@@ -1,0 +1,3825 @@
+{
+  "schema": "RECEIVER_CLI_PREGRADE_CONTRAST_V1",
+  "authority": "none; local intervention on bounded trusted CLI examples, not a target spec or score",
+  "date_utc": "2026-11-26",
+  "protocol_revisions": [
+    "9a8c9e8b",
+    "7bb3fb11"
+  ],
+  "driver_sha256_initial": "89d172f85c03b9bd7a624d79948a36d80dc57a45b552f4b3bed4420bdeb8d3ba",
+  "driver_sha256_followup": "d61559c3eb92413e36ec8bd0f9614746dc21ea4477452ada3c5d7d6e3e489a7c",
+  "teacher_parent": "f25f697a439acc2b0d84aa8f5413330f4e2e75cf",
+  "teacher_store": "one stored generated edit (sub_5792a3103335); from subtree_transfer_control_20261126_v1.json",
+  "pregrade_manifest_sha256": "413b5881f9971f282cb6f383dd8ec82c703fc7523f4f590498d2f987beb2d43e",
+  "pregrade_manifest": {
+    "result-click-1/probe.json": "932b9ef87edf0a6a3f93fc2db30401d6ee27781bd5cccb365fc7d91e0140980b",
+    "result-click-1/contrast.json": "a7dcd8dc9cf1708c36c9fc32793a83773aadbfa26c8dcb50505c6a316b99d32d",
+    "result-click-16/probe.json": "ffa4e76dcc5944c87c07a613ef56e6acbf15910ed15c274bb4f56ddd54b6c369",
+    "result-click-16/contrast.json": "5f6403c39a40af50603f4f654aa4688d8f6ebb18f485cc36af80918671680f96",
+    "result-click-32-directed/probe.json": "f05e099609bfdb44aca7ccd116e6535c0dc343d0b758c7191a5b78a1f972b5a9",
+    "result-click-32-directed/contrast.json": "a44e2dc9e42e8a10df4e5d1443e7253c86a179d520048d2773970cb9c94cd54a",
+    "result-click-32-lexical/probe.json": "e489d3bfadabe0f9dae2e3e6c4e7855781099a9c9c71719965e19a2b92e01afb",
+    "result-click-32-lexical/contrast.json": "f9228a37b2dec5b11daf4320f2a497094d1e72b93dab94f093f5b267bbdde107",
+    "result-click-4-directed/probe.json": "ccb6cc8a35d9f90526e1e707dbf7a39cbd6dc10031533f53eb107e65ea3f23bb",
+    "result-click-4-directed/contrast.json": "12773e2befa6d92ceb0a52839f2623c9096df9fb4446b5a6d51dcfddecb1b9cf",
+    "result-click-4-lexical/probe.json": "f1b2df14867403b0d2139a23ccf4d9f36202deb2149013301c267458e6533898",
+    "result-click-4-lexical/contrast.json": "6c764865254ae3993dc8359224cc61073324bf676b1e89e1e800618accf23dc1",
+    "result-click-64/probe.json": "04b69564948dbcc667ab2a10583642aa886289843aea5dd8b2de0d8e948e5f40",
+    "result-click-64/contrast.json": "c303bdf9ae3880b948539af43f17600c866788836f698293873786086bb8a492",
+    "result-typer-release/probe.json": "2d0e23f674880100a111fe31ce450636fbae77d6ba0df113c1737bc54d5f74d8",
+    "result-typer-release/contrast.json": "590913a5b448b3d5d841db770d32e612b78a9b4091d8d67af9f481fdf58eb944"
+  },
+  "rows": [
+    {
+      "selection": "click-1",
+      "rev": "86949d19b930ef68a45566544cb4b9508d895d0d",
+      "probe": {
+        "targets": [
+          {
+            "files": 17,
+            "parsed_files": 17,
+            "unreadable": [],
+            "source_manifest_sha256": "000e1c6930b01a55c727076904b6d61995a0434150521f5c0dc575126fb6f760",
+            "arms": {
+              "empty": {
+                "files_with_proposal": 0,
+                "first_candidate": null,
+                "lookup_seconds": 0.0
+              },
+              "raw_traces": {
+                "files_with_proposal": 1,
+                "first_candidate": {
+                  "path": "core.py",
+                  "sha256": "be8ac6adac54d9ef9b14dd12ee0042ed5b16ec9dfe52b434e03e42711554231d"
+                },
+                "lookup_seconds": 0.1137
+              },
+              "generalized": {
+                "files_with_proposal": 1,
+                "first_candidate": {
+                  "path": "core.py",
+                  "sha256": "a7fff2dc0b1bc4b1eac2e7093ca314ae481e805c02fb5b97a0a90691d0c22689"
+                },
+                "lookup_seconds": 0.116
+              }
+            },
+            "probe_seconds": 0.28
+          }
+        ],
+        "launcher": {
+          "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+          "status": "CHILD_EXITED",
+          "policy_sha256": "aa04e260521f92922a2b0f3e292aff22b042f1cbb715f7f6e9448807889c8791",
+          "returncode": 0,
+          "wallclock_ms": 667.596,
+          "broker_bytes": 398668,
+          "broker_sha256": "105851fdaa6989d10f3b534464e435446b5db85dae91bffe43dc5cb24c681007",
+          "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+          "material_effects_committed": 0,
+          "execution_authority": false,
+          "promotion_authority": false,
+          "fresh_reality_authority": false
+        },
+        "input_store_sha256": "5438f2d137e3bdd9c9f30cfd4bb46f8d566e3da2f5fe245470e338c9639c7d18"
+      },
+      "contrast": {
+        "eligible_programs": 10,
+        "discovery_errors": [],
+        "changed_functions": {
+          "empty": [],
+          "raw_traces": [
+            "/input/pkg/click/core.py::Argument.get_help_record"
+          ],
+          "generalized": [
+            "/input/pkg/click/core.py::Argument.get_help_record"
+          ]
+        },
+        "rows": {
+          "empty": [
+            {
+              "program": {
+                "path": "aliases/pyproject.toml",
+                "name": "aliases",
+                "entry": "aliases:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "bd644454cd84722f777ce2cd6e8d4ebd1d98c3814e2a2fa88b4c4cc23c32a6d8",
+                "stdout_bytes": 428,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "fdc4d809079818be9826619e81146179838509d4366571fed0528ad0b894e0b8",
+                "returncode": 0,
+                "wallclock_ms": 268.835,
+                "broker_bytes": 352,
+                "broker_sha256": "a560f0942d06784adca0041a50c22307016f4d8386d6de1891b9fd9df24275c6",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "colors/pyproject.toml",
+                "name": "colors",
+                "entry": "colors:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "b7c186ff66e9605eb373f15aac98c4add9b7ef905c6d11996c161f35868a847c",
+                "stdout_bytes": 207,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "fdc4d809079818be9826619e81146179838509d4366571fed0528ad0b894e0b8",
+                "returncode": 0,
+                "wallclock_ms": 269.991,
+                "broker_bytes": 352,
+                "broker_sha256": "27401a1626055fc5a2572370b497621a83ace601ecac8817248efde0eeec1ca9",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "completion/pyproject.toml",
+                "name": "completion",
+                "entry": "completion:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "3bccf17aee2147c6737db1b9ce8e518a6dc58eb7ab8c236b6860256009195f10",
+                "stdout_bytes": 207,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "fdc4d809079818be9826619e81146179838509d4366571fed0528ad0b894e0b8",
+                "returncode": 0,
+                "wallclock_ms": 270.299,
+                "broker_bytes": 352,
+                "broker_sha256": "ef1f8596c4f74c6059343d2edf1d5df49f516480978186453959a893c63ed7c4",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "complex/pyproject.toml",
+                "name": "complex",
+                "entry": "complex.cli:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "6e8a38e0b66721988a98b910c73cf8fd8a2dd1fff774d432111946df8e407b40",
+                "stdout_bytes": 305,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "fdc4d809079818be9826619e81146179838509d4366571fed0528ad0b894e0b8",
+                "returncode": 0,
+                "wallclock_ms": 265.386,
+                "broker_bytes": 352,
+                "broker_sha256": "283b04efd7f6915aaae316ce60120eb89f0eb4e84f1a270379b66e64d2c3709e",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            }
+          ],
+          "raw_traces": [
+            {
+              "program": {
+                "path": "aliases/pyproject.toml",
+                "name": "aliases",
+                "entry": "aliases:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "bd644454cd84722f777ce2cd6e8d4ebd1d98c3814e2a2fa88b4c4cc23c32a6d8",
+                "stdout_bytes": 428,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "8eedfed9adc17648fb60a0ba9aac27bc2c845ba35a80dadd6ceaf1f9facf0dcf",
+                "returncode": 0,
+                "wallclock_ms": 266.178,
+                "broker_bytes": 352,
+                "broker_sha256": "a560f0942d06784adca0041a50c22307016f4d8386d6de1891b9fd9df24275c6",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "colors/pyproject.toml",
+                "name": "colors",
+                "entry": "colors:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "b7c186ff66e9605eb373f15aac98c4add9b7ef905c6d11996c161f35868a847c",
+                "stdout_bytes": 207,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "8eedfed9adc17648fb60a0ba9aac27bc2c845ba35a80dadd6ceaf1f9facf0dcf",
+                "returncode": 0,
+                "wallclock_ms": 316.645,
+                "broker_bytes": 352,
+                "broker_sha256": "27401a1626055fc5a2572370b497621a83ace601ecac8817248efde0eeec1ca9",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "completion/pyproject.toml",
+                "name": "completion",
+                "entry": "completion:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "3bccf17aee2147c6737db1b9ce8e518a6dc58eb7ab8c236b6860256009195f10",
+                "stdout_bytes": 207,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "8eedfed9adc17648fb60a0ba9aac27bc2c845ba35a80dadd6ceaf1f9facf0dcf",
+                "returncode": 0,
+                "wallclock_ms": 270.332,
+                "broker_bytes": 352,
+                "broker_sha256": "ef1f8596c4f74c6059343d2edf1d5df49f516480978186453959a893c63ed7c4",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "complex/pyproject.toml",
+                "name": "complex",
+                "entry": "complex.cli:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "6e8a38e0b66721988a98b910c73cf8fd8a2dd1fff774d432111946df8e407b40",
+                "stdout_bytes": 305,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "8eedfed9adc17648fb60a0ba9aac27bc2c845ba35a80dadd6ceaf1f9facf0dcf",
+                "returncode": 0,
+                "wallclock_ms": 265.957,
+                "broker_bytes": 352,
+                "broker_sha256": "283b04efd7f6915aaae316ce60120eb89f0eb4e84f1a270379b66e64d2c3709e",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            }
+          ],
+          "generalized": [
+            {
+              "program": {
+                "path": "aliases/pyproject.toml",
+                "name": "aliases",
+                "entry": "aliases:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "bd644454cd84722f777ce2cd6e8d4ebd1d98c3814e2a2fa88b4c4cc23c32a6d8",
+                "stdout_bytes": 428,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "e9f54f4dc1c9ab434a8edbe3d2e3b7969ae7849b3d0af0edd599d28312648487",
+                "returncode": 0,
+                "wallclock_ms": 268.702,
+                "broker_bytes": 352,
+                "broker_sha256": "a560f0942d06784adca0041a50c22307016f4d8386d6de1891b9fd9df24275c6",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "colors/pyproject.toml",
+                "name": "colors",
+                "entry": "colors:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "b7c186ff66e9605eb373f15aac98c4add9b7ef905c6d11996c161f35868a847c",
+                "stdout_bytes": 207,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "e9f54f4dc1c9ab434a8edbe3d2e3b7969ae7849b3d0af0edd599d28312648487",
+                "returncode": 0,
+                "wallclock_ms": 265.933,
+                "broker_bytes": 352,
+                "broker_sha256": "27401a1626055fc5a2572370b497621a83ace601ecac8817248efde0eeec1ca9",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "completion/pyproject.toml",
+                "name": "completion",
+                "entry": "completion:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "3bccf17aee2147c6737db1b9ce8e518a6dc58eb7ab8c236b6860256009195f10",
+                "stdout_bytes": 207,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "e9f54f4dc1c9ab434a8edbe3d2e3b7969ae7849b3d0af0edd599d28312648487",
+                "returncode": 0,
+                "wallclock_ms": 265.376,
+                "broker_bytes": 352,
+                "broker_sha256": "ef1f8596c4f74c6059343d2edf1d5df49f516480978186453959a893c63ed7c4",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "complex/pyproject.toml",
+                "name": "complex",
+                "entry": "complex.cli:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "6e8a38e0b66721988a98b910c73cf8fd8a2dd1fff774d432111946df8e407b40",
+                "stdout_bytes": 305,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "e9f54f4dc1c9ab434a8edbe3d2e3b7969ae7849b3d0af0edd599d28312648487",
+                "returncode": 0,
+                "wallclock_ms": 266.012,
+                "broker_bytes": 352,
+                "broker_sha256": "283b04efd7f6915aaae316ce60120eb89f0eb4e84f1a270379b66e64d2c3709e",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            }
+          ]
+        },
+        "elapsed_s": 4.122,
+        "skill_admitted": false
+      }
+    },
+    {
+      "selection": "click-16",
+      "rev": "8ee83ddbf5a7a4c2eac5308c9599c5ee67ee005e",
+      "probe": {
+        "targets": [
+          {
+            "files": 17,
+            "parsed_files": 17,
+            "unreadable": [],
+            "source_manifest_sha256": "587f1c4e69807125802fbc540617039cbada3b4d1935fad3779b08157fd2dd39",
+            "arms": {
+              "empty": {
+                "files_with_proposal": 0,
+                "first_candidate": null,
+                "lookup_seconds": 0.0
+              },
+              "raw_traces": {
+                "files_with_proposal": 1,
+                "first_candidate": {
+                  "path": "core.py",
+                  "sha256": "460e722589206e152686ee1e7160a78596702244ca9f36d698c1be5326436fc3"
+                },
+                "lookup_seconds": 0.1132
+              },
+              "generalized": {
+                "files_with_proposal": 1,
+                "first_candidate": {
+                  "path": "core.py",
+                  "sha256": "b267d6d15279029e3601ddca98dfa55f41c780e9d6f9ef847224929ffe4aad7d"
+                },
+                "lookup_seconds": 0.1133
+              }
+            },
+            "probe_seconds": 0.279
+          }
+        ],
+        "launcher": {
+          "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+          "status": "CHILD_EXITED",
+          "policy_sha256": "b749595e44f58ca57f7d8ddc9715e86ecc3f230e5f8a7535bdc5f666a4293012",
+          "returncode": 0,
+          "wallclock_ms": 519.639,
+          "broker_bytes": 394342,
+          "broker_sha256": "3818538d9d595ba61ad685a4064cf1f2be130e33909ffac759718f5cc42fd511",
+          "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+          "material_effects_committed": 0,
+          "execution_authority": false,
+          "promotion_authority": false,
+          "fresh_reality_authority": false
+        },
+        "input_store_sha256": "5438f2d137e3bdd9c9f30cfd4bb46f8d566e3da2f5fe245470e338c9639c7d18"
+      },
+      "contrast": {
+        "eligible_programs": 10,
+        "discovery_errors": [],
+        "changed_functions": {
+          "empty": [],
+          "raw_traces": [
+            "/input/pkg/click/core.py::Argument.get_help_record"
+          ],
+          "generalized": [
+            "/input/pkg/click/core.py::Argument.get_help_record"
+          ]
+        },
+        "rows": {
+          "empty": [
+            {
+              "program": {
+                "path": "aliases/pyproject.toml",
+                "name": "aliases",
+                "entry": "aliases:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "bd644454cd84722f777ce2cd6e8d4ebd1d98c3814e2a2fa88b4c4cc23c32a6d8",
+                "stdout_bytes": 428,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "f6bb340f184fedf0793715cb8965946acad01e7c67f68abee8156bdac5342381",
+                "returncode": 0,
+                "wallclock_ms": 269.985,
+                "broker_bytes": 352,
+                "broker_sha256": "a560f0942d06784adca0041a50c22307016f4d8386d6de1891b9fd9df24275c6",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "colors/pyproject.toml",
+                "name": "colors",
+                "entry": "colors:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "b7c186ff66e9605eb373f15aac98c4add9b7ef905c6d11996c161f35868a847c",
+                "stdout_bytes": 207,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "f6bb340f184fedf0793715cb8965946acad01e7c67f68abee8156bdac5342381",
+                "returncode": 0,
+                "wallclock_ms": 266.056,
+                "broker_bytes": 352,
+                "broker_sha256": "27401a1626055fc5a2572370b497621a83ace601ecac8817248efde0eeec1ca9",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "completion/pyproject.toml",
+                "name": "completion",
+                "entry": "completion:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "3bccf17aee2147c6737db1b9ce8e518a6dc58eb7ab8c236b6860256009195f10",
+                "stdout_bytes": 207,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "f6bb340f184fedf0793715cb8965946acad01e7c67f68abee8156bdac5342381",
+                "returncode": 0,
+                "wallclock_ms": 265.98,
+                "broker_bytes": 352,
+                "broker_sha256": "ef1f8596c4f74c6059343d2edf1d5df49f516480978186453959a893c63ed7c4",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "complex/pyproject.toml",
+                "name": "complex",
+                "entry": "complex.cli:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "6e8a38e0b66721988a98b910c73cf8fd8a2dd1fff774d432111946df8e407b40",
+                "stdout_bytes": 305,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "f6bb340f184fedf0793715cb8965946acad01e7c67f68abee8156bdac5342381",
+                "returncode": 0,
+                "wallclock_ms": 266.017,
+                "broker_bytes": 352,
+                "broker_sha256": "283b04efd7f6915aaae316ce60120eb89f0eb4e84f1a270379b66e64d2c3709e",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            }
+          ],
+          "raw_traces": [
+            {
+              "program": {
+                "path": "aliases/pyproject.toml",
+                "name": "aliases",
+                "entry": "aliases:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "bd644454cd84722f777ce2cd6e8d4ebd1d98c3814e2a2fa88b4c4cc23c32a6d8",
+                "stdout_bytes": 428,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "5b1190430095ced4aadc6144d3fda0bb66520e8137d83a1c2e7ea78f87603bd1",
+                "returncode": 0,
+                "wallclock_ms": 317.557,
+                "broker_bytes": 352,
+                "broker_sha256": "a560f0942d06784adca0041a50c22307016f4d8386d6de1891b9fd9df24275c6",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "colors/pyproject.toml",
+                "name": "colors",
+                "entry": "colors:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "b7c186ff66e9605eb373f15aac98c4add9b7ef905c6d11996c161f35868a847c",
+                "stdout_bytes": 207,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "5b1190430095ced4aadc6144d3fda0bb66520e8137d83a1c2e7ea78f87603bd1",
+                "returncode": 0,
+                "wallclock_ms": 366.97,
+                "broker_bytes": 352,
+                "broker_sha256": "27401a1626055fc5a2572370b497621a83ace601ecac8817248efde0eeec1ca9",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "completion/pyproject.toml",
+                "name": "completion",
+                "entry": "completion:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "3bccf17aee2147c6737db1b9ce8e518a6dc58eb7ab8c236b6860256009195f10",
+                "stdout_bytes": 207,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "5b1190430095ced4aadc6144d3fda0bb66520e8137d83a1c2e7ea78f87603bd1",
+                "returncode": 0,
+                "wallclock_ms": 366.401,
+                "broker_bytes": 352,
+                "broker_sha256": "ef1f8596c4f74c6059343d2edf1d5df49f516480978186453959a893c63ed7c4",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "complex/pyproject.toml",
+                "name": "complex",
+                "entry": "complex.cli:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "6e8a38e0b66721988a98b910c73cf8fd8a2dd1fff774d432111946df8e407b40",
+                "stdout_bytes": 305,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "5b1190430095ced4aadc6144d3fda0bb66520e8137d83a1c2e7ea78f87603bd1",
+                "returncode": 0,
+                "wallclock_ms": 321.117,
+                "broker_bytes": 352,
+                "broker_sha256": "283b04efd7f6915aaae316ce60120eb89f0eb4e84f1a270379b66e64d2c3709e",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            }
+          ],
+          "generalized": [
+            {
+              "program": {
+                "path": "aliases/pyproject.toml",
+                "name": "aliases",
+                "entry": "aliases:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "bd644454cd84722f777ce2cd6e8d4ebd1d98c3814e2a2fa88b4c4cc23c32a6d8",
+                "stdout_bytes": 428,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "ce9e123866fcecc972d17b5c83a8dacf27cdb8522945b2e7ddd5115dddb0faba",
+                "returncode": 0,
+                "wallclock_ms": 266.674,
+                "broker_bytes": 352,
+                "broker_sha256": "a560f0942d06784adca0041a50c22307016f4d8386d6de1891b9fd9df24275c6",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "colors/pyproject.toml",
+                "name": "colors",
+                "entry": "colors:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "b7c186ff66e9605eb373f15aac98c4add9b7ef905c6d11996c161f35868a847c",
+                "stdout_bytes": 207,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "ce9e123866fcecc972d17b5c83a8dacf27cdb8522945b2e7ddd5115dddb0faba",
+                "returncode": 0,
+                "wallclock_ms": 315.736,
+                "broker_bytes": 352,
+                "broker_sha256": "27401a1626055fc5a2572370b497621a83ace601ecac8817248efde0eeec1ca9",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "completion/pyproject.toml",
+                "name": "completion",
+                "entry": "completion:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "3bccf17aee2147c6737db1b9ce8e518a6dc58eb7ab8c236b6860256009195f10",
+                "stdout_bytes": 207,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "ce9e123866fcecc972d17b5c83a8dacf27cdb8522945b2e7ddd5115dddb0faba",
+                "returncode": 0,
+                "wallclock_ms": 266.4,
+                "broker_bytes": 352,
+                "broker_sha256": "ef1f8596c4f74c6059343d2edf1d5df49f516480978186453959a893c63ed7c4",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "complex/pyproject.toml",
+                "name": "complex",
+                "entry": "complex.cli:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "6e8a38e0b66721988a98b910c73cf8fd8a2dd1fff774d432111946df8e407b40",
+                "stdout_bytes": 305,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "ce9e123866fcecc972d17b5c83a8dacf27cdb8522945b2e7ddd5115dddb0faba",
+                "returncode": 0,
+                "wallclock_ms": 265.984,
+                "broker_bytes": 352,
+                "broker_sha256": "283b04efd7f6915aaae316ce60120eb89f0eb4e84f1a270379b66e64d2c3709e",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            }
+          ]
+        },
+        "elapsed_s": 4.273,
+        "skill_admitted": false
+      }
+    },
+    {
+      "selection": "click-32-directed",
+      "rev": "679a7a0eccbdded7a6e85680bdaaf08003765e01",
+      "probe": {
+        "targets": [
+          {
+            "files": 17,
+            "parsed_files": 17,
+            "unreadable": [],
+            "source_manifest_sha256": "98292befcd4ee48d463a02b12fa59221d1b7438c7a1083caec1f928b1cd05146",
+            "arms": {
+              "empty": {
+                "files_with_proposal": 0,
+                "first_candidate": null,
+                "lookup_seconds": 0.0
+              },
+              "raw_traces": {
+                "files_with_proposal": 1,
+                "first_candidate": {
+                  "path": "core.py",
+                  "sha256": "26215735d66c634fe05823a934b46cabe191775a8d753a392f09c545bc02ce92"
+                },
+                "lookup_seconds": 0.113
+              },
+              "generalized": {
+                "files_with_proposal": 1,
+                "first_candidate": {
+                  "path": "core.py",
+                  "sha256": "3a4035c06815abdae7bd16f84c9d4c299f4a4cc3ae83c0c728082f76d4a9ca57"
+                },
+                "lookup_seconds": 0.1028
+              }
+            },
+            "probe_seconds": 0.265
+          }
+        ],
+        "launcher": {
+          "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+          "status": "CHILD_EXITED",
+          "policy_sha256": "200697ea4b778ccb4eca8d44df0b91dbef4130f4bc9f95fd2d3e3cfac47a8053",
+          "returncode": 0,
+          "wallclock_ms": 466.321,
+          "broker_bytes": 378257,
+          "broker_sha256": "ddc04eab3142445d3cbc24a2217288803620f42921f3313e19befe7e93071138",
+          "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+          "material_effects_committed": 0,
+          "execution_authority": false,
+          "promotion_authority": false,
+          "fresh_reality_authority": false
+        },
+        "input_store_sha256": "5438f2d137e3bdd9c9f30cfd4bb46f8d566e3da2f5fe245470e338c9639c7d18"
+      },
+      "contrast": {
+        "policy": "directed",
+        "related_functions": {
+          "aliases/pyproject.toml": [
+            "alias"
+          ],
+          "colors/pyproject.toml": [],
+          "completion/pyproject.toml": [
+            "select-user",
+            "show-env"
+          ],
+          "complex/pyproject.toml": [
+            "cli"
+          ],
+          "imagepipe/pyproject.toml": [],
+          "inout/pyproject.toml": [
+            "cli"
+          ],
+          "naval/pyproject.toml": [
+            "mine-remove",
+            "mine-set",
+            "ship-move",
+            "ship-new",
+            "ship-shoot"
+          ],
+          "repo/pyproject.toml": [
+            "clone",
+            "commit",
+            "copy"
+          ],
+          "termui/pyproject.toml": [
+            "locate",
+            "open"
+          ],
+          "validation/pyproject.toml": []
+        },
+        "eligible_programs": 10,
+        "discovery_errors": [],
+        "changed_functions": {
+          "empty": [],
+          "raw_traces": [
+            "/input/pkg/click/core.py::Argument.get_help_record"
+          ],
+          "generalized": [
+            "/input/pkg/click/core.py::Argument.get_help_record"
+          ]
+        },
+        "rows": {
+          "empty": [
+            {
+              "program": {
+                "path": "naval/pyproject.toml",
+                "name": "naval",
+                "entry": "naval:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "5f42f531b3a890003c6eb6b6b014e79810f88314105c6b04030f254e5c6d62e5",
+                "stdout_bytes": 370,
+                "advertised": [
+                  "mine",
+                  "ship"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "624299a6a8f988f2c860043a8ab81061affd8455b17d0a8d68c70954ae6a4723",
+                "returncode": 0,
+                "wallclock_ms": 316.121,
+                "broker_bytes": 384,
+                "broker_sha256": "29dc3f824bd2f2359c236f15f2b17e9c23f2c589bc88ee45b8d9fe45058be397",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "repo/pyproject.toml",
+                "name": "repo",
+                "entry": "repo:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "95a39dd4b39882baeebea3d4f84c59c6261908221fa56db21b5ed9c45ca1cc35",
+                "stdout_bytes": 724,
+                "advertised": [
+                  "clone",
+                  "commit",
+                  "copy",
+                  "delete",
+                  "setuser"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "624299a6a8f988f2c860043a8ab81061affd8455b17d0a8d68c70954ae6a4723",
+                "returncode": 0,
+                "wallclock_ms": 265.61,
+                "broker_bytes": 416,
+                "broker_sha256": "8c94f8a2ccf9b8cb0348e8f0cbcb92b09d4a43f1cdc9cbcd5cf125544e574cbc",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "repo/pyproject.toml",
+                "name": "repo",
+                "entry": "repo:cli",
+                "child": "clone"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "9054a2ddf6341fb7eecc6b7da745d07d50387af623574a2a44ec8bf301df3c31",
+                "stdout_bytes": 437,
+                "advertised": [],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 4
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "624299a6a8f988f2c860043a8ab81061affd8455b17d0a8d68c70954ae6a4723",
+                "returncode": 0,
+                "wallclock_ms": 265.679,
+                "broker_bytes": 370,
+                "broker_sha256": "0e463149b6a07c107f4392cb9b17b10063d87497122738475104af0423349ae8",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "completion/pyproject.toml",
+                "name": "completion",
+                "entry": "completion:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "3bccf17aee2147c6737db1b9ce8e518a6dc58eb7ab8c236b6860256009195f10",
+                "stdout_bytes": 207,
+                "advertised": [
+                  "group",
+                  "ls",
+                  "show-env"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "624299a6a8f988f2c860043a8ab81061affd8455b17d0a8d68c70954ae6a4723",
+                "returncode": 0,
+                "wallclock_ms": 265.821,
+                "broker_bytes": 395,
+                "broker_sha256": "160b84c5733205ae1595db5de50f02da8e9980c71776fa54c03c6256b8ac4547",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            }
+          ],
+          "raw_traces": [
+            {
+              "program": {
+                "path": "naval/pyproject.toml",
+                "name": "naval",
+                "entry": "naval:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "5f42f531b3a890003c6eb6b6b014e79810f88314105c6b04030f254e5c6d62e5",
+                "stdout_bytes": 370,
+                "advertised": [
+                  "mine",
+                  "ship"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "141798e658c1f012d3c4aa4c8da1934e540a225b56fcc8fe88ae7ee877c1bb4b",
+                "returncode": 0,
+                "wallclock_ms": 265.488,
+                "broker_bytes": 384,
+                "broker_sha256": "29dc3f824bd2f2359c236f15f2b17e9c23f2c589bc88ee45b8d9fe45058be397",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "repo/pyproject.toml",
+                "name": "repo",
+                "entry": "repo:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "95a39dd4b39882baeebea3d4f84c59c6261908221fa56db21b5ed9c45ca1cc35",
+                "stdout_bytes": 724,
+                "advertised": [
+                  "clone",
+                  "commit",
+                  "copy",
+                  "delete",
+                  "setuser"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "141798e658c1f012d3c4aa4c8da1934e540a225b56fcc8fe88ae7ee877c1bb4b",
+                "returncode": 0,
+                "wallclock_ms": 265.776,
+                "broker_bytes": 416,
+                "broker_sha256": "8c94f8a2ccf9b8cb0348e8f0cbcb92b09d4a43f1cdc9cbcd5cf125544e574cbc",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "repo/pyproject.toml",
+                "name": "repo",
+                "entry": "repo:cli",
+                "child": "clone"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "70f537a4cd4d5efbb90a23784fc3b912cd1af5c227c2906eafb5ae71c69d823f",
+                "stdout_bytes": 475,
+                "advertised": [],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 4
+                }
+              },
+              "comparison": "OBSERVABLE_CHANGE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "141798e658c1f012d3c4aa4c8da1934e540a225b56fcc8fe88ae7ee877c1bb4b",
+                "returncode": 0,
+                "wallclock_ms": 266.173,
+                "broker_bytes": 370,
+                "broker_sha256": "94d839a63f1933111ac069849380e00b61da5407015cd933b481acc1f56c243f",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "completion/pyproject.toml",
+                "name": "completion",
+                "entry": "completion:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "3bccf17aee2147c6737db1b9ce8e518a6dc58eb7ab8c236b6860256009195f10",
+                "stdout_bytes": 207,
+                "advertised": [
+                  "group",
+                  "ls",
+                  "show-env"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "141798e658c1f012d3c4aa4c8da1934e540a225b56fcc8fe88ae7ee877c1bb4b",
+                "returncode": 0,
+                "wallclock_ms": 265.997,
+                "broker_bytes": 395,
+                "broker_sha256": "160b84c5733205ae1595db5de50f02da8e9980c71776fa54c03c6256b8ac4547",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            }
+          ],
+          "generalized": [
+            {
+              "program": {
+                "path": "naval/pyproject.toml",
+                "name": "naval",
+                "entry": "naval:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "5f42f531b3a890003c6eb6b6b014e79810f88314105c6b04030f254e5c6d62e5",
+                "stdout_bytes": 370,
+                "advertised": [
+                  "mine",
+                  "ship"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "620cfc6b44280d7435091e13cfe237381477f75015e5d03ca1ed20a20895bb77",
+                "returncode": 0,
+                "wallclock_ms": 265.935,
+                "broker_bytes": 384,
+                "broker_sha256": "29dc3f824bd2f2359c236f15f2b17e9c23f2c589bc88ee45b8d9fe45058be397",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "repo/pyproject.toml",
+                "name": "repo",
+                "entry": "repo:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "95a39dd4b39882baeebea3d4f84c59c6261908221fa56db21b5ed9c45ca1cc35",
+                "stdout_bytes": 724,
+                "advertised": [
+                  "clone",
+                  "commit",
+                  "copy",
+                  "delete",
+                  "setuser"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "620cfc6b44280d7435091e13cfe237381477f75015e5d03ca1ed20a20895bb77",
+                "returncode": 0,
+                "wallclock_ms": 265.622,
+                "broker_bytes": 416,
+                "broker_sha256": "8c94f8a2ccf9b8cb0348e8f0cbcb92b09d4a43f1cdc9cbcd5cf125544e574cbc",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "repo/pyproject.toml",
+                "name": "repo",
+                "entry": "repo:cli",
+                "child": "clone"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "70f537a4cd4d5efbb90a23784fc3b912cd1af5c227c2906eafb5ae71c69d823f",
+                "stdout_bytes": 475,
+                "advertised": [],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 4
+                }
+              },
+              "comparison": "OBSERVABLE_CHANGE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "620cfc6b44280d7435091e13cfe237381477f75015e5d03ca1ed20a20895bb77",
+                "returncode": 0,
+                "wallclock_ms": 265.553,
+                "broker_bytes": 370,
+                "broker_sha256": "94d839a63f1933111ac069849380e00b61da5407015cd933b481acc1f56c243f",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "completion/pyproject.toml",
+                "name": "completion",
+                "entry": "completion:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "3bccf17aee2147c6737db1b9ce8e518a6dc58eb7ab8c236b6860256009195f10",
+                "stdout_bytes": 207,
+                "advertised": [
+                  "group",
+                  "ls",
+                  "show-env"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "620cfc6b44280d7435091e13cfe237381477f75015e5d03ca1ed20a20895bb77",
+                "returncode": 0,
+                "wallclock_ms": 265.505,
+                "broker_bytes": 395,
+                "broker_sha256": "160b84c5733205ae1595db5de50f02da8e9980c71776fa54c03c6256b8ac4547",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            }
+          ]
+        },
+        "elapsed_s": 3.933,
+        "skill_admitted": false
+      }
+    },
+    {
+      "selection": "click-32-lexical",
+      "rev": "679a7a0eccbdded7a6e85680bdaaf08003765e01",
+      "probe": {
+        "targets": [
+          {
+            "files": 17,
+            "parsed_files": 17,
+            "unreadable": [],
+            "source_manifest_sha256": "98292befcd4ee48d463a02b12fa59221d1b7438c7a1083caec1f928b1cd05146",
+            "arms": {
+              "empty": {
+                "files_with_proposal": 0,
+                "first_candidate": null,
+                "lookup_seconds": 0.0
+              },
+              "raw_traces": {
+                "files_with_proposal": 1,
+                "first_candidate": {
+                  "path": "core.py",
+                  "sha256": "26215735d66c634fe05823a934b46cabe191775a8d753a392f09c545bc02ce92"
+                },
+                "lookup_seconds": 0.1192
+              },
+              "generalized": {
+                "files_with_proposal": 1,
+                "first_candidate": {
+                  "path": "core.py",
+                  "sha256": "3a4035c06815abdae7bd16f84c9d4c299f4a4cc3ae83c0c728082f76d4a9ca57"
+                },
+                "lookup_seconds": 0.1109
+              }
+            },
+            "probe_seconds": 0.282
+          }
+        ],
+        "launcher": {
+          "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+          "status": "CHILD_EXITED",
+          "policy_sha256": "1fed19661bbad37315018f96d10078ca25866ded34a2ce57472028577fa51077",
+          "returncode": 0,
+          "wallclock_ms": 516.561,
+          "broker_bytes": 378258,
+          "broker_sha256": "f786efc018a5b65fd87f1304cb2b27ca7913f75734463294bc5c3161307a4407",
+          "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+          "material_effects_committed": 0,
+          "execution_authority": false,
+          "promotion_authority": false,
+          "fresh_reality_authority": false
+        },
+        "input_store_sha256": "5438f2d137e3bdd9c9f30cfd4bb46f8d566e3da2f5fe245470e338c9639c7d18"
+      },
+      "contrast": {
+        "policy": "lexical",
+        "related_functions": {},
+        "eligible_programs": 10,
+        "discovery_errors": [],
+        "changed_functions": {
+          "empty": [],
+          "raw_traces": [
+            "/input/pkg/click/core.py::Argument.get_help_record"
+          ],
+          "generalized": [
+            "/input/pkg/click/core.py::Argument.get_help_record"
+          ]
+        },
+        "rows": {
+          "empty": [
+            {
+              "program": {
+                "path": "aliases/pyproject.toml",
+                "name": "aliases",
+                "entry": "aliases:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "bd644454cd84722f777ce2cd6e8d4ebd1d98c3814e2a2fa88b4c4cc23c32a6d8",
+                "stdout_bytes": 428,
+                "advertised": [
+                  "alias",
+                  "clone",
+                  "commit",
+                  "pull",
+                  "push",
+                  "status"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "11236e7eb76b603475c6d644dab2da8918abb99132c057f0e86b927d238f2c22",
+                "returncode": 0,
+                "wallclock_ms": 266.478,
+                "broker_bytes": 422,
+                "broker_sha256": "83879a686cf6a1fdd955b08f58d58cb90ee6f3a1e425b18462cb912f23118e88",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "colors/pyproject.toml",
+                "name": "colors",
+                "entry": "colors:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "b7c186ff66e9605eb373f15aac98c4add9b7ef905c6d11996c161f35868a847c",
+                "stdout_bytes": 207,
+                "advertised": [],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "11236e7eb76b603475c6d644dab2da8918abb99132c057f0e86b927d238f2c22",
+                "returncode": 0,
+                "wallclock_ms": 317.344,
+                "broker_bytes": 370,
+                "broker_sha256": "1fe52a3b956068309ee6781b86019c6786db904506c982a072d99373237365c1",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "completion/pyproject.toml",
+                "name": "completion",
+                "entry": "completion:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "3bccf17aee2147c6737db1b9ce8e518a6dc58eb7ab8c236b6860256009195f10",
+                "stdout_bytes": 207,
+                "advertised": [
+                  "group",
+                  "ls",
+                  "show-env"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "11236e7eb76b603475c6d644dab2da8918abb99132c057f0e86b927d238f2c22",
+                "returncode": 0,
+                "wallclock_ms": 316.025,
+                "broker_bytes": 395,
+                "broker_sha256": "160b84c5733205ae1595db5de50f02da8e9980c71776fa54c03c6256b8ac4547",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "complex/pyproject.toml",
+                "name": "complex",
+                "entry": "complex.cli:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "6e8a38e0b66721988a98b910c73cf8fd8a2dd1fff774d432111946df8e407b40",
+                "stdout_bytes": 305,
+                "advertised": [
+                  "init",
+                  "status"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "11236e7eb76b603475c6d644dab2da8918abb99132c057f0e86b927d238f2c22",
+                "returncode": 0,
+                "wallclock_ms": 266.849,
+                "broker_bytes": 386,
+                "broker_sha256": "b4ad01827a87c1d9e2d42fdbcbd628c097d5e5d42dd2cea3b01190b3662c0a7d",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            }
+          ],
+          "raw_traces": [
+            {
+              "program": {
+                "path": "aliases/pyproject.toml",
+                "name": "aliases",
+                "entry": "aliases:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "bd644454cd84722f777ce2cd6e8d4ebd1d98c3814e2a2fa88b4c4cc23c32a6d8",
+                "stdout_bytes": 428,
+                "advertised": [
+                  "alias",
+                  "clone",
+                  "commit",
+                  "pull",
+                  "push",
+                  "status"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "b08ade72f059551729f8c81ccf65e596e294a8f9dcd12b8f8e47be113c3ce6a6",
+                "returncode": 0,
+                "wallclock_ms": 266.061,
+                "broker_bytes": 422,
+                "broker_sha256": "83879a686cf6a1fdd955b08f58d58cb90ee6f3a1e425b18462cb912f23118e88",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "colors/pyproject.toml",
+                "name": "colors",
+                "entry": "colors:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "b7c186ff66e9605eb373f15aac98c4add9b7ef905c6d11996c161f35868a847c",
+                "stdout_bytes": 207,
+                "advertised": [],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "b08ade72f059551729f8c81ccf65e596e294a8f9dcd12b8f8e47be113c3ce6a6",
+                "returncode": 0,
+                "wallclock_ms": 316.041,
+                "broker_bytes": 370,
+                "broker_sha256": "1fe52a3b956068309ee6781b86019c6786db904506c982a072d99373237365c1",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "completion/pyproject.toml",
+                "name": "completion",
+                "entry": "completion:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "3bccf17aee2147c6737db1b9ce8e518a6dc58eb7ab8c236b6860256009195f10",
+                "stdout_bytes": 207,
+                "advertised": [
+                  "group",
+                  "ls",
+                  "show-env"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "b08ade72f059551729f8c81ccf65e596e294a8f9dcd12b8f8e47be113c3ce6a6",
+                "returncode": 0,
+                "wallclock_ms": 265.53,
+                "broker_bytes": 395,
+                "broker_sha256": "160b84c5733205ae1595db5de50f02da8e9980c71776fa54c03c6256b8ac4547",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "complex/pyproject.toml",
+                "name": "complex",
+                "entry": "complex.cli:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "6e8a38e0b66721988a98b910c73cf8fd8a2dd1fff774d432111946df8e407b40",
+                "stdout_bytes": 305,
+                "advertised": [
+                  "init",
+                  "status"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "b08ade72f059551729f8c81ccf65e596e294a8f9dcd12b8f8e47be113c3ce6a6",
+                "returncode": 0,
+                "wallclock_ms": 316.381,
+                "broker_bytes": 386,
+                "broker_sha256": "b4ad01827a87c1d9e2d42fdbcbd628c097d5e5d42dd2cea3b01190b3662c0a7d",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            }
+          ],
+          "generalized": [
+            {
+              "program": {
+                "path": "aliases/pyproject.toml",
+                "name": "aliases",
+                "entry": "aliases:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "bd644454cd84722f777ce2cd6e8d4ebd1d98c3814e2a2fa88b4c4cc23c32a6d8",
+                "stdout_bytes": 428,
+                "advertised": [
+                  "alias",
+                  "clone",
+                  "commit",
+                  "pull",
+                  "push",
+                  "status"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "5427518da5a0ffb5818ee23707bb5985a1cb46ff6573f67743aeaf78c1eb6632",
+                "returncode": 0,
+                "wallclock_ms": 368.458,
+                "broker_bytes": 422,
+                "broker_sha256": "83879a686cf6a1fdd955b08f58d58cb90ee6f3a1e425b18462cb912f23118e88",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "colors/pyproject.toml",
+                "name": "colors",
+                "entry": "colors:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "b7c186ff66e9605eb373f15aac98c4add9b7ef905c6d11996c161f35868a847c",
+                "stdout_bytes": 207,
+                "advertised": [],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "5427518da5a0ffb5818ee23707bb5985a1cb46ff6573f67743aeaf78c1eb6632",
+                "returncode": 0,
+                "wallclock_ms": 317.176,
+                "broker_bytes": 370,
+                "broker_sha256": "1fe52a3b956068309ee6781b86019c6786db904506c982a072d99373237365c1",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "completion/pyproject.toml",
+                "name": "completion",
+                "entry": "completion:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "3bccf17aee2147c6737db1b9ce8e518a6dc58eb7ab8c236b6860256009195f10",
+                "stdout_bytes": 207,
+                "advertised": [
+                  "group",
+                  "ls",
+                  "show-env"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "5427518da5a0ffb5818ee23707bb5985a1cb46ff6573f67743aeaf78c1eb6632",
+                "returncode": 0,
+                "wallclock_ms": 366.15,
+                "broker_bytes": 395,
+                "broker_sha256": "160b84c5733205ae1595db5de50f02da8e9980c71776fa54c03c6256b8ac4547",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "complex/pyproject.toml",
+                "name": "complex",
+                "entry": "complex.cli:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "6e8a38e0b66721988a98b910c73cf8fd8a2dd1fff774d432111946df8e407b40",
+                "stdout_bytes": 305,
+                "advertised": [
+                  "init",
+                  "status"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "5427518da5a0ffb5818ee23707bb5985a1cb46ff6573f67743aeaf78c1eb6632",
+                "returncode": 0,
+                "wallclock_ms": 265.545,
+                "broker_bytes": 386,
+                "broker_sha256": "b4ad01827a87c1d9e2d42fdbcbd628c097d5e5d42dd2cea3b01190b3662c0a7d",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            }
+          ]
+        },
+        "elapsed_s": 4.373,
+        "skill_admitted": false
+      }
+    },
+    {
+      "selection": "click-4-directed",
+      "rev": "87f7a316f482d88d7ef45660da12cdcc5a5c14f6",
+      "probe": {
+        "targets": [
+          {
+            "files": 17,
+            "parsed_files": 17,
+            "unreadable": [],
+            "source_manifest_sha256": "ab782145c4739d56147e2b993ac60c5316f2eef6a4e51fd29977bd0eff96cec2",
+            "arms": {
+              "empty": {
+                "files_with_proposal": 0,
+                "first_candidate": null,
+                "lookup_seconds": 0.0
+              },
+              "raw_traces": {
+                "files_with_proposal": 1,
+                "first_candidate": {
+                  "path": "core.py",
+                  "sha256": "be8ac6adac54d9ef9b14dd12ee0042ed5b16ec9dfe52b434e03e42711554231d"
+                },
+                "lookup_seconds": 0.1172
+              },
+              "generalized": {
+                "files_with_proposal": 1,
+                "first_candidate": {
+                  "path": "core.py",
+                  "sha256": "a7fff2dc0b1bc4b1eac2e7093ca314ae481e805c02fb5b97a0a90691d0c22689"
+                },
+                "lookup_seconds": 0.1319
+              }
+            },
+            "probe_seconds": 0.302
+          }
+        ],
+        "launcher": {
+          "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+          "status": "CHILD_EXITED",
+          "policy_sha256": "daadd37ac2fd948f39d47fb5e56c840441e04da4db73e57cbb7452509a0ad8a0",
+          "returncode": 0,
+          "wallclock_ms": 517.289,
+          "broker_bytes": 398670,
+          "broker_sha256": "49ced934ac3bd134a67c199a7a77d7c07aca56418df9d573a86b3dfe5f7721f5",
+          "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+          "material_effects_committed": 0,
+          "execution_authority": false,
+          "promotion_authority": false,
+          "fresh_reality_authority": false
+        },
+        "input_store_sha256": "5438f2d137e3bdd9c9f30cfd4bb46f8d566e3da2f5fe245470e338c9639c7d18"
+      },
+      "contrast": {
+        "policy": "directed",
+        "related_functions": {
+          "aliases/pyproject.toml": [
+            "alias"
+          ],
+          "colors/pyproject.toml": [],
+          "completion/pyproject.toml": [
+            "select-user",
+            "show-env"
+          ],
+          "complex/pyproject.toml": [
+            "cli"
+          ],
+          "imagepipe/pyproject.toml": [],
+          "inout/pyproject.toml": [
+            "cli"
+          ],
+          "naval/pyproject.toml": [
+            "mine-remove",
+            "mine-set",
+            "ship-move",
+            "ship-new",
+            "ship-shoot"
+          ],
+          "repo/pyproject.toml": [
+            "clone",
+            "commit",
+            "copy"
+          ],
+          "termui/pyproject.toml": [
+            "locate",
+            "open"
+          ],
+          "validation/pyproject.toml": []
+        },
+        "eligible_programs": 10,
+        "discovery_errors": [],
+        "changed_functions": {
+          "empty": [],
+          "raw_traces": [
+            "/input/pkg/click/core.py::Argument.get_help_record"
+          ],
+          "generalized": [
+            "/input/pkg/click/core.py::Argument.get_help_record"
+          ]
+        },
+        "rows": {
+          "empty": [
+            {
+              "program": {
+                "path": "naval/pyproject.toml",
+                "name": "naval",
+                "entry": "naval:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "5f42f531b3a890003c6eb6b6b014e79810f88314105c6b04030f254e5c6d62e5",
+                "stdout_bytes": 370,
+                "advertised": [
+                  "mine",
+                  "ship"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "f13df7143c0404d830b3fa32210defb703e3ac567ee81ab129ea74e4ed03ec50",
+                "returncode": 0,
+                "wallclock_ms": 265.875,
+                "broker_bytes": 384,
+                "broker_sha256": "29dc3f824bd2f2359c236f15f2b17e9c23f2c589bc88ee45b8d9fe45058be397",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "repo/pyproject.toml",
+                "name": "repo",
+                "entry": "repo:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "95a39dd4b39882baeebea3d4f84c59c6261908221fa56db21b5ed9c45ca1cc35",
+                "stdout_bytes": 724,
+                "advertised": [
+                  "clone",
+                  "commit",
+                  "copy",
+                  "delete",
+                  "setuser"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "f13df7143c0404d830b3fa32210defb703e3ac567ee81ab129ea74e4ed03ec50",
+                "returncode": 0,
+                "wallclock_ms": 315.957,
+                "broker_bytes": 416,
+                "broker_sha256": "8c94f8a2ccf9b8cb0348e8f0cbcb92b09d4a43f1cdc9cbcd5cf125544e574cbc",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "repo/pyproject.toml",
+                "name": "repo",
+                "entry": "repo:cli",
+                "child": "clone"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "9054a2ddf6341fb7eecc6b7da745d07d50387af623574a2a44ec8bf301df3c31",
+                "stdout_bytes": 437,
+                "advertised": [],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 4
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "f13df7143c0404d830b3fa32210defb703e3ac567ee81ab129ea74e4ed03ec50",
+                "returncode": 0,
+                "wallclock_ms": 316.026,
+                "broker_bytes": 370,
+                "broker_sha256": "0e463149b6a07c107f4392cb9b17b10063d87497122738475104af0423349ae8",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "completion/pyproject.toml",
+                "name": "completion",
+                "entry": "completion:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "3bccf17aee2147c6737db1b9ce8e518a6dc58eb7ab8c236b6860256009195f10",
+                "stdout_bytes": 207,
+                "advertised": [
+                  "group",
+                  "ls",
+                  "show-env"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "f13df7143c0404d830b3fa32210defb703e3ac567ee81ab129ea74e4ed03ec50",
+                "returncode": 0,
+                "wallclock_ms": 266.173,
+                "broker_bytes": 395,
+                "broker_sha256": "160b84c5733205ae1595db5de50f02da8e9980c71776fa54c03c6256b8ac4547",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            }
+          ],
+          "raw_traces": [
+            {
+              "program": {
+                "path": "naval/pyproject.toml",
+                "name": "naval",
+                "entry": "naval:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "5f42f531b3a890003c6eb6b6b014e79810f88314105c6b04030f254e5c6d62e5",
+                "stdout_bytes": 370,
+                "advertised": [
+                  "mine",
+                  "ship"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "29517d9debb929983a51c60216502d1f700521729ed51f05a6c066a63ff84996",
+                "returncode": 0,
+                "wallclock_ms": 265.657,
+                "broker_bytes": 384,
+                "broker_sha256": "29dc3f824bd2f2359c236f15f2b17e9c23f2c589bc88ee45b8d9fe45058be397",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "repo/pyproject.toml",
+                "name": "repo",
+                "entry": "repo:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "95a39dd4b39882baeebea3d4f84c59c6261908221fa56db21b5ed9c45ca1cc35",
+                "stdout_bytes": 724,
+                "advertised": [
+                  "clone",
+                  "commit",
+                  "copy",
+                  "delete",
+                  "setuser"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "29517d9debb929983a51c60216502d1f700521729ed51f05a6c066a63ff84996",
+                "returncode": 0,
+                "wallclock_ms": 265.804,
+                "broker_bytes": 416,
+                "broker_sha256": "8c94f8a2ccf9b8cb0348e8f0cbcb92b09d4a43f1cdc9cbcd5cf125544e574cbc",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "repo/pyproject.toml",
+                "name": "repo",
+                "entry": "repo:cli",
+                "child": "clone"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "70f537a4cd4d5efbb90a23784fc3b912cd1af5c227c2906eafb5ae71c69d823f",
+                "stdout_bytes": 475,
+                "advertised": [],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 4
+                }
+              },
+              "comparison": "OBSERVABLE_CHANGE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "29517d9debb929983a51c60216502d1f700521729ed51f05a6c066a63ff84996",
+                "returncode": 0,
+                "wallclock_ms": 265.565,
+                "broker_bytes": 370,
+                "broker_sha256": "94d839a63f1933111ac069849380e00b61da5407015cd933b481acc1f56c243f",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "completion/pyproject.toml",
+                "name": "completion",
+                "entry": "completion:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "3bccf17aee2147c6737db1b9ce8e518a6dc58eb7ab8c236b6860256009195f10",
+                "stdout_bytes": 207,
+                "advertised": [
+                  "group",
+                  "ls",
+                  "show-env"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "29517d9debb929983a51c60216502d1f700521729ed51f05a6c066a63ff84996",
+                "returncode": 0,
+                "wallclock_ms": 265.554,
+                "broker_bytes": 395,
+                "broker_sha256": "160b84c5733205ae1595db5de50f02da8e9980c71776fa54c03c6256b8ac4547",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            }
+          ],
+          "generalized": [
+            {
+              "program": {
+                "path": "naval/pyproject.toml",
+                "name": "naval",
+                "entry": "naval:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "5f42f531b3a890003c6eb6b6b014e79810f88314105c6b04030f254e5c6d62e5",
+                "stdout_bytes": 370,
+                "advertised": [
+                  "mine",
+                  "ship"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "af1a4720dbdacbd16de1ad8e5d0d39b8ee5ecc44b68455458f4167860c977db6",
+                "returncode": 0,
+                "wallclock_ms": 265.547,
+                "broker_bytes": 384,
+                "broker_sha256": "29dc3f824bd2f2359c236f15f2b17e9c23f2c589bc88ee45b8d9fe45058be397",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "repo/pyproject.toml",
+                "name": "repo",
+                "entry": "repo:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "95a39dd4b39882baeebea3d4f84c59c6261908221fa56db21b5ed9c45ca1cc35",
+                "stdout_bytes": 724,
+                "advertised": [
+                  "clone",
+                  "commit",
+                  "copy",
+                  "delete",
+                  "setuser"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "af1a4720dbdacbd16de1ad8e5d0d39b8ee5ecc44b68455458f4167860c977db6",
+                "returncode": 0,
+                "wallclock_ms": 265.698,
+                "broker_bytes": 416,
+                "broker_sha256": "8c94f8a2ccf9b8cb0348e8f0cbcb92b09d4a43f1cdc9cbcd5cf125544e574cbc",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "repo/pyproject.toml",
+                "name": "repo",
+                "entry": "repo:cli",
+                "child": "clone"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "70f537a4cd4d5efbb90a23784fc3b912cd1af5c227c2906eafb5ae71c69d823f",
+                "stdout_bytes": 475,
+                "advertised": [],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 4
+                }
+              },
+              "comparison": "OBSERVABLE_CHANGE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "af1a4720dbdacbd16de1ad8e5d0d39b8ee5ecc44b68455458f4167860c977db6",
+                "returncode": 0,
+                "wallclock_ms": 265.443,
+                "broker_bytes": 370,
+                "broker_sha256": "94d839a63f1933111ac069849380e00b61da5407015cd933b481acc1f56c243f",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "completion/pyproject.toml",
+                "name": "completion",
+                "entry": "completion:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "3bccf17aee2147c6737db1b9ce8e518a6dc58eb7ab8c236b6860256009195f10",
+                "stdout_bytes": 207,
+                "advertised": [
+                  "group",
+                  "ls",
+                  "show-env"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "af1a4720dbdacbd16de1ad8e5d0d39b8ee5ecc44b68455458f4167860c977db6",
+                "returncode": 0,
+                "wallclock_ms": 265.458,
+                "broker_bytes": 395,
+                "broker_sha256": "160b84c5733205ae1595db5de50f02da8e9980c71776fa54c03c6256b8ac4547",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            }
+          ]
+        },
+        "elapsed_s": 4.017,
+        "skill_admitted": false
+      }
+    },
+    {
+      "selection": "click-4-lexical",
+      "rev": "87f7a316f482d88d7ef45660da12cdcc5a5c14f6",
+      "probe": {
+        "targets": [
+          {
+            "files": 17,
+            "parsed_files": 17,
+            "unreadable": [],
+            "source_manifest_sha256": "ab782145c4739d56147e2b993ac60c5316f2eef6a4e51fd29977bd0eff96cec2",
+            "arms": {
+              "empty": {
+                "files_with_proposal": 0,
+                "first_candidate": null,
+                "lookup_seconds": 0.0
+              },
+              "raw_traces": {
+                "files_with_proposal": 1,
+                "first_candidate": {
+                  "path": "core.py",
+                  "sha256": "be8ac6adac54d9ef9b14dd12ee0042ed5b16ec9dfe52b434e03e42711554231d"
+                },
+                "lookup_seconds": 0.1192
+              },
+              "generalized": {
+                "files_with_proposal": 1,
+                "first_candidate": {
+                  "path": "core.py",
+                  "sha256": "a7fff2dc0b1bc4b1eac2e7093ca314ae481e805c02fb5b97a0a90691d0c22689"
+                },
+                "lookup_seconds": 0.1248
+              }
+            },
+            "probe_seconds": 0.298
+          }
+        ],
+        "launcher": {
+          "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+          "status": "CHILD_EXITED",
+          "policy_sha256": "d3cb6c61dfb1dae53ad0292f63eb3be8c1ae058ac99030eff23da39420179d4b",
+          "returncode": 0,
+          "wallclock_ms": 617.038,
+          "broker_bytes": 398670,
+          "broker_sha256": "a2621ac83b521c0f4b6f1d888efb7df440aa880fecd76d0b3aca2accea2705a7",
+          "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+          "material_effects_committed": 0,
+          "execution_authority": false,
+          "promotion_authority": false,
+          "fresh_reality_authority": false
+        },
+        "input_store_sha256": "5438f2d137e3bdd9c9f30cfd4bb46f8d566e3da2f5fe245470e338c9639c7d18"
+      },
+      "contrast": {
+        "policy": "lexical",
+        "related_functions": {},
+        "eligible_programs": 10,
+        "discovery_errors": [],
+        "changed_functions": {
+          "empty": [],
+          "raw_traces": [
+            "/input/pkg/click/core.py::Argument.get_help_record"
+          ],
+          "generalized": [
+            "/input/pkg/click/core.py::Argument.get_help_record"
+          ]
+        },
+        "rows": {
+          "empty": [
+            {
+              "program": {
+                "path": "aliases/pyproject.toml",
+                "name": "aliases",
+                "entry": "aliases:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "bd644454cd84722f777ce2cd6e8d4ebd1d98c3814e2a2fa88b4c4cc23c32a6d8",
+                "stdout_bytes": 428,
+                "advertised": [
+                  "alias",
+                  "clone",
+                  "commit",
+                  "pull",
+                  "push",
+                  "status"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "7969025839e0e5ef843d642d7be18a178a9b71637b8bd459ec71fbd5686a4167",
+                "returncode": 0,
+                "wallclock_ms": 366.384,
+                "broker_bytes": 422,
+                "broker_sha256": "83879a686cf6a1fdd955b08f58d58cb90ee6f3a1e425b18462cb912f23118e88",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "colors/pyproject.toml",
+                "name": "colors",
+                "entry": "colors:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "b7c186ff66e9605eb373f15aac98c4add9b7ef905c6d11996c161f35868a847c",
+                "stdout_bytes": 207,
+                "advertised": [],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "7969025839e0e5ef843d642d7be18a178a9b71637b8bd459ec71fbd5686a4167",
+                "returncode": 0,
+                "wallclock_ms": 265.577,
+                "broker_bytes": 370,
+                "broker_sha256": "1fe52a3b956068309ee6781b86019c6786db904506c982a072d99373237365c1",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "completion/pyproject.toml",
+                "name": "completion",
+                "entry": "completion:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "3bccf17aee2147c6737db1b9ce8e518a6dc58eb7ab8c236b6860256009195f10",
+                "stdout_bytes": 207,
+                "advertised": [
+                  "group",
+                  "ls",
+                  "show-env"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "7969025839e0e5ef843d642d7be18a178a9b71637b8bd459ec71fbd5686a4167",
+                "returncode": 0,
+                "wallclock_ms": 265.833,
+                "broker_bytes": 395,
+                "broker_sha256": "160b84c5733205ae1595db5de50f02da8e9980c71776fa54c03c6256b8ac4547",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "complex/pyproject.toml",
+                "name": "complex",
+                "entry": "complex.cli:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "6e8a38e0b66721988a98b910c73cf8fd8a2dd1fff774d432111946df8e407b40",
+                "stdout_bytes": 305,
+                "advertised": [
+                  "init",
+                  "status"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "7969025839e0e5ef843d642d7be18a178a9b71637b8bd459ec71fbd5686a4167",
+                "returncode": 0,
+                "wallclock_ms": 315.957,
+                "broker_bytes": 386,
+                "broker_sha256": "b4ad01827a87c1d9e2d42fdbcbd628c097d5e5d42dd2cea3b01190b3662c0a7d",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            }
+          ],
+          "raw_traces": [
+            {
+              "program": {
+                "path": "aliases/pyproject.toml",
+                "name": "aliases",
+                "entry": "aliases:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "bd644454cd84722f777ce2cd6e8d4ebd1d98c3814e2a2fa88b4c4cc23c32a6d8",
+                "stdout_bytes": 428,
+                "advertised": [
+                  "alias",
+                  "clone",
+                  "commit",
+                  "pull",
+                  "push",
+                  "status"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "557a5c5900fd3e5fbdabb96037db4c23e9b2a3c07f99bd3bc32a06eb006da8d9",
+                "returncode": 0,
+                "wallclock_ms": 265.984,
+                "broker_bytes": 422,
+                "broker_sha256": "83879a686cf6a1fdd955b08f58d58cb90ee6f3a1e425b18462cb912f23118e88",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "colors/pyproject.toml",
+                "name": "colors",
+                "entry": "colors:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "b7c186ff66e9605eb373f15aac98c4add9b7ef905c6d11996c161f35868a847c",
+                "stdout_bytes": 207,
+                "advertised": [],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "557a5c5900fd3e5fbdabb96037db4c23e9b2a3c07f99bd3bc32a06eb006da8d9",
+                "returncode": 0,
+                "wallclock_ms": 266.073,
+                "broker_bytes": 370,
+                "broker_sha256": "1fe52a3b956068309ee6781b86019c6786db904506c982a072d99373237365c1",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "completion/pyproject.toml",
+                "name": "completion",
+                "entry": "completion:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "3bccf17aee2147c6737db1b9ce8e518a6dc58eb7ab8c236b6860256009195f10",
+                "stdout_bytes": 207,
+                "advertised": [
+                  "group",
+                  "ls",
+                  "show-env"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "557a5c5900fd3e5fbdabb96037db4c23e9b2a3c07f99bd3bc32a06eb006da8d9",
+                "returncode": 0,
+                "wallclock_ms": 315.995,
+                "broker_bytes": 395,
+                "broker_sha256": "160b84c5733205ae1595db5de50f02da8e9980c71776fa54c03c6256b8ac4547",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "complex/pyproject.toml",
+                "name": "complex",
+                "entry": "complex.cli:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "6e8a38e0b66721988a98b910c73cf8fd8a2dd1fff774d432111946df8e407b40",
+                "stdout_bytes": 305,
+                "advertised": [
+                  "init",
+                  "status"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "557a5c5900fd3e5fbdabb96037db4c23e9b2a3c07f99bd3bc32a06eb006da8d9",
+                "returncode": 0,
+                "wallclock_ms": 265.646,
+                "broker_bytes": 386,
+                "broker_sha256": "b4ad01827a87c1d9e2d42fdbcbd628c097d5e5d42dd2cea3b01190b3662c0a7d",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            }
+          ],
+          "generalized": [
+            {
+              "program": {
+                "path": "aliases/pyproject.toml",
+                "name": "aliases",
+                "entry": "aliases:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "bd644454cd84722f777ce2cd6e8d4ebd1d98c3814e2a2fa88b4c4cc23c32a6d8",
+                "stdout_bytes": 428,
+                "advertised": [
+                  "alias",
+                  "clone",
+                  "commit",
+                  "pull",
+                  "push",
+                  "status"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "8b418e5894316b902bb8098c20c77558035551a213d3193213b8361466f06e08",
+                "returncode": 0,
+                "wallclock_ms": 265.551,
+                "broker_bytes": 422,
+                "broker_sha256": "83879a686cf6a1fdd955b08f58d58cb90ee6f3a1e425b18462cb912f23118e88",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "colors/pyproject.toml",
+                "name": "colors",
+                "entry": "colors:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "b7c186ff66e9605eb373f15aac98c4add9b7ef905c6d11996c161f35868a847c",
+                "stdout_bytes": 207,
+                "advertised": [],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "8b418e5894316b902bb8098c20c77558035551a213d3193213b8361466f06e08",
+                "returncode": 0,
+                "wallclock_ms": 317.449,
+                "broker_bytes": 370,
+                "broker_sha256": "1fe52a3b956068309ee6781b86019c6786db904506c982a072d99373237365c1",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "completion/pyproject.toml",
+                "name": "completion",
+                "entry": "completion:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "3bccf17aee2147c6737db1b9ce8e518a6dc58eb7ab8c236b6860256009195f10",
+                "stdout_bytes": 207,
+                "advertised": [
+                  "group",
+                  "ls",
+                  "show-env"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "8b418e5894316b902bb8098c20c77558035551a213d3193213b8361466f06e08",
+                "returncode": 0,
+                "wallclock_ms": 265.626,
+                "broker_bytes": 395,
+                "broker_sha256": "160b84c5733205ae1595db5de50f02da8e9980c71776fa54c03c6256b8ac4547",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "complex/pyproject.toml",
+                "name": "complex",
+                "entry": "complex.cli:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "6e8a38e0b66721988a98b910c73cf8fd8a2dd1fff774d432111946df8e407b40",
+                "stdout_bytes": 305,
+                "advertised": [
+                  "init",
+                  "status"
+                ],
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {
+                  "/input/pkg/click/core.py::Argument.get_help_record": 0
+                }
+              },
+              "comparison": "NO_PAIRED_REACH",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "8b418e5894316b902bb8098c20c77558035551a213d3193213b8361466f06e08",
+                "returncode": 0,
+                "wallclock_ms": 265.628,
+                "broker_bytes": 386,
+                "broker_sha256": "b4ad01827a87c1d9e2d42fdbcbd628c097d5e5d42dd2cea3b01190b3662c0a7d",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            }
+          ]
+        },
+        "elapsed_s": 4.279,
+        "skill_admitted": false
+      }
+    },
+    {
+      "selection": "click-64",
+      "rev": "c5cced7b3096804567688df645194e3ed3dfa88b",
+      "probe": {
+        "targets": [
+          {
+            "files": 17,
+            "parsed_files": 17,
+            "unreadable": [],
+            "source_manifest_sha256": "ab813db719aead96eace0648db2bb8a5cd4060087b9ca910533380a3867ba947",
+            "arms": {
+              "empty": {
+                "files_with_proposal": 0,
+                "first_candidate": null,
+                "lookup_seconds": 0.0
+              },
+              "raw_traces": {
+                "files_with_proposal": 0,
+                "first_candidate": null,
+                "lookup_seconds": 0.1068
+              },
+              "generalized": {
+                "files_with_proposal": 0,
+                "first_candidate": null,
+                "lookup_seconds": 0.1004
+              }
+            },
+            "probe_seconds": 0.259
+          }
+        ],
+        "launcher": {
+          "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+          "status": "CHILD_EXITED",
+          "policy_sha256": "15d068b7825e0ec4bffabfbdf730f939e0840d4adf032f634af078ec0f8738ed",
+          "returncode": 0,
+          "wallclock_ms": 466.659,
+          "broker_bytes": 481,
+          "broker_sha256": "dcffd042890982d8e8885201fef6414f01d0ed28573d2759286b3d7887ab624d",
+          "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+          "material_effects_committed": 0,
+          "execution_authority": false,
+          "promotion_authority": false,
+          "fresh_reality_authority": false
+        },
+        "input_store_sha256": "5438f2d137e3bdd9c9f30cfd4bb46f8d566e3da2f5fe245470e338c9639c7d18"
+      },
+      "contrast": {
+        "eligible_programs": 10,
+        "discovery_errors": [],
+        "changed_functions": {
+          "empty": [],
+          "raw_traces": [],
+          "generalized": []
+        },
+        "rows": {
+          "empty": [
+            {
+              "program": {
+                "path": "aliases/pyproject.toml",
+                "name": "aliases",
+                "entry": "aliases:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "bd644454cd84722f777ce2cd6e8d4ebd1d98c3814e2a2fa88b4c4cc23c32a6d8",
+                "stdout_bytes": 428,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {}
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "dee6c2052feda1591997b74911a8d7f582a8c38db7d69844dfbd0c5516f288d1",
+                "returncode": 0,
+                "wallclock_ms": 266.211,
+                "broker_bytes": 297,
+                "broker_sha256": "4e710e54395c6a1b82f9529792b479c7a71e5b7f2fa56c60a1a9c2597a66a26a",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "colors/pyproject.toml",
+                "name": "colors",
+                "entry": "colors:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "b7c186ff66e9605eb373f15aac98c4add9b7ef905c6d11996c161f35868a847c",
+                "stdout_bytes": 207,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {}
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "dee6c2052feda1591997b74911a8d7f582a8c38db7d69844dfbd0c5516f288d1",
+                "returncode": 0,
+                "wallclock_ms": 266.041,
+                "broker_bytes": 297,
+                "broker_sha256": "871df6a699740877035921d1e83022e05c15e3611ef41a9f5bd185ef51ea5b73",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "completion/pyproject.toml",
+                "name": "completion",
+                "entry": "completion:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "3bccf17aee2147c6737db1b9ce8e518a6dc58eb7ab8c236b6860256009195f10",
+                "stdout_bytes": 207,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {}
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "dee6c2052feda1591997b74911a8d7f582a8c38db7d69844dfbd0c5516f288d1",
+                "returncode": 0,
+                "wallclock_ms": 265.456,
+                "broker_bytes": 297,
+                "broker_sha256": "d6aee25fdfd65fb6ba04144a297a9feb652ada83a653c19342721e8a0f2b75e9",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "complex/pyproject.toml",
+                "name": "complex",
+                "entry": "complex.cli:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "6e8a38e0b66721988a98b910c73cf8fd8a2dd1fff774d432111946df8e407b40",
+                "stdout_bytes": 305,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {}
+              },
+              "comparison": "BASELINE",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "dee6c2052feda1591997b74911a8d7f582a8c38db7d69844dfbd0c5516f288d1",
+                "returncode": 0,
+                "wallclock_ms": 265.865,
+                "broker_bytes": 297,
+                "broker_sha256": "611ee4613c704ef1773cdc966d70599ddab7d4c5333f741312b85852996fa8c9",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            }
+          ],
+          "raw_traces": [
+            {
+              "program": {
+                "path": "aliases/pyproject.toml",
+                "name": "aliases",
+                "entry": "aliases:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "bd644454cd84722f777ce2cd6e8d4ebd1d98c3814e2a2fa88b4c4cc23c32a6d8",
+                "stdout_bytes": 428,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {}
+              },
+              "comparison": "NO_PROPOSAL",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "3c3ed54289f675fffbb1db8ae995bef520cfb7b10a98529a0e794b33e435d572",
+                "returncode": 0,
+                "wallclock_ms": 316.296,
+                "broker_bytes": 297,
+                "broker_sha256": "4e710e54395c6a1b82f9529792b479c7a71e5b7f2fa56c60a1a9c2597a66a26a",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "colors/pyproject.toml",
+                "name": "colors",
+                "entry": "colors:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "b7c186ff66e9605eb373f15aac98c4add9b7ef905c6d11996c161f35868a847c",
+                "stdout_bytes": 207,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {}
+              },
+              "comparison": "NO_PROPOSAL",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "3c3ed54289f675fffbb1db8ae995bef520cfb7b10a98529a0e794b33e435d572",
+                "returncode": 0,
+                "wallclock_ms": 265.595,
+                "broker_bytes": 297,
+                "broker_sha256": "871df6a699740877035921d1e83022e05c15e3611ef41a9f5bd185ef51ea5b73",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "completion/pyproject.toml",
+                "name": "completion",
+                "entry": "completion:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "3bccf17aee2147c6737db1b9ce8e518a6dc58eb7ab8c236b6860256009195f10",
+                "stdout_bytes": 207,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {}
+              },
+              "comparison": "NO_PROPOSAL",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "3c3ed54289f675fffbb1db8ae995bef520cfb7b10a98529a0e794b33e435d572",
+                "returncode": 0,
+                "wallclock_ms": 265.95,
+                "broker_bytes": 297,
+                "broker_sha256": "d6aee25fdfd65fb6ba04144a297a9feb652ada83a653c19342721e8a0f2b75e9",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "complex/pyproject.toml",
+                "name": "complex",
+                "entry": "complex.cli:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "6e8a38e0b66721988a98b910c73cf8fd8a2dd1fff774d432111946df8e407b40",
+                "stdout_bytes": 305,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {}
+              },
+              "comparison": "NO_PROPOSAL",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "3c3ed54289f675fffbb1db8ae995bef520cfb7b10a98529a0e794b33e435d572",
+                "returncode": 0,
+                "wallclock_ms": 265.928,
+                "broker_bytes": 297,
+                "broker_sha256": "611ee4613c704ef1773cdc966d70599ddab7d4c5333f741312b85852996fa8c9",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            }
+          ],
+          "generalized": [
+            {
+              "program": {
+                "path": "aliases/pyproject.toml",
+                "name": "aliases",
+                "entry": "aliases:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "bd644454cd84722f777ce2cd6e8d4ebd1d98c3814e2a2fa88b4c4cc23c32a6d8",
+                "stdout_bytes": 428,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {}
+              },
+              "comparison": "NO_PROPOSAL",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "c49ca44ace380028ea74fdd939230230c107457983560f13d3bc30306f5cab2e",
+                "returncode": 0,
+                "wallclock_ms": 265.416,
+                "broker_bytes": 297,
+                "broker_sha256": "4e710e54395c6a1b82f9529792b479c7a71e5b7f2fa56c60a1a9c2597a66a26a",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "colors/pyproject.toml",
+                "name": "colors",
+                "entry": "colors:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "b7c186ff66e9605eb373f15aac98c4add9b7ef905c6d11996c161f35868a847c",
+                "stdout_bytes": 207,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {}
+              },
+              "comparison": "NO_PROPOSAL",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "c49ca44ace380028ea74fdd939230230c107457983560f13d3bc30306f5cab2e",
+                "returncode": 0,
+                "wallclock_ms": 265.624,
+                "broker_bytes": 297,
+                "broker_sha256": "871df6a699740877035921d1e83022e05c15e3611ef41a9f5bd185ef51ea5b73",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "completion/pyproject.toml",
+                "name": "completion",
+                "entry": "completion:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "3bccf17aee2147c6737db1b9ce8e518a6dc58eb7ab8c236b6860256009195f10",
+                "stdout_bytes": 207,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {}
+              },
+              "comparison": "NO_PROPOSAL",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "c49ca44ace380028ea74fdd939230230c107457983560f13d3bc30306f5cab2e",
+                "returncode": 0,
+                "wallclock_ms": 316.869,
+                "broker_bytes": 297,
+                "broker_sha256": "d6aee25fdfd65fb6ba04144a297a9feb652ada83a653c19342721e8a0f2b75e9",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            },
+            {
+              "program": {
+                "path": "complex/pyproject.toml",
+                "name": "complex",
+                "entry": "complex.cli:cli"
+              },
+              "observation": {
+                "status": "OBSERVED",
+                "exit": 0,
+                "stdout_sha256": "6e8a38e0b66721988a98b910c73cf8fd8a2dd1fff774d432111946df8e407b40",
+                "stdout_bytes": 305,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stderr_bytes": 0,
+                "diagnostic": "",
+                "local_product": true,
+                "calls": {}
+              },
+              "comparison": "NO_PROPOSAL",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "c49ca44ace380028ea74fdd939230230c107457983560f13d3bc30306f5cab2e",
+                "returncode": 0,
+                "wallclock_ms": 318.398,
+                "broker_bytes": 297,
+                "broker_sha256": "611ee4613c704ef1773cdc966d70599ddab7d4c5333f741312b85852996fa8c9",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              }
+            }
+          ]
+        },
+        "elapsed_s": 3.875,
+        "skill_admitted": false
+      }
+    },
+    {
+      "selection": "typer-release",
+      "rev": "a9179507924aa0095813d6197b891121d05ed74f",
+      "probe": {
+        "targets": [
+          {
+            "files": 34,
+            "parsed_files": 34,
+            "unreadable": [],
+            "source_manifest_sha256": "5f870ef98870d1ccccd0c37b430549d78ebd499a4fe1b6b48f3adbc307809e35",
+            "arms": {
+              "empty": {
+                "files_with_proposal": 0,
+                "first_candidate": null,
+                "lookup_seconds": 0.0001
+              },
+              "raw_traces": {
+                "files_with_proposal": 0,
+                "first_candidate": null,
+                "lookup_seconds": 0.1168
+              },
+              "generalized": {
+                "files_with_proposal": 0,
+                "first_candidate": null,
+                "lookup_seconds": 0.1176
+              }
+            },
+            "probe_seconds": 0.301
+          }
+        ],
+        "launcher": {
+          "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+          "status": "CHILD_EXITED",
+          "policy_sha256": "bb30bc538eb4d8350de705be192ef6f3d898615e93f166ae388bd91a28257ba6",
+          "returncode": 0,
+          "wallclock_ms": 517.091,
+          "broker_bytes": 484,
+          "broker_sha256": "732ae4df7ce4cea4a5c6926e42c0d0525dbc66b1f02761fca340ca82c08e753d",
+          "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+          "material_effects_committed": 0,
+          "execution_authority": false,
+          "promotion_authority": false,
+          "fresh_reality_authority": false
+        },
+        "input_store_sha256": "5438f2d137e3bdd9c9f30cfd4bb46f8d566e3da2f5fe245470e338c9639c7d18"
+      },
+      "contrast": {
+        "eligible_programs": 0,
+        "discovery_errors": [],
+        "changed_functions": {
+          "empty": [],
+          "raw_traces": [],
+          "generalized": []
+        },
+        "rows": {
+          "empty": [],
+          "raw_traces": [],
+          "generalized": []
+        },
+        "elapsed_s": 0.546,
+        "skill_admitted": false
+      }
+    }
+  ]
+}

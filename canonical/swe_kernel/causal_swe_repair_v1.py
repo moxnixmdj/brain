@@ -283,6 +283,28 @@ def run_pytest_verdicts(
     }
 
 
+def _passed_baseline_nodes(before: Mapping[str, Any], after: Mapping[str, Any]) -> bool:
+    """A disappearing failure (skip, lost collection, timeout) is not a repair."""
+    required = set(before['failing']) | set(before['passing'])
+    return bool(required) and after['ok'] is True and required <= set(after['passing'])
+
+
+def _regression_check(before: Mapping[str, Any], after: Mapping[str, Any]) -> str | None:
+    """Compare witnesses, not summary counts. Inconclusive is not green."""
+    for run in (before, after):
+        rc = run.get('returncode')
+        if (rc not in (0, 1) or not (run.get('passing') or run.get('failing'))
+                or bool(run.get('failing')) != (rc == 1)):
+            return 'INCOMPLETE_REGRESSION_CHECK'
+    old_pass, old_fail = set(before['passing']), set(before['failing'])
+    new_pass, new_fail = set(after['passing']), set(after['failing'])
+    if new_fail - old_fail:
+        return 'REGRESSED_CROSS_MODULE_IMPACTED_TESTS'
+    if not old_pass <= new_pass or not old_fail <= new_pass | new_fail:
+        return 'INCOMPLETE_REGRESSION_CHECK'
+    return None
+
+
 def verify_runner_canary(
     worktree: pathlib.Path,
     *,
@@ -311,7 +333,7 @@ def verify_runner_canary(
         )
         used_pytest = any("::" in k for k in res["verdicts"])
         min_expected = 2 if used_pytest else 1
-        return len(res["failing"]) >= min_expected and not res["ok"]
+        return res.get("returncode") == 1 and len(res["failing"]) >= min_expected and not res["ok"]
 
 
 def _run_unittest_fallback(
@@ -1022,6 +1044,11 @@ def synthesize_candidates(
         fn_node = _enclosing_function(tree, lineno)
         search_root: ast.AST = fn_node if fn_node is not None else tree
 
+        from canonical.swe_kernel.local_type_paths_v1 import return_paths
+        for patch, proof in return_paths(src, [lineno], tree=tree):
+            _emit(PatchCandidate("LOCAL_TYPED_RETURN_PATH", rel, lineno, json.dumps(proof, sort_keys=True),
+                                 patch, "TYPED_PATH_" + str(len(proof['suppliers_inner_first'])), site_bonus + 3.0))
+
         # --- FAMILY 1B: CODEBASE TYPE-HABITATION (runs at every ranked line + CFG guards!) ---
         from canonical.swe_kernel.petri_cow_splicing_engine_v1 import CodebaseTypeHabitationMiner
 
@@ -1719,6 +1746,7 @@ def repair_worktree(
     skill_store: Any | None = None,
     budget_s: float = 90.0,
     max_verifications: int = 20,
+    admit_skills: bool = True,
     _allow_zipper: bool = True,
 ) -> dict[str, Any]:
     """Autonomously localize, synthesize, and verify a bug repair in `worktree` (ZERO diff leakage)."""
@@ -2020,6 +2048,13 @@ def repair_worktree(
     attempts: list[dict[str, Any]] = []
     zipper_seeds: list[tuple[int, int, dict[str, Any], list[str]]] = []
 
+    sibling_baselines: dict[tuple[str, ...], dict[str, Any]] = {}
+    def check_siblings(names: list[str]) -> dict[str, Any]:
+        remaining = budget_s - (time.perf_counter() - started)
+        if remaining <= 0:
+            return {'passing': [], 'failing': [], 'timeout': True}
+        return run_pytest_verdicts(worktree, names, python_exe=python_exe, timeout_s=min(18.0, remaining))
+
     for idx, item in enumerate(sim_verified_patches[:max_verifications]):
         if time.perf_counter() - started > budget_s:
             break
@@ -2036,36 +2071,38 @@ def repair_worktree(
             full = run_pytest_verdicts(
                 worktree, test_target, python_exe=python_exe, timeout_s=40.0
             )
-            regressed = bool(full["failing"]) or len(full["passing"]) < len(passing_nodes)
+            regressed = not _passed_baseline_nodes(baseline, full)
             if regressed:
                 # Record partial-progress seed for Def-Use Relational Zipper (Wall 3):
                 # If `item` strictly fixed >= 1 original failing test (or ALL original failing tests)
                 # while leaving 1..3 remaining/secondary failures, propagate a 2nd hop along call edges!
                 cur_fails = list(full.get("failing") or [])
                 orig_fail_set = set(failing_nodes)
-                fixed_orig = len(orig_fail_set - set(cur_fails))
+                fixed_orig = len(orig_fail_set.intersection(full["passing"]))
+                lost = sorted(set(passing_nodes).intersection(cur_fails))
+                cause = "REGRESSED_PASSING_TESTS" if lost else "BASELINE_NODES_NOT_ALL_PASSING"
                 if _allow_zipper and fixed_orig >= 1 and 1 <= len(cur_fails) <= 3:
                     zipper_seeds.append((fixed_orig, -len(cur_fails), item, cur_fails))
                 memory.record_outcome(
                     item["family"],
                     verified=False,
-                    caused_regression=True,
+                    caused_regression=bool(lost),
                     elapsed_s=time.perf_counter() - t0,
                 )
-                if skill_store is not None and hasattr(skill_store, "record_negative_invariant"):
+                if lost and skill_store is not None and hasattr(skill_store, "record_negative_invariant"):
                     skill_store.record_negative_invariant(
                         domain="swe_python",
                         target_ast_shape=str(item.get("primary_file") or ""),
                         forbidden_delta_op=str(item.get("abstract_shape") or item["family"]),
                         failure_kind="REGRESSED_PASSING_TESTS",
-                        minimal_witness={"failing": list(full["failing"][:3])},
+                        minimal_witness={"formerly_passing": lost[:3]},
                     )
                 attempts.append({
                     "rank": idx + 1,
                     "family": item["family"],
                     "site": f"{item['primary_file']}:{item['primary_line']}",
                     "description": item["description"],
-                    "verdict": "REGRESSED_PASSING_TESTS",
+                    "verdict": cause,
                 })
                 for rel_p in file_patches:
                     (worktree / rel_p).write_text(originals[rel_p], encoding="utf-8")
@@ -2152,39 +2189,29 @@ def repair_worktree(
                     if t != base_test_rel and (worktree / t).is_file() and (worktree / t).stat().st_size < 180_000
                 ][:6]
                 if sibling_tests:
-                    sib_res = run_pytest_verdicts(
-                        worktree, sibling_tests, python_exe=python_exe, timeout_s=18.0
-                    )
-                    sib_fails = list(sib_res.get("failing") or [])
-                    if sib_fails:
-                        # Check whether those failures were pre-existing on unpatched worktree
+                    key = tuple(sibling_tests)
+                    if key not in sibling_baselines:
                         for rel_p in file_patches:
                             (worktree / rel_p).write_text(originals[rel_p], encoding="utf-8")
-                        pre_sib = run_pytest_verdicts(
-                            worktree, sib_fails[:6], python_exe=python_exe, timeout_s=12.0
-                        )
-                        pre_set = set(pre_sib.get("failing") or [])
-                        new_sib_regressions = [f for f in sib_fails if f not in pre_set]
-                        if new_sib_regressions:
-                            if _allow_zipper and 1 <= len(new_sib_regressions) <= 3:
-                                zipper_seeds.append((len(failing_nodes), -len(new_sib_regressions), item, list(new_sib_regressions)))
-                            memory.record_outcome(
-                                item["family"],
-                                verified=False,
-                                caused_regression=True,
-                                elapsed_s=time.perf_counter() - t0,
-                            )
-                            attempts.append({
-                                "rank": idx + 1,
-                                "family": item["family"],
-                                "site": f"{item['primary_file']}:{item['primary_line']}",
-                                "description": item["description"],
-                                "verdict": "REGRESSED_CROSS_MODULE_IMPACTED_TESTS",
-                                "cross_module_regressions": new_sib_regressions[:4],
-                            })
-                            continue
+                        sibling_baselines[key] = check_siblings(sibling_tests)
                         for rel_p, new_src in file_patches.items():
                             (worktree / rel_p).write_text(new_src, encoding="utf-8")
+                    pre_sib = sibling_baselines[key]
+                    sib_res = check_siblings(sibling_tests)
+                    reason = _regression_check(pre_sib, sib_res)
+                    if reason:
+                        new_fails = sorted(set(sib_res['failing']) - set(pre_sib['failing']))
+                        if _allow_zipper and reason.startswith('REGRESSED') and 1 <= len(new_fails) <= 3:
+                            zipper_seeds.append((len(failing_nodes), -len(new_fails), item, new_fails))
+                        memory.record_outcome(item['family'], verified=False, caused_regression=bool(new_fails),
+                                              elapsed_s=time.perf_counter() - t0)
+                        attempts.append({'rank': idx + 1, 'family': item['family'],
+                                         'site': f"{item['primary_file']}:{item['primary_line']}",
+                                         'description': item['description'], 'verdict': reason,
+                                         'cross_module_regressions': new_fails[:4]})
+                        for rel_p in file_patches:
+                            (worktree / rel_p).write_text(originals[rel_p], encoding="utf-8")
+                        continue
 
             memory.record_outcome(
                 item["family"],
@@ -2193,47 +2220,30 @@ def repair_worktree(
                 elapsed_s=time.perf_counter() - t0,
                 abstract_shape=item["abstract_shape"],
             )
-            learned_skill_id: str | None = item.get("reused_skill_id")
-            if skill_store is not None and learned_skill_id is None and hasattr(skill_store, "try_admit_subtree"):
-                prim_f = str(item["primary_file"])
-                orig_f_src = originals.get(prim_f, "")
-                new_f_src = file_patches.get(prim_f, "")
-                if orig_f_src and new_f_src and orig_f_src != new_f_src:
-                    try:
-                        t_orig = ast.parse(orig_f_src)
-                        t_new = ast.parse(new_f_src)
-                        _, fn_o, _ = fpm.AngelicCEGISSynthesizer._find_enclosing_stmt_and_func(
-                            t_orig, int(item["primary_line"])
-                        )
-                        _, fn_n, _ = fpm.AngelicCEGISSynthesizer._find_enclosing_stmt_and_func(
-                            t_new, int(item["primary_line"])
-                        )
-                        if fn_o is not None and fn_n is not None and fn_o.body and fn_n.body:
-                            lo = orig_f_src.splitlines(keepends=True)
-                            ln_new = new_f_src.splitlines(keepends=True)
-                            bo_txt = "".join(lo[fn_o.body[0].lineno - 1 : getattr(fn_o.body[-1], "end_lineno", fn_o.body[-1].lineno)])
-                            bn_txt = "".join(ln_new[fn_n.body[0].lineno - 1 : getattr(fn_n.body[-1], "end_lineno", fn_n.body[-1].lineno)])
-                            mod_syms = [
-                                nd.name for nd in ast.walk(t_orig)
-                                if isinstance(nd, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
-                            ] + [a.arg for a in fn_o.args.args]
-                            ok_adm, adm_id = skill_store.try_admit_subtree(
-                                domain="swe_python",
-                                concrete_before=bo_txt,
-                                concrete_after=bn_txt,
-                                verified=True,
-                                goal_relevant=True,
-                                probes_before_success=max(1, total_generated),
-                                raw_episode_bytes=len(orig_f_src.encode("utf-8")),
-                                source_fingerprint=prim_f,
-                                witness_inputs=[{"failing_nodes": list(failing_nodes[:3])}],
-                                revalidation_probe={"test_target": test_target},
-                                allowed_module_symbols=mod_syms,
-                            )
-                            if ok_adm:
-                                learned_skill_id = adm_id
-                    except Exception:
-                        pass
+            learned_skill_id = None
+            reused_skill_id = item.get("reused_skill_id")
+            admission = None if admit_skills else "NOT_ADMITTED__PROVISIONAL_WITNESS"
+            if admit_skills and skill_store is not None and reused_skill_id is None and hasattr(skill_store, "try_admit_subtree"):
+                # A green multi-file transaction does not verify any one of its
+                # edits in isolation. Feed the learner the whole checked pair
+                # or abstain; independent line numbers can point at different
+                # functions after a deletion.
+                if len(file_patches) != 1:
+                    admission = "NOT_ADMITTED__MULTI_FILE_TRANSACTION"
+                else:
+                    (rel, after), = file_patches.items()
+                    before = originals[rel]
+                    ok_adm, admission = skill_store.try_admit_subtree(
+                        domain="swe_python", concrete_before=before, concrete_after=after,
+                        verified=True, goal_relevant=True, probes_before_success=1 + len(attempts),
+                        raw_episode_bytes=len(before.encode()) + len(after.encode()),
+                        source_fingerprint=hashlib.sha256(before.encode()).hexdigest(),
+                        witness_inputs=[{"failing_nodes": list(failing_nodes[:3])}],
+                        revalidation_probe={"source": rel, "test_target": test_target,
+                                            "candidate_sha256": hashlib.sha256(after.encode()).hexdigest()},
+                    )
+                    if ok_adm:
+                        learned_skill_id = admission
 
             attempts.append({
                 "rank": idx + 1,
@@ -2251,6 +2261,8 @@ def repair_worktree(
                 "winning_family": item["family"],
                 "winning_mechanism": item["mechanism"],
                 "learned_skill_id": learned_skill_id,
+                "subtree_admission": admission,
+                "reused_skill_id": reused_skill_id,
                 "repaired_file": item["primary_file"],
                 "repaired_files": sorted(file_patches.keys()),
                 "repaired_line": item["primary_line"],
@@ -2337,6 +2349,7 @@ def repair_worktree(
                     skill_store=skill_store,
                     budget_s=min(28.0, per_hop_b),
                     max_verifications=8,
+                    admit_skills=False,  # subgoal, not yet a verified transaction
                     _allow_zipper=False,
                 )
                 if not hop_res.get("pass"):
@@ -2353,8 +2366,7 @@ def repair_worktree(
                     worktree, test_target, python_exe=python_exe, timeout_s=30.0
                 )
                 if (
-                    not joint_res.get("failing")
-                    and len(joint_res.get("passing") or []) >= len(passing_nodes)
+                    _passed_baseline_nodes(baseline, joint_res)
                     and verify_runner_canary(worktree, python_exe=python_exe)
                 ):
                     verified_art = True
@@ -2429,6 +2441,7 @@ def repair_worktree(
                     skill_store=skill_store,
                     budget_s=min(24.0, rem_budget_z - 3.0),
                     max_verifications=8,
+                    admit_skills=False,  # subgoal, not yet a verified transaction
                     _allow_zipper=False,
                 )
                 if hop2.get("pass"):
@@ -2440,8 +2453,7 @@ def repair_worktree(
                         worktree, union_targets, python_exe=python_exe, timeout_s=30.0
                     )
                     if (
-                        not final_check.get("failing")
-                        and len(final_check.get("passing") or []) >= len(passing_nodes)
+                        _passed_baseline_nodes(baseline, final_check)
                         and verify_runner_canary(worktree, python_exe=python_exe)
                     ):
                         combined_files = sorted({

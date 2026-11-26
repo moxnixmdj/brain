@@ -1,0 +1,566 @@
+{
+  "kind": "producer-run targeted software checks only",
+  "source_commit": "3b8cdeb19a28fe127b96c3050696c6c690b07d13",
+  "python": "3.11.2",
+  "pytest": "9.2.0",
+  "junit_sha256": "0fd10f9edcedfd75dd9ad9e0c3ca97c6cb99f7f994e24a2726656555a2322379",
+  "targeted_test_modules": [
+    "test_arm_learned_from_its_own_verified_repairs_v1",
+    "test_boundary_evidence_v1",
+    "test_causal_swe_repair_v1",
+    "test_contrast_and_browser_boundary_v1",
+    "test_domain_atlas_v1",
+    "test_finite_minimax_decision_region_v1",
+    "test_frontier_leapfrog_wave39_v1",
+    "test_frontier_leapfrog_waves21_25_v1",
+    "test_harbor_cold_smoke_v1",
+    "test_harbor_epistemic_agent_v1",
+    "test_harbor_experimental_vm_v1",
+    "test_harbor_pro_git_capture_v1",
+    "test_harbor_pro_patch_handoff_v1",
+    "test_harbor_process_cleanup_worker_v1",
+    "test_induced_edit_basis_v1",
+    "test_petri_cow_splicing_engine_v1",
+    "test_petri_cow_unified_architecture_v1",
+    "test_repair_input_dependency_gate_v1",
+    "test_subtree_witness_replay_v1",
+    "test_unified_epistemic_portfolio_v1",
+    "test_unified_frontier_spines_v1",
+    "test_v4_subtree_fuzzer_harbor_v1",
+    "test_witnessed_native_route_v1",
+    "test_witnessed_revision_history_v1",
+    "test_zero_knowledge_cua_kernel_v1"
+  ],
+  "pytest_summary": "213 passed, 2 warnings, 18 subtests passed in 144.47s (0:02:24)",
+  "integrity": {
+    "pass": true,
+    "violation_count": 0,
+    "mode": "static+diff",
+    "base": "c5d59dd0cb20cf1d2b4c02136ccd7dd76423e7aa",
+    "rules": 17
+  },
+  "atlas_and_default": {
+    "kind": "self-labelled top-5 tag hits, NOT task completion",
+    "fixed_atlas_sha256": "6927f6e2b02a51d1d17ceda9c9ba393c9bc5bc9db66a8148ae5992b78efdbbb5",
+    "top_k": 5,
+    "seconds": 0.4777,
+    "default_unhandled_subtask": {
+      "pass": false,
+      "model_calls": 0,
+      "pluggable_proposer_calls": 0,
+      "rung_counts": {
+        "RUNG_0_COMPILED_SKILL": 0,
+        "RUNG_1_SYMBOLIC": 0,
+        "RUNG_2_COW_MENDEL": 0,
+        "RUNG_3_PLUGGABLE_PROPOSER": 0,
+        "ABSTAINED": 1
+      }
+    },
+    "domains": {
+      "instant_learning": {
+        "cases": 6,
+        "native_route": 1.0,
+        "native_source": 1.0,
+        "frontier_route": 1.0,
+        "frontier_source": 1.0
+      },
+      "continual_learning": {
+        "cases": 6,
+        "native_route": 0.667,
+        "native_source": 0.0,
+        "frontier_route": 1.0,
+        "frontier_source": 0.333
+      },
+      "memory": {
+        "cases": 6,
+        "native_route": 1.0,
+        "native_source": 1.0,
+        "frontier_route": 1.0,
+        "frontier_source": 0.667
+      },
+      "computer_use": {
+        "cases": 6,
+        "native_route": 0.667,
+        "native_source": 0.667,
+        "frontier_route": 1.0,
+        "frontier_source": 0.667
+      },
+      "coding_agents": {
+        "cases": 6,
+        "native_route": 1.0,
+        "native_source": 1.0,
+        "frontier_route": 1.0,
+        "frontier_source": 0.667
+      },
+      "verification_abstention": {
+        "cases": 6,
+        "native_route": 1.0,
+        "native_source": 0.667,
+        "frontier_route": 0.667,
+        "frontier_source": 0.333
+      },
+      "world_model": {
+        "cases": 6,
+        "native_route": 1.0,
+        "native_source": 0.667,
+        "frontier_route": 1.0,
+        "frontier_source": 0.667
+      }
+    }
+  },
+  "repeated_native_grades": [
+    {
+      "task": "music-harmony",
+      "repeat_sha256": "4cf4afc5f5f2b1266c4d86bef564e7a34096b1e11a15588f20bafc8da9913ee6",
+      "verified_input_and_outcomes_match": true,
+      "seconds": [
+        13.019,
+        9.466,
+        9.517
+      ],
+      "seconds_arm_order": [
+        "d17cb7c1",
+        "nop",
+        "reference"
+      ]
+    },
+    {
+      "task": "sound-change-cascade",
+      "repeat_sha256": "7c1c8b1326338312383a81856e9592afa9e7bc2d2baf87b4d39429992a5a101b",
+      "verified_input_and_outcomes_match": true,
+      "seconds": [
+        8.123,
+        7.681,
+        7.484
+      ],
+      "seconds_arm_order": [
+        "d17cb7c1",
+        "nop",
+        "reference"
+      ]
+    },
+    {
+      "task": "instance_ansible__ansible-d33bedc48fdd933b5abd65a77c081876298e2f07-v0f01c69f1e2528b935359cfe578530722bca2c59",
+      "repeat_sha256": "aa67261e50c7d9494abaaeddf4e16a250e13f80a4ddbb5d5431f6331422f4732",
+      "verified_input_and_outcomes_match": true,
+      "seconds": [
+        55.834,
+        43.058,
+        42.905,
+        47.545
+      ],
+      "seconds_arm_order": [
+        "bee38f70",
+        "d17cb7c1",
+        "nop",
+        "reference"
+      ]
+    },
+    {
+      "task": "instance_ansible__ansible-d62496fe416623e88b90139dc7917080cb04ce70-v0f01c69f1e2528b935359cfe578530722bca2c59",
+      "repeat_sha256": "d01f31e6f6ec0adda615f8f0ece14aa142a8212fff9e69c41cf630810c80cd9a",
+      "verified_input_and_outcomes_match": true,
+      "seconds": [
+        39.475,
+        40.441,
+        44.039,
+        56.807
+      ],
+      "seconds_arm_order": [
+        "bee38f70",
+        "d17cb7c1",
+        "nop",
+        "reference"
+      ]
+    }
+  ],
+  "repeated_producers": [
+    {
+      "frozen_capture": "hard51_pos5_source_predictions_20261126_v1.json",
+      "repeat_sha256": "f64912858c70516f4468b026a0e6e88807dcb6af692e2258b1e70de99a366d91",
+      "same_public_input_base_manifests_phase_decisions_and_patch": true,
+      "arms": [
+        {
+          "revision": "bee38f7000851a9b16a055d7ef7e2ec01d7c7217",
+          "patch_bytes": 0,
+          "room_s": 28.69,
+          "code_files_and_artifact": 16
+        },
+        {
+          "revision": "d17cb7c1cad4f8baba35395306a20287723322d0",
+          "patch_bytes": 0,
+          "room_s": 7.497,
+          "code_files_and_artifact": 19
+        }
+      ]
+    },
+    {
+      "frozen_capture": "hard51_pos6_source_predictions_20261126_v1.json",
+      "repeat_sha256": "3d1c8066e73042fdb47e70ec2fb7e88fce5de92f3d4082996b01d6c60023c144",
+      "same_public_input_base_manifests_phase_decisions_and_patch": true,
+      "arms": [
+        {
+          "revision": "bee38f7000851a9b16a055d7ef7e2ec01d7c7217",
+          "patch_bytes": 0,
+          "room_s": 26.067,
+          "code_files_and_artifact": 16
+        },
+        {
+          "revision": "d17cb7c1cad4f8baba35395306a20287723322d0",
+          "patch_bytes": 0,
+          "room_s": 6.336,
+          "code_files_and_artifact": 19
+        }
+      ]
+    },
+    {
+      "frozen_capture": "tb41_music_harmony_source_predictions_20261126_v1.json",
+      "repeat_sha256": "4b1bdffdb6e56c37a2435f25fe6981c41f75dd4422870da17b228be73d69bc4b",
+      "same_public_input_base_manifests_phase_decisions_and_patch": true,
+      "arms": [
+        {
+          "revision": "d17cb7c1cad4f8baba35395306a20287723322d0",
+          "patch_bytes": 0,
+          "room_s": 0.667,
+          "code_files_and_artifact": 19
+        }
+      ]
+    },
+    {
+      "frozen_capture": "tb41_sound_change_cascade_source_predictions_20261126_v1.json",
+      "repeat_sha256": "f55b8a7ef278aa310767f446ccf261b4c236b0eb12ef7e602b4f50807780cd26",
+      "same_public_input_base_manifests_phase_decisions_and_patch": true,
+      "arms": [
+        {
+          "revision": "d17cb7c1cad4f8baba35395306a20287723322d0",
+          "patch_bytes": 0,
+          "room_s": 0.667,
+          "code_files_and_artifact": 19
+        }
+      ]
+    },
+    {
+      "frozen_capture": "scbench_cfgpipe_cp1_cold_20261126_v1.json",
+      "repeat_sha256": "fbe63a71ef2e9c315e6ba44d7c77213e4ff1b3f7b62264cdc70959a336b76cc3",
+      "same_public_input_base_manifests_phase_decisions_and_patch": true,
+      "arms": [
+        {
+          "revision": "b10e2cd787cc4347fad14440515d3381982df7fb",
+          "patch_bytes": 0,
+          "room_s": 0.917,
+          "code_files_and_artifact": 16
+        }
+      ]
+    },
+    {
+      "frozen_capture": "scbench_circuit_eval_cp1_cold_20261126_v1.json",
+      "repeat_sha256": "8db03a92733ada0a7e692f5a4180baeded5956787644a300d847eacf1108b158",
+      "same_public_input_base_manifests_phase_decisions_and_patch": true,
+      "arms": [
+        {
+          "revision": "b10e2cd787cc4347fad14440515d3381982df7fb",
+          "patch_bytes": 0,
+          "room_s": 0.717,
+          "code_files_and_artifact": 16
+        }
+      ]
+    }
+  ],
+  "clean_checkout_mutations": [
+    "canonical/astra_runtime/state/CONCEPT_LIBRARY_V1.json (test usage counter only, in disposable clone)"
+  ],
+  "cfgpipe_missing_program_control": {
+    "case": "test_checkpoint_1.py::test_missing_type_field",
+    "workspace": "unchanged, no cfgpipe.py",
+    "actual_interpreter": "/usr/bin/python3.11",
+    "invocation_names": {
+      "neutral": {
+        "passed": false,
+        "xml_sha256": "48ecd2b9b351e1d72eb3c0718a71b293b900e9a4489c21e31fdf0c9d2212c31a"
+      },
+      "eval": {
+        "passed": true,
+        "xml_sha256": "74c4e2ad14f3a2b2866df3eb42904df542a12c3c8d3220c933d47f5a684e6a0d"
+      }
+    }
+  },
+  "authority": "NONE: producer-run measurements and reproductions, no independent review or image score",
+  "browser_recipe_repeat": {
+    "initial": {
+      "repeat_capture_sha256": "0749c50f7ba9cdbc03d3eaaf0e6bdfd94fecf9e2ac689806f0cedde7a5ceeaaa",
+      "repeat_call_grade_sha256": "0dd041c750323858bffd2736fb60d80a421687a3d25783578117bf4f1294fb46",
+      "arms": {
+        "deleted": {
+          "attempts": 26,
+          "complete_executed_matches": 1,
+          "ungraded": 0,
+          "step_matches": 6,
+          "graded_steps": 36
+        },
+        "empty": {
+          "attempts": 26,
+          "complete_executed_matches": 1,
+          "ungraded": 0,
+          "step_matches": 6,
+          "graded_steps": 36
+        },
+        "lifted": {
+          "attempts": 26,
+          "complete_executed_matches": 1,
+          "ungraded": 0,
+          "step_matches": 6,
+          "graded_steps": 36
+        },
+        "raw": {
+          "attempts": 26,
+          "complete_executed_matches": 1,
+          "ungraded": 0,
+          "step_matches": 6,
+          "graded_steps": 36
+        }
+      },
+      "compared_fields": [
+        "status",
+        "actual",
+        "matched_steps",
+        "graded_steps",
+        "entire_call_match",
+        "changed"
+      ],
+      "diffs_from_original_call_grades": [
+        {
+          "arm": "deleted",
+          "suite": "doors",
+          "index": 4,
+          "changes": {
+            "status": {
+              "first": "UNCONFIRMED_INVOCATION",
+              "repeat": "ACTION_WITHOUT_VERIFIED_GOAL"
+            },
+            "actual": {
+              "first": [],
+              "repeat": [
+                "openDoor1"
+              ]
+            },
+            "matched_steps": {
+              "first": null,
+              "repeat": 1
+            },
+            "graded_steps": {
+              "first": null,
+              "repeat": 2
+            },
+            "entire_call_match": {
+              "first": null,
+              "repeat": false
+            },
+            "changed": {
+              "first": null,
+              "repeat": true
+            }
+          }
+        }
+      ]
+    },
+    "followup": {
+      "repeat_capture_sha256": "7896058fab5602eb84c813979e734e4062c1db35ea0ffabeacbade5c26c80ed5",
+      "repeat_call_grade_sha256": "356ab7ab3c03ad42699e0ac350c25bb1fd72797784098de4fe2217ac20d58c5a",
+      "arms": {
+        "original": {
+          "attempts": 15,
+          "complete_executed_matches": 1,
+          "ungraded": 0,
+          "step_matches": 6,
+          "graded_steps": 33
+        },
+        "scoped": {
+          "attempts": 15,
+          "complete_executed_matches": 2,
+          "ungraded": 0,
+          "step_matches": 7,
+          "graded_steps": 33
+        }
+      },
+      "compared_fields": [
+        "status",
+        "actual",
+        "matched_steps",
+        "graded_steps",
+        "entire_call_match",
+        "changed"
+      ],
+      "diffs_from_original_call_grades": []
+    },
+    "doors": {
+      "repeat_grade_sha256": "e51025b43cba3764f5e56aed0ac247a52be4c20fb43642c7fb51dce50768bc39",
+      "rows_index_arm_effect_calibrated": [
+        [
+          8,
+          "original",
+          false,
+          true
+        ],
+        [
+          8,
+          "scoped",
+          true,
+          true
+        ],
+        [
+          8,
+          "noop",
+          false,
+          true
+        ],
+        [
+          8,
+          "positive_ui",
+          true,
+          true
+        ],
+        [
+          9,
+          "original",
+          false,
+          true
+        ],
+        [
+          9,
+          "scoped",
+          false,
+          true
+        ],
+        [
+          9,
+          "noop",
+          false,
+          true
+        ],
+        [
+          9,
+          "positive_ui",
+          true,
+          true
+        ],
+        [
+          10,
+          "original",
+          false,
+          true
+        ],
+        [
+          10,
+          "scoped",
+          false,
+          true
+        ],
+        [
+          10,
+          "noop",
+          false,
+          true
+        ],
+        [
+          10,
+          "positive_ui",
+          true,
+          true
+        ],
+        [
+          11,
+          "original",
+          false,
+          true
+        ],
+        [
+          11,
+          "scoped",
+          false,
+          true
+        ],
+        [
+          11,
+          "noop",
+          false,
+          true
+        ],
+        [
+          11,
+          "positive_ui",
+          true,
+          true
+        ],
+        [
+          12,
+          "original",
+          false,
+          true
+        ],
+        [
+          12,
+          "scoped",
+          false,
+          true
+        ],
+        [
+          12,
+          "noop",
+          false,
+          true
+        ],
+        [
+          12,
+          "positive_ui",
+          true,
+          true
+        ],
+        [
+          13,
+          "original",
+          false,
+          true
+        ],
+        [
+          13,
+          "scoped",
+          false,
+          true
+        ],
+        [
+          13,
+          "noop",
+          false,
+          true
+        ],
+        [
+          13,
+          "positive_ui",
+          true,
+          true
+        ]
+      ],
+      "diffs_in_ordered_visible_readbacks_effect_or_calibration": []
+    }
+  },
+  "dialogue_recipe_repeat": {
+    "dataset_sha256": "686cfdba97db685403f0c4a4c4b49c006cd6103979ff53914eafe2da11e5e26a",
+    "repeat_capture_sha256": "be204aa896d19d0855d45631b763d067eb1b4fdcca8e4a6ef7d4ab0f42e560ff",
+    "repeat_grade_sha256": "c5f551dac1de2e7fffc2eab1ed4aece8875c15f4490613db4613a8c001da1f2b",
+    "all_12_predictions_except_elapsed_time_match": true,
+    "all_grade_rows_match": true
+  },
+  "original_dialogue_store_inspection": {
+    "reader_revision": "1d709be7",
+    "bytes": 16384,
+    "event_counts": {
+      "set": 10
+    },
+    "encoded_value_bytes": 378,
+    "witness_text_bytes": 581,
+    "phase_last_answer_cumulative_reader_seconds": [
+      0.014263,
+      0.018694
+    ]
+  }
+}

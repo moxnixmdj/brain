@@ -1,0 +1,104 @@
+{
+  "kind": "source-native replay; upstream verifier; NOT locked image or full HARD-51",
+  "task": "instance_ansible__ansible-d33bedc48fdd933b5abd65a77c081876298e2f07-v0f01c69f1e2528b935359cfe578530722bca2c59",
+  "suite_commit": "66f92766bba642462d4bbe5479e83f91f9211862",
+  "base": "dcc5dac1846be3bf6e948a2950b93477b9193076",
+  "prediction_sha256": "0357baa0bccf8b00a1e5f02064feb29f024e8ab65b872ac21f5e075b7d18ba24",
+  "verifier_files_sha256": {
+    "test.sh": "b6f26eecd87c1696a3702ee115d31f9d42f4704cf2116419cd879f66b60976d0",
+    "config.json": "52d7bb2e0d472babc4848ee88d9822d1a9ff84f95be21936482005a53901a9f1",
+    "test_patch.patch": "137e9111031d731aab6a98cfbeace83ba6115d9beb87a5362bb7ec96b76b63d1",
+    "parser.py": "5ea7efbbcec4ef823ad414bfcfffaf1fa7d0f3ab8e748ea465c03bc839b3721b",
+    "run_script.sh": "6266fd04d263adc7fe7356680ccc934e5a1d9668898e553c54671104487dc0f8"
+  },
+  "calibrated_reference_nop": true,
+  "rows": [
+    {
+      "arm": "bee38f7000851a9b16a055d7ef7e2ec01d7c7217",
+      "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "exit": 1,
+      "reward_file": 0,
+      "official_image_reward": null,
+      "seconds": 45.55,
+      "verifier_log_sha256": "6be6eddd8dddc8ad7f6afae8681e76d8076f68bedf9837184ca6887572d4a7db",
+      "parsed": {
+        "PASSED": 83,
+        "FAILED": 26
+      },
+      "required": {
+        "fail_to_pass": {
+          "FAILED": 26
+        },
+        "pass_to_pass": {
+          "PASSED": 81
+        }
+      }
+    },
+    {
+      "arm": "d17cb7c1cad4f8baba35395306a20287723322d0",
+      "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "exit": 1,
+      "reward_file": 0,
+      "official_image_reward": null,
+      "seconds": 47.263,
+      "verifier_log_sha256": "6a3d8d35bcc93e0c0b2f074f18c7e2ad6b3720161c8696f2f8594a3f11c9f35c",
+      "parsed": {
+        "PASSED": 83,
+        "FAILED": 26
+      },
+      "required": {
+        "fail_to_pass": {
+          "FAILED": 26
+        },
+        "pass_to_pass": {
+          "PASSED": 81
+        }
+      }
+    },
+    {
+      "arm": "nop",
+      "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "exit": 1,
+      "reward_file": 0,
+      "official_image_reward": null,
+      "seconds": 44.863,
+      "verifier_log_sha256": "0a8545921a4e819b512c1543ad7ceedd08a21ea3584c3ba4cd6662c16c053b27",
+      "parsed": {
+        "PASSED": 83,
+        "FAILED": 26
+      },
+      "required": {
+        "fail_to_pass": {
+          "FAILED": 26
+        },
+        "pass_to_pass": {
+          "PASSED": 81
+        }
+      }
+    },
+    {
+      "arm": "reference",
+      "patch_sha256": "198766fd4c40348b31f1c75464be9780ff6d5fe0e2c248e7c30aad58de7490c6",
+      "bytes": 23129,
+      "exit": 0,
+      "reward_file": 1,
+      "official_image_reward": null,
+      "seconds": 46.377,
+      "verifier_log_sha256": "6fcf24a529beaec85496407a228e6e88d2ceaee0eb00b319938232dbaafae553",
+      "parsed": {
+        "PASSED": 109
+      },
+      "required": {
+        "fail_to_pass": {
+          "PASSED": 26
+        },
+        "pass_to_pass": {
+          "PASSED": 81
+        }
+      }
+    }
+  ]
+}

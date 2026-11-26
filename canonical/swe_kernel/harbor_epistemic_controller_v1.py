@@ -13,10 +13,10 @@ from __future__ import annotations
 import base64
 import json
 import re
-import shlex
+import zlib
 from typing import Any, Mapping
 
-from canonical.runtime.harbor_command_policy import validate_environment_command
+from canonical.runtime.harbor_command_policy import MAX_COMMAND_CHARS, validate_environment_command
 
 SCHEMA = "PROJECT_BRAIN_HARBOR_EPISTEMIC_CONTROLLER_V1"
 CAPABILITY_ID = "swe.harbor.epistemic_cycle.v1"
@@ -29,8 +29,10 @@ def is_harbor_epistemic_envelope(inputs: Mapping[str, Any] | None) -> bool:
     return (
         isinstance(inputs.get("harbor_task"), str)
         and bool(str(inputs.get("harbor_task")).strip())
-        and "cycle" in inputs
+        and type(inputs.get("cycle")) is int
         and isinstance(inputs.get("observations"), list)
+        and inputs["cycle"] == 1 + len(inputs["observations"])
+        and all(isinstance(obs, Mapping) for obs in inputs["observations"])
     )
 
 
@@ -74,14 +76,24 @@ def solve_harbor_cycle(
 
     # Cycle 1: Environment tomography + candidate test target discovery
     if cycle <= 1 or len(observations) == 0:
-        clipped_task = harbor_task[:2400].encode("utf-8", errors="ignore")
-        b64_task = base64.b64encode(clipped_task).decode("ascii")
-        raw_cmd = (
-            "env -i PATH=/opt/miniconda3/envs/testbed/bin:/opt/conda/envs/testbed/bin:"
-            "/usr/local/bin:/usr/bin:/bin HOME=/tmp "
-            f"python3 -I -B {RUNNER_SCRIPT} --phase discover --instruction-b64 {shlex.quote(b64_task)}"
-        )
-        safe_cmd = validate_environment_command(raw_cmd)
+        # The tail often contains the requirements. Send the entire instruction
+        # as data, or visibly abstain; never silently change the task.
+        raw_task = harbor_task.encode("utf-8")
+        prefix = ("env -i PATH=/opt/miniconda3/envs/testbed/bin:/opt/conda/envs/testbed/bin:"
+                  "/usr/local/bin:/usr/bin:/bin HOME=/tmp "
+                  f"python3 -I -B {RUNNER_SCRIPT} --phase discover ")
+        try:
+            if len(raw_task) > 64_000:  # in-room worker request limit
+                raise ValueError('HARBOR_INSTRUCTION_TOO_LARGE')
+            raw_cmd = prefix + '--instruction-b64 ' + base64.b64encode(raw_task).decode('ascii')
+            if len(raw_cmd) > MAX_COMMAND_CHARS:
+                packed = base64.b64encode(zlib.compress(raw_task)).decode('ascii')
+                raw_cmd = prefix + '--instruction-zlib-b64 ' + packed
+            safe_cmd = validate_environment_command(raw_cmd)
+        except ValueError as exc:
+            return {"schema": SCHEMA, "pass": False, "status": "FAIL_CLOSED",
+                    "reason": str(exc), "model_digest": model_digest, "model_calls": 0,
+                    "parameters_stored": 0, "task_completion_claimed": False}
         return {
             "schema": SCHEMA,
             "operation": "SOLVE",

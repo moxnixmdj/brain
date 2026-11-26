@@ -4394,3 +4394,56 @@ def execute_memory_operation(
         "status": "FAIL_CLOSED__UNKNOWN_MEMORY_OPERATION",
         "reason": f"UNKNOWN_OPERATION:{op}",
     }
+
+
+def self_check() -> dict[str, Any]:
+    """Falsifiable behavioral contract for bi-temporal supersession, conflict pruning & drift detection.
+
+    Proves:
+    1. Bi-temporal facts supersede cleanly while preserving historical time-travel queries (`as_of_valid`).
+    2. Conflict clauses prune refuted candidates while leaving unrefuted candidates unpruned.
+    3. DualDriftDetector stays quiet on stationary streams and detects an abrupt mean shift (0.98 -> 0.05).
+    """
+    import tempfile as _tempfile
+
+    failures: list[str] = []
+
+    def check(label: str, ok: bool) -> None:
+        if not ok:
+            failures.append(label)
+
+    with _tempfile.TemporaryDirectory() as td:
+        bus = VerificationFirstMemoryBus(state_path=Path(td) / "bus.json")
+        bus.record_bitemporal_fact(entity="pkg", attribute="ver", value="1.0", valid_from=1.0, supersede_active=True)
+        bus.record_bitemporal_fact(entity="pkg", attribute="ver", value="2.0", valid_from=5.0, supersede_active=True)
+
+        q_old = bus.query_bitemporal_facts(entity="pkg", as_of_valid=2.0, include_superseded=True)
+        q_now = bus.query_bitemporal_facts(entity="pkg", as_of_valid=10.0, include_superseded=False)
+        old_vals = [x.get("value") for x in q_old.get("facts", [])]
+        now_vals = [x.get("value") for x in q_now.get("facts", [])]
+        check("historical as_of_valid=2.0 recovers superseded version 1.0", old_vals == ["1.0"])
+        check("active query at t=10.0 sees only current version 2.0", now_vals == ["2.0"])
+
+        bus.record_conflict(domain="swe", context_sig="ctx", bad_candidate="bad_patch", reason="fails test")
+        check("recorded conflict prunes bad candidate", bus.is_pruned("bad_patch", domain="swe", context_sig="ctx"))
+        check("negative control: unrefuted candidate is not pruned", not bus.is_pruned("good_patch", domain="swe", context_sig="ctx"))
+
+    dd = DualDriftDetector()
+    for _ in range(25):
+        dd.observe("acc", 0.98)
+    pre_drifts = int(dd.summary()["acc"]["drift_count"])
+    check("negative control: stationary stream triggers 0 drift events", pre_drifts == 0)
+
+    for _ in range(25):
+        dd.observe("acc", 0.05)
+    post_drifts = int(dd.summary()["acc"]["drift_count"])
+    check("abrupt distribution shift triggers drift detection", post_drifts > pre_drifts)
+
+    total = 6
+    return {
+        "schema": "BRAIN_CANONICAL_MEMORY_CRYSTALLIZER_V1_SELF_CHECK",
+        "checks": total,
+        "passed": total - len(failures),
+        "failures": failures,
+        "verdict": "SELF_CHECK_PASS" if not failures else "SELF_CHECK_FAIL",
+    }

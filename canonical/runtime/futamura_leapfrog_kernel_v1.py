@@ -64,11 +64,12 @@ SCHEMA = "PROJECT_BRAIN_FUTAMURA_LEAPFROG_KERNEL_V1"
 
 
 class ConformalEValueGate:
-    """Distribution-free anytime-valid sequential e-process risk controller.
+    """Compute a product of supplied Bernoulli likelihood ratios, in log space.
 
-    Maintains `log E_t = sum_i log(e_i)` where each factor satisfies `E_H0[e_i] <= 1`.
-    By Ville's inequality, stopping at ANY step `t` when `E_t >= 1 / alpha` guarantees
-    false-commit probability `<= alpha` under `H0`.
+    Ville's bound requires E_null[e_i | *all preceding evidence*] <= 1.
+    This class does not establish those conditional probabilities. Repeating a
+    check, or assigning p=0.10 to a selected passing test, is not calibration.
+    COMMIT here names the numerical decision only, not a measured error bound.
     """
 
     def __init__(self, *, alpha: float = 0.05) -> None:
@@ -103,7 +104,7 @@ class ConformalEValueGate:
           - Pass factor: `e = (1 - eps) / p0` (with `eps = 0.05` betting conservatism)
           - Fail factor: `e = eps / (1 - p0)`
         Check: `E_H0[e] = p0 * ((1-eps)/p0) + (1-p0) * (eps/(1-p0)) = (1-eps) + eps = 1.0`!
-        So `E_H0[e_i] == 1.0` EXACTLY for every `p0 in (0, 1)`!
+        This expectation uses the supplied p0; it does not validate it.
         """
         p0 = min(max(float(null_pass_prob), 1e-6), 1.0 - 1e-6)
         eps = 0.05
@@ -140,6 +141,8 @@ class ConformalEValueGate:
             reason = "INSUFFICIENT_EVIDENCE_EMIT_MINIMAL_PROBE"
         return {
             "schema": SCHEMA + "/conformal_evalue",
+            "false_commit_bound_established": False,
+            "null_model": "CALLER_SUPPLIED_CONDITIONAL_PROBABILITIES_NOT_VERIFIED",
             "verdict": verdict,
             "reason": reason,
             "alpha": self.alpha,
@@ -1073,10 +1076,13 @@ def _eval_candidate_in_cow_fork(candidate_source: str, test_cases: Sequence[str]
 
 
 def _eval_candidate_in_process(candidate_source: str, test_cases: Sequence[str]) -> bool:
-    ns: dict[str, Any] = {}
     try:
-        exec(compile(candidate_source, "<futamura_cand>", "exec"), ns, ns)
+        code = compile(candidate_source, "<futamura_cand>", "exec")
         for tc in test_cases:
+            # Match localization: each supplied case starts with a fresh subject
+            # namespace, not globals established by the previous case.
+            ns: dict[str, Any] = {}
+            exec(code, ns, ns)
             _exec_test_case(ns, tc)
         return True
     except Exception:
@@ -1208,7 +1214,10 @@ class ZeroOverheadCoWZygoteRepairEngine:
     ) -> dict[str, Any]:
         """Run end-to-end Ochiai + byte-span splice + CoW fork + ddmin + mutation + e-value repair."""
         t0 = time.perf_counter()
-        loc = localize_fault_ochiai(source, test_cases)
+        return self._repair_localized(source, test_cases, localize_fault_ochiai(source, test_cases),
+                                      use_cow_fork, run_mutation_audit, alpha, t0)
+
+    def _repair_localized(self, source, test_cases, loc, use_cow_fork, run_mutation_audit, alpha, t0):
         if loc["total_fail"] == 0:
             return {
                 "schema": SCHEMA + "/cow_zygote_repair",
@@ -1288,6 +1297,9 @@ class ZeroOverheadCoWZygoteRepairEngine:
 # ===========================================================================
 
 
+_TEMPLATE_BUILTINS = frozenset({"len", "min", "max", "range", "sum", "abs", "int", "float", "str", "list", "dict", "set"})
+
+
 class _AlphaTemplateNormalizer:
     """Alpha-normalize an AST subtree into canonical slot variables (`__V0__`, `__C0__`) for generalization."""
 
@@ -1304,7 +1316,7 @@ class _AlphaTemplateNormalizer:
     def _walk(self, node: ast.AST) -> ast.AST:
         if isinstance(node, ast.Name):
             # Keep Python builtins un-abstracted (`len`, `min`, `max`, `range`, `None`).
-            if node.id in {"len", "min", "max", "range", "sum", "abs", "int", "float", "str", "list", "dict", "set"}:
+            if node.id in _TEMPLATE_BUILTINS:
                 return node
             slot = self.name_to_slot.get(node.id)
             if slot is None:
@@ -1372,6 +1384,14 @@ def _rule_bucket(node: ast.AST) -> tuple[str, ...]:
         bops = getattr(node, "op", None)
         op = bops
     return (kind, type(op).__name__) if op is not None else (kind,)
+
+
+def _template_bucket(pattern: ast.AST) -> tuple[str, ...]:
+    # __C slots are represented by ast.Name in storage, but can match only a
+    # concrete Constant. Use the same bucket on compilation and rehydration.
+    if isinstance(pattern, ast.Name) and pattern.id.startswith("__C") and pattern.id.endswith("__"):
+        return ("Constant",)
+    return _rule_bucket(pattern)
 
 
 def _match_template(pattern: ast.AST, concrete: ast.AST, bindings: dict[str, ast.AST]) -> bool:
@@ -1541,6 +1561,10 @@ class FutamuraSelfCompilingCascade:
                 after_ast = ast.parse(str(row["after_template"]), mode="eval").body
             except (KeyError, SyntaxError, TypeError, ValueError):
                 continue
+            before_names = {n.id for n in ast.walk(before_ast) if isinstance(n, ast.Name)}
+            after_names = {n.id for n in ast.walk(after_ast) if isinstance(n, ast.Name)}
+            if after_names - before_names - _TEMPLATE_BUILTINS:
+                continue  # Persistence cannot supply a missing receiver binding.
             rule = CompiledRung0Rule(
                 rule_id=str(row.get("rule_id") or f"persisted_{len(self._persisted)}"),
                 preorder_key=_preorder_signature(before_ast),
@@ -1562,7 +1586,7 @@ class FutamuraSelfCompilingCascade:
                 continue
             self._rules_by_id[rule.rule_id] = rule
             self._rung0_by_key.setdefault(rule.preorder_key, []).append(rule)
-            self._rung0_by_bucket.setdefault(_rule_bucket(rule.before_ast), []).append(rule)
+            self._rung0_by_bucket.setdefault(_template_bucket(rule.before_ast), []).append(rule)
             self._persisted[rule.rule_id] = dict(row)
 
     def persisted_law_ids(self) -> list[str]:
@@ -1683,6 +1707,20 @@ class FutamuraSelfCompilingCascade:
         norm = _AlphaTemplateNormalizer()
         before_tpl = norm.normalize(orig_node)
         after_tpl = norm.normalize(new_node)
+        # A template must reconstruct the actual teacher edit before it can be
+        # filed. A new literal can be frozen; a new name needs a receiver-owned
+        # supplier, not an uninstantiated __V slot in live source.
+        bindings: dict[str, ast.AST] = {}
+        if not _match_template(before_tpl, orig_node, bindings):
+            return {"compiled": False, "reason": "TEACHER_PATTERN_MISMATCH"}
+        fixed = {slot: ast.Constant(value=value) for (_, value), slot in norm.const_to_slot.items()
+                 if slot not in bindings}
+        after_tpl = _instantiate_template(after_tpl, fixed)
+        restored = _instantiate_template(after_tpl, bindings)
+        if ast.dump(restored) != ast.dump(new_node) or any(
+            slot not in bindings for slot in norm.name_to_slot.values()
+        ):
+            return {"compiled": False, "reason": "UNBOUND_REPLACEMENT_OR_FAILED_TEACHER_ROUNDTRIP"}
         pkey = _preorder_signature(orig_node)
         before_str = ast.unparse(before_tpl)
         after_str = ast.unparse(after_tpl)
@@ -1713,7 +1751,7 @@ class FutamuraSelfCompilingCascade:
         )
         self._rules_by_id[rule_id] = rule
         self._rung0_by_key.setdefault(pkey, []).append(rule)
-        self._rung0_by_bucket.setdefault(_rule_bucket(rule.before_ast), []).append(rule)
+        self._rung0_by_bucket.setdefault(_template_bucket(rule.before_ast), []).append(rule)
         # A law that dies with the interpreter is a cache, not a compilation.
         try:
             self.save_laws()
@@ -1756,15 +1794,17 @@ class FutamuraSelfCompilingCascade:
     RUNG0_MAX_REWRITES = 6
     RUNG0_MAX_STATES = 48
 
-    def _rung0_rewrites(self, source: str) -> list[tuple[str, str]]:
-        """Every `(rule_id, rewritten_source)` reachable in ONE rewrite of `source`."""
+    def _rung0_rewrites(self, source: str, failing_lines: set[int]) -> list[tuple[str, str, set[int]]]:
+        """One rewrite and the original failing-line witness mapped into the new source."""
         try:
             tree = ast.parse(source)
         except SyntaxError:
             return []
-        out: list[tuple[str, str]] = []
+        out: list[tuple[str, str, set[int]]] = []
         for node in ast.walk(tree):
             if not hasattr(node, "lineno") or not hasattr(node, "end_lineno"):
+                continue
+            if not any(node.lineno <= line <= node.end_lineno for line in failing_lines):
                 continue
             for rule in self._rung0_by_bucket.get(_rule_bucket(node), ()):
                 if rule.quarantined or rule.rubin_tau_hat <= 0.0:
@@ -1773,12 +1813,22 @@ class FutamuraSelfCompilingCascade:
                 if not _match_template(rule.before_ast, node, bindings):
                     continue
                 instantiated = _instantiate_template(rule.after_ast, bindings)
-                cand_src = splice_ast_byte_span(source, node, ast.unparse(instantiated))
+                replacement = ast.unparse(instantiated)
+                cand_src = splice_ast_byte_span(source, node, replacement)
                 if cand_src != source:
-                    out.append((rule.rule_id, cand_src))
+                    # Carry the original witnessed sites across the splice. Do
+                    # not execute an intermediate candidate in the parent just
+                    # to rediscover its line numbers when using a CoW oracle.
+                    end = node.lineno + replacement.count("\n")
+                    shift = end - node.end_lineno
+                    lines = {n for n in failing_lines if n < node.lineno}
+                    lines.update(range(node.lineno, end + 1))
+                    lines.update(n + shift for n in failing_lines if n > node.end_lineno)
+                    out.append((rule.rule_id, cand_src, lines))
         return out
 
-    def _try_rung0(self, source: str, test_cases: Sequence[str]) -> dict[str, Any] | None:
+    def _try_rung0(self, source: str, test_cases: Sequence[str], failing_lines: set[int],
+                   evaluate: Callable[[str, Sequence[str]], bool]) -> dict[str, Any] | None:
         """Breadth-first replay of compiled Rung-0 laws to a *verified* fixpoint.
 
         Rung 0 is the Futamura payoff: a law learned once from a verified repair
@@ -1791,14 +1841,15 @@ class FutamuraSelfCompilingCascade:
         if not self._rung0_by_key:
             return None
         t0 = time.perf_counter()
-        frontier: list[tuple[str, tuple[str, ...]]] = [(source, ())]
+        eval_overhead_s = 0.0
+        frontier = deque([(source, (), failing_lines)])
         seen: set[str] = {source}
         states = 0
         while frontier and states < self.RUNG0_MAX_STATES:
-            state, fired = frontier.pop(0)
+            state, fired, lines = frontier.popleft()
             if len(fired) >= self.RUNG0_MAX_REWRITES:
                 continue
-            for rule_id, cand_src in self._rung0_rewrites(state):
+            for rule_id, cand_src, next_lines in self._rung0_rewrites(state, lines):
                 if cand_src in seen:
                     continue
                 seen.add(cand_src)
@@ -1806,7 +1857,10 @@ class FutamuraSelfCompilingCascade:
                 rule = self._rules_by_id.get(rule_id)
                 if rule is not None:
                     rule.hits += 1
-                if _eval_candidate_in_process(cand_src, test_cases):
+                start_eval = time.perf_counter()
+                passed = evaluate(cand_src, test_cases)
+                eval_overhead_s += time.perf_counter() - start_eval
+                if passed:
                     if rule is not None:
                         self._record_rule_outcome(rule, passed=True)
                     return {
@@ -1816,14 +1870,14 @@ class FutamuraSelfCompilingCascade:
                         "before_template": rule.before_template_src if rule else "",
                         "after_template": rule.after_template_src if rule else "",
                         "patched_source": cand_src,
-                        "lookup_and_splice_us": round((time.perf_counter() - t0) * 1e6, 3),
+                        "lookup_and_splice_us": round(max(0, time.perf_counter() - t0 - eval_overhead_s) * 1e6, 3),
                         "matched_attempts": states,
                     }
                 if rule is not None:
                     self._record_rule_outcome(rule, passed=False)
                 if states >= self.RUNG0_MAX_STATES:
                     break
-                frontier.append((cand_src, (*fired, rule_id)))
+                frontier.append((cand_src, (*fired, rule_id), next_lines))
         return None
 
     def solve(
@@ -1872,7 +1926,14 @@ class FutamuraSelfCompilingCascade:
             }
 
         # --- RUNG 0: Compiled Generalized AST Rule Replay (< 100 us lookup) ---
-        r0 = self._try_rung0(source, test_cases)
+        loc = localize_fault_ochiai(source, test_cases)
+        if not loc["total_fail"]:
+            return {"schema": SCHEMA + "/futamura_solve", "pass": True, "rung_used": -1,
+                    "status": "ALREADY_PASSING__NO_REPAIR", "patched_source": source,
+                    "compiled_to_rung0": False, "proposer_calls": 0,
+                    "elapsed_ms": round((time.perf_counter() - t0) * 1000, 4)}
+        r0 = self._try_rung0(source, test_cases, {r["line"] for r in loc["ranked_lines"]},
+                             _eval_candidate_in_cow_fork if use_cow_fork else _eval_candidate_in_process)
         if r0 is not None:
             return {
                 "schema": SCHEMA + "/futamura_solve",
@@ -1887,13 +1948,8 @@ class FutamuraSelfCompilingCascade:
             }
 
         # --- RUNG 2: Zero-Overhead Ochiai + Byte-Span AST Splice + CoW Zygote + Ring-0 Gate ---
-        r2 = self.repair_engine.repair(
-            source,
-            test_cases,
-            use_cow_fork=use_cow_fork,
-            run_mutation_audit=True,
-            alpha=alpha,
-        )
+        r2 = self.repair_engine._repair_localized(source, test_cases, loc, use_cow_fork,
+                                                  True, alpha, t0)
         if r2.get("pass"):
             comp = (
                 self.compile_verified_win_to_rung0(source, r2["patched_source"], source_rung=2)

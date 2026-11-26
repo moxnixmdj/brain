@@ -483,6 +483,11 @@ def test_multi_statement_subtree_anti_unification_sibling_graft_and_replay(tmp_p
     assert replay_res["status"] == "VERIFIED"
     assert str(replay_res["mechanism"]).startswith("l2_subtree_skill_replay(")
     assert replay_res["attempt"] == 1
+    assert replay_res["reused_skill_id"] == sid
+    assert replay_res["learned_skill_id"] is None
+    assert store.data["l2_skills"][sid]["verified_transfers"] == 0  # no automatic global promotion
+    assert store.edit_entry(sid, {"domain": "corrected"})
+    assert store.data["l2_skills"][sid]["status"] == "QUARANTINED__EDIT_REQUIRES_RECHECK"
 
     # Surgical O(1) deletion without retraining
     assert store.delete_entry(sid) is True
@@ -746,10 +751,15 @@ def test_idea6_mutant_kill_self_play_and_o1_fingerprint_index(tmp_path: pathlib.
         store=store,
     )
     assert harv["mutants_killed"] >= 2
-    assert harv["skills_admitted"] >= 2
+    # Killing a mutant and repairing it is one teacher, not a held-out task.
+    assert harv["teacher_hypotheses_retained"] >= 2
+    assert harv["skills_admitted"] == 0
+    assert store.summary()["active_l2_skills"] == 0
+    assert all(store.data["l2_skills"][sid]["verified_transfers"] == 0 for sid in harv["retained_skill_ids"])
     # Verify O(1) structural fingerprint lookup finds the harvested `>` -> `>=` skill on an unseen function!
     unseen_buggy = "def allow_zero(k: int) -> int:\n    if k > 0:\n        return 10\n    return -10\n"
-    lookup = store.retrieve_l2_by_structural_fingerprint(source_text=unseen_buggy, domain="python")
+    assert store.retrieve_l2_by_structural_fingerprint(source_text=unseen_buggy, domain="python")["skills"] == []
+    lookup = store.retrieve_l2_by_structural_fingerprint(source_text=unseen_buggy, domain="python", for_proposal=True)
     assert lookup["bucket_hits"] >= 1
     assert len(lookup["skills"]) >= 1
 
@@ -781,7 +791,15 @@ def test_unified_open_model_epistemic_front_door_repairs_workspace(tmp_path: pat
     assert out["pass"] is True
     assert out["model_calls"] == 0
     assert out["parameters_stored"] == 0
-    assert out["epistemic_result"]["mechanism"] == "guard_gt_to_gte"
+    # The unified portfolio emits the M7 name; the pre-portfolio label was stale
+    # even at the base revision. Require the *actual repaired product* as well.
+    assert out["epistemic_result"]["mechanism"] == "M7_boundary_cmp_dual"
+    assert set(out["epistemic_result"]["patched_files"]) == {"bounds.py"}
+    source = (tmp_path / "bounds.py").read_text()
+    assert source == out["epistemic_result"]["patched_files"]["bounds.py"]
+    ns = {}
+    exec(source, ns)
+    assert [ns["clamp_nonneg"](x) for x in (-13, -1, 0, 1, 13)] == [-1, -1, 0, 1, 13]
 
 
 def test_instance_slot_unwrapping_synthesizes_slots_getattr_without_literals(tmp_path: pathlib.Path) -> None:

@@ -1,0 +1,93 @@
+{
+  "arc": {
+    "environment_repository": "rasagyavatsal/arc-prize-2026-arc-agi-3",
+    "rev": "fe79e5f4fe2f5b582e21a79e5801c4f9caa3f143",
+    "files": 50,
+    "tree_sha256": "bf57484673964be96b1a3fa160f4d0ba5b731ffd33fa8aa1d074113ad7778152",
+    "python": "3.12.12",
+    "requirements": [
+      "annotated-types==0.8.0",
+      "arc-agi==0.9.9",
+      "arcengine==0.9.3",
+      "blinker==1.9.0",
+      "certifi==2026.11.20",
+      "charset-normalizer==3.5.3",
+      "click==8.5.1",
+      "contourpy==1.4.0",
+      "cycler==0.12.1",
+      "flask==3.1.3",
+      "fonttools==4.69.1",
+      "idna==3.20",
+      "itsdangerous==2.2.0",
+      "jinja2==3.1.6",
+      "kiwisolver==1.5.1",
+      "markupsafe==3.0.4",
+      "matplotlib==3.11.2",
+      "numpy==2.5.5",
+      "packaging==26.4",
+      "pillow==13.0.0",
+      "pydantic==2.14.4",
+      "pydantic-core==2.50.5",
+      "pyparsing==3.3.3",
+      "python-dateutil==4.0.0",
+      "python-dotenv==1.2.4",
+      "requests==2.34.2",
+      "typing-extensions==4.16.0",
+      "typing-inspection==0.4.5",
+      "tzdata==2026.6",
+      "urllib3==2.8.0",
+      "werkzeug==3.1.9"
+    ]
+  },
+  "locomo": {
+    "repo": "xjtuleeyf/Locomo-Plus",
+    "rev": "059f4e3d38f7f1f96765e8e2cb7de3097551bffb",
+    "raw_sha256": "af2fc6e5e0e88735e28d8dd1ef474b718861a73beb21779809e3b9e1a4fe3d23",
+    "projected_sha256": "e52499d2beac3cabc6923439871519fdb7e18c3bc3db4ae549524ac8aa0b6e84"
+  },
+  "h51": {
+    "suite": "66f92766bba642462d4bbe5479e83f91f9211862",
+    "producer": "6e02f4b92e0394822a4d2b95289a48ee27ff6965",
+    "grade8_python": "3.9.25",
+    "grade8_packages": [
+      "attrs==26.1.0",
+      "certifi==2026.11.20",
+      "cffi==2.0.0",
+      "charset-normalizer==3.5.3",
+      "cryptography==3.1.1",
+      "execnet==1.9.0",
+      "idna==3.20",
+      "iniconfig==2.1.0",
+      "jinja2==2.11.3",
+      "markupsafe==2.0.1",
+      "mock==4.0.3",
+      "packaging==26.3",
+      "pluggy==1.6.0",
+      "py==1.11.0",
+      "pycparser==2.23",
+      "pytest==6.2.5",
+      "pytest-forked==1.6.0",
+      "pytest-mock==3.10.0",
+      "pytest-xdist==2.5.0",
+      "pyyaml==6.0.1",
+      "requests==2.32.5",
+      "six==1.17.0",
+      "toml==0.10.2",
+      "urllib3==2.6.3"
+    ],
+    "tasks": [
+      {
+        "position": 7,
+        "base": "ea164fdde79a3e624c28f90c74f57f06360d2333",
+        "instance_id": "instance_ansible__ansible-d72025be751c894673ba85caa063d835a0ad3a8c-v390e508d27db7a51eece36bb6d9698b63a5b638a",
+        "instruction_sha256": "2ff23898524d5dcdf614f7a335fac456778aaac3954e5331cb7e5f53f2da3224"
+      },
+      {
+        "position": 8,
+        "base": "a1730af91f94552e8aaff4bedfb8dcae00bd284d",
+        "instance_id": "instance_ansible__ansible-de5858f48dc9e1ce9117034e0d7e76806f420ca8-v1055803c3a812189a1133297f7f5468579283f86",
+        "instruction_sha256": "29c2d716704de616f08a8631814ff5869fa778d284a61420481e209375c1b016"
+      }
+    ]
+  }
+}
