@@ -4,7 +4,7 @@
   "action_kind": "REAL_TASK_EXECUTION",
   "date": "2026-11-26",
   "action_summary": "Integrate the completed witnessed repair, revision, browser and one-episode work into current main; retain negative results and upstream full-model routes. The landing itself earns no capability credit.",
-  "canonical_base_commit": "9a224e3ae6f9b9f05fcf9aaa1f38d00175746fef",
+  "canonical_base_commit": "298c46901f4f5f64241dd3f3012519c05e53e3cd",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
@@ -118,7 +118,7 @@
   },
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-    "canonical_base_commit": "9a224e3ae6f9b9f05fcf9aaa1f38d00175746fef",
+    "canonical_base_commit": "298c46901f4f5f64241dd3f3012519c05e53e3cd",
     "real_outcome": "The plain merge failed the staged worker import. The corrected cold worker now runs with no wave module; a non-cold artifact with the same missing provider is refused. Historical source controls remain agent/nop/reference 0/0/1 on each of positions 7 and 8.",
     "required_capability": "Carry both histories, preserve the small producer, and exercise both installation contracts in separate interpreters.",
     "selected_surviving_route": "INTEGRATE_WITNESSED_ROUTES_WITH_COLD_WORKER_BOUNDARY",
@@ -348,5 +348,6 @@
     }
   },
   "action_id": "WITNESSED_ROUTES_AND_COLD_WORKER_INTEGRATION_20261126_V1",
-  "integration_followup": "The integrated front door exceeded the upstream 7,533-line ceiling. Share Wave 39 memory and partial-routing payload decoders with the federation; retain explicit-model rejection, federated goal defaults and untrusted write origins. No size or latency threshold was changed."
+  "integration_followup": "The integrated front door exceeded the upstream 7,533-line ceiling. Share Wave 39 memory and partial-routing payload decoders with the federation; retain explicit-model rejection, federated goal defaults and untrusted write origins. No size or latency threshold was changed.",
+  "upstream_sync": "Wave 46 landed during checks. Keep the fresh namespace per case and the falsifiable expression oracle, profile each chained rewrite against failing lines, and retain the independent selected-suite check before writing any repair. Caller-supplied patches require an explicit external store, are labeled untrusted and cannot enter the blind model-free route."
 }

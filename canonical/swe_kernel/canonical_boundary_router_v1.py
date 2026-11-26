@@ -2029,6 +2029,15 @@ class BoundaryRouter:
         self._record_cluster("swe_repo_native_multifile", tier=str(res.get("tier") or "UNSOLVED"), passed=ok)
         return res
 
+    def route_swe_cold_start(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 45 route: natural-language issue + repository -> verified repair or honest refusal."""
+        from canonical.swe_kernel import cold_start_swe_adapter_v1 as cold_start
+
+        res = cold_start.solve_from_issue(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster("swe_cold_start", tier=str(res.get("tier") or res.get("status") or "UNSOLVED"), passed=ok)
+        return res
+
     def route_bitemporal_skill_bank(self, **kwargs: Any) -> dict[str, Any]:
         """Wave 24 route: Bitemporal Memory + Counterfactual Credit + Hierarchical SkillBank (`0G`)."""
         res = self.memory_bus.bitemporal_credit_and_skill_bank(**kwargs)

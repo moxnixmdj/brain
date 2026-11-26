@@ -5,7 +5,9 @@ from canonical.runtime.futamura_leapfrog_kernel_v1 import (
 )
 
 
-def test_no_edit_or_rent_for_green_receiver_but_actual_red_can_use_rule():
+def test_no_edit_or_rent_for_green_receiver_but_actual_red_can_use_rule(tmp_path, monkeypatch):
+    # This measures a cold teacher, not a law left by another interpreter.
+    monkeypatch.setenv("BRAIN_FUTAMURA_STORE", str(tmp_path / "laws.json"))
     c = FutamuraSelfCompilingCascade(); source = 'def f(x,y):\n    return x <= y\n'
     tests = ['assert not f(1,1)', 'assert f(1,2)', 'assert not f(2,1)']
     teacher = c.solve({'source':source,'test_cases':tests})
@@ -19,7 +21,8 @@ def test_no_edit_or_rent_for_green_receiver_but_actual_red_can_use_rule():
     assert red['patched_source']==q.replace('a <= b','a < b')
 
 
-def test_submitted_foreign_names_are_not_a_receiver_owned_binding():
+def test_submitted_foreign_names_are_not_a_receiver_owned_binding(tmp_path, monkeypatch):
+    monkeypatch.setenv("BRAIN_FUTAMURA_STORE", str(tmp_path / "laws.json"))
     c=FutamuraSelfCompilingCascade()
     result=c.compile_verified_win_to_rung0('def f(x): return x','def f(x): return convert(x)',source_rung=2)
     assert not result['compiled'] and c.rule_count()==0
