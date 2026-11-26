@@ -6737,6 +6737,246 @@ class UnifiedModel:
             limit=int(limit),
         )
 
+    # --- Wave 40: Dark-Matter Frontier Kernel (24 DARK modules + Agent S4/HCU, RLM, 4-Net Engram, CHASE/HDA/NFV, Self-Play/Steer) ---
+
+    def _get_rlm_workspace(self) -> Any:
+        ws = getattr(self, "_w40_rlm_workspace", None)
+        if ws is None:
+            from canonical.runtime.wave40_dark_matter_frontier_kernel_v1 import OutOfCoreRLMWorkspace
+
+            ws = OutOfCoreRLMWorkspace()
+            self._w40_rlm_workspace = ws
+        return ws
+
+    def _get_four_network_git_memory_engine(self, *, root_dir: str | Path | None = None) -> Any:
+        if root_dir is not None:
+            from canonical.runtime.wave40_dark_matter_frontier_kernel_v1 import FourNetworkGitMemoryEngine
+
+            return FourNetworkGitMemoryEngine(root_dir=root_dir)
+        eng = getattr(self, "_w40_four_network_memory", None)
+        if eng is None:
+            from canonical.runtime.wave40_dark_matter_frontier_kernel_v1 import FourNetworkGitMemoryEngine
+
+            eng = FourNetworkGitMemoryEngine()
+            self._w40_four_network_memory = eng
+        return eng
+
+    def epistemic_swe_egraph_cegis(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Guarded Meaning IR E-Graph + Grammar-Closed CEGIS CoW repair + Causal Nexus obligations/transducers."""
+        from canonical.runtime.wave40_dark_matter_frontier_kernel_v1 import EpistemicSWEAndEGraphKernel
+
+        p = dict(payload or {})
+        op = str(operation).upper()
+        if op == "EGRAPH_VERIFY":
+            return EpistemicSWEAndEGraphKernel.egraph_verify_and_anti_unify(
+                term_a=p.get("term_a"),
+                term_b=p.get("term_b"),
+                source_a=p.get("source_a"),
+                source_b=p.get("source_b"),
+            )
+        if op == "GRAMMAR_CLOSED_CEGIS_REPAIR":
+            return EpistemicSWEAndEGraphKernel.grammar_closed_cegis_repair(
+                str(p["buggy_source"]),
+                fn_name=str(p["fn_name"]),
+                test_cases=p.get("test_cases") or (),
+                reference_source=p.get("reference_source"),
+                max_candidates=int(p.get("max_candidates", 160)),
+                use_cow_fork=bool(p.get("use_cow_fork", True)),
+            )
+        if op == "CAUSAL_OBLIGATION_TRANSDUCER":
+            return EpistemicSWEAndEGraphKernel.causal_obligation_and_transducer(
+                failure_text=p.get("failure_text"),
+                io_pairs=p.get("io_pairs"),
+            )
+        raise UnifiedModelError(f"Unsupported Wave 40 Epistemic SWE operation: {operation}")
+
+    def oneshot_version_space_learn(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Evidence Demand + Settlement + Hypothesis Classes + Operator Acquisition + Cross-Env Transfer."""
+        from canonical.runtime.wave40_dark_matter_frontier_kernel_v1 import OneShotEpistemicLearnerKernel
+
+        p = dict(payload or {})
+        op = str(operation).upper()
+        if op == "DEMAND_AND_COLLAPSE":
+            return OneShotEpistemicLearnerKernel.demand_and_collapse_program(
+                p.get("params") or ("x",),
+                p.get("examples") or (),
+                distinguishing_answer=p.get("distinguishing_answer"),
+            )
+        if op == "DETERMINE_HYPOTHESIS":
+            return OneShotEpistemicLearnerKernel.determine_hypothesis_and_vocabulary(
+                p.get("points") or (),
+                bodies=p.get("bodies") or (),
+                operator_example=p.get("operator_example"),
+            )
+        if op == "CROSS_ENV_TRANSFER":
+            return OneShotEpistemicLearnerKernel.cross_env_transfer_and_demo_collapse(
+                p.get("obs_a") or {},
+                p.get("obs_b") or {},
+                demo_observation=p.get("demo_observation"),
+            )
+        raise UnifiedModelError(f"Unsupported Wave 40 One-Shot Learner operation: {operation}")
+
+    def shadow_interface_hcu_route(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Agent-S4 evolving shadow-interface compiler + Microsoft HCU 3-channel router + mental model."""
+        from canonical.runtime.wave40_dark_matter_frontier_kernel_v1 import ShadowInterfaceHCURouterKernel
+
+        p = dict(payload or {})
+        op = str(operation).upper()
+        if op == "ROUTE_HCU":
+            return ShadowInterfaceHCURouterKernel.route_hcu_action(
+                str(p.get("goal", "")),
+                tool_name=p.get("tool_name"),
+                help_text=p.get("help_text"),
+                workspace_root=p.get("workspace_root"),
+                transition_edges=p.get("transition_edges") or (),
+                start_state=p.get("start_state"),
+                goal_state=p.get("goal_state"),
+                ui_observation=p.get("ui_observation"),
+                has_gui_surface=bool(p.get("has_gui_surface", False)),
+            )
+        if op == "COMPILE_SHADOW_INTERFACE":
+            return ShadowInterfaceHCURouterKernel.compile_and_evolve_shadow_interface(
+                tool_name=str(p["tool_name"]),
+                help_text=str(p["help_text"]),
+                repo_dir=p["repo_dir"],
+                validation_probes=p.get("validation_probes") or (),
+                version=int(p.get("version", 1)),
+            )
+        raise UnifiedModelError(f"Unsupported Wave 40 Shadow Interface/HCU operation: {operation}")
+
+    def rlm_workspace_op(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: MIT RLM out-of-core symbolic corpus mount, bounded AST/regex slice, and recursive map-reduce."""
+        ws = self._get_rlm_workspace()
+        p = dict(payload or {})
+        op = str(operation).upper()
+        if op == "MOUNT_CORPUS":
+            return ws.mount_corpus(str(p.get("name", "corpus")), p.get("content", ""))
+        if op == "PROGRAMMATIC_SLICE":
+            return ws.programmatic_slice(
+                str(p["handle_id"]),
+                regex=p.get("regex"),
+                line_range=p.get("line_range"),
+                symbol=p.get("symbol"),
+                token=p.get("token"),
+                context_lines=int(p.get("context_lines", 1)),
+                max_chars=int(p.get("max_chars", 2000)),
+            )
+        if op == "RECURSIVE_MAP_REDUCE":
+            return ws.recursive_map_reduce(
+                str(p["handle_id"]),
+                pattern=str(p["pattern"]),
+                chunk_lines=int(p.get("chunk_lines", 60)),
+                max_depth=int(p.get("max_depth", 3)),
+                max_matches_per_chunk=int(p.get("max_matches_per_chunk", 20)),
+            )
+        raise UnifiedModelError(f"Unsupported Wave 40 RLM workspace operation: {operation}")
+
+    def four_network_git_memory_op(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Hindsight 4-Network bi-temporal git-diffable memory + O(1) Engram + Sleep consolidation + TMA-NM."""
+        p = dict(payload or {})
+        eng = p.get("engine") or self._get_four_network_git_memory_engine(root_dir=p.get("root_dir"))
+        op = str(operation).upper()
+        if op == "WRITE":
+            return eng.write(
+                network=str(p["network"]),
+                record_id=str(p["record_id"]),
+                entity_key=str(p["entity_key"]),
+                verbatim_text=str(p["verbatim_text"]),
+                valid_from=int(p.get("valid_from", 0)),
+                valid_to=p.get("valid_to"),
+                origin_token=str(p.get("origin_token", "TRUSTED_VERIFIER")),
+                support_ids=p.get("support_ids") or (),
+                metadata=p.get("metadata"),
+            )
+        if op == "ENGRAM_QUERY":
+            return eng.engram_query(
+                str(p.get("query", "")),
+                networks=p.get("networks"),
+                at_time=p.get("at_time"),
+                top_k=int(p.get("top_k", 5)),
+            )
+        if op == "SLEEP_CONSOLIDATE":
+            return eng.sleep_consolidate(
+                min_support=int(p.get("min_support", 2)),
+                at_time=int(p.get("at_time", 100)),
+            )
+        raise UnifiedModelError(f"Unsupported Wave 40 4-Network Git Memory operation: {operation}")
+
+    def chase_hda_hill_nfv_gate(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Staged Goal-Blind NFV + CHASE perturbation audit + Harness-Delta Attribution + Hill Sampling."""
+        from canonical.runtime.wave40_dark_matter_frontier_kernel_v1 import CHASEHillSamplingNFVGate
+
+        p = dict(payload or {})
+        op = str(operation).upper()
+        if op == "STAGED_NFV":
+            return CHASEHillSamplingNFVGate.staged_goal_blind_verify(
+                spec_contract=p.get("spec_contract") or {},
+                candidate_source=str(p["candidate_source"]),
+                fn_name=str(p["fn_name"]),
+            )
+        if op == "CHASE_AUDIT":
+            return CHASEHillSamplingNFVGate.chase_perturbation_audit(
+                str(p["candidate_source"]),
+                fn_name=str(p["fn_name"]),
+                base_cases=p.get("base_cases") or (),
+                perturbed_cases=p.get("perturbed_cases") or (),
+                min_survival_rate=float(p.get("min_survival_rate", 1.0)),
+            )
+        if op == "HARNESS_DELTA_ATTRIBUTION":
+            return CHASEHillSamplingNFVGate.harness_delta_attribution(
+                baseline_train=float(p["baseline_train"]),
+                baseline_heldout=float(p["baseline_heldout"]),
+                evolved_train_equal_budget=float(p["evolved_train_equal_budget"]),
+                evolved_heldout_equal_budget=float(p["evolved_heldout_equal_budget"]),
+                evolved_train_extra_budget=p.get("evolved_train_extra_budget"),
+                evolved_heldout_extra_budget=p.get("evolved_heldout_extra_budget"),
+                max_overfit_fraction=float(p.get("max_overfit_fraction", 0.35)),
+            )
+        if op == "HILL_SAMPLING":
+            return CHASEHillSamplingNFVGate.hill_sampling_select(
+                p.get("candidates") or (),
+                k=int(p.get("k", 2)),
+                temperature=float(p.get("temperature", 0.25)),
+                diversity_bonus=float(p.get("diversity_bonus", 0.10)),
+                seed=int(p.get("seed", 40)),
+            )
+        raise UnifiedModelError(f"Unsupported Wave 40 CHASE/HDA/Hill/NFV operation: {operation}")
+
+    def selfplay_steer_horizon_commit(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Zero-Data Self-Play SWE-RL + Steer-Don't-Solve Critic + Long-Horizon Stakes & Atomic WAL Commit."""
+        from canonical.runtime.wave40_dark_matter_frontier_kernel_v1 import SelfPlaySteerAndHorizonKernel
+
+        p = dict(payload or {})
+        op = str(operation).upper()
+        if op == "SELF_PLAY_EPISODE":
+            return SelfPlaySteerAndHorizonKernel.self_play_bug_episode(
+                str(p["clean_source"]),
+                fn_name=str(p["fn_name"]),
+                test_cases=p.get("test_cases") or (),
+                max_mutations=int(p.get("max_mutations", 8)),
+            )
+        if op == "STEER_CRITIC":
+            return SelfPlaySteerAndHorizonKernel.steer_dont_solve_critic(
+                p.get("trajectory") or (),
+                window=int(p.get("window", 4)),
+            )
+        if op == "HORIZON_ATOMIC_COMMIT":
+            return SelfPlaySteerAndHorizonKernel.horizon_stakes_and_atomic_commit(
+                identity=str(p.get("identity", "brain-wave40")),
+                obligations=p.get("obligations") or (),
+                stage_files=p.get("stage_files"),
+                live_files=p.get("live_files"),
+                simulate_crash_recovery=bool(p.get("simulate_crash_recovery", True)),
+                workdir=p.get("workdir"),
+            )
+        raise UnifiedModelError(f"Unsupported Wave 40 Self-Play/Steer/Horizon operation: {operation}")
+
+    def wave40_awakened_inventory(self) -> dict[str, Any]:
+        """Wave 40: Return the exact inventory of 24 newly awakened DARK modules and 7 frontier engines."""
+        from canonical.runtime.wave40_dark_matter_frontier_kernel_v1 import wave40_awakened_inventory
+
+        return wave40_awakened_inventory()
+
 
 # --------------------------------------------------------------------------- helpers
 
