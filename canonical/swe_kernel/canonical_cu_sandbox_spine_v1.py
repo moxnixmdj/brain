@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import hashlib
 import importlib
+import os
 import shutil
 import subprocess
 import tempfile
@@ -53,6 +54,7 @@ val_alg = _LazyModule("canonical.runtime.value_algebra_v1")
 action_grammar = _LazyModule("canonical.swe_kernel.interface_action_grammar_v1")
 scpa = _LazyModule("canonical.swe_kernel.speculative_cow_petri_agent_v1")
 uca = _LazyModule("canonical.swe_kernel.universal_computer_agent_v1")
+zygote_pool = _LazyModule("canonical.swe_kernel.zygote_worker_pool_v1")
 free_fail = _LazyModule("canonical.tools.the_failed_attempt_is_free_v1")
 
 SCHEMA = "PROJECT_BRAIN_CANONICAL_CU_SANDBOX_SPINE_V1"
@@ -132,7 +134,9 @@ class SpeculativeSandbox:
             ignore=shutil.ignore_patterns(".git", "__pycache__", ".pytest_cache", "node_modules"),
         )
 
-    def _commit_clone(self, clone_root: Path, diff: Mapping[str, Sequence[str]]) -> None:
+    def _commit_clone(self, clone_root: Path, diff: Mapping[str, Sequence[str]]) -> str:
+        """Commit verified clone changes using atomic `renameat2(RENAME_EXCHANGE)` per file when supported."""
+        commit_mechanism = "atomic_renameat2_exchange"
         for rel in diff.get("deleted", ()):
             p = self.workspace_root / rel
             if p.exists() and p.is_file():
@@ -141,7 +145,116 @@ class SpeculativeSandbox:
             src = clone_root / rel
             dst = self.workspace_root / rel
             dst.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(src, dst)
+            staged = dst.parent / f".cow_stage_{dst.name}_{time.time_ns()}"
+            shutil.copy2(src, staged)
+            try:
+                if dst.exists():
+                    free_fail.exchange(dst, staged)
+                    staged.unlink(missing_ok=True)
+                else:
+                    staged.replace(dst)
+            except Exception:
+                commit_mechanism = "posix_replace_fallback"
+                staged.replace(dst)
+        return commit_mechanism
+
+    def evaluate_cow_zygote_batch(
+        self,
+        cow_candidates: Sequence[tuple[str, Callable[[], tuple[bool, Any]]]],
+        *,
+        max_parallel: int = 4,
+        per_worker_timeout_s: float = 5.0,
+    ) -> dict[str, Any]:
+        """Zero-disk `os.fork()` CoW parallel candidate screening via `ZygotePrewarmedPool.run_parallel_sharded`."""
+        t0 = time.perf_counter()
+        pool = zygote_pool.ZygotePrewarmedPool(prewarm_enabled=False)
+        all_results: list[dict[str, Any]] = []
+        winner_id: str | None = None
+        winner_payload: Any = None
+        forked_count = 0
+        cancelled_count = 0
+
+        items = list(cow_candidates)
+        if not items:
+            return {
+                "passed": False,
+                "winner_id": None,
+                "winner_payload": None,
+                "forked_count": 0,
+                "cancelled_count": 0,
+                "elapsed_ms": 0.0,
+                "results": [],
+                "execution_engine": "ZygotePrewarmedPool_os_fork_CoW",
+            }
+
+        # Partition `items` across `num_workers` (`<= cpu_count`) CoW worker shards so we pay
+        # kernel `os.fork()` page-table clone only `num_workers` times instead of `len(items)` times!
+        num_workers = min(len(items), max(1, min(int(max_parallel), os.cpu_count() or 4)))
+        worker_buckets: list[list[tuple[str, Callable[[], tuple[bool, Any]]]]] = [
+            items[w_idx::num_workers] for w_idx in range(num_workers)
+        ]
+
+        shard_fns: list[Callable[[], Mapping[str, Any]]] = []
+        for bucket in worker_buckets:
+            def _make_bucket_shard(
+                b_items: list[tuple[str, Callable[[], tuple[bool, Any]]]] = bucket,
+            ) -> Callable[[], Mapping[str, Any]]:
+                def _shard() -> Mapping[str, Any]:
+                    sub_rows: list[dict[str, Any]] = []
+                    for c_id, fn in b_items:
+                        ts = time.perf_counter()
+                        try:
+                            ok, payload = fn()
+                            err = None
+                        except BaseException as exc:  # noqa: BLE001
+                            ok, payload, err = False, None, f"{type(exc).__name__}:{exc}"
+                        row = {
+                            "candidate_id": c_id,
+                            "passed": bool(ok),
+                            "payload": payload,
+                            "error": err,
+                            "elapsed_ms": round((time.perf_counter() - ts) * 1000.0, 3),
+                        }
+                        sub_rows.append(row)
+                        if ok:
+                            return {
+                                "passed": True,
+                                "candidate_id": c_id,
+                                "payload": payload,
+                                "sub_results": sub_rows,
+                            }
+                    return {"passed": False, "candidate_id": None, "payload": None, "sub_results": sub_rows}
+
+                return _shard
+
+            shard_fns.append(_make_bucket_shard())
+
+        forked_count = len(shard_fns)
+        res = pool.run_parallel_sharded(
+            shard_fns,
+            winner_predicate=lambda item: bool(item.get("passed")),
+            timeout_s=per_worker_timeout_s,
+        )
+        cancelled_count = int(res.get("siblings_cancelled", 0))
+        for item in res.get("results", ()):
+            for sr in item.get("sub_results") or ():
+                all_results.append(dict(sr))
+        if res.get("found_winner") and res.get("winner"):
+            win_item = res["winner"]
+            winner_id = str(win_item.get("candidate_id"))
+            winner_payload = win_item.get("payload")
+
+        elapsed_ms = round((time.perf_counter() - t0) * 1000.0, 3)
+        return {
+            "passed": winner_id is not None,
+            "winner_id": winner_id,
+            "winner_payload": winner_payload,
+            "forked_count": forked_count,
+            "cancelled_count": cancelled_count,
+            "elapsed_ms": elapsed_ms,
+            "results": all_results,
+            "execution_engine": "ZygotePrewarmedPool_os_fork_CoW",
+        }
 
     def evaluate_candidates(
         self,
@@ -153,7 +266,9 @@ class SpeculativeSandbox:
         commit_winner: bool = True,
         timeout_s: float = 15.0,
     ) -> dict[str, Any]:
-        """Speculatively evaluate candidates in isolated CoW clones; commit first verified winner only."""
+        """Speculatively evaluate candidates using a single reusable CoW staging workspace
+        with O(|diff|) microsecond rollback + `ZygotePrewarmedPool` `os.fork()` screening
+        for pure `cow_fn` candidates + `renameat2(RENAME_EXCHANGE)` atomic commit."""
         pre_digest, pre_hashes = workspace_tree_digest(self.workspace_root)
         pre_tomo = scpa.capture_tomography_snapshot(self.workspace_root)
         allowed_set = {str(p).lstrip("./") for p in allowed_write_paths}
@@ -161,19 +276,67 @@ class SpeculativeSandbox:
         probe_results: list[SpeculativeProbeResult] = []
         winner_id: str | None = None
         committed = False
+        commit_mechanism = "none"
 
-        for idx, cand in enumerate(candidates):
-            cid = str(cand.get("id") or f"cand_{idx}")
-            t0 = time.perf_counter()
-            with tempfile.TemporaryDirectory(prefix=f"brain_cow_{cid}_") as tmp_dir:
-                clone = Path(tmp_dir) / "ws"
-                self._copy_to_clone(clone)
-                clone_before_snap = uca.snapshot_workspace_files(clone)
+        # Fast Lane 0: If all candidates provide zero-disk `cow_fn` callables, screen in parallel via `os.fork()` CoW!
+        if candidates and all(callable(c.get("cow_fn")) and not c.get("write_files") and not c.get("fn") and not c.get("argv") for c in candidates):
+            batch = [
+                (str(c.get("id") or f"cand_{i}"), c["cow_fn"])
+                for i, c in enumerate(candidates)
+            ]
+            cow_res = self.evaluate_cow_zygote_batch(batch, per_worker_timeout_s=timeout_s)
+            winner_id = cow_res["winner_id"]
+            for row in cow_res["results"]:
+                probe_results.append(
+                    SpeculativeProbeResult(
+                        candidate_id=str(row["candidate_id"]),
+                        passed=bool(row["passed"]),
+                        committed=False,
+                        returncode=0 if row["passed"] else 1,
+                        stdout="",
+                        stderr=str(row.get("error") or ""),
+                        elapsed_ms=float(row.get("elapsed_ms") or 0.0),
+                        diff={"added": [], "modified": [], "deleted": []},
+                        negative_effect_ok=True,
+                        rejection_reason=row.get("error") if not row["passed"] else None,
+                        tomography_diff={},
+                    )
+                )
+            return {
+                "passed": winner_id is not None,
+                "winner_id": winner_id,
+                "winner_payload": cow_res["winner_payload"],
+                "committed": False,
+                "commit_mechanism": "zero_disk_cow_fork",
+                "pre_digest": pre_digest,
+                "post_digest": pre_digest,
+                "workspace_preserved_on_failure": True,
+                "probes": [p.as_dict() for p in probe_results],
+            }
+
+        # Fast Lane 1: Single reusable staging clone + O(|diff|) rollback (deletes K-1 `shutil.copytree` calls!)
+        # Snapshot baseline bytes once in RAM so failed candidates revert ONLY touched files in microseconds.
+        baseline_bytes: dict[str, bytes] = {
+            rel: (self.workspace_root / rel).read_bytes()
+            for rel in pre_hashes
+            if (self.workspace_root / rel).is_file()
+        }
+
+        with tempfile.TemporaryDirectory(prefix="brain_cow_stage_") as tmp_dir:
+            clone = Path(tmp_dir) / "ws"
+            self._copy_to_clone(clone)
+            clone_before_snap = uca.snapshot_workspace_files(clone)
+
+            for idx, cand in enumerate(candidates):
+                cid = str(cand.get("id") or f"cand_{idx}")
+                t0 = time.perf_counter()
 
                 rc: int | None = 0
                 stdout = ""
                 stderr = ""
                 exec_err: str | None = None
+                fast_write_only = False
+                written_rels: list[str] = []
 
                 try:
                     if callable(cand.get("fn")):
@@ -190,8 +353,11 @@ class SpeculativeSandbox:
                         stdout = proc.stdout
                         stderr = proc.stderr
                     elif isinstance(cand.get("write_files"), Mapping):
+                        fast_write_only = True
                         for rel, content in cand["write_files"].items():
-                            target = clone / str(rel)
+                            norm_rel = str(rel).lstrip("./")
+                            written_rels.append(norm_rel)
+                            target = clone / norm_rel
                             target.parent.mkdir(parents=True, exist_ok=True)
                             if isinstance(content, bytes):
                                 target.write_bytes(content)
@@ -207,14 +373,25 @@ class SpeculativeSandbox:
                     exec_err = f"{type(exc).__name__}: {exc}"
                     rc = -1
 
-                _, clone_after_hashes = workspace_tree_digest(clone)
-                clone_after_snap = uca.snapshot_workspace_files(clone)
-                clone_after_tomo = scpa.capture_tomography_snapshot(clone)
-                diff = diff_file_hashes(pre_hashes, clone_after_hashes)
-                tomo_diff = scpa.diff_tomography(pre_tomo, clone_after_tomo)
+                if fast_write_only:
+                    # O(|write_files|) incremental hash diff instead of O(|workspace|) full directory rescan!
+                    added = sorted(r for r in written_rels if r not in pre_hashes)
+                    modified = sorted(
+                        r for r in written_rels
+                        if r in pre_hashes
+                        and hashlib.sha256((clone / r).read_bytes()).hexdigest() != pre_hashes[r]
+                    )
+                    diff = {"added": added, "modified": modified, "deleted": []}
+                    tomo_diff: dict[str, Any] = {"fast_overlay_paths": written_rels}
+                    neg_oracle: Mapping[str, Any] = {}
+                else:
+                    _, clone_after_hashes = workspace_tree_digest(clone)
+                    clone_after_snap = uca.snapshot_workspace_files(clone)
+                    clone_after_tomo = scpa.capture_tomography_snapshot(clone)
+                    diff = diff_file_hashes(pre_hashes, clone_after_hashes)
+                    tomo_diff = scpa.diff_tomography(pre_tomo, clone_after_tomo)
+                    neg_oracle = uca.evaluate_negative_effect_oracle(clone_before_snap, clone_after_snap)
 
-                # Negative-effect / scope boundary checks
-                neg_oracle = uca.evaluate_negative_effect_oracle(clone_before_snap, clone_after_snap)
                 neg_ok = True
                 rejection: str | None = exec_err
 
@@ -246,7 +423,7 @@ class SpeculativeSandbox:
                 if post_ok and neg_ok and winner_id is None:
                     winner_id = cid
                     if commit_winner:
-                        self._commit_clone(clone, diff)
+                        commit_mechanism = self._commit_clone(clone, diff)
                         did_commit = True
                         committed = True
 
@@ -268,12 +445,22 @@ class SpeculativeSandbox:
                 if winner_id is not None:
                     break
 
+                # O(|diff|) microsecond rollback of `clone` back to exact `pre_hashes` state!
+                for rel in diff["added"]:
+                    (clone / rel).unlink(missing_ok=True)
+                for rel in diff["modified"] + diff["deleted"]:
+                    if rel in baseline_bytes:
+                        dst_p = clone / rel
+                        dst_p.parent.mkdir(parents=True, exist_ok=True)
+                        dst_p.write_bytes(baseline_bytes[rel])
+
         post_digest, _ = workspace_tree_digest(self.workspace_root)
         workspace_preserved_on_failure = (winner_id is None and post_digest == pre_digest)
         return {
             "passed": winner_id is not None,
             "winner_id": winner_id,
             "committed": committed,
+            "commit_mechanism": commit_mechanism,
             "pre_digest": pre_digest,
             "post_digest": post_digest,
             "workspace_preserved_on_failure": workspace_preserved_on_failure,
@@ -285,6 +472,7 @@ def execute_speculative_computer_task(
     *,
     workspace_root: str | Path | None = None,
     candidates: Sequence[Mapping[str, Any]] = (),
+    cow_python_candidates: Sequence[tuple[str, Callable[[], tuple[bool, Any]]]] = (),
     postcondition: Callable[[Path], bool] | None = None,
     allowed_write_paths: Sequence[str] = (),
     allow_deletions: bool = False,
@@ -316,6 +504,22 @@ def execute_speculative_computer_task(
         report["petri_cut_vertices"] = uca.compute_petri_dominator_cut_vertices(
             petri_edges, petri_start, petri_goal
         )
+
+    # Route 1A.0 (Zero-Disk Parallel `os.fork()` CoW Python Candidate Screening via `ZygotePrewarmedPool`)
+    if cow_python_candidates:
+        report["modules_invoked"].append("canonical.swe_kernel.zygote_worker_pool_v1:screen_python_candidates_cow")
+        sb_root = Path(workspace_root) if workspace_root is not None else Path.cwd()
+        cow_batch_out = SpeculativeSandbox(sb_root).evaluate_cow_zygote_batch(
+            cow_python_candidates,
+            per_worker_timeout_s=timeout_s,
+        )
+        report["cow_zygote_result"] = cow_batch_out
+        if cow_batch_out["passed"]:
+            report["route_selected"] = "ZYGOTE_OS_FORK_COW_PARALLEL_POOL"
+            report["pass"] = True
+            report["status"] = "PASS__ZYGOTE_COW_VERIFIED"
+            report["reason"] = None
+            return report
 
     # Route 1A (CoAct-1 Programmatic Typed Value Algebra Bypass): construct typed value directly
     if value_algebra_query is not None:

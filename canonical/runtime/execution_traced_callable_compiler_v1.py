@@ -425,28 +425,41 @@ def derive_verified_module_adapter(
 
     mod_parent_str = str(mod_file.parent)
     root_str = str(root)
+    is_sandbox_root = root != ROOT
+    saved_mods = dict(sys.modules) if is_sandbox_root else None
     added_paths: list[str] = []
     for p_str in (mod_parent_str, root_str):
         if p_str not in sys.path:
             sys.path.insert(0, p_str)
             added_paths.append(p_str)
     try:
-        if root == ROOT:
+        if not is_sandbox_root:
             mod = importlib.import_module(mod_dot)
             tmod = importlib.import_module(test_dot)
         else:
+            importlib.invalidate_caches()
+            pkg_prefix = mod_dot.split(".", 1)[0]
+            for k in [k for k in sys.modules if k == pkg_prefix or k.startswith(f"{pkg_prefix}.")]:
+                sys.modules.pop(k, None)
             mspec = importlib.util.spec_from_file_location(mod_dot, mod_file)
             tspec = importlib.util.spec_from_file_location(f"_custom_test_{stem}", test_file)
             if mspec is None or mspec.loader is None or tspec is None or tspec.loader is None:
                 raise ImportError("SPEC_UNLOADABLE")
             mod = importlib.util.module_from_spec(mspec)
+            sys.modules[mod_dot] = mod
             mspec.loader.exec_module(mod)
             tmod = importlib.util.module_from_spec(tspec)
             tspec.loader.exec_module(tmod)
     except BaseException as exc:
-        for p_str in added_paths:
-            if p_str in sys.path:
-                sys.path.remove(p_str)
+        if is_sandbox_root:
+            for p_str in added_paths:
+                if p_str in sys.path:
+                    sys.path.remove(p_str)
+            if saved_mods is not None:
+                for k in list(sys.modules):
+                    if k not in saved_mods:
+                        sys.modules.pop(k, None)
+                sys.modules.update(saved_mods)
         return {
             "schema": SCHEMA,
             "pass": False,
@@ -454,6 +467,15 @@ def derive_verified_module_adapter(
             "reason": f"IMPORT_FAILED:{type(exc).__name__}",
             "model_calls": 0,
         }
+    if is_sandbox_root:
+        for p_str in added_paths:
+            if p_str in sys.path:
+                sys.path.remove(p_str)
+        if saved_mods is not None:
+            for k in list(sys.modules):
+                if k not in saved_mods:
+                    sys.modules.pop(k, None)
+            sys.modules.update(saved_mods)
 
     public_fns: dict[str, Any] = {
         name: fn

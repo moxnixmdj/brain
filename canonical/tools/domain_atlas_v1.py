@@ -283,6 +283,10 @@ def _model_status(model: Mapping[str, Any] | None) -> dict[str, Any]:
     indexed_paths = {row.get("path") for row in model.get("source_index") or []}
     indexed_paths |= {row.get("path") for row in model.get("extended_source_index") or []}
     adapter_stems = {str(row.get("adapter_module") or "") for row in model.get("capabilities") or []}
+    for crow in model.get("capabilities") or []:
+        cid = str(crow.get("id") or "")
+        if cid.endswith(".py.auto.v1"):
+            adapter_stems.add(pathlib.PurePosixPath(cid[: -len(".auto.v1")]).stem)
     for erow in model.get("engines") or []:
         spath = (erow.get("route") or {}).get("source_path") if isinstance(erow, Mapping) else None
         if spath:

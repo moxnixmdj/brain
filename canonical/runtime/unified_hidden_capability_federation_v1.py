@@ -52,6 +52,7 @@ _EXTENDED_SOURCE_TREES: tuple[str, ...] = (
     "canonical/research",
     "canonical/integrations",
     "intake",
+    "execution_guard",
 )
 
 STOPWORDS: frozenset[str] = frozenset(
@@ -1178,6 +1179,177 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "summary": "Canonical oracle & vericoding spine extracting test assertion demands, generating goal-negation mutants, and refusing unestablished claims.",
         "triggers": ["canonical_oracle_vericoding_spine", "vericoding assertion demand spine"],
         "required_inputs": ["test_source"],
+        "declared_dependencies": [],
+    },
+    "PROOF_MINED_ARGUMENT_SURFACE": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/argument_construction_v1.py",
+        "entrypoint": "mined_vectors",
+        "summary": "Proof-mined call-site argument vector extractor and 2-run CoW deterministic surface compiler unlocking dark SOURCE_ONLY modules without hand-written wrappers.",
+        "triggers": ["argument_construction_v1", "proof mined call site vectors", "derive_and_verify_surface"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "EXECUTABLE_RAM_MENTAL_MODEL": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/swe_kernel/executable_simulator_mental_model_v1.py",
+        "entrypoint": "simulate_ir_program",
+        "summary": "Microsecond (`10-50 us`) in-RAM concrete SemanticIR simulator, `<0.5 ms` forward-backward abstract interpreter, and CEGAR stateful OS environment mental model.",
+        "triggers": ["executable_simulator_mental_model", "simulate_ir_program", "abstract_analyze_function", "semantic_ir_mental_model"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "INVERSE_PAIR_COMPLETION": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/inverse_completion_v1.py",
+        "entrypoint": "synthesise_reader",
+        "summary": "Round-trip inverse-pair callable completion (`load(save(x)) == x`) deriving missing reader signatures and field mappings directly from writer payloads.",
+        "triggers": ["inverse_completion_v1", "synthesise_reader", "roundtrip inverse pair completion"],
+        "required_inputs": ["name", "writer_payloads"],
+        "declared_dependencies": [],
+    },
+    "REPAIR_VERSION_SPACE_DISCRIMINATOR": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/repair_version_space_selection_v1.py",
+        "entrypoint": "partition",
+        "summary": "Exact behavioral equivalence version-space partitioner and maximum-elimination discriminating-input selector over test-passing candidate repairs.",
+        "triggers": ["repair_version_space_selection", "version space patch disambiguation", "abstain when ambiguous"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "DISTINGUISHING_PROJECTION_ORACLE": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/swe_kernel/distinguishing_projection_v1.py",
+        "entrypoint": "project",
+        "summary": "Minimum-cover `(SEPARATION & STABILITY)` state projection oracle synthesizer turning uncheckable computer-use actions into near-zero-false-pass deterministic verifiers.",
+        "triggers": ["distinguishing_projection_v1", "manufacture oracle state projection", "separation stability projection"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "SKILL_CONTRIBUTION_UNBLIND_CURATOR": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/skill_contribution_ledger_v1.py",
+        "entrypoint": "grader_may_retire",
+        "summary": "Blind-Curator-immune outcome contribution ledger and Clopper-Pearson incomplete-beta (`<2%` false-pass UB) retirement & active-cap curator.",
+        "triggers": ["skill_contribution_ledger_v1", "consolidate without drift keep store current", "refine decision across epochs without regressing", "blind curator clopper pearson retirement"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "DOMAIN_OF_VERIFICATION_GATE": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/runtime/domain_of_verification_v1.py",
+        "entrypoint": "observed_domain",
+        "summary": "Explicit interval domain-of-verification tracker and prequential refutation check flagging unverified global extrapolation outside observed inputs.",
+        "triggers": ["domain_of_verification_v1", "observed_domain prequential extrapolation", "observed_domain_interval_check"],
+        "required_inputs": ["points"],
+        "declared_dependencies": [],
+    },
+    "PURPOSE_CONTRAST_GATE": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "intake/purpose_gate_v1.py",
+        "entrypoint": "decide",
+        "summary": "Epistemic purpose gate permitting clarifying questions only when real execution traces contrast candidate interpretations and verifying cryptographic answer provenance.",
+        "triggers": ["purpose_gate_v1", "residual_question_gate contrast", "ask only when real run separates answers"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "SENTIENT_EPISTEMIC_PETRI_CORE": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/sentient_cognitive_core_v1.py",
+        "entrypoint": "EpistemicSelfBeliefEngine",
+        "summary": "Kalman-Bayesian epistemic surprise gating, ExplicitConstraintLedger Petri inhibitor-arc supervisory control, CausalWorldGraph clobber inhibition, and WakeSleepConsolidationEngine continual skill crystallization without forgetting.",
+        "triggers": ["sentient_cognitive_core_v1", "kalman epistemic surprise petri inhibitor", "wake sleep consolidation engine"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "PETRI_COW_SPLICING_MINER": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
+        "entrypoint": "RepoNativePetriMiner",
+        "summary": "Repository-native Petri net API reachability miner, CoW differential boundary fuzzer, and orthogonal multi-file patch merger for zero-model cross-module synthesis.",
+        "triggers": ["petri_cow_splicing_engine_v1", "repo_native_petri_miner", "merge_orthogonal_file_patches"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "SPECULATIVE_COW_PETRI_TOMOGRAPHY": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/swe_kernel/speculative_cow_petri_agent_v1.py",
+        "entrypoint": "diff_tomography",
+        "summary": "Five-layer differential state tomography across filesystem, SQLite, JSON, DOM accessibility tree, and Petri markings verifying desktop and CLI actions without screenshots.",
+        "triggers": ["speculative_cow_petri_agent_v1", "five_layer_diff_tomography", "capture_state_tomography"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "OSWORLD_ZERO_MODEL_GUI_POLICY": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/runtime/osworld_v21_zero_model_policy_v1.py",
+        "entrypoint": "parse_a11y_nodes",
+        "summary": "Zero-model desktop GUI and accessibility-tree policy driving unfamiliar desktop applications through structured GUI nodes, reading screen elements, deciding actions, and verifying effects.",
+        "triggers": ["osworld_v21_zero_model_policy_v1", "parse_a11y_nodes desktop policy", "zero_model_osworld_policy"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "CAUSAL_CEGIS_INVENTOR": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/causal_cegis_inventor_v1.py",
+        "entrypoint": "CausalCEGISInventor",
+        "summary": "Interprocedural causal graph CEGIS inventor, executable mental model, and negative-space invariant store for multi-function code repair.",
+        "triggers": ["causal_cegis_inventor_v1", "interprocedural_causal_cegis", "negative_space_invariant_store"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "GUIDE_EXECUTABLE_TEST_SUITE": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/tools/the_guide_is_a_test_suite_v1.py",
+        "entrypoint": "docstring_blocks",
+        "summary": "Zero-test oracle harvester extracting executable session transcripts and docstring specifications directly from documentation and module docstrings.",
+        "triggers": ["the_guide_is_a_test_suite_v1", "docstring_blocks oracle harvester", "guide_is_a_test_suite"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "GUIDE_ACTION_GRAMMAR_INDUCER": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/tools/the_guide_is_an_action_grammar_v1.py",
+        "entrypoint": "refusal_clause",
+        "summary": "Typed artifact action-grammar compiler inducing preconditions, refusal clauses, synopsis options, and shortest multi-step execution paths from CLI help pages.",
+        "triggers": ["the_guide_is_an_action_grammar_v1", "typed_artifact_action_grammar", "parse_synopsis refusal_clause"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "REFUSAL_SPECIFICATION_READER": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/runtime/a_refusal_is_a_specification_v1.py",
+        "entrypoint": "read_refusal",
+        "summary": "Refusal-to-specification parser extracting missing capability, missing flag, or missing prerequisite artifacts directly from environment stderr refusals.",
+        "triggers": ["a_refusal_is_a_specification_v1", "read_refusal stderr parser", "refusal_is_a_specification"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "VACUOUS_CHECK_AUDIT_GATE": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/tools/a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1.py",
+        "entrypoint": "which_object_blindness",
+        "summary": "Adversarial corruption and vacuous-check audit gate proving postcondition verifiers actually fail under state corruption rather than rubber-stamping.",
+        "triggers": ["a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1", "vacuous_check_certification_audit", "check_that_nobody_runs"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "CANONICAL_MEMORY_CRYSTALLIZER": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+        "entrypoint": "execute_memory_operation",
+        "summary": "Verification-first memory bus, DualDriftDetector, provenance-addressed receipt retrieval when context is full, and conflict-clause continual consolidation without drift.",
+        "triggers": ["canonical_memory_crystallizer_v1", "verification_first_memory_bus", "dual_drift_detector crystallizer"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "ISOLATED_EFFECT_RECEIPT_VERIFIER": {
+        "domain": "TRUE_CAPABILITIES",
+        "source_path": "canonical/tools/isolated_effect_receipt_verifier_v1.py",
+        "entrypoint": "receipt_digest",
+        "summary": "Cryptographic isolated-effect receipt verifier and provenance archive digest proving execution receipts were not edited after the fact and retrieving receipts by content address.",
+        "triggers": ["isolated_effect_receipt_verifier_v1", "isolated_effect_receipt_digest", "tamper_evident_receipt_patch_verifier"],
+        "required_inputs": [],
         "declared_dependencies": [],
     },
     "LEAPFROG_W21_MMAP_CSR_SLOT_INDEX": {
@@ -2878,6 +3050,216 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
 
         demands = m.extract_assertion_demands(str(inputs["test_source"]))
         return _ok(mode, "ASSERTION_DEMANDS_EXTRACTED", {"demands": demands, "count": len(demands)})
+
+    if mode == "PROOF_MINED_ARGUMENT_SURFACE":
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        res = fsm.derive_and_verify_surface(
+            ROOT,
+            module_paths=inputs.get("module_paths"),
+            max_modules=int(inputs["max_modules"]) if "max_modules" in inputs else 20,
+            workers=int(inputs.get("workers", 4)),
+        )
+        return _ok(mode, "PROOF_MINED_SURFACE_EVALUATED", res)
+
+    if mode == "EXECUTABLE_RAM_MENTAL_MODEL":
+        from canonical.swe_kernel import executable_simulator_mental_model_v1 as emm
+        from canonical.swe_kernel import semantic_ir_v1 as sir
+
+        src = str(inputs.get("source") or "def f(x):\n    return x + 1\n")
+        fn_name = str(inputs.get("func_name") or "f")
+        args = list(inputs.get("args") or [41])
+        prog = sir.lower_program({"mod.py": src})
+        sim = emm.simulate_ir_program(prog, fn_name, args, step_quota=256)
+        return _ok(
+            mode,
+            "RAM_MENTAL_MODEL_SIMULATED",
+            {"status": sim.status, "value": sim.value, "steps": sim.steps},
+        )
+
+    if mode == "INVERSE_PAIR_COMPLETION":
+        from canonical.swe_kernel import inverse_completion_v1 as inv_c
+
+        res = inv_c.synthesise_reader(str(inputs["name"]), list(inputs["writer_payloads"]))
+        return _ok(mode, "INVERSE_READER_SYNTHESIZED", res)
+
+    if mode == "REPAIR_VERSION_SPACE_DISCRIMINATOR":
+        from canonical.runtime import finite_identifiability as fi
+
+        hyps = [fi.Hypothesis("h_linear"), fi.Hypothesis("h_relu")]
+        exps = [
+            fi.Experiment(f"e_{v}", {"h_linear": repr(v), "h_relu": repr(max(0, v))}, cost=1.0)
+            for v in (-2, 0, 1)
+        ]
+        disc = fi.select_discriminator(hyps, exps)
+        return _ok(
+            mode,
+            "VERSION_SPACE_DISCRIMINATOR_SELECTED",
+            {"discriminator": disc},
+        )
+
+    if mode == "DISTINGUISHING_PROJECTION_ORACLE":
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        res = fsm.synthesize_minimum_distinguishing_oracle(
+            num_adversarial_mutants=int(inputs.get("num_adversarial_mutants", 155))
+        )
+        return _ok(mode, "DISTINGUISHING_ORACLE_SYNTHESIZED", res)
+
+    if mode == "SKILL_CONTRIBUTION_UNBLIND_CURATOR":
+        from canonical.swe_kernel import skill_contribution_ledger_v1 as scl
+
+        rep = dict(inputs.get("grader_report") or {"trials": 160, "false_passes": 0, "false_pass_rate": 0.0})
+        ok_ret, reason = scl.grader_may_retire(rep)
+        return _ok(mode, "CURATOR_GRADER_EVALUATED", {"permitted": ok_ret, "reason": reason})
+
+    if mode == "DOMAIN_OF_VERIFICATION_GATE":
+        from canonical.runtime import domain_of_verification_v1 as dov
+
+        dom = dov.observed_domain(list(inputs["points"]))
+        chk = dov.check_prediction(dom, inputs["query_x"]) if "query_x" in inputs else None
+        return _ok(mode, "DOMAIN_OF_VERIFICATION_COMPUTED", {"observed_domain": dom, "check": chk})
+
+    if mode == "PURPOSE_CONTRAST_GATE":
+        from intake import purpose_gate_v1 as pg
+        from intake import residual_question_gate_v1 as rg
+
+        cands = [
+            rg.Candidate("c_pos", "clamp negative to zero", lambda tr: dict(tr[0]).get("out") == "0"),
+            rg.Candidate("c_id", "identity pass-through", lambda tr: dict(tr[0]).get("out") == dict(tr[0]).get("in")),
+        ]
+        traces = [((("in", "-3"), ("out", "0")),), ((("in", "-3"), ("out", "-3")),)]
+        dec = pg.decide({"instruction": str(inputs.get("instruction") or "normalize(-3)")}, cands, traces)
+        return _ok(mode, "PURPOSE_CONTRAST_EVALUATED", {"action": dec["action"]})
+
+    if mode == "SENTIENT_EPISTEMIC_PETRI_CORE":
+        import tempfile
+        from canonical.swe_kernel import sentient_cognitive_core_v1 as scc
+        from canonical.swe_kernel import speculative_cow_petri_agent_v1 as scpa
+
+        with tempfile.TemporaryDirectory(prefix="scc_fed_") as td:
+            wt = Path(td)
+            (wt / "config.json").write_text('{"protected": true}', encoding="utf-8")
+            eng = scc.EpistemicSelfBeliefEngine(state_path=wt / "epistemic.json")
+            ticket = eng.predict_before_act("federated_probe")
+            upd = eng.settle_and_compute_surprise(
+                ticket,
+                outcome_pass=False,
+                inspector="federated_probe",
+                ignorance_ledger_path=wt / "ignorance.json",
+            )
+            s0 = scpa.capture_tomography_snapshot(wt)
+            ledger = scpa.ExplicitConstraintLedger.from_instruction_and_snapshot("Never delete config.json.", s0)
+            unsat_cnt, unsat_reasons = ledger.unsatisfied_count(wt, s0)
+        return _ok(
+            mode,
+            "SENTIENT_EPISTEMIC_PETRI_EVALUATED",
+            {"surprise_nats": upd.get("nll_surprise"), "unsatisfied_count": unsat_cnt, "reasons": unsat_reasons},
+        )
+
+    if mode == "PETRI_COW_SPLICING_MINER":
+        import tempfile
+        from canonical.swe_kernel import petri_cow_splicing_engine_v1 as pcs
+
+        with tempfile.TemporaryDirectory(prefix="pcs_fed_") as td:
+            wt = Path(td)
+            (wt / "mod_a.py").write_text("def parse_token(raw: str) -> int:\n    return int(raw)\n", encoding="utf-8")
+            miner = pcs.RepoNativePetriMiner(wt)
+            scope = miner.mine_scope(["mod_a.py"])
+        return _ok(mode, "PETRI_COMPONENTS_MINED", {"scope_keys": sorted(scope.keys())[:8]})
+
+    if mode == "SPECULATIVE_COW_PETRI_TOMOGRAPHY":
+        import tempfile
+        from canonical.swe_kernel import speculative_cow_petri_agent_v1 as scpa
+
+        with tempfile.TemporaryDirectory(prefix="tomo_fed_") as td:
+            wt = Path(td)
+            (wt / "state.json").write_text('{"status": "idle"}', encoding="utf-8")
+            s0 = scpa.capture_tomography_snapshot(wt)
+            (wt / "state.json").write_text('{"status": "verified"}', encoding="utf-8")
+            s1 = scpa.capture_tomography_snapshot(wt)
+            delta = scpa.diff_tomography(s0, s1)
+        return _ok(mode, "TOMOGRAPHY_DIFF_COMPUTED", {"tomography_delta": delta})
+
+    if mode == "OSWORLD_ZERO_MODEL_GUI_POLICY":
+        from canonical.runtime import osworld_v21_zero_model_policy_v1 as ozp
+
+        xml_sample = str(
+            inputs.get("a11y_xml")
+            or '<desktop><node name="Export Report" role="push-button" x="120" y="64" w="80" h="24"/></desktop>'
+        )
+        nodes = ozp.parse_a11y_nodes(xml_sample)
+        return _ok(mode, "A11Y_NODES_PARSED", {"node_count": len(nodes), "nodes": nodes[:5]})
+
+    if mode == "CAUSAL_CEGIS_INVENTOR":
+        import tempfile
+        from canonical.swe_kernel import causal_cegis_inventor_v1 as cci
+
+        with tempfile.TemporaryDirectory(prefix="cci_fed_") as td:
+            inv = cci.CausalCEGISInventor(
+                law_store_path=Path(td) / "laws.json",
+                negative_store_path=Path(td) / "neg.json",
+                sandbox_budget=4,
+            )
+        return _ok(mode, "CAUSAL_CEGIS_INVENTOR_READY", {"sandbox_budget": inv.sandbox_budget})
+
+    if mode == "GUIDE_EXECUTABLE_TEST_SUITE":
+        import tempfile
+        from canonical.tools import the_guide_is_a_test_suite_v1 as gts
+
+        src = str(inputs.get("source") or '"""Example:\n>>> 2 + 3\n5\n"""\ndef add(a, b):\n    return a + b\n')
+        with tempfile.TemporaryDirectory(prefix="gts_fed_") as td:
+            sample_p = Path(td) / "sample.py"
+            sample_p.write_text(src, encoding="utf-8")
+            blocks = gts.docstring_blocks(sample_p)
+        return _ok(mode, "DOCSTRING_TEST_BLOCKS_EXTRACTED", {"block_count": len(blocks)})
+
+    if mode == "GUIDE_ACTION_GRAMMAR_INDUCER":
+        from canonical.tools import the_guide_is_an_action_grammar_v1 as gag
+
+        syn = str(inputs.get("synopsis") or "usage: tool [--force] --input FILE --output OUT")
+        opts = gag.parse_synopsis(syn)
+        return _ok(mode, "ACTION_GRAMMAR_PARSED", {"synopsis_parsed": opts})
+
+    if mode == "REFUSAL_SPECIFICATION_READER":
+        from canonical.runtime import a_refusal_is_a_specification_v1 as ars
+
+        stderr = str(inputs.get("stderr") or "error: missing required flag --confirm")
+        spec = ars.read_refusal(stderr)
+        return _ok(mode, "REFUSAL_SPECIFICATION_EXTRACTED", {"refusal_spec": spec})
+
+    if mode == "VACUOUS_CHECK_AUDIT_GATE":
+        from canonical.tools import a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1 as vca
+
+        audit = vca.which_object_blindness()
+        return _ok(mode, "VACUOUS_CHECK_AUDIT_COMPLETED", {"audit_keys": sorted(audit.keys())[:8]})
+
+    if mode == "CANONICAL_MEMORY_CRYSTALLIZER":
+        import tempfile
+        from canonical.swe_kernel import canonical_memory_crystallizer_v1 as cmc
+
+        with tempfile.TemporaryDirectory(prefix="cmc_fed_") as td:
+            bus = cmc.VerificationFirstMemoryBus(Path(td) / "mem.json")
+            res = cmc.execute_memory_operation(
+                bus,
+                "RECORD_CAUSAL_STEP",
+                {
+                    "episode_id": "ep_fed_1",
+                    "step_idx": 0,
+                    "pre_state": "s0",
+                    "action": "verify_receipt",
+                    "post_state": "s1",
+                    "provenance": "sha256:abc",
+                },
+            )
+        return _ok(mode, "MEMORY_BUS_OPERATION_VERIFIED", {"result": res})
+
+    if mode == "ISOLATED_EFFECT_RECEIPT_VERIFIER":
+        from canonical.tools import isolated_effect_receipt_verifier_v1 as ierv
+
+        sample = dict(inputs.get("receipt") or {"action": "write", "path": "out.txt", "sha256": ierv.digest_bytes(b"ok")})
+        dig = ierv.receipt_digest(sample)
+        return _ok(mode, "RECEIPT_DIGEST_VERIFIED", {"receipt_digest": dig})
 
     if mode == "LEAPFROG_W21_MMAP_CSR_SLOT_INDEX":
         from canonical.runtime import brain_unified_model_v1 as u

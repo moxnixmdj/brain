@@ -11,6 +11,7 @@
     "a_refusal_is_a_specification_v1",
     "a_relation_over_two_guards_v1",
     "adversarial_mutation_admission_gate_v1",
+    "adversarial_mutation_admission_gate_v2",
     "angelic_cegis_repair_v1",
     "angelic_cegis_v1",
     "angelic_lens_cow_repair_v1",
@@ -104,6 +105,7 @@
     "finance_agent_v2_keyless_public_tools_v1",
     "first_principles_mental_cegis_v1",
     "force_the_value_and_see_v1",
+    "frontier_seven_moves_runtime_v1",
     "frontier_unified_engine_v1",
     "gdpval_objective_artifact_criteria_v2",
     "gdpval_semantic_complement_localizer_v2",
@@ -171,6 +173,7 @@
     "module_invocation_evidence_v1",
     "multistep_repo_closed_loop_solver_v1",
     "native_artifact_render_preservation_proof_v1",
+    "oe_sygus_synthesizer_v1",
     "one_shot_reality_closure_v2",
     "orthographic_visual_hull",
     "osworld_verified_task_ledger_v1",
@@ -245,6 +248,7 @@
     "software_repair_crossfile_choreograph_v1",
     "spec_contract_synthesis_v1",
     "speculative_cow_petri_agent_v1",
+    "stochastic_synthesizer_v1",
     "swe_observational_program_synthesizer_v1",
     "swe_self_improvement_bridge_v1",
     "swe_typed_plan_v1",
@@ -297,14 +301,14 @@
     "witness_inversion_v1",
     "zygote_worker_pool_v1"
    ],
-   "candidates": 293,
+   "candidates": 297,
    "frontier_function": "resolve a repository issue from a text description",
-   "harvested_all": 104,
+   "harvested_all": 106,
    "harvested_executable_top": 11,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 25,
-   "indexed_all": 275,
+   "indexed_all": 279,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -324,7 +328,7 @@
      ],
      "path": "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
      "score": 41.25,
-     "sha256": "5481d2d1282c2015",
+     "sha256": "cb400c35dfcc2197",
      "source_index": true,
      "summary": "Unified Zero-Model SWE Wall-Closers V1: Metamorphic Witness Splitter, Codebase"
     },
@@ -429,6 +433,26 @@
      "summary": "Multi-Step Closed-Loop Repository Solver, Differential Trace Localizer & Race Prober."
     },
     {
+     "adapter_module_match": false,
+     "anchored": 15.75,
+     "harvested": false,
+     "matched": [
+      "repair@doc",
+      "swe@doc",
+      "localiz@symbol",
+      "patch@symbol",
+      "repair@symbol",
+      "swe@symbol",
+      "diff@doc",
+      "metamorphic@doc"
+     ],
+     "path": "canonical/swe_kernel/canonical_swe_spine_v1.py",
+     "score": 33.75,
+     "sha256": "af7222abf6086223",
+     "source_index": true,
+     "summary": "Canonical Unified Polyglot SWE Spine (`canonical_swe_spine_v1`)."
+    },
+    {
      "adapter_module_match": true,
      "anchored": 14.25,
      "harvested": true,
@@ -530,26 +554,6 @@
     },
     {
      "adapter_module_match": false,
-     "anchored": 12.0,
-     "harvested": false,
-     "matched": [
-      "repair@doc",
-      "swe@doc",
-      "localiz@symbol",
-      "patch@symbol",
-      "repair@symbol",
-      "diff@doc",
-      "metamorphic@doc",
-      "diff@symbol"
-     ],
-     "path": "canonical/swe_kernel/canonical_swe_spine_v1.py",
-     "score": 30.0,
-     "sha256": "b0b576cf1fbbb52c",
-     "source_index": true,
-     "summary": "Canonical Unified Polyglot SWE Spine (`canonical_swe_spine_v1`)."
-    },
-    {
-     "adapter_module_match": false,
      "anchored": 3.0,
      "harvested": false,
      "matched": [
@@ -584,7 +588,7 @@
      ],
      "path": "canonical/swe_kernel/canonical_oracle_vericoding_spine_v1.py",
      "score": 27.25,
-     "sha256": "f6dd48ac889f4f2e",
+     "sha256": "28252b0e8a5b1cf7",
      "source_index": true,
      "summary": "Canonical Dual-Channel Witness Inversion, Goal-Negation Oracle & Formal Vericoding Spine (`0H`)."
     },
@@ -815,6 +819,7 @@
    "candidate_stems": [
     "a_type_you_wrote_is_a_type_you_guess_v1",
     "aa_briefcase_top_support_collapse_v1",
+    "adversarial_mutation_admission_gate_v2",
     "aimed_action_v1",
     "angelic_lens_cow_repair_v1",
     "arc_agi_3_public_exploration_measure_v1",
@@ -823,11 +828,14 @@
     "attested_state_v1",
     "authenticated_pareto_scheduler_v1",
     "automationbench_owned_policy_kernel_v1",
+    "brain_unified_model_v1",
     "browser_goal_grounding_recovery_candidate",
     "browser_v1",
     "bytes_open_domain_equivalence_cut_v1",
     "cad_partspec",
     "cad_t0_oracle_adapter",
+    "canonical_boundary_router_v1",
+    "canonical_cu_sandbox_spine_v1",
     "canonical_env_discovery_spine_v1",
     "capability_parallel_frontier_v1",
     "capability_parallel_frontier_v2",
@@ -857,6 +865,7 @@
     "first_principles_mental_cegis_v1",
     "follow_the_pointer_v1",
     "fresh_quartic_unify_repair_v17",
+    "frontier_seven_moves_runtime_v1",
     "global_extrapolation_chase_spine_v1",
     "goal_compiler",
     "gui_room_v1",
@@ -934,6 +943,7 @@
     "software_repair_crossfile_choreograph_v1",
     "source_authority_binding_ror",
     "state_contract_world_model_v1",
+    "stochastic_synthesizer_v1",
     "synthesis_dimension_scorers_and_strict_reducer_v1",
     "terminal_adaptive_minimum_action_policy_v1",
     "terminal_information_dominance_v1",
@@ -960,14 +970,14 @@
     "whitebox_introspector_and_trace_synthesizer_v1",
     "zygote_worker_pool_v1"
    ],
-   "candidates": 147,
+   "candidates": 153,
    "frontier_function": "drive a GUI it has never seen",
-   "harvested_all": 25,
+   "harvested_all": 28,
    "harvested_executable_top": 6,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 25,
-   "indexed_all": 139,
+   "indexed_all": 145,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -1465,6 +1475,7 @@
     "associative_memory_v1",
     "autonomous_verified_self_improvement_v1",
     "brain_unified_model_v1",
+    "canonical_boundary_router_v1",
     "canonical_env_discovery_spine_v1",
     "canonical_memory_crystallizer_v1",
     "capability_consolidation_audit_v1",
@@ -1476,7 +1487,9 @@
     "derived_value_measure_v1",
     "domain_mapping_truth_certificate_v1",
     "exact_stated_geometry_measure_v1",
+    "frontier_seven_moves_runtime_v1",
     "gradient_free_law_consolidation_v1",
+    "gradient_free_law_consolidation_v2",
     "inert_action_prior_measure_v1",
     "instruction_contract_measure_v1",
     "k6_decision_refinement_compiler_v1",
@@ -1494,20 +1507,34 @@
     "universal_computer_agent_v1",
     "verified_skill_crystallizer_v1"
    ],
-   "candidates": 32,
+   "candidates": 35,
    "frontier_function": "keep improving without forgetting or drifting",
-   "harvested_all": 10,
-   "harvested_executable_top": 10,
-   "hidden_share_all": 0.062,
-   "hidden_top": [
-    "canonical/runtime/k6_decision_refinement_compiler_v1.py",
-    "canonical/runtime/k6_target_relative_decision_quotient_v1.py"
-   ],
+   "harvested_all": 12,
+   "harvested_executable_top": 11,
+   "hidden_share_all": 0.0,
+   "hidden_top": [],
    "in_source_index_top": 23,
-   "indexed_all": 28,
-   "invisible_share": 0.062,
-   "invisible_to_model": 2,
+   "indexed_all": 31,
+   "invisible_share": 0.0,
+   "invisible_to_model": 0,
    "top": [
+    {
+     "adapter_module_match": false,
+     "anchored": 10.5,
+     "harvested": false,
+     "matched": [
+      "consolidat@symbol",
+      "drift@symbol",
+      "expiry@symbol",
+      "forget@symbol",
+      "replay@symbol"
+     ],
+     "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+     "score": 10.5,
+     "sha256": "8454e8d4ef5a2f25",
+     "source_index": true,
+     "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
+    },
     {
      "adapter_module_match": false,
      "anchored": 4.5,
@@ -1544,22 +1571,6 @@
     },
     {
      "adapter_module_match": false,
-     "anchored": 8.25,
-     "harvested": false,
-     "matched": [
-      "consolidat@symbol",
-      "drift@symbol",
-      "forget@symbol",
-      "replay@symbol"
-     ],
-     "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
-     "score": 8.25,
-     "sha256": "e522b9ea243516bb",
-     "source_index": true,
-     "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
-    },
-    {
-     "adapter_module_match": false,
      "anchored": 2.25,
      "harvested": true,
      "matched": [
@@ -1590,6 +1601,23 @@
      "summary": "Sentient Cognitive Core V1 (`sentient_cognitive_core_v1`, `K3 = 0`)."
     },
     {
+     "adapter_module_match": false,
+     "anchored": 3.75,
+     "harvested": false,
+     "matched": [
+      "curriculum@doc",
+      "curriculum@symbol",
+      "drift@doc",
+      "replay@symbol",
+      "stable@symbol"
+     ],
+     "path": "canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
+     "score": 7.25,
+     "sha256": "6aa1eb3a2b1790a0",
+     "source_index": true,
+     "summary": "Canonical Environment Discovery & Conflict-Aware Active Automata Spine (`0E`)."
+    },
+    {
      "adapter_module_match": true,
      "anchored": 2.25,
      "harvested": false,
@@ -1602,6 +1630,22 @@
      "sha256": "d248643cd4ceb629",
      "source_index": true,
      "summary": "Memory that decides for itself what is worth keeping."
+    },
+    {
+     "adapter_module_match": false,
+     "anchored": 3.75,
+     "harvested": true,
+     "matched": [
+      "drift@symbol",
+      "expire@symbol",
+      "expiry@doc",
+      "forget@doc"
+     ],
+     "path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+     "score": 6.75,
+     "sha256": "994a7a420b7a2d3b",
+     "source_index": true,
+     "summary": "Frontier Seven-Move Unified Runtime Substrate (`K3 = 0`, `$0` spend, Elon-Law Minimalism)."
     },
     {
      "adapter_module_match": false,
@@ -1653,19 +1697,34 @@
     },
     {
      "adapter_module_match": false,
-     "anchored": 2.25,
-     "harvested": false,
+     "anchored": 6.0,
+     "harvested": true,
      "matched": [
-      "curriculum@doc",
-      "drift@doc",
-      "replay@symbol",
-      "stable@symbol"
+      "consolidat@symbol",
+      "drift@symbol",
+      "expire@symbol"
      ],
-     "path": "canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
-     "score": 5.75,
-     "sha256": "a11b5a2b49e294e3",
+     "path": "canonical/runtime/brain_unified_model_v1.py",
+     "score": 6.0,
+     "sha256": "6c0d1987af82c21d",
      "source_index": true,
-     "summary": "Canonical Environment Discovery & Conflict-Aware Active Automata Spine (`0E`)."
+     "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
+    },
+    {
+     "adapter_module_match": false,
+     "anchored": 2.25,
+     "harvested": true,
+     "matched": [
+      "consolidat@symbol",
+      "consolidat@doc",
+      "refine@doc",
+      "regress@doc"
+     ],
+     "path": "canonical/runtime/gradient_free_law_consolidation_v2.py",
+     "score": 5.75,
+     "sha256": "96bf2a8028efa600",
+     "source_index": true,
+     "summary": "Move 4 / Play 2 v2 \u2014 Popper Negative-Witness Specialization + E-Graph Anti-Unification (`gradient_free_law_consolidation_v2`)."
     },
     {
      "adapter_module_match": true,
@@ -1735,25 +1794,25 @@
       "consolidat@symbol",
       "drift@symbol"
      ],
-     "path": "canonical/runtime/brain_unified_model_v1.py",
+     "path": "canonical/runtime/creature_runtime_v1.py",
      "score": 4.5,
-     "sha256": "8cb9c29400bda2fc",
+     "sha256": "bbdf7cbd5ea7c7be",
      "source_index": true,
-     "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
+     "summary": "Seven organs, finally in one body."
     },
     {
      "adapter_module_match": false,
      "anchored": 4.5,
-     "harvested": true,
+     "harvested": false,
      "matched": [
-      "consolidat@symbol",
-      "drift@symbol"
+      "drift@symbol",
+      "expiry@symbol"
      ],
-     "path": "canonical/runtime/creature_runtime_v1.py",
+     "path": "canonical/swe_kernel/canonical_boundary_router_v1.py",
      "score": 4.5,
-     "sha256": "d03ea5f6f55680bf",
+     "sha256": "bf80de10dd91e326",
      "source_index": true,
-     "summary": "Seven organs, finally in one body."
+     "summary": "Canonical BoundaryRouter & Compounding Closed-Loop Orchestrator (`0I`)."
     },
     {
      "adapter_module_match": false,
@@ -1841,49 +1900,6 @@
      "sha256": "df520b604d2bee02",
      "source_index": true,
      "summary": "Persistent parameterized code-repair hypotheses in the existing SQLite store."
-    },
-    {
-     "adapter_module_match": true,
-     "anchored": 2.25,
-     "harvested": true,
-     "matched": [
-      "refine@symbol",
-      "replay@doc",
-      "stable@symbol"
-     ],
-     "path": "canonical/tools/the_right_question_is_an_experiment_v1.py",
-     "score": 3.25,
-     "sha256": "dddee8a20f5bccc4",
-     "source_index": true,
-     "summary": "The right question is an experiment: compile a prose claim to a witness, and"
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 3.0,
-     "harvested": false,
-     "matched": [
-      "refresh@symbol",
-      "replay@symbol"
-     ],
-     "path": "canonical/runtime/autonomous_verified_self_improvement_v1.py",
-     "score": 3.0,
-     "sha256": "001a999323648f12",
-     "source_index": true,
-     "summary": "Autonomous verified self-improvement loop V1."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 3.0,
-     "harvested": false,
-     "matched": [
-      "currentness@symbol",
-      "refresh@symbol"
-     ],
-     "path": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
-     "score": 3.0,
-     "sha256": "40b59450e37d0a3c",
-     "source_index": true,
-     "summary": ""
     }
    ],
    "vendored_donors_excluded": 0
@@ -1907,6 +1923,7 @@
     "canonical_env_discovery_spine_v1",
     "canonical_memory_crystallizer_v1",
     "canonical_oracle_vericoding_spine_v1",
+    "canonical_swe_spine_v1",
     "causal_cegis_inventor_v1",
     "causal_computer_use_agent_v1",
     "causal_nexus_v1",
@@ -1939,6 +1956,7 @@
     "finite_index_grid_operator_inducer_v1",
     "first_principles_mental_cegis_v1",
     "forged_binding_and_macro_spine_v1",
+    "frontier_seven_moves_runtime_v1",
     "generalization_rung_gradient_v1",
     "global_extrapolation_chase_spine_v1",
     "goal_compiler",
@@ -1982,6 +2000,7 @@
     "metamorphic_habitation_zipper_v1",
     "miniwob_one_success_generalisation_measure_v1",
     "mortality_and_triage_v1",
+    "oe_sygus_synthesizer_v1",
     "one_demonstration_basin_v1",
     "one_demonstration_identifies_v1",
     "one_experience_every_consequence_v1",
@@ -2068,18 +2087,16 @@
     "witness_inversion_v1",
     "world_binding_v1"
    ],
-   "candidates": 178,
+   "candidates": 181,
    "frontier_function": "adapt from one episode without touching weights",
-   "harvested_all": 66,
+   "harvested_all": 67,
    "harvested_executable_top": 11,
-   "hidden_share_all": 0.006,
-   "hidden_top": [
-    "canonical/runtime/runtime_cognition_credit_guard_v1.py"
-   ],
+   "hidden_share_all": 0.0,
+   "hidden_top": [],
    "in_source_index_top": 24,
-   "indexed_all": 176,
-   "invisible_share": 0.006,
-   "invisible_to_model": 1,
+   "indexed_all": 179,
+   "invisible_share": 0.0,
+   "invisible_to_model": 0,
    "top": [
     {
      "adapter_module_match": false,
@@ -2097,7 +2114,7 @@
      ],
      "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
      "score": 28.75,
-     "sha256": "e522b9ea243516bb",
+     "sha256": "8454e8d4ef5a2f25",
      "source_index": true,
      "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
     },
@@ -2651,6 +2668,7 @@
     "force_the_value_and_see_v1",
     "forged_binding_and_macro_spine_v1",
     "frames_that_cross_machines_v1",
+    "frontier_seven_moves_runtime_v1",
     "github_public_retrieval_provider_v1",
     "goal_compiler",
     "goal_front_compiler_v1",
@@ -2738,6 +2756,7 @@
     "skill_receipt_authenticator_v1",
     "solve_with_a_calibrated_judge_v1",
     "speculative_cow_petri_agent_v1",
+    "stdlib_cow_test_runner_v1",
     "structural_rewrite_induction_v1",
     "swe_self_improvement_bridge_v1",
     "systematic_edit_supply_v1",
@@ -2775,34 +2794,34 @@
     "whitebox_introspector_and_trace_synthesizer_v1",
     "workflow_goal_generalization_v1"
    ],
-   "candidates": 190,
+   "candidates": 192,
    "frontier_function": "context that stays correct as it fills",
-   "harvested_all": 50,
-   "harvested_executable_top": 9,
+   "harvested_all": 51,
+   "harvested_executable_top": 10,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 25,
-   "indexed_all": 185,
+   "indexed_all": 187,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
     {
      "adapter_module_match": false,
-     "anchored": 9.75,
+     "anchored": 12.0,
      "harvested": false,
      "matched": [
       "episod@symbol",
+      "recall@symbol",
       "memory@doc",
       "provenance@doc",
       "compress@symbol",
       "episod@doc",
       "ledger@symbol",
-      "memory@symbol",
-      "retriev@doc"
+      "memory@symbol"
      ],
      "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
-     "score": 18.25,
-     "sha256": "e522b9ea243516bb",
+     "score": 20.5,
+     "sha256": "8454e8d4ef5a2f25",
      "source_index": true,
      "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
     },
@@ -2840,7 +2859,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 16.25,
-     "sha256": "8cb9c29400bda2fc",
+     "sha256": "6c0d1987af82c21d",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -2961,6 +2980,26 @@
      "sha256": "7e49ebd78d5b3573",
      "source_index": true,
      "summary": "Procedure memory that generalizes, and the two ways it is allowed to be wrong."
+    },
+    {
+     "adapter_module_match": false,
+     "anchored": 6.0,
+     "harvested": true,
+     "matched": [
+      "memory@doc",
+      "compress@symbol",
+      "memory@symbol",
+      "trace@symbol",
+      "compact@doc",
+      "compress@doc",
+      "index@doc",
+      "ledger@doc"
+     ],
+     "path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+     "score": 14.0,
+     "sha256": "994a7a420b7a2d3b",
+     "source_index": true,
+     "summary": "Frontier Seven-Move Unified Runtime Substrate (`K3 = 0`, `$0` spend, Elon-Law Minimalism)."
     },
     {
      "adapter_module_match": true,
@@ -3248,24 +3287,6 @@
      "sha256": "7e579c1dcbcf0fce",
      "source_index": true,
      "summary": "Semantic-Causal Program Understanding, Universal Meaning E-Graph & Angelic CEGIS Engine."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 4.5,
-     "harvested": false,
-     "matched": [
-      "trace@doc",
-      "recall@symbol",
-      "recall@doc",
-      "store@doc",
-      "trace@symbol",
-      "cache@symbol"
-     ],
-     "path": "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
-     "score": 10.5,
-     "sha256": "5481d2d1282c2015",
-     "source_index": true,
-     "summary": "Unified Zero-Model SWE Wall-Closers V1: Metamorphic Witness Splitter, Codebase"
     }
    ],
    "vendored_donors_excluded": 2
@@ -3389,6 +3410,7 @@
     "finance_bounded_concept_registry_verify_v1",
     "finite_probe_nonidentifiability_certificate_v1",
     "first_principles_mental_cegis_v1",
+    "frontier_seven_moves_runtime_v1",
     "frontier_unified_engine_v1",
     "global_extrapolation_chase_spine_v1",
     "goal_compiler",
@@ -3602,25 +3624,16 @@
     "work_unit_validity_guard_v2",
     "worker_syscall_allowlist_v1"
    ],
-   "candidates": 329,
+   "candidates": 330,
    "frontier_function": "know when you do not know, and prove what you did",
-   "harvested_all": 57,
+   "harvested_all": 58,
    "harvested_executable_top": 6,
-   "hidden_share_all": 0.027,
-   "hidden_top": [
-    "canonical/runtime/escape_progress_shared_gap_audit_v1.py",
-    "canonical/runtime/escape_progress_shared_gap_audit_v2.py",
-    "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
-    "canonical/runtime/structured_method_universal_correctness_certificate_v1.py",
-    "canonical/runtime/finite_probe_nonidentifiability_certificate_v1.py",
-    "canonical/runtime/tool_discovery_universal_scope_certificate_v1.py",
-    "canonical/runtime/livebench_legacy15_composition_partition_v1.py",
-    "canonical/runtime/coding_static_verified_capability_route_theorem_v1.py"
-   ],
+   "hidden_share_all": 0.0,
+   "hidden_top": [],
    "in_source_index_top": 24,
-   "indexed_all": 294,
-   "invisible_share": 0.027,
-   "invisible_to_model": 9,
+   "indexed_all": 295,
+   "invisible_share": 0.0,
+   "invisible_to_model": 0,
    "top": [
     {
      "adapter_module_match": true,
@@ -3638,7 +3651,7 @@
      ],
      "path": "canonical/swe_kernel/canonical_oracle_vericoding_spine_v1.py",
      "score": 28.25,
-     "sha256": "f6dd48ac889f4f2e",
+     "sha256": "28252b0e8a5b1cf7",
      "source_index": true,
      "summary": "Canonical Dual-Channel Witness Inversion, Goal-Negation Oracle & Formal Vericoding Spine (`0H`)."
     },
@@ -3882,6 +3895,26 @@
      "summary": "Provenance for the two file-fact rows: ground truth computed without them."
     },
     {
+     "adapter_module_match": false,
+     "anchored": 9.0,
+     "harvested": false,
+     "matched": [
+      "abstain@symbol",
+      "prove@doc",
+      "counterexample@symbol",
+      "prove@symbol",
+      "audit@symbol",
+      "refus@doc",
+      "witness@doc",
+      "invariant@doc"
+     ],
+     "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+     "score": 16.0,
+     "sha256": "8454e8d4ef5a2f25",
+     "source_index": true,
+     "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
+    },
+    {
      "adapter_module_match": true,
      "anchored": 5.25,
      "harvested": false,
@@ -3916,7 +3949,7 @@
      ],
      "path": "canonical/runtime/creature_runtime_v1.py",
      "score": 15.25,
-     "sha256": "d03ea5f6f55680bf",
+     "sha256": "bbdf7cbd5ea7c7be",
      "source_index": true,
      "summary": "Seven organs, finally in one body."
     },
@@ -4057,25 +4090,6 @@
     },
     {
      "adapter_module_match": false,
-     "anchored": 6.75,
-     "harvested": false,
-     "matched": [
-      "abstain@symbol",
-      "prove@doc",
-      "counterexample@symbol",
-      "audit@symbol",
-      "refus@doc",
-      "witness@doc",
-      "invariant@doc"
-     ],
-     "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
-     "score": 13.75,
-     "sha256": "e522b9ea243516bb",
-     "source_index": true,
-     "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
-    },
-    {
-     "adapter_module_match": false,
      "anchored": 2.25,
      "harvested": true,
      "matched": [
@@ -4140,6 +4154,7 @@
     "causal_residual_ranker",
     "causal_swe_repair_v1",
     "causal_trace_to_skill_compiler_v1",
+    "compile_brain_unified_model_v1",
     "compose_measured_effects_v1",
     "computer_use_agent_v1",
     "consequence_table_v1",
@@ -4163,6 +4178,7 @@
     "finite_grid_program_inducer_v1",
     "finite_index_grid_operator_inducer_v1",
     "first_principles_mental_cegis_v1",
+    "frontier_seven_moves_runtime_v1",
     "frontier_unified_engine_v1",
     "global_extrapolation_chase_spine_v1",
     "goal_compiler",
@@ -4244,18 +4260,16 @@
     "what_the_vocabulary_cannot_say_v1",
     "what_transfers_to_a_second_host_v1"
    ],
-   "candidates": 128,
+   "candidates": 130,
    "frontier_function": "predict what an action does before doing it",
-   "harvested_all": 39,
+   "harvested_all": 41,
    "harvested_executable_top": 9,
-   "hidden_share_all": 0.008,
-   "hidden_top": [
-    "canonical/runtime/terminal_causal_depth_controller_v1.py"
-   ],
+   "hidden_share_all": 0.0,
+   "hidden_top": [],
    "in_source_index_top": 24,
-   "indexed_all": 125,
-   "invisible_share": 0.008,
-   "invisible_to_model": 1,
+   "indexed_all": 127,
+   "invisible_share": 0.0,
+   "invisible_to_model": 0,
    "top": [
     {
      "adapter_module_match": true,
@@ -4749,13 +4763,13 @@
  "method": "weighted lexical evidence over module stem, docstring and symbol names; frontier vocabulary and this repository's own vocabulary in one table",
  "min_score": 3.0,
  "model_calls": 0,
- "modules_scanned": 3311,
+ "modules_scanned": 3318,
  "network_calls": 0,
  "per_domain": 25,
  "reachability": {
   "coding_agents": {
-   "chance_route_recall": 0.1113,
-   "chance_source_recall": 0.1303,
+   "chance_route_recall": 0.1115,
+   "chance_source_recall": 0.1317,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -4798,7 +4812,7 @@
      "routed_top": [
       "python.fault.localize.dynamic.dataflow.v1",
       "software.repair.choreograph.crossfile.v1",
-      "code.patch.tree_sitter.verify.v1"
+      "brain.module.function.invoke"
      ],
      "source_hit": true,
      "source_top": [
@@ -4901,8 +4915,8 @@
    ]
   },
   "computer_use": {
-   "chance_route_recall": 0.0523,
-   "chance_source_recall": 0.0651,
+   "chance_route_recall": 0.0532,
+   "chance_source_recall": 0.0676,
    "frontier_route_hit_recall": 0.667,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 1.0,
@@ -5039,8 +5053,8 @@
    ]
   },
   "continual_learning": {
-   "chance_route_recall": 0.0202,
-   "chance_source_recall": 0.0143,
+   "chance_route_recall": 0.02,
+   "chance_source_recall": 0.0156,
    "frontier_route_hit_recall": 0.333,
    "frontier_source_hit_recall": 0.333,
    "native_route_hit_recall": 0.667,
@@ -5055,6 +5069,7 @@
      "routed_hit": [],
      "routed_top": [
       "python.source.add_function.v1",
+      "engine:SKILL_CONTRIBUTION_UNBLIND_CURATOR",
       "python.vcs.merge_conflict.resolve.v1"
      ],
      "source_hit": false,
@@ -5065,7 +5080,7 @@
      ]
     },
     {
-     "coverage": 0.5,
+     "coverage": 0.625,
      "hit": true,
      "kind": "frontier",
      "query": "expire rules that no longer hold and keep the store current",
@@ -5074,8 +5089,8 @@
       "engine:RULE_EXPIRY_WORLD_FINGERPRINT"
      ],
      "routed_top": [
+      "engine:SKILL_CONTRIBUTION_UNBLIND_CURATOR",
       "engine:RULE_EXPIRY_WORLD_FINGERPRINT",
-      "python.vcs.merge_conflict.resolve.v1",
       "engine:STRUCTURAL_REWRITE_INDUCTION"
      ],
      "source_hit": false,
@@ -5086,16 +5101,16 @@
      ]
     },
     {
-     "coverage": 0.5,
+     "coverage": 0.666667,
      "hit": true,
      "kind": "frontier",
      "query": "detect drift between what was taught and what is now true",
      "route_hit": false,
      "routed_hit": [],
      "routed_top": [
+      "engine:SKILL_CONTRIBUTION_UNBLIND_CURATOR",
       "git.history.bisect_regression.v1",
-      "file.question.taught_words.v1",
-      "python.review.diff_security_gate.v1"
+      "file.question.taught_words.v1"
      ],
      "source_hit": true,
      "source_top": [
@@ -5127,16 +5142,16 @@
      ]
     },
     {
-     "coverage": 0.4,
+     "coverage": 1.0,
      "hit": false,
      "kind": "native",
      "query": "consolidate without drift and keep the store current",
      "route_hit": false,
      "routed_hit": [],
      "routed_top": [
+      "engine:SKILL_CONTRIBUTION_UNBLIND_CURATOR",
       "python.vcs.merge_conflict.resolve.v1",
-      "canonical.runtime.binding_pin_is_current_v1.hidden.v1",
-      "canonical/runtime/current_26_zero_reality_frontier_v1.py.auto.v1"
+      "canonical.runtime.binding_pin_is_current_v1.hidden.v1"
      ],
      "source_hit": false,
      "source_top": [
@@ -5146,7 +5161,7 @@
      ]
     },
     {
-     "coverage": 0.2,
+     "coverage": 1.0,
      "hit": true,
      "kind": "native",
      "query": "refine a decision across epochs without regressing",
@@ -5156,9 +5171,9 @@
       "canonical/runtime/k6_target_relative_decision_quotient_v1.py.auto.v1"
      ],
      "routed_top": [
+      "engine:SKILL_CONTRIBUTION_UNBLIND_CURATOR",
       "decision.synthesis.typed.stdlib",
-      "decision.synthesis.verify.stdlib",
-      "canonical/runtime/k6_decision_refinement_compiler_v1.py.auto.v1"
+      "decision.synthesis.verify.stdlib"
      ],
      "source_hit": false,
      "source_top": [
@@ -5170,8 +5185,8 @@
    ]
   },
   "instant_learning": {
-   "chance_route_recall": 0.1012,
-   "chance_source_recall": 0.079,
+   "chance_route_recall": 0.1015,
+   "chance_source_recall": 0.0801,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -5315,8 +5330,8 @@
    ]
   },
   "memory": {
-   "chance_route_recall": 0.059,
-   "chance_source_recall": 0.0839,
+   "chance_route_recall": 0.0599,
+   "chance_source_recall": 0.0846,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 0.333,
@@ -5350,13 +5365,14 @@
      "query": "keep a durable memory of prior runs that stays correct as it grows",
      "route_hit": true,
      "routed_hit": [
+      "engine:SKILL_CONTRIBUTION_UNBLIND_CURATOR",
       "engine:ASSOCIATIVE_EPISODIC_MEMORY",
       "engine:PROCEDURE_TRAJECTORY_MEMORY"
      ],
      "routed_top": [
+      "engine:SKILL_CONTRIBUTION_UNBLIND_CURATOR",
       "python.vcs.merge_conflict.resolve.v1",
-      "engine:ASSOCIATIVE_EPISODIC_MEMORY",
-      "engine:PROCEDURE_TRAJECTORY_MEMORY"
+      "engine:ASSOCIATIVE_EPISODIC_MEMORY"
      ],
      "source_hit": true,
      "source_top": [
@@ -5447,27 +5463,26 @@
    ]
   },
   "verification_abstention": {
-   "chance_route_recall": 0.1231,
-   "chance_source_recall": 0.1468,
+   "chance_route_recall": 0.1215,
+   "chance_source_recall": 0.1469,
    "frontier_route_hit_recall": 0.667,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 0.333,
    "native_source_hit_recall": 0.667,
    "rows": [
     {
-     "coverage": 0.6,
+     "coverage": 0.8,
      "hit": true,
      "kind": "frontier",
      "query": "refuse when the evidence does not establish the claim",
      "route_hit": true,
      "routed_hit": [
-      "engine:PROSE_CLAIM_EXPERIMENT",
-      "canonical/runtime/p3_required_claim_grounded_realization_cell_v1.py.auto.v1"
+      "engine:PROSE_CLAIM_EXPERIMENT"
      ],
      "routed_top": [
       "evidence.claim_relation.generic_units.stdlib",
       "evidence.claim_spec.bind.explicit_comparison.stdlib",
-      "evidence.oracle.concrete_execution.v1"
+      "engine:DOMAIN_OF_VERIFICATION_GATE"
      ],
      "source_hit": false,
      "source_top": [
@@ -5518,7 +5533,7 @@
      ]
     },
     {
-     "coverage": 0.666667,
+     "coverage": 0.833333,
      "hit": true,
      "kind": "native",
      "query": "refuse fail-closed when the binding pin is not current",
@@ -5528,8 +5543,8 @@
      ],
      "routed_top": [
       "canonical.runtime.binding_pin_is_current_v1.hidden.v1",
-      "python.source.dead_code.v1",
-      "orchestration.verify.bridge_enumeration.v1"
+      "engine:DOMAIN_OF_VERIFICATION_GATE",
+      "python.source.dead_code.v1"
      ],
      "source_hit": false,
      "source_top": [
@@ -5558,13 +5573,14 @@
      ]
     },
     {
-     "coverage": 0.2,
+     "coverage": 0.4,
      "hit": true,
      "kind": "native",
      "query": "manufacture what the refusal asks for instead of faking it",
      "route_hit": false,
      "routed_hit": [],
      "routed_top": [
+      "engine:DISTINGUISHING_PROJECTION_ORACLE",
       "engine:KOAN_REFUSAL_CURRICULUM",
       "engine:REFUSAL_ARTIFACT_MANUFACTURER"
      ],
@@ -5578,8 +5594,8 @@
    ]
   },
   "world_model": {
-   "chance_route_recall": 0.0422,
-   "chance_source_recall": 0.0567,
+   "chance_route_recall": 0.0449,
+   "chance_source_recall": 0.0574,
    "frontier_route_hit_recall": 0.667,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 0.667,
