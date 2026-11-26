@@ -604,20 +604,9 @@ def remember(fingerprint: Mapping[str, Any], goal_key: str, plan: Sequence[Any],
 
 
 def recall(fingerprint: Mapping[str, Any], goal_key: str | None = None, *,
-           k: int = 3, min_similarity: float = 0.5,
-           use_advantage: bool = False, beta: float = 1.0) -> list[dict[str, Any]]:
-    """Plans worth trying first, best-evidence first. Never a fact: a guess.
-
-    JitRL-style advantage estimation (opt-in): when ``use_advantage`` is set,
-    each candidate's evidence is compared to the baseline (mean evidence
-    across retrieved candidates). Plans with above-baseline evidence are
-    boosted and below-baseline plans suppressed, via the closed-form
-    adjustment ``score = sim * (evidence + beta * (evidence - baseline))`` --
-    the plan-scoring analogue of JitRL's ``z' = z + beta * A_hat``. This
-    turns plain recall into test-time policy optimization over the retrieved
-    plan distribution. Default off: preserves the original behaviour.
-    """
-    cands: list[tuple[float, float, dict[str, Any]]] = []
+           k: int = 3, min_similarity: float = 0.5) -> list[dict[str, Any]]:
+    """Plans worth trying first, best-evidence first. Never a fact: a guess."""
+    out: list[tuple[float, float, dict[str, Any]]] = []
     for row in _load():
         sim = similarity(fingerprint, row.get("fingerprint") or {})
         if sim < min_similarity:
@@ -637,17 +626,9 @@ def recall(fingerprint: Mapping[str, Any], goal_key: str | None = None, *,
             from canonical.runtime import environment_learning_v1 as _el
             if row.get("model_schema") == _el.STATE_KEY_SCHEMA:
                 evidence *= 2.0
-        cands.append((sim, evidence, row))
-    if use_advantage and cands:
-        baseline = sum(ev for _, ev, _ in cands) / len(cands)
-        scored = [
-            (round(sim * (ev + beta * (ev - baseline)), 6), sim, row)
-            for sim, ev, row in cands
-        ]
-    else:
-        scored = [(round(sim * ev, 6), sim, row) for sim, ev, row in cands]
-    scored.sort(key=lambda t: -t[0])
-    return [dict(row, similarity=sim) for _, sim, row in scored[:k]]
+        out.append((round(sim * evidence, 6), sim, row))
+    out.sort(key=lambda t: -t[0])
+    return [dict(row, similarity=sim) for _, sim, row in out[:k]]
 
 
 # --------------------------------------------------------------------------- #
@@ -657,7 +638,6 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
           goal_key: str | None = None, budget: int = 60, seed: int | None = None,
           max_depth: int = 6, heuristic: Callable[[Any], float] | None = None,
           use_transfer: bool = True, min_similarity: float = 0.5,
-          use_advantage: bool = False, beta: float = 1.0,
           experience_mode: str = "learn_and_recall",
           fixed_plan: Sequence[Any] | None = None) -> dict[str, Any]:
     """Recall first, learn second, and prove either way by executing.
@@ -758,8 +738,7 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
     gkey = goal_key if goal_key is not None else _goal_key(is_goal)
 
     transferred = None
-    candidates = recall(fp, gkey, min_similarity=min_similarity,
-                        use_advantage=use_advantage, beta=beta) if use_transfer else []
+    candidates = recall(fp, gkey, min_similarity=min_similarity) if use_transfer else []
 
     available = [str(a) for a in actions]
     tried = 0
