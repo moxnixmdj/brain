@@ -1,0 +1,155 @@
+{
+ "answer": "abstraction: the recorded pattern was a single hole over the whole body, so the learned object was the identity function on one string. This wave replaces that operator with a two-sided rule whose lhs parameterises identifiers and whose rhs projects the after side out of the bound before side, and refuses anything that cannot transfer.",
+ "branch_base": "9a224e3ae6f9b9f05fcf9aaa1f38d00175746fef",
+ "claim_audit_this_wave": {
+  "arena_branches_quoted_by_prior_report": {
+   "06dc079e": "MISSING",
+   "0964738f": "EXISTS, diverged (ahead 4, behind 670)",
+   "1412289d": "MISSING",
+   "39d26eb4": "EXISTS, fully merged (ahead 0, behind 661)",
+   "4260e934": "MISSING",
+   "50c05c04": "MISSING",
+   "80a7e8eb": "EXISTS, diverged (ahead 1, behind 670)",
+   "94363358": "MISSING",
+   "aab1b545": "MISSING",
+   "b81b2217": "EXISTS, diverged (ahead 94, behind 76) -- the only branch carrying unmerged work",
+   "cd5bfaaa": "EXISTS, fully merged (ahead 0, behind 666)",
+   "d86a0174": "EXISTS, fully merged (ahead 0, behind 668)",
+   "f7ec1162": "EXISTS, fully merged (ahead 0, behind 642)"
+  },
+  "commit_hashes_quoted_by_prior_report": {
+   "209bbc6c": "FAILED: fatal: Not a valid object name",
+   "8fe5f749": "FAILED: fatal: Not a valid object name",
+   "9026f2bc": "FAILED: fatal: Not a valid object name",
+   "92b6db85": "FAILED: fatal: Not a valid object name",
+   "d6c1661a": "FAILED: fatal: Not a valid object name",
+   "eac85348": "FAILED: fatal: Not a valid object name"
+  },
+  "files_named_by_prior_report": {
+   "CUMentalWorldModel": "MISSING on main",
+   "canonical/runtime/same_identity_supervisor.py": "PRESENT",
+   "canonical/swe_kernel/typed_invention_v1.py": "PRESENT",
+   "canonical/swe_kernel/universal_semantic_ir_v1.py": "PRESENT",
+   "canonical/swe_kernel/verified_skill_crystallizer_ir_bridge_v1.py": "PRESENT",
+   "canonical/swe_kernel/witness_inversion_v1.py": "PRESENT",
+   "canonical/swe_kernel/zygote_worker_pool_v1.py": "PRESENT",
+   "effect_oracle_v1.py": "MISSING on main",
+   "epistemic_scan_acquire_compress_v1.py": "MISSING on main",
+   "hold_a_constraint_v1.py": "MISSING on main",
+   "instant_swe_skill_store_v1.py": "MISSING on main",
+   "repo_component_and_cow_engine_v1.py": "MISSING on main"
+  },
+  "split_brain_verdict": "6 of the 7 surviving named branches are ancestors of main (0 commits ahead): their work is already here. The split is not 13 branches; it is one branch (b81b2217, 94 commits, 222 files) plus 6 fabricated ids."
+ },
+ "date": "2026-11-24",
+ "measured": {
+  "ablation_name_parameterization": "removing it keeps witness fidelity and loses every unseen surface (pinned by AblationTest)",
+  "cpu_seconds": 0.0365,
+  "median_hole_share": 0.3846,
+  "model_calls": 0,
+  "negative_families": [
+   {
+    "family": "pinned_literal",
+    "hole_share": 0.25,
+    "verdict": "REFUSED_TRANSFER"
+   },
+   {
+    "family": "unrelated_pair",
+    "hole_share": 0.0,
+    "verdict": "REFUSED_DEGENERATE"
+   },
+   {
+    "family": "no_change",
+    "hole_share": 0.5,
+    "verdict": "REFUSED_DEGENERATE"
+   },
+   {
+    "family": "shape_change",
+    "hole_share": null,
+    "verdict": "REFUSED_SHAPE"
+   }
+  ],
+  "negative_refused": 4,
+  "negative_total": 4,
+  "network_calls": 0,
+  "parameters": 0,
+  "positive_admitted": 3,
+  "positive_families": [
+   {
+    "family": "exclusive_bound",
+    "hole_share": 0.3846,
+    "structured_nodes": 6,
+    "unseen_third_matches": true,
+    "unseen_third_produced": "for k in range(len(rows)):\n    seen += rows[k]",
+    "verdict": "ADMITTED"
+   },
+   {
+    "family": "exclusive_comparison",
+    "hole_share": 0.4444,
+    "structured_nodes": 4,
+    "unseen_third_matches": true,
+    "unseen_third_produced": "if depth <= cap:\n    push(depth)",
+    "verdict": "ADMITTED"
+   },
+   {
+    "family": "peeled_wrapper",
+    "hole_share": 0.0,
+    "structured_nodes": 2,
+    "unseen_third_matches": true,
+    "unseen_third_produced": "return str(blob)",
+    "verdict": "ADMITTED"
+   }
+  ],
+  "positive_total": 3,
+  "unseen_third_surfaces_transferred": 3,
+  "wall_clock_s": 0.0042
+ },
+ "next_measured_step": "rebuild the blind catalogue's learned entries through admit(); re-run the store-vs-empty ablation; the claim to beat is 'identical'",
+ "not_claimed": [
+  "not a benchmark result: the families are hand-written mechanism fixtures, not blind tasks",
+  "no end-to-end repair was run: this module admits rules, it does not fix repositories",
+  "no claim that the store now contributes to repair -- the store is not yet rebuilt on this operator, and until an end-to-end catalogue runs with and without it, store contribution remains measured at zero"
+ ],
+ "operator": {
+  "gates": [
+   "FIDELITY: apply(rule, witness before) == witness after",
+   "TRANSFER: apply(rule, renamed/shifted variant before) == variant after",
+   "NON_DEGENERACY: rhs carries structure outside its holes and is not the lhs"
+  ],
+  "germ_parts": [
+   "anti-unification over AST with consistent identifier holes",
+   "projection refs: rhs reads a subterm of the bound before side",
+   "pinned values: scalar leaves the before side cannot derive",
+   "fail-closed admission: fidelity, transfer, non-degeneracy"
+  ],
+  "module": "canonical/swe_kernel/structured_morphism_abstraction_v1.py",
+  "refusals": [
+   "REFUSED_DEGENERATE",
+   "REFUSED_FIDELITY",
+   "REFUSED_TRANSFER",
+   "REFUSED_SHAPE"
+  ]
+ },
+ "question": "The store contributes nothing to repair. Is that a retrieval problem or an abstraction problem?",
+ "schema": "BRAIN_STRUCTURED_MORPHISM_ABSTRACTION_WAVE45_V1",
+ "self_check": {
+  "checks": 8,
+  "command": "python3 canonical/swe_kernel/structured_morphism_abstraction_v1.py --self-check",
+  "expect_exit": 0,
+  "passed": 8,
+  "schema": "BRAIN_STRUCTURED_MORPHISM_ABSTRACTION_V1_SELF_CHECK",
+  "verdict": "SELF_CHECK_PASS"
+ },
+ "tests": {
+  "command": "python3 -m unittest canonical.tests.test_structured_morphism_abstraction_v1",
+  "count": 16,
+  "expect_exit": 0
+ },
+ "wave": 45,
+ "what_it_answers": {
+  "receipt": "canonical/verification/AUTONOMOUS_CAUSAL_SWE_AND_COMPUTER_USE_RECEIPT_20261124_V2.json",
+  "reconciliation": "0 proposals on its own witness is not a recall failure -- a rule that cannot fire on the snippet it was learned from has no lhs. The operator is the defect.",
+  "recorded_cause": "the learned pattern is a single hole over the whole body (pattern has no T and no F), so its two-sided constraint is 'match this exact body': 0 proposals on its own witness, 0 on a held-out same-family body, 0 on file text",
+  "store_vs_empty": "identical"
+ }
+}
