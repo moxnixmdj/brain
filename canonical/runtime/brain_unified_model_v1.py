@@ -863,6 +863,67 @@ class UnifiedModel:
             "reason": "ANATOMY_NAVIGATION__NOT_ADMISSION",
         }
 
+    def find_any_source(self, query: str, *, top_k: int = 5) -> dict[str, Any]:
+        """Locate source modules across ALL repository trees (`runtime`, `swe_kernel`, `tools`, `capabilities`, `research`, `integrations`)."""
+        terms = tokenize(query)
+        if not terms:
+            raise UnifiedModelError("FIND_SOURCE_QUERY_EMPTY")
+        wanted = set(terms)
+        combined: dict[str, dict[str, Any]] = {}
+        combined.update(self.source_index)
+        combined.update(self.extended_source_index)
+        total_docs = max(1, len(combined))
+        scored: list[tuple[float, str, dict[str, Any]]] = []
+        for path, row in combined.items():
+            counts = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
+            if not counts:
+                continue
+            score = 0.0
+            for term in wanted:
+                tf = int(counts.get(term, 0) or 0)
+                if tf <= 0:
+                    continue
+                df = max(1, self._source_df.get(term, 0) + self._extended_source_df.get(term, 0))
+                score += math.log(1.0 + (total_docs - df + 0.5) / (df + 0.5)) * (1.0 + math.log(tf))
+            if score <= 0.0:
+                continue
+            if path.casefold() in query.casefold():
+                score += 8.0
+            scored.append((score, path, row))
+        scored.sort(key=lambda item: (-item[0], item[1]))
+        rows: list[dict[str, Any]] = []
+        for score, path, row in scored[: max(1, int(top_k))]:
+            rows.append(
+                {
+                    "path": path,
+                    "id": row.get("id"),
+                    "tree": row.get("tree") or "canonical/runtime",
+                    "classification": row.get("classification"),
+                    "sha256": row.get("sha256"),
+                    "summary": row.get("summary") or "",
+                    "symbol_count": int(row.get("symbol_count") or 0),
+                    "matched_terms": sorted(wanted & set(row.get("terms") or ())),
+                    "score": round(float(score), 6),
+                    "capability": False,
+                    "executable": False,
+                }
+            )
+        return {
+            "schema": SOLUTION_SCHEMA,
+            "operation": "FIND_ANY_SOURCE",
+            "model_digest": self.digest,
+            "query": query,
+            "query_terms": terms,
+            "candidates": rows,
+            "best": rows[0] if rows else None,
+            "indexed_modules": len(combined),
+            "reason": (
+                "SOURCE_LOCATED__NOT_EXECUTABLE__NO_RECEIPT_OR_BOUND_ADAPTER"
+                if rows
+                else "NO_INDEXED_SOURCE_MATCHED"
+            ),
+        }
+
     # ---------------------------------------------------------- research index
 
     def find_research(self, query: str, *, top_k: int = 5) -> dict[str, Any]:
