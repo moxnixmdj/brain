@@ -45,6 +45,27 @@ class ColdMountTests(unittest.TestCase):
                     self.assertEqual(result['reason'], 'INVALID_HARBOR_CYCLE_ENVELOPE')
                     self.assertNotIn('actions', result)
 
+    def test_missing_wave_is_allowed_only_for_the_cold_model(self):
+        from canonical.runtime.brain_unified_model_v1 import UnifiedModel, artifact_digest
+
+        self.assertTrue(callable(UnifiedModel.rung3_proposer_jitrl_solve))
+        with tempfile.TemporaryDirectory() as tmp:
+            dest = Path(tmp) / 'producer'
+            stage(dest)
+            # No actual full registry or privileged data enters this process.
+            artifact = json.loads((dest / DEFAULT_ARTIFACT).read_bytes())
+            artifact['model_id'] = 'non-cold-installation'
+            artifact['digest'] = {'value': artifact_digest(artifact)}
+            path = Path(tmp) / 'custom.json'
+            path.write_text(json.dumps(artifact))
+            cmd = [sys.executable, '-I', '-S', '-B', '-c',
+                   'import sys; sys.path.insert(0, sys.argv[1]); '
+                   'from canonical.runtime.brain_unified_model_v1 import open_model; open_model(sys.argv[2])',
+                   str(dest), str(path)]
+            proc = subprocess.run(cmd, cwd=tmp, capture_output=True, text=True, timeout=15)
+            self.assertNotEqual(proc.returncode, 0)
+            self.assertIn('UnifiedModelError: FULL_MODEL_WAVE_PROVIDER_MISSING', proc.stderr)
+
 
 class SmokeAccountingTests(unittest.TestCase):
     def test_verifier_zero_is_not_a_missing_duplicate_or_invalid_trial(self):

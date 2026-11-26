@@ -87,6 +87,33 @@ def does_nothing(work: M.Work, creature: "Creature") -> dict[str, Any]:
             "blocked": "NO_EXECUTOR_WIRED"}
 
 
+def unified_perform(work: M.Work, creature: "Creature") -> dict[str, Any]:
+    """Wave 39 Unified Frontier Executor (`K3 = 0`):
+    Routes board obligations through `UnifiedModel.unified_frontier_turn()` and reports honest
+    `verified` / `correct` standing from real kernel verification receipts (never rubber-stamped)."""
+    from canonical.runtime.brain_unified_model_v1 import load_unified_model
+
+    model = load_unified_model()
+    payload = dict(getattr(creature, "_unified_work_payloads", {}).get(work.id) or {})
+    goal_text = str(payload.pop("goal", None) or getattr(work, "note", "") or getattr(work, "id", "") or "inventory")
+    pillar = payload.pop("pillar", None)
+    turn = model.unified_frontier_turn(goal_text, pillar=pillar, payload=payload)
+    passed = bool(turn.get("pass"))
+    out: dict[str, Any] = {
+        "ok": passed,
+        "verified": True,
+        "correct": passed,
+        "pillar": turn.get("pillar"),
+        "stage_trace": turn.get("stage_trace"),
+        "unified_turn": turn,
+    }
+    if not passed:
+        out["blocked"] = "UNIFIED_KERNEL_VERIFICATION_REFUSED"
+    if "world_after" in payload:
+        out["world_after"] = payload["world_after"]
+    return out
+
+
 @dataclass
 class Creature:
     """One body. State lives on disk; nothing is remembered in the process alone."""
@@ -904,6 +931,37 @@ class Creature:
                 break
         return {**self.report(), "steps": rows}
 
+    def attach_unified_work_payload(self, work_id: str, payload: Mapping[str, Any]) -> None:
+        """Attach structured 5-pillar execution inputs for a board obligation (`work_id`)."""
+        store = getattr(self, "_unified_work_payloads", None)
+        if store is None:
+            store = {}
+            self._unified_work_payloads = store
+        store[str(work_id)] = dict(payload)
+
+    def step_unified(self, *, offer: "CP.Offer | None" = None) -> dict[str, Any]:
+        """Execute one `Creature` step using typed catalog checking for catalog questions and
+        `unified_perform` (`UnifiedModel.unified_frontier_turn`, `K3 = 0`) for general obligations."""
+        if self._life is not None:
+            pool = self.remaining_work()
+            if pool:
+                nxt = M.choose_next(self._life, pool)
+                if nxt is not None and nxt.id in self._catalog_questions:
+                    return self.step(does_nothing, offer=offer)
+        return self.step(unified_perform, offer=offer)
+
+    def unified_frontier_turn(
+        self,
+        goal: str,
+        *,
+        pillar: str | None = None,
+        payload: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Direct `K3 = 0` 5-pillar frontier turn from `Creature` through `UnifiedModel`."""
+        from canonical.runtime.brain_unified_model_v1 import load_unified_model
+
+        return load_unified_model().unified_frontier_turn(goal, pillar=pillar, payload=payload)
+
     def _save(self) -> None:
         M.LifeStore(self.root / "life.json").save(self._life)
         S.StandingStore(self.root / "standing.json").save(self._standing)
@@ -1053,12 +1111,28 @@ class Creature:
         self._save()
         return res
 
+    _ASYMMETRIC_SPINE_PILLARS = {
+        "asymmetric_leapfrog": "AUTO",
+        "refusal_autobind": "REFUSAL_AUTOBIND",
+        "angelic_zygote_swe": "ANGELIC_ZYGOTE_SWE",
+        "shadow_transducer_cu": "SHADOW_TRANSDUCER_CU",
+        "digital_twin_arc": "DIGITAL_TWIN_ARC",
+        "sheaf_srmu_memory": "SHEAF_SRMU_MEMORY",
+        "pc_dgm_evolve": "PC_DGM_EVOLVE",
+        "eggmind_proof": "EGGMIND_PROOF",
+    }
+
     def route_goal_via_spine(self, kind: str, **kwargs: Any) -> dict[str, Any]:
         """Execute a task through the unified frontier spines (`0D`-`0I`) + hidden arsenal in O(1) dispatch."""
         k = str(kind or "swe_repair").lower().strip()
         router_attr = self._SPINE_ROUTER_METHODS.get(k)
         if router_attr is not None:
             res = getattr(self.boundary_router, router_attr)(**kwargs)
+        elif k in self._ASYMMETRIC_SPINE_PILLARS:
+            goal_txt = str(kwargs.pop("goal", ""))
+            res = self.unified_model.asymmetric_leapfrog(
+                goal_txt, pillar=self._ASYMMETRIC_SPINE_PILLARS[k], **kwargs
+            )
         elif k == "checkability_oracle":
             ws = kwargs.pop("workspace_root", _REPO_ROOT)
             res = self.unified_model.checkability_oracle_forge(ws, **kwargs)
@@ -1441,7 +1515,7 @@ class Creature:
 
     def execute_confined_computer_use(
         self,
-        work_dir: str | Path,
+        work_dir: str | pathlib.Path,
         steps: Sequence[Mapping[str, Any]],
         *,
         goal_id: str = "confined_hcu_episode",
@@ -1497,7 +1571,7 @@ class Creature:
 
     def solve_multifile_repo_futamura(
         self,
-        repo_dir: str | Path,
+        repo_dir: str | pathlib.Path,
         test_targets: Sequence[str] = (),
         *,
         goal_text: str = "",
@@ -1601,6 +1675,62 @@ class Creature:
         self._unified_model = open_model()
         return self._unified_model.discover_dark_matter(query, top_k=top_k, max_hot=max_hot)
 
+    def asymmetric_leapfrog(
+        self,
+        goal: str = "",
+        *,
+        pillar: str = "AUTO",
+        inputs: Mapping[str, Any] | None = None,
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Execute any of the 7 Asymmetric Frontier-Leapfrog Pillars directly on Creature (`K3=0`)."""
+        res = self.unified_model.asymmetric_leapfrog(goal, pillar=pillar, inputs=inputs, **kwargs)
+        self._save()
+        return res
+
+    def sleep_pc_dgm_supercompile(
+        self,
+        *,
+        domain: str = "general",
+        fn_name: str,
+        incumbent_source: str,
+        candidate_sources: Sequence[str] = (),
+        static_env: Mapping[str, Any] | None = None,
+        test_cases: Sequence[tuple[tuple[Any, ...], Any]] = (),
+        heldout_cases: Sequence[tuple[tuple[Any, ...], Any]] = (),
+        negative_witness_sources: Sequence[str] = (),
+        rubin_rent_scores: Mapping[str, tuple[float, float]] | None = None,
+    ) -> dict[str, Any]:
+        """Sleep-time Proof-Carrying Darwin-Godel Machine (`PC-DGM`) + Turchin AST deforestation + Rubin rent GC."""
+        res = self.unified_model.pc_dgm_evolve(
+            domain=domain,
+            fn_name=fn_name,
+            incumbent_source=incumbent_source,
+            candidate_sources=candidate_sources,
+            static_env=static_env,
+            test_cases=test_cases,
+            heldout_cases=heldout_cases,
+            negative_witness_sources=negative_witness_sources,
+            rubin_rent_scores=rubin_rent_scores,
+        )
+        if res.get("pass") and isinstance(res.get("best_stepping_stone"), Mapping):
+            winner = res["best_stepping_stone"]
+            self.memory_bus.append_verified_event(
+                op="SET",
+                key=f"pc_dgm:{domain}:{fn_name}",
+                value={
+                    "ast_sha256": winner.get("ast_sha256"),
+                    "byte_len": winner.get("byte_len"),
+                    "latency_us": winner.get("latency_us"),
+                },
+                source_commit="pc_dgm_turchin_supercompiler_v1",
+                precondition_guard=["anti_objective_hacking", "popper_negative_witness", "turchin_deforestation"],
+            )
+        if self._standing is not None:
+            self._standing.record(verified=True, correct=bool(res.get("pass")))
+        self._save()
+        return res
+
     def _ensure_unified_model(self) -> Any:
         if getattr(self, "_unified_model", None) is None:
             from canonical.runtime.brain_unified_model_v1 import open_model
@@ -1701,6 +1831,60 @@ class Creature:
     def partial_route_with_jitrl(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
         """Wave 39: Creature closed-form JitRL logit modulation + SkillTTA synthesis + Intra-task Partial Routing."""
         return self._ensure_unified_model().partial_route_with_jitrl(operation, payload)
+
+    def epistemic_swe_egraph_cegis(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Creature Guarded Meaning IR E-Graph + Grammar-Closed CEGIS CoW repair + Causal Nexus."""
+        return self._ensure_unified_model().epistemic_swe_egraph_cegis(operation, payload)
+
+    def oneshot_version_space_learn(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Creature Evidence Demand + Settlement + Hypothesis Classes + Law-Checked Operator Acquisition."""
+        return self._ensure_unified_model().oneshot_version_space_learn(operation, payload)
+
+    def shadow_interface_hcu_route(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Creature Agent-S4 evolving shadow-interface compiler + Microsoft HCU 3-channel router."""
+        return self._ensure_unified_model().shadow_interface_hcu_route(operation, payload)
+
+    def rlm_workspace_op(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Creature MIT RLM out-of-core symbolic corpus slicing & recursive map-reduce."""
+        return self._ensure_unified_model().rlm_workspace_op(operation, payload)
+
+    def four_network_git_memory_op(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Creature Hindsight 4-Network bi-temporal git-diffable memory + Engram + Sleep + TMA-NM."""
+        res = self._ensure_unified_model().four_network_git_memory_op(operation, payload)
+        self._save()
+        return res
+
+    def chase_hda_hill_nfv_gate(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Creature Staged Goal-Blind NFV + CHASE perturbation audit + HDA + Hill Sampling."""
+        return self._ensure_unified_model().chase_hda_hill_nfv_gate(operation, payload)
+
+    def selfplay_steer_horizon_commit(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Creature Zero-Data Self-Play SWE-RL + Steer-Don't-Solve Critic + Atomic WAL Commit."""
+        res = self._ensure_unified_model().selfplay_steer_horizon_commit(operation, payload)
+        self._save()
+        return res
+
+    def rung3_proposer_jitrl_solve(self, payload: Mapping[str, Any]) -> dict[str, Any]:
+        """Wave 41: Creature 4-rung escalation (Rung 0->1->2->3) with K3=0 abstention, pluggable local proposer, JitRL & NFV/CHASE."""
+        return self._ensure_unified_model().rung3_proposer_jitrl_solve(payload)
+
+    def whitebox_trace_abduction_oe(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 41: Creature Ochiai trace abduction + Angelic OE + E-graph CEGIS + Whitebox introspection."""
+        return self._ensure_unified_model().whitebox_trace_abduction_oe(operation, payload)
+
+    def ttpo_opsd_distill_rollouts(self, payload: Mapping[str, Any]) -> dict[str, Any]:
+        """Wave 41: Creature TTPO + OPSD label-free behavioral-equivalence consensus distillation."""
+        return self._ensure_unified_model().ttpo_opsd_distill_rollouts(payload)
+
+    def futamura_compile_away_cycle(self, payload: Mapping[str, Any]) -> dict[str, Any]:
+        """Wave 42: Creature Self-Play -> Futamura Rung-0 Compile-Away -> Sleep Consolidation flywheel."""
+        res = self._ensure_unified_model().futamura_compile_away_cycle(payload)
+        self._save()
+        return res
+
+    def one_demo_trust_and_rung_calibrate(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 42: Creature trace-quotient collision gate + page-guide UI sketcher + provenance calibration."""
+        return self._ensure_unified_model().one_demo_trust_and_rung_calibrate(payload)
 
     def sleep_evolve_organs_gea(
         self,

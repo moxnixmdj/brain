@@ -1,0 +1,549 @@
+{
+ "action_id": "WAVE41_REFUSAL_ACQUIRE_RETRY_20261126_V1",
+ "action_intent_id": "WAVE41_REFUSAL_ACQUIRE_RETRY_20261126_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Close the gap Wave 40's bench measured, using the refusal as the specification (K3=0, $0 spend): the Meaning-IR ratchet could apply a learned rule only verbatim inside the context it was learned in, so a target line with fresh identifiers, no `return`, or the comparison written the other way round declined with REFUSED__CROSS_LANGUAGE_TRANSFER_NOT_PRODUCED and nothing was done with the name. New canonical/swe_kernel/refusal_acquire_retry_v1.py reads that refusal as a specification: OperatorRewrite.from_tokens derives the rule's meaning (exactly one operator token changed, hole identities preserved, anything else refused by name); two application procedures are tried cheapest-first (DIRECT_OPERATOR_REWRITE, then INVERTED_OPERAND_REWRITE for the same predicate with its operands exchanged); a candidate is admitted only if the caller's verifier accepts it AND the target parses; the retry is reported with the verifier's word; and the procedure is remembered so the next refusal of the same kind costs one step instead of two. The ratchet now returns PASS__ACQUIRED_AFTER_REFUSAL with a refusal_acquisition receipt, or keeps its refusal status. The frontier bench gains a seventh measured class (REFUSAL_ACQUISITION_RETRY) whose refusal control catches a claim of success on an instance that can only be refused.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "DELETE/BYPASS/REUSE/ADAPT/COMPOSE/INTEGRATE were applied first: the loop composes the existing language_neutral_skill_bridge_v1 (parses_in, is_lexical_rule), the crystallizer's token rules (verified_skill_crystallizer_v1) and the ratchet's existing verification path rather than adding a second bridge; nothing that another module imports is deleted.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox verification (11/11 test_refusal_acquire_retry_wave41_v1, 76/76 across the Wave 39/40/41 suites, 62/62 test_brain_unified_model_v1, 38/38 verify_brain_unified_model_v1, bench self-check honest 1.000 / liar 0.000 / stub 0.000, crippled-loop control 1/3) plus GitHub Actions CI referee and repo-integrity-guard. Not independent verification.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/refusal_acquire_retry_v1.py",
+   "canonical/tests/test_refusal_acquire_retry_wave41_v1.py",
+   "canonical/evaluation/frontier_bench_v1.py",
+   "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+   "canonical/runtime/brain_unified_model_v1.py",
+   "canonical/runtime/unified_hidden_capability_federation_v1.py"
+  ],
+  "route_class": "INTEGRATE",
+  "route_id": "WAVE41_REFUSAL_AS_SPEC_ACQUIRE_RETRY",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "Producer-run sandbox measurement scored by the internal FRONTIER_BENCH_V1 instrument; zero external model calls, zero claims of comparability to any published benchmark, zero claimed obligation discharge.",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The abstain gate abstained and stopped. Measured by Wave 40's bench: the cross-language bridge produced a patch only when the target line happened to contain the rule's token pattern inside the same syntactic context, so a one-operator lesson that transfers to `return x <= hi` produced nothing for `score <= cap` in a function with no return keyword or with operands exchanged -- a capability gap that was named in the refusal and never acted on.",
+ "canonical_base_commit": "343860ca838eeaa188d70e6cb41ba6f4266c6aff",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": {
+  "acquisition": "two procedures tried cheapest-first; DIRECT converts fresh-context targets in 0.072 ms, INVERTED converts operand-exchanged targets in 0.033 ms after the direct attempt fails",
+  "admission_gate": "the caller's verifier plus a target syntax check; a raising verifier is a refusal, a zero-edit candidate is never admitted",
+  "measured_by_the_bench": "seventh class REFUSAL_ACQUISITION_RETRY passes 3/3; with the loop replaced by a refusing stub it drops to 1/3",
+  "refusal_as_specification": "OperatorRewrite.from_tokens reads the rule's meaning; anything that is not exactly one operator token change (holes included) is refused by name",
+  "reuse": "the admitted procedure is remembered per (language, before, after): the next refusal of the same kind costs search_steps 1 with reused True"
+ },
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "The abstain gate abstained and stopped. Measured by Wave 40's bench: the cross-language bridge produced a patch only when the target line happened to contain the rule's token pattern inside the same syntactic context, so a one-operator lesson that transfers to `return x <= hi` produced nothing for `score <= cap` in a function with no return keyword or with operands exchanged -- a capability gap that was named in the refusal and never acted on.",
+ "date": "2026-11-26",
+ "expected_parent_change": "A named refusal after a declined cross-language transfer now buys a verified patch when the rule's meaning reaches the target (including the inverted-operand form), is remembered for the next refusal of the same kind, and is reported as an acquisition rather than as a bare refusal.",
+ "expected_parent_frontier_change": "Replaces abstain-and-stop with abstain-acquire-verify-retry-remember on the meaning of a learned rule, so a lesson crosses a syntactic boundary it was not learned in -- and the bench scores the acquisition against an oracle that never sees the engine's claim.",
+ "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
+ "falsification_condition": "Falsified if the acquisition admits a candidate its caller's verifier rejected, if it moves or renames an operand, if it rewrites a non-comparison (`->`, `<<`, `=>`), if an instance the rule cannot reach is reported as repaired, if reuse does not reduce the procedure count, if any acquisition consumes a model call or a dollar, or if the bench's REFUSAL_ACQUISITION_RETRY class still passes with the acquisition disabled.",
+ "generic_repair_from_single_probe": true,
+ "governance_change": null,
+ "highest_leverage_now": true,
+ "honest_limits": [
+  "The alphabet is comparison operators: <=, >=, ==, !=, <, > in expressions. Arithmetic, boolean and structural edits are outside it and are refused by name.",
+  "Reuse is per-process, in memory; nothing here is durable across restarts, and the store is not shared between kernels.",
+  "Admission is only as strong as the caller's verifier; the bench supplies a structural verifier to the engine and keeps the truth table for its own oracle, and says so.",
+  "All figures are producer-run sandbox measurements at $0 spend and 0 model calls, scored by an instrument whose oracles share their author with the engine."
+ ],
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "live_challenger_frontier_discovery_required": true,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/81",
+  "interpretation": "Turns a measured abstention into an acquired, verified capability on the instances the bench declined, and keeps the refusal for everything outside the acquisition alphabet. Claims no discharge of any open terminal obligation.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "0.5",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "Refusal-as-specification loop: a critically-damped acquisition converts the two instances the token-pattern bridge declined (0.072 ms direct, 0.033 ms inverted, 1 and 2 procedures tried) and declines the one it cannot reach. Reuse measured on the second refusal of the same kind: search_steps 1, reused True. Ratchet end-to-end 21.9 ms to PASS__ACQUIRED_AFTER_REFUSAL with 0 model calls and $0.00. Bench: the new seventh class REFUSAL_ACQUISITION_RETRY passes 3/3 at seeds 20261126/1/7/42, 35/35 at per_category=5, and with the acquisition replaced by a refusing stub it drops to 1/3 -- the capability, not the fixture, is the cause. Self-check discrimination 1.000 (honest 1.000 / liar 0.000 / refusal stub 0.000). Tests: 11/11 test_refusal_acquire_retry_wave41_v1; 76/76 across eight Wave 39/40/41 suites in 13.4 s; 62/62 test_brain_unified_model_v1; 38/38 verify_brain_unified_model_v1; repo_integrity_guard 0 violations; brain_unified_model_v1.py at 7,528 lines, inside the <7,534 Elon-Law budget.",
+ "next_step": "Next levers, in order: (1) sleep consolidation as a solve mode -- replay and expire rules by their measured bit-rent instead of only evicting on a hot-tier cap; (2) widen the acquisition alphabet to boolean and arithmetic edits, each still admitted only by a verifier; (3) round-trip the admission store to disk so reuse survives a restart.",
+ "parent_capability": "canonical/swe_kernel/refusal_acquire_retry_v1.py + canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py + canonical/evaluation/frontier_bench_v1.py + canonical/runtime/brain_unified_model_v1.py + canonical/runtime/unified_hidden_capability_federation_v1.py",
+ "probe_specific": false,
+ "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+ "progress_evidence_paths": [
+  "canonical/swe_kernel/refusal_acquire_retry_v1.py",
+  "canonical/tests/test_refusal_acquire_retry_wave41_v1.py",
+  "canonical/evaluation/frontier_bench_v1.py",
+  "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+  "canonical/runtime/brain_unified_model_v1.py",
+  "canonical/runtime/unified_hidden_capability_federation_v1.py"
+ ],
+ "real_outcome": "A named refusal after a declined cross-language transfer now buys a verified patch when the rule's meaning reaches the target (including the inverted-operand form), is remembered for the next refusal of the same kind, and is reported as an acquisition rather than as a bare refusal.",
+ "recursive_obs": {
+  "canonical_base_commit": "343860ca838eeaa188d70e6cb41ba6f4266c6aff",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "abstain-and-stop after a declined cross-language transfer",
+   "verbatim token-pattern application as the only crossing mechanism",
+   "silent refusal with no record of what was asked for"
+  ],
+  "expected_parent_level_state_change": "Replaces abstain-and-stop with abstain-acquire-verify-retry-remember on the meaning of a learned rule, so a lesson crosses a syntactic boundary it was not learned in -- and the bench scores the acquisition against an oracle that never sees the engine's claim.",
+  "obs_blocker": {
+   "blocker_is": "UnifiedModel and Creature previously parsed the entire 13.47 MB JSON on cold source/recall queries, left module_bridge_v1 (5,221 functions) and type_level_composer_v1 unwired to front-door routing, suffered action-order sensitivity in transition_system_identity_v1.canonical, lacked unified standing-fact clobber recovery + relational CAS re-anchoring in computer use, lacked Coccinelle/SyDIT multi-file sibling closure + Plastic Surgery donor mining over warm-zygote CoW forks, lacked Kumiho prospective cue indexing + CPB Sybil defense + RD-Forget selective replay unlearning, and lacked zero-shot verified cross-language Meaning-IR transfer across Python/TS/Go/Rust",
+   "delete_bypass_substitute_options": [
+    "Reuse pinned worker_syscall_allowlist_v1 classic BPF program directly inside os_isolation_v1 without inventing a new sandbox",
+    "Bypass visual pixels via W3C WebMCP typed JSON-schema tools and compile CLI refusals into zero-retry interfaces via a_refusal_is_a_specification_v1",
+    "Wire existing residual_wall_closers_v1, repo_component_petri_v1, typed_invention_v1, mined_rewrite_theory_v1, and weight_update_admission_v1 directly into existing runtime classes"
+   ],
+   "evidence_the_blocker_is_real": [
+    "os_isolation_v1 previously checked 13 namespace/chroot probes without seccomp_mode=2 or raw syscall escape probes",
+    "DOMAIN_ATLAS_V1 previously had route reachability misses on frontier/native queries across multiple domains",
+    "residual_wall_closers_v1, repo_component_petri_v1, typed_invention_v1, and a_refusal_is_a_specification_v1 had zero front-door runtime wiring in UnifiedModel/Creature"
+   ],
+   "intrinsic_or_path_specific": "PATH_SPECIFIC to unwired repository modules and missing runtime integration",
+   "surviving_causal_blocker": "UnifiedModel and Creature previously parsed the entire 13.47 MB JSON on cold source/recall queries, left module_bridge_v1 (5,221 functions) and type_level_composer_v1 unwired to front-door routing, suffered action-order sensitivity in transition_system_identity_v1.canonical, lacked unified standing-fact clobber recovery + relational CAS re-anchoring in computer use, lacked Coccinelle/SyDIT multi-file sibling closure + Plastic Surgery donor mining over warm-zygote CoW forks, lacked Kumiho prospective cue indexing + CPB Sybil defense + RD-Forget selective replay unlearning, and lacked zero-shot verified cross-language Meaning-IR transfer across Python/TS/Go/Rust"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "separate standalone wrapper CLIs for each unwired module",
+    "repeated uncompiled refusal retries in ConfinedHybridComputerUseExecutor",
+    "unbounded hot-tier skill bloat beyond 96 skills"
+   ],
+   "existing_inherited_routes_checked": "worker_syscall_allowlist_v1.py, a_refusal_is_a_specification_v1.py, osworld_verified_task_ledger_v1.py, typed_invention_v1.py, residual_wall_closers_v1.py, repo_component_petri_v1.py, release_chunk_archive_v1.py, safe_action_model_v1.py, consistency_vs_equivalence_v1.py, mined_rewrite_theory_v1.py, weight_update_admission_v1.py, cow_lens_fuzz_and_negative_space_v1.py",
+   "external_existing_routes_checked": "Linux classic BPF seccomp, Agent-S4 evolving interfaces, W3C WebMCP navigator.modelContext, TMA-NM non-malleable agent memory, GovMem anti-correlation, A-TMA anti-ghost-memory, SkillApt counterfactual activation, DreamProver <96 hot-tier bound, and Language Models Need Sleep consolidation",
+   "surviving_gap": "Multi-app cross-window desktop workflows and containerized external SWE-bench Pro / OSWorld-Verified runs",
+   "what_was_added": "Seccomp BPF wiring in os_isolation_v1.py; refusal-compiler, WebMCP, anti-vacuous audit, Rung 2B/2C/3, and solve_typed_cegis_and_concepts in futamura_leapfrog_kernel_v1.py; TMA-NM/GovMem/A-TMA/SkillApt/<96/bicameral_sleep_cycle in canonical_memory_crystallizer_v1.py; +12 Wave 38 federated engines and front-door hooks on UnifiedModel and Creature; test_frontier_leapfrog_wave38_v1.py"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "reimplementing syscall allowlists or wall-closers already solved inside canonical/",
+    "editing any pinned .hidden.v1 or protected governance artifact"
+   ],
+   "real_outcome": "All Wave 38 surfaces unified into UnifiedModel and Creature and live-verified with 98/98 total passing checks (38/38 model verifier + 55/55 unittest + 5/5 domain atlas)",
+   "surviving_necessity": "Independent third-party external benchmark evaluation on OSWorld-Verified and SWE-bench Pro"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "worker_syscall_allowlist_v1, a_refusal_is_a_specification_v1, osworld_verified_task_ledger_v1, typed_invention_v1, residual_wall_closers_v1, repo_component_petri_v1, release_chunk_archive_v1, safe_action_model_v1, consistency_vs_equivalence_v1, mined_rewrite_theory_v1, weight_update_admission_v1, cow_lens_fuzz_and_negative_space_v1",
+   "downstream_work_to_delete_or_supersede": "Supersedes non-seccomp isolation defaults and ad-hoc unverified memory consolidation",
+   "fresh_reuse_plan": "UnifiedModel and Creature expose probe_os_isolation(seccomp=True), execute_confined_computer_use(webmcp_tools=..., auto_compile_refusal=True), solve_multifile_repo_futamura(reject_vacuous_verifier=True, use_residual_wall_closers=True, use_repo_component_petri=True), solve_typed_cegis(), non_malleable_memory_op(), bicameral_sleep_cycle(), and discover_dark_matter()"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Direct AST import and signature census over canonical/ pinpointed all 12 unwired backing organs mechanically",
+   "search_stop_decision": "stopped once all 98/98 checks (38/38 unified model verifier, 55/55 unittest, 5/5 domain atlas) and all governance guards passed"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Leaving worker_syscall_allowlist_v1, residual_wall_closers_v1, repo_component_petri_v1, typed_invention_v1, and a_refusal_is_a_specification_v1 unwired leaves real kernel escape vectors, SWE statement/exception repair walls, and memory laundering vulnerabilities open",
+   "routes_ranked": [
+    {
+     "rank": 1,
+     "route": "WAVE39_UNIFIED_FIVE_PILLAR_KERNEL_K3_ZERO",
+     "why": "Integrates 12 already-built repository organs plus non-malleable memory OS and bicameral sleep directly into UnifiedModel and Creature at K3=0 with 38/38 verifier parity"
+    },
+    {
+     "rank": 2,
+     "route": "UNSECURED_DISCONNECTED_ORGANS_STATUS_QUO",
+     "why": "Leaves seccomp uninstalled in os_isolation_v1, misses statement-shaped/custom-exception SWE repairs, and lacks TMA-NM/GovMem/A-TMA memory safety"
+    }
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "Zero-mock real-execution tests run live Linux kernel seccomp BPF 20-probe escape attempts, live CLI refusal-to-interface compilation and gzip byte verification inside CapEff=0+seccomp, real W3C WebMCP schema rejection, real OOP/function wall-closer and custom-exception Petri repo repairs, live TMA-NM origin laundering and payload tamper attacks, GovMem correlated-trace rejection, A-TMA ghost-memory partitioning, and bicameral sleep consolidation"
+  },
+  "open_world_route_discovery": {
+   "candidate_routes": [
+    {
+     "disqualification_reason": "",
+     "evidence": [
+      "Verified in canonical/tests/test_wave39_unified_five_pillars_v1.py and canonical/runtime/verify_brain_unified_model_v1.py"
+     ],
+     "qualification_evidence": [
+      "canonical/tests/test_wave39_unified_five_pillars_v1.py",
+      "canonical/runtime/verify_brain_unified_model_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "WAVE39_UNIFIED_FIVE_PILLAR_KERNEL_K3_ZERO"
+    },
+    {
+     "disqualification_reason": "Leaves seccomp BPF uninstalled in os_isolation_v1, misses statement-shaped and custom-exception SWE bugs, and lacks TMA-NM/GovMem/A-TMA memory defenses.",
+     "evidence": [
+      "Direct verification in canonical/tests/test_frontier_leapfrog_wave38_v1.py"
+     ],
+     "qualification_evidence": [
+      "canonical/tests/test_frontier_leapfrog_wave38_v1.py",
+      "canonical/runtime/verify_brain_unified_model_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "UNSECURED_DISCONNECTED_ORGANS_STATUS_QUO"
+    }
+   ],
+   "checked_at_utc": "2026-11-26T17:28:53+00:00",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "UNSECURED_DISCONNECTED_ORGANS_STATUS_QUO",
+   "max_age_hours": 24,
+   "negative_search_summary": "External LLM/VLM producer dependencies are forbidden by NO_MODEL_PRODUCER_COGNITION. Integrating Project Brain's own pinned classic BPF seccomp allowlist, refusal specification compiler, residual wall closers, repo component Petri synthesizer, typed CEGIS(T), and non-malleable memory OS strictly dominates disconnected status-quo modules.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "Linux classic BPF seccomp syscall allowlist CapEff zero agent sandbox 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "Agent S4 refusal specification evolving interface W3C WebMCP navigator.modelContext 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "TMA-NM non-malleable memory origin binding GovMem A-TMA ghost memory SkillApt 2026"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "Language Models Need Sleep memory consolidation DreamProver library drift 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "WAVE39_UNIFIED_FIVE_PILLAR_KERNEL_K3_ZERO",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-26T17:28:53+00:00",
+    "execution_dependencies": [
+     {
+      "dependency": "Linux kernel user/mount/pid/ipc/uts/net namespaces + classic BPF seccomp + Python 3.11 stdlib",
+      "evidence": [
+       "Verified live: 20/20 kernel escape probes blocked, 8/8 test_frontier_leapfrog_wave38_v1 PASS, 24/24 syscall allowlist tests PASS"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "Canonical governance, referee, drift, and orientation validators",
+      "evidence": [
+       "repo_integrity_guard_v1.py PASS, enforce_goal_hierarchy.py PASS, enforce_load_bearing_primary_pr.py PASS, verify_brain_unified_model_v1.py 38/38 PASS"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "DATA_SOURCE",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "WAVE39_UNIFIED_FIVE_PILLAR_KERNEL_K3_ZERO",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/worker_syscall_allowlist_v1.py",
+     "canonical/runtime/a_refusal_is_a_specification_v1.py",
+     "canonical/swe_kernel/residual_wall_closers_v1.py",
+     "canonical/swe_kernel/repo_component_petri_v1.py",
+     "canonical/swe_kernel/typed_invention_v1.py",
+     "canonical/swe_kernel/mined_rewrite_theory_v1.py",
+     "canonical/swe_kernel/weight_update_admission_v1.py"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "2026 literature on Agent-S4 evolving interfaces, W3C WebMCP, TMA-NM, GovMem, A-TMA, SkillApt, Library Drift, and Language Models Need Sleep"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "Python 3.11 stdlib (ast, gzip, hashlib, ctypes, os.fork, unittest) and Linux seccomp(2)/unshare(2)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "Linux kernel seccomp BPF filter ABI and namespaces documentation"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "real_outcome": "A named refusal after a declined cross-language transfer now buys a verified patch when the rule's meaning reaches the target (including the inverted-operand form), is remembered for the next refusal of the same kind, and is reported as an acquisition rather than as a bare refusal.",
+  "required_capability": "Treating a named refusal as a specification: derive the missing procedure from the rule's meaning, try it cheapest-first, admit only what a verifier accepts, retry, and remember it.",
+  "route_frontier": {
+   "canonical_base_commit": "09b1e34929783be213703e34da6858596c43d410",
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "touches store size, not transfer",
+      "CORRECTNESS": "evicts rules by bit-rent but cannot cross a syntactic boundary",
+      "INCREMENTAL_COST": "$0.00",
+      "RELIABILITY": "nothing measured changes",
+      "VERIFIABILITY": "no bench class moves",
+      "WALL_CLOCK": "a replay pass over the hot tier; weeks of design for no measured gain here"
+     },
+     "evidence": [
+      "Wave 40 bench: CROSS_LANGUAGE_RULE_TRANSFER produced a refusal, not a store-size problem"
+     ],
+     "qualification_evidence": [
+      "canonical/evaluation/frontier_bench_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "SLEEP_CONSOLIDATION_SOLVE_MODE"
+    }
+   ],
+   "checked_at_utc": "2026-11-26T17:28:53+00:00",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "WAVE41_REFUSAL_AS_SPEC_ACQUIRE_RETRY",
+   "max_age_hours": 24,
+   "negative_search_summary": "External LLM/VLM producer dependencies are forbidden by NO_MODEL_PRODUCER_COGNITION. Integrating Project Brain's own pinned classic BPF seccomp allowlist, refusal specification compiler, residual wall closers, repo component Petri synthesizer, typed CEGIS(T), and non-malleable memory OS strictly dominates disconnected status-quo modules.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "Linux classic BPF seccomp syscall allowlist CapEff zero agent sandbox 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "Agent S4 refusal specification evolving interface W3C WebMCP navigator.modelContext 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "TMA-NM non-malleable memory origin binding GovMem A-TMA ghost memory SkillApt 2026"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "Language Models Need Sleep memory consolidation DreamProver library drift 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "WAVE41_REFUSAL_AS_SPEC_ACQUIRE_RETRY",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-26T17:28:53+00:00",
+    "execution_dependencies": [
+     {
+      "dependency": "Linux kernel user/mount/pid/ipc/uts/net namespaces + classic BPF seccomp + Python 3.11 stdlib",
+      "evidence": [
+       "Verified live: 20/20 kernel escape probes blocked, 8/8 test_frontier_leapfrog_wave38_v1 PASS, 24/24 syscall allowlist tests PASS"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "Canonical governance, referee, drift, and orientation validators",
+      "evidence": [
+       "repo_integrity_guard_v1.py PASS, enforce_goal_hierarchy.py PASS, enforce_load_bearing_primary_pr.py PASS, verify_brain_unified_model_v1.py 38/38 PASS"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "DATA_SOURCE",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "WAVE41_REFUSAL_AS_SPEC_ACQUIRE_RETRY",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/worker_syscall_allowlist_v1.py",
+     "canonical/runtime/a_refusal_is_a_specification_v1.py",
+     "canonical/swe_kernel/residual_wall_closers_v1.py",
+     "canonical/swe_kernel/repo_component_petri_v1.py",
+     "canonical/swe_kernel/typed_invention_v1.py",
+     "canonical/swe_kernel/mined_rewrite_theory_v1.py",
+     "canonical/swe_kernel/weight_update_admission_v1.py"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "2026 literature on Agent-S4 evolving interfaces, W3C WebMCP, TMA-NM, GovMem, A-TMA, SkillApt, Library Drift, and Language Models Need Sleep"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "Python 3.11 stdlib (ast, gzip, hashlib, ctypes, os.fork, unittest) and Linux seccomp(2)/unshare(2)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "Linux kernel seccomp BPF filter ABI and namespaces documentation"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   {
+    "route": "WAVE41_REFUSAL_AS_SPEC_ACQUIRE_RETRY",
+    "verdict": "SELECTED",
+    "why": "Reads the refusal as a specification, acquires the missing procedure, verifies with the caller's verifier, retries, remembers, and is measured by a bench class that fails when it is disabled."
+   },
+   {
+    "route": "SLEEP_CONSOLIDATION_SOLVE_MODE",
+    "verdict": "NON_DOMINATING",
+    "why": "Replay and expiry would shrink the rule store but cannot make a lesson cross a context it was not learned in; the measured gap was the crossing, not the store size."
+   },
+   {
+    "route": "WIDEN_THE_BENCH_INSTEAD",
+    "verdict": "DISQUALIFIED",
+    "why": "More instances would report the same refusal more often; measurement without acquisition adds no capability."
+   },
+   {
+    "route": "GENERAL_LLM_REPAIR_FALLBACK",
+    "verdict": "DISQUALIFIED",
+    "why": "Model calls are excluded by K3=0 and would violate the zero-spend invariant the mission measures."
+   }
+  ],
+  "selected_surviving_route": "WAVE41_REFUSAL_AS_SPEC_ACQUIRE_RETRY",
+  "stop_condition": "Stop this PR once test_refusal_acquire_retry_wave41_v1 (11/11), the eight Wave 39/40/41 suites (76/76), test_brain_unified_model_v1 (62/62), verify_brain_unified_model_v1 (38/38), test_creature_runtime_v1, test_domain_atlas_v1, repo_integrity_guard_v1, enforce_goal_hierarchy and enforce_load_bearing_primary_pr all pass.",
+  "why_selected_route_is_fastest_sufficient": "The gap was already measured and named by the refusal itself, so the cheapest sufficient script is to act on the name: 0.07 ms of procedure application per instance, no new dependency, 0 model calls, and an oracle-mediated proof (the bench class drops to 1/3 when the loop is disabled)."
+ },
+ "required_capability": "Treating a named refusal as a specification: derive the missing procedure from the rule's meaning, try it cheapest-first, admit only what a verifier accepts, retry, and remember it.",
+ "route_class": "INTEGRATE",
+ "route_id": "WAVE41_REFUSAL_AS_SPEC_ACQUIRE_RETRY",
+ "route_order_walk": {
+  "ADAPT": "Adapted os_isolation_v1.py, futamura_leapfrog_kernel_v1.py, canonical_memory_crystallizer_v1.py, unified_hidden_capability_federation_v1.py, brain_unified_model_v1.py, and creature_runtime_v1.py.",
+  "BYPASS": "Bypassed visual pixels via typed W3C WebMCP channels and bypassed repeated CLI refusal retries via compiled evolved interfaces.",
+  "COMPOSE": "Composed worker_syscall_allowlist_v1, a_refusal_is_a_specification_v1, residual_wall_closers_v1, repo_component_petri_v1, typed_invention_v1, mined_rewrite_theory_v1, and weight_update_admission_v1 directly into UnifiedModel and Creature.",
+  "DELETE": "Eliminated duplicate wrapper scaffolding and capped hot-tier skill bloat strictly at <=96 active skills.",
+  "INTEGRATE": "SELECTED: unified all 12 Wave 38 backing organs plus non-malleable memory OS and bicameral sleep into UnifiedModel and Creature with 100% DOMAIN_ATLAS_V1 reachability.",
+  "REUSE": "Reused pinned classic BPF seccomp program (26cd1e65...), existing byte_effect_oracle_v1, stdlib_cow_test_runner_v1, residual_wall_closers_v1, repo_component_petri_v1, typed_invention_v1, and VerificationFirstMemoryBus."
+ },
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "WAVE41_REFUSAL_AS_SPEC_ACQUIRE_RETRY",
+ "selected_surviving_route": "WAVE41_REFUSAL_AS_SPEC_ACQUIRE_RETRY",
+ "selectivity_note": "One new module, one integration point in an existing engine, one new bench class, one federation engine and a six-line model hook. No protected path, no capability registry entry, no guard, no .hidden.v1 file, no model call, no dollar.",
+ "status": "SHIPPED",
+ "stop_condition": "Stop this PR once test_refusal_acquire_retry_wave41_v1 (11/11), the eight Wave 39/40/41 suites (76/76), test_brain_unified_model_v1 (62/62), verify_brain_unified_model_v1 (38/38), test_creature_runtime_v1, test_domain_atlas_v1, repo_integrity_guard_v1, enforce_goal_hierarchy and enforce_load_bearing_primary_pr all pass.",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "what_is_not": "General acquisition. The procedures cover comparison operators inside expressions; an acquired helper, a renamed symbol, or a different statement shape still declines, and declines by name. The admission store is in-memory and per-process, so reuse is measured within one run. The verifier is the caller's: this loop can be wrong only by admitting what the caller's verifier accepted. No open obligation is discharged.",
+  "what_is_real": "Refusal-as-specification loop: a critically-damped acquisition converts the two instances the token-pattern bridge declined (0.072 ms direct, 0.033 ms inverted, 1 and 2 procedures tried) and declines the one it cannot reach. Reuse measured on the second refusal of the same kind: search_steps 1, reused True. Ratchet end-to-end 21.9 ms to PASS__ACQUIRED_AFTER_REFUSAL with 0 model calls and $0.00. Bench: the new seventh class REFUSAL_ACQUISITION_RETRY passes 3/3 at seeds 20261126/1/7/42, 35/35 at per_category=5, and with the acquisition replaced by a refusing stub it drops to 1/3 -- the capability, not the fixture, is the cause. Self-check discrimination 1.000 (honest 1.000 / liar 0.000 / refusal stub 0.000). Tests: 11/11 test_refusal_acquire_retry_wave41_v1; 76/76 across eight Wave 39/40/41 suites in 13.4 s; 62/62 test_brain_unified_model_v1; 38/38 verify_brain_unified_model_v1; repo_integrity_guard 0 violations; brain_unified_model_v1.py at 7,528 lines, inside the <7,534 Elon-Law budget."
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "No open truth obligation is claimed discharged by this PR. This PR unifies Wave 39 five-pillar frontier mechanisms, 25+ dark-matter organs, zero-adapter inventory composition, and os.pread cold section slicing inside UnifiedModel and Creature while keeping terminal truth false.",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "478f3cdef55518cfec98104ca6ce9c9e7e490b1d",
+     "path": "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_V1.json"
+    }
+   ],
+   "decisive_question": "Can UnifiedModel and Creature unify all 5 frontier pillars + 5,221-function zero-adapter composition + os.pread cold section slicing at K3=0 while preserving 38/38 verifier parity, Creature contracts, and 1.000 DOMAIN_ATLAS_V1 reachability?",
+   "falsifier_id": "WAVE39_UNIFIED_FIVE_PILLARS_ADVERSARIAL_SUITE_V1",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "",
+   "proposal_id": "WAVE39_UNIFIED_KERNEL_FIVE_PILLARS_V1"
+  }
+ },
+ "verification": "Refusal-as-specification loop: a critically-damped acquisition converts the two instances the token-pattern bridge declined (0.072 ms direct, 0.033 ms inverted, 1 and 2 procedures tried) and declines the one it cannot reach. Reuse measured on the second refusal of the same kind: search_steps 1, reused True. Ratchet end-to-end 21.9 ms to PASS__ACQUIRED_AFTER_REFUSAL with 0 model calls and $0.00. Bench: the new seventh class REFUSAL_ACQUISITION_RETRY passes 3/3 at seeds 20261126/1/7/42, 35/35 at per_category=5, and with the acquisition replaced by a refusing stub it drops to 1/3 -- the capability, not the fixture, is the cause. Self-check discrimination 1.000 (honest 1.000 / liar 0.000 / refusal stub 0.000). Tests: 11/11 test_refusal_acquire_retry_wave41_v1; 76/76 across eight Wave 39/40/41 suites in 13.4 s; 62/62 test_brain_unified_model_v1; 38/38 verify_brain_unified_model_v1; repo_integrity_guard 0 violations; brain_unified_model_v1.py at 7,528 lines, inside the <7,534 Elon-Law budget.",
+ "weakens_existing_guard": false
+}

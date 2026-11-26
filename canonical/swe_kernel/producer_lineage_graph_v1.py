@@ -516,3 +516,62 @@ __all__ = [
     "ProducerEvent", "ReturnLineageTracer", "build_lineage_graph",
     "build_lineage_graph_from_sources", "trace_and_explain", "explain_assertion",
 ]
+
+
+def self_check() -> dict[str, Any]:
+    """Two files, one returned value, one assertion downstream -- and one decoy.
+
+    The module's claim is that the *producer* can be named from the consumer's failure. The decoy
+    below recomputes the same expression inline: the terms are identical, the causal edge is not,
+    and a graph that reported an edge there would be pointing at a function that never ran for that
+    value. That is the whole difference between lineage and pattern matching.
+    """
+    import json as _json
+
+    failures: list[str] = []
+
+    def check(label: str, ok: bool) -> None:
+        if not ok:
+            failures.append(label)
+
+    linked = {
+        "a.py": "def produce(x):\n    return x * 2 + 1\n",
+        "b.py": "from a import produce\n\ndef consume(x):\n    v = produce(x)\n"
+                "    assert v > 10\n    return v\n",
+    }
+    graph = build_lineage_graph_from_sources(linked)
+    cross_file = [
+        edge for edge in graph.edges
+        if edge.kind == "returns" and edge.src.split("::")[0] != edge.dst.split("::")[0]
+    ]
+    check("cross-file return edge is recorded", len(cross_file) == 1)
+    check("the edge starts at the producer's return",
+          bool(cross_file) and cross_file[0].src.startswith("a.py::produce::"))
+    check("the edge ends at the consumer's binding",
+          bool(cross_file) and cross_file[0].dst.startswith("b.py::consume::v"))
+    check("both endpoints exist as nodes",
+          bool(cross_file) and cross_file[0].src in graph.nodes
+          and cross_file[0].dst in graph.nodes)
+    check("the caller->callee edge is recorded",
+          any(edge.kind == "calls" and edge.detail == "produce" for edge in graph.edges))
+
+    decoy = {"b.py": "def consume(x):\n    v = x * 2 + 1\n    assert v > 10\n    return v\n"}
+    decoy_graph = build_lineage_graph_from_sources(decoy)
+    check("negative control: an inline copy of the same expression earns no edge",
+          decoy_graph.edges == [])
+    check("negative control: the decoy still parses into nodes",
+          len(decoy_graph.nodes) >= 2)
+
+    payload = _json.loads(_json.dumps(graph.to_dict()))
+    check("to_dict is JSON-serialisable and reports the return edge",
+          "returns" in payload.get("edge_kinds", [])
+          and payload.get("edges") == len(graph.edges))
+
+    total = 8
+    return {
+        "schema": "BRAIN_PRODUCER_LINEAGE_GRAPH_V1_SELF_CHECK",
+        "checks": total,
+        "passed": total - len(failures),
+        "failures": failures,
+        "verdict": "SELF_CHECK_PASS" if not failures else "SELF_CHECK_FAIL",
+    }

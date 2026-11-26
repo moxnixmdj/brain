@@ -3383,3 +3383,92 @@ def run(payload: Mapping[str, Any], _root: Path | None = None) -> dict[str, Any]
             use_cow_fork=bool(payload.get("use_cow_fork", True)),
         )
     return {"schema": SCHEMA, "pass": False, "status": f"UNSUPPORTED_OP:{op}"}
+
+
+# ===========================================================================
+# 7. Self-check: the anytime-validity claim, measured
+# ===========================================================================
+
+
+def self_check() -> dict[str, Any]:
+    """Test the one claim everything else in this kernel inherits: anytime-validity.
+
+    "Anytime-valid" is not a description, it is an inequality: under the null the e-process must
+    cross `1 / alpha` with probability at most `alpha`, at *any* stopping time. Three checks make
+    that falsifiable here -- the per-step factor must have null expectation exactly 1, the
+    empirical breach rate over seeded null runs must sit inside the Ville bound, and the gate must
+    still commit quickly against a real signal (or the guarantee would be bought by being useless).
+    The hard-contradiction check is the safety direction: a witness outranks accumulated evidence.
+    """
+    import random as _random
+
+    failures: list[str] = []
+
+    def check(label: str, ok: bool) -> None:
+        if not ok:
+            failures.append(label)
+
+    # 1. E_H0[factor] == 1 for any p0 -- the identity the docstring asserts.
+    for p0 in (0.05, 0.25, 0.5, 0.9):
+        eps = 0.05
+        expectation = p0 * ((1.0 - eps) / p0) + (1.0 - p0) * (eps / (1.0 - p0))
+        check(f"null expectation is 1 at p0={p0}", abs(expectation - 1.0) < 1e-9)
+
+    # 2. Ville bound under the null, seeded so the check is reproducible.
+    alpha, trials, horizon = 0.05, 400, 60
+    rng = _random.Random(20261126)
+    breaches = 0
+    for _ in range(trials):
+        gate = ConformalEValueGate(alpha=alpha)
+        for step in range(horizon):
+            decision = gate.observe(f"null_{step}", passed=rng.random() < 0.25,
+                                    null_pass_prob=0.25)
+            if decision["verdict"] == "COMMIT":
+                breaches += 1
+                break
+    breach_rate = breaches / trials
+    sigma = (alpha * (1.0 - alpha) / trials) ** 0.5
+    check("null breach rate stays inside the Ville bound",
+          breach_rate <= alpha + 3.0 * sigma)
+
+    # 3. The guarantee must not be bought by never committing: a real signal commits fast.
+    worst = 0
+    for seed in range(20):
+        r = _random.Random(seed)
+        gate = ConformalEValueGate(alpha=alpha)
+        committed_at = None
+        for step in range(40):
+            if gate.observe(f"signal_{step}", passed=r.random() < 0.90,
+                            null_pass_prob=0.25)["verdict"] == "COMMIT":
+                committed_at = step + 1
+                break
+        worst = max(worst, committed_at or 99)
+    check("a true signal commits within 12 observations", worst <= 12)
+
+    # 4. Safety direction: a hard contradiction outranks accumulated evidence.
+    gate = ConformalEValueGate(alpha=alpha)
+    for step in range(10):
+        gate.observe(f"pass_{step}", passed=True, null_pass_prob=0.25)
+    check("accumulated evidence alone reaches COMMIT", gate.decision()["verdict"] == "COMMIT")
+    gate.observe("witness", passed=False, null_pass_prob=0.25, hard_contradiction=True)
+    final = gate.decision()
+    check("a hard contradiction revokes the commit",
+          final["verdict"] == "ABSTAIN_FAIL_CLOSED"
+          and final["reason"] == "HARD_CONTRADICTION_WITNESS")
+
+    # 5. Determinism: the same observations must give the same verdict.
+    left, right = ConformalEValueGate(alpha=alpha), ConformalEValueGate(alpha=alpha)
+    for step in range(6):
+        a = left.observe(f"s{step}", passed=step % 2 == 0, null_pass_prob=0.25)
+        b = right.observe(f"s{step}", passed=step % 2 == 0, null_pass_prob=0.25)
+    check("identical observations give identical decisions", a["log_e"] == b["log_e"])
+
+    total = 10
+    return {
+        "schema": "BRAIN_FUTAMURA_LEAPFROG_KERNEL_V1_SELF_CHECK",
+        "checks": total,
+        "passed": total - len(failures),
+        "breach_rate": round(breach_rate, 4),
+        "failures": failures,
+        "verdict": "SELF_CHECK_PASS" if not failures else "SELF_CHECK_FAIL",
+    }

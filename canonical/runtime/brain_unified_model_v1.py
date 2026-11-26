@@ -457,6 +457,7 @@ def _pack_hot_marshal_tiers(core: Mapping[str, Any]) -> tuple[dict[str, Any], by
         "artifact_bytes": int(core.get("artifact_bytes") or 0),
         "digest_needle_offset": int(core.get("digest_needle_offset") if core.get("digest_needle_offset") is not None else -1),
         "schema_needle_offset": int(core.get("schema_needle_offset") if core.get("schema_needle_offset") is not None else -1),
+        "section_byte_spans": dict(core.get("section_byte_spans") or {}),
         "objective_verbatim": str(core.get("objective_verbatim") or ""),
         "counts": dict(core.get("counts") or {}),
         "confidence": dict(core.get("confidence") or {}),
@@ -596,7 +597,19 @@ def _extract_secondary_indexes(full: Mapping[str, Any], raw_sha: str) -> dict[st
 # --------------------------------------------------------------------------- model
 
 
-class UnifiedModel:
+# The full installation includes the Wave 40–42 provider; blind worker mounts
+# deliberately omit it. Do not hide a missing *dependency* of an installed wave.
+try:
+    from canonical.runtime.wave41_rung3_proposer_jitrl_continual_flywheel_v1 import (
+        Wave40To42UnifiedModelMixin as _Wave40To42UnifiedModelMixin,
+    )
+except ModuleNotFoundError as exc:
+    if exc.name != "canonical.runtime.wave41_rung3_proposer_jitrl_continual_flywheel_v1":
+        raise
+    _Wave40To42UnifiedModelMixin = object
+
+
+class UnifiedModel(_Wave40To42UnifiedModelMixin):
     """A loaded, digest-verified unified model."""
 
     def __init__(
@@ -608,6 +621,8 @@ class UnifiedModel:
         _target_path: Path | None = None,
         _artifact_path: Path | None = None,
     ):
+        if _Wave40To42UnifiedModelMixin is object and model.get("model_id") != "brain-harbor-cold":
+            raise UnifiedModelError("FULL_MODEL_WAVE_PROVIDER_MISSING")
         self._raw_bytes_backing: bytes | None = _raw_bytes
         self._target_path: Path | None = _target_path or _artifact_path
         self._artifact_path: Path | None = self._target_path
@@ -949,6 +964,46 @@ class UnifiedModel:
         except Exception:
             pass
 
+    def _load_cold_section_rows(self, section_key: str) -> list[Any]:
+        """Wave 39 Elon-Speed Cold-Section Slice Loader (`os.pread` over `section_byte_spans`):
+        Reads and parses ONLY the requested JSON array slice (e.g. `447 KB` `harvested_capabilities`
+        or `597 KB` `extended_source_index`) instead of parsing the entire `13.47 MB` full JSON.
+        Falls back fail-closed to `_ensure_full_model()` whenever `self._model_loaded` is already
+        resident, `self.path != MODEL_PATH`, or `st_size != artifact_bytes` (tamper protection)."""
+        if self._model_loaded is not None:
+            return list(self._model_loaded.get(section_key) or [])
+        spans = self._core_meta.get("section_byte_spans")
+        expected_bytes = int(self._core_meta.get("artifact_bytes") or -1)
+        target = self._target_path
+        default_target = (ROOT / DEFAULT_ARTIFACT).resolve()
+        if (
+            target is not None
+            and target.resolve() == default_target
+            and isinstance(spans, Mapping)
+            and section_key in spans
+            and expected_bytes > 0
+            and target.exists()
+        ):
+            span = spans[section_key]
+            if isinstance(span, Sequence) and len(span) == 2:
+                start, end = int(span[0]), int(span[1])
+                if 0 <= start < end <= expected_bytes:
+                    try:
+                        fd = os.open(str(target), os.O_RDONLY)
+                        try:
+                            st = os.fstat(fd)
+                            if st.st_size == expected_bytes:
+                                chunk = os.pread(fd, end - start, start)
+                                parsed = json.loads(chunk.decode("utf-8"))
+                                if isinstance(parsed, list):
+                                    return parsed
+                        finally:
+                            os.close(fd)
+                    except Exception:
+                        pass
+        full = self._ensure_full_model()
+        return list(full.get(section_key) or [])
+
     def _ensure_harvested(self) -> None:
         if self._harvested_cache is not None:
             return
@@ -956,10 +1011,10 @@ class UnifiedModel:
         if isinstance(cached, dict):
             self._harvested_cache = cached
             return
-        full = self._ensure_full_model()
+        raw_rows = self._load_cold_section_rows("harvested_capabilities")
         self._harvested_cache = {
             str(row["id"]): dict(row)
-            for row in full.get("harvested_capabilities") or []
+            for row in raw_rows
             if isinstance(row, Mapping) and row.get("id")
         }
         self._write_section_cache("harvested", self._harvested_cache)
@@ -986,10 +1041,10 @@ class UnifiedModel:
             df = cached["df"]
             postings = cached["postings"]
         else:
-            full = self._ensure_full_model()
+            raw_rows = self._load_cold_section_rows("source_index")
             rows = {
                 str(row["path"]): dict(row)
-                for row in full.get("source_index") or []
+                for row in raw_rows
                 if isinstance(row, Mapping) and row.get("path")
             }
             df = {}
@@ -1038,10 +1093,10 @@ class UnifiedModel:
             self._extended_source_df_cache = cached["df"]
             self._extended_source_postings_cache = cached["postings"]
             return
-        full = self._ensure_full_model()
+        raw_rows = self._load_cold_section_rows("extended_source_index")
         rows = {
             str(row["path"]): dict(row)
-            for row in full.get("extended_source_index") or []
+            for row in raw_rows
             if isinstance(row, Mapping) and row.get("path")
         }
         df: dict[str, int] = {}
@@ -1126,10 +1181,10 @@ class UnifiedModel:
             self._research_df_cache = cached["df"]
             self._research_postings_cache = cached["postings"]
             return
-        full = self._ensure_full_model()
+        raw_rows = self._load_cold_section_rows("research_index")
         rows = {
             str(row["path"]): dict(row)
-            for row in full.get("research_index") or []
+            for row in raw_rows
             if isinstance(row, Mapping) and row.get("path")
         }
         df: dict[str, int] = {}
@@ -1166,9 +1221,9 @@ class UnifiedModel:
             self._knowledge_postings_cache = cached["postings"]
             self._knowledge_title_postings_cache = cached["title_postings"]
             return
-        full = self._ensure_full_model()
+        raw_rows = self._load_cold_section_rows("knowledge")
         rows = [
-            dict(row) for row in (full.get("knowledge") or []) if isinstance(row, Mapping)
+            dict(row) for row in raw_rows if isinstance(row, Mapping)
         ]
         df: dict[str, int] = {}
         lengths: list[int] = []
@@ -1745,6 +1800,42 @@ class UnifiedModel:
                 "frontier_domain": "continual_learning",
                 "capability_role": "Zero-LLM AlphaEvolve MAP-Elites + Pareto synthesizer guarded by adversarial anti-reward-hacking evaluator audit",
             },
+            {
+                "organ_id": "w39_zero_adapter_inventory_bridge",
+                "module_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+                "frontier_domain": "capability_composition",
+                "capability_role": "Zero-wrapper bridge composing module_bridge_v1 (5,221 functions) with type_level_composer_v1 type graphs",
+            },
+            {
+                "organ_id": "w39_moore_ontology_witness_learner",
+                "module_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+                "frontier_domain": "instant_learning",
+                "capability_role": "Action-invariant Moore bisimulation transfer + OPINE-World ontology residual + FlashMeta D4 witness inversion + Galois lattice",
+            },
+            {
+                "organ_id": "w39_lens_standing_fact_cu",
+                "module_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+                "frontier_domain": "computer_use",
+                "capability_role": "OOXML/JSON bijective lenses + relational anchored frame + CAS stale-click guard + standing-fact batch clobber recovery",
+            },
+            {
+                "organ_id": "w39_deltastate_sibling_swe",
+                "module_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+                "frontier_domain": "coding_agents",
+                "capability_role": "Oracle calibration + Plastic Surgery donor mining + Coccinelle multi-file sibling closure + DeltaBox warm-zygote os.fork() rollout",
+            },
+            {
+                "organ_id": "w39_prospective_memtx_replay",
+                "module_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+                "frontier_domain": "memory",
+                "capability_role": "Kumiho prospective cue indexing + CPB Sybil echo block + AGM K*7/K*8 entrenchment + RD-Forget selective replay unlearning",
+            },
+            {
+                "organ_id": "w39_meaning_ir_cross_lang_ratchet",
+                "module_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+                "frontier_domain": "continual_learning",
+                "capability_role": "Babble/Stitch Meaning-IR anti-unification + zero-shot verified cross-language recall (Python/JS/TS/Go/Rust) + MDL bit-rent eviction",
+            },
         ]
         return {
             "schema": SOLUTION_SCHEMA,
@@ -1848,6 +1939,20 @@ class UnifiedModel:
             from canonical.runtime import cow_zygote_speculative_verifier_v1 as pd
 
             return pd.run(req, ROOT)
+        if organ_id == "w39_zero_adapter_inventory_bridge":
+            goal = str(req.pop("goal", "inventory"))
+            return self.zero_adapter_inventory_bridge(goal, **req)
+        if organ_id == "w39_moore_ontology_witness_learner":
+            return self.instant_learn_moore_witness(**req)
+        if organ_id == "w39_lens_standing_fact_cu":
+            return self.execute_lens_standing_fact_cu(**req)
+        if organ_id == "w39_deltastate_sibling_swe":
+            rr = req.pop("repo_root", ROOT)
+            return self.repair_swe_deltastate_siblings(rr, **req)
+        if organ_id == "w39_prospective_memtx_replay":
+            return self.prospective_memtx_op(**req)
+        if organ_id == "w39_meaning_ir_cross_lang_ratchet":
+            return self.consolidate_meaning_ir_skill(**req)
 
         from canonical.runtime import swe_kernel_organ_bridge_v1 as bridge
 
@@ -2775,6 +2880,41 @@ class UnifiedModel:
             return self._epistemic_envelope(requested, goal, self.active_mealy_question_learner(**inputs))
         if requested == "DBSP_MEMORY" or (requested == "AUTO" and ("zset_deltas" in inputs or "forge_entry" in inputs)):
             return self._epistemic_envelope(requested, goal, self.dbsp_bitemporal_forge(**inputs))
+        _ASYM_SOLVE_MODES = {
+            "ASYMMETRIC_LEAPFROG": "AUTO",
+            "REFUSAL_AUTOBIND": "REFUSAL_AUTOBIND",
+            "ANGELIC_ZYGOTE_SWE": "ANGELIC_ZYGOTE_SWE",
+            "SHADOW_TRANSDUCER_CU": "SHADOW_TRANSDUCER_CU",
+            "DIGITAL_TWIN_ARC": "DIGITAL_TWIN_ARC",
+            "SHEAF_SRMU_MEMORY": "SHEAF_SRMU_MEMORY",
+            "PC_DGM_EVOLVE": "PC_DGM_EVOLVE",
+            "EGGMIND_PROOF": "EGGMIND_PROOF",
+        }
+        if requested in _ASYM_SOLVE_MODES or (
+            requested == "AUTO"
+            and any(
+                k in inputs
+                for k in (
+                    "autobind_source",
+                    "cli_refusal_text",
+                    "visible_tests",
+                    "dom_snapshot",
+                    "interactive_env",
+                    "arc_train_pairs",
+                    "sheaf_episodes",
+                    "pc_dgm_incumbent",
+                    "eggmind_goal_tree",
+                )
+            )
+        ):
+            if "sheaf_episodes" in inputs:
+                inputs["episodes"] = inputs.pop("sheaf_episodes")
+            if "pc_dgm_incumbent" in inputs:
+                inputs["incumbent_source"] = inputs.pop("pc_dgm_incumbent")
+            if "eggmind_goal_tree" in inputs:
+                inputs["goal_tree"] = inputs.pop("eggmind_goal_tree")
+            pil = _ASYM_SOLVE_MODES.get(requested, str(inputs.pop("pillar", "AUTO")))
+            return self._epistemic_envelope(requested, goal, self.asymmetric_leapfrog(goal, pillar=pil, inputs=inputs))
 
         if requested == "EPISTEMIC" and "harbor_task" in inputs:
             # The Harbor transport asks for a proposal, not workspace effects.
@@ -4205,6 +4345,28 @@ class UnifiedModel:
             contribution=res,
         )
 
+    def _wrap_boundary_call(
+        self,
+        op: str,
+        goal_txt: str,
+        payload_key: str,
+        res: Mapping[str, Any],
+        pass_default: str,
+        fail_default: str = "FAIL_CLOSED",
+        *,
+        include_reason: bool = True,
+    ) -> dict[str, Any]:
+        passed = bool(res.get("pass") is True)
+        extra: dict[str, Any] = {"pass": passed, payload_key: res}
+        if include_reason:
+            extra["reason"] = None if passed else str(res.get("status") or fail_default)
+        return self._envelope(
+            operation=op,
+            goal=goal_txt,
+            status=str(res.get("status") or (pass_default if passed else fail_default)),
+            **extra,
+        )
+
     def curate_skills(
         self,
         *,
@@ -4217,83 +4379,26 @@ class UnifiedModel:
     ) -> dict[str, Any]:
         """Retire deadweight skills ONLY on a measured tight grader (`0G` × `skill_contribution_ledger_v1`)."""
         res = self.boundary_router.route_curate_skills(
-            grader_report=grader_report,
-            min_trials=min_trials,
-            threshold=threshold,
-            active_cap=active_cap,
-            db_path=db_path,
+            grader_report=grader_report, min_trials=min_trials, threshold=threshold, active_cap=active_cap, db_path=db_path
         )
-        passed = bool(res.get("pass") is True)
-        return self._envelope(
-            operation="CURATE_SKILLS",
-            goal=goal or "curate_skills_by_contribution",
-            status=str(res.get("status") or ("PASS__SKILLS_CURATED" if passed else "REFUSED__UNMEASURED_GRADER")),
-            **{"pass": passed},
-            reason=None if passed else str(res.get("status") or "CURATION_REFUSED"),
-            curation=res,
-        )
+        return self._wrap_boundary_call("CURATE_SKILLS", goal or "curate_skills_by_contribution", "curation", res, "PASS__SKILLS_CURATED", "REFUSED__UNMEASURED_GRADER")
 
-    def observe_drift(
-        self,
-        stream: str,
-        value: float | bool,
-        *,
-        goal: str = "",
-    ) -> dict[str, Any]:
+    def observe_drift(self, stream: str, value: float | bool, *, goal: str = "") -> dict[str, Any]:
         """Observe one outcome in the hybrid ADWIN + BOCPD + Page-Hinkley concept-drift monitor (`0G`)."""
         res = self.boundary_router.route_observe_drift(stream, value)
-        return self._envelope(
-            operation="OBSERVE_DRIFT",
-            goal=goal or f"drift:{stream}",
-            status=str(res.get("status") or "PASS__STATIONARY"),
-            **{"pass": True},
-            drift=res,
-        )
+        return self._envelope(operation="OBSERVE_DRIFT", goal=goal or f"drift:{stream}", status=str(res.get("status") or "PASS__STATIONARY"), **{"pass": True}, drift=res)
 
     def trace_expression_repair(self, *, goal: str = "", **kwargs: Any) -> dict[str, Any]:
         """Dual-slicing execution-trace blaming + literal-defect & site-generability audit (`0D`)."""
-        res = self.boundary_router.route_trace_expression_repair(**kwargs)
-        passed = bool(res.get("pass") is True)
-        return self._envelope(
-            operation="TRACE_EXPRESSION_REPAIR",
-            goal=goal or "trace_expression_repair",
-            status=str(res.get("status") or ("PASS__TRACE_EXPRESSION_BLAMED" if passed else "FAIL_CLOSED")),
-            **{"pass": passed},
-            reason=None if passed else str(res.get("status") or "TRACE_REPAIR_FAILED"),
-            trace_repair=res,
-        )
+        return self._wrap_boundary_call("TRACE_EXPRESSION_REPAIR", goal or "trace_expression_repair", "trace_repair", self.boundary_router.route_trace_expression_repair(**kwargs), "PASS__TRACE_EXPRESSION_BLAMED", "TRACE_REPAIR_FAILED")
 
-    def multi_file_causal_localize(
-        self,
-        repo_root: str | Path,
-        *,
-        goal: str = "",
-        **kwargs: Any,
-    ) -> dict[str, Any]:
+    def multi_file_causal_localize(self, repo_root: str | Path, *, goal: str = "", **kwargs: Any) -> dict[str, Any]:
         """Multi-step differential-trace fault localization & causal SWE repair (`0D`)."""
-        res = self.boundary_router.route_multi_file_causal_localize(repo_root, goal=goal, **kwargs)
-        passed = bool(res.get("pass") is True)
-        return self._envelope(
-            operation="MULTI_FILE_CAUSAL_LOCALIZE",
-            goal=goal or f"causal_localize:{Path(repo_root).name}",
-            status=str(res.get("status") or ("PASS__DIFFERENTIAL_TRACE_LOCALIZED" if passed else "FAIL_CLOSED")),
-            **{"pass": passed},
-            reason=None if passed else str(res.get("status") or "LOCALIZATION_FAILED"),
-            causal_result=res,
-        )
+        return self._wrap_boundary_call("MULTI_FILE_CAUSAL_LOCALIZE", goal or f"causal_localize:{Path(repo_root).name}", "causal_result", self.boundary_router.route_multi_file_causal_localize(repo_root, goal=goal, **kwargs), "PASS__DIFFERENTIAL_TRACE_LOCALIZED", "LOCALIZATION_FAILED")
 
     def discover_computer_env(self, *, goal: str = "", **kwargs: Any) -> dict[str, Any]:
         """Discover live host OS programs, flags, file actions & minted effect signatures (`0E` × `computer_env_v1`)."""
-        res = self.boundary_router.route_discover_computer_env(**kwargs)
-        passed = bool(res.get("pass") is True)
-        return self._envelope(
-            operation="DISCOVER_COMPUTER_ENV",
-            goal=goal or "discover_computer_env",
-            status=str(res.get("status") or ("PASS__COMPUTER_ENV_DISCOVERED" if passed else "FAIL_CLOSED")),
-            **{"pass": passed},
-            reason=None if passed else str(res.get("status") or "COMPUTER_ENV_UNAVAILABLE"),
-            computer_env=res,
-        )
+        return self._wrap_boundary_call("DISCOVER_COMPUTER_ENV", goal or "discover_computer_env", "computer_env", self.boundary_router.route_discover_computer_env(**kwargs), "PASS__COMPUTER_ENV_DISCOVERED", "COMPUTER_ENV_UNAVAILABLE")
 
     def admit_route(
         self,
@@ -4305,35 +4410,12 @@ class UnifiedModel:
         entry: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
         """Fail-closed live route & DAG contract admission (`live_brain_route_admission_v1`)."""
-        res = self.boundary_router.route_admit_live(
-            goal,
-            compiled=compiled,
-            registry=registry,
-            dag=dag,
-            entry=entry,
-        )
-        passed = bool(res.get("pass") is True)
-        return self._envelope(
-            operation="ADMIT_ROUTE",
-            goal=goal,
-            status=str(res.get("status") or ("PASS__ROUTE_ADMITTED" if passed else "FAIL_CLOSED")),
-            **{"pass": passed},
-            reason=None if passed else str(res.get("status") or "ROUTE_ADMISSION_REJECTED"),
-            route_admission=res,
-        )
+        res = self.boundary_router.route_admit_live(goal, compiled=compiled, registry=registry, dag=dag, entry=entry)
+        return self._wrap_boundary_call("ADMIT_ROUTE", goal, "route_admission", res, "PASS__ROUTE_ADMITTED", "ROUTE_ADMISSION_REJECTED")
 
     def semantic_plan(self, goal: str) -> dict[str, Any]:
         """Neuro-symbolic compositional task AST & plan synthesis (`semantic_generalization_engine_v1`)."""
-        res = self.boundary_router.route_semantic_plan(goal)
-        passed = bool(res.get("pass") is True)
-        return self._envelope(
-            operation="SEMANTIC_PLAN",
-            goal=goal,
-            status=str(res.get("status") or ("PASS__SEMANTIC_PLAN_SYNTHESIZED" if passed else "FAIL_CLOSED")),
-            **{"pass": passed},
-            reason=None if passed else str(res.get("status") or "SEMANTIC_PLAN_FAILED"),
-            semantic_plan=res,
-        )
+        return self._wrap_boundary_call("SEMANTIC_PLAN", goal, "semantic_plan", self.boundary_router.route_semantic_plan(goal), "PASS__SEMANTIC_PLAN_SYNTHESIZED", "SEMANTIC_PLAN_FAILED")
 
     def derive_execution_adapter(
         self,
@@ -4636,23 +4718,11 @@ class UnifiedModel:
     ) -> dict[str, Any]:
         """Wave 15: MemGuard persistent verifier lifecycle & `rule_expiry_v1` world-fingerprint expiry."""
         res = self.boundary_router.route_memguard_and_expiry(
-            action=action,
-            skill_id=skill_id,
-            reward=reward,
-            confidence=confidence,
-            fingerprint=fingerprint,
-            current_fingerprint=current_fingerprint,
-            quarantine_on_drift=quarantine_on_drift,
-            db_path=db_path,
+            action=action, skill_id=skill_id, reward=reward, confidence=confidence,
+            fingerprint=fingerprint, current_fingerprint=current_fingerprint,
+            quarantine_on_drift=quarantine_on_drift, db_path=db_path,
         )
-        passed = bool(res.get("pass"))
-        return self._envelope(
-            operation="MEMGUARD_AUDIT_EXPIRE",
-            goal=f"memguard:{action}:{skill_id or 'all'}",
-            status=str(res.get("status") or "PASS__MEMGUARD"),
-            **{"pass": passed},
-            memguard=res,
-        )
+        return self._wrap_boundary_call("MEMGUARD_AUDIT_EXPIRE", f"memguard:{action}:{skill_id or 'all'}", "memguard", res, "PASS__MEMGUARD", "PASS__MEMGUARD", include_reason=False)
 
     def anti_skill_record(
         self,
@@ -4666,59 +4736,19 @@ class UnifiedModel:
     ) -> dict[str, Any]:
         """Wave 15: Record a symbol-scoped Negative-Knowledge Anti-Skill refutation in `0G`."""
         res = self.boundary_router.route_anti_skill(
-            action="record",
-            domain=domain,
-            symbol_scope=symbol_scope,
-            bad_hypothesis=bad_hypothesis,
-            error_signature=error_signature,
-            world_fp=world_fp,
-            csp_pair=csp_pair,
+            action="record", domain=domain, symbol_scope=symbol_scope,
+            bad_hypothesis=bad_hypothesis, error_signature=error_signature, world_fp=world_fp, csp_pair=csp_pair,
         )
-        return self._envelope(
-            operation="ANTI_SKILL_RECORD",
-            goal=f"anti_skill:{domain}:{symbol_scope}",
-            status=str(res.get("status") or "PASS__ANTI_SKILL_RECORDED"),
-            **{"pass": bool(res.get("pass"))},
-            anti_skill=res,
-        )
+        return self._wrap_boundary_call("ANTI_SKILL_RECORD", f"anti_skill:{domain}:{symbol_scope}", "anti_skill", res, "PASS__ANTI_SKILL_RECORDED", "PASS__ANTI_SKILL_RECORDED", include_reason=False)
 
-    def anti_skill_prune(
-        self,
-        candidates: Sequence[str],
-        *,
-        domain: str,
-        symbol_scope: str = "*",
-    ) -> dict[str, Any]:
+    def anti_skill_prune(self, candidates: Sequence[str], *, domain: str, symbol_scope: str = "*") -> dict[str, Any]:
         """Wave 15: Prune candidate hypotheses in O(1) using crystallized Anti-Skills."""
-        res = self.boundary_router.route_anti_skill(
-            action="prune",
-            domain=domain,
-            symbol_scope=symbol_scope,
-            candidates=candidates,
-        )
-        return self._envelope(
-            operation="ANTI_SKILL_PRUNE",
-            goal=f"prune:{domain}:{symbol_scope}",
-            status=str(res.get("status") or "PASS__ANTI_SKILL_PRUNED"),
-            **{"pass": bool(res.get("pass"))},
-            pruning=res,
-        )
+        res = self.boundary_router.route_anti_skill(action="prune", domain=domain, symbol_scope=symbol_scope, candidates=candidates)
+        return self._wrap_boundary_call("ANTI_SKILL_PRUNE", f"prune:{domain}:{symbol_scope}", "pruning", res, "PASS__ANTI_SKILL_PRUNED", "PASS__ANTI_SKILL_PRUNED", include_reason=False)
 
-    def prove_composition(
-        self,
-        *,
-        initial_text: str,
-        operations: Sequence[Mapping[str, Any]],
-    ) -> dict[str, Any]:
+    def prove_composition(self, *, initial_text: str, operations: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         """Wave 15: Compose multi-step text/code operations only when premise & proof survive (`proved_composition_v1`)."""
-        res = self.boundary_router.route_proved_composition(initial_text=initial_text, operations=operations)
-        return self._envelope(
-            operation="PROVE_COMPOSITION",
-            goal="proved_composition",
-            status=str(res.get("status") or "FAIL_CLOSED"),
-            **{"pass": bool(res.get("pass"))},
-            composition=res,
-        )
+        return self._wrap_boundary_call("PROVE_COMPOSITION", "proved_composition", "composition", self.boundary_router.route_proved_composition(initial_text=initial_text, operations=operations), "FAIL_CLOSED", "FAIL_CLOSED", include_reason=False)
 
     def solve_swe_inverted_microscope(
         self,
@@ -4753,15 +4783,7 @@ class UnifiedModel:
 
     def fork_reality_speculate(self, **kwargs: Any) -> dict[str, Any]:
         """Wave 17: Fork-Reality CoW Speculative World Engine + Kernel Seccomp Confinement."""
-        res = self.boundary_router.route_fork_reality_speculate(**kwargs)
-        passed = bool(res.get("pass"))
-        return self._envelope(
-            operation="FORK_REALITY_SPECULATE",
-            goal="fork_reality_cow_speculation",
-            status=str(res.get("status") or ("PASS" if passed else "FAIL_CLOSED")),
-            **{"pass": passed},
-            speculation=res,
-        )
+        return self._wrap_boundary_call("FORK_REALITY_SPECULATE", "fork_reality_cow_speculation", "speculation", self.boundary_router.route_fork_reality_speculate(**kwargs), "PASS", "FAIL_CLOSED", include_reason=False)
 
     def elevate_gui_trace(
         self,
@@ -5638,6 +5660,18 @@ class UnifiedModel:
             return self.active_mealy_question_learner(**data, **kwargs)
         if m == "dbsp_forge":
             return self.dbsp_bitemporal_forge(**data, **kwargs)
+        if m in (
+            "asymmetric_leapfrog",
+            "refusal_autobind",
+            "angelic_zygote_swe",
+            "shadow_transducer_cu",
+            "digital_twin_arc",
+            "sheaf_srmu_memory",
+            "pc_dgm_evolve",
+            "eggmind_proof",
+        ):
+            pil = "AUTO" if m == "asymmetric_leapfrog" else m.upper()
+            return self.asymmetric_leapfrog(goal, pillar=pil, inputs=data, **kwargs)
         if m == "version_space_swe" or (
             m == "auto"
             and (
@@ -6485,25 +6519,30 @@ class UnifiedModel:
         l2_sources = self.find_source(query, top_k=k)
 
         q_toks = set(tokenize(query))
+        self._ensure_extended_source_index()
+        ext_rows = self._extended_source_index_cache or {}
+        ext_postings = self._extended_source_postings_cache or {}
+        ext_scores: dict[str, float] = {}
+        for tok in q_toks:
+            for path_str, tf_val in ext_postings.get(tok, ()):
+                ext_scores[path_str] = ext_scores.get(path_str, 0.0) + float(tf_val)
         ext_hits: list[tuple[float, dict[str, Any]]] = []
-        for row in (self.model.get("extended_source_index") or ()):
+        for path_str, overlap in ext_scores.items():
+            row = ext_rows.get(path_str)
             if not isinstance(row, Mapping):
                 continue
-            terms = row.get("terms") or {}
-            overlap = sum(float(terms.get(t, 0)) for t in q_toks if t in terms)
-            if overlap > 0.0:
-                ext_hits.append(
-                    (
-                        overlap,
-                        {
-                            "path": row.get("path"),
-                            "tree": row.get("tree"),
-                            "summary": row.get("summary", ""),
-                            "classification": row.get("classification"),
-                            "score": round(overlap, 3),
-                        },
-                    )
+            ext_hits.append(
+                (
+                    overlap,
+                    {
+                        "path": row.get("path"),
+                        "tree": row.get("tree"),
+                        "summary": row.get("summary", ""),
+                        "classification": row.get("classification"),
+                        "score": round(overlap, 3),
+                    },
                 )
+            )
         ext_hits.sort(key=lambda item: (-item[0], str(item[1].get("path") or "")))
         l2_extended = [item[1] for item in ext_hits[:k]]
 
@@ -6527,6 +6566,140 @@ class UnifiedModel:
             "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
         }
 
+    # ---------------------------------------- Asymmetric Frontier-Leapfrog Spine (7 Pillars, K3=0)
+
+    def asymmetric_leapfrog(
+        self,
+        goal: str = "",
+        *,
+        pillar: str = "AUTO",
+        inputs: Mapping[str, Any] | None = None,
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Single O(1) front door for all 7 Asymmetric Frontier-Leapfrog Pillars (`K3=0`)."""
+        from canonical.runtime.asymmetric_frontier_leapfrog_v1 import asymmetric_leapfrog_dispatch
+
+        return asymmetric_leapfrog_dispatch(goal, pillar=pillar, inputs=inputs, **kwargs)
+
+    def abductive_refusal_autobind(self, goal: str = "", **kwargs: Any) -> dict[str, Any]:
+        """Pillar 1: Abductive Refusal-to-Contract Autobinder (`a_refusal_is_a_specification_v1` + `declared_input_derivation_v1`)."""
+        return self.asymmetric_leapfrog(goal, pillar="REFUSAL_AUTOBIND", **kwargs)
+
+    def angelic_zygote_swe_repair(self, **kwargs: Any) -> dict[str, Any]:
+        """Pillar 2: CoW-Zygote + Angelic Forest + Concolic Version-Space Distinguishing SWE Engine."""
+        return self.asymmetric_leapfrog(pillar="ANGELIC_ZYGOTE_SWE", **kwargs)
+
+    def shadow_transducer_cu(self, goal: str = "", **kwargs: Any) -> dict[str, Any]:
+        """Pillar 3: Zero-Pixel Shadow-Interface Transduction + Declarative ARIA/CDP + Petri Checkpoints."""
+        return self.asymmetric_leapfrog(goal, pillar="SHADOW_TRANSDUCER_CU", **kwargs)
+
+    def digital_twin_arc_solve(self, **kwargs: Any) -> dict[str, Any]:
+        """Pillar 4: `OPINE-World` + `Twin` 100%-Replay-Verified Digital Twin + `ARC-NEST` LOO + `E-Stitch`."""
+        return self.asymmetric_leapfrog(pillar="DIGITAL_TWIN_ARC", **kwargs)
+
+    def sheaf_srmu_memory(self, **kwargs: Any) -> dict[str, Any]:
+        """Pillar 5: 3-Layer Algebraic Memory (`SRMU` 10,240-bit HV + Exact `Q` Sheaf `H^1` + Dual NNF Semiring)."""
+        return self.asymmetric_leapfrog(pillar="SHEAF_SRMU_MEMORY", **kwargs)
+
+    def pc_dgm_evolve(self, **kwargs: Any) -> dict[str, Any]:
+        """Pillar 6: Proof-Carrying Darwin-Godel Machine + Turchin AST Supercompiler + Rubin Skill-Rent GC."""
+        return self.asymmetric_leapfrog(pillar="PC_DGM_EVOLVE", **kwargs)
+
+    def eggmind_prove(self, **kwargs: Any) -> dict[str, Any]:
+        """Pillar 7: `EggMind` Proof-Motif E-Graph + `Pantograph` Tactic Goal-Tree Prover."""
+        return self.asymmetric_leapfrog(pillar="EGGMIND_PROOF", **kwargs)
+
+    # ------------------------------------------------------------------ Wave 39 Unified Five-Pillar Frontier Kernel
+
+    def _get_five_pillar_kernel(self) -> Any:
+        kern = getattr(self, "_w39_five_pillar_kernel", None)
+        if kern is None:
+            from canonical.swe_kernel.unified_five_pillar_frontier_kernel_v1 import (
+                UnifiedFivePillarKernel,
+            )
+
+            kern = UnifiedFivePillarKernel()
+            self._w39_five_pillar_kernel = kern
+        return kern
+
+    def unified_frontier_turn(
+        self,
+        goal: str,
+        *,
+        pillar: str | None = None,
+        payload: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 39 Unified 4-Stage `K3 = 0` Turn (`Observe/Ground -> Hypothesize -> CoW Verify -> Consolidate`)
+        across all 5 Pillars + the Zero-Adapter `5,221`-function Inventory Bridge."""
+        return self._get_five_pillar_kernel().run_turn(goal, pillar=pillar, payload=payload)
+
+    def zero_adapter_inventory_bridge(
+        self,
+        goal: str,
+        *,
+        inputs: Mapping[str, Any] | None = None,
+        registry: Mapping[str, Any] | None = None,
+        top_k: int = 6,
+        execute_if_bound: bool = False,
+        max_chain_len: int = 2,
+    ) -> dict[str, Any]:
+        """Wave 39 Zero-Adapter Inventory Bridge: composes `module_bridge_v1` (`5,221` functions)
+        with `type_level_composer_v1` type graphs (`0` thin wrappers)."""
+        return self._get_five_pillar_kernel().inventory_bridge.query_and_compose(
+            goal,
+            inputs=inputs,
+            registry=registry,
+            top_k=top_k,
+            execute_if_bound=execute_if_bound,
+            max_chain_len=max_chain_len,
+        )
+
+    def instant_learn_moore_witness(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 39 Pillar I: Action-invariant Moore bisimulation transfer, `OPINE-World` ontology-error
+        separating predicate synthesis, FCA Galois concept lattices, and `FlashMeta D4` witness inversion."""
+        return self._get_five_pillar_kernel().instant_learner.learn_and_transfer(**kwargs)
+
+    def execute_lens_standing_fact_cu(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 39 Pillar II: Zero-screenshot OOXML/JSON bijective lenses, relational record frames,
+        CAS stale-frame click guards, standing-fact batch clobber recovery, and anti-false-`DONE` checks."""
+        return self._get_five_pillar_kernel().computer_use.execute_workflow(**kwargs)
+
+    def repair_swe_deltastate_siblings(self, repo_root: str | Path, **kwargs: Any) -> dict[str, Any]:
+        """Wave 39 Pillar III: Calibrated non-vacuous test oracle + Plastic Surgery donor mining +
+        `Coccinelle`/`SyDIT` multi-file sibling closure + `DeltaBox` warm-zygote `os.fork()` CoW rollout."""
+        return self._get_five_pillar_kernel().swe_kernel.repair_repository(repo_root, **kwargs)
+
+    def prospective_memtx_op(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 39 Pillar IV: `Kumiho` write-time prospective cue indexing, `CPB` root-disjoint Sybil
+        echo defense, AGM $K^*7/K^*8$ ordinal entrenchment, and `RD-Forget` selective replay unlearning."""
+        return self._get_five_pillar_kernel().run_turn("prospective_memtx_op", pillar="MEMORY", payload=kwargs)
+
+    def consolidate_meaning_ir_skill(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 39 Pillar V: `Babble`/`Stitch` Meaning-IR anti-unification, zero-shot verified cross-language
+        transfer across Python/JS/TS/Go/Rust, 4-gate Hoare sequence composition, and MDL bit-rent eviction."""
+        return self._get_five_pillar_kernel().skill_ratchet.consolidate_and_transfer(**kwargs)
+
+    # ------------------------------------------------------------- Wave 40 held-out bench
+
+    def frontier_bench(self, *, seed: int | None = None, per_category: int = 3,
+                       categories: Sequence[str] | None = None, self_check: bool = False) -> dict[str, Any]:
+        """Wave 40: the held-out, oracle-judged benchmark (`canonical/evaluation/frontier_bench_v1.py`).
+
+        Instances are generated from `seed` at call time and judged by oracles that never read this
+        model's own `pass` flag, so `pass_rate` measures unseen instances, not its own fixtures."""
+        from canonical.evaluation import frontier_bench_v1 as bench
+
+        resolved = bench.DEFAULT_SEED if seed is None else int(seed)
+        scorecard = bench.run_bench(seed=resolved, per_category=int(per_category), categories=categories)
+        if self_check:
+            scorecard["self_check"] = bench.bench_self_check(seed=resolved, per_category=int(per_category))
+        return scorecard
+
+    def refusal_acquire_retry(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 41: a refusal names what is missing; acquire it, verify it, retry, keep it."""
+        from canonical.swe_kernel.refusal_acquire_retry_v1 import acquire_and_retry
+
+        return acquire_and_retry(**kwargs)
     # --- Wave 39: Dark-Organ Unification, Red-Queen/Mendel Co-Evolution, CLM+RRF Memory & Partial-Routing/JitRL ---
 
     def _get_clm_rrf_memory_engine(self) -> Any:
@@ -7284,6 +7457,9 @@ def open_model(
     inst._model_loaded = full
     _OPEN_MODEL_MEM_CACHE[mem_key] = inst
     return inst
+
+
+load_unified_model = open_model
 
 
 def adapter_ast_index_map(path: Path | str | None = None) -> dict[str, Any]:
