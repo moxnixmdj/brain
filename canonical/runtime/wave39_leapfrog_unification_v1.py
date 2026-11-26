@@ -1602,7 +1602,95 @@ class PartialRoutingJitRLSkillTTAEngine:
         }
 
 
+class UnsupportedWave39Operation(ValueError):
+    """An explicit engine operation did not match an advertised entry point."""
+
+
+def dispatch_clm_rrf_operation(
+    eng: CLMRRFMemoryEngine, operation: str, p: Mapping[str, Any], *, fallback_goal: str | None = None,
+) -> dict[str, Any]:
+    """Decode the public payload once, including its untrusted-by-default write origin.
+
+    A model call must name a supported operation. The federation supplies a
+    fallback goal to preserve its existing default of retrieving by goal.
+    """
+    op = str(operation).upper()
+    if op == "WRITE_SURPRISE_GATED":
+        return eng.write_surprise_gated(
+            record_id=str(p["record_id"]),
+            key=str(p["key"]),
+            verbatim_text=str(p["verbatim_text"]),
+            payload=p.get("payload"),
+            valid_from=p.get("valid_from"),
+            origin_token=str(p.get("origin_token", "UNTRUSTED_EXTERNAL")),
+            min_surprise=float(p.get("min_surprise", 0.25)),
+            entities=p.get("entities") or (),
+            source_code=str(p.get("source_code", "")),
+        )
+    if op == "CLM_OFFLOAD":
+        return eng.clm_offload(
+            str(p["context_text"]),
+            workspace_dir=p["workspace_dir"],
+            label=str(p.get("label", "working_ctx")),
+            min_bytes=int(p.get("min_bytes", 128)),
+        )
+    if op == "CLM_GREP_RESTORE":
+        return eng.clm_grep_restore(
+            p["offload_ref"],
+            pattern=p.get("pattern"),
+            max_chars=int(p.get("max_chars", 2000)),
+        )
+    if op == "RETRIEVE_4WAY_RRF_BUDGETED" or fallback_goal is not None:
+        query = p.get("query", "") if fallback_goal is None else p.get("query") or fallback_goal
+        return eng.retrieve_4way_rrf_budgeted(
+            str(query),
+            char_budget=int(p.get("char_budget", 1200)),
+            top_k=int(p.get("top_k", 5)),
+            rrf_k=int(p.get("rrf_k", 60)),
+            query_source_code=str(p.get("query_source_code", "")),
+            query_entities=p.get("query_entities") or (),
+            at_time=p.get("at_time"),
+        )
+    raise UnsupportedWave39Operation(f"Unsupported CLM/RRF memory operation: {operation}")
+
+
+def dispatch_partial_routing_operation(
+    operation: str, p: Mapping[str, Any], *, fallback_goal: str | None = None,
+) -> dict[str, Any]:
+    """Strict for explicit model calls; the federation defaults to modulation by goal."""
+    op = str(operation).upper()
+    if op == "SKILLTTA_SYNTHESIZE":
+        return PartialRoutingJitRLSkillTTAEngine.skilltta_synthesize(
+            p["target_task"],
+            verified_traces=p.get("verified_traces") or (),
+            top_k=int(p.get("top_k", 3)),
+        )
+    if op == "PARTIAL_ROUTE":
+        return PartialRoutingJitRLSkillTTAEngine.partial_route_subtasks(
+            p.get("subtasks") or (),
+            compiled_skills=p.get("compiled_skills"),
+            symbolic_solver=p.get("symbolic_solver"),
+            mendel_solver=p.get("mendel_solver"),
+            pluggable_proposer=p.get("pluggable_proposer"),
+            delta_threshold=float(p.get("delta_threshold", 0.55)),
+            episodic_receipts=p.get("episodic_receipts") or (),
+            beta=float(p.get("beta", 0.5)),
+        )
+    if op == "JITRL_MODULATE" or fallback_goal is not None:
+        signature = p.get("state_signature", "") if fallback_goal is None else p.get("state_signature") or fallback_goal
+        return PartialRoutingJitRLSkillTTAEngine.jitrl_modulate_logits(
+            p["prior_logits"],
+            state_signature=str(signature),
+            episodic_receipts=p.get("episodic_receipts") or (),
+            beta=float(p.get("beta", 1.0)),
+        )
+    raise UnsupportedWave39Operation(f"Unsupported Partial-Routing/JitRL operation: {operation}")
+
+
 __all__ = [
+    "UnsupportedWave39Operation",
+    "dispatch_clm_rrf_operation",
+    "dispatch_partial_routing_operation",
     "SCHEMA",
     "MODEL_CALLS",
     "RedQueenMendelEvolver",

@@ -30,3 +30,36 @@ def test_constant_channels_do_not_vote_for_lexical_order_of_ids():
         assert r[0]['record_id']==ids[0]
         assert [v['channel_ranks']['temporal_entity'] for v in r]==[2]*3
         assert [v['channel_ranks']['lexical'] for v in r]==[1,2.5,2.5]
+
+
+def test_shared_dispatch_keeps_explicit_refusal_and_federated_goal_defaults():
+    import pytest
+    from canonical.runtime.brain_unified_model_v1 import UnifiedModelError, open_model
+    from canonical.runtime.unified_hidden_capability_federation_v1 import run_federated_engine
+
+    model = open_model()
+    for call in (model.clm_rrf_memory_op, model.partial_route_with_jitrl):
+        with pytest.raises(UnifiedModelError, match='Unsupported'):
+            call('not_a_model_operation')
+
+    memory = 'LEAPFROG_W39_CLM_RRF_MEMORY_BUS'
+    engine = CLMRRFMemoryEngine()
+    record = dict(operation='WRITE_SURPRISE_GATED', engine=engine,
+                  record_id='one', key='lesson', verbatim_text='first lesson', valid_from=1)
+    refused = run_federated_engine(memory, dict(record, origin_token='typo'))
+    assert not refused['pass'] and refused['result']['status'] == 'UNKNOWN_ORIGIN_CLASS'
+    assert run_federated_engine(memory, record)['admitted']
+    other = dict(record, record_id='aaa', key='contrast', verbatim_text='different word')
+    assert run_federated_engine(memory, other)['admitted']
+    read = run_federated_engine(memory, {'operation': 'RETRIEVE_4WAY_RRF_BUDGETED', 'top_k': 1,
+                                         'engine': engine}, goal='first lesson')
+    assert [(r['record_id'], r['origin_token']) for r in read['results']] == [('one', 'UNTRUSTED_EXTERNAL')]
+
+    routing = 'LEAPFROG_W39_PARTIAL_ROUTING_AND_JITRL'
+    assert run_federated_engine(routing, {})['reason'] == 'ENGINE_INPUTS_MISSING:operation'
+    failed = run_federated_engine(routing, {'operation': 'JITRL_MODULATE', 'prior_logits': {}})
+    assert not failed['pass'] and failed['result']['error'] == 'EMPTY_PRIOR_LOGITS'
+    params = {'prior_logits': {'go': 0.0}}
+    assert model.partial_route_with_jitrl('jitrl_modulate', params)['state_signature'] == ''
+    assert run_federated_engine(routing, dict(params, operation='JITRL_MODULATE'),
+                                goal='new state')['state_signature'] == 'new state'

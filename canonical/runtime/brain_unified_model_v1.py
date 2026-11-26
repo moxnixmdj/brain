@@ -6865,45 +6865,12 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
         payload: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
         """Wave 39: Verbatim-first 4-way RRF budgeted retrieval + Nemori surprise gating + CLM file-mirrored context + TMA-NM."""
-        eng = self._get_clm_rrf_memory_engine()
-        p = dict(payload or {})
-        op = str(operation).upper()
-        if op == "WRITE_SURPRISE_GATED":
-            return eng.write_surprise_gated(
-                record_id=str(p["record_id"]),
-                key=str(p["key"]),
-                verbatim_text=str(p["verbatim_text"]),
-                payload=p.get("payload"),
-                valid_from=p.get("valid_from"),
-                origin_token=str(p.get("origin_token", "UNTRUSTED_EXTERNAL")),
-                min_surprise=float(p.get("min_surprise", 0.25)),
-                entities=p.get("entities") or (),
-                source_code=str(p.get("source_code", "")),
-            )
-        if op == "RETRIEVE_4WAY_RRF_BUDGETED":
-            return eng.retrieve_4way_rrf_budgeted(
-                str(p.get("query", "")),
-                char_budget=int(p.get("char_budget", 1200)),
-                top_k=int(p.get("top_k", 5)),
-                rrf_k=int(p.get("rrf_k", 60)),
-                query_source_code=str(p.get("query_source_code", "")),
-                query_entities=p.get("query_entities") or (),
-                at_time=p.get("at_time"),
-            )
-        if op == "CLM_OFFLOAD":
-            return eng.clm_offload(
-                str(p["context_text"]),
-                workspace_dir=p["workspace_dir"],
-                label=str(p.get("label", "working_ctx")),
-                min_bytes=int(p.get("min_bytes", 128)),
-            )
-        if op == "CLM_GREP_RESTORE":
-            return eng.clm_grep_restore(
-                p["offload_ref"],
-                pattern=p.get("pattern"),
-                max_chars=int(p.get("max_chars", 2000)),
-            )
-        raise UnifiedModelError(f"Unsupported CLM/RRF memory operation: {operation}")
+        from canonical.runtime import wave39_leapfrog_unification_v1 as wave39
+
+        try:
+            return wave39.dispatch_clm_rrf_operation(self._get_clm_rrf_memory_engine(), operation, payload or {})
+        except wave39.UnsupportedWave39Operation as exc:
+            raise UnifiedModelError(str(exc)) from exc
 
     def partial_route_with_jitrl(
         self,
@@ -6911,35 +6878,12 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
         payload: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
         """Wave 39: Closed-form JitRL logit modulation + SkillTTA dynamic skill synthesis + Intra-task Partial Routing."""
-        from canonical.runtime.wave39_leapfrog_unification_v1 import PartialRoutingJitRLSkillTTAEngine
+        from canonical.runtime import wave39_leapfrog_unification_v1 as wave39
 
-        p = dict(payload or {})
-        op = str(operation).upper()
-        if op == "JITRL_MODULATE":
-            return PartialRoutingJitRLSkillTTAEngine.jitrl_modulate_logits(
-                p["prior_logits"],
-                state_signature=str(p.get("state_signature", "")),
-                episodic_receipts=p.get("episodic_receipts") or (),
-                beta=float(p.get("beta", 1.0)),
-            )
-        if op == "SKILLTTA_SYNTHESIZE":
-            return PartialRoutingJitRLSkillTTAEngine.skilltta_synthesize(
-                p["target_task"],
-                verified_traces=p.get("verified_traces") or (),
-                top_k=int(p.get("top_k", 3)),
-            )
-        if op == "PARTIAL_ROUTE":
-            return PartialRoutingJitRLSkillTTAEngine.partial_route_subtasks(
-                p.get("subtasks") or (),
-                compiled_skills=p.get("compiled_skills"),
-                symbolic_solver=p.get("symbolic_solver"),
-                mendel_solver=p.get("mendel_solver"),
-                pluggable_proposer=p.get("pluggable_proposer"),
-                delta_threshold=float(p.get("delta_threshold", 0.55)),
-                episodic_receipts=p.get("episodic_receipts") or (),
-                beta=float(p.get("beta", 0.5)),
-            )
-        raise UnifiedModelError(f"Unsupported Partial-Routing/JitRL operation: {operation}")
+        try:
+            return wave39.dispatch_partial_routing_operation(operation, payload or {})
+        except wave39.UnsupportedWave39Operation as exc:
+            raise UnifiedModelError(str(exc)) from exc
 
     def self_verify_harvested_surfaces(self, *, limit: int = 40) -> dict[str, Any]:
         """Wave 39: Live offline AST + SHA-256 + public-entrypoint audit over `harvested_capabilities`."""
