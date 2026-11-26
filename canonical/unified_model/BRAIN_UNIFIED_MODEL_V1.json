@@ -33053,7 +33053,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "9ad41b5f8341bfc0a6c65f138604a4fdc1e1ac105690209af393acb9e734f1fd"
+  "value": "93baa85a5ed142a06fd4b6adcc92532f1a40730a4dca973de7fc2693df7c3016"
  },
  "engines": [
   {
@@ -313801,7 +313801,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/PLAY_1_ROUTE_BY_CONTRACT_DIES_ON_ITS_OWN_ABLATION_20261126_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "3b9ea6f78ef3640a06f9734c161250dd8d899c2074e9bd607194eaf65bc1fc51",
+   "sha256": "0327d5a6e3103b770dc6db4876d45487d34e1bfc51665dbf6e9e1fb50a340cdb",
    "status": "PROPOSED__PRODUCER_MEASURED__MECHANISM_WORKS_ON_FIVE_REAL_MACHINES__INDEPENDENT_",
    "terms": {
     "0.33": 1,

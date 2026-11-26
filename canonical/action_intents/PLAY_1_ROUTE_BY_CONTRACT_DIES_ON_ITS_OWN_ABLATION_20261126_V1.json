@@ -128,7 +128,7 @@
  ],
  "real_outcome": "Routing is measured against a target that can fail, so a better router can be told from a luckier one.",
  "recursive_obs": {
-  "canonical_base_commit": "ee2c497f6cb6bfe412d2fe1f7511d05792976cd8",
+  "canonical_base_commit": "1a52fe6f13eb2cde232b49a00d4e6646350b5407",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "domain-level recall as a routing measurement",
@@ -300,7 +300,7 @@
      "route": "TEST_A_ROUTER_AGAINST_ITS_OWN_ABLATION_AND_CHANCE_BASELINE_BEFORE_COMPARING_IT_TO_AN_INCUMBENT"
     }
    ],
-   "checked_at_utc": "2026-11-26T01:44:50Z",
+   "checked_at_utc": "2026-11-26T01:50:58Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -340,7 +340,7 @@
    "selected_route": "TEST_A_ROUTER_AGAINST_ITS_OWN_ABLATION_AND_CHANCE_BASELINE_BEFORE_COMPARING_IT_TO_AN_INCUMBENT",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-26T01:44:50Z",
+    "checked_at_utc": "2026-11-26T01:50:58Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3 runtime with pytest",
