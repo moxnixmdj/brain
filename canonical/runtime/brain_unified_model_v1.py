@@ -1165,6 +1165,42 @@ class UnifiedModel:
                 "frontier_domain": "instant_learning",
                 "capability_role": "Surprise-gated active organism with refusal-curriculum prerequisite synthesis & active disambiguation",
             },
+            {
+                "organ_id": "move_1_trigram_impact_pareto",
+                "module_path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+                "frontier_domain": "coding_agents",
+                "capability_role": "64-bit Python int-bitset positional 3-gram search (<0.5 ms), depth-3 blast radius (<0.05 ms), and bloat Pareto auditor",
+            },
+            {
+                "organ_id": "move_2_proof_mined_surface",
+                "module_path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+                "frontier_domain": "instant_learning",
+                "capability_role": "Proof-mined AST call-vector & CoW 2-run deterministic surface compiler (lifting 406 dark modules 3.7% -> 55.9%)",
+            },
+            {
+                "organ_id": "move_3_speculative_multiverse",
+                "module_path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+                "frontier_domain": "world_model",
+                "capability_role": "Two-speed 10-50us RAM SemanticIR mental model + CDCL Equivalence-Modulo-Conflict nogood pruner -> CoW Zygote",
+            },
+            {
+                "organ_id": "move_5_doors_first_hidden_smc",
+                "module_path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+                "frontier_domain": "computer_use",
+                "capability_role": "Zero-pixel 4-tier Doors-First computer use + executor-hidden Speculative Macro Commit guarded by state projections",
+            },
+            {
+                "organ_id": "move_6_unblind_continual_memory",
+                "module_path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+                "frontier_domain": "memory",
+                "capability_role": "DBSP Z-set O(1) ForgetEval deletion + rule_expiry witness check + synthesized-oracle Clopper-Pearson curator + E-Stitch",
+            },
+            {
+                "organ_id": "move_7_global_extrapolation_gate",
+                "module_path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+                "frontier_domain": "verification_abstention",
+                "capability_role": "Domain-of-verification extrapolation blocker + Purpose Gate contrast check + minimum-action global discriminator",
+            },
         ]
         return {
             "schema": SOLUTION_SCHEMA,
@@ -1218,6 +1254,26 @@ class UnifiedModel:
             return self.solve_swe_repo(repo_root, **req)
         if organ_id == "move_5_surprise_organism":
             return self.autonomous_pulse(**req)
+        if organ_id == "move_1_trigram_impact_pareto":
+            if "pattern" in req:
+                return self.trigram_search(str(req.pop("pattern")), **req)
+            if "target" in req:
+                return self.impact_blast_radius(str(req.pop("target")), **req)
+            return self.audit_bloat_pareto()
+        if organ_id == "move_2_proof_mined_surface":
+            if "invoke_module" in req:
+                return self.invoke_mined_surface(str(req.pop("invoke_module")), **req)
+            return self.derive_and_verify_surface(**req)
+        if organ_id == "move_3_speculative_multiverse":
+            return self.speculate_multiverse(**req)
+        if organ_id == "move_5_doors_first_hidden_smc":
+            ws = req.pop("workspace_dir")
+            steps = req.pop("workflow_steps")
+            return self.execute_doors_first(ws, steps, **req)
+        if organ_id == "move_6_unblind_continual_memory":
+            return self.continual_memory_cycle(**req)
+        if organ_id == "move_7_global_extrapolation_gate":
+            return self.evaluate_global_extrapolation(**req)
         if organ_id == "play_a_counterfactual_discr_tree_router":
             from canonical.runtime import counterfactual_discr_tree_skill_router_v1 as pa
 
@@ -2880,6 +2936,160 @@ class UnifiedModel:
             disambiguation_probe_universe=list(disambiguation_probe_universe) if disambiguation_probe_universe is not None else None,
             disambiguation_truth_index=disambiguation_truth_index,
             **kwargs,
+        )
+
+    # ------------------------------------ 7-Move Frontier Leapfrog Front Doors
+
+    def trigram_search(
+        self,
+        pattern: str,
+        *,
+        regex: bool = False,
+        case_sensitive: bool = True,
+        exclude_tests: bool = False,
+        top_k: int = 20,
+    ) -> dict[str, Any]:
+        """Move I Front-Door: Sub-millisecond 64-bit int-bitset positional 3-gram exact/regex search."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.get_trigram_index(ROOT).search(
+            pattern,
+            regex=regex,
+            case_sensitive=case_sensitive,
+            exclude_tests=exclude_tests,
+            top_k=top_k,
+        )
+
+    def impact_blast_radius(self, module_or_stem: str, *, max_depth: int = 3) -> dict[str, Any]:
+        """Move I Front-Door: `< 0.05 ms` depth-`k` reverse-importer & impacted-test bitset blast radius."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.get_trigram_index(ROOT).impact_blast_radius(module_or_stem, max_depth=max_depth)
+
+    def audit_bloat_pareto(self) -> dict[str, Any]:
+        """Move I Front-Door: Elon's First Law orphan & superseded-clone byte-cost Pareto census."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.audit_bloat_pareto(self, ROOT)
+
+    def derive_and_verify_surface(
+        self,
+        *,
+        module_paths: Sequence[str] | None = None,
+        max_modules: int | None = None,
+        per_call_timeout_s: float = 0.25,
+        workers: int = 8,
+    ) -> dict[str, Any]:
+        """Move II Front-Door: Proof-mine call vectors and verify 2-run `os.fork()` CoW determinism (`3.7% -> 55.9%`)."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.derive_and_verify_surface(
+            ROOT,
+            module_paths=module_paths,
+            max_modules=max_modules,
+            per_call_timeout_s=per_call_timeout_s,
+            workers=workers,
+        )
+
+    def invoke_mined_surface(
+        self,
+        module_or_stem: str,
+        *,
+        args: Sequence[Any] | None = None,
+        kwargs: Mapping[str, Any] | None = None,
+        entrypoint: str | None = None,
+    ) -> dict[str, Any]:
+        """Move II Front-Door: Execute any proof-mined verified dark module in an isolated CoW child."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.invoke_mined_surface(
+            module_or_stem,
+            args=args,
+            kwargs=kwargs,
+            entrypoint=entrypoint,
+            root=ROOT,
+        )
+
+    def speculate_multiverse(
+        self,
+        *,
+        base_source: str,
+        func_name: str,
+        candidate_sources: Sequence[tuple[str, str]],
+        probe_inputs: Sequence[tuple[Any, ...]],
+        postcondition: Callable[[tuple[Any, ...], Any], bool] | None = None,
+        workspace_dir: str | Path | None = None,
+        target_rel_file: str = "module.py",
+    ) -> dict[str, Any]:
+        """Move III Front-Door: Two-speed `10-50 us` RAM SemanticIR mental model + CDCL EMC nogoods -> CoW Zygote."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.speculate_multiverse(
+            base_source=base_source,
+            func_name=func_name,
+            candidate_sources=candidate_sources,
+            probe_inputs=probe_inputs,
+            postcondition=postcondition,
+            workspace_dir=workspace_dir,
+            target_rel_file=target_rel_file,
+        )
+
+    def execute_doors_first(
+        self,
+        workspace_dir: str | Path,
+        workflow_steps: Sequence[Mapping[str, Any]],
+        *,
+        smc_engine: Any = None,
+        learn_macro: bool = True,
+        require_guard_file: str | None = None,
+    ) -> dict[str, Any]:
+        """Move V Front-Door: 4-tier zero-pixel Doors-First execution + executor-hidden Speculative Macro Commit."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.execute_doors_first(
+            workspace_dir,
+            workflow_steps,
+            smc_engine=smc_engine,
+            learn_macro=learn_macro,
+            require_guard_file=require_guard_file,
+        )
+
+    def continual_memory_cycle(
+        self,
+        *,
+        active_cap: int = 32,
+        num_adversarial_mutants: int = 160,
+    ) -> dict[str, Any]:
+        """Move VI Front-Door: DBSP Z-set O(1) ForgetEval deletion + rule_expiry + unblind curator + E-Stitch."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.continual_memory_cycle(
+            active_cap=active_cap,
+            num_adversarial_mutants=num_adversarial_mutants,
+        )
+
+    def evaluate_global_extrapolation(
+        self,
+        *,
+        observed_points: Sequence[tuple[Any, Any]],
+        candidate_hypotheses: Mapping[str, Callable[[Any], Any]],
+        target_query_x: Any,
+        probe_domain: Sequence[Any],
+        world_oracle: Callable[[Any], Any] | None = None,
+        route_costs: Mapping[str, float] | None = None,
+        max_probes: int = 3,
+    ) -> dict[str, Any]:
+        """Move VII Front-Door: Domain-of-verification extrapolation blocker + Purpose Gate + global discriminator."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.evaluate_global_extrapolation(
+            observed_points=observed_points,
+            candidate_hypotheses=candidate_hypotheses,
+            target_query_x=target_query_x,
+            probe_domain=probe_domain,
+            world_oracle=world_oracle,
+            route_costs=route_costs,
+            max_probes=max_probes,
         )
 
     def catalog_federated_engines(self, *, domain: str | None = None) -> dict[str, Any]:

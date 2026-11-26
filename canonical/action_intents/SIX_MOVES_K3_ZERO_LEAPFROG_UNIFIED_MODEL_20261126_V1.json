@@ -30,6 +30,8 @@
   "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
   "progress_evidence_paths": [
     "canonical/runtime/brain_unified_model_v1.py",
+    "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+    "canonical/runtime/unified_hidden_capability_federation_v1.py",
     "canonical/runtime/compile_brain_unified_model_v1.py",
     "canonical/runtime/gradient_free_law_consolidation_v2.py",
     "canonical/runtime/adversarial_mutation_admission_gate_v2.py",
@@ -37,7 +39,9 @@
     "canonical/swe_kernel/canonical_swe_spine_v1.py",
     "canonical/swe_kernel/canonical_cu_sandbox_spine_v1.py",
     "canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
-    "canonical/tests/test_six_moves_leapfrog_v1.py"
+    "canonical/tools/domain_atlas_v1.py",
+    "canonical/tests/test_six_moves_leapfrog_v1.py",
+    "canonical/tests/test_seven_moves_frontier_master_plan_v1.py"
   ],
   "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
   "route_id": "SIX_MOVES_K3_ZERO_HOT_CORE_COW_POPPER_APARTNESS_UNIFIED_MODEL",
@@ -58,6 +62,8 @@
     "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
     "progress_evidence_paths": [
       "canonical/runtime/brain_unified_model_v1.py",
+      "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+      "canonical/runtime/unified_hidden_capability_federation_v1.py",
       "canonical/runtime/compile_brain_unified_model_v1.py",
       "canonical/runtime/gradient_free_law_consolidation_v2.py",
       "canonical/runtime/adversarial_mutation_admission_gate_v2.py",
@@ -65,7 +71,9 @@
       "canonical/swe_kernel/canonical_swe_spine_v1.py",
       "canonical/swe_kernel/canonical_cu_sandbox_spine_v1.py",
       "canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
-      "canonical/tests/test_six_moves_leapfrog_v1.py"
+      "canonical/tools/domain_atlas_v1.py",
+      "canonical/tests/test_six_moves_leapfrog_v1.py",
+      "canonical/tests/test_seven_moves_frontier_master_plan_v1.py"
     ],
     "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
     "earlier_routes_exhausted_reason": "DELETE/BYPASS/REUSE/ADAPT/SUBSTITUTE/COMPOSE/CONFIGURE/INTEGRATE were applied first across all existing swe_kernel and .hidden.v1 modules, but bare-stdlib SWE execution without pytest required stdlib_cow_test_runner_v1.py, eliminating v1 law consolidation's 4 held-out false refutations required Popper negative-witness specialization in gradient_free_law_consolidation_v2.py, and driving .hidden.v1 mutant survival from 43.75% down to 6.25% required AST apartness probe synthesis in adversarial_mutation_admission_gate_v2.py.",

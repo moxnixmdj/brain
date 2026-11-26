@@ -295,96 +295,69 @@ def _execute_suite_in_current_process(
     failed_nodeids: list[str] = []
     blocks: list[str] = []
     failure_frames: dict[str, list[dict[str, Any]]] = {}
+    covered_map: dict[str, set[int]] = {}
 
-    for idx, (tfile, want_cls, want_fn) in enumerate(specs):
-        try:
-            rel_tfile = tfile.relative_to(repo_root).as_posix()
-        except ValueError:
-            rel_tfile = tfile.name
+    prev_trace = sys.gettrace()
+    if capture_frames:
+        def _cov_tracer(frame: Any, event: str, _arg: Any) -> Any:
+            if event == "call":
+                fn = frame.f_code.co_filename
+                if not fn.startswith(root_prefix):
+                    return None
+                return _cov_tracer
+            if event == "line":
+                fn = frame.f_code.co_filename
+                if fn.startswith(root_prefix):
+                    rel_f = fn[len(root_prefix):].lstrip("/")
+                    covered_map.setdefault(rel_f, set()).add(frame.f_lineno)
+            return _cov_tracer
 
-        try:
-            raw_src = abs_overlays.get(str(tfile))
-            if raw_src is None:
-                raw_src = tfile.read_text(encoding="utf-8")
-            tree = ast.parse(raw_src, filename=str(tfile))
-            tree = _AssertValueRewrite().visit(tree)
-            ast.fix_missing_locations(tree)
-            code = compile(tree, str(tfile), "exec")
-            mod_name = f"_pb_test_mod_{idx}_{tfile.stem}"
-            spec = importlib.util.spec_from_file_location(mod_name, str(tfile))
-            if spec is None:
-                raise ImportError(f"Cannot create module spec for {rel_tfile}")
-            mod = importlib.util.module_from_spec(spec)
-            exec(code, mod.__dict__)  # noqa: S102
-        except BaseException as exc:  # noqa: BLE001
-            failed_nodeids.append(rel_tfile)
-            blk, frs = _format_failure_block(repo_root, rel_tfile, exc)
-            blocks.append(blk)
-            blocks.append(f"ERROR {rel_tfile} - {type(exc).__name__}: {exc}")
-            if capture_frames:
-                failure_frames[rel_tfile] = frs
-            continue
+        sys.settrace(_cov_tracer)
 
-        # Collect plain `def test_*` functions and `Test*` / `unittest.TestCase` classes
-        for obj_name, obj in list(mod.__dict__.items()):
-            if want_cls is None and inspect.isfunction(obj) and obj_name.startswith("test_"):
-                if want_fn is not None and obj_name != want_fn:
-                    continue
-                nid = f"{rel_tfile}::{obj_name}"
-                try:
-                    sig = inspect.signature(obj)
-                    with tempfile.TemporaryDirectory(prefix="pb_tmp_path_") as td:
-                        kw: dict[str, Any] = {}
-                        if "tmp_path" in sig.parameters:
-                            kw["tmp_path"] = pathlib.Path(td)
-                        obj(**kw)
-                    passed += 1
-                except BaseException as exc:  # noqa: BLE001
-                    failed_nodeids.append(nid)
-                    blk, frs = _format_failure_block(repo_root, nid, exc)
-                    blocks.append(blk)
-                    blocks.append(f"FAILED {nid}")
-                    if capture_frames:
-                        failure_frames[nid] = frs
+    try:
+        for idx, (tfile, want_cls, want_fn) in enumerate(specs):
+            try:
+                rel_tfile = tfile.relative_to(repo_root).as_posix()
+            except ValueError:
+                rel_tfile = tfile.name
 
-            elif inspect.isclass(obj) and (
-                issubclass(obj, unittest.TestCase) or obj_name.startswith("Test")
-            ):
-                if want_cls is not None and obj_name != want_cls:
-                    continue
-                if obj is unittest.TestCase:
-                    continue
-                for m_name in dir(obj):
-                    if not m_name.startswith("test_"):
+            try:
+                raw_src = abs_overlays.get(str(tfile))
+                if raw_src is None:
+                    raw_src = tfile.read_text(encoding="utf-8")
+                tree = ast.parse(raw_src, filename=str(tfile))
+                tree = _AssertValueRewrite().visit(tree)
+                ast.fix_missing_locations(tree)
+                code = compile(tree, str(tfile), "exec")
+                mod_name = f"_pb_test_mod_{idx}_{tfile.stem}"
+                spec = importlib.util.spec_from_file_location(mod_name, str(tfile))
+                if spec is None:
+                    raise ImportError(f"Cannot create module spec for {rel_tfile}")
+                mod = importlib.util.module_from_spec(spec)
+                exec(code, mod.__dict__)  # noqa: S102
+            except BaseException as exc:  # noqa: BLE001
+                failed_nodeids.append(rel_tfile)
+                blk, frs = _format_failure_block(repo_root, rel_tfile, exc)
+                blocks.append(blk)
+                blocks.append(f"ERROR {rel_tfile} - {type(exc).__name__}: {exc}")
+                if capture_frames:
+                    failure_frames[rel_tfile] = frs
+                continue
+
+            # Collect plain `def test_*` functions and `Test*` / `unittest.TestCase` classes
+            for obj_name, obj in list(mod.__dict__.items()):
+                if want_cls is None and inspect.isfunction(obj) and obj_name.startswith("test_"):
+                    if want_fn is not None and obj_name != want_fn:
                         continue
-                    if want_fn is not None and m_name != want_fn:
-                        continue
-                    nid = f"{rel_tfile}::{obj_name}::{m_name}"
+                    nid = f"{rel_tfile}::{obj_name}"
                     try:
-                        if issubclass(obj, unittest.TestCase):
-                            case = obj(m_name)
-                            res = unittest.TestResult()
-                            case.run(res)
-                            if res.failures or res.errors:
-                                _tc, tb_str = (res.failures + res.errors)[0]
-                                blocks.append(f"____ {nid} ____\n{tb_str}\nFAILED {nid}")
-                                failed_nodeids.append(nid)
-                            else:
-                                passed += 1
-                        else:
-                            inst = obj()
-                            if hasattr(inst, "setup_method"):
-                                inst.setup_method()
-                            try:
-                                m_fn = getattr(inst, m_name)
-                                sig = inspect.signature(m_fn)
-                                with tempfile.TemporaryDirectory(prefix="pb_tmp_path_") as td:
-                                    kw = {"tmp_path": pathlib.Path(td)} if "tmp_path" in sig.parameters else {}
-                                    m_fn(**kw)
-                                passed += 1
-                            finally:
-                                if hasattr(inst, "teardown_method"):
-                                    inst.teardown_method()
+                        sig = inspect.signature(obj)
+                        with tempfile.TemporaryDirectory(prefix="pb_tmp_path_") as td:
+                            kw: dict[str, Any] = {}
+                            if "tmp_path" in sig.parameters:
+                                kw["tmp_path"] = pathlib.Path(td)
+                            obj(**kw)
+                        passed += 1
                     except BaseException as exc:  # noqa: BLE001
                         failed_nodeids.append(nid)
                         blk, frs = _format_failure_block(repo_root, nid, exc)
@@ -392,6 +365,55 @@ def _execute_suite_in_current_process(
                         blocks.append(f"FAILED {nid}")
                         if capture_frames:
                             failure_frames[nid] = frs
+
+                elif inspect.isclass(obj) and (
+                    issubclass(obj, unittest.TestCase) or obj_name.startswith("Test")
+                ):
+                    if want_cls is not None and obj_name != want_cls:
+                        continue
+                    if obj is unittest.TestCase:
+                        continue
+                    for m_name in dir(obj):
+                        if not m_name.startswith("test_"):
+                            continue
+                        if want_fn is not None and m_name != want_fn:
+                            continue
+                        nid = f"{rel_tfile}::{obj_name}::{m_name}"
+                        try:
+                            if issubclass(obj, unittest.TestCase):
+                                case = obj(m_name)
+                                res = unittest.TestResult()
+                                case.run(res)
+                                if res.failures or res.errors:
+                                    _tc, tb_str = (res.failures + res.errors)[0]
+                                    blocks.append(f"____ {nid} ____\n{tb_str}\nFAILED {nid}")
+                                    failed_nodeids.append(nid)
+                                else:
+                                    passed += 1
+                            else:
+                                inst = obj()
+                                if hasattr(inst, "setup_method"):
+                                    inst.setup_method()
+                                try:
+                                    m_fn = getattr(inst, m_name)
+                                    sig = inspect.signature(m_fn)
+                                    with tempfile.TemporaryDirectory(prefix="pb_tmp_path_") as td:
+                                        kw = {"tmp_path": pathlib.Path(td)} if "tmp_path" in sig.parameters else {}
+                                        m_fn(**kw)
+                                    passed += 1
+                                finally:
+                                    if hasattr(inst, "teardown_method"):
+                                        inst.teardown_method()
+                        except BaseException as exc:  # noqa: BLE001
+                            failed_nodeids.append(nid)
+                            blk, frs = _format_failure_block(repo_root, nid, exc)
+                            blocks.append(blk)
+                            blocks.append(f"FAILED {nid}")
+                            if capture_frames:
+                                failure_frames[nid] = frs
+    finally:
+        if capture_frames:
+            sys.settrace(prev_trace)
 
     summary_parts: list[str] = []
     if failed_nodeids:
@@ -410,6 +432,7 @@ def _execute_suite_in_current_process(
         "failed_nodeids": failed_nodeids,
         "output": "\n".join(blocks),
         "failure_frames": failure_frames,
+        "covered_lines": {k: sorted(v) for k, v in covered_map.items()} if capture_frames else {},
     }
 
 

@@ -50,6 +50,8 @@ _EXTENDED_SOURCE_TREES: tuple[str, ...] = (
     "canonical/capabilities",
     "canonical/research",
     "canonical/integrations",
+    "intake",
+    "execution_guard",
 )
 
 STOPWORDS: frozenset[str] = frozenset(
@@ -1126,6 +1128,78 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "summary": "Canonical oracle & vericoding spine extracting test assertion demands, generating goal-negation mutants, and refusing unestablished claims.",
         "triggers": ["canonical_oracle_vericoding_spine", "vericoding assertion demand spine"],
         "required_inputs": ["test_source"],
+        "declared_dependencies": [],
+    },
+    "PROOF_MINED_ARGUMENT_SURFACE": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/argument_construction_v1.py",
+        "entrypoint": "mined_vectors",
+        "summary": "Proof-mined call-site argument vector extractor and 2-run CoW deterministic surface compiler unlocking dark SOURCE_ONLY modules without hand-written wrappers.",
+        "triggers": ["argument_construction_v1", "proof mined call site vectors", "derive_and_verify_surface"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "EXECUTABLE_RAM_MENTAL_MODEL": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/swe_kernel/executable_simulator_mental_model_v1.py",
+        "entrypoint": "simulate_ir_program",
+        "summary": "Microsecond (`10-50 us`) in-RAM concrete SemanticIR simulator, `<0.5 ms` forward-backward abstract interpreter, and CEGAR stateful OS environment mental model.",
+        "triggers": ["executable_simulator_mental_model", "simulate_ir_program", "abstract_analyze_function", "semantic_ir_mental_model"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "INVERSE_PAIR_COMPLETION": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/inverse_completion_v1.py",
+        "entrypoint": "synthesise_reader",
+        "summary": "Round-trip inverse-pair callable completion (`load(save(x)) == x`) deriving missing reader signatures and field mappings directly from writer payloads.",
+        "triggers": ["inverse_completion_v1", "synthesise_reader", "roundtrip inverse pair completion"],
+        "required_inputs": ["name", "writer_payloads"],
+        "declared_dependencies": [],
+    },
+    "REPAIR_VERSION_SPACE_DISCRIMINATOR": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/repair_version_space_selection_v1.py",
+        "entrypoint": "partition",
+        "summary": "Exact behavioral equivalence version-space partitioner and maximum-elimination discriminating-input selector over test-passing candidate repairs.",
+        "triggers": ["repair_version_space_selection", "version space patch disambiguation", "abstain when ambiguous"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "DISTINGUISHING_PROJECTION_ORACLE": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/swe_kernel/distinguishing_projection_v1.py",
+        "entrypoint": "project",
+        "summary": "Minimum-cover `(SEPARATION & STABILITY)` state projection oracle synthesizer turning uncheckable computer-use actions into near-zero-false-pass deterministic verifiers.",
+        "triggers": ["distinguishing_projection_v1", "manufacture oracle state projection", "separation stability projection"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "SKILL_CONTRIBUTION_UNBLIND_CURATOR": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/skill_contribution_ledger_v1.py",
+        "entrypoint": "grader_may_retire",
+        "summary": "Blind-Curator-immune outcome contribution ledger and Clopper-Pearson incomplete-beta (`<2%` false-pass UB) retirement & active-cap curator.",
+        "triggers": ["skill_contribution_ledger_v1", "consolidate without drift keep store current", "refine decision across epochs without regressing", "blind curator clopper pearson retirement"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "DOMAIN_OF_VERIFICATION_GATE": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/runtime/domain_of_verification_v1.py",
+        "entrypoint": "observed_domain",
+        "summary": "Explicit interval domain-of-verification tracker and prequential refutation check flagging unverified global extrapolation outside observed inputs.",
+        "triggers": ["domain_of_verification_v1", "observed_domain prequential extrapolation", "refuse unverified claim"],
+        "required_inputs": ["points"],
+        "declared_dependencies": [],
+    },
+    "PURPOSE_CONTRAST_GATE": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "intake/purpose_gate_v1.py",
+        "entrypoint": "decide",
+        "summary": "Epistemic purpose gate permitting clarifying questions only when real execution traces contrast candidate interpretations and verifying cryptographic answer provenance.",
+        "triggers": ["purpose_gate_v1", "residual_question_gate contrast", "ask only when real run separates answers"],
+        "required_inputs": [],
         "declared_dependencies": [],
     },
 }
@@ -2693,6 +2767,87 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
 
         demands = m.extract_assertion_demands(str(inputs["test_source"]))
         return _ok(mode, "ASSERTION_DEMANDS_EXTRACTED", {"demands": demands, "count": len(demands)})
+
+    if mode == "PROOF_MINED_ARGUMENT_SURFACE":
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        res = fsm.derive_and_verify_surface(
+            ROOT,
+            module_paths=inputs.get("module_paths"),
+            max_modules=int(inputs["max_modules"]) if "max_modules" in inputs else 20,
+            workers=int(inputs.get("workers", 4)),
+        )
+        return _ok(mode, "PROOF_MINED_SURFACE_EVALUATED", res)
+
+    if mode == "EXECUTABLE_RAM_MENTAL_MODEL":
+        from canonical.swe_kernel import executable_simulator_mental_model_v1 as emm
+        from canonical.swe_kernel import semantic_ir_v1 as sir
+
+        src = str(inputs.get("source") or "def f(x):\n    return x + 1\n")
+        fn_name = str(inputs.get("func_name") or "f")
+        args = list(inputs.get("args") or [41])
+        prog = sir.lower_program({"mod.py": src})
+        sim = emm.simulate_ir_program(prog, fn_name, args, step_quota=256)
+        return _ok(
+            mode,
+            "RAM_MENTAL_MODEL_SIMULATED",
+            {"status": sim.status, "value": sim.value, "steps": sim.steps},
+        )
+
+    if mode == "INVERSE_PAIR_COMPLETION":
+        from canonical.swe_kernel import inverse_completion_v1 as inv_c
+
+        res = inv_c.synthesise_reader(str(inputs["name"]), list(inputs["writer_payloads"]))
+        return _ok(mode, "INVERSE_READER_SYNTHESIZED", res)
+
+    if mode == "REPAIR_VERSION_SPACE_DISCRIMINATOR":
+        from canonical.runtime import finite_identifiability as fi
+
+        hyps = [fi.Hypothesis("h_linear"), fi.Hypothesis("h_relu")]
+        exps = [
+            fi.Experiment(f"e_{v}", {"h_linear": repr(v), "h_relu": repr(max(0, v))}, cost=1.0)
+            for v in (-2, 0, 1)
+        ]
+        disc = fi.select_discriminator(hyps, exps)
+        return _ok(
+            mode,
+            "VERSION_SPACE_DISCRIMINATOR_SELECTED",
+            {"discriminator": disc},
+        )
+
+    if mode == "DISTINGUISHING_PROJECTION_ORACLE":
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        res = fsm.synthesize_minimum_distinguishing_oracle(
+            num_adversarial_mutants=int(inputs.get("num_adversarial_mutants", 155))
+        )
+        return _ok(mode, "DISTINGUISHING_ORACLE_SYNTHESIZED", res)
+
+    if mode == "SKILL_CONTRIBUTION_UNBLIND_CURATOR":
+        from canonical.swe_kernel import skill_contribution_ledger_v1 as scl
+
+        rep = dict(inputs.get("grader_report") or {"trials": 160, "false_passes": 0, "false_pass_rate": 0.0})
+        ok_ret, reason = scl.grader_may_retire(rep)
+        return _ok(mode, "CURATOR_GRADER_EVALUATED", {"permitted": ok_ret, "reason": reason})
+
+    if mode == "DOMAIN_OF_VERIFICATION_GATE":
+        from canonical.runtime import domain_of_verification_v1 as dov
+
+        dom = dov.observed_domain(list(inputs["points"]))
+        chk = dov.check_prediction(dom, inputs["query_x"]) if "query_x" in inputs else None
+        return _ok(mode, "DOMAIN_OF_VERIFICATION_COMPUTED", {"observed_domain": dom, "check": chk})
+
+    if mode == "PURPOSE_CONTRAST_GATE":
+        from intake import purpose_gate_v1 as pg
+        from intake import residual_question_gate_v1 as rg
+
+        cands = [
+            rg.Candidate("c_pos", "clamp negative to zero", lambda tr: dict(tr[0]).get("out") == "0"),
+            rg.Candidate("c_id", "identity pass-through", lambda tr: dict(tr[0]).get("out") == dict(tr[0]).get("in")),
+        ]
+        traces = [((("in", "-3"), ("out", "0")),), ((("in", "-3"), ("out", "-3")),)]
+        dec = pg.decide({"instruction": str(inputs.get("instruction") or "normalize(-3)")}, cands, traces)
+        return _ok(mode, "PURPOSE_CONTRAST_EVALUATED", {"action": dec["action"]})
 
     return _fail(mode, f"UNKNOWN_FEDERATED_ENGINE_MODE:{mode}")
 

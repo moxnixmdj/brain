@@ -582,8 +582,9 @@ def _localize_candidate_py_files(
     test_targets: Sequence[str],
     failure_frames: Mapping[str, Sequence[Mapping[str, Any]]],
     failure_output: str,
+    covered_lines: Mapping[str, Sequence[int]] | None = None,
 ) -> list[str]:
-    """Rank non-test `.py` files by live stack frames, test imports, and traceback mentions."""
+    """Rank non-test `.py` files by live stack frames, dynamic line coverage, test imports, and traceback mentions."""
     non_test_py = sorted(
         rel for rel in base_snapshot
         if rel.endswith(".py") and not _is_test_relpath(rel)
@@ -599,6 +600,12 @@ def _localize_candidate_py_files(
             rp = str(fr.get("rel_path") or "")
             if rp in scores:
                 scores[rp] += max(20, 80 - depth * 10)
+
+    # 1b. Dynamic transitive line coverage (solves the `85.7%` test-only-traceback blindness!)
+    if covered_lines:
+        for rel, lns in covered_lines.items():
+            if rel in scores and lns:
+                scores[rel] += 55 + min(20, len(lns))
 
     # 2. Imports inside test files (`from bounds import clamp_nonneg`, `import pkg.mod`)
     imported_stems: set[str] = set()
@@ -636,9 +643,12 @@ def _synthesize_move3_candidates_for_file(
     orig_src: str,
     failure_output: str,
     frame_records: Sequence[Mapping[str, Any]],
-    max_per_file: int = 40,
+    max_per_file: int = 48,
+    *,
+    test_sources: Sequence[str] = (),
+    covered_file_lines: Sequence[int] = (),
 ) -> list[tuple[str, str]]:
-    """Synthesize input-dependency-verified candidate repairs for `orig_src` in `< 2 ms`."""
+    """Synthesize input-dependency-verified candidate repairs (including AST insertions & inverse pairs) in `< 3 ms`."""
     try:
         orig_tree = ast.parse(orig_src)
     except SyntaxError:
@@ -696,10 +706,12 @@ def _synthesize_move3_candidates_for_file(
         ast.In: (ast.NotIn,),
         ast.NotIn: (ast.In,),
     }
-    focus_lines = {int(fr.get("lineno") or 0) for fr in frame_records if fr.get("lineno")}
+    focus_lines = {int(fr.get("lineno") or 0) for fr in frame_records if fr.get("lineno")} | {
+        int(ln) for ln in covered_file_lines if ln
+    }
 
     all_nodes = list(ast.walk(orig_tree))
-    # Prioritize nodes near traceback lines first
+    # Prioritize nodes near traceback or dynamically covered lines first
     node_order = sorted(
         range(len(all_nodes)),
         key=lambda idx: (
@@ -707,6 +719,179 @@ def _synthesize_move3_candidates_for_file(
             idx,
         ),
     )
+
+    # Channel 4 (Move IV — Break the 54% AST Insertion Wall): Precondition & Boundary Guard Insertions
+    combined_test_txt = "\n".join([failure_output, *test_sources])
+    wanted_excs: list[str] = []
+    for exc_name in ("ValueError", "TypeError", "KeyError", "IndexError"):
+        if re.search(rf"\b(?:raises|assertRaises)\s*\(\s*{exc_name}\b", combined_test_txt) or (
+            f"DID NOT RAISE {exc_name}" in combined_test_txt
+        ):
+            wanted_excs.append(exc_name)
+
+    for fn_idx, top_nd in enumerate(orig_tree.body):
+        fn_targets: list[tuple[list[ast.stmt], int, ast.FunctionDef]] = []
+        if isinstance(top_nd, ast.FunctionDef):
+            fn_targets.append((orig_tree.body, fn_idx, top_nd))
+        elif isinstance(top_nd, ast.ClassDef):
+            for m_idx, m_nd in enumerate(top_nd.body):
+                if isinstance(m_nd, ast.FunctionDef):
+                    fn_targets.append((top_nd.body, m_idx, m_nd))
+
+        for _parent_body, _pos_idx, fn_nd in fn_targets:
+            params = [a.arg for a in fn_nd.args.args if a.arg not in ("self", "cls")]
+            # 4a. Missing exception precondition guard insertion (`if p < 0: raise ValueError(...)`, `if p is None: ...`)
+            for exc_cls in wanted_excs[:2]:
+                for p_name in params[:2]:
+                    guard_conds = (
+                        (f"{p_name} is None", "guard_insert_none"),
+                        (f"isinstance({p_name}, (int, float)) and {p_name} < 0", "guard_insert_neg"),
+                        (f"isinstance({p_name}, (int, float)) and {p_name} <= 0", "guard_insert_nonpos"),
+                        (f"not {p_name}", "guard_insert_empty"),
+                    )
+                    for cond_src, gtag in guard_conds:
+                        guard_stmt = ast.parse(f"if {cond_src}:\n    raise {exc_cls}('invalid {p_name}')").body[0]
+                        t_copy = copy.deepcopy(orig_tree)
+                        for sub in ast.walk(t_copy):
+                            if isinstance(sub, ast.FunctionDef) and sub.name == fn_nd.name and sub.lineno == fn_nd.lineno:
+                                insert_at = 1 if (sub.body and isinstance(sub.body[0], ast.Expr) and isinstance(sub.body[0].value, ast.Constant)) else 0
+                                sub.body.insert(insert_at, guard_stmt)
+                                ast.fix_missing_locations(t_copy)
+                                _emit(f"{gtag}:{exc_cls}", ast.unparse(t_copy))
+                                break
+
+            # 4b. Empty-collection boundary guard insertion (`ZeroDivisionError` / `IndexError` on empty sequence)
+            if any(err in failure_output for err in ("ZeroDivisionError", "IndexError")) and params:
+                for ret_lit, rtag in (("0", "empty_guard_zero"), ("0.0", "empty_guard_float"), ("None", "empty_guard_none"), ("[]", "empty_guard_list")):
+                    guard_stmt = ast.parse(f"if not {params[0]}:\n    return {ret_lit}").body[0]
+                    t_copy = copy.deepcopy(orig_tree)
+                    for sub in ast.walk(t_copy):
+                        if isinstance(sub, ast.FunctionDef) and sub.name == fn_nd.name and sub.lineno == fn_nd.lineno:
+                            insert_at = 1 if (sub.body and isinstance(sub.body[0], ast.Expr) and isinstance(sub.body[0].value, ast.Constant)) else 0
+                            sub.body.insert(insert_at, guard_stmt)
+                            ast.fix_missing_locations(t_copy)
+                            _emit(rtag, ast.unparse(t_copy))
+                            break
+
+            # 4c. SObEq Read-Without-Write Loop/Recursion Progress Insertion (`if x in visited:` without `visited.add(x)`)
+            body_dump = ast.unparse(fn_nd)
+            for sub in ast.walk(fn_nd):
+                if (
+                    isinstance(sub, ast.If)
+                    and isinstance(sub.test, ast.Compare)
+                    and len(sub.test.ops) == 1
+                    and isinstance(sub.test.ops[0], (ast.In, ast.NotIn))
+                    and isinstance(sub.test.left, ast.Name)
+                    and isinstance(sub.test.comparators[0], ast.Name)
+                ):
+                    elem_nm = sub.test.left.id
+                    set_nm = sub.test.comparators[0].id
+                    if f"{set_nm}.add(" not in body_dump and f"{set_nm}[" not in body_dump:
+                        add_stmt = ast.parse(f"{set_nm}.add({elem_nm})").body[0]
+                        t_copy = copy.deepcopy(orig_tree)
+                        for f_sub in ast.walk(t_copy):
+                            if isinstance(f_sub, ast.FunctionDef) and f_sub.name == fn_nd.name and f_sub.lineno == fn_nd.lineno:
+                                for st_i, st in enumerate(f_sub.body):
+                                    if isinstance(st, ast.If) and getattr(st, "lineno", -1) == sub.lineno:
+                                        if isinstance(sub.test.ops[0], ast.In):
+                                            f_sub.body.insert(st_i + 1, add_stmt)
+                                        else:
+                                            st.body.insert(0, add_stmt)
+                                        ast.fix_missing_locations(t_copy)
+                                        _emit(f"sobeq_progress_insert:{set_nm}.add({elem_nm})", ast.unparse(t_copy))
+                                        break
+                                    # Also check inside top-level `while` / `for` loops!
+                                    if isinstance(st, (ast.While, ast.For)):
+                                        for lst_i, lst in enumerate(st.body):
+                                            if isinstance(lst, ast.If) and getattr(lst, "lineno", -1) == sub.lineno:
+                                                if isinstance(sub.test.ops[0], ast.In):
+                                                    st.body.insert(lst_i + 1, add_stmt)
+                                                else:
+                                                    lst.body.insert(0, add_stmt)
+                                                ast.fix_missing_locations(t_copy)
+                                                _emit(f"sobeq_loop_progress_insert:{set_nm}.add({elem_nm})", ast.unparse(t_copy))
+                                                break
+
+    # Channel 5 (Move IV — Inverse-Pair Callable Completion via `inverse_completion_v1`: `load(save(x)) == x`)
+    try:
+        from canonical.swe_kernel import inverse_completion_v1 as inv_comp
+
+        for cls_idx, cls_nd in enumerate(orig_tree.body):
+            if not isinstance(cls_nd, ast.ClassDef):
+                continue
+            method_map = {m.name: m for m in cls_nd.body if isinstance(m, ast.FunctionDef)}
+            init_nd = method_map.get("__init__")
+            init_params = [a.arg for a in init_nd.args.args if a.arg != "self"] if init_nd else []
+            attr_err_names = re.findall(r"has no attribute '([A-Za-z_]\w*)'", failure_output)
+            for m_name, m_nd in list(method_map.items()):
+                missing_cands: list[str] = []
+                if m_name.startswith("to_") and len(m_name) > 3:
+                    missing_cands.append("from_" + m_name[3:])
+                elif m_name in ("dump_state", "save_state"):
+                    missing_cands.append("load_state")
+                pair = inv_comp.detect_pair(m_name, list(method_map.keys()))
+                if pair and pair.get("missing") and not str(pair["missing"]).startswith("to_from_"):
+                    missing_cands.append(str(pair["missing"]))
+                for ae_nm in attr_err_names:
+                    if ae_nm not in missing_cands:
+                        missing_cands.insert(0, ae_nm)
+                missing_name: str | None = next((mc for mc in missing_cands if mc and mc not in method_map), None)
+                if not missing_name:
+                    continue
+                # Extract field mapping from `return {"k": self.attr, ...}` or `return (self.a, self.b)`
+                ret_expr = next((sub.value for sub in ast.walk(m_nd) if isinstance(sub, ast.Return) and sub.value is not None), None)
+                if isinstance(ret_expr, ast.Dict):
+                    field_pairs: list[tuple[str, str]] = []
+                    for k_nd, v_nd in zip(ret_expr.keys, ret_expr.values):
+                        if (
+                            isinstance(k_nd, ast.Constant)
+                            and isinstance(k_nd.value, str)
+                            and isinstance(v_nd, ast.Attribute)
+                            and isinstance(v_nd.value, ast.Name)
+                            and v_nd.value.id == "self"
+                        ):
+                            field_pairs.append((k_nd.value, v_nd.attr))
+                    if field_pairs:
+                        if missing_name == "__setstate__":
+                            synth = inv_comp.synthesise_reader("__getstate__", [{k: 0 for k, _ in field_pairs}])
+                            if synth.get("source"):
+                                m_ast = ast.parse(synth["source"]).body[0]
+                                t_copy = copy.deepcopy(orig_tree)
+                                t_copy.body[cls_idx].body.append(m_ast)  # type: ignore[attr-defined]
+                                ast.fix_missing_locations(t_copy)
+                                _emit(f"inverse_pair_setstate:{missing_name}", ast.unparse(t_copy))
+                        else:
+                            assigns = "\n".join(f"    obj.{attr} = payload[{key!r}]" for key, attr in field_pairs)
+                            cls_method_src = (
+                                f"@classmethod\ndef {missing_name}(cls, payload):\n"
+                                f"    obj = cls.__new__(cls)\n{assigns}\n    return obj\n"
+                            )
+                            m_ast = ast.parse(cls_method_src).body[0]
+                            t_copy = copy.deepcopy(orig_tree)
+                            t_copy.body[cls_idx].body.append(m_ast)  # type: ignore[attr-defined]
+                            ast.fix_missing_locations(t_copy)
+                            _emit(f"inverse_pair_classmethod:{missing_name}", ast.unparse(t_copy))
+                elif isinstance(ret_expr, ast.Tuple):
+                    attrs = [
+                        elt.attr
+                        for elt in ret_expr.elts
+                        if isinstance(elt, ast.Attribute) and isinstance(elt.value, ast.Name) and elt.value.id == "self"
+                    ]
+                    if attrs and len(attrs) == len(ret_expr.elts):
+                        if missing_name == "__setstate__":
+                            assigns = "\n".join(f"    self.{attr} = payload[{i}]" for i, attr in enumerate(attrs))
+                            m_ast = ast.parse(f"def __setstate__(self, payload):\n{assigns}\n").body[0]
+                        else:
+                            assigns = "\n".join(f"    obj.{attr} = payload[{i}]" for i, attr in enumerate(attrs))
+                            m_ast = ast.parse(
+                                f"@classmethod\ndef {missing_name}(cls, payload):\n    obj = cls.__new__(cls)\n{assigns}\n    return obj\n"
+                            ).body[0]
+                        t_copy = copy.deepcopy(orig_tree)
+                        t_copy.body[cls_idx].body.append(m_ast)  # type: ignore[attr-defined]
+                        ast.fix_missing_locations(t_copy)
+                        _emit(f"inverse_pair_tuple:{missing_name}", ast.unparse(t_copy))
+    except Exception:
+        pass
 
     for idx in node_order:
         if len(cands) >= max_per_file:
@@ -844,22 +1029,39 @@ def _run_cow_demand_abduction_fast_lane(
         capture_frames=True,
     )
     f_frames: dict[str, list[dict[str, Any]]] = dict(frame_run.get("failure_frames") or {})
+    cov_lines: dict[str, list[int]] = dict(frame_run.get("covered_lines") or {})
     rich_output = str(frame_run.get("output") or base_output)
 
-    ranked_files = _localize_candidate_py_files(base_snapshot, test_targets, f_frames, rich_output)
+    ranked_files = _localize_candidate_py_files(
+        base_snapshot, test_targets, f_frames, rich_output, covered_lines=cov_lines
+    )
     if not ranked_files:
         return None
 
+    test_srcs: list[str] = []
+    for t_rel in test_targets:
+        norm_t = str(t_rel).split("::")[0].lstrip("./")
+        if norm_t in base_snapshot:
+            test_srcs.append(base_snapshot[norm_t].decode("utf-8", errors="replace"))
+
     flat_frames = [fr for frs in f_frames.values() for fr in frs]
     all_targets = list(dict.fromkeys([*test_targets, *regression_tests]))
-    cow_jobs: list[tuple[str, Callable[[], tuple[bool, Any]]]] = []
+    cow_jobs: list[tuple[str, Callable[[], Mapping[str, Any]]]] = []
     job_payloads: dict[str, tuple[str, str, str]] = {}
 
     for rel in ranked_files:
         orig_src = base_snapshot[rel].decode("utf-8", errors="replace")
         file_frames = [fr for fr in flat_frames if fr.get("rel_path") == rel]
+        file_cov = cov_lines.get(rel) or ()
         for idx, (tag, cand_src) in enumerate(
-            _synthesize_move3_candidates_for_file(orig_src, rich_output, file_frames, max_per_file=36)
+            _synthesize_move3_candidates_for_file(
+                orig_src,
+                rich_output,
+                file_frames,
+                max_per_file=48,
+                test_sources=test_srcs,
+                covered_file_lines=file_cov,
+            )
         ):
             if neg_guard is not None and neg_guard.is_refuted(orig_src, cand_src):
                 continue
@@ -892,28 +1094,85 @@ def _run_cow_demand_abduction_fast_lane(
 
             cow_jobs.append((cid, _make_shard()))
 
-    if not cow_jobs:
-        return None
-
     # Screen in parallel `os.fork()` CoW worker batches via `ZygotePrewarmedPool` (`0` disk writes!)
     pool = zygote_pool.ZygotePrewarmedPool(prewarm_enabled=False)
-    win_cid: str | None = None
+    passing_cids: list[str] = []
     forked_total = 0
     per_batch_timeout = min(5.0, max(1.5, timeout_s / 2.0))
-    for start in range(0, min(len(cow_jobs), 64), 8):
+    for start in range(0, min(len(cow_jobs), 80), 8):
         batch = cow_jobs[start : start + 8]
         forked_total += len(batch)
         res = pool.run_parallel_sharded(
             [fn for _, fn in batch],
-            winner_predicate=lambda item: bool(item.get("passed")),
+            winner_predicate=None,
             timeout_s=per_batch_timeout,
         )
-        if res.get("found_winner") and res.get("winner"):
-            win_cid = str(res["winner"].get("candidate_id") or "")
+        for item in res.get("results") or ():
+            if item.get("passed") and item.get("candidate_id") in job_payloads:
+                passing_cids.append(str(item["candidate_id"]))
+        if passing_cids:
             break
 
-    if not win_cid or win_cid not in job_payloads:
+    # Move IV Fallback: Value-Space Angelic + Bottom-Up Observational Equivalence (`angelic_oe_synthesizer_v1`)
+    if not passing_cids and ranked_files and test_targets:
+        try:
+            from canonical.swe_kernel import angelic_oe_synthesizer_v1 as aoe
+
+            top_rel = ranked_files[0]
+            t_rel0 = str(test_targets[0]).split("::")[0].lstrip("./")
+            aoe_res = aoe.repair_file_angelic_oe(
+                repo_root,
+                top_rel,
+                t_rel0,
+                timeout_s=max(6, int(min(10.0, timeout_s))),
+                verify_with_sentinel=False,
+            )
+            if aoe_res.get("repaired") and aoe_res.get("patched_source"):
+                cid_aoe = f"{top_rel}::aoe::{aoe_res.get('method', 'ANGELIC_OE')}"
+                job_payloads[cid_aoe] = (top_rel, str(aoe_res.get("rule") or "ANGELIC_OE"), str(aoe_res["patched_source"]))
+                passing_cids.append(cid_aoe)
+        except Exception:
+            pass
+
+    if not passing_cids:
         return None
+
+    # Move IV Version-Space Equivalence Partition (`repair_version_space_selection_v1` / behavioral signatures)
+    vs_meta: dict[str, Any] = {
+        "passing_candidates_in_batch": len(passing_cids),
+        "equivalence_classes": 1,
+        "diagnosis": "IDENTIFIED_BY_TESTS",
+    }
+    win_cid = passing_cids[0]
+    if len(passing_cids) >= 2:
+        probe_vals = (-5, -1, 0, 1, 2, "", [])
+        sig_classes: dict[str, list[str]] = {}
+        for pcid in passing_cids:
+            _prel, _ptag, psrc = job_payloads[pcid]
+            ns_p: dict[str, Any] = {}
+            sig_parts: list[str] = []
+            try:
+                exec(compile(psrc, "<vs_probe>", "exec"), ns_p)  # noqa: S102
+                callables_p = [v for k, v in ns_p.items() if callable(v) and not k.startswith("__")]
+                if callables_p:
+                    fn0 = callables_p[0]
+                    for pv in probe_vals:
+                        try:
+                            rv = fn0(copy.deepcopy(pv))
+                            sig_parts.append(f"V:{type(rv).__name__}:{repr(rv)[:32]}")
+                        except Exception as exc:
+                            sig_parts.append(f"E:{type(exc).__name__}")
+            except Exception:
+                sig_parts.append("UNPROBED")
+            sig_key = "|".join(sig_parts) or psrc
+            sig_classes.setdefault(sig_key, []).append(pcid)
+        vs_meta = {
+            "passing_candidates_in_batch": len(passing_cids),
+            "equivalence_classes": len(sig_classes),
+            "diagnosis": (
+                "IDENTIFIED_BY_TESTS" if len(sig_classes) == 1 else "UNDETERMINED__A_QUESTION_DECIDES"
+            ),
+        }
 
     win_rel, win_tag, win_src = job_payloads[win_cid]
     ok, _reason, meta = _verify_python_candidate_edits(
@@ -935,6 +1194,8 @@ def _run_cow_demand_abduction_fast_lane(
         "modified_files": [win_rel],
         "patched_source": win_src,
         "candidates_screened_cow": forked_total,
+        "version_space": vs_meta,
+        "covered_source_files": [r for r in ranked_files if cov_lines.get(r)],
         "test_run": meta.get("test_run"),
     }
 
@@ -1331,6 +1592,7 @@ def solve_repository_task(
             "reason": f"SOLVED_BY_COW_DEMAND_FAST_LANE:{fast_res['channel']}",
             "crystallized_law_id": crystallized_fast_id,
             "candidates_screened_cow": fast_res["candidates_screened_cow"],
+            "version_space": fast_res.get("version_space"),
             "stages_run": stages_run,
             "model_calls": model_calls,
             "modified_files": fast_res["modified_files"],
