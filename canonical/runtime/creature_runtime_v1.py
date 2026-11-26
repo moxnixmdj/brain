@@ -1800,6 +1800,60 @@ class Creature:
         """Wave 39: Creature closed-form JitRL logit modulation + SkillTTA synthesis + Intra-task Partial Routing."""
         return self._ensure_unified_model().partial_route_with_jitrl(operation, payload)
 
+    def epistemic_swe_egraph_cegis(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Creature Guarded Meaning IR E-Graph + Grammar-Closed CEGIS CoW repair + Causal Nexus."""
+        return self._ensure_unified_model().epistemic_swe_egraph_cegis(operation, payload)
+
+    def oneshot_version_space_learn(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Creature Evidence Demand + Settlement + Hypothesis Classes + Law-Checked Operator Acquisition."""
+        return self._ensure_unified_model().oneshot_version_space_learn(operation, payload)
+
+    def shadow_interface_hcu_route(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Creature Agent-S4 evolving shadow-interface compiler + Microsoft HCU 3-channel router."""
+        return self._ensure_unified_model().shadow_interface_hcu_route(operation, payload)
+
+    def rlm_workspace_op(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Creature MIT RLM out-of-core symbolic corpus slicing & recursive map-reduce."""
+        return self._ensure_unified_model().rlm_workspace_op(operation, payload)
+
+    def four_network_git_memory_op(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Creature Hindsight 4-Network bi-temporal git-diffable memory + Engram + Sleep + TMA-NM."""
+        res = self._ensure_unified_model().four_network_git_memory_op(operation, payload)
+        self._save()
+        return res
+
+    def chase_hda_hill_nfv_gate(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Creature Staged Goal-Blind NFV + CHASE perturbation audit + HDA + Hill Sampling."""
+        return self._ensure_unified_model().chase_hda_hill_nfv_gate(operation, payload)
+
+    def selfplay_steer_horizon_commit(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Creature Zero-Data Self-Play SWE-RL + Steer-Don't-Solve Critic + Atomic WAL Commit."""
+        res = self._ensure_unified_model().selfplay_steer_horizon_commit(operation, payload)
+        self._save()
+        return res
+
+    def rung3_proposer_jitrl_solve(self, payload: Mapping[str, Any]) -> dict[str, Any]:
+        """Wave 41: Creature 4-rung escalation (Rung 0->1->2->3) with K3=0 abstention, pluggable local proposer, JitRL & NFV/CHASE."""
+        return self._ensure_unified_model().rung3_proposer_jitrl_solve(payload)
+
+    def whitebox_trace_abduction_oe(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 41: Creature Ochiai trace abduction + Angelic OE + E-graph CEGIS + Whitebox introspection."""
+        return self._ensure_unified_model().whitebox_trace_abduction_oe(operation, payload)
+
+    def ttpo_opsd_distill_rollouts(self, payload: Mapping[str, Any]) -> dict[str, Any]:
+        """Wave 41: Creature TTPO + OPSD label-free behavioral-equivalence consensus distillation."""
+        return self._ensure_unified_model().ttpo_opsd_distill_rollouts(payload)
+
+    def futamura_compile_away_cycle(self, payload: Mapping[str, Any]) -> dict[str, Any]:
+        """Wave 42: Creature Self-Play -> Futamura Rung-0 Compile-Away -> Sleep Consolidation flywheel."""
+        res = self._ensure_unified_model().futamura_compile_away_cycle(payload)
+        self._save()
+        return res
+
+    def one_demo_trust_and_rung_calibrate(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 42: Creature trace-quotient collision gate + page-guide UI sketcher + provenance calibration."""
+        return self._ensure_unified_model().one_demo_trust_and_rung_calibrate(payload)
+
     def sleep_evolve_organs_gea(
         self,
         *,
