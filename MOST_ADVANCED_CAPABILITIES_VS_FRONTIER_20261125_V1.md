@@ -519,3 +519,70 @@ re-measuring rather than trusting, because §5j's plan chose main's side on the 
 failing 9 ways: `test_oe_sygus_synthesizer_v1.py` **8 passed**, `test_universal_epistemic_kernel_v1.py`
 **23 passed** against the merged tree, UEK now 5,911 lines, and every changed `.py` in the 72-file
 diff compiles. A plan written before a merge is a hypothesis about the merge.
+
+## §5l  The merge's real cost was two capabilities main measured and nobody enrolled, and three counts I had transcribed
+
+`git merge origin/main` settled cleanly except the artifacts, and the tree that came out was red in
+ways the merge itself did not cause. Sixteen local test failures, three distinct classes, and only one
+of them was a capability finding:
+
+**1. Main measured two capabilities; the enrollment gate that would notice lives on this branch.**
+Wave 43-46 landed ledger rows for `FILE_QUESTION_TAUGHT_WORDS_V1` and
+`FILE_QUESTION_TAUGHT_WORDS_V1`'s sibling `FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1` with receipts that
+resolve, and with no adapter, no pending binding, and no extended-registry row — correct on main, which
+has no rule requiring those, and a hole in the merged tree, which does. Fixed by the producer rather
+than by the number: `capability_enroll_certified_v1.py --write` measured both on fresh instances and
+emitted `canonical/runtime/bound_capabilities/truecap_file_{question_taught_words,change_request_copy_rename_append}.py`,
+their fixtures, queue entries and registry rows. `--check` now reports **11 derived, 11 queued, 11
+adapters, 0 problems**, and `capability_fabric_v1.py --check` passes against a regenerated fabric
+(`certified_count` 16 → 18). The enrollment run also wrote counters into
+`canonical/astra_runtime/state/ASSOCIATIVE_MEMORY_V1.json` and `canonical/runtime/state/experience_v1.json`
+(`accesses`, `credited`, `last_accessed` only) — reverted, because a sandbox's bookkeeping has no
+business in a governance PR, where it would collide with main's next store write for nothing.
+
+**2. Three of my own tests had transcribed the size of the tree.** `== 9` (certified capabilities),
+`== 2319` (extended registry rows), `== 16` (queue files). Each became a derived invariant with a floor
+— `r["certified_capabilities"] == len(ledger rows)`, `r["registry_rows_extended"] == extended_rows >= 2000`,
+`r["pending_bindings"] == len(queue files) >= 16` — which is *stricter* than what it replaced: a
+snapshot number cannot tell a grown tree from a broken rule, and these three assertions could not tell
+either of those from a shrunk ledger. This is the second consecutive merge in which a snapshotted count
+became a false alarm about the test instead of about the code, so the rule earns its place: **a test may
+assert a relationship over the repository, or it may assert a floor; it may not photograph the
+repository.**
+
+**3. The artifact goes stale twice, on purpose.** Any commit touching `canonical/runtime/**` invalidates
+`canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json`, because the artifact indexes those sources, and
+`verify_brain_unified_model_v1.py`'s `recompilation_is_byte_identical` case is the machine that says so.
+It fired for the merge and then fired again for my own enrollment commit — 36/38, then 37/38, now
+**38/38 PASS, MODEL 33881759**. The compiler is the only writer of that JSON; a textual union of two
+generated dumps (what §5k's plan proposed) would have been byte-unequal to the merged engine and
+unverifiable by anyone.
+
+**One red is left, and it is not merge damage.**
+`test_epistemic_spec_oracle_v1.py::test_01_zero_test_multifile_repair_and_tier0_cross_codebase_transfer`
+fails **identically at `b503eb46`**, the pre-merge tip — so the merge neither caused nor concealed it. The
+merged engine synthesizes both metamorphic oracles, repairs `test_m1_aggregate_merge_conservation`
+(`TIER3_REBIND_LOOP_REMOVE_GUARD` in `win_alpha/sessions.py`), leaves
+`test_m2_gc_active_retention_safety` failing, and returns `PARTIAL / METAMORPHIC_ORACLE_PARTIAL` with
+`invariants_repaired: 1` — deterministically, same invariant, across two back-to-back runs. The payload
+names the cause: `remaining_failed_invariants` holds the bare test name, not `…:POLICY_REJECTED:…`, so
+the read-only SHA guard and the banned-import guard were never the obstacle; `SWE.solve_repository`
+simply produced no verified winner for the retention invariant inside its 25 s candidate budget. That is
+a gap in the repair lane — the §11 self-play loop's actual subject — and restating the expectation as
+`PARTIAL` would retire the only executable statement of the gap, so the assertion stands unchanged
+(**19 assert lines before the comment, 19 after**, counted rather than promised). No CI workflow runs
+this file; `grep -rl <testfile> .github/workflows | wc -l` returns **0 for all six** of the branch's
+new test files, which is this repo's own named failure mode — an unrun check — and it is recorded here
+instead of "fixed" by a branch-scoped workflow that would stop existing the moment the branch merged.
+
+Four further local reds were never red at all: `numpy`, `wheel`, `grpcio-tools`, `rdflib` and `pandas`
+were simply absent from the sandbox venv, and `test_epistemic_spec_synthesizer_v1.py` went from 4 failed
+to **24 passed, 6 skipped** once they were installed. A referee that cannot import is not a failing
+test; it is a missing referee, and the distinction is why the suite is graded with the toolchains present.
+
+Local gate state at `1fb78fcc`, base `298c4690`: `DRIFT_GUARD_PASS` (sensitive_files 57, up from 53 —
+the two adapters, their fixtures and the registry rows are all inside sensitive prefixes),
+`LOAD_BEARING_ADMISSION_PASS` (open obligations 13), `repo-integrity-guard rules=17 violations=0`,
+`verify 38/38`. And the intent had to be regenerated once more, because Wave 46 moved the base commit
+it pins: `RECURSIVE_OBS_STALE_BASE_COMMIT` is the guard correctly refusing an intent whose base is
+history. Generating rather than hand-editing is what made that a 40-second fix instead of an afternoon.
