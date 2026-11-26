@@ -9,10 +9,10 @@
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "parent_capability": "canonical/runtime/brain_unified_model_v1.py + canonical/swe_kernel/unified_epistemic_portfolio_v1.py + canonical/swe_kernel/closed_loop_autonomous_controller_v1.py",
-  "canonical_base_commit": "18adda649f28cf786570ea96308768c899c93807",
+  "canonical_base_commit": "dcb3337683ae2181a74ab865027db8a6a2923960",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
-  "causal_blocker": "At 18adda649f28cf786570ea96308768c899c93807, 96 zero-model organs across canonical/swe_kernel, canonical/runtime, and canonical/tools lacked a single sub-millisecond CoW bytecode hot-swap portfolio execution spine uniting PEP-669 zero-overhead line monitoring, in-RAM live-frame differential witness inversion, Guarded Region-SSA Meaning-IR pre-sieving, bidirectional PutGet/frame-independent codec lens synthesis, 7-language Tree-Sitter CST skill transfer, monotonic WebMCP generation-guarded action binding, decidable 1-shot sufficiency/precondition compilation, and Memoir credit-gated VSA+Woodbury+PPR memory under UnifiedModel and SovereignZeroLLMPlanner.",
-  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::At 18adda649f28cf786570ea96308768c899c93807, 96 zero-model organs across canonical/swe_kernel, canonical/runtime, and canonical/tools lacked a single sub-millisecond CoW bytecode hot-swap portfolio execution spine uniting PEP-669 zero-overhead line monitoring, in-RAM live-frame differential witness inversion, Guarded Region-SSA Meaning-IR pre-sieving, bidirectional PutGet/frame-independent codec lens synthesis, 7-language Tree-Sitter CST skill transfer, monotonic WebMCP generation-guarded action binding, decidable 1-shot sufficiency/precondition compilation, and Memoir credit-gated VSA+Woodbury+PPR memory under UnifiedModel and SovereignZeroLLMPlanner.",
+  "causal_blocker": "At dcb3337683ae2181a74ab865027db8a6a2923960, 96 zero-model organs across canonical/swe_kernel, canonical/runtime, and canonical/tools lacked a single sub-millisecond CoW bytecode hot-swap portfolio execution spine uniting PEP-669 zero-overhead line monitoring, in-RAM live-frame differential witness inversion, Guarded Region-SSA Meaning-IR pre-sieving, bidirectional PutGet/frame-independent codec lens synthesis, 7-language Tree-Sitter CST skill transfer, monotonic WebMCP generation-guarded action binding, decidable 1-shot sufficiency/precondition compilation, and Memoir credit-gated VSA+Woodbury+PPR memory under UnifiedModel and SovereignZeroLLMPlanner.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::At dcb3337683ae2181a74ab865027db8a6a2923960, 96 zero-model organs across canonical/swe_kernel, canonical/runtime, and canonical/tools lacked a single sub-millisecond CoW bytecode hot-swap portfolio execution spine uniting PEP-669 zero-overhead line monitoring, in-RAM live-frame differential witness inversion, Guarded Region-SSA Meaning-IR pre-sieving, bidirectional PutGet/frame-independent codec lens synthesis, 7-language Tree-Sitter CST skill transfer, monotonic WebMCP generation-guarded action binding, decidable 1-shot sufficiency/precondition compilation, and Memoir credit-gated VSA+Woodbury+PPR memory under UnifiedModel and SovereignZeroLLMPlanner.",
   "action_summary": "Unify 96 zero-model (K3=0) organs across canonical/swe_kernel, canonical/runtime, and canonical/tools into canonical/swe_kernel/unified_epistemic_portfolio_v1.py and expose all unified capabilities on UnifiedModel, SovereignZeroLLMPlanner, and ClosedLoopAutonomousController: (1) PEP-669 sys.monitoring zero-overhead line localization + pytest assertion producer provenance + pre-compiled CoW bytecode hot-swap zygote screening + 22.5 us UTF-8 byte-span AST splicing + sound AST/Guarded Region-SSA Meaning-IR pre-sieve (0.47 ms); (2) zero-disk CoW in-RAM live-frame differential witness inversion (synthesize_live_differential_witness_repairs_in_ram), zero-extra-fork formatted-message blame guard derivation, Kleene A*->A+ regex tightening, ASCII casefold branch contracts, and bidirectional PutGet/frame-independent codec lens synthesis (M9a_pep681_codec_roundtrip_replace) gated by WholeSliceMutantKillingGate; (3) proved skill composition + scope calibration + 7-language Tree-Sitter CST skill transfer (Python, Rust, Go, TS, JS, C++, Java in 43.7-51.5 ms), decidable 1-shot demonstration sufficiency + hidden-precondition abduction + settlement compiler, monotonic generation-guarded WebMCP HTML/A11y/OSWorld/CLI action binding, and Memoir credit-gated VSA + Sherman-Morrison/Woodbury + Bi-Temporal 2-hop PPR memory (230.2 us/query).",
   "expected_parent_change": "canonical/swe_kernel/unified_epistemic_portfolio_v1.py unifies 96/96 live K3=0 organs; canonical/swe_kernel/differential_witness_inversion_v1.py adds synthesize_live_differential_witness_repairs_in_ram; canonical/runtime/brain_unified_model_v1.py and canonical/swe_kernel/closed_loop_autonomous_controller_v1.py wire organ_portfolio_status, learn_mealy_interface, learn_version_space_ui, act_on_interface, explore_unknown_environment, verify_patch_uncheatable, induce_hypothesis_and_vocabulary, teach_edit_by_example, fast_associate_and_adapt, decide_one_shot_sufficiency, compose_and_calibrate_skills, pre_sieve_meaning_ir, extrapolate_global_opportunity, and PORTFOLIO/EPISTEMIC solve dispatch; BRAIN_UNIFIED_MODEL_V1.json is deterministically recompiled.",
   "expected_parent_frontier_change": "Reaches 13/28 (46.4%) verified blind real-commit OSS solves on fail_to_pass_tasks_20261124_V1.json with 0/28 false positives (100% independent full-file precision) at K3=0 (0 model calls, 0 stored neural parameters), 96/96 ready organs, 22.5 us AST splicing, 0.47 ms Meaning-IR pre-sieving, 230.2 us VSA+Woodbury+PPR recall, and 43.7-51.5 ms 7-language CST transfer.",
@@ -20,7 +20,7 @@
   "required_capability": "Unified K3=0 epistemic portfolio combining PEP-669 localization, pre-compiled CoW bytecode hot-swap screening, in-RAM differential witness inversion, Guarded Region-SSA Meaning-IR pre-sieving, PutGet lens synthesis, 7-language CST transfer, WebMCP generation-guarded action binding, 1-shot sufficiency compilation, and Memoir credit-gated VSA+Woodbury+PPR memory.",
   "stop_condition": "Stop once all 96 organs verify ready, 18/18 portfolio tests + all unified-model/goal-compiler suites pass, 38/38 verify_brain_unified_model_v1 checks pass, and repo_integrity_guard, enforce_load_bearing_primary_pr, and enforce_goal_hierarchy pass with 0 violations and zero overstated capability/terminal credit claims.",
   "falsification_condition": "FALSIFIED if any test in test_unified_epistemic_portfolio_v1 or test_brain_unified_model_v1 fails, if WholeSliceMutantKillingGate admits a single-test overfit false positive, if stale observation generations execute interface mutations, if unverified pondering mutates VSAWoodburyFastMemory precision matrices, or if verify_brain_unified_model_v1 or any CI guard fails.",
-  "verification": "python3 -m pytest -q canonical/tests/test_unified_epistemic_portfolio_v1.py canonical/tests/test_brain_unified_model_v1.py canonical/tests/test_unified_hidden_capabilities_v1.py canonical/tests/test_unified_frontier_spines_v1.py; python3 canonical/runtime/verify_brain_unified_model_v1.py; python3 execution_guard/repo_integrity_guard_v1.py --ci --base 18adda649f28cf786570ea96308768c899c93807; python3 execution_guard/enforce_load_bearing_primary_pr.py --base 18adda649f28cf786570ea96308768c899c93807 --head HEAD; python3 canonical/runtime/enforce_goal_hierarchy.py --base 18adda649f28cf786570ea96308768c899c93807 --head HEAD",
+  "verification": "python3 -m pytest -q canonical/tests/test_unified_epistemic_portfolio_v1.py canonical/tests/test_brain_unified_model_v1.py canonical/tests/test_unified_hidden_capabilities_v1.py canonical/tests/test_unified_frontier_spines_v1.py; python3 canonical/runtime/verify_brain_unified_model_v1.py; python3 execution_guard/repo_integrity_guard_v1.py --ci --base dcb3337683ae2181a74ab865027db8a6a2923960; python3 execution_guard/enforce_load_bearing_primary_pr.py --base dcb3337683ae2181a74ab865027db8a6a2923960 --head HEAD; python3 canonical/runtime/enforce_goal_hierarchy.py --base dcb3337683ae2181a74ab865027db8a6a2923960 --head HEAD",
   "capability_credit_delta": 0,
   "benchmark_or_family_rank_authority": "NONE__SANDBOX_PRODUCER_VERIFICATION_ONLY",
   "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
@@ -107,7 +107,7 @@
     ]
   },
   "recursive_obs": {
-    "canonical_base_commit": "18adda649f28cf786570ea96308768c899c93807",
+    "canonical_base_commit": "dcb3337683ae2181a74ab865027db8a6a2923960",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "subprocess.Popen cold-start and whole-file pytest collection inside live differential witness inversion",
@@ -133,7 +133,7 @@
         "Initial 64-organ portfolio reached 10/28 (35.7%) before Wave 1-3 in-RAM differential witness inversion, sound Meaning-IR pre-sieving, and PutGet codec lens synthesis lifted blind OSS solve rate to 13/28 (46.4%) with 0 FP"
       ],
       "intrinsic_or_path_specific": "PATH_SPECIFIC_UNIFICATION_DEBT resolved by fusing all 96 organs into unified_epistemic_portfolio_v1 and UnifiedModel",
-      "surviving_causal_blocker": "At 18adda649f28cf786570ea96308768c899c93807, 96 zero-model organs across canonical/swe_kernel, canonical/runtime, and canonical/tools lacked a single sub-millisecond CoW bytecode hot-swap portfolio execution spine under UnifiedModel."
+      "surviving_causal_blocker": "At dcb3337683ae2181a74ab865027db8a6a2923960, 96 zero-model organs across canonical/swe_kernel, canonical/runtime, and canonical/tools lacked a single sub-millisecond CoW bytecode hot-swap portfolio execution spine under UnifiedModel."
     },
     "obs_capability": {
       "existing_inherited_routes_checked": "brain_unified_model_v1.py, closed_loop_autonomous_controller_v1.py, differential_witness_inversion_v1.py, guarded_meaning_ir_v1.py, proved_composition_v1.py, tree_sitter_cst_skill_skeleton_v1.py, demonstration_sufficiency_v1.py, and 89 peer K3=0 organs",
@@ -219,7 +219,7 @@
       }
     ],
     "route_frontier": {
-      "canonical_base_commit": "18adda649f28cf786570ea96308768c899c93807",
+      "canonical_base_commit": "dcb3337683ae2181a74ab865027db8a6a2923960",
       "checked_at_utc": "2026-11-26T14:18:33+00:00",
       "max_age_hours": 24,
       "discovery_required": true,
@@ -363,7 +363,7 @@
             "status": "READY",
             "volatility": "STATIC",
             "evidence": [
-              "repo_integrity_guard_v1.py + enforce_load_bearing_primary_pr.py + enforce_goal_hierarchy.py verified against base 18adda649f28cf786570ea96308768c899c93807"
+              "repo_integrity_guard_v1.py + enforce_load_bearing_primary_pr.py + enforce_goal_hierarchy.py verified against base dcb3337683ae2181a74ab865027db8a6a2923960"
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
