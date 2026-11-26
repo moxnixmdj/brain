@@ -118,17 +118,109 @@ def _load(module: str):
     return mod
 
 
+_ENTRYPOINT_PREFERENCE = ("run", "invoke", "main", "verify", "check", "compose", "decompose", "execute")
+
+
+def _bind_entrypoint(mod, args: dict, root: Path):
+    """Find the module's own entrypoint and bind the call to its actual signature.
+
+    MEASURED 2026-11-24: the forge admitted 0 of 12 dormant modules, and 7 of those refusals were
+    NO_ENTRYPOINT purely because this function only accepted a module-level `run` or `invoke`.
+    The modules are not entrypoint-less -- they expose `verify(objective, candidate, ...)`,
+    `decompose(objective)`, `check_source(source, sample=...)`. A capability is a hypothesis, and
+    the hypothesis must be tested against the shape the module actually has, not the shape the
+    forge found convenient.
+
+    Returns (callable, positional_args, keyword_args) or None.
+    """
+    import inspect
+
+    candidates = []
+    for rank, name in enumerate(_ENTRYPOINT_PREFERENCE):
+        fn = getattr(mod, name, None)
+        # The forge loads modules under a `forge_` prefix, so an imported function's __module__
+        # never equals mod.__name__. Membership in the module namespace is the honest test.
+        if callable(fn) and getattr(fn, "__module__", None) in (mod.__name__, "__main__"):
+            candidates.append((rank, name, fn))
+    # Fall back to a module-level run/invoke even when `_load` bound it elsewhere: the old rule
+    # could call these, and widening discovery must never take away a callable it already had.
+    if not candidates:
+        for rank, name in enumerate(("run", "invoke")):
+            fn = getattr(mod, name, None)
+            if callable(fn):
+                candidates.append((rank, name, fn))
+    if not candidates:
+        # No conventional name. Take the module's own single public callable, which is how
+        # `broad_objective_decompose` exposes itself: decompose(objective), and nothing else.
+        own = [
+            (n, f) for n, f in vars(mod).items()
+            if callable(f) and not n.startswith("_") and getattr(f, "__module__", None) == mod.__name__
+            and getattr(f, "__doc__", None) and not isinstance(f, type)
+        ]
+        if len(own) == 1:
+            candidates.append((len(_ENTRYPOINT_PREFERENCE), own[0][0], own[0][1]))
+    if not candidates:
+        return None
+    for _rank, _name, fn in sorted(candidates, key=lambda row: row[0]):
+        try:
+            sig = inspect.signature(fn)
+        except (TypeError, ValueError):
+            continue
+        positional: list = []
+        keyword: dict = {}
+        usable = True
+        params = list(sig.parameters.values())
+        for param in params:
+            if param.kind in (param.VAR_POSITIONAL, param.VAR_KEYWORD):
+                continue
+            name = param.name
+            # A module's own `run(args, root)` wants the whole case dict as ONE parameter, not
+            # the case spread across its parameters. Without this, `run({"argv": []}, root)`
+            # was being called as `run(argv=...)` and failed to bind, so the forge reported
+            # NO_ENTRYPOINT for 15 modules it had been able to call all along.
+            # A single required parameter with no matching key wants the whole case dict.
+            # An `args`-shaped name wants the whole case dict too, whatever the arity: a module's
+            # own `run(args, root)` convention must keep working exactly as it did before this
+            # function existed, or widening the rule would narrow it.
+            if param.default is param.empty and name not in args and (
+                len(params) == 1 or name in ("args", "payload", "case")
+            ):
+                positional.append(dict(args))
+                continue
+            has_value = name in args
+            # A parameter named `root`/`repo_root` is the repository, which the caller never puts in
+            # `args`; supply it rather than making every case carry it.
+            if name in ("root", "repo_root", "repo"):
+                positional.append(root)
+                continue
+            if has_value:
+                if param.kind is param.KEYWORD_ONLY:
+                    keyword[name] = args[name]
+                else:
+                    positional.append(args[name])
+                continue
+            if param.default is not param.empty:
+                continue
+            usable = False
+            break
+        if not usable:
+            continue
+        return fn, positional, keyword
+    return None
+
+
 def _call(module: str, args: dict, root: Path):
     """Run the module. Returns (ok, result_or_error_string)."""
     try:
         mod = _load(module)
     except Exception as exc:
         return False, "LOAD_FAILED:" + type(exc).__name__
-    fn = getattr(mod, "run", None) or getattr(mod, "invoke", None)
-    if not callable(fn):
+    bound = _bind_entrypoint(mod, args, root)
+    if bound is None:
         return False, "NO_ENTRYPOINT"
+    fn, call_args, call_kwargs = bound
     try:
-        out = fn(dict(args), root)
+        out = fn(*call_args, **call_kwargs)
     except Exception as exc:
         # Raising is an honest refusal. Only silence is not.
         return False, type(exc).__name__ + ":" + str(exc)[:200]
