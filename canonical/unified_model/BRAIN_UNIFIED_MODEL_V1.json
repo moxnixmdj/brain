@@ -31362,7 +31362,7 @@
   "harvested_capabilities": 629,
   "harvested_contract_surfaces": 40,
   "harvested_program_surfaces": 589,
-  "knowledge_documents": 739,
+  "knowledge_documents": 740,
   "receipt_backed_capabilities": 296,
   "research_index_records": 7397,
   "routing_tokens": 2723,
@@ -31373,7 +31373,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d41ece6b0470368e53f8922938bf973416ee14a11f6c5eca9e79be9c1b7ad953"
+  "value": "a6b2322278c4b462d64b8ec0938d906b4bf483d7ca2d1b59b0cb5342621ad54c"
  },
  "engines": [
   {
@@ -88264,6 +88264,90 @@
     "let",
     "once",
     "work"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 14822,
+   "headings": [
+    "An asset must keep paying for itself",
+    "0. The one sentence",
+    "1. The law",
+    "2. What is already here, under names nobody would search for",
+    "3. Five doors, ordered by irreversibility of the evidence",
+    "Door 1 — the loop learns. **MERGED** (`75b8a37a`)",
+    "Door 2 — the library has a door in *and* a door out. One law, two gates.",
+    "Door 3 — nothing runs after the answer exists. This is Elon's law as a test.",
+    "Door 4 — spend verification where the oracle is blind, and nowhere else.",
+    "Door 5 — remember worlds, not words.",
+    "4. Why this is ahead, not merely different",
+    "5. What I measured, and what I refuse to assume",
+    "6. Reproduce the census",
+    "{'capabilities': 449, 'bound_capabilities': 153, 'harvested_capabilities': 629,",
+    "'harvested_admitted': 0, 'engines': 84, 'skills': 18, 'research_index_records': 7397, ...}",
+    "8 passed -- and 3 of them fail when the store write is neutered"
+   ],
+   "kind": "DOCUMENT",
+   "path": "AN_ASSET_MUST_KEEP_PAYING_FOR_ITSELF_20261125_V1.md",
+   "sha256": "71c2eb86779e157929b9a9930f242e724de0fcf7538de3bf2077533d79403c7d",
+   "summary": "*2026-11-25 · branch `arena/aa15b62a-brain` @ `b8bde600` · census: 449 capabilities, 153 bound, 629 harvested, **0 admitted**, 84 engines, 18 skills, 7,397 research records · $0, zero model calls*",
+   "terms": {
+    "17.1": 5,
+    "19": 4,
+    "200": 4,
+    "2026": 5,
+    "400": 4,
+    "629": 6,
+    "already": 9,
+    "answer": 6,
+    "arxiv": 6,
+    "because": 9,
+    "canonical": 6,
+    "capabilities": 5,
+    "different": 7,
+    "door": 18,
+    "every": 10,
+    "failure": 6,
+    "frontier": 17,
+    "here": 6,
+    "law": 6,
+    "library": 7,
+    "measured": 7,
+    "mechanism": 6,
+    "model": 15,
+    "ms": 14,
+    "must": 5,
+    "never": 5,
+    "no": 17,
+    "not": 25,
+    "nothing": 7,
+    "one": 11,
+    "only": 11,
+    "over": 5,
+    "own": 5,
+    "part": 6,
+    "per": 5,
+    "program": 9,
+    "rate": 5,
+    "repo": 7,
+    "retirement": 6,
+    "same": 8,
+    "second": 6,
+    "should": 5,
+    "skill": 7,
+    "store": 6,
+    "task": 6,
+    "than": 6,
+    "verification": 8,
+    "world": 9
+   },
+   "title": "An asset must keep paying for itself",
+   "title_terms": [
+    "asset",
+    "itself",
+    "keep",
+    "must",
+    "paying"
    ]
   },
   {
@@ -145780,10 +145864,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 2233,
+  "included_source_count": 2234,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "4901bc02b5b110906026443b746eb8b517cf0cdc132fc4de1e7a857a4ec94395"
+  "source_tree_digest": "bc61a0701b9ab4d3fdc726985a5addf6de0e02892337206f1c4d98053b699416"
  },
  "research_index": [
   {
