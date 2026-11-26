@@ -736,6 +736,64 @@ def induce_insertion_templates(pairs: Iterable[tuple[str, str, str]], *, context
     return sorted(folded.values(), key=lambda t: (t.kind != "RELATIONAL", -t.support, t.template_id()))
 
 
+def joint_expression_templates(pairs):
+    """Keep two sibling changes as one small expression instead of two half repairs.
+
+    Lift only repeated, unchanged formal parameters in a simple function. Free
+    names (especially supplier callees) remain literal. Re-instantiation must
+    reconstruct the complete demonstrated replacement before retaining a row.
+    """
+    out = []
+    for teacher, before, after in pairs:
+        old_tree, new_tree = ast.parse(before), ast.parse(after)
+        fns = [f for f in old_tree.body if isinstance(f, ast.FunctionDef)]
+        for ancestry, path, old, parent, _ in _sites(old_tree):
+            if not isinstance(old, ast.expr) or len(list(ast.walk(old))) > 32:
+                continue
+            new = _resolve(new_tree, path)
+            if type(new) != type(old) or len(list(ast.walk(new))) > 32:
+                continue
+            left, right = list(ast.iter_child_nodes(old)), list(ast.iter_child_nodes(new))
+            if len(left)!=len(right) or sum(_opaque(a)!=_opaque(b) for a,b in zip(left,right)) < 2:
+                continue
+            fn = next((f for f in fns if f.lineno<=old.lineno<=f.end_lineno),None)
+            if fn is None or any(isinstance(st,(ast.Lambda,ast.ClassDef,ast.FunctionDef,ast.AsyncFunctionDef))
+                                 for st in ast.walk(fn) if st is not fn):
+                continue
+            params = {a.arg for a in (*fn.args.posonlyargs,*fn.args.args,*fn.args.kwonlyargs)}
+            lhs,rhs=copy.deepcopy(old),copy.deepcopy(new)
+            names=lambda node:{n.id for n in ast.walk(node) if isinstance(n,ast.Name)}
+            if any(n.startswith(HOLE_PREFIX) for n in names(lhs)|names(rhs)):continue
+            holes={v:f'{HOLE_PREFIX}{i}__' for i,v in enumerate(sorted(params & names(lhs) & names(rhs)))}
+            if not holes:continue
+            for node in (lhs,rhs):
+                for n in ast.walk(node):
+                    if isinstance(n,ast.Name) and n.id in holes:n.id=holes[n.id]
+            bindings={}
+            if not _unify(lhs,old,bindings):continue
+            applied=_instantiate(rhs,bindings)
+            if applied is None or _opaque(applied)!=_opaque(new):continue
+            out.append(NodeTemplate('RELATIONAL','EXPR',type(old).__name__,tuple(ancestry[-1:]),
+                                    ast.unparse(lhs),ast.unparse(rhs),1,(teacher,)))
+    return out
+
+
+def render_one_site(source, candidate):
+    """Transplant only the changed AST site. Don't reformat an entire product file."""
+    path=candidate['site_path']; tree=ast.parse(source); target=ast.parse(candidate['source'])
+    old,new=_resolve(tree,path),_resolve(target,path)
+    if not (isinstance(old,(ast.stmt,ast.expr)) and isinstance(new,(ast.stmt,ast.expr))):return None
+    lines=source.encode().splitlines(keepends=True);a=sum(map(len,lines[:old.lineno-1]))+old.col_offset
+    b=sum(map(len,lines[:old.end_lineno-1]))+old.end_col_offset;raw=source.encode();text=ast.unparse(new)
+    if b'#' in raw[a:b] or '\n' in text:return None
+    for replacement in ([text, f'({text})'] if isinstance(new,ast.expr) else [text]):
+        patched=(raw[:a]+replacement.encode()+raw[b:]).decode()
+        try:
+            if ast.dump(ast.parse(patched))==ast.dump(target):return patched
+        except SyntaxError:pass
+    return None
+
+
 def _parse_pattern(text: str, mode: str) -> ast.AST | None:
     try:
         if mode == "EXPR":

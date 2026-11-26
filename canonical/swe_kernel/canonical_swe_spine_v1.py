@@ -2934,6 +2934,8 @@ def solve_swe_repo_native_multifile(
     test_targets: Sequence[str] | None = None,
     candidate_files: Sequence[str] | None = None,
     in_run_repair_vocab: Mapping[str, Any] | None = None,
+    repair_store: str | Path | None = None,
+    learn_verified: bool = True,
     prior_demonstrations: Sequence[tuple[str, str, str]] = (),
     witness_envs: Sequence[Mapping[str, Any]] | None = None,
     witness_targets: Sequence[Any] | None = None,
@@ -2960,10 +2962,12 @@ def solve_swe_repo_native_multifile(
     from canonical.swe_kernel import repo_component_petri_v1 as petri
     from canonical.tools import arm_learned_from_its_own_verified_repairs_v1 as arm_learn
     from canonical.tools import assertion_localisation_v1 as assert_loc
+    from canonical.swe_kernel.induced_edit_basis_v1 import joint_expression_templates, render_one_site
     from canonical.swe_kernel.local_type_paths_v1 import return_paths
     from canonical.swe_kernel import prior_owned_insertions_v1 as history
     from canonical.swe_kernel import repair_input_dependency_gate_v1 as dependencies
-    from canonical.swe_kernel.repo_native_test_surface_v1 import test_surface, merge_vocab, export_vocab
+    from canonical.swe_kernel.repo_native_test_surface_v1 import (
+        EXCLUDED, copy_product_tree, restored_surface, test_surface, merge_vocab, export_vocab)
     from canonical.tools import line_localisation_v1 as line_loc
 
     t0 = time.perf_counter()
@@ -2996,10 +3000,25 @@ def solve_swe_repo_native_multifile(
         folded = arm_learn.fold(demos_list)
         vocab = merge_vocab(vocab, folded)
 
+    journal = None
+    if repair_store is not None:
+        from canonical.swe_kernel.repair_journal_v1 import RepairJournal, token
+        if pathlib.Path(repair_store).resolve().is_relative_to(root):
+            return {'pass':False, 'status':'REFUSED__STORE_INSIDE_RECEIVER', 'model_calls':0}
+        journal = RepairJournal(repair_store)
+        journal.sleep()  # resume a bounded number of committed wake tickets
+
     deadline = time.monotonic() + timeout_s
     history_info = {"base": None, "candidates": 0, "error": None}
     oracle = lambda ws: test_surface(ws, test_targets, timeout=deadline - time.monotonic())
-    baseline = oracle(root)
+    with _tf.TemporaryDirectory(prefix='native_baseline_') as tb:
+        copied = pathlib.Path(tb)/'repo'
+        try:
+            copy_product_tree(root, copied)
+        except (OSError, ValueError, RuntimeError) as exc:
+            return {'pass':False, 'status':'UNMEASURED__SOURCE_COPY', 'detail':str(exc)[:200], 'model_calls':0}
+        baseline = oracle(copied)
+        baseline['output'] = baseline['output'].replace(str(copied)+'/', '')
 
     def _verify_in_isolated_cow(rel_edits: Mapping[str, str], *, single_test_src: str | None = None) -> tuple[bool, str, bool]:
         """Screen single-file edit via 1.58 ms `os.fork()` CoW Zygote when self-contained, then confirm on CoW workspace."""
@@ -3035,7 +3054,7 @@ def solve_swe_repo_native_multifile(
                     pass
         with _tf.TemporaryDirectory(prefix="wave23_cow_") as td:
             ws = pathlib.Path(td) / "repo"
-            _shutil.copytree(root, ws, ignore=_shutil.ignore_patterns(".git", "__pycache__", "*.pyc"))
+            copy_product_tree(root,ws)
             for rel, content in rel_edits.items():
                 dst = ws / rel
                 dst.parent.mkdir(parents=True, exist_ok=True)
@@ -3043,8 +3062,7 @@ def solve_swe_repo_native_multifile(
                     dst.unlink()
                 dst.write_text(content, encoding="utf-8")
             checked = oracle(ws)
-            ok = (checked["status"] == "GREEN" and checked["passed"] == baseline["passed"] | baseline["failed"]
-                  and checked["skipped"] == baseline["skipped"])
+            ok = restored_surface(baseline,checked)
             return ok, checked["output"], zygote_used
 
     def _crystallize_and_finish(
@@ -3062,7 +3080,17 @@ def solve_swe_repo_native_multifile(
             if orig_p.is_file():
                 orig_src = orig_p.read_text(encoding="utf-8", errors="replace")
                 new_demos.append((f"{rel}@{hashlib.sha256(orig_src.encode()).hexdigest()}:{hashlib.sha256(new_src.encode()).hexdigest()}", orig_src, new_src))
-        updated_vocab = merge_vocab(vocab, arm_learn.fold(new_demos))
+        learned = arm_learn.fold(new_demos)
+        learned["node"] = joint_expression_templates(new_demos) + learned["node"]
+        updated_vocab = merge_vocab(vocab, learned)
+        ticket = None
+        if journal is not None and learn_verified:
+            cert = {'failed_before':sorted(baseline['failed']), 'mechanism':tier,
+                    'restored_surface_sha256':token([sorted(baseline['passed']|baseline['failed']), sorted(baseline['skipped'])]),
+                    'target_tests':{name:hashlib.sha256((root/name).read_bytes()).hexdigest() for name in test_rels},
+                    'edits':[d[0] for d in new_demos], 'authority':'SELECTED_TESTS_ONLY'}
+            ticket = journal.enqueue(cert,learned)
+            journal.sleep()
         if keep_patch_applied:
             for rel, new_src in sorted(edits.items()):
                 dst = root / rel
@@ -3076,7 +3104,7 @@ def solve_swe_repo_native_multifile(
             "patched_files": sorted(edits.keys()),
             "patches": dict(edits),
             "localization": dict(localization),
-            "history": dict(history_info),
+            "history": dict(history_info), "teacher_key":ticket,
             "tested_surface_count": len(baseline["passed"]) + len(baseline["failed"]),
             "knowledge_status": "TEACHER_HYPOTHESIS_RECHECK_ON_RECEIVER",
             "stages_run": stages,
@@ -3110,16 +3138,14 @@ def solve_swe_repo_native_multifile(
     # Stage 0: Cross-file crash-frame + assertion + line localization
     stages_run: list[str] = ["STAGE_0_CROSSFILE_LOCALIZATION"]
     crash_frames = cdg.extract_crash_frames(base_out)
-    py_source_rels = [
-        p.relative_to(root).as_posix()
-        for p in sorted(root.rglob("*.py"))
-        if ".git" not in p.parts
-        and "__pycache__" not in p.parts
-        and not p.name.startswith("test_") and not p.name.endswith("_test.py")
+    product_files = []
+    for parent, dirs, names in _os.walk(root):
+        dirs[:] = sorted(d for d in dirs if d not in EXCLUDED and d not in {'test','tests'} and not d.startswith('.'))
+        product_files.extend(pathlib.Path(parent)/f for f in sorted(names) if f.endswith('.py'))
+    py_source_rels = [p.relative_to(root).as_posix() for p in product_files
+        if not p.name.startswith("test_") and not p.name.endswith("_test.py")
         and p.name != "conftest.py" and not p.is_symlink()
-        and p.relative_to(root).as_posix() not in {str(t).split("::")[0] for t in test_targets or ()}
-        and "/tests/" not in f"/{p.relative_to(root).as_posix()}"
-    ]
+        and p.relative_to(root).as_posix() not in {str(t).split("::")[0] for t in test_targets or ()}]
     test_rels = [
         t for t in (test_targets or ()) if str(t).endswith(".py") and (root / t).is_file()
     ] or [
@@ -3207,6 +3233,12 @@ def solve_swe_repo_native_multifile(
     }
     zygote_screened = 0
 
+    if journal is not None:
+        retrieved = journal.recall(((root/rel).read_text(encoding='utf-8',errors='replace'),
+                                    set(ranked_lines_by_file[rel])) for rel in ranked_files)
+        vocab = merge_vocab(vocab,retrieved)
+        localization_report['store_templates_retrieved'] = sum(map(len,retrieved.values()))
+
     # Stage 1: Online in-run learned repair vocabulary (`arm_learned_from_its_own_verified_repairs_v1`)
     if vocab:
         stages_run.append("STAGE_1_IN_RUN_ALPHA_CANONICAL_TRANSFER")
@@ -3217,7 +3249,7 @@ def solve_swe_repo_native_multifile(
             except Exception:
                 props = []
             for p_row in props[:12]:
-                cand_src = p_row.get("source") or p_row.get("patched") or p_row.get("code")
+                cand_src = render_one_site(orig_src, p_row)
                 if not isinstance(cand_src, str) or cand_src == orig_src:
                     continue
                 ok, _out, zused = _verify_in_isolated_cow({rel: cand_src}, single_test_src=single_test_src)
@@ -3227,7 +3259,7 @@ def solve_swe_repo_native_multifile(
                         {rel: cand_src},
                         tier="IN_RUN_ALPHA_TRANSFER",
                         extra={"fired_template_id": p_row["template_id"],
-                               "candidate_sha256": p_row["source_sha256"],
+                               "candidate_sha256": hashlib.sha256(cand_src.encode()).hexdigest(),
                                "teacher_ids": p_row["template"]["taught_by"]},
                         localization=localization_report,
                         stages=stages_run,

@@ -3,11 +3,39 @@ from __future__ import annotations
 
 import dataclasses
 import os
+import shutil
+import signal
 from pathlib import Path
 import subprocess
 import sys
 import tempfile
 import xml.etree.ElementTree as ET
+
+
+EXCLUDED = frozenset({'.git', '.venv', 'venv', 'node_modules', '__pycache__', '.pytest_cache'})
+
+
+def copy_product_tree(source, destination):
+    """Copy a trusted disposable checkout without following external links.
+
+    This is not process confinement: untrusted project code also needs an OS
+    sandbox. In particular, fork alone is not a filesystem snapshot.
+    """
+    source = Path(source).resolve(strict=True)
+    def ignore(folder, names):
+        skipped = {n for n in names if n in EXCLUDED or n.endswith('.pyc')}
+        for n in set(names) - skipped:
+            p = Path(folder)/n
+            if p.is_symlink() and (Path(os.readlink(p)).is_absolute() or not p.resolve().is_relative_to(source)):
+                raise ValueError('external or absolute product symlink: '+str(p.relative_to(source)))
+        return skipped
+    shutil.copytree(source,destination,ignore=ignore,symlinks=True)
+
+
+def restored_surface(baseline, candidate):
+    return (baseline['status']=='RED' and bool(baseline['failed']) and candidate['status']=='GREEN'
+            and candidate['passed']==baseline['passed'] | baseline['failed']
+            and candidate['skipped']==baseline['skipped'])
 
 
 def test_surface(root, targets, *, timeout):
@@ -18,14 +46,21 @@ def test_surface(root, targets, *, timeout):
         xml = Path(td)/'report.xml'
         cmd = [sys.executable, '-m', 'pytest', '-q', '--tb=short', '-p', 'no:cacheprovider',
                '-o', 'addopts=', '--junitxml='+str(xml), '--', *(targets or ['.'])]
-        try:
-            proc = subprocess.run(cmd, cwd=root, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-                                  timeout=min(15,timeout), text=True, errors='replace',
-                                  env={**os.environ, 'PYTHONPATH':str(root),'PYTHONDONTWRITEBYTECODE':'1',
-                                       'PYTEST_DISABLE_PLUGIN_AUTOLOAD':'1','PYTEST_ADDOPTS':''})
-        except subprocess.TimeoutExpired:
-            return {**result, 'status':'TIMEOUT'}
-        result['output'] = proc.stdout
+        env={'PATH':f'{Path(sys.executable).parent}:/usr/bin:/bin', 'HOME':td, 'LC_ALL':'C.UTF-8',
+             'PYTHONPATH':os.pathsep.join([str(Path(root)/'src'), str(root)]), 'PYTHONDONTWRITEBYTECODE':'1',
+             'PYTEST_DISABLE_PLUGIN_AUTOLOAD':'1'}
+        with tempfile.TemporaryFile() as log:
+            proc = subprocess.Popen(cmd,cwd=root,env=env,stdin=subprocess.DEVNULL,stdout=log,
+                                    stderr=subprocess.STDOUT,start_new_session=True)
+            try:
+                proc.wait(timeout=min(15,timeout))
+            except subprocess.TimeoutExpired:
+                try: os.killpg(proc.pid,signal.SIGKILL)
+                except ProcessLookupError: pass
+                proc.wait()
+                return {**result, 'status':'TIMEOUT'}
+            size=log.tell();log.seek(max(0,size-65536))
+            result['output']=log.read().decode(errors='replace')
         if not xml.is_file():
             return {**result, 'status':'NO_REPORT'}
         try:

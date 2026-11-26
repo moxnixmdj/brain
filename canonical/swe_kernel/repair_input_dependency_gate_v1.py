@@ -104,7 +104,18 @@ def _body_loads(node: ast.AST) -> set[str]:
     return out
 
 
-def parameter_use(source_text: str) -> dict[str, frozenset[str]]:
+def _owned_functions(tree):
+    def visit(node, owner):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            owner = (*owner, node.name)
+            if not isinstance(node, ast.ClassDef):
+                yield '.'.join(owner), node
+        for child in ast.iter_child_nodes(node):
+            yield from visit(child, owner)
+    yield from visit(tree, ())
+
+
+def _qualified_uses(source_text: str) -> dict[str, frozenset[str]]:
     """For every function in `source_text`, the parameters its body actually reads."""
     if not isinstance(source_text, str) or not source_text.strip():
         raise GateError("SOURCE_REQUIRED")
@@ -114,17 +125,24 @@ def parameter_use(source_text: str) -> dict[str, frozenset[str]]:
         raise GateError("SOURCE_NOT_PARSEABLE") from exc
 
     uses: dict[str, frozenset[str]] = {}
-    for node in ast.walk(tree):
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
-            loaded = _body_loads(node)
-            uses[node.name] = frozenset(slot for slot, name in _slots(node) if name in loaded)
+    for owner, node in _owned_functions(tree):
+        loaded = _body_loads(node)
+        uses[owner] = frozenset(slot for slot, name in _slots(node) if name in loaded)
     return uses
+
+
+def parameter_use(source_text: str) -> dict[str, frozenset[str]]:
+    """Qualified owners, plus the original short lookup when it is unambiguous."""
+    from collections import Counter
+    uses = _qualified_uses(source_text)
+    short = Counter(k.rsplit('.',1)[-1] for k in uses)
+    return {**uses, **{k.rsplit('.',1)[-1]:v for k,v in uses.items() if short[k.rsplit('.',1)[-1]]==1}}
 
 
 def lost_dependencies(before_source: str, after_source: str) -> list[dict[str, str]]:
     """Parameters that a function read before the patch and no longer reads after it."""
-    before = parameter_use(before_source)
-    after = parameter_use(after_source)
+    before = _qualified_uses(before_source)
+    after = _qualified_uses(after_source)
     lost: list[dict[str, str]] = []
     for name, used_before in before.items():
         if name not in after:
@@ -144,8 +162,8 @@ def _names_by_slot(source_text: str, function_name: str) -> dict[str, str]:
         tree = ast.parse(source_text)
     except SyntaxError:
         return {}
-    for node in ast.walk(tree):
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == function_name:
+    for owner, node in _owned_functions(tree):
+        if owner == function_name:
             return {slot: param for slot, param in _slots(node)}
     return {}
 
@@ -238,9 +256,7 @@ def imported_callee_use(
     mod_aliases.update(top_aliases)
 
     out: dict[str, dict[str, str]] = {}
-    for node in ast.walk(tree):
-        if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
-            continue
+    for owner, node in _owned_functions(tree):
         fn_syms = dict(mod_syms)
         fn_aliases = dict(mod_aliases)
         local_syms, local_aliases = _collect_non_stdlib_imports(node)
@@ -273,7 +289,7 @@ def imported_callee_use(
                         mod_origin = fn_aliases.get(root_nm) or fn_syms[root_nm]
                         used_modules.setdefault(mod_origin, f"{root_nm}.{cur.attr}")
             stack.extend(ast.iter_child_nodes(cur))
-        out[node.name] = used_modules
+        out[owner] = used_modules
     return out
 
 

@@ -1609,6 +1609,7 @@ class Creature:
         return self._unified_model
 
     def solve_swe_repo_native(self, repo_root: str | pathlib.Path, **kwargs: Any) -> dict[str, Any]:
+        kwargs.setdefault("repair_store", self.root / "repair.sqlite")
         return self._ensure_unified_model().solve_swe_repo_native(repo_root, **kwargs)
 
     def live_browser_episode(self, goal: str, **kwargs: Any) -> dict[str, Any]:
