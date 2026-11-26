@@ -24,6 +24,7 @@ negative-effect guard passes.
 from __future__ import annotations
 
 import hashlib
+import importlib
 import os
 import shutil
 import subprocess
@@ -33,12 +34,28 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
-from canonical.runtime import value_algebra_v1 as val_alg
-from canonical.swe_kernel import interface_action_grammar_v1 as action_grammar
-from canonical.swe_kernel import speculative_cow_petri_agent_v1 as scpa
-from canonical.swe_kernel import universal_computer_agent_v1 as uca
-from canonical.swe_kernel import zygote_worker_pool_v1 as zygote_pool
-from canonical.tools import the_failed_attempt_is_free_v1 as free_fail
+
+class _LazyModule:
+    __slots__ = ("_mod_name", "_loaded")
+
+    def __init__(self, mod_name: str) -> None:
+        object.__setattr__(self, "_mod_name", mod_name)
+        object.__setattr__(self, "_loaded", None)
+
+    def __getattr__(self, item: str) -> Any:
+        mod = object.__getattribute__(self, "_loaded")
+        if mod is None:
+            mod = importlib.import_module(object.__getattribute__(self, "_mod_name"))
+            object.__setattr__(self, "_loaded", mod)
+        return getattr(mod, item)
+
+
+val_alg = _LazyModule("canonical.runtime.value_algebra_v1")
+action_grammar = _LazyModule("canonical.swe_kernel.interface_action_grammar_v1")
+scpa = _LazyModule("canonical.swe_kernel.speculative_cow_petri_agent_v1")
+uca = _LazyModule("canonical.swe_kernel.universal_computer_agent_v1")
+zygote_pool = _LazyModule("canonical.swe_kernel.zygote_worker_pool_v1")
+free_fail = _LazyModule("canonical.tools.the_failed_attempt_is_free_v1")
 
 SCHEMA = "PROJECT_BRAIN_CANONICAL_CU_SANDBOX_SPINE_V1"
 NON_CLAIMS = (
@@ -1114,5 +1131,332 @@ def elevate_gui_trace_to_cli_skill(
         "model_calls": 0,
         "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
     }
+
+
+def execute_horizon_bounded_zero_screenshot_cu(
+    *,
+    task_id: str = "cu_task",
+    goal: Sequence[str] = (),
+    constraints: Sequence[Mapping[str, Any]] = (),
+    subgoals: Sequence[Mapping[str, Any]] = (),
+    total_step_budget: int = 16,
+    initial_state: Mapping[str, bytes] | None = None,
+    dom_observation: Mapping[str, Any] | None = None,
+    target_url: str | None = None,
+    run_tier0_cache_suite: bool = False,
+    vocabulary_invocation: str | None = None,
+    vocabulary_states: Mapping[str, Mapping[str, bytes]] | None = None,
+) -> dict[str, Any]:
+    """Wave 25 (`0F`): Horizon-Bounded Computer-Use Execution + Zero-Screenshot DOM Cache + Vocabulary Growth.
+
+    Fuses 3 hidden `Agent S4` / `CLI-Anything` zero-LLM engines:
+      1. `verified_zero_screenshot_action_cache_v1` (`normalize_url_to_origin_and_template`,
+         `canonical_dom_a11y_fingerprint`, `execute_tier0_data_layer_suite`).
+      2. `horizon_bounded_execution_v1` (`Constraint`, `SubGoal`, `sense_task`,
+         `generate_decompositions`, `execute_task`) for checkpointed multi-subgoal execution.
+      3. `vocabulary_growth_v1` (`evidence`, `diagnose`) for refusal-driven observable vocabulary growth.
+    """
+    import tempfile as _tf
+
+    from canonical.runtime import verified_zero_screenshot_action_cache_v1 as zsc
+    from canonical.swe_kernel import horizon_bounded_execution_v1 as hbe
+    from canonical.swe_kernel import vocabulary_growth_v1 as vg
+
+    t0 = time.perf_counter()
+    cache_report: dict[str, Any] | None = None
+    if target_url is not None or dom_observation is not None or run_tier0_cache_suite:
+        cache_report = {}
+        if target_url is not None:
+            origin, template = zsc.normalize_url_to_origin_and_template(str(target_url))
+            cache_report["url_origin"] = origin
+            cache_report["url_template"] = template
+        if dom_observation is not None:
+            cache_report["dom_fingerprint"] = zsc.canonical_dom_a11y_fingerprint(dom_observation)
+        if run_tier0_cache_suite:
+            cache_report["tier0_suite"] = zsc.execute_tier0_data_layer_suite()
+
+    horizon_report: dict[str, Any] | None = None
+    if subgoals:
+        c_objs = [
+            hbe.Constraint(
+                name=str(c.get("name") or f"c_{i}"),
+                check=str(c.get("check") or ""),
+                must_hold_at=tuple(str(x) for x in (c.get("must_hold_at") or ("every_step",))),
+            )
+            for i, c in enumerate(constraints)
+        ]
+        sg_objs = [
+            hbe.SubGoal(
+                subgoal_index=int(sg.get("subgoal_index", i)),
+                description=str(sg.get("description") or f"subgoal_{i}"),
+                precondition=frozenset(str(x) for x in (sg.get("precondition") or ())),
+                postcondition=frozenset(str(x) for x in (sg.get("postcondition") or ())),
+                step_budget=int(sg.get("step_budget", 4)),
+                constraint_names=frozenset(str(x) for x in (sg.get("constraint_names") or ())),
+            )
+            for i, sg in enumerate(subgoals)
+        ]
+        sensed = hbe.sense_task(
+            str(task_id),
+            [str(g) for g in goal],
+            c_objs,
+            int(total_step_budget),
+            sg_objs,
+            dict(initial_state or {}),
+        )
+        decomp = hbe.generate_decompositions(sensed)
+        exec_out = hbe.execute_task(decomp)
+        res_obj = exec_out.get("result") or exec_out.get("execution_result")
+        horizon_report = {
+            "verdict": str(exec_out.get("verdict") or ""),
+            "goal_reached": bool(getattr(res_obj, "goal_reached", exec_out.get("goal_reached", False))),
+            "within_total_budget": bool(getattr(res_obj, "within_total_budget", True)),
+            "all_constraints_preserved": bool(getattr(res_obj, "all_constraints_preserved", True)),
+            "total_steps": int(getattr(res_obj, "total_steps", 0)),
+            "rollbacks": int(getattr(res_obj, "rollbacks", 0)),
+        }
+
+    vocab_report: dict[str, Any] | None = None
+    if vocabulary_invocation and vocabulary_states:
+        with _tf.TemporaryDirectory(prefix="wave25_vg_") as td:
+            ev = vg.evidence(
+                str(vocabulary_invocation),
+                {str(k): dict(v) for k, v in vocabulary_states.items()},
+                Path(td),
+                repetitions=2,
+            )
+            diag = vg.diagnose(ev, {str(k): dict(v) for k, v in vocabulary_states.items()})
+            vocab_report = {
+                "invocation": str(vocabulary_invocation),
+                "diagnosis": diag,
+            }
+
+    checks: list[bool] = []
+    if cache_report is not None:
+        suite = cache_report.get("tier0_suite")
+        checks.append(bool(suite.get("pass", suite.get("ok", True))) if isinstance(suite, Mapping) else True)
+    if horizon_report is not None:
+        checks.append(bool(horizon_report.get("within_total_budget")) and bool(horizon_report.get("all_constraints_preserved")))
+    if vocab_report is not None:
+        checks.append(bool(vocab_report.get("diagnosis")))
+    ok = bool(checks) and all(checks)
+    return {
+        "schema": SCHEMA,
+        "pass": ok,
+        "status": "PASS__HORIZON_ZERO_SCREENSHOT_CU_EXECUTED" if ok else "FAIL_CLOSED__CU_BUDGET_OR_CACHE_FAILED",
+        "zero_screenshot_cache": cache_report,
+        "horizon_execution": horizon_report,
+        "vocabulary_growth": vocab_report,
+        "model_calls": 0,
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+    }
+
+
+def plan_two_move_and_horizon_bridge(
+    *,
+    two_move_start: Mapping[str, int] | None = None,
+    two_move_goal: Mapping[str, Any] | None = None,
+    two_move_moves: Sequence[Mapping[str, Any]] = (),
+    two_move_max_depth: int = 8,
+    bridge_task_id: str | None = None,
+    bridge_goal: Sequence[str] = (),
+    bridge_constraints: Sequence[Mapping[str, Any]] = (),
+    bridge_subgoals: Sequence[Mapping[str, Any]] = (),
+    bridge_total_step_budget: int = 16,
+    bridge_initial_state: Mapping[str, bytes] | None = None,
+    bridge_holdout_initial_states: Sequence[Mapping[str, bytes]] = (),
+    dag_root: str | Path | None = None,
+    dag_stages: Sequence[str] = (),
+    dag_stage_solver: Callable[[str, int], dict[str, Any]] | None = None,
+    dag_scope_paths: Sequence[str] = (),
+    osworld_state: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Wave 30 (`0F` × `a_goal_that_needs_two_moves_v1` × `perfect_algorithm_horizon_bridge_v1`
+    × `goal_dag_executor_v1` × `osworld_v21_workflow_policy_v2`, `K3=0`).
+
+    Compositional multi-move planning + long-horizon verified CU bridge + transactional Goal DAGs
+    + multi-clause OSWorld v2.1 cross-step workflow routing:
+      1. Plans multi-move sequences over capability classes (`a_goal_that_needs_two_moves_v1`)
+         for goals that NO single capability can satisfy (detecting order dependence automatically).
+      2. Runs the 5-phase `perfect_algorithm_horizon_bridge_v1` pipeline (`sense -> contrast ->
+         identify -> admit -> remember`) over bounded long-horizon subgoals.
+      3. Executes a transactional multi-stage Goal DAG (`goal_dag_executor_v1`) with automatic
+         rollback on syntax or stage failure.
+      4. Routes multi-clause OSWorld v2.1 desktop instructions with cross-clause reference
+         materialization (`osworld_v21_workflow_policy_v2`).
+    """
+    t0 = time.perf_counter()
+    two_move_report: dict[str, Any] | None = None
+    two_move_ok = True
+    if two_move_start is not None and two_move_goal is not None and two_move_moves:
+        from canonical.runtime import a_goal_that_needs_two_moves_v1 as two_m
+
+        start_w = two_m.world(
+            names=int(two_move_start.get("names", 0)),
+            readable=two_move_start.get("readable"),
+            contents=two_move_start.get("contents"),
+            removed=int(two_move_start.get("removed", 0)),
+        )
+        at_least_norm = (
+            {str(k).upper(): int(v) for k, v in two_move_goal["at_least"].items()}
+            if two_move_goal.get("at_least")
+            else None
+        )
+        at_most_norm = (
+            {str(k).upper(): int(v) for k, v in two_move_goal["at_most"].items()}
+            if two_move_goal.get("at_most")
+            else None
+        )
+        goal_obj = two_m.Goal(
+            at_least=at_least_norm,
+            at_most=at_most_norm,
+            desc=str(two_move_goal.get("desc") or ""),
+        )
+        move_objs = [
+            two_m.Move(str(m["id"]), str(m.get("tool") or m["id"]), dict(m.get("signature") or {}))
+            for m in two_move_moves
+        ]
+        one_ans = two_m.one_move_answers(goal_obj, move_objs, start_w)
+        order_info = two_m.why_order_matters(move_objs, start_w)
+        try:
+            seq = two_m.plan(start_w, goal_obj, move_objs, max_depth=int(two_move_max_depth))
+            # Verify plan by simulating transitions
+            cur = dict(start_w)
+            by_id = {mv.id: mv for mv in move_objs}
+            for mid in seq:
+                cur = by_id[mid].apply(cur)
+            holds_end = goal_obj.holds(cur)
+            two_move_ok = bool(holds_end)
+            two_move_report = {
+                "pass": two_move_ok,
+                "start_world": start_w,
+                "final_world": cur,
+                "one_move_answers": one_ans,
+                "requires_multi_move": len(one_ans) == 0 and len(seq) >= 2,
+                "plan": seq,
+                "why_order_matters": order_info,
+            }
+        except two_m.Refusal as ref:
+            two_move_ok = False
+            two_move_report = {
+                "pass": False,
+                "refusal_code": str(ref.code),
+                "refusal_detail": str(ref.detail),
+                "one_move_answers": one_ans,
+                "plan": None,
+            }
+
+    bridge_report: dict[str, Any] | None = None
+    bridge_ok = True
+    if bridge_task_id and bridge_subgoals:
+        from canonical.swe_kernel import perfect_algorithm_horizon_bridge_v1 as hbridge
+
+        c_objs = [
+            hbridge.HConstraint(
+                name=str(c.get("name") or f"c_{i}"),
+                check=str(c.get("check") or ""),
+                must_hold_at=tuple(str(x) for x in (c.get("must_hold_at") or ("every_step",))),
+            )
+            for i, c in enumerate(bridge_constraints)
+        ]
+        sg_objs = [
+            hbridge.HSubGoal(
+                subgoal_index=int(sg.get("subgoal_index", i)),
+                description=str(sg.get("description") or f"sg_{i}"),
+                precondition=frozenset(str(x) for x in (sg.get("precondition") or ())),
+                postcondition=frozenset(str(x) for x in (sg.get("postcondition") or ())),
+                step_budget=int(sg.get("step_budget", 4)),
+                constraint_names=frozenset(str(x) for x in (sg.get("constraint_names") or ())),
+            )
+            for i, sg in enumerate(bridge_subgoals)
+        ]
+        sensed = hbridge.bridge_sense(
+            str(bridge_task_id),
+            [str(g) for g in bridge_goal],
+            c_objs,
+            int(bridge_total_step_budget),
+            sg_objs,
+            dict(bridge_initial_state or {}),
+        )
+        contrasted = hbridge.bridge_contrast(sensed)
+        identified = hbridge.bridge_identify(contrasted)
+        holdouts = [
+            hbridge.HTask(
+                task_id=f"{bridge_task_id}_holdout_{hi}",
+                goal=frozenset(str(g) for g in bridge_goal),
+                constraints=tuple(c_objs),
+                total_step_budget=int(bridge_total_step_budget),
+                subgoals=tuple(sg_objs),
+                initial_state=dict(hst),
+            )
+            for hi, hst in enumerate(bridge_holdout_initial_states)
+        ]
+        admitted = hbridge.bridge_admit(identified, holdout_tasks=holdouts)
+        remembered = hbridge.bridge_remember(admitted)
+        bridge_ok = (
+            admitted.get("status") == hbridge.BRIDGE_ADMITTED
+            if holdouts
+            else identified.get("status") == hbridge.BRIDGE_IDENTIFIED
+        )
+        bridge_report = {
+            "pass": bridge_ok,
+            "sense_status": sensed.get("status"),
+            "contrast_status": contrasted.get("status"),
+            "identify_status": identified.get("status"),
+            "admit_status": admitted.get("status"),
+            "remember_status": remembered.get("status"),
+            "holdout_count": len(holdouts),
+            "subgoal_count": len(sg_objs),
+        }
+
+    dag_report: dict[str, Any] | None = None
+    dag_ok = True
+    if dag_root is not None and dag_stages and dag_stage_solver is not None:
+        from canonical.swe_kernel import goal_dag_executor_v1 as dag_exec
+
+        dag_res = dag_exec.execute_transactional_goal_dag(
+            root=Path(dag_root).resolve(),
+            stages=list(dag_stages),
+            stage_solver=dag_stage_solver,
+            scope_paths=list(dag_scope_paths),
+        )
+        dag_ok = bool(
+            dag_res.get("ok")
+            or dag_res.get("all_passed")
+            or dag_res.get("pass")
+            or dag_res.get("status") in {"PASS", "ALL_STAGES_PASSED", "COMPLETED"}
+        )
+        dag_report = dict(dag_res)
+
+    osworld_report: dict[str, Any] | None = None
+    osworld_ok = True
+    if osworld_state is not None:
+        from canonical.runtime import osworld_v21_workflow_policy_v2 as osw_pol
+
+        osw_out = dict(osw_pol.decide(dict(osworld_state)))
+        osworld_ok = bool(osw_out.get("actions") or osw_out.get("response") is not None)
+        osworld_report = osw_out
+
+    any_active = any(x is not None for x in (two_move_report, bridge_report, dag_report, osworld_report))
+    overall = any_active and two_move_ok and bridge_ok and dag_ok and osworld_ok
+    return {
+        "schema": SCHEMA,
+        "pass": overall,
+        "status": (
+            "PASS__TWO_MOVE_HORIZON_CU_PLANNED"
+            if overall
+            else "FAIL_CLOSED__TWO_MOVE_OR_HORIZON_CU_FAILED"
+        ),
+        "two_move_plan": two_move_report,
+        "horizon_bridge": bridge_report,
+        "goal_dag": dag_report,
+        "osworld_v21_decision": osworld_report,
+        "model_calls": 0,
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+    }
+
+
+
+
 
 

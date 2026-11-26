@@ -59,6 +59,55 @@ from typing import Any, Iterable, Mapping
 _DBSP_CACHE_VERSION = 2
 
 
+def _fast_scandir_files(
+    root_str: str,
+    rel_root: str,
+    *,
+    suffix: str | None = None,
+    skip_dirs: frozenset[str] = frozenset({".git", "__pycache__"}),
+    skip_rel_prefixes: tuple[str, ...] = (),
+) -> list[tuple[str, str, os.stat_result]]:
+    """Wave 21 Elon-speed `os.scandir` walker returning `(abs_path, rel_posix, stat)` sorted identically to `Path`."""
+    start = os.path.join(root_str, rel_root) if rel_root else root_str
+    if not os.path.isdir(start):
+        return []
+    out: list[tuple[str, str, os.stat_result]] = []
+    stack: list[tuple[str, str]] = [(start, rel_root.strip("/"))]
+    while stack:
+        cur_dir, cur_rel = stack.pop()
+        try:
+            with os.scandir(cur_dir) as it:
+                for entry in it:
+                    name = entry.name
+                    rel = f"{cur_rel}/{name}" if cur_rel else name
+                    try:
+                        is_dir = entry.is_dir(follow_symlinks=True)
+                    except OSError:
+                        continue
+                    if is_dir:
+                        if name in skip_dirs:
+                            continue
+                        if skip_rel_prefixes and any(rel == p or rel.startswith(p + "/") for p in skip_rel_prefixes):
+                            continue
+                        stack.append((entry.path, rel))
+                        continue
+                    if suffix is not None and not name.endswith(suffix):
+                        continue
+                    if skip_rel_prefixes and any(rel == p or rel.startswith(p + "/") for p in skip_rel_prefixes):
+                        continue
+                    try:
+                        if not entry.is_file(follow_symlinks=True):
+                            continue
+                        st = entry.stat(follow_symlinks=True)
+                    except OSError:
+                        continue
+                    out.append((entry.path, rel, st))
+        except OSError:
+            continue
+    out.sort(key=lambda item: item[1].split("/"))
+    return out
+
+
 class _DBSPCompileCache:
     """Wave 14 DBSP / Merkle per-file incremental compile cache (O(|Δ|) vs O(|DB|)).
 
@@ -1092,20 +1141,25 @@ def _harvested_rows(
         declared = census.declared_ids(root)
         declared_paths = census.declared_source_paths(root)
         shape_hint = re.compile(r"^\s*(?:async\s+)?def\s+(?:run|execute)\s*\(", re.MULTILINE)
+        skip_prefixes = tuple(census.SKIP_PATH_PREFIXES)
         raw_rows = []
-        for path in census.walk_python(root):
-            if census.TEST_NAME_RE.search(path.name):
+        for abs_path, rel, st in _fast_scandir_files(
+            str(root),
+            "",
+            suffix=".py",
+            skip_dirs=frozenset(census.SKIP_DIRS),
+        ):
+            base_name = os.path.basename(abs_path)
+            if census.TEST_NAME_RE.search(base_name):
                 continue
-            rel = path.relative_to(root).as_posix()
-            try:
-                st = path.stat()
-            except OSError:
+            if any(rel.startswith(p) for p in skip_prefixes):
                 continue
             hit, cached = cache.get("harvest", rel, st)
             if not hit:
                 cached = None
                 try:
-                    source = path.read_text(encoding="utf-8", errors="replace")
+                    with open(abs_path, "r", encoding="utf-8", errors="replace") as fh:
+                        source = fh.read()
                 except OSError:
                     source = ""
                 if "__main__" in source or shape_hint.search(source) or "def main(" in source:
@@ -1125,7 +1179,7 @@ def _harvested_rows(
                                 "declared_inputs": list(contract["inputs"]),
                                 "declared_result_fields": list(contract["result_fields"]),
                                 "triggers": list(census.triggers_for(rel, named or "")),
-                                "sha256": census.sha256_file(path),
+                                "sha256": census.sha256_file(Path(abs_path)),
                             }
                     except (SyntaxError, ValueError):
                         cached = None
@@ -1194,38 +1248,33 @@ def _source_index_rows(
     # measured fact rather than a guess.
     _seen: set[str] = set()
     importers: dict[str, set[str]] = {}
-    py_files: list[Path] = []
-    astra_tmp = root / "canonical" / "astra_runtime" / "tmp"
+    root_str = str(root)
+    py_entries: list[tuple[str, str, os.stat_result]] = []
     for name in ("canonical", "tests"):
-        base = root / name
-        if base.is_dir():
-            py_files.extend(
-                p
-                for p in sorted(base.rglob("*.py"))
-                if ".git" not in p.parts
-                and "__pycache__" not in p.parts
-                and not p.is_relative_to(astra_tmp)
+        py_entries.extend(
+            _fast_scandir_files(
+                root_str,
+                name,
+                suffix=".py",
+                skip_dirs=frozenset({".git", "__pycache__"}),
+                skip_rel_prefixes=("canonical/astra_runtime/tmp",),
             )
-    for path in py_files:
-        rel_imp = path.relative_to(root).as_posix()
-        posix_imp = path.as_posix()
+        )
+    for abs_path, rel_imp, st_imp in py_entries:
+        posix_imp = abs_path.replace(os.sep, "/")
         mods: tuple[str, ...] | None = None
-        st_imp: os.stat_result | None = None
         if cache is not None and cache.enabled:
-            try:
-                st_imp = path.stat()
-                hit, cached_mods = cache.get("imports", rel_imp, st_imp)
-                if hit:
-                    mods = cached_mods
-            except OSError:
-                continue
+            hit, cached_mods = cache.get("imports", rel_imp, st_imp)
+            if hit:
+                mods = cached_mods
         if mods is None:
             try:
-                text = path.read_text(encoding="utf-8", errors="replace")
+                with open(abs_path, "r", encoding="utf-8", errors="replace") as fh:
+                    text = fh.read()
             except OSError:
                 continue
             mods = tuple({m.split(".")[0] for m in _IMPORT_RE.findall(text)})
-            if cache is not None and cache.enabled and st_imp is not None:
+            if cache is not None and cache.enabled:
                 cache.put("imports", rel_imp, st_imp, mods)
         for mod_root in mods:
             importers.setdefault(mod_root, set()).add(posix_imp)
@@ -1244,30 +1293,25 @@ def _source_index_rows(
     # cannot select it, and a module that *is* a capability is still excluded by
     # ``covered`` before it can be indexed as non-executable source.
     for source_root in _SOURCE_ROOTS:
-        base_dir = root / source_root
-        if not base_dir.is_dir():
-            continue
-        for path in sorted(base_dir.rglob("*.py")):
-            if ".git" in path.parts or "__pycache__" in path.parts:
-                continue
-            rel = path.relative_to(root).as_posix()
+        for abs_path, rel, st_src in _fast_scandir_files(
+            root_str,
+            source_root,
+            suffix=".py",
+            skip_dirs=frozenset({".git", "__pycache__"}),
+        ):
             if rel in covered or rel in _seen:
                 continue
             _seen.add(rel)
-            stem = path.stem
+            stem = os.path.splitext(os.path.basename(abs_path))[0]
             cached_src: dict[str, Any] | None = None
-            st_src: os.stat_result | None = None
             if cache is not None and cache.enabled:
-                try:
-                    st_src = path.stat()
-                    hit, val = cache.get("source", rel, st_src)
-                    if hit:
-                        cached_src = val
-                except OSError:
-                    continue
+                hit, val = cache.get("source", rel, st_src)
+                if hit:
+                    cached_src = val
             if cached_src is None:
                 try:
-                    raw = path.read_bytes()
+                    with open(abs_path, "rb") as fh:
+                        raw = fh.read()
                 except OSError:
                     continue
                 text = raw.decode("utf-8", errors="replace")
@@ -1407,28 +1451,25 @@ def _research_rows(
     restate what the tree already holds.
     """
     rows: list[dict[str, Any]] = []
+    root_str = str(root)
+    skip_dirs = frozenset(_NON_SOURCE_DIRS)
     for rel_root in _RESEARCH_ROOTS:
-        base = root / rel_root
-        if not base.is_dir():
-            continue
-        for path in sorted(base.rglob("*")):
-            if not path.is_file() or any(part in _NON_SOURCE_DIRS for part in path.parts):
-                continue
-            rel = path.relative_to(root).as_posix()
+        for abs_path, rel, st_res in _fast_scandir_files(
+            root_str,
+            rel_root,
+            suffix=None,
+            skip_dirs=skip_dirs,
+        ):
             if rel in covered or rel in _GENERATED_OUTPUTS:
                 continue
-            st_res: os.stat_result | None = None
             if cache is not None and cache.enabled:
-                try:
-                    st_res = path.stat()
-                    hit, cached_row = cache.get("research", rel, st_res)
-                    if hit:
-                        rows.append({**cached_row, "terms": dict(cached_row["terms"])})
-                        continue
-                except OSError:
+                hit, cached_row = cache.get("research", rel, st_res)
+                if hit:
+                    rows.append({**cached_row, "terms": dict(cached_row["terms"])})
                     continue
             try:
-                raw = path.read_bytes()
+                with open(abs_path, "rb") as fh:
+                    raw = fh.read()
             except OSError:
                 continue
             text = raw.decode("utf-8", errors="replace")
@@ -1438,7 +1479,9 @@ def _research_rows(
             date = ""
             action_id = ""
             parts: list[str] = []
-            if path.suffix == ".json":
+            base_name = os.path.basename(abs_path)
+            stem, ext = os.path.splitext(base_name)
+            if ext == ".json":
                 try:
                     doc = json.loads(text)
                 except ValueError:
@@ -1453,7 +1496,7 @@ def _research_rows(
                         if isinstance(value, str) and value:
                             parts.append(value)
 
-            haystack = " ".join(parts) + " " + path.stem.replace("_", " ").replace("-", " ")
+            haystack = " ".join(parts) + " " + stem.replace("_", " ").replace("-", " ")
             row_obj = {
                 "id": "research:" + rel,
                 "kind": "RESEARCH_RECORD",
@@ -1467,7 +1510,7 @@ def _research_rows(
                 "capability": False,
                 "terms": _term_counts(haystack, limit=32),
             }
-            if cache is not None and cache.enabled and st_res is not None:
+            if cache is not None and cache.enabled:
                 cache.put("research", rel, st_res, row_obj)
             rows.append(row_obj)
     return rows
