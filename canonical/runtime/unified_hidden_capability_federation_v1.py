@@ -2110,6 +2110,90 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "required_inputs": [],
         "declared_dependencies": [],
     },
+    "LEAPFROG_W43_GIT_HISTORY_SEEDED_REPAIR": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/runtime/wave43_44_dark_matter_meme_webmcp_leapfrog_v1.py",
+        "entrypoint": "GitHistorySeededRepairKernel",
+        "summary": "Wave 43 live unifier for 5 awakened DARK SWE modules (history_template_repair_v1, the_store_is_the_only_thing_that_learns_v1, arm_learned_from_its_own_verified_repairs_v1, operator_generalization_v1, verified_lesson_pipeline_v1): self-seeds per-repo AST template stores from pre-base git history at K3=0, folds online alpha-canonical repairs, generalizes operator swaps, and enforces FixedBench already-passing abstention.",
+        "triggers": [
+            "git history self seeding ast template repair",
+            "online alpha canonical repair folding",
+            "fixedbench already passing abstention gate",
+            "operator swap family generalization locus filter",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W43_TRACE_LITERAL_CAUSAL_SLICE_GATE": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/runtime/wave43_44_dark_matter_meme_webmcp_leapfrog_v1.py",
+        "entrypoint": "TraceLiteralCausalSliceGateKernel",
+        "summary": "Wave 43 live unifier for 8 awakened DARK trace/literal/causal SWE modules (causal_dataflow_graph_v1, causal_dependency_repair_v1, repair_input_dependency_gate_v1, the_constant_is_a_hole_v1, the_literal_is_the_defect_v1, the_relation_not_the_value_v1, the_failing_run_names_the_expression_v1, the_same_guard_twice_is_the_discriminator_v1): ARISE/CausalRepair cross-file dual-slicing, constant-hole CEGIS literal repair, truthiness guard rewriting, and anti-slop input-dependency gating.",
+        "triggers": [
+            "arise causal dataflow dual slicing root cause",
+            "constant is a hole cegis literal regex repair",
+            "anti slop repair input dependency gate",
+            "truthiness boolean coercion guard rewrite",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W43_COW_CONTRASTIVE_MINIMAX_FACTORY": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/wave43_44_dark_matter_meme_webmcp_leapfrog_v1.py",
+        "entrypoint": "CoWContrastiveMinimaxFactoryKernel",
+        "summary": "Wave 43 live unifier for 6 awakened DARK active-contrast modules (the_counterexample_is_the_next_experiment_v1, the_branch_is_the_model_v1, the_refusal_is_the_other_half_v1, the_index_is_the_bottleneck_v1, verified_capability_bridge_index_v1, counterexample_guided_causal_architecture_synthesizer_v1): POSIX CoW contrastive single-feature micro-factory + exact minimax partition-lattice interrogation + filing-key collision diagnostics.",
+        "triggers": [
+            "cow fork contrastive micro factory single feature",
+            "exact minimax partition lattice witness interrogation",
+            "the refusal is the other half hypothesis lattice",
+            "the index is the bottleneck filing key collision",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W44_MEME_DBSP_CASCADE_ABSENCE_MEMORY": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/wave43_44_dark_matter_meme_webmcp_leapfrog_v1.py",
+        "entrypoint": "MEMEDBSPCascadeAbsenceMemoryEngine",
+        "summary": "Wave 44 DBSP Z-set + AGM dependency memory conquering all 6 MEME benchmark tasks (Exact Recall, Aggregation, Tracking, Deletion, Multi-Hop Dependency Cascade, and Formal Absence Witness) plus OpenViking L0/L1/L2 progressive disclosure, DeltaMem residual skill trees, and MemRL runtime Q-value retrieval at K3=0.",
+        "triggers": [
+            "meme benchmark dependency cascade absence deletion",
+            "dbsp zset agm transitive cascade recomputation",
+            "openviking l0 l1 l2 progressive context disclosure",
+            "deltamem residual skill tree memrl runtime utility",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W44_WEBMCP_GUI_ROOM_OSWORLD_HCU": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/runtime/wave43_44_dark_matter_meme_webmcp_leapfrog_v1.py",
+        "entrypoint": "WebMCPGuiRoomOSWorldHCUKernel",
+        "summary": "Wave 44 live unifier for 4 awakened DARK browser/OSWorld surfaces (gui_room_v1, osworld_v21_host_browser_ops_v1, osworld_v21_generic_policy_v1, osworld_computer_surface_v1) + Chrome 150+ W3C WebMCP (document.modelContext ?? navigator.modelContext) compiler lifting HTML forms and CDP/HAR XHR calls to Channel-0 tools before structural AT-SPI A11y routing.",
+        "triggers": [
+            "chrome 150 webmcp document modelcontext registertool",
+            "osworld 2 1 atspi a11y parse_a11y typed pyautogui",
+            "gui room structural cdp browser zero pixel",
+            "lifted html form har xhr webmcp shadow tool",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W44_NESTED_SKILLRL_RQGM_GEA_CONTINUAL": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/wave43_44_dark_matter_meme_webmcp_leapfrog_v1.py",
+        "entrypoint": "NestedSkillRLRQGMGEAContinualKernel",
+        "summary": "Wave 44 continual-learning unifier combining Google Nested Learning multi-frequency Continuum Memory System (CMS clock bands), SkillRL differential success & counterfactual-failure SkillBank distillation, Group-Evolving Agents (GEA intra-group experience sharing), and Red Queen Godel Machine (RQGM anchor-gated evaluator co-evolution with selective utility erasure).",
+        "triggers": [
+            "google nested learning continuum memory system cms",
+            "skillrl differential counterfactual failure skillbank",
+            "group evolving agents gea intra group experience",
+            "red queen godel machine rqgm selective erasure",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
     "METAMORPHIC_HABITATION_ZIPPER": {
         "domain": "SWE_LOCALIZATION_AND_REPAIR",
         "source_path": "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
@@ -3121,6 +3205,100 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
             "canonical/tools/generalization_rung_gradient_v1.py",
             "canonical/tools/the_frame_crosses_the_machine_v1.py",
             "canonical/tools/the_space_is_the_artifact_v1.py",
+        ],
+    },
+    "git_history_seed_causal_dual_slice_constant_cegis_and_minimax": {
+        "external_names": [
+            "git history template repair",
+            "self seeding repo store",
+            "fixedbench abstention",
+            "arise causal dual slicing",
+            "causalrepair dataflow graph",
+            "slopcodebench anti slop gate",
+            "repair input dependency gate",
+            "constant is a hole cegis",
+            "the literal is the defect",
+            "the relation not the value",
+            "truthiness guard rewrite",
+            "contrastive oracle bootstrap",
+            "minimax partition lattice interrogation",
+            "the refusal is the other half",
+            "the index is the bottleneck",
+            "filing key collision",
+            "arm learned from its own verified repairs",
+            "operator generalization cross language",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W43_GIT_HISTORY_SEEDED_REPAIR",
+            "engine:LEAPFROG_W43_TRACE_LITERAL_CAUSAL_SLICE_GATE",
+            "engine:LEAPFROG_W43_COW_CONTRASTIVE_MINIMAX_FACTORY",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave43_44_dark_matter_meme_webmcp_leapfrog_v1.py",
+            "canonical/tools/history_template_repair_v1.py",
+            "canonical/tools/the_constant_is_a_hole_v1.py",
+            "canonical/tools/the_relation_not_the_value_v1.py",
+            "canonical/tools/the_refusal_is_the_other_half_v1.py",
+            "canonical/tools/the_counterexample_is_the_next_experiment_v1.py",
+            "canonical/swe_kernel/causal_dataflow_graph_v1.py",
+            "canonical/swe_kernel/repair_input_dependency_gate_v1.py",
+        ],
+    },
+    "meme_cascade_absence_deltamem_openviking_memrl": {
+        "external_names": [
+            "meme benchmark",
+            "memory cascade",
+            "memory absence",
+            "dependency cascade memory",
+            "absence uncertainty witness",
+            "explicit zset deletion",
+            "memconflict",
+            "openviking",
+            "vikingmem",
+            "l0 l1 l2 progressive disclosure",
+            "deltamem",
+            "residual delta skill tree",
+            "memrl",
+            "runtime reinforcement learning episodic memory",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W44_MEME_DBSP_CASCADE_ABSENCE_MEMORY",
+            "engine:LEAPFROG_W40_FOUR_NETWORK_GIT_ENGRAM_MEMORY",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave43_44_dark_matter_meme_webmcp_leapfrog_v1.py",
+            "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+        ],
+    },
+    "webmcp_document_modelcontext_osworld_nested_skillrl_rqgm_gea": {
+        "external_names": [
+            "webmcp",
+            "document.modelcontext",
+            "navigator.modelcontext",
+            "chrome 150 webmcp",
+            "gui room cdp",
+            "osworld 2.1 atspi",
+            "parse_a11y",
+            "google nested learning",
+            "hope continuum memory system",
+            "skillrl",
+            "skillbank counterfactual failure",
+            "group evolving agents",
+            "gea experience sharing",
+            "red queen godel machine",
+            "rqgm selective erasure",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W44_WEBMCP_GUI_ROOM_OSWORLD_HCU",
+            "engine:LEAPFROG_W44_NESTED_SKILLRL_RQGM_GEA_CONTINUAL",
+            "engine:LEAPFROG_W40_SHADOW_INTERFACE_HCU_ROUTER",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave43_44_dark_matter_meme_webmcp_leapfrog_v1.py",
+            "canonical/runtime/gui_room_v1.py",
+            "canonical/runtime/osworld_v21_generic_policy_v1.py",
+            "canonical/runtime/osworld_computer_surface_v1.py",
+            "canonical/runtime/osworld_v21_host_browser_ops_v1.py",
         ],
     },
 }
@@ -5750,6 +5928,143 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
             one_shot_candidates=inputs.get("one_shot_candidates") or (),
         )
         return _ok(mode, "W42_ONE_DEMO_TRUST_CALIBRATED", res) if res.get("pass") else _fail(mode, "W42_ONE_DEMO_TRUST_FAILED", res)
+
+    if mode == "LEAPFROG_W43_GIT_HISTORY_SEEDED_REPAIR":
+        from canonical.runtime.wave43_44_dark_matter_meme_webmcp_leapfrog_v1 import GitHistorySeededRepairKernel
+
+        op = str(inputs.get("operation") or "FIXEDBENCH_GATE").upper()
+        if op == "MINE_REPO_HISTORY":
+            res = GitHistorySeededRepairKernel.mine_repo_history_store(
+                inputs.get("repo_path") or ROOT,
+                base_commit=str(inputs.get("base_commit", "HEAD")),
+                commit_limit=int(inputs.get("commit_limit", 80)),
+                target_source=inputs.get("target_source"),
+                covered_lines=inputs.get("covered_lines"),
+                candidate_budget=int(inputs.get("candidate_budget", 24)),
+            )
+        elif op == "REPAIR_WITH_HISTORY":
+            res = GitHistorySeededRepairKernel.repair_with_history_and_online_learning(
+                buggy_source=str(inputs["buggy_source"]),
+                fn_name=str(inputs["fn_name"]),
+                test_cases=inputs.get("test_cases") or (),
+                prior_verified_demos=inputs.get("prior_verified_demos") or (),
+                history_lines=inputs.get("history_lines") or (),
+                executed_lines=inputs.get("executed_lines"),
+                enforce_input_dependency_gate=bool(inputs.get("enforce_input_dependency_gate", True)),
+            )
+        else:
+            res = GitHistorySeededRepairKernel.fixedbench_abstention_gate(
+                str(inputs["source"]),
+                str(inputs["fn_name"]),
+                inputs.get("test_cases") or (),
+            )
+        return _ok(mode, f"W43_HISTORY_{op}", res) if res.get("pass") else _fail(mode, f"W43_HISTORY_{op}_FAILED", res)
+
+    if mode == "LEAPFROG_W43_TRACE_LITERAL_CAUSAL_SLICE_GATE":
+        from canonical.runtime.wave43_44_dark_matter_meme_webmcp_leapfrog_v1 import TraceLiteralCausalSliceGateKernel
+
+        op = str(inputs.get("operation") or "ANTI_SLOP_GATE").upper()
+        if op == "CAUSAL_DUAL_SLICE":
+            res = TraceLiteralCausalSliceGateKernel.causal_dual_slice_and_truthiness_audit(
+                files=inputs.get("files") or {},
+                error_file=str(inputs.get("error_file", "mod.py")),
+                error_line=int(inputs.get("error_line", 1)),
+                target_source=inputs.get("target_source"),
+                crash_stderr=str(inputs.get("crash_stderr", "")),
+            )
+        elif op == "CONSTANT_HOLE_CEGIS":
+            res = TraceLiteralCausalSliceGateKernel.repair_constant_hole_cegis(
+                buggy_source=str(inputs["buggy_source"]),
+                fn_name=str(inputs["fn_name"]),
+                test_cases=inputs.get("test_cases") or (),
+                extra_chars=str(inputs.get("extra_chars", "")),
+                max_candidates=int(inputs.get("max_candidates", 80)),
+            )
+        else:
+            res = TraceLiteralCausalSliceGateKernel.anti_slop_input_dependency_gate(
+                before_source=str(inputs["before_source"]),
+                after_source=str(inputs["after_source"]),
+                function_name=inputs.get("function_name"),
+                probe_pairs=inputs.get("probe_pairs") or (),
+                expected_direction_by_pair=inputs.get("expected_direction_by_pair"),
+            )
+        return _ok(mode, f"W43_SLICE_GATE_{op}", res) if res.get("pass") else _fail(mode, f"W43_SLICE_GATE_{op}_FAILED", res)
+
+    if mode == "LEAPFROG_W43_COW_CONTRASTIVE_MINIMAX_FACTORY":
+        from canonical.runtime.wave43_44_dark_matter_meme_webmcp_leapfrog_v1 import CoWContrastiveMinimaxFactoryKernel
+
+        op = str(inputs.get("operation") or "CONTRASTIVE_MINIMAX_PIN").upper()
+        if op == "DIAGNOSE_FILING_KEYS":
+            res = CoWContrastiveMinimaxFactoryKernel.diagnose_filing_keys_and_semantic_roles(
+                feature_keys=inputs.get("feature_keys") or {},
+                winners=inputs.get("winners") or {},
+                goal_text=str(inputs.get("goal_text") or goal),
+            )
+        else:
+            res = CoWContrastiveMinimaxFactoryKernel.run_contrastive_minimax_pinning(
+                feature_names=inputs.get("feature_names") or (),
+                initial_state=inputs.get("initial_state") or {},
+                oracle=inputs["oracle"],
+                max_queries=int(inputs.get("max_queries", 16)),
+            )
+        return _ok(mode, f"W43_MINIMAX_{op}", res) if res.get("pass") else _fail(mode, f"W43_MINIMAX_{op}_FAILED", res)
+
+    if mode == "LEAPFROG_W44_MEME_DBSP_CASCADE_ABSENCE_MEMORY":
+        from canonical.runtime.wave43_44_dark_matter_meme_webmcp_leapfrog_v1 import MEMEDBSPCascadeAbsenceMemoryEngine
+
+        op = str(inputs.get("operation") or "RUN_MEME_SUITE").upper()
+        if op == "RUN_MEME_SUITE":
+            res = MEMEDBSPCascadeAbsenceMemoryEngine.run_meme_6task_suite()
+        else:
+            eng = inputs.get("engine") or MEMEDBSPCascadeAbsenceMemoryEngine(root_dir=inputs.get("root_dir"))
+            if op == "ASSERT_FACT":
+                res = eng.assert_fact(str(inputs["entity"]), inputs["value"], valid_from=inputs.get("valid_from"))
+            elif op == "DELETE_FACT":
+                res = eng.delete_fact(str(inputs["entity"]), at_time=inputs.get("at_time"))
+            else:
+                res = eng.query_entity(str(inputs["entity"]), tier=str(inputs.get("tier", "L1")))
+                res = {"pass": True, **res}
+        return _ok(mode, f"W44_MEME_{op}", res) if res.get("pass") else _fail(mode, f"W44_MEME_{op}_FAILED", res)
+
+    if mode == "LEAPFROG_W44_WEBMCP_GUI_ROOM_OSWORLD_HCU":
+        from canonical.runtime.wave43_44_dark_matter_meme_webmcp_leapfrog_v1 import WebMCPGuiRoomOSWorldHCUKernel
+
+        op = str(inputs.get("operation") or "COMPILE_WEBMCP").upper()
+        if op == "ROUTE_OSWORLD_HCU":
+            res = WebMCPGuiRoomOSWorldHCUKernel.route_osworld_a11y_and_typed_surface(
+                instruction=str(inputs.get("instruction") or goal),
+                a11y_xml=inputs.get("a11y_xml"),
+                webmcp_tools=inputs.get("webmcp_tools") or (),
+                screen_width=int(inputs.get("screen_width", 1920)),
+                screen_height=int(inputs.get("screen_height", 1080)),
+                typed_action=inputs.get("typed_action"),
+            )
+        else:
+            res = WebMCPGuiRoomOSWorldHCUKernel.compile_webmcp_document_model_context(
+                html_source=str(inputs.get("html_source", "")),
+                observed_xhr_calls=inputs.get("observed_xhr_calls") or (),
+                page_origin=str(inputs.get("page_origin", "https://app.local")),
+            )
+        return _ok(mode, f"W44_WEBMCP_HCU_{op}", res) if res.get("pass") else _fail(mode, f"W44_WEBMCP_HCU_{op}_FAILED", res)
+
+    if mode == "LEAPFROG_W44_NESTED_SKILLRL_RQGM_GEA_CONTINUAL":
+        from canonical.runtime.wave43_44_dark_matter_meme_webmcp_leapfrog_v1 import NestedSkillRLRQGMGEAContinualKernel
+
+        eng = inputs.get("engine") or NestedSkillRLRQGMGEAContinualKernel()
+        op = str(inputs.get("operation") or "SKILLRL_DISTILL").upper()
+        if op == "CMS_UPDATE":
+            res = eng.cms_update(band=str(inputs["band"]), key=str(inputs["key"]), value=inputs["value"], tick=inputs.get("tick"))
+        elif op == "GEA_EVOLVE":
+            res = eng.gea_group_evolve(inputs.get("agents") or (), group_size=int(inputs.get("group_size", 2)))
+        elif op == "RQGM_CO_EVOLVE":
+            res = eng.rqgm_co_evolve_evaluator(
+                current_anchor_accuracy=float(inputs["current_anchor_accuracy"]),
+                candidate_anchor_accuracy=float(inputs["candidate_anchor_accuracy"]),
+                min_improvement=float(inputs.get("min_improvement", 0.01)),
+            )
+        else:
+            res = eng.skillrl_distill_trajectories(inputs.get("trajectories") or ())
+        return _ok(mode, f"W44_CONTINUAL_{op}", res) if res.get("pass") else _fail(mode, f"W44_CONTINUAL_{op}_FAILED", res)
 
     if mode == "METAMORPHIC_HABITATION_ZIPPER":
         from canonical.swe_kernel import metamorphic_habitation_zipper_v1 as m

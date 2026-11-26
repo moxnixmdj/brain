@@ -1854,6 +1854,34 @@ class Creature:
         """Wave 42: Creature trace-quotient collision gate + page-guide UI sketcher + provenance calibration."""
         return self._ensure_unified_model().one_demo_trust_and_rung_calibrate(payload)
 
+    def git_history_seeded_repair(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 43: Creature git-history self-seeding AST store + online alpha-canonical learning + FixedBench abstention."""
+        return self._ensure_unified_model().git_history_seeded_repair(operation, payload)
+
+    def trace_literal_causal_slice_gate(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 43: Creature cross-file causal dual-slicing + constant-hole CEGIS + anti-slop input-dependency gate."""
+        return self._ensure_unified_model().trace_literal_causal_slice_gate(operation, payload)
+
+    def cow_contrastive_minimax_op(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 43: Creature POSIX CoW contrastive micro-factory + exact minimax partition-lattice interrogation."""
+        return self._ensure_unified_model().cow_contrastive_minimax_op(operation, payload)
+
+    def meme_dbsp_memory_op(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 44: Creature DBSP/AGM MEME Cascade/Deletion/Absence memory + OpenViking L0/L1/L2 + DeltaMem/MemRL."""
+        res = self._ensure_unified_model().meme_dbsp_memory_op(operation, payload)
+        self._save()
+        return res
+
+    def webmcp_osworld_hcu_op(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 44: Creature Chrome 150+ WebMCP (document.modelContext) compiler + OSWorld 2.1 AT-SPI HCU router."""
+        return self._ensure_unified_model().webmcp_osworld_hcu_op(operation, payload)
+
+    def nested_skillrl_rqgm_gea_op(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 44: Creature Google Nested Learning CMS + SkillRL counterfactual SkillBank + GEA + RQGM co-evolution."""
+        res = self._ensure_unified_model().nested_skillrl_rqgm_gea_op(operation, payload)
+        self._save()
+        return res
+
     def sleep_evolve_organs_gea(
         self,
         *,
