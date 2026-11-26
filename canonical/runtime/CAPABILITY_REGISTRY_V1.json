@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_DECLARATION_REGISTRY_V1",
+  "authority": "NONE__DECLARATION_NOT_CAPABILITY_CREDIT",
+  "date": "2026-11-24",
+  "what_this_is": "A capability id -> (module, verifier) binding that lets the runtime resolve a capability BY NAME without the front door importing it. A declared capability is reachable; that is not the same as being correct, scored, or credited. Every entry additionally requires: the module exists, the verifier exists, and the verifier is itself reachable.",
+  "why_it_exists": "A reachability census found 1,639 of 2,247 canonical/runtime modules unreachable from brain_unified_model_v1. Several of the most load-bearing ones -- the zero-model SWE agent, the OSWorld task-state ledger, aimed selection -- were unreachable while having passing test suites. A module that no entry point can reach cannot participate in a solve, however good it is. Declaration is the minimum repair: it makes the module addressable without editing the import graph, and it forces each binding to name the check that would falsify it.",
+  "admission_rule": [
+    "module path must exist in the tree at this commit",
+    "verifier path must exist and must itself be reachable from a front door",
+    "preconditions and effects are stated, even when empty, so a router can read them",
+    "an entry whose verifier is missing is reported as defective and grants nothing"
+  ],
+  "known_defects": [
+    "verifier_falsification_v1: 1,637 lines, 76KB, no test file, orphaned. It is the module whose whole premise is 'a check that cannot fail is not a check'. It cannot currently be run by anything. Not declared here: a verifier that does not exist as a runnable check cannot be the verifier of a declared capability."
+  ],
+  "capabilities": {
+    "swe.zero_model.harbor": {
+      "module": "canonical/runtime/harbor_swe_zero_model_agent_v1.py",
+      "verifier": "canonical/tests/test_harbor_swe_zero_model_agent_v1.py",
+      "preconditions": [
+        "a Harbor-compatible environment transport",
+        "an instruction string",
+        "no language model available or permitted"
+      ],
+      "effects": [
+        "a patch produced by deterministic kernel composition",
+        "model_dependency_count = 0"
+      ],
+      "notes": "876 lines. Named components: angelic_cegis_repair_v1, reverse_tomography_algebra_v1, universal_computer_agent_v1. This is the module the hard51 run did NOT go through.",
+      "entry": "HarborSweZeroModelAgent",
+      "entry_note": "class entry point; instantiate with a Harbor environment transport then run"
+    },
+    "osworld.task_state_ledger": {
+      "module": "canonical/runtime/osworld_verified_task_ledger_v1.py",
+      "verifier": "canonical/tests/test_osworld_verified_task_ledger_v1.py",
+      "preconditions": [
+        "an OSWorld-style instruction",
+        "observed application state"
+      ],
+      "effects": [
+        "every requirement reduced to evidence literally present in the observation",
+        "requirements with no evidence refused rather than assumed"
+      ],
+      "notes": "808 lines. Its own docstring states the thesis this plan rests on: long-horizon failures concentrate on hidden-state tracking and weak verification, not motor control.",
+      "entry": "compile_requirements",
+      "entry_note": "compile_requirements(instruction, observation) -> requirements; pair with audit()/decide()"
+    },
+    "select.aimed_action": {
+      "module": "canonical/runtime/aimed_action_v1.py",
+      "verifier": "canonical/tests/test_aimed_action_v1.py",
+      "preconditions": [
+        "a set of unsolved cases",
+        "per-case outcome history"
+      ],
+      "effects": [
+        "a ranked action aimed at the cases still unsolved"
+      ],
+      "notes": "94KB, the largest single orphan on the selection path.",
+      "entry": "aimed_actions",
+      "entry_note": "aimed_actions(observation) -> ranked action ids"
+    },
+    "contract.instruction": {
+      "module": "canonical/runtime/instruction_contract_v1.py",
+      "verifier": "canonical/tests/test_instruction_contract_v1.py",
+      "preconditions": [
+        "a free-text instruction"
+      ],
+      "effects": [
+        "constraints extracted as checkable predicates"
+      ],
+      "notes": "113KB, the largest orphaned module by bytes.",
+      "entry": "compile_contract",
+      "entry_note": "compile_contract(utterance, observation) -> checkable constraints"
+    }
+  }
+}

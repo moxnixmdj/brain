@@ -57,7 +57,13 @@ MAX_TRANSFER_CHUNK = 6000
 MAX_OUTPUT_CHARS = 16000
 
 _REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
-_KERNEL_FILES = (
+# The bundle originally listed seven kernel files. The kernel's own imports pull in 723
+# files, 649 of them under canonical/runtime/, so the remote runner died on
+# `ModuleNotFoundError: No module named 'canonical.runtime'` before it could repair
+# anything. A closed list cannot stay correct: any import added to any bundled module
+# silently re-breaks the transfer. The bundle is therefore computed from the import
+# graph at build time, and the closed list is kept only as the SEED of that walk.
+_KERNEL_SEED_FILES = (
     "canonical/swe_kernel/angelic_cegis_repair_v1.py",
     "canonical/swe_kernel/cow_angelic_zygote_v1.py",
     "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
@@ -69,6 +75,75 @@ _KERNEL_FILES = (
     "canonical/swe_kernel/executable_mental_model_v1.py",
     "canonical/swe_kernel/semantic_ir_v1.py",
 )
+# Backwards-compatible alias: receipts and tests refer to _KERNEL_FILES as the seed.
+_KERNEL_FILES = _KERNEL_SEED_FILES
+
+# Directories whose contents are never imported by the kernel and would only bloat the
+# transfer. Anything else under canonical/ that is reachable IS bundled.
+_KERNEL_EXCLUDE_PREFIXES = (
+    "canonical/tests/",
+    "canonical/verification/",
+    "canonical/tmp/",
+)
+
+
+def _canonical_module_file(root: pathlib.Path, module: str) -> pathlib.Path | None:
+    """Resolve `canonical.x.y` to a .py file or a package __init__.py, or None."""
+    parts = module.split(".")
+    base = root.joinpath(*parts)
+    py = base.with_suffix(".py")
+    if py.is_file():
+        return py
+    init = base / "__init__.py"
+    if init.is_file():
+        return init
+    return None
+
+
+def _kernel_bundle_closure(seed: tuple[str, ...], root: pathlib.Path | None = None) -> list[str]:
+    """Transitive canonical.* closure of the seed files, as repo-relative paths.
+
+    Walks imports with `ast` so a module that is only mentioned in a string is not
+    bundled, and a module imported inside a function still is. Returns a sorted list
+    so the tar is deterministic across machines.
+    """
+    import ast
+
+    root = root or _REPO_ROOT
+    seen: set[str] = set()
+    queue = [s for s in seed if (root / s).is_file()]
+    while queue:
+        rel = queue.pop()
+        if rel in seen:
+            continue
+        if any(rel.startswith(p) for p in _KERNEL_EXCLUDE_PREFIXES):
+            continue
+        seen.add(rel)
+        try:
+            tree = ast.parse((root / rel).read_text(encoding="utf-8", errors="replace"))
+        except SyntaxError:
+            continue
+        for node in ast.walk(tree):
+            names: list[str] = []
+            if isinstance(node, ast.Import):
+                names = [a.name for a in node.names]
+            elif isinstance(node, ast.ImportFrom) and node.module and (
+                node.module == "canonical" or node.module.startswith("canonical.")
+            ):
+                names = [node.module]
+                for alias in node.names:
+                    if alias.name != "*":
+                        names.append(node.module + "." + alias.name)
+            for module in names:
+                if not (module == "canonical" or module.startswith("canonical.")):
+                    continue
+                found = _canonical_module_file(root, module)
+                if found is not None:
+                    relpath = found.relative_to(root).as_posix()
+                    if relpath not in seen:
+                        queue.append(relpath)
+    return sorted(seen)
+
 
 
 def _build_kernel_tar_gz() -> bytes:
@@ -84,7 +159,14 @@ def _build_kernel_tar_gz() -> bytes:
 
         _add_bytes("canonical/__init__.py", b"")
         _add_bytes("canonical/swe_kernel/__init__.py", b"")
-        for rel_mod in _KERNEL_FILES:
+        for rel_mod in _kernel_bundle_closure(_KERNEL_SEED_FILES):
+            parent = pathlib.PurePosixPath(rel_mod).parent
+            # every package directory on the path needs an __init__.py, or the remote
+            # interpreter resolves canonical.x as a namespace package with no __file__.
+            parts = parent.parts
+            for i in range(1, len(parts) + 1):
+                pkg = "/".join(parts[:i])
+                _add_bytes(pkg + "/__init__.py", b"")
             _add_bytes(rel_mod, (_REPO_ROOT / rel_mod).read_bytes())
         _add_bytes("run_repair.py", _build_remote_runner_script())
     return buf.getvalue()
