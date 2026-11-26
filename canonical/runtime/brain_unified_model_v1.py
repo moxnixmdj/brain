@@ -574,9 +574,17 @@ def _extract_secondary_indexes(full: Mapping[str, Any], raw_sha: str) -> dict[st
 
 # --------------------------------------------------------------------------- model
 
-from canonical.runtime.wave41_rung3_proposer_jitrl_continual_flywheel_v1 import (
-    Wave40To42UnifiedModelMixin as _Wave40To42UnifiedModelMixin,
-)
+
+# The full installation includes the Wave 40–42 provider; blind worker mounts
+# deliberately omit it. Do not hide a missing *dependency* of an installed wave.
+try:
+    from canonical.runtime.wave41_rung3_proposer_jitrl_continual_flywheel_v1 import (
+        Wave40To42UnifiedModelMixin as _Wave40To42UnifiedModelMixin,
+    )
+except ModuleNotFoundError as exc:
+    if exc.name != "canonical.runtime.wave41_rung3_proposer_jitrl_continual_flywheel_v1":
+        raise
+    _Wave40To42UnifiedModelMixin = object
 
 class UnifiedModel(_Wave40To42UnifiedModelMixin):
     """A loaded, digest-verified unified model."""
@@ -590,6 +598,8 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
         _target_path: Path | None = None,
         _artifact_path: Path | None = None,
     ):
+        if _Wave40To42UnifiedModelMixin is object and model.get("model_id") != "brain-harbor-cold":
+            raise UnifiedModelError("FULL_MODEL_WAVE_PROVIDER_MISSING")
         self._raw_bytes_backing: bytes | None = _raw_bytes
         self._target_path: Path | None = _target_path or _artifact_path
         self._artifact_path: Path | None = self._target_path
@@ -2660,7 +2670,13 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
         is_goal: Any = None,
         **kwargs: Any,
     ) -> dict[str, Any]:
-        """Zero-instruction interactive POMDP / trace-quotient explorer (`K3 = 0`)."""
+        """Explore either a declared indexed-screen port or the existing abstract environment."""
+        if kwargs.get('surface') == 'indexed_screen':
+            from canonical.runtime.frame_program_v1 import explore_screen
+            kwargs.pop('surface')
+            if actions or is_goal is not None:
+                raise ValueError('a screen supplies its own offered actions and advancement feedback')
+            return explore_screen(env, **kwargs)
         from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
 
         return _uep.explore_unknown_environment_unified(env, actions, is_goal=is_goal, **kwargs)
@@ -2781,6 +2797,12 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
     ) -> dict[str, Any]:
         requested = str(mode or "AUTO").strip().upper()
         inputs = dict(inputs or {})
+        if requested == "LIVE_BROWSER_STEP":
+            return self._epistemic_envelope(requested, goal, self.live_browser_step(goal, **inputs))
+        if requested == "REPO_NATIVE_SWE":
+            if inputs.get("residual_proposer") is not None:
+                return self._failure(goal, "REFUSED__MODEL_FREE_ROUTE")
+            return self.solve_swe_repo_native(inputs.pop("repo_root", cwd), **inputs)
         if requested == "RECALL":
             return self.recall(goal)
         # Unified Hidden-Arsenal fast rungs (addressable via explicit mode or AUTO structured inputs)
@@ -2836,6 +2858,16 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
                 inputs["goal_tree"] = inputs.pop("eggmind_goal_tree")
             pil = _ASYM_SOLVE_MODES.get(requested, str(inputs.pop("pillar", "AUTO")))
             return self._epistemic_envelope(requested, goal, self.asymmetric_leapfrog(goal, pillar=pil, inputs=inputs))
+
+        if requested == "EPISTEMIC" and "harbor_task" in inputs:
+            # The Harbor transport asks for a proposal, not workspace effects.
+            # Never route a malformed cycle to the ordinary workspace solver.
+            from canonical.swe_kernel.harbor_epistemic_controller_v1 import (
+                is_harbor_epistemic_envelope, solve_harbor_cycle,
+            )
+            if is_harbor_epistemic_envelope(inputs):
+                return solve_harbor_cycle(goal, inputs=inputs, model_digest=self.digest)
+            return self._failure(goal, "INVALID_HARBOR_CYCLE_ENVELOPE")
 
         if requested in ("EPISTEMIC", "PORTFOLIO"):
             if callable(inputs.get("mealy_oracle")):
@@ -5245,6 +5277,8 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
         test_targets: Sequence[str] | None = None,
         candidate_files: Sequence[str] | None = None,
         in_run_repair_vocab: Mapping[str, Any] | None = None,
+        repair_store: str | Path | None = None,
+        learn_verified: bool = True,
         prior_demonstrations: Sequence[tuple[str, str, str]] = (),
         witness_envs: Sequence[Mapping[str, Any]] | None = None,
         witness_targets: Sequence[Any] | None = None,
@@ -5261,6 +5295,7 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
             test_targets=test_targets,
             candidate_files=candidate_files,
             in_run_repair_vocab=in_run_repair_vocab,
+            repair_store=repair_store, learn_verified=learn_verified,
             prior_demonstrations=prior_demonstrations,
             witness_envs=witness_envs,
             witness_targets=witness_targets,
@@ -6065,13 +6100,32 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
 
         return uul.lift_protocol_and_verify_effect(**kwargs)
 
+    def live_browser_episode(self, goal: str, *, room: Any, **kwargs: Any) -> dict[str, Any]:
+        from canonical.runtime.witnessed_browser_v1 import episode
+        return episode(room, goal, **kwargs)
+
+    def live_browser_step(self, goal: str, *, room: Any, **kwargs: Any) -> dict[str, Any]:
+        from canonical.runtime.witnessed_browser_v1 import step
+        return step(room, goal, **kwargs)
+
+    def revision_memory(self, path: str | Path, operation: str, **payload: Any) -> dict[str, Any]:
+        from canonical.swe_kernel.witnessed_revision_store_v1 import RevisionStore
+        store = RevisionStore(path)
+        if operation in ('ingest_turn', 'answer_question'):
+            from canonical.runtime.dialogue_revision_reader_v1 import DialogueReader
+            reader = DialogueReader(store)
+            if operation == 'ingest_turn':
+                return {'statements_grounded': reader.ingest(**payload)}
+            return reader.answer(**payload)
+        return store.apply(operation, payload)
+
     def semiring_jtms_memory_cycle(
         self,
         *,
         chain_count: int = 24,
         chain_depth: int = 4,
     ) -> dict[str, Any]:
-        """Move 3: Why-Provenance Semiring `(2^(2^V), union, join)` over `Z`-set DBSP (`100%` `MEME` Cascade & Absence)."""
+        """Move 3: Structured chain retraction control, not a score on MEME conversations."""
         from canonical.swe_kernel import unified_unfamiliar_leapfrog_v1 as uul
 
         return uul.run_meme_semiring_benchmark(chain_count=chain_count, chain_depth=chain_depth)
@@ -6792,45 +6846,12 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
         payload: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
         """Wave 39: Verbatim-first 4-way RRF budgeted retrieval + Nemori surprise gating + CLM file-mirrored context + TMA-NM."""
-        eng = self._get_clm_rrf_memory_engine()
-        p = dict(payload or {})
-        op = str(operation).upper()
-        if op == "WRITE_SURPRISE_GATED":
-            return eng.write_surprise_gated(
-                record_id=str(p["record_id"]),
-                key=str(p["key"]),
-                verbatim_text=str(p["verbatim_text"]),
-                payload=p.get("payload"),
-                valid_from=p.get("valid_from"),
-                origin_token=str(p.get("origin_token", "TRUSTED_VERIFIER")),
-                min_surprise=float(p.get("min_surprise", 0.25)),
-                entities=p.get("entities") or (),
-                source_code=str(p.get("source_code", "")),
-            )
-        if op == "RETRIEVE_4WAY_RRF_BUDGETED":
-            return eng.retrieve_4way_rrf_budgeted(
-                str(p.get("query", "")),
-                char_budget=int(p.get("char_budget", 1200)),
-                top_k=int(p.get("top_k", 5)),
-                rrf_k=int(p.get("rrf_k", 60)),
-                query_source_code=str(p.get("query_source_code", "")),
-                query_entities=p.get("query_entities") or (),
-                at_time=p.get("at_time"),
-            )
-        if op == "CLM_OFFLOAD":
-            return eng.clm_offload(
-                str(p["context_text"]),
-                workspace_dir=p["workspace_dir"],
-                label=str(p.get("label", "working_ctx")),
-                min_bytes=int(p.get("min_bytes", 128)),
-            )
-        if op == "CLM_GREP_RESTORE":
-            return eng.clm_grep_restore(
-                p["offload_ref"],
-                pattern=p.get("pattern"),
-                max_chars=int(p.get("max_chars", 2000)),
-            )
-        raise UnifiedModelError(f"Unsupported CLM/RRF memory operation: {operation}")
+        from canonical.runtime import wave39_leapfrog_unification_v1 as wave39
+
+        try:
+            return wave39.dispatch_clm_rrf_operation(self._get_clm_rrf_memory_engine(), operation, payload or {})
+        except wave39.UnsupportedWave39Operation as exc:
+            raise UnifiedModelError(str(exc)) from exc
 
     def partial_route_with_jitrl(
         self,
@@ -6838,35 +6859,12 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
         payload: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
         """Wave 39: Closed-form JitRL logit modulation + SkillTTA dynamic skill synthesis + Intra-task Partial Routing."""
-        from canonical.runtime.wave39_leapfrog_unification_v1 import PartialRoutingJitRLSkillTTAEngine
+        from canonical.runtime import wave39_leapfrog_unification_v1 as wave39
 
-        p = dict(payload or {})
-        op = str(operation).upper()
-        if op == "JITRL_MODULATE":
-            return PartialRoutingJitRLSkillTTAEngine.jitrl_modulate_logits(
-                p["prior_logits"],
-                state_signature=str(p.get("state_signature", "")),
-                episodic_receipts=p.get("episodic_receipts") or (),
-                beta=float(p.get("beta", 1.0)),
-            )
-        if op == "SKILLTTA_SYNTHESIZE":
-            return PartialRoutingJitRLSkillTTAEngine.skilltta_synthesize(
-                p["target_task"],
-                verified_traces=p.get("verified_traces") or (),
-                top_k=int(p.get("top_k", 3)),
-            )
-        if op == "PARTIAL_ROUTE":
-            return PartialRoutingJitRLSkillTTAEngine.partial_route_subtasks(
-                p.get("subtasks") or (),
-                compiled_skills=p.get("compiled_skills"),
-                symbolic_solver=p.get("symbolic_solver"),
-                mendel_solver=p.get("mendel_solver"),
-                pluggable_proposer=p.get("pluggable_proposer"),
-                delta_threshold=float(p.get("delta_threshold", 0.55)),
-                episodic_receipts=p.get("episodic_receipts") or (),
-                beta=float(p.get("beta", 0.5)),
-            )
-        raise UnifiedModelError(f"Unsupported Partial-Routing/JitRL operation: {operation}")
+        try:
+            return wave39.dispatch_partial_routing_operation(operation, payload or {})
+        except wave39.UnsupportedWave39Operation as exc:
+            raise UnifiedModelError(str(exc)) from exc
 
     def self_verify_harvested_surfaces(self, *, limit: int = 40) -> dict[str, Any]:
         """Wave 39: Live offline AST + SHA-256 + public-entrypoint audit over `harvested_capabilities`."""

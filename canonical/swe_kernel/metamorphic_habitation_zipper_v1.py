@@ -47,6 +47,7 @@ import os
 import pathlib
 import re
 import shutil
+import signal
 import subprocess
 import sys
 import tempfile
@@ -54,6 +55,11 @@ import time
 from collections import Counter
 from dataclasses import dataclass, field
 from typing import Any, Mapping, Sequence
+
+from canonical.swe_kernel.differential_witness_inversion_v1 import (
+    _select_sibling_passing_tests,
+    synthesize_live_differential_witness_repairs,
+)
 
 SCHEMA = "PROJECT_BRAIN_METAMORPHIC_HABITATION_ZIPPER_V1"
 PRODUCER_MODEL_CALLS = 0

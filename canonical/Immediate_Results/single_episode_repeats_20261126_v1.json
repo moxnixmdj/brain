@@ -1,0 +1,691 @@
+{
+  "kind": "local same-session repeat checks; no leaderboard or independent evaluation",
+  "screen": {
+    "primary": {
+      "result_sha256": "308b49041afc9639700f7e8f86940b877cdb2695acd808e2d4ac9a422e6293b0",
+      "reported_rows_sha256_except_wall_seconds": "5fc97a251f944625a732efe8520683c31b7fdfc0f68fa725fdeed58196e3ed29",
+      "rows": 130,
+      "one_teacher": "a3850719dffddc88049e3a5c671c4d32eeb89aca077bf19c1941e0d9d681a163",
+      "producer_manifest_sha256": "e726dca86a42abbd916dd1a0ae974317de62e639d476c99ef651240559289606",
+      "program_ids": {
+        "raw": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+        "lifted": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+        "shortened": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+        "deleted": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8"
+      },
+      "distinct_games": 25,
+      "per_arm": {
+        "empty": {
+          "rooms": 26,
+          "advances": 1,
+          "receiver_actions": 1805,
+          "prep": 17,
+          "resets": 8,
+          "wall_seconds": 12.3602,
+          "confirmed_transitions": 0,
+          "24_other_game_advances": 0
+        },
+        "raw": {
+          "rooms": 26,
+          "advances": 1,
+          "receiver_actions": 1805,
+          "prep": 17,
+          "resets": 8,
+          "wall_seconds": 11.6444,
+          "confirmed_transitions": 0,
+          "24_other_game_advances": 0
+        },
+        "lifted": {
+          "rooms": 26,
+          "advances": 1,
+          "receiver_actions": 1808,
+          "prep": 17,
+          "resets": 9,
+          "wall_seconds": 11.6057,
+          "confirmed_transitions": 2,
+          "24_other_game_advances": 0
+        },
+        "shortened": {
+          "rooms": 26,
+          "advances": 1,
+          "receiver_actions": 1793,
+          "prep": 17,
+          "resets": 8,
+          "wall_seconds": 12.1736,
+          "confirmed_transitions": 5,
+          "24_other_game_advances": 0
+        },
+        "deleted": {
+          "rooms": 26,
+          "advances": 1,
+          "receiver_actions": 1805,
+          "prep": 17,
+          "resets": 8,
+          "wall_seconds": 11.7899,
+          "confirmed_transitions": 0,
+          "24_other_game_advances": 0
+        }
+      }
+    },
+    "separate_stores": {
+      "result_sha256": "7faedfe8f90e2a56a9cc6948cd28f0e483ad5cb971e76d094becf1e710138f0e",
+      "reported_rows_sha256_except_wall_seconds": "5fc97a251f944625a732efe8520683c31b7fdfc0f68fa725fdeed58196e3ed29",
+      "rows": 130,
+      "one_teacher": "a3850719dffddc88049e3a5c671c4d32eeb89aca077bf19c1941e0d9d681a163",
+      "producer_manifest_sha256": "e726dca86a42abbd916dd1a0ae974317de62e639d476c99ef651240559289606",
+      "program_ids": {
+        "raw": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+        "lifted": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+        "shortened": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+        "deleted": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8"
+      },
+      "distinct_games": 25,
+      "per_arm": {
+        "empty": {
+          "rooms": 26,
+          "advances": 1,
+          "receiver_actions": 1805,
+          "prep": 17,
+          "resets": 8,
+          "wall_seconds": 12.8614,
+          "confirmed_transitions": 0,
+          "24_other_game_advances": 0
+        },
+        "raw": {
+          "rooms": 26,
+          "advances": 1,
+          "receiver_actions": 1805,
+          "prep": 17,
+          "resets": 8,
+          "wall_seconds": 11.322,
+          "confirmed_transitions": 0,
+          "24_other_game_advances": 0
+        },
+        "lifted": {
+          "rooms": 26,
+          "advances": 1,
+          "receiver_actions": 1808,
+          "prep": 17,
+          "resets": 9,
+          "wall_seconds": 13.6963,
+          "confirmed_transitions": 2,
+          "24_other_game_advances": 0
+        },
+        "shortened": {
+          "rooms": 26,
+          "advances": 1,
+          "receiver_actions": 1793,
+          "prep": 17,
+          "resets": 8,
+          "wall_seconds": 13.6138,
+          "confirmed_transitions": 5,
+          "24_other_game_advances": 0
+        },
+        "deleted": {
+          "rooms": 26,
+          "advances": 1,
+          "receiver_actions": 1805,
+          "prep": 17,
+          "resets": 8,
+          "wall_seconds": 14.1623,
+          "confirmed_transitions": 0,
+          "24_other_game_advances": 0
+        }
+      }
+    },
+    "clean_release_exported_teacher": {
+      "result_sha256": "940a7f2b065677b81f65d73ca429b0cd5314033c682bf143bcc4be54ffd9a45b",
+      "reported_rows_sha256_except_wall_seconds": "5fc97a251f944625a732efe8520683c31b7fdfc0f68fa725fdeed58196e3ed29",
+      "rows": 130,
+      "one_teacher": "a3850719dffddc88049e3a5c671c4d32eeb89aca077bf19c1941e0d9d681a163",
+      "producer_manifest_sha256": "a9e8f80b129d80843d90385fab28e692b8b2ae028fcd626130b763b4ad53af1a",
+      "program_ids": {
+        "raw": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+        "lifted": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+        "shortened": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+        "deleted": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8"
+      },
+      "distinct_games": 25,
+      "per_arm": {
+        "empty": {
+          "rooms": 26,
+          "advances": 1,
+          "receiver_actions": 1805,
+          "prep": 17,
+          "resets": 8,
+          "wall_seconds": 21.0124,
+          "confirmed_transitions": 0,
+          "24_other_game_advances": 0
+        },
+        "raw": {
+          "rooms": 26,
+          "advances": 1,
+          "receiver_actions": 1805,
+          "prep": 17,
+          "resets": 8,
+          "wall_seconds": 13.9194,
+          "confirmed_transitions": 0,
+          "24_other_game_advances": 0
+        },
+        "lifted": {
+          "rooms": 26,
+          "advances": 1,
+          "receiver_actions": 1808,
+          "prep": 17,
+          "resets": 9,
+          "wall_seconds": 14.9496,
+          "confirmed_transitions": 2,
+          "24_other_game_advances": 0
+        },
+        "shortened": {
+          "rooms": 26,
+          "advances": 1,
+          "receiver_actions": 1793,
+          "prep": 17,
+          "resets": 8,
+          "wall_seconds": 14.1283,
+          "confirmed_transitions": 5,
+          "24_other_game_advances": 0
+        },
+        "deleted": {
+          "rooms": 26,
+          "advances": 1,
+          "receiver_actions": 1805,
+          "prep": 17,
+          "resets": 8,
+          "wall_seconds": 11.9362,
+          "confirmed_transitions": 0,
+          "24_other_game_advances": 0
+        }
+      }
+    }
+  },
+  "source_producer": {
+    "7": {
+      "input_instruction_sha256": "2ff23898524d5dcdf614f7a335fac456778aaac3954e5331cb7e5f53f2da3224",
+      "manifest_sha256": "782f9706a59faca5edb6e7591279147e82a3b7f57b89922a382721aa66cf5b6b",
+      "manifest_files": 19,
+      "same_measurement_except_times": true,
+      "capture_files_sha256": [
+        "49a876b16a48f6ad80f157f52fd90986c5fdccbb17bac739304e2ac5bbbc4fbd",
+        "bbeca026f73feec8725a908dc48bfcdef0b554cb8acd13ae024be999028e839b"
+      ],
+      "base": "ea164fdde79a3e624c28f90c74f57f06360d2333",
+      "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "patch_bytes": 0,
+      "repair_seconds": [
+        6.108,
+        7.901
+      ]
+    },
+    "8": {
+      "input_instruction_sha256": "29c2d716704de616f08a8631814ff5869fa778d284a61420481e209375c1b016",
+      "manifest_sha256": "782f9706a59faca5edb6e7591279147e82a3b7f57b89922a382721aa66cf5b6b",
+      "manifest_files": 19,
+      "same_measurement_except_times": true,
+      "capture_files_sha256": [
+        "e4cef57c5a41a0f77996ca9c4eca1d1fbbd3489c748f67d47958aa9da8e79ce8",
+        "02a57d060a7c23e35af38548636f25e4a2fd0c5a52baccc4d111d0083bc8da3a"
+      ],
+      "base": "a1730af91f94552e8aaff4bedfb8dcae00bd284d",
+      "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "patch_bytes": 0,
+      "repair_seconds": [
+        8.58,
+        10.198
+      ]
+    }
+  },
+  "cues": {
+    "first_clean": {
+      "base": {
+        "capture_sha256": "0d26950d4b5aaa972d02eafeae5f935276ec7d1211e2da585acf2f58ee67473f",
+        "differing_rrf_orders": 0,
+        "differing_rrf_sets": 0,
+        "changed_orders": {},
+        "total_at1_at5": {
+          "all": [
+            401,
+            0,
+            0
+          ],
+          "causal": [
+            101,
+            0,
+            0
+          ],
+          "goal": [
+            100,
+            0,
+            0
+          ],
+          "state": [
+            100,
+            0,
+            0
+          ],
+          "value": [
+            100,
+            0,
+            0
+          ]
+        },
+        "admission_empty_bm25_manifest_input_match": true
+      },
+      "origin": {
+        "capture_sha256": "edf095f641eeed2d57137c55494d1973c04c57ff098af79eedf1b769e4a5f479",
+        "differing_rrf_orders": 0,
+        "differing_rrf_sets": 0,
+        "changed_orders": {},
+        "total_at1_at5": {
+          "all": [
+            401,
+            1,
+            7
+          ],
+          "causal": [
+            101,
+            0,
+            3
+          ],
+          "goal": [
+            100,
+            1,
+            1
+          ],
+          "state": [
+            100,
+            0,
+            2
+          ],
+          "value": [
+            100,
+            0,
+            1
+          ]
+        },
+        "admission_empty_bm25_manifest_input_match": true
+      },
+      "ties": {
+        "capture_sha256": "9c64559f10ccf66d90b9f9c7e5dbdbd9463637950f728e046dbb85245e9efbda",
+        "differing_rrf_orders": 5,
+        "differing_rrf_sets": 2,
+        "changed_orders": {
+          "12e7448c1c7dea5dc7971459e6f632ee11cef388c94c2759ee9e8b64a70e052f": [
+            "f79f21dfb841d869990f9fcc3795e6641feee0a97f3116ccabb4e77ba8ffa80f",
+            "4c4e4d8d14a5a34320553760601520bddddc3bb089799de94903f3264345a000",
+            "1174dd21879b8763d86f85c60d6896b360a0cde8ec81d04a858f63407165aab9",
+            "35987c91fafedb98c9f90d267d9fede017ec4fd7d9f303fd2525bc5e1e1325ca",
+            "38b181d5a90ea4af6af1761dcdfd55e97a509d72950b75b3f1a25f3f2fa725e6"
+          ],
+          "471c7a6edf1f7894cfd806389dcc5815305c47afec49c73495e320975d779193": [
+            "0d62399442b0b1fbb37ad87bc4bf0bee441a79a7ea3736942a646335948700e2",
+            "010439ba322e7f9cdbf182d3bd7d595336fdea1de0cbfdebe6e9d118f0f8b046",
+            "03ced19c2b669a7df67b2224ec32d67f88fb13cab7be29901071cf586afdf772",
+            "9c4592a39e20aff230100b904575ad5c3c4ac444d0981a7dc9295e4ff14ed28e",
+            "d2b213935b2bfdd95bbf623a029aa248d862cfbb9882cb0a2843de97ae96e64f"
+          ],
+          "ce8f2a283cb3afa4a1ded9983a1227ab579044045b0b1c5480863c8867485508": [
+            "2ec67bc34b79389a3564d385220a3ae2c97e484528de3a7cfef8fb9227fb73b0",
+            "161159e37cc5966a43d32efa81d469aed8e1bd44555e82ca6836860b77422d44",
+            "51d59460048e13e04388d7601b852abdecae78ef37d6d23ec1faddb2178f1186",
+            "1b6e8a4195ea636851379e455bc81bc0c27c15e247dd8f6881f400ca638ca81f",
+            "31650efab54a84cdcb29ab9dead6ebab0ee2bd8c6af9fb4c00a6e23852e1879c"
+          ],
+          "e0c89477bce6882b6a95d0315cf21ead6fbaaedcd4faf4b2e740d00548e571da": [
+            "1bd76606834a916939c43a7ba4da771d3933af8e7bfe567a23146f835e091263",
+            "03ced19c2b669a7df67b2224ec32d67f88fb13cab7be29901071cf586afdf772",
+            "1665134a074bbdb88ecd3aae309217eb35ca40ac0c5165cced0d7ea07f8ff966",
+            "1775ef1d9e5ce1468d8dc278b1071dbf7aea33dcd6534cee2b97f4bc751614d9",
+            "35987c91fafedb98c9f90d267d9fede017ec4fd7d9f303fd2525bc5e1e1325ca"
+          ],
+          "ee18ccccfce7ae3a7645735a86c48f157c30e94d646f61602902b8de2e39d836": [
+            "0fe8a08368bb628a8407c1a7165b8533594fe724446669eefbadac875096dcad",
+            "669625751d01d40bcdeb2bdd98541c6e55203eaad79f4893ad81cffd829b288e",
+            "1775ef1d9e5ce1468d8dc278b1071dbf7aea33dcd6534cee2b97f4bc751614d9",
+            "3a528b79511b6f275034737fc8529999b357d58f0feb5bde3966509363691b61",
+            "6bff8a28a4ec74ff611855b4c0149151211d1eb2ffe891d877d1f4e4fa045de8"
+          ]
+        },
+        "total_at1_at5": {
+          "all": [
+            401,
+            3,
+            6
+          ],
+          "causal": [
+            101,
+            2,
+            3
+          ],
+          "goal": [
+            100,
+            1,
+            1
+          ],
+          "state": [
+            100,
+            0,
+            1
+          ],
+          "value": [
+            100,
+            0,
+            1
+          ]
+        },
+        "admission_empty_bm25_manifest_input_match": true
+      }
+    },
+    "followup_clean": {
+      "base": {
+        "capture_sha256": "c217380e84c4b14bb3fd581ea60881cdca104c9ca22ba8db6eef0d6e16b0589c",
+        "differing_rrf_orders": 0,
+        "differing_rrf_sets": 0,
+        "changed_orders": {},
+        "total_at1_at5": {
+          "all": [
+            401,
+            0,
+            0
+          ],
+          "causal": [
+            101,
+            0,
+            0
+          ],
+          "goal": [
+            100,
+            0,
+            0
+          ],
+          "state": [
+            100,
+            0,
+            0
+          ],
+          "value": [
+            100,
+            0,
+            0
+          ]
+        },
+        "admission_empty_bm25_manifest_input_match": true
+      },
+      "origin": {
+        "capture_sha256": "a04da4ab3d0eb1b3613add71fa2aa41bbadd1006e0995964efd17f2a104db47a",
+        "differing_rrf_orders": 1,
+        "differing_rrf_sets": 0,
+        "changed_orders": {
+          "ce8f2a283cb3afa4a1ded9983a1227ab579044045b0b1c5480863c8867485508": [
+            "161159e37cc5966a43d32efa81d469aed8e1bd44555e82ca6836860b77422d44",
+            "2ec67bc34b79389a3564d385220a3ae2c97e484528de3a7cfef8fb9227fb73b0",
+            "1b6e8a4195ea636851379e455bc81bc0c27c15e247dd8f6881f400ca638ca81f",
+            "00519206a2d0942ea3802c46244395dd0b4f5e918295eeff027bc1139cca716c",
+            "010439ba322e7f9cdbf182d3bd7d595336fdea1de0cbfdebe6e9d118f0f8b046"
+          ]
+        },
+        "total_at1_at5": {
+          "all": [
+            401,
+            1,
+            7
+          ],
+          "causal": [
+            101,
+            0,
+            3
+          ],
+          "goal": [
+            100,
+            1,
+            1
+          ],
+          "state": [
+            100,
+            0,
+            2
+          ],
+          "value": [
+            100,
+            0,
+            1
+          ]
+        },
+        "admission_empty_bm25_manifest_input_match": true
+      },
+      "ties": {
+        "capture_sha256": "ab49ae12bdbb14ed03a2e68a2c0f3bd191e6ae75e2b96eee01313fe715b74f72",
+        "differing_rrf_orders": 3,
+        "differing_rrf_sets": 0,
+        "changed_orders": {
+          "471c7a6edf1f7894cfd806389dcc5815305c47afec49c73495e320975d779193": [
+            "0d62399442b0b1fbb37ad87bc4bf0bee441a79a7ea3736942a646335948700e2",
+            "010439ba322e7f9cdbf182d3bd7d595336fdea1de0cbfdebe6e9d118f0f8b046",
+            "03ced19c2b669a7df67b2224ec32d67f88fb13cab7be29901071cf586afdf772",
+            "9c4592a39e20aff230100b904575ad5c3c4ac444d0981a7dc9295e4ff14ed28e",
+            "d2b213935b2bfdd95bbf623a029aa248d862cfbb9882cb0a2843de97ae96e64f"
+          ],
+          "a19dc52080e3808fc09ac490f0311a4a3aa82caa1af00b5c808ce6a4b820124a": [
+            "19f3f66b426e68f4d214d2432c6e5ece87f24c55a54d2bbf37b274262b1ff3f0",
+            "f79f21dfb841d869990f9fcc3795e6641feee0a97f3116ccabb4e77ba8ffa80f",
+            "010439ba322e7f9cdbf182d3bd7d595336fdea1de0cbfdebe6e9d118f0f8b046",
+            "ec2488ba7e86954c81d26ca687f5c08f62716a64c78c0a5834856a538fc81f04",
+            "815604c3e784a7dea36e711c6b1b5102add200efd1f6172feac45d6a74e45f0d"
+          ],
+          "ce8f2a283cb3afa4a1ded9983a1227ab579044045b0b1c5480863c8867485508": [
+            "2ec67bc34b79389a3564d385220a3ae2c97e484528de3a7cfef8fb9227fb73b0",
+            "161159e37cc5966a43d32efa81d469aed8e1bd44555e82ca6836860b77422d44",
+            "51d59460048e13e04388d7601b852abdecae78ef37d6d23ec1faddb2178f1186",
+            "1b6e8a4195ea636851379e455bc81bc0c27c15e247dd8f6881f400ca638ca81f",
+            "31650efab54a84cdcb29ab9dead6ebab0ee2bd8c6af9fb4c00a6e23852e1879c"
+          ]
+        },
+        "total_at1_at5": {
+          "all": [
+            401,
+            3,
+            6
+          ],
+          "causal": [
+            101,
+            2,
+            3
+          ],
+          "goal": [
+            100,
+            1,
+            1
+          ],
+          "state": [
+            100,
+            0,
+            1
+          ],
+          "value": [
+            100,
+            0,
+            1
+          ]
+        },
+        "admission_empty_bm25_manifest_input_match": true
+      },
+      "stable": {
+        "capture_sha256": "00dcbd68b0f915edc742a07d9788cfb4e2e86cba6a2a8111d8e8ebac60ea3c0c",
+        "differing_rrf_orders": 0,
+        "differing_rrf_sets": 0,
+        "changed_orders": {},
+        "total_at1_at5": {
+          "all": [
+            401,
+            3,
+            6
+          ],
+          "causal": [
+            101,
+            2,
+            3
+          ],
+          "goal": [
+            100,
+            1,
+            1
+          ],
+          "state": [
+            100,
+            0,
+            1
+          ],
+          "value": [
+            100,
+            0,
+            1
+          ]
+        },
+        "admission_empty_bm25_manifest_input_match": true
+      }
+    }
+  },
+  "cue_stable_second_process": {
+    "capture_sha256": "33d0b59996d409d1a64176e71a2e6692906b7a7c1e8eecdbd1ff03e4ad949c6c",
+    "all_ordered_ids_match": true
+  },
+  "futamura_constructed": {
+    "before": {
+      "teacher": {
+        "pass": true,
+        "rung_used": 2,
+        "compiled_to_rung0": true,
+        "proposer_calls": 0
+      },
+      "green_receiver": [
+        "SOLVED_AT_RUNG0_COMPILED_SKILL",
+        0,
+        true
+      ],
+      "foreign": {
+        "compiled": true,
+        "deduplicated": false,
+        "rule_id": "futamura_84a48644afa8",
+        "source_rung": 2,
+        "before_template": "__V0__",
+        "after_template": "__V1__(__V0__)",
+        "elapsed_us": 370.861
+      },
+      "literal": {
+        "compiled": true,
+        "deduplicated": false,
+        "rule_id": "futamura_01fc7254b5b9",
+        "source_rung": 2,
+        "before_template": "__C0__",
+        "after_template": "__C1__",
+        "elapsed_us": 298.952
+      },
+      "shared_test_state": true,
+      "same_cases_red_baseline": 1
+    },
+    "after": {
+      "teacher": {
+        "pass": true,
+        "rung_used": 2,
+        "compiled_to_rung0": true,
+        "proposer_calls": 0
+      },
+      "green_receiver": [
+        "ALREADY_PASSING__NO_REPAIR",
+        -1,
+        false
+      ],
+      "foreign": {
+        "compiled": false,
+        "reason": "UNBOUND_REPLACEMENT_OR_FAILED_TEACHER_ROUNDTRIP"
+      },
+      "literal": {
+        "compiled": true,
+        "deduplicated": false,
+        "rule_id": "futamura_e21268d34689",
+        "source_rung": 2,
+        "before_template": "__C0__",
+        "after_template": "3",
+        "elapsed_us": 398.038
+      },
+      "shared_test_state": false,
+      "same_cases_red_baseline": 1
+    }
+  },
+  "regressions": {
+    "first_mechanism_selection": {
+      "passed": 147,
+      "failed": [
+        "canonical.tests.test_meta_circular_global_sentient_creature_v1.MetaCircularOrganGraphTests::test_combiner_is_invented_from_credited_unlock_traces",
+        "canonical.tests.test_meta_circular_global_sentient_creature_v1.MetaCircularOrganGraphTests::test_instrumental_policy_prefers_zero_reward_tool_that_unlocks_high_value_goal",
+        "canonical.tests.test_meta_circular_global_sentient_creature_v1.MetaCircularOrganGraphTests::test_live_boards_are_experience_not_named_probes",
+        "canonical.tests.test_meta_circular_global_sentient_creature_v1.MetaCircularOrganGraphTests::test_policy_organ_rewrites_from_world_residuals",
+        "canonical.tests.test_meta_circular_global_sentient_creature_v1.MetaCircularOrganGraphTests::test_qd_archive_holds_structurally_different_policy_organs",
+        "canonical.tests.test_meta_circular_global_sentient_creature_v1.MetaCircularOrganGraphTests::test_sleep_admits_policy_concepts_and_wake_rewrites_the_organ",
+        "canonical.tests.test_meta_circular_global_sentient_creature_v1.CreatureCounterexampleClosureTests::test_creature_step_always_asks_policy_and_matches_choose_next_when_unstructured",
+        "canonical.tests.test_meta_circular_global_sentient_creature_v1.CreatureCounterexampleClosureTests::test_creature_step_ranks_zero_reward_unlock_with_policy_organ",
+        "canonical.tests.test_meta_circular_global_sentient_creature_v1.CreatureCounterexampleClosureTests::test_ring0_referees_organ_sources_not_only_py_files"
+      ],
+      "deselected": 1,
+      "junit_sha256": "2462cdc809942ea49340b52a9ae82eac6544156f590d0433125960b351a634b9"
+    },
+    "after_policy_cache_and_cue_fixes": {
+      "passed": 161,
+      "junit_sha256": "c5a839e9c1666bd5165d741b9cc98c41f3da63d8c51e7c874b93f5de938c183e"
+    },
+    "combined_clean": {
+      "commit": "a3104279",
+      "passed": 355,
+      "subtests_passed": 18,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "warnings": 2,
+      "seconds": 158.172,
+      "junit_sha256": "d8d3bbbcf2b819459542a8dd800a9de1cbc4397bc24a0cccd6bb7d4fde8453ac",
+      "files": [
+        "test_arm_learned_from_its_own_verified_repairs_v1",
+        "test_boundary_evidence_v1",
+        "test_causal_swe_repair_v1",
+        "test_compiled_repair_witness_v1",
+        "test_contrast_and_browser_boundary_v1",
+        "test_contrastive_oracle_bootstrap_v1",
+        "test_cow_angelic_zygote_v1",
+        "test_domain_atlas_v1",
+        "test_evidence_census_and_calibration_v1",
+        "test_finite_minimax_decision_region_v1",
+        "test_frame_program_v1",
+        "test_frontier_leapfrog_wave36_v1",
+        "test_frontier_leapfrog_wave39_v1",
+        "test_frontier_leapfrog_waves21_25_v1",
+        "test_harbor_cold_smoke_v1",
+        "test_harbor_epistemic_agent_v1",
+        "test_harbor_experimental_vm_v1",
+        "test_harbor_pro_git_capture_v1",
+        "test_harbor_pro_patch_handoff_v1",
+        "test_harbor_process_cleanup_worker_v1",
+        "test_induced_edit_basis_v1",
+        "test_meta_circular_global_sentient_creature_v1",
+        "test_minimal_experiment_v1",
+        "test_perfect_algorithm_lifted_generalization_v1",
+        "test_petri_cow_splicing_engine_v1",
+        "test_petri_cow_unified_architecture_v1",
+        "test_repair_input_dependency_gate_v1",
+        "test_reverse_tomography_algebra_v1",
+        "test_same_identity_supervisor",
+        "test_subtree_witness_replay_v1",
+        "test_the_refusal_is_the_curriculum_v1",
+        "test_tied_evidence_and_policy_cache_v1",
+        "test_typed_invention_v1",
+        "test_unification_wave2_frontier_v1",
+        "test_unified_epistemic_portfolio_v1",
+        "test_unified_frontier_spines_v1",
+        "test_v4_subtree_fuzzer_harbor_v1",
+        "test_witnessed_native_route_v1",
+        "test_witnessed_revision_history_v1",
+        "test_zero_knowledge_cua_kernel_v1"
+      ]
+    }
+  }
+}

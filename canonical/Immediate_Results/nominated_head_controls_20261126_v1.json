@@ -1,0 +1,584 @@
+{
+  "kind": "local constructed calls on pinned source, not task-agent outputs",
+  "wave": {
+    "revision": "faea7c3177fc447499e0c7fe2abc5fe0575c23d0",
+    "kernel_sha256": "03cdcd832c1fa6d76c32baee4b700715873f34a980c23d967637230f069f4809",
+    "kind": "explicit constructed controls; no task dispatch or model training",
+    "inventory": {
+      "listed": 100,
+      "distinct_labels": 100,
+      "filename_labels": 67,
+      "distinct_modules": 98,
+      "duplicates": {
+        "canonical.tools.an_actions_effect_is_a_provenance_map_v1": 2,
+        "canonical.tools.the_goal_is_a_quotient_of_the_trace_v1": 2
+      },
+      "plain_python_imports": {
+        "canonical.swe_kernel.guarded_meaning_ir_v1": "imported",
+        "canonical.swe_kernel.angelic_cegis_v1": "imported",
+        "canonical.swe_kernel.causal_nexus_v1": "imported",
+        "canonical.swe_kernel.unified_epistemic_portfolio_v1": "imported",
+        "canonical.tools.grammar_closed_repair_v1": "imported",
+        "canonical.runtime.demonstration_version_space_v1": "imported",
+        "canonical.runtime.evidence_demand_v1": "imported",
+        "canonical.runtime.settlement_v1": "imported",
+        "canonical.runtime.hypothesis_classes_v1": "imported",
+        "canonical.runtime.vocabulary_induction_v1": "imported",
+        "canonical.runtime.operator_acquisition_v1": "imported",
+        "canonical.runtime.transfer_learning_v1": "imported",
+        "canonical.runtime.tool_census_v1": "imported",
+        "canonical.runtime.computer_env_v1": "imported",
+        "canonical.swe_kernel.executable_mental_model_v1": "imported",
+        "canonical.swe_kernel.computer_use_agent_v1": "imported",
+        "canonical.runtime.aimed_action_v1": "imported",
+        "canonical.swe_kernel.horizon_bounded_execution_v1": "imported",
+        "canonical.swe_kernel.composition_verification_v1": "imported",
+        "canonical.swe_kernel.credit_assignment_v1": "imported",
+        "canonical.swe_kernel.weights_from_scratch_v1": "imported",
+        "canonical.runtime.creature_stakes_and_initiative_v1": "imported",
+        "canonical.runtime.curriculum_v1": "imported",
+        "canonical.tools.the_record_is_the_commit_v1": "imported",
+        "canonical.swe_kernel.causal_swe_repair_v1": "imported",
+        "canonical.swe_kernel.multistep_repo_closed_loop_solver_v1": "imported",
+        "canonical.swe_kernel.whitebox_introspector_and_trace_synthesizer_v1": "imported",
+        "canonical.swe_kernel.closed_loop_trace_abduction_repair_v1": "imported",
+        "canonical.swe_kernel.canonical_boundary_router_v1": "imported",
+        "canonical.swe_kernel.semantic_generalization_engine_v1": "imported",
+        "canonical.swe_kernel.cegis_semantic_synthesizer_v1": "imported",
+        "canonical.swe_kernel.angelic_cegis_repair_v1": "imported",
+        "canonical.swe_kernel.angelic_oe_synthesizer_v1": "imported",
+        "canonical.swe_kernel.semantic_ir_v1": "imported",
+        "canonical.swe_kernel.one_demonstration_basin_v1": "imported",
+        "canonical.runtime.bound_capabilities.python_counterfactual_spec_repair_v1": "imported",
+        "canonical.tools.the_frame_crosses_the_machine_v1": "imported",
+        "canonical.tools.the_space_is_the_artifact_v1": "imported",
+        "canonical.tools.the_demand_is_learned_from_the_run_v1": "imported",
+        "canonical.tools.an_actions_effect_is_a_provenance_map_v1": "imported",
+        "canonical.tools.the_goal_is_a_quotient_of_the_trace_v1": "imported",
+        "canonical.tools.when_one_showing_should_be_trusted_20261112_v1": "imported",
+        "canonical.tools.generalization_rung_gradient_v1": "imported",
+        "canonical.tools.the_page_is_the_guide_v1": "imported",
+        "canonical.tools.history_template_repair_v1": "imported",
+        "canonical.tools.the_store_is_the_only_thing_that_learns_v1": "imported",
+        "canonical.tools.arm_learned_from_its_own_verified_repairs_v1": "imported",
+        "canonical.swe_kernel.operator_generalization_v1": "imported",
+        "canonical.swe_kernel.verified_lesson_pipeline_v1": "imported",
+        "canonical.tools.the_failing_run_names_the_expression_v1": "imported",
+        "canonical.tools.the_same_guard_twice_is_the_discriminator_v1": "imported",
+        "canonical.tools.the_constant_is_a_hole_v1": "imported",
+        "canonical.tools.the_literal_is_the_defect_v1": "imported",
+        "canonical.tools.the_relation_not_the_value_v1": "imported",
+        "canonical.swe_kernel.causal_dataflow_graph_v1": "imported",
+        "canonical.swe_kernel.causal_dependency_repair_v1": "imported",
+        "canonical.swe_kernel.repair_input_dependency_gate_v1": "imported",
+        "canonical.tools.the_counterexample_is_the_next_experiment_v1": "imported",
+        "canonical.tools.the_branch_is_the_model_v1": "imported",
+        "canonical.tools.the_refusal_is_the_other_half_v1": "imported",
+        "canonical.tools.the_index_is_the_bottleneck_v1": "imported",
+        "canonical.swe_kernel.verified_capability_bridge_index_v1": "imported",
+        "canonical.runtime.counterexample_guided_causal_architecture_synthesizer_v1": "imported",
+        "canonical.runtime.gui_room_v1": "imported",
+        "canonical.runtime.osworld_v21_host_browser_ops_v1": "imported",
+        "canonical.runtime.osworld_v21_generic_policy_v1": "imported",
+        "canonical.runtime.osworld_computer_surface_v1": "imported",
+        "canonical.swe_kernel.differential_witness_inversion_v1": "imported",
+        "canonical.tools.force_the_value_and_see_v1": "imported",
+        "canonical.tools.the_vocabulary_must_be_computed_not_written_v1": "imported",
+        "canonical.tools.a_contrast_is_a_probe_v1": "imported",
+        "canonical.tools.the_width_of_a_guard_v1": "imported",
+        "canonical.runtime.systematic_exploration_v1": "imported",
+        "canonical.swe_kernel.the_repository_is_the_seed_corpus_v1": "imported",
+        "canonical.swe_kernel.metamorphic_laws_v1": "imported",
+        "canonical.swe_kernel.checkability_by_differential_pin_v1": "imported",
+        "canonical.swe_kernel.producer_lineage_graph_v1": "imported",
+        "canonical.swe_kernel.vocabulary_growth_v1": "imported",
+        "canonical.tools.the_value_that_was_rejected_had_a_producer_v1": "imported",
+        "canonical.tools.the_name_is_a_hole_v1": "imported",
+        "canonical.tools.the_edit_is_in_the_files_own_alphabet_v1": "imported",
+        "canonical.tools.a_relation_over_two_guards_v1": "imported",
+        "canonical.runtime.bound_capabilities.python_source_taint_flow": "imported",
+        "canonical.runtime.verified_zero_screenshot_action_cache_v1": "imported",
+        "canonical.runtime.osworld_verified_task_ledger_v1": "imported",
+        "canonical.runtime.osworld_v21_browser_cdp_v1": "imported",
+        "canonical.tools.the_plan_is_a_partial_order_v1": "imported",
+        "canonical.tools.the_goal_picks_the_door_v1": "imported",
+        "canonical.swe_kernel.meme_protocol_memory_v1": "imported",
+        "canonical.tools.a_fact_is_a_conjunction_of_its_readers_v1": "imported",
+        "canonical.tools.the_check_names_its_object_v1": "imported",
+        "canonical.runtime.residual_witness_retrieval_compiler_v1": "imported",
+        "canonical.runtime.composition_state_capsule_v2": "imported",
+        "canonical.runtime.verifier_falsification_v1": "imported",
+        "canonical.swe_kernel.learned_skill_verdict_v1": "imported",
+        "canonical.swe_kernel.skill_scope_bundle_v1": "imported",
+        "canonical.swe_kernel.hierarchical_skill_library_v1": "imported",
+        "canonical.runtime.capability_selection_retrieval_v1": "imported"
+      }
+    },
+    "hedged_single_observation": [
+      {
+        "quarantined": true,
+        "accepted_as_authoritative": false,
+        "record": {
+          "triple": [
+            "lamp",
+            "status",
+            "on"
+          ],
+          "modality": "HEDGED",
+          "temporal_shape": "STATIVE",
+          "temporal_fidelity": "FAITHFUL",
+          "valid_from": "2026-01-01",
+          "valid_until": null,
+          "sources": [
+            "one event"
+          ],
+          "authoritative": false,
+          "quarantine_reason": "MANUFACTURED_CONFIDENCE_BLOCKED__SINGLE_HEDGED_SOURCE"
+        }
+      },
+      {
+        "quarantined": true,
+        "accepted_as_authoritative": false,
+        "record": {
+          "triple": [
+            "lamp",
+            "status",
+            "on"
+          ],
+          "modality": "HEDGED",
+          "temporal_shape": "STATIVE",
+          "temporal_fidelity": "FAITHFUL",
+          "valid_from": "2026-01-01",
+          "valid_until": null,
+          "sources": [
+            "one event"
+          ],
+          "authoritative": false,
+          "quarantine_reason": "MANUFACTURED_CONFIDENCE_BLOCKED__SINGLE_HEDGED_SOURCE"
+        }
+      },
+      {
+        "quarantined": false,
+        "accepted_as_authoritative": true,
+        "record": {
+          "triple": [
+            "lamp",
+            "status",
+            "on"
+          ],
+          "modality": "CORROBORATED",
+          "temporal_shape": "STATIVE",
+          "temporal_fidelity": "FAITHFUL",
+          "valid_from": "2026-01-01",
+          "valid_until": null,
+          "sources": [
+            "alias for one event",
+            "one event"
+          ],
+          "executable_verified": false,
+          "authoritative": true
+        }
+      }
+    ],
+    "one_outcome_copied_16_times": {
+      "n": 16,
+      "wins": 16,
+      "observed_rate": 1.0,
+      "null_rate": 0.5,
+      "alpha": 0.05,
+      "ville_threshold": 20.0,
+      "final_e_value": 35.527137,
+      "sup_e_value": 35.527137,
+      "anytime_valid_pass": true,
+      "trajectory_tail": [
+        11.641532,
+        14.551915,
+        18.189894,
+        22.737368,
+        28.421709,
+        35.527137
+      ]
+    },
+    "tier1_return": {
+      "pass": true,
+      "engine_id": "LEAPFROG_W46_THREE_TIER_ZERO_FORGETTING_CONTINUAL",
+      "tier": "TIER_1_INSTANT_DOC_TO_LORA_MANIFEST",
+      "manifest": {
+        "doc_id": "d",
+        "doc_sha16": "5200dcbb809e0f61",
+        "chunk_count": 1,
+        "chunk_digests": [
+          "5200dcbb809e0f61"
+        ],
+        "effective_rank": 8,
+        "estimated_adapter_mb": 4.0,
+        "within_50mb_budget": true,
+        "base_weight_drift": 0.0,
+        "mode": "SINGLE_PASS_HYPERNET_D2L_MANIFEST"
+      },
+      "k3_model_calls": 0,
+      "spend_usd": 0.0
+    }
+  },
+  "site": {
+    "kind": "constructed input; supplied oracle; not a task grade",
+    "rows": [
+      {
+        "budget": 1000,
+        "n_examples": 0,
+        "status": "NO_EXAMPLES",
+        "sites": 0,
+        "candidates": 0,
+        "hits": [],
+        "seconds": 4.122000973438844e-06
+      },
+      {
+        "budget": 1000,
+        "n_examples": 1,
+        "status": "NO_EXPRESSION",
+        "sites": 1,
+        "candidates": 1000,
+        "hits": [],
+        "seconds": 0.22575242399943818
+      },
+      {
+        "budget": 1000,
+        "n_examples": 2,
+        "status": "NO_EXPRESSION",
+        "sites": 1,
+        "candidates": 1000,
+        "hits": [],
+        "seconds": 0.2180150809999759
+      },
+      {
+        "budget": 20000,
+        "n_examples": 0,
+        "status": "NO_EXAMPLES",
+        "sites": 0,
+        "candidates": 0,
+        "hits": [],
+        "seconds": 2.5740009732544422e-06
+      },
+      {
+        "budget": 20000,
+        "n_examples": 1,
+        "status": "FOUND",
+        "sites": 1,
+        "candidates": 1603,
+        "hits": [
+          {
+            "expression": "(x + x)",
+            "heldout_minus3": -6
+          },
+          {
+            "expression": "(x * x)",
+            "heldout_minus3": 9
+          },
+          {
+            "expression": "(x + 2)",
+            "heldout_minus3": -1
+          },
+          {
+            "expression": "(x * 2)",
+            "heldout_minus3": -6
+          },
+          {
+            "expression": "(2 + x)",
+            "heldout_minus3": -1
+          },
+          {
+            "expression": "(2 * x)",
+            "heldout_minus3": -6
+          }
+        ],
+        "seconds": 0.3525210000007064
+      },
+      {
+        "budget": 20000,
+        "n_examples": 2,
+        "status": "FOUND",
+        "sites": 1,
+        "candidates": 20000,
+        "hits": [
+          {
+            "expression": "(x * x)",
+            "heldout_minus3": 9
+          }
+        ],
+        "seconds": 5.429810837998957
+      }
+    ],
+    "interrogation": {
+      "problem": {
+        "hypothesis_set_complete": true,
+        "worlds": [
+          {
+            "world_id": "(x + x)"
+          },
+          {
+            "world_id": "(x * x)"
+          },
+          {
+            "world_id": "(x + 2)"
+          },
+          {
+            "world_id": "(x * 2)"
+          },
+          {
+            "world_id": "(2 + x)"
+          },
+          {
+            "world_id": "(2 * x)"
+          }
+        ],
+        "policy_regions": [
+          {
+            "policy_id": "(2 * x)",
+            "region_complete": true,
+            "world_ids": [
+              "(x + x)",
+              "(x * 2)",
+              "(2 * x)"
+            ]
+          },
+          {
+            "policy_id": "(x * x)",
+            "region_complete": true,
+            "world_ids": [
+              "(x * x)"
+            ]
+          },
+          {
+            "policy_id": "(2 + x)",
+            "region_complete": true,
+            "world_ids": [
+              "(x + 2)",
+              "(2 + x)"
+            ]
+          }
+        ],
+        "observations": [
+          {
+            "observation_id": "0",
+            "outcome_map_complete": true,
+            "cost_units": 1,
+            "outcomes": {
+              "(x + x)": 0,
+              "(x * x)": 0,
+              "(x + 2)": 2,
+              "(x * 2)": 0,
+              "(2 + x)": 2,
+              "(2 * x)": 0
+            }
+          },
+          {
+            "observation_id": "1",
+            "outcome_map_complete": true,
+            "cost_units": 1,
+            "outcomes": {
+              "(x + x)": 2,
+              "(x * x)": 1,
+              "(x + 2)": 3,
+              "(x * 2)": 2,
+              "(2 + x)": 3,
+              "(2 * x)": 2
+            }
+          },
+          {
+            "observation_id": "2",
+            "outcome_map_complete": true,
+            "cost_units": 1,
+            "outcomes": {
+              "(x + x)": 4,
+              "(x * x)": 4,
+              "(x + 2)": 4,
+              "(x * 2)": 4,
+              "(2 + x)": 4,
+              "(2 * x)": 4
+            }
+          },
+          {
+            "observation_id": "3",
+            "outcome_map_complete": true,
+            "cost_units": 1,
+            "outcomes": {
+              "(x + x)": 6,
+              "(x * x)": 9,
+              "(x + 2)": 5,
+              "(x * 2)": 6,
+              "(2 + x)": 5,
+              "(2 * x)": 6
+            }
+          }
+        ]
+      },
+      "decision": {
+        "schema": "BRAIN_FINITE_MINIMAX_DECISION_REGION_V1",
+        "pass": true,
+        "status": "PASS__EXACT_MINIMAX_DECISION_REGION_POLICY",
+        "world_count": 6,
+        "policy_region_count": 3,
+        "minimum_worst_case_cost_units": 1.0,
+        "first_observation_id": "1",
+        "first_observation_partitions": [
+          {
+            "world_ids": [
+              "(x * x)"
+            ],
+            "remaining_optimal_cost": 0.0,
+            "common_policy_ids_if_resolved": [
+              "(x * x)"
+            ]
+          },
+          {
+            "world_ids": [
+              "(2 * x)",
+              "(x * 2)",
+              "(x + x)"
+            ],
+            "remaining_optimal_cost": 0.0,
+            "common_policy_ids_if_resolved": [
+              "(2 * x)"
+            ]
+          },
+          {
+            "world_ids": [
+              "(2 + x)",
+              "(x + 2)"
+            ],
+            "remaining_optimal_cost": 0.0,
+            "common_policy_ids_if_resolved": [
+              "(2 + x)"
+            ]
+          }
+        ],
+        "decision_regions_may_overlap": true,
+        "stops_on_common_policy_not_world_identification": true,
+        "theorem_boundary": "EXACT_ONLY_FOR_THE_DECLARED_COMPLETE_FINITE_HYPOTHESIS_SET_COMPLETE_SOUND_POLICY_REGIONS_AND_COMPLETE_TRUTHFUL_OBSERVATION_OUTCOME_MAPS",
+        "terminal_authority": false,
+        "capability_credit_delta": 0
+      },
+      "teacher_queries": 1,
+      "observed": 1,
+      "survivors": [
+        "(x * x)"
+      ],
+      "heldout": {
+        "(x * x)": 9
+      }
+    },
+    "sources": {
+      "canonical/tools/grammar_closed_repair_v1.py": "ee42d7a118f271a7d67456325387230c68b2d27bc4376455a9dd7d818ab214df",
+      "canonical/tools/site_general_expression_synthesis_v1.py": "f0d925cf79f50882710e537ab9ce373e780d23c7ad53dda70b4cf2a3b45f20fb",
+      "canonical/runtime/finite_minimax_decision_region_v1.py": "56856e1d4603f70d28f0f2544a937257af2413cf4340565428a4c3c2c9e38033"
+    }
+  },
+  "initial_inventory_reader_mistake": {
+    "slash_path_labels": 67,
+    "dotted_labels": 33,
+    "outcome": "A dotted-import-only reader failed on the 67 file labels. Normalize both schemes before counting."
+  },
+  "repeat": {
+    "wave_fields_match": true,
+    "site_first_run_caps": {
+      "1000": {
+        "revision": "f247563228102c67282d1696806b42b3aa2e29b4",
+        "source_sha256": {
+          "site_general_expression_synthesis_v1.py": "f0d925cf79f50882710e537ab9ce373e780d23c7ad53dda70b4cf2a3b45f20fb",
+          "grammar_closed_repair_v1.py": "ee42d7a118f271a7d67456325387230c68b2d27bc4376455a9dd7d818ab214df"
+        },
+        "kind": "selected function and caller-supplied examples, not an autonomous repair",
+        "rows": [
+          {
+            "n_examples": 0,
+            "status": "NO_EXAMPLES",
+            "sites": 0,
+            "candidates": 0,
+            "hits": [],
+            "seconds": 3.6830006138188764e-06
+          },
+          {
+            "n_examples": 1,
+            "status": "NO_EXPRESSION",
+            "sites": 1,
+            "candidates": 1000,
+            "hits": [],
+            "seconds": 0.2682772419993853
+          },
+          {
+            "n_examples": 2,
+            "status": "NO_EXPRESSION",
+            "sites": 1,
+            "candidates": 1000,
+            "hits": [],
+            "seconds": 0.21368549200087728
+          }
+        ]
+      },
+      "20000": {
+        "revision": "f247563228102c67282d1696806b42b3aa2e29b4",
+        "source_sha256": {
+          "site_general_expression_synthesis_v1.py": "f0d925cf79f50882710e537ab9ce373e780d23c7ad53dda70b4cf2a3b45f20fb",
+          "grammar_closed_repair_v1.py": "ee42d7a118f271a7d67456325387230c68b2d27bc4376455a9dd7d818ab214df"
+        },
+        "kind": "selected function and caller-supplied examples, not an autonomous repair",
+        "rows": [
+          {
+            "n_examples": 0,
+            "status": "NO_EXAMPLES",
+            "sites": 0,
+            "candidates": 0,
+            "hits": [],
+            "seconds": 3.519000529195182e-06
+          },
+          {
+            "n_examples": 1,
+            "status": "FOUND",
+            "sites": 1,
+            "candidates": 1603,
+            "hits": [
+              {
+                "expr": "(x + x)",
+                "unseen_minus3": -6
+              },
+              {
+                "expr": "(x * x)",
+                "unseen_minus3": 9
+              },
+              {
+                "expr": "(x + 2)",
+                "unseen_minus3": -1
+              },
+              {
+                "expr": "(x * 2)",
+                "unseen_minus3": -6
+              },
+              {
+                "expr": "(2 + x)",
+                "unseen_minus3": -1
+              },
+              {
+                "expr": "(2 * x)",
+                "unseen_minus3": -6
+              }
+            ],
+            "seconds": 0.34726990399940405
+          },
+          {
+            "n_examples": 2,
+            "status": "FOUND",
+            "sites": 1,
+            "candidates": 20000,
+            "hits": [
+              {
+                "expr": "(x * x)",
+                "unseen_minus3": 9
+              }
+            ],
+            "seconds": 5.0980159740011
+          }
+        ]
+      }
+    }
+  }
+}
