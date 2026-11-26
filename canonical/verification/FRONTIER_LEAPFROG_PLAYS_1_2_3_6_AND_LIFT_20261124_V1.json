@@ -1,6 +1,6 @@
 {
   "authority": "NONE -- sandbox execution measurement; independent promotion requires GitHub OIDC re-execution",
-  "base_commit": "b8bde6007eef5aa70b8f68057a2e0306f603910b",
+  "base_commit": "ab5a2df83c6be0d92bb58355ac839ad188adea4a",
   "date": "2026-11-24",
   "harvested_oidc_pipeline_lift": {
     "clean_tmp_contract_replay_reproduced": 16,

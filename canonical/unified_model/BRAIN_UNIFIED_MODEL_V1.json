@@ -1,4 +1,792 @@
 {
+ "anatomy": {
+  "claim_limit": "a score is evidence that the module's own text says it does this work; it is not evidence that the work is correct",
+  "domains": {
+   "coding_agents": {
+    "candidates": 287,
+    "frontier_function": "resolve a repository issue from a text description",
+    "harvested_all": 101,
+    "hidden_share_all": 0.014,
+    "indexed_all": 209,
+    "top": [
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
+      "score": 41.25,
+      "summary": "Unified Zero-Model SWE Wall-Closers V1: Metamorphic Witness Splitter, Codebase"
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/causal_nexus_v1.py",
+      "score": 36.0,
+      "summary": "Causal Nexus: expected-value abduction, single-site counterfactual blame, lens synthesis,"
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/angelic_cegis_repair_v1.py",
+      "score": 35.75,
+      "summary": "True Angelic Execution + Live Differential Spectrum + Object-Aware CEGIS Repair (v1)."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/cow_angelic_zygote_v1.py",
+      "score": 35.25,
+      "summary": "Copy-on-Write Prewarmed Pytest Zygote Server, Angelic Branch Inversion,"
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/multistep_repo_closed_loop_solver_v1.py",
+      "score": 34.0,
+      "summary": "Multi-Step Closed-Loop Repository Solver, Differential Trace Localizer & Race Prober."
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/cow_impact_repair_engine_v1.py",
+      "score": 33.75,
+      "summary": "Zero-Copy CoW Impact-Sliced STUN Guard & Coupled Multi-File Repair Engine (`K3 = 0`)."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/reverse_tomography_algebra_v1.py",
+      "score": 33.75,
+      "summary": "Reverse-Execution Synthesis, Differential State Tomography, Algebraic Skill Composition,"
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/angelic_lens_cow_repair_v1.py",
+      "score": 33.25,
+      "summary": "1ms CoW Angelic Causal Fault Localization, Repo-Native Component Mining,"
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/frontier_unified_engine_v1.py",
+      "score": 33.0,
+      "summary": "Unified Zero-LLM Frontier-Surpassing Engine (V1)."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/causal_swe_repair_v1.py",
+      "score": 32.0,
+      "summary": "Zero-Leakage Causal SWE Repair Engine."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/closed_loop_trace_abduction_repair_v1.py",
+      "score": 28.0,
+      "summary": "Closed-Loop Execution-Trace Abduction, Dynamic Vocabulary Induction &"
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/verified_lesson_pipeline_v1.py",
+      "score": 26.0,
+      "summary": "Causal Whole-File Lesson Localization, Execution-Locus Filtering & Held-Out Admission."
+     }
+    ]
+   },
+   "computer_use": {
+    "candidates": 145,
+    "frontier_function": "drive a GUI it has never seen",
+    "harvested_all": 24,
+    "hidden_share_all": 0.014,
+    "indexed_all": 117,
+    "top": [
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/gui_room_v1.py",
+      "score": 27.0,
+      "summary": "The GUI room: a real browser, a real page, observed structurally -- never from pixels alone."
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": false,
+      "path": "canonical/tools/the_refusal_is_the_curriculum_v1.py",
+      "score": 26.25,
+      "summary": "The refusal is the curriculum: the environment publishes its own grammar, and one visit writes the axioms that make the second visit cheaper."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/osworld_v21_zero_model_policy_v1.py",
+      "score": 26.0,
+      "summary": "Zero-Model OSWorld 2.1 Policy Provider for BrainOSWorldAgentV8 (0 Neural Weights, 0 VLMs)."
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": false,
+      "path": "canonical/tools/miniwob_one_success_generalisation_measure_v1.py",
+      "score": 24.75,
+      "summary": "Does ONE success become a skill? Measured on web tasks nobody in this repository wrote."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/interface_action_grammar_v1.py",
+      "score": 22.75,
+      "summary": "Unified Interface Action-Grammar Engine (CLI Repertoire + GUI/Browser A11y Tree)."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/dom_state_environment_v1.py",
+      "score": 22.25,
+      "summary": "An in-memory web app whose real state can be probed and never seen."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/astra_hidden_visual_executor.py",
+      "score": 21.75,
+      "summary": ""
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/cross_modal_tomography_petri_v1.py",
+      "score": 20.25,
+      "summary": "Multi-Layer Differential State Tomography, Zero-Weight Pure-Canvas Layout"
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/osworld_v21_brain_agent_adapter_v7.py",
+      "score": 19.0,
+      "summary": "Terminal-authority-hardening successor for the OSWorld capability stack."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/universal_computer_agent_v1.py",
+      "score": 18.75,
+      "summary": "Universal Computer-Use Agent: Zero-Model, Zero-Knowledge-House Causal Engine (v1)."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/instruction_contract_v1.py",
+      "score": 18.5,
+      "summary": "Compile an instruction into a checkable contract, so the verifier stops being missing."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/osworld_sensor_request_bridge_v1.py",
+      "score": 16.25,
+      "summary": "Admit a computed sensor request into OSWorld-compatible guest state ops."
+     }
+    ]
+   },
+   "continual_learning": {
+    "candidates": 28,
+    "frontier_function": "keep improving without forgetting or drifting",
+    "harvested_all": 8,
+    "hidden_share_all": 0.071,
+    "indexed_all": 17,
+    "top": [
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": false,
+      "path": "canonical/tools/the_counterexample_is_the_next_experiment_v1.py",
+      "score": 10.5,
+      "summary": "The counterexample is the next experiment: a statistic is true only at the depth that killed it."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/rule_expiry_v1.py",
+      "score": 9.75,
+      "summary": "Retire a learned rule when the world underneath it moved."
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": false,
+      "path": "canonical/tools/exact_stated_geometry_measure_v1.py",
+      "score": 8.25,
+      "summary": "Does the page's OWN geometry reach the score frames that refused every correct press?"
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/sentient_cognitive_core_v1.py",
+      "score": 7.75,
+      "summary": "Sentient Cognitive Core V1 (`sentient_cognitive_core_v1`, `K3 = 0`)."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/associative_memory_v1.py",
+      "score": 6.75,
+      "summary": "Memory that decides for itself what is worth keeping."
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": false,
+      "path": "canonical/tools/capability_consolidation_audit_v1.py",
+      "score": 6.75,
+      "summary": "Deterministic Capability Consolidation & Truth Auditor (`capability_consolidation_audit_v1`)."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/universal_computer_agent_v1.py",
+      "score": 6.5,
+      "summary": "Universal Computer-Use Agent: Zero-Model, Zero-Knowledge-House Causal Engine (v1)."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
+      "score": 6.25,
+      "summary": "Zero-Knowledge-House Petri-Net Component Synthesis, Dual-Program Splicing & 16-Way CoW World Tomography (`petri_cow_splicing_engine_v1`)."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": false,
+      "path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
+      "score": 5.0,
+      "summary": "Cross-file repair with separate staged and in-place protocols."
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": false,
+      "path": "canonical/tools/aimed_action_measure_v1.py",
+      "score": 4.75,
+      "summary": "Can the places the instruction implies be DERIVED, and does deriving them reach the 46?"
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": false,
+      "path": "canonical/tools/derived_value_measure_v1.py",
+      "score": 4.75,
+      "summary": "Is the wall a budget, or is it that the value the page wants cannot be EXPRESSED?"
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+      "score": 4.5,
+      "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
+     }
+    ]
+   },
+   "instant_learning": {
+    "candidates": 173,
+    "frontier_function": "adapt from one episode without touching weights",
+    "harvested_all": 65,
+    "hidden_share_all": 0.006,
+    "indexed_all": 141,
+    "top": [
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+      "score": 27.25,
+      "summary": "Causal Demonstration-to-Program Compiler — Watch/Explore Once -> <5ms Permanent Skill."
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/real_commit_repair_v1.py",
+      "score": 26.0,
+      "summary": "Give the tree's own repair engine a vocabulary learned from REAL commits, and measure it on real commits."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/causal_nexus_v1.py",
+      "score": 25.75,
+      "summary": "Causal Nexus: expected-value abduction, single-site counterfactual blame, lens synthesis,"
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": false,
+      "path": "canonical/tools/what_transfers_v1.py",
+      "score": 24.75,
+      "summary": "Does \"instant learning\" generalise to arbitrary environments, or only to the one it was shown in?"
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/structural_rewrite_induction_v1.py",
+      "score": 23.25,
+      "summary": "Shape rules learned from real diffs, by anti-unification -- and whether they compose."
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/systematic_edit_supply_v1.py",
+      "score": 22.5,
+      "summary": "How much of real engineering is a repeat a single demonstration could determine?"
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/semantic_generalization_engine_v1.py",
+      "score": 21.0,
+      "summary": "Neuro-symbolic compositional & causal generalization engine (Problem 2)."
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": false,
+      "path": "canonical/tools/quixbugs_one_fix_transfer_measure_v1.py",
+      "score": 20.75,
+      "summary": "What does one bug fix teach? Measured on QuixBugs with the tree's own retention organ, unchanged."
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": false,
+      "path": "canonical/tools/generalization_rung_gradient_v1.py",
+      "score": 20.25,
+      "summary": "Problem 2, measured as a gradient rather than a verdict: where does memory stop generalising,"
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/lesson_admission_gate_v1.py",
+      "score": 20.0,
+      "summary": "A lesson is admitted by what it does to programs it was never taught on. Not by its own demo."
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/one_demonstration_identifies_v1.py",
+      "score": 20.0,
+      "summary": "How much does ONE demonstration identify? Measured on real code, with the tree's own learner."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/composition_concept_bridge_v1.py",
+      "score": 19.75,
+      "summary": "Composition Concept Bridge V1 — from single expression to multi-concept programs."
+     }
+    ]
+   },
+   "memory": {
+    "candidates": 184,
+    "frontier_function": "context that stays correct as it fills",
+    "harvested_all": 49,
+    "hidden_share_all": 0.005,
+    "indexed_all": 162,
+    "top": [
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/associative_memory_v1.py",
+      "score": 16.5,
+      "summary": "Memory that decides for itself what is worth keeping."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/answer_memory_v1.py",
+      "score": 16.0,
+      "summary": "A measured conclusion outlives the process that measured it."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
+      "score": 16.0,
+      "summary": "Zero-Knowledge-House Petri-Net Component Synthesis, Dual-Program Splicing & 16-Way CoW World Tomography (`petri_cow_splicing_engine_v1`)."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/causal_computer_use_agent_v1.py",
+      "score": 15.75,
+      "summary": "Zero-Knowledge-House computer-use / SWE agent: the seven-step loop, cut-vertex slicing,"
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": false,
+      "path": "canonical/tools/scan_retrieve_fetch_v1.py",
+      "score": 15.75,
+      "summary": "Scan a host, retrieve what is already known, fetch only what is not."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/procedure_memory_v1.py",
+      "score": 15.25,
+      "summary": "Procedure memory that generalizes, and the two ways it is allowed to be wrong."
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/brain_unified_model_v1.py",
+      "score": 14.0,
+      "summary": "Brain Unified Model V1 — one front door over the compiled Brain."
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/contrastive_oracle_bootstrap_v1.py",
+      "score": 13.25,
+      "summary": "Contrastive Oracle Bootstrap — path item 5."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/autonomous_verified_self_improvement_v1.py",
+      "score": 13.0,
+      "summary": "Autonomous verified self-improvement loop V1."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/goal_front_compiler_v1.py",
+      "score": 13.0,
+      "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler."
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/autonomous_awake_loop_v1.py",
+      "score": 13.0,
+      "summary": "Continuous Zero-LLM Awake Agency Loop (`autonomous_awake_loop_v1`)."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+      "score": 13.0,
+      "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
+     }
+    ]
+   },
+   "verification_abstention": {
+    "candidates": 321,
+    "frontier_function": "know when you do not know, and prove what you did",
+    "harvested_all": 53,
+    "hidden_share_all": 0.04,
+    "indexed_all": 261,
+    "top": [
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/proved_composition_v1.py",
+      "score": 23.75,
+      "summary": "Compose only what is proved — a composition rule with premise survival, per-step"
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/canonical_oracle_vericoding_spine_v1.py",
+      "score": 21.5,
+      "summary": "Canonical Dual-Channel Witness Inversion, Goal-Negation Oracle & Formal Vericoding Spine (`0H`)."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
+      "score": 19.5,
+      "summary": "Zero-Knowledge-House Petri-Net Component Synthesis, Dual-Program Splicing & 16-Way CoW World Tomography (`petri_cow_splicing_engine_v1`)."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/causal_nexus_v1.py",
+      "score": 19.25,
+      "summary": "Causal Nexus: expected-value abduction, single-site counterfactual blame, lens synthesis,"
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": false,
+      "path": "canonical/tools/a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1.py",
+      "score": 18.5,
+      "summary": "A check that nobody runs is a check that cannot be wrong: the guide cites a read-only"
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/angelic_cegis_v1.py",
+      "score": 17.5,
+      "summary": "Angelic spec abduction + observational-equivalence STUN/CEGIS."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/p1_composite_proof_counterexample_audit_v1.py",
+      "score": 17.25,
+      "summary": "Executable falsification audit for the candidate P1 composite-proof restoration."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/confinement_v1.py",
+      "score": 16.75,
+      "summary": "The admitted confinement and effect-verification path the boundary demands."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/benchmark_witness_elimination_compiler_v4.py",
+      "score": 16.5,
+      "summary": "Proof-carrying benchmark claim kernel v4."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/source_aligned_semantic_edge_authority_v1.py",
+      "score": 16.5,
+      "summary": "Source-aligned semantic edge authority V1."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/semantic_relation_entailment_dag_v1.py",
+      "score": 16.25,
+      "summary": "Scoped semantic entailment DAG proof kernel V1."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/mined_rewrite_theory_v1.py",
+      "score": 16.25,
+      "summary": "Mined rewrite theory: invariances discovered by execution, not written by hand."
+     }
+    ]
+   },
+   "world_model": {
+    "candidates": 122,
+    "frontier_function": "predict what an action does before doing it",
+    "harvested_all": 37,
+    "hidden_share_all": 0.041,
+    "indexed_all": 98,
+    "top": [
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/first_principles_mental_cegis_v1.py",
+      "score": 29.25,
+      "summary": "First-Principles Program & Environment Understanding Engine (V1)."
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/credit_assignment_v1.py",
+      "score": 20.75,
+      "summary": "Credit Assignment — attribute which steps in an agent trace caused the outcome."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
+      "score": 20.75,
+      "summary": "Zero-Knowledge-House Petri-Net Component Synthesis, Dual-Program Splicing & 16-Way CoW World Tomography (`petri_cow_splicing_engine_v1`)."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/sentient_cognitive_core_v1.py",
+      "score": 20.75,
+      "summary": "Sentient Cognitive Core V1 (`sentient_cognitive_core_v1`, `K3 = 0`)."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/reverse_tomography_algebra_v1.py",
+      "score": 19.75,
+      "summary": "Reverse-Execution Synthesis, Differential State Tomography, Algebraic Skill Composition,"
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/executable_simulator_mental_model_v1.py",
+      "score": 18.75,
+      "summary": "Executable Mental Model (`executable_mental_model_v1`) — Leap 4 Core."
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": false,
+      "path": "canonical/tools/compose_measured_effects_v1.py",
+      "score": 18.5,
+      "summary": "Compose measured effects: solve what a machine can express, PROVE what it cannot."
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": false,
+      "path": "canonical/tools/the_vocabulary_must_be_computed_not_written_v1.py",
+      "score": 17.75,
+      "summary": "The vocabulary must be computed, not written: a hand-named effect merges transitions the world tells apart."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/consequence_table_v1.py",
+      "score": 17.5,
+      "summary": "The model is a table of executed transitions. That is the whole part."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
+      "score": 15.5,
+      "summary": "Meta-Circular Reflective Program Graph (`K3 = 0`, `$0` spend)."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/swe_kernel/safe_action_model_v1.py",
+      "score": 15.5,
+      "summary": "A SAFE action model: one observation is enough, and every plan it admits is a fact."
+     },
+     {
+      "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": false,
+      "path": "canonical/tools/one_experience_every_consequence_v1.py",
+      "score": 15.0,
+      "summary": "One action in, every consequence out: what one experience buys, and where it stops."
+     }
+    ]
+   }
+  },
+  "present": true,
+  "reachability": {
+   "coding_agents": {
+    "chance_route_recall": 0.0356,
+    "chance_source_recall": 0.1276,
+    "frontier_source_hit_recall": 1.0,
+    "native_route_hit_recall": 1.0
+   },
+   "computer_use": {
+    "chance_route_recall": 0.0134,
+    "chance_source_recall": 0.0642,
+    "frontier_source_hit_recall": 0.667,
+    "native_route_hit_recall": 0.333
+   },
+   "continual_learning": {
+    "chance_route_recall": 0.0067,
+    "chance_source_recall": 0.0125,
+    "frontier_source_hit_recall": 0.333,
+    "native_route_hit_recall": 0.333
+   },
+   "instant_learning": {
+    "chance_route_recall": 0.0022,
+    "chance_source_recall": 0.0767,
+    "frontier_source_hit_recall": 1.0,
+    "native_route_hit_recall": 0.0
+   },
+   "memory": {
+    "chance_route_recall": 0.0067,
+    "chance_source_recall": 0.0812,
+    "frontier_source_hit_recall": 0.667,
+    "native_route_hit_recall": 0.333
+   },
+   "verification_abstention": {
+    "chance_route_recall": 0.0757,
+    "chance_source_recall": 0.1432,
+    "frontier_source_hit_recall": 0.667,
+    "native_route_hit_recall": 0.333
+   },
+   "world_model": {
+    "chance_route_recall": 0.0045,
+    "chance_source_recall": 0.054,
+    "frontier_source_hit_recall": 1.0,
+    "native_route_hit_recall": 0.0
+   }
+  },
+  "schema": "BRAIN_MODEL_ANATOMY_V1",
+  "source": "canonical/unified_model/DOMAIN_ATLAS_V1.json",
+  "source_sha256": "62dd0f66cf8d7bdf10a2500fc9b679d03126d13db0b307e608937e71431802d6"
+ },
  "capabilities": [
   {
    "adapter_module": "archive_tarfile",
@@ -31353,18 +32141,20 @@
   }
  ],
  "counts": {
+  "anatomy_domains": 7,
+  "anatomy_modules": 84,
   "bound_capabilities": 153,
   "capabilities": 449,
   "engines": 84,
-  "extended_source_index_modules": 595,
+  "extended_source_index_modules": 597,
   "federated_kernel_engines": 58,
   "harvested_admitted": 0,
-  "harvested_capabilities": 622,
+  "harvested_capabilities": 624,
   "harvested_contract_surfaces": 33,
-  "harvested_program_surfaces": 589,
-  "knowledge_documents": 739,
+  "harvested_program_surfaces": 591,
+  "knowledge_documents": 741,
   "receipt_backed_capabilities": 296,
-  "research_index_records": 7399,
+  "research_index_records": 7400,
   "routing_tokens": 2723,
   "skills": 18,
   "source_index_entry_points": 564,
@@ -31373,7 +32163,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0db69615f2ad0ec9cb7678bc453fca44238253500c0ce60603a9de5e514afca4"
+  "value": "97a81cab8d8fdfa029a918a516aeedc1e013d3fdd1281d4625024e18dd4d87c6"
  },
  "engines": [
   {
@@ -38043,6 +38833,58 @@
     "supply": 2,
     "tools": 1,
     "v1": 1
+   },
+   "tree": "canonical/tools"
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "ext_source:canonical/tools/domain_atlas_v1.py",
+   "imported_by_count": 0,
+   "kind": "EXTENDED_SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/tools/domain_atlas_v1.py",
+   "sha256": "70e3acfe107964a41230f15f5c37b6ec4cbe81c0becab093f3c888a0ce6cda4b",
+   "summary": "Where the machine's five frontier functions actually live, and whether the model can see them.",
+   "symbol_count": 9,
+   "symbols": [
+    "_model_status",
+    "_score_module",
+    "_stem_tokens",
+    "_symbol_names",
+    "_tokens",
+    "_walk",
+    "build_atlas",
+    "main",
+    "reachability"
+   ],
+   "terms": {
+    "actually": 1,
+    "atlas": 2,
+    "build": 1,
+    "can": 1,
+    "canonical": 1,
+    "domain": 1,
+    "five": 1,
+    "frontier": 1,
+    "functions": 1,
+    "live": 1,
+    "machine": 1,
+    "main": 1,
+    "model": 2,
+    "module": 1,
+    "names": 1,
+    "reachability": 1,
+    "score": 1,
+    "see": 1,
+    "status": 1,
+    "stem": 1,
+    "symbol": 1,
+    "tokens": 2,
+    "tools": 1,
+    "v1": 1,
+    "walk": 1,
+    "whether": 1
    },
    "tree": "canonical/tools"
   },
@@ -45045,6 +45887,42 @@
     "tools": 1,
     "v1": 1,
     "worktree": 1
+   },
+   "tree": "canonical/tools"
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "ext_source:canonical/tools/refresh_action_intent_recursive_obs_20261126.py",
+   "imported_by_count": 0,
+   "kind": "EXTENDED_SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/tools/refresh_action_intent_recursive_obs_20261126.py",
+   "sha256": "7e0480ea2ee559bf0236740dd8c59b0e4c17677a7eddc24e225857fce48601fc",
+   "summary": "Fill the recursive-OBS receipt and live route frontier for this round's action intent.",
+   "symbol_count": 3,
+   "symbols": [
+    "challengers",
+    "frontier",
+    "main"
+   ],
+   "terms": {
+    "20261126": 1,
+    "action": 2,
+    "canonical": 1,
+    "challengers": 1,
+    "fill": 1,
+    "frontier": 2,
+    "intent": 2,
+    "live": 1,
+    "main": 1,
+    "obs": 2,
+    "receipt": 1,
+    "recursive": 2,
+    "refresh": 1,
+    "round": 1,
+    "route": 1,
+    "tools": 1
    },
    "tree": "canonical/tools"
   },
@@ -74869,7 +75747,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "aaad592d59f877ce16302562daa31f05813841b553bc1e80c348c1fbfb193cd7",
+   "sha256": "96138a1a2e45b7ffc06e3f2c6d42d6ca37bf0770591f3670964c9dd00b855097",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "triggers": [
     "brain",
@@ -75019,7 +75897,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/compile_brain_unified_model_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "54326cc4a8a5f2d8905454ca27ab12337f45872edb3b426d59a4889416b16a58",
+   "sha256": "71fe16e153e8cae47f4d6caa60afe858cf30974d3cd885ca05e74b5264b2e046",
    "summary": "Compile the whole live Brain into one content-addressed model artifact.",
    "triggers": [
     "compile",
@@ -80164,6 +81042,27 @@
    "declared_inputs": [],
    "declared_result_fields": [],
    "entrypoint": "main",
+   "id": "canonical.tools.domain_atlas_v1.hidden.v1",
+   "invocation": "cli",
+   "kind": "HARVESTED_EXECUTABLE_SURFACE",
+   "path": "canonical/tools/domain_atlas_v1.py",
+   "route": "canonical/runtime/harvested_capability_runtime_v1.py",
+   "sha256": "70e3acfe107964a41230f15f5c37b6ec4cbe81c0becab093f3c888a0ce6cda4b",
+   "summary": "Where the machine's five frontier functions actually live, and whether the model can see them.",
+   "triggers": [
+    "domain",
+    "atlas"
+   ]
+  },
+  {
+   "admission_state": "DISCOVERED_NOT_ADMITTED",
+   "admitted": false,
+   "also_in_source_index": false,
+   "capability": false,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "entrypoint": "main",
    "id": "canonical.tools.edit_kind_choice_measure_v1.hidden.v1",
    "invocation": "cli",
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
@@ -83088,6 +83987,30 @@
     "worktree",
     "fixture",
     "receipt"
+   ]
+  },
+  {
+   "admission_state": "DISCOVERED_NOT_ADMITTED",
+   "admitted": false,
+   "also_in_source_index": false,
+   "capability": false,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "entrypoint": "main",
+   "id": "canonical.tools.refresh_action_intent_recursive_obs_20261126.hidden.v1",
+   "invocation": "cli",
+   "kind": "HARVESTED_EXECUTABLE_SURFACE",
+   "path": "canonical/tools/refresh_action_intent_recursive_obs_20261126.py",
+   "route": "canonical/runtime/harvested_capability_runtime_v1.py",
+   "sha256": "7e0480ea2ee559bf0236740dd8c59b0e4c17677a7eddc24e225857fce48601fc",
+   "summary": "Fill the recursive-OBS receipt and live route frontier for this round's action intent.",
+   "triggers": [
+    "refresh",
+    "action",
+    "intent",
+    "recursive",
+    "obs"
    ]
   },
   {
@@ -140813,6 +141736,92 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 13585,
+   "headings": [
+    "Frontier research, 2026-11-26 (V2) — instant learning, memory, routing, computer use, coding agents, abstention",
+    "1. Continual learning: plasticity bought with stability, and nothing shipped",
+    "2. Memory: the measurement crisis is bigger than the capability",
+    "3. Routing and tool retrieval: the solved-shaped problem we fail",
+    "4. Computer use: short tasks solved, long horizons not",
+    "5. Coding agents: harness-dominated scores, and a confession about abstention",
+    "6. Abstention: the newest benchmark, and its ceiling",
+    "7. Skill formation: library learning, rediscovered",
+    "8. What none of them has, and this repository does",
+    "9. Non-claims for this digest"
+   ],
+   "kind": "DOCUMENT",
+   "path": "canonical/research_sources/FRONTIER_RESEARCH_20261126_V2.md",
+   "sha256": "f08f2819d0288c68cd9f2f4b655b267cc2317f23f56f715c39bc490f2c812c02",
+   "summary": "**Schema:** `BRAIN_FRONTIER_RESEARCH_V2` · **Harvested by:** web search, this session · **Model calls:** 0 · **Runtime use:** research only — nothing here is cited by the solver at runtime.",
+   "terms": {
+    "2026": 15,
+    "abstain": 4,
+    "abstention": 10,
+    "accuracy": 4,
+    "act": 4,
+    "action": 4,
+    "actions": 4,
+    "agents": 10,
+    "arxiv": 17,
+    "baseline": 4,
+    "benchmark": 5,
+    "best": 4,
+    "capability": 4,
+    "ceiling": 4,
+    "claim": 4,
+    "continual": 6,
+    "failure": 5,
+    "frontier": 8,
+    "independent": 5,
+    "laws": 4,
+    "learning": 8,
+    "means": 7,
+    "memory": 8,
+    "missing": 5,
+    "model": 17,
+    "models": 5,
+    "no": 6,
+    "not": 14,
+    "one": 7,
+    "only": 4,
+    "opus": 4,
+    "over": 6,
+    "own": 5,
+    "paired": 5,
+    "per": 6,
+    "published": 6,
+    "recall": 4,
+    "refusal": 4,
+    "retrieval": 8,
+    "routing": 4,
+    "scores": 6,
+    "search": 4,
+    "solved": 4,
+    "tasks": 7,
+    "tool": 9,
+    "tools": 6,
+    "under": 5,
+    "vs": 5
+   },
+   "title": "Frontier research, 2026-11-26 (V2) — instant learning, memory, routing, computer use, coding agents, abstention",
+   "title_terms": [
+    "2026-11-26",
+    "abstention",
+    "agents",
+    "coding",
+    "computer",
+    "frontier",
+    "instant",
+    "learning",
+    "memory",
+    "research",
+    "routing",
+    "use",
+    "v2"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 10287,
    "headings": [
     "Capability versus frontier — 24 November 2026",
@@ -141368,6 +142377,94 @@
     "leapfrog",
     "november",
     "plan"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 17276,
+   "headings": [
+    "The promotion plan: the frontier's open problems are functions we already implement and cannot reach",
+    "0. The measurement that reorganises everything",
+    "1. Thesis",
+    "2. What V1 got right and what it missed",
+    "3. The plays",
+    "Play 1 — Route by contract, not by vocabulary",
+    "Play 2 — Executability is the promotion, not the discovery",
+    "Play 3 — Abstention with a receipt",
+    "Play 4 — Learning is a store transaction",
+    "Play 5 — Memory must pay rent",
+    "Play 6 — The world model is our verifier",
+    "4. Sequence",
+    "5. What we refuse",
+    "6. Non-claims",
+    "7. Falsifiers"
+   ],
+   "kind": "DOCUMENT",
+   "path": "canonical/verification/FRONTIER_LEAPFROG_PLAN_20261126_V2.md",
+   "sha256": "bf46886eec37512a5ff0aee2d470934665b33fb7b68ba2fc4a339b2dbbc7a986",
+   "summary": "**Schema:** `BRAIN_FRONTIER_PLAN_V2` · **Date:** 2026-11-26 · **Predecessor:** `FRONTIER_LEAPFROG_PLAN_20261125_V1.md` (PR #7095) — six plays, three measured (`LEAPFROG_PLAY_EVIDENCE_20261125_V1.md`, PRs #7096 / #7098) · **Authority:** NONE · **Model calls:** 0 · **Research digest:** `canonical/research_sources/FRONTIER_RESEARCH_20261126_V2.md`",
+   "terms": {
+    "0.33": 9,
+    "abstention": 8,
+    "accuracy": 7,
+    "against": 8,
+    "already": 10,
+    "below": 6,
+    "benchmark": 6,
+    "cannot": 6,
+    "dead": 6,
+    "every": 13,
+    "executable": 6,
+    "failure": 9,
+    "first": 9,
+    "frontier": 24,
+    "independent": 9,
+    "kill": 9,
+    "law": 6,
+    "laws": 10,
+    "learning": 9,
+    "mean": 8,
+    "measurable": 7,
+    "measured": 7,
+    "memory": 7,
+    "model": 20,
+    "move": 9,
+    "name": 6,
+    "names": 6,
+    "no": 12,
+    "not": 25,
+    "one": 8,
+    "only": 8,
+    "own": 19,
+    "paired": 10,
+    "pairs": 6,
+    "play": 26,
+    "plays": 6,
+    "promotion": 7,
+    "recall": 11,
+    "receipt": 9,
+    "route": 8,
+    "routing": 6,
+    "run": 9,
+    "step": 7,
+    "target": 6,
+    "three": 7,
+    "unusual": 8,
+    "vocabulary": 7,
+    "world": 6
+   },
+   "title": "The promotion plan: the frontier's open problems are functions we already implement and cannot reach",
+   "title_terms": [
+    "already",
+    "cannot",
+    "frontier",
+    "functions",
+    "implement",
+    "open",
+    "plan",
+    "problems",
+    "promotion",
+    "reach"
    ]
   },
   {
@@ -145617,14 +146714,14 @@
  },
  "provenance": {
   "compiler": "canonical/runtime/compile_brain_unified_model_v1.py",
-  "compiler_sha256": "54326cc4a8a5f2d8905454ca27ab12337f45872edb3b426d59a4889416b16a58",
+  "compiler_sha256": "71fe16e153e8cae47f4d6caa60afe858cf30974d3cd885ca05e74b5264b2e046",
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 2226,
+  "included_source_count": 2230,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "13426f8d335a2955e233f1eb2b9929e96736c6d0ccb75eb8be9badefd7e65232"
+  "source_tree_digest": "d6a38a3741ec4f94f1b8af23e670fce6d07cc7627f22d7a507461e6b451d0f6b"
  },
  "research_index": [
   {
@@ -215948,7 +217045,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/AUDITABILITY_DECLARATION_FLOOR_20261112_V1.json",
    "schema": "AUDITABILITY_DECLARATION_FLOOR_V1",
-   "sha256": "be5d235af7ae79e4d1848c92401ab208923375bb6f0e18bac11cd658baa521e5",
+   "sha256": "9ba2feed72ec2c99f688b71433e8fd35215f26f34a84370698416e218a83be1f",
    "status": "",
    "terms": {
     "20261112": 1,
@@ -230861,7 +231958,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/FRONTIER_LEAPFROG_PLAYS_1_2_3_6_AND_LIFT_20261124_V1.json",
    "schema": "PROJECT_BRAIN_FRONTIER_LEAPFROG_MEASUREMENT_20261124_V1",
-   "sha256": "80f04cfd6ab0bcbd6f7d01a976f7f920ba7694811a6dbe8ddb52156bc9d966f5",
+   "sha256": "91a86a861164e6eba53e38a4a987921c20946d3f2f5b7cad4a440962a3a957fe",
    "status": "",
    "terms": {
     "20261124": 1,
@@ -311932,7 +313029,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/RECEIPT_REPLAY_REPAIR_AND_FOUR_LEAPFROG_PLAYS_20261124_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
-   "sha256": "29b713345f4fed36eb0c6ac6ff9b6a6e1d3a0c183a637397fb16d32047fd5c20",
+   "sha256": "25e370ad0ce6eb8cf88acc2bb6f9d2e1adb7afd96c5dda7bee514997334d4932",
    "status": "",
    "terms": {
     "20261124": 1,
@@ -316967,6 +318064,51 @@
     "ten-row": 2,
     "unique": 5,
     "wrong": 3
+   }
+  },
+  {
+   "action_id": "THE_MACHINE_CAN_NAME_ITS_FIVE_FUNCTIONS_AND_REACH_A_THIRD_20261126_V1",
+   "capability": false,
+   "date": "2026-11-26",
+   "id": "research:canonical/action_intents/THE_MACHINE_CAN_NAME_ITS_FIVE_FUNCTIONS_AND_REACH_A_THIRD_20261126_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_MACHINE_CAN_NAME_ITS_FIVE_FUNCTIONS_AND_REACH_A_THIRD_20261126_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "47c2c64c32457e21a67031126267146e37776a9ca83cf084ae8cc49256f98678",
+   "status": "PROPOSED__PRODUCER_MEASURED__MECHANISM_WORKS_ON_FIVE_REAL_MACHINES__INDEPENDENT_",
+   "terms": {
+    "0.00": 1,
+    "0.33": 1,
+    "0.76": 1,
+    "005": 1,
+    "20261126": 1,
+    "26.7": 1,
+    "260": 1,
+    "337": 1,
+    "4.7-26.6x": 1,
+    "already": 1,
+    "bottleneck": 1,
+    "building": 1,
+    "but": 1,
+    "call": 1,
+    "callable": 1,
+    "capability": 2,
+    "chance": 1,
+    "classified": 1,
+    "executable": 1,
+    "find_source": 1,
+    "five": 3,
+    "frontier": 2,
+    "function": 2,
+    "function-first": 1,
+    "functions": 3,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "implement": 1,
+    "mean": 2,
+    "model": 2,
+    "not": 2,
+    "reaches": 3,
+    "three": 2
    }
   },
   {
@@ -332726,7 +333868,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "aaad592d59f877ce16302562daa31f05813841b553bc1e80c348c1fbfb193cd7",
+   "sha256": "96138a1a2e45b7ffc06e3f2c6d42d6ca37bf0770591f3670964c9dd00b855097",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 21,
    "symbols": [
@@ -338796,15 +339938,16 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/compile_brain_unified_model_v1.py",
-   "sha256": "54326cc4a8a5f2d8905454ca27ab12337f45872edb3b426d59a4889416b16a58",
+   "sha256": "71fe16e153e8cae47f4d6caa60afe858cf30974d3cd885ca05e74b5264b2e046",
    "summary": "Compile the whole live Brain into one content-addressed model artifact.",
-   "symbol_count": 36,
+   "symbol_count": 37,
    "symbols": [
     "UnifiedModelCompileError",
     "_adapter_executed_programs",
     "_adapter_imports",
     "_adapter_path_of",
     "_adapter_runpy_targets",
+    "_anatomy_block",
     "_build_grammar",
     "_bullets",
     "_capability_row",
@@ -338822,8 +339965,7 @@
     "_placeholders",
     "_research_rows",
     "_skill_rows",
-    "_source_index_rows",
-    "_term_counts"
+    "_source_index_rows"
    ],
    "terms": {
     "adapter_executed_programs": 1,

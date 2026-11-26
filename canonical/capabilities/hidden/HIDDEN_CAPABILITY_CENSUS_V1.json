@@ -29,7 +29,7 @@
    "contract": 0
   },
   "canonical/tools": {
-   "cli": 329,
+   "cli": 331,
    "contract": 0
   },
   "execution_guard": {
@@ -58,19 +58,19 @@
   }
  },
  "counts": {
-  "cli": 1195,
+  "cli": 1197,
   "contract": 313,
   "declared": 863,
   "declared_by_capability_id": 19,
-  "files": 3483,
-  "hidden_executable": 626,
+  "files": 3485,
+  "hidden_executable": 628,
   "library": 1924,
   "self_described": 6,
   "tests": 45,
   "unparseable": 6
  },
  "declared_ids_seen": 2479,
- "digest": "1031816750d90e99468a0f001d73c2e10360149afe49312cf418b13a3180630b",
+ "digest": "a772c960e7866a4a1c0ec4c1483663564567e22328d34e4791b860d53fec4903",
  "hidden": [
   {
    "bytes": 31118,
@@ -422,7 +422,7 @@
    ]
   },
   {
-   "bytes": 149897,
+   "bytes": 148071,
    "declared_capability_id": null,
    "declared_inputs": [],
    "declared_result_fields": [],
@@ -448,7 +448,7 @@
    ],
    "kind": "cli",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "aaad592d59f877ce16302562daa31f05813841b553bc1e80c348c1fbfb193cd7",
+   "sha256": "96138a1a2e45b7ffc06e3f2c6d42d6ca37bf0770591f3670964c9dd00b855097",
    "signals": [
     "evidence",
     "json_stdout",
@@ -1300,6 +1300,54 @@
     "still",
     "shown",
     "true"
+   ]
+  },
+  {
+   "bytes": 24438,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "doc": "Where the machine's five frontier functions actually live, and whether the model can see them.",
+   "entrypoint": "main",
+   "id": "canonical.tools.domain_atlas_v1.hidden.v1",
+   "imports": [
+    "__future__",
+    "argparse",
+    "ast",
+    "canonical",
+    "hashlib",
+    "json",
+    "math",
+    "pathlib",
+    "re",
+    "sys",
+    "typing"
+   ],
+   "kind": "cli",
+   "path": "canonical/tools/domain_atlas_v1.py",
+   "sha256": "70e3acfe107964a41230f15f5c37b6ec4cbe81c0becab093f3c888a0ce6cda4b",
+   "signals": [
+    "evidence",
+    "json_stdout",
+    "measured",
+    "receipt",
+    "refusal",
+    "schema",
+    "sha256",
+    "verification"
+   ],
+   "triggers": [
+    "domain",
+    "atlas",
+    "machine",
+    "five",
+    "frontier",
+    "functions",
+    "actually",
+    "live",
+    "whether",
+    "model",
+    "see"
    ]
   },
   {
@@ -2358,7 +2406,7 @@
    ]
   },
   {
-   "bytes": 65102,
+   "bytes": 68227,
    "declared_capability_id": null,
    "declared_inputs": [],
    "declared_result_fields": [],
@@ -2379,7 +2427,7 @@
    ],
    "kind": "cli",
    "path": "canonical/runtime/compile_brain_unified_model_v1.py",
-   "sha256": "54326cc4a8a5f2d8905454ca27ab12337f45872edb3b426d59a4889416b16a58",
+   "sha256": "71fe16e153e8cae47f4d6caa60afe858cf30974d3cd885ca05e74b5264b2e046",
    "signals": [
     "evidence",
     "json_stdout",
@@ -9856,6 +9904,46 @@
     "repo",
     "own",
     "tests"
+   ]
+  },
+  {
+   "bytes": 21144,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "doc": "Fill the recursive-OBS receipt and live route frontier for this round's action intent.",
+   "entrypoint": "main",
+   "id": "canonical.tools.refresh_action_intent_recursive_obs_20261126.hidden.v1",
+   "imports": [
+    "__future__",
+    "datetime",
+    "json",
+    "pathlib",
+    "subprocess"
+   ],
+   "kind": "cli",
+   "path": "canonical/tools/refresh_action_intent_recursive_obs_20261126.py",
+   "sha256": "7e0480ea2ee559bf0236740dd8c59b0e4c17677a7eddc24e225857fce48601fc",
+   "signals": [
+    "evidence",
+    "json_stdout",
+    "measured",
+    "receipt",
+    "refusal",
+    "verification"
+   ],
+   "triggers": [
+    "refresh",
+    "action",
+    "intent",
+    "recursive",
+    "obs",
+    "fill",
+    "receipt",
+    "live",
+    "route",
+    "frontier",
+    "round"
    ]
   },
   {
