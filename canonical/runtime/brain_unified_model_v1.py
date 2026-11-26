@@ -2344,6 +2344,22 @@ class SovereignZeroLLMPlanner:
                             max_weight=4,
                             concept_library=core.concept_library,
                         )
+                        if not body_code:
+                            # Ensemble fallback (plan v5 move 2): OE + stochastic
+                            # union for shapes the observational grammar cannot
+                            # express at this budget (measured: branch-using
+                            # programs at max_weight 4..8, ten configs, all miss;
+                            # the union finds and verifies them in ~190 ms).
+                            # Every returned body is already verified against ALL
+                            # extracted examples, so a miss costs ~200 ms where
+                            # the affordance otherwise had no candidate at all --
+                            # it cannot slow a step that would have failed.
+                            from canonical.runtime.stochastic_synthesizer_v1 import (
+                                synthesize_body_from_examples,
+                            )
+                            body_code = synthesize_body_from_examples(
+                                p_names, valid_exs,
+                            )
                         if body_code:
                             upd = wits._replace_function_body_in_source(cur_src, fn_nd.name, body_code)
                             if upd:

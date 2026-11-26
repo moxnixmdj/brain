@@ -14,6 +14,7 @@ Zero-LLM, zero-weight, stdlib only. Deterministic given a seed.
 """
 from __future__ import annotations
 
+import math
 import random
 from typing import Any, Mapping, Sequence
 
@@ -152,3 +153,55 @@ def ensemble_value_expressions(
         "overlap": len(oe_codes & stoch_codes),
         "stochastic_unique": len(stoch_codes - oe_codes),
     }
+
+
+def synthesize_body_from_examples(
+    arg_names: Sequence[str],
+    examples: Sequence[tuple[tuple[Any, ...], Any]],
+    *,
+    extra_consts: Sequence[Any] = (),
+    max_results: int = 8,
+    seed: int = 7,
+) -> str | None:
+    """Ensemble fallback: an ``return <expr>`` body, or None.
+
+    ``examples`` is the observational-synthesizer shape, ``((args...), expected)``
+    per pair — the format the planner's H2 affordance extracts from test sources.
+    Runs the OE + stochastic union over those pairs and re-VERIFIES every
+    candidate against every example before returning it: a candidate is only
+    ever returned if it already passes the complete visible spec, so the caller
+    never pays for a wrong patch (the verify-at-generation property; the same
+    gate the loop's own unittest run would apply later, applied earlier and
+    free). Returns the shortest verified body.
+    """
+    if not examples or not arg_names:
+        return None
+    names = [str(a) for a in arg_names]
+    pairs: list[tuple[dict[str, Any], Any]] = []
+    for args, expected in examples:
+        if len(tuple(args)) != len(names):
+            return None
+        pairs.append(({n: v for n, v in zip(names, tuple(args))}, expected))
+    try:
+        ens = ensemble_value_expressions(
+            pairs, lang="python", extra_consts=extra_consts,
+            max_results=max_results, seed=seed,
+        )
+    except Exception:
+        return None
+    ns: dict[str, Any] = {}  # bare: eval adds __builtins__ (int/str/abs True); NO math —
+    # the patched target module will not have imported it, so a candidate that
+    # needs math is not shippable from this path. Verify under the target's env.
+    best: str | None = None
+    for cand in ens["union"]:
+        code = str(cand.get("code") or "")
+        if not code:
+            continue
+        try:
+            fn = eval(f"lambda {', '.join(names)}: ({code})", dict(ns), {})  # noqa: S307
+            if all(fn(*tuple(a)) == e for a, e in examples):
+                if best is None or len(code) < len(best):
+                    best = code
+        except Exception:
+            continue
+    return None if best is None else f"return {best}"
