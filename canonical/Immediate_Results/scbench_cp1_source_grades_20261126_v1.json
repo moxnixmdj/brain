@@ -22,45 +22,8 @@
             "failure": 36,
             "passed": 1
           },
-          "cases": {
-            "cfgpipe.tests.test_checkpoint_1::test_priority_chain": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_file_overrides_env": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_parse_failure_halts": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_unresolved_params_error": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_invalid_schema_json": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_arg_parse_failure": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_non_string_default": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_env_parse_failure": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_missing_file_absent": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_whitespace_file_absent": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_file_value_is_trimmed": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_cli_arg_forms[arg_candidates0]": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_cli_arg_forms[arg_candidates1]": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_unmatched_args": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_bool_float_formats": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_unreadable_file_absent": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_env_parse_error_priority": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_undeclared_sources": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_missing_schema_file": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_invalid_boolean[whitespace]": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_invalid_boolean[suffix]": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_default_parse_error_stops": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_file_parse_error_stops": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_empty_env_string_is_present": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_empty_schema": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_non_string_env": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_non_string_file": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_non_string_arg": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_schema_array_root": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_negative_integer": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_integer_string_as_float": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_arg_error_stops_resolution": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_env_error_stops_resolution": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_unrecognized_type": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_missing_type_field": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_no_sources_unresolved": "failure",
-            "cfgpipe.tests.test_checkpoint_1::test_unresolved_mixed_sources": "failure"
-          }
+          "cases_sha256": "b2c13df5ee7fa962830818370d536043dc2d8c5b1b69c4aabc270dccc4edecfb",
+          "case_outcomes_sha256": "6a002bd1c73998f6692517c6cccec5b3b80a2699677075190309d07e93d28aea"
         },
         "reference": {
           "xml_sha256": "78b362229337088d5088619e0170aebd8524e5e4ac1d676dfa2ef468324cb7b3",
@@ -68,46 +31,38 @@
           "counts": {
             "passed": 37
           },
-          "cases": {
-            "cfgpipe.tests.test_checkpoint_1::test_priority_chain": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_file_overrides_env": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_parse_failure_halts": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_unresolved_params_error": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_invalid_schema_json": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_arg_parse_failure": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_non_string_default": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_env_parse_failure": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_missing_file_absent": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_whitespace_file_absent": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_file_value_is_trimmed": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_cli_arg_forms[arg_candidates0]": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_cli_arg_forms[arg_candidates1]": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_unmatched_args": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_bool_float_formats": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_unreadable_file_absent": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_env_parse_error_priority": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_undeclared_sources": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_missing_schema_file": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_invalid_boolean[whitespace]": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_invalid_boolean[suffix]": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_default_parse_error_stops": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_file_parse_error_stops": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_empty_env_string_is_present": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_empty_schema": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_non_string_env": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_non_string_file": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_non_string_arg": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_schema_array_root": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_negative_integer": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_integer_string_as_float": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_arg_error_stops_resolution": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_env_error_stops_resolution": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_unrecognized_type": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_missing_type_field": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_no_sources_unresolved": "passed",
-            "cfgpipe.tests.test_checkpoint_1::test_unresolved_mixed_sources": "passed"
-          }
+          "cases_sha256": "b2c13df5ee7fa962830818370d536043dc2d8c5b1b69c4aabc270dccc4edecfb",
+          "case_outcomes_sha256": "6835f6101b6c56eab44ec676d999cf15df375da7eddbda3567c851b080f46481"
         }
+      },
+      "repeat": {
+        "cold": {
+          "xml_sha256": "2be3ad95e22bf73e8d0baaf0654fb7f5a66bd765689925ef3a9966506ce00be8",
+          "exit": 1,
+          "counts": {
+            "failure": 37
+          },
+          "case_ids_unchanged": true,
+          "case_outcomes_sha256": "3d974073ebd3f8b9371d19d18a56f13fdbfd1cf49a448cffe6b2b03198aabaa9",
+          "changed_outcomes": [
+            {
+              "id_sha256": "89621c159af1cc82adfb685fbf15731ce3046820eb1661e12f44ac3b4527ae03",
+              "was": "passed",
+              "now": "failure"
+            }
+          ]
+        },
+        "reference": {
+          "xml_sha256": "13813b1d2621fbeee2d169cf6fad1f9844c7255d8814075ef6b0b6a4317475e2",
+          "exit": 0,
+          "counts": {
+            "passed": 37
+          },
+          "case_ids_unchanged": true,
+          "case_outcomes_sha256": "6835f6101b6c56eab44ec676d999cf15df375da7eddbda3567c851b080f46481",
+          "changed_outcomes": []
+        },
+        "diagnosis": "No program in either cold run. Initial test_missing_type_field accepted the Python file-not-found stderr by substring (val in brain-eval-venv); this disappeared on relocating the interpreter. Not a functionality success."
       }
     },
     {
@@ -128,44 +83,8 @@
           "counts": {
             "failure": 36
           },
-          "cases": {
-            "circuit_eval.tests.test_checkpoint_1::test_help_ignores_json_flag": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_version_plain_text": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_version_json": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_cli_usage_error_no_args": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_cli_usage_error_without_command": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_cli_unknown_command": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_valid_circuit_reports_interface": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_file_not_found": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_parse_errors_have_location[bad_syntax-            input a b\\n            output y\\n            y = AND(a, b\\n            ]": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_parse_errors_have_location[literal_x-            input a\\n            output y\\n            y = X\\n            ]": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_parse_errors_have_location[brackets-            input a[0]\\n            output y\\n            y = a\\n            ]": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_validation_errors[declaration_after_assignment-content0-DeclarationAfterAssignmentError]": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_validation_errors[duplicate_name-            input a a\\n            output y\\n            y = a\\n            -DuplicateNameError]": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_validation_errors[undefined_name-            input a\\n            output y\\n            y = z\\n            -UndefinedNameError]": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_validation_errors[input_assignment-            input a\\n            output y\\n            y = a\\n            a = 1\\n            -InputAssignmentError]": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_validation_errors[multiple_assignment-            input a\\n            output y\\n            y = a\\n            y = NOT(a)\\n            -MultipleAssignmentError]": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_validation_errors[unassigned_signal-            input a\\n            output y\\n            -UnassignedSignalError]": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_validation_errors[duplicate_name_across_lines-            input a\\n            input a\\n            output y\\n            y = a\\n            -DuplicateNameError]": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_validation_errors[unassigned_wire-            input a\\n            output y\\n            wire t1\\n            y = a\\n            -UnassignedSignalError]": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_validation_errors[undeclared_lhs-            input a\\n            output y\\n            t1 = a\\n            y = a\\n            -UndefinedNameError]": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_cycle_error_message": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_accepts_all_operators": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_arity_errors[arity_not_too_many-a-NOT(a, a)]": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_arity_errors[arity_buf_too_many-a b-BUF(a, b)]": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_arity_errors[arity_and_too_few-a-AND(a)]": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_arity_errors[arity_or_too_few-a-OR(a)]": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_arity_errors[arity_xor_too_few-a-XOR(a)]": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_arity_errors[arity_nand_too_few-a-NAND(a)]": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_arity_errors[arity_nor_too_few-a-NOR(a)]": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_arity_errors[arity_xnor_too_few-a-XNOR(a)]": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_identifiers_are_case_sensitive": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_majority_vote_circuit": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_parity_generator_circuit": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_comparator_2bit_circuit": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_decoder_circuit": "failure",
-            "circuit_eval.tests.test_checkpoint_1::test_check_shared_scalar_circuit": "failure"
-          }
+          "cases_sha256": "56bf5a4e43152ce54277ad615db666d61be5c8598f8c1e87c958af94342a44d4",
+          "case_outcomes_sha256": "b5091996b016fdadc58ddf457773b89e93088c663068d83d3106afd112575802"
         },
         "reference": {
           "xml_sha256": "ce79d524ab571e358e729f2d2c11256909fe5c7e983b5b4eb38fc489016d123c",
@@ -173,44 +92,30 @@
           "counts": {
             "passed": 36
           },
-          "cases": {
-            "circuit_eval.tests.test_checkpoint_1::test_help_ignores_json_flag": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_version_plain_text": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_version_json": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_cli_usage_error_no_args": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_cli_usage_error_without_command": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_cli_unknown_command": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_valid_circuit_reports_interface": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_file_not_found": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_parse_errors_have_location[bad_syntax-            input a b\\n            output y\\n            y = AND(a, b\\n            ]": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_parse_errors_have_location[literal_x-            input a\\n            output y\\n            y = X\\n            ]": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_parse_errors_have_location[brackets-            input a[0]\\n            output y\\n            y = a\\n            ]": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_validation_errors[declaration_after_assignment-content0-DeclarationAfterAssignmentError]": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_validation_errors[duplicate_name-            input a a\\n            output y\\n            y = a\\n            -DuplicateNameError]": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_validation_errors[undefined_name-            input a\\n            output y\\n            y = z\\n            -UndefinedNameError]": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_validation_errors[input_assignment-            input a\\n            output y\\n            y = a\\n            a = 1\\n            -InputAssignmentError]": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_validation_errors[multiple_assignment-            input a\\n            output y\\n            y = a\\n            y = NOT(a)\\n            -MultipleAssignmentError]": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_validation_errors[unassigned_signal-            input a\\n            output y\\n            -UnassignedSignalError]": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_validation_errors[duplicate_name_across_lines-            input a\\n            input a\\n            output y\\n            y = a\\n            -DuplicateNameError]": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_validation_errors[unassigned_wire-            input a\\n            output y\\n            wire t1\\n            y = a\\n            -UnassignedSignalError]": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_validation_errors[undeclared_lhs-            input a\\n            output y\\n            t1 = a\\n            y = a\\n            -UndefinedNameError]": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_cycle_error_message": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_accepts_all_operators": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_arity_errors[arity_not_too_many-a-NOT(a, a)]": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_arity_errors[arity_buf_too_many-a b-BUF(a, b)]": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_arity_errors[arity_and_too_few-a-AND(a)]": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_arity_errors[arity_or_too_few-a-OR(a)]": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_arity_errors[arity_xor_too_few-a-XOR(a)]": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_arity_errors[arity_nand_too_few-a-NAND(a)]": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_arity_errors[arity_nor_too_few-a-NOR(a)]": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_arity_errors[arity_xnor_too_few-a-XNOR(a)]": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_identifiers_are_case_sensitive": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_majority_vote_circuit": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_parity_generator_circuit": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_comparator_2bit_circuit": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_decoder_circuit": "passed",
-            "circuit_eval.tests.test_checkpoint_1::test_check_shared_scalar_circuit": "passed"
-          }
+          "cases_sha256": "56bf5a4e43152ce54277ad615db666d61be5c8598f8c1e87c958af94342a44d4",
+          "case_outcomes_sha256": "7f19e1eecb100ab6e4712d21e15bb4ec3378aa53f921f1b59bf46e0180eea574"
+        }
+      },
+      "repeat": {
+        "cold": {
+          "xml_sha256": "977194610d57088577c655b34014bb467302435e02b59954ed571a14f876981a",
+          "exit": 1,
+          "counts": {
+            "failure": 36
+          },
+          "case_ids_unchanged": true,
+          "case_outcomes_sha256": "b5091996b016fdadc58ddf457773b89e93088c663068d83d3106afd112575802",
+          "changed_outcomes": []
+        },
+        "reference": {
+          "xml_sha256": "2de63771fac49093b1564005f18343902f498269b8c4535f8f117e4481d0455c",
+          "exit": 0,
+          "counts": {
+            "passed": 36
+          },
+          "case_ids_unchanged": true,
+          "case_outcomes_sha256": "7f19e1eecb100ab6e4712d21e15bb4ec3378aa53f921f1b59bf46e0180eea574",
+          "changed_outcomes": []
         }
       }
     }
