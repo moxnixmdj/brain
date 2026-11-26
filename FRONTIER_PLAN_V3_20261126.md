@@ -128,15 +128,25 @@ Measured on `main@ac5c1015`, today:
 | Fact | Number |
 |---|---|
 | Python modules under `canonical/` | **6,369** |
-| Modules with **no importer** (by module name) | **6,114 (96.0%)** |
-| Lines living in those modules | **1,375,718 of 1,506,745 (91.3%)** |
+| Modules with **no importer** (by module name) | **3,549** — see correction below; the first count, 6,114, was wrong |
+| Modules with no importer, ≥140 lines, non-test | **227** (the substantial bank; first counted as 1,996) |
 | Koan-named modules (`the_*`, `a_*`, `what_*`, `why_*`, `how_*`) | 102 — **58 of them unreachable** |
 | Model source index | 2,264 modules (of 6,369) |
 | Promotion candidates → callable | **849 → 31 (3.7%)** |
 | Model capabilities / harvested capabilities / federation engines | 462 / 659 / 54 |
 | `brain_unified_model_v1.py` | **7,533 lines** (hard cap `< 7,534`) |
 
-Some of those 6,114 are legitimate CLI entry points with no importer. Many are not. Here is the
+**Correction (measured after this document was written, Wave 43 / PR #7146).** The 6,114 and 1,996
+above came from a candidate rule that compared a bare filename stem against fully dotted import
+names, so every module reached as `from canonical.<pkg>.<mod> import X` counted as dark. Corrected,
+the tree has 3,549 unimported modules, 227 of them substantial. The adjudicator then ran on all
+2,174 substantial modules: **6 can prove they run** on the day it merged, **8** after Wave 44
+(futamura_leapfrog_kernel_v1 and egraph_and_deductive_synthesizer_v1 adopted the contract), 2,080 import and prove nothing, 79 need substrate this sandbox does not ship, 7 are broken.
+The 227-module no-importer census proves **nothing at all**. The numbers that follow in this section
+are still worth reading for their shape, but every count of "hidden organs" must be read as 227,
+not 1,996.
+
+Some of those 3,549 are legitimate CLI entry points with no importer. Many are not. Here is the
 uncomfortable part: **a module nobody imports is not a capability, it is a claim.** The brief's
 "we already solved this somewhere" is true in the sense that a library you never open "has" the book
 you need. Three consequences:
@@ -169,8 +179,11 @@ a ranked, evidence-bearing queue, and it gates every "we already have it" claim 
 
 **What:** `canonical/tools/dark_matter_adjudicator_v1.py`
 
-For each candidate module (start: 6,114 no-importer + 58 dark koan + 40 largest dark), emit a
-three-state verdict, fail-closed:
+*(As built: four verdicts, not three — `PROVEN`, `IMPORTS_ONLY`, `MISSING_SUBSTRATE`, `BROKEN` —
+over 2,174 substantial modules with `--all-modules` and 227 without it.)*
+
+For each candidate module (start: the no-importer list, which is 227 substantial modules, not
+6,114), emit a verdict, fail-closed:
 
 * `PROVEN` — imported, its declared entrypoint/self-check executed on synthesised inputs at $0, and
   a receipt written naming the exact call and result;
@@ -283,8 +296,8 @@ what makes it comparable, and arm E is unbuilt.
 
 **Wave 43.** It is $0, it needs no external benchmark, it takes the repo's biggest ambiguity and
 turns it into a ranked queue, and it makes every subsequent "we already have it" claim *checkable* —
-including the ones in this document. Everything else in this plan is downstream of knowing which 5%
-of those 6,114 modules are real.
+including the ones in this document. Everything else in this plan is downstream of knowing which of
+those modules are real — and it turned out to be 6 of 2,174, not 5% of 6,114.
 
 ---
 

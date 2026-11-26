@@ -1667,7 +1667,7 @@
      ],
      "path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
      "score": 9.0,
-     "sha256": "d337af12dfa206e9",
+     "sha256": "282eb2afe100ee7d",
      "source_index": true,
      "summary": "Futamura \"Compile Away the Frontier\" Unified Leapfrog Kernel (`K3 = 0`)."
     },
