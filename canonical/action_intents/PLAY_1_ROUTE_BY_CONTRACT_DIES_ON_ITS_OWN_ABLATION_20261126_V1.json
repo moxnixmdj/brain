@@ -1,0 +1,520 @@
+{
+ "action_id": "PLAY_1_ROUTE_BY_CONTRACT_DIES_ON_ITS_OWN_ABLATION_20261126_V1",
+ "action_intent_id": "PLAY_1_ROUTE_BY_CONTRACT_DIES_ON_ITS_OWN_ABLATION_20261126_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Runs the contract router, the incumbent source index, an ablation with the contract gate removed and a chance baseline over the same 845-module pool and the same 42 queries, in one 22 s pass with 0 model calls. Contract router 0.905 recall@5, ablation 0.952, chance 0.846, incumbment find_source 0.667, contract recall@1 0.548 against ablation 0.476. The play is killed by its own ablation: whatever the contract gate adds at rank five is negative, and a random draw from the topic-sharing pool already scores 0.846. 5 tests pass; 0 network calls.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "Refused by measurement, in order: a bigger vocabulary, a wider grammar, an oracle as a scalar, stored experience, the failure text as an index, two binding rules, candidate supply itself, formatting as the cause of exclusion, the site as the cause of composition, and now the effect list as the vocabulary. What is left is the vocabulary itself: relations, admitted by the goal, grown without a model.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Every number is a row in PLAY_1_ROUTE_BY_CONTRACT_20261126_V1.json: 845 modules, 42 queries, router 0.905, ablation 0.952, chance 0.846, incumbent 0.667, 22 s, 0 model calls, 0 network calls, 5 tests.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/verification/PLAY_1_ROUTE_BY_CONTRACT_20261126_V1.json",
+   "canonical/verification/FRONTIER_LEAPFROG_PLAY_1_ROUTE_BY_CONTRACT_20261126_V1.md",
+   "canonical/tools/contract_first_routing_v1.py",
+   "canonical/tests/test_contract_first_routing_v1.py"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__INTERNAL_ABLATION_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The scoreboard, not the router. Over the same 845-module pool the contract router scores 0.905 recall@5, a topic-only bag of words with the mechanism removed scores 0.952, and a RANDOM five drawn from the modules that share any query word scores 0.846. The ground truth is built from the same vocabulary as the pool, so domain-level recall cannot separate a router from a coin, and last round's 0.33 route recall is not comparable to it.",
+ "canonical_base_commit": "PENDING_STAMP",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "The scoreboard, not the router. Over the same 845-module pool the contract router scores 0.905 recall@5, a topic-only bag of words with the mechanism removed scores 0.952, and a RANDOM five drawn from the modules that share any query word scores 0.846. The ground truth is built from the same vocabulary as the pool, so domain-level recall cannot separate a router from a coin, and last round's 0.33 route recall is not comparable to it.",
+ "date": "2026-11-26",
+ "expected_parent_change": "Routing stops being a claim and becomes a measurement with a falsifier: the router is compared to itself with the mechanism removed and to the chance its own pool implies, Play 1 is killed on its own ablation, and the plan's 'routing is the wall' line is replaced by 'the label is the bottleneck'.",
+ "expected_parent_frontier_change": "Routing stops being a claim and becomes a measurement with a falsifier: the router is compared to itself with the mechanism removed and to the chance its own pool implies, Play 1 is killed on its own ablation, and the plan's 'routing is the wall' line is replaced by 'the label is the bottleneck'.",
+ "explicit_user_authorization": [
+  "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
+  "we are building our own model. never reach for another model or use it and call it ours",
+  "every bit of our weights must be calculated, not a knowledge house",
+  "the best part is no part",
+  "you must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING EXHAUSTION IS HAPPENED",
+  "maximize your web use",
+  "What is the single bottleneck that, if fixed, would unlock the most capability?",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "only our agent/system may run them; integrity 100% real",
+  "the honest truth is that we keep testing on bugs we already know work",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "FALSIFIED if the ablation does not remove the mechanism; if the chance baseline is drawn from a different pool than the router; if 0.905 is reported as a gain without 0.952 and 0.846 beside it; or if any number here fails to reproduce from PLAY_1_ROUTE_BY_CONTRACT_20261126_V1.json.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/50",
+  "interpretation": "Speculative forecast only. The round removes a false routing claim and installs the falsifier that every later routing, promotion or memory-access play will be scored against. No truth obligation is discharged.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "ablation_topic_only_recall_at_1": 0.476,
+  "ablation_topic_only_recall_at_5": 0.952,
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "chance_topic_at_5": 0.8456,
+  "chance_uniform_at_5": 0.0059,
+  "contract_recall_at_1": 0.548,
+  "contract_recall_at_5": 0.905,
+  "contract_recall_executable_at_5": 0.0,
+  "incumbent_find_source_recall_at_5": 0.667,
+  "model_calls": 0,
+  "network_calls": 0,
+  "per_domain_recall_at_5": {
+   "coding_agents": 1.0,
+   "computer_use": 1.0,
+   "continual_learning": 0.5,
+   "instant_learning": 1.0,
+   "memory": 1.0,
+   "verification_abstention": 1.0,
+   "world_model": 0.833
+  },
+  "pool_modules": 845,
+  "queries": 42,
+  "tests_passed": 5,
+  "verdict": "KILLED",
+  "wall_clock_seconds": 22
+ },
+ "next_step": "Extract exact targets from receipts (action, module that served it) and re-run the same instrument; kill the contract idea if it does not separate from its ablation at n>=100.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/tools/domain_atlas_v1.py",
+  "canonical/unified_model/DOMAIN_ATLAS_V1.json",
+  "canonical/runtime/brain_unified_model_v1.py find_source"
+ ],
+ "probe_specific": false,
+ "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+ "progress_evidence_paths": [
+  "canonical/verification/PLAY_1_ROUTE_BY_CONTRACT_20261126_V1.json",
+  "canonical/verification/FRONTIER_LEAPFROG_PLAY_1_ROUTE_BY_CONTRACT_20261126_V1.md",
+  "canonical/tools/contract_first_routing_v1.py",
+  "canonical/tests/test_contract_first_routing_v1.py"
+ ],
+ "real_outcome": "Routing is measured against a target that can fail, so a better router can be told from a luckier one.",
+ "recursive_obs": {
+  "canonical_base_commit": "ab5a2df83c6be0d92bb58355ac839ad188adea4a",
+  "deleted_or_bypassed_paths": [
+   "domain-level recall as a routing measurement",
+   "the incumbent as the only comparison",
+   "the pre-registered 0.53 floor as sufficient",
+   "contract weight tuning"
+  ],
+  "expected_parent_frontier_change": "Routing stops being a claim and becomes a measurement with a falsifier: the router is compared to itself with the mechanism removed and to the chance its own pool implies, Play 1 is killed on its own ablation, and the plan's 'routing is the wall' line is replaced by 'the label is the bottleneck'.",
+  "expected_parent_level_state_change": "Routing stops being a claim and becomes a measurement with a falsifier: the router is compared to itself with the mechanism removed and to the chance its own pool implies, Play 1 is killed on its own ablation, and the plan's 'routing is the wall' line is replaced by 'the label is the bottleneck'.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "(bypass) compare against a vendor's recall number - their ground truth is their own recommendation",
+    "(substitute) hand-label 42 targets - one author, one sitting, unverifiable provenance",
+    "(delete) drop routing from the plan - the runtime still has to choose what to call"
+   ],
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_SCOREBOARD_IS_THE_BLOCKER_NOT_THE_ROUTER",
+   "surviving_causal_blocker": "The scoreboard, not the router. Over the same 845-module pool the contract router scores 0.905 recall@5, a topic-only bag of words with the mechanism removed scores 0.952, and a RANDOM five drawn from the modules that share any query word scores 0.846. The ground truth is built from the same vocabulary as the pool, so domain-level recall cannot separate a router from a coin, and last round's 0.33 route recall is not comparable to it."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "tuning the contract weights (the ablation already outranks them)",
+    "widening the atlas vocabulary (same pool, same label, same saturation)",
+    "a new embedding index (forbidden at runtime, and it would inherit the same label)"
+   ],
+   "existing_inherited_routes_checked": [
+    "find_source at 0.667 recall@5 on the same 42 queries and the same top-5 (0.76 at top-10 in the atlas)",
+    "route() at 0.33 mean, measured over 449 capabilities with a chance of 0.013-0.143",
+    "the atlas classification itself, which supplies both the pool and the ground truth",
+    "the repository's own receipts, which pair an action with the module that served it and are the exact targets this play says to use next"
+   ],
+   "external_existing_routes_checked": [
+    "MCP Gateway 2607.15593: 98.2% recall@15 hybrid, 83.1% dense-only, ground truth flagged as the gateway's own recommendation (label circularity) - the same failure this play measured locally",
+    "HYSET 2607.25718: set-level retrieval, +11.6% COMP@5; still scored against supplied labels",
+    "Switchcraft 2605.07112: 82.9% router against an 89.4% oracle, cost reported, ablation not"
+   ],
+   "surviving_gap": "No routing measurement in this tree has an exact target, an ablation and a chance baseline at once."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "recall at five against a domain-sized ground truth, which a random draw already wins 84.6% of the time",
+    "the incumbent's score as the only comparison, which cannot separate a mechanism from a vocabulary",
+    "reporting 0.905 as a success because it cleared a floor written before the baseline existed"
+   ],
+   "real_outcome": "Routing is measured against a target that can fail, so a better router can be told from a luckier one.",
+   "surviving_necessity": "Without an exact-target scoreboard every later play on routing, promotion or memory access would be scored on a metric that saturates and would read as progress while measuring the label."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": [
+    "domain_atlas_v1 supplies the pool and the label",
+    "brain_unified_model_v1 find_source supplies the incumbent",
+    "the receipt projections supply the exact targets for the next play"
+   ],
+   "downstream_work_to_delete_or_supersede": [
+    "Plan V2's Play 1 as written (route by contract, kill below 0.53): the floor was cleared and the play still died, so the criterion itself is superseded",
+    "the atlas's domain recall as a routing measurement"
+   ],
+   "fresh_reuse_plan": "The ablation and chance clauses run unchanged against exact targets; only the label source changes."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": [
+    "the atlas classification is reused from the merged artifact instead of being re-derived by hand",
+    "one instrument covers router, incumbent, ablation and chance in a single 22 s pass"
+   ],
+   "revalidated_layers": [
+    "obs_capability",
+    "obs_blocker",
+    "route_frontier"
+   ],
+   "search_stop_decision": "Search stopped when three tool-router papers reported recall against labels they supplied themselves; more citations would not have changed what the local ablation showed."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_necessity_reason": "The instrument has to exist before the next play: the ablation and the chance baseline are the parts that turned a 0.905 into a kill, and they are reusable unchanged against exact targets.",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "route 2 cannot be told apart from a bag of words on the metric it was measured on, and route 3 needs the extraction this round did not yet build; shipping the kill now prevents the plan from carrying a false win into the next round.",
+   "routes_ranked": [
+    "1. run the router, the ablation and the chance baseline in one instrument and publish the kill (selected)",
+    "2. keep the contract router and report 0.905 (refused by measurement: ablation 0.952, chance 0.846)",
+    "3. move to exact targets immediately (next play, needs the receipt pairs extracted first)"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_detail": "The committed artifact is the oracle; five tests pin the gate, the ablation and the finding.",
+   "oracle_paths": [
+    "canonical/verification/PLAY_1_ROUTE_BY_CONTRACT_20261126_V1.json",
+    "canonical/tests/test_contract_first_routing_v1.py"
+   ],
+   "synthetic_verification_necessity": "No synthetic data: real modules, real ASTs, real queries. The only constructed comparison is the ablation, which is the same scorer with the mechanism removed.",
+   "verification_considered_detail": "The router is scored on the same 42 fixed queries as the atlas, with the incumbent re-run in the same process, so no number is inherited from last round."
+  },
+  "real_outcome": "Routing is measured against a target that can fail, so a better router can be told from a luckier one.",
+  "required_capability": "A falsifiable routing scoreboard: exact targets, an ablation that removes the claimed mechanism, and a chance baseline computed from the pool the channel actually draws from.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "0.905 sits +0.06 over a chance baseline of 0.846 on 42 queries",
+      "CORRECTNESS": "the ablation with the gate removed scores 0.952, so the mechanism is not what produced the number",
+      "INCREMENTAL_COST": "0",
+      "RELIABILITY": "not separable from noise at n=42",
+      "VERIFIABILITY": "reproducible, and reproduces the disqualification",
+      "WALL_CLOCK": "22 s, cheap"
+     },
+     "evidence": [
+      "contract recall@5 0.905 against the incumbent's 0.667, 22 s, 0 model calls"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/PLAY_1_ROUTE_BY_CONTRACT_20261126_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "KEEP_THE_CONTRACT_ROUTER_AND_REPORT_905"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "bounded by the saturating metric",
+      "CORRECTNESS": "weights fitted to 42 queries cannot be separated from the label they are scored on",
+      "INCREMENTAL_COST": "0",
+      "RELIABILITY": "overfits the only 42 queries available",
+      "VERIFIABILITY": "same artifact, same labels",
+      "WALL_CLOCK": "seconds"
+     },
+     "evidence": [
+      "rank 1: contract 0.548 against ablation 0.476 - a seven-point gain that rank 5 does not show"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/PLAY_1_ROUTE_BY_CONTRACT_20261126_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "TUNE_THE_CONTRACT_WEIGHTS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "removes a false claim from the plan instead of adding one",
+      "CORRECTNESS": "every clause of the kill is a row in the artifact",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 0 network calls",
+      "RELIABILITY": "deterministic; the ablation is the same code with the mechanism switched off",
+      "VERIFIABILITY": "5 tests, one per behaviour that makes the artifact readable",
+      "WALL_CLOCK": "22 s"
+     },
+     "evidence": [
+      "router 0.905, ablation 0.952, chance 0.846, incumbent 0.667, all in one 22 s pass over 845 modules; verdict KILLED by the ablation clause; 5 tests pin the gate, the ablation and the finding"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/PLAY_1_ROUTE_BY_CONTRACT_20261126_V1.json",
+      "canonical/verification/FRONTIER_LEAPFROG_PLAY_1_ROUTE_BY_CONTRACT_20261126_V1.md"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "TEST_A_ROUTER_AGAINST_ITS_OWN_ABLATION_AND_CHANCE_BASELINE_BEFORE_COMPARING_IT_TO_AN_INCUMBENT"
+    }
+   ],
+   "checked_at_utc": "2026-11-26T01:29:51Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "compare a candidate router to the incumbent channel only, on domain-level recall",
+   "max_age_hours": 24,
+   "negative_search_summary": "Searched for a router evaluation that reports an ablation and a chance baseline over the pool it draws from. Three published tool-router results report recall against labels they supplied, and none reports the ablation, so there was no external scoreboard to adopt.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "tool retrieval recall@5 ablation chance baseline 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "MCP Gateway tool retrieval label circularity independent review"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "contract based tool routing AST verb object signature"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 router evaluation ground truth label leakage benchmark"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "TEST_A_ROUTER_AGAINST_ITS_OWN_ABLATION_AND_CHANCE_BASELINE_BEFORE_COMPARING_IT_TO_AN_INCUMBENT",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-26T01:29:51Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3 runtime with pytest",
+      "evidence": [
+       "5 tests pass; the measurement runs in 22 s in this sandbox"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "the repository tree, readable offline",
+      "evidence": [
+       "845 modules contracted from their own ASTs; deterministic on a second run"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "the compiled unified model, for the incumbent channel",
+      "evidence": [
+       "find_source re-run in the same process; verifier 38/38 after recompilation"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "MODEL_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "model API or remote service at runtime",
+      "evidence": [
+       "0 model calls and 0 network calls in the instrument and in the artifact"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "MODEL_API",
+      "required": false,
+      "scope": "GLOBAL",
+      "status": "NOT_REQUIRED",
+      "volatility": "VOLATILE"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "TEST_A_ROUTER_AGAINST_ITS_OWN_ABLATION_AND_CHANCE_BASELINE_BEFORE_COMPARING_IT_TO_AN_INCUMBENT",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/contract_first_routing_v1.py",
+     "canonical/tools/domain_atlas_v1.py",
+     "canonical/unified_model/DOMAIN_ATLAS_V1.json",
+     "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "independent review of the MCP Gateway recall number, flagging that the ground truth is the gateway's own recommendation"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "pypi.org: pytest only, for the tests; the instrument imports the standard library and this tree"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/abs/2607.15593",
+     "https://arxiv.org/abs/2607.25718",
+     "https://arxiv.org/abs/2605.07112"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "TEST_A_ROUTER_AGAINST_ITS_OWN_ABLATION_AND_CHANCE_BASELINE_BEFORE_COMPARING_IT_TO_AN_INCUMBENT",
+   "KEEP_THE_CONTRACT_ROUTER_AND_REPORT_905",
+   "TUNE_THE_CONTRACT_WEIGHTS",
+   "WIDEN_THE_ATLAS_VOCABULARY"
+  ],
+  "selected_route": "TEST_A_ROUTER_AGAINST_ITS_OWN_ABLATION_AND_CHANCE_BASELINE_BEFORE_COMPARING_IT_TO_AN_INCUMBENT",
+  "selected_surviving_route": "TEST_A_ROUTER_AGAINST_ITS_OWN_ABLATION_AND_CHANCE_BASELINE_BEFORE_COMPARING_IT_TO_AN_INCUMBENT",
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "stop_condition": "Stop when a routing scoreboard has exact targets (one module per query, chance 1/845), an ablation and a chance baseline in one artifact; kill any router that does not separate from its own ablation at n>=100 targets.",
+  "why_selected_route_is_fastest_sufficient": "It is one 22 s pass that needs no labels beyond the ones already committed, and it is the only route that can turn a 0.905 into a kill instead of a headline.",
+  "why_this_is_not_another_organ": "No new index and no new store: the router, the ablation and the chance baseline are one function with a switch, and the artifact is a verification row like every other."
+ },
+ "required_capability": "A falsifiable routing scoreboard: exact targets, an ablation that removes the claimed mechanism, and a chance baseline computed from the pool the channel actually draws from.",
+ "route_id": "TEST_A_ROUTER_AGAINST_ITS_OWN_ABLATION_AND_CHANCE_BASELINE_BEFORE_COMPARING_IT_TO_AN_INCUMBENT",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": false,
+ "selected_route": "TEST_A_ROUTER_AGAINST_ITS_OWN_ABLATION_AND_CHANCE_BASELINE_BEFORE_COMPARING_IT_TO_AN_INCUMBENT",
+ "status": "PROPOSED__PRODUCER_MEASURED__MECHANISM_WORKS_ON_FIVE_REAL_MACHINES__INDEPENDENT_VERIFICATION_OPEN",
+ "stop_condition": "Stop when a routing scoreboard has exact targets (one module per query, chance 1/845), an ablation and a chance baseline in one artifact; kill any router that does not separate from its own ablation at n>=100 targets.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "the_law_this_round_adds": "THE VOCABULARY IS THE ARTIFACT. An effect is a computable object -- the set of relations that moved between two readings -- and a goal can only be stated, planned for and verified in relations the system carries. Experience of an atom whose effect no relation names is experience of nothing.",
+  "what_is_false_in_the_claim": [
+   "that experiencing the most advanced action once installs it: mv was experienced in every cell of the probe table twice and still could not take the rename request",
+   "that repetition fixes an unstateable goal: a thousand observations of an invisible change are a thousand observations of nothing",
+   "that one demonstration identifies the rule: median 1037 surviving programs, 4 of 23 tasks identified",
+   "that an action list transfers: 0 of 20 held-out bugs at any budget; an action shape from one demonstration reaches 1-2 of 20",
+   "that any of this solves 'any computer use': the five relations are a grammar, not the world, and OSWorld 2.0's hardest phenomena need relations nobody wrote down"
+  ]
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "current_load_bearing_atomic_count": 36,
+   "deleted_nonnecessary_atomic_count": 2,
+   "historical_atomic_registry_count": 38,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_atomic": 38,
+   "total_families": 19,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This measures the reach of an executed counterfactual over real commit history and finds the content of the fix outside it; it discharges no truth obligation.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "aa752cadab44d7b354814507d437f4fa485aaf74",
+     "path": "canonical/verification/RECOGNITION_IS_THE_BOTTLENECK_20261121_V1.json"
+    }
+   ],
+   "decisive_question": "Before asking what the instrument can find, does it accept the human's own fix -- and if not, why not?",
+   "falsifier_id": "THE_DEMAND_MUST_ADMIT_THE_HUMAN_FIX_AND_NOT_A_CONSTANT",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Zero generalising repairs out of thirty fresh commits is the counterexample, and it is recorded in the receipt rather than hidden.",
+   "proposal_id": "THE_ASSERTION_IS_THE_DEMAND_20261119_V1"
+  }
+ },
+ "verification": {
+  "artifact": "canonical/verification/PLAY_1_ROUTE_BY_CONTRACT_20261126_V1.json",
+  "independent": false,
+  "tests": "canonical/tests/test_contract_first_routing_v1.py"
+ },
+ "weakens_existing_guard": false
+}
