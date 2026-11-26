@@ -136,15 +136,32 @@ def verified_emits_report(
 # --------------------------------------------------------------------------- #
 # graph
 # --------------------------------------------------------------------------- #
+_REGISTRY_CACHE: dict[tuple[str, tuple[int, int] | None, tuple[int, int] | None], dict[str, Any]] = {}
+_GRAPH_CACHE: dict[tuple[tuple[int, int] | None, tuple[int, int] | None, bool], dict[str, dict[str, list[str]]]] = {}
+
+
+def _stat_sig(p: Path) -> tuple[int, int] | None:
+    try:
+        st = p.stat()
+        return (st.st_mtime_ns, st.st_size)
+    except OSError:
+        return None
+
+
 def load_registry(path: str | Path | None = None) -> dict[str, Any]:
     p = Path(path) if path else REGISTRY
     snap = p.with_name("BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json")
+    cache_key = (str(p.resolve()), _stat_sig(p), _stat_sig(snap) if path is None else None)
+    cached = _REGISTRY_CACHE.get(cache_key)
+    if cached is not None:
+        return dict(cached)
     txt = p.read_text(encoding="utf-8") if p.is_file() else ""
     if path is None and not txt.lstrip().startswith("{") and snap.is_file():
         txt = snap.read_text(encoding="utf-8")
     caps = dict(json.loads(txt)["capabilities"])
     if path is None and snap.is_file():
         caps.update(json.loads(snap.read_text(encoding="utf-8")).get("capabilities") or {})
+    _REGISTRY_CACHE[cache_key] = dict(caps)
     return caps
 
 
@@ -160,6 +177,15 @@ def graph(registry: Mapping[str, Any] | None = None,
     exactly, which is how the negative controls prove the added edge is what
     changed the answer.
     """
+    if registry is None and verified is None:
+        snap = REGISTRY.with_name("BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json")
+        gkey = (_stat_sig(REGISTRY), _stat_sig(snap), bool(use_verified))
+        gcached = _GRAPH_CACHE.get(gkey)
+        if gcached is not None:
+            return {
+                cid: {"requires": list(spec["requires"]), "provides": list(spec["provides"])}
+                for cid, spec in gcached.items()
+            }
     reg = registry if registry is not None else load_registry()
     additions: dict[str, list[str]] = {}
     if use_verified:
@@ -174,6 +200,13 @@ def graph(registry: Mapping[str, Any] | None = None,
         out[cid] = {
             "requires": list(entry.get("requires") or []),
             "provides": provides,
+        }
+    if registry is None and verified is None:
+        snap = REGISTRY.with_name("BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json")
+        gkey = (_stat_sig(REGISTRY), _stat_sig(snap), bool(use_verified))
+        _GRAPH_CACHE[gkey] = {
+            cid: {"requires": list(spec["requires"]), "provides": list(spec["provides"])}
+            for cid, spec in out.items()
         }
     return out
 

@@ -2496,7 +2496,12 @@ def catalog_federated_engines(*, domain: str | None = None) -> dict[str, Any]:
     }
 
 
-def compile_extended_source_index_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
+def compile_extended_source_index_rows(
+    root: Path,
+    covered: set[str],
+    *,
+    cache: Any = None,
+) -> list[dict[str, Any]]:
     """Deterministically index non-`canonical/runtime` Python modules across the repo.
 
     Preserves `source_index` as the exact partition of `canonical/runtime/` while
@@ -2513,13 +2518,29 @@ def compile_extended_source_index_rows(root: Path, covered: set[str]) -> list[di
                 if any(part in _NON_SOURCE_DIRS for part in p.parts) or p.is_relative_to(astra_tmp):
                     continue
                 all_py.append(p)
+    use_cache = cache is not None and getattr(cache, "enabled", False)
     for p in all_py:
-        try:
-            txt = p.read_text(encoding="utf-8", errors="replace")
-        except OSError:
-            continue
-        for mod in _IMPORT_RE.findall(txt):
-            importers.setdefault(mod.split(".")[-1], set()).add(p.relative_to(root).as_posix())
+        rel_p = p.relative_to(root).as_posix()
+        st_p = None
+        mods: tuple[str, ...] | None = None
+        if use_cache:
+            try:
+                st_p = p.stat()
+                hit, cached_mods = cache.get("ext_imports", rel_p, st_p)
+                if hit:
+                    mods = cached_mods
+            except OSError:
+                continue
+        if mods is None:
+            try:
+                txt = p.read_text(encoding="utf-8", errors="replace")
+            except OSError:
+                continue
+            mods = tuple({m.split(".")[-1] for m in _IMPORT_RE.findall(txt)})
+            if use_cache and st_p is not None:
+                cache.put("ext_imports", rel_p, st_p, mods)
+        for mod_leaf in mods:
+            importers.setdefault(mod_leaf, set()).add(rel_p)
 
     rows: list[dict[str, Any]] = []
     for tree_rel in _EXTENDED_SOURCE_TREES:
@@ -2532,47 +2553,74 @@ def compile_extended_source_index_rows(root: Path, covered: set[str]) -> list[di
             rel = path.relative_to(root).as_posix()
             if rel in covered:
                 continue
-            try:
-                raw = path.read_bytes()
-            except OSError:
-                continue
-            text = raw.decode("utf-8", errors="replace")
             stem = path.stem
-            is_entry = "__main__" in text
-            n_imp = len(importers.get(stem, set()) - {rel})
-            classification = (
-                "ENTRY_POINT" if is_entry else ("INTERNAL_HELPER" if n_imp else "ORPHAN")
-            )
-            symbols: list[str] = []
-            summary_line = ""
-            try:
-                with warnings.catch_warnings():
-                    warnings.simplefilter("ignore", DeprecationWarning)
-                    parsed = ast.parse(text)
-                for node in parsed.body:
-                    if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
-                        symbols.append(node.name)
-                doc_lines = (ast.get_docstring(parsed) or "").strip().splitlines()
-                summary_line = doc_lines[0][:240] if doc_lines else ""
-            except (SyntaxError, ValueError, UnicodeDecodeError):
-                classification = "UNPARSEABLE"
+            cached_ext: dict[str, Any] | None = None
+            st_ext = None
+            if use_cache:
+                try:
+                    st_ext = path.stat()
+                    hit, val = cache.get("ext_source", rel, st_ext)
+                    if hit:
+                        cached_ext = val
+                except OSError:
+                    continue
+            if cached_ext is None:
+                try:
+                    raw = path.read_bytes()
+                except OSError:
+                    continue
+                text = raw.decode("utf-8", errors="replace")
+                is_entry = "__main__" in text
+                symbols: list[str] = []
+                summary_line = ""
+                parse_ok = True
+                try:
+                    with warnings.catch_warnings():
+                        warnings.simplefilter("ignore", DeprecationWarning)
+                        parsed = ast.parse(text)
+                    for node in parsed.body:
+                        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                            symbols.append(node.name)
+                    doc_lines = (ast.get_docstring(parsed) or "").strip().splitlines()
+                    summary_line = doc_lines[0][:240] if doc_lines else ""
+                except (SyntaxError, ValueError, UnicodeDecodeError):
+                    parse_ok = False
+                haystack = " ".join([tree_rel.replace("/", " "), stem.replace("_", " "), summary_line, " ".join(symbols[:24])])
+                cached_ext = {
+                    "sha256": hashlib.sha256(raw).hexdigest(),
+                    "is_entry": is_entry,
+                    "parse_ok": parse_ok,
+                    "symbol_count": len(symbols),
+                    "symbols": sorted(symbols)[:24],
+                    "summary": summary_line,
+                    "terms": _term_counts(haystack),
+                }
+                if use_cache and st_ext is not None:
+                    cache.put("ext_source", rel, st_ext, cached_ext)
 
-            haystack = " ".join([tree_rel.replace("/", " "), stem.replace("_", " "), summary_line, " ".join(symbols[:24])])
+            is_entry = bool(cached_ext["is_entry"])
+            n_imp = len(importers.get(stem, set()) - {rel})
+            if not cached_ext["parse_ok"]:
+                classification = "UNPARSEABLE"
+            else:
+                classification = (
+                    "ENTRY_POINT" if is_entry else ("INTERNAL_HELPER" if n_imp else "ORPHAN")
+                )
             rows.append(
                 {
                     "id": "ext_source:" + rel,
                     "kind": "EXTENDED_SOURCE_ADDRESSABLE_MODULE",
                     "tree": tree_rel,
                     "path": rel,
-                    "sha256": hashlib.sha256(raw).hexdigest(),
+                    "sha256": cached_ext["sha256"],
                     "classification": classification,
                     "capability": False,
                     "executable_entry_point": is_entry,
                     "imported_by_count": n_imp,
-                    "symbol_count": len(symbols),
-                    "symbols": sorted(symbols)[:24],
-                    "summary": summary_line,
-                    "terms": _term_counts(haystack),
+                    "symbol_count": cached_ext["symbol_count"],
+                    "symbols": list(cached_ext["symbols"]),
+                    "summary": cached_ext["summary"],
+                    "terms": dict(cached_ext["terms"]),
                 }
             )
     return rows

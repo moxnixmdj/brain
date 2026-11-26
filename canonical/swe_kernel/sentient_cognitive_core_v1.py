@@ -42,6 +42,7 @@ from __future__ import annotations
 from collections import deque
 from dataclasses import dataclass, field
 import hashlib
+import importlib
 import json
 import math
 import os
@@ -50,21 +51,42 @@ import tempfile
 import time
 from typing import Any, Callable, Mapping, Sequence
 
-from canonical.runtime import capability_first_scheduler_v1 as cfs
-from canonical.runtime import compose_v1
-from canonical.runtime import continuation_preference_v1 as cpref
-from canonical.runtime import environment_learning_v1 as env_learn
-from canonical.runtime import executable_skill_program_v7 as esp7
-from canonical.runtime import global_retrieval_controller_v1 as grc
-from canonical.runtime import ignorance_ledger_v1 as ign_ledger
-from canonical.runtime import incumbent_dominance_search_v1 as ids
-from canonical.runtime import interaction_v1
-from canonical.runtime import mortality_and_triage_v1 as mort
-from canonical.runtime import open_world_hypothesis_guard_v4 as owhg
-from canonical.runtime import property_v1
-from canonical.runtime import self_authored_obligations_v1 as obligations_org
-from canonical.runtime import self_prediction_calibration_v1 as spc
-from execution_guard import target_chase_driver_v1 as tdriver
+
+class _LazyModule:
+    """Zero-overhead lazy module proxy (Wave 14 Elon's Law: delete cold-start import tax)."""
+
+    __slots__ = ("_mod_name", "_loaded")
+
+    def __init__(self, mod_name: str) -> None:
+        object.__setattr__(self, "_mod_name", mod_name)
+        object.__setattr__(self, "_loaded", None)
+
+    def _resolve(self) -> Any:
+        mod = object.__getattribute__(self, "_loaded")
+        if mod is None:
+            mod = importlib.import_module(object.__getattribute__(self, "_mod_name"))
+            object.__setattr__(self, "_loaded", mod)
+        return mod
+
+    def __getattr__(self, item: str) -> Any:
+        return getattr(self._resolve(), item)
+
+
+cfs = _LazyModule("canonical.runtime.capability_first_scheduler_v1")
+compose_v1 = _LazyModule("canonical.runtime.compose_v1")
+cpref = _LazyModule("canonical.runtime.continuation_preference_v1")
+env_learn = _LazyModule("canonical.runtime.environment_learning_v1")
+esp7 = _LazyModule("canonical.runtime.executable_skill_program_v7")
+grc = _LazyModule("canonical.runtime.global_retrieval_controller_v1")
+ign_ledger = _LazyModule("canonical.runtime.ignorance_ledger_v1")
+ids = _LazyModule("canonical.runtime.incumbent_dominance_search_v1")
+interaction_v1 = _LazyModule("canonical.runtime.interaction_v1")
+mort = _LazyModule("canonical.runtime.mortality_and_triage_v1")
+owhg = _LazyModule("canonical.runtime.open_world_hypothesis_guard_v4")
+property_v1 = _LazyModule("canonical.runtime.property_v1")
+obligations_org = _LazyModule("canonical.runtime.self_authored_obligations_v1")
+spc = _LazyModule("canonical.runtime.self_prediction_calibration_v1")
+tdriver = _LazyModule("execution_guard.target_chase_driver_v1")
 
 SCHEMA = "PROJECT_BRAIN_SENTIENT_COGNITIVE_CORE_V1"
 
@@ -2030,8 +2052,7 @@ class SentientCognitiveCore:
         *,
         surprise_threshold: float = _TWO_SHANNON_BITS_NATS,
     ) -> None:
-        from canonical.swe_kernel.concept_library_v1 import CompoundingConceptLibrary
-        from canonical.swe_kernel.recursive_self_architect_v1 import RecursiveSelfArchitect
+        from canonical.swe_kernel.meta_circular_organ_graph_v1 import MetaCircularOrganGraph
 
         self.root_dir = pathlib.Path(root_dir).resolve() if root_dir is not None else None
         if self.root_dir is not None:
@@ -2042,6 +2063,7 @@ class SentientCognitiveCore:
             else pathlib.Path(tempfile.gettempdir()) / f"brain_self_arch_{os.getpid()}"
         )
         base_state_dir.mkdir(parents=True, exist_ok=True)
+        self._base_state_dir = base_state_dir
         self.belief = EpistemicSelfBeliefEngine(
             (self.root_dir / "belief_state.json") if self.root_dir is not None else None,
             surprise_threshold=surprise_threshold,
@@ -2053,23 +2075,62 @@ class SentientCognitiveCore:
             (self.root_dir / "wake_sleep_consolidation.json") if self.root_dir is not None else None,
         )
         self.voi_controller = GlobalVoIDominanceController()
-        self.concept_library = CompoundingConceptLibrary(base_state_dir / "concept_library_v1.json")
+        self._concept_library: Any = None
         self.associative_memory_path = base_state_dir / "associative_memory_v1.json"
-        self.self_architect = RecursiveSelfArchitect(
-            base_state_dir / "self_architect",
-            concept_library=self.concept_library,
-        )
+        # Lazy-initialized heavy subsystems (Elon's Law: delete ~50ms eager boot import tax).
+        self._self_architect: Any = None
+        self._cost_router: Any = None
         self.trace_harvester = SelfTraceHarvester(salt=f"escrow:{base_state_dir.name}")
-        from canonical.swe_kernel.meta_circular_organ_graph_v1 import MetaCircularOrganGraph
-        from canonical.swe_kernel.transactional_parallel_execution_v1 import LatencyReliabilityCostRouter
-
         self.organ_graph = MetaCircularOrganGraph(
             base_state_dir / "meta_circular_organ_graph_v1.json",
-            concept_library=self.concept_library,
+            concept_library=None,
         )
-        self.cost_router = LatencyReliabilityCostRouter()
         self.verified_programs_buffer: list[str] = []
         self.unresolved_failure_buffer: list[dict[str, Any]] = []
+
+    @property
+    def concept_library(self) -> Any:
+        if self._concept_library is None:
+            from canonical.swe_kernel.concept_library_v1 import CompoundingConceptLibrary
+
+            self._concept_library = CompoundingConceptLibrary(self._base_state_dir / "concept_library_v1.json")
+            self.organ_graph.concept_library = self._concept_library
+        return self._concept_library
+
+    @concept_library.setter
+    def concept_library(self, value: Any) -> None:
+        self._concept_library = value
+        if hasattr(self, "organ_graph"):
+            self.organ_graph.concept_library = value
+
+    @property
+    def self_architect(self) -> Any:
+        if self._self_architect is None:
+            from canonical.swe_kernel.recursive_self_architect_v1 import RecursiveSelfArchitect
+
+            self._self_architect = RecursiveSelfArchitect(
+                self._base_state_dir / "self_architect",
+                concept_library=self.concept_library,
+            )
+        return self._self_architect
+
+    @self_architect.setter
+    def self_architect(self, value: Any) -> None:
+        self._self_architect = value
+
+    @property
+    def cost_router(self) -> Any:
+        if self._cost_router is None:
+            from canonical.swe_kernel.transactional_parallel_execution_v1 import (
+                LatencyReliabilityCostRouter,
+            )
+
+            self._cost_router = LatencyReliabilityCostRouter()
+        return self._cost_router
+
+    @cost_router.setter
+    def cost_router(self, value: Any) -> None:
+        self._cost_router = value
 
     def evaluate_global_open_world_decision(
         self,
