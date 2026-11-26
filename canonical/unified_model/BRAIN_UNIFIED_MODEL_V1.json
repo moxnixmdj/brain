@@ -33056,7 +33056,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "eecdc0c025527ba4ff356a7ba3fc8c9ae0650b801be19f72919dffac55ac0877"
+  "value": "cd12dd36dafcd597293866892ffcb177169bca9a9fe78234f3c1096116cd2415"
  },
  "engines": [
   {
@@ -36486,7 +36486,7 @@
     "carrier_sha256": "e62612e14ad96c71838aeb37dae993a62b93e992bd103b2734771e08d10ada27",
     "entrypoint": "run",
     "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
-    "source_sha256": "1a2b5ecdc67349f4d7c94b93ea3166256ebabf4ef3e22d51d0d10f6e753c05fb"
+    "source_sha256": "a4b1ea0cb006eed14e202c3e2abe0242f62cf2768a06482de6e909feff6e4ffd"
    },
    "summary": "Algebraic DBSP bi-temporal Z-set memory + Kumiho AGM Supersedes/Depends_On transitive AnalyzeImpact + projectmem <10 us PreCommitFailureGate + SCoRE anytime-valid conformal e-value martingale risk controller.",
    "triggers": [
@@ -36522,7 +36522,7 @@
     "carrier_sha256": "e62612e14ad96c71838aeb37dae993a62b93e992bd103b2734771e08d10ada27",
     "entrypoint": "run",
     "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
-    "source_sha256": "1a2b5ecdc67349f4d7c94b93ea3166256ebabf4ef3e22d51d0d10f6e753c05fb"
+    "source_sha256": "a4b1ea0cb006eed14e202c3e2abe0242f62cf2768a06482de6e909feff6e4ffd"
    },
    "summary": "Sub-ms Error-Aware L# + Lambda*_M symbolic Mealy instant learner with binary-split numeric guards plus 3-channel Hybrid Computer Use (CLI/File > AX/CDP > Visual) with <5 us Petri guard, OSWorld-Human loop-churn breaker, and PASTE speculative macro commit.",
    "triggers": [
@@ -36559,7 +36559,7 @@
     "carrier_sha256": "e62612e14ad96c71838aeb37dae993a62b93e992bd103b2734771e08d10ada27",
     "entrypoint": "run",
     "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
-    "source_sha256": "1a2b5ecdc67349f4d7c94b93ea3166256ebabf4ef3e22d51d0d10f6e753c05fb"
+    "source_sha256": "a4b1ea0cb006eed14e202c3e2abe0242f62cf2768a06482de6e909feff6e4ffd"
    },
    "summary": "Futamura self-compiling 4-rung cascade (Rung 0 <100 us alpha-normalized AST rules -> Rung 1 byte-effect -> Rung 2 PEP-669/settrace Ochiai + byte-span AST splice + os.fork CoW + ddmin + mutation + SCoRE e-value -> optional Rung 3 proposer) compiling verified wins back to Rung 0 plus GrowLibm sleep compression.",
    "triggers": [
@@ -36596,7 +36596,7 @@
     "carrier_sha256": "e62612e14ad96c71838aeb37dae993a62b93e992bd103b2734771e08d10ada27",
     "entrypoint": "run",
     "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
-    "source_sha256": "1a2b5ecdc67349f4d7c94b93ea3166256ebabf4ef3e22d51d0d10f6e753c05fb"
+    "source_sha256": "a4b1ea0cb006eed14e202c3e2abe0242f62cf2768a06482de6e909feff6e4ffd"
    },
    "summary": "Real OS kernel-confined 3-channel computer-use executor uniting os_isolation_v1 (CapEff=0) + HybridComputerUsePetriSupervisor + Ring-0 byte_effect_oracle_v1 verification + atomic CoW workspace rollback + PreCommitFailureGate.",
    "triggers": [
@@ -36631,7 +36631,7 @@
     "carrier_sha256": "e62612e14ad96c71838aeb37dae993a62b93e992bd103b2734771e08d10ada27",
     "entrypoint": "run",
     "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
-    "source_sha256": "1a2b5ecdc67349f4d7c94b93ea3166256ebabf4ef3e22d51d0d10f6e753c05fb"
+    "source_sha256": "a4b1ea0cb006eed14e202c3e2abe0242f62cf2768a06482de6e909feff6e4ffd"
    },
    "summary": "Unified multi-file Python repository Futamura solver uniting Rung-0 compiled skills + stdlib_cow_test_runner_v1 os.fork CoW overlays + multi-file dynamic coverage + extended AST + 13-law residual wall closers + repo component Petri + Ring-0 ddmin/mutation/conformal gate + automatic Rung-0 compile-back.",
    "triggers": [
@@ -91058,7 +91058,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "1a2b5ecdc67349f4d7c94b93ea3166256ebabf4ef3e22d51d0d10f6e753c05fb",
+   "sha256": "a4b1ea0cb006eed14e202c3e2abe0242f62cf2768a06482de6e909feff6e4ffd",
    "summary": "Futamura \"Compile Away the Frontier\" Unified Leapfrog Kernel (`K3 = 0`).",
    "triggers": [
     "futamura",
@@ -163712,7 +163712,7 @@
   "included_source_count": 2462,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "9cd143ea54a60ef99e320af1fcc3de9d091ecb0a047816f2b2d83eb308474d48"
+  "source_tree_digest": "13058f831a6b32b2acf68c5fdde344c0bf1591261bc8a1e11fa37f9313104bb6"
  },
  "research_index": [
   {
@@ -370456,7 +370456,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
-   "sha256": "1a2b5ecdc67349f4d7c94b93ea3166256ebabf4ef3e22d51d0d10f6e753c05fb",
+   "sha256": "a4b1ea0cb006eed14e202c3e2abe0242f62cf2768a06482de6e909feff6e4ffd",
    "summary": "Futamura \"Compile Away the Frontier\" Unified Leapfrog Kernel (`K3 = 0`).",
    "symbol_count": 35,
    "symbols": [

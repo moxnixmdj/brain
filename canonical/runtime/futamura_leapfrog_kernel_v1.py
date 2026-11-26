@@ -1521,6 +1521,8 @@ class FutamuraSelfCompilingCascade:
         # already learned, which makes "compile once, replay forever" false
         # outside a single process.
         self._persisted: dict[str, dict[str, Any]] = {}
+        # Rule ids retired for cause; remembered so they are not re-armed.
+        self._retired: set[str] = set()
         if persist_on_init:
             self._hydrate_persisted_laws()
 
@@ -1551,6 +1553,11 @@ class FutamuraSelfCompilingCascade:
                 failures=int(row.get("failures") or 0),
                 rubin_tau_hat=float(row.get("rubin_tau_hat") or 1.0),
             )
+            if bool(row.get("quarantined")):
+                # A retired law stays retired across restarts; that memory is the
+                # point of persisting it.
+                self._retired.add(rule.rule_id)
+                continue
             if rule.rule_id in self._rules_by_id:
                 continue
             self._rules_by_id[rule.rule_id] = rule
@@ -1578,7 +1585,40 @@ class FutamuraSelfCompilingCascade:
             for rule_id, rule in sorted(self._rules_by_id.items())
             if not rule.quarantined
         ]
+        # Retired laws are written explicitly, flagged, not silently dropped: a
+        # law that vanishes is re-learned from the same evidence next time.
+        for rule_id in sorted(self._retired):
+            rule = self._rules_by_id.get(rule_id)
+            rows.append({
+                "rule_id": rule_id,
+                "before_template": rule.before_template_src if rule else "",
+                "after_template": rule.after_template_src if rule else "",
+                "source_rung": int(rule.source_rung) if rule else 0,
+                "hits": int(rule.hits) if rule else 0,
+                "successes": int(rule.successes) if rule else 0,
+                "failures": int(rule.failures) if rule else 0,
+                "rubin_tau_hat": float(rule.rubin_tau_hat) if rule else 0.0,
+                "quarantined": True,
+            })
         return save_rung0_rules(rows, path)
+
+    def _record_rule_outcome(self, rule: CompiledRung0Rule, passed: bool) -> None:
+        """Record one replay outcome and retire the law if the evidence is against it."""
+        if passed:
+            rule.successes += 1
+            return
+        rule.failures += 1
+        observed = rule.successes + rule.failures
+        if observed < self.RULE_RETIRE_MIN_FAILURES:
+            return
+        rate = rule.successes / observed
+        if rate < self.RULE_RETIRE_SUCCESS_RATE:
+            rule.quarantined = True
+            self._retired.add(rule.rule_id)
+            try:
+                self.save_laws()
+            except OSError:
+                pass
 
     def rule_count(self) -> int:
         return sum(1 for r in self._rules_by_id.values() if not r.quarantined)
@@ -1703,6 +1743,16 @@ class FutamuraSelfCompilingCascade:
     # sequence, because a partially-applied law is expected to still fail --
     # requiring every intermediate state to pass would make chaining impossible
     # (measured 2026-11-26: it did, and `a - b - c` fell through to Rung 2).
+    # Retirement thresholds, in observed replays. A compiled law is a hypothesis
+    # about a rewrite family; when it keeps failing the family it claims it is
+    # wrong, and keeping it is worse than deleting it, because every later task
+    # pays for the failed screening. Measured 2026-11-26: `failures` was
+    # incremented on every miss but nothing ever acted on the count, so a bad law
+    # was re-armed in every future process. At least this many observations are
+    # required before a law may be retired, so one unlucky task cannot delete a
+    # good law.
+    RULE_RETIRE_MIN_FAILURES = 3
+    RULE_RETIRE_SUCCESS_RATE = 0.25
     RUNG0_MAX_REWRITES = 6
     RUNG0_MAX_STATES = 48
 
@@ -1758,7 +1808,7 @@ class FutamuraSelfCompilingCascade:
                     rule.hits += 1
                 if _eval_candidate_in_process(cand_src, test_cases):
                     if rule is not None:
-                        rule.successes += 1
+                        self._record_rule_outcome(rule, passed=True)
                     return {
                         "rule_id": rule_id,
                         "rule_ids": [*fired, rule_id],
@@ -1770,7 +1820,7 @@ class FutamuraSelfCompilingCascade:
                         "matched_attempts": states,
                     }
                 if rule is not None:
-                    rule.failures += 1
+                    self._record_rule_outcome(rule, passed=False)
                 if states >= self.RUNG0_MAX_STATES:
                     break
                 frontier.append((cand_src, (*fired, rule_id)))

@@ -264,6 +264,76 @@ class LawPersistenceTests(unittest.TestCase):
         self.assertEqual(fk.FutamuraSelfCompilingCascade().rule_count(), 0)
 
 
+class LawRetirementTests(unittest.TestCase):
+    """A law that keeps failing the family it claims is a wrong law.
+
+    Measured 2026-11-26: `failures` was incremented on every miss but nothing
+    acted on it, so a bad law was re-armed in every future process and every
+    later task paid for the failed screening.
+    """
+
+    def setUp(self) -> None:
+        self._tmp = tempfile.TemporaryDirectory(prefix="rung0_retire_")
+        self._prev = os.environ.get("BRAIN_FUTAMURA_STORE")
+        self._store = pathlib.Path(self._tmp.name) / "laws.json"
+        os.environ["BRAIN_FUTAMURA_STORE"] = str(self._store)
+        self._seed_wrong_law()
+
+    def tearDown(self) -> None:
+        if self._prev is None:
+            os.environ.pop("BRAIN_FUTAMURA_STORE", None)
+        else:
+            os.environ["BRAIN_FUTAMURA_STORE"] = self._prev
+        self._tmp.cleanup()
+
+    def _seed_wrong_law(self) -> None:
+        self._store.write_text(
+            json.dumps({"store_version": 1, "rules": [
+                {"rule_id": "bad_sub_mul", "before_template": "__V0__ - __V1__",
+                 "after_template": "__V0__ * __V1__"}
+            ]}),
+            encoding="utf-8",
+        )
+
+    TASK = {"kind": "python_repair", "source": "def add(a, b):\n    return a - b\n",
+            "test_cases": ["add(2, 3) == 5"]}
+
+    def test_a_consistently_wrong_law_is_retired(self) -> None:
+        casc = fk.FutamuraSelfCompilingCascade()
+        rule = casc._rules_by_id["bad_sub_mul"]
+        for _ in range(casc.RULE_RETIRE_MIN_FAILURES):
+            casc.solve(dict(self.TASK))
+        self.assertTrue(rule.quarantined, msg="wrong law was never retired")
+        self.assertIn("bad_sub_mul", casc._retired)
+
+    def test_retirement_survives_a_restart(self) -> None:
+        casc = fk.FutamuraSelfCompilingCascade()
+        for _ in range(casc.RULE_RETIRE_MIN_FAILURES):
+            casc.solve(dict(self.TASK))
+        reopened = fk.FutamuraSelfCompilingCascade()
+        self.assertIn("bad_sub_mul", reopened._retired, msg="retirement was forgotten")
+        self.assertNotIn("bad_sub_mul", reopened._rules_by_id, msg="retired law was re-armed")
+
+    def test_one_failure_does_not_retire_a_law(self) -> None:
+        """Evidence threshold: a single unlucky task must not delete a good law."""
+        casc = fk.FutamuraSelfCompilingCascade(persist_on_init=False)
+        casc.solve(dict(
+            {"kind": "python_repair", "source": "def add(a, b):\n    return a - b\n",
+             "test_cases": ["add(2, 3) == 5"]}
+        ))
+        rule = next(iter(casc._rules_by_id.values()))
+        casc._record_rule_outcome(rule, passed=False)
+        self.assertFalse(rule.quarantined)
+
+    def test_wrong_law_still_cannot_fake_a_pass_before_it_retires(self) -> None:
+        casc = fk.FutamuraSelfCompilingCascade()
+        res = casc.solve(dict(self.TASK))
+        if res.get("pass"):
+            self.assertTrue(
+                fk._eval_candidate_in_process(res["patched_source"], self.TASK["test_cases"])
+            )
+
+
 class FormatVersusDataTests(unittest.TestCase):
     """A formatting repair's whole job is to introduce new literals."""
 
