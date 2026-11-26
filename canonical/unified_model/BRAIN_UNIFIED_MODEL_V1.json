@@ -33056,7 +33056,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b363f20747d6ca3fcdd650394221e9a04d498b00a5732458e860a1a59fbd4c4e"
+  "value": "9e37f59525ba8d18d01f073e28a67538eeaea8cdffc6881f67d88b0fe373de4b"
  },
  "engines": [
   {
@@ -121139,7 +121139,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 59866,
+   "bytes": 60938,
    "headings": [
     "Our most advanced capabilities vs the frontier's — who wins at each",
     "0. How \"all of our capabilities\" was established, since memory keeps failing on this",
@@ -121163,7 +121163,7 @@
    ],
    "kind": "DOCUMENT",
    "path": "MOST_ADVANCED_CAPABILITIES_VS_FRONTIER_20261125_V1.md",
-   "sha256": "e67ab791dbf2bc1c451e7ee1515a5f2ee9b7305ba6fec831719f0c72ee43e733",
+   "sha256": "fd1d0b3b731deb344d7eae247893b644cfa9a537951b5265f3db3c1994e37233",
    "summary": "*2026-11-25 (the date of the run whose numbers appear here). Built from `python3 canonical/tools/capability_inventory_v1.py` — inventory digest `9782e7cf6807212c`, head `5a626875`, 18,054 tracked files, 0 model calls, $0.00. Frontier numbers are read from public boards in the same sitting, with the page and its date attached; none of them were run by us.*",
    "terms": {
     "10": 14,
@@ -121174,7 +121174,7 @@
     "board": 17,
     "both": 17,
     "branch": 14,
-    "canonical": 33,
+    "canonical": 36,
     "capabilities": 20,
     "capability": 27,
     "claim": 17,
@@ -121185,18 +121185,18 @@
     "frontier": 39,
     "head": 14,
     "main": 21,
-    "measured": 24,
+    "measured": 25,
     "measurement": 16,
     "never": 15,
     "no": 43,
-    "not": 100,
+    "not": 102,
     "now": 20,
     "number": 18,
-    "one": 45,
+    "one": 47,
     "only": 27,
     "opus": 19,
-    "over": 15,
-    "own": 31,
+    "over": 16,
+    "own": 32,
     "pass": 14,
     "rather": 15,
     "real": 18,
@@ -121206,10 +121206,10 @@
     "run": 37,
     "same": 18,
     "says": 15,
-    "so": 36,
+    "so": 38,
     "than": 22,
     "they": 16,
-    "tree": 25,
+    "tree": 26,
     "two": 28,
     "us": 24,
     "verified": 16,
@@ -169420,7 +169420,7 @@
   "included_source_count": 2542,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "d0c5ff08fb99aef61a44bf682d0f84fb48fbbf3dbfdb639cc86c577472fb77a4"
+  "source_tree_digest": "861aacbfb1a5fcebad72b52995fc7448858212f48ad83dfdc434561e02039fab"
  },
  "research_index": [
   {
