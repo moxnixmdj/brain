@@ -31371,7 +31371,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ac70342a69f599362396b22ef69a014dd25da2d0c2a1c216627d85712c78f624"
+  "value": "17c1d5a59f115c253371d7b72e016a1bdac1723b22944db4c7d48fb8dd72e4c5"
  },
  "engines": [
   {
@@ -50192,7 +50192,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/tools/auditability_report_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "3d335cddb2666f80a5455489bfa5b45dd67de23d3f17722018e352d1511765fa",
+   "sha256": "c6c9986781e25403c734a38cbdd1b1ce9c77c5e4a72f9497781204eefd25e4dc",
    "summary": "How much of what this tree calls verified can still be shown true?",
    "triggers": [
     "auditability",
@@ -116708,7 +116708,7 @@
   "included_source_count": 2165,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "f3cbf87a8eb62912f37d048a23fe2cc296b8c2201f1fadfb3ba59cb56e538e8c"
+  "source_tree_digest": "7675573579083f0659b9347050d0f71a8f2637e22e265903ba4c28f93b0764d2"
  },
  "research_index": [
   {
@@ -187032,7 +187032,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/AUDITABILITY_DECLARATION_FLOOR_20261112_V1.json",
    "schema": "AUDITABILITY_DECLARATION_FLOOR_V1",
-   "sha256": "85a3caf251c5463158c20a42047f6e3a21039caf89aa763e379683f563b3de3d",
+   "sha256": "8dfa356b119d6460b1f32a9627054c2ce937b4b780c670883d2d49266c66332c",
    "status": "",
    "terms": {
     "20261112": 1,

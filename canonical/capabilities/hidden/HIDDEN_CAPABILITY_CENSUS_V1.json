@@ -70,7 +70,7 @@
   "unparseable": 6
  },
  "declared_ids_seen": 2479,
- "digest": "a3519a2b5bcb1391946f0fb5862b8cc2045777005c58370d9693324df0efaa5a",
+ "digest": "7a137f6e82fe6ba4818ee120584bd453e65b55cc2431a5e4be69ac8d9634c622",
  "hidden": [
   {
    "bytes": 31118,
@@ -1253,7 +1253,7 @@
    ]
   },
   {
-   "bytes": 52127,
+   "bytes": 52110,
    "declared_capability_id": null,
    "declared_inputs": [],
    "declared_result_fields": [],
@@ -1279,7 +1279,7 @@
    ],
    "kind": "cli",
    "path": "canonical/tools/auditability_report_v1.py",
-   "sha256": "3d335cddb2666f80a5455489bfa5b45dd67de23d3f17722018e352d1511765fa",
+   "sha256": "c6c9986781e25403c734a38cbdd1b1ce9c77c5e4a72f9497781204eefd25e4dc",
    "signals": [
     "evidence",
     "json_stdout",
