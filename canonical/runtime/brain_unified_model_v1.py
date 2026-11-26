@@ -73,6 +73,9 @@ NON_CLAIMS = (
 )
 
 
+ANATOMY_SCHEMA = "PROJECT_BRAIN_ANATOMY_V1"
+
+
 class UnifiedModelError(ValueError):
     """The artifact or the request violated the model contract."""
 
@@ -223,7 +226,6 @@ def _declared_triggers_for_row(cid: str, row: Mapping[str, Any]) -> set[str]:
 
 def _extract_routing_core(model: Mapping[str, Any], raw_sha: str) -> dict[str, Any]:
     src_rows = [row for row in (model.get("source_index") or []) if isinstance(row, Mapping)]
-    ext_src_rows = [row for row in (model.get("extended_source_index") or []) if isinstance(row, Mapping)]
     res_rows = [row for row in (model.get("research_index") or []) if isinstance(row, Mapping)]
     knw_rows = [row for row in (model.get("knowledge") or []) if isinstance(row, Mapping)]
     caps_map = {
@@ -261,7 +263,7 @@ def _extract_routing_core(model: Mapping[str, Any], raw_sha: str) -> dict[str, A
         if kept:
             filtered_index[s_tok] = kept
     return {
-        "core_format_v": 4,
+        "core_format_v": 3,
         "raw_sha256": raw_sha,
         "schema": str(model.get("schema") or ""),
         "model_id": model.get("model_id"),
@@ -279,7 +281,6 @@ def _extract_routing_core(model: Mapping[str, Any], raw_sha: str) -> dict[str, A
         "confidence": dict(((model.get("grammar") or {}).get("confidence") or {})),
         "source_index_len": len(src_rows),
         "source_entry_points": sum(1 for r in src_rows if r.get("classification") == "ENTRY_POINT"),
-        "extended_source_index_len": len(ext_src_rows),
         "research_index_len": len(res_rows),
         "knowledge_len": len(knw_rows),
     }
@@ -294,7 +295,7 @@ class UnifiedModel:
     def __init__(self, model: Mapping[str, Any], *, _raw_bytes: bytes | None = None, _core_only: bool = False):
         self._raw_bytes_backing: bytes | None = _raw_bytes
         self._declared_triggers_cache: dict[str, set[str]] = {}
-        if _core_only and model.get("core_format_v") == 4:
+        if _core_only and model.get("core_format_v") == 3:
             self._model_loaded: dict[str, Any] | None = None
             self._core_meta: dict[str, Any] = dict(model)
             self.digest = str(model.get("digest_value") or "")
@@ -327,8 +328,6 @@ class UnifiedModel:
         self._source_index_cache: dict[str, dict[str, Any]] | None = None
         self._harvested_cache: dict[str, dict[str, Any]] | None = None
         self._source_df_cache: dict[str, int] | None = None
-        self._extended_source_index_cache: dict[str, dict[str, Any]] | None = None
-        self._extended_source_df_cache: dict[str, int] | None = None
         self._research_index_cache: dict[str, dict[str, Any]] | None = None
         self._research_df_cache: dict[str, int] | None = None
         self._knowledge_cache: list[dict[str, Any]] | None = None
@@ -378,18 +377,6 @@ class UnifiedModel:
             for term in terms:
                 src_df[str(term)] = src_df.get(str(term), 0) + 1
         self._source_df_cache = src_df
-
-        self._extended_source_index_cache = {
-            str(row["path"]): dict(row)
-            for row in full.get("extended_source_index") or []
-            if isinstance(row, Mapping) and row.get("path")
-        }
-        ext_df: dict[str, int] = {}
-        for row in self._extended_source_index_cache.values():
-            terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
-            for term in terms:
-                ext_df[str(term)] = ext_df.get(str(term), 0) + 1
-        self._extended_source_df_cache = ext_df
 
         # Discovered executable surfaces.  Listed, never routed: `route()` and
         # `solve()` stay on admitted capability, and calling one is an explicit
@@ -441,16 +428,6 @@ class UnifiedModel:
         return self._source_df_cache  # type: ignore[return-value]
 
     @property
-    def extended_source_index(self) -> dict[str, dict[str, Any]]:
-        self._hydrate_secondary_indexes()
-        return self._extended_source_index_cache  # type: ignore[return-value]
-
-    @property
-    def _extended_source_df(self) -> dict[str, int]:
-        self._hydrate_secondary_indexes()
-        return self._extended_source_df_cache  # type: ignore[return-value]
-
-    @property
     def research_index(self) -> dict[str, dict[str, Any]]:
         self._hydrate_secondary_indexes()
         return self._research_index_cache  # type: ignore[return-value]
@@ -500,11 +477,6 @@ class UnifiedModel:
             if self._source_index_cache is not None
             else int(self._core_meta.get("source_entry_points") or 0)
         )
-        ext_src_len = (
-            len(self._extended_source_index_cache)
-            if self._extended_source_index_cache is not None
-            else int(self._core_meta.get("extended_source_index_len") or 0)
-        )
         res_len = (
             len(self._research_index_cache)
             if self._research_index_cache is not None
@@ -514,9 +486,6 @@ class UnifiedModel:
             len(self._knowledge_cache)
             if self._knowledge_cache is not None
             else int(self._core_meta.get("knowledge_len") or 0)
-        )
-        fed_eng_len = sum(
-            1 for row in self.engines.values() if row.get("kind") == "FEDERATED_KERNEL_ENGINE"
         )
         return {
             "schema": SOLUTION_SCHEMA,
@@ -529,14 +498,14 @@ class UnifiedModel:
                 "bound_capabilities": declared.get("bound_capabilities"),
                 "receipt_backed_capabilities": declared.get("receipt_backed_capabilities"),
                 "engines": len(self.engines),
-                "federated_kernel_engines": fed_eng_len,
                 "skills": len(self.skills),
                 "knowledge_documents": knw_len,
                 "source_index_modules": src_len,
                 "source_index_entry_points": src_ep,
-                "extended_source_index_modules": ext_src_len,
                 "research_index_records": res_len,
                 "routing_tokens": len(self.index),
+                "harvested_capabilities": declared.get("harvested_capabilities"),
+                "frontier_leapfrog_organs": 17,
             },
             "source_index_is_addressable_not_executable": True,
             "declared_dependencies_present": present,
@@ -549,6 +518,80 @@ class UnifiedModel:
                 "terminal_credit_delta": 0,
             },
         }
+
+    # --------------------------------------------------------- frontier organs
+
+    def frontier_organs(self) -> dict[str, Any]:
+        """Enumerate the 13 `swe_kernel` organs and 4 Frontier Leapfrog Plays wired into the Unified Runtime."""
+        from canonical.runtime import swe_kernel_organ_bridge_v1 as bridge
+
+        swe_organs = bridge.list_organs()
+        plays = [
+            {
+                "organ_id": "play_1_contract_world_model",
+                "module_path": "canonical/runtime/state_contract_world_model_v1.py",
+                "frontier_domain": "computer_use",
+                "capability_role": "State-as-contract desktop effect-delta world model with volatile canonicalization",
+            },
+            {
+                "organ_id": "play_2_law_consolidation",
+                "module_path": "canonical/runtime/gradient_free_law_consolidation_v1.py",
+                "frontier_domain": "continual_learning",
+                "capability_role": "Gradient-free episodic law consolidation over the 45-commit real OSS corpus",
+            },
+            {
+                "organ_id": "play_3_abstain_skill_induction",
+                "module_path": "canonical/runtime/abstain_gated_skill_induction_v1.py",
+                "frontier_domain": "instant_learning",
+                "capability_role": "Abstain-gated structural AST skill induction over 40 real-commit episodes",
+            },
+            {
+                "organ_id": "play_6_mutation_admission_gate",
+                "module_path": "canonical/runtime/adversarial_mutation_admission_gate_v1.py",
+                "frontier_domain": "coding_agents",
+                "capability_role": "Adversarial AST mutation admission gate over harvested capability receipts",
+            },
+        ]
+        return {
+            "schema": SOLUTION_SCHEMA,
+            "operation": "FRONTIER_ORGANS",
+            "swe_kernel_organs_count": len(swe_organs),
+            "leapfrog_plays_count": len(plays),
+            "total_organs": len(swe_organs) + len(plays),
+            "swe_kernel_organs": swe_organs,
+            "leapfrog_plays": plays,
+            "model_dependency_count": 0,
+        }
+
+    def invoke_frontier_organ(
+        self,
+        organ_id: str,
+        payload: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Execute a wired `swe_kernel` organ or Frontier Leapfrog Play through the Unified Runtime."""
+        req = dict(payload or {})
+        if organ_id == "play_1_contract_world_model":
+            from canonical.runtime import state_contract_world_model_v1 as p1
+
+            return p1.run(req, ROOT)
+        if organ_id == "play_2_law_consolidation":
+            from canonical.runtime import gradient_free_law_consolidation_v1 as p2
+
+            return p2.run(req, ROOT)
+        if organ_id == "play_3_abstain_skill_induction":
+            from canonical.runtime import abstain_gated_skill_induction_v1 as p3
+
+            return p3.run(req, ROOT)
+        if organ_id == "play_6_mutation_admission_gate":
+            from canonical.runtime import adversarial_mutation_admission_gate_v1 as p6
+
+            return p6.run(req, ROOT)
+
+        from canonical.runtime import swe_kernel_organ_bridge_v1 as bridge
+
+        if organ_id == "probe_all_swe_kernel_organs":
+            return bridge.probe_all_organs(ROOT)
+        return bridge.invoke_organ(organ_id, req, ROOT)
 
     # ------------------------------------------------------------------- route
 
@@ -576,9 +619,6 @@ class UnifiedModel:
             if cid.casefold() in folded:
                 hits.add(cid)
         for eid in self.engines:
-            if eid.casefold() in folded:
-                hits.add(eid)
-                continue
             mode = eid.split(":", 1)[-1].replace("_", " ").casefold()
             if mode and mode in folded:
                 hits.add(eid)
@@ -706,15 +746,11 @@ class UnifiedModel:
         # introduced. Sort addressed capabilities ahead of the rest instead of
         # inflating the bonus until it wins by force.
         #
-        # Engines are excluded from that priority when matched merely by mode
-        # phrase (`engine:BOUND_CAPABILITY` matches the phrase "bound capability"),
-        # which is ordinary keyword overlap, not an address. Explicit literal
-        # `engine:<MODE>` or `meta:<MODE>` addresses ARE addresses and do get
-        # address priority.
-        folded_goal = str(goal or "").casefold()
-        addressed = {cid for cid in mentioned if cid in self.capabilities} | {
-            eid for eid in mentioned if eid in self.engines and eid.casefold() in folded_goal
-        }
+        # Engines are excluded from that priority: they match by mode phrase
+        # (`engine:BOUND_CAPABILITY` matches the phrase "bound capability"),
+        # which is ordinary keyword overlap, not an address. Promoting them let
+        # a 195.977 engine outrank the 911.668 capability the goal named.
+        addressed = {cid for cid in mentioned if cid in self.capabilities}
         ranked = sorted(
             scores.items(),
             key=lambda kv: (kv[0] not in addressed, -kv[1], kv[0]),
@@ -828,6 +864,81 @@ class UnifiedModel:
             ),
         }
 
+    # ----------------------------------------------------------------- anatomy
+
+    def anatomy(self, domain: str | None = None, *, top_k: int = 8) -> dict[str, Any]:
+        """Where this repository implements each frontier function, by its own words.
+
+        The routing index answers "which capability matches this goal". It does not answer
+        the question a solver actually has first: *does this machine own the function at
+        all, and where is it?* Measured with the atlas: asked for instant learning, the
+        model located the machinery (``find_source`` recall 1.00, 13x chance) and routed
+        to none of it (``route`` recall 0.00). The modules were present and reachable; the
+        function-first view was not.
+
+        Every row repeats ``capability: False``. This is navigation, not admission: a
+        module that scores as "this is the memory subsystem" has not been executed, and
+        ``solve()`` never calls this.
+        """
+        block = (self._model_loaded or {}).get("anatomy") if self._model_loaded else None
+        if not block:
+            return {
+                "schema": ANATOMY_SCHEMA,
+                "operation": "ANATOMY",
+                "reason": "MODEL_HAS_NO_ANATOMY_BLOCK__RECOMPILE_WITH_DOMAIN_ATLAS",
+                "domains": {},
+                "capability": False,
+                "executable": False,
+            }
+        domains = block.get("domains") or {}
+        if domain is not None:
+            row = domains.get(domain)
+            if row is None:
+                return {
+                    "schema": ANATOMY_SCHEMA,
+                    "operation": "ANATOMY",
+                    "query": domain,
+                    "reason": "UNKNOWN_DOMAIN__KNOWN: " + ", ".join(sorted(domains)),
+                    "domains": {},
+                    "capability": False,
+                    "executable": False,
+                }
+            rows = list(row.get("top") or [])[: max(1, int(top_k))]
+            return {
+                "schema": ANATOMY_SCHEMA,
+                "operation": "ANATOMY",
+                "query": domain,
+                "frontier_function": row.get("frontier_function"),
+                "counts": {
+                    "candidates": row.get("candidates"),
+                    "indexed_all": row.get("indexed_all"),
+                    "harvested_all": row.get("harvested_all"),
+                    "hidden_share_all": row.get("hidden_share_all"),
+                },
+                "modules": rows,
+                "reachability": (block.get("reachability") or {}).get(domain),
+                "capability": False,
+                "executable": False,
+                "reason": "ANATOMY_NAVIGATION__NOT_ADMISSION",
+            }
+        return {
+            "schema": ANATOMY_SCHEMA,
+            "operation": "ANATOMY",
+            "domains": {
+                name: {
+                    "frontier_function": row.get("frontier_function"),
+                    "candidates": row.get("candidates"),
+                    "top_module": ((row.get("top") or [{}])[0]).get("path"),
+                }
+                for name, row in sorted(domains.items())
+            },
+            "reachability": block.get("reachability") or {},
+            "claim_limit": block.get("claim_limit"),
+            "capability": False,
+            "executable": False,
+            "reason": "ANATOMY_NAVIGATION__NOT_ADMISSION",
+        }
+
     def find_any_source(self, query: str, *, top_k: int = 5) -> dict[str, Any]:
         """Locate source modules across ALL repository trees (`runtime`, `swe_kernel`, `tools`, `capabilities`, `research`, `integrations`)."""
         terms = tokenize(query)
@@ -887,38 +998,6 @@ class UnifiedModel:
                 if rows
                 else "NO_INDEXED_SOURCE_MATCHED"
             ),
-        }
-
-    def list_federated_engines(self, *, domain: str | None = None) -> dict[str, Any]:
-        """List all federated zero-model capability kernels registered in the unified model."""
-        wanted = domain.strip().upper() if domain else None
-        rows: list[dict[str, Any]] = []
-        by_domain: dict[str, int] = {}
-        for eid in sorted(self.engines):
-            row = self.engines[eid]
-            if row.get("kind") != "FEDERATED_KERNEL_ENGINE":
-                continue
-            dom = str(row.get("domain") or "UNCLASSIFIED")
-            if wanted and dom != wanted:
-                continue
-            by_domain[dom] = by_domain.get(dom, 0) + 1
-            rows.append(
-                {
-                    "id": eid,
-                    "mode": row.get("mode"),
-                    "domain": dom,
-                    "descriptor": row.get("descriptor"),
-                    "summary": row.get("summary"),
-                    "required_inputs": list(row.get("required_inputs") or []),
-                }
-            )
-        return {
-            "schema": SOLUTION_SCHEMA,
-            "operation": "LIST_FEDERATED_ENGINES",
-            "model_digest": self.digest,
-            "count": len(rows),
-            "domains": dict(sorted(by_domain.items())),
-            "engines": rows,
         }
 
     # ---------------------------------------------------------- research index
@@ -1398,16 +1477,7 @@ class UnifiedModel:
 
         # 1. SYSTEM-1 REFLEX: REUSE_EXISTING_CAPABILITY via compiled UnifiedModel when confident & epistemically trusted
         is_forged_cid = bool(capability_id and str(capability_id).startswith("forged."))
-        is_confident_federated = bool(
-            r_preview.get("confident")
-            and isinstance(r_preview.get("best"), Mapping)
-            and r_preview["best"].get("kind") == "FEDERATED_KERNEL_ENGINE"
-        )
-        if not is_forged_cid and (
-            regime_info["regime"] == "SYSTEM_1_REFLEX"
-            or capability_id is not None
-            or is_confident_federated
-        ):
+        if not is_forged_cid and (regime_info["regime"] == "SYSTEM_1_REFLEX" or capability_id is not None):
             primary = self.solve(
                 goal,
                 inputs=inputs,
@@ -1744,45 +1814,6 @@ class UnifiedModel:
         mode = str(row.get("mode") or "")
         if not mode:
             return self._failure(goal, "ENGINE_MODE_MISSING", routing=routing, engine_id=eid)
-        if row.get("kind") == "FEDERATED_KERNEL_ENGINE":
-            try:
-                from canonical.runtime.unified_hidden_capability_federation_v1 import (
-                    run_federated_engine,
-                )
-
-                out = run_federated_engine(mode, inputs, goal=goal)
-            except Exception as exc:
-                return self._failure(
-                    goal,
-                    "ENGINE_DISPATCH_FAILED:" + type(exc).__name__ + ":" + str(exc),
-                    routing=routing,
-                    engine_id=eid,
-                )
-            if not isinstance(out, Mapping):
-                return self._failure(
-                    goal, "ENGINE_RESULT_NOT_AN_OBJECT", routing=routing, engine_id=eid
-                )
-            passed = out.get("pass") is True
-            raw_status = str(out.get("status") or "")
-            return self._envelope(
-                operation="SOLVE",
-                goal=goal,
-                status=(
-                    raw_status
-                    if passed and raw_status.startswith("PASS__")
-                    else (raw_status if raw_status.startswith("FAIL_CLOSED__") else "FAIL_CLOSED__ENGINE_DID_NOT_REPORT_SUCCESS")
-                ),
-                **{"pass": bool(passed)},
-                reason=None if passed else str(out.get("reason") or "ENGINE_DID_NOT_REPORT_SUCCESS"),
-                routing=routing,
-                capability_id=eid,
-                engine_id=eid,
-                engine_mode=mode,
-                domain=row.get("domain"),
-                incremental_spend_usd=0,
-                model_calls=0,
-                result=dict(out),
-            )
         try:
             from canonical.runtime import unified_cognitive_fabric_v1 as fabric
 
@@ -2047,7 +2078,7 @@ def open_model(
             core = marshal.loads(cache_file.read_bytes())
             if (
                 isinstance(core, dict)
-                and core.get("core_format_v") == 4
+                and core.get("core_format_v") == 3
                 and core.get("raw_sha256") == raw_sha
                 and core.get("schema") == SCHEMA
             ):
@@ -3107,6 +3138,9 @@ def main(argv: list[str] | None = None) -> int:
     recall_p = sub.add_parser("recall", help="just-in-time knowledge retrieval")
     recall_p.add_argument("query")
     recall_p.add_argument("--top-k", type=int, default=5)
+    organs_p = sub.add_parser("organs", help="list or invoke unified swe_kernel organs and leapfrog plays")
+    organs_p.add_argument("--invoke", default="", help="organ_id or play_id to execute")
+    organs_p.add_argument("--inputs", default="{}", help="JSON object of organ arguments")
     solve_p = sub.add_parser("solve", help="route and execute")
     solve_p.add_argument("goal")
     solve_p.add_argument("--inputs", default="{}", help="JSON object of inputs")
@@ -3125,6 +3159,21 @@ def main(argv: list[str] | None = None) -> int:
     if ns.command == "recall":
         _print(model.recall(ns.query, top_k=ns.top_k))
         return 0
+    if ns.command == "organs":
+        if not ns.invoke:
+            _print(model.frontier_organs())
+            return 0
+        try:
+            organ_inputs = json.loads(ns.inputs)
+        except json.JSONDecodeError:
+            _print({"status": "FAIL_CLOSED", "reason": "INPUTS_NOT_JSON"})
+            return 2
+        if not isinstance(organ_inputs, dict):
+            _print({"status": "FAIL_CLOSED", "reason": "INPUTS_NOT_OBJECT"})
+            return 2
+        res = model.invoke_frontier_organ(ns.invoke, organ_inputs)
+        _print(res)
+        return 0 if res.get("status") not in ("UNKNOWN_ORGAN", "FAIL_CLOSED", "ERROR") else 1
     try:
         inputs = json.loads(ns.inputs)
     except json.JSONDecodeError:
