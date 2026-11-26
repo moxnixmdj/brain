@@ -1,0 +1,343 @@
+{
+ "controls_pass": true,
+ "date_utc": "2026-11-25",
+ "fixed_5000_over_10": 1.6,
+ "flat_claim_holds": true,
+ "kill_criterion": "if bucketed_5000_over_10 >= 2.0 the flat-lookup claim is dead",
+ "measures": "INDEX_LOOKUP_ONLY__NOT_SOLVER_QUALITY",
+ "model_calls": 0,
+ "ratios": {
+  "bucketed_1000_over_10": 0.99,
+  "bucketed_5000_over_10": 1.07,
+  "linear_5000_over_10": 259.59
+ },
+ "rows": [
+  {
+   "bucket_occupancy": 1.0,
+   "bucketed": {
+    "comparisons_per_query": 5.0,
+    "hits": 60,
+    "median_ms": 0.000581,
+    "p95_ms": 0.000869,
+    "queries": 60
+   },
+   "buckets": 1,
+   "key_mode": "scaled",
+   "law_count": 1,
+   "linear": {
+    "comparisons_per_query": 5.0,
+    "hits": 60,
+    "median_ms": 0.000523,
+    "p95_ms": 0.000641,
+    "queries": 60
+   },
+   "removal_control": {
+    "control_ok": true,
+    "law": "law_00000",
+    "law_present_after": false,
+    "law_present_before": true
+   },
+   "speedup": 0.9
+  },
+  {
+   "bucket_occupancy": 1.0,
+   "bucketed": {
+    "comparisons_per_query": 5.0,
+    "hits": 60,
+    "median_ms": 0.000578,
+    "p95_ms": 0.00089,
+    "queries": 60
+   },
+   "buckets": 10,
+   "key_mode": "scaled",
+   "law_count": 10,
+   "linear": {
+    "comparisons_per_query": 50.0,
+    "hits": 60,
+    "median_ms": 0.000867,
+    "p95_ms": 0.00104,
+    "queries": 60
+   },
+   "removal_control": {
+    "control_ok": true,
+    "law": "law_00009",
+    "law_present_after": false,
+    "law_present_before": true
+   },
+   "speedup": 1.5
+  },
+  {
+   "bucket_occupancy": 1.0,
+   "bucketed": {
+    "comparisons_per_query": 5.0,
+    "hits": 60,
+    "median_ms": 0.000562,
+    "p95_ms": 0.001052,
+    "queries": 60
+   },
+   "buckets": 100,
+   "key_mode": "scaled",
+   "law_count": 100,
+   "linear": {
+    "comparisons_per_query": 500.0,
+    "hits": 60,
+    "median_ms": 0.004285,
+    "p95_ms": 0.004739,
+    "queries": 60
+   },
+   "removal_control": {
+    "control_ok": true,
+    "law": "law_00099",
+    "law_present_after": false,
+    "law_present_before": true
+   },
+   "speedup": 7.62
+  },
+  {
+   "bucket_occupancy": 1.0,
+   "bucketed": {
+    "comparisons_per_query": 5.0,
+    "hits": 60,
+    "median_ms": 0.000525,
+    "p95_ms": 0.00062,
+    "queries": 60
+   },
+   "buckets": 500,
+   "key_mode": "scaled",
+   "law_count": 500,
+   "linear": {
+    "comparisons_per_query": 2500.0,
+    "hits": 60,
+    "median_ms": 0.020481,
+    "p95_ms": 0.029757,
+    "queries": 60
+   },
+   "removal_control": {
+    "control_ok": true,
+    "law": "law_00499",
+    "law_present_after": false,
+    "law_present_before": true
+   },
+   "speedup": 39.01
+  },
+  {
+   "bucket_occupancy": 1.0,
+   "bucketed": {
+    "comparisons_per_query": 5.0,
+    "hits": 60,
+    "median_ms": 0.000571,
+    "p95_ms": 0.000704,
+    "queries": 60
+   },
+   "buckets": 1000,
+   "key_mode": "scaled",
+   "law_count": 1000,
+   "linear": {
+    "comparisons_per_query": 5000.0,
+    "hits": 60,
+    "median_ms": 0.040788,
+    "p95_ms": 0.052241,
+    "queries": 60
+   },
+   "removal_control": {
+    "control_ok": true,
+    "law": "law_00999",
+    "law_present_after": false,
+    "law_present_before": true
+   },
+   "speedup": 71.43
+  },
+  {
+   "bucket_occupancy": 1.0,
+   "bucketed": {
+    "comparisons_per_query": 5.0,
+    "hits": 60,
+    "median_ms": 0.000619,
+    "p95_ms": 0.000785,
+    "queries": 60
+   },
+   "buckets": 5000,
+   "key_mode": "scaled",
+   "law_count": 5000,
+   "linear": {
+    "comparisons_per_query": 25000.0,
+    "hits": 60,
+    "median_ms": 0.225065,
+    "p95_ms": 0.278434,
+    "queries": 60
+   },
+   "removal_control": {
+    "control_ok": true,
+    "law": "law_04999",
+    "law_present_after": false,
+    "law_present_before": true
+   },
+   "speedup": 363.59
+  }
+ ],
+ "rows_fixed_key_space": [
+  {
+   "bucket_occupancy": 1.0,
+   "bucketed": {
+    "comparisons_per_query": 5.0,
+    "hits": 60,
+    "median_ms": 0.000525,
+    "p95_ms": 0.000689,
+    "queries": 60
+   },
+   "buckets": 1,
+   "key_mode": "fixed",
+   "law_count": 1,
+   "linear": {
+    "comparisons_per_query": 5.0,
+    "hits": 60,
+    "median_ms": 0.000493,
+    "p95_ms": 0.000708,
+    "queries": 60
+   },
+   "removal_control": {
+    "control_ok": true,
+    "law": "law_00000",
+    "law_present_after": false,
+    "law_present_before": true
+   },
+   "speedup": 0.94
+  },
+  {
+   "bucket_occupancy": 1.0,
+   "bucketed": {
+    "comparisons_per_query": 5.0,
+    "hits": 60,
+    "median_ms": 0.000528,
+    "p95_ms": 0.000629,
+    "queries": 60
+   },
+   "buckets": 10,
+   "key_mode": "fixed",
+   "law_count": 10,
+   "linear": {
+    "comparisons_per_query": 50.0,
+    "hits": 60,
+    "median_ms": 0.000818,
+    "p95_ms": 0.000905,
+    "queries": 60
+   },
+   "removal_control": {
+    "control_ok": true,
+    "law": "law_00009",
+    "law_present_after": false,
+    "law_present_before": true
+   },
+   "speedup": 1.55
+  },
+  {
+   "bucket_occupancy": 1.03,
+   "bucketed": {
+    "comparisons_per_query": 5.17,
+    "hits": 60,
+    "median_ms": 0.00052,
+    "p95_ms": 0.000711,
+    "queries": 60
+   },
+   "buckets": 97,
+   "key_mode": "fixed",
+   "law_count": 100,
+   "linear": {
+    "comparisons_per_query": 500.0,
+    "hits": 60,
+    "median_ms": 0.00427,
+    "p95_ms": 0.007785,
+    "queries": 60
+   },
+   "removal_control": {
+    "control_ok": true,
+    "law": "law_00099",
+    "law_present_after": false,
+    "law_present_before": true
+   },
+   "speedup": 8.21
+  },
+  {
+   "bucket_occupancy": 1.27,
+   "bucketed": {
+    "comparisons_per_query": 6.83,
+    "hits": 60,
+    "median_ms": 0.00057,
+    "p95_ms": 0.000717,
+    "queries": 60
+   },
+   "buckets": 394,
+   "key_mode": "fixed",
+   "law_count": 500,
+   "linear": {
+    "comparisons_per_query": 2500.0,
+    "hits": 60,
+    "median_ms": 0.019707,
+    "p95_ms": 0.024279,
+    "queries": 60
+   },
+   "removal_control": {
+    "control_ok": true,
+    "law": "law_00499",
+    "law_present_after": false,
+    "law_present_before": true
+   },
+   "speedup": 34.57
+  },
+  {
+   "bucket_occupancy": 1.59,
+   "bucketed": {
+    "comparisons_per_query": 9.25,
+    "hits": 60,
+    "median_ms": 0.000581,
+    "p95_ms": 0.000721,
+    "queries": 60
+   },
+   "buckets": 629,
+   "key_mode": "fixed",
+   "law_count": 1000,
+   "linear": {
+    "comparisons_per_query": 5000.0,
+    "hits": 60,
+    "median_ms": 0.039746,
+    "p95_ms": 0.04486,
+    "queries": 60
+   },
+   "removal_control": {
+    "control_ok": true,
+    "law": "law_00999",
+    "law_present_after": false,
+    "law_present_before": true
+   },
+   "speedup": 68.41
+  },
+  {
+   "bucket_occupancy": 5.04,
+   "bucketed": {
+    "comparisons_per_query": 31.08,
+    "hits": 60,
+    "median_ms": 0.000832,
+    "p95_ms": 0.001068,
+    "queries": 60
+   },
+   "buckets": 992,
+   "key_mode": "fixed",
+   "law_count": 5000,
+   "linear": {
+    "comparisons_per_query": 25000.0,
+    "hits": 60,
+    "median_ms": 0.220812,
+    "p95_ms": 0.340538,
+    "queries": 60
+   },
+   "removal_control": {
+    "control_ok": true,
+    "law": "law_04999",
+    "law_present_after": false,
+    "law_present_before": true
+   },
+   "speedup": 265.4
+  }
+ ],
+ "schema": "BRAIN_LAW_STORE_FLAT_LOOKUP_V1"
+}

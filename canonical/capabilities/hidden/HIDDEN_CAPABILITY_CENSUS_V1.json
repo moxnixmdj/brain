@@ -29,7 +29,7 @@
    "contract": 0
   },
   "canonical/tools": {
-   "cli": 325,
+   "cli": 329,
    "contract": 0
   },
   "execution_guard": {
@@ -58,19 +58,19 @@
   }
  },
  "counts": {
-  "cli": 1190,
+  "cli": 1194,
   "contract": 313,
   "declared": 863,
   "declared_by_capability_id": 19,
-  "files": 3472,
-  "hidden_executable": 621,
-  "library": 1918,
+  "files": 3482,
+  "hidden_executable": 625,
+  "library": 1924,
   "self_described": 6,
   "tests": 45,
   "unparseable": 6
  },
  "declared_ids_seen": 2479,
- "digest": "86d84ccc98668f0ea18b7524cebaf584e994e79842eb25bd6d9ca4fda8915be5",
+ "digest": "a3519a2b5bcb1391946f0fb5862b8cc2045777005c58370d9693324df0efaa5a",
  "hidden": [
   {
    "bytes": 31118,
@@ -422,7 +422,7 @@
    ]
   },
   {
-   "bytes": 132709,
+   "bytes": 141902,
    "declared_capability_id": null,
    "declared_inputs": [],
    "declared_result_fields": [],
@@ -448,7 +448,7 @@
    ],
    "kind": "cli",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "d90527613c64bda3f781c211057b63e1bd45321c7c4186553441f2a7d58ac5f8",
+   "sha256": "4cacb8ea801c2401a73480cdff77bf11a3d410cba9f70738243a3b5a68f41866",
    "signals": [
     "evidence",
     "json_stdout",
@@ -4444,6 +4444,43 @@
    ]
   },
   {
+   "bytes": 12242,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "doc": "Ledger of recorded decisions: what was attempted, what was refused, and why.",
+   "entrypoint": "main",
+   "id": "canonical.tools.refusal_ledger_v1.hidden.v1",
+   "imports": [
+    "__future__",
+    "argparse",
+    "json",
+    "pathlib",
+    "re",
+    "typing"
+   ],
+   "kind": "cli",
+   "path": "canonical/tools/refusal_ledger_v1.py",
+   "sha256": "82089aee38319c87ee585e167fe1f0e0ad800f91ebc0fd3330c49e0a2f14807b",
+   "signals": [
+    "evidence",
+    "json_stdout",
+    "measured",
+    "receipt",
+    "refusal",
+    "schema",
+    "verification"
+   ],
+   "triggers": [
+    "refusal",
+    "ledger",
+    "recorded",
+    "decisions",
+    "attempted",
+    "refused"
+   ]
+  },
+  {
    "bytes": 9263,
    "declared_capability_id": null,
    "declared_inputs": [],
@@ -8106,6 +8143,47 @@
    ]
   },
   {
+   "bytes": 14443,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "doc": "Deterministic Capability Consolidation & Truth Auditor (`capability_consolidation_audit_v1`).",
+   "entrypoint": "main",
+   "id": "canonical.tools.capability_consolidation_audit_v1.hidden.v1",
+   "imports": [
+    "__future__",
+    "argparse",
+    "canonical",
+    "importlib",
+    "json",
+    "pathlib",
+    "re",
+    "subprocess",
+    "sys",
+    "time",
+    "typing"
+   ],
+   "kind": "cli",
+   "path": "canonical/tools/capability_consolidation_audit_v1.py",
+   "sha256": "daa02dd41b93f754369d2f40393437a64f8a89380287c41c122ab03fbaa6eaeb",
+   "signals": [
+    "evidence",
+    "json_stdout",
+    "measured",
+    "receipt",
+    "schema",
+    "verification"
+   ],
+   "triggers": [
+    "capability",
+    "consolidation",
+    "audit",
+    "deterministic",
+    "truth",
+    "auditor"
+   ]
+  },
+  {
    "bytes": 9630,
    "declared_capability_id": null,
    "declared_inputs": [],
@@ -9317,6 +9395,50 @@
     "rounds",
     "never",
     "ran"
+   ]
+  },
+  {
+   "bytes": 15987,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "doc": "Mutation as admission (leapfrog Play 6), measured on this repository's own suites.",
+   "entrypoint": "main",
+   "id": "canonical.tools.mutation_admission_probe_v1.hidden.v1",
+   "imports": [
+    "__future__",
+    "argparse",
+    "ast",
+    "hashlib",
+    "json",
+    "pathlib",
+    "re",
+    "subprocess",
+    "sys",
+    "time",
+    "typing"
+   ],
+   "kind": "cli",
+   "path": "canonical/tools/mutation_admission_probe_v1.py",
+   "sha256": "e0a9dcb1a4e36071f7f946a204597acd7352dd1e7b448ca42d10d287f8676a10",
+   "signals": [
+    "evidence",
+    "json_stdout",
+    "measured",
+    "schema",
+    "sha256",
+    "verification"
+   ],
+   "triggers": [
+    "mutation",
+    "admission",
+    "probe",
+    "leapfrog",
+    "play",
+    "measured",
+    "repository",
+    "own",
+    "suites"
    ]
   },
   {
@@ -24212,6 +24334,44 @@
     "not",
     "arbitrary",
     "task"
+   ]
+  },
+  {
+   "bytes": 9685,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "doc": "Measure whether a bucketed law store's *lookup* is flat as the store grows.",
+   "entrypoint": "main",
+   "id": "canonical.tools.measure_law_store_flat_lookup_v1.hidden.v1",
+   "imports": [
+    "__future__",
+    "argparse",
+    "hashlib",
+    "json",
+    "pathlib",
+    "random",
+    "statistics",
+    "time",
+    "typing"
+   ],
+   "kind": "cli",
+   "path": "canonical/tools/measure_law_store_flat_lookup_v1.py",
+   "sha256": "975fc3dccd7d82031c97f41025c1903977433f22772385728495c8dfa0dc781a",
+   "signals": [
+    "json_stdout",
+    "measured",
+    "schema"
+   ],
+   "triggers": [
+    "measure",
+    "law",
+    "store",
+    "flat",
+    "lookup",
+    "whether",
+    "bucketed",
+    "grows"
    ]
   },
   {
