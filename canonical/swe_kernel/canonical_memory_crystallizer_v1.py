@@ -2635,6 +2635,419 @@ class VerificationFirstMemoryBus:
             "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
         }
 
+    def crystallize_meaning_first_and_transfer(
+        self,
+        *,
+        # 1. Semantic unification (`semantic_unification_v1`)
+        semantic_sources: Sequence[str] | None = None,
+        bridge_pair: tuple[str, str] | None = None,
+        # 2. Meaning-first IR crystallizer (`verified_skill_crystallizer_ir_bridge_v1`)
+        before_snippet: str | None = None,
+        after_snippet: str | None = None,
+        ir_language: str = "python",
+        ir_error_class: str = "GENERIC",
+        ir_target_source: str | None = None,
+        # 3. Cross-language bridge + operator generalization & semantics
+        rule: Mapping[str, Any] | None = None,
+        target_language: str | None = None,
+        target_source: str | None = None,
+        operator_symbol: str | None = None,
+        taught_in: str = "python",
+        proposed_in: str | None = None,
+        frozen_operators: Sequence[str] | None = None,
+        # 4. Equivalence compression (`equivalence_compression_v8`)
+        compress_objects: Sequence[Mapping[str, Any]] | None = None,
+        compress_mappings: Sequence[Mapping[str, Any]] | None = None,
+        # 5. Scoped skill calibration, admission & recheck (`rule_scope_learning_v1`, `skill_scope_bundle_v1`, `skill_recheck_v1`)
+        scope_instances: Sequence[Mapping[str, Any]] | None = None,
+        scope_verifier: Any = None,
+        scope_source_text: str | None = None,
+        recheck_rule: Mapping[str, Any] | None = None,
+        recheck_apply: Any = None,
+        # 6. Execution-locus lesson pipeline (`verified_lesson_pipeline_v1`)
+        locus_source: str | None = None,
+        locus_rule: Mapping[str, Any] | None = None,
+        locus_executed_lines: Sequence[int] | None = None,
+        locus_returncode: int = 1,
+        locus_test_count: int = 1,
+        locus_observations: Sequence[tuple[Sequence[str], bool]] | None = None,
+        # 7. Held-out weight update admission (`weight_update_admission_v1`)
+        weight_goal: str | None = None,
+        weight_operation: str = "ROUTE",
+        weight_concept: str = "general",
+        weight_domain: str = "swe",
+        weight_probe_goals: Sequence[str] | None = None,
+        weight_apply: bool = False,
+    ) -> dict[str, Any]:
+        """Wave 33: Meaning-First IR Crystallization, Cross-Language Transfer, Scoped Skills & Weight-Update Admission (`0G`, `K3=0`).
+
+        Composes 11 pure-stdlib hidden memory/transfer/consolidation engines lazily on demand.
+        """
+        t0 = time.perf_counter()
+        engines_invoked: list[str] = []
+        results: dict[str, Any] = {}
+        active_rule: dict[str, Any] | None = dict(rule) if rule is not None else None
+
+        # 1. Semantic anti-unification (`semantic_unification_v1`)
+        if semantic_sources is not None and len(semantic_sources) >= 2:
+            from canonical.swe_kernel import semantic_unification_v1 as semu
+
+            engines_invoked.append("canonical.swe_kernel.semantic_unification_v1")
+            corrs = semu.find_correspondences(list(semantic_sources))
+            sem_out: dict[str, Any] = {"correspondences": corrs}
+            if bridge_pair is not None:
+                c_list = corrs.get("correspondences") or corrs.get("pairs") or []
+                if c_list and isinstance(c_list[0], Mapping):
+                    sem_out["bridged_source"] = semu.bridge_sources(bridge_pair[0], bridge_pair[1], c_list[0])
+            results["semantic_unification"] = sem_out
+
+        # 2. Meaning-first IR crystallization (`verified_skill_crystallizer_ir_bridge_v1`)
+        if before_snippet is not None and after_snippet is not None:
+            from canonical.swe_kernel import verified_skill_crystallizer_ir_bridge_v1 as irb
+
+            engines_invoked.append("canonical.swe_kernel.verified_skill_crystallizer_ir_bridge_v1")
+            cryst = irb.crystallize_with_ir(
+                before_snippet=str(before_snippet),
+                after_snippet=str(after_snippet),
+                language=str(ir_language),
+                error_class=str(ir_error_class),
+            )
+            ir_before = irb.canonical_ir(str(before_snippet), language=str(ir_language))
+            ir_hash = irb.canonical_hash(str(before_snippet), language=str(ir_language))
+            enriched = (
+                irb.enrich_rule_with_ir(active_rule, str(before_snippet), str(after_snippet), language=str(ir_language))
+                if active_rule is not None
+                else cryst
+            )
+            if isinstance(enriched, dict):
+                active_rule = enriched
+            matches_target = (
+                bool(irb.ir_matches(active_rule, str(ir_target_source), language=str(ir_language)))
+                if (active_rule is not None and ir_target_source is not None)
+                else None
+            )
+            results["ir_bridge"] = {
+                "canonical_hash": ir_hash,
+                "canonical_ir": ir_before,
+                "crystallized_rule": cryst,
+                "ir_matches_target": matches_target,
+            }
+
+        # 3. Language-neutral skill bridge & operator generalization/semantics
+        if active_rule is not None and target_language is not None:
+            from canonical.swe_kernel import language_neutral_skill_bridge_v1 as lnsb
+            from canonical.swe_kernel import operator_generalization_v1 as opgen
+
+            engines_invoked.append("canonical.swe_kernel.language_neutral_skill_bridge_v1")
+            engines_invoked.append("canonical.swe_kernel.operator_generalization_v1")
+            lex_ok, lex_reason = lnsb.is_lexical_rule(active_rule)
+            parse_ok, parse_msg = (
+                lnsb.parses_in(str(target_language), str(target_source))
+                if target_source is not None
+                else (True, "NO_TARGET_SOURCE")
+            )
+            swap = opgen.derive_operator_swap(active_rule)
+            swap_family = opgen.derive_swap_family(active_rule)
+            xlang_gate = opgen.cross_language_gate(active_rule, proposed_in=str(target_language))
+            proposals = (
+                list(opgen.propose_operator_swaps(str(target_source), active_rule, language=str(target_language), limit=16))
+                if target_source is not None
+                else []
+            )
+            results["cross_language_transfer"] = {
+                "is_lexical_rule": lex_ok,
+                "lexical_reason": lex_reason,
+                "target_parses": parse_ok,
+                "target_parse_detail": parse_msg,
+                "operator_swap": swap,
+                "swap_family": swap_family,
+                "cross_language_gate": xlang_gate,
+                "proposals": proposals,
+            }
+
+        if operator_symbol is not None or frozen_operators is not None:
+            from canonical.swe_kernel import operator_semantics_v1 as opsem
+
+            engines_invoked.append("canonical.swe_kernel.operator_semantics_v1")
+            op_out: dict[str, Any] = {}
+            if operator_symbol is not None:
+                op_out["semantics"] = opsem.semantics(str(operator_symbol))
+                op_out["probe"] = opsem.run_probe(str(operator_symbol), str(proposed_in or taught_in))
+                if proposed_in is not None:
+                    op_out["may_generalize"] = opsem.may_generalize(
+                        str(operator_symbol),
+                        taught_in=str(taught_in),
+                        proposed_in=str(proposed_in),
+                    )
+            if frozen_operators is not None:
+                op_out["frozen_audit"] = opsem.audit_frozen_list(list(frozen_operators))
+            results["operator_semantics"] = op_out
+
+        # 4. Proof-gated equivalence compression (`equivalence_compression_v8`)
+        if compress_objects is not None:
+            from canonical.runtime import equivalence_compression_v8 as eqc8
+
+            engines_invoked.append("canonical.runtime.equivalence_compression_v8")
+            results["equivalence_compression"] = eqc8.compress(
+                objects=[dict(o) for o in compress_objects],
+                mappings=[dict(m) for m in (compress_mappings or ())],
+            )
+
+        # 5. Scoped rule learning, bundle admission & self-witness recheck
+        if active_rule is not None and (scope_instances is not None or scope_source_text is not None):
+            from canonical.swe_kernel import rule_scope_learning_v1 as rsl
+            from canonical.swe_kernel import skill_scope_bundle_v1 as ssb
+
+            engines_invoked.append("canonical.swe_kernel.rule_scope_learning_v1")
+            engines_invoked.append("canonical.swe_kernel.skill_scope_bundle_v1")
+            probes = rsl.synthesize_diagnostic_probes(active_rule)
+            learned = (
+                rsl.learn_scope(active_rule, list(scope_instances), verifier=scope_verifier)
+                if scope_instances is not None
+                else None
+            )
+            admitted = (
+                ssb.admit(
+                    active_rule,
+                    str(scope_source_text),
+                    language=str(target_language or ir_language),
+                    verifier=scope_verifier,
+                )
+                if scope_source_text is not None
+                else None
+            )
+            results["rule_scope"] = {
+                "diagnostic_probe_count": len(probes),
+                "has_identified_scope": ssb.has_identified_scope(active_rule),
+                "learned_scope": learned,
+                "admission": admitted,
+            }
+
+        target_recheck = dict(recheck_rule) if recheck_rule is not None else None
+        if target_recheck is not None:
+            from canonical.swe_kernel import skill_recheck_v1 as srk
+
+            engines_invoked.append("canonical.swe_kernel.skill_recheck_v1")
+            results["skill_recheck"] = {
+                "recheck": srk.recheck(target_recheck, apply=recheck_apply),
+                "self_witness": srk.self_witness(target_recheck, apply=recheck_apply),
+                "rendered_witness": srk.render_witness(target_recheck),
+            }
+
+        # 6. Execution-locus lesson pipeline (`verified_lesson_pipeline_v1`)
+        if locus_source is not None and (locus_rule is not None or active_rule is not None) and locus_executed_lines is not None:
+            from canonical.swe_kernel import verified_lesson_pipeline_v1 as vlp
+
+            engines_invoked.append("canonical.swe_kernel.verified_lesson_pipeline_v1")
+            lrule = dict(locus_rule or active_rule or {})
+            exec_lines = frozenset(int(x) for x in locus_executed_lines)
+            facts = vlp.execution_locus_facts(
+                str(locus_source),
+                lrule,
+                returncode=int(locus_returncode),
+                test_count=int(locus_test_count),
+                executed_lines=exec_lines,
+                language=str(target_language or ir_language),
+            )
+            cands = list(
+                vlp.propose_execution_locus_candidates(
+                    str(locus_source),
+                    lrule,
+                    exec_lines,
+                    language=str(target_language or ir_language),
+                    limit=16,
+                )
+            )
+            learned_locus = (
+                vlp.learn_execution_locus_scope([(list(fs), bool(ok)) for fs, ok in locus_observations])
+                if locus_observations is not None
+                else None
+            )
+            results["execution_locus"] = {
+                "facts": facts,
+                "candidate_count": len(cands),
+                "candidates": cands,
+                "learned_locus_scope": learned_locus,
+            }
+
+        # 7. Held-out weight update admission (`weight_update_admission_v1`)
+        if weight_goal is not None:
+            from canonical.swe_kernel import weight_update_admission_v1 as wua
+
+            engines_invoked.append("canonical.swe_kernel.weight_update_admission_v1")
+            wmodel = wua.fresh_model()
+            fp_before = wua.fingerprint(wmodel)
+            probe_list: list[Any] = []
+            for pg in (weight_probe_goals or (weight_goal,)):
+                probe_list.append(
+                    wua.Probe(
+                        goal=str(pg),
+                        operation=str(weight_operation),
+                        concept=str(weight_concept),
+                        domain=str(weight_domain),
+                        role="TRANSFER",
+                    )
+                )
+            if weight_apply:
+                wres = wua.apply_if_admitted(
+                    wmodel,
+                    str(weight_goal),
+                    str(weight_operation),
+                    str(weight_concept),
+                    str(weight_domain),
+                    probes=probe_list,
+                    persist=False,
+                )
+            else:
+                wres = wua.evaluate_update(
+                    wmodel,
+                    str(weight_goal),
+                    str(weight_operation),
+                    str(weight_concept),
+                    str(weight_domain),
+                    probes=probe_list,
+                )
+            results["weight_update_admission"] = {
+                "fingerprint_before": fp_before,
+                "fingerprint_after": wua.fingerprint(wmodel),
+                "verdict": wres,
+            }
+
+        passed = bool(engines_invoked)
+        return {
+            "pass": passed,
+            "status": (
+                "PASS__WAVE33_MEANING_FIRST_AND_TRANSFER"
+                if passed
+                else "FAIL_CLOSED__NO_WAVE33_INPUTS"
+            ),
+            "engines_invoked": engines_invoked,
+            "results": results,
+            "model_calls": 0,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+    def memini_memrl_apex_consolidate(
+        self,
+        *,
+        outcomes: Sequence[Mapping[str, Any]] = (),
+        query: str | None = None,
+        query_source: str | None = None,
+        query_language: str = "python",
+        gamma_fast: float = 0.65,
+        gamma_slow: float = 0.96,
+        consolidate_rate: float = 0.25,
+        td_alpha: float = 0.35,
+        prune_threshold: float = 0.08,
+        top_k: int = 8,
+    ) -> dict[str, Any]:
+        """Wave 33 Frontier Memory Dynamics: Memini (`w_fast`/`w_slow`) + MemRL (TD `Q` + 2-phase recall) + APEX-EM (3-channel recall) (`K3=0`)."""
+        t0 = time.perf_counter()
+        if not hasattr(self, "_memini_weights"):
+            self._memini_weights: dict[str, dict[str, float]] = {}
+        if not hasattr(self, "_memrl_q_values"):
+            self._memrl_q_values: dict[str, float] = {}
+
+        # Step 1: Decay all existing Memini coupled fast/slow edges
+        gf = max(0.0, min(1.0, float(gamma_fast)))
+        gs = max(0.0, min(1.0, float(gamma_slow)))
+        crate = max(0.0, min(1.0, float(consolidate_rate)))
+        alpha = max(0.0, min(1.0, float(td_alpha)))
+
+        for sid in list(self.skills.keys()):
+            st = self._memini_weights.setdefault(sid, {"w_fast": 0.5, "w_slow": 0.5})
+            st["w_fast"] = round(gf * st["w_fast"], 6)
+            st["w_slow"] = round(gs * st["w_slow"] + crate * st["w_fast"], 6)
+            self._memrl_q_values.setdefault(sid, 0.5)
+
+        # Step 2: Apply MemRL TD Q-updates & Memini fast-weight reinforcement from episodic outcomes
+        updated_ids: list[str] = []
+        for oc in outcomes:
+            sid = str(oc.get("skill_id") or "")
+            if not sid:
+                continue
+            reward = float(oc.get("reward", 1.0 if oc.get("passed", oc.get("ok", False)) else 0.0))
+            st = self._memini_weights.setdefault(sid, {"w_fast": 0.5, "w_slow": 0.5})
+            st["w_fast"] = round(min(4.0, max(0.0, st["w_fast"] + reward)), 6)
+            st["w_slow"] = round(min(4.0, max(0.0, st["w_slow"] + crate * reward)), 6)
+            q_old = self._memrl_q_values.get(sid, 0.5)
+            self._memrl_q_values[sid] = round(q_old + alpha * (reward - q_old), 6)
+            updated_ids.append(sid)
+
+        # Step 3: Sleep-time Memini weak-edge decay detection (non-destructive flag list)
+        pruned_weak: list[str] = []
+        for sid, st in sorted(self._memini_weights.items()):
+            strength = 0.5 * st["w_fast"] + 0.5 * st["w_slow"]
+            q_val = self._memrl_q_values.get(sid, 0.5)
+            if strength < float(prune_threshold) and q_val < 0.25:
+                pruned_weak.append(sid)
+
+        # Step 4: APEX-EM 3-channel (lexical + canonical-IR structural + graph trigger) + MemRL Phase-2 Q re-ranking
+        ranked_hits: list[dict[str, Any]] = []
+        query_ir_hash: str | None = None
+        if query_source:
+            try:
+                from canonical.swe_kernel import verified_skill_crystallizer_ir_bridge_v1 as irb
+
+                query_ir_hash = irb.canonical_hash(str(query_source), language=str(query_language))
+            except Exception:
+                query_ir_hash = None
+
+        if query or query_ir_hash:
+            import re
+
+            q_tokens = set(re.findall(r"[a-z0-9]+", str(query or "").lower()))
+            # Graph neighborhood: skills sharing trigger keys with matching causal edges
+            graph_boost_triggers: set[str] = set()
+            for edge in self.causal_edges.values():
+                if edge.refused:
+                    continue
+                etoks = set(re.findall(r"[a-z0-9]+", f"{edge.action} {edge.effect} {edge.pre_state}".lower()))
+                if q_tokens and (q_tokens & etoks):
+                    graph_boost_triggers.add(str(edge.action).lower())
+
+            for sid, sk in self.skills.items():
+                if sk.forgotten:
+                    continue
+                st = self._memini_weights.get(sid, {"w_fast": 0.5, "w_slow": 0.5})
+                q_val = self._memrl_q_values.get(sid, 0.5)
+                payload_txt = json.dumps(sk.payload, sort_keys=True, default=str).lower() if sk.payload is not None else ""
+                s_tokens = set(re.findall(r"[a-z0-9]+", f"{sk.kind} {sk.trigger_key} {payload_txt}".lower()))
+                lex_score = (len(q_tokens & s_tokens) / max(1, len(q_tokens))) if q_tokens else 0.0
+                struct_match = 1.0 if (query_ir_hash and query_ir_hash in payload_txt) else 0.0
+                graph_match = 1.0 if (sk.trigger_key.lower() in graph_boost_triggers) else 0.0
+                phase1 = 0.55 * lex_score + 0.30 * struct_match + 0.15 * graph_match
+                if phase1 <= 0.0 and not updated_ids:
+                    continue
+                memini_strength = min(1.0, 0.4 * st["w_fast"] + 0.6 * st["w_slow"])
+                final_score = round(0.50 * phase1 + 0.30 * q_val + 0.20 * memini_strength, 6)
+                ranked_hits.append({
+                    "skill_id": sid,
+                    "kind": sk.kind,
+                    "trigger_key": sk.trigger_key,
+                    "phase1_apex_em": round(phase1, 6),
+                    "memrl_q": q_val,
+                    "memini_w_fast": st["w_fast"],
+                    "memini_w_slow": st["w_slow"],
+                    "final_score": final_score,
+                })
+            ranked_hits.sort(key=lambda r: (-r["final_score"], r["skill_id"]))
+            ranked_hits = ranked_hits[: int(top_k)]
+
+        return {
+            "pass": True,
+            "status": "PASS__WAVE33_MEMINI_MEMRL_APEX_CONSOLIDATED",
+            "tracked_skills": len(self._memini_weights),
+            "updated_skill_ids": updated_ids,
+            "pruned_weak_skill_ids": pruned_weak,
+            "query_ir_hash": query_ir_hash,
+            "ranked_hits": ranked_hits,
+            "weights": {sid: dict(v) for sid, v in sorted(self._memini_weights.items())},
+            "q_values": dict(sorted(self._memrl_q_values.items())),
+            "model_calls": 0,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
 
 def execute_memory_operation(
     bus: VerificationFirstMemoryBus,
@@ -2831,6 +3244,12 @@ def execute_memory_operation(
         return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
     if op == "FILING_KEY_HINDSIGHT_JITRL":
         res = bus.filing_key_hindsight_and_jitrl(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "MEANING_FIRST_TRANSFER":
+        res = bus.crystallize_meaning_first_and_transfer(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "MEMINI_MEMRL_APEX":
+        res = bus.memini_memrl_apex_consolidate(**data)
         return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
     if op == "STATS":
         return {"schema": SCHEMA, "pass": True, "status": "PASS__MEMORY_STATS", "stats": bus.stats()}

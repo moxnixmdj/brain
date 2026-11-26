@@ -3721,6 +3721,286 @@ def solve_producer_lineage_hole_inversion(
     }
 
 
+def disambiguate_and_synthesize_repairs(
+    *,
+    # 1. Version-space repair disambiguation (`repair_version_space_selection_v1` + `passing_repairs_version_space_v1`)
+    candidate_ids: Sequence[str] | None = None,
+    behaviours: Mapping[str, Sequence[Any]] | None = None,
+    probe_ids: Sequence[str] | None = None,
+    probe_outcomes: Mapping[str, Sequence[str]] | None = None,
+    observations: Mapping[str, str] | None = None,
+    reference_outcomes: Mapping[str, Any] | None = None,
+    candidate_sources: Mapping[str, str] | None = None,
+    behaviour_of: Any = None,
+    selection_oracle: Any = None,
+    max_questions: int = 3,
+    passing_task: Mapping[str, Any] | None = None,
+    # 2. Angelic STUN/CEGIS + observational equivalence (`angelic_cegis_v1`)
+    angelic_source: str | None = None,
+    angelic_target: str | None = None,
+    angelic_oracle: Any = None,
+    angelic_inputs: Sequence[Mapping[str, Any]] | None = None,
+    angelic_kind: str = "value",
+    angelic_enclosing: Mapping[str, str] | None = None,
+    angelic_budget: int = 256,
+    equiv_pair: tuple[Any, Any] | None = None,
+    equiv_inputs: Sequence[Mapping[str, Any]] | None = None,
+    # 3. Inverse-pair completion (`inverse_completion_v1`)
+    inverse_name: str | None = None,
+    inverse_siblings: Sequence[str] = (),
+    writer_payloads: Sequence[Any] | None = None,
+    inverse_samples: Sequence[Any] = (),
+    roundtrip_pair: tuple[Any, Any] | None = None,
+    # 4. History-induced edit grammar (`history_induced_edit_grammar_v1`)
+    history_pairs: Sequence[tuple[str, str, str]] | None = None,
+    history_target_source: str | None = None,
+    history_function_line: int | None = None,
+    history_context_depth: int = 1,
+    history_cap: int = 100,
+    # 5. Repository seed corpus + real callers (`the_repository_is_the_seed_corpus_v1` + `the_callers_were_never_asked_v1`)
+    seed_tree: str | pathlib.Path | None = None,
+    seed_call: Mapping[str, Any] | None = None,
+    caller_sites: Sequence[Mapping[str, Any]] | None = None,
+    caller_seeds: Sequence[Mapping[str, Any]] | None = None,
+    caller_defined_in: Sequence[str] = (),
+    caller_module: str | None = None,
+    # 6. Cross-repo dataflow lineage (`cross_repo_dataflow_v1`)
+    dataflow_root: str | pathlib.Path | None = None,
+    dataflow_var: str | None = None,
+    dataflow_from_file: str | None = None,
+    dataflow_to_file: str | None = None,
+    dataflow_max_files: int = 200,
+) -> dict[str, Any]:
+    """Wave 32: Version-Space Repair Disambiguation, Angelic CEGIS, Inverse Completion & Repo-Seeded SWE (`0D`, `K3=0`).
+
+    Composes 7 pure-stdlib hidden SWE synthesis & disambiguation engines lazily on demand:
+      - `repair_version_space_selection_v1`: partition, diagnose, decide, ask_until_settled
+      - `passing_repairs_version_space_v1`: enumerate distinct repairs passing the same suite + separating question
+      - `angelic_cegis_v1`: AngelicCEGIS STUN synthesis, cross_frame_guard, observational_equivalence
+      - `inverse_completion_v1`: detect_pair, determine_reader_shape, synthesise_reader, roundtrip_residual
+      - `history_induced_edit_grammar_v1`: induce_grammar, localized_candidates
+      - `the_repository_is_the_seed_corpus_v1` + `the_callers_were_never_asked_v1`: repo seed harvesting & real-caller inputs
+      - `cross_repo_dataflow_v1`: cross-file/cross-repo causal variable lineage
+    """
+    t0 = time.perf_counter()
+    engines_invoked: list[str] = []
+    results: dict[str, Any] = {}
+    any_ok = False
+    all_ok = True
+
+    # 1a. Version-space repair selection (`repair_version_space_selection_v1`)
+    if candidate_ids is not None and behaviours is not None:
+        from canonical.swe_kernel import repair_version_space_selection_v1 as rvss
+
+        engines_invoked.append("canonical.swe_kernel.repair_version_space_selection_v1")
+        part = rvss.partition(list(candidate_ids), dict(behaviours))
+        diag = rvss.diagnose(part)
+        dec = rvss.decide(
+            part,
+            probe_ids=list(probe_ids) if probe_ids is not None else None,
+            probe_outcomes=dict(probe_outcomes) if probe_outcomes is not None else None,
+            observations=dict(observations) if observations is not None else None,
+            reference_outcomes=dict(reference_outcomes) if reference_outcomes is not None else None,
+        )
+        max_elim = None
+        if probe_ids and probe_outcomes and reference_outcomes:
+            ref_val = next(iter(reference_outcomes.values()), "")
+            max_elim = rvss.maximum_elimination(
+                part,
+                str(ref_val),
+                probe_ids=list(probe_ids),
+                probe_outcomes=dict(probe_outcomes),
+            )
+        results["version_space"] = {
+            "partition": part,
+            "diagnosis": diag,
+            "decision": dec,
+            "maximum_elimination_probe": max_elim,
+        }
+        any_ok = True
+
+    if candidate_sources is not None and probe_ids is not None and behaviour_of is not None and selection_oracle is not None:
+        from canonical.swe_kernel import repair_version_space_selection_v1 as rvss
+
+        if "canonical.swe_kernel.repair_version_space_selection_v1" not in engines_invoked:
+            engines_invoked.append("canonical.swe_kernel.repair_version_space_selection_v1")
+        sel = rvss.ask_until_settled(
+            dict(candidate_sources),
+            list(probe_ids),
+            behaviour_of,
+            selection_oracle,
+            max_questions=int(max_questions),
+        )
+        sel_dict = sel.__dict__ if hasattr(sel, "__dict__") else {"selection": sel}
+        results["active_selection"] = sel_dict
+        any_ok = True
+
+    # 1b. Passing repairs version space (`passing_repairs_version_space_v1`)
+    if passing_task is not None:
+        from canonical.swe_kernel import passing_repairs_version_space_v1 as prvs
+
+        engines_invoked.append("canonical.swe_kernel.passing_repairs_version_space_v1")
+        pr = prvs.passing_repairs(dict(passing_task))
+        results["passing_repairs"] = pr
+        any_ok = True
+
+    # 2. Angelic STUN/CEGIS + Observational Equivalence (`angelic_cegis_v1`)
+    if angelic_source is not None and angelic_oracle is not None and angelic_inputs is not None:
+        from canonical.swe_kernel import angelic_cegis_v1 as acegis
+
+        engines_invoked.append("canonical.swe_kernel.angelic_cegis_v1")
+        if angelic_enclosing is not None and angelic_target:
+            syn = acegis.cross_frame_guard(
+                str(angelic_source),
+                target=str(angelic_target),
+                oracle=angelic_oracle,
+                inputs=list(angelic_inputs),
+                enclosing=dict(angelic_enclosing),
+                budget=int(angelic_budget),
+            )
+        else:
+            scope = acegis.harvest_scope(str(angelic_source), target=angelic_target)
+            engine = acegis.AngelicCEGIS(budget=int(angelic_budget))
+            if angelic_kind == "guard":
+                syn = engine.invent_guard(scope, angelic_oracle, list(angelic_inputs))
+            else:
+                syn = engine.invent(scope, angelic_oracle, list(angelic_inputs), kind=str(angelic_kind))
+        results["angelic_cegis"] = syn
+        ok_a = bool(syn.get("ok") or syn.get("solved") or syn.get("found") or syn.get("expr") or syn.get("guard"))
+        any_ok = any_ok or ok_a
+        all_ok = all_ok and ok_a
+
+    if equiv_pair is not None and equiv_inputs is not None:
+        from canonical.swe_kernel import angelic_cegis_v1 as acegis
+
+        if "canonical.swe_kernel.angelic_cegis_v1" not in engines_invoked:
+            engines_invoked.append("canonical.swe_kernel.angelic_cegis_v1")
+        eq_res = acegis.observational_equivalence(equiv_pair[0], equiv_pair[1], list(equiv_inputs))
+        results["observational_equivalence"] = eq_res
+        any_ok = True
+
+    # 3. Inverse-pair completion (`inverse_completion_v1`)
+    if inverse_name is not None or writer_payloads is not None or roundtrip_pair is not None:
+        from canonical.swe_kernel import inverse_completion_v1 as invc
+
+        engines_invoked.append("canonical.swe_kernel.inverse_completion_v1")
+        inv_rep: dict[str, Any] = {}
+        if inverse_name is not None:
+            inv_rep["pair"] = invc.detect_pair(str(inverse_name), list(inverse_siblings))
+        if writer_payloads is not None:
+            inv_rep["reader_shape"] = invc.determine_reader_shape(list(writer_payloads))
+            if inverse_name is not None:
+                inv_rep["synthesised_reader"] = invc.synthesise_reader(
+                    str(inverse_name),
+                    list(writer_payloads),
+                    list(inverse_samples),
+                )
+        if roundtrip_pair is not None and inverse_samples:
+            inv_rep["roundtrip_residual"] = invc.roundtrip_residual(
+                roundtrip_pair[0], roundtrip_pair[1], list(inverse_samples)
+            )
+        results["inverse_completion"] = inv_rep
+        any_ok = True
+
+    # 4. History-induced edit grammar (`history_induced_edit_grammar_v1`)
+    if history_pairs is not None:
+        from canonical.swe_kernel import history_induced_edit_grammar_v1 as hieg
+
+        engines_invoked.append("canonical.swe_kernel.history_induced_edit_grammar_v1")
+        templates = hieg.induce_grammar(list(history_pairs), context_depth=int(history_context_depth))
+        cands: list[dict[str, Any]] = []
+        if history_target_source is not None and templates:
+            cands = hieg.localized_candidates(
+                str(history_target_source),
+                templates,
+                history_function_line,
+                cap=int(history_cap),
+            )
+        results["history_edit_grammar"] = {
+            "template_count": len(templates),
+            "candidate_count": len(cands),
+            "candidates": cands[:20],
+        }
+        any_ok = any_ok or (len(templates) > 0)
+
+    # 5. Repository seed corpus + real callers (`the_repository_is_the_seed_corpus_v1` + `the_callers_were_never_asked_v1`)
+    if seed_tree is not None:
+        from canonical.swe_kernel import the_repository_is_the_seed_corpus_v1 as seedc
+
+        engines_invoked.append("canonical.swe_kernel.the_repository_is_the_seed_corpus_v1")
+        docs = seedc.harvest_documents(pathlib.Path(seed_tree).resolve())
+        calls = (
+            seedc.calls_from([str(d.get("text") or d.get("content") or "") for d in docs], dict(seed_call))
+            if seed_call is not None
+            else []
+        )
+        results["repo_seed_corpus"] = {
+            "document_count": len(docs),
+            "sample_paths": [str(d.get("path") or d.get("rel") or "") for d in docs[:10]],
+            "synthesized_calls": calls[:20],
+        }
+        any_ok = True
+
+    if caller_sites is not None and caller_seeds is not None:
+        from canonical.swe_kernel import the_callers_were_never_asked_v1 as realcall
+
+        engines_invoked.append("canonical.swe_kernel.the_callers_were_never_asked_v1")
+        c_cands = realcall.candidates_for(
+            list(caller_sites),
+            list(caller_seeds),
+            defined_in=list(caller_defined_in),
+            module=caller_module,
+        )
+        results["real_caller_candidates"] = {
+            "candidate_count": len(c_cands),
+            "candidates": c_cands[:20],
+        }
+        any_ok = True
+
+    # 6. Cross-repo dataflow lineage (`cross_repo_dataflow_v1`)
+    if dataflow_root is not None:
+        from canonical.swe_kernel import cross_repo_dataflow_v1 as crdf
+
+        engines_invoked.append("canonical.swe_kernel.cross_repo_dataflow_v1")
+        graph = crdf.build_cross_repo_graph(pathlib.Path(dataflow_root).resolve(), max_files=int(dataflow_max_files))
+        paths = (
+            crdf.causal_path_cross_repo(
+                graph,
+                str(dataflow_var),
+                from_file=dataflow_from_file,
+                to_file=dataflow_to_file,
+            )
+            if dataflow_var
+            else []
+        )
+        file_count = int(getattr(graph, "file_count", len(getattr(graph, "per_file", {}))))
+        results["cross_repo_dataflow"] = {
+            "files_indexed": file_count,
+            "node_count": int(getattr(graph, "node_count", 0)),
+            "edge_count": int(getattr(graph, "edge_count", 0)),
+            "var": dataflow_var,
+            "causal_path_count": len(paths),
+            "causal_paths": paths[:20],
+        }
+        any_ok = True
+
+    passed = bool(engines_invoked) and any_ok and all_ok
+    return {
+        "schema": SCHEMA,
+        "authority": AUTHORITY,
+        "pass": passed,
+        "status": (
+            "PASS__WAVE32_DISAMBIGUATE_AND_SYNTHESIZE"
+            if passed
+            else ("FAIL_CLOSED__NO_WAVE32_INPUTS" if not engines_invoked else "FAIL_CLOSED__WAVE32_SUBSTAGE_UNSOLVED")
+        ),
+        "engines_invoked": engines_invoked,
+        "results": results,
+        "model_calls": 0,
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+    }
+
+
 __all__ = [
     "AUTHORITY",
     "COMPOSED_CORE_MODULES",
@@ -3732,6 +4012,7 @@ __all__ = [
     "choreograph_crossfile_repair",
     "compile_plain_goal_contract",
     "detect_repository_language",
+    "disambiguate_and_synthesize_repairs",
     "multi_file_causal_localize_and_repair",
     "solve_producer_lineage_hole_inversion",
     "solve_repository_task",

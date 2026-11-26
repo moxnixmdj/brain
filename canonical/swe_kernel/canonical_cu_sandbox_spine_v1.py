@@ -1456,6 +1456,307 @@ def plan_two_move_and_horizon_bridge(
     }
 
 
+def execute_osworld_v21_and_epistemic_cu(
+    *,
+    # 1. OSWorld 2.1 pure-stdlib policy + verifier + constraint guard + adapter
+    osworld_state: Mapping[str, Any] | None = None,
+    policy_mode: str = "workflow_v7",
+    instruction: str | None = None,
+    proposed_action: Mapping[str, Any] | None = None,
+    protected_paths: Sequence[str] | None = None,
+    run_recovery: bool = True,
+    compile_adapter_actions: bool = True,
+    # 2. Epistemic computer agent (`epistemic_computer_agent_v1`)
+    nl_goal: str | None = None,
+    inspect_path: str | Path | None = None,
+    epistemic_store_root: str | Path | None = None,
+    # 3. Action-grammar guide (`the_guide_is_an_action_grammar_v1`)
+    grammar_need: str | Mapping[str, Any] | None = None,
+    grammar_root: str | Path | None = None,
+    grammar_pages: Mapping[str, Any] | None = None,
+    grammar_declared_flags: Mapping[str, Mapping[str, Any]] | None = None,
+    grammar_program: str | None = None,
+) -> dict[str, Any]:
+    """Wave 34: OSWorld 2.1 Pure-Stdlib CU Engine + Epistemic Computer Agent + Action-Grammar Guide (`0F`, `K3=0`).
+
+    Composes 10 pure-stdlib CU & epistemic modules lazily on demand (with optional PIL detection for visual v13/v17 overlays).
+    """
+    import importlib.util
+
+    t0 = time.perf_counter()
+    engines_invoked: list[str] = []
+    results: dict[str, Any] = {}
+    has_pil = importlib.util.find_spec("PIL") is not None
+
+    # 1. OSWorld 2.1 policy + GUI goal verifier + recovery + action compiler + constraint guard
+    if osworld_state is not None or instruction is not None or proposed_action is not None:
+        from canonical.runtime import osworld_v21_constraint_guard_v1 as osw_guard
+
+        engines_invoked.append("canonical.runtime.osworld_v21_constraint_guard_v1")
+        osw_out: dict[str, Any] = {
+            "pil_available": has_pil,
+            "visual_overlay_tier": "PIL_V13_V17_READY" if has_pil else "PURE_STDLIB_V7_V11",
+        }
+        if instruction is not None:
+            osw_out["constraints"] = osw_guard.extract_constraints(instruction)
+        if proposed_action is not None:
+            prot = list(protected_paths or ())
+            if not prot and isinstance(osw_out.get("constraints"), Mapping):
+                prot = list(osw_out["constraints"].get("protected_paths") or ())
+            conflict = osw_guard.action_conflict(dict(proposed_action), prot)
+            osw_out["action_conflict"] = conflict
+            osw_out["guard_blocked"] = conflict is not None
+
+        if osworld_state is not None:
+            state_dict = dict(osworld_state)
+            from canonical.runtime import osworld_v21_brain_agent_adapter_v1 as osw_adapter
+            from canonical.runtime import osworld_v21_gui_goal_verifier_v1 as osw_ver
+            from canonical.runtime import osworld_v21_recovery_policy_v2 as osw_rec
+            from canonical.runtime import osworld_v21_unified_policy_v11 as osw_u11
+            from canonical.runtime import osworld_v21_workflow_policy_v7 as osw_w7
+
+            engines_invoked.extend(
+                [
+                    "canonical.runtime.osworld_v21_workflow_policy_v7",
+                    "canonical.runtime.osworld_v21_unified_policy_v11",
+                    "canonical.runtime.osworld_v21_gui_goal_verifier_v1",
+                    "canonical.runtime.osworld_v21_recovery_policy_v2",
+                    "canonical.runtime.osworld_v21_brain_agent_adapter_v1",
+                ]
+            )
+            gui_verdict = osw_ver.verify_gui_goal(state_dict)
+            osw_out["gui_goal_verifier"] = gui_verdict
+            if policy_mode == "unified_v11":
+                decision = dict(osw_u11.decide(state_dict))
+                osw_out["policy_used"] = "osworld_v21_unified_policy_v11"
+            else:
+                decision = dict(osw_w7.decide(state_dict))
+                osw_out["policy_used"] = "osworld_v21_workflow_policy_v7"
+                if not decision.get("actions") and decision.get("response") is None:
+                    decision = dict(osw_u11.decide(state_dict))
+                    osw_out["policy_used"] = "osworld_v21_unified_policy_v11_fallback"
+            osw_out["decision"] = decision
+            if run_recovery:
+                osw_out["recovery"] = osw_rec.route_recovery(state_dict)
+            if compile_adapter_actions:
+                try:
+                    resp, compiled_acts = osw_adapter.compile_actions(decision)
+                    osw_out["compiled_actions"] = {"response": resp, "actions": compiled_acts}
+                except Exception as exc:
+                    osw_out["compiled_actions"] = {"error": f"{type(exc).__name__}: {exc}"}
+            # Check browser CDP / host ops surfaces lazily (zero network calls)
+            from canonical.runtime import osworld_v21_browser_cdp_v1 as osw_cdp
+            from canonical.runtime import osworld_v21_host_browser_ops_v1 as osw_host
+
+            osw_out["browser_surfaces"] = {
+                "cdp_class": osw_cdp.BrowserCDP.__name__,
+                "host_browser_class": osw_host.OSWorldHostBrowser.__name__,
+            }
+        results["osworld_v21"] = osw_out
+
+    # 2. Epistemic computer agent (`epistemic_computer_agent_v1`)
+    if nl_goal is not None or inspect_path is not None or epistemic_store_root is not None:
+        from canonical.swe_kernel import epistemic_computer_agent_v1 as eca
+
+        engines_invoked.append("canonical.swe_kernel.epistemic_computer_agent_v1")
+        ep_out: dict[str, Any] = {}
+        if nl_goal is not None:
+            parsed = eca.parse_nl_goal(str(nl_goal))
+            ep_out["parsed_goal"] = parsed.__dict__ if hasattr(parsed, "__dict__") else str(parsed)
+        if inspect_path is not None:
+            ep_out["candidate_kinds"] = sorted(eca.hypothesize_candidate_kinds(Path(inspect_path).resolve()))
+        if epistemic_store_root is not None:
+            store = eca.EpistemicStore(Path(epistemic_store_root).resolve())
+            agent = eca.EpistemicComputerAgent(store)
+            ep_out["agent_ready"] = True
+            ep_out["agent_class"] = type(agent).__name__
+        results["epistemic_cu"] = ep_out
+
+    # 3. Action-grammar guide (`the_guide_is_an_action_grammar_v1`)
+    if grammar_need is not None or grammar_declared_flags is not None or grammar_pages is not None:
+        from canonical.tools import the_guide_is_an_action_grammar_v1 as guide_ag
+
+        engines_invoked.append("canonical.tools.the_guide_is_an_action_grammar_v1")
+        ag_out: dict[str, Any] = {}
+        if isinstance(grammar_need, str):
+            ag_out["artifact_kinds"] = sorted(guide_ag.artifact_kinds(grammar_need))
+        elif isinstance(grammar_need, Mapping):
+            need_txt = str(grammar_need.get("need") or grammar_need.get("text") or "")
+            if need_txt:
+                ag_out["artifact_kinds"] = sorted(guide_ag.artifact_kinds(need_txt))
+            if grammar_root is not None and grammar_pages is not None:
+                ag_out["admissible"] = guide_ag.admissible(
+                    dict(grammar_need),
+                    Path(grammar_root).resolve(),
+                    dict(grammar_pages),
+                )
+        if grammar_pages is not None:
+            ag_out["blind_spots"] = guide_ag.check_blind_spots(dict(grammar_pages))
+        if grammar_declared_flags is not None:
+            ag_out["flag_issues"] = guide_ag.check_flags(
+                {k: dict(v) for k, v in grammar_declared_flags.items()},
+                program=grammar_program,
+            )
+        results["action_grammar"] = ag_out
+
+    passed = bool(engines_invoked)
+    return {
+        "schema": SCHEMA,
+        "pass": passed,
+        "status": (
+            "PASS__WAVE34_OSWORLD_V21_AND_EPISTEMIC_CU"
+            if passed
+            else "FAIL_CLOSED__NO_WAVE34_CU_INPUTS"
+        ),
+        "engines_invoked": engines_invoked,
+        "results": results,
+        "model_calls": 0,
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+    }
+
+
+def speculative_macro_commit(
+    *,
+    # 1. Effect witness (`effect_witness_v1`)
+    witness_root: str | Path | None = None,
+    witness_before_digests: Mapping[str, str] | None = None,
+    witness_argv: Sequence[str] | None = None,
+    witness_expected: Sequence[str] | None = None,
+    witness_goal_family: str = "file_op",
+    # 2. Standing-fact invalidation & CoW in-order commit (`standing_facts_v1` — TomasuLLM pattern)
+    standing_before_state: Mapping[str, bytes] | None = None,
+    standing_after_state: Mapping[str, bytes] | None = None,
+    standing_contract: Mapping[str, Any] | None = None,
+    standing_binding: Mapping[str, str] | None = None,
+    standing_step: int = 1,
+    # 3. Action replay under file drift (`action_replay_under_change_v1`)
+    replay_before: str | None = None,
+    replay_after: str | None = None,
+    replay_target_text: str | None = None,
+    # 4. Parallel capability frontier planner (`capability_parallel_frontier_v2`)
+    plan_parallel_frontier: bool = False,
+    frontier_dict: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Wave 34: Speculative Macro Commit with Standing-Fact Invalidation, Effect Witnesses & Parallel Frontier (`0F`, `K3=0`).
+
+    Composes 4 pure-stdlib execution-safety & speculative-commit modules:
+      - `effect_witness_v1`: digest_tree, named_subjects, bind, abstract_rule
+      - `standing_facts_v1`: establish, touched, at_risk, revalidate (TomasuLLM / Speculative Macro Commit)
+      - `action_replay_under_change_v1`: plan_of, replay_plan, inline_skill
+      - `capability_parallel_frontier_v2`: plan_current_parallel_frontier / plan_parallel_frontier / verify_frontier_currentness
+    """
+    t0 = time.perf_counter()
+    engines_invoked: list[str] = []
+    results: dict[str, Any] = {}
+    commit_safe = True
+
+    # 1. Effect witness (`effect_witness_v1`)
+    if witness_root is not None:
+        from canonical.swe_kernel import effect_witness_v1 as ew
+
+        engines_invoked.append("canonical.swe_kernel.effect_witness_v1")
+        root_p = Path(witness_root).resolve()
+        after_digests = ew.digest_tree(root_p)
+        before_d = dict(witness_before_digests) if witness_before_digests is not None else dict(after_digests)
+        subjects = ew.named_subjects(list(witness_argv or ()), before_d, after_digests)
+        ew_out: dict[str, Any] = {
+            "digest_count": len(after_digests),
+            "after_digests": after_digests,
+            "named_subjects": subjects,
+        }
+        if witness_expected is not None:
+            bound = ew.bind(
+                {"argv": list(witness_argv or ()), "before": before_d, "after": after_digests, "subjects": subjects},
+                list(witness_expected),
+            )
+            ew_out["bound"] = bound
+            if bound.get("bound") or bound.get("ok") or bound.get("matched"):
+                try:
+                    ew_out["abstracted_rule"] = ew.abstract_rule(bound, goal_family=str(witness_goal_family))
+                except Exception:
+                    pass
+        results["effect_witness"] = ew_out
+
+    # 2. Standing facts invalidation & TomasuLLM speculative conflict check (`standing_facts_v1`)
+    if standing_before_state is not None:
+        from canonical.swe_kernel import standing_facts_v1 as sf
+
+        engines_invoked.append("canonical.swe_kernel.standing_facts_v1")
+        before_bytes = {str(k): (v if isinstance(v, bytes) else str(v).encode("utf-8")) for k, v in standing_before_state.items()}
+        facts = sf.establish(before_bytes, step=0)
+        touch_set: set[str] = set()
+        at_risk_list: list[dict[str, Any]] = []
+        if standing_contract is not None and standing_binding is not None:
+            touch_set = sf.touched(dict(standing_contract), dict(standing_binding))
+            at_risk_list = sf.at_risk(facts, touch_set)
+        kept: list[dict[str, Any]] = facts
+        invalidated: list[dict[str, Any]] = []
+        if standing_after_state is not None:
+            after_bytes = {str(k): (v if isinstance(v, bytes) else str(v).encode("utf-8")) for k, v in standing_after_state.items()}
+            kept, invalidated = sf.revalidate(facts, after_bytes, step=int(standing_step))
+            # TomasuLLM in-order commit check: if an untouched standing fact silently mutated, abort commit!
+            untouched_invalidated = [f for f in invalidated if str(f.get("path") or f.get("key") or "") not in touch_set]
+            if untouched_invalidated and standing_contract is not None:
+                commit_safe = False
+        results["standing_facts"] = {
+            "established_count": len(facts),
+            "touched": sorted(touch_set),
+            "at_risk_count": len(at_risk_list),
+            "kept_count": len(kept),
+            "invalidated_count": len(invalidated),
+            "invalidated": invalidated,
+            "speculative_commit_safe": commit_safe,
+        }
+
+    # 3. Action replay under file drift (`action_replay_under_change_v1`)
+    if replay_before is not None and replay_after is not None:
+        from canonical.swe_kernel import action_replay_under_change_v1 as aruc
+
+        engines_invoked.append("canonical.swe_kernel.action_replay_under_change_v1")
+        plan = aruc.plan_of(str(replay_before), str(replay_after))
+        replayed = aruc.replay_plan(plan, str(replay_target_text if replay_target_text is not None else replay_before))
+        results["action_replay"] = {
+            "edit_hunk_count": len(plan),
+            "replayed_text": replayed,
+            "inline_skill_schema": sorted(aruc.inline_skill().keys()),
+        }
+
+    # 4. Capability parallel frontier (`capability_parallel_frontier_v2`)
+    if plan_parallel_frontier or frontier_dict is not None:
+        from canonical.runtime import capability_parallel_frontier_v2 as cpf2
+
+        engines_invoked.append("canonical.runtime.capability_parallel_frontier_v2")
+        if frontier_dict is not None:
+            plan_res = cpf2.plan_parallel_frontier(dict(frontier_dict))
+            curr_res = cpf2.verify_frontier_currentness(dict(frontier_dict))
+            results["parallel_frontier"] = {"plan": plan_res, "currentness": curr_res}
+        else:
+            try:
+                results["parallel_frontier"] = cpf2.plan_current_parallel_frontier()
+            except Exception as exc:
+                loaded = cpf2.load_current_frontier()
+                results["parallel_frontier"] = {
+                    "plan": cpf2.plan_parallel_frontier(loaded),
+                    "dynamic_refresh_warning": f"{type(exc).__name__}: {exc}",
+                }
+
+    passed = bool(engines_invoked) and commit_safe
+    return {
+        "schema": SCHEMA,
+        "pass": passed,
+        "commit_decision": "COMMIT" if passed else ("ROLLBACK__UNEXPECTED_STANDING_FACT_DRIFT" if engines_invoked else "NOOP"),
+        "status": (
+            "PASS__WAVE34_SPECULATIVE_MACRO_COMMIT"
+            if passed
+            else "FAIL_CLOSED__WAVE34_SPECULATIVE_COMMIT_ABORTED"
+        ),
+        "engines_invoked": engines_invoked,
+        "results": results,
+        "model_calls": 0,
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+    }
+
+
 
 
 
