@@ -117,3 +117,17 @@ registration (next execution step, with falsifier #3's 2× slowdown gate). Hones
 constructed arithmetic tasks, one concept-library seed, the observational miss at 6 ms
 (`abs(x-2)`) may partly be a budget artifact — re-test with a raised max_weight before calling
 the branch gap fundamental. Reach on the certified HARD-51 remains 0 passes.
+
+## §7 Execution log (same day)
+
+- **Move 2 — DONE (`7c91733f`).** Re-test: branch gap fundamental (obs misses at
+  max_weight 4–8 × 2 concept seeds, 10/10; union hits in ~190 ms). Merge shipped:
+  `synthesize_body_from_examples` (fail-closed, verified-in-bare-builtins-namespace)
+  wired as the H2 affordance's else-fallback in the planner. End-to-end proof through
+  the real socket: `solve("fix f in impl.py so test_f.py passes")` → **DONE, 861 ms,
+  zero LLM tokens**, held-out points correct. The union is now an option *inside* the
+  unified planner — the "at the unified runtime" claim, made literal.
+- **Move 1 — NEXT.** BRAIN_MODEL default binding in the live route; falsifier #1 gate
+  (test-adjacent only if no extra passes end-to-end).
+- **Move 3 — open.** Report ms+tokens alongside every number (done here: 861 ms / 0);
+  AgentCL dependent-stream scoring next.
