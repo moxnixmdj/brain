@@ -234,6 +234,7 @@
     "referent_dependence_v1",
     "refusal_acquire_retry_v1",
     "relational_guard_addition_symbolic_repair_v1",
+    "repair_admission_v1",
     "repair_journal_v1",
     "repo_component_petri_v1",
     "repo_native_component_mining_v1",
@@ -317,14 +318,14 @@
     "witness_inversion_v1",
     "zygote_worker_pool_v1"
    ],
-   "candidates": 313,
+   "candidates": 314,
    "frontier_function": "resolve a repository issue from a text description",
    "harvested_all": 112,
    "harvested_executable_top": 8,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 25,
-   "indexed_all": 293,
+   "indexed_all": 294,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -364,7 +365,7 @@
      ],
      "path": "canonical/swe_kernel/causal_nexus_v1.py",
      "score": 36.0,
-     "sha256": "ca055b6cf4b5d226",
+     "sha256": "3fe354afac608848",
      "source_index": true,
      "summary": "Causal Nexus: expected-value abduction, single-site counterfactual blame, lens synthesis,"
     },
@@ -404,7 +405,7 @@
      ],
      "path": "canonical/swe_kernel/canonical_swe_spine_v1.py",
      "score": 35.25,
-     "sha256": "dc4fd7aba2853c2d",
+     "sha256": "435c77752cc3239a",
      "source_index": true,
      "summary": "Canonical Unified Polyglot SWE Spine (`canonical_swe_spine_v1`)."
     },
@@ -651,6 +652,26 @@
     {
      "adapter_module_match": false,
      "anchored": 4.5,
+     "harvested": false,
+     "matched": [
+      "repair@doc",
+      "patch@doc",
+      "swe@doc",
+      "repair@symbol",
+      "fault@doc",
+      "oracle@doc",
+      "synthes@doc",
+      "candidate@doc"
+     ],
+     "path": "canonical/swe_kernel/repair_admission_v1.py",
+     "score": 26.0,
+     "sha256": "3cacd287ac051539",
+     "source_index": true,
+     "summary": "Repair Admission Gate (`repair_admission_v1`)."
+    },
+    {
+     "adapter_module_match": false,
+     "anchored": 4.5,
      "harvested": true,
      "matched": [
       "repair@doc",
@@ -804,29 +825,9 @@
      ],
      "path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
      "score": 23.5,
-     "sha256": "ee0f375d71cf91e7",
+     "sha256": "ce593e90204393a2",
      "source_index": true,
      "summary": "Futamura \"Compile Away the Frontier\" Unified Leapfrog Kernel (`K3 = 0`)."
-    },
-    {
-     "adapter_module_match": true,
-     "anchored": 9.0,
-     "harvested": false,
-     "matched": [
-      "ast@doc",
-      "oracle@doc",
-      "repair@symbol",
-      "synthes@doc",
-      "fault@symbol",
-      "mutation@symbol",
-      "oracle@symbol",
-      "repair@doc"
-     ],
-     "path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
-     "score": 23.5,
-     "sha256": "2ea067a8cc0f65af",
-     "source_index": true,
-     "summary": "Unified Unfamiliar-Name Frontier Leapfrog Engine (`K3 = 0`, `$0` spend, Elon's First Law)."
     }
    ],
    "vendored_donors_excluded": 2
@@ -1311,7 +1312,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 15.0,
-     "sha256": "4603d20e858b1bbb",
+     "sha256": "4c5706c65f451279",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -1644,7 +1645,7 @@
      ],
      "path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
      "score": 9.0,
-     "sha256": "ee0f375d71cf91e7",
+     "sha256": "ce593e90204393a2",
      "source_index": true,
      "summary": "Futamura \"Compile Away the Frontier\" Unified Leapfrog Kernel (`K3 = 0`)."
     },
@@ -1710,7 +1711,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 7.5,
-     "sha256": "4603d20e858b1bbb",
+     "sha256": "4c5706c65f451279",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -1893,7 +1894,7 @@
      ],
      "path": "canonical/swe_kernel/canonical_boundary_router_v1.py",
      "score": 4.5,
-     "sha256": "ae472d40dd308416",
+     "sha256": "7b032e420a1323fd",
      "source_index": true,
      "summary": "Canonical BoundaryRouter & Compounding Closed-Loop Orchestrator (`0I`)."
     },
@@ -2287,7 +2288,7 @@
      ],
      "path": "canonical/swe_kernel/causal_nexus_v1.py",
      "score": 25.75,
-     "sha256": "ca055b6cf4b5d226",
+     "sha256": "3fe354afac608848",
      "source_index": true,
      "summary": "Causal Nexus: expected-value abduction, single-site counterfactual blame, lens synthesis,"
     },
@@ -2327,7 +2328,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 24.5,
-     "sha256": "4603d20e858b1bbb",
+     "sha256": "4c5706c65f451279",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -2567,7 +2568,7 @@
      ],
      "path": "canonical/swe_kernel/semantic_causal_engine_v1.py",
      "score": 19.0,
-     "sha256": "bc9dfd665ff9203e",
+     "sha256": "ac2d36a67cf99489",
      "source_index": true,
      "summary": "Semantic-Causal Program Understanding, Universal Meaning E-Graph & Angelic CEGIS Engine."
     },
@@ -2906,7 +2907,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 17.75,
-     "sha256": "4603d20e858b1bbb",
+     "sha256": "4c5706c65f451279",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -3832,7 +3833,7 @@
      ],
      "path": "canonical/swe_kernel/causal_nexus_v1.py",
      "score": 19.25,
-     "sha256": "ca055b6cf4b5d226",
+     "sha256": "3fe354afac608848",
      "source_index": true,
      "summary": "Causal Nexus: expected-value abduction, single-site counterfactual blame, lens synthesis,"
     },
@@ -4721,7 +4722,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 13.25,
-     "sha256": "4603d20e858b1bbb",
+     "sha256": "4c5706c65f451279",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -4863,13 +4864,13 @@
  "method": "weighted lexical evidence over module stem, docstring and symbol names; frontier vocabulary and this repository's own vocabulary in one table",
  "min_score": 3.0,
  "model_calls": 0,
- "modules_scanned": 3372,
+ "modules_scanned": 3375,
  "network_calls": 0,
  "per_domain": 25,
  "reachability": {
   "coding_agents": {
    "chance_route_recall": 0.1997,
-   "chance_source_recall": 0.1371,
+   "chance_source_recall": 0.1374,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -5017,7 +5018,7 @@
   },
   "computer_use": {
    "chance_route_recall": 0.0632,
-   "chance_source_recall": 0.0681,
+   "chance_source_recall": 0.068,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -5309,7 +5310,7 @@
   },
   "instant_learning": {
    "chance_route_recall": 0.171,
-   "chance_source_recall": 0.0844,
+   "chance_source_recall": 0.0843,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -5457,7 +5458,7 @@
   },
   "memory": {
    "chance_route_recall": 0.1365,
-   "chance_source_recall": 0.0888,
+   "chance_source_recall": 0.0887,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 1.0,
@@ -5605,7 +5606,7 @@
   },
   "verification_abstention": {
    "chance_route_recall": 0.2011,
-   "chance_source_recall": 0.1508,
+   "chance_source_recall": 0.1506,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 1.0,
@@ -5751,7 +5752,7 @@
   },
   "world_model": {
    "chance_route_recall": 0.1149,
-   "chance_source_recall": 0.062,
+   "chance_source_recall": 0.0619,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
