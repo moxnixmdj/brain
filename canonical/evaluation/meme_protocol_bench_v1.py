@@ -559,6 +559,12 @@ def self_check(per_op: int = 4) -> Dict[str, Any]:
     liar = run_sut(LiarSUT(), instances)
     stub = run_sut(StubSUT(), instances)
     discrimination = round(honest["rate"] - max(liar["rate"], stub["rate"]), 4)
+    trustworthy = (
+        honest["rate"] == 1.0
+        and liar["rate"] < 0.5
+        and stub["rate"] < 0.5
+        and discrimination >= 0.5
+    )
     return {
         "schema": f"{SCHEMA}_SELF_CHECK",
         "honest_rate": honest["rate"],
@@ -566,10 +572,10 @@ def self_check(per_op: int = 4) -> Dict[str, Any]:
         "liar_false_success_claims": liar["false_success_claims"],
         "stub_rate": stub["rate"],
         "discrimination": discrimination,
-        "trustworthy": honest["rate"] == 1.0
-        and liar["rate"] < 0.5
-        and stub["rate"] < 0.5
-        and discrimination >= 0.5,
+        "trustworthy": trustworthy,
+        # The same fact in the repo-wide self-check vocabulary, so an unattended caller (the
+        # dark-matter adjudicator) can read this module's verdict without a per-module special case.
+        "verdict": "SELF_CHECK_PASS" if trustworthy else "SELF_CHECK_FAIL",
     }
 
 

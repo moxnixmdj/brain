@@ -1,0 +1,299 @@
+{
+ "ablation": {
+  "candidates": 227,
+  "command": "--min-loc 140 --no-probe",
+  "counts": {
+   "BROKEN": 0,
+   "IMPORTS_ONLY": 227,
+   "MISSING_SUBSTRATE": 0,
+   "PROVEN": 0
+  },
+  "expect_exit": 0,
+  "note": "With execution disabled every candidate collapses into one indistinguishable state, so the six PROVEN verdicts cannot have come from static reading.",
+  "run_digest_sha256": "f677999735ef2780094eb4080e7739f422a8bb2e2f21c6fcdc25785f8afa799c"
+ },
+ "broken_quarantine": [
+  {
+   "error": "SyntaxError: unexpected character after line continuation character (livebench_legacy_predecessor_compiler_audit_v1.py, line 139)",
+   "loc": 220,
+   "module": "canonical.runtime.livebench_legacy_predecessor_compiler_audit_v1",
+   "path": "canonical/runtime/livebench_legacy_predecessor_compiler_audit_v1.py",
+   "probe": "IMPORT_ERROR",
+   "required_arguments": null
+  },
+  {
+   "error": "SyntaxError: closing parenthesis ']' does not match opening parenthesis '(' (osworld_v21_app_policy_overlay_v1.py, line 152)",
+   "loc": 261,
+   "module": "canonical.runtime.osworld_v21_app_policy_overlay_v1",
+   "path": "canonical/runtime/osworld_v21_app_policy_overlay_v1.py",
+   "probe": "IMPORT_ERROR",
+   "required_arguments": null
+  },
+  {
+   "error": "no finish in 25.0s",
+   "loc": 186,
+   "module": "canonical.runtime.root3_subprocess_final_authorizer_adapter_v2",
+   "path": "canonical/runtime/root3_subprocess_final_authorizer_adapter_v2.py",
+   "probe": "TIMEOUT",
+   "required_arguments": null
+  },
+  {
+   "error": "no finish in 25.0s",
+   "loc": 261,
+   "module": "canonical.runtime.root3_subprocess_mediator_v2",
+   "path": "canonical/runtime/root3_subprocess_mediator_v2.py",
+   "probe": "TIMEOUT",
+   "required_arguments": null
+  },
+  {
+   "error": "no finish in 25.0s",
+   "loc": 559,
+   "module": "canonical.runtime.root3_three_class_attempt_authorizer_v1",
+   "path": "canonical/runtime/root3_three_class_attempt_authorizer_v1.py",
+   "probe": "TIMEOUT",
+   "required_arguments": null
+  },
+  {
+   "error": "no finish in 25.0s",
+   "loc": 236,
+   "module": "canonical.runtime.root3_two_class_attempt_authorizer_v1",
+   "path": "canonical/runtime/root3_two_class_attempt_authorizer_v1.py",
+   "probe": "TIMEOUT",
+   "required_arguments": null
+  },
+  {
+   "error": null,
+   "loc": 453,
+   "module": "canonical.tools.what_the_language_costs_to_check_v1",
+   "path": "canonical/tools/what_the_language_costs_to_check_v1.py",
+   "probe": "SELF_CHECK_NEEDS_ARGS",
+   "required_arguments": [
+    "basis"
+   ]
+  }
+ ],
+ "candidate_rule_repair": {
+  "after": {
+   "no_importer_ge140_non_test": 227,
+   "no_importer_total": 3549
+  },
+  "before": {
+   "no_importer_ge140_non_test": 1996,
+   "no_importer_total": 6114
+  },
+  "consequence": "The substantial unimported bank was overstated by roughly nine times. Any plan sized from 1,996 was sized from the wrong number.",
+  "defect": "The candidate rule compared a bare filename stem against fully dotted import names, so a module reached as `from canonical.<pkg>.<mod> import X` was counted as dark."
+ },
+ "date": "2026-11-26",
+ "every_module_census": {
+  "candidates": 2174,
+  "command": "python3 canonical/tools/dark_matter_adjudicator_v1.py --all-modules --min-loc 140",
+  "conclusion": "Six of 2,174 substantial modules can prove themselves; four of those six got their self-check in this wave.",
+  "counts": {
+   "BROKEN": 7,
+   "IMPORTS_ONLY": 2082,
+   "MISSING_SUBSTRATE": 79,
+   "PROVEN": 6
+  },
+  "expect_exit": 0,
+  "module_total_under_canonical": 6371,
+  "proven_loc": 7479,
+  "proven_share_of_candidates": 0.00276,
+  "run_digest_sha256": "74cd33490ba3d7932a753f4fb61b510c0fee9b59e2c161f5ac3f339b802ffb8a"
+ },
+ "honest_limits": [
+  "PROVEN means one unattended zero-argument self_check() returned a passing verdict in a subprocess. It is evidence that the module's own checks run and pass, not third-party evidence, and a weak self-check passes too.",
+  "IMPORTS_ONLY (2,082 of 2,174) means the module imports cleanly and proves nothing. Import success is not capability; this instrument exists so the two cannot be confused.",
+  "The dependency classifier files third-party absence under MISSING_SUBSTRATE rather than BROKEN. That hides a dependency that no longer exists anywhere: such a module is recorded as unexercisable, not as a defect.",
+  "Seven modules are BROKEN: two real SyntaxErrors, four root3_* modules that never finish importing inside 25 s, and one module whose self_check requires an argument and therefore is not callable unattended. The timeout verdict says as much about the probe budget as about the module.",
+  "The candidate rule was wrong in the first measurement of this wave; the corrected numbers are what this ledger records. The earlier figures (6,114 / 1,996) must not be quoted again."
+ ],
+ "instrument": "canonical/tools/dark_matter_adjudicator_v1.py",
+ "largest_unproven": [
+  {
+   "loc": 7780,
+   "module": "canonical.runtime.astra_runtime"
+  },
+  {
+   "loc": 7554,
+   "module": "canonical.runtime.goal_compiler"
+  },
+  {
+   "loc": 7533,
+   "module": "canonical.runtime.brain_unified_model_v1"
+  },
+  {
+   "loc": 7292,
+   "module": "canonical.runtime.live_brain_route_admission_v1"
+  },
+  {
+   "loc": 6714,
+   "module": "canonical.swe_kernel.unified_epistemic_portfolio_v1"
+  },
+  {
+   "loc": 6712,
+   "module": "canonical.swe_kernel.reverse_tomography_algebra_v1"
+  },
+  {
+   "loc": 6197,
+   "module": "canonical.runtime.unified_hidden_capability_federation_v1"
+  },
+  {
+   "loc": 5175,
+   "module": "canonical.swe_kernel.meta_circular_organ_graph_v1"
+  },
+  {
+   "loc": 4525,
+   "module": "canonical.swe_kernel.angelic_lens_cow_repair_v1"
+  },
+  {
+   "loc": 4401,
+   "module": "canonical.swe_kernel.universal_computer_agent_v1"
+  },
+  {
+   "loc": 4396,
+   "module": "canonical.swe_kernel.canonical_memory_crystallizer_v1"
+  },
+  {
+   "loc": 4303,
+   "module": "canonical.runtime.composer_route_v1"
+  },
+  {
+   "loc": 4221,
+   "module": "canonical.swe_kernel.first_principles_mental_cegis_v1"
+  },
+  {
+   "loc": 4055,
+   "module": "canonical.swe_kernel.canonical_swe_spine_v1"
+  },
+  {
+   "loc": 4028,
+   "module": "canonical.runtime.creature_runtime_v1"
+  },
+  {
+   "loc": 3834,
+   "module": "canonical.runtime.goal_front_compiler_v1"
+  },
+  {
+   "loc": 3793,
+   "module": "canonical.runtime.frontier_seven_moves_runtime_v1"
+  },
+  {
+   "loc": 3785,
+   "module": "canonical.swe_kernel.metamorphic_habitation_zipper_v1"
+  },
+  {
+   "loc": 3422,
+   "module": "canonical.swe_kernel.angelic_cegis_repair_v1"
+  },
+  {
+   "loc": 3392,
+   "module": "canonical.swe_kernel.egraph_and_deductive_synthesizer_v1"
+  },
+  {
+   "loc": 3357,
+   "module": "canonical.runtime.futamura_leapfrog_kernel_v1"
+  },
+  {
+   "loc": 3299,
+   "module": "canonical.swe_kernel.causal_cegis_inventor_v1"
+  },
+  {
+   "loc": 3233,
+   "module": "canonical.runtime.raw_goal_trace_acceptance_v1"
+  },
+  {
+   "loc": 3210,
+   "module": "canonical.swe_kernel.petri_cow_splicing_engine_v1"
+  },
+  {
+   "loc": 3036,
+   "module": "canonical.runtime.computer_env_v1"
+  }
+ ],
+ "no_importer_census": {
+  "candidates": 227,
+  "command": "python3 canonical/tools/dark_matter_adjudicator_v1.py --min-loc 140",
+  "conclusion": "Not one of the substantial unimported modules can prove it runs.",
+  "counts": {
+   "BROKEN": 2,
+   "IMPORTS_ONLY": 197,
+   "MISSING_SUBSTRATE": 28,
+   "PROVEN": 0
+  },
+  "expect_exit": 0,
+  "proven_loc": 0,
+  "run_digest_sha256": "673dcbebd1f88f1cc363bf1f7d4006b215754a0577abf4b4d09d7f2ce491636a"
+ },
+ "proven": [
+  {
+   "checks": 6,
+   "contract_source": "this_wave",
+   "loc": 4702,
+   "module": "canonical.swe_kernel.semantic_causal_engine_v1",
+   "path": "canonical/swe_kernel/semantic_causal_engine_v1.py",
+   "stage": "self_check"
+  },
+  {
+   "checks": null,
+   "contract_source": "pre_existing",
+   "loc": 650,
+   "module": "canonical.evaluation.meme_protocol_bench_v1",
+   "path": "canonical/evaluation/meme_protocol_bench_v1.py",
+   "stage": "self_check"
+  },
+  {
+   "checks": 10,
+   "contract_source": "this_wave",
+   "loc": 594,
+   "module": "canonical.swe_kernel.metamorphic_laws_v1",
+   "path": "canonical/swe_kernel/metamorphic_laws_v1.py",
+   "stage": "self_check"
+  },
+  {
+   "checks": 8,
+   "contract_source": "this_wave",
+   "loc": 577,
+   "module": "canonical.swe_kernel.producer_lineage_graph_v1",
+   "path": "canonical/swe_kernel/producer_lineage_graph_v1.py",
+   "stage": "self_check"
+  },
+  {
+   "checks": 8,
+   "contract_source": "pre_existing",
+   "loc": 499,
+   "module": "canonical.swe_kernel.meme_protocol_memory_v1",
+   "path": "canonical/swe_kernel/meme_protocol_memory_v1.py",
+   "stage": "self_check"
+  },
+  {
+   "checks": 5,
+   "contract_source": "this_wave",
+   "loc": 457,
+   "module": "canonical.tools.dark_matter_adjudicator_v1",
+   "path": "canonical/tools/dark_matter_adjudicator_v1.py",
+   "stage": "self_check"
+  }
+ ],
+ "schema": "BRAIN_DARK_MATTER_ADJUDICATION_V1",
+ "unexercisable_by_dependency": {
+  "by_root_dependency": {
+   "/mnt/data": 9,
+   "PIL": 15,
+   "apt_cli_probe": 2,
+   "auto_apt_cli_acquisition": 1,
+   "cad_partspec": 1,
+   "cadquery": 2,
+   "cv2": 4,
+   "dotenv": 16,
+   "numpy": 3,
+   "polars": 2,
+   "pydantic": 3,
+   "stirrup": 17,
+   "sympy": 2,
+   "thrift": 1,
+   "websocket": 1
+  },
+  "total": 79
+ }
+}
