@@ -3,7 +3,7 @@
   "claim_limit": "a score is evidence that the module's own text says it does this work; it is not evidence that the work is correct",
   "domains": {
    "coding_agents": {
-    "candidates": 287,
+    "candidates": 290,
     "frontier_function": "resolve a repository issue from a text description",
     "harvested_all": 101,
     "hidden_share_all": 0.014,
@@ -108,7 +108,7 @@
     ]
    },
    "computer_use": {
-    "candidates": 145,
+    "candidates": 146,
     "frontier_function": "drive a GUI it has never seen",
     "harvested_all": 24,
     "hidden_share_all": 0.014,
@@ -213,10 +213,10 @@
     ]
    },
    "continual_learning": {
-    "candidates": 28,
+    "candidates": 29,
     "frontier_function": "keep improving without forgetting or drifting",
     "harvested_all": 8,
-    "hidden_share_all": 0.071,
+    "hidden_share_all": 0.069,
     "indexed_all": 17,
     "top": [
      {
@@ -287,6 +287,14 @@
       "capability": false,
       "executable_surface": false,
       "indexed_as_source": false,
+      "path": "canonical/runtime/gradient_free_law_consolidation_v1.py",
+      "score": 5.25,
+      "summary": "Play 2 — Consolidation Without Gradients (`gradient_free_law_consolidation_v1`)."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": false,
       "path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
       "score": 5.0,
       "summary": "Cross-file repair with separate staged and in-place protocols."
@@ -306,19 +314,11 @@
       "path": "canonical/tools/derived_value_measure_v1.py",
       "score": 4.75,
       "summary": "Is the wall a budget, or is it that the value the page wants cannot be EXPRESSED?"
-     },
-     {
-      "capability": false,
-      "executable_surface": false,
-      "indexed_as_source": true,
-      "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
-      "score": 4.5,
-      "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
      }
     ]
    },
    "instant_learning": {
-    "candidates": 173,
+    "candidates": 174,
     "frontier_function": "adapt from one episode without touching weights",
     "harvested_all": 65,
     "hidden_share_all": 0.006,
@@ -423,7 +423,7 @@
     ]
    },
    "memory": {
-    "candidates": 184,
+    "candidates": 188,
     "frontier_function": "context that stays correct as it fills",
     "harvested_all": 49,
     "hidden_share_all": 0.005,
@@ -528,7 +528,7 @@
     ]
    },
    "verification_abstention": {
-    "candidates": 321,
+    "candidates": 323,
     "frontier_function": "know when you do not know, and prove what you did",
     "harvested_all": 53,
     "hidden_share_all": 0.04,
@@ -633,7 +633,7 @@
     ]
    },
    "world_model": {
-    "candidates": 122,
+    "candidates": 123,
     "frontier_function": "predict what an action does before doing it",
     "harvested_all": 37,
     "hidden_share_all": 0.041,
@@ -714,6 +714,14 @@
      {
       "capability": false,
       "executable_surface": false,
+      "indexed_as_source": false,
+      "path": "canonical/runtime/state_contract_world_model_v1.py",
+      "score": 16.5,
+      "summary": "Play 1 — State-as-Contract World Model (`state_contract_world_model_v1`)."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
       "indexed_as_source": true,
       "path": "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
       "score": 15.5,
@@ -726,14 +734,6 @@
       "path": "canonical/swe_kernel/safe_action_model_v1.py",
       "score": 15.5,
       "summary": "A SAFE action model: one observation is enough, and every plan it admits is a fact."
-     },
-     {
-      "capability": false,
-      "executable_surface": true,
-      "indexed_as_source": false,
-      "path": "canonical/tools/one_experience_every_consequence_v1.py",
-      "score": 15.0,
-      "summary": "One action in, every consequence out: what one experience buys, and where it stops."
      }
     ]
    }
@@ -741,51 +741,51 @@
   "present": true,
   "reachability": {
    "coding_agents": {
-    "chance_route_recall": 0.0356,
-    "chance_source_recall": 0.1276,
+    "chance_route_recall": 0.0411,
+    "chance_source_recall": 0.1292,
     "frontier_source_hit_recall": 1.0,
     "native_route_hit_recall": 1.0
    },
    "computer_use": {
-    "chance_route_recall": 0.0134,
-    "chance_source_recall": 0.0642,
+    "chance_route_recall": 0.0152,
+    "chance_source_recall": 0.0648,
     "frontier_source_hit_recall": 0.667,
-    "native_route_hit_recall": 0.333
+    "native_route_hit_recall": 0.667
    },
    "continual_learning": {
-    "chance_route_recall": 0.0067,
-    "chance_source_recall": 0.0125,
+    "chance_route_recall": 0.0087,
+    "chance_source_recall": 0.013,
     "frontier_source_hit_recall": 0.333,
     "native_route_hit_recall": 0.333
    },
    "instant_learning": {
-    "chance_route_recall": 0.0022,
-    "chance_source_recall": 0.0767,
+    "chance_route_recall": 0.0043,
+    "chance_source_recall": 0.0773,
     "frontier_source_hit_recall": 1.0,
-    "native_route_hit_recall": 0.0
+    "native_route_hit_recall": 1.0
    },
    "memory": {
-    "chance_route_recall": 0.0067,
-    "chance_source_recall": 0.0812,
+    "chance_route_recall": 0.013,
+    "chance_source_recall": 0.0831,
     "frontier_source_hit_recall": 0.667,
     "native_route_hit_recall": 0.333
    },
    "verification_abstention": {
-    "chance_route_recall": 0.0757,
-    "chance_source_recall": 0.1432,
+    "chance_route_recall": 0.0779,
+    "chance_source_recall": 0.1444,
     "frontier_source_hit_recall": 0.667,
     "native_route_hit_recall": 0.333
    },
    "world_model": {
-    "chance_route_recall": 0.0045,
-    "chance_source_recall": 0.054,
+    "chance_route_recall": 0.0065,
+    "chance_source_recall": 0.0545,
     "frontier_source_hit_recall": 1.0,
-    "native_route_hit_recall": 0.0
+    "native_route_hit_recall": 0.333
    }
   },
   "schema": "BRAIN_MODEL_ANATOMY_V1",
   "source": "canonical/unified_model/DOMAIN_ATLAS_V1.json",
-  "source_sha256": "62dd0f66cf8d7bdf10a2500fc9b679d03126d13db0b307e608937e71431802d6"
+  "source_sha256": "67ccd73a82ad7ea2ba3b47c6d5bd631c5ce9513f96da283961290ef7c38c92bf"
  },
  "capabilities": [
   {
@@ -33053,7 +33053,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "85a5d307fa6869527a113709a8bd5ef2b4cab489e179b7c86f18c90bd91490be"
+  "value": "2c17c5a9546d14f19881675cd5aefa80c8843894f1e96411af42311f2c35ae5d"
  },
  "engines": [
   {
@@ -40997,7 +40997,7 @@
    "imported_by_count": 0,
    "kind": "EXTENDED_SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/tools/domain_atlas_v1.py",
-   "sha256": "70e3acfe107964a41230f15f5c37b6ec4cbe81c0becab093f3c888a0ce6cda4b",
+   "sha256": "d3c089b94327a77d815d9f7b75f2176f4d437649b431ac54bbbd0242b64cfaee",
    "summary": "Where the machine's five frontier functions actually live, and whether the model can see them.",
    "symbol_count": 9,
    "symbols": [
@@ -84416,7 +84416,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/tools/domain_atlas_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "70e3acfe107964a41230f15f5c37b6ec4cbe81c0becab093f3c888a0ce6cda4b",
+   "sha256": "d3c089b94327a77d815d9f7b75f2176f4d437649b431ac54bbbd0242b64cfaee",
    "summary": "Where the machine's five frontier functions actually live, and whether the model can see them.",
    "triggers": [
     "domain",
@@ -150508,7 +150508,7 @@
   "included_source_count": 2299,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "cd1b303cb98321807e13256d49a19625f304d22b042f2b09c5d4e2dd1b291317"
+  "source_tree_digest": "9e8e5b9594d0ef07935c49bd860225706c7a3b099615798032ba08d81c5b0894"
  },
  "research_index": [
   {

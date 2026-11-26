@@ -416,6 +416,21 @@ def reachability(atlas: Mapping[str, Any], root: pathlib.Path,
                     adapter_of[cid] = str(row["adapter_module"])
         except (OSError, ValueError):
             pass
+        # ENGINES WERE INVISIBLE TO THIS MEASUREMENT. `adapter_of` was built from the bound
+        # registry alone, so a route that returned an engine -- the majority of the model's 116
+        # routing targets -- resolved to a string that can never be a module stem, and scored
+        # MISS even when the engine's carrier module is a catalogued candidate for the domain.
+        # Measured 2026-11-25: 26 of the instant_learning candidates are already carried by
+        # engines the runtime routes to. The capability existed; the measurement could not see
+        # that it had been reached. An engine's own declared `carrier_path` is its adapter.
+        try:
+            for engine_id, engine in (model.engines.items()
+                                      if isinstance(model.engines, dict) else ()):
+                carrier = ((engine.get("route") or {}).get("carrier_path") or "")
+                if carrier.endswith(".py"):
+                    adapter_of[str(engine_id)] = pathlib.PurePosixPath(carrier).stem
+        except (AttributeError, TypeError):
+            pass
         # Chance baselines make the recalls readable: a domain with 287 candidate stems
         # would score 100% against a five-document draw even with no navigation at all.
         indexed_total = max(1, len(model.source_index))
