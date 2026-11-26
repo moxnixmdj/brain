@@ -1,0 +1,5528 @@
+{
+  "kind": "producer-run on pinned public practice game engine; not a leaderboard or private grade",
+  "env_tree_sha256": "bf57484673964be96b1a3fa160f4d0ba5b731ffd33fa8aa1d074113ad7778152",
+  "toolkit": {
+    "arc-agi": "0.9.9",
+    "arcengine": "0.9.3",
+    "toolkit_python": "3.12.12"
+  },
+  "producer_manifest": {
+    "canonical/runtime/brain_unified_model_v1.py": "cf3bb500480ae17d93fd673af1b21406d5028eebb62d8bd1a32b0e791213ffed",
+    "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json": "0111c1d87e4efbdc304a880248be0a41c0ab20a489cf223e63b856e4903930f2",
+    "canonical/runtime/creature_runtime_v1.py": "ec0c6fc25892c74fe0e3e29e86ac2336e2011a92463bee2930836c69b86d0b13",
+    "canonical/runtime/environment_learning_v1.py": "8e89a69304f4eee9cc2bcfc9d70a0d15a2f7510f2ebc9117799b536f81f6f534",
+    "canonical/runtime/systematic_exploration_v1.py": "1f19cba07292638c9de34cd186b5659b882c2cf418388d599e7a46fbb07a15e2",
+    "canonical/runtime/frame_program_v1.py": "3a16476a150496529de7d01aee9924cd05a6732c4cd65e3877f9391d96bb5731",
+    "canonical/tools/screen_port_worker_v1.py": "eabe7b044a1cb25309952cdc0b67bc1db85b601e51988c93c707d80ee2334331",
+    "canonical/swe_kernel/witnessed_revision_store_v1.py": "7175369927a18963ab353f8a38896fe4b9cbccbf20179ed457d1e76d7d68d046",
+    "canonical/swe_kernel/revision_head_v1.py": "efae4eba829f5c6901edab61afb13114af09203382ad13bad15bb47745e7ad42",
+    "canonical/runtime/memory_policy_v1.py": "5805444ca177717c8d1434aa2d40bc5dbb75214b9eba71fdb545446ac4cd2f65"
+  },
+  "one_teacher": "a3850719dffddc88049e3a5c671c4d32eeb89aca077bf19c1941e0d9d681a163",
+  "preparation_plan_length": 17,
+  "storage": {
+    "raw": {
+      "teacher": "a3850719dffddc88049e3a5c671c4d32eeb89aca077bf19c1941e0d9d681a163",
+      "root_id": "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39",
+      "program_id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+      "observed_actions": 17,
+      "planned_actions": 17,
+      "program_bytes": 1450,
+      "file_seconds": 0.031671,
+      "db_bytes": 45056,
+      "db_sha256": "19a61b5919603364f6e4535ee7f25be6fd283fcc82ebc4ed6a70e477edbde2ba"
+    },
+    "lifted": {
+      "teacher": "a3850719dffddc88049e3a5c671c4d32eeb89aca077bf19c1941e0d9d681a163",
+      "root_id": "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39",
+      "program_id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+      "observed_actions": 17,
+      "planned_actions": 17,
+      "program_bytes": 1492,
+      "file_seconds": 0.019763,
+      "db_bytes": 45056,
+      "db_sha256": "dae78850b29ceb513c0333f6f5dc53942d32721dfc50d1ab6e46941dab16225c"
+    },
+    "shortened": {
+      "teacher": "a3850719dffddc88049e3a5c671c4d32eeb89aca077bf19c1941e0d9d681a163",
+      "root_id": "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39",
+      "program_id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+      "observed_actions": 17,
+      "planned_actions": 5,
+      "program_bytes": 547,
+      "file_seconds": 0.017151,
+      "db_bytes": 45056,
+      "db_sha256": "bf6b66055ed10f615e358cc7f9d4af5fc644781f03d38a5a374e6f8ef10aafd5"
+    },
+    "deleted": {
+      "teacher": "a3850719dffddc88049e3a5c671c4d32eeb89aca077bf19c1941e0d9d681a163",
+      "root_id": "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39",
+      "program_id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+      "observed_actions": 17,
+      "planned_actions": 5,
+      "program_bytes": 547,
+      "file_seconds": 0.014567,
+      "db_bytes": 45056,
+      "db_sha256": "bf774575c90a371495c2da8c77ab73d86d28a742f87eecec67721621b93ebf47"
+    }
+  },
+  "retrieval": [],
+  "rows": [
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "ar25-0c556536",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 64,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.48281
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "bp35-0a0ad940",
+      "level_at_start": 0,
+      "budget": 42,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 42,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 42,
+          "experiment_acts": 41,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 42,
+        "score": 0.0
+      },
+      "wall_seconds": 0.49754
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "cd82-fb555c5d",
+      "level_at_start": 0,
+      "budget": 110,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 110,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 110,
+          "experiment_acts": 109,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 110,
+        "score": 0.0
+      },
+      "wall_seconds": 0.6504
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "cn04-2fe56bfb",
+      "level_at_start": 0,
+      "budget": 58,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 58,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 58,
+          "experiment_acts": 58,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 58,
+        "score": 0.0
+      },
+      "wall_seconds": 0.43792
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "dc22-fdcac232",
+      "level_at_start": 0,
+      "budget": 118,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 118,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 118,
+          "experiment_acts": 118,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 118,
+        "score": 0.0
+      },
+      "wall_seconds": 0.72886
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "ft09-0d8bbf25",
+      "level_at_start": 0,
+      "budget": 86,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 86,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 86,
+          "experiment_acts": 86,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 86,
+        "score": 0.0
+      },
+      "wall_seconds": 0.60566
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "g50t-5849a774",
+      "level_at_start": 0,
+      "budget": 156,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 156,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 156,
+          "experiment_acts": 155,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 156,
+        "score": 0.0
+      },
+      "wall_seconds": 0.53045
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "ka59-38d34dbb",
+      "level_at_start": 0,
+      "budget": 56,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 56,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 56,
+          "experiment_acts": 56,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 56,
+        "score": 0.0
+      },
+      "wall_seconds": 0.50805
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "lf52-271a04aa",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 64,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.58746
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "lp85-305b61c3",
+      "level_at_start": 0,
+      "budget": 34,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": true,
+        "spent": 17,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+          "budget_spent": 17,
+          "experiment_acts": 17,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 17,
+        "score": 2.7777777777777777
+      },
+      "wall_seconds": 0.32525
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "ls20-9607627b",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 44,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.30744
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "m0r0-492f87ba",
+      "level_at_start": 0,
+      "budget": 60,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 60,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 60,
+          "experiment_acts": 60,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 60,
+        "score": 0.0
+      },
+      "wall_seconds": 0.41562
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "r11l-495a7899",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 44,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.49656
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "re86-8af5384d",
+      "level_at_start": 0,
+      "budget": 52,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 52,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 52,
+          "experiment_acts": 52,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 52,
+        "score": 0.0
+      },
+      "wall_seconds": 0.32276
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "s5i5-18d95033",
+      "level_at_start": 0,
+      "budget": 40,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 40,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 40,
+          "experiment_acts": 40,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 40,
+        "score": 0.0
+      },
+      "wall_seconds": 0.43046
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "sb26-7fbdac44",
+      "level_at_start": 0,
+      "budget": 36,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 36,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 36,
+          "experiment_acts": 36,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 36,
+        "score": 0.0
+      },
+      "wall_seconds": 0.41293
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "sc25-635fd71a",
+      "level_at_start": 0,
+      "budget": 72,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 72,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 72,
+          "experiment_acts": 71,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 72,
+        "score": 0.0
+      },
+      "wall_seconds": 0.61423
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "sk48-d8078629",
+      "level_at_start": 0,
+      "budget": 122,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 122,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 122,
+          "experiment_acts": 122,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 122,
+        "score": 0.0
+      },
+      "wall_seconds": 0.70069
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "sp80-589a99af",
+      "level_at_start": 0,
+      "budget": 78,
+      "preparation_actions": 0,
+      "actual_resets": 2,
+      "producer": {
+        "advanced": false,
+        "spent": 78,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 78,
+          "experiment_acts": 76,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 78,
+        "score": 0.0
+      },
+      "wall_seconds": 0.53425
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "su15-1944f8ab",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 43,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.49905
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "tn36-ef4dde99",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 63,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.55334
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "tr87-cd924810",
+      "level_at_start": 0,
+      "budget": 108,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 108,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 108,
+          "experiment_acts": 108,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 108,
+        "score": 0.0
+      },
+      "wall_seconds": 0.31766
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "tu93-0768757b",
+      "level_at_start": 0,
+      "budget": 38,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 38,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 38,
+          "experiment_acts": 38,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 38,
+        "score": 0.0
+      },
+      "wall_seconds": 0.23964
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "vc33-5430563c",
+      "level_at_start": 0,
+      "budget": 14,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 14,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 14,
+          "experiment_acts": 14,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 14,
+        "score": 0.0
+      },
+      "wall_seconds": 0.28548
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_start",
+      "game": "wa30-ee6fef47",
+      "level_at_start": 0,
+      "budget": 142,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 142,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 142,
+          "experiment_acts": 142,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 142,
+        "score": 0.0
+      },
+      "wall_seconds": 0.27766
+    },
+    {
+      "arm": "empty",
+      "condition": "reflected_next_level",
+      "game": "lp85-305b61c3",
+      "level_at_start": 1,
+      "budget": 76,
+      "preparation_actions": 17,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 76,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 76,
+          "experiment_acts": 76,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "EMPTY_STORE",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 93,
+        "score": 2.7777777777777777
+      },
+      "wall_seconds": 0.59801
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "ar25-0c556536",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 64,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.46123
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "bp35-0a0ad940",
+      "level_at_start": 0,
+      "budget": 42,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 42,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 42,
+          "experiment_acts": 41,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 42,
+        "score": 0.0
+      },
+      "wall_seconds": 0.53795
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "cd82-fb555c5d",
+      "level_at_start": 0,
+      "budget": 110,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 110,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 110,
+          "experiment_acts": 109,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 110,
+        "score": 0.0
+      },
+      "wall_seconds": 0.74141
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "cn04-2fe56bfb",
+      "level_at_start": 0,
+      "budget": 58,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 58,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 58,
+          "experiment_acts": 58,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 58,
+        "score": 0.0
+      },
+      "wall_seconds": 0.48457
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "dc22-fdcac232",
+      "level_at_start": 0,
+      "budget": 118,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 118,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 118,
+          "experiment_acts": 118,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 118,
+        "score": 0.0
+      },
+      "wall_seconds": 0.89061
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "ft09-0d8bbf25",
+      "level_at_start": 0,
+      "budget": 86,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 86,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 86,
+          "experiment_acts": 86,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 86,
+        "score": 0.0
+      },
+      "wall_seconds": 0.56777
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "g50t-5849a774",
+      "level_at_start": 0,
+      "budget": 156,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 156,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 156,
+          "experiment_acts": 155,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 156,
+        "score": 0.0
+      },
+      "wall_seconds": 0.42282
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "ka59-38d34dbb",
+      "level_at_start": 0,
+      "budget": 56,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 56,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 56,
+          "experiment_acts": 56,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 56,
+        "score": 0.0
+      },
+      "wall_seconds": 0.40144
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "lf52-271a04aa",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 64,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.48156
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "lp85-305b61c3",
+      "level_at_start": 0,
+      "budget": 34,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": true,
+        "spent": 17,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+          "budget_spent": 17,
+          "experiment_acts": 17,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 17,
+        "score": 2.7777777777777777
+      },
+      "wall_seconds": 0.30199
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "ls20-9607627b",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 44,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.26219
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "m0r0-492f87ba",
+      "level_at_start": 0,
+      "budget": 60,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 60,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 60,
+          "experiment_acts": 60,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 60,
+        "score": 0.0
+      },
+      "wall_seconds": 0.41145
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "r11l-495a7899",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 44,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.37562
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "re86-8af5384d",
+      "level_at_start": 0,
+      "budget": 52,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 52,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 52,
+          "experiment_acts": 52,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 52,
+        "score": 0.0
+      },
+      "wall_seconds": 0.20887
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "s5i5-18d95033",
+      "level_at_start": 0,
+      "budget": 40,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 40,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 40,
+          "experiment_acts": 40,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 40,
+        "score": 0.0
+      },
+      "wall_seconds": 0.33134
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "sb26-7fbdac44",
+      "level_at_start": 0,
+      "budget": 36,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 36,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 36,
+          "experiment_acts": 36,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 36,
+        "score": 0.0
+      },
+      "wall_seconds": 0.43067
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "sc25-635fd71a",
+      "level_at_start": 0,
+      "budget": 72,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 72,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 72,
+          "experiment_acts": 71,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 72,
+        "score": 0.0
+      },
+      "wall_seconds": 0.48967
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "sk48-d8078629",
+      "level_at_start": 0,
+      "budget": 122,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 122,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 122,
+          "experiment_acts": 122,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 122,
+        "score": 0.0
+      },
+      "wall_seconds": 0.66483
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "sp80-589a99af",
+      "level_at_start": 0,
+      "budget": 78,
+      "preparation_actions": 0,
+      "actual_resets": 2,
+      "producer": {
+        "advanced": false,
+        "spent": 78,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 78,
+          "experiment_acts": 76,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 78,
+        "score": 0.0
+      },
+      "wall_seconds": 0.546
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "su15-1944f8ab",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 43,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.4482
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "tn36-ef4dde99",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 63,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.48835
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "tr87-cd924810",
+      "level_at_start": 0,
+      "budget": 108,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 108,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 108,
+          "experiment_acts": 108,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 108,
+        "score": 0.0
+      },
+      "wall_seconds": 0.31425
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "tu93-0768757b",
+      "level_at_start": 0,
+      "budget": 38,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 38,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 38,
+          "experiment_acts": 38,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 38,
+        "score": 0.0
+      },
+      "wall_seconds": 0.22699
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "vc33-5430563c",
+      "level_at_start": 0,
+      "budget": 14,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 14,
+        "replay": {
+          "reason": "INAPPLICABLE_PROGRAM",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false,
+          "detail": "version, display size or remaining budget mismatch"
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 14,
+          "experiment_acts": 14,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 14,
+        "score": 0.0
+      },
+      "wall_seconds": 0.2501
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_start",
+      "game": "wa30-ee6fef47",
+      "level_at_start": 0,
+      "budget": 142,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 142,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 142,
+          "experiment_acts": 142,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 142,
+        "score": 0.0
+      },
+      "wall_seconds": 0.25368
+    },
+    {
+      "arm": "raw",
+      "condition": "reflected_next_level",
+      "game": "lp85-305b61c3",
+      "level_at_start": 1,
+      "budget": 76,
+      "preparation_actions": 17,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 76,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 76,
+          "experiment_acts": 76,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7254881ef80310981fb3f087a065e41ff9fc5daa6cf189402ce8e31775972111",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 93,
+        "score": 2.7777777777777777
+      },
+      "wall_seconds": 0.65081
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "ar25-0c556536",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 64,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.46285
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "bp35-0a0ad940",
+      "level_at_start": 0,
+      "budget": 42,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 42,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 42,
+          "experiment_acts": 41,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 42,
+        "score": 0.0
+      },
+      "wall_seconds": 0.47542
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "cd82-fb555c5d",
+      "level_at_start": 0,
+      "budget": 110,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 110,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 110,
+          "experiment_acts": 109,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 110,
+        "score": 0.0
+      },
+      "wall_seconds": 0.647
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "cn04-2fe56bfb",
+      "level_at_start": 0,
+      "budget": 58,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 58,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 58,
+          "experiment_acts": 58,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 58,
+        "score": 0.0
+      },
+      "wall_seconds": 0.42866
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "dc22-fdcac232",
+      "level_at_start": 0,
+      "budget": 118,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 118,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 118,
+          "experiment_acts": 118,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 118,
+        "score": 0.0
+      },
+      "wall_seconds": 0.70246
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "ft09-0d8bbf25",
+      "level_at_start": 0,
+      "budget": 86,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 86,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 86,
+          "experiment_acts": 86,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 86,
+        "score": 0.0
+      },
+      "wall_seconds": 0.58369
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "g50t-5849a774",
+      "level_at_start": 0,
+      "budget": 156,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 156,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 156,
+          "experiment_acts": 155,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 156,
+        "score": 0.0
+      },
+      "wall_seconds": 0.42345
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "ka59-38d34dbb",
+      "level_at_start": 0,
+      "budget": 56,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 56,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 56,
+          "experiment_acts": 56,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 56,
+        "score": 0.0
+      },
+      "wall_seconds": 0.41218
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "lf52-271a04aa",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 64,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.50455
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "lp85-305b61c3",
+      "level_at_start": 0,
+      "budget": 34,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": true,
+        "spent": 20,
+        "replay": {
+          "reason": "AMBIGUOUS_OR_UNOFFERED",
+          "actions": 2,
+          "confirmed_transitions": 2,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+          "budget_spent": 17,
+          "experiment_acts": 17,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 20,
+        "score": 2.006944444444444
+      },
+      "wall_seconds": 0.28583
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "ls20-9607627b",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 44,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.3007
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "m0r0-492f87ba",
+      "level_at_start": 0,
+      "budget": 60,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 60,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 60,
+          "experiment_acts": 60,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 60,
+        "score": 0.0
+      },
+      "wall_seconds": 0.44307
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "r11l-495a7899",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 44,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.43609
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "re86-8af5384d",
+      "level_at_start": 0,
+      "budget": 52,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 52,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 52,
+          "experiment_acts": 52,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 52,
+        "score": 0.0
+      },
+      "wall_seconds": 0.22818
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "s5i5-18d95033",
+      "level_at_start": 0,
+      "budget": 40,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 40,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 40,
+          "experiment_acts": 40,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 40,
+        "score": 0.0
+      },
+      "wall_seconds": 0.38451
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "sb26-7fbdac44",
+      "level_at_start": 0,
+      "budget": 36,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 36,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 36,
+          "experiment_acts": 36,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 36,
+        "score": 0.0
+      },
+      "wall_seconds": 0.42705
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "sc25-635fd71a",
+      "level_at_start": 0,
+      "budget": 72,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 72,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 72,
+          "experiment_acts": 71,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 72,
+        "score": 0.0
+      },
+      "wall_seconds": 0.55377
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "sk48-d8078629",
+      "level_at_start": 0,
+      "budget": 122,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 122,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 122,
+          "experiment_acts": 122,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 122,
+        "score": 0.0
+      },
+      "wall_seconds": 0.68085
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "sp80-589a99af",
+      "level_at_start": 0,
+      "budget": 78,
+      "preparation_actions": 0,
+      "actual_resets": 2,
+      "producer": {
+        "advanced": false,
+        "spent": 78,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 78,
+          "experiment_acts": 76,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 78,
+        "score": 0.0
+      },
+      "wall_seconds": 0.53625
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "su15-1944f8ab",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 43,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.44834
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "tn36-ef4dde99",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 63,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.49435
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "tr87-cd924810",
+      "level_at_start": 0,
+      "budget": 108,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 108,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 108,
+          "experiment_acts": 108,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 108,
+        "score": 0.0
+      },
+      "wall_seconds": 0.31192
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "tu93-0768757b",
+      "level_at_start": 0,
+      "budget": 38,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 38,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 38,
+          "experiment_acts": 38,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 38,
+        "score": 0.0
+      },
+      "wall_seconds": 0.2583
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "vc33-5430563c",
+      "level_at_start": 0,
+      "budget": 14,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 14,
+        "replay": {
+          "reason": "INAPPLICABLE_PROGRAM",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false,
+          "detail": "version, display size or remaining budget mismatch"
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 14,
+          "experiment_acts": 14,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 14,
+        "score": 0.0
+      },
+      "wall_seconds": 0.32079
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_start",
+      "game": "wa30-ee6fef47",
+      "level_at_start": 0,
+      "budget": 142,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 142,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 142,
+          "experiment_acts": 142,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 142,
+        "score": 0.0
+      },
+      "wall_seconds": 0.26805
+    },
+    {
+      "arm": "lifted",
+      "condition": "reflected_next_level",
+      "game": "lp85-305b61c3",
+      "level_at_start": 1,
+      "budget": 76,
+      "preparation_actions": 17,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 76,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 76,
+          "experiment_acts": 76,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "d95c50d2a80204b7390751cf9fe6adccd88874d7fde30b20cf908e34d3b974c6",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 93,
+        "score": 2.7777777777777777
+      },
+      "wall_seconds": 0.5874
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "ar25-0c556536",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 64,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.46117
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "bp35-0a0ad940",
+      "level_at_start": 0,
+      "budget": 42,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 42,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 42,
+          "experiment_acts": 41,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 42,
+        "score": 0.0
+      },
+      "wall_seconds": 0.51084
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "cd82-fb555c5d",
+      "level_at_start": 0,
+      "budget": 110,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 110,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 110,
+          "experiment_acts": 109,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 110,
+        "score": 0.0
+      },
+      "wall_seconds": 0.63685
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "cn04-2fe56bfb",
+      "level_at_start": 0,
+      "budget": 58,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 58,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 58,
+          "experiment_acts": 58,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 58,
+        "score": 0.0
+      },
+      "wall_seconds": 0.43246
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "dc22-fdcac232",
+      "level_at_start": 0,
+      "budget": 118,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 118,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 118,
+          "experiment_acts": 118,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 118,
+        "score": 0.0
+      },
+      "wall_seconds": 0.76292
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "ft09-0d8bbf25",
+      "level_at_start": 0,
+      "budget": 86,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 86,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 86,
+          "experiment_acts": 86,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 86,
+        "score": 0.0
+      },
+      "wall_seconds": 0.69488
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "g50t-5849a774",
+      "level_at_start": 0,
+      "budget": 156,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 156,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 156,
+          "experiment_acts": 155,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 156,
+        "score": 0.0
+      },
+      "wall_seconds": 0.44694
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "ka59-38d34dbb",
+      "level_at_start": 0,
+      "budget": 56,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 56,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 56,
+          "experiment_acts": 56,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 56,
+        "score": 0.0
+      },
+      "wall_seconds": 0.43419
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "lf52-271a04aa",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 64,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.51331
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "lp85-305b61c3",
+      "level_at_start": 0,
+      "budget": 34,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": true,
+        "spent": 5,
+        "replay": {
+          "reason": "PREDICTED_TERMINAL_OBSERVED",
+          "actions": 5,
+          "confirmed_transitions": 5,
+          "terminal_revalidated": true
+        },
+        "cold": null,
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 5,
+        "score": 2.7777777777777777
+      },
+      "wall_seconds": 0.22474
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "ls20-9607627b",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 44,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.27255
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "m0r0-492f87ba",
+      "level_at_start": 0,
+      "budget": 60,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 60,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 60,
+          "experiment_acts": 60,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 60,
+        "score": 0.0
+      },
+      "wall_seconds": 0.4239
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "r11l-495a7899",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 44,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.38432
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "re86-8af5384d",
+      "level_at_start": 0,
+      "budget": 52,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 52,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 52,
+          "experiment_acts": 52,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 52,
+        "score": 0.0
+      },
+      "wall_seconds": 0.21725
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "s5i5-18d95033",
+      "level_at_start": 0,
+      "budget": 40,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 40,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 40,
+          "experiment_acts": 40,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 40,
+        "score": 0.0
+      },
+      "wall_seconds": 0.36163
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "sb26-7fbdac44",
+      "level_at_start": 0,
+      "budget": 36,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 36,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 36,
+          "experiment_acts": 36,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 36,
+        "score": 0.0
+      },
+      "wall_seconds": 0.41357
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "sc25-635fd71a",
+      "level_at_start": 0,
+      "budget": 72,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 72,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 72,
+          "experiment_acts": 71,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 72,
+        "score": 0.0
+      },
+      "wall_seconds": 0.63266
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "sk48-d8078629",
+      "level_at_start": 0,
+      "budget": 122,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 122,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 122,
+          "experiment_acts": 122,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 122,
+        "score": 0.0
+      },
+      "wall_seconds": 0.75183
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "sp80-589a99af",
+      "level_at_start": 0,
+      "budget": 78,
+      "preparation_actions": 0,
+      "actual_resets": 2,
+      "producer": {
+        "advanced": false,
+        "spent": 78,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 78,
+          "experiment_acts": 76,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 78,
+        "score": 0.0
+      },
+      "wall_seconds": 0.74753
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "su15-1944f8ab",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 43,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.4021
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "tn36-ef4dde99",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 63,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.62761
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "tr87-cd924810",
+      "level_at_start": 0,
+      "budget": 108,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 108,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 108,
+          "experiment_acts": 108,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 108,
+        "score": 0.0
+      },
+      "wall_seconds": 0.34433
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "tu93-0768757b",
+      "level_at_start": 0,
+      "budget": 38,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 38,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 38,
+          "experiment_acts": 38,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 38,
+        "score": 0.0
+      },
+      "wall_seconds": 0.25575
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "vc33-5430563c",
+      "level_at_start": 0,
+      "budget": 14,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 14,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 14,
+          "experiment_acts": 14,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 14,
+        "score": 0.0
+      },
+      "wall_seconds": 0.33683
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_start",
+      "game": "wa30-ee6fef47",
+      "level_at_start": 0,
+      "budget": 142,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 142,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 142,
+          "experiment_acts": 142,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 142,
+        "score": 0.0
+      },
+      "wall_seconds": 0.28392
+    },
+    {
+      "arm": "shortened",
+      "condition": "reflected_next_level",
+      "game": "lp85-305b61c3",
+      "level_at_start": 1,
+      "budget": 76,
+      "preparation_actions": 17,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 76,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 76,
+          "experiment_acts": 76,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "SUPPORTED",
+          "support": [
+            {
+              "id": "7b338c7c18c38fc448ff23aad0ff1dae76c746c9c12497f39d26989c84ccf4c8",
+              "parents": [
+                "5905d3e8899ba53aeafff3b75ef252449ed3ce76fb4e46b6c974ae276664fa39"
+              ],
+              "tx": 2,
+              "valid_from": 1,
+              "source": "one live episode"
+            }
+          ]
+        }
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 93,
+        "score": 2.7777777777777777
+      },
+      "wall_seconds": 0.59949
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "ar25-0c556536",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 64,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.46058
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "bp35-0a0ad940",
+      "level_at_start": 0,
+      "budget": 42,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 42,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 42,
+          "experiment_acts": 41,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 42,
+        "score": 0.0
+      },
+      "wall_seconds": 0.47794
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "cd82-fb555c5d",
+      "level_at_start": 0,
+      "budget": 110,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 110,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 110,
+          "experiment_acts": 109,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 110,
+        "score": 0.0
+      },
+      "wall_seconds": 0.62579
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "cn04-2fe56bfb",
+      "level_at_start": 0,
+      "budget": 58,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 58,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 58,
+          "experiment_acts": 58,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 58,
+        "score": 0.0
+      },
+      "wall_seconds": 0.46934
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "dc22-fdcac232",
+      "level_at_start": 0,
+      "budget": 118,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 118,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 118,
+          "experiment_acts": 118,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 118,
+        "score": 0.0
+      },
+      "wall_seconds": 0.78681
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "ft09-0d8bbf25",
+      "level_at_start": 0,
+      "budget": 86,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 86,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 86,
+          "experiment_acts": 86,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 86,
+        "score": 0.0
+      },
+      "wall_seconds": 0.5816
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "g50t-5849a774",
+      "level_at_start": 0,
+      "budget": 156,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 156,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 156,
+          "experiment_acts": 155,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 156,
+        "score": 0.0
+      },
+      "wall_seconds": 0.47705
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "ka59-38d34dbb",
+      "level_at_start": 0,
+      "budget": 56,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 56,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 56,
+          "experiment_acts": 56,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 56,
+        "score": 0.0
+      },
+      "wall_seconds": 0.40778
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "lf52-271a04aa",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 64,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.48725
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "lp85-305b61c3",
+      "level_at_start": 0,
+      "budget": 34,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": true,
+        "spent": 17,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+          "budget_spent": 17,
+          "experiment_acts": 17,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 17,
+        "score": 2.7777777777777777
+      },
+      "wall_seconds": 0.26214
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "ls20-9607627b",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 44,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.32975
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "m0r0-492f87ba",
+      "level_at_start": 0,
+      "budget": 60,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 60,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 60,
+          "experiment_acts": 60,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 60,
+        "score": 0.0
+      },
+      "wall_seconds": 0.41985
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "r11l-495a7899",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 44,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.38582
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "re86-8af5384d",
+      "level_at_start": 0,
+      "budget": 52,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 52,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 52,
+          "experiment_acts": 52,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 52,
+        "score": 0.0
+      },
+      "wall_seconds": 0.22273
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "s5i5-18d95033",
+      "level_at_start": 0,
+      "budget": 40,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 40,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 40,
+          "experiment_acts": 40,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 40,
+        "score": 0.0
+      },
+      "wall_seconds": 0.34425
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "sb26-7fbdac44",
+      "level_at_start": 0,
+      "budget": 36,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 36,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 36,
+          "experiment_acts": 36,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 36,
+        "score": 0.0
+      },
+      "wall_seconds": 0.45901
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "sc25-635fd71a",
+      "level_at_start": 0,
+      "budget": 72,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 72,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 72,
+          "experiment_acts": 71,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 72,
+        "score": 0.0
+      },
+      "wall_seconds": 0.56811
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "sk48-d8078629",
+      "level_at_start": 0,
+      "budget": 122,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 122,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 122,
+          "experiment_acts": 122,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 122,
+        "score": 0.0
+      },
+      "wall_seconds": 0.74399
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "sp80-589a99af",
+      "level_at_start": 0,
+      "budget": 78,
+      "preparation_actions": 0,
+      "actual_resets": 2,
+      "producer": {
+        "advanced": false,
+        "spent": 78,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 78,
+          "experiment_acts": 76,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 78,
+        "score": 0.0
+      },
+      "wall_seconds": 0.59426
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "su15-1944f8ab",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 43,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.47167
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "tn36-ef4dde99",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 63,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.54842
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "tr87-cd924810",
+      "level_at_start": 0,
+      "budget": 108,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 108,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 108,
+          "experiment_acts": 108,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 108,
+        "score": 0.0
+      },
+      "wall_seconds": 0.33498
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "tu93-0768757b",
+      "level_at_start": 0,
+      "budget": 38,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 38,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 38,
+          "experiment_acts": 38,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 38,
+        "score": 0.0
+      },
+      "wall_seconds": 0.21793
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "vc33-5430563c",
+      "level_at_start": 0,
+      "budget": 14,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 14,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 14,
+          "experiment_acts": 14,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 14,
+        "score": 0.0
+      },
+      "wall_seconds": 0.25288
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_start",
+      "game": "wa30-ee6fef47",
+      "level_at_start": 0,
+      "budget": 142,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 142,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 142,
+          "experiment_acts": 142,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 142,
+        "score": 0.0
+      },
+      "wall_seconds": 0.27483
+    },
+    {
+      "arm": "deleted",
+      "condition": "reflected_next_level",
+      "game": "lp85-305b61c3",
+      "level_at_start": 1,
+      "budget": 76,
+      "preparation_actions": 17,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 76,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 76,
+          "experiment_acts": 76,
+          "travel_acts": 0,
+          "surprises": 0
+        },
+        "retrieval": {
+          "status": "UNKNOWN_LOST_SUPPORT",
+          "support": []
+        }
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 93,
+        "score": 2.7777777777777777
+      },
+      "wall_seconds": 0.58513
+    }
+  ]
+}
