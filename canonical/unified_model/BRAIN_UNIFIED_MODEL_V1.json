@@ -33043,7 +33043,7 @@
   "harvested_capabilities": 660,
   "harvested_contract_surfaces": 44,
   "harvested_program_surfaces": 616,
-  "knowledge_documents": 760,
+  "knowledge_documents": 761,
   "promotion_callable": 31,
   "promotion_candidates": 849,
   "receipt_backed_capabilities": 309,
@@ -33056,7 +33056,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "1497143d9eefe11cd5067d5248e7b47a8f2ef9f28a5fd3c42071444d4cd6b430"
+  "value": "eecdc0c025527ba4ff356a7ba3fc8c9ae0650b801be19f72919dffac55ac0877"
  },
  "engines": [
   {
@@ -36486,7 +36486,7 @@
     "carrier_sha256": "e62612e14ad96c71838aeb37dae993a62b93e992bd103b2734771e08d10ada27",
     "entrypoint": "run",
     "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
-    "source_sha256": "7436bbef963ffdd0c1af5819e6854b103fcf7a50f95a7cb261547f9a8dc63b3a"
+    "source_sha256": "1a2b5ecdc67349f4d7c94b93ea3166256ebabf4ef3e22d51d0d10f6e753c05fb"
    },
    "summary": "Algebraic DBSP bi-temporal Z-set memory + Kumiho AGM Supersedes/Depends_On transitive AnalyzeImpact + projectmem <10 us PreCommitFailureGate + SCoRE anytime-valid conformal e-value martingale risk controller.",
    "triggers": [
@@ -36522,7 +36522,7 @@
     "carrier_sha256": "e62612e14ad96c71838aeb37dae993a62b93e992bd103b2734771e08d10ada27",
     "entrypoint": "run",
     "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
-    "source_sha256": "7436bbef963ffdd0c1af5819e6854b103fcf7a50f95a7cb261547f9a8dc63b3a"
+    "source_sha256": "1a2b5ecdc67349f4d7c94b93ea3166256ebabf4ef3e22d51d0d10f6e753c05fb"
    },
    "summary": "Sub-ms Error-Aware L# + Lambda*_M symbolic Mealy instant learner with binary-split numeric guards plus 3-channel Hybrid Computer Use (CLI/File > AX/CDP > Visual) with <5 us Petri guard, OSWorld-Human loop-churn breaker, and PASTE speculative macro commit.",
    "triggers": [
@@ -36559,7 +36559,7 @@
     "carrier_sha256": "e62612e14ad96c71838aeb37dae993a62b93e992bd103b2734771e08d10ada27",
     "entrypoint": "run",
     "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
-    "source_sha256": "7436bbef963ffdd0c1af5819e6854b103fcf7a50f95a7cb261547f9a8dc63b3a"
+    "source_sha256": "1a2b5ecdc67349f4d7c94b93ea3166256ebabf4ef3e22d51d0d10f6e753c05fb"
    },
    "summary": "Futamura self-compiling 4-rung cascade (Rung 0 <100 us alpha-normalized AST rules -> Rung 1 byte-effect -> Rung 2 PEP-669/settrace Ochiai + byte-span AST splice + os.fork CoW + ddmin + mutation + SCoRE e-value -> optional Rung 3 proposer) compiling verified wins back to Rung 0 plus GrowLibm sleep compression.",
    "triggers": [
@@ -36596,7 +36596,7 @@
     "carrier_sha256": "e62612e14ad96c71838aeb37dae993a62b93e992bd103b2734771e08d10ada27",
     "entrypoint": "run",
     "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
-    "source_sha256": "7436bbef963ffdd0c1af5819e6854b103fcf7a50f95a7cb261547f9a8dc63b3a"
+    "source_sha256": "1a2b5ecdc67349f4d7c94b93ea3166256ebabf4ef3e22d51d0d10f6e753c05fb"
    },
    "summary": "Real OS kernel-confined 3-channel computer-use executor uniting os_isolation_v1 (CapEff=0) + HybridComputerUsePetriSupervisor + Ring-0 byte_effect_oracle_v1 verification + atomic CoW workspace rollback + PreCommitFailureGate.",
    "triggers": [
@@ -36631,7 +36631,7 @@
     "carrier_sha256": "e62612e14ad96c71838aeb37dae993a62b93e992bd103b2734771e08d10ada27",
     "entrypoint": "run",
     "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
-    "source_sha256": "7436bbef963ffdd0c1af5819e6854b103fcf7a50f95a7cb261547f9a8dc63b3a"
+    "source_sha256": "1a2b5ecdc67349f4d7c94b93ea3166256ebabf4ef3e22d51d0d10f6e753c05fb"
    },
    "summary": "Unified multi-file Python repository Futamura solver uniting Rung-0 compiled skills + stdlib_cow_test_runner_v1 os.fork CoW overlays + multi-file dynamic coverage + extended AST + 13-law residual wall closers + repo component Petri + Ring-0 ddmin/mutation/conformal gate + automatic Rung-0 compile-back.",
    "triggers": [
@@ -91058,7 +91058,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "7436bbef963ffdd0c1af5819e6854b103fcf7a50f95a7cb261547f9a8dc63b3a",
+   "sha256": "1a2b5ecdc67349f4d7c94b93ea3166256ebabf4ef3e22d51d0d10f6e753c05fb",
    "summary": "Futamura \"Compile Away the Frontier\" Unified Leapfrog Kernel (`K3 = 0`).",
    "triggers": [
     "futamura",
@@ -142996,6 +142996,81 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 9887,
+   "headings": [
+    "Wave 46 — The Oracle Was Unfalsifiable",
+    "1. The defect that invalidated the flagship: an oracle that cannot say no",
+    "2. The admission gate forbade the repairs it exists to admit",
+    "3. The model artefact was stale, and the LOC cap was breached",
+    "4. What the repaired kernel actually does",
+    "5. Regression status",
+    "6. Honest limits — what this does *not* show",
+    "7. Next bottleneck"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WAVE46_FALSIFIABLE_ORACLE_20261126_V1.md",
+   "sha256": "3e0e44589d567799bad84960edd646e281eb18f938f63f0f588d88388dfb4184",
+   "summary": "**Date:** 2026-11-26 · **Branch:** `arena/fe676c2a-brain` · **Base:** `ac5c1015`",
+   "terms": {
+    "03d": 3,
+    "10": 3,
+    "12": 5,
+    "16": 7,
+    "1f": 4,
+    "999": 3,
+    "add": 5,
+    "admitted": 3,
+    "after": 3,
+    "artefact": 4,
+    "base": 4,
+    "both": 4,
+    "branch": 4,
+    "case": 5,
+    "compiled": 4,
+    "def": 6,
+    "every": 7,
+    "exactly": 4,
+    "exec": 4,
+    "false": 4,
+    "fix": 6,
+    "kernel": 5,
+    "law": 5,
+    "lines": 4,
+    "ms": 4,
+    "multiply": 4,
+    "never": 4,
+    "no": 4,
+    "not": 10,
+    "now": 6,
+    "ok": 11,
+    "one": 6,
+    "only": 7,
+    "oracle": 4,
+    "r0": 4,
+    "refused": 8,
+    "result": 4,
+    "return": 11,
+    "rule": 6,
+    "rung": 5,
+    "score": 5,
+    "so": 10,
+    "still": 7,
+    "test": 8,
+    "true": 9,
+    "verified": 5,
+    "were": 4,
+    "yes": 4
+   },
+   "title": "Wave 46 — The Oracle Was Unfalsifiable",
+   "title_terms": [
+    "46",
+    "oracle",
+    "unfalsifiable",
+    "wave"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 8154,
    "headings": [
     "Web-app read-back gates adapter DONE — 2026-11-20 (V1)",
@@ -163634,10 +163709,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 2461,
+  "included_source_count": 2462,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "6c39daa41d1054270a9e846e10d97feb80211023e85e8c42676d3f8aaf839e11"
+  "source_tree_digest": "9cd143ea54a60ef99e320af1fcc3de9d091ecb0a047816f2b2d83eb308474d48"
  },
  "research_index": [
   {
@@ -370381,9 +370456,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
-   "sha256": "7436bbef963ffdd0c1af5819e6854b103fcf7a50f95a7cb261547f9a8dc63b3a",
+   "sha256": "1a2b5ecdc67349f4d7c94b93ea3166256ebabf4ef3e22d51d0d10f6e753c05fb",
    "summary": "Futamura \"Compile Away the Frontier\" Unified Leapfrog Kernel (`K3 = 0`).",
-   "symbol_count": 32,
+   "symbol_count": 35,
    "symbols": [
     "CompiledRung0Rule",
     "CompiledSymbolicMealyMachine",
@@ -370418,7 +370493,6 @@
     "compiledsymbolicmealymachine": 1,
     "conformalevaluegate": 1,
     "dbspbeliefrevisionbus": 1,
-    "digest_work_dir": 1,
     "errorawaresymbolicmealylearner": 1,
     "eval_candidate_in_cow_fork": 1,
     "eval_candidate_in_process": 1,
@@ -370432,13 +370506,14 @@
     "kernel": 2,
     "leapfrog": 2,
     "line_byte_offsets": 1,
+    "load_rung0_rules": 1,
     "localize_fault_ochiai": 1,
     "match_template": 1,
     "preorder_signature": 1,
-    "restore_work_dir_bytes": 1,
     "rule_bucket": 1,
     "run_case_with_line_trace": 1,
-    "snapshot_work_dir_bytes": 1,
+    "rung0_store_path": 1,
+    "save_rung0_rules": 1,
     "splice_ast_byte_span": 1,
     "unified": 1,
     "v1": 1,

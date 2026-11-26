@@ -1,0 +1,25 @@
+{
+ "rules": [
+  {
+   "after_template": "__V0__ + __V1__",
+   "before_template": "__V0__ - __V1__",
+   "failures": 0,
+   "hits": 0,
+   "rubin_tau_hat": 1.0,
+   "rule_id": "futamura_bc9b67fba5ed",
+   "source_rung": 2,
+   "successes": 1
+  },
+  {
+   "after_template": "__V0__ * __V1__",
+   "before_template": "__V0__ / __V1__",
+   "failures": 0,
+   "hits": 0,
+   "rubin_tau_hat": 1.0,
+   "rule_id": "futamura_e2b9b6a8da61",
+   "source_rung": 2,
+   "successes": 1
+  }
+ ],
+ "store_version": 1
+}

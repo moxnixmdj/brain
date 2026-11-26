@@ -31,8 +31,10 @@ Nothing here is a benchmark score. These are unit-level honesty checks.
 """
 from __future__ import annotations
 
-import hashlib
+import json
+import os
 import pathlib
+import tempfile
 import unittest
 
 from canonical.runtime import futamura_leapfrog_kernel_v1 as fk
@@ -107,7 +109,24 @@ class FalsifiableOracleTests(unittest.TestCase):
 
 
 class Rung0ReplayTransferTests(unittest.TestCase):
-    """Teach once, replay free -- and say exactly how far that transfers."""
+    """Teach once, replay free -- and say exactly how far that transfers.
+
+    Each test gets a scratch law store: replay is learned state, so a test that
+    read the repo's real store would assert on whatever had been learned before
+    it ran, and would pass or fail for reasons outside the test.
+    """
+
+    def setUp(self) -> None:
+        self._tmp = tempfile.TemporaryDirectory(prefix="rung0_scratch_")
+        self._prev = os.environ.get("BRAIN_FUTAMURA_STORE")
+        os.environ["BRAIN_FUTAMURA_STORE"] = str(pathlib.Path(self._tmp.name) / "laws.json")
+
+    def tearDown(self) -> None:
+        if self._prev is None:
+            os.environ.pop("BRAIN_FUTAMURA_STORE", None)
+        else:
+            os.environ["BRAIN_FUTAMURA_STORE"] = self._prev
+        self._tmp.cleanup()
 
     TEACH = {
         "kind": "python_repair",
@@ -160,6 +179,89 @@ class Rung0ReplayTransferTests(unittest.TestCase):
         ]:
             res = casc.solve({"kind": "python_repair", "source": src, "test_cases": [case]})
             self.assertFalse(res.get("pass"), msg=f"false pass on {case!r}")
+
+
+class LawPersistenceTests(unittest.TestCase):
+    """A law that dies with the interpreter is a cache, not a compilation.
+
+    Measured 2026-11-26: a fresh process started with 0 rules and re-spent Rung 2
+    synthesis on a law the previous process had already learned, so "compile
+    once, replay forever" was false outside one process.
+    """
+
+    def setUp(self) -> None:
+        self._tmp = tempfile.TemporaryDirectory(prefix="rung0_store_")
+        self._prev = os.environ.get("BRAIN_FUTAMURA_STORE")
+        os.environ["BRAIN_FUTAMURA_STORE"] = str(pathlib.Path(self._tmp.name) / "laws.json")
+
+    def tearDown(self) -> None:
+        if self._prev is None:
+            os.environ.pop("BRAIN_FUTAMURA_STORE", None)
+        else:
+            os.environ["BRAIN_FUTAMURA_STORE"] = self._prev
+        self._tmp.cleanup()
+
+    TEACH = {
+        "kind": "python_repair",
+        "source": "def add(a, b):\n    return a - b\n",
+        "test_cases": ["add(2, 3) == 5"],
+    }
+
+    def test_law_survives_into_a_new_cascade_instance(self) -> None:
+        first = fk.FutamuraSelfCompilingCascade()
+        first.solve(dict(self.TEACH))
+        self.assertEqual(first.rule_count(), 1)
+        second = fk.FutamuraSelfCompilingCascade()
+        self.assertEqual(second.rule_count(), 1, msg="law did not persist")
+        self.assertEqual(len(second.persisted_law_ids()), 1)
+
+    def test_persisted_law_replays_at_rung_zero(self) -> None:
+        fk.FutamuraSelfCompilingCascade().solve(dict(self.TEACH))
+        fresh = fk.FutamuraSelfCompilingCascade()
+        src = "def plus(x, y):\n    return x - y\n"
+        case = "plus(10, 4) == 14"
+        res = fresh.solve({"kind": "python_repair", "source": src, "test_cases": [case]})
+        self.assertEqual(res.get("rung_used"), 0, msg="persisted law did not replay at Rung 0")
+        self.assertTrue(fk._eval_candidate_in_process(res["patched_source"], [case]))
+
+    def test_corrupt_store_yields_no_laws_and_no_crash(self) -> None:
+        pathlib.Path(os.environ["BRAIN_FUTAMURA_STORE"]).write_text("{ not json", encoding="utf-8")
+        self.assertEqual(fk.FutamuraSelfCompilingCascade().rule_count(), 0)
+
+    def test_unparseable_template_is_dropped(self) -> None:
+        pathlib.Path(os.environ["BRAIN_FUTAMURA_STORE"]).write_text(
+            json.dumps({"store_version": 1, "rules": [
+                {"rule_id": "evil", "before_template": "not python ((", "after_template": "__V0__"}
+            ]}),
+            encoding="utf-8",
+        )
+        self.assertEqual(fk.FutamuraSelfCompilingCascade().rule_count(), 0)
+
+    def test_a_wrong_persisted_law_cannot_fake_a_pass(self) -> None:
+        """Storage may supply a bad law; the oracle is still what decides."""
+        pathlib.Path(os.environ["BRAIN_FUTAMURA_STORE"]).write_text(
+            json.dumps({"store_version": 1, "rules": [
+                {"rule_id": "wrong", "before_template": "__V0__ - __V1__",
+                 "after_template": "__V0__ * __V1__"}
+            ]}),
+            encoding="utf-8",
+        )
+        casc = fk.FutamuraSelfCompilingCascade()
+        res = casc.solve(dict(self.TEACH))
+        if res.get("pass"):
+            self.assertTrue(
+                fk._eval_candidate_in_process(res["patched_source"], self.TEACH["test_cases"]),
+                msg="a persisted wrong law produced an unverified pass",
+            )
+
+    def test_human_can_delete_a_law_without_retraining(self) -> None:
+        """Section 2 test: knowledge lives outside the weights and is removable."""
+        fk.FutamuraSelfCompilingCascade().solve(dict(self.TEACH))
+        store = pathlib.Path(os.environ["BRAIN_FUTAMURA_STORE"])
+        payload = json.loads(store.read_text(encoding="utf-8"))
+        payload["rules"] = []
+        store.write_text(json.dumps(payload), encoding="utf-8")
+        self.assertEqual(fk.FutamuraSelfCompilingCascade().rule_count(), 0)
 
 
 class FormatVersusDataTests(unittest.TestCase):

@@ -1444,6 +1444,50 @@ def _instantiate_template(template: ast.AST, bindings: Mapping[str, ast.AST]) ->
     return res
 
 
+RUNG0_STORE_VERSION = 1
+RUNG0_STORE_RELPATH = Path("canonical/astra_runtime/state/futamura_rung0_laws_v1.json")
+
+
+def rung0_store_path() -> Path:
+    """Where compiled laws persist between processes.
+
+    Default is the repo state dir; `BRAIN_FUTAMURA_STORE` overrides it so a test
+    can point at a scratch file rather than mutating the checked-in store.
+    """
+    override = os.environ.get("BRAIN_FUTAMURA_STORE")
+    if override:
+        return Path(override)
+    return Path(__file__).resolve().parents[2] / RUNG0_STORE_RELPATH
+
+
+def load_rung0_rules(path: Path | None = None) -> list[dict[str, Any]]:
+    """Read persisted laws. Corrupt or absent store yields no laws, never a crash."""
+    target = path or rung0_store_path()
+    try:
+        raw = target.read_text(encoding="utf-8")
+    except OSError:
+        return []
+    try:
+        payload = json.loads(raw)
+    except (ValueError, TypeError):
+        return []
+    if not isinstance(payload, dict) or payload.get("store_version") != RUNG0_STORE_VERSION:
+        return []
+    rules = payload.get("rules")
+    return [r for r in rules if isinstance(r, dict)] if isinstance(rules, list) else []
+
+
+def save_rung0_rules(rules: list[dict[str, Any]], path: Path | None = None) -> Path:
+    """Write persisted laws atomically."""
+    target = path or rung0_store_path()
+    target.parent.mkdir(parents=True, exist_ok=True)
+    payload = {"store_version": RUNG0_STORE_VERSION, "rules": rules}
+    tmp = target.with_suffix(target.suffix + ".tmp")
+    tmp.write_text(json.dumps(payload, indent=1, sort_keys=True), encoding="utf-8")
+    tmp.replace(target)
+    return target
+
+
 @dataclass
 class CompiledRung0Rule:
     rule_id: str
@@ -1463,15 +1507,78 @@ class CompiledRung0Rule:
 class FutamuraSelfCompilingCascade:
     """4-Rung Self-Compiling Cascade that compiles verified Rung 1/2/3 wins back into `< 50 us` Rung 0."""
 
-    def __init__(self) -> None:
+    def __init__(self, *, persist_on_init: bool = True) -> None:
         self._rung0_by_key: dict[tuple[str, ...], list[CompiledRung0Rule]] = {}
-        # Coarse (kind, operator) index so a rule can fire on a nested
-        # operand whose exact signature differs from the learned one.
+        # Coarse (kind, operator) index so a rule can fire on a nested operand
+        # whose exact signature differs from the learned one.
         self._rung0_by_bucket: dict[tuple[str, ...], list[CompiledRung0Rule]] = {}
         self._rules_by_id: dict[str, CompiledRung0Rule] = {}
         self.belief_bus = DBSPBeliefRevisionBus()
         self.repair_engine = ZeroOverheadCoWZygoteRepairEngine()
         self.compile_history: list[dict[str, Any]] = []
+        # Laws survive the process, not just the session. Measured 2026-11-26:
+        # a fresh interpreter saw 0 rules and re-spent Rung 2 on a law it had
+        # already learned, which makes "compile once, replay forever" false
+        # outside a single process.
+        self._persisted: dict[str, dict[str, Any]] = {}
+        if persist_on_init:
+            self._hydrate_persisted_laws()
+
+    def _hydrate_persisted_laws(self) -> None:
+        """Rebuild compiled laws from disk, re-validating each one.
+
+        A persisted law is a *claim* that held in an earlier interpreter. It is
+        re-armed only if its templates re-parse and rebuild a usable rule;
+        anything unparseable is dropped rather than trusted. The store is
+        ordinary editable data, so a human can delete a bad law by hand and the
+        next process simply will not have it.
+        """
+        for row in load_rung0_rules():
+            try:
+                before_ast = ast.parse(str(row["before_template"]), mode="eval").body
+                after_ast = ast.parse(str(row["after_template"]), mode="eval").body
+            except (KeyError, SyntaxError, TypeError, ValueError):
+                continue
+            rule = CompiledRung0Rule(
+                rule_id=str(row.get("rule_id") or f"persisted_{len(self._persisted)}"),
+                preorder_key=_preorder_signature(before_ast),
+                before_template_src=str(row["before_template"]),
+                after_template_src=str(row["after_template"]),
+                before_ast=before_ast,
+                after_ast=after_ast,
+                source_rung=int(row.get("source_rung") or 2),
+                successes=int(row.get("successes") or 0),
+                failures=int(row.get("failures") or 0),
+                rubin_tau_hat=float(row.get("rubin_tau_hat") or 1.0),
+            )
+            if rule.rule_id in self._rules_by_id:
+                continue
+            self._rules_by_id[rule.rule_id] = rule
+            self._rung0_by_key.setdefault(rule.preorder_key, []).append(rule)
+            self._rung0_by_bucket.setdefault(_rule_bucket(rule.before_ast), []).append(rule)
+            self._persisted[rule.rule_id] = dict(row)
+
+    def persisted_law_ids(self) -> list[str]:
+        """Rule ids that came from disk, as opposed to compiled this process."""
+        return sorted(self._persisted)
+
+    def save_laws(self, path: Path | None = None) -> Path:
+        """Persist all non-quarantined laws with their observed counters."""
+        rows: list[dict[str, Any]] = [
+            {
+                "rule_id": rule_id,
+                "before_template": rule.before_template_src,
+                "after_template": rule.after_template_src,
+                "source_rung": int(rule.source_rung),
+                "hits": int(rule.hits),
+                "successes": int(rule.successes),
+                "failures": int(rule.failures),
+                "rubin_tau_hat": float(rule.rubin_tau_hat),
+            }
+            for rule_id, rule in sorted(self._rules_by_id.items())
+            if not rule.quarantined
+        ]
+        return save_rung0_rules(rows, path)
 
     def rule_count(self) -> int:
         return sum(1 for r in self._rules_by_id.values() if not r.quarantined)
@@ -1567,6 +1674,11 @@ class FutamuraSelfCompilingCascade:
         self._rules_by_id[rule_id] = rule
         self._rung0_by_key.setdefault(pkey, []).append(rule)
         self._rung0_by_bucket.setdefault(_rule_bucket(rule.before_ast), []).append(rule)
+        # A law that dies with the interpreter is a cache, not a compilation.
+        try:
+            self.save_laws()
+        except OSError:
+            pass
         self.belief_bus.ingest_delta(
             record_id=rule_id,
             key="rung0_compiled_rule",
