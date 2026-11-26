@@ -7,6 +7,7 @@ a transcript search nor a synthetic graph benchmark. All facts/rules on disk.
 from __future__ import annotations
 
 import re
+from contextlib import closing
 from canonical.swe_kernel.witnessed_revision_store_v1 import RevisionStore
 
 _OWNER = r'(?:my|our|the)\s+'
@@ -31,10 +32,15 @@ def _tokens(s):
 
 class DialogueReader:
     def __init__(self,path):
-        self.store=RevisionStore(path)
+        self.store = path if isinstance(path, RevisionStore) else RevisionStore(path)
 
     def ingest(self, role, text, *, turn, source):
         if role != 'user': return 0  # an assistant suggestion is not a user's assertion
+        with closing(self.store._connect()) as db, db:
+            db.execute('BEGIN IMMEDIATE')
+            return self._ingest_tx(db,text,turn,source)
+
+    def _ingest_tx(self, db, text, turn, source):
         count=0
         for sentence in re.split(r'(?<=[.?!;])\s+|\n+',text):
             s=sentence.strip().rstrip('.;!').strip()
@@ -43,37 +49,46 @@ class DialogueReader:
             if m:=_COND.fullmatch(s):
                 key, trigger, head, value=m.groups()
                 rule=[_key(key),_value(trigger),_key(head),_value(value)]
-                self.store.append('set','rule:'+repr(rule),value=rule,**kw); count+=1
+                self.store.append_tx(db,'set','rule:'+repr(rule),value=rule,**kw); count+=1
             elif m:=_REMOVE.fullmatch(s):
-                self.store.append('delete','fact:'+_key(m[1]),**kw);count+=1
+                self.store.append_tx(db,'delete','fact:'+_key(m[1]),**kw);count+=1
             elif m:=_ASSIGN.search(s):
                 key,value=_key(m[1]),_value(m[2]); root='fact:'+key
-                fact=self.store.append('set',root,value=value,**kw);count+=1
+                fact=self.store.append_tx(db,'set',root,value=value,**kw);count+=1
                 # Only fire rules actually uttered before this update. An old
                 # conclusion depends on that exact version; never infer its replacement.
                 pending=[(key,value,fact['id'])]; fired=set()
                 while pending:
                     slot,val,parent=pending.pop()
-                    for rk in self.store.keys('rule:'):
+                    for rk in self.store.keys_tx(db,'rule:',valid_at=turn):
                         if rk in fired: continue
-                        row=self.store.query(rk,valid_at=turn)
+                        row=self.store.query_tx(db,rk,valid_at=turn)
                         if row['status']!='SUPPORTED':continue
                         dep,trigger,head,replacement=row['value']
                         if dep!=slot or _key(trigger)!=_key(val):continue
                         fired.add(rk)
-                        entry=self.store.append('revise','fact:'+head,value=replacement,
+                        current=self.store.query_tx(db,'fact:'+head,valid_at=turn)
+                        # Keep a second, independent justification. A conflicting
+                        # pair of active rule conclusions is unknown, not last-rule-wins.
+                        additive=(current['value']==replacement or any(p['parents'] for p in current['support']))
+                        entry=self.store.append_tx(db,'derive' if additive else 'revise','fact:'+head,value=replacement,
                                  parents=[parent,row['support'][0]['id']],**kw)
                         pending.append((head,replacement,entry['id']));count+=1
         return count
 
-    def answer(self, question):
+    def answer(self, question, *, valid_at=2**63-1, known_at=2**63-1):
+        with closing(self.store._connect()) as db, db:
+            db.execute('BEGIN')
+            return self._answer_tx(db,question,valid_at,known_at)
+
+    def _answer_tx(self, db, question, valid_at, known_at):
         q=_tokens(question);ranked=[]
-        for name in self.store.keys('fact:'):
+        for name in self.store.keys_tx(db,'fact:',valid_at,known_at):
             t=_tokens(name[5:]); hits=len(t&q)
             if hits and hits==len(t):ranked.append((hits,name))
         ranked.sort(reverse=True)
         if not ranked or (len(ranked)>1 and ranked[0][0]==ranked[1][0]):
             return {'answer':'Uncertain','status':'NO_UNIQUE_SLOT'}
-        row=self.store.query(ranked[0][1]);status=row['status']
+        row=self.store.query_tx(db,ranked[0][1],valid_at=valid_at,known_at=known_at);status=row['status']
         return {'answer':str(row['value']) if status=='SUPPORTED' else 'Uncertain',
                 'status':status,'key':ranked[0][1],'evidence_ids':[r['id'] for r in row['support']]}

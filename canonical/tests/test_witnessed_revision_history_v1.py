@@ -88,3 +88,20 @@ def test_dialogue_uses_assertions_not_suggestions_or_future_turns(tmp_path):
     ingest(5,'Forget my switch.')
     assert r.answer('What is my switch?')['status']=='DELETED'
     assert r.answer('What is my serial number?')['answer']=='Uncertain'
+
+
+def test_both_front_doors_see_one_committed_turn_and_its_as_of_answer(tmp_path):
+    from canonical.runtime.brain_unified_model_v1 import open_model
+    from canonical.runtime.creature_runtime_v1 import Creature
+    c = Creature('reader', tmp_path, 20); m=open_model(); path=tmp_path/'revisions.sqlite'
+    rules=('If my switch is up, then my lamp is red. If my backup is on, then my lamp is red.')
+    assert c.revision_memory('ingest_turn',role='user',text=rules,turn=1,source='s')=={'statements_grounded':2}
+    for i,statement in enumerate(['My switch is up.', 'My backup is on.', 'Forget my switch.'],2):
+        m.revision_memory(path,'ingest_turn',role='user',text=statement,turn=i,source=f's{i}')
+    both=c.revision_memory('answer_question',question='What is my lamp?',valid_at=3)
+    assert both['answer']=='red' and len(both['evidence_ids'])==2
+    assert len(c.revision_memory('answer_question',question='What is my lamp?')['evidence_ids'])==1
+    # A new, longer slot must not change which key an old question designates.
+    c.revision_memory('ingest_turn',role='user',text='My backup lamp is green.',turn=5,source='s5')
+    assert c.revision_memory('answer_question',question='What is my backup lamp?',valid_at=2)['answer']=='red'
+    assert c.revision_memory('answer_question',question='What is my backup lamp?')['answer']=='green'

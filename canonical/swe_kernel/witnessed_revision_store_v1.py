@@ -23,6 +23,7 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 
+from canonical.runtime.memory_policy_v1 import MemoryPolicyError, can_read_memory, can_write_memory
 from canonical.swe_kernel import revision_head_v1 as head
 
 
@@ -37,8 +38,14 @@ def _time(value: int) -> int:
 
 
 class RevisionStore:
-    def __init__(self, path: str | Path):
+    def __init__(self, path: str | Path, *, read_only=False):
         self.path = Path(path)
+        self.read_only = read_only
+        if not can_read_memory():
+            raise MemoryPolicyError('revision memory is off')
+        if self.read_only or not can_write_memory():
+            if not self.path.is_file():raise MemoryPolicyError('no initialized read-only revision store')
+            return  # in particular, do not create, migrate or consolidate during an ablation
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with closing(self._connect()) as db, db:
             db.executescript('''CREATE TABLE IF NOT EXISTS event(
@@ -49,7 +56,10 @@ class RevisionStore:
             head.initialize(db,self._visible)
 
     def _connect(self):
-        db = sqlite3.connect(self.path)
+        if not can_read_memory():raise MemoryPolicyError('revision memory is off')
+        if self.read_only or not can_write_memory():
+            db=sqlite3.connect(self.path.resolve().as_uri()+'?mode=ro',uri=True)
+        else:db = sqlite3.connect(self.path)
         db.row_factory = sqlite3.Row
         return db
 
@@ -94,17 +104,25 @@ class RevisionStore:
                              and all(live.get(p, False) for p in json.loads(r['parents'])))
         return roots, live
 
+    @staticmethod
+    def keys_tx(db, prefix, valid_at=head.MAX_TIME, known_at=head.MAX_TIME):
+        return [r[0] for r in db.execute('SELECT DISTINCT key FROM event '
+                'WHERE substr(key,1,?)=? AND vf<=? AND tx<=? ORDER BY key',
+                (len(prefix),prefix,_time(valid_at),_time(known_at)))]
+
     def keys(self, prefix: str) -> list[str]:
         with closing(self._connect()) as db:
-            return [r[0] for r in db.execute('SELECT DISTINCT key FROM event WHERE substr(key,1,?)=? ORDER BY key',
-                                              (len(prefix),prefix))]
+            return self.keys_tx(db,prefix)
 
     def query(self, key: str, *, valid_at: int = 2**63-1, known_at: int = 2**63-1) -> dict:
         with closing(self._connect()) as db:
             db.execute('BEGIN')  # one consistent read even if another writer commits
-            point = (_time(valid_at), _time(known_at))
-            current = point == (head.MAX_TIME, head.MAX_TIME)
-            roots, live = head.read(db,key) if current else self._view(db, key, *point)
+            return self.query_tx(db,key,valid_at=valid_at,known_at=known_at)
+
+    def query_tx(self, db, key, *, valid_at=head.MAX_TIME, known_at=head.MAX_TIME):
+        point = (_time(valid_at), _time(known_at))
+        current = point == (head.MAX_TIME, head.MAX_TIME)
+        roots, live = head.read(db,key) if current else self._view(db, key, *point)
         proofs = [r for r in roots if live[r['id']]]
         values = sorted(set(r['value'] for r in proofs))
         status = ('SUPPORTED' if len(values) == 1 else 'UNKNOWN_CONFLICT' if values
@@ -124,6 +142,7 @@ class RevisionStore:
 
     def append_tx(self, db, op, key, *, valid_from, source, witness, value=None, parents=()):
         """Add one event inside a caller-owned transaction on this database."""
+        if self.read_only or not can_write_memory():raise MemoryPolicyError('revision writes disabled')
         if not db.in_transaction:
             raise ValueError('transaction required')
         if op not in ('set', 'delete', 'derive', 'revise') or not all(

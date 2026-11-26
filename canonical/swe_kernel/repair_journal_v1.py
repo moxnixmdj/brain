@@ -12,6 +12,7 @@ from contextlib import closing
 import hashlib
 import json
 
+from canonical.runtime.memory_policy_v1 import can_write_memory, MemoryPolicyError
 from canonical.swe_kernel.witnessed_revision_store_v1 import RevisionStore
 from canonical.swe_kernel.repo_native_test_surface_v1 import merge_vocab
 
@@ -25,12 +26,14 @@ def token(obj):
 
 
 class RepairJournal:
-    def __init__(self,path):
-        self.store=RevisionStore(path)
+    def __init__(self,path, *, read_only=False):
+        self.store=RevisionStore(path,read_only=read_only)
+        if read_only or not can_write_memory():return
         with closing(self.store._connect()) as db, db:
             db.execute('CREATE TABLE IF NOT EXISTS repair_queue(id TEXT PRIMARY KEY, payload TEXT NOT NULL)')
 
     def enqueue(self, certificate, vocabulary):
+        if self.store.read_only or not can_write_memory():raise MemoryPolicyError('journal writes disabled')
         if not certificate['failed_before'] or not certificate['restored_surface_sha256']:
             raise ValueError('missing measured repair')
         rows=[]
@@ -51,6 +54,7 @@ class RepairJournal:
         return key
 
     def sleep(self,limit=8):
+        if self.store.read_only or not can_write_memory():raise MemoryPolicyError('journal writes disabled')
         if type(limit) is not int or not 0<=limit<=128:raise ValueError('invalid consolidation budget')
         filed=[]
         with closing(self.store._connect()) as db:

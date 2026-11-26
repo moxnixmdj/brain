@@ -2956,6 +2956,7 @@ def solve_swe_repo_native_multifile(
     import subprocess as _sp
     import tempfile as _tf
 
+    from canonical.runtime.memory_policy_v1 import can_read_memory, can_write_memory
     from canonical.runtime import cow_zygote_speculative_verifier_v1 as zygote
     from canonical.swe_kernel import angelic_oe_synthesizer_v1 as angelic_oe
     from canonical.swe_kernel import causal_dataflow_graph_v1 as cdg
@@ -2988,6 +2989,10 @@ def solve_swe_repo_native_multifile(
         name = str(target).split("::")[0]
         if pathlib.Path(name).is_absolute() or not (root / name).resolve().is_relative_to(root):
             return {"pass": False, "status": "REFUSED__PATH_OUTSIDE_WORKSPACE", "model_calls": 0}
+    if not can_read_memory():
+        repair_store = in_run_repair_vocab = None
+        prior_demonstrations, mine_git_history = (), False
+    learn_verified = learn_verified and can_write_memory()
     # Build/merge in-run alpha-canonical repair vocabulary from any prior verified demonstrations.
     try:
         vocab = merge_vocab({}, in_run_repair_vocab) if in_run_repair_vocab else {}
@@ -3005,8 +3010,9 @@ def solve_swe_repo_native_multifile(
         from canonical.swe_kernel.repair_journal_v1 import RepairJournal, token
         if pathlib.Path(repair_store).resolve().is_relative_to(root):
             return {'pass':False, 'status':'REFUSED__STORE_INSIDE_RECEIVER', 'model_calls':0}
-        journal = RepairJournal(repair_store)
-        journal.sleep()  # resume a bounded number of committed wake tickets
+        if learn_verified or pathlib.Path(repair_store).is_file():
+            journal = RepairJournal(repair_store, read_only=not learn_verified)
+            if learn_verified:journal.sleep()  # bounded resume; never mutate read-only receivers
 
     deadline = time.monotonic() + timeout_s
     history_info = {"base": None, "candidates": 0, "error": None}
@@ -3021,7 +3027,7 @@ def solve_swe_repo_native_multifile(
         baseline['output'] = baseline['output'].replace(str(copied)+'/', '')
 
     def _verify_in_isolated_cow(rel_edits: Mapping[str, str], *, single_test_src: str | None = None) -> tuple[bool, str, bool]:
-        """Screen single-file edit via 1.58 ms `os.fork()` CoW Zygote when self-contained, then confirm on CoW workspace."""
+        """Screen self-contained assertions if possible; confirm on a fresh project copy."""
         if time.monotonic() >= deadline:
             return False, "BUDGET_EXHAUSTED", False
         for rel, candidate in rel_edits.items():
@@ -3035,23 +3041,12 @@ def solve_swe_repo_native_multifile(
             only_rel, new_src = next(iter(rel_edits.items()))
             orig_p = root / only_rel
             if orig_p.is_file():
-                try:
-                    zres = zygote.verify_candidate_patch_cow(
-                        orig_p.read_text(encoding="utf-8", errors="replace"),
-                        new_src,
-                        single_test_src,
-                    )
-                    zygote_used = True
-                    zerr = str(zres.get("error") or zres.get("stderr") or "")
-                    if (
-                        zres.get("verdict") == "FAIL"
-                        and "ModuleNotFoundError" not in zerr
-                        and "ImportError" not in zerr
-                        and "NameError" not in zerr
-                    ):
-                        return False, zerr or "zygote_rejected", True
-                except Exception:
-                    pass
+                zres = zygote.verify_candidate_patch_cow(
+                    orig_p.read_text(encoding="utf-8", errors="replace"),new_src,single_test_src,
+                    timeout_s=min(1.0,deadline-time.monotonic()))
+                zygote_used = bool(zres.get('tested'))
+                if zres['verdict']=='FAIL':
+                    return False,'zygote assertion: '+zres['failed_test'],zygote_used
         with _tf.TemporaryDirectory(prefix="wave23_cow_") as td:
             ws = pathlib.Path(td) / "repo"
             copy_product_tree(root,ws)

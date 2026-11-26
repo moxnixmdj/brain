@@ -70,3 +70,14 @@ def test_registered_handle_read_refusal_and_actual_reloaded_slot(tmp_path):
             with fresh_room(exe,origin) as room:
                 r=m.live_browser_step('Stamp "fir"',room=room,origin=origin,lesson=row['value'],arm='lifted',expected_text='fir')
                 assert r['goal_verified'] and r['action']['route']==route
+
+
+def test_single_patch_zygote_is_bounded_and_reports_only_actual_assertions(tmp_path):
+    from canonical.runtime.cow_zygote_speculative_verifier_v1 import verify_candidate_patch_cow as check
+    original='def f(x): return x';patch='def f(x): return x + 1';test='def test_f(): assert f(2)==3'
+    assert check(original,original,test)['failed_test']=='test_f'
+    ok=check(original,patch,test);assert ok['verdict']=='PASS' and ok['tested']==['test_f']
+    assert check(original,patch,'def helper():pass')['verdict']=='UNMEASURED'
+    assert check(original,patch,'from app import f\n'+test)['verdict']=='UNMEASURED'
+    assert check(original,'def f(x):\n while True: pass',test,timeout_s=.05)['verdict']=='UNMEASURED'
+    assert check(original,'import os\ndef f(x): os._exit(3)',test)['verdict']=='UNMEASURED'

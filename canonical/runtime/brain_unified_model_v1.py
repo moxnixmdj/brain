@@ -6089,7 +6089,14 @@ class UnifiedModel:
 
     def revision_memory(self, path: str | Path, operation: str, **payload: Any) -> dict[str, Any]:
         from canonical.swe_kernel.witnessed_revision_store_v1 import RevisionStore
-        return RevisionStore(path).apply(operation, payload)
+        store = RevisionStore(path)
+        if operation in ('ingest_turn', 'answer_question'):
+            from canonical.runtime.dialogue_revision_reader_v1 import DialogueReader
+            reader = DialogueReader(store)
+            if operation == 'ingest_turn':
+                return {'statements_grounded': reader.ingest(**payload)}
+            return reader.answer(**payload)
+        return store.apply(operation, payload)
 
     def semiring_jtms_memory_cycle(
         self,

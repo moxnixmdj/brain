@@ -93,3 +93,53 @@ def test_external_link_and_baseline_write_do_not_mutate_caller_workspace(tmp_pat
     assert not (root/'state').exists()
     (root/'link').symlink_to(tmp_path)
     assert model.solve_swe_repo_native(root,test_targets=[p.name])['status']=='UNMEASURED__SOURCE_COPY'
+
+
+def test_timed_out_project_and_its_child_cannot_finish_the_write(tmp_path):
+    import time
+    p=tmp_path/'test_slow.py';signal_file=tmp_path/'started';leak=tmp_path/'late'
+    child = f'import time; time.sleep(1.5); open({str(leak)!r},"w").close()'
+    p.write_text('import subprocess,sys,time\nfrom pathlib import Path\ndef test_slow():\n'
+                 f'    subprocess.Popen([sys.executable,"-c",{child!r}])\n'
+                 f'    Path({str(signal_file)!r}).touch()\n    time.sleep(10)\n')
+    result=observe_cases(tmp_path,[p.name],timeout=1)
+    assert signal_file.exists() and result['status']=='TIMEOUT' and not result['passed']
+    time.sleep(1.6);assert not leak.exists()
+
+
+def test_duplicate_method_does_not_mask_a_cut_imported_callee():
+    before = 'from orchard import dry\nclass A:\n def f(self, fruit): return dry(fruit)\nclass B:\n def f(self, fruit): return dry(fruit)\n'
+    after = before.replace('return dry(fruit)', 'return fruit', 1)
+    assert gate.lost_imported_callees(before,after)==[{'function':'A.f','module':'orchard','callee':'dry'}]
+
+
+def test_readonly_and_off_never_create_a_repair_store(tmp_path):
+    from canonical.runtime.memory_policy_v1 import memory_policy_scope, READ_ONLY, OFF
+    app = tmp_path/'app';app.mkdir();(app/'test_ok.py').write_text('def test_ok(): assert 3>2\n')
+    store=tmp_path/'absent'/'repair.sqlite';m=open_model()
+    for mode in (READ_ONLY,OFF):
+        with memory_policy_scope(mode):
+            assert m.solve_swe_repo_native(app,test_targets=['test_ok.py'],repair_store=store)['swe_result']['tier']=='ALREADY_GREEN'
+        assert not store.parent.exists()
+
+
+def test_pending_teacher_resumes_once_and_alternate_teacher_survives(tmp_path):
+    from canonical.runtime.memory_policy_v1 import memory_policy_scope, READ_ONLY, OFF, MemoryPolicyError
+    from canonical.tools.arm_learned_from_its_own_verified_repairs_v1 import fold
+    path=tmp_path/'repair';bad='def cost(a,b):\n return a-b\n';fix=bad.replace('a-b','a+b')
+    rows=fold([('case',bad,fix)]);journal=RepairJournal(path)
+    cert={'restored_surface_sha256':'a'*64,'failed_before':[['demo','one']]}
+    key=journal.enqueue(cert,rows); assert journal.enqueue(cert,rows)==key
+    # Discard the writer before sleep. No proposal is visible until the
+    # transaction that consumes the ticket commits in a later process/handle.
+    assert not any(RepairJournal(path).recall([(bad,{2})]).values())
+    assert RepairJournal(path).sleep()==[key] and journal.sleep()==[]
+    k2=journal.enqueue({**cert,'failed_before':[['demo','two']]},rows);journal.sleep()
+    def teachers():return {t for rs in journal.recall([(bad,{2})]).values() for r in rs for t in r.taught_by}
+    assert teachers()=={key,k2};journal.forget(key);assert teachers()=={k2}
+    with memory_policy_scope(READ_ONLY):
+        assert teachers()=={k2}
+        with pytest.raises(MemoryPolicyError):journal.sleep()
+    with memory_policy_scope(OFF):
+        with pytest.raises(MemoryPolicyError):teachers()
+    journal.forget(k2);assert not teachers();assert journal.enqueue(cert,rows)==key and journal.sleep()==[]
