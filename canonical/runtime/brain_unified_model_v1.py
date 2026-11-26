@@ -1487,7 +1487,11 @@ class UnifiedModel:
         src_postings = self._source_postings_cache or {}
         total_docs = max(1, len(src_map))
         acc_scores: dict[str, float] = {}
-        for term in wanted:
+        # Sorted, not `wanted`: floats do not add associatively, so summing idf contributions in
+        # hash order made near-ties depend on PYTHONHASHSEED. Measured with the answer fingerprint:
+        # 1 of 404 questions returned a different rank-3 module in a second process, which no
+        # verifier check could see because the model was still internally consistent.
+        for term in sorted(wanted):
             plist = src_postings.get(term)
             if not plist:
                 continue
@@ -1551,7 +1555,7 @@ class UnifiedModel:
         ext_df = self._extended_source_df_cache or {}
         total_docs = max(1, len(combined))
         acc_scores: dict[str, float] = {}
-        for term in wanted:
+        for term in sorted(wanted):  # see find_source: float order must not depend on the hash seed
             plist = comb_postings.get(term)
             if not plist:
                 continue
@@ -1674,7 +1678,7 @@ class UnifiedModel:
         res_postings = self._research_postings_cache or {}
         total_docs = max(1, len(res_map))
         acc_scores: dict[str, float] = {}
-        for term in wanted:
+        for term in sorted(wanted):  # see find_source
             plist = res_postings.get(term)
             if not plist:
                 continue
