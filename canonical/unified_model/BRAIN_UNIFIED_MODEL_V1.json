@@ -33055,7 +33055,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "7c7d083141613fb44490ba5d2c9fb10f5799758a18da50d57fd6a807a8cb61b1"
+  "value": "cd5a614ee7ad60865f227c53cc63161da475fc9b380e8379968d9c81c42dff6a"
  },
  "engines": [
   {
@@ -326179,7 +326179,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/SIX_MOVES_K3_ZERO_LEAPFROG_UNIFIED_MODEL_20261126_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "f898a261b970edab47e22f058f2f634c550e891dbd5b5337ffc9517263a9aa89",
+   "sha256": "9f0e07629e928bf782700e008310ffb762006d18eea60af61cbdc52600f23b99",
    "status": "SHIPPED",
    "terms": {
     "11.48": 1,

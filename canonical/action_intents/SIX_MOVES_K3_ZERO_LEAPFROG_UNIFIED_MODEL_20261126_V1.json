@@ -118,7 +118,7 @@
   ],
   "real_outcome": "UnifiedModel now opens cold in 2.59 ms, delta-compiles byte-identically in 561.6 ms, queries FTS5 in 1.01 ms, speculates candidates via os.fork() CoW + RENAME_EXCHANGE, repairs Python defects on bare stdlib without pytest at K3=0, consolidates laws with 0 held-out false refutations, discovers drifting environments in 7.85x fewer steps, and kills 15/16 AST mutants across all .hidden.v1 contract capabilities.",
   "recursive_obs": {
-    "canonical_base_commit": "dcb3337683ae2181a74ab865027db8a6a2923960",
+    "canonical_base_commit": "7d09ec5efa49d21b376ba091876abb7be6549e3c",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "11.48 MB passive cold arrays on the hot open_model() startup path",
