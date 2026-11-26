@@ -455,6 +455,7 @@ class UnifiedModel:
         self._source_index_cache: dict[str, dict[str, Any]] | None = None
         self._source_postings_cache: dict[str, tuple[tuple[str, int], ...]] | None = None
         self._harvested_cache: dict[str, dict[str, Any]] | None = None
+        self._harvested_index: dict[str, dict[str, float]] | None = None
         self._source_df_cache: dict[str, int] | None = None
         self._extended_source_index_cache: dict[str, dict[str, Any]] | None = None
         self._extended_source_df_cache: dict[str, int] | None = None
@@ -715,6 +716,103 @@ class UnifiedModel:
         self._ensure_harvested()
         row = (self._harvested_cache or {}).get(str(capability_id))
         return dict(row) if row else None
+
+    def _ensure_harvested_index(self) -> dict[str, dict[str, float]]:
+        """Lazily build the harvested trigger index (token -> {id: weight}).
+
+        Mirrors the capability grammar: IDF-weighted postings over declared
+        triggers plus id tokens. Built once per model instance; the fallback
+        in ``solve()`` only runs when the primary route fails, so this cost
+        is off the hot path.
+        """
+        if self._harvested_index is not None:
+            return self._harvested_index
+        self._ensure_harvested()
+        rows = self._harvested_cache or {}
+        postings: dict[str, dict[str, int]] = {}
+        for hid, row in rows.items():
+            seen: set[str] = set()
+            for trigger in row.get("triggers") or []:
+                for token in tokenize(str(trigger)):
+                    if token not in seen:
+                        seen.add(token)
+                        postings.setdefault(token, {})[hid] = 2
+            for token in tokenize(hid.replace("/", " ").replace(".", " ")):
+                if token not in seen:
+                    seen.add(token)
+                    postings.setdefault(token, {})[hid] = 3
+        total = max(1, len(rows))
+        index: dict[str, dict[str, float]] = {}
+        for token in sorted(postings):
+            idf = 1.0 + (total / (1.0 + len(postings[token])))
+            index[token] = {
+                hid: round(w * idf, 6) for hid, w in sorted(postings[token].items())
+            }
+        self._harvested_index = index
+        return index
+
+    def route_harvested(self, goal: str, *, top_k: int = 5) -> dict[str, Any]:
+        """Score harvested surfaces against a goal. Never returns a capability.
+
+        This is the fallback router: it answers "which discovered surface
+        could serve this goal?" with ``admitted: False`` on every row. It
+        does not promote, admit, or verify anything — execution still goes
+        through ``execute_harvested_surface`` and still issues only a
+        producer receipt.
+        """
+        tokens = tokenize(goal)
+        index = self._ensure_harvested_index()
+        ask_list: list[str] = []
+        seen: set[str] = set()
+        for token in ask_tokens(goal):
+            if token not in seen:
+                seen.add(token)
+                ask_list.append(token)
+        scores: dict[str, float] = {}
+        matched: set[str] = set()
+        for token in ask_list:
+            postings = index.get(token)
+            if not postings:
+                continue
+            matched.add(token)
+            for hid, weight in postings.items():
+                scores[hid] = scores.get(hid, 0.0) + math.log1p(weight)
+        ask = set(ask_list)
+        coverage = (len(matched & ask) / len(ask)) if ask else 0.0
+        ranked = sorted(scores.items(), key=lambda kv: (-kv[1], kv[0]))
+        rows: list[dict[str, Any]] = []
+        for hid, score in ranked[: max(1, int(top_k))]:
+            row = (self._harvested_cache or {}).get(hid) or {}
+            rows.append(
+                {
+                    "id": hid,
+                    "kind": "HARVESTED_SURFACE",
+                    "score": round(float(score), 6),
+                    "coverage": round(coverage, 6),
+                    "admitted": False,
+                    "path": row.get("path"),
+                    "invocation": row.get("invocation"),
+                }
+            )
+        best = ranked[0] if ranked else None
+        confident = bool(best and best[1] >= self.min_score and coverage >= self.min_coverage)
+        return {
+            "schema": SOLUTION_SCHEMA,
+            "operation": "ROUTE_HARVESTED",
+            "model_digest": self.digest,
+            "goal": goal,
+            "query_tokens": tokens,
+            "matched_token_count": len(matched),
+            "coverage": round(coverage, 6),
+            "confident": confident,
+            "best": rows[0] if rows else None,
+            "candidates": rows,
+            "reason": (
+                "HARVESTED_SURFACE_ROUTED__NOT_ADMITTED"
+                if confident
+                else "NO_HARVESTED_SURFACE_MATCHED__FAIL_CLOSED"
+            ),
+        }
 
     def _ensure_full_model(self) -> dict[str, Any]:
         if self._model_loaded is None:
@@ -1759,6 +1857,21 @@ class UnifiedModel:
 
             routing = self.route(goal)
             if not routing["confident"]:
+                # Unified fallback: no verified capability or engine claims
+                # this goal. Before failing closed, ask whether a discovered
+                # (harvested) surface does. Execution stays unadmitted and
+                # zero-credit — this is reachability, not promotion.
+                try:
+                    harvested_routing = self.route_harvested(goal)
+                except Exception:
+                    harvested_routing = None
+                if harvested_routing and harvested_routing.get("confident"):
+                    hid = str(harvested_routing["best"]["id"])
+                    return self.execute_harvested_surface(
+                        capability_id=hid,
+                        args=dict(inputs) if isinstance(inputs, Mapping) else {},
+                        goal=goal,
+                    )
                 return self._failure(
                     goal,
                     "GOAL_NOT_REPRESENTED_IN_MODEL__FAIL_CLOSED",

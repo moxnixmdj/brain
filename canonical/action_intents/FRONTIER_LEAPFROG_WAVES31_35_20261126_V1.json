@@ -9,7 +9,7 @@
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "parent_capability": "canonical/runtime/brain_unified_model_v1.py + canonical/runtime/creature_runtime_v1.py + canonical/swe_kernel/canonical_{swe,env_discovery,cu_sandbox,memory_crystallizer,oracle_vericoding,boundary_router}_spine_v1.py",
-  "canonical_base_commit": "d9b5312cd6dd0c5b28c31e17c7673a499e1d8120",
+  "canonical_base_commit": "18adda649f28cf786570ea96308768c899c93807",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "causal_blocker": "After Waves 21-30 (PR #7128 at d9b5312c), two systemic gaps remained across UnifiedModel, Creature, and Spines 0D-0I: (1) warm compile_model() still took 918.95 ms due to 8+ redundant scandir passes, 812 realpath syscalls in digesting, and re-parsing the 13.57 MB model in declared_ids(); cold route() eagerly probed all 462 capability dependencies (12.17 ms); creature_runtime_v1 eagerly imported 5 organ modules (37.55 ms); and retrieval was flooded by 39 version-sprawl families; (2) 46 pure-stdlib frontier modules across version-space repair disambiguation, angelic CEGIS, behavioral-equivalence proofs, reverted-part pinning, verdict amplification, meaning-first IR crystallization, cross-language operator transfer, Memini/MemRL/APEX-EM sleep consolidation, OSWorld 2.1 pure-stdlib policies + browser/verifier/guard surfaces, TomasuLLM speculative macro commit, BM25 repertoire queries, EFE-VI probe-vs-abstain, typed CEGIS(T), and distinction creation remained unwired from UnifiedModel and Spines 0D-0I.",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::After Waves 21-30 (PR #7128 at d9b5312c), two systemic gaps remained across UnifiedModel, Creature, and Spines 0D-0I: (1) warm compile_model() still took 918.95 ms due to 8+ redundant scandir passes, 812 realpath syscalls in digesting, and re-parsing the 13.57 MB model in declared_ids(); cold route() eagerly probed all 462 capability dependencies (12.17 ms); creature_runtime_v1 eagerly imported 5 organ modules (37.55 ms); and retrieval was flooded by 39 version-sprawl families; (2) 46 pure-stdlib frontier modules across version-space repair disambiguation, angelic CEGIS, behavioral-equivalence proofs, reverted-part pinning, verdict amplification, meaning-first IR crystallization, cross-language operator transfer, Memini/MemRL/APEX-EM sleep consolidation, OSWorld 2.1 pure-stdlib policies + browser/verifier/guard surfaces, TomasuLLM speculative macro commit, BM25 repertoire queries, EFE-VI probe-vs-abstain, typed CEGIS(T), and distinction creation remained unwired from UnifiedModel and Spines 0D-0I.",
@@ -20,7 +20,7 @@
   "required_capability": "Unified K3=0 orchestration fusing sub-millisecond MemGuard/FTS5 memory, Inverted SWE Microscope with CoW isolation, os.fork CoW speculative rollouts, GUI->CLI trace elevation, partial-order planning, minimax witness interrogation, CSP hard-negative/spec-gap detection, and GEA+SEA certified organ evolution.",
   "stop_condition": "Stop once all Wave 15-30 frontier-leapfrog tests, unified-model tests, 38/38 verify_brain_unified_model_v1 checks, bit-identical no-cache compile check, repo_integrity_guard, enforce_load_bearing_primary_pr, and enforce_goal_hierarchy pass with 0 violations and zero overstated capability/terminal credit claims.",
   "falsification_condition": "FALSIFIED if any Wave 15-30 test fails, if expired MemGuard skills reappear in default FTS5 recall, if CoW speculative edits mutate host repo files on rejected proposals, if find_source scores differ across PYTHONHASHSEED values, if Creature GEA+SEA admits unsafe or zero-gain organs, or if verify_brain_unified_model_v1 or any execution guard fails.",
-  "verification": "python3 -m unittest -v canonical/tests/test_frontier_leapfrog_waves31_35_v1.py canonical/tests/test_frontier_leapfrog_waves26_30_v1.py canonical/tests/test_frontier_leapfrog_waves21_25_v1.py canonical/tests/test_frontier_leapfrog_waves15_20_v1.py canonical/tests/test_brain_unified_model_v1.py canonical/tests/test_unified_frontier_spines_v1.py canonical/tests/test_unified_hidden_capabilities_v1.py; python3 canonical/runtime/verify_brain_unified_model_v1.py; python3 execution_guard/repo_integrity_guard_v1.py --ci; python3 execution_guard/enforce_load_bearing_primary_pr.py --base d9b5312cd6dd0c5b28c31e17c7673a499e1d8120 --head HEAD",
+  "verification": "python3 -m unittest -v canonical/tests/test_frontier_leapfrog_waves31_35_v1.py canonical/tests/test_frontier_leapfrog_waves26_30_v1.py canonical/tests/test_frontier_leapfrog_waves21_25_v1.py canonical/tests/test_frontier_leapfrog_waves15_20_v1.py canonical/tests/test_brain_unified_model_v1.py canonical/tests/test_unified_frontier_spines_v1.py canonical/tests/test_unified_hidden_capabilities_v1.py; python3 canonical/runtime/verify_brain_unified_model_v1.py; python3 execution_guard/repo_integrity_guard_v1.py --ci; python3 execution_guard/enforce_load_bearing_primary_pr.py --base 18adda649f28cf786570ea96308768c899c93807 --head HEAD",
   "capability_credit_delta": 0,
   "benchmark_or_family_rank_authority": "NONE__SANDBOX_PRODUCER_VERIFICATION_ONLY",
   "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
@@ -118,7 +118,7 @@
     ]
   },
   "recursive_obs": {
-    "canonical_base_commit": "d9b5312cd6dd0c5b28c31e17c7673a499e1d8120",
+    "canonical_base_commit": "18adda649f28cf786570ea96308768c899c93807",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "PYTHONHASHSEED-dependent set iteration order in UnifiedModel.find_source (replaced with sorted(wanted))",
@@ -227,7 +227,7 @@
       }
     ],
     "route_frontier": {
-      "canonical_base_commit": "d9b5312cd6dd0c5b28c31e17c7673a499e1d8120",
+      "canonical_base_commit": "18adda649f28cf786570ea96308768c899c93807",
       "checked_at_utc": "2026-11-26T04:24:00+00:00",
       "max_age_hours": 24,
       "discovery_required": true,
@@ -347,7 +347,7 @@
       "unresolved_plausible_dominators": [],
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-26T13:54:51+00:00",
+        "checked_at_utc": "2026-11-26T14:11:54+00:00",
         "execution_dependencies_complete": true,
         "failed_dependencies": [],
         "max_age_hours": 2,
@@ -378,7 +378,7 @@
             "status": "READY",
             "volatility": "STATIC",
             "evidence": [
-              "repo_integrity_guard_v1.py + enforce_load_bearing_primary_pr.py verified against base d9b5312cd6dd0c5b28c31e17c7673a499e1d8120"
+              "repo_integrity_guard_v1.py + enforce_load_bearing_primary_pr.py verified against base 18adda649f28cf786570ea96308768c899c93807"
             ],
             "evidence_classes": [
               "DIRECT_PROBE"

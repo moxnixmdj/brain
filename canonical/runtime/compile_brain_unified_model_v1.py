@@ -1212,6 +1212,120 @@ def _skill_rows(root: Path) -> list[dict[str, Any]]:
 
 # --------------------------------------------------------------------------- model
 
+# Natural-language trigger supplements for federated engines.
+#
+# The federation descriptors carry technical triggers ("instant_one_shot_learning",
+# "rule_expiry_v1") that a caller describing a goal in plain words never types.
+# Measured: "learn a new capability from a single demonstration without training"
+# routed to `python.source.add_function.v1` (coverage 0.5) instead of
+# `engine:INSTANT_ONE_SHOT_LEARNER` (zero token overlap); "keep improving on new
+# tasks without forgetting earlier ones" failed closed entirely. These phrases
+# are the frontier vocabulary from DOMAIN_ATLAS queries, mapped to the engine
+# that implements each function. They are routing words only: they grant no
+# capability, change no required input, and cannot make an engine execute
+# without its declared inputs (the federation still fails closed on those).
+_FRONTIER_TRIGGER_SUPPLEMENTS: dict[str, tuple[str, ...]] = {
+    "INSTANT_ONE_SHOT_LEARNER": (
+        "learn from one example",
+        "single demonstration",
+        "learn a new capability",
+        "one shot learning",
+        "generalize from one episode",
+        "infer a program from one example",
+        "adapt from one episode without touching weights",
+    ),
+    "CAUSAL_TRACE_SKILL_COMPILER": (
+        "compile trace to skill",
+        "demonstration to program",
+        "watch once learn forever",
+        "elevate demonstration to program",
+    ),
+    "VERIFIED_SKILL_CRYSTALLIZER": (
+        "crystallize skill",
+        "learn rule from fix",
+        "anti unify bugfix",
+    ),
+    "ASSOCIATIVE_EPISODIC_MEMORY": (
+        "recall prior episode",
+        "remember previous",
+        "episodic memory",
+        "context stays correct",
+        "recall from memory",
+        "durable memory",
+        "keep a durable memory of prior runs",
+    ),
+    "PROCEDURE_TRAJECTORY_MEMORY": (
+        "procedure memory",
+        "episode journal",
+        "remember procedure",
+        "recall the right prior episode",
+    ),
+    "RULE_EXPIRY_WORLD_FINGERPRINT": (
+        "keep improving without forgetting",
+        "continual learning",
+        "without forgetting",
+        "without drifting",
+        "expire stale rules",
+        "detect drift",
+        "keep improving on new tasks",
+    ),
+    "GRADIENT_FREE_LAW_CONSOLIDATION": (
+        "consolidate without drift",
+        "sleep consolidation",
+        "consolidate learning",
+        "keep the store current",
+    ),
+    "WAKE_SLEEP_CONSOLIDATION": (
+        "promote repair episode to permanent rule",
+        "check a learned rule is not a constant",
+        "expire stale rules and forget low value episodes",
+        "consolidate repair episodes",
+        "two independent witnesses",
+        "memory hygiene",
+    ),
+    "VERIFICATION_FIRST_MEMORY_BUS": (
+        "memory operating system",
+        "forget one skill without damaging others",
+        "create a durable memory of prior runs",
+        "organize memory into durable long term structure",
+        "consolidate memory during idle time",
+        "selective unlearning",
+        "resolve conflicting memories",
+        "keep a durable memory of prior runs",
+        "drive an unfamiliar desktop application without screenshots",
+    ),
+    "PREDICTIVE_HOARE_CONTRACT": (
+        "what action does",
+        "simulate consequence",
+        "what an action does before doing it",
+    ),
+    "INTERFACE_ACTION_GRAMMAR": (
+        "drive GUI",
+        "unfamiliar desktop",
+        "operate desktop application",
+        "computer use",
+        "drive a GUI",
+        "operate browser page",
+        "drive an unfamiliar desktop application",
+    ),
+    "STATE_CONTRACT_WORLD_MODEL": (
+        "screen state prediction",
+        "simulate action consequence",
+        "world model desktop",
+        "screen state before action",
+    ),
+    "CAUSAL_GOAL_COMPUTER_AGENT": (
+        "computer agent",
+        "drive computer",
+        "operate computer",
+    ),
+    "OSWORLD_BROWSER_OPS": (
+        "browser ops",
+        "operate browser page",
+        "click elements on screen",
+    ),
+}
+
 
 def _engine_rows(root: Path) -> list[dict[str, Any]]:
     from canonical.runtime.unified_hidden_capability_federation_v1 import (
@@ -1266,7 +1380,11 @@ def _engine_rows(root: Path) -> list[dict[str, Any]]:
         src_sha = digest_file(src_file) if src_file.is_file() else None
         trig_list: list[str] = []
         seen_t: set[str] = set()
-        for phrase in [mode.replace("_", " ").lower(), *(spec.get("triggers") or [])]:
+        for phrase in [
+            mode.replace("_", " ").lower(),
+            *(spec.get("triggers") or []),
+            *(_FRONTIER_TRIGGER_SUPPLEMENTS.get(mode) or ()),
+        ]:
             p_str = str(phrase).strip()
             if p_str and p_str not in seen_t:
                 seen_t.add(p_str)
