@@ -33053,7 +33053,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "065770c51b147ed9aa5c25b32b266edc077dd68df1661cf24bd87837efa32519"
+  "value": "4f3c109cce7ccf7bd2a4731c3b361f301dda14b2b448e5e05f68a0f0f40e8cf1"
  },
  "engines": [
   {
@@ -311710,7 +311710,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/MEASURED_CEILING_OF_THE_SUBSTITUTION_FAMILY_20261125_V42.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
-   "sha256": "b09dcc3cdfa6fae5e21850e3f6e6d47ad9c8af352ecc24c2f12f43278b1ef578",
+   "sha256": "2ba2def97f52273c7e3c7edfbd86d7a1bf31f13a8dd0a8a68e995dd3b5d47c85",
    "status": "",
    "terms": {
     "20261125": 1,
