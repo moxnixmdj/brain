@@ -286,6 +286,7 @@
     "tree_sitter_swe_kernel_v1",
     "typed_invention_v1",
     "unified_epistemic_portfolio_v1",
+    "unified_five_pillar_frontier_kernel_v1",
     "unified_hidden_capability_federation_v1",
     "unified_unfamiliar_leapfrog_v1",
     "universal_computer_agent_v1",
@@ -310,14 +311,14 @@
     "witness_inversion_v1",
     "zygote_worker_pool_v1"
    ],
-   "candidates": 306,
+   "candidates": 307,
    "frontier_function": "resolve a repository issue from a text description",
    "harvested_all": 110,
-   "harvested_executable_top": 10,
+   "harvested_executable_top": 9,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 25,
-   "indexed_all": 288,
+   "indexed_all": 289,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -722,6 +723,26 @@
      "summary": "Recursive Self-Architecting Engine (`K3 = 0`, `$0` spend, `0` host `exec()`)."
     },
     {
+     "adapter_module_match": true,
+     "anchored": 9.0,
+     "harvested": false,
+     "matched": [
+      "repair@doc",
+      "swe@doc",
+      "repair@symbol",
+      "swe@symbol",
+      "ast@doc",
+      "metamorphic@doc",
+      "ast@symbol",
+      "patch@doc"
+     ],
+     "path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+     "score": 24.5,
+     "sha256": "f3a502a700dbc31b",
+     "source_index": true,
+     "summary": "Unified Five-Pillar Frontier Kernel V1 \u2014 Zero-Adapter, Sub-Millisecond `K3 = 0` Unification."
+    },
+    {
      "adapter_module_match": false,
      "anchored": 3.0,
      "harvested": true,
@@ -800,26 +821,6 @@
      "sha256": "7fd8fdc00c19cf0b",
      "source_index": true,
      "summary": "Ring-0 Byte-Level Effect Oracle, DRA Delta-Debugging Hunk Minimizer & Mutation Gate (`K3 = 0`)."
-    },
-    {
-     "adapter_module_match": true,
-     "anchored": 3.75,
-     "harvested": true,
-     "matched": [
-      "repair@doc",
-      "ast@doc",
-      "patch@doc",
-      "patch@symbol",
-      "mutant@doc",
-      "candidate@doc",
-      "test@doc",
-      "bug@doc"
-     ],
-     "path": "canonical/runtime/cow_zygote_speculative_verifier_v1.py",
-     "score": 22.75,
-     "sha256": "e4ff324b2fd58926",
-     "source_index": true,
-     "summary": "Play D \u2014 Sub-5ms POSIX `os.fork()` CoW Zygote Speculative Repair Verifier (`K3 = 0`)."
     }
    ],
    "vendored_donors_excluded": 2
@@ -1515,18 +1516,19 @@
     "the_counterexample_is_the_next_experiment_v1",
     "the_right_question_is_an_experiment_v1",
     "transfer_learning_v1",
+    "unified_five_pillar_frontier_kernel_v1",
     "universal_computer_agent_v1",
     "verified_skill_crystallizer_v1",
     "wave40_dark_matter_frontier_kernel_v1"
    ],
-   "candidates": 37,
+   "candidates": 38,
    "frontier_function": "keep improving without forgetting or drifting",
    "harvested_all": 13,
-   "harvested_executable_top": 11,
+   "harvested_executable_top": 10,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 23,
-   "indexed_all": 33,
+   "indexed_all": 34,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -1637,6 +1639,24 @@
      "summary": "Futamura \"Compile Away the Frontier\" Unified Leapfrog Kernel (`K3 = 0`)."
     },
     {
+     "adapter_module_match": true,
+     "anchored": 3.75,
+     "harvested": false,
+     "matched": [
+      "consolidat@symbol",
+      "consolidat@doc",
+      "forget@doc",
+      "replay@symbol",
+      "replay@doc",
+      "stale@doc"
+     ],
+     "path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+     "score": 8.75,
+     "sha256": "f3a502a700dbc31b",
+     "source_index": true,
+     "summary": "Unified Five-Pillar Frontier Kernel V1 \u2014 Zero-Adapter, Sub-Millisecond `K3 = 0` Unification."
+    },
+    {
      "adapter_module_match": false,
      "anchored": 2.25,
      "harvested": true,
@@ -1693,7 +1713,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 6.75,
-     "sha256": "168961ef3dc47d3f",
+     "sha256": "0a0316c8af82e5ef",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -1847,7 +1867,7 @@
      ],
      "path": "canonical/runtime/creature_runtime_v1.py",
      "score": 4.5,
-     "sha256": "9535931a694b3d83",
+     "sha256": "daa9f77248afabf5",
      "source_index": true,
      "summary": "Seven organs, finally in one body."
     },
@@ -1908,20 +1928,6 @@
      "sha256": "dc39e0d7028a0a5c",
      "source_index": true,
      "summary": "Experience carries over. An environment is not the first one ever seen."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 2.25,
-     "harvested": true,
-     "matched": [
-      "consolidat@symbol",
-      "consolidat@doc"
-     ],
-     "path": "canonical/tools/inert_action_prior_measure_v1.py",
-     "score": 3.75,
-     "sha256": "9539583dfa25205f",
-     "source_index": true,
-     "summary": "Does knowing which actions are inert make a never-solved page solvable in fewer actions?"
     }
    ],
    "vendored_donors_excluded": 0
@@ -2089,6 +2095,7 @@
     "typed_invention_v1",
     "unified_cognitive_fabric_v1",
     "unified_epistemic_portfolio_v1",
+    "unified_five_pillar_frontier_kernel_v1",
     "universal_active_transfer_learner_v2",
     "universal_computer_agent_v1",
     "universal_parameterized_skill_candidate_v1",
@@ -2115,14 +2122,14 @@
     "witness_inversion_v1",
     "world_binding_v1"
    ],
-   "candidates": 187,
+   "candidates": 188,
    "frontier_function": "adapt from one episode without touching weights",
    "harvested_all": 69,
-   "harvested_executable_top": 12,
+   "harvested_executable_top": 11,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 24,
-   "indexed_all": 185,
+   "indexed_all": 186,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -2145,6 +2152,26 @@
      "sha256": "4bd50f721dfd5452",
      "source_index": true,
      "summary": "Wave 40 Dark-Matter Frontier Kernel (K3=0, $0 spend)."
+    },
+    {
+     "adapter_module_match": true,
+     "anchored": 14.25,
+     "harvested": false,
+     "matched": [
+      "adapt@doc",
+      "learn@doc",
+      "skill@doc",
+      "transfer@doc",
+      "induc@symbol",
+      "induce@symbol",
+      "transfer@symbol",
+      "acquire@doc"
+     ],
+     "path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+     "score": 29.75,
+     "sha256": "f3a502a700dbc31b",
+     "source_index": true,
+     "summary": "Unified Five-Pillar Frontier Kernel V1 \u2014 Zero-Adapter, Sub-Millisecond `K3 = 0` Unification."
     },
     {
      "adapter_module_match": true,
@@ -2382,7 +2409,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 20.0,
-     "sha256": "168961ef3dc47d3f",
+     "sha256": "0a0316c8af82e5ef",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -2605,26 +2632,6 @@
      "sha256": "806c7517c7b1feb9",
      "source_index": true,
      "summary": "Where an edit comes from, and why that decides whether one experience can ever be enough."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 3.0,
-     "harvested": true,
-     "matched": [
-      "generaliz@doc",
-      "lesson@doc",
-      "skill@doc",
-      "generaliz@symbol",
-      "general@doc",
-      "learn@doc",
-      "teach@doc",
-      "general@symbol"
-     ],
-     "path": "canonical/swe_kernel/operator_semantics_v1.py",
-     "score": 18.0,
-     "sha256": "4358e083551a30c2",
-     "source_index": true,
-     "summary": "What an operator MEANS is a computation, not a membership test."
     }
    ],
    "vendored_donors_excluded": 0
@@ -2801,6 +2808,7 @@
     "tree_sitter_cst_skill_skeleton_v1",
     "type_level_composer_v1",
     "unified_epistemic_portfolio_v1",
+    "unified_five_pillar_frontier_kernel_v1",
     "unified_unfamiliar_leapfrog_v1",
     "universal_active_transfer_learner_v2",
     "universal_computer_agent_v1",
@@ -2827,14 +2835,14 @@
     "whitebox_introspector_and_trace_synthesizer_v1",
     "workflow_goal_generalization_v1"
    ],
-   "candidates": 197,
+   "candidates": 198,
    "frontier_function": "context that stays correct as it fills",
    "harvested_all": 52,
    "harvested_executable_top": 10,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 25,
-   "indexed_all": 192,
+   "indexed_all": 193,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -3010,7 +3018,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 15.5,
-     "sha256": "168961ef3dc47d3f",
+     "sha256": "0a0316c8af82e5ef",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -3170,6 +3178,26 @@
      "summary": "Unified Epistemic Portfolio & Multi-Organ Runtime Spine (`K3 = 0`) \u2014 v1."
     },
     {
+     "adapter_module_match": true,
+     "anchored": 5.25,
+     "harvested": false,
+     "matched": [
+      "recall@symbol",
+      "ledger@doc",
+      "provenance@doc",
+      "memory@symbol",
+      "memory@doc",
+      "store@doc",
+      "index@symbol",
+      "store@symbol"
+     ],
+     "path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+     "score": 12.75,
+     "sha256": "f3a502a700dbc31b",
+     "source_index": true,
+     "summary": "Unified Five-Pillar Frontier Kernel V1 \u2014 Zero-Adapter, Sub-Millisecond `K3 = 0` Unification."
+    },
+    {
      "adapter_module_match": false,
      "anchored": 3.0,
      "harvested": false,
@@ -3300,26 +3328,6 @@
      "sha256": "dc39e0d7028a0a5c",
      "source_index": true,
      "summary": "Experience carries over. An environment is not the first one ever seen."
-    },
-    {
-     "adapter_module_match": true,
-     "anchored": 5.25,
-     "harvested": false,
-     "matched": [
-      "archive@doc",
-      "archive@symbol",
-      "compress@symbol",
-      "episod@doc",
-      "journal@symbol",
-      "journal@doc",
-      "trace@doc",
-      "record@symbol"
-     ],
-     "path": "canonical/swe_kernel/recursive_self_architect_v1.py",
-     "score": 11.25,
-     "sha256": "cf88543d6177d6f3",
-     "source_index": true,
-     "summary": "Recursive Self-Architecting Engine (`K3 = 0`, `$0` spend, `0` host `exec()`)."
     }
    ],
    "vendored_donors_excluded": 2
@@ -3637,6 +3645,7 @@
     "trajectory_failure_information_safe_proof",
     "type_level_composer_v1",
     "unified_epistemic_portfolio_v1",
+    "unified_five_pillar_frontier_kernel_v1",
     "unified_unfamiliar_leapfrog_v1",
     "universal_computer_agent_v1",
     "universal_learning_contract_v1",
@@ -3664,14 +3673,14 @@
     "work_unit_validity_guard_v2",
     "worker_syscall_allowlist_v1"
    ],
-   "candidates": 337,
+   "candidates": 338,
    "frontier_function": "know when you do not know, and prove what you did",
    "harvested_all": 62,
    "harvested_executable_top": 5,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 24,
-   "indexed_all": 302,
+   "indexed_all": 303,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -4029,7 +4038,7 @@
      ],
      "path": "canonical/runtime/creature_runtime_v1.py",
      "score": 15.25,
-     "sha256": "9535931a694b3d83",
+     "sha256": "daa9f77248afabf5",
      "source_index": true,
      "summary": "Seven organs, finally in one body."
     },
@@ -4052,6 +4061,26 @@
      "sha256": "b110fe1bf3537d78",
      "source_index": true,
      "summary": "Fail-closed route admission in front of the live Brain."
+    },
+    {
+     "adapter_module_match": true,
+     "anchored": 3.75,
+     "harvested": false,
+     "matched": [
+      "witness@doc",
+      "prove@doc",
+      "witness@symbol",
+      "invariant@symbol",
+      "attest@doc",
+      "gate@doc",
+      "invariant@doc",
+      "verify@doc"
+     ],
+     "path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+     "score": 14.75,
+     "sha256": "f3a502a700dbc31b",
+     "source_index": true,
+     "summary": "Unified Five-Pillar Frontier Kernel V1 \u2014 Zero-Adapter, Sub-Millisecond `K3 = 0` Unification."
     },
     {
      "adapter_module_match": false,
@@ -4148,25 +4177,6 @@
      "sha256": "1c135097c7ea1c2a",
      "source_index": true,
      "summary": "Play C \u2014 Relational AST Guard/Addition Synthesizer & Symbolic Witness Mutation Gate (`K3 = 0`)."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 3.75,
-     "harvested": false,
-     "matched": [
-      "refus@doc",
-      "witness@symbol",
-      "audit@doc",
-      "admit@symbol",
-      "witness@doc",
-      "admit@doc",
-      "certif@doc"
-     ],
-     "path": "canonical/runtime/applicability_v1.py",
-     "score": 13.75,
-     "sha256": "1e9a2d51bb7efea5",
-     "source_index": true,
-     "summary": "Learn WHEN a remembered plan applies, from outcomes in context."
     }
    ],
    "vendored_donors_excluded": 0
@@ -4296,6 +4306,7 @@
     "the_width_of_a_guard_v1",
     "trajectory_failure_information_safe_proof",
     "unified_epistemic_portfolio_v1",
+    "unified_five_pillar_frontier_kernel_v1",
     "unified_unfamiliar_leapfrog_v1",
     "universal_computer_agent_v1",
     "universal_semantic_ir_v1",
@@ -4309,14 +4320,14 @@
     "what_the_vocabulary_cannot_say_v1",
     "what_transfers_to_a_second_host_v1"
    ],
-   "candidates": 136,
+   "candidates": 137,
    "frontier_function": "predict what an action does before doing it",
    "harvested_all": 42,
-   "harvested_executable_top": 8,
+   "harvested_executable_top": 9,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 24,
-   "indexed_all": 133,
+   "indexed_all": 134,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -4640,6 +4651,26 @@
     },
     {
      "adapter_module_match": false,
+     "anchored": 11.25,
+     "harvested": true,
+     "matched": [
+      "counterfactual@symbol",
+      "causal@symbol",
+      "delta@symbol",
+      "effect@symbol",
+      "model@doc",
+      "hypothesis@symbol",
+      "model@symbol",
+      "plan@symbol"
+     ],
+     "path": "canonical/runtime/brain_unified_model_v1.py",
+     "score": 13.25,
+     "sha256": "0a0316c8af82e5ef",
+     "source_index": true,
+     "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
+    },
+    {
+     "adapter_module_match": false,
      "anchored": 3.0,
      "harvested": true,
      "matched": [
@@ -4787,25 +4818,6 @@
      "sha256": "071d364d82c71ae0",
      "source_index": true,
      "summary": "Perfect Algorithm V1 \u2014 the model itself."
-    },
-    {
-     "adapter_module_match": true,
-     "anchored": 6.0,
-     "harvested": false,
-     "matched": [
-      "causal@doc",
-      "causal@symbol",
-      "effect@symbol",
-      "outcome@symbol",
-      "model@doc",
-      "plan@symbol",
-      "plan@doc"
-     ],
-     "path": "canonical/swe_kernel/universal_computer_agent_v1.py",
-     "score": 12.0,
-     "sha256": "912489810b1f7b82",
-     "source_index": true,
-     "summary": "Universal Computer-Use Agent: Zero-Model, Zero-Knowledge-House Causal Engine (v1)."
     }
    ],
    "vendored_donors_excluded": 1
@@ -4814,13 +4826,13 @@
  "method": "weighted lexical evidence over module stem, docstring and symbol names; frontier vocabulary and this repository's own vocabulary in one table",
  "min_score": 3.0,
  "model_calls": 0,
- "modules_scanned": 3332,
+ "modules_scanned": 3333,
  "network_calls": 0,
  "per_domain": 25,
  "reachability": {
   "coding_agents": {
-   "chance_route_recall": 0.1763,
-   "chance_source_recall": 0.135,
+   "chance_route_recall": 0.1836,
+   "chance_source_recall": 0.1354,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -4967,7 +4979,7 @@
    ]
   },
   "computer_use": {
-   "chance_route_recall": 0.0652,
+   "chance_route_recall": 0.0646,
    "chance_source_recall": 0.0677,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
@@ -5112,8 +5124,8 @@
    ]
   },
   "continual_learning": {
-   "chance_route_recall": 0.0474,
-   "chance_source_recall": 0.0164,
+   "chance_route_recall": 0.0558,
+   "chance_source_recall": 0.0168,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.333,
    "native_route_hit_recall": 1.0,
@@ -5259,8 +5271,8 @@
    ]
   },
   "instant_learning": {
-   "chance_route_recall": 0.1467,
-   "chance_source_recall": 0.0823,
+   "chance_route_recall": 0.1542,
+   "chance_source_recall": 0.0827,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -5407,8 +5419,8 @@
    ]
   },
   "memory": {
-   "chance_route_recall": 0.1126,
-   "chance_source_recall": 0.0863,
+   "chance_route_recall": 0.1204,
+   "chance_source_recall": 0.0867,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 1.0,
@@ -5467,14 +5479,14 @@
      "query": "compress a long trajectory without losing the facts it carried",
      "route_hit": true,
      "routed_hit": [
-      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
       "engine:LEAPFROG_W40_SELFPLAY_STEER_HORIZON_COMMIT",
-      "engine:PROCEDURE_TRAJECTORY_MEMORY"
+      "engine:PROCEDURE_TRAJECTORY_MEMORY",
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS"
      ],
      "routed_top": [
-      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
       "engine:LEAPFROG_W40_SELFPLAY_STEER_HORIZON_COMMIT",
-      "engine:PROCEDURE_TRAJECTORY_MEMORY"
+      "engine:PROCEDURE_TRAJECTORY_MEMORY",
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS"
      ],
      "source_hit": false,
      "source_top": [
@@ -5543,7 +5555,7 @@
      "routed_top": [
       "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
       "engine:PROCEDURE_TRAJECTORY_MEMORY",
-      "engine:SKILL_SCOPE_ACQUISITION"
+      "engine:AUTONOMOUS_AWAKE_LOOP"
      ],
      "source_hit": true,
      "source_top": [
@@ -5555,8 +5567,8 @@
    ]
   },
   "verification_abstention": {
-   "chance_route_recall": 0.1763,
-   "chance_source_recall": 0.1492,
+   "chance_route_recall": 0.1836,
+   "chance_source_recall": 0.1496,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 1.0,
@@ -5700,8 +5712,8 @@
    ]
   },
   "world_model": {
-   "chance_route_recall": 0.0904,
-   "chance_source_recall": 0.0598,
+   "chance_route_recall": 0.0984,
+   "chance_source_recall": 0.0602,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -5804,7 +5816,8 @@
      "query": "rank residual causes for an observed effect",
      "route_hit": true,
      "routed_hit": [
-      "engine:ANGELIC_LENS_COW_REPAIR"
+      "engine:STATE_CONTRACT_WORLD_MODEL",
+      "engine:UNFAMILIAR_M2_PROTOCOL_LIFT_EFFECT_ORACLE"
      ],
      "routed_top": [
       "source.objective_relevance.rank.bm25",

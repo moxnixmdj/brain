@@ -2807,6 +2807,35 @@ def delta_compile_model(
     return model, stats
 
 
+_COLD_SECTION_KEYS: tuple[str, ...] = (
+    "source_index",
+    "extended_source_index",
+    "knowledge",
+    "research_index",
+    "harvested_capabilities",
+)
+
+
+def _compute_section_byte_spans(raw_bytes: bytes) -> dict[str, list[int]]:
+    """Compute exact UTF-8 `[start, end]` byte spans for top-level JSON array sections (`indent=1`)."""
+    spans: dict[str, list[int]] = {}
+    for sec in _COLD_SECTION_KEYS:
+        header = f'\n "{sec}": ['.encode("ascii")
+        h_pos = raw_bytes.find(header)
+        if h_pos < 0:
+            continue
+        arr_start = h_pos + len(header) - 1  # points to `[`
+        # Empty array fast check `[]`
+        if raw_bytes[arr_start : arr_start + 2] == b"[]":
+            spans[sec] = [arr_start, arr_start + 2]
+            continue
+        # At `indent=1`, top-level array closes with `\n ]` followed by `,` or `\n`
+        close_pos = raw_bytes.find(b"\n ]", arr_start)
+        if close_pos > arr_start:
+            spans[sec] = [arr_start, close_pos + 3]
+    return spans
+
+
 def _build_hot_core_payload(model: Mapping[str, Any], raw_bytes: bytes) -> dict[str, Any]:
     """Extract the compact hot executable core (evicting 11.48 MB passive cold arrays)."""
     from canonical.runtime.brain_unified_model_v1 import _extract_routing_core
@@ -2819,6 +2848,7 @@ def _build_hot_core_payload(model: Mapping[str, Any], raw_bytes: bytes) -> dict[
     core["artifact_bytes"] = len(raw_bytes)
     core["digest_needle_offset"] = raw_bytes.find(needle)
     core["schema_needle_offset"] = raw_bytes.find(schema_needle)
+    core["section_byte_spans"] = _compute_section_byte_spans(raw_bytes)
     return core
 
 
