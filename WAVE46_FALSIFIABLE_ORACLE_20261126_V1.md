@@ -521,3 +521,101 @@ verification machinery, measured a genuine 5/5 transfer result, and then found
 that the thing which reports results is not connected to what was asked. Until
 `§17` is implemented and tested, every "pass" this door emits should be treated as
 unknown, including any number I might otherwise have reported from it.
+
+---
+
+# Wave 46g — Correction: I overclaimed `§16`, and what actually stands
+
+## 19. The overclaim
+
+`§16` said: *"A system that reports `EXACT_SEMANTIC_ACCEPTANCE_VERIFIED` for a
+request it did not perform cannot be improved by making its components better.
+Every honest measurement taken through this door is meaningless."*
+
+**That is too strong, and I retract it.** Measuring the door across all 23
+benchmark goals showed the door is not uniformly credulous — it refuses most
+goals, and 8 of 23 certified *inside an empty fixture directory*, which for goals
+that create their own inputs (tar.gz create-and-verify, source audit to JSON,
+markdown-to-decision) is plausibly correct, not false. A door that refuses 15 of
+23 and certifies 8 is not a door whose signal is disconnected from the request.
+It has a specific defect, not a global one.
+
+## 20. A second self-correction: my cross-goal harness was invalid
+
+A follow-up harness compiled every goal and *then* ran each one, and reported
+"0/23 certified with the wrong capability" while simultaneously showing `certified:
+False` for every row — including rows a previous run had certified. Two different
+readings of the same door in the same process disagree, so the harness was
+measuring process state, not the door. Its 0/23 result is **discarded**; it does
+not show the door is safe, it shows the harness was broken. Recorded because the
+temptation is to keep the flattering number.
+
+The same caution applies to the sample of `chosen` capabilities in that table
+(`docx.document.create_from_json_record` appearing for five unrelated goals). That
+reflects compile-time registry state in a reused process, not the door's decision
+for those sentences, and I am not drawing conclusions from it.
+
+## 21. What survives, reproduced in a clean process
+
+Fresh process, one goal, no preceding compile call:
+
+```
+mutation score   status=True  PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED
+                 r.json written: False
+fault localize   status=True  PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED
+                 r.json written: False
+```
+
+For **fault localization** this is clean and unambiguous: the sentence explicitly
+asks for a report at `<dir>/r.json`, the report is not written, and the door
+returns verified success. A stated, checkable postcondition is unmet while the
+success signal says otherwise. That single claim stands and is enough to make the
+`§17` guard necessary.
+
+For **mutation score** the defect is the capability choice: the sentence asks for
+a mutation score, the selected row is `source.objective_relevance.rank.bm25`, and
+running a ranker does not measure mutation. Verified by direct inspection of the
+chosen id and the request, in the same process.
+
+## 22. Honest revised status of `§15`–`§17`
+
+| claim | verdict |
+|---|---|
+| The door returns `EXACT_SEMANTIC_ACCEPTANCE_VERIFIED` for fault localization without writing the requested `r.json` | **verified**, clean process |
+| The door selects a BM25 ranker for a mutation-score request | **verified**, clean process |
+| The door's success signal is globally disconnected from the request | **retracted** — it refuses 15/23 and 8/23 certifications are plausibly genuine |
+| A cross-goal harness showed 0/23 wrong-capability certifications | **discarded** — the harness was measuring process state |
+
+The guard in `§17` is still the right next step, and its acceptance test is now
+sharper than when I wrote it: rather than an adversarial rewrite, it is the
+*fault-localization-with-a-stated-report-path* case, which needs no adversarial
+construction at all. The door must return
+`FAIL_CLOSED__STATED_POSTCONDITION_UNMET` when the sentence names an output path
+and no file exists there at completion.
+
+## 23. Wave 46 final status
+
+Verified and pushed (`b33c71cb`, `b8ab774f`, `f85718f4`, `418b363d`,
+`b1e500ef`, `afdc5e9a`):
+
+- falsifiable test oracle (was: no candidate could fail) — **verified**
+- Rung-0 replay to a verified fixpoint — **verified**
+- laws persist across processes and retire on evidence — **verified**
+- artefact currentness guard + 7,490-line cap — **verified**
+- 5/5 genuine held-out transfer at Rung 0, zero synthesis, 0.16–0.50 ms — **verified**
+- selection benchmark on a fixed 23-goal set: selection 19/23, compile 21/23
+  (base `9554215`: 0/23, 5/23) — **measured**, benchmark's own harness
+- door certifies success without writing a stated output file — **verified defect, unfixed**
+
+Refuted by measurement: the operator grammar is not the bottleneck (≤0.7%); the
+pinned ranker is not the bottleneck (it ranks correctly and is overridden).
+
+Not claimed: any SWE-bench Pro V2 / Terminal-Bench 4.0 / OSWorld 2.1 number
+(`docker` absent). Hard-51 0/51. §6 unmet.
+
+The most valuable thing this wave produced is not a capability. It is that four
+separate "green" results turned out to be unfalsifiable — a test oracle that could
+not fail, a benchmark whose rows already passed, a classifier whose labels moved
+with the regexes, and a harness that measured its own process state. Each was
+found by trying to break my own result rather than by reading the code, and two of
+them were my results from earlier in the same session.
