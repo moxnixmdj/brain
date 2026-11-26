@@ -39,7 +39,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::the live repair loop's ensemble fallback re-derived its own hand-written atom grammar and never consulted canonical/swe_kernel/concept_library_v1.py, so (a) program shapes outside that grammar returned None on specs whose generating function is a stored, already-admitted concept, and (b) the fallback's shortest-candidate tiebreak preferred a shorter ad-hoc if-then-else that passes the visible points and is wrong off-spec, discarding the learned abstraction it had just been given access to",
-  "canonical_base_commit": "ea71d5c009a1772722e2352bc9b800d376348efc",
+  "canonical_base_commit": "f4e5e8c214816bc1cb3246e84b88415268ab77c0",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_law_compliance": {
@@ -58,6 +58,7 @@
   "highest_leverage_now": true,
   "incremental_spend_usd": 0,
   "load_bearing_primary": {
+    "canonical_base_note": "base pinned by canonical/tools/rebind_intent_and_verify_gates_v1.py to origin/main tip",
     "constructive_gap_for_open_obligation_ids": [
       "CODING_TB4_GE_66_4",
       "CODING_FRONTIERCODE_GE_54_4",
@@ -84,7 +85,7 @@
   "parent_capability": "canonical/runtime/stochastic_synthesizer_v1.py + canonical/swe_kernel/concept_library_v1.py",
   "prior_work_reused": "canonical/swe_kernel/concept_library_v1.py (CompoundingConceptLibrary: admission by description-length compression + probe determinism + syntactic-mutant kill, Levin/Laplace log-priors, uses/verified_hits/disconfirmations/retired), the Expr algebra in canonical/runtime/oe_sygus_synthesizer_v1.py, the OE separation of terms from predicates combined by ITE, canonical/runtime/memory_policy_v1.py's existing READ_ONLY scope, and canonical/runtime/compile_brain_unified_model_v1.py. Zero new modules: 2 runtime files edited, 1 test added, 1 yardstick extended, 1 artifact recompiled.",
   "recursive_obs": {
-    "canonical_base_commit": "ea71d5c009a1772722e2352bc9b800d376348efc",
+    "canonical_base_commit": "f4e5e8c214816bc1cb3246e84b88415268ab77c0",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "A_NEW_SYNTHESIS_MODULE",
@@ -94,7 +95,7 @@
       "INFLATING_POINTS_ON_A_SATURATED_FAMILY_AS_A_GENERALIZATION_FIX",
       "ARM_C_ALWAYS_DEEP_PASS_MEASURED_PLUS_150_TO_330_MS_AND_WORSE"
     ],
-    "expected_parent_level_state_change": "THE_LIVE_REPAIR_LOOP_NOW_SHARES_ONE_GRAMMAR_WITH_THE_LEARNED_CONCEPTS_ON_BOTH_OF_ITS_ENGINES_INSTSTEAD_OF_ONE__WHICH_IS_THE_PREREQUISITE_FOR_CONCEPT_GROUNDED_REPAIR_ON_REAL_REPO_SHAPED_SPECS__AND_THE_ROUND_ALSO_KILLED_FOUR_CLAIMS__THAT_THE_COMPOSITION_CAP_WAS_THE_RESIDUAL_LEVER__THAT_A_LONGER_POINT_SET_WAS_THE_RESIDUAL_ERROR__THAT_DREAMING_ON_THE_REPOS_SOURCE_PAYS_FOR_THIS_GRAMMAR__AND_THAT_HARD_51_0_OF_51_MEASURES_CAPABILITY",
+    "expected_parent_level_state_change": "The bottleneck advances, causally narrowed to three named places: (1) concepts admitted with string or list domains are stored but never instantiated -- measured zero delta on 9 string specs (6/9 and 3/9 in both arms), so the library's read path is numeric-only; (2) a 6-point spec over a 49-point domain cannot pin a two-variable guarded program, and for every non-generalizing row the ENTIRE verified candidate set contains no target-equivalent program, so the residual error belongs to the spec writer, not the search; (3) sleep_abstract admits 0 concepts on micro corpora (correct early-learning behavior per LILO) so experience does not yet compound at this scale.",
     "obs_blocker": {
       "delete_bypass_substitute_options": [
         "DELETE_THE_FALLBACK",
@@ -104,9 +105,14 @@
         "SUBSTITUTE_A_SECOND_GRAMMAR_FILE"
       ],
       "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_SWE_SIDE_OBSERVATIONAL_ENGINE_ALREADY_CONSULTS_THE_LIBRARY_AND_SHIPS_CONCEPT_GROUNDED_PROGRAMS_WHILE_THE_LIVE_LOOPS_ENSEMBLE_FALLBACK_DID_NOT",
+      "surviving_causal_blocker": "THE_FALLBACK_RE_DERIVED_A_GRAMMAR_INSTEAD_OF_READING_THE_ONE_THE_REPO_ALREADY_ADMITTED__fixed_by_a_read_view_plus_a_rank_key_in_two_edited_files_with_no_new_module_and_verified_by_a_red_green_unit_pair__and_the_next_blocker_is_the_one_this_round_narrowed_it_to_a_string-domain_instantiation_the_reader_cannot_use_and_a_6_point_spec_that_cannot_pin_a_2-variable_guarded_program",
       "why_each_was_rejected": "THE_FALLBACK_IS_THE_ONLY_PRODUCER_FOR_SHAPES_THE_PRIMARY_MISSES_MEASURED_ON_THIS_SESSION_SEVEN_TIMES__KEEPING_ONLY_THE_PRIMARY_LEAVES_THE_CLAMP_CLASS_AT_None__AND_EVERY_SUBSTITUTE_EITHER_PUTS_A_MODEL_ON_THE_PRODUCER_PATH_FORBIDDEN_OR_COSTS_THE_2_5_s_MISS_PATH_BUDGET"
     },
     "obs_capability": {
+      "capability_work_deleted": [
+        "ARM_C__ALWAYS_CONSULT_THE_DEEP_PASS_EVEN_AFTER_A_VERIFIED_CANDIDATE__PROTOTYPED_MEASURED_PLUS_150_TO_330_MS_AND_0_OF_10_AND_DELETED",
+        "max_results_TRUNCATION_OF_THE_CONCEPT_CANDIDATE_LIST__MEASURED_LOSING_SOLVES_7_OF_10_TO_5_OF_10_AND_DELETED"
+      ],
       "existing_inherited_routes_checked": [
         "canonical/runtime/stochastic_synthesizer_v1.py",
         "canonical/runtime/oe_sygus_synthesizer_v1.py",
@@ -123,6 +129,7 @@
         "Library_Drift_Zhang_2026",
         "Letta_sleep_time_compute_and_Anthropic_dreaming"
       ],
+      "surviving_gap": "THE_LIBRARY_READ_PATH_IS_NUMERIC_ONLY__concepts_are_instantiated_against_the_numeric_atom_grammar__so_a_string_or_list_concept_is_still_admitted_persisted_and_never_applied_and_the_loop_level_reach_on_the_clamp_family_is_UNCHANGED_at_7_of_10_because_the_primary_path_already_consulted_the_library_first",
       "why_no_existing_route_covered_it": "THE_CAPABILITY_EXISTED_AND_WAS_WIRED_TO_THE_OTHER_ENGINE_ONLY__NO_ROUTE_IN_OR_OUT_GIVES_A_SECOND_PRODUCER_PATH_THE_LIBRARY_IT_ALREADY_HOLDS"
     },
     "obs_goal": {
@@ -162,12 +169,13 @@
         "DELETE",
         "BYPASS",
         "REUSE",
-        "ADAPT",
         "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
         "COMPOSE",
         "CONFIGURE",
         "INTEGRATE"
       ],
+      "implementation_still_necessary": true,
       "losing_routes_reason": {
         "DREAM_ON_THE_REPOS_OWN_SOURCE_AND_FEED_THE_RESULT_IN": "MEASURED_ZERO_DELTA_ON_9_STRING_SPECS__THE_INSTANTIATION_PATH_IS_NUMERIC_SHAPED_SO_A_STRING_CONCEPT_IS_ADMITTED_PERSISTED_AND_NEVER_APPLIED__THE_DREAM_ITSELF_COST_84_5_s_FOR_116_FILES",
         "WIDEN_THE_HAND_WRITTEN_GRAMMAR_BY_HAND": "SATURATED_AT_50_OF_50_ON_1_VAR_AND_2_VAR_AFTER_SIX_ROUNDS_AND_STILL_RETURNS_NONE_ON_CLAMP_SHAPES_AT_ANY_DEPTH"
