@@ -170,6 +170,7 @@
     "manufactured_contrast_v1",
     "matched_coding_debug_tool_discovery_fresh_v1",
     "matched_coding_debug_tool_discovery_v1",
+    "meme_protocol_bench_v1",
     "meta_circular_organ_graph_v1",
     "metamorphic_cli_compiler_v1",
     "metamorphic_habitation_zipper_v1",
@@ -308,6 +309,7 @@
     "wave40_dark_matter_frontier_kernel_v1",
     "wave41_rung3_proposer_jitrl_continual_flywheel_v1",
     "wave43_44_dark_matter_meme_webmcp_leapfrog_v1",
+    "wave45_46_anytime_valid_quotient_metamorphic_hcu_v1",
     "what_a_real_fix_needs_from_the_site_v1",
     "what_an_experience_can_own_v1",
     "what_is_knowable_here_v1",
@@ -316,14 +318,14 @@
     "witness_inversion_v1",
     "zygote_worker_pool_v1"
    ],
-   "candidates": 312,
+   "candidates": 314,
    "frontier_function": "resolve a repository issue from a text description",
-   "harvested_all": 111,
-   "harvested_executable_top": 8,
+   "harvested_all": 112,
+   "harvested_executable_top": 7,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 25,
-   "indexed_all": 293,
+   "indexed_all": 294,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -426,6 +428,26 @@
      "sha256": "7bf2c97306270047",
      "source_index": true,
      "summary": "Copy-on-Write Prewarmed Pytest Zygote Server, Angelic Branch Inversion,"
+    },
+    {
+     "adapter_module_match": true,
+     "anchored": 12.75,
+     "harvested": false,
+     "matched": [
+      "metamorphic@doc",
+      "swe@doc",
+      "diff@doc",
+      "metamorphic@symbol",
+      "localiz@symbol",
+      "repair@symbol",
+      "swe@symbol",
+      "fault@symbol"
+     ],
+     "path": "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+     "score": 34.75,
+     "sha256": "03cdcd832c1fa6d7",
+     "source_index": true,
+     "summary": "Wave 45-46 Frontier-Leapfrog Unification Kernel (`K3 = 0`, `$0.00` Spend, Zero Mocks)."
     },
     {
      "adapter_module_match": true,
@@ -806,26 +828,6 @@
      "sha256": "d0dd411b74618859",
      "source_index": true,
      "summary": "Can this project repair a real public bug corpus it did not write, end to end, with no model?"
-    },
-    {
-     "adapter_module_match": true,
-     "anchored": 13.5,
-     "harvested": true,
-     "matched": [
-      "ast@doc",
-      "localiz@symbol",
-      "repair@symbol",
-      "ast@symbol",
-      "compile@doc",
-      "fault@symbol",
-      "localiz@doc",
-      "oracle@symbol"
-     ],
-     "path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
-     "score": 23.5,
-     "sha256": "d337af12dfa206e9",
-     "source_index": true,
-     "summary": "Futamura \"Compile Away the Frontier\" Unified Leapfrog Kernel (`K3 = 0`)."
     }
    ],
    "vendored_donors_excluded": 2
@@ -984,18 +986,19 @@
     "value_algebra_v1",
     "verified_zero_screenshot_action_cache_v1",
     "wave43_44_dark_matter_meme_webmcp_leapfrog_v1",
+    "wave45_46_anytime_valid_quotient_metamorphic_hcu_v1",
     "what_a_demonstration_leaves_open_v1",
     "whitebox_introspector_and_trace_synthesizer_v1",
     "zygote_worker_pool_v1"
    ],
-   "candidates": 156,
+   "candidates": 157,
    "frontier_function": "drive a GUI it has never seen",
    "harvested_all": 29,
    "harvested_executable_top": 6,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 25,
-   "indexed_all": 148,
+   "indexed_all": 149,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -1118,6 +1121,26 @@
      "sha256": "7f60253471cef256",
      "source_index": true,
      "summary": "Does ONE success become a skill? Measured on web tasks nobody in this repository wrote."
+    },
+    {
+     "adapter_module_match": true,
+     "anchored": 4.5,
+     "harvested": false,
+     "matched": [
+      "osworld@doc",
+      "cdp@doc",
+      "osworld@symbol",
+      "screen@doc",
+      "screenshot@doc",
+      "browser@doc",
+      "actuat@symbol",
+      "tab@doc"
+     ],
+     "path": "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+     "score": 23.5,
+     "sha256": "03cdcd832c1fa6d7",
+     "source_index": true,
+     "summary": "Wave 45-46 Frontier-Leapfrog Unification Kernel (`K3 = 0`, `$0.00` Spend, Zero Mocks)."
     },
     {
      "adapter_module_match": true,
@@ -1465,25 +1488,6 @@
      "sha256": "5ca8ea43ac7b5c2f",
      "source_index": true,
      "summary": "Strict product-native web application operations for OSWorld 2.1."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 6.75,
-     "harvested": false,
-     "matched": [
-      "browser@symbol",
-      "osworld@symbol",
-      "osworld@doc",
-      "cdp@doc",
-      "chrome@doc",
-      "desktop@doc",
-      "page@symbol"
-     ],
-     "path": "canonical/runtime/osworld_v21_host_browser_ops_v1.py",
-     "score": 13.25,
-     "sha256": "4c9cc0934aed7c33",
-     "source_index": true,
-     "summary": "Constrained host-side Chrome controller for OSWorld 2.1."
     }
    ],
    "vendored_donors_excluded": 2
@@ -1528,19 +1532,38 @@
     "unified_five_pillar_frontier_kernel_v1",
     "universal_computer_agent_v1",
     "verified_skill_crystallizer_v1",
-    "wave40_dark_matter_frontier_kernel_v1"
+    "wave40_dark_matter_frontier_kernel_v1",
+    "wave45_46_anytime_valid_quotient_metamorphic_hcu_v1"
    ],
-   "candidates": 39,
+   "candidates": 40,
    "frontier_function": "keep improving without forgetting or drifting",
    "harvested_all": 14,
    "harvested_executable_top": 10,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 23,
-   "indexed_all": 34,
+   "indexed_all": 35,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
+    {
+     "adapter_module_match": true,
+     "anchored": 4.5,
+     "harvested": false,
+     "matched": [
+      "forget@doc",
+      "consolidat@symbol",
+      "forget@symbol",
+      "consolidat@doc",
+      "drift@doc",
+      "revis@doc"
+     ],
+     "path": "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+     "score": 12.5,
+     "sha256": "03cdcd832c1fa6d7",
+     "source_index": true,
+     "summary": "Wave 45-46 Frontier-Leapfrog Unification Kernel (`K3 = 0`, `$0.00` Spend, Zero Mocks)."
+    },
     {
      "adapter_module_match": true,
      "anchored": 12.0,
@@ -1722,9 +1745,24 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 6.75,
-     "sha256": "42c02bbc75fec3f2",
+     "sha256": "fa3e0c981f065632",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
+    },
+    {
+     "adapter_module_match": false,
+     "anchored": 6.75,
+     "harvested": true,
+     "matched": [
+      "consolidat@symbol",
+      "drift@symbol",
+      "forget@symbol"
+     ],
+     "path": "canonical/runtime/creature_runtime_v1.py",
+     "score": 6.75,
+     "sha256": "9f16105b3f83b8f2",
+     "source_index": true,
+     "summary": "Seven organs, finally in one body."
     },
     {
      "adapter_module_match": false,
@@ -1869,20 +1907,6 @@
     {
      "adapter_module_match": false,
      "anchored": 4.5,
-     "harvested": true,
-     "matched": [
-      "consolidat@symbol",
-      "drift@symbol"
-     ],
-     "path": "canonical/runtime/creature_runtime_v1.py",
-     "score": 4.5,
-     "sha256": "f513f35980b93bee",
-     "source_index": true,
-     "summary": "Seven organs, finally in one body."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 4.5,
      "harvested": false,
      "matched": [
       "drift@symbol",
@@ -1923,20 +1947,6 @@
      "sha256": "1a8d2cea8292c0a8",
      "source_index": true,
      "summary": "Conflict-aware, option-preserving live work frontier controller."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 3.75,
-     "harvested": false,
-     "matched": [
-      "forget@symbol",
-      "replay@symbol"
-     ],
-     "path": "canonical/runtime/transfer_learning_v1.py",
-     "score": 3.75,
-     "sha256": "dc39e0d7028a0a5c",
-     "source_index": true,
-     "summary": "Experience carries over. An environment is not the first one ever seen."
     }
    ],
    "vendored_donors_excluded": 0
@@ -2131,19 +2141,20 @@
     "wave40_dark_matter_frontier_kernel_v1",
     "wave41_rung3_proposer_jitrl_continual_flywheel_v1",
     "wave43_44_dark_matter_meme_webmcp_leapfrog_v1",
+    "wave45_46_anytime_valid_quotient_metamorphic_hcu_v1",
     "what_transfers_to_a_second_host_v1",
     "what_transfers_v1",
     "witness_inversion_v1",
     "world_binding_v1"
    ],
-   "candidates": 193,
+   "candidates": 194,
    "frontier_function": "adapt from one episode without touching weights",
    "harvested_all": 70,
    "harvested_executable_top": 11,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 24,
-   "indexed_all": 190,
+   "indexed_all": 191,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -2323,9 +2334,29 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 24.5,
-     "sha256": "42c02bbc75fec3f2",
+     "sha256": "fa3e0c981f065632",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
+    },
+    {
+     "adapter_module_match": true,
+     "anchored": 7.5,
+     "harvested": false,
+     "matched": [
+      "induc@doc",
+      "induce@doc",
+      "learn@doc",
+      "skill@doc",
+      "induc@symbol",
+      "induce@symbol",
+      "adapt@doc",
+      "learn@symbol"
+     ],
+     "path": "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+     "score": 24.0,
+     "sha256": "03cdcd832c1fa6d7",
+     "source_index": true,
+     "summary": "Wave 45-46 Frontier-Leapfrog Unification Kernel (`K3 = 0`, `$0.00` Spend, Zero Mocks)."
     },
     {
      "adapter_module_match": true,
@@ -2626,26 +2657,6 @@
      "sha256": "5459d0cda81a603e",
      "source_index": true,
      "summary": "Teach the front door the actions in ``canonical/swe_kernel/taught_actions``."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 6.0,
-     "harvested": false,
-     "matched": [
-      "induc@doc",
-      "induce@doc",
-      "skill@doc",
-      "induc@symbol",
-      "induce@symbol",
-      "skill@symbol",
-      "adapt@doc",
-      "program@doc"
-     ],
-     "path": "canonical/runtime/universal_solver_skill_bridge_v1.py",
-     "score": 18.0,
-     "sha256": "5a617d8d3c9a33ce",
-     "source_index": true,
-     "summary": "Bridge Universal Verified Adaptive Solver V3 traces into skill induction."
     }
    ],
    "vendored_donors_excluded": 0
@@ -2753,6 +2764,7 @@
     "live_integrated_brain_v1",
     "matched_executable_atom_semantics_v1",
     "measurement_hygiene_guard_v1",
+    "meme_protocol_bench_v1",
     "meta_circular_organ_graph_v1",
     "meta_learning_policy_v9",
     "metamorphic_habitation_zipper_v1",
@@ -2846,6 +2858,7 @@
     "wave40_dark_matter_frontier_kernel_v1",
     "wave41_rung3_proposer_jitrl_continual_flywheel_v1",
     "wave43_44_dark_matter_meme_webmcp_leapfrog_v1",
+    "wave45_46_anytime_valid_quotient_metamorphic_hcu_v1",
     "weight_space_fuel_v1",
     "weights_from_scratch_v1",
     "what_an_experience_can_own_v1",
@@ -2853,14 +2866,14 @@
     "whitebox_introspector_and_trace_synthesizer_v1",
     "workflow_goal_generalization_v1"
    ],
-   "candidates": 202,
+   "candidates": 204,
    "frontier_function": "context that stays correct as it fills",
-   "harvested_all": 53,
-   "harvested_executable_top": 10,
+   "harvested_all": 54,
+   "harvested_executable_top": 9,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 25,
-   "indexed_all": 196,
+   "indexed_all": 197,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -2883,6 +2896,26 @@
      "sha256": "0e8b47bd66e30908",
      "source_index": true,
      "summary": "Wave 43 & Wave 44: Dark-Matter SWE Seed Store + Causal Dual-Slice / Anti-Slop"
+    },
+    {
+     "adapter_module_match": true,
+     "anchored": 6.0,
+     "harvested": false,
+     "matched": [
+      "memory@doc",
+      "provenance@doc",
+      "retriev@doc",
+      "ledger@doc",
+      "trace@doc",
+      "cache@doc",
+      "ledger@symbol",
+      "memory@symbol"
+     ],
+     "path": "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+     "score": 21.5,
+     "sha256": "03cdcd832c1fa6d7",
+     "source_index": true,
+     "summary": "Wave 45-46 Frontier-Leapfrog Unification Kernel (`K3 = 0`, `$0.00` Spend, Zero Mocks)."
     },
     {
      "adapter_module_match": true,
@@ -3056,7 +3089,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 15.5,
-     "sha256": "42c02bbc75fec3f2",
+     "sha256": "fa3e0c981f065632",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -3331,26 +3364,6 @@
      "sha256": "f4b3f35cb5db7d07",
      "source_index": true,
      "summary": "What does one bug fix teach? Measured on QuixBugs with the tree's own retention organ, unchanged."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 11.25,
-     "harvested": true,
-     "matched": [
-      "recall@symbol",
-      "history@symbol",
-      "ledger@symbol",
-      "memory@symbol",
-      "receipt@symbol",
-      "trace@symbol",
-      "record@symbol",
-      "store@symbol"
-     ],
-     "path": "canonical/runtime/creature_runtime_v1.py",
-     "score": 11.75,
-     "sha256": "f513f35980b93bee",
-     "source_index": true,
-     "summary": "Seven organs, finally in one body."
     }
    ],
    "vendored_donors_excluded": 2
@@ -3533,6 +3546,7 @@
     "matched_executable_atom_semantics_v1",
     "material_effect_reference_monitor_v1",
     "mechanism_discovery_v6",
+    "meme_protocol_memory_v1",
     "meta_circular_organ_graph_v1",
     "metamorphic_habitation_zipper_v1",
     "mined_rewrite_theory_v1",
@@ -3697,18 +3711,19 @@
     "wave40_dark_matter_frontier_kernel_v1",
     "wave41_rung3_proposer_jitrl_continual_flywheel_v1",
     "wave43_44_dark_matter_meme_webmcp_leapfrog_v1",
+    "wave45_46_anytime_valid_quotient_metamorphic_hcu_v1",
     "weights_from_scratch_v1",
     "work_unit_validity_guard_v2",
     "worker_syscall_allowlist_v1"
    ],
-   "candidates": 343,
+   "candidates": 345,
    "frontier_function": "know when you do not know, and prove what you did",
-   "harvested_all": 63,
+   "harvested_all": 64,
    "harvested_executable_top": 4,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 24,
-   "indexed_all": 307,
+   "indexed_all": 309,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -3731,6 +3746,26 @@
      "sha256": "1f3bd309e8338557",
      "source_index": true,
      "summary": "Canonical Dual-Channel Witness Inversion, Goal-Negation Oracle & Formal Vericoding Spine (`0H`)."
+    },
+    {
+     "adapter_module_match": true,
+     "anchored": 3.75,
+     "harvested": false,
+     "matched": [
+      "falsif@doc",
+      "prove@doc",
+      "witness@doc",
+      "audit@doc",
+      "independent@doc",
+      "admit@symbol",
+      "audit@symbol",
+      "gate@doc"
+     ],
+     "path": "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+     "score": 26.25,
+     "sha256": "03cdcd832c1fa6d7",
+     "source_index": true,
+     "summary": "Wave 45-46 Frontier-Leapfrog Unification Kernel (`K3 = 0`, `$0.00` Spend, Zero Mocks)."
     },
     {
      "adapter_module_match": true,
@@ -4124,7 +4159,7 @@
      ],
      "path": "canonical/runtime/creature_runtime_v1.py",
      "score": 15.25,
-     "sha256": "f513f35980b93bee",
+     "sha256": "9f16105b3f83b8f2",
      "source_index": true,
      "summary": "Seven organs, finally in one body."
     },
@@ -4186,24 +4221,6 @@
      "sha256": "451c50a28bd5da75",
      "source_index": true,
      "summary": "Independent evidence-recomputation worker for R3 learning promotion."
-    },
-    {
-     "adapter_module_match": true,
-     "anchored": 6.0,
-     "harvested": false,
-     "matched": [
-      "proof@doc",
-      "witness@doc",
-      "proof@symbol",
-      "prove@symbol",
-      "admission@symbol",
-      "certif@doc"
-     ],
-     "path": "canonical/swe_kernel/consistency_vs_equivalence_v1.py",
-     "score": 14.5,
-     "sha256": "c5482beab198b42a",
-     "source_index": true,
-     "summary": "Consistency is evidence; equivalence is the goal. No model, no network."
     }
    ],
    "vendored_donors_excluded": 0
@@ -4736,7 +4753,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 13.25,
-     "sha256": "42c02bbc75fec3f2",
+     "sha256": "fa3e0c981f065632",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -4860,13 +4877,13 @@
  "method": "weighted lexical evidence over module stem, docstring and symbol names; frontier vocabulary and this repository's own vocabulary in one table",
  "min_score": 3.0,
  "model_calls": 0,
- "modules_scanned": 3338,
+ "modules_scanned": 3341,
  "network_calls": 0,
  "per_domain": 25,
  "reachability": {
   "coding_agents": {
-   "chance_route_recall": 0.2068,
-   "chance_source_recall": 0.1374,
+   "chance_route_recall": 0.2133,
+   "chance_source_recall": 0.1381,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -4948,14 +4965,14 @@
      "query": "repair a repository from a failing test using a metamorphic oracle",
      "route_hit": true,
      "routed_hit": [
+      "engine:LEAPFROG_W45_METAMORPHIC_LINEAGE_CORPUS_SWE",
       "python.repository.acceptance.measure.v1",
-      "software.repair.choreograph.crossfile.v1",
-      "python.patch.search.test_guided.ast.v1"
+      "software.repair.choreograph.crossfile.v1"
      ],
      "routed_top": [
+      "engine:LEAPFROG_W45_METAMORPHIC_LINEAGE_CORPUS_SWE",
       "python.repository.acceptance.measure.v1",
-      "software.repair.choreograph.crossfile.v1",
-      "python.patch.search.test_guided.ast.v1"
+      "software.repair.choreograph.crossfile.v1"
      ],
      "source_hit": true,
      "source_top": [
@@ -5013,8 +5030,8 @@
    ]
   },
   "computer_use": {
-   "chance_route_recall": 0.0713,
-   "chance_source_recall": 0.0685,
+   "chance_route_recall": 0.0791,
+   "chance_source_recall": 0.0688,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -5120,7 +5137,7 @@
      "routed_hit": [
       "engine:LEAPFROG_W43_COW_CONTRASTIVE_MINIMAX_FACTORY",
       "engine:OSWORLD_BROWSER_OPS",
-      "professional.artifact.visual_observer.v1"
+      "engine:LEAPFROG_W45_AX_GUARD_ZERO_SHOT_CACHE_HCU"
      ],
      "routed_top": [
       "python.feature.implement_function_spec.v1",
@@ -5159,8 +5176,8 @@
    ]
   },
   "continual_learning": {
-   "chance_route_recall": 0.0556,
-   "chance_source_recall": 0.0172,
+   "chance_route_recall": 0.0636,
+   "chance_source_recall": 0.0177,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.333,
    "native_route_hit_recall": 1.0,
@@ -5175,12 +5192,12 @@
      "routed_hit": [
       "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
       "engine:RULE_EXPIRY_WORLD_FINGERPRINT",
-      "engine:ASSOCIATIVE_EPISODIC_MEMORY"
+      "engine:LEAPFROG_W46_THREE_TIER_ZERO_FORGETTING_CONTINUAL"
      ],
      "routed_top": [
       "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
       "engine:RULE_EXPIRY_WORLD_FINGERPRINT",
-      "engine:INSTANT_ONE_SHOT_LEARNER"
+      "engine:LEAPFROG_W46_THREE_TIER_ZERO_FORGETTING_CONTINUAL"
      ],
      "source_hit": false,
      "source_top": [
@@ -5306,8 +5323,8 @@
    ]
   },
   "instant_learning": {
-   "chance_route_recall": 0.1783,
-   "chance_source_recall": 0.0848,
+   "chance_route_recall": 0.185,
+   "chance_source_recall": 0.0852,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -5454,8 +5471,8 @@
    ]
   },
   "memory": {
-   "chance_route_recall": 0.1441,
-   "chance_source_recall": 0.0883,
+   "chance_route_recall": 0.1511,
+   "chance_source_recall": 0.0891,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 1.0,
@@ -5502,9 +5519,9 @@
      ],
      "source_hit": true,
      "source_top": [
+      "canonical/swe_kernel/meme_protocol_memory_v1.py",
       "canonical/runtime/associative_memory_v1.py",
-      "canonical/runtime/h100_zero_learned_event_memory_v1.py",
-      "canonical/runtime/memory_policy_v1.py"
+      "canonical/runtime/h100_zero_learned_event_memory_v1.py"
      ]
     },
     {
@@ -5516,12 +5533,12 @@
      "routed_hit": [
       "engine:LEAPFROG_W40_SELFPLAY_STEER_HORIZON_COMMIT",
       "engine:PROCEDURE_TRAJECTORY_MEMORY",
-      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS"
+      "engine:UNIVERSAL_COMPUTER_PETRI_AGENT"
      ],
      "routed_top": [
       "engine:LEAPFROG_W40_SELFPLAY_STEER_HORIZON_COMMIT",
       "engine:PROCEDURE_TRAJECTORY_MEMORY",
-      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS"
+      "engine:UNIVERSAL_COMPUTER_PETRI_AGENT"
      ],
      "source_hit": false,
      "source_top": [
@@ -5602,8 +5619,8 @@
    ]
   },
   "verification_abstention": {
-   "chance_route_recall": 0.2068,
-   "chance_source_recall": 0.1515,
+   "chance_route_recall": 0.2147,
+   "chance_source_recall": 0.1523,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 1.0,
@@ -5748,7 +5765,7 @@
    ]
   },
   "world_model": {
-   "chance_route_recall": 0.1227,
+   "chance_route_recall": 0.1215,
    "chance_source_recall": 0.0618,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,

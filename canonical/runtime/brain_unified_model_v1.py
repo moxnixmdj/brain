@@ -597,12 +597,12 @@ def _extract_secondary_indexes(full: Mapping[str, Any], raw_sha: str) -> dict[st
 # --------------------------------------------------------------------------- model
 
 
-from canonical.runtime.wave43_44_dark_matter_meme_webmcp_leapfrog_v1 import (
-    Wave43To44UnifiedModelMixin as _Wave43To44UnifiedModelMixin,
+from canonical.runtime.wave45_46_anytime_valid_quotient_metamorphic_hcu_v1 import (
+    Wave45To46UnifiedModelMixin as _Wave45To46UnifiedModelMixin,
 )
 
 
-class UnifiedModel(_Wave43To44UnifiedModelMixin):
+class UnifiedModel(_Wave45To46UnifiedModelMixin):
     """A loaded, digest-verified unified model."""
 
     def __init__(

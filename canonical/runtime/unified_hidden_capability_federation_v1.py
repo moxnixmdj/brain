@@ -1785,6 +1785,23 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "required_inputs": ["rule", "source_text", "target_language", "verifier"],
         "declared_dependencies": [],
     },
+    "LEAPFROG_W42_MEME_PROTOCOL_MEMORY": {
+        "domain": "MEMORY_AND_DEPENDENCY_PROPAGATION",
+        "source_path": "canonical/swe_kernel/meme_protocol_memory_v1.py",
+        "entrypoint": "run_protocol",
+        "summary": "Answers the three MEME protocol operations the semiring store could not: exact Z-set aggregates that refuse to report a total over a set that lost a member, rename tracking that carries derived facts and poisons the stale name, and absence for a rule that never fired; scored by a six-operation bench judged by a from-scratch fixpoint oracle.",
+        "triggers": [
+            "memory cascade",
+            "memory absence",
+            "dependency invalidation",
+            "aggregate over invalidated facts",
+            "entity rename tracking",
+            "upstream superseded",
+            "meme protocol",
+        ],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
     "LEAPFROG_W40_FRONTIER_BENCH_HARNESS": {
         "domain": "VERIFICATION_MEASUREMENT_AND_ABSTENTION",
         "source_path": "canonical/evaluation/frontier_bench_v1.py",
@@ -2207,6 +2224,91 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
             "red queen godel machine rqgm selective erasure",
         ],
         "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W45_QUOTIENT_ANGELIC_PROBE_INDUCER": {
+        "domain": "SYNTHESIS_AND_INDUCTION",
+        "source_path": "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+        "entrypoint": "QuotientAngelicProbeInducerKernel",
+        "summary": "Wave 45 instant-learning kernel computing coarsest sufficient trace quotients, angelic value forcing + expression synthesis, computed vs. hand-written vocabulary separation, contrastive probes, guard-width law learning, and single-pass systematic graph exploration at K3=0.",
+        "triggers": [
+            "coarsest quotient of the trace",
+            "angelic value forcing expression synthesis",
+            "computed vocabulary not written",
+            "contrast is a probe guard width",
+            "systematic graph exploration",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W45_METAMORPHIC_LINEAGE_CORPUS_SWE": {
+        "domain": "SWE_LOCALIZATION_AND_REPAIR",
+        "source_path": "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+        "entrypoint": "MetamorphicLineageCorpusSWEKernel",
+        "summary": "Wave 45 formal SWE kernel harvesting repository seed corpora, enforcing zero-test metamorphic canonicality laws, tracing interprocedural producer lineage for rejected values, repairing variable name holes and coupled two-guard edits within the file's own alphabet, enforcing symbol ownership, and auditing source taint flows at K3=0.",
+        "triggers": [
+            "repository seed corpus metamorphic laws",
+            "producer lineage graph rejected value producer",
+            "variable name hole two guard coupled repair",
+            "symbol ownership taint flow alphabet",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W45_AX_GUARD_ZERO_SHOT_CACHE_HCU": {
+        "domain": "COMPUTER_USE_AND_TERMINAL",
+        "source_path": "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+        "entrypoint": "AXGuardZeroShotCacheHCUKernel",
+        "summary": "Wave 45 Microsoft HCU AX-guard kernel combining view-independent AX target binding, pre-input action guards, accessibility-debt auditing (visual fallback only on undescribed widgets), verified zero-screenshot CDP/A11y action caching, partial-order planning, and literal-evidence OSWorld verified task ledgers at K3=0.",
+        "triggers": [
+            "microsoft hcu ax guard batched wait diff",
+            "accessibility debt undescribed widgets visual fallback",
+            "verified zero screenshot action cache cdp",
+            "osworld verified task ledger partial order",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W46_ANTI_MANUFACTURED_CONFIDENCE_MEMORY": {
+        "domain": "MEMORY_AND_BELIEF_REVISION",
+        "source_path": "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+        "entrypoint": "AntiManufacturedConfidenceMemoryEngine",
+        "summary": "Wave 46 anti-manufactured-confidence memory unifying PR #7145 6-op MEME DependencyMemory with Kwon 2026 Manufactured-Confidence immunity (quarantining single-source hedged hearsay), LAPSE temporal-shape fidelity (preserving progressive/bounded facts without stative coercion), reader conjunctions, capture-recapture unseen estimation, and rollbackable composition state capsules at K3=0.",
+        "triggers": [
+            "manufactured confidence hedged provenance quarantine",
+            "lapse temporal fidelity progressive bounded stative",
+            "meme protocol 6 op dependency memory capsule rollback",
+            "kumiho agm hansson belief revision",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W46_ANYTIME_VALID_EVALUE_EVOLUTION_GATE": {
+        "domain": "VERIFICATION_AND_EPISTEMIC_GATES",
+        "source_path": "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+        "entrypoint": "AnytimeValidEValueEvolutionGateKernel",
+        "summary": "Wave 46 self-evolution verification gate enforcing SCoRE conformal e-values, Ville's inequality anytime-valid betting supermartingales, mutation-tested verifier falsification (can_say_no), cross-verifier conditional error correlation phi, skill-scope admission, and Thompson-compiler security poisoning defense at K3=0.",
+        "triggers": [
+            "score conformal e values ville anytime valid supermartingale",
+            "verifier falsification mutant kill rate phi correlation",
+            "endogenous loop collapse thompson poisoning gate",
+            "skill scope bundle learned skill verdict",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W46_THREE_TIER_ZERO_FORGETTING_CONTINUAL": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+        "entrypoint": "ThreeTierZeroForgettingContinualKernel",
+        "summary": "Wave 46 three-tier zero-forgetting continual kernel uniting Tier-0 HierarchicalSkillLibrary with O(1) unlearning, Tier-1 Doc-to-LoRA single-pass rank-budgeted adapter manifests (<50 MB), and Tier-2 LRCP Gram-Schmidt orthogonal-subspace projection + sparse memory slot consolidation gated by anytime-valid e-values at K3=0.",
+        "triggers": [
+            "doc to lora single pass hypernetwork adapter manifest",
+            "lrcp orthogonal subspace projection zero forgetting",
+            "sparse memory finetuning sae fd hierarchical skill library",
+            "three tier continual learning o1 unlearning",
+        ],
+        "required_inputs": ["op"],
         "declared_dependencies": [],
     },
     "METAMORPHIC_HABITATION_ZIPPER": {
@@ -2982,6 +3084,23 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
             "canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py",
         ],
     },
+    "meme_protocol_memory_w42": {
+        "external_names": [
+            "memory cascade",
+            "memory absence",
+            "dependency invalidation",
+            "upstream superseded",
+            "incremental view maintenance",
+            "why provenance",
+            "entity rename tracking",
+            "aggregate over a set that lost a member",
+        ],
+        "engines": ["engine:LEAPFROG_W42_MEME_PROTOCOL_MEMORY"],
+        "koan_modules": [
+            "canonical/swe_kernel/meme_protocol_memory_v1.py",
+            "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+        ],
+    },
     "refusal_acquire_retry_w41": {
         "external_names": [
             "a refusal is a specification",
@@ -3329,6 +3448,103 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
             "canonical/runtime/osworld_v21_generic_policy_v1.py",
             "canonical/runtime/osworld_computer_surface_v1.py",
             "canonical/runtime/osworld_v21_host_browser_ops_v1.py",
+        ],
+    },
+    "quotient_angelic_metamorphic_hcu": {
+        "external_names": [
+            "coarsest trace quotient",
+            "angelic value forcing",
+            "computed vocabulary",
+            "contrast is a probe",
+            "repository seed corpus",
+            "metamorphic laws",
+            "producer lineage graph",
+            "name hole repair",
+            "two guard coupled edit",
+            "microsoft hcu",
+            "hybrid computer use",
+            "accessibility debt",
+            "a11y cua",
+            "zero screenshot action cache",
+            "osworld verified task ledger",
+            "partial order plan",
+            "sussman anomaly",
+            "agentic symbolic execution",
+            "symbolon",
+            "fixedbench",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W45_QUOTIENT_ANGELIC_PROBE_INDUCER",
+            "engine:LEAPFROG_W45_METAMORPHIC_LINEAGE_CORPUS_SWE",
+            "engine:LEAPFROG_W45_AX_GUARD_ZERO_SHOT_CACHE_HCU",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+            "canonical/tools/the_goal_is_a_quotient_of_the_trace_v1.py",
+            "canonical/tools/force_the_value_and_see_v1.py",
+            "canonical/swe_kernel/metamorphic_laws_v1.py",
+            "canonical/swe_kernel/producer_lineage_graph_v1.py",
+            "canonical/runtime/verified_zero_screenshot_action_cache_v1.py",
+            "canonical/runtime/osworld_verified_task_ledger_v1.py",
+        ],
+    },
+    "manufactured_confidence_lapse_kumiho_meme": {
+        "external_names": [
+            "manufactured confidence",
+            "kwon 2026 manufactured confidence",
+            "lapse temporal fidelity",
+            "coerced stative",
+            "hedged hearsay quarantine",
+            "kumiho agm",
+            "hansson belief revision",
+            "meme protocol 6 op",
+            "dependency memory semiring",
+            "composition state capsule rollback",
+            "capture recapture unseen",
+            "always on engram",
+            "memoryarena",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W46_ANTI_MANUFACTURED_CONFIDENCE_MEMORY",
+            "engine:LEAPFROG_W44_MEME_DBSP_CASCADE_ABSENCE_MEMORY",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+            "canonical/swe_kernel/meme_protocol_memory_v1.py",
+            "canonical/runtime/composition_state_capsule_v2.py",
+            "canonical/runtime/residual_witness_retrieval_compiler_v1.py",
+            "canonical/tools/a_fact_is_a_conjunction_of_its_readers_v1.py",
+        ],
+    },
+    "anytime_valid_evalue_score_d2l_lrcp": {
+        "external_names": [
+            "score conformal e values",
+            "conformal e values",
+            "ville inequality supermartingale",
+            "anytime valid certificate",
+            "endogenous loop collapse",
+            "thompson poisoning",
+            "verifier falsification",
+            "verifier conditional correlation phi",
+            "doc to lora",
+            "text to lora",
+            "lrcp orthogonal projection",
+            "sparse memory finetuning",
+            "sae fd",
+            "hierarchical skill library",
+            "hyperagents dgm h",
+            "self healing harness",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W46_ANYTIME_VALID_EVALUE_EVOLUTION_GATE",
+            "engine:LEAPFROG_W46_THREE_TIER_ZERO_FORGETTING_CONTINUAL",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+            "canonical/runtime/verifier_falsification_v1.py",
+            "canonical/swe_kernel/skill_scope_bundle_v1.py",
+            "canonical/swe_kernel/learned_skill_verdict_v1.py",
+            "canonical/swe_kernel/hierarchical_skill_library_v1.py",
         ],
     },
 }
@@ -5484,6 +5700,21 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
             return _fail(mode, str(acquired.get("status") or "ACQUISITION_FAILED"), acquisition=acquired)
         return _ok(mode, "PASS__ACQUIRED_AFTER_REFUSAL", acquired)
 
+    if mode == "LEAPFROG_W42_MEME_PROTOCOL_MEMORY":
+        from canonical.swe_kernel.meme_protocol_memory_v1 import run_protocol
+
+        report = run_protocol(
+            per_op=int(inputs.get("per_op", 4)),
+            seed=int(inputs.get("seed", 20261126)),
+        )
+        if not report.get("instances"):
+            return _fail(mode, "NO_PROTOCOL_INSTANCES")
+        if (report.get("dependency_memory_rate") or 0.0) < 0.999:
+            return _fail(mode, "MEME_PROTOCOL_OPERATION_UNANSWERED", report=report)
+        if not (report.get("self_check") or {}).get("trustworthy"):
+            return _fail(mode, "MEME_PROTOCOL_INSTRUMENT_NOT_TRUSTWORTHY", report=report)
+        return _ok(mode, "MEME_PROTOCOL_MEASURED", report)
+
     if mode == "LEAPFROG_W40_FRONTIER_BENCH_HARNESS":
         from canonical.evaluation import frontier_bench_v1 as bench
 
@@ -6112,6 +6343,48 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
         else:
             res = eng.skillrl_distill_trajectories(inputs.get("trajectories") or ())
         return _ok(mode, f"W44_CONTINUAL_{op}", res) if res.get("pass") else _fail(mode, f"W44_CONTINUAL_{op}_FAILED", res)
+
+    if mode == "LEAPFROG_W45_QUOTIENT_ANGELIC_PROBE_INDUCER":
+        from canonical.runtime.wave45_46_anytime_valid_quotient_metamorphic_hcu_v1 import QuotientAngelicProbeInducerKernel
+
+        eng = inputs.get("engine") or QuotientAngelicProbeInducerKernel()
+        res = eng.run(inputs)
+        return _ok(mode, "W45_QUOTIENT_ANGELIC_PROBE", res) if res.get("pass") else _fail(mode, "W45_QUOTIENT_ANGELIC_PROBE_FAILED", res)
+
+    if mode == "LEAPFROG_W45_METAMORPHIC_LINEAGE_CORPUS_SWE":
+        from canonical.runtime.wave45_46_anytime_valid_quotient_metamorphic_hcu_v1 import MetamorphicLineageCorpusSWEKernel
+
+        eng = inputs.get("engine") or MetamorphicLineageCorpusSWEKernel()
+        res = eng.run(inputs)
+        return _ok(mode, "W45_METAMORPHIC_LINEAGE_SWE", res) if res.get("pass") else _fail(mode, "W45_METAMORPHIC_LINEAGE_SWE_FAILED", res)
+
+    if mode == "LEAPFROG_W45_AX_GUARD_ZERO_SHOT_CACHE_HCU":
+        from canonical.runtime.wave45_46_anytime_valid_quotient_metamorphic_hcu_v1 import AXGuardZeroShotCacheHCUKernel
+
+        eng = inputs.get("engine") or AXGuardZeroShotCacheHCUKernel()
+        res = eng.run(inputs)
+        return _ok(mode, "W45_AX_GUARD_HCU", res) if res.get("pass") else _fail(mode, "W45_AX_GUARD_HCU_FAILED", res)
+
+    if mode == "LEAPFROG_W46_ANTI_MANUFACTURED_CONFIDENCE_MEMORY":
+        from canonical.runtime.wave45_46_anytime_valid_quotient_metamorphic_hcu_v1 import AntiManufacturedConfidenceMemoryEngine
+
+        eng = inputs.get("engine") or AntiManufacturedConfidenceMemoryEngine()
+        res = eng.run(inputs)
+        return _ok(mode, "W46_ANTI_MANUFACTURED_CONFIDENCE_MEMORY", res) if res.get("pass") else _fail(mode, "W46_ANTI_MANUFACTURED_CONFIDENCE_MEMORY_FAILED", res)
+
+    if mode == "LEAPFROG_W46_ANYTIME_VALID_EVALUE_EVOLUTION_GATE":
+        from canonical.runtime.wave45_46_anytime_valid_quotient_metamorphic_hcu_v1 import AnytimeValidEValueEvolutionGateKernel
+
+        eng = inputs.get("engine") or AnytimeValidEValueEvolutionGateKernel()
+        res = eng.run(inputs)
+        return _ok(mode, "W46_ANYTIME_VALID_EVALUE_GATE", res) if res.get("pass") else _fail(mode, "W46_ANYTIME_VALID_EVALUE_GATE_FAILED", res)
+
+    if mode == "LEAPFROG_W46_THREE_TIER_ZERO_FORGETTING_CONTINUAL":
+        from canonical.runtime.wave45_46_anytime_valid_quotient_metamorphic_hcu_v1 import ThreeTierZeroForgettingContinualKernel
+
+        eng = inputs.get("engine") or ThreeTierZeroForgettingContinualKernel()
+        res = eng.run(inputs)
+        return _ok(mode, "W46_THREE_TIER_CONTINUAL", res) if res.get("pass") else _fail(mode, "W46_THREE_TIER_CONTINUAL_FAILED", res)
 
     if mode == "METAMORPHIC_HABITATION_ZIPPER":
         from canonical.swe_kernel import metamorphic_habitation_zipper_v1 as m

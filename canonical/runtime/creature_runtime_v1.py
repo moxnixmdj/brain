@@ -1882,6 +1882,34 @@ class Creature:
         self._save()
         return res
 
+    def quotient_angelic_probe_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 45: Creature coarsest trace-quotient induction + angelic forcing + systematic graph exploration."""
+        return self._ensure_unified_model().quotient_angelic_probe_op(payload)
+
+    def metamorphic_lineage_swe_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 45: Creature repo seed-corpus harvesting + metamorphic laws + producer lineage + symbol-owned hole/guard repair."""
+        return self._ensure_unified_model().metamorphic_lineage_swe_op(payload)
+
+    def ax_guard_zero_shot_hcu_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 45: Creature Microsoft HCU AX-guard + accessibility-debt audit + zero-screenshot cache + OSWorld ledger."""
+        return self._ensure_unified_model().ax_guard_zero_shot_hcu_op(payload)
+
+    def anti_manufactured_confidence_memory_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 46: Creature Anti-Manufactured-Confidence 6-op MEME DependencyMemory + LAPSE temporal fidelity + capsule rollback."""
+        res = self._ensure_unified_model().anti_manufactured_confidence_memory_op(payload)
+        self._save()
+        return res
+
+    def anytime_valid_evalue_gate_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 46: Creature SCoRE conformal e-values + Ville anytime-valid gate + verifier falsification + Thompson-poisoning guard."""
+        return self._ensure_unified_model().anytime_valid_evalue_gate_op(payload)
+
+    def three_tier_zero_forgetting_continual_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 46: Creature 3-tier continual kernel (HierarchicalSkillLibrary + Doc-to-LoRA manifest + LRCP orthogonal consolidation)."""
+        res = self._ensure_unified_model().three_tier_zero_forgetting_continual_op(payload)
+        self._save()
+        return res
+
     def sleep_evolve_organs_gea(
         self,
         *,
