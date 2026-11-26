@@ -33055,7 +33055,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "cf8985cc84cbff4e827a332a45bbc44de288f9a29f9cb35422c61e14ffc57559"
+  "value": "3fd04848b369ba292ae3f4eb98348adb12cde2107bc5cca2f4059d923d7b5791"
  },
  "engines": [
   {
@@ -334585,7 +334585,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/UNFAMILIAR_SIX_MOVES_UNIFIED_MODEL_20261126_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "fac8f2738988c0a7b5d51f92a6870833237dfddcb162b9ffc083b496bb4c89c6",
+   "sha256": "e5d4c6b3786219044a612eb1df26bc83544d5475a6ab0e14ddc2c3372d8dcdb1",
    "status": "SHIPPED",
    "terms": {
     "20261126": 1,

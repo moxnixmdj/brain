@@ -109,6 +109,8 @@
       "repeated browser/DOM rendering after Run-1 CDP/WebMCP API discovery"
     ],
     "expected_parent_level_state_change": "Eliminates disconnected dark-organ isolation, L* observation-table overhead, dead-site AST repair waste, NAME_SCOPE blindness, misnamed-archive false passes, and multi-hop memory retraction/absence failures across UnifiedModel's K3=0 spines.",
+    "real_outcome": "UnifiedModel now unifies 8 previously unwired repository modules and 6 cross-disciplinary K3=0 engines behind first-class methods, federated routes, and concept bridges, completing all 6 moves end-to-end in ~51 ms total.",
+    "required_capability": "Observation-table-free active automata learning, Angelic Forest + OE-SyGuS + NAME_SCOPE SWE repair with non-vacuous verification, WebMCP/CDP protocol lifting + magic-header round-trip effect verification, Why-Provenance Semiring multi-hop Cascade/Absence memory, minimax version-space interrogation, and anti-reward-hacking Pareto evolution.",
     "obs_blocker": {
       "blocker_is": "Disconnected unwired synthesis/minimax/intake modules, observation-table overhead, dead-site AST enumeration + missing NAME_SCOPE, browser UI repetition + format-impostor blind spots, and missing provenance polynomials on multi-hop memory retractions",
       "delete_bypass_substitute_options": [
@@ -178,6 +180,141 @@
           "why": "Leaves 64+ organs unreachable from UnifiedModel, fails NAME_SCOPE repair, and lacks Why-Provenance Cascade/Absence"
         }
       ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Zero-mock real-execution tests run live Mealy apartness learning, on-disk solve_swe_repo() NAME_SCOPE repair, real os.fork() Angelic Forest + OE-SyGuS synthesis, real xz/zip-as-gz magic-header impostors, 96-chain MEME Cascade/Absence retractions, DP minimax probes, and real-time sum_squares closed-form Pareto evolution"
+    },
+    "route_frontier": {
+      "canonical_base_commit": "908f5216517110b35e079635b1d16eb42ad84e22",
+      "checked_at_utc": "2026-11-26T15:55:47+00:00",
+      "max_age_hours": 24,
+      "discovery_required": true,
+      "incumbent_route": "DISCONNECTED_ORGANS_AND_UNPRUNED_ENUMERATION_STATUS_QUO",
+      "selected_route": "UNFAMILIAR_SIX_MOVES_K3_ZERO_UNIFIED_MODEL",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "challenger_routes": [
+        {
+          "route": "DISCONNECTED_ORGANS_AND_UNPRUNED_ENUMERATION_STATUS_QUO",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "leaves oe_sygus_synthesizer_v1, site_by_intervention_v1, mined_rewrite_theory_v1, and finite_minimax_decision_region_v1 unreachable from UnifiedModel",
+            "CORRECTNESS": "fails NAME_SCOPE member-to-local repair, accepts misnamed archives under existence checks, and misses multi-hop Cascade/Absence",
+            "INCREMENTAL_COST": "$0.00",
+            "RELIABILITY": "shadowed by v1..v12 superseded clones in find_source() and lacks anti-reward-hacking evaluator corruption checks",
+            "VERIFIABILITY": "lacks 4-gate non-vacuous test verification and provenance polynomial witnesses",
+            "WALL_CLOCK": "wastes SxE observation-table sweeps and dead-site AST enumeration"
+          },
+          "evidence": [
+            "Verified 7/7 in canonical/tests/test_unfamiliar_six_moves_leapfrog_v1.py and 38/38 in verify_brain_unified_model_v1.py"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_unfamiliar_six_moves_leapfrog_v1.py",
+            "canonical/runtime/verify_brain_unified_model_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        }
+      ],
+      "negative_search_summary": "External LLM/VLM calls are forbidden by NO_MODEL_PRODUCER_COGNITION. Unifying Brain's existing unwired synthesizers and minimax solvers with L#_e apartness, Angelic Forest pruning, CDP/WebMCP protocol lifting, Why-Provenance Semiring JTMS, and anti-reward-hacking MAP-Elites strictly dominates disconnected status-quo organs.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "Vaandrager L# constructive apartness error-aware active automata learning 2026"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Angelix angelic forest EUSolver observational equivalence SyGuS repair"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "WebMCP WindTunnel CDP HAR reverse API protocol lifting zero browser"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "MEME benchmark Cascade Absence Why-Provenance Semiring JTMS Datalog 2026"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/oe_sygus_synthesizer_v1.py",
+          "canonical/swe_kernel/site_by_intervention_v1.py",
+          "canonical/swe_kernel/mined_rewrite_theory_v1.py",
+          "canonical/runtime/finite_minimax_decision_region_v1.py"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Linux unshare(1)/namespaces interface and Python 3.11 standard library documentation"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Python 3.11 standard library (ast, os.fork, gzip, lzma, bz2, zipfile, sqlite3, urllib.parse)"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Published L# apartness, Angelix/EUSolver, WebMCP WindTunnel, MEME ICML 2026, Why-Provenance Semiring, and AlphaEvolve literature"
+        ]
+      },
+      "unresolved_plausible_dominators": [],
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-26T15:55:47+00:00",
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "UNFAMILIAR_SIX_MOVES_K3_ZERO_UNIFIED_MODEL",
+        "status": "READY",
+        "execution_dependencies": [
+          {
+            "dependency": "Python 3.11 stdlib runtime with POSIX os.fork, gzip/lzma/bz2/zipfile, sqlite3, and ast",
+            "kind": "LOCAL_RUNTIME",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "required": true,
+            "status": "READY",
+            "volatility": "STATIC",
+            "evidence": [
+              "Verified 7/7 in test_unfamiliar_six_moves_leapfrog_v1.py, 8/8 in test_canonical_swe_spine_v1.py, and 38/38 in verify_brain_unified_model_v1.py"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "Canonical governance, referee, drift, and orientation validators",
+            "kind": "DATA_SOURCE",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "required": true,
+            "status": "READY",
+            "volatility": "STATIC",
+            "evidence": [
+              "repo_integrity_guard_v1.py PASS, enforce_goal_hierarchy.py PASS, enforce_load_bearing_primary_pr.py PASS"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          }
+        ]
+      }
     },
     "open_world_route_discovery": {
       "candidate_routes": [
