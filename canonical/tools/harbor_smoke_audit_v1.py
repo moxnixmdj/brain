@@ -7,6 +7,8 @@ one. Nothing here runs a task or claims an official aggregate score.
 from __future__ import annotations
 
 import argparse
+from datetime import datetime
+import hashlib
 import json
 from pathlib import Path
 
@@ -17,6 +19,18 @@ def _object(path: Path) -> dict:
         raise ValueError('expected object')
     return obj
 
+
+
+def _seconds(timing: dict | None) -> float | None:
+    """Harbor phase timestamps, not estimates from the enclosing CI job."""
+    if not isinstance(timing, dict):
+        return None
+    try:
+        elapsed = (datetime.fromisoformat(timing['finished_at']) -
+                   datetime.fromisoformat(timing['started_at'])).total_seconds()
+    except (KeyError, TypeError, ValueError):
+        return None
+    return round(elapsed, 3) if elapsed >= 0 else None
 
 def audit(jobs: Path, ids: list[str], *, pro: bool) -> dict:
     if not ids or len(ids) != len(set(ids)) or any(not i.strip() for i in ids):
@@ -52,8 +66,12 @@ def audit(jobs: Path, ids: list[str], *, pro: bool) -> dict:
                 raise ValueError('missing or ambiguous trial')
             src, producer = producers[task]
             dst, grader = graders[task]
-            if producer.get('exception_info') or grader.get('exception_info'):
-                raise ValueError('Harbor trial exception')
+            row.update(producer_trial_s=_seconds(producer), agent_s=_seconds(producer.get('agent_execution')),
+                       verifier_s=_seconds(grader.get('verifier')))
+            if pro:
+                row['replay_trial_s'] = _seconds(grader)
+            if producer.get('exception_info') or grader.get('exception_info') or grader.get('reward_valid') is False:
+                raise ValueError('Harbor trial exception or invalid reward')
             trace = _object(src / 'agent/brain_epistemic_trace.json')
             row.update(agent_status=trace['status'], cycles=trace.get('cycles'))
             if trace.get('external_harbor_vm_eval_status') != 'EXPERIMENTAL_DISPATCH__UNVERIFIED':
@@ -64,11 +82,24 @@ def audit(jobs: Path, ids: list[str], *, pro: bool) -> dict:
                 replay = _object(dst / 'agent/replay.json')
                 if trace.get('patch_emitted') is not True:
                     raise ValueError('no producer patch')
+                if (not producer.get('task_checksum') or producer['task_checksum'] != grader.get('task_checksum')
+                        or replay.get('task') != task):
+                    raise ValueError('producer/replay task mismatch')
+                with patch.open('rb') as stream:
+                    row['patch_sha256'] = hashlib.file_digest(stream, 'sha256').hexdigest()
+                handoff = trace.get('pro_candidate_handoff')
+                if (not isinstance(handoff, dict) or handoff.get('patch_sha256') != row['patch_sha256']
+                        or handoff.get('patch_size') != row['patch_bytes']):
+                    raise ValueError('producer handoff differs from captured file')
                 if row['patch_bytes']:
-                    if replay.get('apply_rc') != 0 or Path(replay['patch']).resolve() != patch.resolve():
+                    if (type(replay.get('apply_rc')) is not int or replay['apply_rc'] != 0
+                            or Path(replay['patch']).resolve() != patch.resolve()):
                         raise ValueError('patch not replayed')
+                    row['replay'] = 'APPLIED'
                 elif replay['patch'] is not None:
                     raise ValueError('empty patch replay mismatch')
+                else:
+                    row['replay'] = 'EMPTY_CAPTURE'
             reward = grader['verifier_result']['rewards']['reward']
             if type(reward) not in (int, float) or not 0 <= reward <= 1:
                 raise ValueError('invalid verifier reward')

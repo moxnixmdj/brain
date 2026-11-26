@@ -66,6 +66,37 @@ class SmokeAccountingTests(unittest.TestCase):
             self.assertTrue(report['issues'])
             self.assertNotIn('ungraded_reason', report['rows'][0])
 
+    def test_pro_audits_handoff_identity_and_reports_measured_phase_times(self):
+        # Audit input records only; this is not a task replay or an earned reward.
+        from canonical.runtime.harbor_pro_patch_handoff_v1 import store_candidate_patch
+        with tempfile.TemporaryDirectory() as tmp:
+            jobs = Path(tmp)
+            src, dst = (jobs / d / 'trial' for d in ('brain-pro-smoke', 'brain-pro-smoke-regrade'))
+            patch = b'diff --git a/a b/a\n'
+            for d in (src, dst):
+                (d / 'agent').mkdir(parents=True)
+                (d / 'result.json').write_text(json.dumps({'task_name': 'swebench-pro/a', 'task_checksum': 'one',
+                    'started_at': '2026-11-25T10:00:00Z', 'finished_at': '2026-11-25T10:00:12.250Z',
+                    'exception_info': None, 'verifier_result': {'rewards': {'reward': 0}}}))
+            digest = hashlib.sha256(patch).hexdigest()
+            handoff = store_candidate_patch(agent_log_dir=src/'agent', patch=patch,
+                expected_base='a'*40, reported_base='a'*40, expected_sha256=digest)
+            (src/'agent/brain_epistemic_trace.json').write_text(json.dumps({'status': 'FINISHED',
+                'patch_emitted': True, 'pro_candidate_handoff': handoff,
+                'external_harbor_vm_eval_status': 'EXPERIMENTAL_DISPATCH__UNVERIFIED'}))
+            replay = {'task': 'a', 'patch': handoff['patch_path'], 'apply_rc': 0}
+            def row(**override):
+                (dst/'agent/replay.json').write_text(json.dumps({**replay, **override}))
+                return audit(jobs, ['a'], pro=True)['rows'][0]
+            ok = row()
+            self.assertEqual((ok['reward'], ok['replay'], ok['patch_sha256']), (0, 'APPLIED', digest))
+            self.assertEqual(ok['replay_trial_s'], 12.25)
+            self.assertIsNone(ok['verifier_s'])  # missing phase timing is not zero
+            self.assertIsNone(row(apply_rc=False)['reward'])
+            self.assertIsNone(row(task='b')['reward'])
+            (src/'agent/model.patch').write_bytes(patch.replace(b'a/a', b'x/x'))
+            self.assertIsNone(row()['reward'])  # same length and path, different intervention
+
     def test_pro_never_scores_a_producer_without_a_pristine_replay(self):
         with tempfile.TemporaryDirectory() as tmp:
             jobs = Path(tmp)
