@@ -3,7 +3,7 @@
 - **Authority**: `NONE` (Arena sandbox measurement receipt; independent external verification remains open).
 - **Model Dependency Count**: `0` (`0` external LLM API calls, `0` local neural weights, `$0.00` incremental spend).
 - **Receipt Bundle**: `canonical/verification/frontier_leapfrog_wave2_k3_zero_20261125_V1.json`
-- **Base Commit**: `b28dffd863a00fca76e52fc09f16c1f5edc08b44`
+- **Base Commit**: `eded44f2269bd9bc65baddbb0c4077d1f638f94f`
 
 ---
 

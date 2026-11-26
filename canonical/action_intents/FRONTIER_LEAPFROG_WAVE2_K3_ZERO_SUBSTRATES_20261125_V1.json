@@ -46,7 +46,7 @@
   },
   "benchmark_or_family_rank_authority": "NONE__SANDBOX_SUBSTRATE_AND_UNIFIED_MODEL_INTEGRATION_ONLY",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::K3_ZERO_COUNTERFACTUAL_ROUTING_ZERO_SCREENSHOT_RELATIONAL_ADDITION_AND_COW_VERIFIER",
-  "canonical_base_commit": "b28dffd863a00fca76e52fc09f16c1f5edc08b44",
+  "canonical_base_commit": "eded44f2269bd9bc65baddbb0c4077d1f638f94f",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -74,7 +74,7 @@
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
   "recursive_obs": {
-    "canonical_base_commit": "b28dffd863a00fca76e52fc09f16c1f5edc08b44",
+    "canonical_base_commit": "eded44f2269bd9bc65baddbb0c4077d1f638f94f",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "Deleted syntax-only AST rewrite triggers after proving 0 non-identity AST skeleton rewrites repeat across 189 real OSS commits",

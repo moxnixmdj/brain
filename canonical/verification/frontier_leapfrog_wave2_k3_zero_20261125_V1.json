@@ -25,9 +25,9 @@
       "native_source_hit_recall": 1.0
     },
     "continual_learning": {
-      "candidates": 29,
+      "candidates": 32,
       "chance_route_recall": 0.0202,
-      "chance_source_recall": 0.0129,
+      "chance_source_recall": 0.0143,
       "frontier_route_hit_recall": 0.333,
       "frontier_source_hit_recall": 0.333,
       "invisible_to_model": 2,
@@ -35,9 +35,9 @@
       "native_source_hit_recall": 0.333
     },
     "instant_learning": {
-      "candidates": 174,
-      "chance_route_recall": 0.0995,
-      "chance_source_recall": 0.0772,
+      "candidates": 178,
+      "chance_route_recall": 0.1012,
+      "chance_source_recall": 0.079,
       "frontier_route_hit_recall": 1.0,
       "frontier_source_hit_recall": 1.0,
       "invisible_to_model": 1,
@@ -45,9 +45,9 @@
       "native_source_hit_recall": 1.0
     },
     "memory": {
-      "candidates": 190,
+      "candidates": 191,
       "chance_route_recall": 0.059,
-      "chance_source_recall": 0.0839,
+      "chance_source_recall": 0.0843,
       "frontier_route_hit_recall": 1.0,
       "frontier_source_hit_recall": 0.667,
       "invisible_to_model": 0,
@@ -55,9 +55,9 @@
       "native_source_hit_recall": 1.0
     },
     "verification_abstention": {
-      "candidates": 325,
+      "candidates": 329,
       "chance_route_recall": 0.1231,
-      "chance_source_recall": 0.145,
+      "chance_source_recall": 0.1468,
       "frontier_route_hit_recall": 0.667,
       "frontier_source_hit_recall": 0.667,
       "invisible_to_model": 9,
@@ -65,9 +65,9 @@
       "native_source_hit_recall": 0.667
     },
     "world_model": {
-      "candidates": 124,
+      "candidates": 128,
       "chance_route_recall": 0.0422,
-      "chance_source_recall": 0.0549,
+      "chance_source_recall": 0.0567,
       "frontier_route_hit_recall": 0.667,
       "frontier_source_hit_recall": 1.0,
       "invisible_to_model": 1,
@@ -79,11 +79,11 @@
   "independent_verified": false,
   "model_dependency_count": 0,
   "module_sha256": {
-    "canonical/runtime/brain_unified_model_v1.py": "14f0f8ca2f578a68feea11e9637a61208e498ac584a42b208213b32c14dc35eb",
+    "canonical/runtime/brain_unified_model_v1.py": "f260bb3f5dd1f9be4deb0494dd3c61113c61b5459f4b7ecd67033245659b0c26",
     "canonical/runtime/counterfactual_discr_tree_skill_router_v1.py": "652e3b974a026ca74646f5810687392ec3b141da908bf61d035c03cfe109dc42",
     "canonical/runtime/cow_zygote_speculative_verifier_v1.py": "e4ff324b2fd589269b5d33cc31679a3f548d6bc977ba6567e86c70ce6eda6d1e",
     "canonical/runtime/relational_guard_addition_symbolic_repair_v1.py": "1c135097c7ea1c2a7ec007a23fe61c1676a9761b28c4c9148e2e05e6dc434e70",
-    "canonical/runtime/unified_hidden_capability_federation_v1.py": "33c38b3a4dd04635a4147581dc296c65f4fa7c843e60d63fb4392c711d014d51",
+    "canonical/runtime/unified_hidden_capability_federation_v1.py": "4fc6f96135d09469ba6f804c1ad8c25497158ef49554135e78fd13255c9d24d3",
     "canonical/runtime/verified_zero_screenshot_action_cache_v1.py": "6bd5c9a473162d14f689aa3007177eebf8d1c88b15cf5a5aafe8bd352475007c",
     "canonical/tools/domain_atlas_v1.py": "9d88c13ef8a8d91701be587e14dc1c2652926194caabfd339d706e762e574e84"
   },
