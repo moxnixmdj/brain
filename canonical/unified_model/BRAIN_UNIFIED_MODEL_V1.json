@@ -31371,7 +31371,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "9c5ffd8fb3f528d34abc35e1ca3fc5851ee37435317f1f431a93f4e84edb6e4b"
+  "value": "0b2d25475bdaf4b59bcb0d4704e47bb4298ca80e816d4924ab282925a6676416"
  },
  "engines": [
   {
@@ -291275,7 +291275,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/UNIFICATION_WAVE2_RUNTIME_MODEL_SPINES_20261124_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "cfa2d2e219be09e646fc5f3a48b937f65a7484dd45de6664e93f3b77b07ad3c8",
+   "sha256": "94991b99e2aa27df7f71e7c8db2f772f5eeabb01bde3556a27b0b7ea2c43129d",
    "status": "SHIPPED",
    "terms": {
     "0e": 1,
