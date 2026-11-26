@@ -29,7 +29,7 @@ frontier mechanisms into `UnifiedModel`, `Creature`, and `unified_hidden_capabil
      CoW speculative verification trial ONLY where hypotheses disagree (`BY_TRIAL`), with zero
      mutation of parent memory.
 5. `CLMRRFMemoryEngine`:
-   - Verbatim-first immutable archival + `Nemori` free-energy surprise-gated admission + `TMA-NM` HMAC origin seal,
+   - Verbatim-first immutable archival + `Nemori` free-energy surprise-gated admission + `TMA-NM` origin hash commitment,
    - 4-way Reciprocal Rank Fusion (`Hindsight`-style: lexical BM25 + structural AST + bi-temporal entity graph +
      origin trust) strictly bounded by an explicit character budget (`Beyond Memory Leaderboards`),
    - `CLM` file-mirrored editable working context (`clm_offload`, `clm_grep_restore`, `clm_audit`) with SHA-256 tamper verification.
@@ -945,7 +945,7 @@ class CLMRRFMemoryEngine:
         entities: Sequence[str] = (),
         source_code: str = "",
     ) -> dict[str, Any]:
-        """Nemori surprise-gated verbatim-first write sealed with TMA-NM HMAC-SHA256 origin binding."""
+        """Nemori surprise-gated verbatim-first write with a SHA-256 commitment to the declared origin."""
         # Distinguish a user utterance from a verifier. The backing bus uses
         # different class names; never elevate an unknown spelling to verifier.
         origin_cls = {"USER_DIRECT": "TRUSTED_USER", "RUNTIME_OBSERVATION": "DERIVED_INTERNAL",
@@ -1099,13 +1099,12 @@ class CLMRRFMemoryEngine:
             for tok in rec["lexical_tokens"]:
                 df[tok] = df.get(tok, 0) + 1
 
+        # Hash-randomized set iteration and ordinary float addition made equal
+        # evidence differ by one ulp across new processes, breaking tie groups.
+        idf = {t: math.log(1.0 + (n_docs + 0.5) / (df.get(t, 0) + 0.5)) for t in q_lex}
+
         def _lex_score(rec: dict[str, Any]) -> float:
-            score = 0.0
-            for tok in q_lex:
-                if tok in rec["lexical_tokens"]:
-                    idf = math.log(1.0 + (n_docs + 0.5) / (df.get(tok, 0) + 0.5))
-                    score += idf
-            return score
+            return math.fsum(idf[t] for t in q_lex & rec["lexical_tokens"])
 
         # Channel 2: Structural AST/identifier overlap
         def _ast_score(rec: dict[str, Any]) -> float:
