@@ -243,11 +243,36 @@ def _rel(path: Path, root: Path) -> str:
         return str(path)
 
 
+_JSON_MEMO: dict[tuple[str, int, int], Any] = {}
+
+
 def _json(path: Path) -> Any:
+    """Parse a JSON file once per (path, size, mtime).
+
+    BEST PART IS NO PART: this read and re-decoded the SAME file on every call,
+    and the acceptance verifier calls it once per row.  Measured on the
+    python.source.symbols.index.ast goal: 6,777 calls, 4.85 s of decode out of a
+    14.19 s run -- a third of the work was re-parsing one unchanging artifact.
+
+    The key includes size and mtime, so a file that is rewritten is re-read;
+    nothing about the result changes, only how often it is computed.  Bounded so
+    a long-lived process cannot accumulate them without limit.
+    """
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
+        st = path.stat()
+        key = (str(path), int(st.st_size), int(st.st_mtime_ns))
+    except OSError:
+        return None
+    if key in _JSON_MEMO:
+        return _JSON_MEMO[key]
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError, UnicodeDecodeError):
         return None
+    if len(_JSON_MEMO) >= 512:
+        _JSON_MEMO.clear()
+    _JSON_MEMO[key] = value
+    return value
 
 
 def _canonical_json_sha256(path: Path) -> str | None:
