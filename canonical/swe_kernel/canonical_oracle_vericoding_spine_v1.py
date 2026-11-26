@@ -892,3 +892,297 @@ def audit_self_evolution_entry(
         "model_calls": 0,
     }
 
+
+def interrogate_minimax_witness(
+    *,
+    params: Sequence[str],
+    examples: Sequence[tuple[Any, Any]] = (),
+    candidate_bodies: Sequence[str] | None = None,
+    max_weight: int = 3,
+    extra_constants: Sequence[Any] = (),
+) -> dict[str, Any]:
+    """Wave 18: Exact-Minimax Witness Interrogation via `evidence_demand_v1` (closes spec & 1-demo ambiguity).
+
+    Refuses premature commitment whenever >=2 admissible candidate functions agree on all observed examples
+    yet diverge on a discriminating probe; computes the exact minimax probe maximizing worst-case
+    hypothesis-space elimination (`O(log |H|)` active queries).
+    """
+    import math
+
+    from canonical.runtime import evidence_demand_v1 as ev_dem
+
+    t0 = time.perf_counter()
+    param_list = [str(p) for p in params]
+    ex_list = list(examples)
+    if candidate_bodies is not None:
+        admissible = []
+        for raw_b in candidate_bodies:
+            s = str(raw_b).strip()
+            if not s:
+                continue
+            # Auto-wrap bare expressions into `return <expr>` for evidence_demand_v1.behaviour_signature
+            if not s.startswith(("return ", "if ", "for ", "while ", "def ")) and "\n" not in s:
+                s = f"return {s}"
+            admissible.append(s)
+    else:
+        raw_adm = ev_dem.enumerate_admissible(
+            param_list,
+            ex_list,
+            max_weight=int(max_weight),
+            extra_constants=tuple(extra_constants),
+        )
+        admissible = [str(b) for b in raw_adm]
+
+    if not admissible:
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "decision": "FAIL_CLOSED__NO_ADMISSIBLE_HYPOTHESIS",
+            "status": "FAIL_CLOSED__NO_ADMISSIBLE_HYPOTHESIS",
+            "admissible_count": 0,
+            "model_calls": 0,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+    probes = ev_dem.disclose_probes(admissible, examples=ex_list)
+    # Build probe-indexed partition buckets to select exact minimax discriminating probe
+    sigs: dict[str, tuple[Any, ...]] = {}
+    for body in admissible:
+        try:
+            sigs[body] = tuple(ev_dem.behaviour_signature(body, param_list, probes=probes))
+        except Exception:
+            continue
+
+    unique_classes: dict[tuple[Any, ...], list[str]] = {}
+    for body, sig in sigs.items():
+        unique_classes.setdefault(sig, []).append(body)
+
+    if len(unique_classes) <= 1:
+        chosen = sorted(admissible, key=lambda s: (len(s), s))[0]
+        return {
+            "schema": SCHEMA,
+            "pass": True,
+            "decision": "COMMIT_UNIQUE_EXPLANATION",
+            "status": "PASS__UNIQUE_EXPLANATION_IDENTIFIED",
+            "chosen_body": chosen,
+            "admissible_count": len(admissible),
+            "equivalence_classes": len(unique_classes),
+            "minimax_probe": None,
+            "model_calls": 0,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+    # Pick the exact minimax probe: minimizes max bucket size over distinct behaviour classes
+    reps = [members[0] for members in unique_classes.values()]
+    n_classes = len(reps)
+    best_probe: Any = None
+    best_max_bucket = n_classes + 1
+    best_entropy = -1.0
+    best_buckets: dict[str, int] = {}
+
+    for p_idx, probe_val in enumerate(probes):
+        buckets: dict[str, int] = {}
+        for rep in reps:
+            out_val = sigs[rep][p_idx] if p_idx < len(sigs[rep]) else "<ERR>"
+            k = repr(out_val)
+            buckets[k] = buckets.get(k, 0) + 1
+        if len(buckets) <= 1:
+            continue
+        max_b = max(buckets.values())
+        ent = -sum((c / n_classes) * math.log2(c / n_classes) for c in buckets.values() if c > 0)
+        if (max_b < best_max_bucket) or (max_b == best_max_bucket and ent > best_entropy):
+            best_max_bucket = max_b
+            best_entropy = ent
+            best_probe = probe_val
+            best_buckets = dict(buckets)
+
+    return {
+        "schema": SCHEMA,
+        "pass": True,
+        "decision": "REFUSE_AMBIGUOUS_NEED_PROBE",
+        "status": "PASS__MINIMAX_DISCRIMINATING_PROBE_COMPUTED",
+        "admissible_count": len(admissible),
+        "equivalence_classes": n_classes,
+        "minimax_probe": best_probe,
+        "worst_case_remaining_classes": best_max_bucket if best_probe is not None else n_classes,
+        "information_gain_bits": round(max(0.0, best_entropy), 6),
+        "outcome_buckets": best_buckets,
+        "sample_competing_bodies": reps[:6],
+        "model_calls": 0,
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+    }
+
+
+def generate_csp_hard_negatives(
+    *,
+    source_text: str,
+    test_source: str,
+    max_mutants: int = 12,
+    timeout_s: float = 10.0,
+) -> dict[str, Any]:
+    """Wave 18: NS-PRM Counterfactual Symbolic Perturbation (CSP) hard-negative & spec-gap generator.
+
+    Synthesizes syntactically valid, type-compatible AST perturbations of a verified Python module and
+    runs each in an isolated subprocess against `test_source`, separating:
+    - `caught_pairs`: ready-to-distill `(verified_positive, csp_hard_negative)` pairs for ASCENT / NS-PRM
+    - `survived_spec_gaps`: broken implementations that *passed* the tests (exposing specification gaps!)
+    """
+    import ast
+    import subprocess
+    import sys
+    import tempfile
+
+    t0 = time.perf_counter()
+    try:
+        tree = ast.parse(source_text)
+    except SyntaxError as exc:
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__SOURCE_SYNTAX_ERROR",
+            "reason": str(exc),
+            "model_calls": 0,
+        }
+
+    # Verify original source passes test_source first (pytest or zero-dependency stdlib runner!)
+    import importlib.util
+
+    has_pytest = importlib.util.find_spec("pytest") is not None
+    stdlib_runner = (
+        "import importlib.util, pathlib, sys, traceback, unittest\n"
+        "sys.path.insert(0, '.')\n"
+        "failed = 0\n"
+        "p = pathlib.Path(sys.argv[1])\n"
+        "spec = importlib.util.spec_from_file_location(p.stem, str(p))\n"
+        "mod = importlib.util.module_from_spec(spec)\n"
+        "spec.loader.exec_module(mod)\n"
+        "for name, obj in sorted(vars(mod).items()):\n"
+        "    if name.startswith('test_') and callable(obj):\n"
+        "        try:\n"
+        "            obj()\n"
+        "        except Exception:\n"
+        "            failed += 1\n"
+        "            traceback.print_exc()\n"
+        "    elif isinstance(obj, type) and issubclass(obj, unittest.TestCase) and obj is not unittest.TestCase:\n"
+        "        res = unittest.TextTestRunner(verbosity=0).run(unittest.defaultTestLoader.loadTestsFromTestCase(obj))\n"
+        "        if not res.wasSuccessful():\n"
+        "            failed += len(res.failures) + len(res.errors)\n"
+        "sys.exit(0 if failed == 0 else 1)\n"
+    )
+
+    def _exec_pair(src: str) -> tuple[bool, str]:
+        with tempfile.TemporaryDirectory(prefix="csp_eval_") as td:
+            td_p = Path(td)
+            (td_p / "subject_mod.py").write_text(src, encoding="utf-8")
+            (td_p / "test_subject.py").write_text(test_source, encoding="utf-8")
+            cmd = (
+                [sys.executable, "-m", "pytest", "-q", "test_subject.py"]
+                if has_pytest
+                else [sys.executable, "-c", stdlib_runner, "test_subject.py"]
+            )
+            cp = subprocess.run(
+                cmd,
+                cwd=td,
+                capture_output=True,
+                text=True,
+                timeout=min(8.0, float(timeout_s)),
+            )
+            return cp.returncode == 0, (cp.stdout + "\n" + cp.stderr).strip()
+
+    orig_ok, orig_out = _exec_pair(source_text)
+    if not orig_ok:
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__BASELINE_SOURCE_FAILS_TESTS",
+            "baseline_output": orig_out[-400:],
+            "model_calls": 0,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+    cmp_swaps = {
+        ast.Lt: ast.LtE,
+        ast.LtE: ast.Lt,
+        ast.Gt: ast.GtE,
+        ast.GtE: ast.Gt,
+        ast.Eq: ast.NotEq,
+        ast.NotEq: ast.Eq,
+    }
+    bin_swaps = {
+        ast.Add: ast.Sub,
+        ast.Sub: ast.Add,
+        ast.Mult: ast.FloorDiv,
+    }
+    bool_swaps = {ast.And: ast.Or, ast.Or: ast.And}
+
+    mutants: list[tuple[str, str]] = []
+    seen_srcs: set[str] = {source_text}
+
+    def _collect_mutants() -> None:
+        all_nodes = list(ast.walk(tree))
+        for idx, node in enumerate(all_nodes):
+            if len(mutants) >= int(max_mutants):
+                return
+            kind_label = None
+            new_tree = ast.parse(source_text)
+            target = list(ast.walk(new_tree))[idx]
+            if isinstance(target, ast.Compare) and len(target.ops) == 1:
+                op_cls = type(target.ops[0])
+                if op_cls in cmp_swaps:
+                    target.ops[0] = cmp_swaps[op_cls]()
+                    kind_label = f"CMP_SWAP_{op_cls.__name__}_TO_{cmp_swaps[op_cls].__name__}"
+            elif isinstance(target, ast.BinOp) and type(target.op) in bin_swaps:
+                op_cls = type(target.op)
+                target.op = bin_swaps[op_cls]()
+                kind_label = f"BINOP_SWAP_{op_cls.__name__}_TO_{bin_swaps[op_cls].__name__}"
+            elif isinstance(target, ast.BoolOp) and type(target.op) in bool_swaps:
+                op_cls = type(target.op)
+                target.op = bool_swaps[op_cls]()
+                kind_label = f"BOOL_SWAP_{op_cls.__name__}_TO_{bool_swaps[op_cls].__name__}"
+            if kind_label is not None:
+                mut_src = ast.unparse(new_tree) + "\n"
+                if mut_src not in seen_srcs:
+                    seen_srcs.add(mut_src)
+                    mutants.append((kind_label, mut_src))
+
+    _collect_mutants()
+
+    caught_pairs: list[dict[str, Any]] = []
+    survived_spec_gaps: list[dict[str, Any]] = []
+    for label, mut_src in mutants:
+        ok, out = _exec_pair(mut_src)
+        rec = {
+            "perturbation": label,
+            "mutated_source": mut_src,
+            "test_passed": ok,
+            "diagnostic": out[-240:],
+        }
+        if ok:
+            survived_spec_gaps.append(rec)
+        else:
+            caught_pairs.append(
+                {
+                    "perturbation": label,
+                    "positive_source": source_text,
+                    "hard_negative_source": mut_src,
+                    "verifier_diagnostic": out[-240:],
+                }
+            )
+
+    total = len(mutants)
+    kill_rate = round(len(caught_pairs) / total, 4) if total > 0 else 0.0
+    return {
+        "schema": SCHEMA,
+        "pass": total > 0,
+        "status": "PASS__CSP_HARD_NEGATIVES_GENERATED" if total > 0 else "FAIL_CLOSED__NO_PERTURBATION_SITES",
+        "total_mutants": total,
+        "caught_count": len(caught_pairs),
+        "survived_spec_gap_count": len(survived_spec_gaps),
+        "kill_rate": kill_rate,
+        "caught_pairs": caught_pairs,
+        "survived_spec_gaps": survived_spec_gaps,
+        "model_calls": 0,
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+    }
+
+
