@@ -2113,6 +2113,17 @@ def _rel_path_to_mod_name(rel_path: str) -> str:
     return ".".join(parts)
 
 
+
+def _evict_trial_modules(root: pathlib.Path, top_packages: set[str]) -> dict[str, Any]:
+    """Only the selected project namespace. /tmp can also contain our interpreter."""
+    prefix = str(root.resolve()) + os.sep
+    removed = {}
+    for name, module in list(sys.modules.items()):
+        if (name.partition('.')[0] in top_packages
+                or str(getattr(module, '__file__', '') or '').startswith(prefix)):
+            removed[name] = sys.modules.pop(name)
+    return removed
+
 def fuzz_verify_patch_cow(
     *,
     project_root: pathlib.Path,
@@ -2123,194 +2134,132 @@ def fuzz_verify_patch_cow(
     pass_envs: Sequence[Mapping[str, Any]],
     max_boundary_cases: int = 64,
 ) -> dict[str, Any]:
-    """Active Counterexample / Differential Boundary Fuzzing across parallel 1ms CoW forks!
-
-    Mutates observed passing call frames across 64 type-boundary values (`0`, `-0.0`, `-1`, `1`,
-    `""`, `b"\\x04"`, `None`, `[]`, `()`) and verifies in forked CoW children that:
-      1. Exact Passing Equivalence holds on all unmodified `pass_envs`.
-      2. No novel internal runtime fault (`ZeroDivisionError`, `IndexError`, `KeyError`,
-         `AttributeError`, `UnboundLocalError`, `RecursionError`) is introduced on boundary
-         inputs where the original function returned cleanly!
+    """Check recorded calls for typed value/argument drift; check unlabelled
+    neighbours only for newly raised exceptions. The latter have no desired
+    value oracle. UNMEASURED is neither a counterexample nor a passing gate.
+    Trusted deterministic code in a disposable environment only: fork is not
+    an external-effects sandbox.
     """
-    t_f0 = time.monotonic()
+    from itertools import combinations, product
+    from canonical.swe_kernel.petri_cow_splicing_engine_v1 import CoWDifferentialBoundaryFuzzer
+
+    start = time.monotonic()
+    if not 1 <= max_boundary_cases <= 64:
+        raise ValueError('boundary budget must be in [1,64]')
+    observe = CoWDifferentialBoundaryFuzzer._observable
+    def report(status, reason=None, *, generated=0, tested=0, exact=0, witness=None):
+        return {'status': status, 'fuzz_passed': status == 'PASSED_FINITE_CHECKS',
+                'failure_reason': reason, 'boundary_cases_generated': generated, 'boundary_cases_tested': tested,
+                'exact_calls_tested': exact, 'counterexample': witness,
+                'fuzz_elapsed_ms': round((time.monotonic() - start) * 1000, 2)}
+
     mod_name = _rel_path_to_mod_name(rel_path)
-    if not mod_name or not pass_envs:
-        return {"fuzz_passed": True, "boundary_cases_tested": 0, "fuzz_elapsed_ms": 0.0}
-
-    # Extract parameter signature for top-level function OR class method (`self` in pass_envs[0])
-    mod_cur = sys.modules.get(mod_name)
-    self_cls_name: str | None = None
-    fn_cur = getattr(mod_cur, func_name, None) if mod_cur is not None else None
-    if not callable(fn_cur) and mod_cur is not None and "self" in pass_envs[0]:
-        cand_cls_name = type(pass_envs[0]["self"]).__name__
-        cls_cur = getattr(mod_cur, cand_cls_name, None)
-        if isinstance(cls_cur, type):
-            fn_cur = getattr(cls_cur, func_name, None)
-            if callable(fn_cur):
-                self_cls_name = cand_cls_name
-    if not callable(fn_cur):
-        return {"fuzz_passed": True, "boundary_cases_tested": 0, "fuzz_elapsed_ms": 0.0}
+    mod = sys.modules.get(mod_name)
+    if not mod_name or mod is None or not pass_envs:
+        return report('UNMEASURED', 'NO_MODULE_OR_PASS_FRAME')
+    cls_name = None
+    fn = getattr(mod, func_name, None)
+    if not callable(fn) and 'self' in pass_envs[0]:
+        cls_name = type(pass_envs[0]['self']).__name__
+        fn = getattr(getattr(mod, cls_name, None), func_name, None)
     try:
-        sig = inspect.signature(fn_cur)
-        param_names = [
-            p.name for p in sig.parameters.values()
-            if p.kind in (inspect.Parameter.POSITIONAL_ONLY, inspect.Parameter.POSITIONAL_OR_KEYWORD)
-        ]
-    except (TypeError, ValueError):
-        return {"fuzz_passed": True, "boundary_cases_tested": 0, "fuzz_elapsed_ms": 0.0}
-    if not param_names or not all(pn in pass_envs[0] for pn in param_names):
-        return {"fuzz_passed": True, "boundary_cases_tested": 0, "fuzz_elapsed_ms": 0.0}
+        params = list(inspect.signature(fn).parameters.values())
+    except (ValueError, TypeError):
+        return report('UNMEASURED', 'NO_SIGNATURE')
+    if not params or any(p.kind not in (p.POSITIONAL_ONLY, p.POSITIONAL_OR_KEYWORD) for p in params):
+        return report('UNMEASURED', 'UNSUPPORTED_SIGNATURE')
 
-    exact_calls: list[list[Any]] = []
-    for penv in pass_envs[:8]:
-        if all(pn in penv for pn in param_names):
-            exact_calls.append([penv[pn] for pn in param_names])
+    def arg_state(args):
+        if not cls_name:
+            return observe(args)
+        if any('__slots__' in vars(cls) for cls in type(args[0]).__mro__):
+            raise ValueError('unobserved slots')
+        return (type(args[0]).__qualname__, observe(vars(args[0])), observe(args[1:]))
 
-    boundary_calls: list[list[Any]] = []
-    base_args = list(exact_calls[0])
-    for slot_i, val in enumerate(base_args):
-        if self_cls_name is not None and slot_i == 0:
-            continue  # Never replace `self` receiver with `None`!
-        muts: list[Any]
-        if isinstance(val, bool):
-            muts = [True, False]
-        elif isinstance(val, int):
-            muts = [0, 1, -1, 2, -2, 65536, val + 1, val - 1]
-        elif isinstance(val, float):
-            muts = [0.0, -0.0, 1.0, -1.0, 1e-9, -1e-9, val + 1.0]
-        elif isinstance(val, str):
-            muts = ["", " ", "a", "0", "a-b", "\x04", "\n", val + "x"]
-        elif isinstance(val, bytes):
-            muts = [b"", b"\x00", b"\x04", b"\x1a", b"\n", val + b"x"]
-        elif isinstance(val, list):
-            muts = [[], val[:1], val + val[:1]]
-        elif isinstance(val, tuple):
-            muts = [(), val[:1], val + val[:1]]
-        elif isinstance(val, dict):
-            muts = [{}, dict(val)]
-        else:
-            muts = [None]
-        for mv in muts:
-            cand_args = list(base_args)
-            cand_args[slot_i] = mv
-            boundary_calls.append(cand_args)
-            if len(boundary_calls) >= max_boundary_cases:
-                break
-        if len(boundary_calls) >= max_boundary_cases:
-            break
+    def neighbours(x, depth=0):
+        t = type(x)
+        if t is bool: return [not x]
+        if t is int: return [0, 1, -1, 2, -2, 65536, x + 1, x - 1]
+        if t is float: return [0., -0., 1., -1., 1e-9, -1e-9, x + 1.]
+        if t is str: return ['', ' ', 'a', '0', 'a-b', '\x04', '\n', x + 'x']
+        if t is bytes: return [b'', b'\0', b'\x04', b'\x1a', b'\n', x + b'x']
+        if t in (tuple, list): return [t(), x[:1], x + x[:1]]
+        if t is dict:
+            # Change a value as well as removing keys; keep nesting bounded.
+            return [{}] + ([{**x, k: v} for k in list(x)[:2] for v in neighbours(x[k], depth+1)] if not depth else [])
+        return [None]
 
-    while 0 < len(boundary_calls) < max_boundary_cases:
-        # Cross-parameter boundary pairs
-        idx_k = len(boundary_calls) % len(boundary_calls)
-        boundary_calls.append(list(boundary_calls[idx_k]))
-        if len(boundary_calls) >= max_boundary_cases:
-            break
-
-    _INTERNAL_CRASH_TYPES = (
-        ZeroDivisionError,
-        IndexError,
-        KeyError,
-        AttributeError,
-        UnboundLocalError,
-        RecursionError,
-        MemoryError,
-    )
-
-    chunk_size = 16
-    chunks = [boundary_calls[i : i + chunk_size] for i in range(0, len(boundary_calls), chunk_size)] or [[]]
-
-    def _clone_args(a_list: list[Any]) -> list[Any]:
-        out_a: list[Any] = []
-        for x_a in a_list:
+    seen, exact_calls, boundary = set(), [], []
+    try:
+        for e in pass_envs[:8]:
+            args = tuple(e[p.name] for p in params)
+            key = arg_state(args)
+            if key not in seen:
+                seen.add(key)
+                exact_calls.append(args)
+        for args in exact_calls:
+            slots = range(int(cls_name is not None), len(args))
+            for width in (1, 2):  # single mutations first, then genuine cross-parameter pairs
+                for idx in combinations(slots, width):
+                    for vals in product(*(neighbours(args[i]) for i in idx)):
+                        v = list(args)
+                        for i, val in zip(idx, vals):
+                            v[i] = val
+                        key = arg_state(tuple(v))
+                        if key not in seen:
+                            seen.add(key)
+                            boundary.append(tuple(v))
+                        if len(boundary) == max_boundary_cases: break
+                    if len(boundary) == max_boundary_cases: break
+                if len(boundary) == max_boundary_cases: break
+            if len(boundary) == max_boundary_cases: break
+    except (KeyError, TypeError, ValueError, RecursionError):
+        return report('UNMEASURED', 'UNSUPPORTED_FRAME')
+    def worker(chunk, check_exact):
+        def load(source):
+            m = _load_modules_from_sources(project_root, {rel_path: source})[mod_name]
+            return getattr(getattr(m, cls_name) if cls_name else m, func_name)
+        def call(f, args, typed):
+            av = copy.deepcopy(args)
             try:
-                out_a.append(copy.deepcopy(x_a))
-            except BaseException:
-                out_a.append(x_a)
-        return out_a
+                val = f(*av)
+            except Exception as exc:
+                return ('raise', type(exc).__module__, type(exc).__qualname__, observe(exc.args) if typed else None,
+                        arg_state(av) if typed else None)
+            if inspect.isgenerator(val) or inspect.isawaitable(val):
+                raise ValueError('lazy result not observed')
+            return ('return', observe(val) if typed else None, arg_state(av) if typed else None)
+        def run():
+            orig = load(orig_source)
+            exact = [call(orig, a, True) for a in exact_calls] if check_exact else []
+            if check_exact and exact != [call(orig, a, True) for a in exact_calls]:
+                return {'ok': False, 'error': 'UNSTABLE_BASELINE'}
+            clean = [call(orig, a, False)[0] == 'return' for a in chunk]
+            candidate = load(patched_source)
+            diff = None
+            for a, before in zip(exact_calls, exact):
+                if call(candidate, a, True) != before and diff is None:
+                    diff = ('PASS_ENV_REGRESSION', repr(a)[:160])
+            for a, ok in zip(chunk, clean):
+                if ok:
+                    after = call(candidate, a, False)
+                    if after[0] == 'raise' and diff is None:
+                        diff = ('BOUNDARY_CRASH:' + after[2], repr(a)[:160])
+            return {'ok': True, 'exact': len(exact), 'tested': sum(clean), 'difference': diff}
+        return run
 
-    def _make_fuzz_worker(b_chunk: list[list[Any]], check_exact: bool) -> Callable[[], dict[str, Any]]:
-        def _fworker() -> dict[str, Any]:
-            m_orig = _load_modules_from_sources(project_root, {rel_path: orig_source}).get(mod_name)
-            f_orig = getattr(getattr(m_orig, self_cls_name), func_name) if self_cls_name else getattr(m_orig, func_name)
-            orig_exact: list[tuple[bool, Any, bool]] = []
-            if check_exact:
-                for args_e in exact_calls:
-                    try:
-                        rv1 = f_orig(*_clone_args(args_e))
-                        if inspect.isgenerator(rv1):
-                            rv1 = list(rv1)[:32]
-                        # Verify `args_e` is idempotent under `_clone_args` (not an un-copyable C iterator/stream)!
-                        rv2 = f_orig(*_clone_args(args_e))
-                        if inspect.isgenerator(rv2):
-                            rv2 = list(rv2)[:32]
-                        idem = bool(rv1 == rv2)
-                        orig_exact.append((True, rv1, idem))
-                    except BaseException as exc_o:
-                        orig_exact.append((False, type(exc_o).__name__, True))
-
-            orig_clean_flags: list[bool] = []
-            for args_b in b_chunk:
-                try:
-                    rv_b = f_orig(*_clone_args(args_b))
-                    if inspect.isgenerator(rv_b):
-                        list(rv_b)[:32]
-                    orig_clean_flags.append(True)
-                except BaseException:
-                    orig_clean_flags.append(False)
-
-            m_pat = _load_modules_from_sources(project_root, {rel_path: patched_source}).get(mod_name)
-            f_pat = getattr(getattr(m_pat, self_cls_name), func_name) if self_cls_name else getattr(m_pat, func_name)
-            if check_exact:
-                for args_e, (was_ok, orig_rv, is_idem) in zip(exact_calls, orig_exact):
-                    if not is_idem:
-                        continue
-                    try:
-                        prv = f_pat(*_clone_args(args_e))
-                        if inspect.isgenerator(prv):
-                            prv = list(prv)[:32]
-                        if not was_ok or prv != orig_rv:
-                            return {"ok": True, "passed": False, "reason": "PASS_ENV_REGRESSION", "witness": repr(args_e)[:80]}
-                    except BaseException as exc_p:
-                        if was_ok or type(exc_p).__name__ != orig_rv:
-                            return {"ok": True, "passed": False, "reason": f"PASS_ENV_EXC:{type(exc_p).__name__}", "witness": repr(args_e)[:80]}
-
-            for args_b, orig_clean in zip(b_chunk, orig_clean_flags):
-                if not orig_clean:
-                    continue
-                try:
-                    prv_b = f_pat(*_clone_args(args_b))
-                    if inspect.isgenerator(prv_b):
-                        list(prv_b)[:32]
-                except _INTERNAL_CRASH_TYPES as crash_exc:
-                    return {
-                        "ok": True,
-                        "passed": False,
-                        "reason": f"BOUNDARY_CRASH:{type(crash_exc).__name__}",
-                        "witness": repr(args_b)[:80],
-                    }
-                except BaseException:
-                    pass
-            return {"ok": True, "passed": True, "tested": len(b_chunk)}
-
-        return _fworker
-
-    f_tasks = [_make_fuzz_worker(ch, i == 0) for i, ch in enumerate(chunks)]
-    f_outs = _run_cow_batch(f_tasks, max_parallel=min(4, len(f_tasks)), timeout_s=0.8)
-    elapsed_f = round((time.monotonic() - t_f0) * 1000.0, 2)
-    for fo in f_outs:
-        if fo.get("ok") and fo.get("passed") is False:
-            return {
-                "fuzz_passed": False,
-                "boundary_cases_tested": len(boundary_calls),
-                "fuzz_elapsed_ms": elapsed_f,
-                "failure_reason": fo.get("reason"),
-                "counterexample": fo.get("witness"),
-            }
-    return {
-        "fuzz_passed": True,
-        "boundary_cases_tested": len(boundary_calls),
-        "fuzz_elapsed_ms": elapsed_f,
-    }
+    # An exact recorded call can refute a candidate even if it has no distinct neighbours.
+    tasks = [worker(boundary[i:i + 16], i == 0) for i in range(0, len(boundary), 16)] or [worker([], True)]
+    rows = _run_cow_batch(tasks, max_parallel=4, timeout_s=0.8)
+    counts = dict(generated=len(boundary), tested=sum(r.get('tested', 0) for r in rows),
+                  exact=sum(r.get('exact', 0) for r in rows))
+    for r in rows:
+        if r.get('difference'):
+            reason, witness = r['difference']
+            return report('COUNTEREXAMPLE', reason, witness=witness, **counts)
+    if any(r.get('ok') is not True for r in rows) or counts['exact'] != len(exact_calls) or not counts['tested']:
+        return report('UNMEASURED', next((r.get('error') for r in rows if not r.get('ok')), 'NO_CLEAN_BOUNDARY_CALL'), **counts)
+    return report('PASSED_FINITE_CHECKS', **counts)
 
 
 def repair_python_project_cow(
@@ -2369,7 +2318,7 @@ def repair_python_project_cow(
                 source_text=orig_s,
                 domain=domain,
                 current_version_fingerprint=version_fingerprint,
-                top_k=6,
+                top_k=6, for_proposal=True,
             )
             total_structural_lookup_ms += float(fp_res.get("lookup_elapsed_ms", 0.0))
             for sk in fp_res.get("skills", ()):
@@ -2664,15 +2613,20 @@ def repair_python_project_cow(
                 func_name=site.func_name,
                 pass_envs=witness_pass_envs_by_fn.get((site.rel_path, site.func_name), ()),
             )
-            if not fuzz_report.get("fuzz_passed", True):
+            if fuzz_report["status"] == "COUNTEREXAMPLE":
                 if store is not None:
                     store.record_l3_negative_invariant(
                         domain=domain,
                         forbidden_signature=new_code,
-                        precondition_predicates={"site_kind": site.kind, "func_name": site.func_name},
+                        precondition_predicates={"site_kind": site.kind, "func_name": site.func_name,
+                                                 "source_sha256": hashlib.sha256(sources[site.rel_path].encode()).hexdigest()},
                         failure_cause=f"FAILED_COW_BOUNDARY_FUZZ:{fuzz_report.get('failure_reason')}",
                         counterexample_witness={"counterexample": fuzz_report.get("counterexample")},
                     )
+                continue
+            # Missing frames cannot justify a fuzz pass. A separate native suite may
+            # still judge this exact proposal; record that distinction in the result.
+            if not fuzz_report["fuzz_passed"] and full_suite_verifier is None:
                 continue
             if full_suite_verifier is not None:
                 ok_full, detail = full_suite_verifier({site.rel_path: patched_src})
@@ -2689,34 +2643,19 @@ def repair_python_project_cow(
             else:
                 detail = "in_process_cow_suite_passed"
 
-            learned_skill_id: str | None = None
-            if store is not None:
-                if desc.startswith("l2_subtree_skill_replay(") and desc.endswith(")"):
-                    learned_skill_id = desc[len("l2_subtree_skill_replay(") : -1]
-                    if learned_skill_id in store.data["l2_skills"]:
-                        store.data["l2_skills"][learned_skill_id]["verified_transfers"] = (
-                            int(store.data["l2_skills"][learned_skill_id].get("verified_transfers", 1)) + 1
-                        )
-                        store.save()
-                else:
-                    morph_lifted = EASP.lift_python_subtree_morphism(sources[site.rel_path], patched_src)
-                    if morph_lifted is not None:
-                        raw_ep = f"FILE:{site.rel_path}\nSITE:{site.site_id}\nORIG:\n{sources[site.rel_path][:1200]}\nPATCH:\n{patched_src[:1200]}"
-                        adm = store.admit_l2_subtree_skill(
-                            domain=domain,
-                            morphism=morph_lifted,
-                            witness={"file": site.rel_path, "mechanism": desc, "replacement": new_code[:120]},
-                            provenance={"project": project_root.name, "site_id": site.site_id},
-                            version_fingerprint=version_fingerprint,
-                            verified_on_oracle=True,
-                            goal_relevant=True,
-                            prediction_error_bearing=True,
-                            held_out_transfer_passed=True,
-                            innocent_controls_preserved=True,
-                            raw_episode_text=raw_ep,
-                        )
-                        if adm.get("admitted"):
-                            learned_skill_id = str(adm.get("skill_id"))
+            learned_skill_id = reused_skill_id = None
+            if store is not None and desc.startswith('l2_subtree_skill_replay(') and desc.endswith(')'):
+                reused_skill_id = desc[len('l2_subtree_skill_replay('):-1]
+            elif store is not None and sres['f2p'] > 0:
+                morph = EASP.lift_python_subtree_morphism(sources[site.rel_path], patched_src)
+                if morph is not None:
+                    learned_skill_id = store.retain_teacher_subtree(
+                        before=sources[site.rel_path], after=patched_src, morphism=morph, domain=domain,
+                        version_fingerprint=version_fingerprint,
+                        witness={'method': detail, 'passing_controls': len(passing_test_fns),
+                                 'fixed_inputs': sres['f2p'], 'boundary_status': fuzz_report['status']},
+                        provenance={'project': project_root.name, 'file': site.rel_path, 'site_id': site.site_id},
+                    )
 
             verified_winner = {
                 "status": "VERIFIED",
@@ -2729,6 +2668,7 @@ def repair_python_project_cow(
                 "zipper_hops": _zipper_depth,
                 "structural_lookup_ms": round(total_structural_lookup_ms, 4),
                 "learned_skill_id": learned_skill_id,
+                "reused_skill_id": reused_skill_id,
                 "cow_boundary_fuzz": fuzz_report,
                 "attempt": idx + 1,
                 "candidates_screened": len(all_patch_proposals),
@@ -3467,19 +3407,9 @@ def repair_git_repo_from_pytest(
 
         return _prunner
 
-    # Purge any previously cached sys.modules from top-level packages under suspect_rels or stale /tmp checkouts
     importlib.invalidate_caches()
     top_pkgs = {_rel_path_to_mod_name(r).split(".")[0] for r in suspect_rels if _rel_path_to_mod_name(r)}
-    repo_dir_s = str(repo_dir.resolve())
-    for k_mod, m_obj in list(sys.modules.items()):
-        m_file = str(getattr(m_obj, "__file__", "") or "")
-        if (
-            k_mod.split(".")[0] in top_pkgs
-            or k_mod in ("tests", "conftest")
-            or k_mod.startswith(("tests.", "test_", "_tmod_"))
-            or (m_file.startswith("/tmp/") and not m_file.startswith(repo_dir_s))
-        ):
-            sys.modules.pop(k_mod, None)
+    previous_modules = _evict_trial_modules(repo_dir, top_pkgs)
 
     # Ensure repo_dir is active cwd during in-process pytest runs
     orig_cwd = os.getcwd()
@@ -3568,15 +3498,8 @@ def repair_git_repo_from_pytest(
     finally:
         os.chdir(orig_cwd)
         sys.path[:] = orig_sys_path
-        for k_mod, m_obj in list(sys.modules.items()):
-            m_file = str(getattr(m_obj, "__file__", "") or "")
-            if (
-                k_mod.split(".")[0] in top_pkgs
-                or k_mod in ("tests", "conftest")
-                or k_mod.startswith(("tests.", "test_", "_tmod_"))
-                or m_file.startswith(repo_dir_s)
-            ):
-                sys.modules.pop(k_mod, None)
+        _evict_trial_modules(repo_dir, top_pkgs)
+        sys.modules.update(previous_modules)
         importlib.invalidate_caches()
 
     if res.get("status") == "VERIFIED":
@@ -4357,16 +4280,7 @@ def repair_issue_only_green_repo_cow(
 
     importlib.invalidate_caches()
     top_pkgs = {_rel_path_to_mod_name(r).split(".")[0] for r in suspect_files if _rel_path_to_mod_name(r)}
-    repo_dir_s = str(repo_dir.resolve())
-    for k_mod, m_obj in list(sys.modules.items()):
-        m_file = str(getattr(m_obj, "__file__", "") or "")
-        if (
-            k_mod.split(".")[0] in top_pkgs
-            or k_mod in ("tests", "conftest")
-            or k_mod.startswith(("tests.", "test_", "_tmod_"))
-            or (m_file.startswith("/tmp/") and not m_file.startswith(repo_dir_s))
-        ):
-            sys.modules.pop(k_mod, None)
+    previous_modules = _evict_trial_modules(repo_dir, top_pkgs)
 
     try:
         os.chdir(str(repo_dir))
@@ -4426,6 +4340,9 @@ def repair_issue_only_green_repo_cow(
     finally:
         os.chdir(orig_cwd)
         sys.path[:] = orig_sys_path
+        _evict_trial_modules(repo_dir, top_pkgs)
+        sys.modules.update(previous_modules)
+        importlib.invalidate_caches()
         for r_k, o_txt in orig_sources.items():
             (repo_dir / r_k).write_text(o_txt, encoding="utf-8")
 
@@ -4520,6 +4437,72 @@ def probe_binary_byte_jacobian_cow(
         "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 2),
         "model_calls": 0,
         "parameters_stored": 0,
+    }
+
+
+def self_check() -> dict[str, Any]:
+    """Falsifiable behavioral contract for bidirectional lens synthesis & separating guard induction.
+
+    Proves:
+    1. AST site extraction locates expression sites and span replacement preserves valid Python AST.
+    2. Bidirectional lens synthesis learns a reversible framing transformation (`x -> [x]`) that
+       round-trips on unseen held-out strings (`put(get(s)) == s`).
+    3. Separating guard induction finds a boolean predicate that holds on all positive environments
+       and fails on all negative environments, and returns None on contradictory identical envs.
+    """
+    failures: list[str] = []
+
+    def check(label: str, ok: bool) -> None:
+        if not ok:
+            failures.append(label)
+
+    src = "def inc(x):\n    return x + 1\n"
+    sites = extract_ast_sites("sample.py", src)
+    check("extracts AST sites from function", len(sites) >= 1)
+    if sites:
+        replaced = replace_site_span(src, sites[0], "x + 2")
+        try:
+            ast.parse(replaced)
+            valid_ast = replaced != src
+        except SyntaxError:
+            valid_ast = False
+        check("site span replacement yields valid modified AST", valid_ast)
+    else:
+        check("site span replacement yields valid modified AST", False)
+
+    lens = synthesize_bidirectional_lens(
+        [("hello world", "hello_world"), ("a b c", "a_b_c")],
+        preserved_samples=("xyz", "token"),
+    )
+    check("synthesizes bidirectional lens", lens is not None and bool(lens.roundtrip_verified))
+    if lens is not None:
+        unseen = "unseen foo bar"
+        fwd = lens.forward_fn(unseen)
+        inv = lens.inverse_fn(fwd)
+        check("lens forward and inverse round-trip on unseen input", fwd == "unseen_foo_bar" and inv == unseen)
+    else:
+        check("lens forward and inverse round-trip on unseen input", False)
+
+    guard = synthesize_separating_guard([{"x": 5}, {"x": 10}], [{"x": -1}, {"x": 0}])
+    check("synthesizes separating guard", isinstance(guard, str) and len(guard) > 0)
+    if guard:
+        pos_ok = all(bool(eval(guard, {"__builtins__": {}}, env)) for env in ({"x": 5}, {"x": 10}))
+        neg_ok = all(not bool(eval(guard, {"__builtins__": {}}, env)) for env in ({"x": -1}, {"x": 0}))
+        check("guard separates positive from negative envs", pos_ok and neg_ok)
+    else:
+        check("guard separates positive from negative envs", False)
+
+    # Negative control: identical positive & negative env is inseparable
+    insep = synthesize_separating_guard([{"x": 5}], [{"x": 5}])
+    check("negative control: inseparable envs yield None guard", insep is None)
+
+    total = 7
+    return {
+        "schema": "BRAIN_ANGELIC_LENS_COW_REPAIR_V1_SELF_CHECK",
+        "checks": total,
+        "passed": total - len(failures),
+        "failures": failures,
+        "verdict": "SELF_CHECK_PASS" if not failures else "SELF_CHECK_FAIL",
     }
 
 

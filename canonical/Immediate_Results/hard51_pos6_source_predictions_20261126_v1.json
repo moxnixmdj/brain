@@ -1,0 +1,297 @@
+{
+  "kind": "source-only paired route control; no official image, Harbor, verifier or grade",
+  "input_instruction_sha256": "e8538e435727e8f24bed64ba8ae84878fe6c876509d5176568c057777a8950b6",
+  "rows": [
+    {
+      "producer_revision": "bee38f7000851a9b16a055d7ef7e2ec01d7c7217",
+      "cold_manifest": {
+        "canonical/runtime/brain_unified_model_v1.py": "c54b0b40cfcb10077575cc1c23d0068cb46014c2702ac2d042d7afa77daf88a5",
+        "canonical/runtime/harbor_command_policy.py": "0b202f653abf69a5e81b45cd76b492142253c994f1dcbcc9fe26297ad84ec8ef",
+        "canonical/runtime/harbor_container_solver_worker_v1.py": "2aff4dee0819f19d12fc0695787ca15a2824973c7589a81d90430a6e44e6e1cc",
+        "canonical/runtime/harbor_process_cleanup_worker_v1.py": "29cb95c1a05246c48cfdbcf9860b8106c034b1ce74b3a046b004de584e1cdca6",
+        "canonical/runtime/harbor_pro_git_capture_v1.py": "f641c8f7ddc88482408a5eb0d03a2f96490a8c42a60578c4b9fb653dd428f0a2",
+        "canonical/runtime/tree_sitter_swe_kernel_v1.py": "109c973a7cbab8afc7dc62974616f82c71fb154ece166c86783bb9abc3c4de97",
+        "canonical/swe_kernel/__init__.py": "044580b3e7bc95b9ae5b34f97a3702ae18898520000c21784bfca1b99c308351",
+        "canonical/swe_kernel/harbor_epistemic_controller_v1.py": "e4dc49c4b7d38236008629381345187d820797979d03edb3471479d63065f01b",
+        "canonical/swe_kernel/harbor_in_container_runner_v1.py": "ab734f3beeca26280414ff4c7810f6fd89073f1aa41c64969a7428db409a7fe5",
+        "canonical/swe_kernel/causal_swe_repair_v1.py": "b4e90dae74ef73b2e886cdd32c2d3bb42d4e31eb6f37076ad15c562bb3d7be26",
+        "canonical/swe_kernel/first_principles_mental_cegis_v1.py": "8013e57d228a3318185727bcb9bf8c1bb065738fccf4a1b64f505a3a5357bb51",
+        "canonical/swe_kernel/incremental_semantic_graph_v1.py": "e3ffc5cf0454e404ab0794839052c64fbf862c69cb273b0068ea888ee219a306",
+        "canonical/swe_kernel/petri_cow_splicing_engine_v1.py": "85ca4f531c3c8f775dcd22e760a41218580aefb559a426ec0d38914add7592d1",
+        "canonical/swe_kernel/consistency_vs_equivalence_v1.py": "c5482beab198b42a057ac101e27085c9f3d7aede3a2cdb365c112bacd7bb40f9",
+        "canonical/swe_kernel/effect_contract_composition_v1.py": "4d10dc77641b71ad0d51cabb8b0af3d7e491d71560ea4d2a003d40ca52bc0a4a",
+        "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json": "e151934a8a401c6619d6835ebb60fe13834c4c96eb39ed30ff6147a26f8df4dc"
+      },
+      "launcher": {
+        "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+        "status": "CHILD_EXITED",
+        "policy_sha256": "a5f88e32f3311ec156f4cc2237266d364aa6b07b2aebf79c87b3dff4fcd8ae3d",
+        "returncode": 0,
+        "wallclock_ms": 25898.686,
+        "broker_bytes": 1845,
+        "broker_sha256": "1cc66377aa0f1a283960016d0feae8dd2294fa8a964b5639ebd670433bdddb04",
+        "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+        "material_effects_committed": 0,
+        "execution_authority": false,
+        "promotion_authority": false,
+        "fresh_reality_authority": false
+      },
+      "measurement": {
+        "public_instruction_chars": 2704,
+        "base": "df29852f3a48160e1a60635692c202531dd8b14a",
+        "trace": [
+          {
+            "cycle": 1,
+            "worker_exit": 0,
+            "worker_s": 0.107,
+            "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+            "reason": null,
+            "actions": [
+              "terminal_exec"
+            ],
+            "phase": "discover",
+            "command_exit": 0,
+            "command_s": 0.254,
+            "observed": {
+              "discover_wall_s": 0.191,
+              "ecosystems": {
+                "go": false,
+                "node": false,
+                "python": true,
+                "rust": false
+              },
+              "instruction_chars": 2704,
+              "model_calls": 0,
+              "python_exe": "/work/repo/.venv/bin/python",
+              "ranked_tests": [
+                "test/units/cli/test_galaxy.py",
+                "test/units/galaxy/test_collection.py",
+                "test/units/galaxy/test_collection_install.py",
+                "test/integration/targets/module_utils/library/test_cwd_missing.py",
+                "test/units/galaxy/test_api.py",
+                "test/units/plugins/action/test_action.py"
+              ],
+              "repo_root": "/work/repo",
+              "schema": "PROJECT_BRAIN_HARBOR_IN_CONTAINER_RUNNER_V1"
+            }
+          },
+          {
+            "cycle": 2,
+            "worker_exit": 0,
+            "worker_s": 0.122,
+            "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+            "reason": null,
+            "actions": [
+              "terminal_exec"
+            ],
+            "phase": "repair",
+            "command_exit": 0,
+            "command_s": 24.599,
+            "observed": {
+              "failing_target": "test/units/cli/test_galaxy.py",
+              "learned_skill_id": null,
+              "model_calls": 0,
+              "pass": false,
+              "probe_outcomes": [
+                {
+                  "exit": 1,
+                  "failing": 5,
+                  "passing": 98,
+                  "target": "test/units/cli/test_galaxy.py",
+                  "timeout": false
+                }
+              ],
+              "reaped_children": 0,
+              "repaired_file": null,
+              "repaired_line": null,
+              "reused_skill_id": null,
+              "status": "OPEN__NO_CANDIDATE_SYNTHESIZED",
+              "subtree_admission": null,
+              "wall_s": 24.512,
+              "winning_mechanism": null
+            }
+          },
+          {
+            "cycle": 3,
+            "worker_exit": 0,
+            "worker_s": 0.102,
+            "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+            "reason": null,
+            "actions": [
+              "finish"
+            ]
+          }
+        ],
+        "capture_exit": 0,
+        "patch_bytes": 0,
+        "official_reward": null,
+        "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "source_replay": "EMPTY_CAPTURE"
+      }
+    },
+    {
+      "producer_revision": "d17cb7c1cad4f8baba35395306a20287723322d0",
+      "cold_manifest": {
+        "canonical/runtime/brain_unified_model_v1.py": "c54b0b40cfcb10077575cc1c23d0068cb46014c2702ac2d042d7afa77daf88a5",
+        "canonical/runtime/harbor_command_policy.py": "0b202f653abf69a5e81b45cd76b492142253c994f1dcbcc9fe26297ad84ec8ef",
+        "canonical/runtime/harbor_container_solver_worker_v1.py": "2aff4dee0819f19d12fc0695787ca15a2824973c7589a81d90430a6e44e6e1cc",
+        "canonical/runtime/harbor_process_cleanup_worker_v1.py": "29cb95c1a05246c48cfdbcf9860b8106c034b1ce74b3a046b004de584e1cdca6",
+        "canonical/runtime/harbor_pro_git_capture_v1.py": "f641c8f7ddc88482408a5eb0d03a2f96490a8c42a60578c4b9fb653dd428f0a2",
+        "canonical/runtime/tree_sitter_swe_kernel_v1.py": "109c973a7cbab8afc7dc62974616f82c71fb154ece166c86783bb9abc3c4de97",
+        "canonical/swe_kernel/__init__.py": "044580b3e7bc95b9ae5b34f97a3702ae18898520000c21784bfca1b99c308351",
+        "canonical/swe_kernel/harbor_epistemic_controller_v1.py": "e4dc49c4b7d38236008629381345187d820797979d03edb3471479d63065f01b",
+        "canonical/swe_kernel/harbor_in_container_runner_v1.py": "ad7ca71356da6eafd26f8bf173ec17a4959cfe67b44de70c559f05681b99745b",
+        "canonical/swe_kernel/causal_swe_repair_v1.py": "309aea6d845f50285fa170e1bc7b0566d96ddaa60dd527da22ecbd22f9eb307d",
+        "canonical/swe_kernel/local_type_paths_v1.py": "ab7bac5cf678632351433470f135ee00cb5f396164a36002719b7b13a7efad3c",
+        "canonical/swe_kernel/goal_native_probe_v1.py": "b62c3b0f96520829bc7f8073761c2f1aed2ac95acea5d6b8b805546fe4935990",
+        "canonical/runtime/bound_capabilities/objective_relevance_bm25.py": "809b3a8a8645933b6401017a993389346b310567b0afa9ab65ffccc81803135a",
+        "canonical/swe_kernel/first_principles_mental_cegis_v1.py": "8013e57d228a3318185727bcb9bf8c1bb065738fccf4a1b64f505a3a5357bb51",
+        "canonical/swe_kernel/incremental_semantic_graph_v1.py": "e3ffc5cf0454e404ab0794839052c64fbf862c69cb273b0068ea888ee219a306",
+        "canonical/swe_kernel/petri_cow_splicing_engine_v1.py": "85ca4f531c3c8f775dcd22e760a41218580aefb559a426ec0d38914add7592d1",
+        "canonical/swe_kernel/consistency_vs_equivalence_v1.py": "c5482beab198b42a057ac101e27085c9f3d7aede3a2cdb365c112bacd7bb40f9",
+        "canonical/swe_kernel/effect_contract_composition_v1.py": "4d10dc77641b71ad0d51cabb8b0af3d7e491d71560ea4d2a003d40ca52bc0a4a",
+        "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json": "f652fe56835655b650f95424148bb8d05fc64ad144e584f6a2a868d5cff56bb2"
+      },
+      "launcher": {
+        "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+        "status": "CHILD_EXITED",
+        "policy_sha256": "871a034202a0dc94e35475f344f24c2ac4ec94ac6b257be3ce2617a87c84ffca",
+        "returncode": 0,
+        "wallclock_ms": 6183.915,
+        "broker_bytes": 2840,
+        "broker_sha256": "5b8444cae25c62198ec0d91d1cc77a3c8a5dd24bd5a52b14b67e3dfec0a84c60",
+        "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+        "material_effects_committed": 0,
+        "execution_authority": false,
+        "promotion_authority": false,
+        "fresh_reality_authority": false
+      },
+      "measurement": {
+        "public_instruction_chars": 2704,
+        "base": "df29852f3a48160e1a60635692c202531dd8b14a",
+        "trace": [
+          {
+            "cycle": 1,
+            "worker_exit": 0,
+            "worker_s": 0.107,
+            "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+            "reason": null,
+            "actions": [
+              "terminal_exec"
+            ],
+            "phase": "discover",
+            "command_exit": 0,
+            "command_s": 0.266,
+            "observed": {
+              "acquisition": {
+                "bodies_read": 6,
+                "bytes_read": 26002,
+                "eligible_files": 313,
+                "ranking_seconds_excluding_enumeration": 0.0065,
+                "selected": [
+                  "test/units/module_utils/common/text/formatters/test_human_to_bytes.py",
+                  "test/units/executor/test_task_result.py",
+                  "test/units/module_utils/common/text/formatters/test_bytes_to_human.py",
+                  "test/units/module_utils/common/parameters/test_list_no_log_values.py"
+                ]
+              },
+              "discover_wall_s": 0.2,
+              "ecosystems": {
+                "go": false,
+                "node": false,
+                "python": true,
+                "rust": false
+              },
+              "instruction_chars": 2704,
+              "model_calls": 0,
+              "python_exe": "/work/repo/.venv/bin/python",
+              "ranked_tests": [
+                "test/units/module_utils/common/text/formatters/test_human_to_bytes.py",
+                "test/units/executor/test_task_result.py",
+                "test/units/module_utils/common/text/formatters/test_bytes_to_human.py",
+                "test/units/module_utils/common/parameters/test_list_no_log_values.py"
+              ],
+              "repo_root": "/work/repo",
+              "schema": "PROJECT_BRAIN_HARBOR_IN_CONTAINER_RUNNER_V1"
+            }
+          },
+          {
+            "cycle": 2,
+            "worker_exit": 0,
+            "worker_s": 0.1,
+            "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+            "reason": null,
+            "actions": [
+              "terminal_exec"
+            ],
+            "phase": "repair",
+            "command_exit": 0,
+            "command_s": 4.886,
+            "observed": {
+              "model_calls": 0,
+              "named_subject_checks": {},
+              "pass": false,
+              "probe_outcomes": [
+                {
+                  "exit": 0,
+                  "failing": 0,
+                  "passing": 93,
+                  "target": "test/units/module_utils/common/text/formatters/test_human_to_bytes.py",
+                  "timeout": false
+                },
+                {
+                  "exit": 0,
+                  "failing": 0,
+                  "passing": 7,
+                  "target": "test/units/executor/test_task_result.py",
+                  "timeout": false
+                },
+                {
+                  "exit": 0,
+                  "failing": 0,
+                  "passing": 62,
+                  "target": "test/units/module_utils/common/text/formatters/test_bytes_to_human.py",
+                  "timeout": false
+                },
+                {
+                  "exit": 0,
+                  "failing": 0,
+                  "passing": 13,
+                  "target": "test/units/module_utils/common/parameters/test_list_no_log_values.py",
+                  "timeout": false
+                }
+              ],
+              "probed_tests": [
+                "test/units/module_utils/common/text/formatters/test_human_to_bytes.py",
+                "test/units/executor/test_task_result.py",
+                "test/units/module_utils/common/text/formatters/test_bytes_to_human.py",
+                "test/units/module_utils/common/parameters/test_list_no_log_values.py"
+              ],
+              "status": "OPEN__NO_FAILING_WITNESS_OBSERVED",
+              "wall_s": 4.818,
+              "witness_compiler": {
+                "compiled": false,
+                "reason": "no_matching_repo_functions"
+              }
+            }
+          },
+          {
+            "cycle": 3,
+            "worker_exit": 0,
+            "worker_s": 0.104,
+            "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+            "reason": null,
+            "actions": [
+              "finish"
+            ]
+          }
+        ],
+        "capture_exit": 0,
+        "patch_bytes": 0,
+        "official_reward": null,
+        "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "source_replay": "EMPTY_CAPTURE"
+      }
+    }
+  ]
+}

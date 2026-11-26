@@ -655,7 +655,7 @@ class EpistemicStoreV1:
         self.data["structural_index"] = idx_map
         count = 0
         for sid, entry in self.data.get("l2_skills", {}).items():
-            if entry.get("status") == "ACTIVE":
+            if entry.get("status") in ("ACTIVE", "RETAINED__TEACHER_ONLY"):
                 self._index_l2_entry(sid, entry)
                 count += 1
         return count
@@ -683,6 +683,11 @@ class EpistemicStoreV1:
         """O(1) inspectable knowledge edit without retraining."""
         for bucket in ("l2_skills", "l3_negative_invariants"):
             if entry_id in self.data[bucket]:
+                if set(updates) - {'notes'}:
+                    updates = {**updates, 'status': 'QUARANTINED__EDIT_REQUIRES_RECHECK'}
+                    if bucket == 'l2_skills':
+                        self._unindex_l2_entry(entry_id, self.data[bucket][entry_id])
+                        updates['verified_transfers'] = 0
                 self.data[bucket][entry_id].update(dict(updates))
                 self.data[bucket][entry_id]["revision"] = int(self.data[bucket][entry_id].get("revision", 1)) + 1
                 self.save()
@@ -789,7 +794,7 @@ class EpistemicStoreV1:
         candidate_signature: str,
         context_state: Mapping[str, Any] | None = None,
     ) -> tuple[bool, str | None]:
-        """O(1)/microsecond negative-space pruning before compiling or running a candidate."""
+        """Match the stored signature *and* its scoped predicates before pruning."""
         ctx = context_state or {}
         for inv_id, inv in self.data["l3_negative_invariants"].items():
             if inv.get("status") != "ACTIVE" or inv.get("domain") != domain:
@@ -798,7 +803,7 @@ class EpistemicStoreV1:
             if not sig or candidate_signature.strip() != sig.strip():
                 continue
             preds = inv.get("precondition_predicates") or {}
-            if all(ctx.get(k) == v for k, v in preds.items()):
+            if all(k in ctx and ctx[k] == v for k, v in preds.items()):
                 inv["pruned_count"] = int(inv.get("pruned_count", 0)) + 1
                 return True, inv_id
         return False, None
@@ -907,6 +912,44 @@ class EpistemicStoreV1:
         self.save()
         return {"admitted": True, "skill_id": sid, "entry": entry, "compression_ratio": verdict.compression_ratio}
 
+    def retain_teacher_subtree(
+        self, *, before: str, after: str, morphism: "TreeRewriteMorphism", domain: str,
+        version_fingerprint: str, witness: Mapping[str, Any], provenance: Mapping[str, Any],
+    ) -> str | None:
+        """Remember a teacher-checked proposal, NOT an admitted transferable law.
+
+        Require a closed rewrite that reconstructs the teacher's changed AST.
+        Keep source hashes and the recheck obligation, not the execution trace.
+        Executing a matched proposal still requires a fresh local witness.
+        """
+        if morphism.unbound_holes() or not witness or not provenance:
+            return None
+        replay = apply_subtree_morphism_to_python(morphism, before)
+        if not replay:
+            return None
+        try:
+            target = ast.dump(ast.parse(after))
+            if ast.dump(ast.parse(before)) == target or ast.dump(ast.parse(replay)) != target:
+                return None
+        except SyntaxError:
+            return None
+        procedure = morphism.to_dict()
+        fingerprint = hashlib.sha256(before.encode()).hexdigest()
+        sid = 'hyp_' + _sha256_short(_canonical_json([domain, version_fingerprint, fingerprint, procedure]))
+        existing = self.data['l2_skills'].get(sid)
+        if existing is not None:
+            return sid if existing.get('status') == 'RETAINED__TEACHER_ONLY' else None
+        entry = {'skill_id': sid, 'domain': domain, 'skill_kind': 'AST_SUBTREE_MORPHISM',
+                 'revision': 1, 'status': 'RETAINED__TEACHER_ONLY', 'subtree_morphism': procedure,
+                 'verified_transfers': 0, 'refutations': 0, 'version_fingerprint': version_fingerprint,
+                 'teacher_before_sha256': fingerprint, 'teacher_after_sha256': hashlib.sha256(after.encode()).hexdigest(),
+                 'provenance': dict(provenance), 'witness': dict(witness),
+                 'receiver_obligation': 'reproduce goal failure, flip it, preserve original passing controls'}
+        self.data['l2_skills'][sid] = entry
+        self._index_l2_entry(sid, entry)
+        self.save()
+        return sid
+
     def retrieve_l2_by_structural_fingerprint(
         self,
         *,
@@ -915,6 +958,7 @@ class EpistemicStoreV1:
         current_version_fingerprint: str | None = None,
         reprobe_fn: Callable[[Mapping[str, Any]], bool] | None = None,
         top_k: int = 8,
+        for_proposal: bool = False,
     ) -> dict[str, Any]:
         """O(1) per-AST-node structural hash-bucket retrieval eliminating `NO_COMPOUNDING` (`8fe5f749`).
 
@@ -944,11 +988,15 @@ class EpistemicStoreV1:
         mutated = False
         for sid in candidate_sids:
             entry = self.data["l2_skills"].get(sid)
-            if not isinstance(entry, dict) or entry.get("status") != "ACTIVE" or entry.get("domain") != domain:
+            if not isinstance(entry, dict) or entry.get("domain") != domain:
+                continue
+            if entry.get('status') == 'RETAINED__TEACHER_ONLY' and for_proposal:
+                matched_entries.append(entry)  # candidate only, never count a lookup as a transfer
+                continue
+            if entry.get('status') != 'ACTIVE':
                 continue
             if current_version_fingerprint is not None and entry.get("version_fingerprint") != current_version_fingerprint:
                 if reprobe_fn is None:
-                    matched_entries.append(entry)
                     continue
                 if reprobe_fn(entry):
                     entry["version_fingerprint"] = current_version_fingerprint
@@ -1010,6 +1058,7 @@ class EpistemicStoreV1:
         return {
             "schema": self.data["schema"],
             "active_l2_skills": active_l2,
+            "teacher_only_hypotheses": sum(e.get("status") == "RETAINED__TEACHER_ONLY" for e in self.data["l2_skills"].values()),
             "total_l2_skills": len(self.data["l2_skills"]),
             "structural_index_buckets": len(self.data.get("structural_index") or {}),
             "active_l3_negative_invariants": active_l3,
@@ -1769,7 +1818,7 @@ def harvest_repo_mutant_kill_skills(
                                 break
 
     killed = 0
-    admitted_ids: list[str] = []
+    retained_ids: list[str] = []
     for kind, msrc in mutants:
         if passing_oracle_fn(msrc):
             continue  # Surviving equivalent mutant -> carries zero specification bits!
@@ -1780,30 +1829,21 @@ def harvest_repo_mutant_kill_skills(
         repaired = apply_subtree_morphism_to_python(morph, msrc)
         if repaired is None or not passing_oracle_fn(repaired):
             continue
-        raw_ep = f"MUTANT({kind}):\n{msrc}\n---\nCLEAN:\n{orig_unparsed}\n" * 2
-        adm = store.admit_l2_subtree_skill(
-            domain="python",
-            morphism=morph,
-            witness={"mutant_kind": kind},
-            provenance={"source": provenance_tag, "mutant_kind": kind},
-            version_fingerprint=version_fingerprint,
-            verified_on_oracle=True,
-            goal_relevant=True,
-            prediction_error_bearing=True,
-            held_out_transfer_passed=True,
-            innocent_controls_preserved=True,
-            raw_episode_text=raw_ep,
+        sid = store.retain_teacher_subtree(
+            before=msrc, after=repaired, morphism=morph, domain='python', version_fingerprint=version_fingerprint,
+            witness={'mutant_kind': kind, 'mutant_failed': True, 'replayed_on_local_oracle': True},
+            provenance={'source': provenance_tag, 'kind': 'self_play'},
         )
-        if adm.get("admitted") and adm.get("skill_id"):
-            admitted_ids.append(str(adm["skill_id"]))
+        if sid and sid not in retained_ids:
+            retained_ids.append(sid)
 
     store.compact_l2_skills()
     return {
         "status": "OK",
         "mutants_generated": len(mutants),
         "mutants_killed": killed,
-        "skills_admitted": len(admitted_ids),
-        "admitted_skill_ids": admitted_ids,
+        "skills_admitted": 0, "admitted_skill_ids": [],
+        "teacher_hypotheses_retained": len(retained_ids), "retained_skill_ids": retained_ids,
         "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 2),
         "model_calls": 0,
         "parameters_stored": 0,

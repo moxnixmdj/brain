@@ -1,0 +1,123 @@
+{
+  "kind": "upstream checkpoint 1 Python tests, native replay; not official Docker/whole-suite grade",
+  "suite_commit": "9cd9ca3a51c3d3e2a99d2488a25baf73a2204451",
+  "python": "3.11.2",
+  "pytest": "pytest 9.2.0",
+  "rows": [
+    {
+      "suite": "cfgpipe",
+      "producer_input_sha256": "04fc083bcf0d4ee1335326912cd623be6bf21faed1dbb09b6bf01c1600ba67a2",
+      "frozen_capture_sha256": "0e47eaddfb538eabfcd7845da2f249ec1a73967b15b6bc23b6248cc5c22589ee",
+      "public_tests": {
+        "conftest.py": "12e59e0c707da2d4375ecedf8200df9a75cb0a40c2c017d588fdb08ed29ab5ca",
+        "test_checkpoint_1.py": "3a639a3fb60584b0bb477bf097cfffbb8dc5489a61b688eca60650e0a8f4e998",
+        "utils.py": "4c78b4d322b237e012141623e5e49c6a96e5623dfb873274b0469dad9b6ff383"
+      },
+      "config_sha256": "5a27ac37b54e6fe0fee3402d7f2017c0db0ed318122725afcb2ce2e24ea15432",
+      "arms": {
+        "cold": {
+          "xml_sha256": "4f7ef6ca8faff82f17543a18216b686d3b52775e55606b9a8f15ba1002236787",
+          "pytest_seconds": "0.554",
+          "counts": {
+            "failure": 36,
+            "passed": 1
+          },
+          "cases_sha256": "b2c13df5ee7fa962830818370d536043dc2d8c5b1b69c4aabc270dccc4edecfb",
+          "case_outcomes_sha256": "6a002bd1c73998f6692517c6cccec5b3b80a2699677075190309d07e93d28aea"
+        },
+        "reference": {
+          "xml_sha256": "78b362229337088d5088619e0170aebd8524e5e4ac1d676dfa2ef468324cb7b3",
+          "pytest_seconds": "1.098",
+          "counts": {
+            "passed": 37
+          },
+          "cases_sha256": "b2c13df5ee7fa962830818370d536043dc2d8c5b1b69c4aabc270dccc4edecfb",
+          "case_outcomes_sha256": "6835f6101b6c56eab44ec676d999cf15df375da7eddbda3567c851b080f46481"
+        }
+      },
+      "repeat": {
+        "cold": {
+          "xml_sha256": "2be3ad95e22bf73e8d0baaf0654fb7f5a66bd765689925ef3a9966506ce00be8",
+          "exit": 1,
+          "counts": {
+            "failure": 37
+          },
+          "case_ids_unchanged": true,
+          "case_outcomes_sha256": "3d974073ebd3f8b9371d19d18a56f13fdbfd1cf49a448cffe6b2b03198aabaa9",
+          "changed_outcomes": [
+            {
+              "id_sha256": "89621c159af1cc82adfb685fbf15731ce3046820eb1661e12f44ac3b4527ae03",
+              "was": "passed",
+              "now": "failure"
+            }
+          ]
+        },
+        "reference": {
+          "xml_sha256": "13813b1d2621fbeee2d169cf6fad1f9844c7255d8814075ef6b0b6a4317475e2",
+          "exit": 0,
+          "counts": {
+            "passed": 37
+          },
+          "case_ids_unchanged": true,
+          "case_outcomes_sha256": "6835f6101b6c56eab44ec676d999cf15df375da7eddbda3567c851b080f46481",
+          "changed_outcomes": []
+        },
+        "diagnosis": "No program in either cold run. Initial test_missing_type_field accepted the Python file-not-found stderr by substring (val in brain-eval-venv); this disappeared on relocating the interpreter. Not a functionality success."
+      }
+    },
+    {
+      "suite": "circuit_eval",
+      "producer_input_sha256": "5e83257b93e169e269ebc64f4621e712f1903bb5d7784e158755ec0d43112baf",
+      "frozen_capture_sha256": "2359e55f0ba085ad7ee4926fa93171526eeaa08d99fbe5f8deaa2f1787e4fb8f",
+      "public_tests": {
+        "conftest.py": "9f371e98841457c088b39578bcf2f48c4e94b0b2904bf5ed0c758b8c01d99a53",
+        "helpers.py": "83bf8b211673b6fc63253817239362db4ba1ea9fa83ff79abff26544edfa7aa7",
+        "novel_circuits.py": "a86bd6a0f595920b518bfe507a612d938861c4a536a22fa165cf7a5807908973",
+        "test_checkpoint_1.py": "367e3560fcd530ea01ce9ceeade022d6a4d06accfe84a9fce237cf2291d89146"
+      },
+      "config_sha256": "5930e2160c3d614021f138f235c31851c5dea8bfdebac08e82dbc62e0b4df8cd",
+      "arms": {
+        "cold": {
+          "xml_sha256": "7800e0cf5929af9dfeecfe97748c5ca57dbd57ca61f275b716dcd4a10c2d7778",
+          "pytest_seconds": "0.529",
+          "counts": {
+            "failure": 36
+          },
+          "cases_sha256": "56bf5a4e43152ce54277ad615db666d61be5c8598f8c1e87c958af94342a44d4",
+          "case_outcomes_sha256": "b5091996b016fdadc58ddf457773b89e93088c663068d83d3106afd112575802"
+        },
+        "reference": {
+          "xml_sha256": "ce79d524ab571e358e729f2d2c11256909fe5c7e983b5b4eb38fc489016d123c",
+          "pytest_seconds": "1.685",
+          "counts": {
+            "passed": 36
+          },
+          "cases_sha256": "56bf5a4e43152ce54277ad615db666d61be5c8598f8c1e87c958af94342a44d4",
+          "case_outcomes_sha256": "7f19e1eecb100ab6e4712d21e15bb4ec3378aa53f921f1b59bf46e0180eea574"
+        }
+      },
+      "repeat": {
+        "cold": {
+          "xml_sha256": "977194610d57088577c655b34014bb467302435e02b59954ed571a14f876981a",
+          "exit": 1,
+          "counts": {
+            "failure": 36
+          },
+          "case_ids_unchanged": true,
+          "case_outcomes_sha256": "b5091996b016fdadc58ddf457773b89e93088c663068d83d3106afd112575802",
+          "changed_outcomes": []
+        },
+        "reference": {
+          "xml_sha256": "2de63771fac49093b1564005f18343902f498269b8c4535f8f117e4481d0455c",
+          "exit": 0,
+          "counts": {
+            "passed": 36
+          },
+          "case_ids_unchanged": true,
+          "case_outcomes_sha256": "7f19e1eecb100ab6e4712d21e15bb4ec3378aa53f921f1b59bf46e0180eea574",
+          "changed_outcomes": []
+        }
+      }
+    }
+  ]
+}

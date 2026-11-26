@@ -6712,3 +6712,73 @@ def run_unified_epistemic_portfolio(
         "model_calls": 0,
         "parameters_stored": 0,
     }
+
+
+def self_check() -> dict[str, Any]:
+    """Falsifiable behavioral contract for the unified epistemic portfolio pre-sieve.
+
+    Proves three non-tautological properties:
+    1. Semantic-IR pre-sieving eliminates both semantic duplicates of the buggy baseline
+       and candidates whose simulated output contradicts the observed expected return,
+       retaining only the genuinely distinct passing candidate.
+    2. Negative control: when NO candidate satisfies the expected output, kept_count is 0
+       (a rubber-stamp sieve that keeps everything fails this control).
+    3. Determinism: identical inputs produce identical kept indices and prune counts.
+    """
+    failures: list[str] = []
+
+    def check(label: str, ok: bool) -> None:
+        if not ok:
+            failures.append(label)
+
+    baseline = "def add(a, b):\n    return a - b\n"
+    candidates = [
+        "def add(a, b):\n    return a - b\n",
+        "def add(a, b):\n    return a + b\n",
+        "def add(a, b):\n    return a * b\n",
+    ]
+    res1 = pre_sieve_and_simulate_meaning_ir(
+        baseline,
+        candidates,
+        entry_func="add",
+        probe_args=(2, 3),
+        expected_return=5,
+        check_expected=True,
+    )
+    check("sieve succeeds with zero model calls", bool(res1.get("pass")) and res1.get("model_calls") == 0)
+    check("keeps only the true passing candidate index [1]", res1.get("kept_indices") == [1])
+    check("prunes semantic duplicate of baseline", int(res1.get("pruned_semantic_duplicates", 0)) >= 1)
+    check("prunes simulation mismatch candidate", int(res1.get("pruned_simulation_mismatches", 0)) >= 1)
+
+    neg = pre_sieve_and_simulate_meaning_ir(
+        baseline,
+        candidates,
+        entry_func="add",
+        probe_args=(2, 3),
+        expected_return=999,
+        check_expected=True,
+    )
+    check("negative control: unsatisfiable expectation yields 0 survivors", neg.get("kept_count") == 0)
+
+    res2 = pre_sieve_and_simulate_meaning_ir(
+        baseline,
+        candidates,
+        entry_func="add",
+        probe_args=(2, 3),
+        expected_return=5,
+        check_expected=True,
+    )
+    check(
+        "deterministic sieve output",
+        res1.get("kept_indices") == res2.get("kept_indices")
+        and res1.get("pruned_semantic_duplicates") == res2.get("pruned_semantic_duplicates"),
+    )
+
+    total = 6
+    return {
+        "schema": "BRAIN_UNIFIED_EPISTEMIC_PORTFOLIO_V1_SELF_CHECK",
+        "checks": total,
+        "passed": total - len(failures),
+        "failures": failures,
+        "verdict": "SELF_CHECK_PASS" if not failures else "SELF_CHECK_FAIL",
+    }

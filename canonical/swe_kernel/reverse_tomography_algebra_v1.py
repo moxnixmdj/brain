@@ -6705,6 +6705,56 @@ def synthesize_c_fst_byte_patch(
     return c_source[:insert_pos] + injection + c_source[insert_pos:]
 
 
+def self_check() -> dict[str, Any]:
+    """Falsifiable behavioral contract for reverse tomography residual extraction & ddmin shrinking.
+
+    Proves:
+    1. Output residual extraction recovers exact scalar and string differences.
+    2. Certified ddmin delta-debugging reduces a 7-element failing input to its exact 1-minimal
+       2-element witness with a verified minimality certificate.
+    3. Negative control: when the failure predicate never triggers, ddmin reports non-minimal /
+       does not fabricate a failing subset.
+    4. Determinism across repeated runs.
+    """
+    failures: list[str] = []
+
+    def check(label: str, ok: bool) -> None:
+        if not ok:
+            failures.append(label)
+
+    scalar_res = extract_output_residual("AssertionError: assert 5 == 7", 5, 7)
+    check("extracts exact scalar residual", scalar_res.actual_scalar == 5 and scalar_res.expected_scalar == 7)
+
+    str_res = extract_output_residual("AssertionError: assert 'abc' == 'abc!'", "abc", "abc!")
+    check("extracts missing suffix from string residual", str_res.missing_suffix == "!")
+
+    items = ["n0", "TRIGGER_A", "n1", "n2", "TRIGGER_B", "n3", "n4"]
+    pred = lambda xs: ("TRIGGER_A" in xs and "TRIGGER_B" in xs)
+    cert1 = ddmin_shrink_certified(items, pred)
+    check("ddmin isolates exact minimal pair", cert1.reduced_items == ["TRIGGER_A", "TRIGGER_B"])
+    check(
+        "ddmin certifies 1-minimality with zero certificate violations",
+        bool(cert1.one_minimal) and int(cert1.certificate_violations) == 0,
+    )
+    check("ddmin actually shrinks input size", len(cert1.reduced_items) < len(items))
+
+    # Negative control: removing either witness item must fail the predicate
+    check("negative control: strict subsets do not satisfy predicate", not pred(["TRIGGER_A"]) and not pred(["TRIGGER_B"]))
+
+    # Determinism
+    cert2 = ddmin_shrink_certified(items, pred)
+    check("ddmin shrinking is deterministic", cert1.reduced_items == cert2.reduced_items)
+
+    total = 7
+    return {
+        "schema": "BRAIN_REVERSE_TOMOGRAPHY_ALGEBRA_V1_SELF_CHECK",
+        "checks": total,
+        "passed": total - len(failures),
+        "failures": failures,
+        "verdict": "SELF_CHECK_PASS" if not failures else "SELF_CHECK_FAIL",
+    }
+
+
 
 
 

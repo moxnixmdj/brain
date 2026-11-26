@@ -44,7 +44,7 @@ class HarborEpistemicAgentTests(unittest.TestCase):
     def test_metadata_and_mode_semantics(self):
         self.assertEqual(agent.EpistemicBrainAgent.name(), "brain-epistemic")
         self.assertEqual(agent.EpistemicBrainAgent().version(), "1.0.0")
-        self.assertIn("MODE_NOT_SPECIAL_CASED_BY_ENGINE:EPISTEMIC", agent.mode_note("EPISTEMIC"))
+        self.assertEqual(agent.mode_note("EPISTEMIC"), "MODE_SPECIAL_CASED_BY_ENGINE:EPISTEMIC")
         self.assertEqual(agent.mode_note("RECALL"), "MODE_SPECIAL_CASED_BY_ENGINE:RECALL")
 
     def test_model_proposal_is_executed_and_finish_ends_loop(self):
