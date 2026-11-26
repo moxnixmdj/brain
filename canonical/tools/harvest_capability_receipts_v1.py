@@ -78,7 +78,8 @@ def harvest(root: Path, census: dict[str, Any], *, kinds: tuple[str, ...],
     elapsed = time.perf_counter() - started
 
     # Probing executes real modules; some write reports or state as a side effect.
-    reverted = lane.restore_tree(str(root), before, ("astra_runtime/evidence/CAPABILITY__",))
+    reverted = lane.restore_tree(str(root), before, ("astra_runtime/evidence/CAPABILITY__",
+                                                     "astra_runtime/instances/"))
 
     # Additive projection merge: derived entries only, existing rows untouched.
     projection_path = root / lane.PROJECTION
