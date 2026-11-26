@@ -16,11 +16,13 @@ from canonical.runtime import root3_read_only_local_file_query_executor_v1 as v1
 SCHEMA = "PROJECT_BRAIN_ROOT3_READ_ONLY_DECLARED_QUERY_EXECUTOR_V2"
 EFFECT_CLASS = v1.EFFECT_CLASS
 
-APT_SUPPORTED = {
-    ("canonical/runtime/capability_discovery.py", 267, "subprocess.run"): "APT_SEARCH",
-    ("canonical/runtime/capability_discovery.py", 359, "subprocess.run"): "APT_POLICY",
-    ("canonical/runtime/capability_discovery.py", 368, "subprocess.run"): "APT_SHOW",
-}
+# 2026-11-24: emptied. These three entries pinned `capability_discovery.py` lines 267/359/368 as
+# subprocess sites, but that file imports `subprocess` and never calls it (verified: zero
+# `subprocess.<call>` occurrences across 933 lines). The apt shell-outs were refactored into
+# apt_cli_probe.py / apt_python_probe.py, which is why the measured engine already reports exactly
+# 4 READ_ONLY_DECLARED_QUERY sites and none of them is an APT profile. The entries survived as
+# phantom pins and were the last blocker keeping nine governance modules from importing.
+APT_SUPPORTED: dict[tuple[str, int, str], str] = {}
 SUPPORTED = {**v1.SUPPORTED, **APT_SUPPORTED}
 
 _PACKAGE_RE = re.compile(r"^[a-z0-9][a-z0-9+.-]{0,127}(?::[a-z0-9][a-z0-9-]{0,31})?$")

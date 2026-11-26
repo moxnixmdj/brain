@@ -26,11 +26,20 @@ EFFECT_CLASS = "READ_ONLY_DECLARED_QUERY"
 # The sqlite CLI profile was discharged on #6300: the capability now queries
 # through the same libsqlite3 via the stdlib sqlite3 module in-process, so no
 # child-process site remains for it.
+# KEYS ARE LEGACY COORDINATES, NOT CURRENT FILE LINES. The registry normalises the lineno it hands
+# to a processor through `_LEGACY_LINE_REMAP`, and `LEGACY_EXPECTED` itself is written in those
+# legacy coordinates (yq 21, archive 32, python_test_audit 50). Measured 2026-11-24: this table
+# used the CURRENT lines for the two files that have a remap -- yq 23 and archive 53 -- while the
+# runtime delivers 21 and 32, so 2 of the 4 declared read-only capabilities were unreachable at
+# runtime. The two files WITHOUT a remap (jq 41, pdf_ocr_tesseract 44) were correct by luck,
+# because for them current == legacy. Declaring current lines here only works until the next
+# reflow; declaring legacy coordinates works because that is the coordinate system the registry
+# speaks.
 SUPPORTED = {
-    ("canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py", 53, "subprocess.run"): "TAR_LIST",
+    ("canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py", 32, "subprocess.run"): "TAR_LIST",
     ("canonical/runtime/bound_capabilities/jq_query.py", 41, "subprocess.run"): "JQ",
     ("canonical/runtime/bound_capabilities/pdf_ocr_tesseract.py", 44, "subprocess.run"): "TESSERACT_STDOUT",
-    ("canonical/runtime/bound_capabilities/yq_yaml_json.py", 23, "subprocess.run"): "YQ",
+    ("canonical/runtime/bound_capabilities/yq_yaml_json.py", 21, "subprocess.run"): "YQ",
 }
 
 JQ_FORBIDDEN = (

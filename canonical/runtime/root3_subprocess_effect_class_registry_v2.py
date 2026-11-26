@@ -47,16 +47,24 @@ _LEGACY_LINE_REMAP: dict[str, dict[int, int]] = {
     },
     "canonical/runtime/astra_runtime.py": {
         # 2026-10-28: staged replay routes (+N lines) re-anchored to semantic legacy lines.
+        # 2026-11-24: re-measured. Five of the six keys had drifted off every `subprocess.run` in
+        # the file -- 781 was `def run_http(step):`, 859 a dict comprehension, 1309
+        # `local_wheels.append(p)`, 1653 a closing brace, 6405 a strip() generator. The live sites
+        # are 400, 862, 940, 1408, 1788, 6558 (all six confirmed by AST scan). 400 was already
+        # correct; the other five are re-anchored here onto their pristine legacy lines. This is
+        # the table's designed job: current line moved, legacy class preserved.
         400: 325,
-        781: 595,
-        859: 673,
-        1309: 939,
-        1653: 1215,
-        6405: 5777,
+        862: 595,
+        940: 673,
+        1408: 939,
+        1788: 1215,
+        6558: 5777,
     },
     "canonical/runtime/bound_capabilities/yq_yaml_json.py": {23: 21},
     "canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py": {53: 32},
-    "canonical/runtime/bound_capabilities/python_test_audit.py": {136: 50},
+    # 2026-11-24: was {136: 50}; line 136 is `started=time.monotonic()`, not a process site. The file
+    # has exactly one `subprocess.run`, at 144.
+    "canonical/runtime/bound_capabilities/python_test_audit.py": {144: 50},
 }
 
 # Legacy pins whose semantic obligation is discharged by refactor on #6300:

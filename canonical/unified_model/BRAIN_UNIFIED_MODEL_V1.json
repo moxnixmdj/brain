@@ -31872,7 +31872,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "01f0b76aeed444ad004cca011c53bf9b0c73eaff51c7ecc442b11fdf91c7baab"
+  "value": "f2b9df2072f7015bde20a46badbb92d6c59e37bde42314a358f9193c798c86af"
  },
  "engines": [
   {
@@ -345323,7 +345323,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/root3_read_only_declared_query_executor_v2.py",
-   "sha256": "7b26ed6b9337dbbdd6d3aa0b1ba6044c55ad68958270e1a211da2705d88c7394",
+   "sha256": "eddb0cf88eb2b7ad10496e6b03b2a154a4eab9ba4d8d38c115e229a240a4796d",
    "summary": "",
    "symbol_count": 9,
    "symbols": [
@@ -345364,7 +345364,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/root3_read_only_local_file_query_executor_v1.py",
-   "sha256": "c6576166a5062eaf2a21511517d2d6fc570c10c749ebd708c44215e5d7be9fa8",
+   "sha256": "e17ef15a8d67eafb853c9c469467a242e37203bd6ed63e7b83e67ede17ef34d5",
    "summary": "",
    "symbol_count": 9,
    "symbols": [
@@ -345406,7 +345406,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/root3_runtime_process_universe_v2.py",
-   "sha256": "12de1027dfaef9c2deaea6923d0a2cac7284f88cd4c4000a3b008c6fba2910a6",
+   "sha256": "46dc4cccf52ff4505c95ea440b6baac072c1faafe77c760ca276065a64f6678b",
    "summary": "Conservative whole-runtime Python process universe compiler for Root3 V2.",
    "symbol_count": 10,
    "symbols": [
@@ -345667,7 +345667,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/root3_subprocess_effect_class_registry_v2.py",
-   "sha256": "dc3608de49991ec72a4605a6870b8e3d07725ddb9e5bcdb599a18f14bb499e63",
+   "sha256": "9c5281cc084cb2bee1f8d741c2853ae2f0b43f665b80b834deff99440d615cd5",
    "summary": "Conservative effect-class totalizer over Root3 whole-runtime process universe V2.",
    "symbol_count": 6,
    "symbols": [
