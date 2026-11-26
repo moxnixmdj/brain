@@ -1,0 +1,96 @@
+{
+ "attempted": 12,
+ "chance_for_an_exact_target": 0.00118,
+ "claim_limit": "A survivor is a call that twice produced the same output. It is not a claim that the module is correct, that its output is meaningful, or that the test asserts what the adapter assumes -- none of these tests was run. Producer-run, one sandbox.",
+ "exact_targets": 0,
+ "kill_floor": 0.4,
+ "method": {
+  "admission": "the call is executed twice in a fresh interpreter, cwd in a temp dir, and must agree",
+  "arguments": "literals only, taken from a call in the module's own same-stem test file",
+  "selection": "first 12 SOURCE_ONLY ledger rows, sorted by path",
+  "timeout_seconds": 8.0
+ },
+ "model_calls": 0,
+ "network_calls": 0,
+ "outcomes": {
+  "NO_LITERAL_CALL_IN_TEST": 12
+ },
+ "rows": [
+  {
+   "module": "canonical/runtime/a_goal_that_needs_two_moves_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "a_goal_that_needs_two_moves_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/a_refusal_is_a_specification_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "a_refusal_is_a_specification_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/aa_briefcase_internal_only_certification_gate_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "aa_briefcase_internal_only_certification_gate_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/aa_briefcase_internal_only_certification_gate_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "aa_briefcase_internal_only_certification_gate_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/aa_briefcase_internal_only_certification_gate_v3.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "aa_briefcase_internal_only_certification_gate_v3",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/aa_briefcase_minimum_information_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "aa_briefcase_minimum_information_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/aa_briefcase_top_support_collapse_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "aa_briefcase_top_support_collapse_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/acceptance_quotient_simulation_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "acceptance_quotient_simulation_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/acceptance_quotient_simulation_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "acceptance_quotient_simulation_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/acceptance_quotient_simulation_v3.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "acceptance_quotient_simulation_v3",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/acceptance_quotient_simulation_v4.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "acceptance_quotient_simulation_v4",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/acceptance_quotient_simulation_v5.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "acceptance_quotient_simulation_v5",
+   "surface": "OK"
+  }
+ ],
+ "schema": "PROJECT_BRAIN_AST_ADAPTER_DERIVATION_V1",
+ "survival_rate": 0.0,
+ "survivors": 0,
+ "verdict": "KILLED"
+}
