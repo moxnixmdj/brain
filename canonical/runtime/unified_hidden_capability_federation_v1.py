@@ -1682,13 +1682,14 @@ def compile_extended_source_index_rows(root: Path, covered: set[str]) -> list[di
     exposing `canonical/swe_kernel/`, `canonical/tools/`, `canonical/capabilities/`,
     `canonical/research/`, and `canonical/integrations/` to cross-repository discovery.
     """
+    astra_tmp = root / "canonical" / "astra_runtime" / "tmp"
     importers: dict[str, set[str]] = {}
     all_py: list[Path] = []
     for sub in ("canonical", "tests"):
         base = root / sub
         if base.is_dir():
             for p in sorted(base.rglob("*.py")):
-                if any(part in _NON_SOURCE_DIRS for part in p.parts):
+                if any(part in _NON_SOURCE_DIRS for part in p.parts) or p.is_relative_to(astra_tmp):
                     continue
                 all_py.append(p)
     for p in all_py:

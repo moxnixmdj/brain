@@ -1008,11 +1008,16 @@ def _source_index_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
     _seen: set[str] = set()
     importers: dict[str, set[str]] = {}
     py_files: list[Path] = []
+    astra_tmp = root / "canonical" / "astra_runtime" / "tmp"
     for name in ("canonical", "tests"):
         base = root / name
         if base.is_dir():
             py_files.extend(
-                p for p in sorted(base.rglob("*.py")) if ".git" not in p.parts
+                p
+                for p in sorted(base.rglob("*.py"))
+                if ".git" not in p.parts
+                and "__pycache__" not in p.parts
+                and not p.is_relative_to(astra_tmp)
             )
     for path in py_files:
         try:
