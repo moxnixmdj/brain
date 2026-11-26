@@ -1111,12 +1111,28 @@ class Creature:
         self._save()
         return res
 
+    _ASYMMETRIC_SPINE_PILLARS = {
+        "asymmetric_leapfrog": "AUTO",
+        "refusal_autobind": "REFUSAL_AUTOBIND",
+        "angelic_zygote_swe": "ANGELIC_ZYGOTE_SWE",
+        "shadow_transducer_cu": "SHADOW_TRANSDUCER_CU",
+        "digital_twin_arc": "DIGITAL_TWIN_ARC",
+        "sheaf_srmu_memory": "SHEAF_SRMU_MEMORY",
+        "pc_dgm_evolve": "PC_DGM_EVOLVE",
+        "eggmind_proof": "EGGMIND_PROOF",
+    }
+
     def route_goal_via_spine(self, kind: str, **kwargs: Any) -> dict[str, Any]:
         """Execute a task through the unified frontier spines (`0D`-`0I`) + hidden arsenal in O(1) dispatch."""
         k = str(kind or "swe_repair").lower().strip()
         router_attr = self._SPINE_ROUTER_METHODS.get(k)
         if router_attr is not None:
             res = getattr(self.boundary_router, router_attr)(**kwargs)
+        elif k in self._ASYMMETRIC_SPINE_PILLARS:
+            goal_txt = str(kwargs.pop("goal", ""))
+            res = self.unified_model.asymmetric_leapfrog(
+                goal_txt, pillar=self._ASYMMETRIC_SPINE_PILLARS[k], **kwargs
+            )
         elif k == "checkability_oracle":
             ws = kwargs.pop("workspace_root", _REPO_ROOT)
             res = self.unified_model.checkability_oracle_forge(ws, **kwargs)
@@ -1659,6 +1675,62 @@ class Creature:
         self._unified_model = open_model()
         return self._unified_model.discover_dark_matter(query, top_k=top_k, max_hot=max_hot)
 
+    def asymmetric_leapfrog(
+        self,
+        goal: str = "",
+        *,
+        pillar: str = "AUTO",
+        inputs: Mapping[str, Any] | None = None,
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Execute any of the 7 Asymmetric Frontier-Leapfrog Pillars directly on Creature (`K3=0`)."""
+        res = self.unified_model.asymmetric_leapfrog(goal, pillar=pillar, inputs=inputs, **kwargs)
+        self._save()
+        return res
+
+    def sleep_pc_dgm_supercompile(
+        self,
+        *,
+        domain: str = "general",
+        fn_name: str,
+        incumbent_source: str,
+        candidate_sources: Sequence[str] = (),
+        static_env: Mapping[str, Any] | None = None,
+        test_cases: Sequence[tuple[tuple[Any, ...], Any]] = (),
+        heldout_cases: Sequence[tuple[tuple[Any, ...], Any]] = (),
+        negative_witness_sources: Sequence[str] = (),
+        rubin_rent_scores: Mapping[str, tuple[float, float]] | None = None,
+    ) -> dict[str, Any]:
+        """Sleep-time Proof-Carrying Darwin-Godel Machine (`PC-DGM`) + Turchin AST deforestation + Rubin rent GC."""
+        res = self.unified_model.pc_dgm_evolve(
+            domain=domain,
+            fn_name=fn_name,
+            incumbent_source=incumbent_source,
+            candidate_sources=candidate_sources,
+            static_env=static_env,
+            test_cases=test_cases,
+            heldout_cases=heldout_cases,
+            negative_witness_sources=negative_witness_sources,
+            rubin_rent_scores=rubin_rent_scores,
+        )
+        if res.get("pass") and isinstance(res.get("best_stepping_stone"), Mapping):
+            winner = res["best_stepping_stone"]
+            self.memory_bus.append_verified_event(
+                op="SET",
+                key=f"pc_dgm:{domain}:{fn_name}",
+                value={
+                    "ast_sha256": winner.get("ast_sha256"),
+                    "byte_len": winner.get("byte_len"),
+                    "latency_us": winner.get("latency_us"),
+                },
+                source_commit="pc_dgm_turchin_supercompiler_v1",
+                precondition_guard=["anti_objective_hacking", "popper_negative_witness", "turchin_deforestation"],
+            )
+        if self._standing is not None:
+            self._standing.record(verified=True, correct=bool(res.get("pass")))
+        self._save()
+        return res
+
     def _ensure_unified_model(self) -> Any:
         if getattr(self, "_unified_model", None) is None:
             from canonical.runtime.brain_unified_model_v1 import open_model
@@ -1759,6 +1831,28 @@ class Creature:
         res = self._ensure_unified_model().selfplay_steer_horizon_commit(operation, payload)
         self._save()
         return res
+
+    def rung3_proposer_jitrl_solve(self, payload: Mapping[str, Any]) -> dict[str, Any]:
+        """Wave 41: Creature 4-rung escalation (Rung 0->1->2->3) with K3=0 abstention, pluggable local proposer, JitRL & NFV/CHASE."""
+        return self._ensure_unified_model().rung3_proposer_jitrl_solve(payload)
+
+    def whitebox_trace_abduction_oe(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 41: Creature Ochiai trace abduction + Angelic OE + E-graph CEGIS + Whitebox introspection."""
+        return self._ensure_unified_model().whitebox_trace_abduction_oe(operation, payload)
+
+    def ttpo_opsd_distill_rollouts(self, payload: Mapping[str, Any]) -> dict[str, Any]:
+        """Wave 41: Creature TTPO + OPSD label-free behavioral-equivalence consensus distillation."""
+        return self._ensure_unified_model().ttpo_opsd_distill_rollouts(payload)
+
+    def futamura_compile_away_cycle(self, payload: Mapping[str, Any]) -> dict[str, Any]:
+        """Wave 42: Creature Self-Play -> Futamura Rung-0 Compile-Away -> Sleep Consolidation flywheel."""
+        res = self._ensure_unified_model().futamura_compile_away_cycle(payload)
+        self._save()
+        return res
+
+    def one_demo_trust_and_rung_calibrate(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 42: Creature trace-quotient collision gate + page-guide UI sketcher + provenance calibration."""
+        return self._ensure_unified_model().one_demo_trust_and_rung_calibrate(payload)
 
     def sleep_evolve_organs_gea(
         self,

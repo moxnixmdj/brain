@@ -597,7 +597,12 @@ def _extract_secondary_indexes(full: Mapping[str, Any], raw_sha: str) -> dict[st
 # --------------------------------------------------------------------------- model
 
 
-class UnifiedModel:
+from canonical.runtime.wave41_rung3_proposer_jitrl_continual_flywheel_v1 import (
+    Wave40To42UnifiedModelMixin as _Wave40To42UnifiedModelMixin,
+)
+
+
+class UnifiedModel(_Wave40To42UnifiedModelMixin):
     """A loaded, digest-verified unified model."""
 
     def __init__(
@@ -2856,6 +2861,41 @@ class UnifiedModel:
             return self._epistemic_envelope(requested, goal, self.active_mealy_question_learner(**inputs))
         if requested == "DBSP_MEMORY" or (requested == "AUTO" and ("zset_deltas" in inputs or "forge_entry" in inputs)):
             return self._epistemic_envelope(requested, goal, self.dbsp_bitemporal_forge(**inputs))
+        _ASYM_SOLVE_MODES = {
+            "ASYMMETRIC_LEAPFROG": "AUTO",
+            "REFUSAL_AUTOBIND": "REFUSAL_AUTOBIND",
+            "ANGELIC_ZYGOTE_SWE": "ANGELIC_ZYGOTE_SWE",
+            "SHADOW_TRANSDUCER_CU": "SHADOW_TRANSDUCER_CU",
+            "DIGITAL_TWIN_ARC": "DIGITAL_TWIN_ARC",
+            "SHEAF_SRMU_MEMORY": "SHEAF_SRMU_MEMORY",
+            "PC_DGM_EVOLVE": "PC_DGM_EVOLVE",
+            "EGGMIND_PROOF": "EGGMIND_PROOF",
+        }
+        if requested in _ASYM_SOLVE_MODES or (
+            requested == "AUTO"
+            and any(
+                k in inputs
+                for k in (
+                    "autobind_source",
+                    "cli_refusal_text",
+                    "visible_tests",
+                    "dom_snapshot",
+                    "interactive_env",
+                    "arc_train_pairs",
+                    "sheaf_episodes",
+                    "pc_dgm_incumbent",
+                    "eggmind_goal_tree",
+                )
+            )
+        ):
+            if "sheaf_episodes" in inputs:
+                inputs["episodes"] = inputs.pop("sheaf_episodes")
+            if "pc_dgm_incumbent" in inputs:
+                inputs["incumbent_source"] = inputs.pop("pc_dgm_incumbent")
+            if "eggmind_goal_tree" in inputs:
+                inputs["goal_tree"] = inputs.pop("eggmind_goal_tree")
+            pil = _ASYM_SOLVE_MODES.get(requested, str(inputs.pop("pillar", "AUTO")))
+            return self._epistemic_envelope(requested, goal, self.asymmetric_leapfrog(goal, pillar=pil, inputs=inputs))
 
         if requested in ("EPISTEMIC", "PORTFOLIO"):
             if callable(inputs.get("mealy_oracle")):
@@ -4276,6 +4316,28 @@ class UnifiedModel:
             contribution=res,
         )
 
+    def _wrap_boundary_call(
+        self,
+        op: str,
+        goal_txt: str,
+        payload_key: str,
+        res: Mapping[str, Any],
+        pass_default: str,
+        fail_default: str = "FAIL_CLOSED",
+        *,
+        include_reason: bool = True,
+    ) -> dict[str, Any]:
+        passed = bool(res.get("pass") is True)
+        extra: dict[str, Any] = {"pass": passed, payload_key: res}
+        if include_reason:
+            extra["reason"] = None if passed else str(res.get("status") or fail_default)
+        return self._envelope(
+            operation=op,
+            goal=goal_txt,
+            status=str(res.get("status") or (pass_default if passed else fail_default)),
+            **extra,
+        )
+
     def curate_skills(
         self,
         *,
@@ -4288,83 +4350,26 @@ class UnifiedModel:
     ) -> dict[str, Any]:
         """Retire deadweight skills ONLY on a measured tight grader (`0G` × `skill_contribution_ledger_v1`)."""
         res = self.boundary_router.route_curate_skills(
-            grader_report=grader_report,
-            min_trials=min_trials,
-            threshold=threshold,
-            active_cap=active_cap,
-            db_path=db_path,
+            grader_report=grader_report, min_trials=min_trials, threshold=threshold, active_cap=active_cap, db_path=db_path
         )
-        passed = bool(res.get("pass") is True)
-        return self._envelope(
-            operation="CURATE_SKILLS",
-            goal=goal or "curate_skills_by_contribution",
-            status=str(res.get("status") or ("PASS__SKILLS_CURATED" if passed else "REFUSED__UNMEASURED_GRADER")),
-            **{"pass": passed},
-            reason=None if passed else str(res.get("status") or "CURATION_REFUSED"),
-            curation=res,
-        )
+        return self._wrap_boundary_call("CURATE_SKILLS", goal or "curate_skills_by_contribution", "curation", res, "PASS__SKILLS_CURATED", "REFUSED__UNMEASURED_GRADER")
 
-    def observe_drift(
-        self,
-        stream: str,
-        value: float | bool,
-        *,
-        goal: str = "",
-    ) -> dict[str, Any]:
+    def observe_drift(self, stream: str, value: float | bool, *, goal: str = "") -> dict[str, Any]:
         """Observe one outcome in the hybrid ADWIN + BOCPD + Page-Hinkley concept-drift monitor (`0G`)."""
         res = self.boundary_router.route_observe_drift(stream, value)
-        return self._envelope(
-            operation="OBSERVE_DRIFT",
-            goal=goal or f"drift:{stream}",
-            status=str(res.get("status") or "PASS__STATIONARY"),
-            **{"pass": True},
-            drift=res,
-        )
+        return self._envelope(operation="OBSERVE_DRIFT", goal=goal or f"drift:{stream}", status=str(res.get("status") or "PASS__STATIONARY"), **{"pass": True}, drift=res)
 
     def trace_expression_repair(self, *, goal: str = "", **kwargs: Any) -> dict[str, Any]:
         """Dual-slicing execution-trace blaming + literal-defect & site-generability audit (`0D`)."""
-        res = self.boundary_router.route_trace_expression_repair(**kwargs)
-        passed = bool(res.get("pass") is True)
-        return self._envelope(
-            operation="TRACE_EXPRESSION_REPAIR",
-            goal=goal or "trace_expression_repair",
-            status=str(res.get("status") or ("PASS__TRACE_EXPRESSION_BLAMED" if passed else "FAIL_CLOSED")),
-            **{"pass": passed},
-            reason=None if passed else str(res.get("status") or "TRACE_REPAIR_FAILED"),
-            trace_repair=res,
-        )
+        return self._wrap_boundary_call("TRACE_EXPRESSION_REPAIR", goal or "trace_expression_repair", "trace_repair", self.boundary_router.route_trace_expression_repair(**kwargs), "PASS__TRACE_EXPRESSION_BLAMED", "TRACE_REPAIR_FAILED")
 
-    def multi_file_causal_localize(
-        self,
-        repo_root: str | Path,
-        *,
-        goal: str = "",
-        **kwargs: Any,
-    ) -> dict[str, Any]:
+    def multi_file_causal_localize(self, repo_root: str | Path, *, goal: str = "", **kwargs: Any) -> dict[str, Any]:
         """Multi-step differential-trace fault localization & causal SWE repair (`0D`)."""
-        res = self.boundary_router.route_multi_file_causal_localize(repo_root, goal=goal, **kwargs)
-        passed = bool(res.get("pass") is True)
-        return self._envelope(
-            operation="MULTI_FILE_CAUSAL_LOCALIZE",
-            goal=goal or f"causal_localize:{Path(repo_root).name}",
-            status=str(res.get("status") or ("PASS__DIFFERENTIAL_TRACE_LOCALIZED" if passed else "FAIL_CLOSED")),
-            **{"pass": passed},
-            reason=None if passed else str(res.get("status") or "LOCALIZATION_FAILED"),
-            causal_result=res,
-        )
+        return self._wrap_boundary_call("MULTI_FILE_CAUSAL_LOCALIZE", goal or f"causal_localize:{Path(repo_root).name}", "causal_result", self.boundary_router.route_multi_file_causal_localize(repo_root, goal=goal, **kwargs), "PASS__DIFFERENTIAL_TRACE_LOCALIZED", "LOCALIZATION_FAILED")
 
     def discover_computer_env(self, *, goal: str = "", **kwargs: Any) -> dict[str, Any]:
         """Discover live host OS programs, flags, file actions & minted effect signatures (`0E` × `computer_env_v1`)."""
-        res = self.boundary_router.route_discover_computer_env(**kwargs)
-        passed = bool(res.get("pass") is True)
-        return self._envelope(
-            operation="DISCOVER_COMPUTER_ENV",
-            goal=goal or "discover_computer_env",
-            status=str(res.get("status") or ("PASS__COMPUTER_ENV_DISCOVERED" if passed else "FAIL_CLOSED")),
-            **{"pass": passed},
-            reason=None if passed else str(res.get("status") or "COMPUTER_ENV_UNAVAILABLE"),
-            computer_env=res,
-        )
+        return self._wrap_boundary_call("DISCOVER_COMPUTER_ENV", goal or "discover_computer_env", "computer_env", self.boundary_router.route_discover_computer_env(**kwargs), "PASS__COMPUTER_ENV_DISCOVERED", "COMPUTER_ENV_UNAVAILABLE")
 
     def admit_route(
         self,
@@ -4376,35 +4381,12 @@ class UnifiedModel:
         entry: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
         """Fail-closed live route & DAG contract admission (`live_brain_route_admission_v1`)."""
-        res = self.boundary_router.route_admit_live(
-            goal,
-            compiled=compiled,
-            registry=registry,
-            dag=dag,
-            entry=entry,
-        )
-        passed = bool(res.get("pass") is True)
-        return self._envelope(
-            operation="ADMIT_ROUTE",
-            goal=goal,
-            status=str(res.get("status") or ("PASS__ROUTE_ADMITTED" if passed else "FAIL_CLOSED")),
-            **{"pass": passed},
-            reason=None if passed else str(res.get("status") or "ROUTE_ADMISSION_REJECTED"),
-            route_admission=res,
-        )
+        res = self.boundary_router.route_admit_live(goal, compiled=compiled, registry=registry, dag=dag, entry=entry)
+        return self._wrap_boundary_call("ADMIT_ROUTE", goal, "route_admission", res, "PASS__ROUTE_ADMITTED", "ROUTE_ADMISSION_REJECTED")
 
     def semantic_plan(self, goal: str) -> dict[str, Any]:
         """Neuro-symbolic compositional task AST & plan synthesis (`semantic_generalization_engine_v1`)."""
-        res = self.boundary_router.route_semantic_plan(goal)
-        passed = bool(res.get("pass") is True)
-        return self._envelope(
-            operation="SEMANTIC_PLAN",
-            goal=goal,
-            status=str(res.get("status") or ("PASS__SEMANTIC_PLAN_SYNTHESIZED" if passed else "FAIL_CLOSED")),
-            **{"pass": passed},
-            reason=None if passed else str(res.get("status") or "SEMANTIC_PLAN_FAILED"),
-            semantic_plan=res,
-        )
+        return self._wrap_boundary_call("SEMANTIC_PLAN", goal, "semantic_plan", self.boundary_router.route_semantic_plan(goal), "PASS__SEMANTIC_PLAN_SYNTHESIZED", "SEMANTIC_PLAN_FAILED")
 
     def derive_execution_adapter(
         self,
@@ -4707,23 +4689,11 @@ class UnifiedModel:
     ) -> dict[str, Any]:
         """Wave 15: MemGuard persistent verifier lifecycle & `rule_expiry_v1` world-fingerprint expiry."""
         res = self.boundary_router.route_memguard_and_expiry(
-            action=action,
-            skill_id=skill_id,
-            reward=reward,
-            confidence=confidence,
-            fingerprint=fingerprint,
-            current_fingerprint=current_fingerprint,
-            quarantine_on_drift=quarantine_on_drift,
-            db_path=db_path,
+            action=action, skill_id=skill_id, reward=reward, confidence=confidence,
+            fingerprint=fingerprint, current_fingerprint=current_fingerprint,
+            quarantine_on_drift=quarantine_on_drift, db_path=db_path,
         )
-        passed = bool(res.get("pass"))
-        return self._envelope(
-            operation="MEMGUARD_AUDIT_EXPIRE",
-            goal=f"memguard:{action}:{skill_id or 'all'}",
-            status=str(res.get("status") or "PASS__MEMGUARD"),
-            **{"pass": passed},
-            memguard=res,
-        )
+        return self._wrap_boundary_call("MEMGUARD_AUDIT_EXPIRE", f"memguard:{action}:{skill_id or 'all'}", "memguard", res, "PASS__MEMGUARD", "PASS__MEMGUARD", include_reason=False)
 
     def anti_skill_record(
         self,
@@ -4737,59 +4707,19 @@ class UnifiedModel:
     ) -> dict[str, Any]:
         """Wave 15: Record a symbol-scoped Negative-Knowledge Anti-Skill refutation in `0G`."""
         res = self.boundary_router.route_anti_skill(
-            action="record",
-            domain=domain,
-            symbol_scope=symbol_scope,
-            bad_hypothesis=bad_hypothesis,
-            error_signature=error_signature,
-            world_fp=world_fp,
-            csp_pair=csp_pair,
+            action="record", domain=domain, symbol_scope=symbol_scope,
+            bad_hypothesis=bad_hypothesis, error_signature=error_signature, world_fp=world_fp, csp_pair=csp_pair,
         )
-        return self._envelope(
-            operation="ANTI_SKILL_RECORD",
-            goal=f"anti_skill:{domain}:{symbol_scope}",
-            status=str(res.get("status") or "PASS__ANTI_SKILL_RECORDED"),
-            **{"pass": bool(res.get("pass"))},
-            anti_skill=res,
-        )
+        return self._wrap_boundary_call("ANTI_SKILL_RECORD", f"anti_skill:{domain}:{symbol_scope}", "anti_skill", res, "PASS__ANTI_SKILL_RECORDED", "PASS__ANTI_SKILL_RECORDED", include_reason=False)
 
-    def anti_skill_prune(
-        self,
-        candidates: Sequence[str],
-        *,
-        domain: str,
-        symbol_scope: str = "*",
-    ) -> dict[str, Any]:
+    def anti_skill_prune(self, candidates: Sequence[str], *, domain: str, symbol_scope: str = "*") -> dict[str, Any]:
         """Wave 15: Prune candidate hypotheses in O(1) using crystallized Anti-Skills."""
-        res = self.boundary_router.route_anti_skill(
-            action="prune",
-            domain=domain,
-            symbol_scope=symbol_scope,
-            candidates=candidates,
-        )
-        return self._envelope(
-            operation="ANTI_SKILL_PRUNE",
-            goal=f"prune:{domain}:{symbol_scope}",
-            status=str(res.get("status") or "PASS__ANTI_SKILL_PRUNED"),
-            **{"pass": bool(res.get("pass"))},
-            pruning=res,
-        )
+        res = self.boundary_router.route_anti_skill(action="prune", domain=domain, symbol_scope=symbol_scope, candidates=candidates)
+        return self._wrap_boundary_call("ANTI_SKILL_PRUNE", f"prune:{domain}:{symbol_scope}", "pruning", res, "PASS__ANTI_SKILL_PRUNED", "PASS__ANTI_SKILL_PRUNED", include_reason=False)
 
-    def prove_composition(
-        self,
-        *,
-        initial_text: str,
-        operations: Sequence[Mapping[str, Any]],
-    ) -> dict[str, Any]:
+    def prove_composition(self, *, initial_text: str, operations: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         """Wave 15: Compose multi-step text/code operations only when premise & proof survive (`proved_composition_v1`)."""
-        res = self.boundary_router.route_proved_composition(initial_text=initial_text, operations=operations)
-        return self._envelope(
-            operation="PROVE_COMPOSITION",
-            goal="proved_composition",
-            status=str(res.get("status") or "FAIL_CLOSED"),
-            **{"pass": bool(res.get("pass"))},
-            composition=res,
-        )
+        return self._wrap_boundary_call("PROVE_COMPOSITION", "proved_composition", "composition", self.boundary_router.route_proved_composition(initial_text=initial_text, operations=operations), "FAIL_CLOSED", "FAIL_CLOSED", include_reason=False)
 
     def solve_swe_inverted_microscope(
         self,
@@ -4824,15 +4754,7 @@ class UnifiedModel:
 
     def fork_reality_speculate(self, **kwargs: Any) -> dict[str, Any]:
         """Wave 17: Fork-Reality CoW Speculative World Engine + Kernel Seccomp Confinement."""
-        res = self.boundary_router.route_fork_reality_speculate(**kwargs)
-        passed = bool(res.get("pass"))
-        return self._envelope(
-            operation="FORK_REALITY_SPECULATE",
-            goal="fork_reality_cow_speculation",
-            status=str(res.get("status") or ("PASS" if passed else "FAIL_CLOSED")),
-            **{"pass": passed},
-            speculation=res,
-        )
+        return self._wrap_boundary_call("FORK_REALITY_SPECULATE", "fork_reality_cow_speculation", "speculation", self.boundary_router.route_fork_reality_speculate(**kwargs), "PASS", "FAIL_CLOSED", include_reason=False)
 
     def elevate_gui_trace(
         self,
@@ -5706,6 +5628,18 @@ class UnifiedModel:
             return self.active_mealy_question_learner(**data, **kwargs)
         if m == "dbsp_forge":
             return self.dbsp_bitemporal_forge(**data, **kwargs)
+        if m in (
+            "asymmetric_leapfrog",
+            "refusal_autobind",
+            "angelic_zygote_swe",
+            "shadow_transducer_cu",
+            "digital_twin_arc",
+            "sheaf_srmu_memory",
+            "pc_dgm_evolve",
+            "eggmind_proof",
+        ):
+            pil = "AUTO" if m == "asymmetric_leapfrog" else m.upper()
+            return self.asymmetric_leapfrog(goal, pillar=pil, inputs=data, **kwargs)
         if m == "version_space_swe" or (
             m == "auto"
             and (
@@ -6581,6 +6515,49 @@ class UnifiedModel:
             "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
         }
 
+    # ---------------------------------------- Asymmetric Frontier-Leapfrog Spine (7 Pillars, K3=0)
+
+    def asymmetric_leapfrog(
+        self,
+        goal: str = "",
+        *,
+        pillar: str = "AUTO",
+        inputs: Mapping[str, Any] | None = None,
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Single O(1) front door for all 7 Asymmetric Frontier-Leapfrog Pillars (`K3=0`)."""
+        from canonical.runtime.asymmetric_frontier_leapfrog_v1 import asymmetric_leapfrog_dispatch
+
+        return asymmetric_leapfrog_dispatch(goal, pillar=pillar, inputs=inputs, **kwargs)
+
+    def abductive_refusal_autobind(self, goal: str = "", **kwargs: Any) -> dict[str, Any]:
+        """Pillar 1: Abductive Refusal-to-Contract Autobinder (`a_refusal_is_a_specification_v1` + `declared_input_derivation_v1`)."""
+        return self.asymmetric_leapfrog(goal, pillar="REFUSAL_AUTOBIND", **kwargs)
+
+    def angelic_zygote_swe_repair(self, **kwargs: Any) -> dict[str, Any]:
+        """Pillar 2: CoW-Zygote + Angelic Forest + Concolic Version-Space Distinguishing SWE Engine."""
+        return self.asymmetric_leapfrog(pillar="ANGELIC_ZYGOTE_SWE", **kwargs)
+
+    def shadow_transducer_cu(self, goal: str = "", **kwargs: Any) -> dict[str, Any]:
+        """Pillar 3: Zero-Pixel Shadow-Interface Transduction + Declarative ARIA/CDP + Petri Checkpoints."""
+        return self.asymmetric_leapfrog(goal, pillar="SHADOW_TRANSDUCER_CU", **kwargs)
+
+    def digital_twin_arc_solve(self, **kwargs: Any) -> dict[str, Any]:
+        """Pillar 4: `OPINE-World` + `Twin` 100%-Replay-Verified Digital Twin + `ARC-NEST` LOO + `E-Stitch`."""
+        return self.asymmetric_leapfrog(pillar="DIGITAL_TWIN_ARC", **kwargs)
+
+    def sheaf_srmu_memory(self, **kwargs: Any) -> dict[str, Any]:
+        """Pillar 5: 3-Layer Algebraic Memory (`SRMU` 10,240-bit HV + Exact `Q` Sheaf `H^1` + Dual NNF Semiring)."""
+        return self.asymmetric_leapfrog(pillar="SHEAF_SRMU_MEMORY", **kwargs)
+
+    def pc_dgm_evolve(self, **kwargs: Any) -> dict[str, Any]:
+        """Pillar 6: Proof-Carrying Darwin-Godel Machine + Turchin AST Supercompiler + Rubin Skill-Rent GC."""
+        return self.asymmetric_leapfrog(pillar="PC_DGM_EVOLVE", **kwargs)
+
+    def eggmind_prove(self, **kwargs: Any) -> dict[str, Any]:
+        """Pillar 7: `EggMind` Proof-Motif E-Graph + `Pantograph` Tactic Goal-Tree Prover."""
+        return self.asymmetric_leapfrog(pillar="EGGMIND_PROOF", **kwargs)
+
     # ------------------------------------------------------------------ Wave 39 Unified Five-Pillar Frontier Kernel
 
     def _get_five_pillar_kernel(self) -> Any:
@@ -6901,246 +6878,6 @@ class UnifiedModel:
             repo_root=ROOT,
             limit=int(limit),
         )
-
-    # --- Wave 40: Dark-Matter Frontier Kernel (24 DARK modules + Agent S4/HCU, RLM, 4-Net Engram, CHASE/HDA/NFV, Self-Play/Steer) ---
-
-    def _get_rlm_workspace(self) -> Any:
-        ws = getattr(self, "_w40_rlm_workspace", None)
-        if ws is None:
-            from canonical.runtime.wave40_dark_matter_frontier_kernel_v1 import OutOfCoreRLMWorkspace
-
-            ws = OutOfCoreRLMWorkspace()
-            self._w40_rlm_workspace = ws
-        return ws
-
-    def _get_four_network_git_memory_engine(self, *, root_dir: str | Path | None = None) -> Any:
-        if root_dir is not None:
-            from canonical.runtime.wave40_dark_matter_frontier_kernel_v1 import FourNetworkGitMemoryEngine
-
-            return FourNetworkGitMemoryEngine(root_dir=root_dir)
-        eng = getattr(self, "_w40_four_network_memory", None)
-        if eng is None:
-            from canonical.runtime.wave40_dark_matter_frontier_kernel_v1 import FourNetworkGitMemoryEngine
-
-            eng = FourNetworkGitMemoryEngine()
-            self._w40_four_network_memory = eng
-        return eng
-
-    def epistemic_swe_egraph_cegis(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
-        """Wave 40: Guarded Meaning IR E-Graph + Grammar-Closed CEGIS CoW repair + Causal Nexus obligations/transducers."""
-        from canonical.runtime.wave40_dark_matter_frontier_kernel_v1 import EpistemicSWEAndEGraphKernel
-
-        p = dict(payload or {})
-        op = str(operation).upper()
-        if op == "EGRAPH_VERIFY":
-            return EpistemicSWEAndEGraphKernel.egraph_verify_and_anti_unify(
-                term_a=p.get("term_a"),
-                term_b=p.get("term_b"),
-                source_a=p.get("source_a"),
-                source_b=p.get("source_b"),
-            )
-        if op == "GRAMMAR_CLOSED_CEGIS_REPAIR":
-            return EpistemicSWEAndEGraphKernel.grammar_closed_cegis_repair(
-                str(p["buggy_source"]),
-                fn_name=str(p["fn_name"]),
-                test_cases=p.get("test_cases") or (),
-                reference_source=p.get("reference_source"),
-                max_candidates=int(p.get("max_candidates", 160)),
-                use_cow_fork=bool(p.get("use_cow_fork", True)),
-            )
-        if op == "CAUSAL_OBLIGATION_TRANSDUCER":
-            return EpistemicSWEAndEGraphKernel.causal_obligation_and_transducer(
-                failure_text=p.get("failure_text"),
-                io_pairs=p.get("io_pairs"),
-            )
-        raise UnifiedModelError(f"Unsupported Wave 40 Epistemic SWE operation: {operation}")
-
-    def oneshot_version_space_learn(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
-        """Wave 40: Evidence Demand + Settlement + Hypothesis Classes + Operator Acquisition + Cross-Env Transfer."""
-        from canonical.runtime.wave40_dark_matter_frontier_kernel_v1 import OneShotEpistemicLearnerKernel
-
-        p = dict(payload or {})
-        op = str(operation).upper()
-        if op == "DEMAND_AND_COLLAPSE":
-            return OneShotEpistemicLearnerKernel.demand_and_collapse_program(
-                p.get("params") or ("x",),
-                p.get("examples") or (),
-                distinguishing_answer=p.get("distinguishing_answer"),
-            )
-        if op == "DETERMINE_HYPOTHESIS":
-            return OneShotEpistemicLearnerKernel.determine_hypothesis_and_vocabulary(
-                p.get("points") or (),
-                bodies=p.get("bodies") or (),
-                operator_example=p.get("operator_example"),
-            )
-        if op == "CROSS_ENV_TRANSFER":
-            return OneShotEpistemicLearnerKernel.cross_env_transfer_and_demo_collapse(
-                p.get("obs_a") or {},
-                p.get("obs_b") or {},
-                demo_observation=p.get("demo_observation"),
-            )
-        raise UnifiedModelError(f"Unsupported Wave 40 One-Shot Learner operation: {operation}")
-
-    def shadow_interface_hcu_route(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
-        """Wave 40: Agent-S4 evolving shadow-interface compiler + Microsoft HCU 3-channel router + mental model."""
-        from canonical.runtime.wave40_dark_matter_frontier_kernel_v1 import ShadowInterfaceHCURouterKernel
-
-        p = dict(payload or {})
-        op = str(operation).upper()
-        if op == "ROUTE_HCU":
-            return ShadowInterfaceHCURouterKernel.route_hcu_action(
-                str(p.get("goal", "")),
-                tool_name=p.get("tool_name"),
-                help_text=p.get("help_text"),
-                workspace_root=p.get("workspace_root"),
-                transition_edges=p.get("transition_edges") or (),
-                start_state=p.get("start_state"),
-                goal_state=p.get("goal_state"),
-                ui_observation=p.get("ui_observation"),
-                has_gui_surface=bool(p.get("has_gui_surface", False)),
-            )
-        if op == "COMPILE_SHADOW_INTERFACE":
-            return ShadowInterfaceHCURouterKernel.compile_and_evolve_shadow_interface(
-                tool_name=str(p["tool_name"]),
-                help_text=str(p["help_text"]),
-                repo_dir=p["repo_dir"],
-                validation_probes=p.get("validation_probes") or (),
-                version=int(p.get("version", 1)),
-            )
-        raise UnifiedModelError(f"Unsupported Wave 40 Shadow Interface/HCU operation: {operation}")
-
-    def rlm_workspace_op(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
-        """Wave 40: MIT RLM out-of-core symbolic corpus mount, bounded AST/regex slice, and recursive map-reduce."""
-        ws = self._get_rlm_workspace()
-        p = dict(payload or {})
-        op = str(operation).upper()
-        if op == "MOUNT_CORPUS":
-            return ws.mount_corpus(str(p.get("name", "corpus")), p.get("content", ""))
-        if op == "PROGRAMMATIC_SLICE":
-            return ws.programmatic_slice(
-                str(p["handle_id"]),
-                regex=p.get("regex"),
-                line_range=p.get("line_range"),
-                symbol=p.get("symbol"),
-                token=p.get("token"),
-                context_lines=int(p.get("context_lines", 1)),
-                max_chars=int(p.get("max_chars", 2000)),
-            )
-        if op == "RECURSIVE_MAP_REDUCE":
-            return ws.recursive_map_reduce(
-                str(p["handle_id"]),
-                pattern=str(p["pattern"]),
-                chunk_lines=int(p.get("chunk_lines", 60)),
-                max_depth=int(p.get("max_depth", 3)),
-                max_matches_per_chunk=int(p.get("max_matches_per_chunk", 20)),
-            )
-        raise UnifiedModelError(f"Unsupported Wave 40 RLM workspace operation: {operation}")
-
-    def four_network_git_memory_op(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
-        """Wave 40: Hindsight 4-Network bi-temporal git-diffable memory + O(1) Engram + Sleep consolidation + TMA-NM."""
-        p = dict(payload or {})
-        eng = p.get("engine") or self._get_four_network_git_memory_engine(root_dir=p.get("root_dir"))
-        op = str(operation).upper()
-        if op == "WRITE":
-            return eng.write(
-                network=str(p["network"]),
-                record_id=str(p["record_id"]),
-                entity_key=str(p["entity_key"]),
-                verbatim_text=str(p["verbatim_text"]),
-                valid_from=int(p.get("valid_from", 0)),
-                valid_to=p.get("valid_to"),
-                origin_token=str(p.get("origin_token", "TRUSTED_VERIFIER")),
-                support_ids=p.get("support_ids") or (),
-                metadata=p.get("metadata"),
-            )
-        if op == "ENGRAM_QUERY":
-            return eng.engram_query(
-                str(p.get("query", "")),
-                networks=p.get("networks"),
-                at_time=p.get("at_time"),
-                top_k=int(p.get("top_k", 5)),
-            )
-        if op == "SLEEP_CONSOLIDATE":
-            return eng.sleep_consolidate(
-                min_support=int(p.get("min_support", 2)),
-                at_time=int(p.get("at_time", 100)),
-            )
-        raise UnifiedModelError(f"Unsupported Wave 40 4-Network Git Memory operation: {operation}")
-
-    def chase_hda_hill_nfv_gate(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
-        """Wave 40: Staged Goal-Blind NFV + CHASE perturbation audit + Harness-Delta Attribution + Hill Sampling."""
-        from canonical.runtime.wave40_dark_matter_frontier_kernel_v1 import CHASEHillSamplingNFVGate
-
-        p = dict(payload or {})
-        op = str(operation).upper()
-        if op == "STAGED_NFV":
-            return CHASEHillSamplingNFVGate.staged_goal_blind_verify(
-                spec_contract=p.get("spec_contract") or {},
-                candidate_source=str(p["candidate_source"]),
-                fn_name=str(p["fn_name"]),
-            )
-        if op == "CHASE_AUDIT":
-            return CHASEHillSamplingNFVGate.chase_perturbation_audit(
-                str(p["candidate_source"]),
-                fn_name=str(p["fn_name"]),
-                base_cases=p.get("base_cases") or (),
-                perturbed_cases=p.get("perturbed_cases") or (),
-                min_survival_rate=float(p.get("min_survival_rate", 1.0)),
-            )
-        if op == "HARNESS_DELTA_ATTRIBUTION":
-            return CHASEHillSamplingNFVGate.harness_delta_attribution(
-                baseline_train=float(p["baseline_train"]),
-                baseline_heldout=float(p["baseline_heldout"]),
-                evolved_train_equal_budget=float(p["evolved_train_equal_budget"]),
-                evolved_heldout_equal_budget=float(p["evolved_heldout_equal_budget"]),
-                evolved_train_extra_budget=p.get("evolved_train_extra_budget"),
-                evolved_heldout_extra_budget=p.get("evolved_heldout_extra_budget"),
-                max_overfit_fraction=float(p.get("max_overfit_fraction", 0.35)),
-            )
-        if op == "HILL_SAMPLING":
-            return CHASEHillSamplingNFVGate.hill_sampling_select(
-                p.get("candidates") or (),
-                k=int(p.get("k", 2)),
-                temperature=float(p.get("temperature", 0.25)),
-                diversity_bonus=float(p.get("diversity_bonus", 0.10)),
-                seed=int(p.get("seed", 40)),
-            )
-        raise UnifiedModelError(f"Unsupported Wave 40 CHASE/HDA/Hill/NFV operation: {operation}")
-
-    def selfplay_steer_horizon_commit(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
-        """Wave 40: Zero-Data Self-Play SWE-RL + Steer-Don't-Solve Critic + Long-Horizon Stakes & Atomic WAL Commit."""
-        from canonical.runtime.wave40_dark_matter_frontier_kernel_v1 import SelfPlaySteerAndHorizonKernel
-
-        p = dict(payload or {})
-        op = str(operation).upper()
-        if op == "SELF_PLAY_EPISODE":
-            return SelfPlaySteerAndHorizonKernel.self_play_bug_episode(
-                str(p["clean_source"]),
-                fn_name=str(p["fn_name"]),
-                test_cases=p.get("test_cases") or (),
-                max_mutations=int(p.get("max_mutations", 8)),
-            )
-        if op == "STEER_CRITIC":
-            return SelfPlaySteerAndHorizonKernel.steer_dont_solve_critic(
-                p.get("trajectory") or (),
-                window=int(p.get("window", 4)),
-            )
-        if op == "HORIZON_ATOMIC_COMMIT":
-            return SelfPlaySteerAndHorizonKernel.horizon_stakes_and_atomic_commit(
-                identity=str(p.get("identity", "brain-wave40")),
-                obligations=p.get("obligations") or (),
-                stage_files=p.get("stage_files"),
-                live_files=p.get("live_files"),
-                simulate_crash_recovery=bool(p.get("simulate_crash_recovery", True)),
-                workdir=p.get("workdir"),
-            )
-        raise UnifiedModelError(f"Unsupported Wave 40 Self-Play/Steer/Horizon operation: {operation}")
-
-    def wave40_awakened_inventory(self) -> dict[str, Any]:
-        """Wave 40: Return the exact inventory of 24 newly awakened DARK modules and 7 frontier engines."""
-        from canonical.runtime.wave40_dark_matter_frontier_kernel_v1 import wave40_awakened_inventory
-
-        return wave40_awakened_inventory()
 
 
 # --------------------------------------------------------------------------- helpers

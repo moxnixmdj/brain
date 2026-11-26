@@ -214,13 +214,19 @@ def bind(port: str = PORT):
     return b
 
 
+def _is_local(url: str) -> bool:
+    """Loopback HTTP or local-file targets have no remote TLS peer to SPKI-pin."""
+    host = host_of(url)
+    return host in ("127.0.0.1", "localhost", "::1", "0.0.0.0", "") or host.endswith(".local")
+
+
 def state(url: str, timeout: int = 180) -> dict:
     """Load a page and report it: title, text, and every interactive element
     with the name a person would call it.
 
     Choosing between those elements is the loop's job, not ours.
     """
-    ok, why = ensure([host_of(url)])
+    ok, why = ensure([] if _is_local(url) else [host_of(url)])
     if not ok:
         return {"schema": SCHEMA, "ok": False, "reason": why, "url": url}
     b = bind()

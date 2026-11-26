@@ -2026,6 +2026,75 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "required_inputs": ["operation"],
         "declared_dependencies": [],
     },
+    "LEAPFROG_W41_RUNG3_PLUGGABLE_PROPOSER_JITRL": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/runtime/wave41_rung3_proposer_jitrl_continual_flywheel_v1.py",
+        "entrypoint": "PluggableRung3ProposerJitRLKernel",
+        "summary": "Strict 4-rung escalation (Rung 0 Futamura -> Rung 1 Grammar-Closed CEGIS -> Rung 2 Angelic OE -> Rung 3 Pluggable Open-Weight Local Proposer) with K3=0 default abstention, live closed-form JitRL logit shift, CMU Steer-Don't-Solve, and Wave 40 Staged Goal-Blind NFV + CHASE gating.",
+        "triggers": [
+            "rung 3 pluggable open weight proposer jitrl",
+            "four rung escalation abstention staged nfv",
+            "local proposer logit shift steer dont solve",
+            "qwen cwm rung 3 proposer adapter",
+        ],
+        "required_inputs": ["buggy_source", "fn_name", "test_cases"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W41_WHITEBOX_TRACE_ABDUCTION_AND_OE": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/runtime/wave41_rung3_proposer_jitrl_continual_flywheel_v1.py",
+        "entrypoint": "WhiteboxTraceAbductionOEKernel",
+        "summary": "Live unifier for 8 awakened DARK whitebox SWE organs: closed_loop_trace_abduction_repair_v1 (Ochiai + loop-cycle detection), angelic_oe_synthesizer_v1, cegis_semantic_synthesizer_v1, whitebox_introspector_and_trace_synthesizer_v1, semantic_ir_v1, python_counterfactual_spec_repair_v1, causal_swe_repair_v1, and multistep_repo_closed_loop_solver_v1.",
+        "triggers": [
+            "whitebox trace abduction ochiai loop cycle",
+            "angelic oe bottom up expression synthesizer",
+            "cegis semantic egraph pruned synthesis",
+            "whitebox introspector counterfactual repair sites",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W41_TTPO_OPSD_CONSENSUS_DISTILLER": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/wave41_rung3_proposer_jitrl_continual_flywheel_v1.py",
+        "entrypoint": "TTPOOPSDConsensusDistiller",
+        "summary": "TTPO (arXiv:2608.27448) + OPSD (arXiv:2608.31046) label-free test-time behavioral-equivalence consensus distillation inside POSIX CoW forks: distills agreeing rollouts into positive JitRL receipts and penalizes confident disagreeing errors.",
+        "triggers": [
+            "ttpo opsd label free test time distillation",
+            "behavioral equivalence rollout consensus",
+            "negative self distillation confident outlier penalty",
+        ],
+        "required_inputs": ["rollouts", "fn_name", "probe_inputs"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W42_FUTAMURA_COMPILE_AWAY_FLYWHEEL": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/wave41_rung3_proposer_jitrl_continual_flywheel_v1.py",
+        "entrypoint": "FutamuraCompileAwayFlywheelKernel",
+        "summary": "Wave 42 compounding continual-learning flywheel: Zero-Data Self-Play -> Rung-1/2/3 Solve -> Futamura Rung-0 O(1) Skill Compile-Away -> Zero-Anchor-Regression Gate -> 4-Network Git/Engram TMA-NM Sleep Consolidation.",
+        "triggers": [
+            "futamura compile away continual flywheel",
+            "rung 0 skill compilation zero search speedup",
+            "sleep consolidation zero anchor regression",
+            "self play compile away continual learning",
+        ],
+        "required_inputs": ["training_buggy_source", "training_fn_name", "training_cases"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W42_ONE_DEMO_TRUST_AND_RUNG_CALIBRATOR": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/wave41_rung3_proposer_jitrl_continual_flywheel_v1.py",
+        "entrypoint": "OneDemoTrustAndRungCalibratorKernel",
+        "summary": "Live unifier for 8 awakened DARK continual-learning & koan modules: the_goal_is_a_quotient_of_the_trace_v1 (collision-free quotient gating), the_demand_is_learned_from_the_run_v1, an_actions_effect_is_a_provenance_map_v1, the_page_is_the_guide_v1, when_one_showing_should_be_trusted_20261112_v1, generalization_rung_gradient_v1, the_frame_crosses_the_machine_v1, semantic_generalization_engine_v1, and canonical_boundary_router_v1.",
+        "triggers": [
+            "one demo trust calibration quotient collision",
+            "the page is the guide ui trace sketch rule",
+            "the demand is learned from the run guard sites",
+            "actions effect provenance map rung gradient",
+        ],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
     "METAMORPHIC_HABITATION_ZIPPER": {
         "domain": "SWE_LOCALIZATION_AND_REPAIR",
         "source_path": "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
@@ -2105,6 +2174,69 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "summary": "Learns exact syntactic/observable applicability scope facts governing when a compiled skill safely fires.",
         "triggers": ["skill_scope_acquisition", "observable skill applicability facts"],
         "required_inputs": ["source"],
+        "declared_dependencies": [],
+    },
+    "ABDUCTIVE_REFUSAL_AUTOBINDER": {
+        "domain": "VERIFICATION_AND_CHECKABILITY",
+        "source_path": "canonical/runtime/asymmetric_frontier_leapfrog_v1.py",
+        "entrypoint": "abductive_refusal_contract_autobinder",
+        "summary": "Compiles CLI/Python precondition refusals + declared goal derivations (`a_refusal_is_a_specification_v1` + `declared_input_derivation_v1`) into mutant-verified executable contracts.",
+        "triggers": ["abductive_refusal_autobinder", "refusal is a specification", "declared input derivation"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "ANGELIC_ZYGOTE_VERSION_SPACE_SWE": {
+        "domain": "SWE_LOCALIZATION_AND_REPAIR",
+        "source_path": "canonical/runtime/asymmetric_frontier_leapfrog_v1.py",
+        "entrypoint": "angelic_zygote_version_space_swe",
+        "summary": "CoW-Zygote + Angelic Forest (`angelic_cegis_repair_v1`) + RepoMem git alignment + concolic version-space distinguishing oracle (`passing_repairs_version_space_v1`).",
+        "triggers": ["angelic_zygote_version_space_swe", "angelic cegis zygote", "passing repairs version space"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "ZERO_PIXEL_SHADOW_TRANSDUCER_CU": {
+        "domain": "COMPUTER_USE_AND_ENVIRONMENT_EXPLORATION",
+        "source_path": "canonical/runtime/asymmetric_frontier_leapfrog_v1.py",
+        "entrypoint": "zero_pixel_shadow_transducer_cu",
+        "summary": "Zero-pixel declarative ARIA/Shadow-DOM name-addressed CDP + counterfactual trace elevation + Petri dominator checkpoints + Vaandrager L# Mealy transducer.",
+        "triggers": ["zero_pixel_shadow_transducer_cu", "agent s4 shadow interface", "name addressed browser cdp"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "EPISTEMIC_DIGITAL_TWIN_AND_ARC": {
+        "domain": "WORLD_MODELS_AND_ABSTRACTION",
+        "source_path": "canonical/runtime/asymmetric_frontier_leapfrog_v1.py",
+        "entrypoint": "solve_digital_twin_and_arc",
+        "summary": "OPINE-World epistemic ontology exploration + Twin 100%-replay-verified BFS digital twin + ARC-NEST leave-one-out CV + E-Stitch library compression.",
+        "triggers": ["epistemic_digital_twin_and_arc", "opine world digital twin", "arc nest estitch"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "ALGEBRAIC_SHEAF_SRMU_MEMORY": {
+        "domain": "MEMORY_AND_CONTINUAL_LEARNING",
+        "source_path": "canonical/runtime/asymmetric_frontier_leapfrog_v1.py",
+        "entrypoint": "sheaf_srmu_memory_cycle",
+        "summary": "3-Layer Algebraic Memory Spine: SRMU 10,240-bit relevance-gated hypervectors + exact Q cellular sheaf H^1 contradiction firewall + Dual NNF Why-True/Why-Absent provenance semiring.",
+        "triggers": ["algebraic_sheaf_srmu_memory", "cellular sheaf h1 cohomology", "srmu hypervector dual nnf provenance"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "PC_DGM_SUPERCOMPILER": {
+        "domain": "SELF_IMPROVEMENT_AND_META_SYNTHESIS",
+        "source_path": "canonical/runtime/asymmetric_frontier_leapfrog_v1.py",
+        "entrypoint": "pc_dgm_supercompile_evolve",
+        "summary": "Proof-Carrying Darwin-Godel Machine stepping-stone archive + Turchin/Futamura AST deforestation + terminal proof supercompiler + Rubin marginal skill-rent GC.",
+        "triggers": ["pc_dgm_supercompiler", "darwin godel machine supercompiler", "turchin deforestation"],
+        "required_inputs": ["fn_name", "incumbent_source"],
+        "declared_dependencies": [],
+    },
+    "EGGMIND_GOAL_TREE_PROVER": {
+        "domain": "FORMAL_VERIFICATION_AND_THEOREM_PROVING",
+        "source_path": "canonical/runtime/asymmetric_frontier_leapfrog_v1.py",
+        "entrypoint": "eggmind_saturate_and_prove",
+        "summary": "EggMind proof-motif cached SemanticEGraph + Pantograph-style AND/OR tactic goal-tree prover over exact Q polynomial rings and Fourier-Motzkin linear arithmetic.",
+        "triggers": ["eggmind_goal_tree_prover", "eggmind motif egraph", "pantograph tactic goal tree"],
+        "required_inputs": [],
         "declared_dependencies": [],
     },
 }
@@ -2557,6 +2689,47 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
             "canonical/tools/a_law_carries_its_reason_v1.py",
         ],
     },
+    "asymmetric_frontier_leapfrog_sheaf_srmu_opine_dgm_eggmind": {
+        "external_names": [
+            "opine-world",
+            "opine digital twin",
+            "replay verified digital twin",
+            "arc-nest leave-one-out",
+            "srmu hypervector",
+            "cellular sheaf cohomology",
+            "dual nnf provenance semiring",
+            "why-absent provenance",
+            "darwin godel machine",
+            "turchin supercompilation",
+            "eggmind motif cache",
+            "pantograph tactic tree",
+            "refusal is a specification",
+            "declared input derivation",
+            "passing repairs version space",
+        ],
+        "engines": [
+            "engine:ABDUCTIVE_REFUSAL_AUTOBINDER",
+            "engine:ANGELIC_ZYGOTE_VERSION_SPACE_SWE",
+            "engine:ZERO_PIXEL_SHADOW_TRANSDUCER_CU",
+            "engine:EPISTEMIC_DIGITAL_TWIN_AND_ARC",
+            "engine:ALGEBRAIC_SHEAF_SRMU_MEMORY",
+            "engine:PC_DGM_SUPERCOMPILER",
+            "engine:EGGMIND_GOAL_TREE_PROVER",
+        ],
+        "koan_modules": [
+            "canonical/runtime/asymmetric_frontier_leapfrog_v1.py",
+            "canonical/runtime/a_refusal_is_a_specification_v1.py",
+            "canonical/runtime/declared_input_derivation_v1.py",
+            "canonical/swe_kernel/angelic_cegis_repair_v1.py",
+            "canonical/swe_kernel/cow_angelic_zygote_v1.py",
+            "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
+            "canonical/swe_kernel/passing_repairs_version_space_v1.py",
+            "canonical/swe_kernel/causal_nexus_v1.py",
+            "canonical/runtime/swe_observational_program_synthesizer_v1.py",
+            "canonical/runtime/osworld_v21_browser_cdp_v1.py",
+            "canonical/runtime/terminal_proof_supercompiler.py",
+        ],
+    },
     "mendel_red_queen_anti_slop_coevolution": {
         "external_names": [
             "mendel godel machine",
@@ -2844,6 +3017,78 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
             "canonical/runtime/hypothesis_classes_v1.py",
             "canonical/runtime/operator_acquisition_v1.py",
             "canonical/tools/the_record_is_the_commit_v1.py",
+        ],
+    },
+    "rung3_proposer_jitrl_ttpo_opsd_whitebox_abduction": {
+        "external_names": [
+            "ttpo",
+            "opsd",
+            "test time preference optimization",
+            "on policy self distillation",
+            "rung 3 proposer",
+            "pluggable open weight proposer",
+            "qwen3.8",
+            "cwm 32b",
+            "whitebox trace abduction",
+            "ochiai fault localization",
+            "loop cycle diagnosis",
+            "angelic oe synthesizer",
+            "cegis semantic synthesizer",
+            "counterfactual spec repair",
+            "causal swe repair",
+            "multistep repo closed loop solver",
+            "whitebox introspector",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W41_RUNG3_PLUGGABLE_PROPOSER_JITRL",
+            "engine:LEAPFROG_W41_WHITEBOX_TRACE_ABDUCTION_AND_OE",
+            "engine:LEAPFROG_W41_TTPO_OPSD_CONSENSUS_DISTILLER",
+            "engine:LEAPFROG_W39_PARTIAL_ROUTING_AND_JITRL",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave41_rung3_proposer_jitrl_continual_flywheel_v1.py",
+            "canonical/swe_kernel/closed_loop_trace_abduction_repair_v1.py",
+            "canonical/swe_kernel/angelic_oe_synthesizer_v1.py",
+            "canonical/swe_kernel/cegis_semantic_synthesizer_v1.py",
+            "canonical/swe_kernel/whitebox_introspector_and_trace_synthesizer_v1.py",
+            "canonical/swe_kernel/causal_swe_repair_v1.py",
+            "canonical/swe_kernel/multistep_repo_closed_loop_solver_v1.py",
+            "canonical/runtime/bound_capabilities/python_counterfactual_spec_repair_v1.py",
+        ],
+    },
+    "futamura_compile_away_one_demo_trust_flywheel": {
+        "external_names": [
+            "futamura compile away",
+            "rung 0 skill compilation",
+            "zero search speedup",
+            "continual learning flywheel",
+            "the goal is a quotient of the trace",
+            "the demand is learned from the run",
+            "an actions effect is a provenance map",
+            "the page is the guide",
+            "when one showing should be trusted",
+            "generalization rung gradient",
+            "the frame crosses the machine",
+            "the space is the artifact",
+            "one demonstration basin",
+            "semantic generalization engine",
+            "canonical boundary router",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W42_FUTAMURA_COMPILE_AWAY_FLYWHEEL",
+            "engine:LEAPFROG_W42_ONE_DEMO_TRUST_AND_RUNG_CALIBRATOR",
+            "engine:LEAPFROG_W40_FOUR_NETWORK_GIT_ENGRAM_MEMORY",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave41_rung3_proposer_jitrl_continual_flywheel_v1.py",
+            "canonical/tools/the_goal_is_a_quotient_of_the_trace_v1.py",
+            "canonical/tools/the_demand_is_learned_from_the_run_v1.py",
+            "canonical/tools/an_actions_effect_is_a_provenance_map_v1.py",
+            "canonical/tools/the_page_is_the_guide_v1.py",
+            "canonical/tools/when_one_showing_should_be_trusted_20261112_v1.py",
+            "canonical/tools/generalization_rung_gradient_v1.py",
+            "canonical/tools/the_frame_crosses_the_machine_v1.py",
+            "canonical/tools/the_space_is_the_artifact_v1.py",
         ],
     },
 }
@@ -5373,6 +5618,92 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
             )
         return _ok(mode, f"W40_SELFPLAY_{op}", res) if res.get("pass") else _fail(mode, f"W40_SELFPLAY_{op}_FAILED", res)
 
+    if mode == "LEAPFROG_W41_RUNG3_PLUGGABLE_PROPOSER_JITRL":
+        from canonical.runtime.wave41_rung3_proposer_jitrl_continual_flywheel_v1 import PluggableRung3ProposerJitRLKernel
+
+        res = PluggableRung3ProposerJitRLKernel.solve_with_escalation(
+            buggy_source=str(inputs["buggy_source"]),
+            fn_name=str(inputs["fn_name"]),
+            test_cases=inputs.get("test_cases") or (),
+            spec_contract=inputs.get("spec_contract"),
+            perturbed_cases=inputs.get("perturbed_cases") or (),
+            compiled_rung0_rules=inputs.get("compiled_rung0_rules") or (),
+            rung3_proposer=inputs.get("rung3_proposer"),
+            episodic_receipts=inputs.get("episodic_receipts") or (),
+            state_signature=inputs.get("state_signature"),
+            beta=float(inputs.get("beta", 1.0)),
+            max_rung3_rounds=int(inputs.get("max_rung3_rounds", 2)),
+        )
+        return _ok(mode, "W41_RUNG3_SOLVED", res) if res.get("pass") else _fail(mode, "W41_RUNG3_UNSOLVED", res)
+
+    if mode == "LEAPFROG_W41_WHITEBOX_TRACE_ABDUCTION_AND_OE":
+        from canonical.runtime.wave41_rung3_proposer_jitrl_continual_flywheel_v1 import WhiteboxTraceAbductionOEKernel
+
+        op = str(inputs.get("operation") or "SYNTHESIZE_OE_CEGIS").upper()
+        if op == "TRACE_ABDUCTION":
+            res = WhiteboxTraceAbductionOEKernel.trace_abduction_and_ochiai(
+                source=str(inputs["source"]),
+                fn_name=str(inputs["fn_name"]),
+                failing_args=inputs.get("failing_args") or (),
+                passing_args=inputs.get("passing_args") or (),
+                step_quota=int(inputs.get("step_quota", 80)),
+            )
+        elif op == "INTROSPECT_SITES":
+            res = WhiteboxTraceAbductionOEKernel.introspect_and_collect_sites(
+                source=str(inputs["source"]),
+                goal=str(inputs.get("goal") or goal),
+                rel_path=str(inputs.get("rel_path", "module.py")),
+            )
+        else:
+            res = WhiteboxTraceAbductionOEKernel.synthesize_oe_and_cegis(
+                examples=inputs.get("examples") or (),
+                var_names=inputs.get("var_names") or ("x",),
+            )
+        return _ok(mode, f"W41_WHITEBOX_{op}", res) if res.get("pass") else _fail(mode, f"W41_WHITEBOX_{op}_FAILED", res)
+
+    if mode == "LEAPFROG_W41_TTPO_OPSD_CONSENSUS_DISTILLER":
+        from canonical.runtime.wave41_rung3_proposer_jitrl_continual_flywheel_v1 import TTPOOPSDConsensusDistiller
+
+        res = TTPOOPSDConsensusDistiller.distill_rollouts(
+            rollouts=inputs.get("rollouts") or (),
+            fn_name=str(inputs["fn_name"]),
+            probe_inputs=inputs.get("probe_inputs") or (),
+            state_signature=str(inputs.get("state_signature") or goal),
+            min_consensus_fraction=float(inputs.get("min_consensus_fraction", 0.50)),
+        )
+        return _ok(mode, "W41_TTPO_OPSD_DISTILLED", res) if res.get("pass") else _fail(mode, "W41_TTPO_OPSD_NO_CONSENSUS", res)
+
+    if mode == "LEAPFROG_W42_FUTAMURA_COMPILE_AWAY_FLYWHEEL":
+        from canonical.runtime.wave41_rung3_proposer_jitrl_continual_flywheel_v1 import FutamuraCompileAwayFlywheelKernel
+
+        fly = inputs.get("flywheel") or FutamuraCompileAwayFlywheelKernel(memory_root=inputs.get("memory_root"))
+        res = fly.run_continual_cycle(
+            training_buggy_source=str(inputs["training_buggy_source"]),
+            training_fn_name=str(inputs["training_fn_name"]),
+            training_cases=inputs.get("training_cases") or (),
+            unseen_homologous_source=str(inputs["unseen_homologous_source"]),
+            unseen_fn_name=str(inputs["unseen_fn_name"]),
+            unseen_cases=inputs.get("unseen_cases") or (),
+            anchor_tasks=inputs.get("anchor_tasks") or (),
+            perturbed_cases=inputs.get("perturbed_cases") or (),
+        )
+        return _ok(mode, "W42_FUTAMURA_COMPILED_AWAY", res) if res.get("pass") else _fail(mode, "W42_FUTAMURA_FAILED", res)
+
+    if mode == "LEAPFROG_W42_ONE_DEMO_TRUST_AND_RUNG_CALIBRATOR":
+        from canonical.runtime.wave41_rung3_proposer_jitrl_continual_flywheel_v1 import OneDemoTrustAndRungCalibratorKernel
+
+        res = OneDemoTrustAndRungCalibratorKernel.calibrate_and_sketch(
+            quotient_images=inputs.get("quotient_images") or (),
+            quotient_labels=inputs.get("quotient_labels") or (),
+            guard_source=inputs.get("guard_source"),
+            verified_ui_trace=inputs.get("verified_ui_trace"),
+            ui_need_text=inputs.get("ui_need_text"),
+            semantic_goal=inputs.get("semantic_goal"),
+            provenance_dir=inputs.get("provenance_dir"),
+            one_shot_candidates=inputs.get("one_shot_candidates") or (),
+        )
+        return _ok(mode, "W42_ONE_DEMO_TRUST_CALIBRATED", res) if res.get("pass") else _fail(mode, "W42_ONE_DEMO_TRUST_FAILED", res)
+
     if mode == "METAMORPHIC_HABITATION_ZIPPER":
         from canonical.swe_kernel import metamorphic_habitation_zipper_v1 as m
 
@@ -5438,6 +5769,23 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
             )
         )
         return _ok(mode, "SKILL_SCOPE_FACTS_ACQUIRED", {"facts": facts, "count": len(facts)})
+
+    _ASYM_MODE_TO_PILLAR = {
+        "ABDUCTIVE_REFUSAL_AUTOBINDER": "REFUSAL_AUTOBIND",
+        "ANGELIC_ZYGOTE_VERSION_SPACE_SWE": "ANGELIC_ZYGOTE_SWE",
+        "ZERO_PIXEL_SHADOW_TRANSDUCER_CU": "SHADOW_TRANSDUCER_CU",
+        "EPISTEMIC_DIGITAL_TWIN_AND_ARC": "DIGITAL_TWIN_ARC",
+        "ALGEBRAIC_SHEAF_SRMU_MEMORY": "SHEAF_SRMU_MEMORY",
+        "PC_DGM_SUPERCOMPILER": "PC_DGM_EVOLVE",
+        "EGGMIND_GOAL_TREE_PROVER": "EGGMIND_PROOF",
+    }
+    if mode in _ASYM_MODE_TO_PILLAR:
+        from canonical.runtime.asymmetric_frontier_leapfrog_v1 import asymmetric_leapfrog_dispatch
+
+        res = asymmetric_leapfrog_dispatch(goal, pillar=_ASYM_MODE_TO_PILLAR[mode], inputs=inputs)
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("status") or "ASYMMETRIC_LEAPFROG_REFUSED"), detail=res)
+        return _ok(mode, str(res.get("status") or "ASYMMETRIC_LEAPFROG_COMPLETE"), res)
 
     return _fail(mode, f"UNKNOWN_FEDERATED_ENGINE_MODE:{mode}")
 
