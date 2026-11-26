@@ -1770,6 +1770,21 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "required_inputs": [],
         "declared_dependencies": [],
     },
+    "LEAPFROG_W41_REFUSAL_ACQUIRE_RETRY": {
+        "domain": "CROSS_LANGUAGE_SKILL_COMPILATION_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/refusal_acquire_retry_v1.py",
+        "entrypoint": "acquire_and_retry",
+        "summary": "Reads a refusal as a specification: derives the rule's single changed operator, tries context-free application procedures cheapest-first, admits only what the caller's verifier accepts, retries, and remembers the procedure so the next refusal of the same kind costs one step instead of two.",
+        "triggers": [
+            "refusal is a specification",
+            "abstain acquire retry",
+            "context free operator rewrite",
+            "cross language transfer after refusal",
+            "acquisition store reuse",
+        ],
+        "required_inputs": ["rule", "source_text", "target_language", "verifier"],
+        "declared_dependencies": [],
+    },
     "LEAPFROG_W40_FRONTIER_BENCH_HARNESS": {
         "domain": "VERIFICATION_MEASUREMENT_AND_ABSTENTION",
         "source_path": "canonical/evaluation/frontier_bench_v1.py",
@@ -2965,6 +2980,21 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
             "canonical/tools/the_check_mode_is_the_oracle_v1.py",
             "canonical/tools/an_actions_vocabulary_is_its_refusal_surface_v1.py",
             "canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py",
+        ],
+    },
+    "refusal_acquire_retry_w41": {
+        "external_names": [
+            "a refusal is a specification",
+            "abstain then acquire",
+            "refusal curriculum",
+            "context-free rewrite",
+            "acquisition reuse",
+            "meaning-ir operator swap",
+        ],
+        "engines": ["engine:LEAPFROG_W41_REFUSAL_ACQUIRE_RETRY"],
+        "koan_modules": [
+            "canonical/swe_kernel/refusal_acquire_retry_v1.py",
+            "canonical/swe_kernel/language_neutral_skill_bridge_v1.py",
         ],
     },
     "frontier_bench_heldout_measurement_w40": {
@@ -5436,6 +5466,23 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
         if not res.get("pass"):
             return _fail(mode, "PROSPECTIVE_MEMTX_BLOCKED", detail=res)
         return _ok(mode, "PROSPECTIVE_MEMTX_COMMITTED", res)
+
+    if mode == "LEAPFROG_W41_REFUSAL_ACQUIRE_RETRY":
+        from canonical.swe_kernel.refusal_acquire_retry_v1 import acquire_and_retry
+
+        verifier = inputs.get("verifier")
+        if not callable(verifier):
+            return _fail(mode, "ACQUISITION_REQUIRES_A_VERIFIER")
+        acquired = acquire_and_retry(
+            rule=inputs.get("rule") or {},
+            source_text=str(inputs.get("source_text") or ""),
+            target_language=str(inputs.get("target_language") or ""),
+            verifier=verifier,
+            parse_check=inputs.get("parse_check"),
+        )
+        if not acquired.get("pass"):
+            return _fail(mode, str(acquired.get("status") or "ACQUISITION_FAILED"), acquisition=acquired)
+        return _ok(mode, "PASS__ACQUIRED_AFTER_REFUSAL", acquired)
 
     if mode == "LEAPFROG_W40_FRONTIER_BENCH_HARNESS":
         from canonical.evaluation import frontier_bench_v1 as bench

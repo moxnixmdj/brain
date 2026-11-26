@@ -1713,6 +1713,10 @@ class MeaningIRSkillRatchetEngine:
         self.max_hot_skills = int(max_hot_skills)
         self.false_fire_penalty_bits = float(false_fire_penalty_bits)
         self.store = _InMemoryCrossLanguageRuleStore()
+        # Wave 41: what a refusal bought, remembered for the next refusal of the same kind.
+        from canonical.swe_kernel import refusal_acquire_retry_v1 as _rar
+
+        self.refusal_loop = _rar.RefusalAcquisitionLoop()
 
     def consolidate_and_transfer(
         self,
@@ -1822,6 +1826,7 @@ class MeaningIRSkillRatchetEngine:
 
         # 4. Zero-Shot Cross-Language Recall & Verification (`language_neutral_skill_bridge_v1`)
         cross_language_transfer: dict[str, Any] | None = None
+        refusal_acquisition: dict[str, Any] | None = None
         if admitted_to_hot and target_language and target_buggy_source and callable(target_verifier):
             cross_language_transfer = lnsb.recall_across_languages(
                 self.store,
@@ -1831,6 +1836,37 @@ class MeaningIRSkillRatchetEngine:
                 error_class=error_class,
                 source_languages=[source_language],
             )
+            if cross_language_transfer is None:
+                # Wave 41 — ABSTAIN -> ACQUIRE -> RETRY. The bridge applies the rule verbatim
+                # inside the context it was learned in, so a target line with different
+                # identifiers, no `return`, or the comparison written the other way round
+                # declines even though the rule is one operator swap. The refusal names the
+                # missing term; buy it, verify it with the caller's verifier, and retry.
+                refusal_acquisition = self.refusal_loop.acquire_cross_language_patch(
+                    rule=enriched,
+                    source_text=str(target_buggy_source),
+                    target_language=str(target_language),
+                    verifier=target_verifier,
+                    parse_check=lnsb.parses_in,
+                )
+                if refusal_acquisition.get("pass"):
+                    acq = refusal_acquisition["acquisition"]
+                    cross_language_transfer = {
+                        "schema": lnsb.SCHEMA,
+                        "skill_id": enriched.get("skill_id"),
+                        "from_language": source_language,
+                        "to_language": target_language,
+                        "bridge_reason": "CONTEXT_FREE_OPERATOR_REWRITE_AFTER_REFUSAL",
+                        "syntax_evidence": "REWRITE_VERIFIED_BY_CALLER",
+                        "patched_source": refusal_acquisition["patched_source"],
+                        "from_cross_language_memory": True,
+                        "whole_task_correctness_proved": False,
+                        "verifier_passed": True,
+                        "acquired_after_refusal": True,
+                        "acquisition_procedure": acq.get("procedure"),
+                        "acquisition_steps": acq.get("search_steps"),
+                        "acquisition_reused": bool(acq.get("reused")),
+                    }
 
         # THE STATUS IS THE VERDICT, NOT A SIBLING OF IT. Measured 2026-11-26 (Wave 40 bench,
         # CROSS_LANGUAGE_RULE_TRANSFER#02): when a requested cross-language transfer produced no
@@ -1841,7 +1877,11 @@ class MeaningIRSkillRatchetEngine:
         transfer_ok = (cross_language_transfer is not None) if transfer_required else True
         overall_pass = bool(admitted_to_hot and transfer_ok)
         if overall_pass:
-            status = "PASS__CONSOLIDATED_AND_VERIFIED"
+            status = (
+                "PASS__ACQUIRED_AFTER_REFUSAL"
+                if (refusal_acquisition or {}).get("pass")
+                else "PASS__CONSOLIDATED_AND_VERIFIED"
+            )
         elif not admitted_to_hot:
             status = "DEMOTED__NEGATIVE_MDL_BIT_RENT"
         else:
@@ -1862,6 +1902,8 @@ class MeaningIRSkillRatchetEngine:
             "contract_verdict": contract_verdict,
             "sequence_verdict": sequence_verdict,
             "cross_language_transfer": cross_language_transfer,
+            "refusal_acquisition": refusal_acquisition,
+            "refusal_loop_store": self.refusal_loop.store.as_dict(),
             "model_calls": 0,
             "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
         }

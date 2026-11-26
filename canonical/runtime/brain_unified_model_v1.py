@@ -6643,6 +6643,12 @@ class UnifiedModel(_Wave43To44UnifiedModelMixin):
         if self_check:
             scorecard["self_check"] = bench.bench_self_check(seed=resolved, per_category=int(per_category))
         return scorecard
+
+    def refusal_acquire_retry(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 41: a refusal names what is missing; acquire it, verify it, retry, keep it."""
+        from canonical.swe_kernel.refusal_acquire_retry_v1 import acquire_and_retry
+
+        return acquire_and_retry(**kwargs)
     # --- Wave 39: Dark-Organ Unification, Red-Queen/Mendel Co-Evolution, CLM+RRF Memory & Partial-Routing/JitRL ---
 
     def _get_clm_rrf_memory_engine(self) -> Any:
