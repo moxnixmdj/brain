@@ -33046,7 +33046,7 @@
   "promotion_callable": 31,
   "promotion_candidates": 849,
   "receipt_backed_capabilities": 309,
-  "research_index_records": 7423,
+  "research_index_records": 7424,
   "routing_tokens": 3018,
   "skills": 18,
   "source_index_entry_points": 562,
@@ -33055,7 +33055,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d67b4fb03e48b2258460d52c191cac055d79ec839f955147cf69df347fd444a7"
+  "value": "737ed5441a667a4b18229fc167ca89ae89c94199a1d22ac50ffe353d4394718e"
  },
  "engines": [
   {
@@ -328665,6 +328665,51 @@
     "spines": 2,
     "split": 2,
     "unified": 3
+   }
+  },
+  {
+   "action_id": "UNIFIED_96_ORGAN_EPISTEMIC_PORTFOLIO_20261126_V1",
+   "capability": false,
+   "date": "2026-11-26",
+   "id": "research:canonical/action_intents/UNIFIED_96_ORGAN_EPISTEMIC_PORTFOLIO_20261126_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/UNIFIED_96_ORGAN_EPISTEMIC_PORTFOLIO_20261126_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d79e6589442cc63227a5da4c492ad0bb09a4e87aa8da76a02aa835b72fb94cc8",
+   "status": "SHIPPED",
+   "terms": {
+    "0.47": 1,
+    "1-shot": 1,
+    "100": 1,
+    "13": 1,
+    "20261126": 1,
+    "22.5": 1,
+    "230.2": 1,
+    "28": 2,
+    "43.7-51.5": 1,
+    "46.4": 1,
+    "7-language": 2,
+    "96": 4,
+    "across": 1,
+    "action": 1,
+    "ast": 1,
+    "bidirectional": 1,
+    "binding": 1,
+    "blind": 1,
+    "bytecode": 1,
+    "calls": 1,
+    "canonical": 3,
+    "codec": 1,
+    "compilation": 1,
+    "cst": 2,
+    "meaning-ir": 2,
+    "ms": 2,
+    "organs": 2,
+    "portfolio": 2,
+    "pre-sieving": 2,
+    "transfer": 2,
+    "us": 2,
+    "vsa+woodbury+ppr": 2
    }
   },
   {
