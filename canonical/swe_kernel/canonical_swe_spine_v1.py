@@ -2943,21 +2943,10 @@ def solve_swe_repo_native_multifile(
     keep_patch_applied: bool = False,
     timeout_s: float = 30.0,
 ) -> dict[str, Any]:
-    """Wave 23: Repo-Native Multi-File SWE Engine (`K3=0` first + Evaporating-LLM crystallization).
+    """Try learned edits, strict-prior insertions and localized synthesis on a disposable repo.
 
-    Fuses 7 hidden SWE superweapons behind one verified CoW oracle:
-      1. `causal_dataflow_graph_v1.extract_crash_frames` + `assertion_localisation_v1` + `line_localisation_v1`
-         for cross-file & line-level localization from real failing assertions.
-      2. `arm_learned_from_its_own_verified_repairs_v1` (`alpha_canonical` + `fold` + `propose`) for
-         instant in-run online transfer across analogous bugs (`K3=0` TTT-Discover).
-      3. `history_template_repair_v1` (`mine_history` + `site_candidates` + `insert_after`) mining
-         the target repository's own git history for fix templates.
-      4. `repo_component_petri_v1` (`mine_repo_neighborhood_components`) + `angelic_oe_synthesizer_v1`
-         (`synthesize_causal_structural_patches` + `synthesize_oe_expression`) for repo-native synthesis.
-      5. `cow_zygote_speculative_verifier_v1` (`verify_candidate_patch_cow` / `select_impacted_tests`)
-         for sub-2 ms `os.fork()` CoW Zygote candidate verification alongside full CoW test confirmation.
-      6. Return a serializable, removable vocabulary of repair proposals. Each receiver must
-         reproduce a failing case and pass its own unchanged surface before accepting one.
+    A selected-suite pass is not a solved issue or transferable rule. The
+    zygote is a screening optimization; a fresh pytest process is the gate.
     """
     import ast as _ast
     import os as _os
@@ -2971,6 +2960,7 @@ def solve_swe_repo_native_multifile(
     from canonical.swe_kernel import repo_component_petri_v1 as petri
     from canonical.tools import arm_learned_from_its_own_verified_repairs_v1 as arm_learn
     from canonical.tools import assertion_localisation_v1 as assert_loc
+    from canonical.swe_kernel.local_type_paths_v1 import return_paths
     from canonical.swe_kernel import prior_owned_insertions_v1 as history
     from canonical.swe_kernel import repair_input_dependency_gate_v1 as dependencies
     from canonical.swe_kernel.repo_native_test_surface_v1 import test_surface, merge_vocab, export_vocab
@@ -3066,7 +3056,7 @@ def solve_swe_repo_native_multifile(
         zygote_screened: int,
         extra: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
-        new_demos: list[tuple[str, str, str]] = list(demos_list)
+        new_demos: list[tuple[str, str, str]] = []
         for rel, new_src in sorted(edits.items()):
             orig_p = root / rel
             if orig_p.is_file():
@@ -3149,7 +3139,7 @@ def solve_swe_repo_native_multifile(
         f_file = str(fr.get("file") or "")
         f_line = int(fr.get("line") or 0)
         p_fr = pathlib.Path(f_file) if _os.path.isabs(f_file) else (root / f_file)
-        if p_fr.is_file() and f_line > 0:
+        if p_fr.resolve().is_relative_to(root) and p_fr.is_file() and f_line > 0:
             try:
                 node = assert_loc.failing_assertion(p_fr.read_text(encoding="utf-8", errors="replace"), f_line)
                 if node is not None:
@@ -3236,6 +3226,9 @@ def solve_swe_repo_native_multifile(
                     return _crystallize_and_finish(
                         {rel: cand_src},
                         tier="IN_RUN_ALPHA_TRANSFER",
+                        extra={"fired_template_id": p_row["template_id"],
+                               "candidate_sha256": p_row["source_sha256"],
+                               "teacher_ids": p_row["template"]["taught_by"]},
                         localization=localization_report,
                         stages=stages_run,
                         zygote_screened=zygote_screened,
@@ -3296,6 +3289,13 @@ def solve_swe_repo_native_multifile(
             mined_components_total += len(comps)
         except Exception:
             pass
+        for patched, proof in return_paths(orig_src, ranked_lines_by_file[rel]):
+            ok, _, screened = _verify_in_isolated_cow({rel: patched}, single_test_src=single_test_src)
+            zygote_screened += int(screened)
+            if ok:
+                return _crystallize_and_finish({rel: patched}, tier="LOCAL_TYPED_RETURN_PATH",
+                    localization=localization_report, stages=stages_run, zygote_screened=zygote_screened,
+                    extra={"typed_path": proof})
         try:
             struct_patches = angelic_oe.synthesize_causal_structural_patches(
                 orig_src,

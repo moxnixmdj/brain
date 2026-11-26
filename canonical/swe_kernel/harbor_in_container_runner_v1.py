@@ -114,64 +114,15 @@ def _extract_instruction_clues(instruction: str) -> dict[str, list[str]]:
     return {"py_paths": py_paths[:12], "identifiers": identifiers}
 
 
-def _rank_candidate_tests(repo_root: pathlib.Path, clues: dict[str, list[str]]) -> list[str]:
-    explicit_tests: list[str] = []
-    src_clues: list[str] = []
-    for rel in clues.get("py_paths", ()):
-        if (repo_root / rel).is_file():
-            if "test" in pathlib.Path(rel).name.lower() or rel.startswith(("tests/", "test/")):
-                explicit_tests.append(rel)
-            else:
-                src_clues.append(rel)
-
-    test_files: list[tuple[int, str]] = []
-    idents = set(clues.get("identifiers", ())[:16])
-    src_stems = {pathlib.Path(s).stem.removeprefix("_") for s in src_clues}
-    scan_deadline = time.perf_counter() + 12.0
-
-    for root_dir, dirs, files in os.walk(repo_root):
-        if time.perf_counter() >= scan_deadline:
-            break
-        dirs[:] = [
-            d for d in dirs
-            if not d.startswith(".") and d not in {"node_modules", "__pycache__", "build", "dist", "venv", ".venv"}
-        ]
-        for fname in files:
-            if time.perf_counter() >= scan_deadline:
-                break
-            if not (fname.startswith("test_") and fname.endswith(".py")) and not fname.endswith("_test.py"):
-                continue
-            fpath = pathlib.Path(root_dir) / fname
-            rel_p = fpath.relative_to(repo_root).as_posix()
-            score = 0
-            stem = fpath.stem.removeprefix("test_").removesuffix("_test")
-            if stem in src_stems:
-                score += 20
-            try:
-                if fpath.stat().st_size <= 200_000:
-                    txt = fpath.read_text(encoding="utf-8", errors="ignore")
-                    for ident in idents:
-                        if ident in txt:
-                            score += 3
-            except OSError:
-                pass
-            if score > 0 or len(test_files) < 8:
-                test_files.append((score, rel_p))
-
-    test_files.sort(key=lambda item: (-item[0], item[1]))
-    ranked = list(explicit_tests)
-    for _, rp in test_files[:8]:
-        if rp not in ranked:
-            ranked.append(rp)
-    return ranked[:6]
-
-
 def phase_discover(instruction: str) -> dict[str, Any]:
     t0 = time.perf_counter()
     repo_root = _detect_repo_root()
     py_exe = _detect_task_python(repo_root)
     clues = _extract_instruction_clues(instruction)
-    ranked_tests = _rank_candidate_tests(repo_root, clues)
+    from canonical.runtime.bound_capabilities import objective_relevance_bm25 as ranker
+    from canonical.swe_kernel.goal_native_probe_v1 import select
+    acquisition = select(repo_root, instruction, False, ranker, clues['py_paths'])
+    ranked_tests = acquisition['selected']
 
     # detect primary ecosystem
     has_py = bool(ranked_tests) or (repo_root / "pyproject.toml").is_file() or (repo_root / "setup.py").is_file()
@@ -191,6 +142,7 @@ def phase_discover(instruction: str) -> dict[str, Any]:
         },
         "clues": clues,
         "ranked_tests": ranked_tests,
+        "acquisition": acquisition,
         "instruction": instruction,
         "instruction_chars": len(instruction),
         "discover_wall_s": round(time.perf_counter() - t0, 3),
@@ -204,6 +156,7 @@ def phase_discover(instruction: str) -> dict[str, Any]:
         "python_exe": state["python_exe"],
         "ecosystems": state["ecosystems"],
         "ranked_tests": ranked_tests[:6],
+        "acquisition": acquisition,
         "instruction_chars": len(instruction),
         "discover_wall_s": state["discover_wall_s"],
         "model_calls": 0,
@@ -805,12 +758,29 @@ def phase_repair(timeout_s: float) -> dict[str, Any]:
         failing_target: str | list[str] | None = None
         witness_info: dict[str, Any] = {"compiled": False}
         originals_checked: dict[str, dict] = {}
+        from canonical.swe_kernel import goal_native_probe_v1 as subject
+        from canonical.swe_kernel.causal_swe_repair_v1 import _clean_env
+        names = subject.named_symbols(str(state.get('instruction') or ''))
+        relevance = {}
         for cand_t in ranked_tests[:4]:
             if time.perf_counter() - t0 > timeout_s * 0.30:
                 break
             verd = run_pytest_verdicts(repo_root, cand_t, python_exe=py_exe, timeout_s=15.0)
             originals_checked[cand_t] = verd
             if verd.get("returncode") == 1 and verd.get("failing"):
+                if names:
+                    try:
+                        proc = subprocess.run([py_exe, '-B', subject.__file__, cand_t, json.dumps(names)],
+                            cwd=repo_root, env=_clean_env(repo_root), capture_output=True, timeout=15)
+                        if proc.returncode: raise ValueError('observer failure')
+                        observed = json.loads(proc.stdout.rsplit(b'BRAIN_NATIVE_PROBE:', 1)[-1])
+                        reached = set(observed['failed_nodes_reaching_subject'])
+                        relevance[cand_t] = {'exit':observed['exit'], 'reached':len(reached)}
+                        if observed['exit'] != 1 or not set(verd['failing']).issubset(reached):
+                            continue  # no repair from unrelated or unobserved failures
+                    except (OSError, ValueError, KeyError, subprocess.TimeoutExpired) as exc:
+                        relevance[cand_t] = {'error': type(exc).__name__}
+                        continue
                 failing_target = cand_t
                 break
 
@@ -838,7 +808,7 @@ def phase_repair(timeout_s: float) -> dict[str, Any]:
             return {
                 "status": ("OPEN__NO_FAILING_WITNESS_OBSERVED" if any(v["ok"] for v in originals_checked.values())
                            else "OPEN__NO_USABLE_NATIVE_TEST_RESULT_OR_WITNESS"),
-                "probed_tests": list(originals_checked), "probe_outcomes": probed,
+                "probed_tests": list(originals_checked), "probe_outcomes": probed, "named_subject_checks": relevance,
                 "witness_compiler": witness_info,
                 "pass": False,
                 "wall_s": round(time.perf_counter() - t0, 3),
@@ -884,7 +854,7 @@ def phase_repair(timeout_s: float) -> dict[str, Any]:
             "learned_skill_id": outcome.get("learned_skill_id"),
             "reused_skill_id": outcome.get("reused_skill_id"),
             "subtree_admission": outcome.get("subtree_admission"),
-            "probe_outcomes": probed,
+            "probe_outcomes": probed, "named_subject_checks": relevance,
             "repaired_file": outcome.get("repaired_file"),
             "repaired_line": outcome.get("repaired_line"),
             "reaped_children": reaped,

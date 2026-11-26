@@ -1044,6 +1044,11 @@ def synthesize_candidates(
         fn_node = _enclosing_function(tree, lineno)
         search_root: ast.AST = fn_node if fn_node is not None else tree
 
+        from canonical.swe_kernel.local_type_paths_v1 import return_paths
+        for patch, proof in return_paths(src, [lineno], tree=tree):
+            _emit(PatchCandidate("LOCAL_TYPED_RETURN_PATH", rel, lineno, json.dumps(proof, sort_keys=True),
+                                 patch, "TYPED_PATH_" + str(len(proof['suppliers_inner_first'])), site_bonus + 3.0))
+
         # --- FAMILY 1B: CODEBASE TYPE-HABITATION (runs at every ranked line + CFG guards!) ---
         from canonical.swe_kernel.petri_cow_splicing_engine_v1 import CodebaseTypeHabitationMiner
 

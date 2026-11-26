@@ -30,6 +30,9 @@ SOURCES = (
     'canonical/swe_kernel/harbor_epistemic_controller_v1.py',
     'canonical/swe_kernel/harbor_in_container_runner_v1.py',
     'canonical/swe_kernel/causal_swe_repair_v1.py',
+    'canonical/swe_kernel/local_type_paths_v1.py',
+    'canonical/swe_kernel/goal_native_probe_v1.py',
+    'canonical/runtime/bound_capabilities/objective_relevance_bm25.py',
     'canonical/swe_kernel/first_principles_mental_cegis_v1.py',
     'canonical/swe_kernel/incremental_semantic_graph_v1.py',
     'canonical/swe_kernel/petri_cow_splicing_engine_v1.py',
@@ -38,7 +41,7 @@ SOURCES = (
 )
 
 
-def stage(destination: Path, *, source_root: Path = ROOT) -> dict[str, str]:
+def stage(destination: Path, *, source_root: Path = ROOT, sources=SOURCES) -> dict[str, str]:
     source_root = source_root.resolve(strict=True)
     destination.mkdir(exist_ok=False)  # Never inherit a previous run's memory or files.
     manifest: dict[str, str] = {}
@@ -49,7 +52,9 @@ def stage(destination: Path, *, source_root: Path = ROOT) -> dict[str, str]:
         out.write_bytes(data)
         manifest[name] = hashlib.sha256(data).hexdigest()
 
-    for name in SOURCES:
+    if not set(sources).issubset(SOURCES):
+        raise ValueError('unreviewed source in cold mount')
+    for name in sources:
         source = source_root / name
         if source.resolve(strict=True) != source or not source.is_file():
             raise ValueError(f'not a regular source in the checkout: {name}')

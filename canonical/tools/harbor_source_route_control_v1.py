@@ -9,6 +9,7 @@ See ONE_EXPERIENCE_AND_ITS_LIMITS_20261126.md for protocol and reproduce command
 from __future__ import annotations
 
 import argparse
+import ast
 import base64
 import hashlib
 import json
@@ -126,11 +127,27 @@ def paired(base: Path, instruction: Path, venv: Path, revisions: list[str]) -> d
             shutil.copyfile(instruction, mount / 'instruction.txt')
             shutil.copyfile(__file__, mount / 'driver.py')
             src = Path(tmp) / 'src'
-            for rel in SOURCES:
+            # Use the producer's reviewed source manifest, not whatever happens to
+            # be in the host checkout. Before staging existed use the earliest
+            # cold manifest (same pre-existing source files).
+            stagefile = 'canonical/tools/stage_harbor_runtime_v1.py'
+            blob = subprocess.run(['git', 'cat-file', 'blob', rev+':'+stagefile], capture_output=True)
+            if blob.returncode:
+                if subprocess.run(['git','merge-base','--is-ancestor',rev,'2aa1c30c']).returncode:
+                    raise ValueError('missing source manifest')
+                text = subprocess.check_output(['git','cat-file','blob','2aa1c30c:'+stagefile])
+            else:
+                text = blob.stdout
+            assignment, = [st for st in ast.parse(text).body if isinstance(st,ast.Assign)
+                           and any(isinstance(t,ast.Name) and t.id=='SOURCES' for t in st.targets)]
+            sources = ast.literal_eval(assignment.value)
+            if not isinstance(sources,tuple) or not set(sources).issubset(SOURCES):
+                raise ValueError('unreviewed source')
+            for rel in sources:
                 p = src / rel
                 p.parent.mkdir(parents=True, exist_ok=True)
                 p.write_bytes(subprocess.check_output(['git', 'cat-file', 'blob', rev + ':' + rel]))
-            manifest = stage(mount / 'producer', source_root=src)
+            manifest = stage(mount / 'producer', source_root=src, sources=sources)
             result = run_confined({'input_dir': str(mount), 'argv': ['/usr/bin/python3', '-I', '-B', '/input/driver.py', '--inside'],
                                    'expose_runtime_devices': True,
                                    'limits': {'memory_mb': 2048, 'cpu_seconds': 120, 'wallclock_s': 240, 'scratch_mb': 256,
