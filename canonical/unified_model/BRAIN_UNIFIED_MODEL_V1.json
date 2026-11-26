@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "5a647a51eff3449e72c1d560e85bd020d0b6d9cbf43bf5b9818bec58e1693689"
+  "value": "488daa64f7c7adc4578f58daf380554176e4dc64b54e7c8729172eb317821090"
  },
  "engines": [
   {
@@ -347035,7 +347035,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/stochastic_synthesizer_v1.py",
-   "sha256": "c4b84ea7fd018079c1acf0409c1f1b42fcb37675b82a954c4c3b3a6dc71ff902",
+   "sha256": "6f65c2ef869df88b2994867366994052492427053c1d3ab8476b44a76014575f",
    "summary": "Stochastic (random-search) SyGuS synthesizer over the OE grammar.",
    "symbol_count": 5,
    "symbols": [

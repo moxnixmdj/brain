@@ -286,6 +286,9 @@ class, honestly tracked).
 
 ## §11 The two §10 levers, adjudicated (this "go")
 
+> RESIDUAL-LEVER STATUS (updated in §13): the "one more inverse-composition
+> pass" recorded below is DONE — branch-restricted, 2-var family now saturated.
+
 Both levers were one mechanism. A naive term x term scan at real loop sizes
 measured 429 atoms / 5.3 s — OVER the 2.5 s miss-path gate, so the cap-1024
 plan was rejected in favor of the algebra: for `*`, `+`, `-` the second
@@ -345,3 +348,80 @@ axis our zero-token loop addresses at the spec-verified seam; Opus 5.5 holds
 SWE-bench Pro 89.9 / TB 2.1 87.6. We do not chase those numbers; the ledger
 stays: engines reachable FROM the unified model's own front door, priced in ms
 and tokens, HARD-51 reach still 0 and stated as the gap.
+
+## §13 Branch-restricted composition: the class closes, and the yardstick hits its ceiling (this "go")
+
+§11/§12 left one shape unsolved: a compound conditional whose ELSE branch is
+only required to be right on the points where it RUNS. A global inversion
+(look up `target - a` over ALL example points) can never find `-(x*3)-y`,
+because that branch is irrelevantly wrong on the then-side. That is not a
+reach limit, it is a scope error in my own indexing.
+
+Mechanism, in one splice inside the ITE stage of `_level2c_exhaustive`: project
+the target and every atom's value vector onto the REMAINDER index set (the
+points the then-branch does not cover), index atoms by that projected tuple,
+and solve the three slot equations there (`b = t-a`, `b = a-t`, `b = t/a` with
+an exact-divisibility guard). Value-vector construction was hoisted into
+`_atom_vals()` so both passes share one build — the restricted pass costs extra
+hash lookups, not extra evaluation. Soundness is untouched: the composed ITE
+still has to match EVERY example in the final `_sig` check, so a branch that is
+wrong outside its own region is harmless and a candidate is never emitted
+unverified.
+
+Gate (same shape as §11: improve the family, stay under ~2.5 s mean miss-path
+cost). Result: **2-var 28/30 -> 30/30** (10/10/10 on seeds 65/99/2026) at
+1065 / 1098 / 1010 ms. The six previously-missing rows now resolve in 180-949
+ms each, e.g. seed 99 `(x*3+y) if (x+y)>=1 else -(x*3)-y` ->
+`(9 - abs(y)) if ((x < -1) or (x > 1)) else ((abs(y) * -2) + ((x + y) * 3))`,
+and seed 2026 `(x*2+y) if (x+y)>=1 else -(x*2)-y` -> `(y + 6) - (abs(y) * 2)`
+(the latter is x-free — all its sampled points sit on a line where x is
+determined by y, which is the §13 ceiling showing up before the grid does).
+Anti-overfit check on two seeds never used for tuning (7, 1234): **10/10 and
+10/10** at 915 / 879 ms — 50/50 across five seeds, so this is class coverage,
+not seed luck. 1-var family 10/10 @ 916 ms (no regression); 10/10 synthesizer +
+OE + ensemble tests; 9/9 loop suites (`solve` ends-what-a-project-test-started,
+transfer probe). **Gate met; adopted.** The mechanism ships with a red/green
+falsifier, not just a number:
+`test_branch_restricted_composition_closes_compound_conditional` pins the two
+recorded specs, FAILS (`found nothing`) against the pre-§13 module and PASSES
+with it — `git stash` proved both directions in one run.
+
+The number is the less interesting result. Measuring what the loop SHIPS
+against a 231-point grid (`x in [-5,5], y in [-11,11]`) instead of its own 6
+visible points: **6/10 generalize on seeds 65/99/2026, 4/10 on seed 7.** For
+every non-generalizing row, the ENTIRE verified candidate set for that spec
+contains no target-equivalent program — e.g. for `x if x > y+4 else y*2` all
+six sampled points land in the else branch, so `y + y` is a perfectly correct
+answer to the question that was actually asked. So this is NOT a selection bug
+(shortest-first is not discarding a better candidate) and NOT a reach bug (the
+class is now saturated); it is the information content of the spec.
+`points=6` over a 49-point domain cannot pin a two-variable guarded program.
+Raising `points` would move the generalization number by making the benchmark
+easier to pin, which is difficulty tuning, not capability — refused, same rule
+that killed move 1 and the `parts[:6]` hypothesis. The lever that would genuinely
+buy something is a stronger SPEC, and the loop has no oracle beyond the tests
+it is given: candidate-distinguishing queries (CEGIS-style) need a teacher.
+
+Practical reading for the repo: on this axis the remaining error budget is owned
+by whoever writes the test file, not by the search. In the real setting the spec
+is a whole test module, so the ceiling here is an artifact of the micro-family.
+
+Ritual, paid for immediately: `stochastic_synthesizer_v1` is a COMPILED runtime
+module, so editing it without re-emitting `canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json`
+turns `test_compilation_is_deterministic` and `test_the_compile_is_a_fixed_point`
+red. That is the §12 carrier test doing exactly what a tripwire is for; the fix
+is one command (`python canonical/runtime/compile_brain_unified_model_v1.py`,
+62/62 + 927 subtests green afterwards), never a hand-edit of the artifact.
+
+Ledger after §13 — 1-var 40/40 @ ~920 ms; 2-var 50/50 @ ~1000 ms; 0 LLM samples
+and 0 tokens for the entire session; certified HARD-51 reach still 0/51, and
+still the binding number for any frontier claim. "Solved" in this section means
+*spec-consistent*, which is exactly what a verifier-gated loop can promise.
+
+External corroboration this round: eUSolver (Alur et al., TACAS'17) prescribes exactly
+this separation — enumerate value terms, enumerate predicates, combine by ITE —
+and warns enumerative solvers degrade "drastically with the size of the smallest
+solution"; the fix there is decomposition, here it was scoping the inversion to
+the branch. SlopCodeBench (2603.24755) reports pass-rate benchmarks hiding
+structural decay; the 6/10-vs-30/30 split above is the same trap one level down,
+which is why the generalization grid is now part of how this family is read.

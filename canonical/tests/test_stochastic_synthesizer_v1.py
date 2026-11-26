@@ -44,6 +44,31 @@ class TestStochasticSynthesizerV1(unittest.TestCase):
             for env, out in examples:
                 self.assertEqual(eval(e["code"], {"math": math}, dict(env)), out)
 
+    def test_branch_restricted_composition_closes_compound_conditional(self) -> None:
+        """Plan v6 §13 falsifier: the ELSE branch of a conditional only has to
+        match the targets on the points where it RUNS. These two specs come from
+        the recorded 2-var misses — the else sides (`-(x*3)-y`, `-(x*2)-y`) are
+        wrong on the then-points, so no globally-consistent inversion can find
+        them, and before §13 both returned None. If the restricted pass ever
+        stops firing, this test goes red while the family stays 'solved'.
+        """
+        cases = [
+            ([(3, 0), (1, 2), (3, -2), (-3, 2), (1, -1), (-1, 3)],
+             {(3, 0): 9, (1, 2): 5, (3, -2): 7, (-3, 2): 7, (1, -1): -2, (-1, 3): 0}),
+            ([(-3, 0), (3, 0), (1, 2), (3, -3), (-3, 3), (2, 1)],
+             {(-3, 0): 6, (3, 0): 6, (1, 2): 4, (3, -3): -3, (-3, 3): 3, (2, 1): 5}),
+        ]
+        for pts, want in cases:
+            body = STOCH.synthesize_body_from_examples(
+                ["x", "y"], [((x, y), want[(x, y)]) for (x, y) in pts]
+            )
+            self.assertIsNotNone(body, "restricted composition found nothing")
+            ns: dict = {"abs": abs}
+            exec(f"def f(x, y):\n    {body.strip()}\n", ns)
+            for (x, y) in pts:  # verified against the WHOLE spec, by contract
+                self.assertEqual(ns["f"](x, y), want[(x, y)])
+
+
     def test_ensemble_diversity_on_multi_solution_task(self) -> None:
         # A task admitting several distinct expressions: the ensemble should
         # surface candidates from both engines (diversity), not just one set.

@@ -262,11 +262,12 @@ def _level2c_exhaustive(
     # compose product/sum BRANCHES (the compound-conditional class) for free.
     # Zero-divisor slots are skipped (rare sound loss: no candidate is ever
     # emitted unverified — every hit passes _sig over every example).
-    if all(isinstance(t, (int, float)) and not isinstance(t, bool) for t in targets) \
-            and len(inner) <= 2048:
-        num_t = list(targets)
-        by_vals: dict[tuple, list] = {}
-        atoms_vals: list = []
+    num_t: list = [t for t in targets
+                   if isinstance(t, (int, float)) and not isinstance(t, bool)]
+    ok_num = len(num_t) == len(targets)
+
+    def _atom_vals() -> list:
+        out: list = []
         for e in inner.values():
             vs: list = []
             good = True
@@ -282,8 +283,15 @@ def _level2c_exhaustive(
                     break
                 vs.append(v)
             if good:
-                atoms_vals.append((e, vs))
-                by_vals.setdefault(tuple(vs), []).append(e)
+                out.append((e, vs))
+        return out
+
+    atoms_vals_c: list = _atom_vals() if ok_num and len(inner) <= 2048 else []
+    if ok_num and len(inner) <= 2048:
+        by_vals: dict[tuple, list] = {}
+        atoms_vals = atoms_vals_c
+        for e, vs in atoms_vals:
+            by_vals.setdefault(tuple(vs), []).append(e)
         npts = len(envs)
         for ea, va in atoms_vals:
             plans = [
@@ -328,9 +336,49 @@ def _level2c_exhaustive(
         if 0 < len(cov) < n:
             parts.append((len(cov), e, cov))
     parts.sort(key=lambda x: (-x[0], x[1].size))
+    va_by_id = {id(e): vs for e, vs in atoms_vals_c}
     for _c1, ex_then, cov_then in parts[:6]:
         rem = set(range(n)) - cov_then
         ex_else = next((e2 for _c2, e2, cov2 in parts if rem <= cov2), None)
+        if ex_else is None and ok_num:
+            # Restricted composition (plan v6 section 11 lever): the else
+            # branch only has to match the targets ON THE POINTS WHERE IT
+            # RUNS. Composing then inverting on the remainder set builds
+            # branches like -(x*3)-y that are (irrelevantly) wrong on the
+            # then-side and so were unreachable for a global inversion.
+            # Correctness is untouched: the final _sig check still requires
+            # the WHOLE composed ITE to match every example.
+            ridx = sorted(rem)
+            need = [num_t[i] for i in ridx]
+            va = va_by_id.get(id(ex_then))
+            rem_by: dict[tuple, Any] = {}
+            for e2, v2 in atoms_vals_c:
+                rem_by.setdefault(tuple(v2[i] for i in ridx), e2)
+            for a, vav in atoms_vals_c:
+                k1 = tuple(need[j] - vav[ridx[j]] for j in range(len(ridx)))
+                k2 = tuple(vav[ridx[j]] - need[j] for j in range(len(ridx)))
+                mulk: list | None = []
+                for j in range(len(ridx)):
+                    x_ = vav[ridx[j]]
+                    t_ = need[j]
+                    if x_ == 0 or isinstance(t_, int) and isinstance(x_, int) and t_ % x_ != 0 \
+                            or not (isinstance(t_, int) and isinstance(x_, int)) and (t_ / x_) != int(t_ / x_):
+                        mulk = None
+                        break
+                    mulk.append(t_ // x_ if isinstance(t_, int) and isinstance(x_, int) else float(t_ / x_))
+                for op3, kk in (("+", k1), ("-", k2), ("*", tuple(mulk) if mulk is not None else None)):
+                    if kk is None:
+                        continue
+                    b = rem_by.get(kk)
+                    if b is None:
+                        continue
+                    cand = OE.Expr(op3, (a, b), a.size + b.size + 1)
+                    sc = _sig(cand)
+                    if sc is not None and all(sc[i] == target_sig[i] for i in ridx):
+                        ex_else = cand
+                        break
+                if ex_else is not None:
+                    break
         if ex_else is None:
             continue
         f_sub = [envs[i] for i in sorted(cov_then)]
