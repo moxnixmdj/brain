@@ -1395,6 +1395,53 @@ def _anatomy_block(root: Path) -> dict[str, Any]:
     }
 
 
+LEDGER_PATH = "canonical/verification/PROMOTION_LEDGER_20261127_V1.json"
+
+
+def _promotion_block(root: Path) -> dict[str, Any]:
+    """What stands between the tree's frontier-function code and a call from ``solve()``.
+
+    The anatomy block answers *where* the five functions live. It does not answer why a
+    module that implements one of them still cannot be called. Measured on 849 classified
+    modules: 31 are callable and receipted, 36 are callable with no receipt, 641 are indexed
+    source with no adapter, and 137 are not indexed at all. Three quarters of the machinery
+    is one thin adapter away from the runtime, which is a different job from writing
+    capability -- and until the number was written down, every round guessed at it.
+
+    The block is a projection of the ledger, so it is rebuilt when the ledger is, and every
+    count in it is a row of that artifact. It admits nothing: a ``ROUTED`` row has a receipt,
+    not a proof of correctness.
+    """
+    path = root / LEDGER_PATH
+    if not path.is_file():
+        return {
+            "schema": "BRAIN_MODEL_PROMOTION_V1",
+            "source": LEDGER_PATH,
+            "present": False,
+            "reason": "LEDGER_NOT_COMPILED__RUN_canonical/tools/promotion_ledger_v1.py",
+        }
+    ledger = json.loads(path.read_text(encoding="utf-8"))
+    totals = ledger.get("totals") or {}
+    return {
+        "schema": "BRAIN_MODEL_PROMOTION_V1",
+        "source": LEDGER_PATH,
+        "source_sha256": digest_file(path),
+        "present": True,
+        "candidates": ledger.get("candidates"),
+        "callable_now": ledger.get("callable_now"),
+        "callable_share": ledger.get("callable_share"),
+        "by_missing_attribute": totals,
+        "promotable_without_new_code": int(totals.get("RECEIPTED_UNBOUND") or 0) + int(
+            totals.get("ADAPTER_UNRECEIPTED") or 0
+        ),
+        "needs_a_thin_adapter": int(totals.get("SOURCE_ONLY") or 0),
+        "not_indexed": int(totals.get("INVISIBLE") or 0),
+        "per_domain_callable": ledger.get("domain_executable_now") or {},
+        "next_actions": ledger.get("next_actions") or [],
+        "claim_limit": ledger.get("claim_limit"),
+    }
+
+
 def compile_model(root: str | Path | None = None) -> dict[str, Any]:
     """Compile the model in memory. The caller decides whether to persist it."""
     base = Path(root or ROOT).resolve()
@@ -1458,6 +1505,7 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
             raise UnifiedModelCompileError("CAPABILITY_WITHOUT_TRIGGERS:" + row["id"])
 
     anatomy = _anatomy_block(base)
+    promotion = _promotion_block(base)
     grammar = _build_grammar(capabilities, engines)
     grammar["adapter_ast_index"] = _extract_adapter_ast_index(base, capabilities)
 
@@ -1502,6 +1550,7 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
         "research_index": research_index,
         "grammar": grammar,
         "anatomy": anatomy,
+        "promotion": promotion,
         "counts": {
             "capabilities": len(capabilities),
             "bound_capabilities": sum(
@@ -1534,6 +1583,8 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
             "anatomy_domains": len(anatomy.get("domains") or {}),
             "anatomy_modules": sum(len(row.get("top") or []) for row in
                                    (anatomy.get("domains") or {}).values()),
+            "promotion_candidates": promotion.get("candidates") or 0,
+            "promotion_callable": promotion.get("callable_now") or 0,
         },
         "provenance": {
             "compiler": "canonical/runtime/compile_brain_unified_model_v1.py",

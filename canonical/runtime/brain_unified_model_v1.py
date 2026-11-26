@@ -74,6 +74,7 @@ NON_CLAIMS = (
 
 
 ANATOMY_SCHEMA = "PROJECT_BRAIN_ANATOMY_V1"
+PROMOTION_SCHEMA = "PROJECT_BRAIN_PROMOTION_V1"
 
 
 class UnifiedModelError(ValueError):
@@ -999,6 +1000,49 @@ class UnifiedModel:
                 else "NO_INDEXED_SOURCE_MATCHED"
             ),
         }
+
+    # -------------------------------------------------------------- promotion
+
+    def promotion(self, domain: str | None = None) -> dict[str, Any]:
+        """Why the tree's frontier-function code cannot be called, in the model's own words.
+
+        ``anatomy()`` says where the five functions live. It does not say why a module that
+        implements one of them is still unreachable. This does: the first missing attribute,
+        counted over every classified module -- callable and receipted, callable without a
+        receipt, indexed but adapterless, or not indexed at all.
+
+        It is a projection of the promotion ledger, so the answer changes only when the
+        ledger is rebuilt. Nothing here is admitted: a callable row has a receipt, which is
+        evidence that it ran once, not that it is correct.
+        """
+        block = (self._model_loaded or {}).get("promotion") if self._model_loaded else None
+        if not block:
+            return {
+                "schema": PROMOTION_SCHEMA,
+                "operation": "PROMOTION",
+                "reason": "MODEL_HAS_NO_PROMOTION_BLOCK__RECOMPILE_WITH_THE_LEDGER",
+                "capability": False,
+            }
+        per_domain = block.get("per_domain_callable") or {}
+        if domain is not None:
+            if domain not in per_domain:
+                return {
+                    "schema": PROMOTION_SCHEMA,
+                    "operation": "PROMOTION",
+                    "domain": domain,
+                    "reason": "UNKNOWN_DOMAIN",
+                    "known_domains": sorted(per_domain),
+                    "capability": False,
+                }
+            return {
+                "schema": PROMOTION_SCHEMA,
+                "operation": "PROMOTION",
+                "domain": domain,
+                "callable_now": per_domain[domain],
+                "candidates": (block.get("by_missing_attribute") or {}),
+                "capability": False,
+            }
+        return dict(block, operation="PROMOTION", capability=False)
 
     # ---------------------------------------------------------- research index
 
