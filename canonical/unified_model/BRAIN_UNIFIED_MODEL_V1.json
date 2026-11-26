@@ -33056,7 +33056,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a1222fbcc1843ca5dc3188485248b4777207d2fc855264d056c0ac3f80a418f3"
+  "value": "a5e0fc03d441077617e87645af93388367c97a2b2f829cfa6f982b3a01e5b456"
  },
  "engines": [
   {
@@ -434920,10 +434920,12 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/repo_native_test_surface_v1.py",
-   "sha256": "2da3c3276834839e132df308ef02ba47df50294fe69589d94955f3aa1de33405",
+   "sha256": "93c201d9cbb83eed43096caf6526910094b09fa75b23668f889301274920bed3",
    "summary": "Observe the same pytest case identities before and after an edit (including unittest cases).",
-   "symbol_count": 5,
+   "symbol_count": 7,
    "symbols": [
+    "_case_key",
+    "_stdlib_surface",
     "copy_product_tree",
     "export_vocab",
     "merge_vocab",
@@ -434934,6 +434936,7 @@
     "after": 1,
     "before": 1,
     "case": 1,
+    "case_key": 1,
     "cases": 1,
     "copy_product_tree": 1,
     "edit": 1,
@@ -434947,6 +434950,7 @@
     "repo": 1,
     "restored_surface": 1,
     "same": 1,
+    "stdlib_surface": 1,
     "surface": 1,
     "test": 1,
     "test_surface": 1,
@@ -436492,7 +436496,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/stdlib_cow_test_runner_v1.py",
-   "sha256": "5245063ca08ae34401c20d38683af2f5d275ede02b2080ddac5cc7aa427d696f",
+   "sha256": "4ad8a39da7015a394d3f3653d3f2362758d929fe06b835a6e1d94b03049db30b",
    "summary": "Zero-Dependency `os.fork()` CoW Test & Assertion-Value Runner (`stdlib_cow_test_runner_v1`).",
    "symbol_count": 6,
    "symbols": [
