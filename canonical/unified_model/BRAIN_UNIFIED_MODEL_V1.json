@@ -33056,7 +33056,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "22e1d9422452d20166925539450b48a43ecd0098c399af6a6593d197a7b7f0b6"
+  "value": "b363f20747d6ca3fcdd650394221e9a04d498b00a5732458e860a1a59fbd4c4e"
  },
  "engines": [
   {
@@ -333698,7 +333698,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/MEASURED_INSTANT_LEARNING_AND_THE_GENERALIZER_CEILING_20261126_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "2d5f79a72a74f690e0af258c0c52d9a4af89d3224332ec15793aa4ded6b91bab",
+   "sha256": "77a810e62c5c787fda14d012c0912241c7e5c39dfa8a441a4cc30679560dd35a",
    "status": "SHIPPED",
    "terms": {
     "10": 1,
