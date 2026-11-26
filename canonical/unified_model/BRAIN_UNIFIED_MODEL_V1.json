@@ -33042,12 +33042,12 @@
   "harvested_capabilities": 645,
   "harvested_contract_surfaces": 37,
   "harvested_program_surfaces": 608,
-  "knowledge_documents": 753,
+  "knowledge_documents": 754,
   "promotion_callable": 31,
   "promotion_candidates": 849,
   "receipt_backed_capabilities": 309,
   "research_index_records": 7422,
-  "routing_tokens": 3018,
+  "routing_tokens": 3060,
   "skills": 18,
   "source_index_entry_points": 561,
   "source_index_modules": 2243
@@ -33055,7 +33055,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "473efd3db10307a585f14439a45a91b63170b05896135daf599e6845e9914af6"
+  "value": "8641c65c72e256d228904407964abb88240c5d9a50ee2e64eb3b8e68cf206049"
  },
  "engines": [
   {
@@ -33725,7 +33725,14 @@
    "triggers": [
     "associative episodic memory",
     "associative_memory_v1",
-    "associative episodic importance decay"
+    "associative episodic importance decay",
+    "recall prior episode",
+    "remember previous",
+    "episodic memory",
+    "context stays correct",
+    "recall from memory",
+    "durable memory",
+    "keep a durable memory of prior runs"
    ]
   },
   {
@@ -33936,7 +33943,10 @@
    "triggers": [
     "causal goal computer agent",
     "causal_computer_use_agent",
-    "goal cone backward chaining agent"
+    "goal cone backward chaining agent",
+    "computer agent",
+    "drive computer",
+    "operate computer"
    ]
   },
   {
@@ -33970,7 +33980,11 @@
    "triggers": [
     "causal trace skill compiler",
     "elevate trace fastest layer",
-    "anti_unify_workflow"
+    "anti_unify_workflow",
+    "compile trace to skill",
+    "demonstration to program",
+    "watch once learn forever",
+    "elevate demonstration to program"
    ]
   },
   {
@@ -35061,7 +35075,11 @@
    "triggers": [
     "gradient free law consolidation",
     "gradient_free_law_consolidation",
-    "episodic ast law consolidation"
+    "episodic ast law consolidation",
+    "consolidate without drift",
+    "sleep consolidation",
+    "consolidate learning",
+    "keep the store current"
    ]
   },
   {
@@ -35201,7 +35219,14 @@
     "instant one shot learner",
     "instant_one_shot_learning",
     "extract_contract applicability",
-    "one shot causal credit"
+    "one shot causal credit",
+    "learn from one example",
+    "single demonstration",
+    "learn a new capability",
+    "one shot learning",
+    "generalize from one episode",
+    "infer a program from one example",
+    "adapt from one episode without touching weights"
    ]
   },
   {
@@ -35271,7 +35296,14 @@
     "interface action grammar",
     "interface_action_grammar",
     "a11y action grammar",
-    "zero screenshot gui solver"
+    "zero screenshot gui solver",
+    "drive GUI",
+    "unfamiliar desktop",
+    "operate desktop application",
+    "computer use",
+    "drive a GUI",
+    "operate browser page",
+    "drive an unfamiliar desktop application"
    ]
   },
   {
@@ -35895,7 +35927,10 @@
    "summary": "Compiles declarative OSWorld 2.1 browser specifications into deterministic browser operation plans.",
    "triggers": [
     "osworld browser ops",
-    "compile_browser_op"
+    "compile_browser_op",
+    "browser ops",
+    "operate browser page",
+    "click elements on screen"
    ]
   },
   {
@@ -36212,7 +36247,10 @@
     "predictive hoare contract",
     "predictive_contract",
     "hoare byte clauses",
-    "world model contract derive_clauses"
+    "world model contract derive_clauses",
+    "what action does",
+    "simulate consequence",
+    "what an action does before doing it"
    ]
   },
   {
@@ -36283,7 +36321,11 @@
    "triggers": [
     "procedure trajectory memory",
     "procedure_memory_v1",
-    "direction preserving procedure signature"
+    "direction preserving procedure signature",
+    "procedure memory",
+    "episode journal",
+    "remember procedure",
+    "recall the right prior episode"
    ]
   },
   {
@@ -36523,7 +36565,14 @@
    "triggers": [
     "rule expiry world fingerprint",
     "rule_expiry_v1",
-    "expire stale rules world fingerprint"
+    "expire stale rules world fingerprint",
+    "keep improving without forgetting",
+    "continual learning",
+    "without forgetting",
+    "without drifting",
+    "expire stale rules",
+    "detect drift",
+    "keep improving on new tasks"
    ]
   },
   {
@@ -36729,7 +36778,11 @@
    "triggers": [
     "state contract world model",
     "state_contract_world_model",
-    "desktop effect delta contract"
+    "desktop effect delta contract",
+    "screen state prediction",
+    "simulate action consequence",
+    "world model desktop",
+    "screen state before action"
    ]
   },
   {
@@ -37005,7 +37058,10 @@
    "triggers": [
     "verified skill crystallizer",
     "crystallize code rule",
-    "anti_unify_code_rule"
+    "anti_unify_code_rule",
+    "crystallize skill",
+    "learn rule from fix",
+    "anti unify bugfix"
    ]
   },
   {
@@ -65401,9 +65457,11 @@
     "canonical/runtime/bytes_strong_accounting_and_persistence_cut_v1.py.auto.v1": 595.0
    },
    "action": {
-    "canonical/runtime/root3_minimum_action_cut_v1.py.auto.v1": 298.5,
-    "engine:INTERFACE_ACTION_GRAMMAR": 447.75,
-    "engine:VERIFIED_ZERO_SCREENSHOT_ACTION_CACHE": 447.75
+    "canonical/runtime/root3_minimum_action_cut_v1.py.auto.v1": 199.666667,
+    "engine:INTERFACE_ACTION_GRAMMAR": 299.5,
+    "engine:PREDICTIVE_HOARE_CONTRACT": 299.5,
+    "engine:STATE_CONTRACT_WORLD_MODEL": 299.5,
+    "engine:VERIFIED_ZERO_SCREENSHOT_ACTION_CACHE": 299.5
    },
    "actionable": {
     "knowledge.support.materialize": 595.0
@@ -65424,6 +65482,9 @@
    },
    "active15": {
     "canonical/runtime/livebench_active15_plus_one_noarg_pointwise_v1.py.auto.v1": 595.0
+   },
+   "adapt": {
+    "engine:INSTANT_ONE_SHOT_LEARNER": 892.5
    },
    "adapter": {
     "canonical/runtime/escape_gap_a_policy_cover_adapter_v1.py.auto.v1": 397.333333,
@@ -65608,6 +65669,9 @@
     "chart.read.legend_linear_intersection.v1": 298.5,
     "file.question.taught_words.v1": 298.5
    },
+   "anti": {
+    "engine:VERIFIED_SKILL_CRYSTALLIZER": 892.5
+   },
    "anti_unify_code_rule": {
     "engine:VERIFIED_SKILL_CRYSTALLIZER": 595.0
    },
@@ -65630,6 +65694,9 @@
    },
    "applicability": {
     "engine:INSTANT_ONE_SHOT_LEARNER": 892.5
+   },
+   "application": {
+    "engine:INTERFACE_ACTION_GRAMMAR": 892.5
    },
    "applied": {
     "python.software.repair.apply.verified.v1": 397.333333,
@@ -66212,6 +66279,10 @@
     "engine:FINANCE_QUANTITATIVE_ALGEBRA": 447.75,
     "terminal.kstar.root.assess.stdlib": 298.5
    },
+   "before": {
+    "engine:PREDICTIVE_HOARE_CONTRACT": 596.0,
+    "engine:STATE_CONTRACT_WORLD_MODEL": 596.0
+   },
    "behavior": {
     "canonical/runtime/domain_behavior_universe_anchor_v1.py.auto.v1": 239.2,
     "canonical/runtime/unknown_domain_two_behavior_shared_semantic_frontier_v1.py.auto.v1": 239.2,
@@ -66439,8 +66510,9 @@
     "engine:ENVIRONMENT_BROKER": 892.5
    },
    "browser": {
-    "engine:OSWORLD_BROWSER_OPS": 596.0,
-    "web.browser.rendered.capture.chromedriver": 397.333333
+    "engine:INTERFACE_ACTION_GRAMMAR": 447.75,
+    "engine:OSWORLD_BROWSER_OPS": 447.75,
+    "web.browser.rendered.capture.chromedriver": 298.5
    },
    "bson": {
     "auto.pypi.bson-modern": 595.0
@@ -66456,6 +66528,9 @@
     "python.software.repair.route.v1": 239.2,
     "python.source.test_adequacy.v1": 358.8,
     "python.tests.mutation_score.v1": 358.8
+   },
+   "bugfix": {
+    "engine:VERIFIED_SKILL_CRYSTALLIZER": 892.5
    },
    "build": {
     "code.polyglot.transform_and_verify.v1": 397.333333,
@@ -67939,15 +68014,16 @@
     "canonical.runtime.bound_capabilities.software_synthesis_grid_induction_v1.hidden.v1": 133.777778
    },
    "capability": {
-    "canonical.runtime.capability_selection_retrieval_v1.hidden.v1": 120.6,
-    "canonical/runtime/coding_static_verified_capability_route_theorem_v1.py.auto.v1": 120.6,
-    "engine:BOUND_CAPABILITY": 120.6,
-    "engine:CAPABILITY_FIRST_RANKING": 180.9,
-    "engine:CAPABILITY_SCHEDULER": 120.6,
-    "engine:LIVE_CAPABILITY": 120.6,
-    "plain_goal.bound_capability.grounding.stdlib": 120.6,
-    "plain_goal.bound_capability.grounding.verify.stdlib": 120.6,
-    "terminal.kstar.root.assess.stdlib": 120.6
+    "canonical.runtime.capability_selection_retrieval_v1.hidden.v1": 109.818182,
+    "canonical/runtime/coding_static_verified_capability_route_theorem_v1.py.auto.v1": 109.818182,
+    "engine:BOUND_CAPABILITY": 109.818182,
+    "engine:CAPABILITY_FIRST_RANKING": 164.727273,
+    "engine:CAPABILITY_SCHEDULER": 109.818182,
+    "engine:INSTANT_ONE_SHOT_LEARNER": 164.727273,
+    "engine:LIVE_CAPABILITY": 109.818182,
+    "plain_goal.bound_capability.grounding.stdlib": 109.818182,
+    "plain_goal.bound_capability.grounding.verify.stdlib": 109.818182,
+    "terminal.kstar.root.assess.stdlib": 109.818182
    },
    "capability_first_ranking": {
     "engine:CAPABILITY_FIRST_RANKING": 2380.0
@@ -68269,7 +68345,8 @@
     "shell.command.run": 298.5
    },
    "click": {
-    "web.browser.rendered.capture.chromedriver": 595.0
+    "engine:OSWORLD_BROWSER_OPS": 596.0,
+    "web.browser.rendered.capture.chromedriver": 397.333333
    },
    "client": {
     "python.swe.transform_and_synthesize.v1": 595.0
@@ -68382,7 +68459,8 @@
     "evidence.claim_spec.bind.explicit_comparison.stdlib": 397.333333
    },
    "compile": {
-    "python.software.request.semantic_behavior.compile.v1": 595.0
+    "engine:CAUSAL_TRACE_SKILL_COMPILER": 596.0,
+    "python.software.request.semantic_behavior.compile.v1": 397.333333
    },
    "compile_browser_op": {
     "engine:OSWORLD_BROWSER_OPS": 595.0
@@ -68512,8 +68590,9 @@
     "math.numeric_expression.sympy": 397.333333
    },
    "computer": {
-    "engine:CAUSAL_GOAL_COMPUTER_AGENT": 596.0,
-    "engine:UNIVERSAL_COMPUTER_PETRI_AGENT": 596.0
+    "engine:CAUSAL_GOAL_COMPUTER_AGENT": 447.75,
+    "engine:INTERFACE_ACTION_GRAMMAR": 447.75,
+    "engine:UNIVERSAL_COMPUTER_PETRI_AGENT": 447.75
    },
    "concept": {
     "canonical/runtime/sec_issuer_extension_concept_semantics_verify_v1.py.auto.v1": 397.333333,
@@ -68563,10 +68642,17 @@
    "conjunction": {
     "engine:DISTINCTION_GUARD_SYNTHESIS": 892.5
    },
+   "consequence": {
+    "engine:PREDICTIVE_HOARE_CONTRACT": 596.0,
+    "engine:STATE_CONTRACT_WORLD_MODEL": 596.0
+   },
    "consistency": {
     "canonical/runtime/current_projection_consistency_guard_v1.py.auto.v1": 298.5,
     "canonical/runtime/terminal_projection_consistency_v1.py.auto.v1": 298.5,
     "knowledge.consistency.assess": 298.5
+   },
+   "consolidate": {
+    "engine:GRADIENT_FREE_LAW_CONSOLIDATION": 892.5
    },
    "consolidation": {
     "canonical.runtime.gradient_free_law_consolidation_v1.hidden.v1": 397.333333,
@@ -68611,21 +68697,25 @@
     "python.software.repair.semantic_acceptance.v1": 298.5
    },
    "context": {
-    "canonical/runtime/livebench_legacy15_punkt_context_quotient_v1.py.auto.v1": 76.125,
-    "canonical/runtime/p3_bound_binary_real_context_membership_v1.py.auto.v1": 76.125,
-    "canonical/runtime/p3_real_context_v3_admission_v1.py.auto.v1": 76.125,
-    "canonical/runtime/p3_real_context_v3_admission_v10.py.auto.v1": 76.125,
-    "canonical/runtime/p3_real_context_v3_admission_v11.py.auto.v1": 76.125,
-    "canonical/runtime/p3_real_context_v3_admission_v12.py.auto.v1": 76.125,
-    "canonical/runtime/p3_real_context_v3_admission_v2.py.auto.v1": 76.125,
-    "canonical/runtime/p3_real_context_v3_admission_v3.py.auto.v1": 76.125,
-    "canonical/runtime/p3_real_context_v3_admission_v4.py.auto.v1": 76.125,
-    "canonical/runtime/p3_real_context_v3_admission_v5.py.auto.v1": 76.125,
-    "canonical/runtime/p3_real_context_v3_admission_v6.py.auto.v1": 76.125,
-    "canonical/runtime/p3_real_context_v3_admission_v7.py.auto.v1": 76.125,
-    "canonical/runtime/p3_real_context_v3_admission_v8.py.auto.v1": 76.125,
-    "canonical/runtime/p3_real_context_v3_admission_v9.py.auto.v1": 76.125,
-    "terminal.kstar.root.assess.stdlib": 76.125
+    "canonical/runtime/livebench_legacy15_punkt_context_quotient_v1.py.auto.v1": 71.764706,
+    "canonical/runtime/p3_bound_binary_real_context_membership_v1.py.auto.v1": 71.764706,
+    "canonical/runtime/p3_real_context_v3_admission_v1.py.auto.v1": 71.764706,
+    "canonical/runtime/p3_real_context_v3_admission_v10.py.auto.v1": 71.764706,
+    "canonical/runtime/p3_real_context_v3_admission_v11.py.auto.v1": 71.764706,
+    "canonical/runtime/p3_real_context_v3_admission_v12.py.auto.v1": 71.764706,
+    "canonical/runtime/p3_real_context_v3_admission_v2.py.auto.v1": 71.764706,
+    "canonical/runtime/p3_real_context_v3_admission_v3.py.auto.v1": 71.764706,
+    "canonical/runtime/p3_real_context_v3_admission_v4.py.auto.v1": 71.764706,
+    "canonical/runtime/p3_real_context_v3_admission_v5.py.auto.v1": 71.764706,
+    "canonical/runtime/p3_real_context_v3_admission_v6.py.auto.v1": 71.764706,
+    "canonical/runtime/p3_real_context_v3_admission_v7.py.auto.v1": 71.764706,
+    "canonical/runtime/p3_real_context_v3_admission_v8.py.auto.v1": 71.764706,
+    "canonical/runtime/p3_real_context_v3_admission_v9.py.auto.v1": 71.764706,
+    "engine:ASSOCIATIVE_EPISODIC_MEMORY": 107.647059,
+    "terminal.kstar.root.assess.stdlib": 71.764706
+   },
+   "continual": {
+    "engine:RULE_EXPIRY_WORLD_FINGERPRINT": 892.5
    },
    "continuity": {
     "canonical/runtime/continuity_root3_fixed_entry_verifier_v1.py.auto.v1": 298.5,
@@ -68705,6 +68795,9 @@
     "engine:COMPRESSION_GAIN_MDL": 299.5,
     "python.tests.audit.unittest": 199.666667,
     "source.candidates.enumerate.stdlib": 199.666667
+   },
+   "correct": {
+    "engine:ASSOCIATIVE_EPISODIC_MEMORY": 892.5
    },
    "correctness": {
     "canonical/runtime/structured_method_universal_correctness_certificate_v1.py.auto.v1": 595.0
@@ -68877,35 +68970,36 @@
     "python.source.complexity.v1": 595.0
    },
    "current": {
-    "canonical.runtime.binding_pin_is_current_v1.hidden.v1": 41.533333,
-    "canonical/runtime/current_26_zero_reality_frontier_v1.py.auto.v1": 41.533333,
-    "canonical/runtime/current_26_zero_reality_frontier_v2.py.auto.v1": 41.533333,
-    "canonical/runtime/current_26_zero_reality_frontier_v3.py.auto.v1": 41.533333,
-    "canonical/runtime/current_27_zero_reality_frontier_v2.py.auto.v1": 41.533333,
-    "canonical/runtime/current_30_obligation_pointer_verifier.py.auto.v1": 41.533333,
-    "canonical/runtime/current_accepted_five_d_reduction_verifier_v1.py.auto.v1": 41.533333,
-    "canonical/runtime/current_escape_o11_objective_acceptance_law_gate_v1.py.auto.v1": 41.533333,
-    "canonical/runtime/current_escape_o11_proof_instantiation_search_v1.py.auto.v1": 41.533333,
-    "canonical/runtime/current_escape_o_objective_acceptance_law_gate_v2.py.auto.v1": 41.533333,
-    "canonical/runtime/current_escape_o_proof_instantiation_search_v2.py.auto.v1": 41.533333,
-    "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v1.py.auto.v1": 41.533333,
-    "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v2.py.auto.v1": 41.533333,
-    "canonical/runtime/current_escape_oq_frontier_reduction_v1.py.auto.v1": 41.533333,
-    "canonical/runtime/current_one_shot_projection_v1.py.auto.v1": 41.533333,
-    "canonical/runtime/current_projection_consistency_guard_v1.py.auto.v1": 41.533333,
-    "canonical/runtime/current_state_obs_reducer.py.auto.v1": 41.533333,
-    "canonical/runtime/current_terminal_authority_v11_verifier_v1.py.auto.v1": 41.533333,
-    "canonical/runtime/current_terminal_authority_v13_verifier_v1.py.auto.v1": 41.533333,
-    "canonical/runtime/current_terminal_authority_v3_k6_v4_verifier.py.auto.v1": 41.533333,
-    "canonical/runtime/current_terminal_authority_v6_verifier.py.auto.v1": 41.533333,
-    "canonical/runtime/current_terminal_authority_v7_verifier.py.auto.v1": 41.533333,
-    "canonical/runtime/current_terminal_authority_v8_verifier.py.auto.v1": 41.533333,
-    "canonical/runtime/current_terminal_authority_v9_verifier.py.auto.v1": 41.533333,
-    "canonical/runtime/escape_tb_science_current_route_reclassification_v2_verify.py.auto.v1": 41.533333,
-    "canonical/runtime/k6_current_authority_reconciliation_v2.py.auto.v1": 41.533333,
-    "canonical/runtime/root3_current_credited_zero_effect_reconciliation_verifier_v1.py.auto.v1": 41.533333,
-    "canonical/runtime/root3_effect_membrane_e1_current_byte_v1.py.auto.v1": 41.533333,
-    "web.release.verify.independent_http": 41.533333
+    "canonical.runtime.binding_pin_is_current_v1.hidden.v1": 40.258065,
+    "canonical/runtime/current_26_zero_reality_frontier_v1.py.auto.v1": 40.258065,
+    "canonical/runtime/current_26_zero_reality_frontier_v2.py.auto.v1": 40.258065,
+    "canonical/runtime/current_26_zero_reality_frontier_v3.py.auto.v1": 40.258065,
+    "canonical/runtime/current_27_zero_reality_frontier_v2.py.auto.v1": 40.258065,
+    "canonical/runtime/current_30_obligation_pointer_verifier.py.auto.v1": 40.258065,
+    "canonical/runtime/current_accepted_five_d_reduction_verifier_v1.py.auto.v1": 40.258065,
+    "canonical/runtime/current_escape_o11_objective_acceptance_law_gate_v1.py.auto.v1": 40.258065,
+    "canonical/runtime/current_escape_o11_proof_instantiation_search_v1.py.auto.v1": 40.258065,
+    "canonical/runtime/current_escape_o_objective_acceptance_law_gate_v2.py.auto.v1": 40.258065,
+    "canonical/runtime/current_escape_o_proof_instantiation_search_v2.py.auto.v1": 40.258065,
+    "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v1.py.auto.v1": 40.258065,
+    "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v2.py.auto.v1": 40.258065,
+    "canonical/runtime/current_escape_oq_frontier_reduction_v1.py.auto.v1": 40.258065,
+    "canonical/runtime/current_one_shot_projection_v1.py.auto.v1": 40.258065,
+    "canonical/runtime/current_projection_consistency_guard_v1.py.auto.v1": 40.258065,
+    "canonical/runtime/current_state_obs_reducer.py.auto.v1": 40.258065,
+    "canonical/runtime/current_terminal_authority_v11_verifier_v1.py.auto.v1": 40.258065,
+    "canonical/runtime/current_terminal_authority_v13_verifier_v1.py.auto.v1": 40.258065,
+    "canonical/runtime/current_terminal_authority_v3_k6_v4_verifier.py.auto.v1": 40.258065,
+    "canonical/runtime/current_terminal_authority_v6_verifier.py.auto.v1": 40.258065,
+    "canonical/runtime/current_terminal_authority_v7_verifier.py.auto.v1": 40.258065,
+    "canonical/runtime/current_terminal_authority_v8_verifier.py.auto.v1": 40.258065,
+    "canonical/runtime/current_terminal_authority_v9_verifier.py.auto.v1": 40.258065,
+    "canonical/runtime/escape_tb_science_current_route_reclassification_v2_verify.py.auto.v1": 40.258065,
+    "canonical/runtime/k6_current_authority_reconciliation_v2.py.auto.v1": 40.258065,
+    "canonical/runtime/root3_current_credited_zero_effect_reconciliation_verifier_v1.py.auto.v1": 40.258065,
+    "canonical/runtime/root3_effect_membrane_e1_current_byte_v1.py.auto.v1": 40.258065,
+    "engine:GRADIENT_FREE_LAW_CONSOLIDATION": 60.387097,
+    "web.release.verify.independent_http": 40.258065
    },
    "current_26_zero_reality_frontier_v1": {
     "canonical/runtime/current_26_zero_reality_frontier_v1.py.auto.v1": 595.0
@@ -69257,6 +69351,10 @@
     "engine:CONDITION_DEMAND_HARVESTER": 447.75,
     "engine:KOAN_ASSERTION_DEMAND": 447.75
    },
+   "demonstration": {
+    "engine:CAUSAL_TRACE_SKILL_COMPILER": 596.0,
+    "engine:INSTANT_ONE_SHOT_LEARNER": 596.0
+   },
    "dependencies": {
     "code.impact.tree_sitter.testselect.v1": 595.0
    },
@@ -69299,7 +69397,11 @@
     "software.analysis.diagnose_and_architect.v1": 892.5
    },
    "desktop": {
-    "engine:STATE_CONTRACT_WORLD_MODEL": 892.5
+    "engine:INTERFACE_ACTION_GRAMMAR": 596.0,
+    "engine:STATE_CONTRACT_WORLD_MODEL": 596.0
+   },
+   "detect": {
+    "engine:RULE_EXPIRY_WORLD_FINGERPRINT": 892.5
    },
    "detect_layout": {
     "engine:ENVIRONMENT_BROKER": 892.5
@@ -69503,6 +69605,9 @@
    "docx_text_edit_transaction": {
     "engine:DOCX_TEXT_EDIT_TRANSACTION": 2380.0
    },
+   "doing": {
+    "engine:PREDICTIVE_HOARE_CONTRACT": 892.5
+   },
    "dom": {
     "engine:CROSS_MODAL_TOMOGRAPHY_PETRI": 596.0,
     "engine:DOM_STATE_ENVIRONMENT": 596.0
@@ -69538,6 +69643,17 @@
    "dpll": {
     "software.patch.synthesize.cegis.z3.v1": 595.0
    },
+   "drift": {
+    "engine:GRADIENT_FREE_LAW_CONSOLIDATION": 596.0,
+    "engine:RULE_EXPIRY_WORLD_FINGERPRINT": 596.0
+   },
+   "drifting": {
+    "engine:RULE_EXPIRY_WORLD_FINGERPRINT": 892.5
+   },
+   "drive": {
+    "engine:CAUSAL_GOAL_COMPUTER_AGENT": 596.0,
+    "engine:INTERFACE_ACTION_GRAMMAR": 596.0
+   },
    "dual": {
     "canonical/runtime/dual_judgment_general_substrate_role_v1.py.auto.v1": 298.5,
     "canonical/runtime/dual_judgment_source_gate_activation_v1.py.auto.v1": 298.5,
@@ -69560,6 +69676,9 @@
    },
    "duplicate": {
     "file.copy.v1": 892.5
+   },
+   "durable": {
+    "engine:ASSOCIATIVE_EPISODIC_MEMORY": 892.5
    },
    "duration": {
     "engine:SACCR_CREDIT_ADDON": 892.5
@@ -69627,6 +69746,9 @@
    },
    "egraph_optimize_function": {
     "engine:EGRAPH_DEDUCTIVE_SYNTHESIZER": 595.0
+   },
+   "elements": {
+    "engine:OSWORLD_BROWSER_OPS": 892.5
    },
    "elevate": {
     "engine:CAUSAL_TRACE_SKILL_COMPILER": 892.5
@@ -70088,7 +70210,10 @@
     "engine:ENVIRONMENT_BROKER": 2380.0
    },
    "episode": {
-    "engine:LEARNING_EPISODE": 595.0
+    "engine:ASSOCIATIVE_EPISODIC_MEMORY": 358.8,
+    "engine:INSTANT_ONE_SHOT_LEARNER": 358.8,
+    "engine:LEARNING_EPISODE": 239.2,
+    "engine:PROCEDURE_TRAJECTORY_MEMORY": 358.8
    },
    "episodic": {
     "engine:ASSOCIATIVE_EPISODIC_MEMORY": 596.0,
@@ -70269,7 +70394,8 @@
     "canonical/runtime/exact_symbolic_selected_leaf_verifier_v1.py.auto.v1": 892.5
    },
    "example": {
-    "engine:EDIT_BY_EXAMPLE_PROSE": 892.5
+    "engine:EDIT_BY_EXAMPLE_PROSE": 596.0,
+    "engine:INSTANT_ONE_SHOT_LEARNER": 596.0
    },
    "examples": {
     "engine:CROSS_MODAL_TOMOGRAPHY_PETRI": 892.5
@@ -70656,8 +70782,9 @@
     "canonical/runtime/five_public_bar_observable_target_scope_closure_verifier_v1.py.auto.v1": 892.5
    },
    "fix": {
-    "python.software.repair.apply.verified.v1": 596.0,
-    "software.repair.choreograph.crossfile.v1": 596.0
+    "engine:VERIFIED_SKILL_CRYSTALLIZER": 447.75,
+    "python.software.repair.apply.verified.v1": 447.75,
+    "software.repair.choreograph.crossfile.v1": 447.75
    },
    "fixed": {
     "canonical/runtime/continuity_root3_fixed_entry_verifier_v1.py.auto.v1": 298.5,
@@ -70707,8 +70834,14 @@
    "forcing": {
     "engine:KOAN_FORCE_VALUE_ANGELIC": 892.5
    },
+   "forever": {
+    "engine:CAUSAL_TRACE_SKILL_COMPILER": 892.5
+   },
    "forge": {
     "python.repo.pr_realize.v1": 595.0
+   },
+   "forgetting": {
+    "engine:RULE_EXPIRY_WORLD_FINGERPRINT": 892.5
    },
    "fork": {
     "engine:COW_ZYGOTE_SPECULATIVE_VERIFIER": 596.0,
@@ -70888,6 +71021,9 @@
    "general": {
     "canonical/runtime/dual_judgment_general_substrate_role_v1.py.auto.v1": 397.333333,
     "canonical/runtime/livebench_legacy15_general_composer_v1.py.auto.v1": 397.333333
+   },
+   "generalize": {
+    "engine:INSTANT_ONE_SHOT_LEARNER": 892.5
    },
    "generate": {
     "image.qr.generate.qrencode": 239.2,
@@ -71336,6 +71472,9 @@
    "improvement_cycle": {
     "engine:IMPROVEMENT_CYCLE": 2380.0
    },
+   "improving": {
+    "engine:RULE_EXPIRY_WORLD_FINGERPRINT": 892.5
+   },
    "incremental": {
     "code.index.tree_sitter.incremental.v1": 298.5,
     "code.multilanguage.parse.tree_sitter.v1": 298.5,
@@ -71390,6 +71529,9 @@
     "engine:CONTRASTIVE_ORACLE_BOOTSTRAP": 257.142857,
     "engine:STRUCTURAL_REWRITE_INDUCTION": 257.142857,
     "software.synthesis.grid_induction.v1": 171.428571
+   },
+   "infer": {
+    "engine:INSTANT_ONE_SHOT_LEARNER": 892.5
    },
    "inference": {
     "engine:H100_INFERENCE": 298.5,
@@ -71577,6 +71719,9 @@
    "joss19": {
     "evidence.oracle.hypothesis_property.v1": 595.0
    },
+   "journal": {
+    "engine:PROCEDURE_TRAJECTORY_MEMORY": 892.5
+   },
    "jq": {
     "json.query.jq": 595.0
    },
@@ -71649,7 +71794,10 @@
     "canonical/runtime/k6_target_relative_decision_quotient_v1.py.auto.v1": 892.5
    },
    "keep": {
-    "python.vcs.merge_conflict.resolve.v1": 892.5
+    "engine:ASSOCIATIVE_EPISODIC_MEMORY": 358.8,
+    "engine:GRADIENT_FREE_LAW_CONSOLIDATION": 358.8,
+    "engine:RULE_EXPIRY_WORLD_FINGERPRINT": 358.8,
+    "python.vcs.merge_conflict.resolve.v1": 358.8
    },
    "keeping": {
     "software.repair.choreograph.crossfile.v1": 892.5
@@ -71775,6 +71923,11 @@
    "leaked": {
     "python.source.secret_scan.v1": 595.0
    },
+   "learn": {
+    "engine:CAUSAL_TRACE_SKILL_COMPILER": 447.75,
+    "engine:INSTANT_ONE_SHOT_LEARNER": 447.75,
+    "engine:VERIFIED_SKILL_CRYSTALLIZER": 447.75
+   },
    "learned": {
     "engine:ZERO_LEARNED_EXTRACTIVE_SUMMARY": 892.5
    },
@@ -71782,7 +71935,10 @@
     "engine:INSTANT_ONE_SHOT_LEARNER": 892.5
    },
    "learning": {
-    "engine:LEARNING_EPISODE": 595.0
+    "engine:GRADIENT_FREE_LAW_CONSOLIDATION": 358.8,
+    "engine:INSTANT_ONE_SHOT_LEARNER": 358.8,
+    "engine:LEARNING_EPISODE": 239.2,
+    "engine:RULE_EXPIRY_WORLD_FINGERPRINT": 358.8
    },
    "learning_episode": {
     "engine:LEARNING_EPISODE": 2380.0
@@ -72766,7 +72922,9 @@
     "test.slice.never_miss.v1": 595.0
    },
    "new": {
-    "python.source.add_function.v1": 892.5
+    "engine:INSTANT_ONE_SHOT_LEARNER": 447.75,
+    "engine:RULE_EXPIRY_WORLD_FINGERPRINT": 447.75,
+    "python.source.add_function.v1": 447.75
    },
    "nexus": {
     "engine:ANGELIC_LENS_COW_REPAIR": 892.5
@@ -72945,6 +73103,9 @@
    "omc": {
     "canonical/runtime/tb4_omc_cloud_candidate_v1.py.auto.v1": 595.0
    },
+   "once": {
+    "engine:CAUSAL_TRACE_SKILL_COMPILER": 892.5
+   },
    "one": {
     "canonical/runtime/current_one_shot_projection_v1.py.auto.v1": 171.428571,
     "canonical/runtime/livebench_active15_plus_one_noarg_pointwise_v1.py.auto.v1": 171.428571,
@@ -72999,8 +73160,11 @@
     "engine:ASSERTION_OPERAND_TOMOGRAPHY": 892.5
    },
    "operate": {
-    "git.repository.operate.v1": 397.333333,
-    "python.swe.transform_and_synthesize.v1": 397.333333
+    "engine:CAUSAL_GOAL_COMPUTER_AGENT": 299.5,
+    "engine:INTERFACE_ACTION_GRAMMAR": 299.5,
+    "engine:OSWORLD_BROWSER_OPS": 299.5,
+    "git.repository.operate.v1": 199.666667,
+    "python.swe.transform_and_synthesize.v1": 199.666667
    },
    "operations": {
     "engine:DOCX_TEXT_EDIT_TRANSACTION": 892.5
@@ -73390,7 +73554,9 @@
     "engine:OOXML_PACKAGE_VALIDATOR": 596.0
    },
    "page": {
-    "web.browser.rendered.capture.chromedriver": 595.0
+    "engine:INTERFACE_ACTION_GRAMMAR": 447.75,
+    "engine:OSWORLD_BROWSER_OPS": 447.75,
+    "web.browser.rendered.capture.chromedriver": 298.5
    },
    "pair": {
     "engine:CONTRASTIVE_ORACLE_BOOTSTRAP": 596.0,
@@ -73732,6 +73898,9 @@
    "predicate_world_abstraction": {
     "engine:PREDICATE_UI_WORLD_ABSTRACTION": 595.0
    },
+   "prediction": {
+    "engine:STATE_CONTRACT_WORLD_MODEL": 892.5
+   },
    "predictive": {
     "engine:PREDICTIVE_HOARE_CONTRACT": 892.5
    },
@@ -73764,6 +73933,9 @@
     "canonical/runtime/seed_preserving_instruction_postprocessor_v2.py.auto.v1": 298.5,
     "engine:PROCEDURE_TRAJECTORY_MEMORY": 447.75
    },
+   "previous": {
+    "engine:ASSOCIATIVE_EPISODIC_MEMORY": 892.5
+   },
    "prewave": {
     "canonical/runtime/prewave_direct_proof_preflight.py.auto.v1": 595.0
    },
@@ -73779,6 +73951,10 @@
    },
    "principles": {
     "engine:FIRST_PRINCIPLES_MENTAL_CEGIS": 892.5
+   },
+   "prior": {
+    "engine:ASSOCIATIVE_EPISODIC_MEMORY": 596.0,
+    "engine:PROCEDURE_TRAJECTORY_MEMORY": 596.0
    },
    "probe": {
     "canonical/runtime/finite_probe_nonidentifiability_certificate_v1.py.auto.v1": 239.2,
@@ -74050,11 +74226,13 @@
     "python.review.diff_perf_gate.v1": 595.0
    },
    "program": {
-    "engine:DUAL_PROGRAM_SPLICING": 299.5,
-    "engine:KOAN_AIMED_PROGRAM_EDITS": 299.5,
-    "python.software.request.semantic_behavior.compile.v1": 199.666667,
-    "software.hardcore.kernel.orchestrate.v1": 199.666667,
-    "software.synthesis.grid_induction.v1": 199.666667
+    "engine:CAUSAL_TRACE_SKILL_COMPILER": 225.375,
+    "engine:DUAL_PROGRAM_SPLICING": 225.375,
+    "engine:INSTANT_ONE_SHOT_LEARNER": 225.375,
+    "engine:KOAN_AIMED_PROGRAM_EDITS": 225.375,
+    "python.software.request.semantic_behavior.compile.v1": 150.25,
+    "software.hardcore.kernel.orchestrate.v1": 150.25,
+    "software.synthesis.grid_induction.v1": 150.25
    },
    "progress": {
     "canonical/runtime/escape_progress_13_route_manifest_v1.py.auto.v1": 199.666667,
@@ -75030,6 +75208,10 @@
    "rebind": {
     "canonical/runtime/abc_observable_trace_scope_rebind_verifier_v1.py.auto.v1": 595.0
    },
+   "recall": {
+    "engine:ASSOCIATIVE_EPISODIC_MEMORY": 596.0,
+    "engine:PROCEDURE_TRAJECTORY_MEMORY": 596.0
+   },
    "receipt": {
     "python.repository.acceptance.measure.v1": 397.333333,
     "python.task.acceptance.measured.objective.v1": 397.333333
@@ -75206,6 +75388,10 @@
    },
    "relocation": {
     "python.refactor.move_function.v1": 892.5
+   },
+   "remember": {
+    "engine:ASSOCIATIVE_EPISODIC_MEMORY": 596.0,
+    "engine:PROCEDURE_TRAJECTORY_MEMORY": 596.0
    },
    "remove": {
     "python.swe.transform_and_synthesize.v1": 298.5,
@@ -75418,7 +75604,8 @@
     "engine:STRUCTURAL_REWRITE_INDUCTION": 892.5
    },
    "right": {
-    "engine:PROSE_CLAIM_EXPERIMENT": 892.5
+    "engine:PROCEDURE_TRAJECTORY_MEMORY": 596.0,
+    "engine:PROSE_CLAIM_EXPERIMENT": 596.0
    },
    "rm": {
     "shell.command.run": 595.0
@@ -75612,6 +75799,9 @@
    },
    "runner": {
     "software.analysis.diagnose_and_architect.v1": 595.0
+   },
+   "runs": {
+    "engine:ASSOCIATIVE_EPISODIC_MEMORY": 892.5
    },
    "runtime": {
     "canonical.runtime.abstain_gated_skill_induction_v1.hidden.v1": 5.838188,
@@ -76066,6 +76256,10 @@
    "scored": {
     "python.tests.advance.mutation_kill.v1": 595.0
    },
+   "screen": {
+    "engine:OSWORLD_BROWSER_OPS": 596.0,
+    "engine:STATE_CONTRACT_WORLD_MODEL": 596.0
+   },
    "screen_python_candidates_cow": {
     "engine:ZYGOTE_COW_FORK_POOL": 595.0
    },
@@ -76392,6 +76586,10 @@
    "simplified": {
     "engine:FINANCE_LBO_DCF_WORKFLOW": 892.5
    },
+   "simulate": {
+    "engine:PREDICTIVE_HOARE_CONTRACT": 596.0,
+    "engine:STATE_CONTRACT_WORLD_MODEL": 596.0
+   },
    "simulate_python_fast": {
     "engine:FAST_ABSTRACT_SIMULATOR": 595.0
    },
@@ -76399,11 +76597,12 @@
     "engine:FAST_ABSTRACT_SIMULATOR": 892.5
    },
    "single": {
-    "canonical/runtime/five_primitive_role_single_semantic_frontier_v1.py.auto.v1": 199.666667,
-    "canonical/runtime/livebench_if_single_checker_solver_v1.py.auto.v1": 199.666667,
-    "canonical/runtime/livebench_legacy_single_constraint_witness_v1.py.auto.v1": 199.666667,
-    "engine:LIVEBENCH_IF_CONSTRAINT_SOLVER": 299.5,
-    "python.refactor.inline_helper.v1": 299.5
+    "canonical/runtime/five_primitive_role_single_semantic_frontier_v1.py.auto.v1": 171.428571,
+    "canonical/runtime/livebench_if_single_checker_solver_v1.py.auto.v1": 171.428571,
+    "canonical/runtime/livebench_legacy_single_constraint_witness_v1.py.auto.v1": 171.428571,
+    "engine:INSTANT_ONE_SHOT_LEARNER": 257.142857,
+    "engine:LIVEBENCH_IF_CONSTRAINT_SOLVER": 257.142857,
+    "python.refactor.inline_helper.v1": 257.142857
    },
    "single-use": {
     "python.refactor.inline_helper.v1": 595.0
@@ -76440,6 +76639,9 @@
    },
    "skipped": {
     "python.tests.audit.unittest": 595.0
+   },
+   "sleep": {
+    "engine:GRADIENT_FREE_LAW_CONSOLIDATION": 892.5
    },
    "slice": {
     "code.impact.tree_sitter.testselect.v1": 239.2,
@@ -76768,6 +76970,9 @@
     "git.repository.operate.v1": 397.333333,
     "knowledge.status.assert": 397.333333
    },
+   "stays": {
+    "engine:ASSOCIATIVE_EPISODIC_MEMORY": 892.5
+   },
    "stderr": {
     "engine:KOAN_REFUSAL_CURRICULUM": 892.5
    },
@@ -76792,6 +76997,9 @@
    },
    "storage": {
     "canonical/runtime/h100_unichart_storage_feasibility_v1.py.auto.v1": 595.0
+   },
+   "store": {
+    "engine:GRADIENT_FREE_LAW_CONSOLIDATION": 892.5
    },
    "story": {
     "engine:DOCX_STORY_PART_REPLACE": 892.5
@@ -77174,6 +77382,9 @@
    "task.acceptance.objective.lossless.v1": {
     "task.acceptance.objective.lossless.v1": 3570.0
    },
+   "tasks": {
+    "engine:RULE_EXPIRY_WORLD_FINGERPRINT": 892.5
+   },
    "taught": {
     "file.question.taught_words.v1": 595.0
    },
@@ -77550,6 +77761,9 @@
    "touch": {
     "shell.command.run": 595.0
    },
+   "touching": {
+    "engine:INSTANT_ONE_SHOT_LEARNER": 892.5
+   },
    "tournament": {
     "terminal.kstar.root.assess.stdlib": 595.0
    },
@@ -77736,6 +77950,9 @@
    "understudy": {
     "engine:VERIFIED_ZERO_SCREENSHOT_ACTION_CACHE": 892.5
    },
+   "unfamiliar": {
+    "engine:INTERFACE_ACTION_GRAMMAR": 892.5
+   },
    "unichart": {
     "canonical/runtime/h100_unichart_storage_feasibility_v1.py.auto.v1": 595.0
    },
@@ -77747,6 +77964,9 @@
    },
    "unified_trace_policy_generator_v1.py.auto.v1": {
     "canonical/runtime/unified_trace_policy_generator_v1.py.auto.v1": 892.5
+   },
+   "unify": {
+    "engine:VERIFIED_SKILL_CRYSTALLIZER": 892.5
    },
    "union": {
     "canonical/runtime/python_request_acceptance_union_v1.py.auto.v1": 595.0
@@ -77861,9 +78081,10 @@
     "web.browser.rendered.capture.chromedriver": 397.333333
    },
    "use": {
-    "engine:C_ASAN_CEGIS_REPAIR": 447.75,
-    "python.fault.localize.dynamic.dataflow.v1": 298.5,
-    "python.refactor.inline_helper.v1": 447.75
+    "engine:C_ASAN_CEGIS_REPAIR": 358.8,
+    "engine:INTERFACE_ACTION_GRAMMAR": 358.8,
+    "python.fault.localize.dynamic.dataflow.v1": 239.2,
+    "python.refactor.inline_helper.v1": 358.8
    },
    "v1": {
     "canonical.runtime.abstain_gated_skill_induction_v1.hidden.v1": 4.885645,
@@ -78744,6 +78965,9 @@
    "wacc": {
     "engine:FINANCE_LBO_DCF_WORKFLOW": 892.5
    },
+   "watch": {
+    "engine:CAUSAL_TRACE_SKILL_COMPILER": 892.5
+   },
    "web": {
     "web.browser.rendered.capture.chromedriver": 397.333333,
     "web.release.verify.independent_http": 397.333333
@@ -78759,6 +78983,9 @@
    },
    "weighted": {
     "canonical/runtime/p3_explicit_weighted_salience_cell_v1.py.auto.v1": 595.0
+   },
+   "weights": {
+    "engine:INSTANT_ONE_SHOT_LEARNER": 892.5
    },
    "what_the_condition_wants": {
     "engine:CONDITION_DEMAND_HARVESTER": 595.0
@@ -80273,7 +80500,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "0379a0a0290b8b73fbb94b6eed98c238032a41a87853a71cb0ad45675b75234a",
+   "sha256": "801c440327a5d1ccc29da76b6e1758eb3cdfa0a29c7d50e5cec69e753627e1ab",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "triggers": [
     "brain",
@@ -80423,7 +80650,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/compile_brain_unified_model_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "a813b94bd1d0e44db2cd4bcee1a149994de64497bf825b243605973b5655bf2c",
+   "sha256": "d185c809787dd191156971dcf571e5c5fb24e5b8e0d97201f3b9b99cc07d2164",
    "summary": "Compile the whole live Brain into one content-addressed model artifact.",
    "triggers": [
     "compile",
@@ -100569,6 +100796,110 @@
     "frontier",
     "map",
     "v1"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 27535,
+   "headings": [
+    "Frontier Leapfrog Plan — 2026-11-26",
+    "0. The one-sentence answer",
+    "1. What the frontier actually looks like (Nov 2026, web research)",
+    "1.1 Instant learning — the frontier moved to *structure*, not similarity",
+    "1.2 Computer use — OSWorld-Verified is done; OSWorld 2.0 is the frontier",
+    "1.3 Coding agents — SWE-bench is retired; Frontier-Bench is open",
+    "1.4 Memory — modular, tiered, agent-managed",
+    "1.5 Continual learning — 2026 is the year; RL forgets less than SFT",
+    "1.6 World models — L1 Predict → L2 Simulate → L3 Modify",
+    "1.7 Verification / abstention — conformal + evidence acquisition",
+    "2. The unusual ideas (what puts Brain ahead, not behind)",
+    "Idea 1: Structure-first retrieval (beat GraphIC at its own game)",
+    "Idea 2: CLI-first computer use (beat pixel agents on speed)",
+    "Idea 3: Sleep consolidation as a first-class operation",
+    "Idea 4: Abstain → acquire evidence → retry (beat guaranteed abstention)",
+    "Idea 5: Training-free adaptation by default (JitRL without the paper)",
+    "Idea 6: World-model-first planning (L2 before L1)",
+    "Idea 7: Measure on Frontier-Bench-shaped tasks, not SWE-bench",
+    "3. The unification (Elon's law: delete the walls)",
+    "3.1 The fragmentation, measured",
+    "3.2 The fix (no new parts)",
+    "3.3 What this does NOT do (by design)",
+    "3.4 Speed (insanely fast)",
+    "4. Sequencing (fastest real lever first)",
+    "5. How to know it's working",
+    "6. Risks and honest limits",
+    "7. References (web research, Nov 2026)",
+    "8. Measured results — steps 1–3 executed this session",
+    "8.1 Files changed",
+    "8.2 Routing, before → after (10 frontier goals)",
+    "8.3 Negative control preserved",
+    "8.4 Harvested reachability, measured",
+    "8.5 Unreachable-executable count",
+    "8.6 Speed (Elon's law), measured on this machine",
+    "8.7 Verification state",
+    "8.8 What is still true",
+    "8.9 Next lever, in order"
+   ],
+   "kind": "DOCUMENT",
+   "path": "FRONTIER_LEAPFROG_PLAN_20261126_V1.md",
+   "sha256": "55492af47b09141c8950d860ade87d97cb646ef86e0ec998550434704cb4e234",
+   "summary": "> **Authority: NONE.** Sandbox plan + web research. No capability is registered, > no family flips, `truth.achieved` is untouched. This document describes what > to build and why; it claims nothing about what has been built.",
+   "terms": {
+    "10": 8,
+    "2.0": 8,
+    "2026": 32,
+    "abstain": 7,
+    "abstention": 9,
+    "action": 9,
+    "agents": 8,
+    "already": 10,
+    "beats": 8,
+    "before": 13,
+    "bet": 7,
+    "brain": 19,
+    "capability": 15,
+    "confident": 7,
+    "consolidation": 8,
+    "cost": 11,
+    "engine": 22,
+    "evidence": 11,
+    "executable": 8,
+    "fallback": 14,
+    "fix": 9,
+    "forgetting": 9,
+    "frontier": 28,
+    "goal": 10,
+    "goals": 8,
+    "harvested": 16,
+    "https": 17,
+    "lesson": 8,
+    "make": 8,
+    "memory": 14,
+    "mode": 8,
+    "model": 16,
+    "new": 18,
+    "no": 31,
+    "not": 43,
+    "one": 15,
+    "only": 15,
+    "predict": 8,
+    "route": 23,
+    "runtime": 8,
+    "solve": 19,
+    "still": 10,
+    "surfaces": 11,
+    "tasks": 10,
+    "top": 8,
+    "trigger": 9,
+    "verification": 12,
+    "zero": 8
+   },
+   "title": "Frontier Leapfrog Plan — 2026-11-26",
+   "title_terms": [
+    "2026-11-26",
+    "frontier",
+    "leapfrog",
+    "plan"
    ]
   },
   {
@@ -152730,14 +153061,14 @@
  },
  "provenance": {
   "compiler": "canonical/runtime/compile_brain_unified_model_v1.py",
-  "compiler_sha256": "a813b94bd1d0e44db2cd4bcee1a149994de64497bf825b243605973b5655bf2c",
+  "compiler_sha256": "d185c809787dd191156971dcf571e5c5fb24e5b8e0d97201f3b9b99cc07d2164",
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 2336,
+  "included_source_count": 2337,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "c04cde3d1ad1d584bd5f14f7bc1430acbe9e6964576f1ab4973c18c6ceaf679e"
+  "source_tree_digest": "0edaa2cb9c86055dc7e69a9119046655607cd14c0c0177666e0442cb4a1db078"
  },
  "research_index": [
   {
@@ -340186,7 +340517,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "0379a0a0290b8b73fbb94b6eed98c238032a41a87853a71cb0ad45675b75234a",
+   "sha256": "801c440327a5d1ccc29da76b6e1758eb3cdfa0a29c7d50e5cec69e753627e1ab",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 26,
    "symbols": [
@@ -346264,7 +346595,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/compile_brain_unified_model_v1.py",
-   "sha256": "a813b94bd1d0e44db2cd4bcee1a149994de64497bf825b243605973b5655bf2c",
+   "sha256": "d185c809787dd191156971dcf571e5c5fb24e5b8e0d97201f3b9b99cc07d2164",
    "summary": "Compile the whole live Brain into one content-addressed model artifact.",
    "symbol_count": 40,
    "symbols": [
