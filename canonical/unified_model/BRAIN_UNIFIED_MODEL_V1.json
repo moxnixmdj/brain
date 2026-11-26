@@ -33055,7 +33055,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0bdbfe3d849212816af4d7039a9ec63a231ba0f4465a3eb32fa35de406166072"
+  "value": "f0521b3eaf78e9c75813a18c4a519ff4db1e51366a7a57fd72657393f24e3cfa"
  },
  "engines": [
   {
@@ -316114,7 +316114,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FRONTIER_REACHABILITY_AND_SELECTIVE_RISK_20261126_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V8",
-   "sha256": "7aff3e737739d8396276f27e1293cfb1ec9ffab6763bd7c87127dd6760470449",
+   "sha256": "a66c332a46f62a4a92bfbae773ce69b0e723dd7e397ce328c29106b5a91b0770",
    "status": "SHIPPED",
    "terms": {
     "10": 2,
