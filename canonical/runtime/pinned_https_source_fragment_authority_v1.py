@@ -40,16 +40,7 @@ def _norm(text: Any) -> str:
     return _WS.sub(" ", unescape(str(text or "")).strip()).casefold()
 
 
-def _canon(value: Any) -> bytes:
-    return json.dumps(
-        value,
-        sort_keys=True,
-        separators=(",", ":"),
-        ensure_ascii=False,
-        allow_nan=False,
-    ).encode("utf-8")
-
-
+from canonical.runtime.canonical_form_v1 import canonical_bytes as _canon  # noqa: E402
 def _sha(value: Any) -> str:
     if isinstance(value, (bytes, bytearray)):
         return sha256(bytes(value)).hexdigest()

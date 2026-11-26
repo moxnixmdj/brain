@@ -56,16 +56,7 @@ def _git_blob(raw: bytes) -> str:
     return sha1(b"blob " + str(len(raw)).encode("ascii") + b"\0" + raw).hexdigest()
 
 
-def _canon(value: Any) -> bytes:
-    return json.dumps(
-        value,
-        sort_keys=True,
-        separators=(",", ":"),
-        ensure_ascii=False,
-        allow_nan=False,
-    ).encode("utf-8")
-
-
+from canonical.runtime.canonical_form_v1 import canonical_bytes as _canon  # noqa: E402
 def _sha(value: Any) -> str:
     return sha256(_canon(value)).hexdigest()
 

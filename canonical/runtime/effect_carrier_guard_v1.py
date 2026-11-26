@@ -18,16 +18,7 @@ from canonical.runtime.effect_broker_final_authorizer_v1 import authorize_effect
 SCHEMA = "PROJECT_BRAIN_EFFECT_CARRIER_GUARD_V1"
 
 
-def _canon(value: Any) -> bytes:
-    return json.dumps(
-        value,
-        sort_keys=True,
-        separators=(",", ":"),
-        ensure_ascii=False,
-        allow_nan=False,
-    ).encode("utf-8")
-
-
+from canonical.runtime.canonical_form_v1 import canonical_bytes as _canon  # noqa: E402
 def execute_authorized_effect(
     request: Mapping[str, Any],
     grant: Mapping[str, Any],

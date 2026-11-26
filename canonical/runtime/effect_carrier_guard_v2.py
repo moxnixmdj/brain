@@ -19,16 +19,7 @@ SCHEMA = "PROJECT_BRAIN_EFFECT_CARRIER_GUARD_V2"
 MAX_BOUND_RESULT_BYTES = 8_000_000
 
 
-def _canon(value: Any) -> bytes:
-    return json.dumps(
-        value,
-        sort_keys=True,
-        separators=(",", ":"),
-        ensure_ascii=False,
-        allow_nan=False,
-    ).encode("utf-8")
-
-
+from canonical.runtime.canonical_form_v1 import canonical_bytes as _canon  # noqa: E402
 def _pre_effect_deny(authorization: Mapping[str, Any]) -> dict[str, Any]:
     return {
         "schema": SCHEMA,

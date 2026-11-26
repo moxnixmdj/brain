@@ -49,16 +49,7 @@ def _fail(reason: str, **extra: Any) -> dict[str, Any]:
     }
 
 
-def _canon(value: Any) -> bytes:
-    return json.dumps(
-        value,
-        sort_keys=True,
-        separators=(",", ":"),
-        ensure_ascii=False,
-        allow_nan=False,
-    ).encode("utf-8")
-
-
+from canonical.runtime.canonical_form_v1 import canonical_bytes as _canon  # noqa: E402
 def _rule_id(surface: str, source_schema: str, profile: str) -> str:
     digest = sha256(
         _canon({

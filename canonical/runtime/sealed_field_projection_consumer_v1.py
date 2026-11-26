@@ -43,16 +43,7 @@ class SealedFieldProjectionError(RuntimeError):
     pass
 
 
-def _canon(value: Any) -> bytes:
-    return json.dumps(
-        value,
-        sort_keys=True,
-        separators=(",", ":"),
-        ensure_ascii=False,
-        allow_nan=False,
-    ).encode("utf-8")
-
-
+from canonical.runtime.canonical_form_v1 import canonical_bytes as _canon  # noqa: E402
 def _sha256(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
 

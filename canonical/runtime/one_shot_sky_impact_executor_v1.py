@@ -46,16 +46,7 @@ ROOT = Path(__file__).resolve().parents[2]
 SCHEMA = "PROJECT_BRAIN_ONE_SHOT_SKY_IMPACT_EXECUTION_RECEIPT_V1"
 
 
-def _canon(value: Any) -> bytes:
-    return json.dumps(
-        value,
-        sort_keys=True,
-        separators=(",", ":"),
-        ensure_ascii=False,
-        allow_nan=False,
-    ).encode("utf-8")
-
-
+from canonical.runtime.canonical_form_v1 import canonical_bytes as _canon  # noqa: E402
 def _sha256(value: Any) -> str:
     return sha256(_canon(value)).hexdigest()
 
