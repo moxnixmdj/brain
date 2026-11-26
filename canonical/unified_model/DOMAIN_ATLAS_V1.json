@@ -170,6 +170,7 @@
     "manufactured_contrast_v1",
     "matched_coding_debug_tool_discovery_fresh_v1",
     "matched_coding_debug_tool_discovery_v1",
+    "meme_protocol_bench_v1",
     "meta_circular_organ_graph_v1",
     "metamorphic_cli_compiler_v1",
     "metamorphic_habitation_zipper_v1",
@@ -315,9 +316,9 @@
     "witness_inversion_v1",
     "zygote_worker_pool_v1"
    ],
-   "candidates": 311,
+   "candidates": 312,
    "frontier_function": "resolve a repository issue from a text description",
-   "harvested_all": 111,
+   "harvested_all": 112,
    "harvested_executable_top": 8,
    "hidden_share_all": 0.0,
    "hidden_top": [],
@@ -2748,6 +2749,7 @@
     "live_integrated_brain_v1",
     "matched_executable_atom_semantics_v1",
     "measurement_hygiene_guard_v1",
+    "meme_protocol_bench_v1",
     "meta_circular_organ_graph_v1",
     "meta_learning_policy_v9",
     "metamorphic_habitation_zipper_v1",
@@ -2847,9 +2849,9 @@
     "whitebox_introspector_and_trace_synthesizer_v1",
     "workflow_goal_generalization_v1"
    ],
-   "candidates": 201,
+   "candidates": 202,
    "frontier_function": "context that stays correct as it fills",
-   "harvested_all": 53,
+   "harvested_all": 54,
    "harvested_executable_top": 10,
    "hidden_share_all": 0.0,
    "hidden_top": [],
@@ -3525,6 +3527,7 @@
     "matched_executable_atom_semantics_v1",
     "material_effect_reference_monitor_v1",
     "mechanism_discovery_v6",
+    "meme_protocol_memory_v1",
     "meta_circular_organ_graph_v1",
     "metamorphic_habitation_zipper_v1",
     "mined_rewrite_theory_v1",
@@ -3692,14 +3695,14 @@
     "work_unit_validity_guard_v2",
     "worker_syscall_allowlist_v1"
    ],
-   "candidates": 342,
+   "candidates": 343,
    "frontier_function": "know when you do not know, and prove what you did",
-   "harvested_all": 63,
+   "harvested_all": 64,
    "harvested_executable_top": 4,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 24,
-   "indexed_all": 306,
+   "indexed_all": 307,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -4848,13 +4851,13 @@
  "method": "weighted lexical evidence over module stem, docstring and symbol names; frontier vocabulary and this repository's own vocabulary in one table",
  "min_score": 3.0,
  "model_calls": 0,
- "modules_scanned": 3337,
+ "modules_scanned": 3339,
  "network_calls": 0,
  "per_domain": 25,
  "reachability": {
   "coding_agents": {
-   "chance_route_recall": 0.2,
-   "chance_source_recall": 0.137,
+   "chance_route_recall": 0.1997,
+   "chance_source_recall": 0.1374,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -5001,7 +5004,7 @@
    ]
   },
   "computer_use": {
-   "chance_route_recall": 0.0633,
+   "chance_route_recall": 0.0632,
    "chance_source_recall": 0.0676,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
@@ -5146,7 +5149,7 @@
    ]
   },
   "continual_learning": {
-   "chance_route_recall": 0.0561,
+   "chance_route_recall": 0.056,
    "chance_source_recall": 0.0172,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.333,
@@ -5293,7 +5296,7 @@
    ]
   },
   "instant_learning": {
-   "chance_route_recall": 0.1712,
+   "chance_route_recall": 0.171,
    "chance_source_recall": 0.0844,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
@@ -5441,8 +5444,8 @@
    ]
   },
   "memory": {
-   "chance_route_recall": 0.1367,
-   "chance_source_recall": 0.0879,
+   "chance_route_recall": 0.1365,
+   "chance_source_recall": 0.0883,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 1.0,
@@ -5489,9 +5492,9 @@
      ],
      "source_hit": true,
      "source_top": [
+      "canonical/swe_kernel/meme_protocol_memory_v1.py",
       "canonical/runtime/associative_memory_v1.py",
-      "canonical/runtime/h100_zero_learned_event_memory_v1.py",
-      "canonical/runtime/memory_policy_v1.py"
+      "canonical/runtime/h100_zero_learned_event_memory_v1.py"
      ]
     },
     {
@@ -5503,12 +5506,12 @@
      "routed_hit": [
       "engine:LEAPFROG_W40_SELFPLAY_STEER_HORIZON_COMMIT",
       "engine:PROCEDURE_TRAJECTORY_MEMORY",
-      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS"
+      "engine:UNIVERSAL_COMPUTER_PETRI_AGENT"
      ],
      "routed_top": [
       "engine:LEAPFROG_W40_SELFPLAY_STEER_HORIZON_COMMIT",
       "engine:PROCEDURE_TRAJECTORY_MEMORY",
-      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS"
+      "engine:UNIVERSAL_COMPUTER_PETRI_AGENT"
      ],
      "source_hit": false,
      "source_top": [
@@ -5589,8 +5592,8 @@
    ]
   },
   "verification_abstention": {
-   "chance_route_recall": 0.2,
-   "chance_source_recall": 0.1511,
+   "chance_route_recall": 0.2011,
+   "chance_source_recall": 0.1515,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 1.0,
@@ -5735,7 +5738,7 @@
    ]
   },
   "world_model": {
-   "chance_route_recall": 0.1151,
+   "chance_route_recall": 0.1149,
    "chance_source_recall": 0.0614,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,

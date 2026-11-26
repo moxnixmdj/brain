@@ -1,0 +1,548 @@
+{
+  "action_id": "WAVE42_MEME_PROTOCOL_MEMORY_20261126_V1",
+  "action_intent_id": "WAVE42_MEME_PROTOCOL_MEMORY_20261126_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "action_summary": "The repository's semiring Why-Provenance JTMS memory (Move 3 of unified_unfamiliar_leapfrog_v1) answers two of the six operations the MEME protocol asks for -- multi-hop cascade retraction that preserves diamond alternative proofs, and absence for a fact that was established and lost its support. Measured on main before this PR, three operations have no API at all: aggregation, tracking (entity renames), and absence for a rule that never fired. This PR adds them by composition, not duplication: the fact store, the polynomials and the cascade stay in the existing engine, and canonical/swe_kernel/meme_protocol_memory_v1.py adds a ground rule layer that saturates incrementally, Z-set aggregates that distinguish a member the operator deleted (the smaller total is the intended answer) from a member that lost its support upstream (the total is now unsupported and must be refused, naming the member), rename tracking that carries derived facts and poisons the stale name, and a rule-blocked absence answer that names the rule and the missing body. The new six-operation bench canonical/evaluation/meme_protocol_bench_v1.py scores the subsystem against a from-scratch fixpoint oracle with a no-dependency-edges baseline, a liar control and a stub control.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "earlier_routes_exhausted_reason": "COMPOSE/INTEGRATE first: the new layer reuses the existing semiring store, its provenance polynomials, its cascade retraction and its tombstones rather than re-implementing them; the only new machinery is the three operations the store cannot express.",
+    "incremental_spend_usd": 0,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer-run sandbox verification (18/18 new suite, 156/156 across ten wave suites, 62/62 model tests, 38/38 verify_brain_unified_model_v1, bench self-check honest 1.000 / liar 0.167 / stub 0.000 with discrimination 0.833, no-edges baseline 0.333, 40-seed differential agreement) plus GitHub Actions CI referee and repo-integrity-guard. Not independent verification.",
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md",
+      "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/meme_protocol_memory_v1.py",
+      "canonical/evaluation/meme_protocol_bench_v1.py",
+      "canonical/tests/test_meme_protocol_memory_wave42_v1.py",
+      "canonical/verification/MEME_PROTOCOL_BENCH_V1_SCORECARD_20261126.json",
+      "canonical/runtime/unified_hidden_capability_federation_v1.py"
+    ],
+    "route_class": "INTEGRATE",
+    "route_id": "WAVE42_MEMORY_DEPENDENCY_PROTOCOL",
+    "scope_complete_discharge": false,
+    "terminal_achieved": false
+  },
+  "benchmark_or_family_rank_authority": "Producer-run sandbox measurement scored by this repository's own MEME protocol instrument; zero external model calls, zero claims of comparability to any published benchmark or to any other memory system, zero claimed obligation discharge.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A memory that can only delete and cascade answers three of the six questions the protocol asks. An aggregate over a set that lost a member silently reports the smaller total; an entity rename leaves derived facts pointing at a name nobody will ever write again; and a rule that could never fire is indistinguishable from a fact nobody ever knew. Measured here, before the change: aggregation, tracking and rule-blocked absence have no API in the store.",
+  "canonical_base_commit": "aae7c958b9f37c3067b283aafc3e04e65b3de724",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": {
+    "aggregation_under_invalidation": "Z-set contributions with a live/support distinction: an operator deletion shrinks the total on purpose, an upstream invalidation refuses it and names the lost member",
+    "instrument": "six-operation bench with honest/liar/stub controls: discrimination 0.833, trustworthy True",
+    "measured_by_an_oracle": "36/36 against a from-scratch fixpoint; 12/36 for the no-dependency-edges baseline; 40 random mutation sequences agree with the oracle",
+    "rule_blocked_absence": "a rule that never fired is reported as UNKNOWN__UPSTREAM_SUPERSEDED naming the rule and the missing body, distinct from the cascade answer and from never-established",
+    "tracking": "rename_entity carries derived facts to the new name, refuses writes under the stale name, and poison-queries it; 206-fact rebuild in 1.68 ms with 0 lost facts"
+  },
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "A memory that can only delete and cascade answers three of the six questions the protocol asks. An aggregate over a set that lost a member silently reports the smaller total; an entity rename leaves derived facts pointing at a name nobody will ever write again; and a rule that could never fire is indistinguishable from a fact nobody ever knew. Measured here, before the change: aggregation, tracking and rule-blocked absence have no API in the store.",
+  "date": "2026-11-26",
+  "expected_parent_change": "The memory answers all six protocol operations, and the two kinds of 'no' stay distinct: a fact that lost its support names the invalidated premise; a rule that never fired names the rule and the missing body; a member the operator deleted is meant to be gone, so the smaller aggregate is the right answer and is still reported.",
+  "expected_parent_frontier_change": "Replaces delete-and-cascade with a dependency memory that can be asked the questions mainstream stacks answer with a confident smaller number: aggregates under invalidation, entity tracking, and absence for a dependent that was never derivable.",
+  "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
+  "falsification_condition": "Falsified if the incremental store disagrees with the from-scratch fixpoint on any mutation sequence, if an aggregate reports a value after an upstream invalidation removed a member, if a rename promotes a derived fact into a premise (it would then survive the retraction of the very support it came from), if a stale name is accepted as a write, if a rule-blocked absence is reported as 'never established', or if the no-dependency-edges baseline scores above chance on cascade, absence, aggregation or tracking.",
+  "generic_repair_from_single_probe": true,
+  "governance_change": null,
+  "highest_leverage_now": true,
+  "honest_limits": [
+    "Ground rules only: no unification, no variables, no negation. A variable-bearing rule is outside the layer and would be refused, not approximated.",
+    "Rename rebuilds the store (O(store), 1.68 ms for 206 facts) because premise ids are positional; that is a cost, not a design claim.",
+    "The aggregate is recomputed from the Z-set per query (94 us over 200 members); it is not an incrementally cached value.",
+    "The protocol bench is this repository's instrument, judged by this repository's oracle; the baseline is our own no-edges implementation, not a measurement of anyone else's system.",
+    "All figures are producer-run sandbox measurements at $0 spend and 0 model calls."
+  ],
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "live_challenger_frontier_discovery_required": true,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/81",
+    "interpretation": "Turns three protocol operations that had no implementation into measured ones, with the witness for each. Claims no discharge of any open terminal obligation.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "0.5",
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "Six-operation protocol bench, judged by a from-scratch semi-naive fixpoint oracle: dependency memory 36/36 (rate 1.000) at seed 20261126 and 30/30 at seeds 1/7/42/99; the no-dependency-edges baseline 12/36 (0.333) -- it answers exact recall (6/6) and deletion (6/6) and scores 0/6 on cascade, absence, aggregation and tracking, while making 6 false success claims (it reports the smaller total confidently). Instrument self-check: honest 1.000 / liar 0.167 / stub 0.000, discrimination 0.833, trustworthy True. Differential test: 40 random mutation sequences x 120 operations agree with the from-scratch fixpoint, aggregates included. Costs measured: 200 facts built in 1.7 ms, an aggregate over 200 members in 94 us, a query in 8 us, a rename of a 206-fact store in 1.68 ms with 0 lost facts, retract+cascade 17 us. Tests: 18/18 test_meme_protocol_memory_wave42_v1; 156/156 across the ten wave suites; 62/62 test_brain_unified_model_v1; repo_integrity_guard 0 violations. Zero model calls, $0.00.",
+  "next_step": "Next levers, in order: (1) variable-bearing rules with unification, so the layer stops being propositional; (2) a durable Z-set log so the memory survives a process restart and a replay can be byte-compared; (3) wire the six operations into the creature's memory engine so the protocol answers are what the runtime actually asks for.",
+  "parent_capability": "canonical/swe_kernel/meme_protocol_memory_v1.py + canonical/evaluation/meme_protocol_bench_v1.py + canonical/runtime/unified_hidden_capability_federation_v1.py",
+  "probe_specific": false,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+    "canonical/swe_kernel/meme_protocol_memory_v1.py",
+    "canonical/evaluation/meme_protocol_bench_v1.py",
+    "canonical/tests/test_meme_protocol_memory_wave42_v1.py",
+    "canonical/verification/MEME_PROTOCOL_BENCH_V1_SCORECARD_20261126.json",
+    "canonical/runtime/unified_hidden_capability_federation_v1.py"
+  ],
+  "real_outcome": "The memory answers all six protocol operations, and the two kinds of 'no' stay distinct: a fact that lost its support names the invalidated premise; a rule that never fired names the rule and the missing body; a member the operator deleted is meant to be gone, so the smaller aggregate is the right answer and is still reported.",
+  "recursive_obs": {
+    "canonical_base_commit": "aae7c958b9f37c3067b283aafc3e04e65b3de724",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "aggregate by re-querying the live set and hoping nobody notices the smaller total",
+      "rename by mutating keys in place while provenance points at positional ids",
+      "absence by returning 'never established' for a fact whose rule simply cannot fire"
+    ],
+    "expected_parent_level_state_change": "Replaces delete-and-cascade with a dependency memory that can be asked the questions mainstream stacks answer with a confident smaller number: aggregates under invalidation, entity tracking, and absence for a dependent that was never derivable.",
+    "obs_blocker": {
+      "blocker_is": "UnifiedModel and Creature previously parsed the entire 13.47 MB JSON on cold source/recall queries, left module_bridge_v1 (5,221 functions) and type_level_composer_v1 unwired to front-door routing, suffered action-order sensitivity in transition_system_identity_v1.canonical, lacked unified standing-fact clobber recovery + relational CAS re-anchoring in computer use, lacked Coccinelle/SyDIT multi-file sibling closure + Plastic Surgery donor mining over warm-zygote CoW forks, lacked Kumiho prospective cue indexing + CPB Sybil defense + RD-Forget selective replay unlearning, and lacked zero-shot verified cross-language Meaning-IR transfer across Python/TS/Go/Rust",
+      "delete_bypass_substitute_options": [
+        "Reuse pinned worker_syscall_allowlist_v1 classic BPF program directly inside os_isolation_v1 without inventing a new sandbox",
+        "Bypass visual pixels via W3C WebMCP typed JSON-schema tools and compile CLI refusals into zero-retry interfaces via a_refusal_is_a_specification_v1",
+        "Wire existing residual_wall_closers_v1, repo_component_petri_v1, typed_invention_v1, mined_rewrite_theory_v1, and weight_update_admission_v1 directly into existing runtime classes"
+      ],
+      "evidence_the_blocker_is_real": [
+        "os_isolation_v1 previously checked 13 namespace/chroot probes without seccomp_mode=2 or raw syscall escape probes",
+        "DOMAIN_ATLAS_V1 previously had route reachability misses on frontier/native queries across multiple domains",
+        "residual_wall_closers_v1, repo_component_petri_v1, typed_invention_v1, and a_refusal_is_a_specification_v1 had zero front-door runtime wiring in UnifiedModel/Creature"
+      ],
+      "intrinsic_or_path_specific": "PATH_SPECIFIC to unwired repository modules and missing runtime integration",
+      "surviving_causal_blocker": "UnifiedModel and Creature previously parsed the entire 13.47 MB JSON on cold source/recall queries, left module_bridge_v1 (5,221 functions) and type_level_composer_v1 unwired to front-door routing, suffered action-order sensitivity in transition_system_identity_v1.canonical, lacked unified standing-fact clobber recovery + relational CAS re-anchoring in computer use, lacked Coccinelle/SyDIT multi-file sibling closure + Plastic Surgery donor mining over warm-zygote CoW forks, lacked Kumiho prospective cue indexing + CPB Sybil defense + RD-Forget selective replay unlearning, and lacked zero-shot verified cross-language Meaning-IR transfer across Python/TS/Go/Rust"
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "separate standalone wrapper CLIs for each unwired module",
+        "repeated uncompiled refusal retries in ConfinedHybridComputerUseExecutor",
+        "unbounded hot-tier skill bloat beyond 96 skills"
+      ],
+      "existing_inherited_routes_checked": "worker_syscall_allowlist_v1.py, a_refusal_is_a_specification_v1.py, osworld_verified_task_ledger_v1.py, typed_invention_v1.py, residual_wall_closers_v1.py, repo_component_petri_v1.py, release_chunk_archive_v1.py, safe_action_model_v1.py, consistency_vs_equivalence_v1.py, mined_rewrite_theory_v1.py, weight_update_admission_v1.py, cow_lens_fuzz_and_negative_space_v1.py",
+      "external_existing_routes_checked": "Linux classic BPF seccomp, Agent-S4 evolving interfaces, W3C WebMCP navigator.modelContext, TMA-NM non-malleable agent memory, GovMem anti-correlation, A-TMA anti-ghost-memory, SkillApt counterfactual activation, DreamProver <96 hot-tier bound, and Language Models Need Sleep consolidation",
+      "surviving_gap": "Multi-app cross-window desktop workflows and containerized external SWE-bench Pro / OSWorld-Verified runs",
+      "what_was_added": "Seccomp BPF wiring in os_isolation_v1.py; refusal-compiler, WebMCP, anti-vacuous audit, Rung 2B/2C/3, and solve_typed_cegis_and_concepts in futamura_leapfrog_kernel_v1.py; TMA-NM/GovMem/A-TMA/SkillApt/<96/bicameral_sleep_cycle in canonical_memory_crystallizer_v1.py; +12 Wave 38 federated engines and front-door hooks on UnifiedModel and Creature; test_frontier_leapfrog_wave38_v1.py"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "reimplementing syscall allowlists or wall-closers already solved inside canonical/",
+        "editing any pinned .hidden.v1 or protected governance artifact"
+      ],
+      "real_outcome": "All Wave 38 surfaces unified into UnifiedModel and Creature and live-verified with 98/98 total passing checks (38/38 model verifier + 55/55 unittest + 5/5 domain atlas)",
+      "surviving_necessity": "Independent third-party external benchmark evaluation on OSWorld-Verified and SWE-bench Pro"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "worker_syscall_allowlist_v1, a_refusal_is_a_specification_v1, osworld_verified_task_ledger_v1, typed_invention_v1, residual_wall_closers_v1, repo_component_petri_v1, release_chunk_archive_v1, safe_action_model_v1, consistency_vs_equivalence_v1, mined_rewrite_theory_v1, weight_update_admission_v1, cow_lens_fuzz_and_negative_space_v1",
+      "downstream_work_to_delete_or_supersede": "Supersedes non-seccomp isolation defaults and ad-hoc unverified memory consolidation",
+      "fresh_reuse_plan": "UnifiedModel and Creature expose probe_os_isolation(seccomp=True), execute_confined_computer_use(webmcp_tools=..., auto_compile_refusal=True), solve_multifile_repo_futamura(reject_vacuous_verifier=True, use_residual_wall_closers=True, use_repo_component_petri=True), solve_typed_cegis(), non_malleable_memory_op(), bicameral_sleep_cycle(), and discover_dark_matter()"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "Direct AST import and signature census over canonical/ pinpointed all 12 unwired backing organs mechanically",
+      "search_stop_decision": "stopped once all 98/98 checks (38/38 unified model verifier, 55/55 unittest, 5/5 domain atlas) and all governance guards passed"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Leaving worker_syscall_allowlist_v1, residual_wall_closers_v1, repo_component_petri_v1, typed_invention_v1, and a_refusal_is_a_specification_v1 unwired leaves real kernel escape vectors, SWE statement/exception repair walls, and memory laundering vulnerabilities open",
+      "routes_ranked": [
+        {
+          "rank": 1,
+          "route": "WAVE39_UNIFIED_FIVE_PILLAR_KERNEL_K3_ZERO",
+          "why": "Integrates 12 already-built repository organs plus non-malleable memory OS and bicameral sleep directly into UnifiedModel and Creature at K3=0 with 38/38 verifier parity"
+        },
+        {
+          "rank": 2,
+          "route": "UNSECURED_DISCONNECTED_ORGANS_STATUS_QUO",
+          "why": "Leaves seccomp uninstalled in os_isolation_v1, misses statement-shaped/custom-exception SWE repairs, and lacks TMA-NM/GovMem/A-TMA memory safety"
+        }
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Zero-mock real-execution tests run live Linux kernel seccomp BPF 20-probe escape attempts, live CLI refusal-to-interface compilation and gzip byte verification inside CapEff=0+seccomp, real W3C WebMCP schema rejection, real OOP/function wall-closer and custom-exception Petri repo repairs, live TMA-NM origin laundering and payload tamper attacks, GovMem correlated-trace rejection, A-TMA ghost-memory partitioning, and bicameral sleep consolidation"
+    },
+    "open_world_route_discovery": {
+      "candidate_routes": [
+        {
+          "disqualification_reason": "",
+          "evidence": [
+            "Verified in canonical/tests/test_wave39_unified_five_pillars_v1.py and canonical/runtime/verify_brain_unified_model_v1.py"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_wave39_unified_five_pillars_v1.py",
+            "canonical/runtime/verify_brain_unified_model_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "WAVE39_UNIFIED_FIVE_PILLAR_KERNEL_K3_ZERO"
+        },
+        {
+          "disqualification_reason": "Leaves seccomp BPF uninstalled in os_isolation_v1, misses statement-shaped and custom-exception SWE bugs, and lacks TMA-NM/GovMem/A-TMA memory defenses.",
+          "evidence": [
+            "Direct verification in canonical/tests/test_frontier_leapfrog_wave38_v1.py"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_frontier_leapfrog_wave38_v1.py",
+            "canonical/runtime/verify_brain_unified_model_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "UNSECURED_DISCONNECTED_ORGANS_STATUS_QUO"
+        }
+      ],
+      "checked_at_utc": "2026-11-26T17:28:53+00:00",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "UNSECURED_DISCONNECTED_ORGANS_STATUS_QUO",
+      "max_age_hours": 24,
+      "negative_search_summary": "External LLM/VLM producer dependencies are forbidden by NO_MODEL_PRODUCER_COGNITION. Integrating Project Brain's own pinned classic BPF seccomp allowlist, refusal specification compiler, residual wall closers, repo component Petri synthesizer, typed CEGIS(T), and non-malleable memory OS strictly dominates disconnected status-quo modules.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "Linux classic BPF seccomp syscall allowlist CapEff zero agent sandbox 2026"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Agent S4 refusal specification evolving interface W3C WebMCP navigator.modelContext 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "TMA-NM non-malleable memory origin binding GovMem A-TMA ghost memory SkillApt 2026"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "Language Models Need Sleep memory consolidation DreamProver library drift 2026"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "WAVE39_UNIFIED_FIVE_PILLAR_KERNEL_K3_ZERO",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-26T17:28:53+00:00",
+        "execution_dependencies": [
+          {
+            "dependency": "Linux kernel user/mount/pid/ipc/uts/net namespaces + classic BPF seccomp + Python 3.11 stdlib",
+            "evidence": [
+              "Verified live: 20/20 kernel escape probes blocked, 8/8 test_frontier_leapfrog_wave38_v1 PASS, 24/24 syscall allowlist tests PASS"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "Canonical governance, referee, drift, and orientation validators",
+            "evidence": [
+              "repo_integrity_guard_v1.py PASS, enforce_goal_hierarchy.py PASS, enforce_load_bearing_primary_pr.py PASS, verify_brain_unified_model_v1.py 38/38 PASS"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "DATA_SOURCE",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "WAVE39_UNIFIED_FIVE_PILLAR_KERNEL_K3_ZERO",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/worker_syscall_allowlist_v1.py",
+          "canonical/runtime/a_refusal_is_a_specification_v1.py",
+          "canonical/swe_kernel/residual_wall_closers_v1.py",
+          "canonical/swe_kernel/repo_component_petri_v1.py",
+          "canonical/swe_kernel/typed_invention_v1.py",
+          "canonical/swe_kernel/mined_rewrite_theory_v1.py",
+          "canonical/swe_kernel/weight_update_admission_v1.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "2026 literature on Agent-S4 evolving interfaces, W3C WebMCP, TMA-NM, GovMem, A-TMA, SkillApt, Library Drift, and Language Models Need Sleep"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Python 3.11 stdlib (ast, gzip, hashlib, ctypes, os.fork, unittest) and Linux seccomp(2)/unshare(2)"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Linux kernel seccomp BPF filter ABI and namespaces documentation"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "real_outcome": "The memory answers all six protocol operations, and the two kinds of 'no' stay distinct: a fact that lost its support names the invalidated premise; a rule that never fired names the rule and the missing body; a member the operator deleted is meant to be gone, so the smaller aggregate is the right answer and is still reported.",
+    "required_capability": "Answering the six memory operations from dependencies rather than from retrieval: exact recall, aggregation, tracking, deletion, cascade, absence -- each with the witness that makes it checkable.",
+    "route_frontier": {
+      "canonical_base_commit": "09b1e34929783be213703e34da6858596c43d410",
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "unification is a real capability, not a measured gap here",
+            "CORRECTNESS": "more general, but the cascade and diamond behaviour already passes",
+            "INCREMENTAL_COST": "$0.00",
+            "RELIABILITY": "discards working provenance machinery",
+            "VERIFIABILITY": "no new oracle; the same six operations would need judging",
+            "WALL_CLOCK": "a store rewrite for three operations that fit on top of the existing one"
+          },
+          "evidence": [
+            "main: SemiringProvenanceJTMSMemory has no aggregate, no rename, no rule layer"
+          ],
+          "qualification_evidence": [
+            "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "route": "REWRITE_THE_MEMORY_AS_A_DATALOG_ENGINE"
+        }
+      ],
+      "checked_at_utc": "2026-11-26T17:28:53+00:00",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "WAVE42_MEMORY_DEPENDENCY_PROTOCOL",
+      "max_age_hours": 24,
+      "negative_search_summary": "External LLM/VLM producer dependencies are forbidden by NO_MODEL_PRODUCER_COGNITION. Integrating Project Brain's own pinned classic BPF seccomp allowlist, refusal specification compiler, residual wall closers, repo component Petri synthesizer, typed CEGIS(T), and non-malleable memory OS strictly dominates disconnected status-quo modules.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "Linux classic BPF seccomp syscall allowlist CapEff zero agent sandbox 2026"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Agent S4 refusal specification evolving interface W3C WebMCP navigator.modelContext 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "TMA-NM non-malleable memory origin binding GovMem A-TMA ghost memory SkillApt 2026"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "Language Models Need Sleep memory consolidation DreamProver library drift 2026"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "WAVE42_MEMORY_DEPENDENCY_PROTOCOL",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-26T19:57:38+00:00",
+        "execution_dependencies": [
+          {
+            "dependency": "Linux kernel user/mount/pid/ipc/uts/net namespaces + classic BPF seccomp + Python 3.11 stdlib",
+            "evidence": [
+              "Re-verified 2026-11-26T19:57:38+00:00: test_frontier_leapfrog_wave38_v1 8/8 PASS (its test_01 runs the seccomp-BPF + 6-namespace + CAP_EFF_0 escape probe); the whole wave ran here at 0 model calls and $0."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "Canonical governance, referee, drift, and orientation validators",
+            "evidence": [
+              "Re-verified 2026-11-26T19:57:38+00:00: repo_integrity_guard_v1 --static-only violations=0 PASS; enforce_load_bearing_primary_pr.py --base aae7c958b9 --head HEAD PASS; rebind_intent_and_verify_gates_v1.py --no-fetch ALL_GATES_PASS."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "DATA_SOURCE",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "WAVE42_MEMORY_DEPENDENCY_PROTOCOL",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/worker_syscall_allowlist_v1.py",
+          "canonical/runtime/a_refusal_is_a_specification_v1.py",
+          "canonical/swe_kernel/residual_wall_closers_v1.py",
+          "canonical/swe_kernel/repo_component_petri_v1.py",
+          "canonical/swe_kernel/typed_invention_v1.py",
+          "canonical/swe_kernel/mined_rewrite_theory_v1.py",
+          "canonical/swe_kernel/weight_update_admission_v1.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "2026 literature on Agent-S4 evolving interfaces, W3C WebMCP, TMA-NM, GovMem, A-TMA, SkillApt, Library Drift, and Language Models Need Sleep"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Python 3.11 stdlib (ast, gzip, hashlib, ctypes, os.fork, unittest) and Linux seccomp(2)/unshare(2)"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Linux kernel seccomp BPF filter ABI and namespaces documentation"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      {
+        "route": "WAVE42_MEMORY_DEPENDENCY_PROTOCOL",
+        "verdict": "SELECTED",
+        "why": "Adds the three missing operations by composition, and measures them against a from-scratch fixpoint oracle with a no-edges baseline and two controls."
+      },
+      {
+        "route": "REWRITE_THE_MEMORY_AS_A_DATALOG_ENGINE",
+        "verdict": "NON_DOMINATING",
+        "why": "Unification would be a larger capability, but the measured gap was three specific operations over ground facts; rewriting the store would also discard the cascade and diamond-preservation behaviour that already passes."
+      },
+      {
+        "route": "BENCHMARK_ONLY",
+        "verdict": "DISQUALIFIED",
+        "why": "A protocol bench without the operations would score zero on its own hardest cases; measurement without acquisition adds no capability."
+      },
+      {
+        "route": "VECTOR_OR_GRAPH_RETRIEVAL_BASELINE_UPGRADE",
+        "verdict": "DISQUALIFIED",
+        "why": "Retrieval cannot answer cascade or absence at any top-k; the baseline is included to show that, not to be improved."
+      }
+    ],
+    "selected_surviving_route": "WAVE42_MEMORY_DEPENDENCY_PROTOCOL",
+    "stop_condition": "Stop this PR once test_meme_protocol_memory_wave42_v1 (18/18), the ten wave suites (156/156), test_brain_unified_model_v1 (62/62), verify_brain_unified_model_v1 (38/38), test_creature_runtime_v1, test_domain_atlas_v1, repo_integrity_guard_v1, enforce_goal_hierarchy and enforce_load_bearing_primary_pr all pass.",
+    "why_selected_route_is_fastest_sufficient": "The gap was measured by asking the store for the three operations and getting no API: the cheapest sufficient script is to add exactly those three on top of the provenance it already maintains, and to judge them with an oracle that recomputes. 94 us per aggregate over 200 members, 0 model calls, no new dependency."
+  },
+  "required_capability": "Answering the six memory operations from dependencies rather than from retrieval: exact recall, aggregation, tracking, deletion, cascade, absence -- each with the witness that makes it checkable.",
+  "route_class": "INTEGRATE",
+  "route_id": "WAVE42_MEMORY_DEPENDENCY_PROTOCOL",
+  "route_order_walk": {
+    "ADAPT": "Adapted os_isolation_v1.py, futamura_leapfrog_kernel_v1.py, canonical_memory_crystallizer_v1.py, unified_hidden_capability_federation_v1.py, brain_unified_model_v1.py, and creature_runtime_v1.py.",
+    "BYPASS": "Bypassed visual pixels via typed W3C WebMCP channels and bypassed repeated CLI refusal retries via compiled evolved interfaces.",
+    "COMPOSE": "Composed worker_syscall_allowlist_v1, a_refusal_is_a_specification_v1, residual_wall_closers_v1, repo_component_petri_v1, typed_invention_v1, mined_rewrite_theory_v1, and weight_update_admission_v1 directly into UnifiedModel and Creature.",
+    "DELETE": "Eliminated duplicate wrapper scaffolding and capped hot-tier skill bloat strictly at <=96 active skills.",
+    "INTEGRATE": "SELECTED: unified all 12 Wave 38 backing organs plus non-malleable memory OS and bicameral sleep into UnifiedModel and Creature with 100% DOMAIN_ATLAS_V1 reachability.",
+    "REUSE": "Reused pinned classic BPF seccomp program (26cd1e65...), existing byte_effect_oracle_v1, stdlib_cow_test_runner_v1, residual_wall_closers_v1, repo_component_petri_v1, typed_invention_v1, and VerificationFirstMemoryBus."
+  },
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "WAVE42_MEMORY_DEPENDENCY_PROTOCOL",
+  "selected_surviving_route": "WAVE42_MEMORY_DEPENDENCY_PROTOCOL",
+  "selectivity_note": "One new module, one new bench, one new test file, one federation engine, one concept family. No protected path, no capability registry entry, no guard, no model file change (the model stays at 7,533 lines, inside the < 7,534 budget), no model call, no dollar.",
+  "status": "SHIPPED",
+  "stop_condition": "Stop this PR once test_meme_protocol_memory_wave42_v1 (18/18), the ten wave suites (156/156), test_brain_unified_model_v1 (62/62), verify_brain_unified_model_v1 (38/38), test_creature_runtime_v1, test_domain_atlas_v1, repo_integrity_guard_v1, enforce_goal_hierarchy and enforce_load_bearing_primary_pr all pass.",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "truth": {
+    "achieved": false,
+    "what_is_not": "No comparison to any published memory system: the baseline is this repository's own no-dependency-edges implementation, scored by this repository's own oracle. The rule layer is propositional (ground rules), not a datalog with unification. Rename is an O(store) rebuild, measured at 1.68 ms for 206 facts, not an in-place rekey. Aggregates are recomputed from the Z-set on demand rather than maintained as a cached value with a delta. Nothing here is durable across processes. No open obligation is discharged.",
+    "what_is_real": "Six-operation protocol bench, judged by a from-scratch semi-naive fixpoint oracle: dependency memory 36/36 (rate 1.000) at seed 20261126 and 30/30 at seeds 1/7/42/99; the no-dependency-edges baseline 12/36 (0.333) -- it answers exact recall (6/6) and deletion (6/6) and scores 0/6 on cascade, absence, aggregation and tracking, while making 6 false success claims (it reports the smaller total confidently). Instrument self-check: honest 1.000 / liar 0.167 / stub 0.000, discrimination 0.833, trustworthy True. Differential test: 40 random mutation sequences x 120 operations agree with the from-scratch fixpoint, aggregates included. Costs measured: 200 facts built in 1.7 ms, an aggregate over 200 members in 94 us, a query in 8 us, a rename of a 206-fact store in 1.68 ms with 0 lost facts, retract+cascade 17 us. Tests: 18/18 test_meme_protocol_memory_wave42_v1; 156/156 across the ten wave suites; 62/62 test_brain_unified_model_v1; repo_integrity_guard 0 violations. Zero model calls, $0.00."
+  },
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "No open truth obligation is claimed discharged by this PR. This PR unifies Wave 39 five-pillar frontier mechanisms, 25+ dark-matter organs, zero-adapter inventory composition, and os.pread cold section slicing inside UnifiedModel and Creature while keeping terminal truth false.",
+    "target_truth_obligations": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "478f3cdef55518cfec98104ca6ce9c9e7e490b1d",
+          "path": "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_V1.json"
+        }
+      ],
+      "decisive_question": "Can UnifiedModel and Creature unify all 5 frontier pillars + 5,221-function zero-adapter composition + os.pread cold section slicing at K3=0 while preserving 38/38 verifier parity, Creature contracts, and 1.000 DOMAIN_ATLAS_V1 reachability?",
+      "falsifier_id": "WAVE39_UNIFIED_FIVE_PILLARS_ADVERSARIAL_SUITE_V1",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "",
+      "proposal_id": "WAVE39_UNIFIED_KERNEL_FIVE_PILLARS_V1"
+    }
+  },
+  "verification": "Six-operation protocol bench, judged by a from-scratch semi-naive fixpoint oracle: dependency memory 36/36 (rate 1.000) at seed 20261126 and 30/30 at seeds 1/7/42/99; the no-dependency-edges baseline 12/36 (0.333) -- it answers exact recall (6/6) and deletion (6/6) and scores 0/6 on cascade, absence, aggregation and tracking, while making 6 false success claims (it reports the smaller total confidently). Instrument self-check: honest 1.000 / liar 0.167 / stub 0.000, discrimination 0.833, trustworthy True. Differential test: 40 random mutation sequences x 120 operations agree with the from-scratch fixpoint, aggregates included. Costs measured: 200 facts built in 1.7 ms, an aggregate over 200 members in 94 us, a query in 8 us, a rename of a 206-fact store in 1.68 ms with 0 lost facts, retract+cascade 17 us. Tests: 18/18 test_meme_protocol_memory_wave42_v1; 156/156 across the ten wave suites; 62/62 test_brain_unified_model_v1; repo_integrity_guard 0 violations. Zero model calls, $0.00.",
+  "weakens_existing_guard": false
+}
