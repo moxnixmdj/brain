@@ -1591,6 +1591,42 @@ class UnifiedModel:
                 "frontier_domain": "verification_abstention",
                 "capability_role": "Domain-of-verification extrapolation blocker + Purpose Gate contrast check + minimum-action global discriminator",
             },
+            {
+                "organ_id": "unfamiliar_m0_apartness_lsharp",
+                "module_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+                "frontier_domain": "instant_learning",
+                "capability_role": "Observation-table-free Brouwer-Heyting constructive apartness (L# / L#_e) active Mealy learner with error-sink pruning (<0.25 ms)",
+            },
+            {
+                "organ_id": "unfamiliar_m1_angelic_sygus_swe",
+                "module_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+                "frontier_domain": "coding_agents",
+                "capability_role": "CoW Angelic Forest impossibility sieve + EUSolver OE-SyGuS + NAME_SCOPE + 4-gate non-vacuous test verifier",
+            },
+            {
+                "organ_id": "unfamiliar_m2_protocol_lift_oracle",
+                "module_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+                "frontier_domain": "computer_use",
+                "capability_role": "WebMCP + CDP/HAR network-to-HTTP protocol lifter + kernel namespace confinement + magic-header round-trip effect oracle",
+            },
+            {
+                "organ_id": "unfamiliar_m3_semiring_jtms_meme",
+                "module_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+                "frontier_domain": "memory",
+                "capability_role": "Why-Provenance Semiring (2^(2^V), union, join) over Z-set DBSP achieving 100% MEME Cascade & Absence in <15 us",
+            },
+            {
+                "organ_id": "unfamiliar_m4_minimax_interrogator",
+                "module_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+                "frontier_domain": "verification_abstention",
+                "capability_role": "Exact DP minimax decision-region version-space interrogator (finite_minimax_decision_region_v1) with irreversibility gating",
+            },
+            {
+                "organ_id": "unfamiliar_m5_zero_llm_alphaevolve",
+                "module_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+                "frontier_domain": "continual_learning",
+                "capability_role": "Zero-LLM AlphaEvolve MAP-Elites + Pareto synthesizer guarded by adversarial anti-reward-hacking evaluator audit",
+            },
         ]
         return {
             "schema": SOLUTION_SCHEMA,
@@ -1664,6 +1700,20 @@ class UnifiedModel:
             return self.continual_memory_cycle(**req)
         if organ_id == "move_7_global_extrapolation_gate":
             return self.evaluate_global_extrapolation(**req)
+        if organ_id == "unfamiliar_m0_apartness_lsharp":
+            return self.learn_apartness_lsharp(**req)
+        if organ_id == "unfamiliar_m1_angelic_sygus_swe":
+            return self.solve_angelic_sygus_swe(str(req.pop("source_text")), str(req.pop("test_source")), **req)
+        if organ_id == "unfamiliar_m2_protocol_lift_oracle":
+            return self.lift_protocol_and_verify_effect(**req)
+        if organ_id == "unfamiliar_m3_semiring_jtms_meme":
+            return self.semiring_jtms_memory_cycle(**req)
+        if organ_id == "unfamiliar_m4_minimax_interrogator":
+            return self.minimax_interrogate_version_space(**req)
+        if organ_id == "unfamiliar_m5_zero_llm_alphaevolve":
+            return self.evolve_pareto_organ(str(req.pop("baseline_source")), **req)
+        if organ_id == "unfamiliar_six_moves_suite":
+            return self.run_unfamiliar_six_moves_suite()
         if organ_id == "play_a_counterfactual_discr_tree_router":
             from canonical.runtime import counterfactual_discr_tree_skill_router_v1 as pa
 
@@ -1986,7 +2036,13 @@ class UnifiedModel:
 
     # -------------------------------------------------------------- source index
 
-    def find_source(self, query: str, *, top_k: int = 5) -> dict[str, Any]:
+    def find_source(
+        self,
+        query: str,
+        *,
+        top_k: int = 5,
+        collapse_superseded: bool = True,
+    ) -> dict[str, Any]:
         """Locate runtime source the model can *address* but cannot *execute*.
 
         This is deliberately not ``route`` and ``solve`` never calls it. The
@@ -1998,10 +2054,19 @@ class UnifiedModel:
         if not terms:
             raise UnifiedModelError("FIND_SOURCE_QUERY_EMPTY")
         wanted = set(terms)
+        for _t in terms:
+            if "_" in _t:
+                for _part in _t.split("_"):
+                    if len(_part) >= 2 and _part not in STOPWORDS:
+                        wanted.add(_part)
+        q_folded = query.casefold()
+        explicit_ver = bool(re.search(r"(?:\bv\d+\b|_v\d+|\.py\b)", q_folded))
+        do_collapse = bool(collapse_superseded) and not explicit_ver
+        fetch_k = max(int(top_k) * 4, 24) if (do_collapse or "_" in q_folded) else max(1, int(top_k))
         self._ensure_source_index()
         src_map = self._source_index_cache or {}
         if self._source_csr is not None:
-            scored_top = self._source_csr.search_ranked(wanted, query.casefold(), top_k=top_k)
+            scored_top = self._source_csr.search_ranked(wanted, q_folded, top_k=fetch_k)
         else:
             src_df = self._source_df_cache or {}
             src_postings = self._source_postings_cache or {}
@@ -2019,7 +2084,6 @@ class UnifiedModel:
                 idf = math.log(1.0 + (total_docs - df + 0.5) / (df + 0.5))
                 for path, tf in plist:
                     acc_scores[path] = acc_scores.get(path, 0.0) + idf * (1.0 + math.log(tf))
-            q_folded = query.casefold()
             scored: list[tuple[float, str, dict[str, Any]]] = []
             for path, score in acc_scores.items():
                 if score <= 0.0:
@@ -2028,10 +2092,14 @@ class UnifiedModel:
                     score += 8.0
                 scored.append((score, path, src_map[path]))
             scored.sort(key=lambda item: (-item[0], item[1]))
-            scored_top = scored[: max(1, int(top_k))]
+            scored_top = scored[:fetch_k]
 
         rows: list[dict[str, Any]] = []
+        has_underscore_q = "_" in q_folded
         for score, path, row in scored_top:
+            adj_score = float(score)
+            if has_underscore_q and Path(path).stem.casefold() in q_folded:
+                adj_score += 8.0
             rows.append(
                 {
                     "path": path,
@@ -2041,12 +2109,23 @@ class UnifiedModel:
                     "summary": row.get("summary") or "",
                     "symbol_count": int(row.get("symbol_count") or 0),
                     "matched_terms": sorted(wanted & set(row.get("terms") or ())),
-                    "score": round(float(score), 6),
+                    "score": round(adj_score, 6),
                     # The load-bearing part of this whole method.
                     "capability": False,
                     "executable": False,
                 }
             )
+        if has_underscore_q and len(rows) > 1:
+            rows.sort(key=lambda r: (-r["score"], r["path"]))
+        if do_collapse and len(rows) > 1:
+            deduped = dedupe_version_families(rows, path_key="path")[: max(1, int(top_k))]
+            for d in deduped:
+                d.pop("version_family", None)
+                d.pop("version_number", None)
+                d.pop("superseded_versions_collapsed", None)
+            rows = deduped
+        else:
+            rows = rows[: max(1, int(top_k))]
         return {
             "schema": SOLUTION_SCHEMA,
             "operation": "FIND_SOURCE",
@@ -2063,16 +2142,31 @@ class UnifiedModel:
             ),
         }
 
-    def find_any_source(self, query: str, *, top_k: int = 5) -> dict[str, Any]:
+    def find_any_source(
+        self,
+        query: str,
+        *,
+        top_k: int = 5,
+        collapse_superseded: bool = True,
+    ) -> dict[str, Any]:
         """Locate source modules across ALL repository trees (`runtime`, `swe_kernel`, `tools`, `capabilities`, `research`, `integrations`)."""
         terms = tokenize(query)
         if not terms:
             raise UnifiedModelError("FIND_SOURCE_QUERY_EMPTY")
         wanted = set(terms)
+        for _t in terms:
+            if "_" in _t:
+                for _part in _t.split("_"):
+                    if len(_part) >= 2 and _part not in STOPWORDS:
+                        wanted.add(_part)
+        q_folded = query.casefold()
+        explicit_ver = bool(re.search(r"(?:\bv\d+\b|_v\d+|\.py\b)", q_folded))
+        do_collapse = bool(collapse_superseded) and not explicit_ver
+        fetch_k = max(int(top_k) * 4, 24) if (do_collapse or "_" in q_folded) else max(1, int(top_k))
         self._ensure_combined_source_index()
         combined = self._combined_source_index_cache or {}
         if self._combined_source_csr is not None:
-            scored_top = self._combined_source_csr.search_ranked(wanted, query.casefold(), top_k=top_k)
+            scored_top = self._combined_source_csr.search_ranked(wanted, q_folded, top_k=fetch_k)
         else:
             comb_postings = self._combined_source_postings_cache or {}
             src_df = self._source_df_cache or {}
@@ -2087,7 +2181,6 @@ class UnifiedModel:
                 idf = math.log(1.0 + (total_docs - df + 0.5) / (df + 0.5))
                 for path, tf in plist:
                     acc_scores[path] = acc_scores.get(path, 0.0) + idf * (1.0 + math.log(tf))
-            q_folded = query.casefold()
             scored: list[tuple[float, str, dict[str, Any]]] = []
             for path, score in acc_scores.items():
                 if score <= 0.0:
@@ -2096,7 +2189,7 @@ class UnifiedModel:
                     score += 8.0
                 scored.append((score, path, combined[path]))
             scored.sort(key=lambda item: (-item[0], item[1]))
-            scored_top = scored[: max(1, int(top_k))]
+            scored_top = scored[:fetch_k]
         rows: list[dict[str, Any]] = []
         for score, path, row in scored_top:
             rows.append(
@@ -2114,6 +2207,15 @@ class UnifiedModel:
                     "executable": False,
                 }
             )
+        if do_collapse and len(rows) > 1:
+            deduped = dedupe_version_families(rows, path_key="path")[: max(1, int(top_k))]
+            for d in deduped:
+                d.pop("version_family", None)
+                d.pop("version_number", None)
+                d.pop("superseded_versions_collapsed", None)
+            rows = deduped
+        else:
+            rows = rows[: max(1, int(top_k))]
         return {
             "schema": SOLUTION_SCHEMA,
             "operation": "FIND_ANY_SOURCE",
@@ -5990,6 +6092,82 @@ class UnifiedModel:
         from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
 
         return fsm.dbsp_memory_and_wake_sleep_cycle(scale_events=scale_events)
+
+    # ----------------------------------------------------- Unfamiliar-Name 6-Move Frontier Leapfrog Front Door
+
+    def learn_apartness_lsharp(
+        self,
+        *,
+        alphabet: Sequence[str],
+        execute_trace: Any,
+        held_out_traces: Sequence[Sequence[str]] = (),
+        target_output: str | None = None,
+        prune_error_sinks: bool = True,
+    ) -> dict[str, Any]:
+        """Move 0: `< 0.25 ms` observation-table-free Brouwer-Heyting constructive apartness (`L#_e`) learner."""
+        from canonical.swe_kernel import unified_unfamiliar_leapfrog_v1 as uul
+
+        return uul.ApartnessTreeInstantLearner(prune_error_sinks=prune_error_sinks).learn(
+            alphabet=alphabet,
+            execute_trace=execute_trace,
+            held_out_traces=held_out_traces,
+            target_output=target_output,
+        )
+
+    def solve_angelic_sygus_swe(
+        self,
+        source_text: str,
+        test_source: str,
+        *,
+        filename: str = "target_mod.py",
+        instruction_hint: str = "",
+        seed_cold_store: bool = False,
+    ) -> dict[str, Any]:
+        """Move 1: CoW Angelic Forest impossibility sieve + `OE-SyGuS` (`EUSolver`) + `NAME_SCOPE` + 4-gate verifier."""
+        from canonical.swe_kernel import unified_unfamiliar_leapfrog_v1 as uul
+
+        return uul.AngelicForestSyGuSRepairEngine().solve(
+            source_text,
+            test_source,
+            filename=filename,
+            instruction_hint=instruction_hint,
+            seed_cold_store=seed_cold_store,
+        )
+
+    def lift_protocol_and_verify_effect(self, **kwargs: Any) -> dict[str, Any]:
+        """Move 2: `WebMCP` + CDP/HAR network-to-HTTP protocol lifter + `osworld_intake` + magic-header `effect_oracle`."""
+        from canonical.swe_kernel import unified_unfamiliar_leapfrog_v1 as uul
+
+        return uul.lift_protocol_and_verify_effect(**kwargs)
+
+    def semiring_jtms_memory_cycle(
+        self,
+        *,
+        chain_count: int = 24,
+        chain_depth: int = 4,
+    ) -> dict[str, Any]:
+        """Move 3: Why-Provenance Semiring `(2^(2^V), union, join)` over `Z`-set DBSP (`100%` `MEME` Cascade & Absence)."""
+        from canonical.swe_kernel import unified_unfamiliar_leapfrog_v1 as uul
+
+        return uul.run_meme_semiring_benchmark(chain_count=chain_count, chain_depth=chain_depth)
+
+    def minimax_interrogate_version_space(self, **kwargs: Any) -> dict[str, Any]:
+        """Move 4: Exact DP minimax decision-region version-space interrogator (`finite_minimax_decision_region_v1`)."""
+        from canonical.swe_kernel import unified_unfamiliar_leapfrog_v1 as uul
+
+        return uul.minimax_interrogate_version_space(**kwargs)
+
+    def evolve_pareto_organ(self, baseline_source: str, **kwargs: Any) -> dict[str, Any]:
+        """Move 5: Zero-LLM `AlphaEvolve` MAP-Elites + Pareto code synthesizer with anti-reward-hacking oracle gate."""
+        from canonical.swe_kernel import unified_unfamiliar_leapfrog_v1 as uul
+
+        return uul.evolve_pareto_organ(baseline_source, **kwargs)
+
+    def run_unfamiliar_six_moves_suite(self) -> dict[str, Any]:
+        """Execute all 6 Unfamiliar-Name Frontier Leapfrog Moves end-to-end through `UnifiedModel` (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_unfamiliar_leapfrog_v1 as uul
+
+        return uul.run_unfamiliar_six_moves_suite()
 
     # ------------------------------------------------------------------ Wave 36 + 37 Unified Futamura & OS-Confined Front Doors
 

@@ -1388,6 +1388,60 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "required_inputs": ["query"],
         "declared_dependencies": [],
     },
+    "UNFAMILIAR_M0_APARTNESS_LSHARP_LEARNER": {
+        "domain": "INSTANT_LEARNING_AND_AUTOMATA",
+        "source_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+        "entrypoint": "ApartnessTreeInstantLearner",
+        "summary": "Observation-table-free Brouwer-Heyting constructive apartness (L# / L#_e) active Mealy learner with error-persistent sink pruning and adaptive distinguishing sequences.",
+        "triggers": ["apartness_lsharp_learner", "vaandrager constructive apartness observation tree", "error persistent mealy learner"],
+        "required_inputs": ["alphabet", "execute_trace"],
+        "declared_dependencies": [],
+    },
+    "UNFAMILIAR_M1_ANGELIC_FOREST_OE_SYGUS": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+        "entrypoint": "AngelicForestSyGuSRepairEngine",
+        "summary": "CoW os.fork() Angelic Forest impossibility sieve feeding multi-language EUSolver observational-equivalence SyGuS (oe_sygus_synthesizer_v1), NAME_SCOPE member-to-local rewrites, and 4-gate non-vacuous test verification.",
+        "triggers": ["angelic_forest_oe_sygus", "angelix impossibility sieve eusolver sygus", "name_scope non_vacuous repair"],
+        "required_inputs": ["source_text", "test_source"],
+        "declared_dependencies": [],
+    },
+    "UNFAMILIAR_M2_PROTOCOL_LIFT_EFFECT_ORACLE": {
+        "domain": "ZERO_PIXEL_COMPUTER_USE",
+        "source_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+        "entrypoint": "lift_protocol_and_verify_effect",
+        "summary": "WebMCP (document.modelContext) and CDP/HAR network-to-HTTP protocol lifter deleting browser UI overhead on Run 2+, paired with unprivileged Linux namespace confinement and magic-header round-trip effect_oracle.",
+        "triggers": ["protocol_lift_effect_oracle", "cdp har reverse api protocol lifting", "magic header roundtrip effect oracle"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "UNFAMILIAR_M3_SEMIRING_PROVENANCE_JTMS_MEME": {
+        "domain": "BITEMPORAL_MEMORY_AND_SKILL_RENT",
+        "source_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+        "entrypoint": "run_meme_semiring_benchmark",
+        "summary": "Green-Karvounarakis-Tannen Why-Provenance Semiring (2^(2^V), union, join) over Z-set DBSP memory achieving 100% MEME Cascade multi-hop retraction, diamond alternative-proof preservation, and 100% Absence invalidation detection in <15 us.",
+        "triggers": ["semiring_provenance_jtms_meme", "why provenance semiring cascade absence", "jtms nonmonotonic truth maintenance"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "UNFAMILIAR_M4_MINIMAX_VERSION_SPACE_INTERROGATOR": {
+        "domain": "ACTIVE_DISCRIMINATION_AND_MINIMAX",
+        "source_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+        "entrypoint": "minimax_interrogate_version_space",
+        "summary": "Exact dynamic-programming minimax decision-region interrogator (finite_minimax_decision_region_v1) bisecting ambiguous 1-shot version spaces with minimum worst-case probe cost while blocking irreversible probes.",
+        "triggers": ["minimax_version_space_interrogator", "finite minimax decision region bisection", "contrastive version space probe"],
+        "required_inputs": ["hypotheses", "candidate_probes"],
+        "declared_dependencies": [],
+    },
+    "UNFAMILIAR_M5_ZERO_LLM_ALPHAEVOLVE_PARETO": {
+        "domain": "EVOLUTIONARY_SYNTHESIS_AND_OPTIMIZATION",
+        "source_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+        "entrypoint": "evolve_pareto_organ",
+        "summary": "Zero-LLM AlphaEvolve MAP-Elites and Pareto (latency_us, ast_bytes) code synthesizer guarded by adversarial output-corruption evaluator auditing (0% false-pass reward hacking) and Two-Door rent garbage collection.",
+        "triggers": ["zero_llm_alphaevolve_pareto", "map elites pareto code evolution", "anti reward hacking evaluator audit"],
+        "required_inputs": ["baseline_source", "fn_name", "test_inputs"],
+        "declared_dependencies": [],
+    },
     "LEAPFROG_W36_BYTE_EFFECT_ORACLE": {
         "domain": "RING0_BYTE_EFFECT_AND_DRA_MINIMIZATION",
         "source_path": "canonical/runtime/byte_effect_oracle_v1.py",
@@ -1841,6 +1895,49 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
             "canonical/swe_kernel/computer_use_check_density_v1.py",
             "canonical/runtime/domain_of_verification_v1.py",
             "canonical/runtime/contrast_selection_v1.py",
+        ],
+    },
+    "unfamiliar_apartness_angelix_sygus_semiring_alphaevolve": {
+        "external_names": [
+            "lsharp",
+            "vaandrager apartness",
+            "adaptive distinguishing sequence",
+            "angelix",
+            "angelic forest",
+            "eusolver",
+            "observational equivalence sygus",
+            "name_scope",
+            "protocol lifting",
+            "har reverse api",
+            "effect oracle",
+            "why provenance semiring",
+            "jtms",
+            "meme cascade",
+            "meme absence",
+            "finite minimax decision region",
+            "alphaevolve",
+            "shinkaevolve",
+            "map-elites",
+        ],
+        "engines": [
+            "engine:UNFAMILIAR_M0_APARTNESS_LSHARP_LEARNER",
+            "engine:UNFAMILIAR_M1_ANGELIC_FOREST_OE_SYGUS",
+            "engine:UNFAMILIAR_M2_PROTOCOL_LIFT_EFFECT_ORACLE",
+            "engine:UNFAMILIAR_M3_SEMIRING_PROVENANCE_JTMS_MEME",
+            "engine:UNFAMILIAR_M4_MINIMAX_VERSION_SPACE_INTERROGATOR",
+            "engine:UNFAMILIAR_M5_ZERO_LLM_ALPHAEVOLVE_PARETO",
+        ],
+        "koan_modules": [
+            "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+            "canonical/runtime/oe_sygus_synthesizer_v1.py",
+            "canonical/swe_kernel/site_by_intervention_v1.py",
+            "canonical/swe_kernel/expected_actual_literal_v1.py",
+            "canonical/swe_kernel/cow_lens_fuzz_and_negative_space_v1.py",
+            "canonical/swe_kernel/mined_rewrite_theory_v1.py",
+            "canonical/swe_kernel/pins_from_the_reverted_part_v1.py",
+            "canonical/runtime/finite_minimax_decision_region_v1.py",
+            "canonical/runtime/monotone_semantic_drd_bridge_v1.py",
+            "intake/osworld_intake_policy_v1.py",
         ],
     },
     "futamura_compile_away_ring0_byte_oracle_and_dra": {
@@ -3781,6 +3878,82 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
             top_k=int(inputs.get("top_k", 10)),
         )
         return _ok(mode, "FORWARD_PUSH_BITEMPORAL_RECALLED", res)
+
+    if mode == "UNFAMILIAR_M0_APARTNESS_LSHARP_LEARNER":
+        from canonical.swe_kernel.unified_unfamiliar_leapfrog_v1 import ApartnessTreeInstantLearner
+
+        res = ApartnessTreeInstantLearner().learn(
+            alphabet=inputs["alphabet"],
+            execute_trace=inputs["execute_trace"],
+            held_out_traces=inputs.get("held_out_traces") or (),
+            target_output=inputs.get("target_output"),
+        )
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("reason") or "LSHARP_INCOMPLETE"), detail=res)
+        return _ok(mode, "APARTNESS_LSHARP_LEARNED", res)
+
+    if mode == "UNFAMILIAR_M1_ANGELIC_FOREST_OE_SYGUS":
+        from canonical.swe_kernel.unified_unfamiliar_leapfrog_v1 import AngelicForestSyGuSRepairEngine
+
+        res = AngelicForestSyGuSRepairEngine().solve(
+            str(inputs["source_text"]),
+            str(inputs["test_source"]),
+            seed_cold_store=bool(inputs.get("seed_cold_store", False)),
+        )
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("reason") or "ANGELIC_SYGUS_UNSOLVED"), detail=res)
+        return _ok(mode, "ANGELIC_FOREST_SYGUS_SOLVED", res)
+
+    if mode == "UNFAMILIAR_M2_PROTOCOL_LIFT_EFFECT_ORACLE":
+        from canonical.swe_kernel.unified_unfamiliar_leapfrog_v1 import lift_protocol_and_verify_effect
+
+        res = lift_protocol_and_verify_effect(
+            cdp_network_events=inputs.get("cdp_network_events") or (),
+            webmcp_tools=inputs.get("webmcp_tools") or (),
+            goal_parameters=inputs.get("goal_parameters"),
+            transport_fn=inputs.get("transport_fn"),
+            osworld_state=inputs.get("osworld_state"),
+            artifact_check=inputs.get("artifact_check"),
+        )
+        if not res.get("pass"):
+            return _fail(mode, "EFFECT_ORACLE_OR_PROTOCOL_LIFT_REFUSED", detail=res)
+        return _ok(mode, "PROTOCOL_LIFT_AND_ORACLE_VERIFIED", res)
+
+    if mode == "UNFAMILIAR_M3_SEMIRING_PROVENANCE_JTMS_MEME":
+        from canonical.swe_kernel.unified_unfamiliar_leapfrog_v1 import run_meme_semiring_benchmark
+
+        res = run_meme_semiring_benchmark(
+            chain_count=int(inputs.get("chain_count", 16)),
+            chain_depth=int(inputs.get("chain_depth", 3)),
+        )
+        return _ok(mode, "SEMIRING_JTMS_MEME_VERIFIED", res)
+
+    if mode == "UNFAMILIAR_M4_MINIMAX_VERSION_SPACE_INTERROGATOR":
+        from canonical.swe_kernel.unified_unfamiliar_leapfrog_v1 import minimax_interrogate_version_space
+
+        res = minimax_interrogate_version_space(
+            hypotheses=inputs["hypotheses"],
+            candidate_probes=inputs["candidate_probes"],
+            policy_regions=inputs.get("policy_regions"),
+            true_oracle=inputs.get("true_oracle"),
+            allow_irreversible_probes=bool(inputs.get("allow_irreversible_probes", False)),
+        )
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("reason") or "MINIMAX_INTERROGATION_INCOMPLETE"), detail=res)
+        return _ok(mode, "MINIMAX_VERSION_SPACE_RESOLVED", res)
+
+    if mode == "UNFAMILIAR_M5_ZERO_LLM_ALPHAEVOLVE_PARETO":
+        from canonical.swe_kernel.unified_unfamiliar_leapfrog_v1 import evolve_pareto_organ
+
+        res = evolve_pareto_organ(
+            str(inputs["baseline_source"]),
+            fn_name=str(inputs["fn_name"]),
+            test_inputs=inputs["test_inputs"],
+            evaluator_fn=inputs.get("evaluator_fn"),
+        )
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("status") or "EVOLUTION_REFUSED"), detail=res)
+        return _ok(mode, "PARETO_ORGAN_EVOLVED", res)
 
     if mode == "LEAPFROG_W36_BYTE_EFFECT_ORACLE":
         from canonical.runtime import byte_effect_oracle_v1 as m
