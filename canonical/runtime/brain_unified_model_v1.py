@@ -654,6 +654,7 @@ class UnifiedModel:
         self._source_csr: Any = None
         self._combined_source_csr: Any = None
         self._route_memo: dict[tuple[str, int], dict[str, Any]] = {}
+        self._futamura_cascade: Any = None
         self._raw_sha256: str = str(self._core_meta.get("raw_sha256") or "")
 
         self.min_score = float(confidence.get("minimum_best_score", 1.0))
@@ -5989,6 +5990,254 @@ class UnifiedModel:
         from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
 
         return fsm.dbsp_memory_and_wake_sleep_cycle(scale_events=scale_events)
+
+    # ------------------------------------------------------------------ Wave 36 + 37 Unified Futamura & OS-Confined Front Doors
+
+    def _get_futamura_cascade(self) -> Any:
+        if self._futamura_cascade is None:
+            from canonical.runtime.futamura_leapfrog_kernel_v1 import FutamuraSelfCompilingCascade
+
+            self._futamura_cascade = FutamuraSelfCompilingCascade()
+        return self._futamura_cascade
+
+    def futamura_solve(
+        self,
+        task: Mapping[str, Any],
+        *,
+        untrusted_proposer: Any = None,
+        auto_compile: bool = True,
+        use_cow_fork: bool = True,
+        alpha: float = 0.05,
+    ) -> dict[str, Any]:
+        """Wave 36: Futamura self-compiling Rung 0 -> 1 -> 2 -> 3 cascade with Ring-0 verification."""
+        return self._get_futamura_cascade().solve(
+            task,
+            untrusted_proposer=untrusted_proposer,
+            auto_compile=auto_compile,
+            use_cow_fork=use_cow_fork,
+            alpha=alpha,
+        )
+
+    def verify_byte_effect(
+        self,
+        target: str | Path,
+        *,
+        expected_format: str | None = None,
+        expected_source_bytes: bytes | None = None,
+        expected_source_path: str | Path | None = None,
+        baseline_archive_hashes: Mapping[str, str] | None = None,
+        allowed_archive_mutations: Sequence[str] = (),
+    ) -> dict[str, Any]:
+        """Wave 36: Ring-0 byte-level effect verification (magic headers, roundtrip, lying extensions, archive invariance)."""
+        from canonical.runtime.byte_effect_oracle_v1 import verify_byte_effect
+
+        return verify_byte_effect(
+            target,
+            expected_format=expected_format,
+            expected_source_bytes=expected_source_bytes,
+            expected_source_path=expected_source_path,
+            baseline_archive_hashes=baseline_archive_hashes,
+            allowed_archive_mutations=allowed_archive_mutations,
+        )
+
+    def minimize_patch_ddmin(
+        self,
+        original_source: str,
+        patched_source: str,
+        oracle_fn: Any,
+    ) -> dict[str, Any]:
+        """Wave 36: Atomic-line Delta-Debugging (`ddmin`) hunk minimizer (`NP_code`)."""
+        from canonical.runtime.byte_effect_oracle_v1 import ddmin_minimize_hunks
+
+        return ddmin_minimize_hunks(original_source, patched_source, oracle_fn)
+
+    def audit_patch_mutations(
+        self,
+        original_source: str,
+        patched_source: str,
+        oracle_fn: Any,
+        *,
+        max_mutants: int = 16,
+    ) -> dict[str, Any]:
+        """Wave 36: Touched-line adversarial mutation-kill audit."""
+        from canonical.runtime.byte_effect_oracle_v1 import audit_patch_mutation_kill
+
+        return audit_patch_mutation_kill(
+            original_source, patched_source, oracle_fn, max_mutants=max_mutants
+        )
+
+    def learn_mealy_instant(
+        self,
+        reset_and_run: Any,
+        alphabet: Sequence[str],
+        *,
+        numeric_actions: Mapping[str, tuple[int, int]] | None = None,
+        error_outputs: Sequence[str] = ("ERR", "ERROR", "FAIL", "DENIED"),
+        commutative_pairs: Sequence[tuple[str, str]] = (),
+        idempotent_actions: Sequence[str] = (),
+        max_states: int = 32,
+        enable_error_pruning: bool = True,
+    ) -> Any:
+        """Wave 36: Error-Aware `L#` + `Lambda*_M` sub-ms symbolic Mealy instant learner."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import ErrorAwareSymbolicMealyLearner
+
+        return ErrorAwareSymbolicMealyLearner().learn(
+            reset_and_run,
+            alphabet,
+            numeric_actions=numeric_actions,
+            error_outputs=error_outputs,
+            commutative_pairs=commutative_pairs,
+            idempotent_actions=idempotent_actions,
+            max_states=max_states,
+            enable_error_pruning=enable_error_pruning,
+        )
+
+    def execute_hybrid_cu(
+        self,
+        steps: Sequence[Mapping[str, Any]],
+        *,
+        initial_marking: Mapping[str, int] | None = None,
+        transitions: Mapping[str, Mapping[str, Any]] | None = None,
+        executor: Any = None,
+        initial_state: Mapping[str, Any] | None = None,
+        max_loop_repeats: int = 2,
+        macros: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 36: 3-channel HCU (`Programmatic > Semantic > Visual`) + Petri guard + loop-churn killer + PASTE macros."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import HybridComputerUsePetriSupervisor
+
+        sup = HybridComputerUsePetriSupervisor(
+            initial_marking=initial_marking,
+            transitions=transitions,
+        )
+        for m_name, m_steps in (macros or {}).items():
+            sup.register_paste_macro(str(m_name), m_steps)
+        return sup.execute_episode(
+            steps,
+            executor=executor,
+            initial_state=initial_state,
+            max_loop_repeats=max_loop_repeats,
+        )
+
+    def dbsp_belief_bus(self) -> Any:
+        """Wave 36: Live DBSP bi-temporal `Z`-set + Kumiho AGM belief-revision + `PreCommitFailureGate` bus."""
+        return self._get_futamura_cascade().belief_bus
+
+    def conformal_evalue_gate(
+        self,
+        observations: Sequence[Mapping[str, Any]],
+        *,
+        alpha: float = 0.05,
+    ) -> dict[str, Any]:
+        """Wave 36: Anytime-valid SCoRE conformal e-process gate (`Ville bound <= alpha`)."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import ConformalEValueGate
+
+        gate = ConformalEValueGate(alpha=alpha)
+        for ev in observations:
+            gate.observe(
+                str(ev["evidence"]),
+                passed=bool(ev["passed"]),
+                null_pass_prob=float(ev.get("null_pass_prob", 0.25)),
+                hard_contradiction=bool(ev.get("hard_contradiction", False)),
+            )
+        return gate.decision()
+
+    def cow_zygote_repair(
+        self,
+        source: str,
+        test_cases: Sequence[str],
+        *,
+        use_cow_fork: bool = True,
+    ) -> dict[str, Any]:
+        """Wave 36: Zero-overhead `os.fork()` CoW zygote AST repair + ddmin + mutation-kill gate."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import ZeroOverheadCoWZygoteRepairEngine
+
+        return ZeroOverheadCoWZygoteRepairEngine().repair(
+            source, test_cases, use_cow_fork=use_cow_fork
+        )
+
+    def wake_sleep_consolidate(
+        self,
+        *,
+        max_active_rules: int = 64,
+        rubin_observations: Mapping[str, tuple[float, float]] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 36: Wake-sleep anti-unification MDL consolidation + Rubin skill-rent GC."""
+        return self._get_futamura_cascade().wake_sleep_consolidate(
+            max_active_rules=max_active_rules,
+            rubin_observations=rubin_observations,
+        )
+
+    def probe_os_isolation(self, *, budget_s: float = 30.0) -> dict[str, Any]:
+        """Wave 37: Real Linux kernel namespace (`user+mount+pid+ipc+uts+net`, `CapEff=0`) 18-attempt escape probe."""
+        from canonical.runtime import os_isolation_v1
+
+        return os_isolation_v1.probe(budget_s=budget_s)
+
+    def execute_confined_computer_use(
+        self,
+        work_dir: str | Path,
+        steps: Sequence[Mapping[str, Any]],
+        *,
+        goal_id: str = "confined_hcu_episode",
+        budget_s: float = 15.0,
+        allow_network: bool = False,
+        verify_effect: bool = True,
+        initial_marking: Mapping[str, int] | None = None,
+        transitions: Mapping[str, Mapping[str, Any]] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 37: Real OS kernel-confined 3-channel HCU executor with Ring-0 byte-effect verification & CoW rollback."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import (
+            ConfinedHybridComputerUseExecutor,
+            HybridComputerUsePetriSupervisor,
+        )
+
+        sup = HybridComputerUsePetriSupervisor(
+            initial_marking=initial_marking,
+            transitions=transitions,
+        )
+        ex = ConfinedHybridComputerUseExecutor(
+            supervisor=sup,
+            belief_bus=self._get_futamura_cascade().belief_bus,
+        )
+        return ex.execute_episode(
+            work_dir,
+            steps,
+            goal_id=goal_id,
+            budget_s=budget_s,
+            allow_network=allow_network,
+            verify_effect=verify_effect,
+        )
+
+    def solve_multifile_repo_futamura(
+        self,
+        repo_dir: str | Path,
+        test_targets: Sequence[str] = (),
+        *,
+        goal_text: str = "",
+        suspect_files: Sequence[str] | None = None,
+        auto_compile: bool = True,
+        apply_to_disk: bool = True,
+        use_portfolio_fallback: bool = False,
+        alpha: float = 0.05,
+        timeout_s: float = 10.0,
+    ) -> dict[str, Any]:
+        """Wave 37: Unified multi-file Python repository Futamura solver (Rung-0 compiled skills +
+        `stdlib_cow_test_runner_v1` CoW fork screening + extended AST synthesis + Ring-0 Gate + compile-back)."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import MultifileFutamuraRepoSolver
+
+        solver = MultifileFutamuraRepoSolver(cascade=self._get_futamura_cascade())
+        return solver.solve(
+            repo_dir,
+            test_targets,
+            goal_text=goal_text,
+            suspect_files=suspect_files,
+            auto_compile=auto_compile,
+            apply_to_disk=apply_to_disk,
+            use_portfolio_fallback=use_portfolio_fallback,
+            alpha=alpha,
+            timeout_s=timeout_s,
+        )
 
 
 # --------------------------------------------------------------------------- helpers
