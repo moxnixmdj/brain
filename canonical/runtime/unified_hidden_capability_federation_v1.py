@@ -2936,6 +2936,7 @@ def compile_extended_source_index_rows(
     covered: set[str],
     *,
     cache: Any = None,
+    snapshot: Any = None,
 ) -> list[dict[str, Any]]:
     """Deterministically index non-`canonical/runtime` Python modules across the repo.
 
@@ -2948,14 +2949,24 @@ def compile_extended_source_index_rows(
     importers: dict[str, set[str]] = {}
     all_py: list[tuple[str, str, os.stat_result]] = []
     for sub in ("canonical", "intake", "tests"):
-        all_py.extend(
-            _fast_scandir_py(
-                root_str,
-                sub,
-                skip_dirs=skip_dirs,
-                skip_rel_prefixes=("canonical/astra_runtime/tmp",),
+        if snapshot is not None:
+            all_py.extend(
+                snapshot.under(
+                    sub,
+                    suffix=".py",
+                    skip_dirs=skip_dirs,
+                    skip_rel_prefixes=("canonical/astra_runtime/tmp",),
+                )
             )
-        )
+        else:
+            all_py.extend(
+                _fast_scandir_py(
+                    root_str,
+                    sub,
+                    skip_dirs=skip_dirs,
+                    skip_rel_prefixes=("canonical/astra_runtime/tmp",),
+                )
+            )
     use_cache = cache is not None and getattr(cache, "enabled", False)
     for abs_p, rel_p, st_p in all_py:
         mods: tuple[str, ...] | None = None
@@ -2977,7 +2988,12 @@ def compile_extended_source_index_rows(
 
     rows: list[dict[str, Any]] = []
     for tree_rel in _EXTENDED_SOURCE_TREES:
-        for abs_path, rel, st_ext in _fast_scandir_py(root_str, tree_rel, skip_dirs=skip_dirs):
+        tree_entries = (
+            snapshot.under(tree_rel, suffix=".py", skip_dirs=skip_dirs)
+            if snapshot is not None
+            else _fast_scandir_py(root_str, tree_rel, skip_dirs=skip_dirs)
+        )
+        for abs_path, rel, st_ext in tree_entries:
             if rel in covered:
                 continue
             stem = os.path.splitext(os.path.basename(abs_path))[0]

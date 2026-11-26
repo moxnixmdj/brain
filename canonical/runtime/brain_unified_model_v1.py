@@ -1228,8 +1228,9 @@ class UnifiedModel:
         """
         if self._unrunnable is None:
             found: dict[str, list[str]] = {}
+            probe_cache: dict[tuple[str, bool], bool] = {}
             for cid, row in self.capabilities.items():
-                missing = _missing_declared_dependencies(row)
+                missing = _missing_declared_dependencies(row, probe_cache=probe_cache)
                 if missing:
                     found[cid] = missing
             self._unrunnable = found
@@ -1267,7 +1268,7 @@ class UnifiedModel:
                 ask_list.append(token)
         scores: dict[str, float] = {}
         matched: set[str] = set()
-        unrunnable = self.unrunnable_capabilities()
+        unrunnable_known = self._unrunnable
         unrunnable_matched: set[str] = set()
         for token in ask_list:
             postings = self.index.get(token)
@@ -1275,17 +1276,7 @@ class UnifiedModel:
                 continue
             matched.add(token)
             for cid, weight in postings.items():
-                if cid in unrunnable:
-                    # Recorded, not removed. `route()` answers "what does the
-                    # model contain", and that is not a fact about this host:
-                    # the pinned route for "extract text from a pdf document"
-                    # is pdf.extract.text.pypdf on every machine, and this
-                    # sandbox happens to have pypdf while the CI runner does
-                    # not. Hiding a capability here would make the ranking
-                    # host-dependent, which is exactly what
-                    # test_status_reports_the_machine_it_actually_runs_on
-                    # exists to prevent. `solve()`, which does run things, is
-                    # where the host gets a vote.
+                if unrunnable_known is not None and cid in unrunnable_known:
                     unrunnable_matched.add(cid)
                 # A query token that is also in the capability id is direct
                 # operation evidence, not merely effect vocabulary. Count that
@@ -1298,6 +1289,16 @@ class UnifiedModel:
                     2.0 if token in self._capability_id_terms.get(cid, ()) else 1.0
                 )
                 scores[cid] = scores.get(cid, 0.0) + identity_weight * math.log1p(weight)
+        # Wave 31 Elon speed pass: when `unrunnable_capabilities()` has not been materialized yet,
+        # resolve declared dependencies lazily ONLY for matched capability candidates (memoized
+        # per unique dep name inside this call's local `probe_cache`), guaranteeing the exact same
+        # `unrunnable_on_this_host` without probing all 462 capabilities and with zero global cache state.
+        if unrunnable_known is None:
+            route_probe_cache: dict[tuple[str, bool], bool] = {}
+            for cid in scores:
+                row = self.capabilities.get(cid)
+                if row is not None and _missing_declared_dependencies(row, probe_cache=route_probe_cache):
+                    unrunnable_matched.add(cid)
         for cid in mentioned:
             scores[cid] = scores.get(cid, 0.0) + math.log1p(24.0)
             matched.add(cid.casefold())
@@ -3558,10 +3559,50 @@ class UnifiedModel:
             lazy_cli_imports_deferred=True,
             lazy_router_memory_bus=True,
             lazy_spine_imports=True,
+            lazy_route_dep_probe=True,
+            version_family_dedup_enabled=True,
             mmap_fts5_enabled=True,
             symbol_graph_sidecars_open=len(self._symbol_graph_conns),
             capability_count=len(self.capabilities),
             engine_count=len(self.engines),
+            elapsed_ms=round((time.perf_counter() - t0) * 1000.0, 3),
+        )
+
+    def recall_latest_sources(
+        self,
+        query: str,
+        *,
+        limit: int = 10,
+        include_extended: bool = True,
+    ) -> dict[str, Any]:
+        """Wave 31: Version-family deduplicated source recall (collapses v1..v17 sprawl to latest per family)."""
+        t0 = time.perf_counter()
+        fetch_k = max(int(limit) * 6, 48)
+        candidates: list[dict[str, Any]] = []
+        seen_paths: set[str] = set()
+        if include_extended:
+            fts = self.fts5_recall(query, top_k=fetch_k)
+            for row in fts.get("hits") or []:
+                path = str(row.get("path") or "")
+                if path.endswith(".py") and path not in seen_paths:
+                    seen_paths.add(path)
+                    candidates.append(dict(row))
+        rec = self.recall(query, top_k=fetch_k)
+        for row in rec.get("hits") or []:
+            path = str(row.get("path") or "")
+            if path.endswith(".py") and path not in seen_paths:
+                seen_paths.add(path)
+                candidates.append(dict(row))
+        deduped = dedupe_version_families(candidates, path_key="path")[: int(limit)]
+        return self._envelope(
+            operation="RECALL_LATEST_SOURCES",
+            goal=str(query),
+            status="PASS__RECALL_LATEST_SOURCES",
+            **{"pass": True},
+            raw_candidate_count=len(candidates),
+            deduped_count=len(deduped),
+            collapsed_superseded_count=max(0, len(candidates) - len(deduped)),
+            hits=deduped,
             elapsed_ms=round((time.perf_counter() - t0) * 1000.0, 3),
         )
 
@@ -4287,6 +4328,92 @@ class UnifiedModel:
             elapsed_ms=round((_time.perf_counter() - t0) * 1000.0, 3),
         )
 
+    # ----------------------------------------------------- Waves 32-35 Frontier Leapfrog Front Door
+
+    def disambiguate_and_pin_repairs(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 32: Version-Space Repair Disambiguation + Angelic CEGIS + Inverse Completion + Repo-Seeded SWE (`0D`, `K3=0`)."""
+        res = self.boundary_router.route_disambiguate_and_pin_repairs(**kwargs)
+        passed = bool(res.get("pass"))
+        return self._envelope(
+            operation="DISAMBIGUATE_AND_PIN_REPAIRS",
+            goal="wave32_version_space_swe",
+            status=str(res.get("status") or ("PASS" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            version_space_swe=res,
+        )
+
+    def prove_equivalence_and_amplify(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 32: Consistency-vs-Equivalence Proof + Distinguishing Projection + Reverted-Part Pinning + Verdict Amplification (`0H`, `K3=0`)."""
+        res = self.boundary_router.route_prove_equivalence_and_amplify(**kwargs)
+        passed = bool(res.get("pass"))
+        return self._envelope(
+            operation="PROVE_EQUIVALENCE_AND_AMPLIFY",
+            goal="wave32_equivalence_oracle",
+            status=str(res.get("status") or ("PASS" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            equivalence_oracle=res,
+        )
+
+    def crystallize_meaning_first_transfer(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 33: Meaning-First IR Crystallization + Cross-Language Transfer + Scoped Skills + Weight Admission (`0G`, `K3=0`)."""
+        res = self.boundary_router.route_meaning_first_transfer(**kwargs)
+        passed = bool(res.get("pass"))
+        return self._envelope(
+            operation="MEANING_FIRST_TRANSFER",
+            goal="wave33_meaning_first_transfer",
+            status=str(res.get("status") or ("PASS" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            meaning_first=res,
+        )
+
+    def memini_memrl_apex_consolidate(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 33: Memini (`w_fast`/`w_slow`) + MemRL (TD `Q` + 2-phase) + APEX-EM (3-channel) Consolidation (`0G`, `K3=0`)."""
+        res = self.boundary_router.route_memini_memrl_apex(**kwargs)
+        passed = bool(res.get("pass"))
+        return self._envelope(
+            operation="MEMINI_MEMRL_APEX",
+            goal="wave33_memini_memrl_apex",
+            status=str(res.get("status") or ("PASS" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            consolidation=res,
+        )
+
+    def execute_osworld_v21_epistemic_cu(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 34: OSWorld 2.1 Pure-Stdlib CU Engine + Epistemic Computer Agent + Action-Grammar Guide (`0F`, `K3=0`)."""
+        res = self.boundary_router.route_osworld_v21_epistemic_cu(**kwargs)
+        passed = bool(res.get("pass"))
+        return self._envelope(
+            operation="OSWORLD_V21_EPISTEMIC_CU",
+            goal="wave34_osworld_v21_epistemic_cu",
+            status=str(res.get("status") or ("PASS" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            osworld_epistemic_cu=res,
+        )
+
+    def speculative_macro_commit(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 34: TomasuLLM Speculative Macro Commit + Standing-Fact Invalidation + Effect Witnesses + Parallel Frontier (`0F`, `K3=0`)."""
+        res = self.boundary_router.route_speculative_macro_commit(**kwargs)
+        passed = bool(res.get("pass"))
+        return self._envelope(
+            operation="SPECULATIVE_MACRO_COMMIT",
+            goal="wave34_speculative_macro_commit",
+            status=str(res.get("status") or ("PASS" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            speculative_commit=res,
+        )
+
+    def active_repertoire_typed_invention(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 35: Active-Inference Repertoire Query + Typed CEGIS(T) + Distinction Creation + Proof-Carrying Counterfactuals (`0E`, `K3=0`)."""
+        res = self.boundary_router.route_active_repertoire_typed_invention(**kwargs)
+        passed = bool(res.get("pass"))
+        return self._envelope(
+            operation="ACTIVE_REPERTOIRE_TYPED_INVENTION",
+            goal="wave35_active_repertoire_typed_invention",
+            status=str(res.get("status") or ("PASS" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            active_repertoire=res,
+        )
+
     def leapfrog_solve(
         self,
         goal: str,
@@ -4304,9 +4431,72 @@ class UnifiedModel:
         residual_proposer: Any = None,
         **kwargs: Any,
     ) -> dict[str, Any]:
-        """Waves 20-30: Single unified frontier-leapfrog front door across all canonical spines (`K3=0` default)."""
+        """Waves 20-35: Single unified frontier-leapfrog front door across all canonical spines (`K3=0` default)."""
         m = str(mode or "auto").lower().strip()
         data = dict(inputs or {})
+        if m == "version_space_swe" or (
+            m == "auto"
+            and (
+                "candidate_ids" in data
+                or "angelic_source" in data
+                or "inverse_name" in data
+                or "history_pairs" in data
+                or "dataflow_root" in data
+            )
+        ):
+            return self.disambiguate_and_pin_repairs(**data, **kwargs)
+        if m == "equivalence_oracle" or (
+            m == "auto"
+            and (
+                "code_rule" in data
+                or "projection_features" in data
+                or "pin_fixed" in data
+                or "amplify_module_path" in data
+            )
+        ):
+            return self.prove_equivalence_and_amplify(**data, **kwargs)
+        if m == "meaning_first" or (
+            m == "auto"
+            and (
+                "semantic_sources" in data
+                or "before_snippet" in data
+                or "operator_symbol" in data
+                or "compress_objects" in data
+                or "weight_goal" in data
+            )
+        ):
+            return self.crystallize_meaning_first_transfer(**data, **kwargs)
+        if m == "memini_memrl" or (m == "auto" and ("outcomes" in data or "gamma_fast" in data)):
+            return self.memini_memrl_apex_consolidate(**data, **kwargs)
+        if m == "osworld_epistemic_cu" or (
+            m == "auto"
+            and ("policy_mode" in data or "nl_goal" in data or "grammar_need" in data or "proposed_action" in data)
+        ):
+            return self.execute_osworld_v21_epistemic_cu(**data, **kwargs)
+        if m == "speculative_commit" or (
+            m == "auto"
+            and (
+                "standing_before_state" in data
+                or "witness_root" in data
+                or "replay_before" in data
+                or "plan_parallel_frontier" in data
+            )
+        ):
+            return self.speculative_macro_commit(**data, **kwargs)
+        if m == "active_repertoire" or (
+            m == "auto"
+            and (
+                "repertoire_query" in data
+                or "typed_spec" in data
+                or "typed_examples" in data
+                or "distinction_transitions" in data
+                or "efe_info_gain" in data
+                or "question_statement" in data
+            )
+        ):
+            return self.active_repertoire_typed_invention(**data, **kwargs)
+        if m == "latest_sources":
+            return self.recall_latest_sources(goal, **data, **kwargs)
         if m == "symbol_graph" or (m == "auto" and "symgraph_root" in data):
             s_root = data.pop("symgraph_root", repo_root or ROOT)
             return self.repo_symbol_graph_query(s_root, **data, **kwargs)
@@ -4445,7 +4635,43 @@ class UnifiedModel:
 # --------------------------------------------------------------------------- helpers
 
 
-def _missing_declared_dependencies(row: Mapping[str, Any]) -> list[str]:
+_VERSION_FAMILY_RE = re.compile(r"^(.+?)(?:_v(\d+))(\.[^.]+)$", re.IGNORECASE)
+
+
+def dedupe_version_families(rows: Sequence[Mapping[str, Any]], *, path_key: str = "path") -> list[dict[str, Any]]:
+    """Wave 31 Elon's Law: collapse superseded `*_v1..v(N-1).ext` siblings so the latest version wins."""
+    best_by_family: dict[tuple[str, str], tuple[int, int, dict[str, Any]]] = {}
+    passthrough: list[tuple[int, dict[str, Any]]] = []
+    for idx, row in enumerate(rows):
+        d = dict(row)
+        raw_path = str(d.get(path_key) or d.get("id") or "")
+        m = _VERSION_FAMILY_RE.match(raw_path)
+        if not m:
+            passthrough.append((idx, d))
+            continue
+        fam_key = (m.group(1), m.group(3).lower())
+        ver = int(m.group(2))
+        prev = best_by_family.get(fam_key)
+        if prev is None or ver > prev[0]:
+            superseded_count = (prev[2].get("superseded_versions_collapsed", 0) + 1) if prev is not None else 0
+            d["version_family"] = m.group(1)
+            d["version_number"] = ver
+            d["superseded_versions_collapsed"] = superseded_count
+            best_by_family[fam_key] = (ver, prev[1] if prev is not None else idx, d)
+        else:
+            prev[2]["superseded_versions_collapsed"] = int(prev[2].get("superseded_versions_collapsed", 0)) + 1
+    merged: list[tuple[int, dict[str, Any]]] = list(passthrough)
+    for _ver, first_idx, d in best_by_family.values():
+        merged.append((first_idx, d))
+    merged.sort(key=lambda item: item[0])
+    return [d for _i, d in merged]
+
+
+def _missing_declared_dependencies(
+    row: Mapping[str, Any],
+    *,
+    probe_cache: dict[tuple[str, bool], bool] | None = None,
+) -> list[str]:
     """Resolve a capability's declared dependencies against *this* machine.
 
     The artifact records only the tree-derived declaration, so this answer is
@@ -4462,16 +4688,23 @@ def _missing_declared_dependencies(row: Mapping[str, Any]) -> list[str]:
         name = str(entry)
         if not name:
             continue
-        if name in on_path:
-            import shutil as _shutil
-            found = _shutil.which(name) is not None
-        else:
-            try:
-                found = importlib.util.find_spec(name) is not None
-            except (ImportError, ValueError):
-                # A name the import machinery refuses to resolve is not
-                # evidence of presence. Fail closed.
-                found = False
+        is_exe = name in on_path
+        key = (name, is_exe)
+        found = probe_cache.get(key) if probe_cache is not None else None
+        if found is None:
+            if is_exe:
+                import shutil as _shutil
+
+                found = _shutil.which(name) is not None
+            else:
+                try:
+                    found = importlib.util.find_spec(name) is not None
+                except (ImportError, ValueError):
+                    # A name the import machinery refuses to resolve is not
+                    # evidence of presence. Fail closed.
+                    found = False
+            if probe_cache is not None:
+                probe_cache[key] = found
         if not found:
             missing.append(name)
     return sorted(set(missing))
