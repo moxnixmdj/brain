@@ -87,7 +87,7 @@ def _tree_is_materialized(repo: pathlib.Path, sha: str) -> bool:
 TASK_DEPS = {
     # the minimum the repo's own tests need to import; resolved from the package index at run time
     "click": ("pytest",),
-    "werkzeug": ("pytest", "MarkupSafe", "itsdangerous"),
+    "werkzeug": ("pytest", "MarkupSafe", "itsdangerous", "ephemeral-port-reserve", "flask"),
 }
 
 
@@ -266,7 +266,50 @@ def oracle_apply(repo: pathlib.Path, sha: str, work: pathlib.Path) -> bool:
                           input=patch, text=True, capture_output=True, timeout=300).returncode == 0
 
 
-def seed_store(repo: pathlib.Path, train: Mapping[str, Any], work: pathlib.Path, *, generalize: bool) -> dict[str, Any]:
+def transfer_probe(repo: pathlib.Path, probe: Mapping[str, Any], morph, scratch: pathlib.Path,
+                   py: str | None) -> dict[str, Any]:
+    """Apply the lifted morphism to a THIRD, disjoint broken commit and see whether its tests go green.
+
+    Why this exists: the store's `reusable` gate demands proof of held-out transfer, and a single
+    exposure cannot supply that by construction -- so seeding either lies to the gate or gets refused.
+    Here the proof is *earned*: the morphism is applied to a commit that is neither the training commit
+    nor the task being scored, and the pytest run decides. A pattern that fails to unify there is
+    reported as a failed probe and the admission filter refuses the skill, which is the correct
+    outcome -- nothing below relaxes a gate.
+    """
+    from canonical.swe_kernel import epistemic_admission_and_self_play_v1 as EASP
+
+    out: dict[str, Any] = {"attempted": True, "passed": False, "why": "", "on": ""}
+    out["on"] = f"{probe.get('repo')}@{str(probe.get('sha'))[:9]}"
+    pw = scratch / f"probe-{str(probe['sha'])[:9]}"
+    mat = materialize_task(repo, str(probe["sha"]), str(probe["test_target"]), pw)
+    if not mat.get("materialized"):
+        out["why"] = f"PROBE_MATERIALIZE_FAILED:{str(mat.get('reason'))[:80]}"
+        return out
+    target_name = str(probe["test_target"])
+    src = next((c for c in sorted(pw.rglob("*.py"))
+                if c.name == target_name.rsplit("/", 1)[-1] and "tests" not in c.parts), None)
+    if src is None:
+        shutil.rmtree(pw, ignore_errors=True)
+        out["why"] = "PROBE_HAS_NO_MATCHING_SOURCE_FILE"
+        return out
+    before = src.read_text(encoding="utf-8", errors="replace")
+    rewritten = EASP.apply_subtree_morphism_to_python(morph, before, apply_all=True)
+    if rewritten is None or rewritten == before:
+        shutil.rmtree(pw, ignore_errors=True)
+        out["why"] = "PATTERN_DOES_NOT_UNIFY_ON_THE_HELD_OUT_COMMIT"
+        return out
+    src.write_text(rewritten, encoding="utf-8")
+    st = _pytest_state(pw, target_name, py, 240.0)
+    out["still_failing"] = len(st.get("failing", []))
+    out["passed"] = bool(st.get("ran")) and not st.get("failing")
+    out["why"] = "APPLIED_AND_THE_HELD_OUT_TESTS_GO_GREEN" if out["passed"] else f"APPLIED_BUT_{out['still_failing']}_STILL_FAIL"
+    shutil.rmtree(pw, ignore_errors=True)
+    return out
+
+
+def seed_store(repo: pathlib.Path, train: Mapping[str, Any], work: pathlib.Path, *, generalize: bool,
+               probe: Mapping[str, Any] | None = None, scratch: pathlib.Path | None = None) -> dict[str, Any]:
     """Build the external store from ONE disjoint exposure -- the single-experience test itself.
 
     The exposure is the *training* commit's real fix, so the gates the store demands can be measured
@@ -306,30 +349,41 @@ def seed_store(repo: pathlib.Path, train: Mapping[str, Any], work: pathlib.Path,
     if generalize:
         if morph is None:
             return {"store": store, "seeded": False, "reason": "LIFT_REFUSED_NO_GENERALIZABLE_SUBTREE"}
+        # `reusable` = transfer proven on a held-out commit AND nothing already-green broke. Both are
+        # measurements; neither is a hope. The probe runs before admission precisely so the filter can
+        # say no -- and a `no` here is a result we report, not an error we route around.
+        innocuous = bool(verified_on_oracle) and not (set(a["failing"]) - set(b["failing"]))
+        transfer = (transfer_probe(repo, probe, morph, scratch or pathlib.Path("/tmp/ilsa"), tpy)
+                    if probe is not None else
+                    {"attempted": False, "passed": False, "why": "NO_HELD_OUT_COMMIT_AVAILABLE", "on": ""})
         try:
             res = store.admit_l2_subtree_skill(
                 skill_id=entry_id, domain="python_subtree", morphism=morph,
-                witness={"training_test_target": str(train["test_target"]),
+                witness={"training_test_target": tgt, "held_out_probe": transfer,
+                         "verified_on_training_commit": bool(verified_on_oracle),
                          "prediction_error_bearing_source": "the training tests fail before this fix"},
                 provenance=prov, version_fingerprint=fid,
                 verified_on_oracle=bool(verified_on_oracle), goal_relevant=True,
                 prediction_error_bearing=bool(fixed_by_training_fix),
-                held_out_transfer_passed=False,  # not yet observed: a single exposure cannot have transferred
-                innocent_controls_preserved=bool(verified_on_oracle), raw_episode_text=f"{entry_id}\n{after[:4000]}",
+                held_out_transfer_passed=bool(transfer.get("passed")),
+                innocent_controls_preserved=bool(innocuous),
+                raw_episode_text=f"before:\n{before}\nafter:\n{after}",
             )
         except Exception as exc:  # a contract refusal is a result, not a crash
-            return {"store": store, "seeded": False, "reason": f"ADMIT_ERROR:{type(exc).__name__}:{str(exc)[:120]}"}
+            return {"store": store, "seeded": False, "probe": transfer,
+                    "reason": f"ADMIT_ERROR:{type(exc).__name__}:{str(exc)[:140]}"}
         admitted = bool(isinstance(res, dict) and (res.get("admitted") or res.get("skill_id")))
-        return {"store": store, "seeded": admitted,
+        return {"store": store, "seeded": admitted, "probe": transfer, "innocuous": innocuous,
                 "entry_id": entry_id if admitted else "",
-                "reason": "" if admitted else f"ADMIT_REFUSED:{json.dumps(res, default=str)[:160]}"}
+                "reason": "" if admitted else f"ADMIT_REFUSED:{json.dumps(res, default=str)[:220]}"}
     store.data["raw_trace_archive_ephemeral"].append(
         {"skill_id": entry_id, "generalized": False, "provenance": prov,
          "source_sha256": hashlib.sha256(after.encode("utf-8")).hexdigest(),
          "concrete_before_after": {"path": changed, "before_len": len(before), "after_len": len(after)},
          "how_verified": "training tests pass with this trace applied, fail without it"}
     )
-    return {"store": store, "seeded": True, "entry_id": entry_id, "rebuild_index": store.rebuild_structural_index()}
+    return {"store": store, "seeded": True, "entry_id": entry_id,
+            "rebuild_index": store.rebuild_structural_index()}
 
 
 def solve_arm(store_obj: Any, work: pathlib.Path, targets: Sequence[str], timeout_s: float) -> dict[str, Any]:
@@ -362,7 +416,8 @@ def solve_arm(store_obj: Any, work: pathlib.Path, targets: Sequence[str], timeou
 
 def evaluate(repos_dir: pathlib.Path, tasks: list[dict[str, Any]], *, arms: tuple[str, ...],
              solve_timeout_s: float, keep: bool, discover: bool = False,
-             partial_out: pathlib.Path | None = None) -> dict[str, Any]:
+             partial_out: pathlib.Path | None = None,
+             train_pool: list[dict[str, Any]] | None = None) -> dict[str, Any]:
     scratch = pathlib.Path("/tmp/ilsa")
     scratch.mkdir(parents=True, exist_ok=True)
     rows: list[dict[str, Any]] = []
@@ -394,10 +449,22 @@ def evaluate(repos_dir: pathlib.Path, tasks: list[dict[str, Any]], *, arms: tupl
         nop_fail = set(nop["failing"]); orac_fail = set(orac["failing"])
         f2p = sorted(nop_fail - orac_fail)          # broken before the reference fix, green after it
         p2p = sorted(set(nop["ids"]) - nop_fail - orac_fail)  # green in both -- must stay green
+        # A referee that cannot start is not a failing test. Name the missing import so the row says
+        # "our harness lacks a dependency" instead of quietly becoming a capability zero.
+        blocker = ""
+        for blob in (nop.get("summary", ""), orac.get("summary", "")):
+            for tok in ("ModuleNotFoundError", "ImportError"):
+                if tok in blob:
+                    blocker = blob.split(tok)[-1].strip().split("\n")[0][:80]
+                    break
+            if blocker:
+                break
+        row["referee_blocker"] = blocker
         row["controls"] = {"nop_ran": bool(nop["ran"]), "oracle_applied": bool(oracle_ok),
                            "fail_to_pass": len(f2p), "pass_to_pass": len(p2p),
                            "pre_existing_environment_failures": sorted(orac_fail),
-                           "state": "COMPLETE" if (nop["ran"] and oracle_ok and f2p) else "INCOMPLETE"}
+                           "state": ("REFREE_BLOCKED_ON_MISSING_IMPORT" if blocker else
+                                     "COMPLETE" if (nop["ran"] and oracle_ok and f2p) else "INCOMPLETE")}
         row["nop_passed"] = not nop_fail
         row["oracle_passed"] = not orac_fail and bool(f2p)
         row["referee_summary"] = {"nop": nop["summary"], "oracle": orac["summary"]}
@@ -412,8 +479,12 @@ def evaluate(repos_dir: pathlib.Path, tasks: list[dict[str, Any]], *, arms: tupl
             if found["ok"] and found["targets"]:
                 targets = found["targets"]
 
-        train = next((t for t in tasks if t["sha"] != task["sha"] and t["repo"] != task["repo"]),
-                     next((t for t in tasks if t["sha"] != task["sha"]), None))
+        # The exposure must come from the whole corpus, not the filtered run: with `--only`, the
+        # evaluated task would be the only candidate and every seeded arm would degrade to `cold`,
+        # measuring nothing while still printing three numbers.
+        pool = train_pool if train_pool is not None else tasks
+        train = next((t for t in pool if t["sha"] != task["sha"] and t["repo"] != task["repo"]),
+                     next((t for t in pool if t["sha"] != task["sha"]), None))
         f2p_set, p2p_set = set(f2p), set(p2p)
         for arm in arms:
             # Reset to the broken starting state for EVERY arm. Without this, arm 1's successful edit
@@ -434,8 +505,15 @@ def evaluate(repos_dir: pathlib.Path, tasks: list[dict[str, Any]], *, arms: tupl
                 # patch would make the second arm's gate evidence wrong rather than merely duplicated.
                 train_work = scratch / f"train-{train['sha'][:9]}-{arm}"
                 materialize_task(repos_dir / train["repo"], train["sha"], train["test_target"], train_work)
-                seeded = seed_store(repos_dir / train["repo"], train, train_work, generalize=(arm == "general"))
+                probe_task = next((t for t in (train_pool or tasks)
+                                   if t["sha"] != train["sha"] and t["sha"] != task["sha"]), None)
+                seeded = seed_store(repos_dir / train["repo"], train, train_work,
+                                    generalize=(arm == "general"), probe=probe_task, scratch=scratch)
                 store_obj, seed_note = seeded["store"], seeded
+                if probe_task is not None:
+                    pr = seeded.get("probe") or {}
+                    row.setdefault("held_out_probe", {})[arm] = {
+                        "on": pr.get("on", ""), "passed": bool(pr.get("passed")), "why": str(pr.get("why"))[:90]}
                 shutil.rmtree(train_work, ignore_errors=True)
             res = solve_arm(store_obj, work, targets, solve_timeout_s)
             after = _pytest_state(work, task["test_target"], py, 300.0)
@@ -475,11 +553,13 @@ def build_receipt(repos_dir: pathlib.Path, arms: tuple[str, ...], solve_timeout_
                   json_out: str | None = None) -> dict[str, Any]:
     """discover=True makes the demand an observation instead of a quotation; see discover_demands."""
     tasks = [dict(t) for t in TASKS]
+    pool = [dict(t) for t in TASKS]
     if only:
-        tasks = [t for t in tasks if t["sha"].startswith(only)]
+        tasks = [t for t in pool if t["sha"].startswith(only)]
     train_shas = {t["sha"] for t in tasks}
     result = evaluate(repos_dir, tasks, arms=arms, solve_timeout_s=solve_timeout_s, keep=keep,
-                      discover=discover, partial_out=pathlib.Path(json_out) if json_out else None)
+                      discover=discover, partial_out=pathlib.Path(json_out) if json_out else None,
+                      train_pool=pool)
     rows = result["rows"]
     counted = [r for r in rows if "arms" in r and (r.get("controls") or {}).get("state") == "COMPLETE"]
     per_arm = {
