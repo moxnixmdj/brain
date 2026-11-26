@@ -528,7 +528,7 @@ of them was a capability finding:
 
 **1. Main measured two capabilities; the enrollment gate that would notice lives on this branch.**
 Wave 43-46 landed ledger rows for `FILE_QUESTION_TAUGHT_WORDS_V1` and
-`FILE_QUESTION_TAUGHT_WORDS_V1`'s sibling `FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1` with receipts that
+`FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1` with receipts that
 resolve, and with no adapter, no pending binding, and no extended-registry row — correct on main, which
 has no rule requiring those, and a hole in the merged tree, which does. Fixed by the producer rather
 than by the number: `capability_enroll_certified_v1.py --write` measured both on fresh instances and
