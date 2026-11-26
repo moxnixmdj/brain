@@ -1116,11 +1116,14 @@ def _rank_pick(elements: Sequence[Mapping[str, Any]], rank: str) -> int | None:
 def _element_label_set(observation: Mapping[str, Any]) -> dict[str, list[int]]:
     """Every string the page shows on an element, as label -> indices."""
     out: dict[str, list[int]] = {}
-    for element in observation.get("elements") or []:
+    for position, element in enumerate(observation.get("elements") or []):
         for field in ("text", "value", "aria-label", "title", "alt", "id", "name"):
             value = plain(element.get(field))
             if value and len(value) <= 60:
-                out.setdefault(value, []).append(int(element["index"]))
+                # A page that does not number its elements is still a page. Falling back to the
+                # element's position keeps the reading total instead of raising on the one case
+                # (an unindexed observation) where a pre-action gate must still answer.
+                out.setdefault(value, []).append(int(element.get("index", position)))
     return out
 
 

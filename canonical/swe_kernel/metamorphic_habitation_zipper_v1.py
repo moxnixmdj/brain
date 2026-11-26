@@ -641,6 +641,106 @@ class RepairCandidate:
     line_no: int
 
 
+# The operator-swap tables were written long ago in autonomous_awake_loop_v1 and never reached
+# this chain, which is why a one-character `a-b` -> `a+b` bug came back UNSOLVED_WITHIN_BUDGET.
+# A test failing on the wrong arithmetic names the operator, so swapping it is the highest-value
+# candidate on the whole board, and there are only 9 swap pairs in total.
+_AST_BINOP_SWAPS: dict[type[ast.operator], tuple[type[ast.operator], ...]] = {
+    ast.Add: (ast.Sub, ast.Mult),
+    ast.Sub: (ast.Add,),
+    ast.Mult: (ast.Add, ast.FloorDiv, ast.Div),
+    ast.Div: (ast.FloorDiv, ast.Mult),
+    ast.FloorDiv: (ast.Div, ast.Mult),
+}
+
+_AST_CMPOP_SWAPS: dict[type[ast.cmpop], tuple[type[ast.cmpop], ...]] = {
+    ast.Lt: (ast.LtE, ast.Gt, ast.GtE),
+    ast.LtE: (ast.Lt, ast.GtE, ast.Gt),
+    ast.Gt: (ast.GtE, ast.Lt, ast.LtE),
+    ast.GtE: (ast.Gt, ast.LtE, ast.Lt),
+    ast.Eq: (ast.NotEq,),
+    ast.NotEq: (ast.Eq,),
+}
+
+
+def generate_operator_swap_candidates(
+    repo_root: pathlib.Path,
+    rel_file: str,
+    lines: set[int],
+    *,
+    max_candidates: int = 24,
+) -> list[RepairCandidate]:
+    """Swap one arithmetic/comparison operator on a line the failure actually executed.
+
+    Every candidate is a single-token edit to a line implicated by the traceback or the trace
+    spectrum, so the search stays linear in the number of implicated operators instead of
+    exponential in the number of lines.
+    """
+    path = repo_root / rel_file
+    if not path.is_file():
+        return []
+    source = path.read_text(encoding="utf-8", errors="replace")
+    try:
+        tree = ast.parse(source)
+    except SyntaxError:
+        return []
+    src_lines = source.splitlines()
+    candidates: list[RepairCandidate] = []
+    for node in ast.walk(tree):
+        line_no = getattr(node, "lineno", 0)
+        if lines and line_no not in lines:
+            continue
+        targets: list[tuple[int, int, type]] = []
+        # Operator nodes carry no position in 3.8-3.10, so the span is found from the operands:
+        # the operator sits between the end of the left operand and the start of the right one.
+        if isinstance(node, ast.BinOp) and getattr(node.left, "end_lineno", 0) == line_no:
+            if getattr(node.right, "lineno", 0) == line_no:
+                span = (int(node.left.end_col_offset), int(node.right.col_offset))
+                for repl in _AST_BINOP_SWAPS.get(type(node.op), ()):
+                    targets.append((span[0], span[1], repl))
+        elif isinstance(node, ast.Compare):
+            if getattr(node, "end_lineno", line_no) != line_no or line_no == 0:
+                continue  # multi-line comparison: column surgery is ambiguous, skip
+            left_end = int(node.left.end_col_offset)
+            for idx, op in enumerate(node.ops):
+                comp = node.comparators[idx]
+                if getattr(comp, "lineno", 0) != line_no:
+                    break
+                span = (left_end, int(comp.col_offset))
+                for repl in _AST_CMPOP_SWAPS.get(type(op), ()):
+                    targets.append((span[0], span[1], repl))
+                left_end = int(comp.end_col_offset)
+        if not targets or line_no <= 0 or line_no > len(src_lines):
+            continue
+        original = bytes(src_lines[line_no - 1], "utf-8")
+        for start, end, repl in targets:
+            replacement = {
+                ast.Add: b"+", ast.Sub: b"-", ast.Mult: b"*", ast.Div: b"/",
+                ast.FloorDiv: b"//",
+                ast.Lt: b"<", ast.LtE: b"<=", ast.Gt: b">", ast.GtE: b">=",
+                ast.Eq: b"==", ast.NotEq: b"!=",
+            }.get(repl)
+            if replacement is None:
+                continue
+            patched_line = original[:start] + replacement + original[end:]
+            if patched_line == original:
+                continue
+            patched = src_lines[: line_no - 1] + [patched_line.decode("utf-8")] + src_lines[line_no:]
+            candidates.append(
+                RepairCandidate(
+                    rel_file=rel_file,
+                    patched_source="\n".join(patched) + ("\n" if source.endswith("\n") else ""),
+                    mechanism="OPERATOR_SWAP_AST",
+                    description=f"line {line_no}: -> {replacement.decode()}",
+                    priority=9.5,
+                    line_no=line_no,
+                )
+            )
+            if len(candidates) >= max_candidates:
+                return candidates
+    return candidates
+
+
 def _enclosing_functions_for_lines(tree: ast.Module, lines: set[int]) -> list[ast.AST]:
     """Return functions/methods overlapping `lines` (or all top-level functions if `lines` empty)."""
     funcs: list[ast.AST] = []
@@ -2283,6 +2383,14 @@ def repair_repo_unified_zero_model(
                 )
                 # 1a. Codebase Type-Habitation candidates
                 for cand in generate_type_habitation_candidates(root, rel_file, loc, profile, max_candidates=14):
+                    ek = (rel_file, hashlib.sha1(cand.patched_source.encode("utf-8")).hexdigest())
+                    if ek in seen_edit_keys or neg_guard.is_refuted(orig_s, cand.patched_source):
+                        continue
+                    seen_edit_keys.add(ek)
+                    eff_prio = cand.priority - (file_rank * 1.2)
+                    global_queue.append((-eff_prio, file_rank, cand.line_no, cand))
+                # 1a-bis. Operator swaps (arithmetic + comparison) on implicated lines.
+                for cand in generate_operator_swap_candidates(root, rel_file, act_lines, max_candidates=24):
                     ek = (rel_file, hashlib.sha1(cand.patched_source.encode("utf-8")).hexdigest())
                     if ek in seen_edit_keys or neg_guard.is_refuted(orig_s, cand.patched_source):
                         continue

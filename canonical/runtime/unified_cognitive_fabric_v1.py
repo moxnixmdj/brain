@@ -7,36 +7,83 @@ from __future__ import annotations
 
 from copy import deepcopy
 from pathlib import Path
+import importlib
 import re
 from typing import Any, Callable, Mapping
 
-from canonical.runtime import live_integrated_brain_v1 as live_brain
-from canonical.runtime import p3_real_context_v3_admission_v12 as p3
-from canonical.runtime import autonomous_verified_self_improvement_v1 as self_improvement
-from canonical.runtime import r3_improvement_queue_driver_v1 as improvement_driver
-from canonical.runtime import live_brain_runtime_v1 as live_runtime
-from canonical.runtime import h100_verified_capability_registry_v8 as h100_inference
-from canonical.runtime import exact_linear_parameter_polytope_v1 as mystery_polytope
-from canonical.runtime import interval_information_frontier_v1 as mystery_information
-from canonical.runtime import capability_first_scheduler_v1 as capability_scheduler
-from canonical.runtime.brain_owned_python_closure_census_v1 import census as closure_census
-from canonical.runtime.current_authority_runtime_census_v1 import run as authority_runtime_census
-from canonical.runtime import live_capability_ownership_v1 as live_ownership
-from canonical.runtime import live_capability_invoker_v1 as live_invoker
-from canonical.runtime import live_capability_composition_v1 as live_composition
-from canonical.runtime import r1_live_architecture_closure_gate_v1 as r1_closure_gate
-from canonical.runtime import universal_escape_resolver_v1 as universal_escape
-from canonical.runtime import certificate_gated_selected_route_runtime_entrypoint_v5 as certified_route
-from canonical.runtime import terminal_autopilot_v1 as terminal_autopilot
-from canonical.runtime import terminal_root_decision_gate_v1 as terminal_root
-from canonical.runtime import terminal_closure_reducer as terminal_closure
-from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute as execute_bound
-from canonical.runtime import semantic_ambiguity_control_v1 as semantic_ambiguity
-from canonical.runtime import semantic_relation_control_v2 as semantic_relation
-from canonical.runtime import oewn_decision_sense_control_v1 as oewn_decision_sense
-from canonical.runtime import finance_bounded_concept_registry_verify_v1 as finance_concept_verify
-from canonical.runtime import one_shot_reality_closure_v2 as one_shot_reality_closure
-from canonical.runtime import reached_escape_repair_cycle_v1 as reached_escape_repair
+# --- Deferred capability imports -----------------------------------------------------------
+# MEASURED 2026-11-24: importing this module eagerly pulled in 239 canonical modules and cost
+# 853 ms -- it opened urllib.request/http.client to build a static table. Every alias below is
+# used only inside a function body (AST audit: 1 of 34 module-level names is touched at module
+# scope, and it is Path). Deferring costs 51 ms and changes no behaviour: each name is still the
+# exact same object, and the proxy resolves it once, then replaces itself in globals().
+_LAZY_IMPORTS: dict[str, str] = {
+    "live_brain":               "canonical.runtime.live_integrated_brain_v1",
+    "p3":                       "canonical.runtime.p3_real_context_v3_admission_v12",
+    "self_improvement":         "canonical.runtime.autonomous_verified_self_improvement_v1",
+    "improvement_driver":       "canonical.runtime.r3_improvement_queue_driver_v1",
+    "live_runtime":             "canonical.runtime.live_brain_runtime_v1",
+    "h100_inference":           "canonical.runtime.h100_verified_capability_registry_v8",
+    "mystery_polytope":         "canonical.runtime.exact_linear_parameter_polytope_v1",
+    "mystery_information":      "canonical.runtime.interval_information_frontier_v1",
+    "capability_scheduler":     "canonical.runtime.capability_first_scheduler_v1",
+    "closure_census":           "canonical.runtime.brain_owned_python_closure_census_v1:census",
+    "authority_runtime_census": "canonical.runtime.current_authority_runtime_census_v1:run",
+    "live_ownership":           "canonical.runtime.live_capability_ownership_v1",
+    "live_invoker":             "canonical.runtime.live_capability_invoker_v1",
+    "live_composition":         "canonical.runtime.live_capability_composition_v1",
+    "r1_closure_gate":          "canonical.runtime.r1_live_architecture_closure_gate_v1",
+    "universal_escape":         "canonical.runtime.universal_escape_resolver_v1",
+    "certified_route":          "canonical.runtime.certificate_gated_selected_route_runtime_entrypoint_v5",
+    "terminal_autopilot":       "canonical.runtime.terminal_autopilot_v1",
+    "terminal_root":            "canonical.runtime.terminal_root_decision_gate_v1",
+    "terminal_closure":         "canonical.runtime.terminal_closure_reducer",
+    "execute_bound":            "canonical.runtime.verified_bound_capability_execution_adapter_v1:execute",
+    "semantic_ambiguity":       "canonical.runtime.semantic_ambiguity_control_v1",
+    "semantic_relation":        "canonical.runtime.semantic_relation_control_v2",
+    "oewn_decision_sense":      "canonical.runtime.oewn_decision_sense_control_v1",
+    "finance_concept_verify":   "canonical.runtime.finance_bounded_concept_registry_verify_v1",
+    "one_shot_reality_closure": "canonical.runtime.one_shot_reality_closure_v2",
+    "reached_escape_repair":    "canonical.runtime.reached_escape_repair_cycle_v1",
+}
+
+
+class _Deferred:
+    """Transparent stand-in that resolves its target on first use, then is never seen again.
+
+    Module aliases are reached as ``alias.attr``; three aliases are functions and are reached
+    as bare calls (``closure_census(...)``). This covers both without a module/function split.
+    """
+
+    def __init__(self, name: str) -> None:
+        object.__setattr__(self, "_name", name)
+        object.__setattr__(self, "_value", None)
+
+    def _resolve(self):
+        value = object.__getattribute__(self, "_value")
+        if value is None:
+            spec = _LAZY_IMPORTS[object.__getattribute__(self, "_name")]
+            module_name, _, attr = spec.partition(":")
+            value = importlib.import_module(module_name)
+            if attr:
+                value = getattr(value, attr)
+            object.__setattr__(self, "_value", value)
+        return value
+
+    def __getattr__(self, item: str):
+        return getattr(self._resolve(), item)
+
+    def __call__(self, *args, **kwargs):
+        return self._resolve()(*args, **kwargs)
+
+    def __setattr__(self, item: str, value) -> None:
+        # unittest.mock.patch() must be able to set and restore an alias; honor it.
+        object.__setattr__(self, item, value)
+
+
+for _alias in _LAZY_IMPORTS:
+    globals()[_alias] = _Deferred(_alias)
+del _alias
 
 SCHEMA = "PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_V1"
 ROOT = Path(__file__).resolve().parents[2]

@@ -1644,11 +1644,35 @@ def open_model(
     if mem_hit is not None:
         return mem_hit
 
+    cache_dir = _core_cache_dir()
+    # MEASURED 2026-11-24: this cache used to read all 11.6 MB and sha256 it purely to decide
+    # whether the 0.89 MB core was still valid -- it saved the parse and kept the read. The core
+    # records the artifact's identity, so a stat signature settles the common case. The full
+    # digest is still computed and checked on the cold path below, where it already ran.
+    signature = f"{st.st_size}:{st.st_mtime_ns}"
+    if not cache_dir.is_dir():
+        cache_dir = None
+    if cache_dir is not None:
+        for probe in cache_dir.glob("unified_model_core_*.marshal"):
+            try:
+                core = marshal.loads(probe.read_bytes())
+            except Exception:
+                continue
+            if not isinstance(core, dict) or core.get("core_format_v") != 3:
+                continue
+            if core.get("artifact_signature") != signature or core.get("schema") != SCHEMA:
+                continue
+            raw_bytes = target.read_bytes()
+            raw_sha = str(core.get("raw_sha256") or "")
+            _VERIFIED_BLOB_DIGESTS[raw_sha] = str(core.get("digest_value") or "")
+            inst = UnifiedModel(core, _raw_bytes=raw_bytes, _core_only=True)
+            _OPEN_MODEL_MEM_CACHE[mem_key] = inst
+            return inst
+
     raw_bytes = target.read_bytes()
     raw_sha = hashlib.sha256(raw_bytes).hexdigest()
-    cache_dir = _core_cache_dir()
-    cache_file = cache_dir / f"unified_model_core_{raw_sha[:32]}.marshal"
-    if cache_file.is_file():
+    cache_file = cache_dir / f"unified_model_core_{raw_sha[:32]}.marshal" if cache_dir else None
+    if cache_file is not None and cache_file.is_file():
         try:
             core = marshal.loads(cache_file.read_bytes())
             if (
@@ -1666,6 +1690,8 @@ def open_model(
 
     full = load_model(target, root=base, verify=True)
     core = _extract_routing_core(full, raw_sha)
+    if isinstance(core, dict):
+        core["artifact_signature"] = signature
     try:
         cache_dir.mkdir(parents=True, exist_ok=True)
         tmp_f = cache_dir / f".unified_model_core_{raw_sha[:32]}.{os.getpid()}.tmp"
