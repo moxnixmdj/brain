@@ -344,6 +344,77 @@ def is_verified_entry(entry: Mapping[str, Any] | None) -> bool:
     return status == "VERIFIED_BOUND_CAPABILITY" and status not in _PENDING_PROMOTION_STATUSES
 
 
+# A POSTCONDITION THE SENTENCE STATES IS PART OF THE REQUEST.
+#
+# Measured 2026-11-26 in a clean process: "Localize the fault in the python source
+# root <dir> using the tests and write the report to <dir>/r.json" returned
+# ``PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED`` while ``r.json``
+# was never created.  The door already refuses with ``STATED_ANSWER_NOT_PROVIDED``
+# when the chosen row does not DECLARE the asked-for effect, and it already
+# refuses with ``STATED_ANSWER_NOT_PROVIDED`` on grounding clauses; what was missing
+# is the crudest check of all -- the sentence names a file to write, and at
+# completion that file does not exist.  Semantic acceptance cannot certify a run
+# whose own stated output is absent.
+_STATED_OUTPUT_REQUEST_RE = re.compile(
+    r"\b(?:write|save|store|emit|produce|dump|export|record|persist)\b"
+    r"[^\n]{0,120}?\b(?:to|into|at|in)\s+(?:the\s+file\s+)?"
+    r"(?P<target>[^\s,;]+)",
+    re.IGNORECASE,
+)
+
+
+def _refuse_unwritten_stated_output(result: dict[str, Any], goal: str, root: Any = None) -> bool:
+    """Demote a certified PASS when a file the sentence asked for was never written.
+
+    Applied at EVERY site that can emit the certified status. Measured
+    2026-11-26: the first version guarded only the single-goal return, but the
+    compound-goal branch (``compound_result``) sets the same status and returns
+    earlier, so the door kept certifying a run with no ``r.json`` on disk.
+    Returns True when the result was demoted.
+    """
+    if not isinstance(result, dict) or result.get("pass") is not True:
+        return False
+    if not _STATED_OUTPUT_REQUEST_RE.search(str(goal or "")):
+        return False
+    unwritten = _stated_output_paths_unwritten(goal, root)
+    if not unwritten:
+        return False
+    result["status"] = "FAIL_CLOSED__STATED_OUTPUT_PATH_NOT_WRITTEN"
+    result["pass"] = False
+    result["failure_class"] = "STATED_OUTPUT_PATH_NOT_WRITTEN"
+    result["stated_output_paths_unwritten"] = unwritten
+    return True
+
+
+def _stated_output_paths_unwritten(goal: str, root: Any) -> list[str]:
+    """Paths the sentence asks to be WRITTEN that do not exist at completion.
+
+    Deliberately not built on ``_stated_paths``: that helper reports paths the
+    sentence names *and* the tree already contains, which is the wrong predicate
+    here -- an output file is precisely the one that does not exist yet. Measured
+    2026-11-26: routing this through ``_stated_paths`` returned ``[]`` for
+    ``...write the report to <dir>/r.json`` and the guard never fired.
+    """
+    base = Path(root) if root is not None else ROOT
+    out: list[str] = []
+    for match in _STATED_OUTPUT_REQUEST_RE.finditer(str(goal or "")):
+        raw = (match.group("target") or "").strip().strip("\"'`()[]")
+        raw = raw.rstrip(".;:")
+        if not raw or raw.startswith("${") or "/" not in raw and "." not in raw:
+            continue
+        try:
+            candidate = Path(raw)
+            if not candidate.is_absolute():
+                candidate = base / raw
+            if candidate.is_file():
+                continue
+        except OSError:
+            continue
+        if raw not in out:
+            out.append(raw)
+    return out
+
+
 def compile_against_live_registry(goal: str, root: Any = None) -> tuple[
         dict[str, Mapping[str, Any]], dict[str, Mapping[str, Any]], dict[str, Any]]:
     """The front-door policy in ONE place: THE verified registry, its platform-admissible
@@ -1259,6 +1330,9 @@ def _run_raw_goal_impl(request: Mapping[str, Any]) -> dict[str, Any]:
                             "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_"
                             "ACCEPTANCE_VERIFIED"
                         )
+                    # A stated output that was never written is not a success,
+                    # whatever the acceptance receipts say.
+                    _refuse_unwritten_stated_output(compound_result, goal, ROOT)
                     for _trow in trace:
                         _tres = _trow.get("result") if isinstance(_trow, Mapping) else None
                         _tplan = _trow.get("plan") if isinstance(_trow, Mapping) else None
@@ -1539,7 +1613,13 @@ def _run_raw_goal_impl(request: Mapping[str, Any]) -> dict[str, Any]:
             from canonical.runtime.live_brain_route_admission_v1 import stated_answer_errors as _sae
             _ans_cid = str(selected or (result.get("selected_plan") or [""])[0] or "")
             _unans = _sae(goal, dict(admissible.get(_ans_cid) or {}), _ans_cid) if _ans_cid else []
-            if _unans:
+            _unwritten = _stated_output_paths_unwritten(goal, ROOT) if _STATED_OUTPUT_REQUEST_RE.search(str(goal or "")) else []
+            if _unwritten:
+                result["status"] = "FAIL_CLOSED__STATED_OUTPUT_PATH_NOT_WRITTEN"
+                result["pass"] = False
+                result["failure_class"] = "STATED_OUTPUT_PATH_NOT_WRITTEN"
+                result["stated_output_paths_unwritten"] = _unwritten
+            elif _unans:
                 result["status"] = "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED"
                 result["pass"] = False
                 result["failure_class"] = "STATED_ANSWER_NOT_PROVIDED"
