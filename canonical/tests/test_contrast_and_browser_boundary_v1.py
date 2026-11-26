@@ -81,3 +81,12 @@ def test_single_patch_zygote_is_bounded_and_reports_only_actual_assertions(tmp_p
     assert check(original,patch,'from app import f\n'+test)['verdict']=='UNMEASURED'
     assert check(original,'def f(x):\n while True: pass',test,timeout_s=.05)['verdict']=='UNMEASURED'
     assert check(original,'import os\ndef f(x): os._exit(3)',test)['verdict']=='UNMEASURED'
+
+
+def test_federation_does_not_promote_no_test_and_default_hard_rung_abstains():
+    from canonical.runtime.unified_hidden_capability_federation_v1 import run_federated_engine
+    r=run_federated_engine('COW_ZYGOTE_SPECULATIVE_VERIFIER',{'original_module_source':'x=1','candidate_patch_source':'x=2','test_suite_source':'pass'})
+    assert not r['pass'] and r['reason']=='COW_CANDIDATE_UNMEASURED'
+    r=open_model().partial_route_with_jitrl('PARTIAL_ROUTE', {'subtasks':[{'kind':'unhandled','difficulty':1.0}]})
+    assert not r['pass'] and r['pluggable_proposer_calls']==r['model_calls']==0
+    assert r['rung_counts']['ABSTAINED']==1 and r['routed_subtasks'][0]['output'] is None

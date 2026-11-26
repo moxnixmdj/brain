@@ -3843,7 +3843,9 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
                 str(inputs["candidate_patch_source"]),
                 str(inputs["test_suite_source"]),
             )
-            return _ok(mode, "COW_CANDIDATE_PATCH_EVALUATED", verdict)
+            if verdict['verdict'] != 'PASS':
+                return _fail(mode, 'COW_CANDIDATE_'+verdict['verdict'], result=verdict)
+            return _ok(mode, 'COW_SELECTED_ASSERTIONS_PASSED', verdict)
         res = m.run(inputs, ROOT)
         if res.get("status") != "OK":
             return _fail(mode, f"COW_VERIFIER_KILLED:{res.get('status')}", result=res)
