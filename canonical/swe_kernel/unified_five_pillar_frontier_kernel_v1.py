@@ -1832,10 +1832,25 @@ class MeaningIRSkillRatchetEngine:
                 source_languages=[source_language],
             )
 
+        # THE STATUS IS THE VERDICT, NOT A SIBLING OF IT. Measured 2026-11-26 (Wave 40 bench,
+        # CROSS_LANGUAGE_RULE_TRANSFER#02): when a requested cross-language transfer produced no
+        # patch, `pass` was False while `status` still read PASS__CONSOLIDATED_AND_VERIFIED. A
+        # receipt that says PASS about a refused transfer is the defect the laws name; the two
+        # fields are now derived from one another.
+        transfer_required = bool(target_language)
+        transfer_ok = (cross_language_transfer is not None) if transfer_required else True
+        overall_pass = bool(admitted_to_hot and transfer_ok)
+        if overall_pass:
+            status = "PASS__CONSOLIDATED_AND_VERIFIED"
+        elif not admitted_to_hot:
+            status = "DEMOTED__NEGATIVE_MDL_BIT_RENT"
+        else:
+            status = "REFUSED__CROSS_LANGUAGE_TRANSFER_NOT_PRODUCED"
+
         return {
             "schema": "BRAIN_PILLAR5_MEANING_IR_RATCHET_V1",
-            "pass": admitted_to_hot and (cross_language_transfer is not None if target_language else True),
-            "status": "PASS__CONSOLIDATED_AND_VERIFIED" if admitted_to_hot else "DEMOTED__NEGATIVE_MDL_BIT_RENT",
+            "pass": overall_pass,
+            "status": status,
             "skill_id": enriched.get("skill_id"),
             "ir_hash_before": enriched.get("ir_hash_before"),
             "ir_hash_after": enriched.get("ir_hash_after"),
