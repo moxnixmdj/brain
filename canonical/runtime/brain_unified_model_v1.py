@@ -597,8 +597,8 @@ def _extract_secondary_indexes(full: Mapping[str, Any], raw_sha: str) -> dict[st
 # --------------------------------------------------------------------------- model
 
 
-from canonical.runtime.wave41_rung3_proposer_jitrl_continual_flywheel_v1 import (
-    Wave40To42UnifiedModelMixin as _Wave40To42UnifiedModelMixin,
+from canonical.runtime.wave47_48_titan_unification_v1 import (
+    Wave47To48UnifiedModelMixin as _Wave40To42UnifiedModelMixin,
 )
 
 

@@ -2286,6 +2286,42 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "required_inputs": [],
         "declared_dependencies": [],
     },
+    "W47_TITAN_PIPELINE": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/runtime/wave47_48_titan_unification_v1.py",
+        "entrypoint": "TitanPipeline",
+        "summary": "Wave 47-48 4-rung TitanPipeline: Futamura Rung-0 fast path -> Reverse Tomography + Angelic Lens + CoW Zygote -> E-Graph + Semantic-Causal equivalence -> gated Rung-3 -> §9.2 admission + sleep crystallization.",
+        "triggers": ["titan pipeline futamura reverse tomography angelic", "four rung swe composition", "compile away the frontier pipeline"],
+        "required_inputs": ["buggy_source", "fn_name", "test_cases"],
+        "declared_dependencies": [],
+    },
+    "W47_SHADOW_INTERFACE_EVOLUTION": {
+        "domain": "COMPUTER_USE_AND_ENVIRONMENT_EXPLORATION",
+        "source_path": "canonical/runtime/wave47_48_titan_unification_v1.py",
+        "entrypoint": "ShadowInterfaceEvolutionKernel",
+        "summary": "Agent-S4-style evolving shadow interfaces (CLI/HAR/D-Bus/WebMCP/AT-SPI lifting) + HCU 3-channel routing + kernel confinement + byte effect oracle.",
+        "triggers": ["shadow interface evolution agent s4", "evolving agent interfaces hcu routing", "byte effect oracle computer use"],
+        "required_inputs": ["tool_name", "help_text"],
+        "declared_dependencies": [],
+    },
+    "W47_SLEEP_CRYSTALLIZER_GATE": {
+        "domain": "MEMORY_AND_CONTINUAL_LEARNING",
+        "source_path": "canonical/runtime/wave47_48_titan_unification_v1.py",
+        "entrypoint": "SleepCrystallizerAdmissionGate",
+        "summary": "5-timescale verification-first memory + DBSP incremental maintenance + §9.2 admission filter (verified, goal-relevant, prediction-error-bearing, reusable, compressible).",
+        "triggers": ["sleep crystallizer admission gate", "dbsp incremental memory", "anti manufactured confidence"],
+        "required_inputs": ["original_source", "patched_source", "fn_name", "test_cases"],
+        "declared_dependencies": [],
+    },
+    "W47_DUAL_RUNG_GATE": {
+        "domain": "VERIFICATION_AND_CHECKABILITY",
+        "source_path": "canonical/runtime/wave47_48_titan_unification_v1.py",
+        "entrypoint": "DualRungGate",
+        "summary": "K3=0 sovereign default (Rungs 0-2); Rung-3 proposer strictly untrusted, gated by confinement + effect oracle + e-graph + mutation falsification + SCoRE e-value, compiled back to Tier-0 on verify.",
+        "triggers": ["dual rung gate k3 zero", "rung 3 untrusted proposer gate", "score e value mutation falsification"],
+        "required_inputs": ["original_source", "proposed_source", "fn_name", "test_cases"],
+        "declared_dependencies": [],
+    },
 }
 
 
@@ -5846,6 +5882,50 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
             one_shot_candidates=inputs.get("one_shot_candidates") or (),
         )
         return _ok(mode, "W42_ONE_DEMO_TRUST_CALIBRATED", res) if res.get("pass") else _fail(mode, "W42_ONE_DEMO_TRUST_FAILED", res)
+
+    if mode == "W47_TITAN_PIPELINE":
+        from canonical.runtime.wave47_48_titan_unification_v1 import TitanPipeline
+
+        res = TitanPipeline().solve_python_repair(
+            str(inputs["buggy_source"]),
+            str(inputs["fn_name"]),
+            inputs.get("test_cases") or (),
+            goal=str(inputs.get("goal", "")),
+            use_cow_fork=bool(inputs.get("use_cow_fork", True)),
+        )
+        return _ok(mode, str(res.get("status") or "TITAN_PIPELINE_COMPLETE"), res) if res.get("pass") else _fail(mode, str(res.get("status") or "TITAN_PIPELINE_REFUSED"), res)
+
+    if mode == "W47_SHADOW_INTERFACE_EVOLUTION":
+        from canonical.runtime.wave47_48_titan_unification_v1 import ShadowInterfaceEvolutionKernel
+
+        res = ShadowInterfaceEvolutionKernel.compile_shadow_interface(
+            str(inputs["tool_name"]), str(inputs.get("help_text", "")),
+        )
+        return _ok(mode, "SHADOW_INTERFACE_COMPILED", res)
+
+    if mode == "W47_SLEEP_CRYSTALLIZER_GATE":
+        from canonical.runtime.wave47_48_titan_unification_v1 import SleepCrystallizerAdmissionGate
+
+        res = SleepCrystallizerAdmissionGate.admit(
+            original_source=str(inputs["original_source"]),
+            patched_source=str(inputs["patched_source"]),
+            fn_name=str(inputs["fn_name"]),
+            test_cases=inputs.get("test_cases") or (),
+            goal=str(inputs.get("goal", "python_repair")),
+        )
+        return _ok(mode, "ADMISSION_EVALUATED", res) if res.get("admitted") else _fail(mode, "ADMISSION_REFUSED", res)
+
+    if mode == "W47_DUAL_RUNG_GATE":
+        from canonical.runtime.wave47_48_titan_unification_v1 import DualRungGate
+
+        res = DualRungGate.gate_proposal(
+            str(inputs["original_source"]),
+            str(inputs["proposed_source"]),
+            str(inputs["fn_name"]),
+            inputs.get("test_cases") or (),
+            use_cow_fork=bool(inputs.get("use_cow_fork", True)),
+        )
+        return _ok(mode, str(res.get("status") or "DUAL_RUNG_GATED"), res) if res.get("pass") else _fail(mode, str(res.get("status") or "DUAL_RUNG_REJECTED"), res)
 
     if mode == "METAMORPHIC_HABITATION_ZIPPER":
         from canonical.swe_kernel import metamorphic_habitation_zipper_v1 as m

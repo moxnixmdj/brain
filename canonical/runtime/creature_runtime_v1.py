@@ -1169,6 +1169,12 @@ class Creature:
         """Run any of the 58 federated hidden kernel engines directly from Creature (`0I`)."""
         return self.route_goal_via_spine("federated_engine", mode=mode, inputs=inputs, goal=goal)
 
+    def titan_pipeline_solve(self, payload: Mapping[str, Any]) -> dict[str, Any]:
+        """Wave 47-48 TitanPipeline directly from Creature (K3=0, $0)."""
+        res = self.unified_model.titan_pipeline_solve(payload)
+        self._save()
+        return res
+
     def speculative_cow_race(
         self,
         workspace_root: str | pathlib.Path,
