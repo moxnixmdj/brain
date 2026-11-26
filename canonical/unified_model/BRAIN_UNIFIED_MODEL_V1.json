@@ -33046,7 +33046,7 @@
   "promotion_callable": 31,
   "promotion_candidates": 849,
   "receipt_backed_capabilities": 309,
-  "research_index_records": 7423,
+  "research_index_records": 7424,
   "routing_tokens": 3088,
   "skills": 18,
   "source_index_entry_points": 561,
@@ -33055,7 +33055,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "1ef9817dace305a53e605a8e21b87a0296f122653df2a026fd66ef2290a7d0d6"
+  "value": "3b87fac712aba04b6e644a2640eb6f20611ebd0599cd7c10fc24be6fef0d9ef8"
  },
  "engines": [
   {
@@ -315283,6 +315283,51 @@
     "organ": 2,
     "planning": 2,
     "swe": 2
+   }
+  },
+  {
+   "action_id": "FRONTIER_REACHABILITY_AND_SELECTIVE_RISK_20261126_V1",
+   "capability": false,
+   "date": "2026-11-26",
+   "id": "research:canonical/action_intents/FRONTIER_REACHABILITY_AND_SELECTIVE_RISK_20261126_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/FRONTIER_REACHABILITY_AND_SELECTIVE_RISK_20261126_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V8",
+   "sha256": "7aff3e737739d8396276f27e1293cfb1ec9ffab6763bd7c87127dd6760470449",
+   "status": "SHIPPED",
+   "terms": {
+    "10": 2,
+    "120": 1,
+    "128-module": 1,
+    "20261126": 1,
+    "301": 2,
+    "661": 1,
+    "72.3": 1,
+    "858": 1,
+    "after": 1,
+    "because": 1,
+    "behind": 1,
+    "bottleneck": 1,
+    "capability": 3,
+    "carried": 1,
+    "claim": 1,
+    "closed": 1,
+    "door": 2,
+    "engine": 3,
+    "executable": 1,
+    "exists": 1,
+    "failed": 1,
+    "front": 2,
+    "frontier": 4,
+    "frontier_reachability_and_selective_risk_20261126_v1": 1,
+    "goals": 2,
+    "had": 2,
+    "harvested": 2,
+    "indexed": 2,
+    "model": 2,
+    "modules": 2,
+    "no": 2,
+    "probed": 2
    }
   },
   {
