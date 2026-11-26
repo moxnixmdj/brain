@@ -9,7 +9,7 @@
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "parent_capability": "canonical/runtime/brain_unified_model_v1.py + canonical/runtime/creature_runtime_v1.py + canonical/swe_kernel/canonical_{swe,env_discovery,cu_sandbox,memory_crystallizer,oracle_vericoding,boundary_router}_spine_v1.py",
-  "canonical_base_commit": "f4e5e8c214816bc1cb3246e84b88415268ab77c0",
+  "canonical_base_commit": "662e322e1f55b3c9828d19d5f045170ca2e28f20",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "causal_blocker": "After Waves 2-14 (PR #7101 at f4e5e8c2), 15 high-leverage hidden superweapon modules across SWE (causal_cegis_inventor_v1, metamorphic_habitation_zipper_v1, multistep_repo_closed_loop_solver_v1, causal_nexus_v1, cow_impact_repair_engine_v1), Computer Use / Sandbox / Planning (transactional_parallel_execution_v1, worker_syscall_allowlist_v1, cross_modal_tomography_petri_v1, causal_trace_to_skill_compiler_v1, partial_order_planner_v1), Memory Governance (rule_expiry_v1, proved_composition_v1), Active Interrogation (evidence_demand_v1), and Meta-Circular Organ Evolution (meta_circular_organ_graph_v1, recursive_self_architect_v1) remained unwired from the unified front door (UnifiedModel + Creature + Spines 0D-0I), and find_source exhibited PYTHONHASHSEED float-summation nondeterminism.",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::After Waves 2-14 (PR #7101 at f4e5e8c2), 15 high-leverage hidden superweapon modules across SWE (causal_cegis_inventor_v1, metamorphic_habitation_zipper_v1, multistep_repo_closed_loop_solver_v1, causal_nexus_v1, cow_impact_repair_engine_v1), Computer Use / Sandbox / Planning (transactional_parallel_execution_v1, worker_syscall_allowlist_v1, cross_modal_tomography_petri_v1, causal_trace_to_skill_compiler_v1, partial_order_planner_v1), Memory Governance (rule_expiry_v1, proved_composition_v1), Active Interrogation (evidence_demand_v1), and Meta-Circular Organ Evolution (meta_circular_organ_graph_v1, recursive_self_architect_v1) remained unwired from the unified front door (UnifiedModel + Creature + Spines 0D-0I), and find_source exhibited PYTHONHASHSEED float-summation nondeterminism.",
@@ -20,7 +20,7 @@
   "required_capability": "Unified K3=0 orchestration fusing sub-millisecond MemGuard/FTS5 memory, Inverted SWE Microscope with CoW isolation, os.fork CoW speculative rollouts, GUI->CLI trace elevation, partial-order planning, minimax witness interrogation, CSP hard-negative/spec-gap detection, and GEA+SEA certified organ evolution.",
   "stop_condition": "Stop once all 16 Wave 15-20 frontier-leapfrog tests, unified-model tests, 38/38 verify_brain_unified_model_v1 checks, bit-identical no-cache compile check, repo_integrity_guard, enforce_load_bearing_primary_pr, and enforce_goal_hierarchy pass with 0 violations and zero overstated capability/terminal credit claims.",
   "falsification_condition": "FALSIFIED if any Wave 15-20 test fails, if expired MemGuard skills reappear in default FTS5 recall, if CoW speculative edits mutate host repo files on rejected proposals, if find_source scores differ across PYTHONHASHSEED values, if Creature GEA+SEA admits unsafe or zero-gain organs, or if verify_brain_unified_model_v1 or any execution guard fails.",
-  "verification": "python3 -m unittest -v canonical/tests/test_frontier_leapfrog_waves15_20_v1.py canonical/tests/test_brain_unified_model_v1.py canonical/tests/test_unified_frontier_spines_v1.py canonical/tests/test_unified_hidden_capabilities_v1.py; python3 canonical/runtime/verify_brain_unified_model_v1.py; BRAIN_COMPILE_NO_CACHE=1 bit-identical check; python3 execution_guard/repo_integrity_guard_v1.py --base f4e5e8c214816bc1cb3246e84b88415268ab77c0; python3 execution_guard/enforce_load_bearing_primary_pr.py --base f4e5e8c214816bc1cb3246e84b88415268ab77c0 --head HEAD",
+  "verification": "python3 -m unittest -v canonical/tests/test_frontier_leapfrog_waves15_20_v1.py canonical/tests/test_brain_unified_model_v1.py canonical/tests/test_unified_frontier_spines_v1.py canonical/tests/test_unified_hidden_capabilities_v1.py; python3 canonical/runtime/verify_brain_unified_model_v1.py; BRAIN_COMPILE_NO_CACHE=1 bit-identical check; python3 execution_guard/repo_integrity_guard_v1.py --base 662e322e1f55b3c9828d19d5f045170ca2e28f20; python3 execution_guard/enforce_load_bearing_primary_pr.py --base 662e322e1f55b3c9828d19d5f045170ca2e28f20 --head HEAD",
   "capability_credit_delta": 0,
   "benchmark_or_family_rank_authority": "NONE__SANDBOX_PRODUCER_VERIFICATION_ONLY",
   "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
@@ -113,7 +113,7 @@
     ]
   },
   "recursive_obs": {
-    "canonical_base_commit": "f4e5e8c214816bc1cb3246e84b88415268ab77c0",
+    "canonical_base_commit": "662e322e1f55b3c9828d19d5f045170ca2e28f20",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "PYTHONHASHSEED-dependent set iteration order in UnifiedModel.find_source (replaced with sorted(wanted))",
@@ -222,8 +222,8 @@
       }
     ],
     "route_frontier": {
-      "canonical_base_commit": "f4e5e8c214816bc1cb3246e84b88415268ab77c0",
-      "checked_at_utc": "2026-11-26T04:03:57+00:00",
+      "canonical_base_commit": "662e322e1f55b3c9828d19d5f045170ca2e28f20",
+      "checked_at_utc": "2026-11-26T04:24:00+00:00",
       "max_age_hours": 24,
       "discovery_required": true,
       "incumbent_route": "LEAVE_15_SUPERWEAPONS_UNWIRED_DARK_MATTER",
@@ -342,7 +342,7 @@
       "unresolved_plausible_dominators": [],
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-26T04:03:57+00:00",
+        "checked_at_utc": "2026-11-26T04:24:00+00:00",
         "execution_dependencies_complete": true,
         "failed_dependencies": [],
         "max_age_hours": 2,
@@ -373,7 +373,7 @@
             "status": "READY",
             "volatility": "STATIC",
             "evidence": [
-              "repo_integrity_guard_v1.py + enforce_load_bearing_primary_pr.py verified against base f4e5e8c2"
+              "repo_integrity_guard_v1.py + enforce_load_bearing_primary_pr.py verified against base 662e322e1f55b3c9828d19d5f045170ca2e28f20"
             ],
             "evidence_classes": [
               "DIRECT_PROBE"

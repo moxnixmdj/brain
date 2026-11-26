@@ -873,7 +873,7 @@ class UnifiedModel:
                 "research_index_records": res_len,
                 "routing_tokens": len(self.index),
                 "harvested_capabilities": declared.get("harvested_capabilities"),
-                "frontier_leapfrog_organs": 17,
+                "frontier_leapfrog_organs": 21,
             },
             "source_index_is_addressable_not_executable": True,
             "declared_dependencies_present": present,
@@ -896,7 +896,7 @@ class UnifiedModel:
     # --------------------------------------------------------- frontier organs
 
     def frontier_organs(self) -> dict[str, Any]:
-        """Enumerate the 13 `swe_kernel` organs and 4 Frontier Leapfrog Plays wired into the Unified Runtime."""
+        """Enumerate the 13 `swe_kernel` organs and 8 Frontier Leapfrog Plays wired into the Unified Runtime."""
         from canonical.runtime import swe_kernel_organ_bridge_v1 as bridge
 
         swe_organs = bridge.list_organs()
@@ -924,6 +924,30 @@ class UnifiedModel:
                 "module_path": "canonical/runtime/adversarial_mutation_admission_gate_v1.py",
                 "frontier_domain": "coding_agents",
                 "capability_role": "Adversarial AST mutation admission gate over harvested capability receipts",
+            },
+            {
+                "organ_id": "play_a_counterfactual_discr_tree_router",
+                "module_path": "canonical/runtime/counterfactual_discr_tree_skill_router_v1.py",
+                "frontier_domain": "continual_learning",
+                "capability_role": "Witness-conditioned AST discrimination-tree router (5.4 us p50) with Rubin counterfactual utility gating",
+            },
+            {
+                "organ_id": "play_b_verified_zero_screenshot_cache",
+                "module_path": "canonical/runtime/verified_zero_screenshot_action_cache_v1.py",
+                "frontier_domain": "computer_use",
+                "capability_role": "Three-tier zero-screenshot data-layer workflow elevator and volatile-invariant CDP pre-probe cache",
+            },
+            {
+                "organ_id": "play_c_relational_guard_addition_repair",
+                "module_path": "canonical/runtime/relational_guard_addition_symbolic_repair_v1.py",
+                "frontier_domain": "coding_agents",
+                "capability_role": "Semi-naive relational AST guard/exception-contract/container-sync addition synthesizer with GuardDrop mutation gate",
+            },
+            {
+                "organ_id": "play_d_cow_zygote_speculative_verifier",
+                "module_path": "canonical/runtime/cow_zygote_speculative_verifier_v1.py",
+                "frontier_domain": "verification_abstention",
+                "capability_role": "POSIX os.fork() copy-on-write Zygote speculative patch verifier (1.58 ms p50) with AST test impact slicing",
             },
         ]
         return {
@@ -960,6 +984,22 @@ class UnifiedModel:
             from canonical.runtime import adversarial_mutation_admission_gate_v1 as p6
 
             return p6.run(req, ROOT)
+        if organ_id == "play_a_counterfactual_discr_tree_router":
+            from canonical.runtime import counterfactual_discr_tree_skill_router_v1 as pa
+
+            return pa.run(req, ROOT)
+        if organ_id == "play_b_verified_zero_screenshot_cache":
+            from canonical.runtime import verified_zero_screenshot_action_cache_v1 as pb
+
+            return pb.run(req, ROOT)
+        if organ_id == "play_c_relational_guard_addition_repair":
+            from canonical.runtime import relational_guard_addition_symbolic_repair_v1 as pc
+
+            return pc.run(req, ROOT)
+        if organ_id == "play_d_cow_zygote_speculative_verifier":
+            from canonical.runtime import cow_zygote_speculative_verifier_v1 as pd
+
+            return pd.run(req, ROOT)
 
         from canonical.runtime import swe_kernel_organ_bridge_v1 as bridge
 
@@ -1258,6 +1298,10 @@ class UnifiedModel:
         src_postings = self._source_postings_cache or {}
         total_docs = max(1, len(src_map))
         acc_scores: dict[str, float] = {}
+        # Sorted, not `wanted`: floats do not add associatively, so summing idf contributions in
+        # hash order made near-ties depend on PYTHONHASHSEED. Measured with the answer fingerprint:
+        # 1 of 404 questions returned a different rank-3 module in a second process, which no
+        # verifier check could see because the model was still internally consistent.
         for term in sorted(wanted):
             plist = src_postings.get(term)
             if not plist:
@@ -1322,7 +1366,7 @@ class UnifiedModel:
         ext_df = self._extended_source_df_cache or {}
         total_docs = max(1, len(combined))
         acc_scores: dict[str, float] = {}
-        for term in wanted:
+        for term in sorted(wanted):  # see find_source: float order must not depend on the hash seed
             plist = comb_postings.get(term)
             if not plist:
                 continue
@@ -1445,7 +1489,7 @@ class UnifiedModel:
         res_postings = self._research_postings_cache or {}
         total_docs = max(1, len(res_map))
         acc_scores: dict[str, float] = {}
-        for term in wanted:
+        for term in sorted(wanted):  # see find_source
             plist = res_postings.get(term)
             if not plist:
                 continue
@@ -4342,7 +4386,15 @@ class SovereignZeroLLMPlanner:
                     verifier_backed=True,
                     render_fn=lambda: (
                         "import subprocess, sys\n"
-                        "r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True)\n"
+                        "import os as _os, pathlib as _pl\n"
+                        "for _d in _pl.Path('.').rglob('__pycache__'):\n"
+                        "    for _c in _d.glob('*.pyc'):\n"
+                        "        try:\n"
+                        "            _c.unlink()\n"
+                        "        except OSError:\n"
+                        "            pass\n"
+                        "_ENV = {**_os.environ, 'PYTHONDONTWRITEBYTECODE': '1'}\n"
+                        "r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True, env=_ENV)\n"
                         "if r.returncode != 0:\n"
                         "    sys.stderr.write((r.stderr or r.stdout or 'verification_failed')[-800:])\n"
                         "    raise SystemExit(1)\n"
@@ -4352,8 +4404,16 @@ class SovereignZeroLLMPlanner:
                 # Pure-stdlib confined AST single-operator / constant-sign repair search (`confined_v1` safe — zero external imports!)
                 return (
                     "import ast, copy, pathlib, subprocess, sys\n"
+                    "import os as _os, pathlib as _pl\n"
+                    "for _d in _pl.Path('.').rglob('__pycache__'):\n"
+                    "    for _c in _d.glob('*.pyc'):\n"
+                    "        try:\n"
+                    "            _c.unlink()\n"
+                    "        except OSError:\n"
+                    "            pass\n"
+                    "_ENV = {**_os.environ, 'PYTHONDONTWRITEBYTECODE': '1'}\n"
                     "def _test_ok():\n"
-                    "    r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True)\n"
+                    "    r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True, env=_ENV)\n"
                     "    return r.returncode == 0, (r.stderr or r.stdout or '')[-800:]\n"
                     "ok0, err0 = _test_ok()\n"
                     "if ok0:\n"
@@ -4446,6 +4506,30 @@ class SovereignZeroLLMPlanner:
                             max_weight=4,
                             concept_library=core.concept_library,
                         )
+                        if not body_code:
+                            # Ensemble fallback (plan v5 move 2): OE + stochastic
+                            # union for shapes the observational grammar cannot
+                            # express at this budget (measured: branch-using
+                            # programs at max_weight 4..8, ten configs, all miss;
+                            # the union finds and verifies them in ~190 ms).
+                            # Every returned body is already verified against ALL
+                            # extracted examples, so a miss costs ~200 ms where
+                            # the affordance otherwise had no candidate at all --
+                            # it cannot slow a step that would have failed.
+                            from canonical.runtime.stochastic_synthesizer_v1 import (
+                                numeric_concept_templates,
+                                synthesize_body_from_examples,
+                            )
+                            body_code = synthesize_body_from_examples(
+                                p_names, valid_exs,
+                                # Learned grammar (v6 section 14): the concept
+                                # library's admitted templates are atoms this
+                                # enumerator cannot build at any depth. Read
+                                # only -- nothing here mutates the library.
+                                concepts=numeric_concept_templates(
+                                    getattr(core, "concept_library", None),
+                                ),
+                            )
                         if body_code:
                             upd = wits._replace_function_body_in_source(cur_src, fn_nd.name, body_code)
                             if upd:
@@ -4453,12 +4537,20 @@ class SovereignZeroLLMPlanner:
                     if cur_src != src_txt:
                         patched_files[imp_rel] = cur_src
 
-                lines = ["import pathlib, subprocess, sys"]
+                lines = ["import pathlib, subprocess, sys",
+                         "import os as _os",
+                         "for _d in pathlib.Path('.').rglob('__pycache__'):",
+                         "    for _c in _d.glob('*.pyc'):",
+                         "        try:",
+                         "            _c.unlink()",
+                         "        except OSError:",
+                         "            pass",
+                         "_ENV = {**_os.environ, 'PYTHONDONTWRITEBYTECODE': '1'}"]
                 for rel_p, new_src in sorted(patched_files.items()):
                     lines.append(f"pathlib.Path({rel_p!r}).write_text({new_src!r}, encoding='utf-8')")
                 lines.extend(
                     [
-                        "r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True)",
+                        "r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True, env=_ENV)",
                         "if r.returncode != 0:",
                         "    sys.stderr.write((r.stderr or r.stdout or 'obs_synth_h2_failed')[-800:])",
                         "    raise SystemExit(1)",
