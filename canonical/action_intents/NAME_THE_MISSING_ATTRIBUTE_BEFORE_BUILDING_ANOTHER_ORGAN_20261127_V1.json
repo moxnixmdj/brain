@@ -129,7 +129,7 @@
  ],
  "real_outcome": "Every frontier function the tree implements is callable by the runtime, or the one attribute blocking it is named.",
  "recursive_obs": {
-  "canonical_base_commit": "9a8a8d0798443aa64487ada5354bd5715835cb52",
+  "canonical_base_commit": "9953cbc473491bbf123f3cf04f2d4e30115007bd",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "candidate counts as capability",
@@ -304,7 +304,7 @@
      "route": "NAME_THE_MISSING_ATTRIBUTE_FOR_EVERY_MODULE_BEFORE_BUILDING_ANOTHER_ONE"
     }
    ],
-   "checked_at_utc": "2026-11-26T02:19:39Z",
+   "checked_at_utc": "2026-11-26T02:27:55Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -344,7 +344,7 @@
    "selected_route": "NAME_THE_MISSING_ATTRIBUTE_FOR_EVERY_MODULE_BEFORE_BUILDING_ANOTHER_ONE",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-26T02:19:39Z",
+    "checked_at_utc": "2026-11-26T02:27:55Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3 runtime with pytest",
