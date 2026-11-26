@@ -1388,6 +1388,60 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "required_inputs": ["query"],
         "declared_dependencies": [],
     },
+    "CHECKABILITY_ORACLE_FORGE": {
+        "domain": "CHECKABILITY_AND_ORACLE_SYNTHESIS",
+        "source_path": "canonical/swe_kernel/argument_construction_v1.py",
+        "entrypoint": "mined_vectors",
+        "summary": "Zero-test checkability multiplier uniting non-scalar repository call-site argument mining (argument_construction_v1), public-surface differential pinning (checkability_by_differential_pin_v1), and prose-to-code contract compilation (instruction_contract_for_code_v1).",
+        "triggers": ["checkability_oracle_forge", "non scalar argument construction differential pin"],
+        "required_inputs": ["workspace_root"],
+        "declared_dependencies": [],
+    },
+    "SPACETIME_OE_SYGUS_REPAIR": {
+        "domain": "POLYGLOT_SYGUS_AND_CAUSAL_REPAIR",
+        "source_path": "canonical/runtime/oe_sygus_synthesizer_v1.py",
+        "entrypoint": "synthesize_value_expressions",
+        "summary": "SpaceTime causal do-intervention bug localization (site_by_intervention_v1) + 3-language Python/JS/C observational-equivalence SyGuS & EUSolver separating guard synthesis with Plotkin anti-unification.",
+        "triggers": ["spacetime_oe_sygus_repair", "observational equivalence sygus polyglot eusolver"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "SHADOW_INTERFACE_COMPUTER_USE": {
+        "domain": "SHADOW_INTERFACE_AND_PETRI_CU",
+        "source_path": "canonical/tools/follow_the_pointer_v1.py",
+        "entrypoint": "declarations",
+        "summary": "Agent-S4 shadow-interface evolution + W3C WebMCP (navigator.modelContext / declarative form toolname) compiler + zero-exec CLI stub pointer chasing + environment_fit_v1 + sub-microsecond inhibitor-arc Petri 5-layer State-Alias tomography.",
+        "triggers": ["shadow_interface_computer_use", "webmcp shadow interface pointer chasing petri"],
+        "required_inputs": ["workspace_root"],
+        "declared_dependencies": [],
+    },
+    "ACTIVE_MEALY_QUESTION_LEARNER": {
+        "domain": "INSTANT_ACTIVE_AUTOMATA_LEARNING",
+        "source_path": "canonical/tools/ask_instead_of_stare_v1.py",
+        "entrypoint": "learn_with_acquisition",
+        "summary": "Sub-millisecond Angluin L* active Mealy automata learner with automatic distinguishing suffix synthesis plus executable-question pre-state disambiguation (ask_instead_of_stare_v1 + the_pre_state_is_the_missing_part_v1).",
+        "triggers": ["active_mealy_question_learner", "angluin lstar active mealy distinguishing suffix"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "DBSP_BITEMPORAL_CAPABILITY_FORGE": {
+        "domain": "DBSP_ZSET_MEMORY_AND_MUTANT_FORGE",
+        "source_path": "canonical/runtime/capability_forge_v1.py",
+        "entrypoint": "forge_function",
+        "summary": "Sub-10-microsecond DBSP Abelian Z-set (+1/-1) bi-temporal incremental view maintenance + ForwardPush local PPR (zero CL-Bench stale-belief drift) + adversarial mutant-killing dormant capability forge.",
+        "triggers": ["dbsp_bitemporal_capability_forge", "dbsp abelian zset bitemporal mutant forge"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "GROUNDED_COMPUTER_INSPECTOR": {
+        "domain": "GROUNDED_INSPECTION_AND_OPERATION_TRIAL",
+        "source_path": "canonical/runtime/inspect_v1.py",
+        "entrypoint": "answer",
+        "summary": "Evidence-grounded computer inspection and executable-attempt question answering (inspect_v1 + operation_trial_v1 + value_enumeration_v1) with perturbation referent verification.",
+        "triggers": ["grounded_computer_inspector", "executable attempt grounded computer inspection"],
+        "required_inputs": ["question"],
+        "declared_dependencies": [],
+    },
     "UNFAMILIAR_M0_APARTNESS_LSHARP_LEARNER": {
         "domain": "INSTANT_LEARNING_AND_AUTOMATA",
         "source_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
@@ -2036,6 +2090,39 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
             "canonical/swe_kernel/computer_use_check_density_v1.py",
             "canonical/runtime/domain_of_verification_v1.py",
             "canonical/runtime/contrast_selection_v1.py",
+        ],
+    },
+    "shadow_interface_webmcp_petri_cu": {
+        "external_names": ["agent s4", "evolving agent interfaces", "shadow interface", "webmcp", "modelcontext", "coact-1", "inhibitor arc petri net", "pointer chasing", "research env bench"],
+        "engines": ["engine:SHADOW_INTERFACE_COMPUTER_USE", "engine:GROUNDED_COMPUTER_INSPECTOR"],
+        "koan_modules": [
+            "canonical/tools/follow_the_pointer_v1.py",
+            "canonical/runtime/environment_fit_v1.py",
+            "canonical/runtime/inspect_v1.py",
+            "canonical/runtime/operation_trial_v1.py",
+            "canonical/runtime/hidden_arsenal_unifier_v1.py",
+        ],
+    },
+    "spacetime_omniscient_oe_sygus": {
+        "external_names": ["spacetime programming", "omniscient debugging", "debugharness", "observational equivalence sygus", "eusolver", "causal site intervention", "polyglot sygus"],
+        "engines": ["engine:SPACETIME_OE_SYGUS_REPAIR", "engine:CHECKABILITY_ORACLE_FORGE"],
+        "koan_modules": [
+            "canonical/runtime/oe_sygus_synthesizer_v1.py",
+            "canonical/runtime/value_enumeration_v1.py",
+            "canonical/swe_kernel/site_by_intervention_v1.py",
+            "canonical/swe_kernel/argument_construction_v1.py",
+            "canonical/swe_kernel/checkability_by_differential_pin_v1.py",
+            "canonical/swe_kernel/instruction_contract_for_code_v1.py",
+        ],
+    },
+    "dbsp_zset_bitemporal_memory_and_mealy": {
+        "external_names": ["dbsp", "abelian z-set", "incremental view maintenance", "angluin lstar", "active mealy automata", "distinguishing suffix", "cl-bench", "doc-to-lora", "ascent self-distillation"],
+        "engines": ["engine:DBSP_BITEMPORAL_CAPABILITY_FORGE", "engine:ACTIVE_MEALY_QUESTION_LEARNER"],
+        "koan_modules": [
+            "canonical/tools/ask_instead_of_stare_v1.py",
+            "canonical/tools/the_pre_state_is_the_missing_part_v1.py",
+            "canonical/runtime/capability_forge_v1.py",
+            "canonical/runtime/hidden_arsenal_unifier_v1.py",
         ],
     },
     "unfamiliar_apartness_angelix_sygus_semiring_alphaevolve": {
@@ -4157,6 +4244,97 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
             top_k=int(inputs.get("top_k", 10)),
         )
         return _ok(mode, "FORWARD_PUSH_BITEMPORAL_RECALLED", res)
+
+    if mode == "CHECKABILITY_ORACLE_FORGE":
+        from canonical.runtime import hidden_arsenal_unifier_v1 as hau
+
+        res = hau.checkability_oracle_forge(
+            inputs["workspace_root"],
+            module_rel=inputs.get("module_rel"),
+            instruction=str(inputs.get("instruction") or goal or ""),
+            wanted_callables=inputs.get("wanted_callables") or (),
+        )
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("status") or "CHECKABILITY_UNRESOLVED"), detail=res)
+        return _ok(mode, "CHECKABILITY_ORACLE_FORGED", res)
+
+    if mode == "SPACETIME_OE_SYGUS_REPAIR":
+        from canonical.runtime import hidden_arsenal_unifier_v1 as hau
+
+        res = hau.spacetime_oe_sygus_repair(
+            inputs.get("workspace_root"),
+            module_rel=inputs.get("module_rel"),
+            value_target=inputs.get("value_target"),
+            contrasts=inputs.get("contrasts") or (),
+            examples=inputs.get("examples") or (),
+            failing_envs=inputs.get("failing_envs") or (),
+            passing_envs=inputs.get("passing_envs") or (),
+            lang=str(inputs.get("lang") or "python"),
+            extra_consts=inputs.get("extra_consts") or (),
+        )
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("status") or "SYGUS_UNRESOLVED"), detail=res)
+        return _ok(mode, "SPACETIME_OE_SYGUS_SYNTHESIZED", res)
+
+    if mode == "SHADOW_INTERFACE_COMPUTER_USE":
+        from canonical.runtime import hidden_arsenal_unifier_v1 as hau
+
+        res = hau.shadow_interface_computer_use(
+            inputs["workspace_root"],
+            question=str(inputs.get("question") or goal or ""),
+            entrypoint_path=inputs.get("entrypoint_path"),
+            html_or_webmcp=str(inputs.get("html_or_webmcp") or ""),
+            shadow_op=inputs.get("shadow_op"),
+            target_rel=inputs.get("target_rel"),
+            standing_rels=inputs.get("standing_rels") or (),
+            petri_supervisor=inputs.get("petri_supervisor"),
+            transition_name=str(inputs.get("transition_name") or "shadow_commit"),
+            expected_record_count=inputs.get("expected_record_count"),
+        )
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("status") or "SHADOW_CU_REFUSED"), detail=res)
+        return _ok(mode, "SHADOW_INTERFACE_EXECUTED", res)
+
+    if mode == "ACTIVE_MEALY_QUESTION_LEARNER":
+        from canonical.runtime import hidden_arsenal_unifier_v1 as hau
+
+        res = hau.active_mealy_question_learner(
+            oracle_fn=inputs.get("oracle_fn"),
+            alphabet=inputs.get("alphabet") or (),
+            machine_name=inputs.get("machine_name"),
+            depth=int(inputs.get("depth", 2)),
+            budget=int(inputs.get("budget", 12)),
+            max_states=int(inputs.get("max_states", 8)),
+        )
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("status") or "ACTIVE_MEALY_UNRESOLVED"), detail=res)
+        return _ok(mode, "ACTIVE_MEALY_LEARNED", res)
+
+    if mode == "DBSP_BITEMPORAL_CAPABILITY_FORGE":
+        from canonical.runtime import hidden_arsenal_unifier_v1 as hau
+
+        res = hau.dbsp_bitemporal_forge(
+            zset_deltas=inputs.get("zset_deltas") or (),
+            supersede_slot=bool(inputs.get("supersede_slot", True)),
+            query_seed=inputs.get("query_seed"),
+            query_t_valid=inputs.get("query_t_valid"),
+            forge_entry=inputs.get("forge_entry"),
+            seed_cases=inputs.get("seed_cases"),
+            workspace_root=inputs.get("workspace_root"),
+            memory=inputs.get("memory"),
+        )
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("status") or "DBSP_FORGE_REJECTED"), detail=res)
+        return _ok(mode, "DBSP_FORGE_COMPLETE", res)
+
+    if mode == "GROUNDED_COMPUTER_INSPECTOR":
+        from canonical.runtime import hidden_arsenal_unifier_v1 as hau
+
+        ws = inputs.get("workspace_root") or ROOT
+        res = hau.shadow_interface_computer_use(ws, question=str(inputs["question"]))
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("status") or "INSPECTION_UNGROUNDED"), detail=res)
+        return _ok(mode, "GROUNDED_COMPUTER_INSPECTED", res)
 
     if mode == "UNFAMILIAR_M0_APARTNESS_LSHARP_LEARNER":
         from canonical.swe_kernel.unified_unfamiliar_leapfrog_v1 import ApartnessTreeInstantLearner
