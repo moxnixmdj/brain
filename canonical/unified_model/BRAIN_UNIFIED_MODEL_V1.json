@@ -31373,7 +31373,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8a417a3742cbdee5d335ad421422838aea5e2eb5515837d7191ee2ee91644102"
+  "value": "250ee08deb749d6a4dbe4a0ed2cfbc920b8e5a7e8ca7952b0b4818b2bdede7ba"
  },
  "engines": [
   {
@@ -33102,7 +33102,7 @@
     "carrier_sha256": "706658ca4dd0853bca78d6678b4fab7c82a4f6995d0482390f13f1a499a40083",
     "entrypoint": "induce_periodic_operator",
     "source_path": "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
-    "source_sha256": "9c28ff14e7315f3358e13f0a596c1df0137bc6acdfc24fcdd74c47aa429925c2"
+    "source_sha256": "6ed969077cd88e7b27785405e2a03c204ed93a733569f36401a6e58febba342d"
    },
    "summary": "Synthesizes pure AST-verified perceptor, periodic-modulo, and compressed lookup organs from raw input/output observations.",
    "triggers": [
@@ -145696,7 +145696,7 @@
   "included_source_count": 2232,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "73ac851e0e19f9d75969e3060882f41cad4d55c7c982bc01aeba2cbb3b581525"
+  "source_tree_digest": "cec3441179c825e668ed0c96c99575671923a3f36d3eb313349d7de0b47e6800"
  },
  "research_index": [
   {
@@ -402865,9 +402865,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/closed_loop_autonomous_controller_v1.py",
-   "sha256": "cd412fa2ce68bdc9a967e00f5b694fb0c0dbb01f48766acf8812dc75688c582a",
+   "sha256": "fdf68f4043262cbada28cea457679b39df11bca5e6ddeb7d2ea85b1afea0c97e",
    "summary": "Unified Closed-Loop Autonomous Controller (`solve_or_learn`) — v1.",
-   "symbol_count": 18,
+   "symbol_count": 20,
    "symbols": [
     "_close_matching_ignorance_gaps",
     "_deterministic_zero_llm_mcp_substrate",
@@ -402875,12 +402875,14 @@
     "_is_executable",
     "_is_honest_contract_refusal",
     "_named_executable",
+    "_program_signature",
     "_promote_r3_episode_if_configured",
     "_qualify_cli_measurement_skill",
     "_qualify_http_form_skill",
     "_read_only_repository_analysis",
     "_record_gap_and_read_knowledge",
     "_solve_or_learn_impl",
+    "_tier0a_semantic_lane",
     "chase_until_met",
     "execute_and_elevate_confined_trajectory",
     "inspect_local_repo_for_goal",
@@ -402903,6 +402905,7 @@
     "is_honest_contract_refusal": 1,
     "loop": 1,
     "named_executable": 1,
+    "program_signature": 1,
     "promote_r3_episode_if_configured": 1,
     "qualify_cli_measurement_skill": 1,
     "qualify_http_form_skill": 1,
@@ -402912,6 +402915,7 @@
     "solve_or_learn_impl": 1,
     "solve_or_learn_isolated": 1,
     "study_open_gaps": 1,
+    "tier0a_semantic_lane": 1,
     "unified": 1,
     "v1": 2
    }
@@ -406147,7 +406151,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
-   "sha256": "9c28ff14e7315f3358e13f0a596c1df0137bc6acdfc24fcdd74c47aa429925c2",
+   "sha256": "6ed969077cd88e7b27785405e2a03c204ed93a733569f36401a6e58febba342d",
    "summary": "Meta-Circular Reflective Program Graph (`K3 = 0`, `$0` spend).",
    "symbol_count": 88,
    "symbols": [

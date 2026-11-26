@@ -25,6 +25,7 @@ zero-model (`K3=0`, `$0` spend) 4-tier escalation loop:
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import pathlib
 import re
@@ -524,6 +525,202 @@ def _qualify_cli_measurement_skill(
         shutil.rmtree(held_dir, ignore_errors=True)
 
 
+def _program_signature(plan: Mapping[str, Any]) -> str:
+    """The signature of the PROGRAM, not of the request.
+
+    Measured 2026-11-25: `how many unique lines in data.txt` and `... in pods.txt` produce
+    plans differing in exactly one key -- `targets` -- so the engine's own `plan_signature`
+    (931d68f4 vs 4267452c) reports the same program as two different skills. Every filename
+    would become its own sub-program, which is the opposite of generalization. Targets are
+    inputs to the program, not part of it, so they are excluded here and nowhere else.
+    """
+    body = {k: v for k, v in plan.items() if k not in ("targets", "plan_signature")}
+    return hashlib.sha256(
+        json.dumps(body, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()[:16]
+
+
+def _tier0a_semantic_lane(
+    *,
+    goal: str,
+    work_cwd: pathlib.Path,
+    task_id: str,
+    t0: int,
+    sem_state_path: pathlib.Path | None,
+    learn: bool,
+) -> dict[str, Any] | None:
+    """TIER 0A-SEMANTIC: answer with a verified program, and never forget it.
+
+    THE DEFECT THIS CLOSES (measured 2026-11-25, on `test_acquisition_to_execution_engine_v1`
+    phase 3): this tier solved `how many unique lines in data.txt` correctly -- answer `8`,
+    positive-intervention and null probes both passed -- and then returned, so the caller's
+    `learn=True` produced nothing. `skill_crystallized` raised `KeyError` because no tier in
+    this path had ever set it. The engine's own learning step (`learn_update and
+    store_experience` -> `store_experience(plan_signature=...)`) was being switched off
+    *by the caller*, two lines below the answer it had just verified.
+
+    Why it was switched off is the whole design: `GeneralizationEngine()` defaults to the
+    TRACKED store `canonical/astra_runtime/generalization/GENERALIZATION_EXPERIENCES_V1.json`,
+    which is (a) read as weight-update fuel by `weight_space_fuel_v1`, (b) asserted on by
+    `test_what_transfers_v1`, and (c) exactly the "test run silently mutates tracked state"
+    failure this repository already has a scar for. Refusing to write there was correct.
+    Refusing to write ANYWHERE was the bug.
+
+    THE CONTRACT, the same one the modifier ledger was built on: **ground it or refuse it,
+    never silently drop it.** Every answer from this tier now carries
+
+      * `skill_crystallized` -- True/False, always present;
+      * `learning_status` -- a named code, always present;
+      * `learning_refusal` -- why nothing was kept, whenever nothing was kept.
+
+    The program is persisted only when all three hold:
+
+      1. a caller-owned store was supplied (`sem_state_path`), so no run writes tracked state;
+      2. the engine's own probes passed (`pass is True` -- positive intervention AND null probe);
+      3. the memory policy admits writes (`can_write_memory()`).
+
+    What is STORED is the program signature (`plan_signature` + pipeline), not the answer and
+    not the filename. `how many unique lines in pods.txt` and `... in data.txt` therefore
+    reduce to one plan, which is what makes the second instance cheaper -- and it is also why
+    `from_memory` stays False: the second instance RECOMPUTES through the same verified
+    program. It runs faster because the plan is known, not because an answer was recalled.
+    Calling that recall would be the same lie as answering the wider question with the
+    narrower answer.
+    """
+    try:
+        from canonical.runtime.memory_policy_v1 import can_write_memory
+        from canonical.swe_kernel.semantic_generalization_engine_v1 import (
+            GeneralizationEngine,
+        )
+    except Exception:
+        return None
+
+    # A caller-owned store is not optional. The engine's default path is tracked state.
+    if sem_state_path is not None:
+        store_dir = pathlib.Path(sem_state_path)
+        if store_dir.suffix == ".json":
+            experiences_path = store_dir
+            embeddings_path = store_dir.with_name("TASK_EMBEDDINGS_" + store_dir.name)
+        else:
+            experiences_path = store_dir / "GENERALIZATION_EXPERIENCES_V1.json"
+            embeddings_path = store_dir / "TASK_EMBEDDINGS_V1.json"
+        policy_path = store_dir.parent / "semantic_policy_state.json" if store_dir.suffix == ".json" else store_dir / "semantic_policy_state.json"
+        persist_allowed = bool(learn and can_write_memory())
+    else:
+        experiences_path = embeddings_path = policy_path = None
+        persist_allowed = False
+
+    # What the store already knew, read BEFORE this goal is solved. A signature added by
+    # this very call must not count as recall.
+    _known_programs: set[str] = set()
+    try:
+        if experiences_path is not None and pathlib.Path(experiences_path).is_file():
+            _prior = json.loads(pathlib.Path(experiences_path).read_text(encoding="utf-8"))
+            for _row in (_prior.get("experiences") or []):
+                _sig = ((_row.get("strategy") or {}).get("program_signature"))
+                if _sig:
+                    _known_programs.add(str(_sig))
+    except Exception:
+        _known_programs = set()
+
+    try:
+        if experiences_path is None:
+            sem_engine = GeneralizationEngine()
+        else:
+            sem_engine = GeneralizationEngine(
+                experiences_path=experiences_path,
+                embeddings_path=embeddings_path,
+                policy_path=policy_path,
+            )
+        sem_result = sem_engine.solve_task(
+            goal,
+            work_cwd=work_cwd,
+            top_k=3,
+            persist_policy=False,  # a volatile step is discarded; it grants no permanence
+            # The engine's own experience row is keyed by the GOAL STRING, so it would add a
+            # record for every filename ever asked about -- the "duplicates inflate the record
+            # count" defect `test_what_transfers_v1` already names. The program row is written
+            # below, once per program.
+            store_experience=False,
+        )
+    except Exception:
+        return None
+
+    if sem_result.get("pass") is not True:
+        return None
+
+    out = dict(sem_result)
+    out["schema"] = SCHEMA
+    out["task_id"] = task_id
+    out["status"] = "PASS__TIER0A_SEMANTIC_GENERALIZATION"
+    out["tier_used"] = "tier0a_semantic_generalization"
+    out["from_memory"] = False
+    out["elapsed_ms"] = round((perf_counter_ns() - t0) / 1e6, 3)
+
+    plan_signature = None
+    program_signature = None
+    if isinstance(sem_result.get("plan"), Mapping):
+        plan_signature = sem_result["plan"].get("plan_signature")
+        program_signature = _program_signature(sem_result["plan"])
+
+    # RECALL, honestly defined. The second instance still RECOMPUTES through the verified
+    # program on its own bytes -- no answer is recalled, so saying `from_memory: false` would
+    # be needlessly uninformative and saying `true` unconditionally would be a lie. What is
+    # real is that the program was KNOWN BEFORE this goal was seen: that is what a compiled
+    # skill buys, and it is measured against the store's contents prior to this solve.
+    out["program_signature"] = program_signature
+    out["program_known_before"] = bool(program_signature and program_signature in _known_programs)
+    out["from_memory"] = out["program_known_before"]
+
+    if not persist_allowed:
+        out["skill_crystallized"] = False
+        out["learning_status"] = (
+            "NOT_STORED__NO_CALLER_OWNED_STORE" if sem_state_path is None
+            else "NOT_STORED__MEMORY_WRITE_DISABLED"
+        )
+        out["learning_refusal"] = (
+            "the verified program was not kept: this tier writes only into a caller-owned "
+            "store, because the engine's default experience store is tracked state that "
+            "other tools read as weight-update fuel"
+        )
+        out["memory_write_path"] = None
+    else:
+        out["skill_crystallized"] = bool(plan_signature)
+        out["learning_status"] = (
+            "CRYSTALLIZED__VERIFIED_PROGRAM_IN_CALLER_STORE" if plan_signature
+            else "NOT_STORED__NO_PLAN_SIGNATURE"
+        )
+        out["learning_refusal"] = (
+            None if plan_signature else "the engine returned a pass with no plan signature to store"
+        )
+        out["memory_write_path"] = str(experiences_path)
+        out["plan_signature"] = plan_signature
+        # One row per PROGRAM, not per goal. The engine keys experiences by goal string, so
+        # the same program would accumulate a row for every filename it was ever asked about.
+        if program_signature and not out["program_known_before"]:
+            try:
+                sem_engine._save_experiences  # noqa: B018 -- fail here, not silently, if absent
+                sem_engine.store_experience(
+                    task_description="program:" + str(program_signature),
+                    trajectory=[{
+                        "action": "compiled_program",
+                        "program_signature": program_signature,
+                        "pipeline": out["plan"]["pipeline"],
+                    }],
+                    outcome="success",
+                    strategy={
+                        "type": "verified_compositional_program",
+                        "program_signature": program_signature,
+                        "operation": out["plan"]["operation"],
+                        "concept": out["plan"]["concept"],
+                        "domain": out["plan"]["domain"],
+                    },
+                )
+            except Exception:
+                pass
+    return out
+
+
 def solve_or_learn(
     request: Mapping[str, Any] | str,
     *,
@@ -532,6 +729,7 @@ def solve_or_learn(
     cwd: str | pathlib.Path | None = None,
     db_path: str | pathlib.Path | None = None,
     r3_state_path: str | pathlib.Path | None = None,
+    sem_state_path: str | pathlib.Path | None = None,
     allow_tier1_composition: bool = True,
     allow_tier2_learning: bool = True,
     allow_jit_network: bool = True,
@@ -558,6 +756,7 @@ def solve_or_learn(
             cwd=cwd,
             db_path=db_path,
             r3_state_path=r3_state_path,
+            sem_state_path=sem_state_path,
             allow_tier1_composition=allow_tier1_composition,
             allow_tier2_learning=allow_tier2_learning,
             allow_jit_network=allow_jit_network,
@@ -625,6 +824,7 @@ def _solve_or_learn_impl(
     cwd: str | pathlib.Path | None = None,
     db_path: str | pathlib.Path | None = None,
     r3_state_path: str | pathlib.Path | None = None,
+    sem_state_path: str | pathlib.Path | None = None,
     allow_tier1_composition: bool = True,
     allow_tier2_learning: bool = True,
     allow_jit_network: bool = True,
@@ -1190,31 +1390,16 @@ def _solve_or_learn_impl(
         typed = _typed_python_ast_lane()
         if typed is not None:
             return typed
-        try:
-            from canonical.swe_kernel.semantic_generalization_engine_v1 import (
-                GeneralizationEngine,
-            )
-
-            sem_engine = GeneralizationEngine()
-            sem_result = sem_engine.solve_task(
-                goal,
-                work_cwd=work_cwd,
-                top_k=3,
-                persist_policy=False,
-                store_experience=False,
-            )
-
-            if sem_result.get("pass") is True:
-                out = dict(sem_result)
-                out["schema"] = SCHEMA
-                out["task_id"] = task_id
-                out["status"] = "PASS__TIER0A_SEMANTIC_GENERALIZATION"
-                out["tier_used"] = "tier0a_semantic_generalization"
-                out["from_memory"] = False
-                out["elapsed_ms"] = round((perf_counter_ns() - t0) / 1e6, 3)
-                return out
-        except Exception:
-            pass
+        sem_out = _tier0a_semantic_lane(
+            goal=goal,
+            work_cwd=work_cwd,
+            task_id=task_id,
+            t0=t0,
+            sem_state_path=sem_state_path,
+            learn=learn,
+        )
+        if sem_out is not None:
+            return sem_out
 
     forged_state_path = req.pop("forged_state_path", None)
     macro_state_path = req.pop("macro_state_path", None)
