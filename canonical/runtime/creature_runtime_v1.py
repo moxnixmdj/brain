@@ -1611,6 +1611,9 @@ class Creature:
     def solve_swe_repo_native(self, repo_root: str | pathlib.Path, **kwargs: Any) -> dict[str, Any]:
         return self._ensure_unified_model().solve_swe_repo_native(repo_root, **kwargs)
 
+    def live_browser_episode(self, goal: str, **kwargs: Any) -> dict[str, Any]:
+        return self._ensure_unified_model().live_browser_episode(goal, **kwargs)
+
     def live_browser_step(self, goal: str, **kwargs: Any) -> dict[str, Any]:
         return self._ensure_unified_model().live_browser_step(goal, **kwargs)
 

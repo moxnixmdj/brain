@@ -6076,6 +6076,10 @@ class UnifiedModel:
 
         return uul.lift_protocol_and_verify_effect(**kwargs)
 
+    def live_browser_episode(self, goal: str, *, room: Any, **kwargs: Any) -> dict[str, Any]:
+        from canonical.runtime.witnessed_browser_v1 import episode
+        return episode(room, goal, **kwargs)
+
     def live_browser_step(self, goal: str, *, room: Any, **kwargs: Any) -> dict[str, Any]:
         from canonical.runtime.witnessed_browser_v1 import step
         return step(room, goal, **kwargs)

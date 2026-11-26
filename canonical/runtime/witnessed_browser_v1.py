@@ -76,10 +76,15 @@ def _eligible(tool):
     return not hints.get('consequentialHint') and not hints.get('debugging') and bool(tool.get('name'))
 
 
+def read_question(goal):
+    return bool(re.match(r'^\s*(what|where|when|which|who|how (?:many|much)|show|list|inspect|read|describe)\b',goal,re.I))
+
+
 def propose(goal, tools, *, lesson=None, arm='empty'):
     if arm not in ('empty','raw','lifted'):
         raise ValueError('unknown comparison arm')
-    active = [t for t in tools if _eligible(t)]
+    active = [t for t in tools if _eligible(t) and
+              (not read_question(goal) or (t.get('annotations') or {}).get('readOnlyHint') is True)]
     if lesson and arm != 'empty':
         tool = [t for t in active if t['name']==lesson['tool'] and digest(_schema(t))==lesson['schema']]
         if len(tool)==1:
@@ -102,6 +107,8 @@ def propose(goal, tools, *, lesson=None, arm='empty'):
         if schema is None or not any(score):
             continue
         args = _arguments(goal, schema)
+        if args == {} and schema.get('properties') and not (tool.get('annotations') or {}).get('readOnlyHint'):
+            args = None  # unbound optional write slots are not an instruction to reset to defaults
         ranked.append((score,tool['name'],args))
     ranked.sort(key=lambda r:r[0], reverse=True)
     if not ranked or (len(ranked)>1 and ranked[0][0]==ranked[1][0]) or ranked[0][2] is None:
@@ -174,6 +181,8 @@ def step(room, goal, *, origin, arm='empty', lesson=None, expected_text=None):
     else:
         # A live DOM fallback, restricted to a unique enabled control named in
         # the request. No CSS selector, page-specific synonym or coordinates in memory.
+        if read_question(goal):
+            return result
         elements = room.observe(); phrase = ' '+' '.join(words(goal))+' '
         options = [e for e in elements if e['enabled'] and e['role']=='button' and words(e['name'])
                    and ' '+' '.join(words(e['name']))+' ' in phrase]
@@ -187,3 +196,39 @@ def step(room, goal, *, origin, arm='empty', lesson=None, expected_text=None):
     ok = bool(after['origin']==origin and expected_text and expected_text in after['text'].splitlines())
     return {**result,'status':'VERIFIED_VISIBLE_TRANSITION' if ok else 'ACTION_WITHOUT_VERIFIED_GOAL',
             'pass':ok,'goal_verified':ok}
+
+
+def episode(room, goal, *, origin, expected_text=None, max_actions=3):
+    """Follow only explicit ordering. An action authorizes a dependent step
+    only on a changed page with a newly groundable next handle. No arbitrary
+    executable tool lists, and no claim that a changed page satisfies a goal.
+    """
+    if not 1 <= max_actions <= 3:
+        raise ValueError('expected an action budget from 1 to 3')
+    # Do not split a quoted argument, e.g. a title containing 'then'.
+    parts = re.split(r'("[^"\n]*"|\'[^\'\n]*\')',goal)
+    clauses = ['']
+    for i, part in enumerate(parts):
+        pieces = [part] if i % 2 else re.split(r'[,.;]?\s+(?:and\s+)?then\s+', part, flags=re.I)
+        clauses[-1] += pieces[0]
+        clauses.extend(pieces[1:])
+    steps = []; transitions = []
+    for i, clause in enumerate(clauses[:max_actions]):
+        before = room.evaluate(_DISCOVER)
+        last = i == len(clauses)-1
+        res = step(room,clause,origin=origin,expected_text=expected_text if last else None)
+        steps.append(res)
+        if not res['executed'] or not res.get('changed') or last:
+            break
+        after = room.evaluate(_DISCOVER)
+        if after['origin']!=origin or before['origin']!=origin:
+            break
+        next_goal=clauses[i+1]; nxt=propose(next_goal,after['tools'])
+        if not nxt:break
+        def contracts(tools):
+            return {(t['name'],digest(_schema(t))) for t in tools if _eligible(t)}
+        arrived=contracts(after['tools'])-contracts(before['tools'])
+        if not any(name==nxt['name'] for name,_ in arrived):break
+        transitions.append({'before':res['before'],'after':res['after'],'newly_available':nxt['name']})
+    return {'pass':bool(steps and len(steps)==len(clauses) and steps[-1]['goal_verified']),
+            'steps':steps,'transitions':transitions,'clause_count':len(clauses),'model_calls':0}
