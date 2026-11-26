@@ -420,3 +420,24 @@ instead of reporting it, and the first thing it produces is a correction to us:
    to fix nothing ("1 failed, 115 passed" before and after, identically). And a whole-file pass criterion
    makes tasks with pre-existing environment failures permanently unsolvable -- werkzeug's conftest imports
    `ephemeral_port_reserve`, so its first measurement was an import error dressed as a capability zero.
+
+### §5j  One exposure or two? Measured in 0.9 s, and it closes a door
+
+`canonical/tools/one_or_two_witness_generalization_probe_v1.py` lifted a morphism from each of three real
+fixes (click@`05f6fd0df`, click@`c53d3732b`, werkzeug@`051fd6635`) and asked the two operations that a
+learning story depends on to do their jobs. Result, all four numbers being counts and not impressions:
+
+| question | answer | evidence |
+|---|---|---|
+| does the lift produce a rule or a copy? | **a copy** | `before_stmts_pattern` arities **10, 1, 0** — the "skill" is the fix's own statement slice |
+| does that skill transfer to another bug? | **no: 0 of 6** | `apply_subtree_morphism_to_python` changed nothing on werkzeug@`884437aef` or click@`fc518e412`, including the same-project pair |
+| can two witnesses be composed instead? | **no: 0 of 3 pairs** | `anti_unify_subtree_morphisms` refuses with `ARITY_MISMATCH_BEFORE` — it requires `len(before_1) == len(before_2)` before inspecting anything |
+| so is the fix "more exposures"? | **no** | the composition operator rejects the second witness before looking at it; the "see it twice, then generalize" fallback is closed by the same precondition |
+
+This is the sharpest statement of §3's answer the project has produced: *instant learning is not blocked by
+the admission filter, the weights, or the benchmark* — four of five gates were earned outright — *but by a
+generalizer that emits commit constants instead of typed rules.* The remedy named in §9.2 ("anti-unification
+over the Semantic IR") is therefore not an optimization of the current lift; it replaces its input domain,
+and the arity equality has to go with it. Anything less and "each experience multiplies capability" is
+prose: a skill that never fires cannot compound, and wiring more engines into `UnifiedModel` would not make
+one fire.
