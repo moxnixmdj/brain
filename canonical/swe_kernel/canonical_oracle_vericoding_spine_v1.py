@@ -1529,6 +1529,180 @@ def audit_verifier_pinning_and_synthesize_oracles(
     }
 
 
+def prove_equivalence_and_amplify_verdict(
+    *,
+    # 1. Consistency vs Equivalence proof (`consistency_vs_equivalence_v1`)
+    code_rule: Mapping[str, Any] | None = None,
+    before_snippet: str | None = None,
+    after_snippet: str | None = None,
+    rule_judge: Any = None,
+    rule_probes: Sequence[Any] | None = None,
+    rule_language: str = "python",
+    gate_report: Mapping[str, Any] | None = None,
+    # 2. Minimal distinguishing projection oracle (`distinguishing_projection_v1`)
+    projection_root: str | Path | None = None,
+    projection_features: Sequence[str] | None = None,
+    run_projection_synthesize: bool = False,
+    # 3. Reach changed site & pin reverted part (`reach_the_changed_site_v1` + `pins_from_the_reverted_part_v1`)
+    pin_tree: str | Path | None = None,
+    pin_source_rel: str | None = None,
+    pin_test_rel: str | None = None,
+    pin_fixed: str | None = None,
+    pin_mutant: str | None = None,
+    pin_test_source: str | None = None,
+    reach_part_spec: Mapping[str, Any] | None = None,
+    reach_budget: int = 80,
+    # 4. Patch verdict amplification (`patch_verdict_amplification_v1`)
+    amplify_module_path: str | None = None,
+    amplify_test_path: str | None = None,
+    amplify_candidate_source: str | None = None,
+    amplify_repo_root: str | Path | None = None,
+    amplify_extra_pools: Mapping[str, Sequence[Any]] | None = None,
+) -> dict[str, Any]:
+    """Wave 32: Behavioral-Equivalence Proof, Minimal Distinguishing Projection, Reverted-Part Pinning & Verdict Amplification (`0H`, `K3=0`).
+
+    Composes 5 pure-stdlib hidden oracle & proof engines lazily on demand:
+      - `consistency_vs_equivalence_v1`: prove_code_rule + combined_admission_verdict
+      - `distinguishing_projection_v1`: project / combine / synthesize minimal action-identifying oracle
+      - `pins_from_the_reverted_part_v1`: calls_from_the_test + pin_part
+      - `reach_the_changed_site_v1`: reach_part to hit the changed line and assert its effect
+      - `patch_verdict_amplification_v1`: prepare_laws + laws_against_prepared / amplify
+    """
+    t0 = time.perf_counter()
+    engines_invoked: list[str] = []
+    results: dict[str, Any] = {}
+    any_ok = False
+    all_ok = True
+
+    # 1. Consistency vs Equivalence (`consistency_vs_equivalence_v1`)
+    if code_rule is not None and before_snippet is not None and after_snippet is not None and rule_judge is not None and rule_probes is not None:
+        from canonical.swe_kernel import consistency_vs_equivalence_v1 as cve
+
+        engines_invoked.append("canonical.swe_kernel.consistency_vs_equivalence_v1")
+        proof = cve.prove_code_rule(
+            dict(code_rule),
+            str(before_snippet),
+            str(after_snippet),
+            rule_judge,
+            list(rule_probes),
+            language=str(rule_language),
+        )
+        proof_dict = proof.__dict__ if hasattr(proof, "__dict__") else {"proof": str(proof)}
+        combined = cve.combined_admission_verdict(dict(gate_report), proof) if gate_report is not None else None
+        results["equivalence_proof"] = {
+            "proof": proof_dict,
+            "combined_verdict": combined,
+        }
+        any_ok = True
+
+    # 2. Distinguishing projection oracle (`distinguishing_projection_v1`)
+    if projection_root is not None and projection_features:
+        from canonical.swe_kernel import distinguishing_projection_v1 as dp
+
+        engines_invoked.append("canonical.swe_kernel.distinguishing_projection_v1")
+        root_p = Path(projection_root).resolve()
+        feats = [str(f) for f in projection_features]
+        per_feat = {f: dp.project(root_p, f) for f in feats}
+        combined_proj = dp.combine(root_p, feats)
+        results["distinguishing_projection"] = {
+            "features": feats,
+            "per_feature": per_feat,
+            "combined": combined_proj,
+        }
+        any_ok = True
+    elif run_projection_synthesize:
+        from canonical.swe_kernel import distinguishing_projection_v1 as dp
+
+        engines_invoked.append("canonical.swe_kernel.distinguishing_projection_v1")
+        results["distinguishing_projection"] = dp.synthesize()
+        any_ok = True
+
+    # 3. Calls from test + Pin reverted part + Reach changed site (`pins_from_the_reverted_part_v1` + `reach_the_changed_site_v1`)
+    extracted_calls: list[dict[str, Any]] = []
+    if pin_test_source is not None:
+        from canonical.swe_kernel import pins_from_the_reverted_part_v1 as pinr
+
+        engines_invoked.append("canonical.swe_kernel.pins_from_the_reverted_part_v1")
+        extracted_calls = pinr.calls_from_the_test(str(pin_test_source))
+        results["test_calls"] = {
+            "count": len(extracted_calls),
+            "calls": extracted_calls,
+        }
+        any_ok = True
+
+    if pin_tree is not None and pin_source_rel and pin_test_rel and pin_fixed is not None and pin_mutant is not None:
+        from canonical.swe_kernel import pins_from_the_reverted_part_v1 as pinr
+
+        if "canonical.swe_kernel.pins_from_the_reverted_part_v1" not in engines_invoked:
+            engines_invoked.append("canonical.swe_kernel.pins_from_the_reverted_part_v1")
+        tree_p = Path(pin_tree).resolve()
+        if not extracted_calls:
+            tst_p = tree_p / str(pin_test_rel)
+            if tst_p.is_file():
+                extracted_calls = pinr.calls_from_the_test(tst_p.read_text(encoding="utf-8", errors="replace"))
+        pin_res = pinr.pin_part(tree_p, str(pin_source_rel), str(pin_test_rel), str(pin_fixed), str(pin_mutant), extracted_calls)
+        results["reverted_part_pin"] = pin_res
+        any_ok = True
+        if reach_part_spec is not None:
+            from canonical.swe_kernel import reach_the_changed_site_v1 as reachs
+
+            engines_invoked.append("canonical.swe_kernel.reach_the_changed_site_v1")
+            reach_res = reachs.reach_part(
+                tree_p,
+                str(pin_source_rel),
+                str(pin_test_rel),
+                str(pin_fixed),
+                str(pin_mutant),
+                dict(reach_part_spec),
+                extracted_calls,
+                budget=int(reach_budget),
+            )
+            results["reach_changed_site"] = reach_res
+
+    # 4. Patch verdict amplification (`patch_verdict_amplification_v1`)
+    if amplify_module_path is not None:
+        from canonical.swe_kernel import patch_verdict_amplification_v1 as pva
+
+        engines_invoked.append("canonical.swe_kernel.patch_verdict_amplification_v1")
+        repo_p = Path(amplify_repo_root).resolve() if amplify_repo_root is not None else ROOT
+        if amplify_test_path is not None and amplify_candidate_source is not None:
+            amp_res = pva.amplify(
+                module_path=str(amplify_module_path),
+                test_path=str(amplify_test_path),
+                candidate_source=str(amplify_candidate_source),
+                repo_root=repo_p,
+                extra_pools=amplify_extra_pools,
+            )
+            results["verdict_amplification"] = amp_res
+        else:
+            prep = pva.prepare_laws(
+                module_path=str(amplify_module_path),
+                repo_root=repo_p,
+                extra_pools=amplify_extra_pools,
+            )
+            if amplify_candidate_source is not None:
+                law_res = pva.laws_against_prepared(prep, candidate_source=str(amplify_candidate_source))
+                results["verdict_amplification"] = {"prepared": prep, "laws_result": law_res}
+            else:
+                results["verdict_amplification"] = {"prepared": prep}
+        any_ok = True
+
+    passed = bool(engines_invoked) and any_ok and all_ok
+    return {
+        "schema": SCHEMA,
+        "pass": passed,
+        "status": (
+            "PASS__WAVE32_EQUIVALENCE_AND_VERDICT_AMPLIFIED"
+            if passed
+            else "FAIL_CLOSED__WAVE32_ORACLE_INPUTS_MISSING"
+        ),
+        "engines_invoked": engines_invoked,
+        "results": results,
+        "model_calls": 0,
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+    }
+
+
 
 
 
