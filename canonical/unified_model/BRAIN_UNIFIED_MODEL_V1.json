@@ -3,11 +3,11 @@
   "claim_limit": "a score is evidence that the module's own text says it does this work; it is not evidence that the work is correct",
   "domains": {
    "coding_agents": {
-    "candidates": 307,
+    "candidates": 308,
     "frontier_function": "resolve a repository issue from a text description",
     "harvested_all": 111,
     "hidden_share_all": 0.0,
-    "indexed_all": 288,
+    "indexed_all": 289,
     "top": [
      {
       "capability": false,
@@ -318,11 +318,11 @@
     ]
    },
    "instant_learning": {
-    "candidates": 188,
+    "candidates": 189,
     "frontier_function": "adapt from one episode without touching weights",
     "harvested_all": 70,
     "hidden_share_all": 0.0,
-    "indexed_all": 185,
+    "indexed_all": 186,
     "top": [
      {
       "capability": false,
@@ -390,6 +390,14 @@
      },
      {
       "capability": false,
+      "executable_surface": true,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/brain_unified_model_v1.py",
+      "score": 22.25,
+      "summary": "Brain Unified Model V1 — one front door over the compiled Brain."
+     },
+     {
+      "capability": false,
       "executable_surface": false,
       "indexed_as_source": true,
       "path": "canonical/swe_kernel/semantic_generalization_engine_v1.py",
@@ -411,23 +419,15 @@
       "path": "canonical/swe_kernel/unified_epistemic_portfolio_v1.py",
       "score": 20.5,
       "summary": "Unified Epistemic Portfolio & Multi-Organ Runtime Spine (`K3 = 0`) — v1."
-     },
-     {
-      "capability": false,
-      "executable_surface": true,
-      "indexed_as_source": true,
-      "path": "canonical/tools/generalization_rung_gradient_v1.py",
-      "score": 20.25,
-      "summary": "Problem 2, measured as a gradient rather than a verdict: where does memory stop generalising,"
      }
     ]
    },
    "memory": {
-    "candidates": 198,
+    "candidates": 199,
     "frontier_function": "context that stays correct as it fills",
     "harvested_all": 53,
     "hidden_share_all": 0.0,
-    "indexed_all": 192,
+    "indexed_all": 193,
     "top": [
      {
       "capability": false,
@@ -511,28 +511,28 @@
      },
      {
       "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/asymmetric_frontier_leapfrog_v1.py",
+      "score": 14.75,
+      "summary": "Asymmetric Frontier-Leapfrog Unification Spine — v1."
+     },
+     {
+      "capability": false,
       "executable_surface": true,
       "indexed_as_source": true,
       "path": "canonical/swe_kernel/contrastive_oracle_bootstrap_v1.py",
       "score": 13.25,
       "summary": "Contrastive Oracle Bootstrap — path item 5."
-     },
-     {
-      "capability": false,
-      "executable_surface": false,
-      "indexed_as_source": true,
-      "path": "canonical/runtime/autonomous_verified_self_improvement_v1.py",
-      "score": 13.0,
-      "summary": "Autonomous verified self-improvement loop V1."
      }
     ]
    },
    "verification_abstention": {
-    "candidates": 338,
+    "candidates": 339,
     "frontier_function": "know when you do not know, and prove what you did",
     "harvested_all": 63,
     "hidden_share_all": 0.0,
-    "indexed_all": 302,
+    "indexed_all": 303,
     "top": [
      {
       "capability": false,
@@ -557,6 +557,14 @@
       "path": "canonical/runtime/wave39_leapfrog_unification_v1.py",
       "score": 22.75,
       "summary": "Wave 39 Frontier-Leapfrog Dark-Organ Unification, Red-Queen/Mendel Co-Evolution, CLM+RRF Memory & Partial-Routing/JitRL."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": true,
+      "path": "canonical/runtime/asymmetric_frontier_leapfrog_v1.py",
+      "score": 22.5,
+      "summary": "Asymmetric Frontier-Leapfrog Unification Spine — v1."
      },
      {
       "capability": false,
@@ -621,23 +629,15 @@
       "path": "canonical/runtime/confinement_v1.py",
       "score": 16.75,
       "summary": "The admitted confinement and effect-verification path the boundary demands."
-     },
-     {
-      "capability": false,
-      "executable_surface": false,
-      "indexed_as_source": true,
-      "path": "canonical/runtime/benchmark_witness_elimination_compiler_v4.py",
-      "score": 16.5,
-      "summary": "Proof-carrying benchmark claim kernel v4."
      }
     ]
    },
    "world_model": {
-    "candidates": 137,
+    "candidates": 138,
     "frontier_function": "predict what an action does before doing it",
     "harvested_all": 43,
     "hidden_share_all": 0.0,
-    "indexed_all": 133,
+    "indexed_all": 134,
     "top": [
      {
       "capability": false,
@@ -741,51 +741,51 @@
   "present": true,
   "reachability": {
    "coding_agents": {
-    "chance_route_recall": 0.1763,
-    "chance_source_recall": 0.1355,
+    "chance_route_recall": 0.1848,
+    "chance_source_recall": 0.1358,
     "frontier_source_hit_recall": 1.0,
     "native_route_hit_recall": 1.0
    },
    "computer_use": {
-    "chance_route_recall": 0.0652,
+    "chance_route_recall": 0.0645,
     "chance_source_recall": 0.0677,
     "frontier_source_hit_recall": 1.0,
     "native_route_hit_recall": 1.0
    },
    "continual_learning": {
-    "chance_route_recall": 0.0474,
+    "chance_route_recall": 0.0469,
     "chance_source_recall": 0.0168,
     "frontier_source_hit_recall": 0.333,
     "native_route_hit_recall": 1.0
    },
    "instant_learning": {
-    "chance_route_recall": 0.1467,
-    "chance_source_recall": 0.0828,
+    "chance_route_recall": 0.1554,
+    "chance_source_recall": 0.0832,
     "frontier_source_hit_recall": 1.0,
     "native_route_hit_recall": 1.0
    },
    "memory": {
-    "chance_route_recall": 0.1126,
-    "chance_source_recall": 0.0868,
+    "chance_route_recall": 0.1217,
+    "chance_source_recall": 0.0872,
     "frontier_source_hit_recall": 0.667,
     "native_route_hit_recall": 1.0
    },
    "verification_abstention": {
-    "chance_route_recall": 0.1763,
-    "chance_source_recall": 0.1496,
+    "chance_route_recall": 0.1848,
+    "chance_source_recall": 0.15,
     "frontier_source_hit_recall": 0.667,
     "native_route_hit_recall": 1.0
    },
    "world_model": {
-    "chance_route_recall": 0.0904,
-    "chance_source_recall": 0.0602,
+    "chance_route_recall": 0.0997,
+    "chance_source_recall": 0.0606,
     "frontier_source_hit_recall": 1.0,
     "native_route_hit_recall": 1.0
    }
   },
   "schema": "BRAIN_MODEL_ANATOMY_V1",
   "source": "canonical/unified_model/DOMAIN_ATLAS_V1.json",
-  "source_sha256": "ded076c3682ef9233e5dfe43daffe454f327258ecdedfe2d2da9aa3909609028"
+  "source_sha256": "8e18759f5479b85781ee13c88870245a886e1096fd52b41de27865e7ffd6787b"
  },
  "capabilities": [
   {
@@ -33056,7 +33056,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0659437f6906ba55942ddd2e864f5d6cd2f591994894bd330d4fea53fbe80eb4"
+  "value": "34fda5682ff0008af934c12fc33749f9ccf34678057650d77cead92650ae6692"
  },
  "engines": [
   {
@@ -89191,7 +89191,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "e91e1c86c37396b5a0c65dd6fdbc1bdc9b5c503eee68983f4ae7e8958cf86b8d",
+   "sha256": "20c37363184b1299d228a6937884585e9ac05adf29d79fdcaec2bc538c149feb",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "triggers": [
     "brain",
@@ -161983,7 +161983,7 @@
   "included_source_count": 2438,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "e2c1c921f33c9b2fd4635e97ce0749bd6c340f2f8759db72d47141b9b21e2e7b"
+  "source_tree_digest": "91644f3597e9ad2d8e6cf2de96d3083979235491474d00cd31bb34aaa6045f2c"
  },
  "research_index": [
   {
@@ -338825,7 +338825,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/WAVE40_FRONTIER_BENCH_HELDOUT_MEASUREMENT_20261126_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "a1e1f6e79594e90fad26be3bc197b3432cad2121c6e8d3c755ad66f97b19d1a0",
+   "sha256": "364d06d48e274f80067aa309eb31a69a27f99a74caf225678a0fd7fbed3ec682",
    "status": "SHIPPED",
    "terms": {
     "20261126": 1,
@@ -350250,7 +350250,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "e91e1c86c37396b5a0c65dd6fdbc1bdc9b5c503eee68983f4ae7e8958cf86b8d",
+   "sha256": "20c37363184b1299d228a6937884585e9ac05adf29d79fdcaec2bc538c149feb",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 31,
    "symbols": [

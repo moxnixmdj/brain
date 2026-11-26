@@ -6623,36 +6623,20 @@ class UnifiedModel:
         transfer across Python/JS/TS/Go/Rust, 4-gate Hoare sequence composition, and MDL bit-rent eviction."""
         return self._get_five_pillar_kernel().skill_ratchet.consolidate_and_transfer(**kwargs)
 
-    # ------------------------------------------------------------------ Wave 40 held-out bench
+    # ------------------------------------------------------------- Wave 40 held-out bench
 
-    def frontier_bench(
-        self,
-        *,
-        seed: int | None = None,
-        per_category: int = 3,
-        categories: Sequence[str] | None = None,
-        self_check: bool = False,
-    ) -> dict[str, Any]:
-        """Wave 40: run the held-out, oracle-judged capability benchmark (see
-        `canonical/evaluation/frontier_bench_v1.py`).
+    def frontier_bench(self, *, seed: int | None = None, per_category: int = 3,
+                       categories: Sequence[str] | None = None, self_check: bool = False) -> dict[str, Any]:
+        """Wave 40: the held-out, oracle-judged benchmark (`canonical/evaluation/frontier_bench_v1.py`).
 
-        Every instance is generated from `seed` at call time and judged by an oracle that
-        never reads this model's own `pass` flag, so the returned `pass_rate` is a measurement
-        of the five pillars on instances they have not seen — not a re-run of their fixtures.
-        `self_check=True` also calibrates the instrument against a liar and a refusal stub.
-        """
+        Instances are generated from `seed` at call time and judged by oracles that never read this
+        model's own `pass` flag, so `pass_rate` measures unseen instances, not its own fixtures."""
         from canonical.evaluation import frontier_bench_v1 as bench
 
-        resolved_seed = bench.DEFAULT_SEED if seed is None else int(seed)
-        scorecard = bench.run_bench(
-            seed=resolved_seed,
-            per_category=int(per_category),
-            categories=categories,
-        )
+        resolved = bench.DEFAULT_SEED if seed is None else int(seed)
+        scorecard = bench.run_bench(seed=resolved, per_category=int(per_category), categories=categories)
         if self_check:
-            scorecard["self_check"] = bench.bench_self_check(
-                seed=resolved_seed, per_category=int(per_category)
-            )
+            scorecard["self_check"] = bench.bench_self_check(seed=resolved, per_category=int(per_category))
         return scorecard
     # --- Wave 39: Dark-Organ Unification, Red-Queen/Mendel Co-Evolution, CLM+RRF Memory & Partial-Routing/JitRL ---
 
