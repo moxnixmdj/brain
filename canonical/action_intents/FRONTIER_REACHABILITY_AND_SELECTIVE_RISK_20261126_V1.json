@@ -1,0 +1,454 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V8",
+ "action_id": "FRONTIER_REACHABILITY_AND_SELECTIVE_RISK_20261126_V1",
+ "action_intent_id": "FRONTIER_REACHABILITY_AND_SELECTIVE_RISK_20261126_V1",
+ "date": "2026-11-26",
+ "status": "SHIPPED",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "d9b5312cd6dd0c5b28c31e17c7673a499e1d8120",
+ "causal_blocker": "2,301 of 2,858 indexed modules were unreachable from the unified model front door and six of ten probed frontier goals misrouted or failed closed, because engine triggers carried only technical tokens and harvested surfaces had zero ids in the route index",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::2,301 of 2,858 indexed modules were unreachable from the unified model front door and six of ten probed frontier goals misrouted or failed closed, because engine triggers carried only technical tokens and harvested surfaces had zero ids in the route index",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "required_capability": "Goal-shaped routing of already-owned organs, plus a selective-risk instrument that reports coverage with error",
+ "action_summary": "Wire two pre-existing 2,000+ line organs into the unified model as federated engines, enrich federated engine triggers with goal-shaped frontier vocabulary, add a harvested-surface fallback to solve(), measure that 72.3% of the indexed tree had no route, shrink the unroutable target to 128 named modules, protect the routing contract with a mutation-tested suite, and ship a selective-risk evaluator that blocks its own headline.",
+ "expected_parent_frontier_change": "The frontier bottleneck moves from 'which capability exists' to 'which capability is reachable': 2,301 indexed modules (661,120 lines, 72.3%) had no capability, engine, or harvested surface, so no goal could reach them. After this PR the model routes 10/10 probed frontier goals to the engine that implements them, two pre-existing organs are executable behind the front door, and the unroutable mass is a named 128-module target instead of an unmeasured claim.",
+ "expected_parent_change": "The frontier bottleneck moves from 'which capability exists' to 'which capability is reachable': 2,301 indexed modules (661,120 lines, 72.3%) had no capability, engine, or harvested surface, so no goal could reach them. After this PR the model routes 10/10 probed frontier goals to the engine that implements them, two pre-existing organs are executable behind the front door, and the unroutable mass is a named 128-module target instead of an unmeasured claim.",
+ "highest_leverage_now": true,
+ "stop_condition": "Stop once the frontier routing contract passes 9/9, verify_brain_unified_model_v1 passes 38/38, test_brain_unified_model_v1 passes 62/62, repo_integrity_guard_v1 reports 0 violations, and the selective-risk evaluator refuses to emit a headline for its hand-authored task set.",
+ "probe_id": null,
+ "probe_specific": false,
+ "generic_repair_from_single_probe": false,
+ "governance_change": null,
+ "user_authorized_governance_change": false,
+ "explicit_user_authorization": "User instructed: 'Merge all of your work' after five commits on arena/62d0fc7e-brain.",
+ "incremental_spend_usd": 0.0,
+ "model_calls": 0,
+ "capability_credit_delta": 0,
+ "terminal_credit_delta": 0,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/100",
+  "interpretation": "Constructive prerequisite only; discharges nothing. Both obligations are measured through the unified model's front door, and before this PR 72.3% of the indexed tree was unreachable from that door, so no benchmark run could have exercised the organs that exist. This PR makes the memory, continual-learning and computer-use organs reachable and adds an instrument that reports coverage with error. The positive unlock figure is the house convention for a constructive-gap binding, not a measured benchmark movement.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "0.5",
+  "wall_clock_cost_ub": 1
+ },
+ "intentional_route_race": false,
+ "live_challenger_frontier_discovery_required": true,
+ "route_class": "REUSE",
+ "route_id": "REUSE_EXISTING_ORGAN_AS_UNIFIED_ENGINE",
+ "selected_route": "REUSE",
+ "selected_surviving_route": "REUSE: expose two existing organs as federated engines and make harvested surfaces reachable, with no new capability invented",
+ "real_outcome": "Engine triggers now carry goal-shaped frontier vocabulary; solve() falls back to harvested surfaces before failing closed; VERIFICATION_FIRST_MEMORY_BUS (canonical_memory_crystallizer_v1, 2,269 lines) and WAKE_SLEEP_CONSOLIDATION (sentient_cognitive_core_v1, 2,505 lines) are executable engines with fail-closed contracts; 10/10 probed frontier goals route to the engine that implements them; 645/645 harvested surfaces reachable by goal with 0 admitted; 72.3% unrouted mass measured and reduced to a 128-module target; selective risk on 25 tasks is coverage 68.00% at 0.00% selective error with AURC 0.0545, and the headline is blocked because the tasks are hand-authored.",
+ "measured_effect": "Before: 4/10 frontier goals correct, 3 fail-closed, 3 misrouted. After: 10/10 correct, 0 fail-closed. Harvested uncovered 612 -> 2. Hot-path route latency unchanged at 0.071-0.084 ms; harvested fallback 0.070 ms warm, entered only after the primary route fails; engine execution 0.802 ms; end-to-end solve 2.936 ms. Verifier 38/38, tests 62/62 + 9/9, repo_integrity_guard 17 rules / 0 violations.",
+ "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+ "progress_evidence_paths": [
+  "canonical/runtime/compile_brain_unified_model_v1.py",
+  "canonical/runtime/brain_unified_model_v1.py",
+  "canonical/runtime/unified_hidden_capability_federation_v1.py",
+  "canonical/tools/orphan_organ_census_v1.py",
+  "canonical/tools/selective_risk_eval_v1.py",
+  "canonical/tests/test_frontier_routing_contract_v1.py",
+  "canonical/verification/FRONTIER_FRESH_TASK_SET_20261126_V1.json",
+  "FRONTIER_LEAPFROG_PLAN_20261126_V1.md"
+ ],
+ "verification": "python3 -m unittest canonical.tests.test_frontier_routing_contract_v1 (9 passed), canonical.tests.test_brain_unified_model_v1 (62 passed), canonical/runtime/verify_brain_unified_model_v1.py --seed arena-final-20261020 (38/38 PASS), execution_guard/repo_integrity_guard_v1.py (rules=17 violations=0 -> PASS). Producer-run sandbox measurement; no independent verifier.",
+ "honest_limits": [
+  "Routed line ratio did not move: 27.74% before and after. Two engines out of 2,301 unrouted modules is a rounding error on 661k lines.",
+  "Selective-risk numbers come from a hand-authored task set; they check the routing contract, not generalisation, and the tool blocks the headline for that reason.",
+  "universal_computer_agent_v1.py (4,401 lines) is still unrouted: it needs injected callables, not JSON, and a declarative-env adapter was not written.",
+  "goal_compiler.py (ranked first by influence) could not be wired: its content-bound pins are stale and bypassing the adapter yields zero compiled parts.",
+  "987 source/extended entry points remain addressable-only because a pinned test forbids find_source from ever being executable.",
+  "No independent verifier has re-run any of this; every number here is a producer-run sandbox measurement."
+ ],
+ "truth": {
+  "achieved": false,
+  "what_is_real": "Two pre-existing organs executable behind the front door, goal-shaped routing for ten frontier goals, a measured 72.3% unreachable-mass figure, a mutation-tested routing contract, and a selective-risk instrument that gates its own claim.",
+  "what_is_not": "Any claim of frontier parity, any discharged truth obligation, terminal truth, or independent verification."
+ },
+ "route_order_walk": {
+  "DELETE": "Deleted the assumption that a technical trigger string is a usable routing signal, and deleted the silent failure path where a reachable organ was reported as GOAL_NOT_REPRESENTED.",
+  "BYPASS": "Bypassed the missing goal-understanding layer rather than building one: routing words were added where routing is decided, not a new planner.",
+  "REUSE": "Reused 105 existing federated engines, the harvested capability runtime, BoundaryRouter.execute_harvested_surface, and two pre-existing 2,000+ line organs. No capability invented.",
+  "ADAPT": "Adapted _engine_rows trigger derivation and the solve() failure branch. No new stage in the pipeline.",
+  "COMPOSE": "Composed trigger supplements + harvested fallback + engine descriptors into one front door.",
+  "SYNTHESIZE_NEW_PRIMITIVE": "REJECTED: no new primitive was needed. The organs existed; only reachability did not."
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "mode": "ACTIVE_INTERFACE",
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "target_truth_obligations": [
+   "COMPOSITION_COMPONENT_SCOPED_PROOFS"
+  ],
+  "proof_state_reachability": "No open truth obligation is claimed discharged by this PR. It removes a findability defect and ships a measurement instrument; terminal truth stays false and the target obligation stays open.",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "proposal_id": "FRONTIER_REACHABILITY_NOT_CAPABILITY_SHORTAGE",
+   "falsifier_id": "PROBE_TEN_FRONTIER_GOALS_AGAINST_ROUTE_INDEX",
+   "decisive_question": "Was the frontier gap a capability shortage or a reachability defect? Falsifiable by routing ten frontier goals: if the engines that implement them already exist and are confident-matchable, the gap was reachability.",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "The falsifier was executed and returned 4/10 before and 10/10 after, with the engines already present in the compiled artifact in both cases. goal_compiler.py was the standing counterexample to 'wiring is cheap' and it falsified that claim: it could not be wired, which is recorded in the plan rather than hidden."
+  }
+ },
+ "recursive_obs": {
+  "canonical_base_commit": "d9b5312cd6dd0c5b28c31e17c7673a499e1d8120",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "real_outcome": "Ten frontier goals now reach the engine that implements them; two pre-existing organs are executable; the unreachable mass is measured at 72.3% and named down to 128 modules.",
+  "required_capability": "Reachability of already-owned organs, and honest measurement that reports abstention with error.",
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-26T13:38:00Z",
+   "max_age_hours": 24,
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/unified_hidden_capability_federation_v1.py:FEDERATED_KERNEL_DESCRIPTORS (105 engines, checked for an existing implementation before writing any)",
+     "canonical/swe_kernel/canonical_memory_crystallizer_v1.py:VerificationFirstMemoryBus (2,269 lines, docstring names Letta sleep-time + E-Stitch)",
+     "canonical/swe_kernel/sentient_cognitive_core_v1.py:WakeSleepConsolidationEngine (2,505 lines, zero importers)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "arxiv.org/html/2506.10943v1 SEAL self-adapting LLMs (72.5% vs 20% vs 0%); each self-edit evaluation 30-45s",
+     "arxiv.org/pdf/2507.03724 MemOS MemCube memory OS; arxiv.org/html/2601.02163v1 EverMemOS engram lifecycle",
+     "arxiv.org/html/2506.16042v1 OSWorld-Human: planning/reflection/judging = 76-96% of computer-use latency",
+     "OpenAI 2026 audit retracting SWE-bench Pro (~30% broken); DeepSWE 32% verifier error (24% false negatives)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "github.com/mariam-elelidy/Coverage-Abstention-Trade-offs-in-Selective-Prediction (CAP curves)",
+     "github.com/opencolin/agentic-engineering benchmarks matrix (SWE-bench variants, Terminal-Bench)",
+     "morphllm.com SWE-bench Pro and coding-agent leaderboards (harness-held-fixed rows)"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "niteagent.com sweep-bench reckoning 2026; lecompute.fr metrology crisis; decodethefuture.org agent benchmark roundup",
+     "nomadx.ae agent-memory frameworks ranked 2026; edukatesg.com semantic abstention standard"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "instant learning continual learning memory computer use coding agents frontier 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "SEAL self-adapting language models MemOS EverMemOS memory operating system"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "test-time training self-edits LoRA sleep-time consolidation engram lifecycle implementation"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "SWE-bench Pro retracted Terminal-Bench 4.1 OSWorld 2.0 November 2026 leaderboard"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "not_applicable_reason": null,
+   "canonical_base_commit": "24cea0dc86447e06d79562a0231bea1684010313",
+   "incumbent_route": "CAPABILITY_INDEX_ONLY_ROUTING",
+   "selected_route": "REUSE",
+   "challenger_routes": [
+    {
+     "route": "CAPABILITY_INDEX_ONLY_ROUTING",
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "3 of 10 probed frontier goals failed closed and 3 misrouted to an unrelated capability",
+      "CAPABILITY_STRENGTH": "4/10 correct; the engines that implement the goals were present in the artifact but unreachable",
+      "WALL_CLOCK": "0.084 ms per route (equal)",
+      "INCREMENTAL_COST": "$0.00 (equal)",
+      "RELIABILITY": "silent: a reachable organ was reported as GOAL_NOT_REPRESENTED_IN_MODEL",
+      "VERIFIABILITY": "no test pinned which goal reaches which engine"
+     },
+     "evidence": [
+      "Route probes on 10 frontier goals: BEFORE 4/10 correct, 3 fail-closed, 3 misrouted; AFTER 10/10 correct"
+     ],
+     "qualification_evidence": [
+      "canonical/tests/test_frontier_routing_contract_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    },
+    {
+     "route": "SYNTHESIZE_NEW_PLANNER",
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "goal_compiler.py was tried as this route: 0 compiled parts outside its narrow family",
+      "CAPABILITY_STRENGTH": "no gain over routing words; would add a second unreachable organ",
+      "WALL_CLOCK": "unbounded implementation cost",
+      "INCREMENTAL_COST": "weeks of work plus a new organ to keep reachable",
+      "RELIABILITY": "unknown; unverified",
+      "VERIFIABILITY": "would need its own oracle before it could be trusted"
+     },
+     "evidence": [
+      "compile_goal against the real 145-capability bound registry returned compiled_parts=0 for every goal tried; the content-bound adapter refuses with BOUND_BLOB_DRIFT"
+     ],
+     "qualification_evidence": [
+      "FRONTIER_LEAPFROG_PLAN_20261126_V1.md"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    },
+    {
+     "route": "WHITE_BOX_HARVEST",
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "not applicable: nothing external was needed",
+      "CAPABILITY_STRENGTH": "equal; the donor code was already in this tree",
+      "WALL_CLOCK": "equal",
+      "INCREMENTAL_COST": "$0.00",
+      "RELIABILITY": "equal",
+      "VERIFIABILITY": "equal"
+     },
+     "evidence": [
+      "The two organs wired here are first-party files already present: canonical_memory_crystallizer_v1.py and sentient_cognitive_core_v1.py"
+     ],
+     "qualification_evidence": [
+      "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+      "canonical/swe_kernel/sentient_cognitive_core_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "BRAIN_INHERITED",
+      "DIRECT_PROBE"
+     ]
+    }
+   ],
+   "negative_search_summary": "Searched for an existing general goal-understanding or planner route in the tree before adding routing words. goal_compiler.py (7,554 lines, 142 symbols, 7 importers) is the only candidate and it is a narrow specialist: 0 compiled parts outside its family. No external planner was admissible because this repository forbids replacing owned cognition with an opaque provider, and the organs needed were already first-party. Route REUSE therefore dominated on every comparison dimension: zero new logic, zero runtime cost on the hot path, and a measurable correctness gain from 4/10 to 10/10.",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-26T13:07:40+00:00",
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "REUSE",
+    "status": "READY",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 standard library only",
+      "kind": "LOCAL_RUNTIME",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "required": true,
+      "status": "READY",
+      "volatility": "STATIC",
+      "evidence": [
+       "No third-party import added; the engines use stdlib plus existing first-party modules. Route/exec measured at 0.071-0.802 ms."
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "compiled unified model artifact canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+      "kind": "CODE_ARTIFACT",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "required": true,
+      "status": "READY",
+      "volatility": "STATIC",
+      "evidence": [
+       "Recompiled deterministically: 133 engines, 107 federated, 3,088 routing tokens; artifact digest recorded in the artifact itself"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "repository integrity and drift guards",
+      "kind": "DATA_SOURCE",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "required": true,
+      "status": "READY",
+      "volatility": "STATIC",
+      "evidence": [
+       "repo_integrity_guard_v1.py rules=17 violations=0 -> PASS; verify_brain_unified_model_v1.py 38/38 PASS"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "zero external model endpoints at runtime",
+      "kind": "NETWORK_ENDPOINT",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "required": false,
+      "status": "READY",
+      "volatility": "VOLATILE",
+      "observed_at_utc": "2026-11-26T13:07:40+00:00",
+      "evidence": [
+       "model_calls 0 and incremental_spend_usd 0.0 across every envelope produced; no LLM SDK imported by the touched modules"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     }
+    ]
+   }
+  },
+  "selected_surviving_route": "REUSE",
+  "why_selected_route_is_fastest_sufficient": "The organs already existed and were already compiled; adding routing words and one fallback branch costs nothing at runtime, whereas writing new capability would have cost weeks and would still have been unreachable.",
+  "expected_parent_level_state_change": "The frontier bottleneck moves from 'which capability exists' to 'which capability is reachable': 2,301 indexed modules (661,120 lines, 72.3%) had no capability, engine, or harvested surface, so no goal could reach them. After this PR the model routes 10/10 probed frontier goals to the engine that implements them, two pre-existing organs are executable behind the front door, and the unroutable mass is a named 128-module target instead of an unmeasured claim.",
+  "stop_condition": "Stop once the frontier routing contract passes 9/9, verify_brain_unified_model_v1 passes 38/38, test_brain_unified_model_v1 passes 62/62, repo_integrity_guard_v1 reports 0 violations, and the selective-risk evaluator refuses to emit a headline for its hand-authored task set.",
+  "routes_considered": [
+   {
+    "route": "SYNTHESIZE_NEW_PRIMITIVE",
+    "rejected_because": "The capability already existed; a new primitive would have added a second unreachable organ."
+   },
+   {
+    "route": "WHITE_BOX_HARVEST",
+    "rejected_because": "Nothing needed harvesting from an external donor; the code was already in the tree."
+   },
+   {
+    "route": "REUSE",
+    "selected_because": "Two descriptors plus one fallback branch made 645 harvested surfaces and two 2,000+ line organs reachable at zero runtime cost on the hot path."
+   }
+  ],
+  "deleted_or_bypassed_paths": [
+   "technical-only engine triggers that a goal-shaped caller never types",
+   "the silent GOAL_NOT_REPRESENTED_IN_MODEL failure that hid 612 reachable harvested surfaces",
+   "the assumption that goal_compiler.py was the missing goal-understanding layer"
+  ],
+  "obs_goal": {
+   "real_outcome": "Frontier goals route to the engines that implement them, and the remaining unroutable mass is a named 128-module target.",
+   "proxy_goals_deleted": "Deleted the proxy goal of 'add more capabilities'. The measurement showed the capabilities were present and unreachable.",
+   "surviving_necessity": "Reachability and honest measurement are necessary; more capability was not."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": "Checked all 105 federated engines, 462 capabilities, and 645 harvested surfaces against the ten probed goals.",
+   "external_existing_routes_checked": "Checked the 2026 frontier literature for equivalent mechanisms; SEAL, MemOS, EverMemOS, MemoryOS, and the OSWorld latency studies were mapped onto organs already present in this tree.",
+   "capability_work_deleted": "Deleted the plan item 'build instant learning'; instant_one_shot_learning_v1 already existed and only lacked a route.",
+   "surviving_gap": "Orgs whose entrypoints take injected callables rather than data (universal_computer_agent_v1) and organs behind stale content pins (goal_compiler.py)."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "Path-specific: the routing index was constructed from capabilities and engines only, so harvested and source surfaces were unreachable by construction.",
+   "delete_bypass_substitute_options": "Deletion would have meant deleting reachable capability; bypass was possible by falling back to the harvested index before failing closed.",
+   "surviving_causal_blocker": "Only genuinely unmatchable surfaces remain (2 of 645), plus source entry points pinned as addressable-only on purpose."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    {
+     "rank": 1,
+     "route": "REUSE",
+     "score": "zero new logic, zero runtime cost on the hot path"
+    },
+    {
+     "rank": 2,
+     "route": "COMPOSE",
+     "score": "trigger supplements plus a fallback branch"
+    },
+    {
+     "rank": 3,
+     "route": "SYNTHESIZE_NEW_PRIMITIVE",
+     "score": "rejected; would duplicate an existing organ"
+    }
+   ],
+   "losing_routes_reason": "Synthesising new capability would have added a second unreachable organ and could not have been verified in the same budget.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The routing contract needs a synthetic goal set because real post-cutoff tasks were not mined; the evaluator marks that set as non-reportable so it cannot be mistaken for a frontier score."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": "The plan's step 'build a frontier eval' is superseded by the selective-risk evaluator, which measures coverage with error rather than accuracy alone.",
+   "adjacent_capabilities_absorbed": "GRAPHITION-free: the harvested fallback absorbed 612 previously unreachable surfaces into one front door without promoting any of them.",
+   "fresh_reuse_plan": "Route the next 128-module target through the same census, wiring JSON-in/JSON-out organs first, then adapting callable-injection organs, then deleting the remainder."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": "The census replaced ad-hoc grep sweeps with one ranked report; the harvested trigger index is built once lazily and reused across calls.",
+   "search_stop_decision": "Stopped wiring after two engines because the census showed the ratio barely moves one descriptor at a time; the remaining work is deletion and adapter design, not more descriptors.",
+   "affected_layers_only_on_revalidation": true
+  }
+ },
+ "truth_repair": null,
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/unified_hidden_capability_federation_v1.py",
+   "canonical/runtime/brain_unified_model_v1.py",
+   "canonical/runtime/compile_brain_unified_model_v1.py",
+   "canonical/tests/test_frontier_routing_contract_v1.py",
+   "canonical/tools/selective_risk_eval_v1.py"
+  ],
+  "route_class": "REUSE",
+  "earlier_routes_exhausted_reason": "SYNTHESIZE_NEW_PRIMITIVE was tried and failed: goal_compiler.py, the only in-tree planner, returns zero compiled parts outside its narrow family, and its content-bound pins are stale. WHITE_BOX_HARVEST was unnecessary: the organs needed were first-party. DELETE was inapplicable because the organs are load-bearing. REUSE dominated: two descriptors plus one failure-path branch made two 2,000+ line organs and 645 harvested surfaces reachable at zero cost on the hot path.",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ]
+ }
+}
