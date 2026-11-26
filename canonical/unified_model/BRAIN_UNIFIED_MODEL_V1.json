@@ -32149,21 +32149,21 @@
   "extended_source_index_modules": 597,
   "federated_kernel_engines": 58,
   "harvested_admitted": 0,
-  "harvested_capabilities": 631,
-  "harvested_contract_surfaces": 40,
+  "harvested_capabilities": 624,
+  "harvested_contract_surfaces": 33,
   "harvested_program_surfaces": 591,
   "knowledge_documents": 741,
   "receipt_backed_capabilities": 296,
-  "research_index_records": 7398,
+  "research_index_records": 7400,
   "routing_tokens": 2723,
   "skills": 18,
-  "source_index_entry_points": 559,
-  "source_index_modules": 2243
+  "source_index_entry_points": 564,
+  "source_index_modules": 2248
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "853481b354bfe7af70743c1346d68a1c7df405dbd8554fb8a36e1b49c4814f29"
+  "value": "97a81cab8d8fdfa029a918a516aeedc1e013d3fdd1281d4625024e18dd4d87c6"
  },
  "engines": [
   {
@@ -36357,7 +36357,7 @@
    "imported_by_count": 0,
    "kind": "EXTENDED_SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/tools/auditability_report_v1.py",
-   "sha256": "3d335cddb2666f80a5455489bfa5b45dd67de23d3f17722018e352d1511765fa",
+   "sha256": "c6c9986781e25403c734a38cbdd1b1ce9c77c5e4a72f9497781204eefd25e4dc",
    "summary": "How much of what this tree calls verified can still be shown true?",
    "symbol_count": 22,
    "symbols": [
@@ -40744,7 +40744,7 @@
    "imported_by_count": 0,
    "kind": "EXTENDED_SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/tools/harvest_capability_receipts_v1.py",
-   "sha256": "2f8868547089013731b036d6aedd9a253061b75275f9ceccc369589c1e10795b",
+   "sha256": "3acd5ee647e6988fe7f33fdd116eb828f09a948349460072ebb63a2332d0118a",
    "summary": "Drive hidden capability surfaces through the repository's own receipt lane.",
    "symbol_count": 3,
    "symbols": [
@@ -74978,51 +74978,6 @@
    "declared_inputs": [],
    "declared_result_fields": [],
    "entrypoint": "run",
-   "id": "canonical.runtime.bound_capabilities.code_multilanguage_tree_sitter_v1.hidden.v1",
-   "invocation": "contract",
-   "kind": "HARVESTED_EXECUTABLE_SURFACE",
-   "path": "canonical/runtime/bound_capabilities/code_multilanguage_tree_sitter_v1.py",
-   "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "0fb865a5b9eeb0324295bbd29e10db4b1add20b71fc2522e98fbf234ef3364df",
-   "summary": "Multi-language deterministic parser — tree-sitter + deterministic polyglot structural kernel.",
-   "triggers": [
-    "code",
-    "multilanguage",
-    "tree",
-    "sitter"
-   ]
-  },
-  {
-   "admission_state": "DISCOVERED_NOT_ADMITTED",
-   "admitted": false,
-   "also_in_source_index": true,
-   "capability": false,
-   "declared_capability_id": null,
-   "declared_inputs": [],
-   "declared_result_fields": [],
-   "entrypoint": "run",
-   "id": "canonical.runtime.bound_capabilities.concrete_execution_oracle.hidden.v1",
-   "invocation": "contract",
-   "kind": "HARVESTED_EXECUTABLE_SURFACE",
-   "path": "canonical/runtime/bound_capabilities/concrete_execution_oracle.py",
-   "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "f37063bbcfcb9e0250e3b037bc687f1c48855ac099be68749d25b340ccf73b73",
-   "summary": "Second independent oracle: concrete execution.",
-   "triggers": [
-    "concrete",
-    "execution",
-    "oracle"
-   ]
-  },
-  {
-   "admission_state": "DISCOVERED_NOT_ADMITTED",
-   "admitted": false,
-   "also_in_source_index": true,
-   "capability": false,
-   "declared_capability_id": null,
-   "declared_inputs": [],
-   "declared_result_fields": [],
-   "entrypoint": "run",
    "id": "canonical.runtime.bound_capabilities.crosshair_contract_oracle.hidden.v1",
    "invocation": "contract",
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
@@ -75145,29 +75100,6 @@
    "triggers": [
     "forged",
     "invoker"
-   ]
-  },
-  {
-   "admission_state": "DISCOVERED_NOT_ADMITTED",
-   "admitted": false,
-   "also_in_source_index": true,
-   "capability": false,
-   "declared_capability_id": null,
-   "declared_inputs": [],
-   "declared_result_fields": [],
-   "entrypoint": "run",
-   "id": "canonical.runtime.bound_capabilities.hardcore_software_engineering_orchestrator_v1.hidden.v1",
-   "invocation": "contract",
-   "kind": "HARVESTED_EXECUTABLE_SURFACE",
-   "path": "canonical/runtime/bound_capabilities/hardcore_software_engineering_orchestrator_v1.py",
-   "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "7ec082df163b7888f4760a5e7ba327eb0130c2b79f1cf69c29d3a944a55b3932",
-   "summary": "Hardcore SWE deterministic kernel — insanely fast, only right way.",
-   "triggers": [
-    "hardcore",
-    "software",
-    "engineering",
-    "orchestrator"
    ]
   },
   {
@@ -75354,29 +75286,6 @@
    "declared_inputs": [],
    "declared_result_fields": [],
    "entrypoint": "run",
-   "id": "canonical.runtime.bound_capabilities.python_change_impact_testselect.hidden.v1",
-   "invocation": "contract",
-   "kind": "HARVESTED_EXECUTABLE_SURFACE",
-   "path": "canonical/runtime/bound_capabilities/python_change_impact_testselect.py",
-   "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "ac8493c4fc864b7e088448c642593d2400fb086c514e4b3c887fd5eb50f519ed",
-   "summary": "Deterministic diff-to-minimal-test-set selection (change impact analysis).",
-   "triggers": [
-    "python",
-    "change",
-    "impact",
-    "testselect"
-   ]
-  },
-  {
-   "admission_state": "DISCOVERED_NOT_ADMITTED",
-   "admitted": false,
-   "also_in_source_index": true,
-   "capability": false,
-   "declared_capability_id": null,
-   "declared_inputs": [],
-   "declared_result_fields": [],
-   "entrypoint": "run",
    "id": "canonical.runtime.bound_capabilities.python_counterfactual_spec_repair_v1.hidden.v1",
    "invocation": "contract",
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
@@ -75457,51 +75366,6 @@
     "semantic",
     "acceptance",
     "cells"
-   ]
-  },
-  {
-   "admission_state": "DISCOVERED_NOT_ADMITTED",
-   "admitted": false,
-   "also_in_source_index": true,
-   "capability": false,
-   "declared_capability_id": null,
-   "declared_inputs": [],
-   "declared_result_fields": [],
-   "entrypoint": "run",
-   "id": "canonical.runtime.bound_capabilities.python_source_audit.hidden.v1",
-   "invocation": "contract",
-   "kind": "HARVESTED_EXECUTABLE_SURFACE",
-   "path": "canonical/runtime/bound_capabilities/python_source_audit.py",
-   "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "f5c5a7bb1dc067b1c06f6e1fe88575946a9c6662998e623bad07d8a8d35f1f7a",
-   "summary": "Deterministic repository-local Python source structural audit.",
-   "triggers": [
-    "python",
-    "source",
-    "audit"
-   ]
-  },
-  {
-   "admission_state": "DISCOVERED_NOT_ADMITTED",
-   "admitted": false,
-   "also_in_source_index": true,
-   "capability": false,
-   "declared_capability_id": null,
-   "declared_inputs": [],
-   "declared_result_fields": [],
-   "entrypoint": "run",
-   "id": "canonical.runtime.bound_capabilities.python_source_symbol_index.hidden.v1",
-   "invocation": "contract",
-   "kind": "HARVESTED_EXECUTABLE_SURFACE",
-   "path": "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
-   "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "10bf5f7589e64535c09e7a62715d94d808bff74f8d46bf3344446023c6c7127a",
-   "summary": "Deterministic repository-local Python semantic symbol index (stdlib ast).",
-   "triggers": [
-    "python",
-    "source",
-    "symbol",
-    "index"
    ]
   },
   {
@@ -75723,29 +75587,6 @@
    "declared_inputs": [],
    "declared_result_fields": [],
    "entrypoint": "run",
-   "id": "canonical.runtime.bound_capabilities.software_synthesis_grid_induction_v1.hidden.v1",
-   "invocation": "contract",
-   "kind": "HARVESTED_EXECUTABLE_SURFACE",
-   "path": "canonical/runtime/bound_capabilities/software_synthesis_grid_induction_v1.py",
-   "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "6b06260459a02a137b44377730bb3bae4e3913ffe41516adeaa3fe6fff673e96",
-   "summary": "Bounded program synthesis — finite grid inducer harvest, only right way.",
-   "triggers": [
-    "software",
-    "synthesis",
-    "grid",
-    "induction"
-   ]
-  },
-  {
-   "admission_state": "DISCOVERED_NOT_ADMITTED",
-   "admitted": false,
-   "also_in_source_index": true,
-   "capability": false,
-   "declared_capability_id": null,
-   "declared_inputs": [],
-   "declared_result_fields": [],
-   "entrypoint": "run",
    "id": "canonical.runtime.bound_capabilities.source_candidates_verify_git_index.hidden.v1",
    "invocation": "contract",
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
@@ -75906,7 +75747,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "74399f210b44076471ef0430486af7dadf628b2e4cfeb5433e80c0e9e89c5f56",
+   "sha256": "96138a1a2e45b7ffc06e3f2c6d42d6ca37bf0770591f3670964c9dd00b855097",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "triggers": [
     "brain",
@@ -76013,7 +75854,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/capability_receipt_lane_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "94bf102a17227e4911d538315dd567c2d58c24ab2b2be6da696a223f9a37a7a0",
+   "sha256": "010f48260037ff0b58e1d13a557cbe9e7fb070c6cc59e24c6ccc44b306965471",
    "summary": "Capability execution receipts — one normalized schema, content-addressed, execution-backed.",
    "triggers": [
     "capability",
@@ -80058,7 +79899,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/tools/auditability_report_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "3d335cddb2666f80a5455489bfa5b45dd67de23d3f17722018e352d1511765fa",
+   "sha256": "c6c9986781e25403c734a38cbdd1b1ce9c77c5e4a72f9497781204eefd25e4dc",
    "summary": "How much of what this tree calls verified can still be shown true?",
    "triggers": [
     "auditability",
@@ -81926,7 +81767,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/tools/harvest_capability_receipts_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "2f8868547089013731b036d6aedd9a253061b75275f9ceccc369589c1e10795b",
+   "sha256": "3acd5ee647e6988fe7f33fdd116eb828f09a948349460072ebb63a2332d0118a",
    "summary": "Drive hidden capability surfaces through the repository's own receipt lane.",
    "triggers": [
     "harvest",
@@ -146877,10 +146718,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 2237,
+  "included_source_count": 2230,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "7babb206f21ff46466f3f6f28b7234456b46b544ec13d5ee0724c1414460b8a3"
+  "source_tree_digest": "d6a38a3741ec4f94f1b8af23e670fce6d07cc7627f22d7a507461e6b451d0f6b"
  },
  "research_index": [
   {
@@ -217204,7 +217045,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/AUDITABILITY_DECLARATION_FLOOR_20261112_V1.json",
    "schema": "AUDITABILITY_DECLARATION_FLOOR_V1",
-   "sha256": "75479798881ad8eefd3221b14ca60ae5ca1cd8ca8b2b607e7634ae8909e956ba",
+   "sha256": "9ba2feed72ec2c99f688b71433e8fd35215f26f34a84370698416e218a83be1f",
    "status": "",
    "terms": {
     "20261112": 1,
@@ -232107,6 +231948,25 @@
     "runner": 1,
     "v1": 1,
     "verification": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/verification/FRONTIER_LEAPFROG_PLAYS_1_2_3_6_AND_LIFT_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/FRONTIER_LEAPFROG_PLAYS_1_2_3_6_AND_LIFT_20261124_V1.json",
+   "schema": "PROJECT_BRAIN_FRONTIER_LEAPFROG_MEASUREMENT_20261124_V1",
+   "sha256": "91a86a861164e6eba53e38a4a987921c20946d3f2f5b7cad4a440962a3a957fe",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "frontier": 1,
+    "leapfrog": 1,
+    "lift": 1,
+    "plays": 1,
+    "v1": 1
    }
   },
   {
@@ -313162,6 +313022,32 @@
    }
   },
   {
+   "action_id": "RECEIPT_REPLAY_REPAIR_AND_FOUR_LEAPFROG_PLAYS_20261124_V1",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/action_intents/RECEIPT_REPLAY_REPAIR_AND_FOUR_LEAPFROG_PLAYS_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/RECEIPT_REPLAY_REPAIR_AND_FOUR_LEAPFROG_PLAYS_20261124_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+   "sha256": "25e370ad0ce6eb8cf88acc2bb6f9d2e1adb7afd96c5dda7bee514997334d4932",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "all_16_staged_contract_receipts_reproduce_from_clean_tmp_declaration_floor_drops_607_to_422_thirteen_swe_kernel_organs_are_live_at_brain_unified_model_and_plays_1_2_3_6_have_exact_kill_criterion_measurements": 1,
+    "four": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "leapfrog": 1,
+    "plays": 1,
+    "receipt": 1,
+    "receipt_replay_repair_and_four_leapfrog_plays_20261124_v1": 1,
+    "repair": 1,
+    "repair_receipt_replay_and_declaration_floor_in_capability_receipt_lane_and_integrate_swe_kernel_organs_and_plays_1_2_3_6_into_brain_unified_model": 1,
+    "replay": 1,
+    "v1": 1,
+    "verify_producer_receipts_omitted_invoked_args_and_input_digests_replay_blocking_all_622_input_requiring_harvested_surfaces_and_cli_projection_rows_lacked_expect_exit_regressing_declaration_floor_to_607_gt_595": 1
+   }
+  },
+  {
    "action_id": "RECOGNITION_IS_THE_BOTTLENECK_20261121_V1",
    "capability": false,
    "date": "2026-11-21",
@@ -326440,6 +326326,46 @@
   },
   {
    "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/abstain_gated_skill_induction_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/abstain_gated_skill_induction_v1.py",
+   "sha256": "371a30019dc2a956e064218cd64e92244b7d64009a8d30f0d06d9d126cb85583",
+   "summary": "Play 3 — Induction With an Abstain Option (`abstain_gated_skill_induction_v1`).",
+   "symbol_count": 8,
+   "symbols": [
+    "InducedSkill",
+    "admit_with_abstain_gate",
+    "classify_structural_edit_family",
+    "induce_skill_from_commit",
+    "probe_statement_features",
+    "run",
+    "run_40_episode_induction",
+    "skill_decision_on_line"
+   ],
+   "terms": {
+    "abstain": 2,
+    "abstain_gated_skill_induction_v1": 1,
+    "admit_with_abstain_gate": 1,
+    "classify_structural_edit_family": 1,
+    "gated": 1,
+    "induce_skill_from_commit": 1,
+    "inducedskill": 1,
+    "induction": 2,
+    "option": 1,
+    "play": 1,
+    "probe_statement_features": 1,
+    "run": 1,
+    "run_40_episode_induction": 1,
+    "skill": 1,
+    "skill_decision_on_line": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
    "classification": "ORPHAN",
    "executable_entry_point": false,
    "id": "source:canonical/runtime/acceptance_backprop_compiler_v1.py",
@@ -327229,6 +327155,39 @@
     "structural": 2,
     "v1": 1,
     "verify_policy_manifest": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/adversarial_mutation_admission_gate_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/adversarial_mutation_admission_gate_v1.py",
+   "sha256": "484bd66b66320cf375beab4edc8f34e582a020e07d2b79d1ce4165fa38f5df0d",
+   "summary": "Play 6 — Adversarial Mutation Admission Gate (`adversarial_mutation_admission_gate_v1`).",
+   "symbol_count": 5,
+   "symbols": [
+    "_check_template_expect",
+    "audit_harvested_capabilities",
+    "evaluate_mutant_against_receipt",
+    "run",
+    "synthesize_first_executable_mutation"
+   ],
+   "terms": {
+    "admission": 2,
+    "adversarial": 2,
+    "adversarial_mutation_admission_gate_v1": 1,
+    "audit_harvested_capabilities": 1,
+    "check_template_expect": 1,
+    "evaluate_mutant_against_receipt": 1,
+    "gate": 2,
+    "mutation": 2,
+    "play": 1,
+    "run": 1,
+    "synthesize_first_executable_mutation": 1,
+    "v1": 1
    }
   },
   {
@@ -333909,7 +333868,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "74399f210b44076471ef0430486af7dadf628b2e4cfeb5433e80c0e9e89c5f56",
+   "sha256": "96138a1a2e45b7ffc06e3f2c6d42d6ca37bf0770591f3670964c9dd00b855097",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 21,
    "symbols": [
@@ -337952,9 +337911,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/capability_receipt_lane_v1.py",
-   "sha256": "94bf102a17227e4911d538315dd567c2d58c24ab2b2be6da696a223f9a37a7a0",
+   "sha256": "010f48260037ff0b58e1d13a557cbe9e7fb070c6cc59e24c6ccc44b306965471",
    "summary": "Capability execution receipts — one normalized schema, content-addressed, execution-backed.",
-   "symbol_count": 28,
+   "symbol_count": 29,
    "symbols": [
     "_Timeout",
     "_alarm",
@@ -337976,15 +337935,14 @@
     "main",
     "projection_entry",
     "receipt_path_for",
+    "restore_snapshot_inputs",
     "restore_tree",
     "run_cli_adapter",
-    "run_reference_is_attested",
-    "sha256_canonical"
+    "run_reference_is_attested"
    ],
    "terms": {
     "alarm": 1,
     "at_instance": 1,
-    "bound_module_path": 1,
     "capability": 2,
     "changed_paths": 1,
     "cli_argv_for": 1,
@@ -338006,6 +337964,7 @@
     "receipt_path_for": 1,
     "receipts": 1,
     "resolve_argv": 1,
+    "restore_snapshot_inputs": 1,
     "restore_tree": 1,
     "run_cli_adapter": 1,
     "run_reference_is_attested": 1,
@@ -354025,6 +353984,52 @@
     "stateable": 1,
     "transfer": 1,
     "unstateable_report": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/gradient_free_law_consolidation_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/gradient_free_law_consolidation_v1.py",
+   "sha256": "07e1ab9391c8fe564e76d1c26c65fc6cc737e3bb6ea9f283c50b6f9be5c98efe",
+   "summary": "Play 2 — Consolidation Without Gradients (`gradient_free_law_consolidation_v1`).",
+   "symbol_count": 11,
+   "symbols": [
+    "CandidateLaw",
+    "ast_alpha_skeleton",
+    "consolidate_laws",
+    "evaluate_law_bank",
+    "harvest_raw_episodic_laws",
+    "line_signature",
+    "matches_law",
+    "parse_single_line_stmt",
+    "run",
+    "run_corpus45_consolidation",
+    "token_alpha_skeleton"
+   ],
+   "terms": {
+    "ast_alpha_skeleton": 1,
+    "candidatelaw": 1,
+    "consolidate_laws": 1,
+    "consolidation": 2,
+    "evaluate_law_bank": 1,
+    "free": 1,
+    "gradient": 1,
+    "gradient_free_law_consolidation_v1": 1,
+    "gradients": 1,
+    "harvest_raw_episodic_laws": 1,
+    "law": 1,
+    "line_signature": 1,
+    "matches_law": 1,
+    "parse_single_line_stmt": 1,
+    "play": 1,
+    "run": 1,
+    "run_corpus45_consolidation": 1,
+    "token_alpha_skeleton": 1,
     "v1": 1
    }
   },
@@ -391851,6 +391856,46 @@
   },
   {
    "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/state_contract_world_model_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state_contract_world_model_v1.py",
+   "sha256": "d7ef6cc5e48f3956ad0ae03935ceb14a24ed7bc1acf7c121cdbed1cb72bca1c3",
+   "summary": "Play 1 — State-as-Contract World Model (`state_contract_world_model_v1`).",
+   "symbol_count": 8,
+   "symbols": [
+    "EffectDeltaContract",
+    "ScriptedDesktopWorkflowEnv",
+    "_run_unchecked_loop_baseline",
+    "canonical_a11y_state",
+    "compute_observed_delta",
+    "evaluate_workflow_contracts",
+    "run",
+    "verify_delta_contract"
+   ],
+   "terms": {
+    "canonical_a11y_state": 1,
+    "compute_observed_delta": 1,
+    "contract": 1,
+    "effectdeltacontract": 1,
+    "evaluate_workflow_contracts": 1,
+    "model": 2,
+    "play": 1,
+    "run": 1,
+    "run_unchecked_loop_baseline": 1,
+    "scripteddesktopworkflowenv": 1,
+    "state": 1,
+    "state-as-contract": 1,
+    "state_contract_world_model_v1": 1,
+    "v1": 1,
+    "verify_delta_contract": 1,
+    "world": 2
+   }
+  },
+  {
+   "capability": false,
    "classification": "ORPHAN",
    "executable_entry_point": false,
    "id": "source:canonical/runtime/stated_root_is_the_bound_root_v1.py",
@@ -392396,6 +392441,43 @@
     "svg": 2,
     "v1": 1,
     "verify": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/swe_kernel_organ_bridge_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/swe_kernel_organ_bridge_v1.py",
+   "sha256": "96086a1aa3b78c645c736ed6fa1c472f8933bab93d6784f79003165d49635ed3",
+   "summary": "Unified contract bridge for Brain's 13 non-obviously named `swe_kernel` organs.",
+   "symbol_count": 4,
+   "symbols": [
+    "invoke_organ",
+    "list_organs",
+    "probe_all_organs",
+    "run"
+   ],
+   "terms": {
+    "13": 1,
+    "brain": 1,
+    "bridge": 2,
+    "contract": 1,
+    "invoke_organ": 1,
+    "kernel": 1,
+    "list_organs": 1,
+    "named": 1,
+    "non-obviously": 1,
+    "organ": 1,
+    "organs": 1,
+    "probe_all_organs": 1,
+    "run": 1,
+    "swe": 1,
+    "swe_kernel": 1,
+    "unified": 1,
+    "v1": 1
    }
   },
   {
