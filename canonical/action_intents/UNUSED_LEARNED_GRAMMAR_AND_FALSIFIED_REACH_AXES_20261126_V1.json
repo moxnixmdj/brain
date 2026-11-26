@@ -39,7 +39,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::the live repair loop's ensemble fallback re-derived its own hand-written atom grammar and never consulted canonical/swe_kernel/concept_library_v1.py, so (a) program shapes outside that grammar returned None on specs whose generating function is a stored, already-admitted concept, and (b) the fallback's shortest-candidate tiebreak preferred a shorter ad-hoc if-then-else that passes the visible points and is wrong off-spec, discarding the learned abstraction it had just been given access to",
-  "canonical_base_commit": "",
+  "canonical_base_commit": "ea71d5c009a1772722e2352bc9b800d376348efc",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_law_compliance": {
@@ -84,19 +84,166 @@
   "parent_capability": "canonical/runtime/stochastic_synthesizer_v1.py + canonical/swe_kernel/concept_library_v1.py",
   "prior_work_reused": "canonical/swe_kernel/concept_library_v1.py (CompoundingConceptLibrary: admission by description-length compression + probe determinism + syntactic-mutant kill, Levin/Laplace log-priors, uses/verified_hits/disconfirmations/retired), the Expr algebra in canonical/runtime/oe_sygus_synthesizer_v1.py, the OE separation of terms from predicates combined by ITE, canonical/runtime/memory_policy_v1.py's existing READ_ONLY scope, and canonical/runtime/compile_brain_unified_model_v1.py. Zero new modules: 2 runtime files edited, 1 test added, 1 yardstick extended, 1 artifact recompiled.",
   "recursive_obs": {
-    "canonical_base_commit": "",
+    "canonical_base_commit": "ea71d5c009a1772722e2352bc9b800d376348efc",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "A_NEW_SYNTHESIS_MODULE",
+      "A_MODEL_CALL_AT_ANY_POINT",
+      "A_SAMPLED_ENGINE_ON_A_DENSE_MICRO_CLASS",
+      "RAISING_THE_PRODUCT_CAP_TO_1024_MEASURED_5_3_S",
+      "INFLATING_POINTS_ON_A_SATURATED_FAMILY_AS_A_GENERALIZATION_FIX",
+      "ARM_C_ALWAYS_DEEP_PASS_MEASURED_PLUS_150_TO_330_MS_AND_WORSE"
+    ],
+    "expected_parent_level_state_change": "THE_LIVE_REPAIR_LOOP_NOW_SHARES_ONE_GRAMMAR_WITH_THE_LEARNED_CONCEPTS_ON_BOTH_OF_ITS_ENGINES_INSTSTEAD_OF_ONE__WHICH_IS_THE_PREREQUISITE_FOR_CONCEPT_GROUNDED_REPAIR_ON_REAL_REPO_SHAPED_SPECS__AND_THE_ROUND_ALSO_KILLED_FOUR_CLAIMS__THAT_THE_COMPOSITION_CAP_WAS_THE_RESIDUAL_LEVER__THAT_A_LONGER_POINT_SET_WAS_THE_RESIDUAL_ERROR__THAT_DREAMING_ON_THE_REPOS_SOURCE_PAYS_FOR_THIS_GRAMMAR__AND_THAT_HARD_51_0_OF_51_MEASURES_CAPABILITY",
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "DELETE_THE_FALLBACK",
+        "BYPASS_AND_KEEP_THE_PRIMARY_PATH_ONLY",
+        "SUBSTITUTE_A_MODEL_CALL",
+        "SUBSTITUTE_A_SAMPLED_ENGINE",
+        "SUBSTITUTE_A_SECOND_GRAMMAR_FILE"
+      ],
+      "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_SWE_SIDE_OBSERVATIONAL_ENGINE_ALREADY_CONSULTS_THE_LIBRARY_AND_SHIPS_CONCEPT_GROUNDED_PROGRAMS_WHILE_THE_LIVE_LOOPS_ENSEMBLE_FALLBACK_DID_NOT",
+      "why_each_was_rejected": "THE_FALLBACK_IS_THE_ONLY_PRODUCER_FOR_SHAPES_THE_PRIMARY_MISSES_MEASURED_ON_THIS_SESSION_SEVEN_TIMES__KEEPING_ONLY_THE_PRIMARY_LEAVES_THE_CLAMP_CLASS_AT_None__AND_EVERY_SUBSTITUTE_EITHER_PUTS_A_MODEL_ON_THE_PRODUCER_PATH_FORBIDDEN_OR_COSTS_THE_2_5_s_MISS_PATH_BUDGET"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/stochastic_synthesizer_v1.py",
+        "canonical/runtime/oe_sygus_synthesizer_v1.py",
+        "canonical/runtime/swe_observational_program_synthesizer_v1.py",
+        "canonical/swe_kernel/concept_library_v1.py"
+      ],
+      "external_existing_routes_checked": [
+        "DreamCoder_PLDI21_wake_sleep_library_learning",
+        "Stitch_POPL23_top_down_library_synthesis",
+        "LILO_ICLR24_library_learning_inside_a_synthesis_loop",
+        "EUSolver_TACAS17_terms_predicates_and_ITE",
+        "CODESKILL_arXiv_2605.25430",
+        "SAGE_ACL2026_skill_library_RL",
+        "Library_Drift_Zhang_2026",
+        "Letta_sleep_time_compute_and_Anthropic_dreaming"
+      ],
+      "why_no_existing_route_covered_it": "THE_CAPABILITY_EXISTED_AND_WAS_WIRED_TO_THE_OTHER_ENGINE_ONLY__NO_ROUTE_IN_OR_OUT_GIVES_A_SECOND_PRODUCER_PATH_THE_LIBRARY_IT_ALREADY_HOLDS"
+    },
     "obs_goal": {
       "proxy_goals_deleted": [
+        "ANOTHER_MECHANISM_AS_PROGRESS",
         "A_MICRO_FAMILY_SOLVE_RATE_PRESENTED_AS_FRONTIER_REACH",
-        "MORE_POINTS_ON_A_SATURATED_YARDSTICK_AS_CAPABILITY_PROGRESS",
-        "RAISING_A_SEARCH_CAP_AS_A_SUBSTITUTE_FOR_PRUNING",
-        "A_RECEIPT_COUNTED_AS_A_RESULT"
+        "A_RECEIPT_COUNTED_AS_A_RESULT",
+        "MORE_POINTS_ON_A_SATURATED_YARDSTICK"
       ],
-      "real_outcome": "AN_OWNED_ORGAN_WIRED_INTO_THE_LIVE_LOOP__PLUS_THE_FOUR_CLAIMS_THIS_ROUND_KILLED"
+      "real_outcome": "AN_OWNED_ORGAN_WIRED_INTO_THE_LIVE_LOOP_PLUS_THE_FALSE_CLAIMS_THIS_ROUND_KILLED",
+      "surviving_necessity": "A_ROW_COUNTS_ONLY_IF_THE_CANDIDATE_IS_RE-VERIFIED_AGAINST_EVERY_EXAMPLE_AND_THE_SHAPE_WAS_UNREACHABLE_BY_THE_PREVIOUS_GRAMMAR_IN_PRINCIPLE_NOT_MERELY_UNFOUNDED"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": [
+        "INVERSE_COMPOSITION_over_value_vectors",
+        "BRANCH_RESTRICTED_INVERSION_on_the_remainder_index_set",
+        "PAIRED_CROSS_VARIABLE_ATOMS",
+        "TERM_x_TERM_PRODUCT_under_a_size_gate"
+      ],
+      "downstream_work_to_delete_or_supersede": [
+        "THE_parts[:6]_RESIDUAL_LEVER_HYPOTHESIS_FROM_SECTION_8",
+        "THE_CAP_1024_PRODUCT_RAISE_PLAN_FROM_SECTION_10",
+        "ARM_C_ALWAYS_CONSULT_THE_DEEP_PASS_PROTOTYPED_AND_REFUSED_THIS_ROUND"
+      ],
+      "fresh_reuse_plan": "THE_SAME_READ_VIEW_FEEDS_BOTH_ENGINES__SO_THE_NEXT_ROUND_THAT_TEACHES_CONCEPT_INSTANTIATION_TO_NON_NUMERIC_TEMPLATES_REUSES_THESE_EXACT_CANDIDATES_AND_THE_RANK_KEY_INSTEAD_OF_ADDING_A_SECOND_PATH"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": [
+        "SEARCHING_THE_TREE_FOR_A_HIDDEN_MODULE_FOR_A_FIFTH_ROUND__THE_ORGAN_APPEARED_IN_ONE_GREP",
+        "RE-DREAMING_THE_CORPUS_PER_CALL__THE_DREAM_IS_AN_OFFLINE_PASS_ON_PURPOSE"
+      ],
+      "search_stop_decision": "STOP_WHEN_A_LEVER_IS_PRICED_AND_REFUSED_RATHER_THAN_RE_TRIED__AND_WHEN_A_FAMILY_IS_SATURATED_MOVE_THE_FAMILY_NOT_THE_CAP"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "ADAPT",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "losing_routes_reason": {
+        "DREAM_ON_THE_REPOS_OWN_SOURCE_AND_FEED_THE_RESULT_IN": "MEASURED_ZERO_DELTA_ON_9_STRING_SPECS__THE_INSTANTIATION_PATH_IS_NUMERIC_SHAPED_SO_A_STRING_CONCEPT_IS_ADMITTED_PERSISTED_AND_NEVER_APPLIED__THE_DREAM_ITSELF_COST_84_5_s_FOR_116_FILES",
+        "WIDEN_THE_HAND_WRITTEN_GRAMMAR_BY_HAND": "SATURATED_AT_50_OF_50_ON_1_VAR_AND_2_VAR_AFTER_SIX_ROUNDS_AND_STILL_RETURNS_NONE_ON_CLAMP_SHAPES_AT_ANY_DEPTH"
+      },
+      "routes_ranked": [
+        "INTEGRATE_THE_OWNED_CONCEPT_LIBRARY_INTO_THE_FALLBACK",
+        "DREAM_ON_THE_REPOS_OWN_SOURCE_AND_FEED_THE_RESULT_IN",
+        "WIDEN_THE_HAND_WRITTEN_GRAMMAR_BY_HAND"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "independent_oracle_name": "canonical/tests/test_learned_grammar_read_path_v1.py_plus_the_loops_own_per_candidate_reverification_against_every_extracted_example",
+      "synthetic_verification_necessity": "NONE_FOR_CREDIT__THE_FAMILIES_ARE_SELF_GENERATED_SO_THEY_ARE_NOT_AN_INDEPENDENT_ORACLE_AND_NO_CAPABILITY_CREDIT_IS_CLAIMED__THE_ONLY_ASSERTION_IS_A_RED_GREEN_UNIT_PAIR_ON_A_STUB_LIBRARY_THAT_RETURNS_NONE_without_the_wiring"
     },
     "real_outcome": "MEASURED__FALLBACK_CLAMP_SPEC_PASS_4_TO_7_OF_10__TARGET_IDENTICAL_1_TO_2_OF_10__COST_294_TO_303_MS_PER_CALL__LOOP_LEVEL_7_OF_10_UNCHANGED__DREAM_ON_REPO_SOURCE_84_5_S_YIELDS_4_CONCEPTS_AND_0_DELTA_ON_9_STRING_SPECS__HARD51_RELABELLED_AS_A_CERTIFICATION_WALL_NOT_A_CAPABILITY_NUMBER",
-    "required_capability": "EMIT_A_PATCH_THAT_MATCHES_THE_GENERATING_FUNCTION_OFF_SPEC_WITH_ZERO_MODEL_CALLS_AND_WITHOUT_WAITING_FOR_A_BENCHMARK_TO_SAY_SO"
+    "required_capability": "EMIT_A_PATCH_THAT_MATCHES_THE_GENERATING_FUNCTION_OFF_SPEC_WITH_ZERO_MODEL_CALLS_AND_WITHOUT_WAITING_FOR_A_BENCHMARK_TO_SAY_SO",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "GOVERNANCE_GUARD_ACTION__THE_ROUND_WIRES_ONE_OWNED_ORGAN_INTO_A_SECOND_PRODUCER_PATH_AND_FILES_FALSIFICATIONS_WITH_NO_BENCHMARK_ROW_CLAIMED",
+      "selected_route": "INTEGRATE_ALREADY_OWNED_CONCEPT_LIBRARY_INTO_THE_LIVE_REPAIR_FALLBACK",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-26T03:32:43Z",
+        "execution_dependencies": [
+          {
+            "dependency": "CPYTHON3_STDLIB_ONLY_DETERMINISTIC_ENUMERATION_AND_EVAL",
+            "evidence": [
+              "30_synthesizer_calls_per_family_at_294_to_303_ms_each_in_this_sandbox"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "THE_COMPOUNDING_CONCEPT_LIBRARY_STATE_FILE",
+            "evidence": [
+              "canonical/astra_runtime/state/CONCEPT_LIBRARY_V1.json",
+              "read-only_for_this_path__the_bench_now_runs_inside_memory_policy_scope(READ_ONLY)_because_a_benchmark_run_was_measured_persisting_uses_0_to_2_into_a_committed_file"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "DATA_SOURCE",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "MUTABLE"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "INTEGRATE_ALREADY_OWNED_CONCEPT_LIBRARY_INTO_THE_LIVE_REPAIR_FALLBACK",
+        "status": "READY"
+      }
+    },
+    "routes_considered": [
+      "INTEGRATE_THE_OWNED_CONCEPT_LIBRARY_INTO_THE_FALLBACK",
+      "WIDEN_THE_HAND_WRITTEN_ATOM_GRAMMAR_BY_HAND",
+      "RAISE_THE_COMPOSITION_CAP",
+      "DREAM_ON_THE_REPOS_OWN_SOURCE_AND_FEED_THE_RESULT_IN",
+      "CONSULT_THE_DEEP_PASS_EVEN_WHEN_A_CANDIDATE_ALREADY_VERIFIED"
+    ],
+    "selected_surviving_route": "INTEGRATE_ALREADY_OWNED_CONCEPT_LIBRARY_INTO_THE_LIVE_REPAIR_FALLBACK",
+    "stop_condition": "ONE ROUND PER LEVER, ADOPTED ONLY ON A MEASURED IMPROVEMENT AT <=2.5 s MEAN MISS-PATH COST; REFUSALS ARE RECORDED AND NOT RE-TRIED. NO MODEL CALLS, NO STORED PARAMETERS, NO NETWORK ON THE PRODUCER PATH, AND NO BENCHMARK ROW CLAIMED.",
+    "why_selected_route_is_fastest_sufficient": "A_READ_VIEW_PLUS_ONE_RANK_KEY_COSTS_9_MS_PER_CALL_ON_THE_FAMILY_THAT_NEEDS_IT_AND_0_MS_WHERE_IT_IS_NOT_NEEDED__AND_THE_ALTERNATIVES_WERE_MEASURED_SLOWER_OR_CLAIMED_MORE"
   },
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
   "selected_route": "INTEGRATE_ALREADY_OWNED_CONCEPT_LIBRARY_INTO_THE_LIVE_REPAIR_FALLBACK",
@@ -128,7 +275,31 @@
     "fresh_reality_authority": false,
     "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
     "mode": "ACTIVE_INTERFACE",
-    "proof_state_reachability_note": "read from the live pointer at write time; this action changes no cut, no pointer and no family status"
+    "proof_state_reachability": "SANDBOX_MEASUREMENT_ONLY_ON_SELF_GENERATED_FIXED_SEED_FAMILIES__NO_TRUTH_OBLIGATION_REACHED_A_PROOF_STATE__NO_OPEN_ROW_MOVED_AND_NONE_IS_CLAIMED",
+    "target_truth_obligations": [
+      "CODING_TB4_GE_66_4",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_CURSORBENCH_GE_57_8",
+      "PROWORK_GDPVAL_GE_1846",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "AUTOMATIONBENCH_GE_40",
+      "HLE_TOOLS_GE_67_7",
+      "TB_SCIENCE_GE_58_7",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [],
+      "decisive_question": "DOES_THE_LOOP_SHIP_PROGRAMS_THAT_ARE_CORRECT_OFF_SPEC_RATHER_THAN_MERELY_CONSISTENT_WITH_THE_VISIBLE_POINTS",
+      "falsifier_id": "CONCEPT_GROUNDED_CANDIDATES_FAIL_TO_BEAT_THE_HAND_WRITTEN_GRAMMAR_ON_A_FIXED_FAMILY",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "MEASURED_ON_THE_CLAMP_FAMILY__FALLBACK_SPEC_PASS_4_OF_10_TO_7_OF_10_AND_TARGET_IDENTICAL_1_OF_10_TO_2_OF_10__AND_THE_LOOP_LEVEL_NUMBER_DID_NOT_MOVE_7_OF_10_TO_7_OF_10_BECAUSE_THE_PRIMARY_PATH_ALREADY_CONSULTS_THE_LIBRARY__THAT_MISSING_END_TO_END_GAIN_IS_RECORDED_AS_THE_GATE_NOT_MET_RATHER_THAN_SMOOTHED_OVER",
+      "proposal_id": "THE_LIVE_LOOP_ALREADY_OWNS_A_LEARNED_GRAMMAR_AND_CAN_CONSUME_IT_WITHOUT_A_NEW_MODULE_V1"
+    }
   },
   "weakens_existing_guard": false
 }

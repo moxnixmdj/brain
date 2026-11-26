@@ -33046,7 +33046,7 @@
   "promotion_callable": 31,
   "promotion_candidates": 849,
   "receipt_backed_capabilities": 309,
-  "research_index_records": 7411,
+  "research_index_records": 7412,
   "routing_tokens": 2946,
   "skills": 18,
   "source_index_entry_points": 557,
@@ -33055,7 +33055,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e67297e5cff8183f4f5cf5d7cb5c1d78edbb8cda782723221c62fcccfd9ad1c1"
+  "value": "505f8f46d223dbb0fa9d7db5de08fdfc6565b15c19e4e4348e4edb018a439e2d"
  },
  "engines": [
   {
@@ -326737,6 +326737,51 @@
     "unparseable_neighbour_does_not_abort_repair_v1_20261023_v1": 2,
     "v1": 2,
     "while": 2
+   }
+  },
+  {
+   "action_id": "UNUSED_LEARNED_GRAMMAR_AND_FALSIFIED_REACH_AXES_20261126_V1",
+   "capability": false,
+   "date": "2026-11-26",
+   "id": "research:canonical/action_intents/UNUSED_LEARNED_GRAMMAR_AND_FALSIFIED_REACH_AXES_20261126_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/UNUSED_LEARNED_GRAMMAR_AND_FALSIFIED_REACH_AXES_20261126_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "aadd92a4a21a2c489836fb8a9970022107fe5c7de4e9e63862e8bf4b58edfd68",
+   "status": "SHIPPED",
+   "terms": {
+    "20261126": 1,
+    "49-point": 1,
+    "6-point": 1,
+    "abstraction": 1,
+    "access": 1,
+    "ad-hoc": 1,
+    "admits": 1,
+    "admitted": 1,
+    "advances": 1,
+    "already-admitted": 1,
+    "arms": 1,
+    "atom": 1,
+    "axes": 1,
+    "been": 1,
+    "behavior": 1,
+    "belongs": 1,
+    "both": 1,
+    "bottleneck": 1,
+    "but": 1,
+    "candidate": 1,
+    "concepts": 2,
+    "fallback": 2,
+    "grammar": 3,
+    "learned": 2,
+    "never": 2,
+    "not": 2,
+    "program": 3,
+    "so": 4,
+    "spec": 2,
+    "specs": 2,
+    "stored": 2,
+    "string": 2
    }
   },
   {
