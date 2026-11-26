@@ -61,8 +61,7 @@ class DialogueReader:
                         dep,trigger,head,replacement=row['value']
                         if dep!=slot or _key(trigger)!=_key(val):continue
                         fired.add(rk)
-                        self.store.append('delete','fact:'+head,**kw)
-                        entry=self.store.append('derive','fact:'+head,value=replacement,
+                        entry=self.store.append('revise','fact:'+head,value=replacement,
                                  parents=[parent,row['support'][0]['id']],**kw)
                         pending.append((head,replacement,entry['id']));count+=1
         return count
