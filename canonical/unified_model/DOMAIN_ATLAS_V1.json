@@ -4730,7 +4730,7 @@
  "method": "weighted lexical evidence over module stem, docstring and symbol names; frontier vocabulary and this repository's own vocabulary in one table",
  "min_score": 3.0,
  "model_calls": 0,
- "modules_scanned": 3298,
+ "modules_scanned": 3300,
  "network_calls": 0,
  "per_domain": 25,
  "reachability": {
