@@ -21,8 +21,20 @@ def _sha(b):return hashlib.sha256(b).hexdigest()
 def _text(r):return str(r.get('stdout') or '')+'\n'+str(r.get('stderr') or '')
 def _score(r):
  if r.get('timed_out'):return None
- if r.get('returncode')==0:return 0
- t=_text(r);m=re.search(r'FAILED\s*\(([^)]*)\)',t)
+ _t0=_text(r)
+ # Refuse collection errors and wrapped pytest usage/collection failures first across all return codes.
+ if re.search(r'(?m)^ERROR collecting ',_t0) or 'error during collection' in _t0:
+  return None
+ if re.search(r'PYTEST_EXECUTION_FAILED:(\d+)',_t0):
+  return None
+ # Refuse vacuous returncode==0 runs where 0 tests actually executed.
+ if r.get('returncode')==0:
+  if re.search(r'(?m)^no tests ran',_t0):return None
+  _c=re.findall(r'(\d+)\s+(?:passed|failed|errors?|skipped|xfailed|xpassed)',_t0)
+  if _c and sum(int(n) for n in _c)==0:return None
+  if not _c and 'OK' not in _t0 and 'Ran ' not in _t0:return None
+  return 0
+ t=_t0;m=re.search(r'FAILED\s*\(([^)]*)\)',t)
  if m:
   n=sum(int(v) for _,v in re.findall(r'(failures|errors)=(\d+)',m.group(1)))
   if n:return n
@@ -54,7 +66,23 @@ def _files(repo,root,tests,failure):
  for p in sorted(root.rglob('*.py')):add(p)
  return out
 def _purge(paths):
- for p in paths:_PATCH._purge_source_bytecode(p)
+ import shutil as _sh
+ for p in paths:
+  _PATCH._purge_source_bytecode(p)
+  try:
+   _c=pathlib.Path(importlib.util.cache_from_source(str(p))).parent
+   if _c.is_dir():_sh.rmtree(_c,ignore_errors=True)
+  except (NotImplementedError,ValueError,OSError):
+   pass
+def _name_scope_specs(tree,source=None):
+ _fields=set(_PATCH._declared_fields(tree))|set(_PATCH._read_attributes(tree))|set(_PATCH._imported_fields(tree,source))
+ for node in _PATCH._locations(tree):
+  if isinstance(node,ast.Attribute) and isinstance(node.ctx,ast.Load):
+   _bare=node.attr
+   if _bare in _fields and _bare.isidentifier():
+    key=_PATCH._node_key(node)
+    desc=_PATCH._descriptor(node,'NAME_SCOPE',ast.unparse(node)+' -> '+_bare,'name_scope')
+    yield key,desc,(lambda n,_bare=_bare:ast.Name(id=_bare,ctx=ast.Load()))
 def _diff(repo,p,a,b):return ''.join(difflib.unified_diff(a.decode().splitlines(True),b.decode().splitlines(True),fromfile='a/'+_rel(repo,p),tofile='b/'+_rel(repo,p)))
 def _best(repo,source,tests,argv,timeout,score,limit,touched,env,focus=None,structural=False,
           veto_argv=None,veto_counter=None):
@@ -63,20 +91,31 @@ def _best(repo,source,tests,argv,timeout,score,limit,touched,env,focus=None,stru
  except Exception:return None,0
  renderer=_PATCH._CandidateRenderer(text,tree)
  nums,strings=_PATCH._test_literals(tests);best=None;tested=0
- # Traceback-frame-first economics (L6 law, tqdm/9): source-order iteration
- # spent the whole count budget on early-line trivia of a 3000-line module
- # before reaching any line the stack names. Near-focus candidates first.
+ # Traceback-frame-first + render-before-ordering + round-robin-by-family so
+ # small high-precision defect families (e.g. name_scope, dropped_operand) are
+ # never starved behind thousands of early-line AST-walk legacy candidates.
  fl=set(focus or ())
  specs=[]
- for key,desc,replacer in _PATCH._candidate_specs(tree,nums,strings,source,structural=structural):
+ all_iter=list(_PATCH._candidate_specs(tree,nums,strings,source,structural=structural))+list(_name_scope_specs(tree,source))
+ for key,desc,replacer in all_iter:
   line=desc.get('lineno') or 0
   near=1 if not fl else 0 if any(abs(line-f)<=3 for f in fl) else 1
   specs.append((near,line,key,desc,replacer))
- specs.sort(key=lambda x:(x[0],x[1]))
- for near,line,key,desc,replacer in specs:
+ _by_family={}
+ for _n,_l,_k,_d,_r in sorted(specs,key=lambda x:(x[0],x[1])):
+  _c=renderer.render(_k,_r)
+  if _c and _c!=text:_by_family.setdefault(_d.get('family') or 'legacy',[]).append((_n,_l,_c,_d))
+ rendered=[]
+ _queues=[list(v) for _,v in sorted(_by_family.items(),key=lambda kv:kv[0])]
+ while _queues:
+  for _q in list(_queues):
+   if _q:rendered.append(_q.pop(0))
+   else:_queues.remove(_q)
+ _seen=set()
+ for near,line,cand,desc in rendered:
   if tested>=limit:break
-  cand=renderer.render(key,replacer)
-  if not cand or cand==text:continue
+  if cand in _seen:continue
+  _seen.add(cand)
   tested+=1
   rec=None
   try:
