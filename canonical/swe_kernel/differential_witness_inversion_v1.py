@@ -9,11 +9,16 @@ positional-only parameters), missing-exception separating guards, and public re-
 """
 from __future__ import annotations
 
+import importlib
 import json
 import os
 import pathlib
+import select
 import signal
 import subprocess
+import sys
+import threading
+import time
 from typing import Any
 
 
@@ -1081,10 +1086,11 @@ def _synthesize_patches():
     return patches[:28]
 
 
-cli_targets = [test_file] if test_file else list(dict.fromkeys(pass_ids + fail_ids))
+base_fn_targets = list(dict.fromkeys(nid.split("[")[0] for nid in (pass_ids + fail_ids) if nid))
+cli_targets = base_fn_targets if base_fn_targets else ([test_file] if test_file else [])
 try:
     pytest.main(
-        [*cli_targets, "-q", "--tb=short", "-p", "no:cacheprovider", "-W", "ignore"],
+        [*cli_targets, "-q", "--tb=short", "-p", "no:cacheprovider", "-o", "addopts=", "-W", "ignore"],
         plugins=[_WitnessPlugin()],
     )
 except BaseException:
@@ -1095,16 +1101,160 @@ try:
 except Exception:
     synthesized = []
 
-out_path.write_text(
-    json.dumps(
-        {
-            "captures": len(fail_captures),
-            "patches": synthesized,
-        }
-    ),
-    encoding="utf-8",
+payload_json = json.dumps(
+    {
+        "captures": len(fail_captures),
+        "patches": synthesized,
+    }
 )
+out_fd = cfg.get("out_fd")
+if isinstance(out_fd, int) and out_fd >= 0:
+    raw_out = payload_json.encode("utf-8")
+    mv = memoryview(raw_out)
+    sent = 0
+    while sent < len(mv):
+        sent += os.write(out_fd, mv[sent:])
+else:
+    out_path.write_text(payload_json, encoding="utf-8")
 '''
+
+
+_COMPILED_WITNESS_CODE = compile(_LIVE_DIFFERENTIAL_WITNESS_SCRIPT, "<brain_live_diff_witness>", "exec")
+
+
+def synthesize_live_differential_witness_repairs_in_ram(
+    cow_root: pathlib.Path,
+    failing_tests: list[str],
+    passing_tests: list[str],
+    *,
+    timeout_sec: float = 1.8,
+) -> tuple[list[tuple[dict[str, str], str, str]], int]:
+    """Zero-disk, zero-cold-start Copy-on-Write (`os.fork()`) live-frame witness inverter (~120-250 ms)."""
+    clean_fails = [t for t in failing_tests if t and not t.startswith("<")][:2]
+    if not clean_fails or not hasattr(os, "fork") or threading.active_count() > 1:
+        return [], 0
+    try:
+        import pytest as _preloaded_pytest  # noqa: F401
+    except Exception:
+        return [], 0
+
+    clean_passes = _select_sibling_passing_tests(clean_fails, passing_tests, limit=8)
+    test_file = clean_fails[0].split("::")[0] if "::" in clean_fails[0] else ""
+    root_abs = cow_root.resolve()
+
+    r_fd, w_fd = os.pipe()
+    pid = os.fork()
+    if pid == 0:
+        os.close(r_fd)
+        try:
+            signal.setitimer(signal.ITIMER_REAL, max(0.5, timeout_sec))
+            devnull = os.open(os.devnull, os.O_WRONLY)
+            os.dup2(devnull, 1)
+            os.dup2(devnull, 2)
+            os.close(devnull)
+            os.chdir(str(root_abs))
+            # Evict any cached repo/test modules before running targeted witness capture
+            search_bases = [root_abs / "src", root_abs] if (root_abs / "src").is_dir() else [root_abs]
+            pkg_roots = {
+                e.stem if e.is_file() else e.name
+                for b in search_bases
+                if b.is_dir()
+                for e in b.iterdir()
+                if not e.name.startswith((".", "docs", "build", "dist"))
+                and ((e.is_dir() and (e / "__init__.py").is_file()) or (e.is_file() and e.suffix == ".py"))
+            }
+            pkg_prefixes = tuple(sorted(pkg_roots)) + ("tests", "test_", "conftest")
+            for m_k in [k for k in list(sys.modules) if k in pkg_prefixes or k.startswith(tuple(f"{p}." for p in pkg_prefixes))]:
+                sys.modules.pop(m_k, None)
+            if (root_abs / "src").is_dir():
+                if str(root_abs) not in sys.path:
+                    sys.path.insert(0, str(root_abs))
+                if str(root_abs / "src") not in sys.path:
+                    sys.path.insert(0, str(root_abs / "src"))
+            elif str(root_abs) not in sys.path:
+                sys.path.insert(0, str(root_abs))
+            importlib.invalidate_caches()
+            os.environ["PYTEST_DISABLE_PLUGIN_AUTOLOAD"] = "1"
+            cfg_payload = json.dumps(
+                {
+                    "cow_root": str(root_abs),
+                    "test_file": test_file,
+                    "fail_ids": clean_fails,
+                    "pass_ids": clean_passes,
+                    "out_path": "",
+                    "out_fd": w_fd,
+                    "max_records": 240,
+                    "max_events": 30000,
+                }
+            )
+            sys.argv = ["_brain_live_diff_witness_ram", cfg_payload]
+            ns_exec: dict[str, Any] = {"__name__": "__main__"}
+            exec(_COMPILED_WITNESS_CODE, ns_exec)  # noqa: S102 -- confined CoW witness child
+        except BaseException:
+            pass
+        finally:
+            try:
+                signal.setitimer(signal.ITIMER_REAL, 0.0)
+                os.close(w_fd)
+            except OSError:
+                pass
+            os._exit(0)
+
+    os.close(w_fd)
+    chunks: list[bytes] = []
+    deadline = time.perf_counter() + timeout_sec + 0.35
+    eof = False
+    reaped = False
+    while not (eof and reaped):
+        rem = deadline - time.perf_counter()
+        if rem <= 0:
+            try:
+                os.kill(pid, signal.SIGKILL)
+                os.waitpid(pid, 0)
+            except OSError:
+                pass
+            try:
+                os.close(r_fd)
+            except OSError:
+                pass
+            return [], 0
+        if not eof:
+            ready, _, _ = select.select([r_fd], [], [], min(0.015, rem))
+            if ready:
+                try:
+                    blk = os.read(r_fd, 65536)
+                except OSError:
+                    blk = b""
+                if blk:
+                    chunks.append(blk)
+                else:
+                    eof = True
+        if not reaped:
+            try:
+                wp, _ = os.waitpid(pid, os.WNOHANG)
+                if wp == pid:
+                    reaped = True
+            except ChildProcessError:
+                reaped = True
+        if eof and not reaped:
+            time.sleep(0.0005)
+    try:
+        os.close(r_fd)
+    except OSError:
+        pass
+    try:
+        data = json.loads(b"".join(chunks).decode("utf-8") or "{}")
+    except Exception:
+        return [], 0
+    raw_patches = data.get("patches") or []
+    results: list[tuple[dict[str, str], str, str]] = []
+    for item in raw_patches:
+        rel_p = str(item.get("rel_path") or "")
+        p_src = str(item.get("patched_src") or "")
+        desc = str(item.get("description") or "Live differential witness inversion")
+        if rel_p and p_src:
+            results.append(({rel_p: p_src}, "COGS_LIVE_DIFFERENTIAL_WITNESS_INVERSION", desc))
+    return results, len(results)
 
 
 def _select_sibling_passing_tests(failing_tests: list[str], passing_tests: list[str], limit: int = 8) -> list[str]:

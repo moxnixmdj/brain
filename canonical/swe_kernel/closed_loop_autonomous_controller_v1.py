@@ -876,6 +876,12 @@ def _solve_or_learn_impl(
             "dom_elements",
             "perf_target",
             "repair_command",
+            "epistemic_portfolio_problem",
+            "mealy_interface_problem",
+            "version_space_ui_problem",
+            "refusal_specification_problem",
+            "interface_action_problem",
+            "unknown_environment_problem",
         )
     )
     if work_cwd != pathlib.Path(__file__).resolve().parents[2]:
@@ -1036,6 +1042,156 @@ def _solve_or_learn_impl(
             "tier_used": "tier0_semantic_ambiguity_sense_control",
             "semantic_control": amb_out,
             "associative_memory": mem_rec,
+            "k3_external_llm_calls": 0,
+            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+        }
+
+    ep_port_prob = req.pop("epistemic_portfolio_problem", None)
+    if isinstance(ep_port_prob, Mapping):
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as uep
+
+        ws_target = pathlib.Path(ep_port_prob.get("workspace_dir") or ep_port_prob.get("repo_dir") or work_cwd).resolve()
+        port_out = uep.run_unified_epistemic_portfolio(
+            workspace_dir=ws_target,
+            goal_text=goal,
+            pytest_targets=ep_port_prob.get("pytest_targets"),
+            suspect_files=ep_port_prob.get("suspect_files"),
+            timeout_s=float(ep_port_prob.get("timeout_s", 45.0)),
+        )
+        passed_p = bool(port_out.get("pass") is True)
+        mem_rec = _credit_assoc_memory(passed_p, {"goal": goal, "organ": port_out.get("mechanism")})
+        return {
+            "schema": SCHEMA,
+            "task_id": task_id,
+            "goal": goal,
+            "pass": passed_p,
+            "status": str(port_out.get("status") or ("VERIFIED" if passed_p else "FAIL_CLOSED")),
+            "tier_used": "tier0_unified_epistemic_portfolio",
+            "epistemic_portfolio": port_out,
+            "associative_memory": mem_rec,
+            "k3_external_llm_calls": 0,
+            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+        }
+
+    mealy_prob = req.pop("mealy_interface_problem", None)
+    if isinstance(mealy_prob, Mapping) and callable(mealy_prob.get("oracle_fn")):
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as uep
+
+        m_out = uep.ActiveSymbolicMealyLearner.learn_mealy_interface(
+            mealy_prob["oracle_fn"],
+            mealy_prob.get("alphabet") or (),
+            accepting_outputs=mealy_prob.get("accepting_outputs", ("1", "ACCEPT", "OK", "TRUE", "True")),
+            max_states=int(mealy_prob.get("max_states", 4)),
+            max_queries=int(mealy_prob.get("max_queries", 48)),
+        )
+        passed_m = bool(m_out.get("pass") is True)
+        return {
+            "schema": SCHEMA,
+            "task_id": task_id,
+            "goal": goal,
+            "pass": passed_m,
+            "status": str(m_out.get("status") or "FAIL_CLOSED"),
+            "tier_used": "tier0_active_symbolic_mealy_learner",
+            "mealy_learning": m_out,
+            "k3_external_llm_calls": 0,
+            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+        }
+
+    vsui_prob = req.pop("version_space_ui_problem", None)
+    if isinstance(vsui_prob, Mapping):
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as uep
+
+        vs_out = uep.learn_and_act_version_space_ui(
+            vsui_prob.get("demonstration_traces") or (),
+            vsui_prob.get("query_observation"),
+            step=int(vsui_prob.get("step", 0)),
+        )
+        passed_vs = bool(vs_out.get("pass") is True)
+        return {
+            "schema": SCHEMA,
+            "task_id": task_id,
+            "goal": goal,
+            "pass": passed_vs,
+            "status": str(vs_out.get("status") or "FAIL_CLOSED"),
+            "tier_used": "tier0_demonstration_version_space_ui",
+            "version_space_ui": vs_out,
+            "k3_external_llm_calls": 0,
+            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+        }
+
+    ref_spec_prob = req.pop("refusal_specification_problem", None)
+    if isinstance(ref_spec_prob, Mapping):
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as uep
+
+        rs_out = uep.diagnose_and_plan_refusal_repair(
+            str(ref_spec_prob.get("stderr") or ""),
+            pathlib.Path(ref_spec_prob.get("workspace_dir") or work_cwd),
+        )
+        passed_rs = bool(rs_out.get("parsed") is True)
+        return {
+            "schema": SCHEMA,
+            "task_id": task_id,
+            "goal": goal,
+            "pass": passed_rs,
+            "status": "PASS__REFUSAL_SPECIFICATION_COMPILED" if passed_rs else "FAIL_CLOSED__UNRECOGNIZED_REFUSAL",
+            "tier_used": "tier0_refusal_as_specification",
+            "refusal_specification": rs_out,
+            "k3_external_llm_calls": 0,
+            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+        }
+
+    iface_prob = req.pop("interface_action_problem", None)
+    if isinstance(iface_prob, Mapping):
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as uep
+
+        ia_out = uep.act_on_interface_unified(
+            str(iface_prob.get("instruction") or goal),
+            observation=iface_prob.get("observation"),
+            html_source=iface_prob.get("html_source"),
+            a11y_env=iface_prob.get("a11y_env"),
+            submit_effects=iface_prob.get("submit_effects"),
+            goal_check=iface_prob.get("goal_check"),
+            cli_need=iface_prob.get("cli_need"),
+            workspace_dir=iface_prob.get("workspace_dir") or work_cwd,
+            demonstration_traces=iface_prob.get("demonstration_traces"),
+            step=int(iface_prob.get("step", 0)),
+        )
+        passed_ia = bool(ia_out.get("pass") is True)
+        return {
+            "schema": SCHEMA,
+            "task_id": task_id,
+            "goal": goal,
+            "pass": passed_ia,
+            "status": str(ia_out.get("status") or "FAIL_CLOSED"),
+            "tier_used": "tier0_interface_action_grammar",
+            "interface_action": ia_out,
+            "k3_external_llm_calls": 0,
+            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+        }
+
+    unk_env_prob = req.pop("unknown_environment_problem", None)
+    if isinstance(unk_env_prob, Mapping) and unk_env_prob.get("env") is not None and callable(unk_env_prob.get("is_goal")):
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as uep
+
+        ue_out = uep.explore_unknown_environment_unified(
+            unk_env_prob["env"],
+            unk_env_prob.get("actions") or (),
+            is_goal=unk_env_prob["is_goal"],
+            action_budget=int(unk_env_prob.get("action_budget", 32)),
+            use_memory=bool(unk_env_prob.get("use_memory", False)),
+            verify_replay=bool(unk_env_prob.get("verify_replay", False)),
+            interventional_call=unk_env_prob.get("interventional_call"),
+            refusal_line=unk_env_prob.get("refusal_line"),
+        )
+        passed_ue = bool(ue_out.get("pass") is True)
+        return {
+            "schema": SCHEMA,
+            "task_id": task_id,
+            "goal": goal,
+            "pass": passed_ue,
+            "status": str(ue_out.get("status") or "FAIL_CLOSED"),
+            "tier_used": "tier0_systematic_unknown_environment_explorer",
+            "unknown_environment": ue_out,
             "k3_external_llm_calls": 0,
             "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
         }

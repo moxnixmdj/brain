@@ -1904,6 +1904,146 @@ class UnifiedModel:
 
     # ------------------------------------------------------------------- solve
 
+    def organ_portfolio_status(self) -> dict[str, Any]:
+        """Inspect live readiness of the 64 unified zero-model SWE & runtime organs (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.organ_portfolio_status()
+
+    def learn_mealy_interface(
+        self,
+        oracle_fn: Any,
+        alphabet: Sequence[str],
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Actively learn a minimal separating-word Mealy interface (`minimal_experiment_v1`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.ActiveSymbolicMealyLearner.learn_mealy_interface(oracle_fn, alphabet, **kwargs)
+
+    def learn_version_space_ui(
+        self,
+        demonstration_traces: Sequence[Sequence[tuple[Mapping[str, Any], str]]],
+        query_observation: Mapping[str, Any] | None = None,
+        *,
+        step: int = 0,
+    ) -> dict[str, Any]:
+        """Synthesize a few-shot GUI/DOM Version-Space skill (`demonstration_version_space_v1`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.learn_and_act_version_space_ui(demonstration_traces, query_observation, step=step)
+
+    def act_on_interface(
+        self,
+        instruction: str,
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Zero-VLM 5-Tier Computer-Use, WebMCP & CLI Action-Grammar dispatcher (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.act_on_interface_unified(instruction, **kwargs)
+
+    def explore_unknown_environment(
+        self,
+        env: Any,
+        actions: Sequence[Any],
+        *,
+        is_goal: Any = None,
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Zero-instruction interactive POMDP / trace-quotient explorer (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.explore_unknown_environment_unified(env, actions, is_goal=is_goal, **kwargs)
+
+    def verify_patch_uncheatable(
+        self,
+        workspace_dir: str | Path,
+        patched_files: Mapping[str, str],
+        pytest_targets: Sequence[str],
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Uncheatable behavioural diff-mutation & structural-specification gate (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.verify_patch_uncheatable(workspace_dir, patched_files, pytest_targets, **kwargs)
+
+    def induce_hypothesis_and_vocabulary(
+        self,
+        points: Sequence[tuple[Any, Any]] | None = None,
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Symbolic/piecewise hypothesis fitting, active query design, and vocabulary induction (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.induce_hypothesis_and_vocabulary_unified(points, **kwargs)
+
+    def teach_edit_by_example(
+        self,
+        target_source: str,
+        before_example: str,
+        after_example: str,
+    ) -> dict[str, Any]:
+        """1-shot structural AST transformation transfer (`edit_by_example_v1`, `K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.teach_edit_by_example_unified(target_source, before_example, after_example)
+
+    def fast_associate_and_adapt(
+        self,
+        query_or_key: str,
+        *,
+        observe_payload: Any | None = None,
+        utility: float = 1.0,
+        credit_verified: bool = True,
+        top_k: int = 3,
+    ) -> dict[str, Any]:
+        """64-bit Hyperdimensional SimHash VSA + Sherman-Morrison/Woodbury + Bi-Temporal PPR fast adapter (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        mem = getattr(self, "_vsa_woodbury_mem", None)
+        if mem is None:
+            mem = _uep.VSAWoodburyFastMemory()
+            self._vsa_woodbury_mem = mem
+        if observe_payload is not None:
+            mem.observe(query_or_key, observe_payload, utility=utility, credit_verified=credit_verified)
+        return mem.query(query_or_key, top_k=top_k)
+
+    def decide_one_shot_sufficiency(self, **kwargs: Any) -> dict[str, Any]:
+        """Decidable 1-shot demonstration sufficiency, hidden-precondition abduction & active experiment compiler (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.decide_one_shot_sufficiency_and_experiment(**kwargs)
+
+    def compose_and_calibrate_skills(
+        self,
+        source_text: str,
+        before_after_lessons: Sequence[tuple[str, str]],
+        *,
+        target_language: str = "python",
+        pure_organ_source: str | None = None,
+    ) -> dict[str, Any]:
+        """Proved skill composition (`proved_composition_v1`), diagnostic scope calibration & 7-language CST transfer (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.compose_and_calibrate_verified_skills(
+            source_text,
+            before_after_lessons,
+            target_language=target_language,
+            pure_organ_source=pure_organ_source,
+        )
+
+    def pre_sieve_meaning_ir(
+        self,
+        baseline_source: str,
+        candidate_sources: Sequence[str],
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Microsecond Guarded Region-SSA Meaning-IR deduplicator & forward-backward abstract simulator (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.pre_sieve_and_simulate_meaning_ir(baseline_source, candidate_sources, **kwargs)
+
     def solve(
         self,
         goal: str,
@@ -1919,30 +2059,215 @@ class UnifiedModel:
         inputs = dict(inputs or {})
         if requested == "RECALL":
             return self.recall(goal)
-        if requested == "EPISTEMIC":
-            ws_arg = cwd or inputs.get("workspace_dir") or inputs.get("repo_dir")
-            if ws_arg is not None:
-                from canonical.swe_kernel import cross_modal_tomography_petri_v1 as _cmtp
-                from canonical.swe_kernel import epistemic_admission_and_self_play_v1 as _easp
-
-                store_obj = inputs.get("store")
-                if isinstance(store_obj, (str, Path)):
-                    store_obj = _easp.EpistemicStoreV1(Path(store_obj))
-                elif not isinstance(store_obj, _easp.EpistemicStoreV1):
-                    store_obj = _easp.EpistemicStoreV1()
-                ep_res = _cmtp.solve_epistemic_workspace_cow(
-                    workspace_dir=Path(ws_arg),
-                    goal_text=str(goal or ""),
-                    store=store_obj,
-                    pytest_targets=inputs.get("pytest_targets"),
-                    suspect_files=inputs.get("suspect_files"),
-                    timeout_s=float(inputs.get("timeout_s", 35.0)),
+        if requested in ("EPISTEMIC", "PORTFOLIO"):
+            if callable(inputs.get("mealy_oracle")):
+                m_res = self.learn_mealy_interface(
+                    inputs["mealy_oracle"],
+                    inputs.get("alphabet") or (),
+                    max_states=int(inputs.get("max_states", 4)),
+                    max_queries=int(inputs.get("max_queries", 48)),
                 )
                 return {
                     "schema": SOLUTION_SCHEMA,
                     "authority": "NONE",
                     "non_claims": list(NON_CLAIMS),
-                    "mode": "EPISTEMIC",
+                    "mode": requested,
+                    "goal": goal,
+                    "status": m_res.get("status", "UNSOLVED"),
+                    "pass": bool(m_res.get("pass")),
+                    "epistemic_result": m_res,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            if inputs.get("version_space_traces") is not None:
+                vs_res = self.learn_version_space_ui(
+                    inputs.get("version_space_traces") or (),
+                    inputs.get("query_observation"),
+                    step=int(inputs.get("step", 0)),
+                )
+                return {
+                    "schema": SOLUTION_SCHEMA,
+                    "authority": "NONE",
+                    "non_claims": list(NON_CLAIMS),
+                    "mode": requested,
+                    "goal": goal,
+                    "status": vs_res.get("status", "UNSOLVED"),
+                    "pass": bool(vs_res.get("pass")),
+                    "epistemic_result": vs_res,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            if inputs.get("interface_action_problem") is not None:
+                ia_spec = dict(inputs["interface_action_problem"])
+                ia_res = self.act_on_interface(str(ia_spec.pop("instruction", goal)), **ia_spec)
+                return {
+                    "schema": SOLUTION_SCHEMA,
+                    "authority": "NONE",
+                    "non_claims": list(NON_CLAIMS),
+                    "mode": requested,
+                    "goal": goal,
+                    "status": ia_res.get("status", "UNSOLVED"),
+                    "pass": bool(ia_res.get("pass")),
+                    "epistemic_result": ia_res,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            if inputs.get("unknown_environment_problem") is not None:
+                ue_spec = dict(inputs["unknown_environment_problem"])
+                ue_env = ue_spec.pop("env")
+                ue_actions = ue_spec.pop("actions", ())
+                ue_goal = ue_spec.pop("is_goal", None)
+                ue_res = self.explore_unknown_environment(ue_env, ue_actions, is_goal=ue_goal, **ue_spec)
+                return {
+                    "schema": SOLUTION_SCHEMA,
+                    "authority": "NONE",
+                    "non_claims": list(NON_CLAIMS),
+                    "mode": requested,
+                    "goal": goal,
+                    "status": ue_res.get("status", "UNSOLVED"),
+                    "pass": bool(ue_res.get("pass")),
+                    "epistemic_result": ue_res,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            if inputs.get("one_shot_sufficiency_problem") is not None:
+                os_spec = dict(inputs["one_shot_sufficiency_problem"])
+                os_res = self.decide_one_shot_sufficiency(**os_spec)
+                return {
+                    "schema": SOLUTION_SCHEMA,
+                    "authority": "NONE",
+                    "non_claims": list(NON_CLAIMS),
+                    "mode": requested,
+                    "goal": goal,
+                    "status": os_res.get("status", "UNSOLVED"),
+                    "pass": bool(os_res.get("pass")),
+                    "epistemic_result": os_res,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            if inputs.get("proved_skill_composition_problem") is not None:
+                psc_spec = dict(inputs["proved_skill_composition_problem"])
+                psc_src = str(psc_spec.pop("source_text", ""))
+                psc_lessons = psc_spec.pop("before_after_lessons", ())
+                psc_res = self.compose_and_calibrate_skills(psc_src, psc_lessons, **psc_spec)
+                return {
+                    "schema": SOLUTION_SCHEMA,
+                    "authority": "NONE",
+                    "non_claims": list(NON_CLAIMS),
+                    "mode": requested,
+                    "goal": goal,
+                    "status": psc_res.get("status", "UNSOLVED"),
+                    "pass": bool(psc_res.get("pass")),
+                    "epistemic_result": psc_res,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            if inputs.get("meaning_ir_presieve_problem") is not None:
+                mir_spec = dict(inputs["meaning_ir_presieve_problem"])
+                mir_base = str(mir_spec.pop("baseline_source", ""))
+                mir_cands = mir_spec.pop("candidate_sources", ())
+                mir_res = self.pre_sieve_meaning_ir(mir_base, mir_cands, **mir_spec)
+                return {
+                    "schema": SOLUTION_SCHEMA,
+                    "authority": "NONE",
+                    "non_claims": list(NON_CLAIMS),
+                    "mode": requested,
+                    "goal": goal,
+                    "status": mir_res.get("status", "UNSOLVED"),
+                    "pass": bool(mir_res.get("pass")),
+                    "epistemic_result": mir_res,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            if inputs.get("uncheatable_audit_problem") is not None:
+                ua_spec = dict(inputs["uncheatable_audit_problem"])
+                ua_res = self.verify_patch_uncheatable(
+                    ua_spec.pop("workspace_dir"),
+                    ua_spec.pop("patched_files"),
+                    ua_spec.pop("pytest_targets"),
+                    **ua_spec,
+                )
+                return {
+                    "schema": SOLUTION_SCHEMA,
+                    "authority": "NONE",
+                    "non_claims": list(NON_CLAIMS),
+                    "mode": requested,
+                    "goal": goal,
+                    "status": ua_res.get("status", "UNSOLVED"),
+                    "pass": bool(ua_res.get("pass")),
+                    "epistemic_result": ua_res,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            if inputs.get("hypothesis_vocabulary_problem") is not None:
+                hv_spec = dict(inputs["hypothesis_vocabulary_problem"])
+                hv_pts = hv_spec.pop("points", None)
+                hv_res = self.induce_hypothesis_and_vocabulary(hv_pts, **hv_spec)
+                return {
+                    "schema": SOLUTION_SCHEMA,
+                    "authority": "NONE",
+                    "non_claims": list(NON_CLAIMS),
+                    "mode": requested,
+                    "goal": goal,
+                    "status": hv_res.get("status", "UNSOLVED"),
+                    "pass": bool(hv_res.get("pass")),
+                    "epistemic_result": hv_res,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            if inputs.get("taught_edit_problem") is not None:
+                te_spec = dict(inputs["taught_edit_problem"])
+                te_res = self.teach_edit_by_example(
+                    str(te_spec["target_source"]),
+                    str(te_spec["before_example"]),
+                    str(te_spec["after_example"]),
+                )
+                return {
+                    "schema": SOLUTION_SCHEMA,
+                    "authority": "NONE",
+                    "non_claims": list(NON_CLAIMS),
+                    "mode": requested,
+                    "goal": goal,
+                    "status": te_res.get("status", "UNSOLVED"),
+                    "pass": bool(te_res.get("pass")),
+                    "epistemic_result": te_res,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            ws_arg = cwd or inputs.get("workspace_dir") or inputs.get("repo_dir")
+            if ws_arg is not None:
+                if inputs.get("store") is None:
+                    from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+                    ep_res = _uep.run_unified_epistemic_portfolio(
+                        workspace_dir=Path(ws_arg),
+                        goal_text=str(goal or ""),
+                        pytest_targets=inputs.get("pytest_targets"),
+                        suspect_files=inputs.get("suspect_files"),
+                        timeout_s=float(inputs.get("timeout_s", 35.0)),
+                    )
+                else:
+                    from canonical.swe_kernel import cross_modal_tomography_petri_v1 as _cmtp
+                    from canonical.swe_kernel import epistemic_admission_and_self_play_v1 as _easp
+
+                    store_obj = inputs.get("store")
+                    if isinstance(store_obj, (str, Path)):
+                        store_obj = _easp.EpistemicStoreV1(Path(store_obj))
+                    elif not isinstance(store_obj, _easp.EpistemicStoreV1):
+                        store_obj = _easp.EpistemicStoreV1()
+                    ep_res = _cmtp.solve_epistemic_workspace_cow(
+                        workspace_dir=Path(ws_arg),
+                        goal_text=str(goal or ""),
+                        store=store_obj,
+                        pytest_targets=inputs.get("pytest_targets"),
+                        suspect_files=inputs.get("suspect_files"),
+                        timeout_s=float(inputs.get("timeout_s", 35.0)),
+                    )
+                return {
+                    "schema": SOLUTION_SCHEMA,
+                    "authority": "NONE",
+                    "non_claims": list(NON_CLAIMS),
+                    "mode": requested,
                     "goal": goal,
                     "status": ep_res.get("status", "UNSOLVED"),
                     "pass": bool(ep_res.get("pass")),
@@ -2161,6 +2486,12 @@ class UnifiedModel:
                 "escape_repair_state",
                 "ooxml_preflight_target",
                 "domain_mapping_problem",
+                "epistemic_portfolio_problem",
+                "mealy_interface_problem",
+                "version_space_ui_problem",
+                "refusal_specification_problem",
+                "interface_action_problem",
+                "unknown_environment_problem",
             )
         ):
             spec_payload: dict[str, Any] = {"goal": goal, **dict(inputs)}
@@ -5395,6 +5726,129 @@ class SovereignZeroLLMPlanner:
     def organ_graph(self) -> Any:
         """Access the unified 5-stratum `MetaCircularOrganGraph` (`P_t`)."""
         return self._cognitive_core().organ_graph
+
+    def epistemic_portfolio_status(self) -> dict[str, Any]:
+        """Inspect readiness of the unified zero-model epistemic portfolio (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.organ_portfolio_status()
+
+    def act_on_interface(self, instruction: str, **kwargs: Any) -> dict[str, Any]:
+        """Zero-VLM 5-Tier Computer-Use, WebMCP & CLI Action-Grammar dispatcher (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.act_on_interface_unified(instruction, **kwargs)
+
+    def explore_unknown_environment(self, env: Any, actions: Sequence[Any], *, is_goal: Any = None, **kwargs: Any) -> dict[str, Any]:
+        """Zero-instruction interactive POMDP / trace-quotient explorer (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.explore_unknown_environment_unified(env, actions, is_goal=is_goal, **kwargs)
+
+    def verify_patch_uncheatable(
+        self,
+        workspace_dir: str | Path,
+        patched_files: Mapping[str, str],
+        pytest_targets: Sequence[str],
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Uncheatable behavioural diff-mutation & structural-specification gate (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.verify_patch_uncheatable(workspace_dir, patched_files, pytest_targets, **kwargs)
+
+    def induce_hypothesis_and_vocabulary(
+        self,
+        points: Sequence[tuple[Any, Any]] | None = None,
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Symbolic/piecewise hypothesis fitting, active query design, and vocabulary induction (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.induce_hypothesis_and_vocabulary_unified(points, **kwargs)
+
+    def teach_edit_by_example(
+        self,
+        target_source: str,
+        before_example: str,
+        after_example: str,
+    ) -> dict[str, Any]:
+        """1-shot structural AST transformation transfer (`edit_by_example_v1`, `K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.teach_edit_by_example_unified(target_source, before_example, after_example)
+
+    def fast_associate_and_adapt(
+        self,
+        query_or_key: str,
+        *,
+        observe_payload: Any | None = None,
+        utility: float = 1.0,
+        credit_verified: bool = True,
+        top_k: int = 3,
+    ) -> dict[str, Any]:
+        """64-bit Hyperdimensional SimHash VSA + Sherman-Morrison/Woodbury + Bi-Temporal PPR fast adapter (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        mem = getattr(self, "_vsa_woodbury_mem", None)
+        if mem is None:
+            mem = _uep.VSAWoodburyFastMemory()
+            self._vsa_woodbury_mem = mem
+        if observe_payload is not None:
+            mem.observe(query_or_key, observe_payload, utility=utility, credit_verified=credit_verified)
+        return mem.query(query_or_key, top_k=top_k)
+
+    def decide_one_shot_sufficiency(self, **kwargs: Any) -> dict[str, Any]:
+        """Decidable 1-shot demonstration sufficiency, hidden-precondition abduction & active experiment compiler (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.decide_one_shot_sufficiency_and_experiment(**kwargs)
+
+    def compose_and_calibrate_skills(
+        self,
+        source_text: str,
+        before_after_lessons: Sequence[tuple[str, str]],
+        *,
+        target_language: str = "python",
+        pure_organ_source: str | None = None,
+    ) -> dict[str, Any]:
+        """Proved skill composition (`proved_composition_v1`), diagnostic scope calibration & 7-language CST transfer (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.compose_and_calibrate_verified_skills(
+            source_text,
+            before_after_lessons,
+            target_language=target_language,
+            pure_organ_source=pure_organ_source,
+        )
+
+    def pre_sieve_meaning_ir(
+        self,
+        baseline_source: str,
+        candidate_sources: Sequence[str],
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Microsecond Guarded Region-SSA Meaning-IR deduplicator & forward-backward abstract simulator (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.pre_sieve_and_simulate_meaning_ir(baseline_source, candidate_sources, **kwargs)
+
+    def organ_portfolio_status(self) -> dict[str, Any]:
+        """Inspect readiness of all 96 unified SWE, tools & runtime organs (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.organ_portfolio_status()
+
+    def learn_mealy_interface(
+        self,
+        oracle_fn: Any,
+        alphabet: Sequence[str],
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Actively learn an unknown finite-state environment via separating words (`minimal_experiment_v1`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.ActiveSymbolicMealyLearner.learn_mealy_interface(oracle_fn, alphabet, **kwargs)
 
     def extrapolate_global_opportunity(
         self,
