@@ -349,5 +349,5 @@
   },
   "action_id": "WITNESSED_ROUTES_AND_COLD_WORKER_INTEGRATION_20261126_V1",
   "integration_followup": "The integrated front door exceeded the upstream 7,533-line ceiling. Share Wave 39 memory and partial-routing payload decoders with the federation; retain explicit-model rejection, federated goal defaults and untrusted write origins. No size or latency threshold was changed.",
-  "upstream_sync": "Wave 46 landed during checks. Keep the fresh namespace per case and the falsifiable expression oracle, profile each chained rewrite against failing lines, and retain the independent selected-suite check before writing any repair. Caller-supplied patches require an explicit external store, are labeled untrusted and cannot enter the blind model-free route."
+  "upstream_sync": "Wave 46 landed during checks. Keep the fresh namespace per case and the falsifiable expression oracle, restrict chained rewrites to the remapped failing-line witness, and retain the independent selected-suite check before writing any repair. Caller-supplied patches require an explicit external store, are labeled untrusted and cannot enter the blind model-free route."
 }

@@ -49,3 +49,13 @@ def test_reusing_one_pass_is_not_an_anytime_error_bound():
         g=gate.observe('same event',passed=True,null_pass_prob=.25)
     assert g['verdict']=='COMMIT' and g['step_count']==3  # numerical threshold really crossed
     assert not g['false_commit_bound_established']  # the three observations could be perfectly correlated
+
+
+def test_rehydration_cannot_introduce_an_unbound_supplier(tmp_path, monkeypatch):
+    import json
+    store = tmp_path / 'laws.json'
+    monkeypatch.setenv('BRAIN_FUTAMURA_STORE', str(store))
+    store.write_text(json.dumps({'store_version': 1, 'rules': [
+        {'rule_id': 'foreign', 'before_template': '__V0__', 'after_template': 'convert(__V0__)'},
+        {'rule_id': 'unbound', 'before_template': '__V0__', 'after_template': '__C1__'}]}))
+    assert FutamuraSelfCompilingCascade().persisted_law_ids() == []

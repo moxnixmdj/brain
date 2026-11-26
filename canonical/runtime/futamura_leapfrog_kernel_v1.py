@@ -1297,6 +1297,9 @@ class ZeroOverheadCoWZygoteRepairEngine:
 # ===========================================================================
 
 
+_TEMPLATE_BUILTINS = frozenset({"len", "min", "max", "range", "sum", "abs", "int", "float", "str", "list", "dict", "set"})
+
+
 class _AlphaTemplateNormalizer:
     """Alpha-normalize an AST subtree into canonical slot variables (`__V0__`, `__C0__`) for generalization."""
 
@@ -1313,7 +1316,7 @@ class _AlphaTemplateNormalizer:
     def _walk(self, node: ast.AST) -> ast.AST:
         if isinstance(node, ast.Name):
             # Keep Python builtins un-abstracted (`len`, `min`, `max`, `range`, `None`).
-            if node.id in {"len", "min", "max", "range", "sum", "abs", "int", "float", "str", "list", "dict", "set"}:
+            if node.id in _TEMPLATE_BUILTINS:
                 return node
             slot = self.name_to_slot.get(node.id)
             if slot is None:
@@ -1559,9 +1562,8 @@ class FutamuraSelfCompilingCascade:
             except (KeyError, SyntaxError, TypeError, ValueError):
                 continue
             before_names = {n.id for n in ast.walk(before_ast) if isinstance(n, ast.Name)}
-            after_slots = {n.id for n in ast.walk(after_ast) if isinstance(n, ast.Name)
-                           and n.id.startswith(("__V", "__C")) and n.id.endswith("__")}
-            if not after_slots.issubset(before_names):
+            after_names = {n.id for n in ast.walk(after_ast) if isinstance(n, ast.Name)}
+            if after_names - before_names - _TEMPLATE_BUILTINS:
                 continue  # Persistence cannot supply a missing receiver binding.
             rule = CompiledRung0Rule(
                 rule_id=str(row.get("rule_id") or f"persisted_{len(self._persisted)}"),
@@ -1792,13 +1794,13 @@ class FutamuraSelfCompilingCascade:
     RUNG0_MAX_REWRITES = 6
     RUNG0_MAX_STATES = 48
 
-    def _rung0_rewrites(self, source: str, failing_lines: set[int]) -> list[tuple[str, str]]:
-        """Every `(rule_id, rewritten_source)` reachable in ONE rewrite of `source`."""
+    def _rung0_rewrites(self, source: str, failing_lines: set[int]) -> list[tuple[str, str, set[int]]]:
+        """One rewrite and the original failing-line witness mapped into the new source."""
         try:
             tree = ast.parse(source)
         except SyntaxError:
             return []
-        out: list[tuple[str, str]] = []
+        out: list[tuple[str, str, set[int]]] = []
         for node in ast.walk(tree):
             if not hasattr(node, "lineno") or not hasattr(node, "end_lineno"):
                 continue
@@ -1811,9 +1813,18 @@ class FutamuraSelfCompilingCascade:
                 if not _match_template(rule.before_ast, node, bindings):
                     continue
                 instantiated = _instantiate_template(rule.after_ast, bindings)
-                cand_src = splice_ast_byte_span(source, node, ast.unparse(instantiated))
+                replacement = ast.unparse(instantiated)
+                cand_src = splice_ast_byte_span(source, node, replacement)
                 if cand_src != source:
-                    out.append((rule.rule_id, cand_src))
+                    # Carry the original witnessed sites across the splice. Do
+                    # not execute an intermediate candidate in the parent just
+                    # to rediscover its line numbers when using a CoW oracle.
+                    end = node.lineno + replacement.count("\n")
+                    shift = end - node.end_lineno
+                    lines = {n for n in failing_lines if n < node.lineno}
+                    lines.update(range(node.lineno, end + 1))
+                    lines.update(n + shift for n in failing_lines if n > node.end_lineno)
+                    out.append((rule.rule_id, cand_src, lines))
         return out
 
     def _try_rung0(self, source: str, test_cases: Sequence[str], failing_lines: set[int],
@@ -1831,22 +1842,14 @@ class FutamuraSelfCompilingCascade:
             return None
         t0 = time.perf_counter()
         eval_overhead_s = 0.0
-        frontier: list[tuple[str, tuple[str, ...]]] = [(source, ())]
+        frontier = deque([(source, (), failing_lines)])
         seen: set[str] = {source}
         states = 0
         while frontier and states < self.RUNG0_MAX_STATES:
-            state, fired = frontier.pop(0)
+            state, fired, lines = frontier.popleft()
             if len(fired) >= self.RUNG0_MAX_REWRITES:
                 continue
-            # A rewrite may change line numbers and which case is red. Never
-            # apply a learned edit to an unexecuted site in the next state.
-            lines = failing_lines
-            if fired:
-                start_eval = time.perf_counter()
-                loc = localize_fault_ochiai(state, test_cases)
-                lines = {row["line"] for row in loc["ranked_lines"]}
-                eval_overhead_s += time.perf_counter() - start_eval
-            for rule_id, cand_src in self._rung0_rewrites(state, lines):
+            for rule_id, cand_src, next_lines in self._rung0_rewrites(state, lines):
                 if cand_src in seen:
                     continue
                 seen.add(cand_src)
@@ -1874,7 +1877,7 @@ class FutamuraSelfCompilingCascade:
                     self._record_rule_outcome(rule, passed=False)
                 if states >= self.RUNG0_MAX_STATES:
                     break
-                frontier.append((cand_src, (*fired, rule_id)))
+                frontier.append((cand_src, (*fired, rule_id), next_lines))
         return None
 
     def solve(
