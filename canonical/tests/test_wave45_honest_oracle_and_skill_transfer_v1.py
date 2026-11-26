@@ -188,3 +188,76 @@ class EndToEndSpineTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ColdStartAdapterTest(unittest.TestCase):
+    """The front door: a sentence and a repository, no structured inputs."""
+
+    def setUp(self):
+        import os
+
+        self._prev = {k: os.environ.get(k) for k in ("BRAIN_SKILL_STORE_PATH", "BRAIN_LAW_STORE_PATH")}
+        import tempfile as _tf
+
+        self._tmp = _tf.mkdtemp(prefix="wave45_cold_")
+        os.environ["BRAIN_SKILL_STORE_PATH"] = f"{self._tmp}/store.json"
+        os.environ["BRAIN_LAW_STORE_PATH"] = f"{self._tmp}/laws.json"
+
+    def tearDown(self):
+        import os
+
+        for k, v in self._prev.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
+
+    def _repo(self, name: str, files: dict[str, str]) -> pathlib.Path:
+        root = pathlib.Path(self._tmp) / name
+        root.mkdir(parents=True, exist_ok=True)
+        for rel, text in files.items():
+            (root / rel).write_text(text, encoding="utf-8")
+        return root
+
+    def test_binds_targets_and_candidates_from_evidence(self):
+        from canonical.swe_kernel.cold_start_swe_adapter_v1 import solve_from_issue
+
+        root = self._repo("bind", {
+            "calc.py": "def add(a, b):\n    return a - b\n",
+            "test_calc.py": "from calc import add\n\n\ndef test_add():\n    assert add(2, 3) == 5\n",
+            "unrelated.py": "def rain():\n    return 1\n",
+        })
+        res = solve_from_issue("the addition helper subtracts", root, keep_patch_applied=True)
+        self.assertEqual(res["binding"]["test_targets"], ["test_calc.py"])
+        self.assertIn("calc.py", res["binding"]["candidate_files"])
+        self.assertNotIn("test_calc.py", res["binding"]["candidate_files"])
+
+    def test_no_test_file_refuses_instead_of_guessing(self):
+        from canonical.swe_kernel.cold_start_swe_adapter_v1 import solve_from_issue
+
+        root = self._repo("nooracle", {"lib.py": "def f():\n    return 1\n"})
+        res = solve_from_issue("f is wrong", root)
+        self.assertFalse(res["pass"])
+        self.assertEqual(res["reason"], "NO_ORACLE_TARGET__NO_TEST_FILE_IN_REPO")
+        self.assertEqual(res["model_calls"], 0)
+
+    def test_missing_repo_root_fails_closed(self):
+        from canonical.swe_kernel.cold_start_swe_adapter_v1 import solve_from_issue
+
+        res = solve_from_issue("anything", "/nonexistent/path/xyz")
+        self.assertFalse(res["pass"])
+        self.assertEqual(res["reason"], "REPO_ROOT_MISSING")
+
+    def test_cold_start_solves_and_reports_zero_model_calls(self):
+        from canonical.runtime.brain_unified_model_v1 import open_model
+
+        model = open_model()
+        root = self._repo("solve", {
+            "calc.py": "def add(a, b):\n    return a - b\n",
+            "test_calc.py": "from calc import add\n\n\ndef test_add():\n    assert add(2, 3) == 5\n",
+        })
+        res = model.solve_swe_cold_start("addition returns the wrong answer", root, keep_patch_applied=True)
+        self.assertTrue(res["pass"], res.get("status"))
+        payload = res["payload"]
+        self.assertEqual((payload.get("swe_result") or {}).get("model_calls"), 0)
+        self.assertIn("a + b", (root / "calc.py").read_text(encoding="utf-8"))

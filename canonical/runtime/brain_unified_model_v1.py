@@ -5262,6 +5262,42 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
             admitted_capabilities_visible=len(self.capabilities),
         )
 
+    def solve_swe_cold_start(
+        self,
+        issue_text: str,
+        repo_root: str | Path,
+        *,
+        timeout_s: float = 30.0,
+        keep_patch_applied: bool = False,
+        skill_store_path: str | Path | None = None,
+    ) -> dict[str, Any]:
+        """Wave 45: the door a person actually knocks on.
+
+        A repository and a sentence. The adapter scans, binds test targets and candidate files
+        from evidence (issue terms + import graph), then hands the bound problem to
+        `solve_swe_repo_native`. Zero model calls; a refusal names what is missing instead of
+        guessing.
+        """
+        res = self.boundary_router.route_swe_cold_start(
+            issue_text=issue_text,
+            repo_root=repo_root,
+            timeout_s=timeout_s,
+            keep_patch_applied=keep_patch_applied,
+            skill_store_path=skill_store_path,
+        )
+        passed = bool(res.get("pass"))
+        return self._envelope(
+            operation="SWE_COLD_START",
+            goal=f"swe_cold_start:{repo_root}",
+            status=str(res.get("status") or ("PASS" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            tier=res.get("tier"),
+            reason=res.get("reason"),
+            binding=res.get("binding"),
+            elapsed_s=res.get("elapsed_s"),
+            payload=res,
+        )
+
     def solve_swe_repo_native(
         self,
         repo_root: str | Path,

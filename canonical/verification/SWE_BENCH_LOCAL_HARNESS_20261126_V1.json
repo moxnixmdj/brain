@@ -1,8 +1,70 @@
 {
   "arms": {
+    "COLD_START_FROM_ISSUE": {
+      "CS_BINOP": {
+        "binding_steps": [
+          "TARGETS_BY_FULL_TEST_SET_FALLBACK",
+          "CANDIDATES_BY_IMPORT_GRAPH_AND_TERMS"
+        ],
+        "elapsed_s": 0.045,
+        "expect_shape_present": true,
+        "issue": "addition returns the wrong answer, subtraction happens instead",
+        "model_calls": 0,
+        "pass_independently_verified": true,
+        "pass_reported": true,
+        "status": "PASS__REPO_NATIVE_ANGELIC_OE_STRUCTURAL",
+        "task": "CS_BINOP",
+        "tier": "ANGELIC_OE_STRUCTURAL"
+      },
+      "CS_COMPARISON": {
+        "binding_steps": [
+          "TARGETS_BY_ISSUE_TERM_MATCH",
+          "CANDIDATES_BY_IMPORT_GRAPH_AND_TERMS"
+        ],
+        "elapsed_s": 0.039,
+        "expect_shape_present": true,
+        "issue": "is_adult rejects eighteen year olds due to an off by one comparison",
+        "model_calls": 0,
+        "pass_independently_verified": true,
+        "pass_reported": true,
+        "status": "PASS__REPO_NATIVE_ANGELIC_OE_STRUCTURAL",
+        "task": "CS_COMPARISON",
+        "tier": "ANGELIC_OE_STRUCTURAL"
+      },
+      "CS_NONE_COALESCE": {
+        "binding_steps": [
+          "TARGETS_BY_ISSUE_TERM_MATCH",
+          "CANDIDATES_BY_IMPORT_GRAPH_AND_TERMS"
+        ],
+        "elapsed_s": 0.331,
+        "expect_shape_present": true,
+        "issue": "label crashes when the tag is missing and should print empty brackets",
+        "model_calls": 0,
+        "pass_independently_verified": false,
+        "pass_reported": false,
+        "status": "FAIL_CLOSED__RESIDUAL_HOLE_NEEDS_PROPOSER",
+        "task": "CS_NONE_COALESCE",
+        "tier": "REPO_NATIVE_EXHAUSTED_FAIL_CLOSED"
+      },
+      "CS_OFF_BY_ONE": {
+        "binding_steps": [
+          "TARGETS_BY_ISSUE_TERM_MATCH",
+          "CANDIDATES_BY_IMPORT_GRAPH_AND_TERMS"
+        ],
+        "elapsed_s": 0.117,
+        "expect_shape_present": true,
+        "issue": "the total skips the last element and returns the wrong sum",
+        "model_calls": 0,
+        "pass_independently_verified": true,
+        "pass_reported": true,
+        "status": "PASS__REPO_NATIVE_ANGELIC_OE_STRUCTURAL",
+        "task": "CS_OFF_BY_ONE",
+        "tier": "ANGELIC_OE_STRUCTURAL"
+      }
+    },
     "EMPTY_STORE_NO_PROPOSER": {
       "BINOP_INVERT": {
-        "elapsed_s": 0.118,
+        "elapsed_s": 0.108,
         "expect_shape_present": true,
         "learned_skill_id": "trm_cc27e48e4337de74",
         "model_calls": 0,
@@ -14,7 +76,7 @@
         "tier": "ANGELIC_OE_STRUCTURAL"
       },
       "GUARD_NONE_FALLBACK": {
-        "elapsed_s": 0.454,
+        "elapsed_s": 0.5,
         "expect_shape_present": false,
         "learned_skill_id": null,
         "model_calls": 0,
@@ -26,7 +88,7 @@
         "tier": "REPO_NATIVE_EXHAUSTED_FAIL_CLOSED"
       },
       "HELD_OUT_DIFFERENT_VOCABULARY": {
-        "elapsed_s": 0.428,
+        "elapsed_s": 0.417,
         "expect_shape_present": false,
         "learned_skill_id": null,
         "model_calls": 0,
@@ -40,7 +102,7 @@
     },
     "OVERFIT_LITERAL_ADMISSION": {
       "GUARD_NONE_FALLBACK": {
-        "elapsed_s": 0.415,
+        "elapsed_s": 0.433,
         "expect_shape_present": false,
         "learned_skill_id": null,
         "model_calls": 1,
@@ -54,7 +116,7 @@
     },
     "SEEDED_STORE_NO_PROPOSER": {
       "HELD_OUT_DIFFERENT_VOCABULARY": {
-        "elapsed_s": 0.136,
+        "elapsed_s": 0.16,
         "expect_shape_present": true,
         "learned_skill_id": null,
         "model_calls": 0,
@@ -66,7 +128,7 @@
         "tier": "SKILL_STORE_RECALL"
       },
       "TEACH_GUARD_NONE_FALLBACK": {
-        "elapsed_s": 0.451,
+        "elapsed_s": 0.457,
         "expect_shape_present": true,
         "learned_skill_id": "trm_33fd6e7daaf9970e",
         "model_calls": 1,
@@ -117,6 +179,11 @@
       }
     },
     "arms": {
+      "COLD_START_FROM_ISSUE": {
+        "independently_verified_passes": 3,
+        "tasks": 4,
+        "total_model_calls": 0
+      },
       "EMPTY_STORE_NO_PROPOSER": {
         "independently_verified_passes": 1,
         "tasks": 3,

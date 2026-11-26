@@ -247,6 +247,17 @@ def admits_repair(
     return True, "ADMITTED", {"reused_source_literals": True}
 
 
+# A gate that was designed and REMOVED here, recorded so it is not re-proposed:
+#
+# "Refuse a patch whose expressions simplify to the same value as the original" looked right
+# against the off-by-one task, where the engine wrote `range(len(xs) - 1 + 1)`. That looked
+# cosmetic. It is not: `len(xs) - 1 + 1 == len(xs)`, so the patch is CORRECT arithmetic with
+# redundant syntax, and refusing it would have rejected a real fix. Symbolic equality tells
+# you a change is safe; it cannot tell you a change is worthless, because the redundant form
+# is what the synthesiser could prove. The suite oracle plus the three gates below are the
+# honest boundary. Re-proposed and rejected 2026-11-26.
+
+
 def _short(value: Any, limit: int = 40) -> str:
     text = repr(value)
     return text if len(text) <= limit else text[: limit - 3] + "..."

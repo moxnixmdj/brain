@@ -92,3 +92,75 @@ The patch that passed the suite by hardcoding `'bob'` is now refused before eval
 1. **Cold-start spec discovery.** The instrument is now honest and it learns, but it cannot be reached from a natural-language goal. That is what keeps the SWE-bench number at 0. This is the single highest-leverage remaining item.
 2. **Transfer breadth.** One morphism class transfers. Real repos need guards-on-tuples, None-coalescing in returns, exception-message rewrites, and multi-file import zippers. The store format supports them; nothing has measured them.
 3. **Container evaluation.** Without Docker there is no public number, and without a public number none of this can be compared to the frontier. GitHub Actions is the only path available from this sandbox.
+
+---
+
+# Addendum: cold-start adapter (Part 3) — built and measured
+
+## A1. What it is
+
+`canonical/swe_kernel/cold_start_swe_adapter_v1.py` (new, ~290 LOC) + `UnifiedModel.solve_swe_cold_start()`
++ `route_swe_cold_start`. It turns `(repository, one sentence)` into the structured inputs the spine
+needs, with **zero model calls**:
+
+1. **Scan** — test files, source files, frameworks actually present (`pytest` / `unittest` / plain functions).
+2. **Bind targets** — issue-term match against test names and bodies; falls back to the full test set
+   (bounded) so a lexically poor issue still gets *measured* rather than skipped.
+3. **Bind candidates** — files that define a symbol the tests import, then term overlap. The import graph
+   decides, not the wording.
+4. **Hand off** to `solve_swe_repo_native_multifile`, which is honest about failure.
+5. **Refuse** with `NO_ORACLE_TARGET__NO_TEST_FILE_IN_REPO` when there is no test: no oracle ⇒ no
+   verification ⇒ no repair. This is the module's most important line.
+
+Every result carries `binding.evidence.steps`, so a wrong binding is inspectable.
+
+## A2. Measured results (cold start from a sentence, `model_calls = 0` everywhere)
+
+| Task | Issue | Status | Verified |
+|---|---|---|---|
+| `CS_BINOP` | "addition returns the wrong answer" | `PASS__REPO_NATIVE_ANGELIC_OE_STRUCTURAL` | yes |
+| `CS_COMPARISON` | "rejects eighteen year olds, off by one" | `PASS__REPO_NATIVE_ANGELIC_OE_STRUCTURAL` | yes |
+| `CS_OFF_BY_ONE` | "total skips the last element" | `PASS__…` (writes `len(xs) - 1 + 1`, equal to `len(xs)`) | yes |
+| `CS_NONE_COALESCE` | "crashes when the tag is missing" | `FAIL_CLOSED__RESIDUAL_HOLE_NEEDS_PROPOSER` | no |
+
+**3 of 4 solved cold from a sentence, zero model calls.** The fourth (string concatenation with a
+missing-None fallback) fails closed, honestly, naming `RESIDUAL_SEMANTIC_HOLE_NEEDS_PROPOSER`.
+
+## A3. Real-code probe (not synthetic)
+
+A 436-line module copied out of this repo (`canonical/tools/line_localisation_v1.py`) with a genuine
+single-site bug injected (one `-` dropped from the sort key in `fuse`, causing reciprocal-rank fusion to
+return the worst line first):
+
+- **Binding: correct.** `test_targets=['test_loc.py']`, `candidate_files=['loc.py']`, evidence
+  `TARGETS_BY_ISSUE_TERM_MATCH` + `CANDIDATES_BY_IMPORT_GRAPH_AND_TERMS`.
+- **Baseline: correctly detected as failing** (the honest oracle). Stage 0, Stage 3 and Stage 4 all run.
+- **Repair: FAILED, honestly.** `FAIL_CLOSED__RESIDUAL_HOLE_NEEDS_PROPOSER`. No patch, no false green.
+
+This is the real frontier: reaching the right file and test is solved; flipping a sign inside a
+`lambda` used as a `sorted` key argument is not. Recorded as a failure, not smoothed over.
+
+## A4. A gate that was designed and removed
+
+"Refuse patches whose expressions simplify to the original value" looked correct against
+`range(len(xs) - 1 + 1)`. It was wrong: that expression **is** `len(xs)`. Symbolic equality proves a
+change is safe; it cannot prove a change is worthless. Removed, with the reasoning recorded in
+`repair_admission_v1.py` so it is not re-proposed.
+
+## A5. Test suite (this session)
+
+```
+canonical.tests.test_wave45_honest_oracle_and_skill_transfer_v1 .... 16 passed
+canonical.tests.test_canonical_swe_spine_v1 ....................... 8 passed
+canonical.tests.test_petri_cow_splicing_engine_v1 ................. 6 passed
+canonical.tests.test_parallel_cow_rollouts_v1 ..................... 3 passed
+```
+
+## A6. Still not done
+
+- No SWE-bench Pro V2 / Terminal-Bench 4.0 / OSWorld 2.1 number: `docker` absent. Reported as
+  `NOT_RUN__DOCKER_UNAVAILABLE`, never as a score. Honest baseline remains **0/51**.
+- Repair of real multi-token semantic bugs (sign inside a keyword lambda, string concatenation
+  fallbacks) is unsolved: 3/4 synthetic cold-start tasks pass, 0/1 real-code probe passes.
+- Only one morphism class has a verified transfer (guard → fallback).
+- **Not DONE per §6.**

@@ -2773,7 +2773,7 @@ def solve_swe_inverted_microscope(
 
     # Same external store as the multifile path: a proposer-verified fix on any path must be
     # crystallised once, not re-derived next time.
-    _store_target = skill_store_path or _os.environ.get("BRAIN_SKILL_STORE_PATH")
+    _store_target = skill_store_path or os.environ.get("BRAIN_SKILL_STORE_PATH")
     try:
         _skill_store = causal_nexus_v1.SkillStoreV2(_store_target)
     except Exception:  # pragma: no cover
@@ -3273,7 +3273,7 @@ def solve_swe_repo_native_multifile(
 
     _closure_law_store: CanonicalLawStore | None = None
     try:
-        _law_env = _os.environ.get("BRAIN_LAW_STORE_PATH")
+        _law_env = os.environ.get("BRAIN_LAW_STORE_PATH")
         _default_law_path = (
             pathlib.Path(_law_env)
             if _law_env

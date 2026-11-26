@@ -81,6 +81,81 @@ TASKS: tuple[dict[str, Any], ...] = (
     },
 )
 
+COLD_START_TASKS: tuple[dict[str, Any], ...] = (
+    {
+        "id": "CS_BINOP",
+        "issue": "addition returns the wrong answer, subtraction happens instead",
+        "files": {
+            "calc.py": "def add(a, b):\n    return a - b\n",
+            "test_calc.py": "from calc import add\n\n\ndef test_add():\n    assert add(2, 3) == 5\n",
+        },
+        "expect_file_contains": "a + b",
+    },
+    {
+        "id": "CS_OFF_BY_ONE",
+        "issue": "the total skips the last element and returns the wrong sum",
+        "files": {
+            "lib.py": "def total(xs):\n    s = 0\n    for i in range(len(xs) - 1):\n        s += xs[i]\n    return s\n",
+            "test_lib.py": "from lib import total\n\n\ndef test_total():\n    assert total([1, 2, 3]) == 6\n",
+        },
+        "expect_file_contains": None,  # the engine writes `len(xs) - 1 + 1`, which is the same length
+    },
+    {
+        "id": "CS_COMPARISON",
+        "issue": "is_adult rejects eighteen year olds due to an off by one comparison",
+        "files": {
+            "lib.py": "def is_adult(age):\n    return age > 18\n",
+            "test_lib.py": "from lib import is_adult\n\n\ndef test_18():\n    assert is_adult(18) is True\n",
+        },
+        "expect_file_contains": ">=",
+    },
+    {
+        "id": "CS_NONE_COALESCE",
+        "issue": "label crashes when the tag is missing and should print empty brackets",
+        "files": {
+            "lib.py": 'def label(tag):\n    return "[" + tag + "]\n',
+            "test_lib.py": 'from lib import label\n\n\ndef test_none():\n    assert label(None) == "[]"\n\n\ndef test_ok():\n    assert label("x") == "[x]"\n',
+        },
+        "expect_file_contains": None,
+    },
+)
+
+
+def _run_cold_start(task: Mapping[str, Any], *, workdir: pathlib.Path, store_path: pathlib.Path, model: Any) -> dict[str, Any]:
+    """Drive the front door a person uses: repository + one sentence."""
+    root = _repo(workdir / task["id"].lower(), task["files"])
+    t0 = time.perf_counter()
+    res = model.solve_swe_cold_start(
+        task["issue"], str(root), timeout_s=30.0, keep_patch_applied=True,
+        skill_store_path=str(store_path),
+    )
+    elapsed = round(time.perf_counter() - t0, 3)
+    payload = res.get("payload") or {}
+    swe = payload.get("swe_result") or {}
+    patched = "".join(
+        (root / rel).read_text(encoding="utf-8", errors="replace")
+        for rel in task["files"] if rel.endswith(".py") and not rel.startswith("test_")
+    )
+    from canonical.swe_kernel.canonical_swe_spine_v1 import _honest_suite_verdict
+
+    oracle_ok, _ = _honest_suite_verdict(
+        root, [r for r in task["files"] if r.startswith("test_")], timeout_s=20.0
+    )
+    expected = task.get("expect_file_contains")
+    return {
+        "task": task["id"],
+        "issue": task["issue"],
+        "status": res.get("status"),
+        "tier": res.get("tier"),
+        "pass_reported": bool(res.get("pass")),
+        "pass_independently_verified": bool(oracle_ok),
+        "expect_shape_present": bool(expected is None or expected in patched),
+        "binding_steps": ((res.get("binding") or {}).get("evidence") or {}).get("steps"),
+        "model_calls": int(swe.get("model_calls") or 0),
+        "elapsed_s": elapsed,
+    }
+
+
 #: The held-out variant used for single-experience transfer. Different function name,
 #: different parameter name, different key -- same law.
 HELD_OUT = {
@@ -199,6 +274,14 @@ def run(*, json_out: str | None = None) -> dict[str, Any]:
             TASKS[1], workdir=base / "arm3", store_path=base / "arm3_store.json",
             proposer=PROPOSERS["OVERFIT_LITERAL"], model=model,
         )
+    }
+
+    # ---- Arm 4: cold start from a natural-language issue. The front door. -------------
+    report["arms"]["COLD_START_FROM_ISSUE"] = {
+        task["id"]: _run_cold_start(
+            task, workdir=base / "arm4", store_path=base / "arm4_store.json", model=model
+        )
+        for task in COLD_START_TASKS
     }
 
     # ---- Summary ----------------------------------------------------------------------
