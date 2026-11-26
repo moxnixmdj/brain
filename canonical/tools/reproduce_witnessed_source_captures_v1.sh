@@ -4,7 +4,7 @@
 set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
 suite=${1:-}; w=$(realpath -m "${2:?provide a NEW external directory}")
-case "$suite" in h51|tb|scb) ;; *) echo 'choose h51, tb, or scb' >&2; exit 2;; esac
+case "$suite" in h51|h51-next|tb|scb) ;; *) echo 'choose h51, h51-next, tb, or scb' >&2; exit 2;; esac
 case "$w/" in "$PWD/"*) echo 'external directory required' >&2; exit 2;; esac
 mkdir "$w"  # Never inherit an earlier room, capture or teacher.
 py=${PYTHON311:-python3.11}; py=$(command -v "$py")
@@ -23,19 +23,24 @@ capture() {  # stem (also output filename), clean shallow base, public instructi
   local name=$1 base=$2 goal=$3; shift 3
   "$py" -m canonical.tools.harbor_source_route_control_v1 --base "$base" --instruction "$goal" --venv "$w/venv" "$@" > "$w/$name.json"
 }
-if [[ $suite = h51 ]]; then
+if [[ $suite = h51 || $suite = h51-next ]]; then
   manifest=canonical/Immediate_Results/source_route_and_acquisition_20261126_v1.json
   pin=$(jq -er .protocol.official_suite_pin "$manifest")
   jq -r '.environments.native[]' "$manifest" > "$w/native.txt"
   "$py" -m venv "$w/venv"; "$w/venv/bin/python" -m pip install --only-binary=:all: --no-deps --index-url https://pypi.org/simple -r "$w/native.txt"
   "$w/venv/bin/python" -c "import site,pathlib; (pathlib.Path(site.getsitepackages()[0])/'receiver-src.pth').write_text('/work/repo/lib\n')"
+  tasks='.tasks[]'; revisions=(--revision bee38f70 --revision d17cb7c1)
+  if [[ $suite = h51-next ]]; then
+    manifest=canonical/verification/SINGLE_EPISODE_INPUTS_20261126.json; tasks='.h51.tasks[]'
+    pin=$(jq -er .h51.suite "$manifest"); revisions=(--revision "$(jq -er .h51.producer "$manifest")")
+  fi
   while read -r pos base id digest; do
     app="$w/base-$pos"; goal="$w/pos-$pos.md"; git init -q --template= "$app"
     git -C "$app" fetch -q --no-tags --depth=1 https://github.com/ansible/ansible.git "$base"; git -C "$app" checkout -q --detach FETCH_HEAD
     public_blob scaleapi/SWE-bench_Pro-os "$pin" "v2/tasks/$id/instruction.md" "$goal"
     printf '%s  %s\n' "$digest" "$goal" | sha256sum -c -
-    capture "pos-$pos" "$app" "$goal" --revision bee38f70 --revision d17cb7c1
-  done < <(jq -r '.tasks[]|[.position,.base,.instance_id,.instruction_sha256]|@tsv' "$manifest")
+    capture "pos-$pos" "$app" "$goal" "${revisions[@]}"
+  done < <(jq -r "$tasks"'|[.position,.base,.instance_id,.instruction_sha256]|@tsv' "$manifest")
 else
   "$py" -m venv --without-pip "$w/venv"  # Original blank/terminal producer, NOT the grader runtime.
   if [[ $suite = tb ]]; then
