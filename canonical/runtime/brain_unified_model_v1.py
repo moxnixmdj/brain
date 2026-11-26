@@ -3881,7 +3881,15 @@ class SovereignZeroLLMPlanner:
                     verifier_backed=True,
                     render_fn=lambda: (
                         "import subprocess, sys\n"
-                        "r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True)\n"
+                        "import os as _os, pathlib as _pl\n"
+                        "for _d in _pl.Path('.').rglob('__pycache__'):\n"
+                        "    for _c in _d.glob('*.pyc'):\n"
+                        "        try:\n"
+                        "            _c.unlink()\n"
+                        "        except OSError:\n"
+                        "            pass\n"
+                        "_ENV = {**_os.environ, 'PYTHONDONTWRITEBYTECODE': '1'}\n"
+                        "r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True, env=_ENV)\n"
                         "if r.returncode != 0:\n"
                         "    sys.stderr.write((r.stderr or r.stdout or 'verification_failed')[-800:])\n"
                         "    raise SystemExit(1)\n"
@@ -3891,8 +3899,16 @@ class SovereignZeroLLMPlanner:
                 # Pure-stdlib confined AST single-operator / constant-sign repair search (`confined_v1` safe — zero external imports!)
                 return (
                     "import ast, copy, pathlib, subprocess, sys\n"
+                    "import os as _os, pathlib as _pl\n"
+                    "for _d in _pl.Path('.').rglob('__pycache__'):\n"
+                    "    for _c in _d.glob('*.pyc'):\n"
+                    "        try:\n"
+                    "            _c.unlink()\n"
+                    "        except OSError:\n"
+                    "            pass\n"
+                    "_ENV = {**_os.environ, 'PYTHONDONTWRITEBYTECODE': '1'}\n"
                     "def _test_ok():\n"
-                    "    r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True)\n"
+                    "    r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True, env=_ENV)\n"
                     "    return r.returncode == 0, (r.stderr or r.stdout or '')[-800:]\n"
                     "ok0, err0 = _test_ok()\n"
                     "if ok0:\n"
@@ -3985,6 +4001,30 @@ class SovereignZeroLLMPlanner:
                             max_weight=4,
                             concept_library=core.concept_library,
                         )
+                        if not body_code:
+                            # Ensemble fallback (plan v5 move 2): OE + stochastic
+                            # union for shapes the observational grammar cannot
+                            # express at this budget (measured: branch-using
+                            # programs at max_weight 4..8, ten configs, all miss;
+                            # the union finds and verifies them in ~190 ms).
+                            # Every returned body is already verified against ALL
+                            # extracted examples, so a miss costs ~200 ms where
+                            # the affordance otherwise had no candidate at all --
+                            # it cannot slow a step that would have failed.
+                            from canonical.runtime.stochastic_synthesizer_v1 import (
+                                numeric_concept_templates,
+                                synthesize_body_from_examples,
+                            )
+                            body_code = synthesize_body_from_examples(
+                                p_names, valid_exs,
+                                # Learned grammar (v6 section 14): the concept
+                                # library's admitted templates are atoms this
+                                # enumerator cannot build at any depth. Read
+                                # only -- nothing here mutates the library.
+                                concepts=numeric_concept_templates(
+                                    getattr(core, "concept_library", None),
+                                ),
+                            )
                         if body_code:
                             upd = wits._replace_function_body_in_source(cur_src, fn_nd.name, body_code)
                             if upd:
@@ -3992,12 +4032,20 @@ class SovereignZeroLLMPlanner:
                     if cur_src != src_txt:
                         patched_files[imp_rel] = cur_src
 
-                lines = ["import pathlib, subprocess, sys"]
+                lines = ["import pathlib, subprocess, sys",
+                         "import os as _os",
+                         "for _d in pathlib.Path('.').rglob('__pycache__'):",
+                         "    for _c in _d.glob('*.pyc'):",
+                         "        try:",
+                         "            _c.unlink()",
+                         "        except OSError:",
+                         "            pass",
+                         "_ENV = {**_os.environ, 'PYTHONDONTWRITEBYTECODE': '1'}"]
                 for rel_p, new_src in sorted(patched_files.items()):
                     lines.append(f"pathlib.Path({rel_p!r}).write_text({new_src!r}, encoding='utf-8')")
                 lines.extend(
                     [
-                        "r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True)",
+                        "r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True, env=_ENV)",
                         "if r.returncode != 0:",
                         "    sys.stderr.write((r.stderr or r.stdout or 'obs_synth_h2_failed')[-800:])",
                         "    raise SystemExit(1)",

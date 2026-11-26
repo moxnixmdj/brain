@@ -33036,26 +33036,26 @@
   "bound_capabilities": 153,
   "capabilities": 462,
   "engines": 131,
-  "extended_source_index_modules": 613,
+  "extended_source_index_modules": 614,
   "federated_kernel_engines": 105,
   "harvested_admitted": 0,
-  "harvested_capabilities": 644,
+  "harvested_capabilities": 645,
   "harvested_contract_surfaces": 37,
-  "harvested_program_surfaces": 607,
+  "harvested_program_surfaces": 608,
   "knowledge_documents": 753,
   "promotion_callable": 31,
   "promotion_candidates": 849,
   "receipt_backed_capabilities": 309,
-  "research_index_records": 7420,
+  "research_index_records": 7421,
   "routing_tokens": 3018,
   "skills": 18,
   "source_index_entry_points": 561,
-  "source_index_modules": 2241
+  "source_index_modules": 2243
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b0097cf428f195593f4506d1737d4b0df83c21ab1aff818132eb24dd2a8294ac"
+  "value": "507b86d7cf524fcd549c3acb3d90f55fc00d241e073c055d311f2b42a2ee1379"
  },
  "engines": [
   {
@@ -46028,6 +46028,45 @@
     "v1": 1,
     "walk": 1,
     "wide": 1
+   },
+   "tree": "canonical/tools"
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "ext_source:canonical/tools/micro_evolve_bench_v1.py",
+   "imported_by_count": 0,
+   "kind": "EXTENDED_SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/tools/micro_evolve_bench_v1.py",
+   "sha256": "c5ca107655e0b41ea99c54503eb4cccc93c80bf268c39f47f2aca8c7f2057e43",
+   "summary": "micro_evolve_bench_v1 — priced reach of the zero-LLM repair loop (plan v6 §6).",
+   "symbol_count": 3,
+   "symbols": [
+    "main",
+    "make_family",
+    "run_task"
+   ],
+   "terms": {
+    "bench": 2,
+    "canonical": 1,
+    "evolve": 2,
+    "family": 1,
+    "llm": 1,
+    "loop": 1,
+    "main": 1,
+    "make": 1,
+    "micro": 2,
+    "plan": 1,
+    "priced": 1,
+    "reach": 1,
+    "repair": 1,
+    "run": 1,
+    "task": 1,
+    "tools": 1,
+    "v1": 2,
+    "v6": 1,
+    "zero": 1
    },
    "tree": "canonical/tools"
   },
@@ -80234,7 +80273,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "8cb9c29400bda2fc050308c743789831bbe36ffbf30543f8272450af9ddd5f3d",
+   "sha256": "9853c0950fa6b62ec5452fa516bd8b73cf87a12c42ea3f677725305ed921d2f6",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "triggers": [
     "brain",
@@ -87498,6 +87537,28 @@
     "measurement",
     "hygiene",
     "guard"
+   ]
+  },
+  {
+   "admission_state": "DISCOVERED_NOT_ADMITTED",
+   "admitted": false,
+   "also_in_source_index": false,
+   "capability": false,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "entrypoint": "main",
+   "id": "canonical.tools.micro_evolve_bench_v1.hidden.v1",
+   "invocation": "cli",
+   "kind": "HARVESTED_EXECUTABLE_SURFACE",
+   "path": "canonical/tools/micro_evolve_bench_v1.py",
+   "route": "canonical/runtime/harvested_capability_runtime_v1.py",
+   "sha256": "c5ca107655e0b41ea99c54503eb4cccc93c80bf268c39f47f2aca8c7f2057e43",
+   "summary": "micro_evolve_bench_v1 — priced reach of the zero-LLM repair loop (plan v6 §6).",
+   "triggers": [
+    "micro",
+    "evolve",
+    "bench"
    ]
   },
   {
@@ -152673,10 +152734,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 2335,
+  "included_source_count": 2336,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "1d3cc782d872d2fe5d07593231959613d6fd429f9d99e60344dae45df4331f84"
+  "source_tree_digest": "608305bf495c717f2326a7c034df07dcc084c04bb6032e2694d47686999daa43"
  },
  "research_index": [
   {
@@ -328336,6 +328397,51 @@
    }
   },
   {
+   "action_id": "UNUSED_LEARNED_GRAMMAR_AND_FALSIFIED_REACH_AXES_20261126_V1",
+   "capability": false,
+   "date": "2026-11-26",
+   "id": "research:canonical/action_intents/UNUSED_LEARNED_GRAMMAR_AND_FALSIFIED_REACH_AXES_20261126_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/UNUSED_LEARNED_GRAMMAR_AND_FALSIFIED_REACH_AXES_20261126_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "0c8eaa83adc13e7b31a2c9e713d02b59b17e18c984d33831f5f19eab9f567896",
+   "status": "SHIPPED",
+   "terms": {
+    "20261126": 1,
+    "49-point": 1,
+    "6-point": 1,
+    "abstraction": 1,
+    "access": 1,
+    "ad-hoc": 1,
+    "admits": 1,
+    "admitted": 1,
+    "advances": 1,
+    "already-admitted": 1,
+    "arms": 1,
+    "atom": 1,
+    "axes": 1,
+    "been": 1,
+    "behavior": 1,
+    "belongs": 1,
+    "both": 1,
+    "bottleneck": 1,
+    "but": 1,
+    "candidate": 1,
+    "concepts": 2,
+    "fallback": 2,
+    "grammar": 3,
+    "learned": 2,
+    "never": 2,
+    "not": 2,
+    "program": 3,
+    "so": 4,
+    "spec": 2,
+    "specs": 2,
+    "stored": 2,
+    "string": 2
+   }
+  },
+  {
    "action_id": "UNWEDGE_CHOOSER_FAIL_OPEN_PIN_AUDIT_20261104_V1",
    "capability": false,
    "date": "2026-11-04",
@@ -340035,7 +340141,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "8cb9c29400bda2fc050308c743789831bbe36ffbf30543f8272450af9ddd5f3d",
+   "sha256": "9853c0950fa6b62ec5452fa516bd8b73cf87a12c42ea3f677725305ed921d2f6",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 26,
    "symbols": [
@@ -367544,7 +367650,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_runtime_v1.py",
-   "sha256": "a4506a3c7a03a35a405973802deb0384070a16bd38064a881bedd9fd17770a8d",
+   "sha256": "c18c041b93b8ab8418a47362fc4cc0cc95a0d15c6ace9108cfbfaf96005db1ce",
    "summary": "Unified live execution subruntime V1.",
    "symbol_count": 34,
    "symbols": [
@@ -372934,6 +373040,52 @@
     "surface": 1,
     "survive": 1,
     "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/oe_sygus_synthesizer_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/oe_sygus_synthesizer_v1.py",
+   "sha256": "31727e1dfefc207cd405c3970aa9084468d5f2876d9c1ae2be68618989254df0",
+   "summary": "Unified Multi-Language Observational-Equivalence SyGuS + EUSolver Synthesizer v1.",
+   "symbol_count": 11,
+   "symbols": [
+    "Expr",
+    "_abstract_expr_template",
+    "_eval_expr",
+    "_is_num",
+    "_normalize_envs",
+    "_sig_atom",
+    "_sig_vec",
+    "abstract_synthesized_repair",
+    "emit_expr",
+    "synthesize_separating_predicates",
+    "synthesize_value_expressions"
+   ],
+   "terms": {
+    "abstract_expr_template": 1,
+    "abstract_synthesized_repair": 1,
+    "emit_expr": 1,
+    "eusolver": 1,
+    "eval_expr": 1,
+    "expr": 1,
+    "is_num": 1,
+    "multi-language": 1,
+    "normalize_envs": 1,
+    "observational-equivalence": 1,
+    "oe": 1,
+    "sig_atom": 1,
+    "sig_vec": 1,
+    "sygus": 2,
+    "synthesize_separating_predicates": 1,
+    "synthesize_value_expressions": 1,
+    "synthesizer": 2,
+    "unified": 1,
+    "v1": 2
    }
   },
   {
@@ -396884,7 +397036,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/solve_v1.py",
-   "sha256": "0bba15acac3238b0778a5ac57a86fb838d1705107410f6c0d59fbb8432fe88bd",
+   "sha256": "0212ae65a2fd32a89109d9df4a73b980c10f8bd1405c08b6f17a43d87160a092",
    "summary": "The whole system, reduced to what cannot be removed.",
    "symbol_count": 9,
    "symbols": [
@@ -398211,6 +398363,44 @@
     "stochastic": 1,
     "transform": 1,
     "universality": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/stochastic_synthesizer_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/stochastic_synthesizer_v1.py",
+   "sha256": "11052ce06af3e22fcd1d34715a7410d31b7a7251ae0159d51d07a2cce71d6cc4",
+   "summary": "Stochastic (random-search) SyGuS synthesizer over the OE grammar.",
+   "symbol_count": 7,
+   "symbols": [
+    "_concept_candidates",
+    "_level2c_exhaustive",
+    "_random_expr",
+    "ensemble_value_expressions",
+    "numeric_concept_templates",
+    "synthesize_body_from_examples",
+    "synthesize_value_expressions_stochastic"
+   ],
+   "terms": {
+    "concept_candidates": 1,
+    "ensemble_value_expressions": 1,
+    "grammar": 1,
+    "level2c_exhaustive": 1,
+    "numeric_concept_templates": 1,
+    "oe": 1,
+    "over": 1,
+    "random-search": 1,
+    "random_expr": 1,
+    "stochastic": 2,
+    "sygus": 1,
+    "synthesize_body_from_examples": 1,
+    "synthesize_value_expressions_stochastic": 1,
+    "synthesizer": 2,
     "v1": 1
    }
   },

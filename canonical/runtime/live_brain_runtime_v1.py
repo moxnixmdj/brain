@@ -148,6 +148,35 @@ def synthesize_failure_repair(
         return _fail("REPAIR_REQUEST_NOT_OBJECT")
     fingerprint = str(request.get("failure_fingerprint") or "").strip()
     components = request.get("components")
+    # Verified-synthesis path (plan v7): the unified model routes
+    # engine:REPAIR_SYNTHESIS here; when the request carries concrete
+    # (args, expected) examples instead of an R3 fingerprint, answer with the
+    # zero-LLM loop's ensemble — the same engines the planner's H2 affordance
+    # uses, reached through the model's own front door. Additive: every
+    # fingerprint-shaped request follows the original path byte-for-byte.
+    ex_rows = request.get("examples")
+    if (not fingerprint) and isinstance(ex_rows, list) and ex_rows and components is None:
+        arg_names = [str(a) for a in (request.get("arg_names") or [])]
+        pairs = []
+        for row in ex_rows[:64]:
+            if (isinstance(row, (list, tuple)) and len(row) == 2
+                    and isinstance(row[0], (list, tuple))):
+                pairs.append((tuple(row[0]), row[1]))
+        if arg_names and pairs:
+            from canonical.runtime.stochastic_synthesizer_v1 import (
+                synthesize_body_from_examples,
+            )
+            body = synthesize_body_from_examples(arg_names, pairs)
+            return {
+                "pass": bool(body),
+                "body": body,
+                "engine": "engine:REPAIR_SYNTHESIS",
+                "verifier": "all-provided-examples",
+                "authority": "NONE",
+                "non_claim": "spec-consistent, not target-identical; "
+                             "zero LLM samples; no receipt of held-out merit",
+            }
+        return _fail("EXAMPLES_SHAPE_INVALID")
     if not fingerprint:
         return _fail("FAILURE_FINGERPRINT_REQUIRED")
     if not isinstance(components, Sequence) or isinstance(components, (str, bytes)):
