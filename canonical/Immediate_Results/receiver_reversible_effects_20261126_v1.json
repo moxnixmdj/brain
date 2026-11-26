@@ -471,5 +471,39 @@
         }
       }
     }
+  },
+  "postgrade_deletion_control": {
+    "note": "Separate post-grade fresh reproduction at 465f3a26, using copies of the one-teacher store and the reproduced ~4 conditional store. Only proposal/veto dependence is measured, not task reward. Witness IDs bind to the updated driver; do not mix IDs from different runs.",
+    "driver_sha256": "c3a0d1f9d820cec3d39b6a11287e348524d6a395a51c9891340a33ec80a785ea",
+    "result": {
+      "receiver": "ab782145c4739d56147e2b993ac60c5316f2eef6a4e51fd29977bd0eff96cec2",
+      "files": 17,
+      "teacher_id": "sub_5792a3103335",
+      "before_removal": {
+        "empty": 0,
+        "raw_traces": 1,
+        "generalized": 1
+      },
+      "after_removal": {
+        "empty": 0,
+        "raw_traces": 0,
+        "generalized": 0
+      },
+      "conditional_veto": {
+        "witness_ids": [
+          "l3_neg_6235377d3fdc67ef",
+          "l3_neg_805fd7e960149a38"
+        ],
+        "removed": "l3_neg_6235377d3fdc67ef",
+        "before": [
+          true,
+          true
+        ],
+        "after": [
+          false,
+          true
+        ]
+      }
+    }
   }
 }
