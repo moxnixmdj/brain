@@ -9,7 +9,7 @@ tests use its own fixtures. That is a closed loop: the thing being judged and
 the thing judging are the same code path, and the instances are the ones the
 author had in view while writing the engine.
 
-This module opens the loop. For every one of the six capability classes the
+This module opens the loop. For every one of the capability classes the
 creature claims, it:
 
 1. **Generates fresh instances from a seed**, at run time, in the bench. Nothing
@@ -34,7 +34,7 @@ What it is not
 This is **not** an external benchmark (SWE-bench, Terminal-Bench, …) and its
 numbers are **not comparable** to any published number. It is an internal
 instrument: it says whether the creature can still do, on instances it has
-never seen, the six things it says it can do — and it flags the cases where it
+never seen, the things it says it can do — and it flags the cases where it
 says it did something it did not.
 
 The `--self-check` mode calibrates the instrument itself: an honest kernel must
@@ -83,6 +83,7 @@ CATEGORIES: tuple[str, ...] = (
     "MULTIFILE_REPAIR",
     "BELIEF_REVISION_ENTRENCHMENT",
     "CROSS_LANGUAGE_RULE_TRANSFER",
+    "REFUSAL_ACQUISITION_RETRY",
 )
 
 #: Categories whose instances are cheap and safe to run in a unit test.
@@ -961,6 +962,126 @@ def _build_cross_language(rng: random.Random, index: int) -> BenchInstance:
     )
 
 
+# --------------------------------------------------------------------------- category 7: acquire after refusal
+_ACQ_TARGET_POOL = (
+    # (template with {lhs}/{rhs}/{op}, operand names) -- shapes the token-pattern bridge cannot
+    # touch because they carry no `return` and use identifiers the rule never saw.
+    ("fn within({lhs}: i64, {rhs}: i64) -> bool {{ {lhs} {op} {rhs} }}", ("score", "cap")),
+    ("func within({lhs} int, {rhs} int) bool {{ {lhs} {op} {rhs} }}", ("load", "limit")),
+    ("fn fits({lhs}: f64, {rhs}: f64) -> bool {{ {lhs} {op} {rhs} }}", ("mass", "budget")),
+)
+
+
+def _build_refusal_acquisition(rng: random.Random, index: int) -> BenchInstance:
+    """Acquire the missing procedure after a named refusal, or refuse by name.
+
+    The engine's token-pattern bridge applies a learned rule *inside the context it was learned
+    in*. These targets deliberately break that context: no `return`, fresh identifiers, and (for
+    one kind) the comparison written with its operands exchanged. A third kind cannot be reached
+    by the rule at all and must be refused — claiming a repair there is the failure mode the
+    oracle is looking for.
+    """
+    kind = ("FRESH_CONTEXT", "INVERTED_OPERANDS", "UNREACHABLE")[index % 3]
+    bug_op, fixed_op, source_before, source_after = _RULES[index % len(_RULES)]
+    language = ("rust", "go", "typescript")[index % 3]
+    template, (lhs, rhs) = _ACQ_TARGET_POOL[index % len(_ACQ_TARGET_POOL)]
+    if kind == "INVERTED_OPERANDS":
+        written_op = {"<": ">", "<=": ">=", ">": "<", ">=": "<="}[bug_op]
+    elif kind == "UNREACHABLE":
+        written_op = "=="
+    else:
+        written_op = bug_op
+    buggy_source = template.format(lhs=lhs, rhs=rhs, op=written_op)
+    grid = (-2, -1, 0, 1, 3, 7)
+    mirror = {"<": ">", "<=": ">=", ">": "<", ">=": "<=", "==": "==", "!=": "!="}
+    comparison = re.compile(r"(\w+)\s*(<=|>=|==|!=|<|>)\s*(\w+)")
+
+    def _truth(op: str, a: int, b: int) -> bool:
+        return {"<": a < b, "<=": a <= b, ">": a > b, ">=": a >= b, "==": a == b, "!=": a != b}[op]
+
+    def _structural_verifier(patched: str) -> bool:
+        """What the *engine* is allowed to know: the comparison changed, the operands did not.
+
+        The truth table stays with the oracle. If the engine's admission criterion and the
+        bench's judgement were the same function, this category would be a tautology.
+        """
+        if patched == buggy_source:
+            return False
+        match = comparison.search(patched)
+        if match is None:
+            return False
+        a, op, b = match.group(1), match.group(2), match.group(3)
+        return {a, b} == {lhs, rhs} and op != written_op
+
+    def run() -> Mapping[str, Any]:
+        return _CURRENT_SUT.kernel().skill_ratchet.consolidate_and_transfer(
+            before_snippet=f"def check(x, y):\n    return {source_before}\n",
+            after_snippet=f"def check(x, y):\n    return {source_after}\n",
+            target_language=language,
+            target_buggy_source=buggy_source,
+            target_verifier=_structural_verifier,
+        )
+
+    def judge(result: Mapping[str, Any]) -> Judgement:
+        claimed = bool(result.get("pass"))
+        transfer = result.get("cross_language_transfer") or {}
+        patched = str(transfer.get("patched_source") or "")
+        problems: list[str] = []
+        if kind == "UNREACHABLE":
+            # Nothing the rule can reach: a verified patch here would be a fabrication.
+            if patched:
+                problems.append(f"produced a patch for a comparison the rule cannot reach: {patched!r}")
+            if bool(transfer.get("verifier_passed")):
+                problems.append("reported a verified transfer on an unreachable instance")
+            if claimed:
+                problems.append("claimed success on an instance the only truthful answer is to refuse")
+            ok = not problems
+            return Judgement(
+                ok=ok,
+                reason="REFUSED_UNREACHABLE_AND_NAMED_IT" if ok else "CLAIMED_A_TRANSFER_IT_COULD_NOT_MAKE",
+                expected={"refusal_required": True},
+                observed={"patched": patched, "claimed": claimed, "problems": problems},
+                sut_claimed=claimed,
+            )
+        match = comparison.search(patched)
+        if not match:
+            return Judgement(False, "NO_COMPARABLE_PREDICATE_IN_PATCH", expected={"operands": [lhs, rhs]},
+                             observed={"patched": patched}, sut_claimed=claimed)
+        got_a, got_op, got_b = match.group(1), match.group(2), match.group(3)
+        if {got_a, got_b} != {lhs, rhs}:
+            problems.append(f"the edit moved or renamed an operand: {(got_a, got_b)}")
+        if got_op not in {fixed_op, mirror[fixed_op]}:
+            problems.append(f"patched operator {got_op!r} is neither {fixed_op!r} nor its mirror")
+        # The bench's own truth table over the *intended* predicate, in the source's operand order.
+        intended_op = fixed_op if kind == "FRESH_CONTEXT" else mirror[fixed_op]
+        for a in grid:
+            for b in grid:
+                if got_op in {"<", "<=", ">", ">=", "=="} and _truth(got_op, a, b) != _truth(intended_op, a, b):
+                    problems.append(f"predicate mismatch at {lhs}={a} {rhs}={b}")
+                    break
+            else:
+                continue
+            break
+        claimed_steps = (transfer or {}).get("acquisition_steps")
+        ok = not problems
+        return Judgement(
+            ok=ok,
+            reason="ACQUIRED_AND_VERIFIED_AFTER_REFUSAL" if ok else "ACQUISITION_MISMATCH",
+            expected={"operator": fixed_op, "operand_order": [lhs, rhs], "kind": kind},
+            observed={"patched": patched, "operator": got_op, "acquisition_steps": claimed_steps,
+                      "problems": problems},
+            sut_claimed=claimed,
+        )
+
+    return BenchInstance(
+        instance_id=f"REFUSAL_ACQUISITION_RETRY#{index:02d}_{kind}",
+        category="REFUSAL_ACQUISITION_RETRY",
+        run=run,
+        judge=judge,
+        notes=f"kind={kind} language={language} written_op={written_op} rule={bug_op}->{fixed_op}",
+    )
+
+
 _BUILDERS: dict[str, Callable[[random.Random, int], BenchInstance]] = {
     "TRANSFER_UNDER_ISOMORPHISM": _build_transfer,
     "WITNESS_INVERSION_GENERALIZATION": _build_synthesis,
@@ -968,6 +1089,7 @@ _BUILDERS: dict[str, Callable[[random.Random, int], BenchInstance]] = {
     "MULTIFILE_REPAIR": _build_multifile_repair,
     "BELIEF_REVISION_ENTRENCHMENT": _build_belief_revision,
     "CROSS_LANGUAGE_RULE_TRANSFER": _build_cross_language,
+    "REFUSAL_ACQUISITION_RETRY": _build_refusal_acquisition,
 }
 
 _CURRENT_SUT: Sut = Sut.default()
@@ -1256,7 +1378,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--per-category", type=int, default=3,
                         help="instances per capability class (default 3)")
     parser.add_argument("--category", action="append", choices=list(CATEGORIES), default=None,
-                        help="restrict to one or more classes (default: all six)")
+                        help="restrict to one or more classes (default: all of them)")
     parser.add_argument("--json", default=None, help="write the full scorecard to this path")
     parser.add_argument("--self-check", action="store_true",
                         help="also calibrate the instrument against a liar and a refusal stub")
