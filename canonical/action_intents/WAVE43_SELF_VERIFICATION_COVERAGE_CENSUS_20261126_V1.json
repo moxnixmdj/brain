@@ -1,0 +1,554 @@
+{
+ "action_id": "WAVE43_SELF_VERIFICATION_COVERAGE_CENSUS_20261126_V1",
+ "action_intent_id": "WAVE43_SELF_VERIFICATION_COVERAGE_CENSUS_20261126_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Every plan in this tree that proposed to 'wake the hidden organs' assumed the unimported modules were capabilities waiting for a caller. Nothing had ever checked, and a module nobody imports is not a capability, it is a claim. This PR adds an adjudicator: each candidate is imported in its own subprocess under a timeout, its unattended zero-argument self_check() is called if it has one, and the result is one of four fail-closed verdicts (PROVEN / IMPORTS_ONLY / MISSING_SUBSTRATE / BROKEN), with --no-probe as a built-in ablation. Measuring first corrected the premise: the candidate rule compared a bare filename stem against fully dotted import names, so every module reached as `from canonical.<pkg>.<mod> import X` counted as dark. The substantial no-importer bank is 227 modules, not 1,996. Adjudicating those 227 proves nothing: 0 can prove they run, 197 import and stop there, 28 need a package this repo does not ship, 2 are broken. The census over all 2,174 substantial modules finds 6 that can prove themselves, and 4 of the 6 got their self-check here -- including the 4,702-line semantic-causal engine, whose headline cross-language claim was silently false: statement-position C lowered to RAW_EXPR while Python lowered to RAW_STMT, so identical text sat in two opcodes and semantically_equivalent() returned False for programs the docstring said it collapses. Fixed at the statement-position fallback, and now proved by a positive cross-language pair, an inclusive-bound pair, a negative control that must NOT collapse, an idempotence check, and the emitted Python executed against a buffer.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "COMPOSE/INTEGRATE first: the new layer reuses the existing semiring store, its provenance polynomials, its cascade retraction and its tombstones rather than re-implementing them; the only new machinery is the three operations the store cannot express.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox verification (18/18 new suite, 156/156 across ten wave suites, 62/62 model tests, 38/38 verify_brain_unified_model_v1, bench self-check honest 1.000 / liar 0.167 / stub 0.000 with discrimination 0.833, no-edges baseline 0.333, 40-seed differential agreement) plus GitHub Actions CI referee and repo-integrity-guard. Not independent verification.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/meme_protocol_memory_v1.py",
+   "canonical/evaluation/meme_protocol_bench_v1.py",
+   "canonical/tests/test_meme_protocol_memory_wave42_v1.py",
+   "canonical/verification/MEME_PROTOCOL_BENCH_V1_SCORECARD_20261126.json",
+   "canonical/runtime/unified_hidden_capability_federation_v1.py"
+  ],
+  "route_class": "INTEGRATE",
+  "route_id": "WAVE42_MEMORY_DEPENDENCY_PROTOCOL",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "Producer-run sandbox census scored by this repository's own instrument; zero external model calls, zero comparison to any published benchmark, zero claimed capability rank.",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The frontier cannot grow by wiring organs it cannot run. Import success is the only signal the tree has, so a 4,700-line engine that fails its own advertised equivalence and a 200-line helper are indistinguishable, and the measured organs of this repository are its leaders only because nobody asked the rest to prove anything.",
+ "canonical_base_commit": "ac5c1015e62612ec85a2efbfab0ac6f7e6b28468",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": {
+  "adopted_contracts": [
+   "canonical/swe_kernel/semantic_causal_engine_v1.py (6 checks, incl. an executed emission)",
+   "canonical/swe_kernel/metamorphic_laws_v1.py (10 checks, each law paired with a negative)",
+   "canonical/swe_kernel/producer_lineage_graph_v1.py (8 checks, incl. an inline-copy decoy)"
+  ],
+  "defect_repaired": "RAW_EXPR vs RAW_STMT at statement position split one meaning across two opcodes; cross-language equivalence was false for any body statement the lowerer could not interpret",
+  "instrument": "canonical/tools/dark_matter_adjudicator_v1.py",
+  "self_verification_coverage_census": "one runnable verdict per substantial module: PROVEN / IMPORTS_ONLY / MISSING_SUBSTRATE / BROKEN, with the ablation that shows the verdicts come from execution"
+ },
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "The frontier cannot grow by wiring organs it cannot run. Import success is the only signal the tree has, so a 4,700-line engine that fails its own advertised equivalence and a 200-line helper are indistinguishable, and the measured organs of this repository are its leaders only because nobody asked the rest to prove anything.",
+ "date": "2026-11-26",
+ "expected_parent_change": "The tree can answer 'which of your modules actually run' with a number instead of an assumption, and the answer is 6 of 2,174. Four organs carry executable proofs they did not have, and one of them had its own headline claim falsified by the proof and repaired.",
+ "expected_parent_frontier_change": "Replaces 'we already have it somewhere' with a verdict per module. It removes the dormant-organ bank as a strategy (227 unproven modules cannot carry a wave) and moves the frontier's growth to the modules that can be made provable, which is what the next waves must be sized from.",
+ "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
+ "falsification_condition": "Falsified if a module recorded PROVEN fails its self_check() on a re-run, if the ablation produces a PROVEN verdict, if a third-party absence is counted as BROKEN or an in-repo import failure is counted as MISSING_SUBSTRATE, or if the corrected candidate rule still lists a module that some other module imports by dotted name.",
+ "generic_repair_from_single_probe": true,
+ "governance_change": null,
+ "highest_leverage_now": true,
+ "honest_limits": [
+  "PROVEN means one unattended self_check() passed in a subprocess. It is the module's own check; a weak check proves nothing and this instrument cannot tell a weak check from a strong one.",
+  "2,082 modules import cleanly and prove nothing. That is the largest number in the ledger and it is the point: none of it is evidence.",
+  "The dependency classifier files third-party absence as MISSING_SUBSTRATE rather than BROKEN, so a dependency that no longer exists anywhere is recorded as unexercisable rather than defective.",
+  "Four root3_* modules are BROKEN only in the sense that they do not finish importing inside 25 s; the budget is part of the verdict.",
+  "The first measurement of this wave used a wrong candidate rule (6,114 / 1,996). Those numbers are superseded and must not be quoted.",
+  "No claim of comparison to any published system: this is a census of this repository under its own contract."
+ ],
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "live_challenger_frontier_discovery_required": true,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/100",
+  "interpretation": "Discharges nothing and unlocks little, on purpose: four modules that this PR shows cannot even be imported inside 25 s sit in the terminal execution path, and a module that cannot be imported cannot be dispatched. The bound is deliberately small because the census changes what the tree may claim about itself, not what it can do.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "0.9",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "Every-module census (>=140 LOC, non-test): 2,174 candidates, PROVEN 6, IMPORTS_ONLY 2,082, MISSING_SUBSTRATE 79, BROKEN 7, proven lines 7,479, 56 s wall at 24 workers, run digest 74cd33490ba3d793. No-importer census: 227 candidates, PROVEN 0. Ablation (--no-probe): 227 candidates, PROVEN 0, IMPORTS_ONLY 227. The instrument's own self-check separates four fabricated modules into four states (5/5).",
+ "next_step": "(1) Give a self_check to the next ten largest IMPORTS_ONLY modules in order of what a live path would use, one PR per three modules, since a contract that is not adopted is a wish; (2) make the census a CI gate so the PROVEN count can only rise deliberately; (3) treat the 4 root3_* import hangs as a real defect: a module that cannot be imported cannot be dispatched, and the federation cannot reach it.",
+ "parent_capability": "canonical/tools/dark_matter_adjudicator_v1.py + canonical/verification/DARK_MATTER_ADJUDICATION_20261126_V1.json + the three adopted self_check contracts",
+ "probe_specific": false,
+ "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+ "progress_evidence_paths": [
+  "canonical/tools/dark_matter_adjudicator_v1.py",
+  "canonical/tests/test_dark_matter_adjudicator_v1.py",
+  "canonical/verification/DARK_MATTER_ADJUDICATION_20261126_V1.json",
+  "canonical/swe_kernel/semantic_causal_engine_v1.py",
+  "canonical/swe_kernel/metamorphic_laws_v1.py",
+  "canonical/swe_kernel/producer_lineage_graph_v1.py",
+  "canonical/evaluation/meme_protocol_bench_v1.py"
+ ],
+ "real_outcome": "2,174 substantial modules adjudicated in 56 s: 6 PROVEN (7,479 lines), 2,082 IMPORTS_ONLY, 79 MISSING_SUBSTRATE, 7 BROKEN. The 227-module no-importer census proves nothing at all. The same run with --no-probe collapses all 227 into IMPORTS_ONLY, which is what the tree knew before. The quarantine is concrete: two modules do not parse, four root3_* modules never finish importing in 25 s, one self-check needs an argument and so is not callable unattended.",
+ "recursive_obs": {
+  "canonical_base_commit": "ac5c1015e62612ec85a2efbfab0ac6f7e6b28468",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "the bare-stem candidate rule, which counted dotted imports as dark and overstated the organ bank nine times",
+   "the assumption that a self_check returning `trustworthy: True` is readable by anything but a human",
+   "the assumption that a module which imports cleanly works"
+  ],
+  "expected_parent_level_state_change": "Replaces 'we already have it somewhere' with a verdict per module. It removes the dormant-organ bank as a strategy (227 unproven modules cannot carry a wave) and moves the frontier's growth to the modules that can be made provable, which is what the next waves must be sized from.",
+  "obs_blocker": {
+   "blocker_is": "UnifiedModel and Creature previously parsed the entire 13.47 MB JSON on cold source/recall queries, left module_bridge_v1 (5,221 functions) and type_level_composer_v1 unwired to front-door routing, suffered action-order sensitivity in transition_system_identity_v1.canonical, lacked unified standing-fact clobber recovery + relational CAS re-anchoring in computer use, lacked Coccinelle/SyDIT multi-file sibling closure + Plastic Surgery donor mining over warm-zygote CoW forks, lacked Kumiho prospective cue indexing + CPB Sybil defense + RD-Forget selective replay unlearning, and lacked zero-shot verified cross-language Meaning-IR transfer across Python/TS/Go/Rust",
+   "delete_bypass_substitute_options": [
+    "Reuse pinned worker_syscall_allowlist_v1 classic BPF program directly inside os_isolation_v1 without inventing a new sandbox",
+    "Bypass visual pixels via W3C WebMCP typed JSON-schema tools and compile CLI refusals into zero-retry interfaces via a_refusal_is_a_specification_v1",
+    "Wire existing residual_wall_closers_v1, repo_component_petri_v1, typed_invention_v1, mined_rewrite_theory_v1, and weight_update_admission_v1 directly into existing runtime classes"
+   ],
+   "evidence_the_blocker_is_real": [
+    "os_isolation_v1 previously checked 13 namespace/chroot probes without seccomp_mode=2 or raw syscall escape probes",
+    "DOMAIN_ATLAS_V1 previously had route reachability misses on frontier/native queries across multiple domains",
+    "residual_wall_closers_v1, repo_component_petri_v1, typed_invention_v1, and a_refusal_is_a_specification_v1 had zero front-door runtime wiring in UnifiedModel/Creature"
+   ],
+   "intrinsic_or_path_specific": "PATH_SPECIFIC to unwired repository modules and missing runtime integration",
+   "surviving_causal_blocker": "UnifiedModel and Creature previously parsed the entire 13.47 MB JSON on cold source/recall queries, left module_bridge_v1 (5,221 functions) and type_level_composer_v1 unwired to front-door routing, suffered action-order sensitivity in transition_system_identity_v1.canonical, lacked unified standing-fact clobber recovery + relational CAS re-anchoring in computer use, lacked Coccinelle/SyDIT multi-file sibling closure + Plastic Surgery donor mining over warm-zygote CoW forks, lacked Kumiho prospective cue indexing + CPB Sybil defense + RD-Forget selective replay unlearning, and lacked zero-shot verified cross-language Meaning-IR transfer across Python/TS/Go/Rust"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "separate standalone wrapper CLIs for each unwired module",
+    "repeated uncompiled refusal retries in ConfinedHybridComputerUseExecutor",
+    "unbounded hot-tier skill bloat beyond 96 skills"
+   ],
+   "existing_inherited_routes_checked": "worker_syscall_allowlist_v1.py, a_refusal_is_a_specification_v1.py, osworld_verified_task_ledger_v1.py, typed_invention_v1.py, residual_wall_closers_v1.py, repo_component_petri_v1.py, release_chunk_archive_v1.py, safe_action_model_v1.py, consistency_vs_equivalence_v1.py, mined_rewrite_theory_v1.py, weight_update_admission_v1.py, cow_lens_fuzz_and_negative_space_v1.py",
+   "external_existing_routes_checked": "Linux classic BPF seccomp, Agent-S4 evolving interfaces, W3C WebMCP navigator.modelContext, TMA-NM non-malleable agent memory, GovMem anti-correlation, A-TMA anti-ghost-memory, SkillApt counterfactual activation, DreamProver <96 hot-tier bound, and Language Models Need Sleep consolidation",
+   "surviving_gap": "Multi-app cross-window desktop workflows and containerized external SWE-bench Pro / OSWorld-Verified runs",
+   "what_was_added": "Seccomp BPF wiring in os_isolation_v1.py; refusal-compiler, WebMCP, anti-vacuous audit, Rung 2B/2C/3, and solve_typed_cegis_and_concepts in futamura_leapfrog_kernel_v1.py; TMA-NM/GovMem/A-TMA/SkillApt/<96/bicameral_sleep_cycle in canonical_memory_crystallizer_v1.py; +12 Wave 38 federated engines and front-door hooks on UnifiedModel and Creature; test_frontier_leapfrog_wave38_v1.py"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "reimplementing syscall allowlists or wall-closers already solved inside canonical/",
+    "editing any pinned .hidden.v1 or protected governance artifact"
+   ],
+   "real_outcome": "All Wave 38 surfaces unified into UnifiedModel and Creature and live-verified with 98/98 total passing checks (38/38 model verifier + 55/55 unittest + 5/5 domain atlas)",
+   "surviving_necessity": "Independent third-party external benchmark evaluation on OSWorld-Verified and SWE-bench Pro"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "worker_syscall_allowlist_v1, a_refusal_is_a_specification_v1, osworld_verified_task_ledger_v1, typed_invention_v1, residual_wall_closers_v1, repo_component_petri_v1, release_chunk_archive_v1, safe_action_model_v1, consistency_vs_equivalence_v1, mined_rewrite_theory_v1, weight_update_admission_v1, cow_lens_fuzz_and_negative_space_v1",
+   "downstream_work_to_delete_or_supersede": "Supersedes non-seccomp isolation defaults and ad-hoc unverified memory consolidation",
+   "fresh_reuse_plan": "UnifiedModel and Creature expose probe_os_isolation(seccomp=True), execute_confined_computer_use(webmcp_tools=..., auto_compile_refusal=True), solve_multifile_repo_futamura(reject_vacuous_verifier=True, use_residual_wall_closers=True, use_repo_component_petri=True), solve_typed_cegis(), non_malleable_memory_op(), bicameral_sleep_cycle(), and discover_dark_matter()"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Direct AST import and signature census over canonical/ pinpointed all 12 unwired backing organs mechanically",
+   "search_stop_decision": "stopped once all 98/98 checks (38/38 unified model verifier, 55/55 unittest, 5/5 domain atlas) and all governance guards passed"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Leaving worker_syscall_allowlist_v1, residual_wall_closers_v1, repo_component_petri_v1, typed_invention_v1, and a_refusal_is_a_specification_v1 unwired leaves real kernel escape vectors, SWE statement/exception repair walls, and memory laundering vulnerabilities open",
+   "routes_ranked": [
+    {
+     "rank": 1,
+     "route": "WAVE39_UNIFIED_FIVE_PILLAR_KERNEL_K3_ZERO",
+     "why": "Integrates 12 already-built repository organs plus non-malleable memory OS and bicameral sleep directly into UnifiedModel and Creature at K3=0 with 38/38 verifier parity"
+    },
+    {
+     "rank": 2,
+     "route": "UNSECURED_DISCONNECTED_ORGANS_STATUS_QUO",
+     "why": "Leaves seccomp uninstalled in os_isolation_v1, misses statement-shaped/custom-exception SWE repairs, and lacks TMA-NM/GovMem/A-TMA memory safety"
+    }
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "Zero-mock real-execution tests run live Linux kernel seccomp BPF 20-probe escape attempts, live CLI refusal-to-interface compilation and gzip byte verification inside CapEff=0+seccomp, real W3C WebMCP schema rejection, real OOP/function wall-closer and custom-exception Petri repo repairs, live TMA-NM origin laundering and payload tamper attacks, GovMem correlated-trace rejection, A-TMA ghost-memory partitioning, and bicameral sleep consolidation"
+  },
+  "open_world_route_discovery": {
+   "candidate_routes": [
+    {
+     "disqualification_reason": "",
+     "evidence": [
+      "Verified in canonical/tests/test_wave39_unified_five_pillars_v1.py and canonical/runtime/verify_brain_unified_model_v1.py"
+     ],
+     "qualification_evidence": [
+      "canonical/tests/test_wave39_unified_five_pillars_v1.py",
+      "canonical/runtime/verify_brain_unified_model_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "WAVE39_UNIFIED_FIVE_PILLAR_KERNEL_K3_ZERO"
+    },
+    {
+     "disqualification_reason": "Leaves seccomp BPF uninstalled in os_isolation_v1, misses statement-shaped and custom-exception SWE bugs, and lacks TMA-NM/GovMem/A-TMA memory defenses.",
+     "evidence": [
+      "Direct verification in canonical/tests/test_frontier_leapfrog_wave38_v1.py"
+     ],
+     "qualification_evidence": [
+      "canonical/tests/test_frontier_leapfrog_wave38_v1.py",
+      "canonical/runtime/verify_brain_unified_model_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "UNSECURED_DISCONNECTED_ORGANS_STATUS_QUO"
+    }
+   ],
+   "checked_at_utc": "2026-11-26T17:28:53+00:00",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "UNSECURED_DISCONNECTED_ORGANS_STATUS_QUO",
+   "max_age_hours": 24,
+   "negative_search_summary": "External LLM/VLM producer dependencies are forbidden by NO_MODEL_PRODUCER_COGNITION. Integrating Project Brain's own pinned classic BPF seccomp allowlist, refusal specification compiler, residual wall closers, repo component Petri synthesizer, typed CEGIS(T), and non-malleable memory OS strictly dominates disconnected status-quo modules.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "Linux classic BPF seccomp syscall allowlist CapEff zero agent sandbox 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "Agent S4 refusal specification evolving interface W3C WebMCP navigator.modelContext 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "TMA-NM non-malleable memory origin binding GovMem A-TMA ghost memory SkillApt 2026"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "Language Models Need Sleep memory consolidation DreamProver library drift 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "WAVE39_UNIFIED_FIVE_PILLAR_KERNEL_K3_ZERO",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-26T17:28:53+00:00",
+    "execution_dependencies": [
+     {
+      "dependency": "Linux kernel user/mount/pid/ipc/uts/net namespaces + classic BPF seccomp + Python 3.11 stdlib",
+      "evidence": [
+       "Verified live: 20/20 kernel escape probes blocked, 8/8 test_frontier_leapfrog_wave38_v1 PASS, 24/24 syscall allowlist tests PASS"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "Canonical governance, referee, drift, and orientation validators",
+      "evidence": [
+       "repo_integrity_guard_v1.py PASS, enforce_goal_hierarchy.py PASS, enforce_load_bearing_primary_pr.py PASS, verify_brain_unified_model_v1.py 38/38 PASS"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "DATA_SOURCE",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "WAVE39_UNIFIED_FIVE_PILLAR_KERNEL_K3_ZERO",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/worker_syscall_allowlist_v1.py",
+     "canonical/runtime/a_refusal_is_a_specification_v1.py",
+     "canonical/swe_kernel/residual_wall_closers_v1.py",
+     "canonical/swe_kernel/repo_component_petri_v1.py",
+     "canonical/swe_kernel/typed_invention_v1.py",
+     "canonical/swe_kernel/mined_rewrite_theory_v1.py",
+     "canonical/swe_kernel/weight_update_admission_v1.py"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "2026 literature on Agent-S4 evolving interfaces, W3C WebMCP, TMA-NM, GovMem, A-TMA, SkillApt, Library Drift, and Language Models Need Sleep"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "Python 3.11 stdlib (ast, gzip, hashlib, ctypes, os.fork, unittest) and Linux seccomp(2)/unshare(2)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "Linux kernel seccomp BPF filter ABI and namespaces documentation"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "real_outcome": "The memory answers all six protocol operations, and the two kinds of 'no' stay distinct: a fact that lost its support names the invalidated premise; a rule that never fired names the rule and the missing body; a member the operator deleted is meant to be gone, so the smaller aggregate is the right answer and is still reported.",
+  "required_capability": "Answering the six memory operations from dependencies rather than from retrieval: exact recall, aggregation, tracking, deletion, cascade, absence -- each with the witness that makes it checkable.",
+  "route_frontier": {
+   "canonical_base_commit": "09b1e34929783be213703e34da6858596c43d410",
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "unification is a real capability, not a measured gap here",
+      "CORRECTNESS": "more general, but the cascade and diamond behaviour already passes",
+      "INCREMENTAL_COST": "$0.00",
+      "RELIABILITY": "discards working provenance machinery",
+      "VERIFIABILITY": "no new oracle; the same six operations would need judging",
+      "WALL_CLOCK": "a store rewrite for three operations that fit on top of the existing one"
+     },
+     "evidence": [
+      "main: SemiringProvenanceJTMSMemory has no aggregate, no rename, no rule layer"
+     ],
+     "qualification_evidence": [
+      "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "REWRITE_THE_MEMORY_AS_A_DATALOG_ENGINE"
+    }
+   ],
+   "checked_at_utc": "2026-11-26T17:28:53+00:00",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "WAVE42_MEMORY_DEPENDENCY_PROTOCOL",
+   "max_age_hours": 24,
+   "negative_search_summary": "External LLM/VLM producer dependencies are forbidden by NO_MODEL_PRODUCER_COGNITION. Integrating Project Brain's own pinned classic BPF seccomp allowlist, refusal specification compiler, residual wall closers, repo component Petri synthesizer, typed CEGIS(T), and non-malleable memory OS strictly dominates disconnected status-quo modules.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "Linux classic BPF seccomp syscall allowlist CapEff zero agent sandbox 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "Agent S4 refusal specification evolving interface W3C WebMCP navigator.modelContext 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "TMA-NM non-malleable memory origin binding GovMem A-TMA ghost memory SkillApt 2026"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "Language Models Need Sleep memory consolidation DreamProver library drift 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "WAVE42_MEMORY_DEPENDENCY_PROTOCOL",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-26T19:57:38+00:00",
+    "execution_dependencies": [
+     {
+      "dependency": "Linux kernel user/mount/pid/ipc/uts/net namespaces + classic BPF seccomp + Python 3.11 stdlib",
+      "evidence": [
+       "Re-verified 2026-11-26T19:57:38+00:00: test_frontier_leapfrog_wave38_v1 8/8 PASS (its test_01 runs the seccomp-BPF + 6-namespace + CAP_EFF_0 escape probe); the whole wave ran here at 0 model calls and $0."
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "Canonical governance, referee, drift, and orientation validators",
+      "evidence": [
+       "Re-verified 2026-11-26T19:57:38+00:00: repo_integrity_guard_v1 --static-only violations=0 PASS; enforce_load_bearing_primary_pr.py --base aae7c958b9 --head HEAD PASS; rebind_intent_and_verify_gates_v1.py --no-fetch ALL_GATES_PASS."
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "DATA_SOURCE",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "WAVE42_MEMORY_DEPENDENCY_PROTOCOL",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/worker_syscall_allowlist_v1.py",
+     "canonical/runtime/a_refusal_is_a_specification_v1.py",
+     "canonical/swe_kernel/residual_wall_closers_v1.py",
+     "canonical/swe_kernel/repo_component_petri_v1.py",
+     "canonical/swe_kernel/typed_invention_v1.py",
+     "canonical/swe_kernel/mined_rewrite_theory_v1.py",
+     "canonical/swe_kernel/weight_update_admission_v1.py"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "2026 literature on Agent-S4 evolving interfaces, W3C WebMCP, TMA-NM, GovMem, A-TMA, SkillApt, Library Drift, and Language Models Need Sleep"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "Python 3.11 stdlib (ast, gzip, hashlib, ctypes, os.fork, unittest) and Linux seccomp(2)/unshare(2)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "Linux kernel seccomp BPF filter ABI and namespaces documentation"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   {
+    "route": "WAVE42_MEMORY_DEPENDENCY_PROTOCOL",
+    "verdict": "SELECTED",
+    "why": "Adds the three missing operations by composition, and measures them against a from-scratch fixpoint oracle with a no-edges baseline and two controls."
+   },
+   {
+    "route": "REWRITE_THE_MEMORY_AS_A_DATALOG_ENGINE",
+    "verdict": "NON_DOMINATING",
+    "why": "Unification would be a larger capability, but the measured gap was three specific operations over ground facts; rewriting the store would also discard the cascade and diamond-preservation behaviour that already passes."
+   },
+   {
+    "route": "BENCHMARK_ONLY",
+    "verdict": "DISQUALIFIED",
+    "why": "A protocol bench without the operations would score zero on its own hardest cases; measurement without acquisition adds no capability."
+   },
+   {
+    "route": "VECTOR_OR_GRAPH_RETRIEVAL_BASELINE_UPGRADE",
+    "verdict": "DISQUALIFIED",
+    "why": "Retrieval cannot answer cascade or absence at any top-k; the baseline is included to show that, not to be improved."
+   }
+  ],
+  "selected_surviving_route": "WAVE42_MEMORY_DEPENDENCY_PROTOCOL",
+  "stop_condition": "Stop once test_dark_matter_adjudicator_v1 (16/16), the Wave 42 suite (18/18), the wave suites, verify_brain_unified_model_v1 (38/38) and rebind_intent_and_verify_gates_v1 (ALL_GATES_PASS) are green and CI is green.",
+  "why_selected_route_is_fastest_sufficient": "The gap was measured by asking the store for the three operations and getting no API: the cheapest sufficient script is to add exactly those three on top of the provenance it already maintains, and to judge them with an oracle that recomputes. 94 us per aggregate over 200 members, 0 model calls, no new dependency."
+ },
+ "required_capability": "Deciding whether a module in this tree works, without reading it: an executable contract, an isolated probe, a fail-closed verdict vocabulary, and a control that shows what the verdict would have been without execution.",
+ "route_class": "INSTRUMENT",
+ "route_id": "WAVE43_ADJUDICATE_THEN_PROVE",
+ "route_order_walk": {
+  "ADAPT": "Adapted os_isolation_v1.py, futamura_leapfrog_kernel_v1.py, canonical_memory_crystallizer_v1.py, unified_hidden_capability_federation_v1.py, brain_unified_model_v1.py, and creature_runtime_v1.py.",
+  "BYPASS": "Bypassed visual pixels via typed W3C WebMCP channels and bypassed repeated CLI refusal retries via compiled evolved interfaces.",
+  "COMPOSE": "Composed worker_syscall_allowlist_v1, a_refusal_is_a_specification_v1, residual_wall_closers_v1, repo_component_petri_v1, typed_invention_v1, mined_rewrite_theory_v1, and weight_update_admission_v1 directly into UnifiedModel and Creature.",
+  "DELETE": "Eliminated duplicate wrapper scaffolding and capped hot-tier skill bloat strictly at <=96 active skills.",
+  "INTEGRATE": "SELECTED: unified all 12 Wave 38 backing organs plus non-malleable memory OS and bicameral sleep into UnifiedModel and Creature with 100% DOMAIN_ATLAS_V1 reachability.",
+  "REUSE": "Reused pinned classic BPF seccomp program (26cd1e65...), existing byte_effect_oracle_v1, stdlib_cow_test_runner_v1, residual_wall_closers_v1, repo_component_petri_v1, typed_invention_v1, and VerificationFirstMemoryBus."
+ },
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "WAVE43_ADJUDICATE_THEN_PROVE",
+ "selected_surviving_route": "WAVE43_ADJUDICATE_THEN_PROVE",
+ "selectivity_note": "One new tool, one new test file, one receipt, three adopted contracts, one defect repair, one verdict-vocabulary line in an existing module. No protected path, no guard, no capability registry entry, no federation engine, no model file change.",
+ "status": "SHIPPED",
+ "stop_condition": "Stop once test_dark_matter_adjudicator_v1 (16/16), the Wave 42 suite (18/18), the wave suites, verify_brain_unified_model_v1 (38/38) and rebind_intent_and_verify_gates_v1 (ALL_GATES_PASS) are green and CI is green.",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "what_is_not": "The census is a statement about this repository's own contract, not about capability in general. Six PROVEN modules do not make the system more capable on any benchmark; they make it honest about what it can run. No external comparison, no terminal obligation discharged, no independent verification."
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "No open truth obligation is claimed discharged by this PR. It adjudicates 2,174 substantial modules of this tree under an executable contract and records the four fail-closed verdicts, while terminal truth stays false.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "a9cf8ef59ba68f435227996a3182c6a9e8f40460",
+     "path": "canonical/verification/DARK_MATTER_ADJUDICATION_20261126_V1.json"
+    }
+   ],
+   "decisive_question": "Can this tree say, mechanically and per module, whether a module runs -- and does the answer show that the dormant-organ premise was sized from a rule that over-counted by nine times?",
+   "falsifier_id": "DARK_MATTER_ADJUDICATOR_ABLATION_AND_NEGATIVE_CONTROL_V1",
+   "falsifier_note": "The ablation (--no-probe) must collapse every verdict, and the fabricated-module self-check must separate four states.",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "",
+   "proposal_id": "WAVE43_SELF_VERIFICATION_COVERAGE_CENSUS_V1"
+  }
+ },
+ "verification": "Producer-run sandbox: adjudicator self-check 5/5; test_dark_matter_adjudicator_v1 16/16; Wave 42 suite 18/18; every-module census digest 74cd33490ba3d793; no-importer census digest 673dcbebd1f88f1c; ablation digest f677999735ef2780; plus the GitHub Actions referee and the repo-integrity guard. Not independent verification.",
+ "weakens_existing_guard": false
+}

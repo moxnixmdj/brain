@@ -1,0 +1,41 @@
+{
+ "schema": "BRAIN_FRESH_TASK_SET_V1",
+ "set_id": "FRONTIER_FRESH_TASK_SET_20261126_V1",
+ "created": "2026-11-26",
+ "authority": "NONE",
+ "purpose": "A task set for selective-risk measurement of the unified model's front door. Half the tasks must be answered by a specific engine; half must be refused. The refusal class is the point: a system that answers everything has no measurable risk-coverage trade-off.",
+ "provenance": {
+  "kind": "HAND_AUTHORED",
+  "mined_after": null,
+  "cutoff_baseline": "2026-06-01",
+  "source": "Authored 2026-11-26 from the frontier routing contract in canonical/tests/test_frontier_routing_contract_v1.py plus the verifier's UNKNOWN_GOALS. NOT mined from post-cutoff repositories.",
+  "honest_limit": "These tasks are hand-authored by the same session that wired the routes. They measure whether the contract holds, not whether Brain generalises to unseen work. A genuine frontier score requires post-cutoff mined tasks; this set deliberately records that it is not one, and the evaluator refuses to emit a headline for it."
+ },
+ "tasks": [
+  {"id": "A01", "class": "ANSWER", "goal": "learn a new capability from a single demonstration without training", "expect_engine": "engine:INSTANT_ONE_SHOT_LEARNER", "domain": "instant_learning"},
+  {"id": "A02", "class": "ANSWER", "goal": "infer a program from one example and prove it works", "expect_engine": "engine:INSTANT_ONE_SHOT_LEARNER", "domain": "instant_learning"},
+  {"id": "A03", "class": "ANSWER", "goal": "generalize one episode into a reusable rule", "expect_engine": "engine:INSTANT_ONE_SHOT_LEARNER", "domain": "instant_learning"},
+  {"id": "A04", "class": "ANSWER", "goal": "keep improving on new tasks without forgetting earlier ones", "expect_engine": "engine:RULE_EXPIRY_WORLD_FINGERPRINT", "domain": "continual_learning"},
+  {"id": "A05", "class": "ANSWER", "goal": "expire rules that no longer hold and keep the store current", "expect_engine": "engine:RULE_EXPIRY_WORLD_FINGERPRINT", "domain": "continual_learning"},
+  {"id": "A06", "class": "ANSWER", "goal": "recall the right prior episode as context when the window is nearly full", "expect_engine": "engine:PROCEDURE_TRAJECTORY_MEMORY", "domain": "memory"},
+  {"id": "A07", "class": "ANSWER", "goal": "create a durable memory of prior runs", "expect_engine": "engine:VERIFICATION_FIRST_MEMORY_BUS", "domain": "memory"},
+  {"id": "A08", "class": "ANSWER", "goal": "forget one skill without damaging others", "expect_engine": "engine:VERIFICATION_FIRST_MEMORY_BUS", "domain": "memory"},
+  {"id": "A09", "class": "ANSWER", "goal": "consolidate memory during idle time", "expect_engine": "engine:VERIFICATION_FIRST_MEMORY_BUS", "domain": "memory"},
+  {"id": "A10", "class": "ANSWER", "goal": "resolve conflicting memories", "expect_engine": "engine:VERIFICATION_FIRST_MEMORY_BUS", "domain": "memory"},
+  {"id": "A11", "class": "ANSWER", "goal": "promote repair episode to permanent rule", "expect_engine": "engine:WAKE_SLEEP_CONSOLIDATION", "domain": "continual_learning"},
+  {"id": "A12", "class": "ANSWER", "goal": "check a learned rule is not a constant", "expect_engine": "engine:WAKE_SLEEP_CONSOLIDATION", "domain": "continual_learning"},
+  {"id": "A13", "class": "ANSWER", "goal": "two independent witnesses", "expect_engine": "engine:WAKE_SLEEP_CONSOLIDATION", "domain": "continual_learning"},
+  {"id": "A14", "class": "ANSWER", "goal": "memory hygiene", "expect_engine": "engine:WAKE_SLEEP_CONSOLIDATION", "domain": "continual_learning"},
+  {"id": "A15", "class": "ANSWER", "goal": "drive an unfamiliar desktop application through its GUI", "expect_engine": "engine:INTERFACE_ACTION_GRAMMAR", "domain": "computer_use"},
+  {"id": "A16", "class": "ANSWER", "goal": "predict the next screen state before taking the action", "expect_engine": "engine:STATE_CONTRACT_WORLD_MODEL", "domain": "computer_use"},
+  {"id": "A17", "class": "ANSWER", "goal": "predict what an action does before doing it", "expect_engine": "engine:PREDICTIVE_HOARE_CONTRACT", "domain": "world_model"},
+  {"id": "N01", "class": "ABSTAIN", "goal": "launch a weather satellite into low earth orbit", "domain": "out_of_domain"},
+  {"id": "N02", "class": "ABSTAIN", "goal": "write me a poem about the sea", "domain": "out_of_domain"},
+  {"id": "N03", "class": "ABSTAIN", "goal": "book a flight to tokyo for next tuesday", "domain": "out_of_domain"},
+  {"id": "N04", "class": "ABSTAIN", "goal": "translate this sentence into medieval french", "domain": "out_of_domain"},
+  {"id": "N05", "class": "ABSTAIN", "goal": "compose a symphony in the style of debussy", "domain": "out_of_domain"},
+  {"id": "N06", "class": "ABSTAIN", "goal": "diagnose why my houseplant is losing leaves", "domain": "out_of_domain"},
+  {"id": "N07", "class": "ABSTAIN", "goal": "negotiate a lower price on a used bicycle", "domain": "out_of_domain"},
+  {"id": "N08", "class": "ABSTAIN", "goal": "predict the winner of next year's tournament", "domain": "out_of_domain"}
+ ]
+}

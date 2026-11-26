@@ -1,0 +1,104 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "declared_before_the_run": {
+    "M1": "the 16-way rollout finds the same known winner as the sequential rollout",
+    "M2": "the winning index is global across shards, not a shard-local index",
+    "M3": "the benchmark pool never prewarms or calls a model",
+    "M4": "no network calls and zero stored parameters"
+  },
+  "environment": {
+    "cpu_count": 2,
+    "note": "2 logical CPUs; 16 forks are oversubscribed and slower in this sandbox"
+  },
+  "gates": {
+    "M1": true,
+    "M2": true,
+    "M3": true,
+    "M4": true
+  },
+  "generated_at_utc": "2026-11-25T00:21:35Z",
+  "label": "click_parallel_cow",
+  "mechanism": {
+    "parallel": {
+      "arm": "mechanism_parallel",
+      "candidates_evaluated": 8,
+      "found": true,
+      "internal_ms": 45.357,
+      "shards": 16,
+      "siblings_cancelled": 8,
+      "wall_ms": 45.699,
+      "winning_index": 7
+    },
+    "sequential": {
+      "arm": "mechanism_sequential",
+      "candidates_evaluated": 8,
+      "found": true,
+      "internal_ms": 3.942,
+      "shards": 1,
+      "siblings_cancelled": 0,
+      "wall_ms": 24.313,
+      "winning_index": 7
+    }
+  },
+  "real_diagnostic": [
+    {
+      "commit": "8d7f03dac8739afed890af0c0921965786c5e83c",
+      "failing_tests": 1,
+      "parallel": {
+        "arm": "real_parallel",
+        "candidates_evaluated": 16,
+        "found": false,
+        "internal_ms": 2105.954,
+        "shards": 16,
+        "siblings_cancelled": 0,
+        "wall_ms": 2319.573,
+        "winning_index": -1
+      },
+      "sequential": {
+        "arm": "real_sequential",
+        "candidates_evaluated": 16,
+        "found": false,
+        "internal_ms": 1649.539,
+        "shards": 1,
+        "siblings_cancelled": 0,
+        "wall_ms": 1663.142,
+        "winning_index": -1
+      },
+      "status": "CANDIDATES_GENERATED"
+    },
+    {
+      "commit": "e0033315510510acdba14e880a361ccca091fb4b",
+      "failing_tests": 1,
+      "parallel": {
+        "arm": "real_parallel",
+        "candidates_evaluated": 16,
+        "found": false,
+        "internal_ms": 2051.885,
+        "shards": 16,
+        "siblings_cancelled": 0,
+        "wall_ms": 2261.496,
+        "winning_index": -1
+      },
+      "sequential": {
+        "arm": "real_sequential",
+        "candidates_evaluated": 16,
+        "found": false,
+        "internal_ms": 1504.942,
+        "shards": 1,
+        "siblings_cancelled": 0,
+        "wall_ms": 1528.151,
+        "winning_index": -1
+      },
+      "status": "CANDIDATES_GENERATED"
+    }
+  ],
+  "schema": "PROJECT_BRAIN_PARALLEL_COW_ROLLOUTS_BENCHMARK_V1",
+  "summary": {
+    "model_calls": 0,
+    "network_calls": 0,
+    "parallel_shards": 16,
+    "parameters_stored": 0,
+    "speedup_mechanism": 0.532
+  },
+  "verdict": "PASS"
+}

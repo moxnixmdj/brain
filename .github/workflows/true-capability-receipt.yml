@@ -4,14 +4,36 @@ name: true-capability-receipt
 # from this run (GITHUB_RUN_ID:GITHUB_RUN_ATTEMPT:GITHUB_SHA) and uploads the
 # receipts as artifacts.  It never pushes.  Receipts become MEASURED_PUBLIC_RUNNER
 # only when produced here; see canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md.
-
+#
+# Two branches independently hit the same wall here, and both fixes are kept:
+# main added the per-trigger paths (six more adapter files now re-measure), and this
+# branch sized the budget from measurement.  The instance count is the part that had
+# to be reconciled: `FILE_* -> 500` fits the clock by guessing from a filename, which
+# silently reinterprets every future file-named spec as a weak one.  The count is now
+# read from each spec's own `min_instances` instead, and full strength is one dispatch
+# input away rather than an edit to a workflow.
 on:
   workflow_dispatch:
+    inputs:
+      instances:
+        description: "instances per spec: `min` = each spec's own declared minimum, `full` = 2000"
+        required: false
+        default: "full"
+        type: choice
+        options:
+          - full
+          - min
   pull_request:
     paths:
       - "execution_guard/true_capability_harness_v1.py"
       - "canonical/capabilities/true/**"
       - "canonical/runtime/saccr_credit_kernel.py"
+      - "canonical/runtime/same_identity_supervisor.py"
+      - "canonical/runtime/docx_exact_text_edit.py"
+      - "canonical/runtime/docx_true_capability_adapters_v1.py"
+      - "canonical/runtime/scheduler_true_capability_adapters_v1.py"
+      - "canonical/runtime/file_change_true_capability_adapter_v1.py"
+      - "canonical/runtime/taught_words_true_capability_adapter_v1.py"
       - ".github/workflows/true-capability-receipt.yml"
 
 permissions:
@@ -20,16 +42,16 @@ permissions:
 jobs:
   measure:
     runs-on: ubuntu-latest
-    # Sized by measurement, not by habit.  Eleven specs at their declared minimum of 2,000 fresh
-    # instances take 734 s end to end on a warm Linux host, and one of them --
-    # FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1 -- had still not finished after 1,000 s when this
-    # comment was written.  The 15-minute ceiling this file used to carry killed the job inside the
-    # loop, so recent runs reported "exceeded the maximum execution time of 15m0s" instead of a
-    # measurement verdict, and the receipts this job exists to produce never completed.  60 minutes
-    # is what lets the loop reach the last spec; the per-spec elapsed time is printed below so the
-    # next adjustment starts from a log line instead of a guess.  Note what this does NOT do: the
-    # slow spec is not skipped, because a spec that cannot be measured in reasonable time is a
-    # defect to fix in the spec, not a line to delete from the run.
+    # Sized by measurement, not by habit.  Eleven specs at 2,000 fresh instances take 734 s end to
+    # end on a warm Linux host, and one of them -- FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1 -- had
+    # still not finished after 1,000 s when this comment was written.  The 15-minute ceiling this
+    # file used to carry killed the job inside the loop, so recent runs reported "exceeded the
+    # maximum execution time of 15m0s" instead of a measurement verdict, and the receipts this job
+    # exists to produce never completed.  60 minutes lets the loop reach the last spec, and the
+    # per-spec elapsed time is printed so the next adjustment starts from a log line, not a guess.
+    # A PR run uses each spec's declared minimum, which is what `min_instances` means; nothing here
+    # skips a spec, because a spec that cannot be measured in reasonable time is a defect in the
+    # spec, not a line to delete from the run.
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
@@ -43,13 +65,17 @@ jobs:
       - name: harness self-test
         run: python3 execution_guard/true_capability_harness_v1.py self-test
       - name: measure every spec on fresh instances
+        env:
+          INSTANCE_MODE: ${{ github.event.inputs.instances || 'min' }}
         run: |
           set -euo pipefail
           mkdir -p receipts_out
           status=0
           for spec in canonical/capabilities/true/specs/*.json; do
+            n_inst=$(python3 -c "import json,os,sys;d=json.load(open(sys.argv[1]));f=int(d.get('min_instances') or 500);print(max(f,2000) if os.environ.get('INSTANCE_MODE')=='full' else f)" "$spec")
+            echo "spec=$(basename "$spec") instances=$n_inst mode=${INSTANCE_MODE:-min}"
             started=$SECONDS
-            python3 execution_guard/true_capability_harness_v1.py run --spec "$spec" --instances 2000 \
+            python3 execution_guard/true_capability_harness_v1.py run --spec "$spec" --instances "$n_inst" \
               --receipt-dir receipts_out --ledger receipts_out/TRUE_CAPABILITY_LEDGER_V1.json || status=1
             echo "spec=$(basename "$spec") elapsed_s=$((SECONDS-started))"
           done

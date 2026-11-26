@@ -1,0 +1,1170 @@
+{
+ "schema": "BRAIN_COVERAGE_SELECTOR_MEASUREMENT_V1",
+ "generated": "2026-11-26T00:56:21Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 458.2
+ },
+ "question": "With no source frame, does executing the failing test narrow the file to the edit?",
+ "tasks": 28,
+ "measured": 28,
+ "fix_lines_total": 416,
+ "fix_lines_inside_coverage": 99,
+ "retention": 0.238,
+ "candidate_budget_covered": 2847,
+ "candidate_budget_whole_file": 21288,
+ "reduction": 0.866,
+ "tasks_with_any_truth_line_covered": 25,
+ "rows_where_instrument_reported_zero": 0,
+ "rows": [
+  {
+   "sha": "f91ea793",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": true,
+   "failure_class": "AttributeError",
+   "instrument_reported_zero": false,
+   "truth_lines": 7,
+   "truth_lines_covered": 1,
+   "covered_lines": 3,
+   "covered_test_time": 3,
+   "covered_import_time": 0,
+   "source_lines": 1073,
+   "budget_fraction": 0.003,
+   "per_file": {
+    "src/packaging/markers.py": {
+     "covered": 3,
+     "file": 761
+    },
+    "src/packaging/requirements.py": {
+     "covered": 0,
+     "file": 312
+    }
+   },
+   "truth_detail": {
+    "src/packaging/markers.py": [
+     89,
+     90,
+     96
+    ],
+    "src/packaging/requirements.py": [
+     17,
+     64,
+     65,
+     71
+    ]
+   }
+  },
+  {
+   "sha": "f1c57155",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "AssertionError",
+   "instrument_reported_zero": false,
+   "truth_lines": 19,
+   "truth_lines_covered": 4,
+   "covered_lines": 71,
+   "covered_test_time": 71,
+   "covered_import_time": 71,
+   "source_lines": 1213,
+   "budget_fraction": 0.059,
+   "per_file": {
+    "src/packaging/_structures.py": {
+     "covered": 0,
+     "file": 33
+    },
+    "src/packaging/direct_url.py": {
+     "covered": 71,
+     "file": 311
+    },
+    "src/packaging/pylock.py": {
+     "covered": 0,
+     "file": 869
+    }
+   },
+   "truth_detail": {
+    "src/packaging/_structures.py": [
+     5,
+     6,
+     8,
+     9,
+     16,
+     34
+    ],
+    "src/packaging/direct_url.py": [
+     10,
+     157,
+     175,
+     216,
+     229
+    ],
+    "src/packaging/pylock.py": [
+     35,
+     339,
+     364,
+     381,
+     406,
+     442,
+     475,
+     583
+    ]
+   }
+  },
+  {
+   "sha": "0efe21aa",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "AttributeError",
+   "instrument_reported_zero": false,
+   "truth_lines": 28,
+   "truth_lines_covered": 1,
+   "covered_lines": 7,
+   "covered_test_time": 7,
+   "covered_import_time": 0,
+   "source_lines": 1032,
+   "budget_fraction": 0.007,
+   "per_file": {
+    "src/packaging/markers.py": {
+     "covered": 7,
+     "file": 740
+    },
+    "src/packaging/requirements.py": {
+     "covered": 0,
+     "file": 292
+    }
+   },
+   "truth_detail": {
+    "src/packaging/markers.py": [
+     76,
+     77,
+     78,
+     79,
+     80,
+     81,
+     82,
+     83,
+     84,
+     85,
+     86,
+     87,
+     88,
+     89,
+     90,
+     91,
+     92,
+     93,
+     94,
+     95,
+     549,
+     550,
+     551
+    ],
+    "src/packaging/requirements.py": [
+     52,
+     53,
+     117,
+     118,
+     119
+    ]
+   }
+  },
+  {
+   "sha": "46167dcd",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": true,
+   "failure_class": "TypeError",
+   "instrument_reported_zero": false,
+   "truth_lines": 6,
+   "truth_lines_covered": 3,
+   "covered_lines": 277,
+   "covered_test_time": 277,
+   "covered_import_time": 275,
+   "source_lines": 2342,
+   "budget_fraction": 0.118,
+   "per_file": {
+    "src/packaging/ranges.py": {
+     "covered": 277,
+     "file": 2342
+    }
+   },
+   "truth_detail": {
+    "src/packaging/ranges.py": [
+     22,
+     25,
+     30,
+     436,
+     1140,
+     2343
+    ]
+   }
+  },
+  {
+   "sha": "8efde605",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "AssertionError",
+   "instrument_reported_zero": false,
+   "truth_lines": 3,
+   "truth_lines_covered": 2,
+   "covered_lines": 99,
+   "covered_test_time": 99,
+   "covered_import_time": 37,
+   "source_lines": 341,
+   "budget_fraction": 0.29,
+   "per_file": {
+    "src/packaging/dependency_groups.py": {
+     "covered": 99,
+     "file": 341
+    }
+   },
+   "truth_detail": {
+    "src/packaging/dependency_groups.py": [
+     196,
+     197,
+     198
+    ]
+   }
+  },
+  {
+   "sha": "7d0611d4",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": true,
+   "failure_class": "AttributeError",
+   "instrument_reported_zero": false,
+   "truth_lines": 25,
+   "truth_lines_covered": 2,
+   "covered_lines": 48,
+   "covered_test_time": 48,
+   "covered_import_time": 0,
+   "source_lines": 702,
+   "budget_fraction": 0.068,
+   "per_file": {
+    "src/packaging/markers.py": {
+     "covered": 48,
+     "file": 702
+    }
+   },
+   "truth_detail": {
+    "src/packaging/markers.py": [
+     266,
+     312,
+     332,
+     333,
+     334,
+     335,
+     336,
+     422,
+     423,
+     424,
+     454,
+     455,
+     456,
+     457,
+     458,
+     459,
+     624,
+     640,
+     641,
+     642,
+     643,
+     644,
+     667,
+     668,
+     669
+    ]
+   }
+  },
+  {
+   "sha": "491af5d5",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "AssertionError",
+   "instrument_reported_zero": false,
+   "truth_lines": 3,
+   "truth_lines_covered": 1,
+   "covered_lines": 46,
+   "covered_test_time": 46,
+   "covered_import_time": 0,
+   "source_lines": 688,
+   "budget_fraction": 0.067,
+   "per_file": {
+    "src/packaging/markers.py": {
+     "covered": 46,
+     "file": 688
+    }
+   },
+   "truth_detail": {
+    "src/packaging/markers.py": [
+     238,
+     569,
+     578
+    ]
+   }
+  },
+  {
+   "sha": "a03bde12",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "AssertionError",
+   "instrument_reported_zero": false,
+   "truth_lines": 22,
+   "truth_lines_covered": 8,
+   "covered_lines": 81,
+   "covered_test_time": 81,
+   "covered_import_time": 43,
+   "source_lines": 264,
+   "budget_fraction": 0.307,
+   "per_file": {
+    "src/packaging/requirements.py": {
+     "covered": 81,
+     "file": 264
+    }
+   },
+   "truth_detail": {
+    "src/packaging/requirements.py": [
+     96,
+     190,
+     191,
+     192,
+     193,
+     194,
+     195,
+     196,
+     197,
+     198,
+     199,
+     200,
+     201,
+     204,
+     208,
+     209,
+     210,
+     211,
+     212,
+     213,
+     222,
+     226
+    ]
+   }
+  },
+  {
+   "sha": "cd91074b",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "AssertionError",
+   "instrument_reported_zero": false,
+   "truth_lines": 26,
+   "truth_lines_covered": 11,
+   "covered_lines": 320,
+   "covered_test_time": 320,
+   "covered_import_time": 270,
+   "source_lines": 2327,
+   "budget_fraction": 0.138,
+   "per_file": {
+    "src/packaging/ranges.py": {
+     "covered": 320,
+     "file": 2327
+    }
+   },
+   "truth_detail": {
+    "src/packaging/ranges.py": [
+     397,
+     399,
+     405,
+     1104,
+     1105,
+     1106,
+     1154,
+     1155,
+     1156,
+     1168,
+     1169,
+     1170,
+     1171,
+     1172,
+     1173,
+     1174,
+     1587,
+     1588,
+     1589,
+     1590,
+     1591,
+     1592,
+     1593,
+     1594,
+     1595,
+     1596
+    ]
+   }
+  },
+  {
+   "sha": "8c37b047",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "Failed",
+   "instrument_reported_zero": false,
+   "truth_lines": 1,
+   "truth_lines_covered": 1,
+   "covered_lines": 48,
+   "covered_test_time": 48,
+   "covered_import_time": 14,
+   "source_lines": 204,
+   "budget_fraction": 0.235,
+   "per_file": {
+    "src/packaging/licenses/__init__.py": {
+     "covered": 48,
+     "file": 204
+    }
+   },
+   "truth_detail": {
+    "src/packaging/licenses/__init__.py": [
+     118
+    ]
+   }
+  },
+  {
+   "sha": "b1c439b0",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "AssertionError",
+   "instrument_reported_zero": false,
+   "truth_lines": 2,
+   "truth_lines_covered": 2,
+   "covered_lines": 296,
+   "covered_test_time": 296,
+   "covered_import_time": 223,
+   "source_lines": 1049,
+   "budget_fraction": 0.282,
+   "per_file": {
+    "src/packaging/metadata.py": {
+     "covered": 296,
+     "file": 1049
+    }
+   },
+   "truth_detail": {
+    "src/packaging/metadata.py": [
+     856,
+     1029
+    ]
+   }
+  },
+  {
+   "sha": "31b2d013",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "AssertionError",
+   "instrument_reported_zero": false,
+   "truth_lines": 8,
+   "truth_lines_covered": 3,
+   "covered_lines": 81,
+   "covered_test_time": 81,
+   "covered_import_time": 33,
+   "source_lines": 333,
+   "budget_fraction": 0.243,
+   "per_file": {
+    "src/packaging/dependency_groups.py": {
+     "covered": 81,
+     "file": 333
+    }
+   },
+   "truth_detail": {
+    "src/packaging/dependency_groups.py": [
+     1,
+     270,
+     271,
+     272,
+     273,
+     274,
+     275,
+     276
+    ]
+   }
+  },
+  {
+   "sha": "bddb6903",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "Failed",
+   "instrument_reported_zero": false,
+   "truth_lines": 6,
+   "truth_lines_covered": 2,
+   "covered_lines": 89,
+   "covered_test_time": 89,
+   "covered_import_time": 0,
+   "source_lines": 582,
+   "budget_fraction": 0.153,
+   "per_file": {
+    "src/packaging/markers.py": {
+     "covered": 89,
+     "file": 582
+    }
+   },
+   "truth_detail": {
+    "src/packaging/markers.py": [
+     272,
+     273,
+     274,
+     275,
+     529,
+     530
+    ]
+   }
+  },
+  {
+   "sha": "2d57ce2b",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "AssertionError",
+   "instrument_reported_zero": false,
+   "truth_lines": 69,
+   "truth_lines_covered": 24,
+   "covered_lines": 95,
+   "covered_test_time": 95,
+   "covered_import_time": 32,
+   "source_lines": 352,
+   "budget_fraction": 0.27,
+   "per_file": {
+    "src/packaging/dependency_groups.py": {
+     "covered": 95,
+     "file": 352
+    }
+   },
+   "truth_detail": {
+    "src/packaging/dependency_groups.py": [
+     126,
+     127,
+     155,
+     156,
+     157,
+     158,
+     159,
+     160,
+     161,
+     162,
+     163,
+     164,
+     165,
+     166,
+     167,
+     168,
+     169,
+     170,
+     171,
+     172,
+     175,
+     176,
+     177,
+     178,
+     179,
+     180,
+     181,
+     182,
+     183,
+     184,
+     185,
+     186,
+     187,
+     188,
+     189,
+     190,
+     191,
+     192,
+     193,
+     195,
+     196,
+     197,
+     198,
+     199,
+     200,
+     201,
+     207,
+     208,
+     209,
+     210,
+     211,
+     212,
+     213,
+     214,
+     215,
+     216,
+     217,
+     218,
+     219,
+     220,
+     221,
+     222,
+     223,
+     224,
+     225,
+     226,
+     227,
+     228,
+     229
+    ]
+   }
+  },
+  {
+   "sha": "5706b87c",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "AssertionError",
+   "instrument_reported_zero": false,
+   "truth_lines": 9,
+   "truth_lines_covered": 3,
+   "covered_lines": 30,
+   "covered_test_time": 30,
+   "covered_import_time": 0,
+   "source_lines": 829,
+   "budget_fraction": 0.036,
+   "per_file": {
+    "src/packaging/markers.py": {
+     "covered": 30,
+     "file": 575
+    },
+    "src/packaging/requirements.py": {
+     "covered": 0,
+     "file": 254
+    }
+   },
+   "truth_detail": {
+    "src/packaging/markers.py": [
+     399,
+     409,
+     439,
+     442,
+     443,
+     444,
+     445,
+     462
+    ],
+    "src/packaging/requirements.py": [
+     122
+    ]
+   }
+  },
+  {
+   "sha": "4b243af9",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "AttributeError",
+   "instrument_reported_zero": false,
+   "truth_lines": 8,
+   "truth_lines_covered": 4,
+   "covered_lines": 42,
+   "covered_test_time": 42,
+   "covered_import_time": 26,
+   "source_lines": 201,
+   "budget_fraction": 0.209,
+   "per_file": {
+    "src/packaging/requirements.py": {
+     "covered": 42,
+     "file": 201
+    }
+   },
+   "truth_detail": {
+    "src/packaging/requirements.py": [
+     6,
+     7,
+     8,
+     9,
+     17,
+     25,
+     73,
+     108
+    ]
+   }
+  },
+  {
+   "sha": "2aada00b",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "Failed",
+   "instrument_reported_zero": false,
+   "truth_lines": 1,
+   "truth_lines_covered": 0,
+   "covered_lines": 18,
+   "covered_test_time": 18,
+   "covered_import_time": 0,
+   "source_lines": 1450,
+   "budget_fraction": 0.012,
+   "per_file": {
+    "src/packaging/specifiers.py": {
+     "covered": 18,
+     "file": 1450
+    }
+   },
+   "truth_detail": {
+    "src/packaging/specifiers.py": [
+     250
+    ]
+   }
+  },
+  {
+   "sha": "2c87a33f",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "AssertionError",
+   "instrument_reported_zero": false,
+   "truth_lines": 9,
+   "truth_lines_covered": 5,
+   "covered_lines": 54,
+   "covered_test_time": 54,
+   "covered_import_time": 13,
+   "source_lines": 198,
+   "budget_fraction": 0.273,
+   "per_file": {
+    "src/packaging/licenses/__init__.py": {
+     "covered": 54,
+     "file": 198
+    }
+   },
+   "truth_detail": {
+    "src/packaging/licenses/__init__.py": [
+     110,
+     111,
+     112,
+     113,
+     114,
+     115,
+     116,
+     117,
+     118
+    ]
+   }
+  },
+  {
+   "sha": "959bb79c",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "AssertionError",
+   "instrument_reported_zero": false,
+   "truth_lines": 22,
+   "truth_lines_covered": 8,
+   "covered_lines": 92,
+   "covered_test_time": 92,
+   "covered_import_time": 32,
+   "source_lines": 335,
+   "budget_fraction": 0.275,
+   "per_file": {
+    "src/packaging/dependency_groups.py": {
+     "covered": 92,
+     "file": 335
+    }
+   },
+   "truth_detail": {
+    "src/packaging/dependency_groups.py": [
+     158,
+     161,
+     162,
+     163,
+     164,
+     165,
+     171,
+     172,
+     173,
+     174,
+     175,
+     176,
+     177,
+     178,
+     202,
+     203,
+     204,
+     213,
+     245,
+     274,
+     275,
+     276
+    ]
+   }
+  },
+  {
+   "sha": "d17cfaf0",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "AssertionError",
+   "instrument_reported_zero": false,
+   "truth_lines": 1,
+   "truth_lines_covered": 1,
+   "covered_lines": 7,
+   "covered_test_time": 7,
+   "covered_import_time": 0,
+   "source_lines": 418,
+   "budget_fraction": 0.017,
+   "per_file": {
+    "src/packaging/_parser.py": {
+     "covered": 7,
+     "file": 418
+    }
+   },
+   "truth_detail": {
+    "src/packaging/_parser.py": [
+     397
+    ]
+   }
+  },
+  {
+   "sha": "2602dd07",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "Failed",
+   "instrument_reported_zero": false,
+   "truth_lines": 1,
+   "truth_lines_covered": 0,
+   "covered_lines": 27,
+   "covered_test_time": 27,
+   "covered_import_time": 0,
+   "source_lines": 198,
+   "budget_fraction": 0.136,
+   "per_file": {
+    "src/packaging/_tokenizer.py": {
+     "covered": 27,
+     "file": 198
+    }
+   },
+   "truth_detail": {
+    "src/packaging/_tokenizer.py": [
+     85
+    ]
+   }
+  },
+  {
+   "sha": "23669b1b",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "Failed",
+   "instrument_reported_zero": false,
+   "truth_lines": 5,
+   "truth_lines_covered": 2,
+   "covered_lines": 231,
+   "covered_test_time": 231,
+   "covered_import_time": 151,
+   "source_lines": 802,
+   "budget_fraction": 0.288,
+   "per_file": {
+    "src/packaging/pylock.py": {
+     "covered": 231,
+     "file": 802
+    }
+   },
+   "truth_detail": {
+    "src/packaging/pylock.py": [
+     28,
+     650,
+     651,
+     665,
+     669
+    ]
+   }
+  },
+  {
+   "sha": "55cbf1b9",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "AssertionError",
+   "instrument_reported_zero": false,
+   "truth_lines": 6,
+   "truth_lines_covered": 2,
+   "covered_lines": 202,
+   "covered_test_time": 202,
+   "covered_import_time": 198,
+   "source_lines": 835,
+   "budget_fraction": 0.242,
+   "per_file": {
+    "src/packaging/_ranges.py": {
+     "covered": 202,
+     "file": 835
+    }
+   },
+   "truth_detail": {
+    "src/packaging/_ranges.py": [
+     181,
+     182,
+     189,
+     238,
+     239,
+     246
+    ]
+   }
+  },
+  {
+   "sha": "e1fdb94b",
+   "repo": "hukkin/tomli",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "AssertionError",
+   "instrument_reported_zero": false,
+   "truth_lines": 2,
+   "truth_lines_covered": 1,
+   "covered_lines": 193,
+   "covered_test_time": 193,
+   "covered_import_time": 80,
+   "source_lines": 782,
+   "budget_fraction": 0.247,
+   "per_file": {
+    "src/tomli/_parser.py": {
+     "covered": 193,
+     "file": 782
+    }
+   },
+   "truth_detail": {
+    "src/tomli/_parser.py": [
+     36,
+     478
+    ]
+   }
+  },
+  {
+   "sha": "d1d6a857",
+   "repo": "hukkin/tomli",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "AssertionError",
+   "instrument_reported_zero": false,
+   "truth_lines": 112,
+   "truth_lines_covered": 5,
+   "covered_lines": 74,
+   "covered_test_time": 74,
+   "covered_import_time": 74,
+   "source_lines": 696,
+   "budget_fraction": 0.106,
+   "per_file": {
+    "src/tomli/_parser.py": {
+     "covered": 74,
+     "file": 696
+    }
+   },
+   "truth_detail": {
+    "src/tomli/_parser.py": [
+     11,
+     53,
+     54,
+     55,
+     56,
+     57,
+     58,
+     59,
+     60,
+     61,
+     62,
+     63,
+     64,
+     65,
+     66,
+     67,
+     68,
+     69,
+     70,
+     71,
+     72,
+     73,
+     74,
+     75,
+     76,
+     77,
+     78,
+     79,
+     80,
+     81,
+     82,
+     83,
+     84,
+     85,
+     86,
+     87,
+     88,
+     89,
+     90,
+     91,
+     92,
+     93,
+     94,
+     95,
+     96,
+     97,
+     98,
+     99,
+     100,
+     101,
+     102,
+     103,
+     104,
+     105,
+     106,
+     107,
+     108,
+     109,
+     121,
+     132,
+     133,
+     259,
+     264,
+     295,
+     300,
+     303,
+     304,
+     305,
+     313,
+     321,
+     324,
+     325,
+     326,
+     339,
+     345,
+     346,
+     352,
+     354,
+     371,
+     409,
+     433,
+     453,
+     457,
+     459,
+     466,
+     488,
+     499,
+     509,
+     513,
+     514,
+     515,
+     570,
+     585,
+     633,
+     654,
+     655,
+     656,
+     657,
+     658,
+     659,
+     660,
+     661,
+     662,
+     663,
+     664,
+     665,
+     666,
+     667,
+     668,
+     669,
+     670,
+     671
+    ]
+   }
+  },
+  {
+   "sha": "4e245a4b",
+   "repo": "hukkin/tomli",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "AssertionError",
+   "instrument_reported_zero": false,
+   "truth_lines": 6,
+   "truth_lines_covered": 1,
+   "covered_lines": 75,
+   "covered_test_time": 75,
+   "covered_import_time": 74,
+   "source_lines": 691,
+   "budget_fraction": 0.109,
+   "per_file": {
+    "src/tomli/_parser.py": {
+     "covered": 75,
+     "file": 691
+    }
+   },
+   "truth_detail": {
+    "src/tomli/_parser.py": [
+     74,
+     75,
+     76,
+     77,
+     78,
+     79
+    ]
+   }
+  },
+  {
+   "sha": "794c8e50",
+   "repo": "hukkin/tomli",
+   "status": "MEASURED",
+   "has_source_frame": false,
+   "failure_class": "AssertionError",
+   "instrument_reported_zero": false,
+   "truth_lines": 2,
+   "truth_lines_covered": 0,
+   "covered_lines": 167,
+   "covered_test_time": 167,
+   "covered_import_time": 73,
+   "source_lines": 669,
+   "budget_fraction": 0.25,
+   "per_file": {
+    "src/tomli/_parser.py": {
+     "covered": 167,
+     "file": 669
+    }
+   },
+   "truth_detail": {
+    "src/tomli/_parser.py": [
+     78,
+     670
+    ]
+   }
+  },
+  {
+   "sha": "8b962e13",
+   "repo": "hukkin/tomli",
+   "status": "MEASURED",
+   "has_source_frame": true,
+   "failure_class": "AttributeError",
+   "instrument_reported_zero": false,
+   "truth_lines": 7,
+   "truth_lines_covered": 2,
+   "covered_lines": 74,
+   "covered_test_time": 74,
+   "covered_import_time": 73,
+   "source_lines": 682,
+   "budget_fraction": 0.109,
+   "per_file": {
+    "src/tomli/_parser.py": {
+     "covered": 74,
+     "file": 682
+    }
+   },
+   "truth_detail": {
+    "src/tomli/_parser.py": [
+     77,
+     78,
+     79,
+     80,
+     81,
+     82,
+     83
+    ]
+   }
+  }
+ ],
+ "authority": "NONE -- offline corpus measurement; no solve claimed, no benchmark row"
+}

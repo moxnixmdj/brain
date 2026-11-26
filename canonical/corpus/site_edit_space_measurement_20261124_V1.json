@@ -1,0 +1,1515 @@
+{
+ "schema": "BRAIN_SITE_EDIT_SPACE_MEASUREMENT_V1",
+ "generated": "2026-11-26T00:00:42Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 10.5
+ },
+ "question": "Is zero emission a BUDGET problem or a VOCABULARY problem?",
+ "rule": "SINGLE_LINE_AT_TRACE_LINE is the only shape the current operator family can express, so its count is an UPPER BOUND on that family's solve rate on this corpus.",
+ "tasks": 28,
+ "measured": 28,
+ "kinds": {
+  "MULTI_FILE": 4,
+  "DEFINITION_LEVEL": 8,
+  "MULTI_LINE_SINGLE_SITE": 5,
+  "MULTI_SITE": 9,
+  "SINGLE_LINE_ELSEWHERE": 2
+ },
+ "expressible_by_a_one_line_edit_at_a_traced_line": 0,
+ "upper_bound_resolve_rate": 0.0,
+ "localised_to_the_edit_site": 3,
+ "the_input_census": {
+  "tasks_exposing_a_source_frame": 4,
+  "tasks_exposing_no_source_frame": 24,
+  "fraction_with_no_source_frame": 0.857,
+  "failure_classes": {
+   "AssertionError": 17,
+   "AttributeError": 5,
+   "Failed": 5,
+   "TypeError": 1
+  },
+  "reading": "A traceback-driven generator can only fire where the traceback names a source line. On the tasks that expose none, every operator family in this project has NO INPUT, so adding another form cannot raise the rate -- and that, not the vocabulary, is what the six families have been measuring all along."
+ },
+ "rows": [
+  {
+   "sha": "f91ea793",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {
+    "src/packaging/markers.py": [
+     89
+    ]
+   },
+   "frame_count": 1,
+   "failure_class": "AttributeError",
+   "has_source_frame": true,
+   "truth_lines": {
+    "src/packaging/markers.py": [
+     89,
+     90,
+     96,
+     96,
+     96,
+     96,
+     96
+    ],
+    "src/packaging/requirements.py": [
+     17,
+     64,
+     65,
+     71,
+     71,
+     71,
+     71,
+     71
+    ]
+   },
+   "overlap": 1,
+   "kind": "MULTI_FILE",
+   "changed_lines": 15,
+   "sites": [
+    "src/packaging/markers.py",
+    "src/packaging/requirements.py"
+   ],
+   "definition_level": true,
+   "files_changed": [
+    "src/packaging/markers.py",
+    "src/packaging/requirements.py"
+   ]
+  },
+  {
+   "sha": "f1c57155",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "AssertionError",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/packaging/_structures.py": [
+     5,
+     6,
+     8,
+     9,
+     16,
+     16,
+     16,
+     16,
+     16,
+     16,
+     16,
+     34,
+     34,
+     34,
+     34,
+     34,
+     34,
+     34,
+     34,
+     34,
+     34,
+     34,
+     34,
+     34,
+     34,
+     34,
+     34,
+     34,
+     34,
+     34,
+     34,
+     34,
+     34,
+     34
+    ],
+    "src/packaging/direct_url.py": [
+     10,
+     10,
+     157,
+     175,
+     216,
+     229
+    ],
+    "src/packaging/pylock.py": [
+     35,
+     339,
+     364,
+     381,
+     406,
+     442,
+     475,
+     583
+    ]
+   },
+   "overlap": 0,
+   "kind": "MULTI_FILE",
+   "changed_lines": 48,
+   "sites": [
+    "src/packaging/_structures.py",
+    "src/packaging/direct_url.py",
+    "src/packaging/pylock.py"
+   ],
+   "definition_level": true,
+   "files_changed": [
+    "src/packaging/_structures.py",
+    "src/packaging/direct_url.py",
+    "src/packaging/pylock.py"
+   ]
+  },
+  {
+   "sha": "0efe21aa",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "AttributeError",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/packaging/markers.py": [
+     76,
+     77,
+     78,
+     79,
+     80,
+     81,
+     82,
+     83,
+     84,
+     85,
+     86,
+     87,
+     88,
+     89,
+     90,
+     91,
+     92,
+     93,
+     94,
+     95,
+     549,
+     550,
+     551
+    ],
+    "src/packaging/requirements.py": [
+     52,
+     52,
+     53,
+     53,
+     53,
+     53,
+     53,
+     53,
+     53,
+     53,
+     53,
+     53,
+     53,
+     53,
+     53,
+     53,
+     53,
+     53,
+     117,
+     118,
+     119
+    ]
+   },
+   "overlap": 0,
+   "kind": "MULTI_FILE",
+   "changed_lines": 44,
+   "sites": [
+    "src/packaging/markers.py",
+    "src/packaging/requirements.py"
+   ],
+   "definition_level": true,
+   "files_changed": [
+    "src/packaging/markers.py",
+    "src/packaging/requirements.py"
+   ]
+  },
+  {
+   "sha": "46167dcd",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {
+    "src/packaging/ranges.py": [
+     1133
+    ]
+   },
+   "frame_count": 1,
+   "failure_class": "TypeError",
+   "has_source_frame": true,
+   "truth_lines": {
+    "src/packaging/ranges.py": [
+     22,
+     25,
+     30,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     436,
+     1140,
+     1140,
+     1140,
+     1140,
+     1140,
+     1140,
+     1140,
+     1140,
+     1140,
+     1140,
+     1140,
+     1140,
+     1140,
+     1140,
+     1140,
+     1140,
+     1140,
+     1140,
+     1140,
+     1140,
+     1140,
+     1140,
+     1140,
+     1140,
+     1140,
+     2343,
+     2343,
+     2343,
+     2343,
+     2343,
+     2343,
+     2343,
+     2343,
+     2343,
+     2343,
+     2343,
+     2343,
+     2343,
+     2343,
+     2343,
+     2343,
+     2343,
+     2343,
+     2343,
+     2343,
+     2343,
+     2343
+    ]
+   },
+   "overlap": 0,
+   "kind": "DEFINITION_LEVEL",
+   "changed_lines": 72,
+   "sites": [
+    "<module>",
+    "VersionRange._build"
+   ],
+   "definition_level": true,
+   "files_changed": [
+    "src/packaging/ranges.py"
+   ]
+  },
+  {
+   "sha": "8efde605",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "AssertionError",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/packaging/dependency_groups.py": [
+     196,
+     197,
+     198
+    ]
+   },
+   "overlap": 0,
+   "kind": "MULTI_LINE_SINGLE_SITE",
+   "changed_lines": 3,
+   "sites": [
+    "DependencyGroupResolver._validate"
+   ],
+   "definition_level": false,
+   "files_changed": [
+    "src/packaging/dependency_groups.py"
+   ]
+  },
+  {
+   "sha": "7d0611d4",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {
+    "src/packaging/markers.py": [
+     644
+    ]
+   },
+   "frame_count": 1,
+   "failure_class": "AttributeError",
+   "has_source_frame": true,
+   "truth_lines": {
+    "src/packaging/markers.py": [
+     266,
+     266,
+     266,
+     266,
+     266,
+     266,
+     266,
+     266,
+     266,
+     266,
+     266,
+     266,
+     266,
+     266,
+     266,
+     266,
+     266,
+     312,
+     312,
+     312,
+     312,
+     312,
+     312,
+     312,
+     312,
+     312,
+     312,
+     312,
+     312,
+     312,
+     312,
+     312,
+     332,
+     333,
+     334,
+     335,
+     335,
+     335,
+     335,
+     336,
+     422,
+     423,
+     424,
+     454,
+     455,
+     456,
+     457,
+     458,
+     459,
+     624,
+     624,
+     624,
+     624,
+     640,
+     641,
+     642,
+     643,
+     644,
+     667,
+     668,
+     669
+    ]
+   },
+   "overlap": 1,
+   "kind": "DEFINITION_LEVEL",
+   "changed_lines": 53,
+   "sites": [
+    "Marker.evaluate",
+    "Marker.evaluate_prepared",
+    "_eval_op",
+    "_evaluate_markers",
+    "prepare_environment"
+   ],
+   "definition_level": true,
+   "files_changed": [
+    "src/packaging/markers.py"
+   ]
+  },
+  {
+   "sha": "491af5d5",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "AssertionError",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/packaging/markers.py": [
+     238,
+     238,
+     238,
+     238,
+     238,
+     238,
+     238,
+     238,
+     238,
+     238,
+     238,
+     238,
+     238,
+     238,
+     569,
+     578
+    ]
+   },
+   "overlap": 0,
+   "kind": "DEFINITION_LEVEL",
+   "changed_lines": 12,
+   "sites": [
+    "<module>",
+    "Marker.__and__",
+    "Marker.__or__"
+   ],
+   "definition_level": true,
+   "files_changed": [
+    "src/packaging/markers.py"
+   ]
+  },
+  {
+   "sha": "a03bde12",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "AssertionError",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/packaging/requirements.py": [
+     96,
+     96,
+     96,
+     96,
+     190,
+     191,
+     192,
+     193,
+     194,
+     195,
+     196,
+     197,
+     198,
+     198,
+     198,
+     199,
+     200,
+     201,
+     204,
+     208,
+     209,
+     210,
+     211,
+     212,
+     213,
+     222,
+     222,
+     222,
+     222,
+     222,
+     222,
+     222,
+     222,
+     222,
+     222,
+     222,
+     226
+    ]
+   },
+   "overlap": 0,
+   "kind": "DEFINITION_LEVEL",
+   "changed_lines": 36,
+   "sites": [
+    "Requirement",
+    "Requirement.__getstate__",
+    "Requirement.__setstate__"
+   ],
+   "definition_level": true,
+   "files_changed": [
+    "src/packaging/requirements.py"
+   ]
+  },
+  {
+   "sha": "cd91074b",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "AssertionError",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/packaging/ranges.py": [
+     397,
+     399,
+     405,
+     1104,
+     1105,
+     1106,
+     1154,
+     1155,
+     1156,
+     1168,
+     1169,
+     1170,
+     1171,
+     1172,
+     1173,
+     1174,
+     1587,
+     1588,
+     1589,
+     1590,
+     1591,
+     1592,
+     1593,
+     1594,
+     1595,
+     1596
+    ]
+   },
+   "overlap": 0,
+   "kind": "MULTI_SITE",
+   "changed_lines": 26,
+   "sites": [
+    "VersionRange",
+    "VersionRange._build",
+    "VersionRange._combine_literals",
+    "_struct_admits"
+   ],
+   "definition_level": false,
+   "files_changed": [
+    "src/packaging/ranges.py"
+   ]
+  },
+  {
+   "sha": "8c37b047",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "Failed",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/packaging/licenses/__init__.py": [
+     118,
+     118,
+     118
+    ]
+   },
+   "overlap": 0,
+   "kind": "MULTI_LINE_SINGLE_SITE",
+   "changed_lines": 3,
+   "sites": [
+    "canonicalize_license_expression"
+   ],
+   "definition_level": false,
+   "files_changed": [
+    "src/packaging/licenses/__init__.py"
+   ]
+  },
+  {
+   "sha": "b1c439b0",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "AssertionError",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/packaging/metadata.py": [
+     856,
+     1029
+    ]
+   },
+   "overlap": 0,
+   "kind": "MULTI_SITE",
+   "changed_lines": 2,
+   "sites": [
+    "Metadata._write_metadata",
+    "Metadata.from_raw"
+   ],
+   "definition_level": false,
+   "files_changed": [
+    "src/packaging/metadata.py"
+   ]
+  },
+  {
+   "sha": "31b2d013",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "AssertionError",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/packaging/dependency_groups.py": [
+     1,
+     1,
+     1,
+     270,
+     271,
+     272,
+     273,
+     274,
+     275,
+     276
+    ]
+   },
+   "overlap": 0,
+   "kind": "MULTI_SITE",
+   "changed_lines": 10,
+   "sites": [
+    "<module>",
+    "DependencyGroupResolver._parse_group"
+   ],
+   "definition_level": false,
+   "files_changed": [
+    "src/packaging/dependency_groups.py"
+   ]
+  },
+  {
+   "sha": "bddb6903",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "Failed",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/packaging/markers.py": [
+     272,
+     273,
+     274,
+     275,
+     529,
+     530
+    ]
+   },
+   "overlap": 0,
+   "kind": "MULTI_SITE",
+   "changed_lines": 6,
+   "sites": [
+    "Marker.evaluate",
+    "_normalize"
+   ],
+   "definition_level": false,
+   "files_changed": [
+    "src/packaging/markers.py"
+   ]
+  },
+  {
+   "sha": "2d57ce2b",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "AssertionError",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/packaging/dependency_groups.py": [
+     126,
+     127,
+     155,
+     156,
+     157,
+     158,
+     159,
+     160,
+     161,
+     162,
+     163,
+     164,
+     164,
+     165,
+     166,
+     167,
+     168,
+     169,
+     170,
+     171,
+     172,
+     175,
+     175,
+     176,
+     177,
+     178,
+     179,
+     180,
+     181,
+     182,
+     183,
+     184,
+     185,
+     186,
+     187,
+     188,
+     189,
+     190,
+     191,
+     192,
+     193,
+     195,
+     196,
+     197,
+     198,
+     199,
+     200,
+     201,
+     207,
+     207,
+     207,
+     207,
+     207,
+     207,
+     207,
+     207,
+     207,
+     207,
+     207,
+     207,
+     207,
+     207,
+     207,
+     207,
+     207,
+     208,
+     209,
+     210,
+     211,
+     212,
+     213,
+     214,
+     215,
+     216,
+     217,
+     218,
+     219,
+     220,
+     221,
+     222,
+     223,
+     224,
+     225,
+     226,
+     227,
+     228,
+     229
+    ]
+   },
+   "overlap": 0,
+   "kind": "DEFINITION_LEVEL",
+   "changed_lines": 77,
+   "sites": [
+    "DependencyGroupResolver",
+    "DependencyGroupResolver.__init__",
+    "DependencyGroupResolver._resolve",
+    "DependencyGroupResolver.resolve"
+   ],
+   "definition_level": true,
+   "files_changed": [
+    "src/packaging/dependency_groups.py"
+   ]
+  },
+  {
+   "sha": "5706b87c",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "AssertionError",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/packaging/markers.py": [
+     399,
+     409,
+     439,
+     442,
+     443,
+     444,
+     445,
+     462,
+     462
+    ],
+    "src/packaging/requirements.py": [
+     122
+    ]
+   },
+   "overlap": 0,
+   "kind": "MULTI_FILE",
+   "changed_lines": 10,
+   "sites": [
+    "src/packaging/markers.py",
+    "src/packaging/requirements.py"
+   ],
+   "definition_level": false,
+   "files_changed": [
+    "src/packaging/markers.py",
+    "src/packaging/requirements.py"
+   ]
+  },
+  {
+   "sha": "4b243af9",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "AttributeError",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/packaging/requirements.py": [
+     6,
+     7,
+     8,
+     9,
+     17,
+     17,
+     25,
+     25,
+     25,
+     25,
+     25,
+     73,
+     73,
+     73,
+     73,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108,
+     108
+    ]
+   },
+   "overlap": 0,
+   "kind": "DEFINITION_LEVEL",
+   "changed_lines": 45,
+   "sites": [
+    "<module>",
+    "Requirement"
+   ],
+   "definition_level": true,
+   "files_changed": [
+    "src/packaging/requirements.py"
+   ]
+  },
+  {
+   "sha": "2aada00b",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "Failed",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/packaging/specifiers.py": [
+     250
+    ]
+   },
+   "overlap": 0,
+   "kind": "SINGLE_LINE_ELSEWHERE",
+   "changed_lines": 1,
+   "sites": [
+    "Specifier"
+   ],
+   "definition_level": false,
+   "files_changed": [
+    "src/packaging/specifiers.py"
+   ]
+  },
+  {
+   "sha": "2c87a33f",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "AssertionError",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/packaging/licenses/__init__.py": [
+     110,
+     111,
+     112,
+     113,
+     114,
+     115,
+     116,
+     117,
+     118
+    ]
+   },
+   "overlap": 0,
+   "kind": "MULTI_LINE_SINGLE_SITE",
+   "changed_lines": 9,
+   "sites": [
+    "canonicalize_license_expression"
+   ],
+   "definition_level": false,
+   "files_changed": [
+    "src/packaging/licenses/__init__.py"
+   ]
+  },
+  {
+   "sha": "959bb79c",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "AssertionError",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/packaging/dependency_groups.py": [
+     158,
+     161,
+     162,
+     163,
+     164,
+     165,
+     171,
+     172,
+     173,
+     174,
+     175,
+     176,
+     177,
+     178,
+     202,
+     203,
+     204,
+     213,
+     245,
+     274,
+     275,
+     276
+    ]
+   },
+   "overlap": 0,
+   "kind": "MULTI_SITE",
+   "changed_lines": 21,
+   "sites": [
+    "DependencyGroupResolver._parse_group",
+    "DependencyGroupResolver._resolve",
+    "DependencyGroupResolver.resolve"
+   ],
+   "definition_level": false,
+   "files_changed": [
+    "src/packaging/dependency_groups.py"
+   ]
+  },
+  {
+   "sha": "d17cfaf0",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "AssertionError",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/packaging/_parser.py": [
+     397,
+     397,
+     397,
+     397
+    ]
+   },
+   "overlap": 0,
+   "kind": "MULTI_LINE_SINGLE_SITE",
+   "changed_lines": 3,
+   "sites": [
+    "process_python_str"
+   ],
+   "definition_level": false,
+   "files_changed": [
+    "src/packaging/_parser.py"
+   ]
+  },
+  {
+   "sha": "2602dd07",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "Failed",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/packaging/_tokenizer.py": [
+     85
+    ]
+   },
+   "overlap": 0,
+   "kind": "SINGLE_LINE_ELSEWHERE",
+   "changed_lines": 1,
+   "sites": [
+    "<module>"
+   ],
+   "definition_level": false,
+   "files_changed": [
+    "src/packaging/_tokenizer.py"
+   ]
+  },
+  {
+   "sha": "23669b1b",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "Failed",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/packaging/pylock.py": [
+     28,
+     650,
+     650,
+     650,
+     650,
+     651,
+     651,
+     651,
+     651,
+     651,
+     651,
+     651,
+     651,
+     651,
+     651,
+     651,
+     651,
+     651,
+     651,
+     651,
+     651,
+     651,
+     651,
+     651,
+     651,
+     651,
+     651,
+     651,
+     651,
+     665,
+     669
+    ]
+   },
+   "overlap": 0,
+   "kind": "MULTI_SITE",
+   "changed_lines": 28,
+   "sites": [
+    "<module>",
+    "Pylock.select"
+   ],
+   "definition_level": false,
+   "files_changed": [
+    "src/packaging/pylock.py"
+   ]
+  },
+  {
+   "sha": "55cbf1b9",
+   "repo": "pypa/packaging",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "AssertionError",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/packaging/_ranges.py": [
+     181,
+     182,
+     189,
+     189,
+     189,
+     189,
+     238,
+     239,
+     246,
+     246,
+     246,
+     246
+    ]
+   },
+   "overlap": 0,
+   "kind": "MULTI_SITE",
+   "changed_lines": 10,
+   "sites": [
+    "LowerBound",
+    "LowerBound.__init__",
+    "UpperBound",
+    "UpperBound.__init__"
+   ],
+   "definition_level": false,
+   "files_changed": [
+    "src/packaging/_ranges.py"
+   ]
+  },
+  {
+   "sha": "e1fdb94b",
+   "repo": "hukkin/tomli",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "AssertionError",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/tomli/_parser.py": [
+     36,
+     36,
+     36,
+     36,
+     36,
+     36,
+     36,
+     478,
+     478,
+     478,
+     478
+    ]
+   },
+   "overlap": 0,
+   "kind": "MULTI_SITE",
+   "changed_lines": 10,
+   "sites": [
+    "<module>",
+    "parse_key"
+   ],
+   "definition_level": false,
+   "files_changed": [
+    "src/tomli/_parser.py"
+   ]
+  },
+  {
+   "sha": "d1d6a857",
+   "repo": "hukkin/tomli",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "AssertionError",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/tomli/_parser.py": [
+     11,
+     53,
+     53,
+     53,
+     53,
+     53,
+     54,
+     55,
+     56,
+     57,
+     58,
+     59,
+     60,
+     61,
+     62,
+     63,
+     64,
+     65,
+     66,
+     67,
+     68,
+     69,
+     70,
+     71,
+     72,
+     73,
+     74,
+     75,
+     76,
+     77,
+     78,
+     79,
+     80,
+     81,
+     82,
+     83,
+     84,
+     85,
+     86,
+     87,
+     88,
+     89,
+     90,
+     91,
+     92,
+     93,
+     94,
+     95,
+     96,
+     97,
+     98,
+     99,
+     100,
+     101,
+     102,
+     103,
+     104,
+     105,
+     106,
+     107,
+     108,
+     109,
+     121,
+     132,
+     133,
+     259,
+     264,
+     295,
+     300,
+     303,
+     304,
+     305,
+     313,
+     321,
+     324,
+     325,
+     326,
+     339,
+     345,
+     346,
+     352,
+     354,
+     371,
+     409,
+     433,
+     453,
+     457,
+     459,
+     466,
+     488,
+     499,
+     509,
+     513,
+     514,
+     515,
+     570,
+     585,
+     633,
+     654,
+     655,
+     656,
+     657,
+     658,
+     659,
+     660,
+     661,
+     662,
+     663,
+     664,
+     665,
+     666,
+     667,
+     668,
+     669,
+     670,
+     671
+    ]
+   },
+   "overlap": 0,
+   "kind": "DEFINITION_LEVEL",
+   "changed_lines": 105,
+   "sites": [
+    "<module>",
+    "TOMLDecodeError",
+    "create_dict_rule",
+    "create_list_rule",
+    "key_value_rule",
+    "load",
+    "loads",
+    "parse_array",
+    "parse_basic_str",
+    "parse_basic_str_escape",
+    "parse_hex_char",
+    "parse_inline_table",
+    "parse_key_part",
+    "parse_key_value_pair",
+    "parse_value",
+    "skip_until",
+    "suffixed_err",
+    "suffixed_err.coord_repr"
+   ],
+   "definition_level": true,
+   "files_changed": [
+    "src/tomli/_parser.py"
+   ]
+  },
+  {
+   "sha": "4e245a4b",
+   "repo": "hukkin/tomli",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "AssertionError",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/tomli/_parser.py": [
+     74,
+     75,
+     76,
+     77,
+     78,
+     79
+    ]
+   },
+   "overlap": 0,
+   "kind": "MULTI_LINE_SINGLE_SITE",
+   "changed_lines": 6,
+   "sites": [
+    "loads"
+   ],
+   "definition_level": false,
+   "files_changed": [
+    "src/tomli/_parser.py"
+   ]
+  },
+  {
+   "sha": "794c8e50",
+   "repo": "hukkin/tomli",
+   "status": "MEASURED",
+   "frames": {},
+   "frame_count": 0,
+   "failure_class": "AssertionError",
+   "has_source_frame": false,
+   "truth_lines": {
+    "src/tomli/_parser.py": [
+     78,
+     670,
+     670,
+     670,
+     670,
+     670,
+     670,
+     670,
+     670,
+     670,
+     670,
+     670,
+     670,
+     670,
+     670,
+     670,
+     670,
+     670,
+     670,
+     670,
+     670,
+     670
+    ]
+   },
+   "overlap": 0,
+   "kind": "DEFINITION_LEVEL",
+   "changed_lines": 17,
+   "sites": [
+    "<module>",
+    "loads"
+   ],
+   "definition_level": true,
+   "files_changed": [
+    "src/tomli/_parser.py"
+   ]
+  },
+  {
+   "sha": "8b962e13",
+   "repo": "hukkin/tomli",
+   "status": "MEASURED",
+   "frames": {
+    "src/tomli/_parser.py": [
+     77
+    ]
+   },
+   "frame_count": 1,
+   "failure_class": "AttributeError",
+   "has_source_frame": true,
+   "truth_lines": {
+    "src/tomli/_parser.py": [
+     77,
+     78,
+     79,
+     80,
+     81,
+     82,
+     83
+    ]
+   },
+   "overlap": 1,
+   "kind": "MULTI_SITE",
+   "changed_lines": 7,
+   "sites": [
+    "<module>",
+    "load",
+    "loads"
+   ],
+   "definition_level": false,
+   "files_changed": [
+    "src/tomli/_parser.py"
+   ]
+  }
+ ],
+ "authority": "NONE -- offline corpus measurement, no solve is claimed, no benchmark row"
+}

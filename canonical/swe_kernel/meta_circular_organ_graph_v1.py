@@ -3140,6 +3140,9 @@ def _synthesize_immediate_from_traces(
     return None
 
 
+_DEFAULT_POLICY_ORGAN_TEMPLATE: ExecutableOrgan | None = None
+
+
 def compile_policy_organ(
     *,
     name: str = "instrumental_policy",
@@ -3154,6 +3157,17 @@ def compile_policy_organ(
     Unlock-walk horizon is `max(horizon, len(board))` (the board, not a frozen
     3). `gamma` / cost-penalty live in the combiner body when supplied.
     """
+    global _DEFAULT_POLICY_ORGAN_TEMPLATE
+    is_default = (
+        name == "instrumental_policy"
+        and gamma == 0.92
+        and horizon == 3
+        and not empirical_burns
+        and not learned_immediate
+        and not combiner_src
+    )
+    if is_default and _DEFAULT_POLICY_ORGAN_TEMPLATE is not None:
+        return copy.deepcopy(_DEFAULT_POLICY_ORGAN_TEMPLATE)
     observed = {str(k): float(v) for k, v in dict(empirical_burns or {}).items()}
     imm_src = (learned_immediate or "").strip()
     comb_src = (combiner_src or "").strip()
@@ -3243,6 +3257,8 @@ def compile_policy_organ(
     )
     if observed or imm_src or comb_src:
         organ.verified_passes = max(1, len(observed) + (8 if imm_src else 0) + (4 if comb_src else 0))
+    if is_default and _DEFAULT_POLICY_ORGAN_TEMPLATE is None:
+        _DEFAULT_POLICY_ORGAN_TEMPLATE = copy.deepcopy(organ)
     return organ
 
 
@@ -4084,19 +4100,43 @@ class MetaCircularOrganGraph:
         self.growth_enabled: bool = True
         #: Hard cap on questions spent collecting evidence before deciding no structure is present.
         self.growth_evidence_budget: int = 24
+        #: Wall-clock budget, in ms, for policy evolution triggered by a wake transition.
+        #: MEASURED 2026-11-25: `evolve_policy_from_traces` runs the self-architect mutator and
+        #: DreamCoder-style `concept_library.sleep_abstract` synchronously inside
+        #: `record_wake_episode`, and one call took 3.4 s of a 3.4 s `solve_or_learn` -- the answer
+        #: was already built and verified; the caller waited on organ synthesis. Deferred, not
+        #: disabled: when the budget is spent the graph keeps accumulating traces
+        #: (`_world_transitions` persists) and evolves on a later transition or an explicit call.
+        #: 0 restores the old unbounded behaviour and is not the default.
+        self.policy_evolution_budget_ms: float = 250.0
+        self._evolution_deferred: int = 0
         self.convention_memory = ConventionMemory()
-        self.policy_archive: Any | None = None
-        if self.state_path is not None:
-            try:
-                from canonical.swe_kernel.recursive_self_architect_v1 import QualityDiversitySelfArchive
-
-                self.policy_archive = QualityDiversitySelfArchive(
-                    self.state_path.with_name("policy_qd_archive_v1.json")
-                )
-            except Exception:
-                self.policy_archive = None
+        self._policy_archive: Any | None = None
+        self._policy_archive_init: bool = False
         if self.state_path is not None and self.state_path.is_file():
             self._load()
+
+    @property
+    def policy_archive(self) -> Any | None:
+        if not self._policy_archive_init:
+            self._policy_archive_init = True
+            if self.state_path is not None:
+                try:
+                    from canonical.swe_kernel.recursive_self_architect_v1 import (
+                        QualityDiversitySelfArchive,
+                    )
+
+                    self._policy_archive = QualityDiversitySelfArchive(
+                        self.state_path.with_name("policy_qd_archive_v1.json")
+                    )
+                except Exception:
+                    self._policy_archive = None
+        return self._policy_archive
+
+    @policy_archive.setter
+    def policy_archive(self, value: Any | None) -> None:
+        self._policy_archive = value
+        self._policy_archive_init = True
 
     def _tap_policy_invoke(self, organ: ExecutableOrgan) -> None:
         """Remember the board a POLICY organ ranked. Perception that is thrown away cannot teach."""
@@ -4224,9 +4264,28 @@ class MetaCircularOrganGraph:
                 or len({t.get("value") for t in recent if t.get("value") is not None}) >= 2
             )
             if has_contrast:
-                self.evolve_policy_from_traces()
+                if self._evolution_budget_available():
+                    _t_evo = time.perf_counter()
+                    self.evolve_policy_from_traces()
+                    self._last_evolution_ms = (time.perf_counter() - _t_evo) * 1000.0
+                else:
+                    # The trace stays in `_world_transitions`; nothing is lost, only deferred.
+                    self._evolution_deferred += 1
         except Exception:
             return
+
+    def _evolution_budget_available(self) -> bool:
+        """Whether a wake transition may pay for policy synthesis.
+
+        Two conditions, both measured rather than assumed: the budget must not be zero, and the
+        previous evolution must have fit inside it. A single evolution that overruns does not
+        disable evolution -- it defers the NEXT one, so a slow machine evolves every other
+        transition instead of paying that cost on every answer.
+        """
+        budget = float(getattr(self, "policy_evolution_budget_ms", 250.0) or 0.0)
+        if budget <= 0.0:
+            return True  # unbounded, the historical behaviour
+        return float(getattr(self, "_last_evolution_ms", 0.0) or 0.0) <= budget
 
     def evolve_policy_from_traces(self) -> ExecutableOrgan | None:
         """Factory is bootstrap only. Successors mutate the incumbent organ under Ring-0."""

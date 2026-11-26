@@ -1,304 +1,380 @@
 {
-  "authority": "NONE",
-  "rows": {
-    "AUTHENTICATED_PARETO_SCHEDULE_V1": {
-      "canary_pass": "0/0",
-      "carrier": "SANDBOX",
-      "claim": "compile_schedule accepts a candidate list only if every candidate has a non-empty string id (no duplicates), all nine numeric metrics, and a measurement receipt that is independently verified, carries a 64-hex sha256 and whose subject_sha256 equals sha256 of the canonical JSON of {candidate_id, metrics}; any candidate with non-zero cost_usd_ucb, or an empty list, fails closed with the first offending candidate and reason named. On acceptance it returns the nondominated set (five benefit metrics maximised, four cost metrics minimised, textbook dominance) sorted by id and, for every dominated candidate, the sorted ids of its dominators; it never grants promotion or terminal authority and reports zero credit and zero spend.",
-      "fresh_pass_rate": 1.0,
-      "independent_oracle_ids": [
-        "REFERENCE_SCHEDULE",
-        "AUTHORITY_ENVELOPE",
-        "TAMPER_AFTER_RECEIPT_IS_REFUSED",
-        "PERMUTATION_INVARIANCE"
-      ],
-      "instances": 2000,
-      "kernel_git_blob_shas": {
-        "canonical/runtime/authenticated_pareto_scheduler_v1.py": "0d351964d29690e676f116480a69b8c979b8b54a"
-      },
-      "latest_receipt": "canonical/capabilities/true/receipts/AUTHENTICATED_PARETO_SCHEDULE_V1__463480e1295d2068.json",
-      "measured_utc": "2026-10-14T18:50:24Z",
-      "oracle_classes": {
-        "AUTHORITY_ENVELOPE": "PROPERTY",
-        "PERMUTATION_INVARIANCE": "METAMORPHIC",
-        "REFERENCE_SCHEDULE": "ANALYTIC_CLOSED_FORM",
-        "TAMPER_AFTER_RECEIPT_IS_REFUSED": "METAMORPHIC"
-      },
-      "scope_limits": [
-        "NO verification that the receipt sha256 refers to a real measurement; only the binding of metrics to the receipt subject is measured",
-        "NO claim about float rounding beyond exact equality of the supplied numbers"
-      ],
-      "seed_source": "OS_URANDOM",
-      "solver_git_blob_sha": "d7dbd9d320d27587d2dac228e16bc5b4eceba61a",
-      "spec_path": "canonical/capabilities/true/specs/AUTHENTICATED_PARETO_SCHEDULE_V1.json",
-      "status": "MEASURED_SANDBOX",
-      "verdict": "PASS"
-    },
-    "CAPABILITY_FIRST_RANKING_V1": {
-      "canary_pass": "0/0",
-      "carrier": "SANDBOX",
-      "claim": "Given a list of work items (id, work type, benchmark role, frontier class, new-primitive claim with its proof fields, load-bearing obligation references, exact non-negative leverage and cost numbers) and the number of open checkpoint obligations, rank_work returns every item exactly once, ordered by: eligible work before demoted work; then exact-fraction leverage score (capability + efficiency + reliability) x reuse breadth x generalization x success probability / (wall + compute + memory + complexity cost), descending; then checkpoint audit score (discharge + unlock) x success / wall, which is non-zero only while obligations are open and the item references one; then work id. Benchmark instrumentation without an allowed role, new-primitive claims whose six proof requirements are not all present, and open-world evidence frontier work without a concrete counterexample or verified defect are demoted with score 0. Inputs with an unknown work type, duplicate ids, negative numbers, success probability above 1 or zero total cost on eligible work are refused. The result is planning only: no execution authority and zero acceptance, capability, ownership and terminal credit.",
-      "fresh_pass_rate": 1.0,
-      "independent_oracle_ids": [
-        "REFERENCE_RANKING",
-        "ORDER_INVARIANTS",
-        "PERMUTATION_INVARIANCE",
-        "UNIFORM_COST_SCALING_INVARIANCE",
-        "NO_AUTHORITY_GRANTED"
-      ],
-      "instances": 2000,
-      "kernel_git_blob_shas": {
-        "canonical/runtime/capability_first_scheduler_v1.py": "6d2091cc1581b9aa1fd2c74e8a76519a41d9d957"
-      },
-      "latest_receipt": "canonical/capabilities/true/receipts/CAPABILITY_FIRST_RANKING_V1__b588e2cdf071cc62.json",
-      "measured_utc": "2026-10-14T18:50:17Z",
-      "oracle_classes": {
-        "NO_AUTHORITY_GRANTED": "PROPERTY",
-        "ORDER_INVARIANTS": "PROPERTY",
-        "PERMUTATION_INVARIANCE": "METAMORPHIC",
-        "REFERENCE_RANKING": "ANALYTIC_CLOSED_FORM",
-        "UNIFORM_COST_SCALING_INVARIANCE": "METAMORPHIC"
-      },
-      "scope_limits": [
-        "NO shared-residual fan-out tie-break: items never carry shared_residual_cause_ids, so the repository residual ledger is never read",
-        "NO live authority reading: checkpoint_open_obligation_count is always supplied; rank_live_work and the current-authority file are out of scope",
-        "NO validation of malformed id lists or non-string identifiers beyond what the generator emits"
-      ],
-      "seed_source": "OS_URANDOM",
-      "solver_git_blob_sha": "d7dbd9d320d27587d2dac228e16bc5b4eceba61a",
-      "spec_path": "canonical/capabilities/true/specs/CAPABILITY_FIRST_RANKING_V1.json",
-      "status": "MEASURED_SANDBOX",
-      "verdict": "PASS"
-    },
-    "DOCX_EXACT_TEXT_EDIT_V1": {
-      "canary_pass": "0/0",
-      "carrier": "SANDBOX",
-      "claim": "Given a .docx package and an exact text-node value that occurs exactly once in word/document.xml, produce a package in which that single text node is replaced and every other package member is byte-identical; when the value occurs zero or several times, fail closed and write nothing.",
-      "fresh_pass_rate": 1.0,
-      "independent_oracle_ids": [
-        "EXPECTED_OUTCOME",
-        "PACKAGE_INTEGRITY",
-        "INVERSE_EDIT_RESTORES"
-      ],
-      "instances": 3000,
-      "latest_receipt": "canonical/capabilities/true/receipts/DOCX_EXACT_TEXT_EDIT_V1__1ec1c01b914478ca.json",
-      "measured_utc": "2026-10-14T17:55:14Z",
-      "oracle_classes": {
-        "EXPECTED_OUTCOME": "ANALYTIC_CLOSED_FORM",
-        "INVERSE_EDIT_RESTORES": "METAMORPHIC",
-        "PACKAGE_INTEGRITY": "PROPERTY"
-      },
-      "scope_limits": [
-        "NO replacement of text spanning several runs or text nodes",
-        "NO visual-layout, tracked-changes, comments, headers/footers or numbering guarantees",
-        "NO general DOCX editing; one exact text node per call",
-        "NO no-op edits: new == old fails closed by design and is outside the input class"
-      ],
-      "seed_source": "OS_URANDOM",
-      "solver_git_blob_sha": "c137d9d05de3822a0bac6f2d52d1f4446f2682da",
-      "spec_path": "canonical/capabilities/true/specs/DOCX_EXACT_TEXT_EDIT_V1.json",
-      "status": "MEASURED_SANDBOX",
-      "verdict": "PASS"
-    },
-    "DOCX_RUN_SPAN_REPLACE_V1": {
-      "canary_pass": "0/0",
-      "carrier": "SANDBOX",
-      "claim": "Given a .docx package and a target string that occurs exactly once (counting overlapping occurrences) in the visible text of the paragraphs of word/document.xml - possibly spanning several runs and text nodes - produce a package whose paragraph texts equal the originals with that single span replaced, with the same number of paragraphs and text nodes and every other member byte-identical; when the target occurs zero or several times, fail closed and write nothing.",
-      "fresh_pass_rate": 1.0,
-      "independent_oracle_ids": [
-        "EXPECTED_OUTCOME",
-        "PACKAGE_INTEGRITY",
-        "INVERSE_EDIT_RESTORES"
-      ],
-      "instances": 2000,
-      "kernel_git_blob_shas": {
-        "canonical/runtime/docx_run_span_replace.py": "915cea0532a1a304f2f08c764135d2f6f44614e5"
-      },
-      "latest_receipt": "canonical/capabilities/true/receipts/DOCX_RUN_SPAN_REPLACE_V1__2890e390b84f468d.json",
-      "measured_utc": "2026-10-14T19:13:36Z",
-      "oracle_classes": {
-        "EXPECTED_OUTCOME": "ANALYTIC_CLOSED_FORM",
-        "INVERSE_EDIT_RESTORES": "METAMORPHIC",
-        "PACKAGE_INTEGRITY": "PROPERTY"
-      },
-      "scope_limits": [
-        "NO targets spanning two paragraphs",
-        "NO visual-layout, tracked-changes, fields or numbering guarantees",
-        "NO headers/footers/footnotes (see DOCX_STORY_PART_REPLACE_V1)",
-        "NO general DOCX editing; one span per call"
-      ],
-      "seed_source": "OS_URANDOM",
-      "solver_git_blob_sha": "0008bed08fa3e17587a4af04e5bce04ff81fc8d2",
-      "spec_path": "canonical/capabilities/true/specs/DOCX_RUN_SPAN_REPLACE_V1.json",
-      "status": "MEASURED_SANDBOX",
-      "verdict": "PASS"
-    },
-    "DOCX_STORY_PART_REPLACE_V1": {
-      "canary_pass": "0/0",
-      "carrier": "SANDBOX",
-      "claim": "Given a .docx package, a story part name (word/headerN.xml, word/footerN.xml, word/footnotes.xml, word/endnotes.xml or word/comments.xml) and a target string that occurs exactly once (overlapping count) in the paragraph texts of that part, produce a package in which only that part is changed, its paragraph texts equal the originals with the span replaced, and every other member - including word/document.xml even when it contains the same text - is byte-identical; when the part name is not a story part, the part is missing, or the target is absent or repeated inside the part, fail closed and write nothing.",
-      "fresh_pass_rate": 1.0,
-      "independent_oracle_ids": [
-        "EXPECTED_OUTCOME",
-        "PACKAGE_INTEGRITY",
-        "INVERSE_EDIT_RESTORES"
-      ],
-      "instances": 2000,
-      "kernel_git_blob_shas": {
-        "canonical/runtime/docx_story_part_replace.py": "d908ef95b4abe7d4d52be5700f94cd65e25de4f6"
-      },
-      "latest_receipt": "canonical/capabilities/true/receipts/DOCX_STORY_PART_REPLACE_V1__e098d8db05ee5d56.json",
-      "measured_utc": "2026-10-14T19:13:54Z",
-      "oracle_classes": {
-        "EXPECTED_OUTCOME": "ANALYTIC_CLOSED_FORM",
-        "INVERSE_EDIT_RESTORES": "METAMORPHIC",
-        "PACKAGE_INTEGRITY": "PROPERTY"
-      },
-      "scope_limits": [
-        "NO body edits through this entry",
-        "NO targets spanning two paragraphs",
-        "NO creation of missing parts",
-        "NO visual-layout, tracked-changes, fields or numbering guarantees"
-      ],
-      "seed_source": "OS_URANDOM",
-      "solver_git_blob_sha": "0008bed08fa3e17587a4af04e5bce04ff81fc8d2",
-      "spec_path": "canonical/capabilities/true/specs/DOCX_STORY_PART_REPLACE_V1.json",
-      "status": "MEASURED_SANDBOX",
-      "verdict": "PASS"
-    },
-    "DOCX_TEXT_EDIT_TRANSACTION_V1": {
-      "canary_pass": "0/0",
-      "carrier": "SANDBOX",
-      "claim": "Given a .docx package and 1-64 (old,new) edits, apply all of them to word/document.xml atomically: every target must occur exactly once (overlapping count) in the paragraph texts and no two target spans may overlap (touching spans are allowed); then the output paragraph texts equal the originals with every span replaced and every other member is byte-identical. If any target is absent, repeated or overlaps another, or an edit is impossible, fail closed and write nothing.",
-      "fresh_pass_rate": 1.0,
-      "independent_oracle_ids": [
-        "EXPECTED_OUTCOME",
-        "PACKAGE_INTEGRITY",
-        "ATOMICITY_AND_INVERSE"
-      ],
-      "instances": 2000,
-      "kernel_git_blob_shas": {
-        "canonical/runtime/docx_text_edit_transaction.py": "5ada9da10b7fdc6592373a1ae2eaa579ee7992de"
-      },
-      "latest_receipt": "canonical/capabilities/true/receipts/DOCX_TEXT_EDIT_TRANSACTION_V1__9e73768fd0f238e0.json",
-      "measured_utc": "2026-10-14T19:13:46Z",
-      "oracle_classes": {
-        "ATOMICITY_AND_INVERSE": "METAMORPHIC",
-        "EXPECTED_OUTCOME": "ANALYTIC_CLOSED_FORM",
-        "PACKAGE_INTEGRITY": "PROPERTY"
-      },
-      "scope_limits": [
-        "NO more than 64 edits per call",
-        "NO targets spanning two paragraphs",
-        "NO headers/footers/footnotes",
-        "NO visual-layout, tracked-changes, fields or numbering guarantees"
-      ],
-      "seed_source": "OS_URANDOM",
-      "solver_git_blob_sha": "0008bed08fa3e17587a4af04e5bce04ff81fc8d2",
-      "spec_path": "canonical/capabilities/true/specs/DOCX_TEXT_EDIT_TRANSACTION_V1.json",
-      "status": "MEASURED_SANDBOX",
-      "verdict": "PASS"
-    },
-    "PARETO_FRONTIER_UPDATE_V1": {
-      "canary_pass": "0/0",
-      "carrier": "SANDBOX",
-      "claim": "Folding a sequence of candidates into an initially empty frontier with update_pareto_frontier: a candidate without a capability id is refused; a candidate that is not marked reusable, or not independently verified, is not admitted (with the matching reason) and the frontier is unchanged; a candidate with a negative metric is refused; a candidate dominated by an incumbent (no worse on capability, generalization and reliability and on latency, compute, memory and spend, strictly better somewhere, and with the same semantic contract when both declare one) is not admitted and the dominating incumbent is named; otherwise it is admitted, every incumbent it dominates is retired from the active frontier (never deleted, no deletion authority), and the frontier stays sorted by capability id.",
-      "fresh_pass_rate": 1.0,
-      "independent_oracle_ids": [
-        "REFERENCE_FOLD",
-        "FRONTIER_INVARIANTS",
-        "UNIFORM_SCALING_INVARIANCE"
-      ],
-      "instances": 2000,
-      "kernel_git_blob_shas": {
-        "canonical/runtime/capability_first_scheduler_v1.py": "6d2091cc1581b9aa1fd2c74e8a76519a41d9d957"
-      },
-      "latest_receipt": "canonical/capabilities/true/receipts/PARETO_FRONTIER_UPDATE_V1__ded725829226d120.json",
-      "measured_utc": "2026-10-14T18:50:23Z",
-      "oracle_classes": {
-        "FRONTIER_INVARIANTS": "PROPERTY",
-        "REFERENCE_FOLD": "ANALYTIC_CLOSED_FORM",
-        "UNIFORM_SCALING_INVARIANCE": "METAMORPHIC"
-      },
-      "scope_limits": [
-        "NO physical deletion semantics (option_preserving_capability_optimizer is a separate component)",
-        "NO claim about order-independence of the final frontier across differing semantic contracts"
-      ],
-      "seed_source": "OS_URANDOM",
-      "solver_git_blob_sha": "d7dbd9d320d27587d2dac228e16bc5b4eceba61a",
-      "spec_path": "canonical/capabilities/true/specs/PARETO_FRONTIER_UPDATE_V1.json",
-      "status": "MEASURED_SANDBOX",
-      "verdict": "PASS"
-    },
-    "SACCR_CREDIT_ADDON_V1": {
-      "canary_pass": "1/1",
-      "carrier": "SANDBOX",
-      "claim": "Given a portfolio of linear single-name and index credit derivatives, compute the Basel SA-CCR credit asset-class add-on (CRE52.34, 52.48, 52.50, 52.55-52.72) with an explicit intermediate trace per trade.",
-      "fresh_pass_rate": 1.0,
-      "independent_oracle_ids": [
-        "CRE52_CLOSED_FORM",
-        "OFFSET_CANCELS",
-        "NOTIONAL_HOMOGENEITY"
-      ],
-      "instances": 2000,
-      "latest_receipt": "canonical/capabilities/true/receipts/SACCR_CREDIT_ADDON_V1__3e600b175e196a2e.json",
-      "measured_utc": "2026-10-14T16:30:19Z",
-      "oracle_classes": {
-        "CRE52_CLOSED_FORM": "ANALYTIC_CLOSED_FORM",
-        "DONOR_DIFFERENTIAL": "DIFFERENTIAL_EXTERNAL",
-        "NOTIONAL_HOMOGENEITY": "METAMORPHIC",
-        "OFFSET_CANCELS": "METAMORPHIC",
-        "SINGLE_ENTITY_BOUNDS": "PROPERTY"
-      },
-      "scope_limits": [
-        "NO options or CDO tranche deltas",
-        "NO replacement cost, PFE multiplier or whole netting-set EAD",
-        "NO rating/entity inference from documents; inputs are already structured",
-        "entity with mixed supervisory factor or correlation fails closed (ValueError) by design"
-      ],
-      "seed_source": "OS_URANDOM",
-      "solver_git_blob_sha": "fb451d4a413ec537321920a5182e717f5079e512",
-      "spec_path": "canonical/capabilities/true/specs/SACCR_CREDIT_ADDON_V1.json",
-      "status": "MEASURED_SANDBOX",
-      "verdict": "PASS"
-    },
-    "SAME_IDENTITY_SUPERVISOR_V1": {
-      "canary_pass": "0/0",
-      "carrier": "SANDBOX",
-      "claim": "Given a repository root with task manifests (PROJECT_BRAIN_SAME_IDENTITY_TASK_V1), mission files and prerequisite files, and an arbitrary interleaving of choose / claim / execute operations issued by the durable worker identity and by an intruder identity while manifests, missions and prerequisites are edited underneath it, the supervisor (1) chooses only causally-ready tasks (valid manifest for that identity, every prerequisite present and hash-bound, mission file hash-bound, not terminal), highest priority first and smallest task id on ties; (2) lets exactly one identity hold a task lease - a different identity never claims, resumes or executes a leased task and the lease owner never changes; (3) refuses to claim or execute after the manifest or mission drifted from the bound hashes; (4) checkpoints once before the first runtime launch when the manifest asks for it (exit 75, runtime not launched); (5) maps the runtime exit code to COMPLETE (0) / BLOCKED (3,4,5) / FAILED (other) and never launches the runtime again once a task is COMPLETE or FAILED; (6) keeps an append-only, contiguously numbered event log per task and writes one evidence receipt per checkpoint and per runtime attempt.",
-      "fresh_pass_rate": 1.0,
-      "independent_oracle_ids": [
-        "REFERENCE_MODEL_TRACE",
-        "LEASE_EXCLUSIVITY",
-        "NO_TERMINAL_REEXECUTION",
-        "EVENT_LOG_INTEGRITY",
-        "PRIORITY_SHIFT_INVARIANCE"
-      ],
-      "instances": 2000,
-      "kernel_git_blob_shas": {},
-      "latest_receipt": "canonical/capabilities/true/receipts/SAME_IDENTITY_SUPERVISOR_V1__3b246db7861650fb.json",
-      "measured_utc": "2026-11-25T18:28:31Z",
-      "oracle_classes": {
-        "EVENT_LOG_INTEGRITY": "PROPERTY",
-        "LEASE_EXCLUSIVITY": "PROPERTY",
-        "NO_TERMINAL_REEXECUTION": "PROPERTY",
-        "PRIORITY_SHIFT_INVARIANCE": "METAMORPHIC",
-        "REFERENCE_MODEL_TRACE": "ANALYTIC_CLOSED_FORM"
-      },
-      "scope_limits": [
-        "NO continuous-OBS context validation: instance roots carry no canonical/CANONICAL_POINTER.json and missions carry no continuous_obs block, so continuous_obs_runtime.validate_context is never exercised (separately measurable)",
-        "NO real runtime process: the executor is injected and returns scripted exit codes; the default subprocess executor and the ASTRA launcher are out of scope",
-        "NO concurrent-process lock contention: operations are sequential in one process; the inter-process claim lock is not measured",
-        "NO lease-expiry semantics: lease_seconds is never exceeded inside an instance",
-        "NO guarantee about state files written by anything other than the supervisor itself"
-      ],
-      "seed_source": "OS_URANDOM",
-      "solver_git_blob_sha": "ae66843e0d178801889a77e7700769a45a78b57e",
-      "spec_path": "canonical/capabilities/true/specs/SAME_IDENTITY_SUPERVISOR_V1.json",
-      "status": "MEASURED_SANDBOX",
-      "verdict": "PASS"
-    }
+ "authority": "NONE",
+ "rows": {
+  "AUTHENTICATED_PARETO_SCHEDULE_V1": {
+   "canary_pass": "0/0",
+   "carrier": "SANDBOX",
+   "claim": "compile_schedule accepts a candidate list only if every candidate has a non-empty string id (no duplicates), all nine numeric metrics, and a measurement receipt that is independently verified, carries a 64-hex sha256 and whose subject_sha256 equals sha256 of the canonical JSON of {candidate_id, metrics}; any candidate with non-zero cost_usd_ucb, or an empty list, fails closed with the first offending candidate and reason named. On acceptance it returns the nondominated set (five benefit metrics maximised, four cost metrics minimised, textbook dominance) sorted by id and, for every dominated candidate, the sorted ids of its dominators; it never grants promotion or terminal authority and reports zero credit and zero spend.",
+   "fresh_pass_rate": 1.0,
+   "independent_oracle_ids": [
+    "REFERENCE_SCHEDULE",
+    "AUTHORITY_ENVELOPE",
+    "TAMPER_AFTER_RECEIPT_IS_REFUSED",
+    "PERMUTATION_INVARIANCE"
+   ],
+   "instances": 2000,
+   "kernel_git_blob_shas": {
+    "canonical/runtime/authenticated_pareto_scheduler_v1.py": "0d351964d29690e676f116480a69b8c979b8b54a"
+   },
+   "latest_receipt": "canonical/capabilities/true/receipts/AUTHENTICATED_PARETO_SCHEDULE_V1__463480e1295d2068.json",
+   "measured_utc": "2026-10-14T18:50:24Z",
+   "oracle_classes": {
+    "AUTHORITY_ENVELOPE": "PROPERTY",
+    "PERMUTATION_INVARIANCE": "METAMORPHIC",
+    "REFERENCE_SCHEDULE": "ANALYTIC_CLOSED_FORM",
+    "TAMPER_AFTER_RECEIPT_IS_REFUSED": "METAMORPHIC"
+   },
+   "scope_limits": [
+    "NO verification that the receipt sha256 refers to a real measurement; only the binding of metrics to the receipt subject is measured",
+    "NO claim about float rounding beyond exact equality of the supplied numbers"
+   ],
+   "seed_source": "OS_URANDOM",
+   "solver_git_blob_sha": "d7dbd9d320d27587d2dac228e16bc5b4eceba61a",
+   "spec_path": "canonical/capabilities/true/specs/AUTHENTICATED_PARETO_SCHEDULE_V1.json",
+   "status": "MEASURED_SANDBOX",
+   "verdict": "PASS"
   },
-  "rule": "Rows are written only by execution_guard/true_capability_harness_v1.py from a receipt. A row is a measurement, not a claim; status MEASURED_SANDBOX never counts; status MEASURED_PUBLIC_RUNNER counts only when the receipt is referee-signed.",
-  "schema": "TRUE_CAPABILITY_LEDGER_V1"
+  "CAPABILITY_FIRST_RANKING_V1": {
+   "canary_pass": "0/0",
+   "carrier": "SANDBOX",
+   "claim": "Given a list of work items (id, work type, benchmark role, frontier class, new-primitive claim with its proof fields, load-bearing obligation references, exact non-negative leverage and cost numbers) and the number of open checkpoint obligations, rank_work returns every item exactly once, ordered by: eligible work before demoted work; then exact-fraction leverage score (capability + efficiency + reliability) x reuse breadth x generalization x success probability / (wall + compute + memory + complexity cost), descending; then checkpoint audit score (discharge + unlock) x success / wall, which is non-zero only while obligations are open and the item references one; then work id. Benchmark instrumentation without an allowed role, new-primitive claims whose six proof requirements are not all present, and open-world evidence frontier work without a concrete counterexample or verified defect are demoted with score 0. Inputs with an unknown work type, duplicate ids, negative numbers, success probability above 1 or zero total cost on eligible work are refused. The result is planning only: no execution authority and zero acceptance, capability, ownership and terminal credit.",
+   "fresh_pass_rate": 1.0,
+   "independent_oracle_ids": [
+    "REFERENCE_RANKING",
+    "ORDER_INVARIANTS",
+    "PERMUTATION_INVARIANCE",
+    "UNIFORM_COST_SCALING_INVARIANCE",
+    "NO_AUTHORITY_GRANTED"
+   ],
+   "instances": 2000,
+   "kernel_git_blob_shas": {
+    "canonical/runtime/capability_first_scheduler_v1.py": "6d2091cc1581b9aa1fd2c74e8a76519a41d9d957"
+   },
+   "latest_receipt": "canonical/capabilities/true/receipts/CAPABILITY_FIRST_RANKING_V1__b588e2cdf071cc62.json",
+   "measured_utc": "2026-10-14T18:50:17Z",
+   "oracle_classes": {
+    "NO_AUTHORITY_GRANTED": "PROPERTY",
+    "ORDER_INVARIANTS": "PROPERTY",
+    "PERMUTATION_INVARIANCE": "METAMORPHIC",
+    "REFERENCE_RANKING": "ANALYTIC_CLOSED_FORM",
+    "UNIFORM_COST_SCALING_INVARIANCE": "METAMORPHIC"
+   },
+   "scope_limits": [
+    "NO shared-residual fan-out tie-break: items never carry shared_residual_cause_ids, so the repository residual ledger is never read",
+    "NO live authority reading: checkpoint_open_obligation_count is always supplied; rank_live_work and the current-authority file are out of scope",
+    "NO validation of malformed id lists or non-string identifiers beyond what the generator emits"
+   ],
+   "seed_source": "OS_URANDOM",
+   "solver_git_blob_sha": "d7dbd9d320d27587d2dac228e16bc5b4eceba61a",
+   "spec_path": "canonical/capabilities/true/specs/CAPABILITY_FIRST_RANKING_V1.json",
+   "status": "MEASURED_SANDBOX",
+   "verdict": "PASS"
+  },
+  "DOCX_EXACT_TEXT_EDIT_V1": {
+   "canary_pass": "0/0",
+   "carrier": "SANDBOX",
+   "claim": "Given a .docx package and an exact text-node value that occurs exactly once in word/document.xml, produce a package in which that single text node is replaced and every other package member is byte-identical; when the value occurs zero or several times, fail closed and write nothing.",
+   "fresh_pass_rate": 1.0,
+   "independent_oracle_ids": [
+    "EXPECTED_OUTCOME",
+    "PACKAGE_INTEGRITY",
+    "INVERSE_EDIT_RESTORES"
+   ],
+   "instances": 3000,
+   "latest_receipt": "canonical/capabilities/true/receipts/DOCX_EXACT_TEXT_EDIT_V1__1ec1c01b914478ca.json",
+   "measured_utc": "2026-10-14T17:55:14Z",
+   "oracle_classes": {
+    "EXPECTED_OUTCOME": "ANALYTIC_CLOSED_FORM",
+    "INVERSE_EDIT_RESTORES": "METAMORPHIC",
+    "PACKAGE_INTEGRITY": "PROPERTY"
+   },
+   "scope_limits": [
+    "NO replacement of text spanning several runs or text nodes",
+    "NO visual-layout, tracked-changes, comments, headers/footers or numbering guarantees",
+    "NO general DOCX editing; one exact text node per call",
+    "NO no-op edits: new == old fails closed by design and is outside the input class"
+   ],
+   "seed_source": "OS_URANDOM",
+   "solver_git_blob_sha": "c137d9d05de3822a0bac6f2d52d1f4446f2682da",
+   "spec_path": "canonical/capabilities/true/specs/DOCX_EXACT_TEXT_EDIT_V1.json",
+   "status": "MEASURED_SANDBOX",
+   "verdict": "PASS"
+  },
+  "DOCX_RUN_SPAN_REPLACE_V1": {
+   "canary_pass": "0/0",
+   "carrier": "SANDBOX",
+   "claim": "Given a .docx package and a target string that occurs exactly once (counting overlapping occurrences) in the visible text of the paragraphs of word/document.xml - possibly spanning several runs and text nodes - produce a package whose paragraph texts equal the originals with that single span replaced, with the same number of paragraphs and text nodes and every other member byte-identical; when the target occurs zero or several times, fail closed and write nothing.",
+   "fresh_pass_rate": 1.0,
+   "independent_oracle_ids": [
+    "EXPECTED_OUTCOME",
+    "PACKAGE_INTEGRITY",
+    "INVERSE_EDIT_RESTORES"
+   ],
+   "instances": 2000,
+   "kernel_git_blob_shas": {
+    "canonical/runtime/docx_run_span_replace.py": "915cea0532a1a304f2f08c764135d2f6f44614e5"
+   },
+   "latest_receipt": "canonical/capabilities/true/receipts/DOCX_RUN_SPAN_REPLACE_V1__2890e390b84f468d.json",
+   "measured_utc": "2026-10-14T19:13:36Z",
+   "oracle_classes": {
+    "EXPECTED_OUTCOME": "ANALYTIC_CLOSED_FORM",
+    "INVERSE_EDIT_RESTORES": "METAMORPHIC",
+    "PACKAGE_INTEGRITY": "PROPERTY"
+   },
+   "scope_limits": [
+    "NO targets spanning two paragraphs",
+    "NO visual-layout, tracked-changes, fields or numbering guarantees",
+    "NO headers/footers/footnotes (see DOCX_STORY_PART_REPLACE_V1)",
+    "NO general DOCX editing; one span per call"
+   ],
+   "seed_source": "OS_URANDOM",
+   "solver_git_blob_sha": "0008bed08fa3e17587a4af04e5bce04ff81fc8d2",
+   "spec_path": "canonical/capabilities/true/specs/DOCX_RUN_SPAN_REPLACE_V1.json",
+   "status": "MEASURED_SANDBOX",
+   "verdict": "PASS"
+  },
+  "DOCX_STORY_PART_REPLACE_V1": {
+   "canary_pass": "0/0",
+   "carrier": "SANDBOX",
+   "claim": "Given a .docx package, a story part name (word/headerN.xml, word/footerN.xml, word/footnotes.xml, word/endnotes.xml or word/comments.xml) and a target string that occurs exactly once (overlapping count) in the paragraph texts of that part, produce a package in which only that part is changed, its paragraph texts equal the originals with the span replaced, and every other member - including word/document.xml even when it contains the same text - is byte-identical; when the part name is not a story part, the part is missing, or the target is absent or repeated inside the part, fail closed and write nothing.",
+   "fresh_pass_rate": 1.0,
+   "independent_oracle_ids": [
+    "EXPECTED_OUTCOME",
+    "PACKAGE_INTEGRITY",
+    "INVERSE_EDIT_RESTORES"
+   ],
+   "instances": 2000,
+   "kernel_git_blob_shas": {
+    "canonical/runtime/docx_story_part_replace.py": "d908ef95b4abe7d4d52be5700f94cd65e25de4f6"
+   },
+   "latest_receipt": "canonical/capabilities/true/receipts/DOCX_STORY_PART_REPLACE_V1__e098d8db05ee5d56.json",
+   "measured_utc": "2026-10-14T19:13:54Z",
+   "oracle_classes": {
+    "EXPECTED_OUTCOME": "ANALYTIC_CLOSED_FORM",
+    "INVERSE_EDIT_RESTORES": "METAMORPHIC",
+    "PACKAGE_INTEGRITY": "PROPERTY"
+   },
+   "scope_limits": [
+    "NO body edits through this entry",
+    "NO targets spanning two paragraphs",
+    "NO creation of missing parts",
+    "NO visual-layout, tracked-changes, fields or numbering guarantees"
+   ],
+   "seed_source": "OS_URANDOM",
+   "solver_git_blob_sha": "0008bed08fa3e17587a4af04e5bce04ff81fc8d2",
+   "spec_path": "canonical/capabilities/true/specs/DOCX_STORY_PART_REPLACE_V1.json",
+   "status": "MEASURED_SANDBOX",
+   "verdict": "PASS"
+  },
+  "DOCX_TEXT_EDIT_TRANSACTION_V1": {
+   "canary_pass": "0/0",
+   "carrier": "SANDBOX",
+   "claim": "Given a .docx package and 1-64 (old,new) edits, apply all of them to word/document.xml atomically: every target must occur exactly once (overlapping count) in the paragraph texts and no two target spans may overlap (touching spans are allowed); then the output paragraph texts equal the originals with every span replaced and every other member is byte-identical. If any target is absent, repeated or overlaps another, or an edit is impossible, fail closed and write nothing.",
+   "fresh_pass_rate": 1.0,
+   "independent_oracle_ids": [
+    "EXPECTED_OUTCOME",
+    "PACKAGE_INTEGRITY",
+    "ATOMICITY_AND_INVERSE"
+   ],
+   "instances": 2000,
+   "kernel_git_blob_shas": {
+    "canonical/runtime/docx_text_edit_transaction.py": "5ada9da10b7fdc6592373a1ae2eaa579ee7992de"
+   },
+   "latest_receipt": "canonical/capabilities/true/receipts/DOCX_TEXT_EDIT_TRANSACTION_V1__9e73768fd0f238e0.json",
+   "measured_utc": "2026-10-14T19:13:46Z",
+   "oracle_classes": {
+    "ATOMICITY_AND_INVERSE": "METAMORPHIC",
+    "EXPECTED_OUTCOME": "ANALYTIC_CLOSED_FORM",
+    "PACKAGE_INTEGRITY": "PROPERTY"
+   },
+   "scope_limits": [
+    "NO more than 64 edits per call",
+    "NO targets spanning two paragraphs",
+    "NO headers/footers/footnotes",
+    "NO visual-layout, tracked-changes, fields or numbering guarantees"
+   ],
+   "seed_source": "OS_URANDOM",
+   "solver_git_blob_sha": "0008bed08fa3e17587a4af04e5bce04ff81fc8d2",
+   "spec_path": "canonical/capabilities/true/specs/DOCX_TEXT_EDIT_TRANSACTION_V1.json",
+   "status": "MEASURED_SANDBOX",
+   "verdict": "PASS"
+  },
+  "FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1": {
+   "canary_pass": "0/0",
+   "carrier": "SANDBOX",
+   "claim": "Asked through the front door in one of fifteen plain phrasings, a request to copy a file to a new name, to rename a file to a new name, or to append one line to a file leaves the folder holding exactly what the request determines and nothing else changed; the same request with a word no row accounts for, with a destination that already exists, or naming a file that is not there is refused and the folder is left byte for byte as it was.",
+   "fresh_pass_rate": 1.0,
+   "independent_oracle_ids": [
+    "FOLDER_BY_CONSTRUCTION"
+   ],
+   "instances": 500,
+   "kernel_git_blob_shas": {
+    "canonical/runtime/bound_capabilities/file_edit.py": "0d55efa6d0a04025bee525f686e622abf301f198",
+    "canonical/runtime/bound_capabilities/file_ops.py": "7e0cf6a1c83348a032fbf40a623e8a2126a44f70",
+    "canonical/runtime/bound_capabilities/stated_file_path.py": "1d76b8b8a6cf10d5bd27b04ea95778b2577621e8",
+    "canonical/runtime/file_artifact_expectation_v1.py": "37944a7a2467f5069d415d03e9f937b917a62ff7",
+    "canonical/runtime/goal_compiler.py": "2737338025c6ae964e5af7dabd07ca86b80c4e42",
+    "canonical/runtime/goal_front_compiler_v1.py": "555bb25a0fbcac8592e8481b2aa09c7788e88bd1",
+    "canonical/runtime/live_brain_route_admission_v1.py": "1d1585a96d5f40a5dc28fce53262f643ca7fc3f3"
+   },
+   "latest_receipt": "canonical/capabilities/true/receipts/FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1__47bef8f1ea2618ef.json",
+   "measured_utc": "2026-11-25T22:36:13Z",
+   "oracle_classes": {
+    "ASKED_AGAIN_RELATION": "METAMORPHIC",
+    "FOLDER_BY_CONSTRUCTION": "ANALYTIC_CLOSED_FORM",
+    "UNTOUCHED_AND_BY_THE_ROW": "PROPERTY"
+   },
+   "scope_limits": [
+    "NO phrasing outside the fifteen in the generator's tables; other wordings are mostly refused and that is not measured here",
+    "NO overwriting: a request that asks to replace an existing destination is never generated",
+    "NO directories as source or destination, no destination in another or a missing folder, no absolute paths, no path outside the repository",
+    "NO appended line that is an ordinary English word, contains a quotation mark, or spans lines",
+    "NO files above a few hundred bytes, no binary content, no symbolic links, no concurrent writers",
+    "NO claim about any other file operation, and nothing that starts a program"
+   ],
+   "seed_source": "OS_URANDOM",
+   "solver_git_blob_sha": "5e907c5001e3adf6180713a178ab3ae0184054fc",
+   "spec_path": "canonical/capabilities/true/specs/FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1.json",
+   "status": "MEASURED_SANDBOX",
+   "verdict": "PASS"
+  },
+  "FILE_QUESTION_TAUGHT_WORDS_V1": {
+   "canary_pass": "0/0",
+   "carrier": "SANDBOX",
+   "claim": "Asked through the front door, a sentence that names one UTF-8 text file and is otherwise made only of words whose meaning was taught by example answers gets the whole number those words determine for that file (how many, how many different, how many blank, how many containing a stated text, the sum, the largest, the smallest, the length of the longest or shortest line, each optionally after the first); the same sentence with one untaught word in it gets no answer.",
+   "fresh_pass_rate": 1.0,
+   "independent_oracle_ids": [
+    "VALUE_BY_CONSTRUCTION"
+   ],
+   "instances": 500,
+   "kernel_git_blob_shas": {
+    "canonical/runtime/TAUGHT_WORD_LESSONS_V1.json": "c72d3c01fead8c31d02a6488c719b55a5bd69144",
+    "canonical/runtime/TAUGHT_WORD_LEXICON_V1.json": "86be1cd670ba5919d02726e8797060af1930ead7",
+    "canonical/runtime/bound_capabilities/file_question_taught_words.py": "53b8fcf1f3bf63da8c47806c696de6bd4e8719c0",
+    "canonical/runtime/live_brain_route_admission_v1.py": "1d1585a96d5f40a5dc28fce53262f643ca7fc3f3",
+    "canonical/runtime/taught_words_check_v1.py": "039316ffae32457e2a141ae08460d7e50e58f034",
+    "canonical/runtime/taught_words_v1.py": "bc435677a974c3b636a9ff9506481a5d29004d6d"
+   },
+   "latest_receipt": "canonical/capabilities/true/receipts/FILE_QUESTION_TAUGHT_WORDS_V1__21c33d583f3e2682.json",
+   "measured_utc": "2026-11-25T22:37:55Z",
+   "oracle_classes": {
+    "ANSWER_ENVELOPE": "PROPERTY",
+    "DOUBLED_FILE_RELATION": "METAMORPHIC",
+    "VALUE_BY_CONSTRUCTION": "ANALYTIC_CLOSED_FORM"
+   },
+   "scope_limits": [
+    "NO sentence outside the generator's phrase tables: the lexicon holds 28 words and anything else is refused, which is measured only for one inserted word",
+    "NO word order: 'after the first' is never combined with another filter, because the row applies its parts in one fixed order and English does not",
+    "NO whitespace-only lines, tabs, carriage returns, non-UTF-8 bytes, files above 4 MiB, directories, or two files in one sentence",
+    "NO claim that the lessons are sufficient to learn any further word; the learner is not measured here, only the answers the stored lexicon gives",
+    "NO operation that changes a file, and nothing that starts a program"
+   ],
+   "seed_source": "OS_URANDOM",
+   "solver_git_blob_sha": "b01876a44f4f6b6b19b8bf3970239eee8166a89a",
+   "spec_path": "canonical/capabilities/true/specs/FILE_QUESTION_TAUGHT_WORDS_V1.json",
+   "status": "MEASURED_SANDBOX",
+   "verdict": "PASS"
+  },
+  "PARETO_FRONTIER_UPDATE_V1": {
+   "canary_pass": "0/0",
+   "carrier": "SANDBOX",
+   "claim": "Folding a sequence of candidates into an initially empty frontier with update_pareto_frontier: a candidate without a capability id is refused; a candidate that is not marked reusable, or not independently verified, is not admitted (with the matching reason) and the frontier is unchanged; a candidate with a negative metric is refused; a candidate dominated by an incumbent (no worse on capability, generalization and reliability and on latency, compute, memory and spend, strictly better somewhere, and with the same semantic contract when both declare one) is not admitted and the dominating incumbent is named; otherwise it is admitted, every incumbent it dominates is retired from the active frontier (never deleted, no deletion authority), and the frontier stays sorted by capability id.",
+   "fresh_pass_rate": 1.0,
+   "independent_oracle_ids": [
+    "REFERENCE_FOLD",
+    "FRONTIER_INVARIANTS",
+    "UNIFORM_SCALING_INVARIANCE"
+   ],
+   "instances": 2000,
+   "kernel_git_blob_shas": {
+    "canonical/runtime/capability_first_scheduler_v1.py": "6d2091cc1581b9aa1fd2c74e8a76519a41d9d957"
+   },
+   "latest_receipt": "canonical/capabilities/true/receipts/PARETO_FRONTIER_UPDATE_V1__ded725829226d120.json",
+   "measured_utc": "2026-10-14T18:50:23Z",
+   "oracle_classes": {
+    "FRONTIER_INVARIANTS": "PROPERTY",
+    "REFERENCE_FOLD": "ANALYTIC_CLOSED_FORM",
+    "UNIFORM_SCALING_INVARIANCE": "METAMORPHIC"
+   },
+   "scope_limits": [
+    "NO physical deletion semantics (option_preserving_capability_optimizer is a separate component)",
+    "NO claim about order-independence of the final frontier across differing semantic contracts"
+   ],
+   "seed_source": "OS_URANDOM",
+   "solver_git_blob_sha": "d7dbd9d320d27587d2dac228e16bc5b4eceba61a",
+   "spec_path": "canonical/capabilities/true/specs/PARETO_FRONTIER_UPDATE_V1.json",
+   "status": "MEASURED_SANDBOX",
+   "verdict": "PASS"
+  },
+  "SACCR_CREDIT_ADDON_V1": {
+   "canary_pass": "1/1",
+   "carrier": "SANDBOX",
+   "claim": "Given a portfolio of linear single-name and index credit derivatives, compute the Basel SA-CCR credit asset-class add-on (CRE52.34, 52.48, 52.50, 52.55-52.72) with an explicit intermediate trace per trade.",
+   "fresh_pass_rate": 1.0,
+   "independent_oracle_ids": [
+    "CRE52_CLOSED_FORM",
+    "OFFSET_CANCELS",
+    "NOTIONAL_HOMOGENEITY"
+   ],
+   "instances": 2000,
+   "latest_receipt": "canonical/capabilities/true/receipts/SACCR_CREDIT_ADDON_V1__3e600b175e196a2e.json",
+   "measured_utc": "2026-10-14T16:30:19Z",
+   "oracle_classes": {
+    "CRE52_CLOSED_FORM": "ANALYTIC_CLOSED_FORM",
+    "DONOR_DIFFERENTIAL": "DIFFERENTIAL_EXTERNAL",
+    "NOTIONAL_HOMOGENEITY": "METAMORPHIC",
+    "OFFSET_CANCELS": "METAMORPHIC",
+    "SINGLE_ENTITY_BOUNDS": "PROPERTY"
+   },
+   "scope_limits": [
+    "NO options or CDO tranche deltas",
+    "NO replacement cost, PFE multiplier or whole netting-set EAD",
+    "NO rating/entity inference from documents; inputs are already structured",
+    "entity with mixed supervisory factor or correlation fails closed (ValueError) by design"
+   ],
+   "seed_source": "OS_URANDOM",
+   "solver_git_blob_sha": "fb451d4a413ec537321920a5182e717f5079e512",
+   "spec_path": "canonical/capabilities/true/specs/SACCR_CREDIT_ADDON_V1.json",
+   "status": "MEASURED_SANDBOX",
+   "verdict": "PASS"
+  },
+  "SAME_IDENTITY_SUPERVISOR_V1": {
+   "canary_pass": "0/0",
+   "carrier": "SANDBOX",
+   "claim": "Given a repository root with task manifests (PROJECT_BRAIN_SAME_IDENTITY_TASK_V1), mission files and prerequisite files, and an arbitrary interleaving of choose / claim / execute operations issued by the durable worker identity and by an intruder identity while manifests, missions and prerequisites are edited underneath it, the supervisor (1) chooses only causally-ready tasks (valid manifest for that identity, every prerequisite present and hash-bound, mission file hash-bound, not terminal), highest priority first and smallest task id on ties; (2) lets exactly one identity hold a task lease - a different identity never claims, resumes or executes a leased task and the lease owner never changes; (3) refuses to claim or execute after the manifest or mission drifted from the bound hashes; (4) checkpoints once before the first runtime launch when the manifest asks for it (exit 75, runtime not launched); (5) maps the runtime exit code to COMPLETE (0) / BLOCKED (3,4,5) / FAILED (other) and never launches the runtime again once a task is COMPLETE or FAILED; (6) keeps an append-only, contiguously numbered event log per task and writes one evidence receipt per checkpoint and per runtime attempt.",
+   "fresh_pass_rate": 1.0,
+   "independent_oracle_ids": [
+    "REFERENCE_MODEL_TRACE",
+    "LEASE_EXCLUSIVITY",
+    "NO_TERMINAL_REEXECUTION",
+    "EVENT_LOG_INTEGRITY",
+    "PRIORITY_SHIFT_INVARIANCE"
+   ],
+   "instances": 2000,
+   "kernel_git_blob_shas": {},
+   "latest_receipt": "canonical/capabilities/true/receipts/SAME_IDENTITY_SUPERVISOR_V1__35251f4e055e0556.json",
+   "measured_utc": "2026-11-25T22:26:49Z",
+   "oracle_classes": {
+    "EVENT_LOG_INTEGRITY": "PROPERTY",
+    "LEASE_EXCLUSIVITY": "PROPERTY",
+    "NO_TERMINAL_REEXECUTION": "PROPERTY",
+    "PRIORITY_SHIFT_INVARIANCE": "METAMORPHIC",
+    "REFERENCE_MODEL_TRACE": "ANALYTIC_CLOSED_FORM"
+   },
+   "scope_limits": [
+    "NO continuous-OBS context validation: instance roots carry no canonical/CANONICAL_POINTER.json and missions carry no continuous_obs block, so continuous_obs_runtime.validate_context is never exercised (separately measurable)",
+    "NO real runtime process: the executor is injected and returns scripted exit codes; the default subprocess executor and the ASTRA launcher are out of scope",
+    "NO concurrent-process lock contention: operations are sequential in one process; the inter-process claim lock is not measured",
+    "NO lease-expiry semantics: lease_seconds is never exceeded inside an instance",
+    "NO guarantee about state files written by anything other than the supervisor itself"
+   ],
+   "seed_source": "OS_URANDOM",
+   "solver_git_blob_sha": "ae66843e0d178801889a77e7700769a45a78b57e",
+   "spec_path": "canonical/capabilities/true/specs/SAME_IDENTITY_SUPERVISOR_V1.json",
+   "status": "MEASURED_SANDBOX",
+   "verdict": "PASS"
+  }
+ },
+ "rule": "Rows are written only by execution_guard/true_capability_harness_v1.py from a receipt. A row is a measurement, not a claim; status MEASURED_SANDBOX never counts; status MEASURED_PUBLIC_RUNNER counts only when the receipt is referee-signed.",
+ "schema": "TRUE_CAPABILITY_LEDGER_V1"
 }

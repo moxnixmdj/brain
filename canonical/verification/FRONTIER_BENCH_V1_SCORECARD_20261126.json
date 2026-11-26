@@ -1,0 +1,521 @@
+{
+ "schema": "BRAIN_FRONTIER_BENCH_SCORECARD_V1",
+ "bench": "BRAIN_FRONTIER_BENCH_V1",
+ "seed": 20261126,
+ "per_category": 3,
+ "categories": [
+  "TRANSFER_UNDER_ISOMORPHISM",
+  "WITNESS_INVERSION_GENERALIZATION",
+  "COMPUTER_USE_GROUNDING",
+  "MULTIFILE_REPAIR",
+  "BELIEF_REVISION_ENTRENCHMENT",
+  "CROSS_LANGUAGE_RULE_TRANSFER"
+ ],
+ "instance_digest": "be7ccbecdcd8615507abba2a61dbebbb61c7a091ac5583881fd1dd9c124e2c55",
+ "instances": 18,
+ "passed": 18,
+ "failed": 0,
+ "errors": 0,
+ "pass_rate": 1.0,
+ "false_success_claims": 0,
+ "false_success_claim_ids": [],
+ "unclaimed_successes": 3,
+ "unclaimed_success_ids": [
+  "TRANSFER_UNDER_ISOMORPHISM#02_UNREACHABLE",
+  "COMPUTER_USE_GROUNDING#02_REFUSAL",
+  "MULTIFILE_REPAIR#01_VACUOUS"
+ ],
+ "scored_against_engine_claim": false,
+ "stored_answers_used": false,
+ "model_calls": 0,
+ "spend_usd": 0.0,
+ "elapsed_ms": 323.749,
+ "by_category": {
+  "TRANSFER_UNDER_ISOMORPHISM": {
+   "instances": 3,
+   "passed": 3,
+   "failed": 0,
+   "errors": 0,
+   "pass_rate": 1.0,
+   "elapsed_ms": 0.0
+  },
+  "WITNESS_INVERSION_GENERALIZATION": {
+   "instances": 3,
+   "passed": 3,
+   "failed": 0,
+   "errors": 0,
+   "pass_rate": 1.0,
+   "elapsed_ms": 0.0
+  },
+  "COMPUTER_USE_GROUNDING": {
+   "instances": 3,
+   "passed": 3,
+   "failed": 0,
+   "errors": 0,
+   "pass_rate": 1.0,
+   "elapsed_ms": 0.0
+  },
+  "MULTIFILE_REPAIR": {
+   "instances": 3,
+   "passed": 3,
+   "failed": 0,
+   "errors": 0,
+   "pass_rate": 1.0,
+   "elapsed_ms": 0.0
+  },
+  "BELIEF_REVISION_ENTRENCHMENT": {
+   "instances": 3,
+   "passed": 3,
+   "failed": 0,
+   "errors": 0,
+   "pass_rate": 1.0,
+   "elapsed_ms": 0.0
+  },
+  "CROSS_LANGUAGE_RULE_TRANSFER": {
+   "instances": 3,
+   "passed": 3,
+   "failed": 0,
+   "errors": 0,
+   "pass_rate": 1.0,
+   "elapsed_ms": 0.0
+  }
+ },
+ "verdict": "BENCH_COMPLETE__ALL_INSTANCES_PASS",
+ "records": [
+  {
+   "instance_id": "TRANSFER_UNDER_ISOMORPHISM#00_ISO",
+   "category": "TRANSFER_UNDER_ISOMORPHISM",
+   "notes": "modulus=6 step=1 jump=3 goal=3 goal_reachable=True",
+   "ok": true,
+   "reason": "PLAN_REACHES_GOAL",
+   "expected": {
+    "goal": 3,
+    "oracle_plan": [
+     "halt"
+    ]
+   },
+   "observed": {
+    "end_state": 3,
+    "plan": [
+     "halt"
+    ],
+    "claimed_verified": true
+   },
+   "sut_claimed": true,
+   "status": "PASS",
+   "elapsed_ms": 43.505
+  },
+  {
+   "instance_id": "TRANSFER_UNDER_ISOMORPHISM#01_ISO",
+   "category": "TRANSFER_UNDER_ISOMORPHISM",
+   "notes": "modulus=7 step=1 jump=3 goal=3 goal_reachable=True",
+   "ok": true,
+   "reason": "PLAN_REACHES_GOAL",
+   "expected": {
+    "goal": 3,
+    "oracle_plan": [
+     "orbit"
+    ]
+   },
+   "observed": {
+    "end_state": 3,
+    "plan": [
+     "orbit"
+    ],
+    "claimed_verified": true
+   },
+   "sut_claimed": true,
+   "status": "PASS",
+   "elapsed_ms": 0.291
+  },
+  {
+   "instance_id": "TRANSFER_UNDER_ISOMORPHISM#02_UNREACHABLE",
+   "category": "TRANSFER_UNDER_ISOMORPHISM",
+   "notes": "modulus=6 step=2 jump=4 goal=3 goal_reachable=False",
+   "ok": true,
+   "reason": "REFUSED_AND_NO_PLAN_EXISTS",
+   "expected": {
+    "reachable_plan": null,
+    "refusal_required": true
+   },
+   "observed": {
+    "claimed": false,
+    "status": "WITNESS_FOUND__THE_TWO_ENVIRONMENTS_ARE_THE_SAME_MACHINE"
+   },
+   "sut_claimed": false,
+   "status": "PASS",
+   "elapsed_ms": 0.117
+  },
+  {
+   "instance_id": "WITNESS_INVERSION_GENERALIZATION#00_AFFINE",
+   "category": "WITNESS_INVERSION_GENERALIZATION",
+   "notes": "family=AFFINE a=5 b=-1",
+   "ok": true,
+   "reason": "GENERALISED_TO_HELD_OUT_PROBES",
+   "expected": {
+    "probes": [
+     [
+      4,
+      19
+     ],
+     [
+      5,
+      24
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      0,
+      -1
+     ]
+    ]
+   },
+   "observed": {
+    "program": "affine(5*x + -1)",
+    "mismatches": []
+   },
+   "sut_claimed": true,
+   "status": "PASS",
+   "elapsed_ms": 0.044
+  },
+  {
+   "instance_id": "WITNESS_INVERSION_GENERALIZATION#01_EXTRACT_BETWEEN",
+   "category": "WITNESS_INVERSION_GENERALIZATION",
+   "notes": "family=EXTRACT_BETWEEN left='{' right='}'",
+   "ok": true,
+   "reason": "GENERALISED_TO_HELD_OUT_PROBES",
+   "expected": {
+    "probes": [
+     [
+      "hdrz{zeta9}tail9atez",
+      "zeta9"
+     ],
+     [
+      "hdrk{kappa}tailappak",
+      "kappa"
+     ],
+     [
+      "hdrt{theta_1}tail1_ateht",
+      "theta_1"
+     ],
+     [
+      "hdrl{lambda_2}tail2_adbmal",
+      "lambda_2"
+     ]
+    ]
+   },
+   "observed": {
+    "program": "extract_between('{', '}')",
+    "mismatches": []
+   },
+   "sut_claimed": true,
+   "status": "PASS",
+   "elapsed_ms": 0.115
+  },
+  {
+   "instance_id": "WITNESS_INVERSION_GENERALIZATION#02_ACRONYM",
+   "category": "WITNESS_INVERSION_GENERALIZATION",
+   "notes": "family=ACRONYM sep='.'",
+   "ok": true,
+   "reason": "GENERALISED_TO_HELD_OUT_PROBES",
+   "expected": {
+    "probes": [
+     [
+      "Ada.Lovelace",
+      "AL"
+     ],
+     [
+      "Alan.Turing",
+      "AT"
+     ],
+     [
+      "Edsger.Dijkstra",
+      "ED"
+     ]
+    ]
+   },
+   "observed": {
+    "program": "acronym_upper('.')",
+    "mismatches": []
+   },
+   "sut_claimed": true,
+   "status": "PASS",
+   "elapsed_ms": 0.052
+  },
+  {
+   "instance_id": "COMPUTER_USE_GROUNDING#00_GROUND",
+   "category": "COMPUTER_USE_GROUNDING",
+   "notes": "sender=Priya control=trash ooxml=True json=False",
+   "ok": true,
+   "reason": "GROUNDED_ON_DISK_AND_INDEX",
+   "expected": {
+    "files": {
+     "notes_a.txt": "established-33",
+     "notes_b.txt": "established-b-66"
+    },
+    "control_index": 26
+   },
+   "observed": {
+    "problems": []
+   },
+   "sut_claimed": true,
+   "status": "PASS",
+   "elapsed_ms": 12.401
+  },
+  {
+   "instance_id": "COMPUTER_USE_GROUNDING#01_GROUND",
+   "category": "COMPUTER_USE_GROUNDING",
+   "notes": "sender=Tobias control=trash ooxml=False json=True",
+   "ok": true,
+   "reason": "GROUNDED_ON_DISK_AND_INDEX",
+   "expected": {
+    "files": {
+     "notes_a.txt": "established-13",
+     "notes_b.txt": "established-b-45"
+    },
+    "control_index": 20
+   },
+   "observed": {
+    "problems": []
+   },
+   "sut_claimed": true,
+   "status": "PASS",
+   "elapsed_ms": 2.162
+  },
+  {
+   "instance_id": "COMPUTER_USE_GROUNDING#02_REFUSAL",
+   "category": "COMPUTER_USE_GROUNDING",
+   "notes": "sender=Zora control=trash ooxml=False json=False",
+   "ok": true,
+   "reason": "REFUSED_FALSE_DONE",
+   "expected": {
+    "must_claim_success": false,
+    "done_allowed": false
+   },
+   "observed": {
+    "claimed": false,
+    "done_allowed": false
+   },
+   "sut_claimed": false,
+   "status": "PASS",
+   "elapsed_ms": 0.566
+  },
+  {
+   "instance_id": "MULTIFILE_REPAIR#00_REPAIR",
+   "category": "MULTIFILE_REPAIR",
+   "notes": "vacuous=False",
+   "ok": true,
+   "reason": "REPO_TESTS_GREEN_AFTER_REPAIR",
+   "expected": {
+    "files": [
+     "fees.py",
+     "receipt.py"
+    ],
+    "tests_ran": 2
+   },
+   "observed": {
+    "tests": {
+     "returncode": 0,
+     "ran": 2,
+     "tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n"
+    },
+    "touched": [
+     "fees.py",
+     "receipt.py"
+    ],
+    "problems": []
+   },
+   "sut_claimed": true,
+   "status": "PASS",
+   "elapsed_ms": 89.068
+  },
+  {
+   "instance_id": "MULTIFILE_REPAIR#01_VACUOUS",
+   "category": "MULTIFILE_REPAIR",
+   "notes": "vacuous=True",
+   "ok": true,
+   "reason": "REFUSED_VACUOUS_ORACLE",
+   "expected": {
+    "refusal_required": true,
+    "tests_green": true
+   },
+   "observed": {
+    "claimed": false,
+    "problems": [],
+    "tests": 0
+   },
+   "sut_claimed": false,
+   "status": "PASS",
+   "elapsed_ms": 62.152
+  },
+  {
+   "instance_id": "MULTIFILE_REPAIR#02_REPAIR",
+   "category": "MULTIFILE_REPAIR",
+   "notes": "vacuous=False",
+   "ok": true,
+   "reason": "REPO_TESTS_GREEN_AFTER_REPAIR",
+   "expected": {
+    "files": [
+     "ledger.py",
+     "invoice.py"
+    ],
+    "tests_ran": 2
+   },
+   "observed": {
+    "tests": {
+     "returncode": 0,
+     "ran": 2,
+     "tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n"
+    },
+    "touched": [
+     "ledger.py",
+     "invoice.py"
+    ],
+    "problems": []
+   },
+   "sut_claimed": true,
+   "status": "PASS",
+   "elapsed_ms": 87.033
+  },
+  {
+   "instance_id": "BELIEF_REVISION_ENTRENCHMENT#00_REJECT_LOWER_RANK",
+   "category": "BELIEF_REVISION_ENTRENCHMENT",
+   "notes": "kind=REJECT_LOWER_RANK subject=build_channel",
+   "ok": true,
+   "reason": "BELIEF_STATE_MATCHES_ORACLE",
+   "expected": {
+    "kind": "REJECT_LOWER_RANK",
+    "subject": "build_channel"
+   },
+   "observed": {
+    "status": "REJECTED__LOWER_EPISTEMIC_ENTRENCHMENT",
+    "authorized": true,
+    "recalled": [
+     "incumbent"
+    ],
+    "problems": []
+   },
+   "sut_claimed": null,
+   "status": "PASS",
+   "elapsed_ms": 0.173
+  },
+  {
+   "instance_id": "BELIEF_REVISION_ENTRENCHMENT#01_SUPERSEDE",
+   "category": "BELIEF_REVISION_ENTRENCHMENT",
+   "notes": "kind=SUPERSEDE subject=gateway_ip",
+   "ok": true,
+   "reason": "BELIEF_STATE_MATCHES_ORACLE",
+   "expected": {
+    "kind": "SUPERSEDE",
+    "subject": "gateway_ip"
+   },
+   "observed": {
+    "status": "COMMITTED",
+    "authorized": true,
+    "recalled": [
+     "challenger"
+    ],
+    "problems": []
+   },
+   "sut_claimed": null,
+   "status": "PASS",
+   "elapsed_ms": 0.704
+  },
+  {
+   "instance_id": "BELIEF_REVISION_ENTRENCHMENT#02_SYBIL_ECHO",
+   "category": "BELIEF_REVISION_ENTRENCHMENT",
+   "notes": "kind=SYBIL_ECHO subject=build_channel",
+   "ok": true,
+   "reason": "BELIEF_STATE_MATCHES_ORACLE",
+   "expected": {
+    "kind": "SYBIL_ECHO",
+    "subject": "build_channel"
+   },
+   "observed": {
+    "status": "PROVISIONAL",
+    "authorized": false,
+    "recalled": [
+     "incumbent"
+    ],
+    "problems": []
+   },
+   "sut_claimed": null,
+   "status": "PASS",
+   "elapsed_ms": 0.055
+  },
+  {
+   "instance_id": "CROSS_LANGUAGE_RULE_TRANSFER#00_TYPESCRIPT",
+   "category": "CROSS_LANGUAGE_RULE_TRANSFER",
+   "notes": "language=typescript bug_op=<= fixed_op=<",
+   "ok": true,
+   "reason": "RULE_TRANSFERRED_SEMANTICALLY",
+   "expected": {
+    "fixed_operator": "<",
+    "language": "typescript"
+   },
+   "observed": {
+    "patched": "function check(x: number, bound: number) { return x < bound; }",
+    "operator": "<",
+    "problems": []
+   },
+   "sut_claimed": true,
+   "status": "PASS",
+   "elapsed_ms": 21.293
+  },
+  {
+   "instance_id": "CROSS_LANGUAGE_RULE_TRANSFER#01_GO",
+   "category": "CROSS_LANGUAGE_RULE_TRANSFER",
+   "notes": "language=go bug_op=>= fixed_op=>",
+   "ok": true,
+   "reason": "RULE_TRANSFERRED_SEMANTICALLY",
+   "expected": {
+    "fixed_operator": ">",
+    "language": "go"
+   },
+   "observed": {
+    "patched": "func check(x int, bound int) bool { return x > bound }",
+    "operator": ">",
+    "problems": []
+   },
+   "sut_claimed": true,
+   "status": "PASS",
+   "elapsed_ms": 1.396
+  },
+  {
+   "instance_id": "CROSS_LANGUAGE_RULE_TRANSFER#02_RUST",
+   "category": "CROSS_LANGUAGE_RULE_TRANSFER",
+   "notes": "language=rust bug_op=< fixed_op=<=",
+   "ok": true,
+   "reason": "RULE_TRANSFERRED_SEMANTICALLY",
+   "expected": {
+    "fixed_operator": "<=",
+    "language": "rust"
+   },
+   "observed": {
+    "patched": "fn check(x: i64, bound: i64) -> bool { return x <= bound; }",
+    "operator": "<=",
+    "problems": []
+   },
+   "sut_claimed": true,
+   "status": "PASS",
+   "elapsed_ms": 0.969
+  }
+ ],
+ "self_check": {
+  "schema": "BRAIN_FRONTIER_BENCH_SELF_CHECK_V1",
+  "seed": 20261126,
+  "per_category": 3,
+  "honest_pass_rate": 1.0,
+  "liar_pass_rate": 0.0,
+  "refusal_stub_pass_rate": 0.0,
+  "discrimination": 1.0,
+  "instrument_trustworthy": true,
+  "liar_false_success_claims": 15,
+  "stub_false_success_claims": 0,
+  "honest_verdict": "BENCH_COMPLETE__ALL_INSTANCES_PASS",
+  "liar_verdict": "BENCH_COMPLETE__FAILURES_PRESENT",
+  "stub_verdict": "BENCH_INCOMPLETE__ORACLE_OR_ENGINE_ERROR"
+ }
+}

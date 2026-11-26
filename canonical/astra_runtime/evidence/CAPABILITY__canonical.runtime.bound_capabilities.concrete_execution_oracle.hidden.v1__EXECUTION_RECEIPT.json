@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical.runtime.bound_capabilities.concrete_execution_oracle.hidden.v1",
+ "elapsed_ms": 0.381,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "sample": {
+   "x": 1
+  },
+  "source": "def f(x):\n    return x + 1\n",
+  "target_path": "canonical/astra_runtime/tmp/harvest_demo/f.py"
+ },
+ "kind": "contract",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bound_capabilities/concrete_execution_oracle.py",
+ "module_sha256": "f37063bbcfcb9e0250e3b037bc687f1c48855ac099be68749d25b340ccf73b73",
+ "observed": {
+  "status": "NO_POSTCONDITION_PARSED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "harvested-runtime",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.bound_capabilities.concrete_execution_oracle.hidden.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 8,
+ "result_sha256": "ecaed598ec2176294093fe4f00defa380b92d7db2c518b98a6b85e9445caf8fb",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

@@ -1,0 +1,69 @@
+{
+  "authority": "NONE__RECEIPT_AND_PINNED_REPOSITORIES_ONLY",
+  "generated_at_utc": "2026-11-25T17:10:44Z",
+  "rows": [
+    {
+      "errors": 0,
+      "failed": 0,
+      "generator_verified": true,
+      "passed": 676,
+      "returncode": 0,
+      "sha": "c53d3732b98c764932e146c007146ad402acb229",
+      "stage": "REPLAYED",
+      "tail": ".................................................... [ 63%]\n........................................................................ [ 74%]\n........................................................................ [ 85%]\n........................................................................ [ 95%]\n............................                                             [100%]\n676 passed in 0.63s\n",
+      "verified": true
+    },
+    {
+      "errors": 0,
+      "failed": 0,
+      "generator_verified": true,
+      "passed": 116,
+      "returncode": 0,
+      "sha": "05f6fd0df4ecbd104eb7a229f9f185c2484dee69",
+      "stage": "REPLAYED",
+      "tail": "........................................................................ [ 62%]\n............................................                             [100%]\n116 passed in 0.21s\n",
+      "verified": true
+    },
+    {
+      "errors": 0,
+      "failed": 0,
+      "generator_verified": true,
+      "passed": 8,
+      "returncode": 0,
+      "sha": "fc518e41218b447e875fe27244ae692c269bcb77",
+      "stage": "REPLAYED",
+      "tail": "........                                                                 [100%]\n8 passed in 0.01s\n",
+      "verified": true
+    },
+    {
+      "errors": 0,
+      "failed": 0,
+      "generator_verified": true,
+      "passed": 150,
+      "returncode": 0,
+      "sha": "884437aef93e543ebaff3b9cdbe857ee47e7e00c",
+      "stage": "REPLAYED",
+      "tail": "........................................................................ [ 48%]\n........................................................................ [ 96%]\n......                                                                   [100%]\n150 passed in 1.85s\n",
+      "verified": true
+    },
+    {
+      "errors": 0,
+      "failed": 0,
+      "generator_verified": true,
+      "passed": 124,
+      "returncode": 0,
+      "sha": "051fd66352cf8b3f0797249858068dedaead6d39",
+      "stage": "REPLAYED",
+      "tail": "........................................................................ [ 58%]\n....................................................                     [100%]\n124 passed in 0.23s\n",
+      "verified": true
+    }
+  ],
+  "schema": "PROJECT_BRAIN_INDEPENDENT_REPLAY_V1",
+  "summary": {
+    "independently_verified": 5,
+    "model_calls": 0,
+    "network_calls": 0,
+    "rows": 5
+  },
+  "verdict": "PASS"
+}

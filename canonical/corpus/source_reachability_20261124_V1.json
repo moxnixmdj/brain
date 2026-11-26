@@ -1,0 +1,91 @@
+{
+ "schema": "BRAIN_SOURCE_REACHABILITY_20261124_V1",
+ "generated": "2026-11-24",
+ "question": "Are the project's own solver components addressable by the unified model that runs them?",
+ "measured_defect": {
+  "before": {
+   "source_index_modules": 2027,
+   "entry_points": 462,
+   "swe_kernel_modules_indexed": 0,
+   "swe_kernel_modules_on_disk": 204,
+   "find_source_rank1_hits": 0,
+   "find_source_queries": 8
+  },
+  "after": {
+   "source_index_modules": 2237,
+   "entry_points": 557,
+   "swe_kernel_modules_indexed": 204,
+   "find_source_rank1_hits": 8,
+   "find_source_queries": 8
+  },
+  "cause": "_source_index_rows scanned only canonical/runtime; canonical/swe_kernel was outside the domain. A directory literal, not a law.",
+  "queries": [
+   {
+    "query": "cegis repair",
+    "target": "canonical/swe_kernel/angelic_cegis_repair_v1.py"
+   },
+   {
+    "query": "angelic lens cow repair",
+    "target": "canonical/swe_kernel/angelic_lens_cow_repair_v1.py"
+   },
+   {
+    "query": "epistemic store self play",
+    "target": "canonical/swe_kernel/epistemic_admission_and_self_play_v1.py"
+   },
+   {
+    "query": "causal dataflow graph",
+    "target": "canonical/swe_kernel/causal_dataflow_graph_v1.py"
+   },
+   {
+    "query": "concept library compounding",
+    "target": "canonical/swe_kernel/concept_library_v1.py"
+   },
+   {
+    "query": "cow angelic zygote",
+    "target": "canonical/swe_kernel/cow_angelic_zygote_v1.py"
+   },
+   {
+    "query": "executable mental model",
+    "target": "canonical/swe_kernel/executable_mental_model_v1.py"
+   },
+   {
+    "query": "cross modal tomography",
+    "target": "canonical/swe_kernel/cross_modal_tomography_petri_v1.py"
+   }
+  ]
+ },
+ "scope_widening": {
+  "constant": "_SOURCE_ROOTS = (\"canonical/runtime\",\"canonical/swe_kernel\")",
+  "excluded_on_purpose": [
+   "canonical/tests",
+   "canonical/tools",
+   "canonical/research",
+   "canonical/astra_runtime",
+   "canonical/capabilities",
+   "canonical/verification"
+  ],
+  "why_excluded": "tests are the oracle and must never answer a goal; the rest are not solver source"
+ },
+ "guarantee_held": {
+  "indexed_rows_claiming_capability": 0,
+  "find_source_reports_executable": 0,
+  "solve_on_source_only_goal": "FAIL_CLOSED",
+  "partition_is_exact": true
+ },
+ "does_not_do": "source index is addressable, not executable; solve() cannot select it",
+ "solve_effect": {
+  "task": "pypa/packaging dec6213e + added test test_invalid_marker_defers_argument_formatting",
+  "baseline": "genuine TEST FAILURE, AttributeError Message has no attribute text",
+  "epistemic_loop_before": "ABSTAINED__NO_VERIFIED_LOCAL_POSTCONDITION",
+  "epistemic_loop_after": "ABSTAINED__NO_VERIFIED_LOCAL_POSTCONDITION",
+  "angelic_engine": "UNSOLVED, candidates_screened 0, angelic_sites_found 0",
+  "conclusion": "making the solver addressable did not make it able; discovery and ability are separate components"
+ },
+ "cost": {
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_at_run_time": 0
+ },
+ "negative_control": "the new regression test fails on the pre-change compiler with canonical/runtime/r2_existing_policy_adequacy_repair_v1.py where angelic_cegis_repair_v1.py was expected",
+ "what_this_is_not": "not a capability gain; no benchmark row; the solve rate is unchanged at 0 on this task"
+}

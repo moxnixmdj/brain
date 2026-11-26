@@ -1,0 +1,431 @@
+{
+  "all_four_plays_ok": true,
+  "any_kill_triggered": false,
+  "authority": "NONE",
+  "date_utc": "2026-11-25",
+  "domain_atlas_reachability_summary": {
+    "coding_agents": {
+      "candidates": 293,
+      "chance_route_recall": 0.1113,
+      "chance_source_recall": 0.1303,
+      "frontier_route_hit_recall": 1.0,
+      "frontier_source_hit_recall": 1.0,
+      "invisible_to_model": 0,
+      "native_route_hit_recall": 1.0,
+      "native_source_hit_recall": 1.0
+    },
+    "computer_use": {
+      "candidates": 147,
+      "chance_route_recall": 0.0523,
+      "chance_source_recall": 0.0651,
+      "frontier_route_hit_recall": 0.667,
+      "frontier_source_hit_recall": 0.667,
+      "invisible_to_model": 0,
+      "native_route_hit_recall": 1.0,
+      "native_source_hit_recall": 1.0
+    },
+    "continual_learning": {
+      "candidates": 32,
+      "chance_route_recall": 0.0202,
+      "chance_source_recall": 0.0143,
+      "frontier_route_hit_recall": 0.333,
+      "frontier_source_hit_recall": 0.333,
+      "invisible_to_model": 2,
+      "native_route_hit_recall": 0.667,
+      "native_source_hit_recall": 0.333
+    },
+    "instant_learning": {
+      "candidates": 178,
+      "chance_route_recall": 0.1012,
+      "chance_source_recall": 0.079,
+      "frontier_route_hit_recall": 1.0,
+      "frontier_source_hit_recall": 1.0,
+      "invisible_to_model": 1,
+      "native_route_hit_recall": 1.0,
+      "native_source_hit_recall": 1.0
+    },
+    "memory": {
+      "candidates": 191,
+      "chance_route_recall": 0.059,
+      "chance_source_recall": 0.0843,
+      "frontier_route_hit_recall": 1.0,
+      "frontier_source_hit_recall": 0.667,
+      "invisible_to_model": 0,
+      "native_route_hit_recall": 0.333,
+      "native_source_hit_recall": 1.0
+    },
+    "verification_abstention": {
+      "candidates": 329,
+      "chance_route_recall": 0.1231,
+      "chance_source_recall": 0.1468,
+      "frontier_route_hit_recall": 0.667,
+      "frontier_source_hit_recall": 0.667,
+      "invisible_to_model": 9,
+      "native_route_hit_recall": 0.333,
+      "native_source_hit_recall": 0.667
+    },
+    "world_model": {
+      "candidates": 128,
+      "chance_route_recall": 0.0422,
+      "chance_source_recall": 0.0567,
+      "frontier_route_hit_recall": 0.667,
+      "frontier_source_hit_recall": 1.0,
+      "invisible_to_model": 1,
+      "native_route_hit_recall": 0.667,
+      "native_source_hit_recall": 1.0
+    }
+  },
+  "incremental_spend_usd": 0,
+  "independent_verified": false,
+  "model_dependency_count": 0,
+  "module_sha256": {
+    "canonical/runtime/brain_unified_model_v1.py": "8cb9c29400bda2fc050308c743789831bbe36ffbf30543f8272450af9ddd5f3d",
+    "canonical/runtime/counterfactual_discr_tree_skill_router_v1.py": "652e3b974a026ca74646f5810687392ec3b141da908bf61d035c03cfe109dc42",
+    "canonical/runtime/cow_zygote_speculative_verifier_v1.py": "e4ff324b2fd589269b5d33cc31679a3f548d6bc977ba6567e86c70ce6eda6d1e",
+    "canonical/runtime/relational_guard_addition_symbolic_repair_v1.py": "1c135097c7ea1c2a7ec007a23fe61c1676a9761b28c4c9148e2e05e6dc434e70",
+    "canonical/runtime/unified_hidden_capability_federation_v1.py": "4fc6f96135d09469ba6f804c1ad8c25497158ef49554135e78fd13255c9d24d3",
+    "canonical/runtime/verified_zero_screenshot_action_cache_v1.py": "6bd5c9a473162d14f689aa3007177eebf8d1c88b15cf5a5aafe8bd352475007c",
+    "canonical/tools/domain_atlas_v1.py": "9d88c13ef8a8d91701be587e14dc1c2652926194caabfd339d706e762e574e84"
+  },
+  "play_a_counterfactual_discr_tree_router": {
+    "authority": "NONE",
+    "discr_tree_scaling_1086_rules": {
+      "discr_tree_lookup_p50_us": 6.256,
+      "indexed_rules": 1086,
+      "linear_scan_p50_us": 36697.228,
+      "speedup_vs_linear_x": 5865.93
+    },
+    "kill_criterion": {
+      "kill_triggered": false,
+      "max_lookup_p50_us": 50.0,
+      "max_safe_code_regressions": 0,
+      "min_post_quarantine_precision": 0.95,
+      "min_retention_replay_rate": 0.95
+    },
+    "model_dependency_count": 0,
+    "part1_189_commit_syntax_only_bound": {
+      "commits_audited": 189,
+      "distinct_non_identity_skeleton_rewrites": 95,
+      "finding": "0 non-identity full-line AST alpha-skeleton rewrites repeat across the 189 real OSS commits; syntax-only triggers without a runtime failure witness either abstain everywhere or misfire on safe code.",
+      "parsed_commits": 142,
+      "repeating_skeleton_rewrites_ge_2": 0,
+      "repeating_specific_families_ge_2": {
+        "IF_GUARD_CONJUNCT_STRENGTHEN:Compare:1_TO_2": 3,
+        "IF_GUARD_CONJUNCT_STRENGTHEN:Name:1_TO_2": 2,
+        "STATIC_STR_TO_FSTRING_DIAGNOSTIC:Assign": 2
+      }
+    },
+    "part2_witness_conditioned_counterfactual_router": {
+      "convicted_skills": [
+        {
+          "convicting_probes": [
+            {
+              "kind": "ZERO_LIFT_VERIFICATION_WASTE",
+              "probe_id": "sA1_div_defect",
+              "y_with": 0.0,
+              "y_without": 0.0
+            },
+            {
+              "kind": "SAFE_CODE_REGRESSION",
+              "probe_id": "sA1_div_healthy",
+              "y_with": 0.0,
+              "y_without": 1.0
+            }
+          ],
+          "family": "OVERBROAD_BLIND:Stmt_Return_FalsyNone",
+          "quarantine_reason": "CONVICTION_SAFE_CODE_REGRESSION",
+          "skill_id": "decoy_01_blind_return_guard",
+          "tau_hat": -0.375
+        },
+        {
+          "convicting_probes": [
+            {
+              "kind": "SAFE_CODE_REGRESSION",
+              "probe_id": "sA1_key_healthy",
+              "y_with": 0.0,
+              "y_without": 1.0
+            },
+            {
+              "kind": "SAFE_CODE_REGRESSION",
+              "probe_id": "sA1_healthy_bool_passthrough",
+              "y_with": 0.0,
+              "y_without": 1.0
+            }
+          ],
+          "family": "OVERBROAD_BLIND:Stmt_Return_Var",
+          "quarantine_reason": "CONVICTION_SAFE_CODE_REGRESSION",
+          "skill_id": "decoy_02_blind_var_return",
+          "tau_hat": -1.0
+        },
+        {
+          "convicting_probes": [
+            {
+              "kind": "ZERO_LIFT_VERIFICATION_WASTE",
+              "probe_id": "sA1_div_defect",
+              "y_with": 0.0,
+              "y_without": 0.0
+            },
+            {
+              "kind": "ZERO_LIFT_VERIFICATION_WASTE",
+              "probe_id": "sA2_div_defect",
+              "y_with": 0.0,
+              "y_without": 0.0
+            }
+          ],
+          "family": "WRONG_REWRITE:ZeroDivisionError:DivToMult",
+          "quarantine_reason": "CONVICTION_NON_POSITIVE_MARGINAL_UTILITY",
+          "skill_id": "decoy_03_wrong_div_to_mult",
+          "tau_hat": -0.25
+        },
+        {
+          "convicting_probes": [
+            {
+              "kind": "SAFE_CODE_REGRESSION",
+              "probe_id": "sA1_div_healthy",
+              "y_with": 0.0,
+              "y_without": 1.0
+            },
+            {
+              "kind": "SAFE_CODE_REGRESSION",
+              "probe_id": "sA2_div_healthy",
+              "y_with": 0.0,
+              "y_without": 1.0
+            }
+          ],
+          "family": "OVERBROAD_BLIND:Stmt_Return_BinOp_Add",
+          "quarantine_reason": "CONVICTION_SAFE_CODE_REGRESSION",
+          "skill_id": "decoy_04_blind_binop_add",
+          "tau_hat": -1.0
+        }
+      ],
+      "counterfactual_gated_heldout_split_b": {
+        "defective_probes": 15,
+        "defective_repaired": 15,
+        "healthy_probes": 9,
+        "net_causal_utility": 15.0,
+        "precision": 1.0,
+        "probes_total": 24,
+        "repair_rate": 1.0,
+        "safe_code_abstains": 9,
+        "safe_code_regressions": 0,
+        "wasted_fires": 0
+      },
+      "counterfactual_gated_split_a": {
+        "defective_probes": 10,
+        "defective_repaired": 10,
+        "healthy_probes": 6,
+        "net_causal_utility": 10.0,
+        "precision": 1.0,
+        "probes_total": 16,
+        "repair_rate": 1.0,
+        "safe_code_abstains": 6,
+        "safe_code_regressions": 0,
+        "wasted_fires": 0
+      },
+      "evicted_nonpositive_utility": 1,
+      "evicted_safe_code_regression": 3,
+      "kept_active_skills": 5,
+      "split_ab_sign_flip": false,
+      "total_candidate_skills": 9,
+      "ungated_heldout_split_b": {
+        "defective_probes": 15,
+        "defective_repaired": 12,
+        "healthy_probes": 9,
+        "net_causal_utility": 2.25,
+        "precision": 0.5,
+        "probes_total": 24,
+        "repair_rate": 0.8,
+        "safe_code_abstains": 0,
+        "safe_code_regressions": 9,
+        "wasted_fires": 3
+      }
+    },
+    "retention_replay": {
+      "checks": 15,
+      "hits": 15,
+      "retention_rate": 1.0
+    },
+    "schema": "PROJECT_BRAIN_COUNTERFACTUAL_DISCR_TREE_SKILL_ROUTER_V1",
+    "status": "OK",
+    "world_fingerprint_sha256": "851e28545065dd0b431bc39c7c9d8713d7d8b1dafcefc359245270097e6b7cf9"
+  },
+  "play_b_verified_zero_screenshot_cache": {
+    "authority": "NONE",
+    "kill_criterion": {
+      "kill_triggered": false,
+      "max_blind_stale_executions": 0,
+      "max_local_dispatch_p50_ms": 5.0,
+      "max_volatile_false_invalidation_rate": 0.0,
+      "min_tier0_real_artifacts_verified": 3
+    },
+    "model_dependency_count": 0,
+    "schema": "PROJECT_BRAIN_VERIFIED_ZERO_SCREENSHOT_ACTION_CACHE_V1",
+    "screenshots_captured": 0,
+    "status": "OK",
+    "tier0_data_layer": {
+      "elevated_trace_steps_kept": 1,
+      "tier0_p50_ms": 1.3779,
+      "tier0_real_artifacts_verified": 3,
+      "tier0_workflows_run": 3
+    },
+    "tier1_verified_cdp_cache": {
+      "blind_stale_executions": 0,
+      "drift_traps_tested": 3,
+      "evicted_on_third_miss": true,
+      "local_dispatch_p50_ms": 0.061,
+      "post_eviction_status": "CACHE_MISS",
+      "silent_backend_drop_status": "FAIL_CLOSED_POST_CONTRACT",
+      "telemetry": {
+        "blind_stale_executions": 0,
+        "cache_hits_executed": 20,
+        "entries_evicted": 1,
+        "post_contract_failures": 1,
+        "pre_probe_refusals": 3
+      },
+      "volatile_false_invalidation_rate": 0.0,
+      "volatile_hits": 20,
+      "volatile_trials": 20
+    }
+  },
+  "play_c_relational_guard_addition_repair": {
+    "authority": "NONE",
+    "elapsed_ms": 970.256,
+    "kill_criterion": {
+      "kill_triggered": false,
+      "max_admitted_with_surviving_guard_drop": 0,
+      "min_non_substitution_admitted": 1,
+      "min_overall_mutation_kill_rate": 0.85,
+      "must_beat_substitution_baseline": true
+    },
+    "model_dependency_count": 0,
+    "part1_real_corpus_addition_audit": {
+      "real_commits_adding_if_guards": 35,
+      "real_commits_adding_raise_contracts": 20,
+      "real_commits_adding_return_statements": 22,
+      "real_fix_pairs_parsed": 87,
+      "taxonomy_28_tasks": 28,
+      "taxonomy_add_sites": 482,
+      "taxonomy_in_file_shape_add_sites": 161,
+      "taxonomy_single_substitution_ceiling": 0.0,
+      "taxonomy_tasks_with_in_file_shape_additions": 22,
+      "taxonomy_total_sites": 667
+    },
+    "part2_closed_loop_non_substitution_synthesis": {
+      "admitted_with_surviving_guard_drop_mutant": 0,
+      "overall_mutation_kill_rate": 1.0,
+      "relational_addition_admitted": 4,
+      "substitution_baseline_solved": 0,
+      "tasks": [
+        {
+          "admitted": true,
+          "admitted_family": "RELATIONAL_ADD:NONE_GUARD_ADD:[]",
+          "initial_witness": {
+            "exception": "AttributeError",
+            "message": "'NoneType' object has no attribute 'split'"
+          },
+          "mutants_killed": 3,
+          "mutants_tested": 3,
+          "mutation_kill_rate": 1.0,
+          "relational_candidates_tried": 25,
+          "substitution_candidates_tried": 0,
+          "substitution_solved": false,
+          "task_id": "add_01_none_or_blank_sibling_guard"
+        },
+        {
+          "admitted": true,
+          "admitted_family": "RELATIONAL_ADD:RAISE_NEGATIVE_CONTRACT:ValueError:shard_count",
+          "initial_witness": {
+            "exception": "AssertionError",
+            "message": "Expected ValueError on negative boundary input"
+          },
+          "mutants_killed": 4,
+          "mutants_tested": 4,
+          "mutation_kill_rate": 1.0,
+          "relational_candidates_tried": 26,
+          "substitution_candidates_tried": 2,
+          "substitution_solved": false,
+          "task_id": "add_02_sibling_exception_contract"
+        },
+        {
+          "admitted": true,
+          "admitted_family": "RELATIONAL_ADD:DICT_BUCKET_INIT_GUARD",
+          "initial_witness": {
+            "exception": "KeyError",
+            "message": "'t1'"
+          },
+          "mutants_killed": 2,
+          "mutants_tested": 2,
+          "mutation_kill_rate": 1.0,
+          "relational_candidates_tried": 22,
+          "substitution_candidates_tried": 0,
+          "substitution_solved": false,
+          "task_id": "add_03_dict_bucket_init_guard"
+        },
+        {
+          "admitted": true,
+          "admitted_family": "RELATIONAL_ADD:CONTAINER_DUAL_SYNC:_active_set",
+          "initial_witness": {
+            "exception": "AssertionError",
+            "message": "Metamorphic violation: removed argument 'auth' lingered in getters"
+          },
+          "mutants_killed": 5,
+          "mutants_tested": 5,
+          "mutation_kill_rate": 1.0,
+          "relational_candidates_tried": 1,
+          "substitution_candidates_tried": 0,
+          "substitution_solved": false,
+          "task_id": "add_04_metamorphic_container_dual_sync"
+        }
+      ],
+      "tasks_total": 4,
+      "total_mutants_killed": 14,
+      "total_mutants_tested": 14
+    },
+    "schema": "PROJECT_BRAIN_RELATIONAL_GUARD_ADDITION_SYMBOLIC_REPAIR_V1",
+    "status": "OK"
+  },
+  "play_d_cow_zygote_speculative_verifier": {
+    "authority": "NONE",
+    "benchmark_48_candidates": {
+      "candidates_evaluated": 48,
+      "cold_subprocess_p50_ms": 18.0998,
+      "cow_fork_p50_ms": 2.2055,
+      "cow_fork_p95_ms": 2.5863,
+      "cross_worker_state_leaks": 0,
+      "estimated_candidates_per_second_1core": 453.4,
+      "speedup_vs_subprocess_x": 8.21,
+      "valid_repairs_found": 2,
+      "verdict_disagreements_vs_subprocess": 0
+    },
+    "impact_slicing": {
+      "all_tests": [
+        "test_fee_zero_and_negative",
+        "test_fee_standard_and_capped",
+        "test_unrelated_invoice_header",
+        "test_unrelated_checksum"
+      ],
+      "changed_symbols": [
+        "compute_fee_bps"
+      ],
+      "reduction_ratio": 0.5,
+      "selected_tests": [
+        "test_fee_zero_and_negative",
+        "test_fee_standard_and_capped"
+      ],
+      "tests_skipped": 2,
+      "transitive_impacted_symbols": [
+        "compute_fee_bps"
+      ]
+    },
+    "kill_criterion": {
+      "kill_triggered": false,
+      "max_cow_candidate_p50_ms": 5.0,
+      "max_cross_worker_state_leaks": 0,
+      "max_verdict_disagreements_vs_subprocess": 0
+    },
+    "model_dependency_count": 0,
+    "schema": "PROJECT_BRAIN_COW_ZYGOTE_SPECULATIVE_VERIFIER_V1",
+    "status": "OK"
+  },
+  "schema": "PROJECT_BRAIN_FRONTIER_LEAPFROG_WAVE2_K3_ZERO_RECEIPT_V1"
+}

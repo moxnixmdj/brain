@@ -1,0 +1,421 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "FRONTIER_LEAPFROG_WAVE36_20261126_V1",
+  "action_intent_id": "FRONTIER_LEAPFROG_WAVE36_20261126_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "date": "2026-11-26",
+  "status": "SHIPPED",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "canonical/runtime/brain_unified_model_v1.py + canonical/runtime/creature_runtime_v1.py + canonical/swe_kernel/canonical_memory_crystallizer_v1.py + canonical/runtime/unified_hidden_capability_federation_v1.py + canonical/runtime/os_isolation_v1.py",
+  "canonical_base_commit": "ecf5871e971b6adcc413b938b16cea99e48c0d68",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "causal_blocker": "After PRs #7129, #7130, and #7121 merged to ecf5871e97, five concrete structural gaps remained across Project Brain's unified runtime, OS confinement, and multi-file SWE self-compilation: (1) main lacked real Linux kernel namespace isolation (`os_isolation_v1.py` with CLONE_NEWUSER/NS/PID/NET/IPC/UTS + chroot + CapEff=0 drop + 18-attempt adversarial escape probe); (2) no OS-confined 3-channel computer-use executor united real kernel isolation with Ring-0 byte-level effect verification (catching disguised xz/zip-as-gz lying extensions and collateral file mutations), CoW workspace rollback, microsecond Petri inhibitor guards, and PreCommitFailureGate blocking; (3) fast-cascade and multi-file repo SWE repairs did not compile verified single-file and 2-file coordinated wins back into alpha-normalized Rung-0 rewrite rules generalized across unseen renamed repositories; (4) Ring-0 lacked atomic-line Zeller ddmin hunk minimization (DRA), touched-line AST mutation auditing, and anytime-valid SCoRE conformal e-value martingale gating (Ville bound); and (5) VerificationFirstMemoryBus lacked DBSP bi-temporal Z-set deltas, Kumiho AGM transitive AnalyzeImpact, and projectmem PreCommitFailureGate alongside 16 newly federated kernels.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::After PRs #7129, #7130, and #7121 merged to ecf5871e97, five concrete structural gaps remained across Project Brain's unified runtime, OS confinement, and multi-file SWE self-compilation: (1) main lacked real Linux kernel namespace isolation (`os_isolation_v1.py` with CLONE_NEWUSER/NS/PID/NET/IPC/UTS + chroot + CapEff=0 drop + 18-attempt adversarial escape probe); (2) no OS-confined 3-channel computer-use executor united real kernel isolation with Ring-0 byte-level effect verification (catching disguised xz/zip-as-gz lying extensions and collateral file mutations), CoW workspace rollback, microsecond Petri inhibitor guards, and PreCommitFailureGate blocking; (3) fast-cascade and multi-file repo SWE repairs did not compile verified single-file and 2-file coordinated wins back into alpha-normalized Rung-0 rewrite rules generalized across unseen renamed repositories; (4) Ring-0 lacked atomic-line Zeller ddmin hunk minimization (DRA), touched-line AST mutation auditing, and anytime-valid SCoRE conformal e-value martingale gating (Ville bound); and (5) VerificationFirstMemoryBus lacked DBSP bi-temporal Z-set deltas, Kumiho AGM transitive AnalyzeImpact, and projectmem PreCommitFailureGate alongside 16 newly federated kernels.",
+  "action_summary": "Frontier-Leapfrog Waves 36+37 cleanly unify on top of origin/main's hot_v7 lazy marshal core (ecf5871e97, deleting duplicate boot caches) to deliver: (1) real Linux kernel namespace confinement (`canonical/runtime/os_isolation_v1.py`: user+mount+pid+ipc+uts+net + chroot + CapEff=0 drop + 18-attempt live escape probe returning verdict ISOLATED in ~64 ms); (2) Ring-0 byte-level effect oracle + DRA atomic-line ddmin hunk minimizer + touched-line mutation auditor (`canonical/runtime/byte_effect_oracle_v1.py`); (3) Futamura 'Compile Away the Frontier' unified leapfrog kernel (`canonical/runtime/futamura_leapfrog_kernel_v1.py`) uniting single-file and multi-file Python repository Futamura solving (`MultifileFutamuraRepoSolver` over `stdlib_cow_test_runner_v1` pure-RAM `os.fork()` CoW overlays, dynamic line coverage, single-file + coordinated 2-file AST synthesis, stale-`.pyc` invalidation, Ring-0 ddmin+mutation+dir_diff+SCoRE e-value gating, and automatic Rung-0 alpha-normalized compile-back generalizing to unseen renamed repositories at 1 candidate and 0 proposer calls), real OS-confined 3-channel HCU execution (`ConfinedHybridComputerUseExecutor` catching PR #7071's disguised xz-as-gz defect with CoW rollback + gzip recovery + collateral mutation rollback + Petri inhibitor blocking + PreCommitFailureGate), Error-Aware L# + Lambda*_M Mealy instant learning, DBSP Z-set + Kumiho AGM AnalyzeImpact + PreCommitFailureGate memory hygiene, and GrowLibm + Rubin wake-sleep consolidation; and (4) 16 newly federated kernels (146 live federated kernels, 172 engines total) wired onto UnifiedModel, Creature, VerificationFirstMemoryBus, and bit-identically recompiled BRAIN_UNIFIED_MODEL_V1.json at K3=0 ($0 spend).",
+  "expected_parent_change": "UnifiedModel keeps origin/main hot_v7 lazy boot and exposes `futamura_solve`, `verify_byte_effect`, `minimize_patch_ddmin`, `audit_patch_mutations`, `learn_mealy_instant`, `execute_hybrid_cu`, `dbsp_belief_bus`, `conformal_evalue_gate`, `cow_zygote_repair`, `wake_sleep_consolidate`, `probe_os_isolation`, `execute_confined_computer_use`, and `solve_multifile_repo_futamura`; Creature exposes `futamura_solve`, `learn_mealy_instant`, `execute_hybrid_cu`, `wake_sleep_consolidate`, `probe_os_isolation`, `execute_confined_computer_use`, and `solve_multifile_repo_futamura`; VerificationFirstMemoryBus exposes DBSP/AGM/PreCommit ops; os_isolation_v1.py brings kernel-enforced namespace confinement to canonical/runtime; unified_hidden_capability_federation_v1 expands to 146 live federated kernels (172 engines total); BRAIN_UNIFIED_MODEL_V1.json is recompiled bit-identically.",
+  "expected_parent_frontier_change": "Transforms UnifiedModel + Creature into a sub-millisecond hot_v7 self-compiling multi-file Futamura cognitive runtime with real Linux kernel namespace isolation (CapEff=0), Ring-0 byte-effect + DRA ddmin + mutation + SCoRE conformal e-value verification, real OS-confined 3-channel Petri HCU with rollback recovery, sub-ms Mealy instant learning, DBSP+AGM+PreCommit memory hygiene, and 146 live callable federated kernels at K3=0.",
+  "real_outcome": "16/16 Wave 36+37 zero-mock adversarial tests PASS: real Linux kernel isolation probe measured verdict=ISOLATED in ~64 ms with CapEff=0000000000000000 and all host/network/mount/chroot/RO-bind escape probes kernel-blocked; ConfinedHybridComputerUseExecutor caught disguised xz-as-gz via byte_effect_oracle_v1, rolled back /work byte-for-byte, and recovered with real gzip inside CapEff=0 sandbox, plus rolled back collateral file mutations and triggered PreCommitFailureGate; MultifileFutamuraRepoSolver solved multi-file billing_repo at Rung 2, passed ddmin/mutation/dir_diff/SCoRE COMMIT, compiled an alpha-normalized rule to Rung 0, and solved unseen renamed inventory_repo at Rung 0 in 1 candidate with 0 proposer calls, plus solved a true 2-file coordinated bug (with stale-.pyc invalidation) and 6/6 QuixBugs-class algorithmic repairs at K3=0; unified with origin/main (ecf5871e97) to 172 engines / 146 federated kernels; verify_brain_unified_model_v1 38/38 PASS, bit-identical BRAIN_COMPILE_NO_CACHE=1, runtime_answer_receipt FAST, and all 3 CI guards PASS with 0 violations.",
+  "required_capability": "Real Linux kernel namespace isolation (os_isolation_v1), OS-confined 3-channel HCU with Ring-0 byte-effect verification and CoW rollback, unified multi-file Python repository Futamura self-compiling repair over pure-stdlib os.fork() CoW overlays, Ring-0 ddmin/mutation/SCoRE e-value gating, Error-Aware L# Mealy learning, DBSP+AGM+PreCommit memory hygiene, and live kernel federation at K3=0.",
+  "stop_condition": "Stop once all Wave 37, Wave 36, Wave 21-24, Seven Moves, Five Phases, Unified Epistemic Portfolio, unified-model, goal-compiler, and creature tests pass, verify_brain_unified_model_v1 passes 38/38 with bit-identical BRAIN_COMPILE_NO_CACHE=1 recompilation, runtime_answer_receipt passes, and repo_integrity_guard, enforce_load_bearing_primary_pr, and enforce_goal_hierarchy pass with 0 violations and zero overstated capability/terminal credit claims.",
+  "falsification_condition": "FALSIFIED if os_isolation_v1.probe() fails to return verdict ISOLATED with CapEff=0 and blocked escape attempts, if ConfinedHybridComputerUseExecutor fails to reject lying xz-as-gz or collateral file mutations with full byte-for-byte rollback, if MultifileFutamuraRepoSolver fails to solve multi-file repos or generalize Rung-0 rules across unseen renamed repos at 0 proposer calls, if SCoRE violates Ville's null bound, if DBSP/AGM fails transitive impact invalidation, or if any unified-model verifier or repo guard fails.",
+  "verification": "PYTHONPATH=. python3 -m unittest -v canonical/tests/test_frontier_leapfrog_wave37_v1.py canonical/tests/test_frontier_leapfrog_wave36_v1.py canonical/tests/test_frontier_leapfrog_waves21_24_v1.py canonical/tests/test_brain_unified_model_v1.py canonical/tests/test_seven_moves_frontier_master_plan_v1.py canonical/tests/test_post_frontier_five_phases_v1.py canonical/tests/test_unified_epistemic_portfolio_v1.py canonical/tests/test_goal_compiler.py canonical/tests/test_goal_compiler_world_binding_v1.py canonical/tests/test_the_creature_runs_unattended_v1.py; PYTHONPATH=. python3 canonical/runtime/verify_brain_unified_model_v1.py; BRAIN_COMPILE_NO_CACHE=1 bit-identical check; PYTHONPATH=. python3 canonical/tools/runtime_answer_receipt_v1.py; python3 execution_guard/repo_integrity_guard_v1.py --ci --base ecf5871e971b6adcc413b938b16cea99e48c0d68; python3 execution_guard/enforce_load_bearing_primary_pr.py --base ecf5871e971b6adcc413b938b16cea99e48c0d68 --head HEAD; python3 canonical/runtime/enforce_goal_hierarchy.py --base ecf5871e971b6adcc413b938b16cea99e48c0d68 --head HEAD",
+  "capability_credit_delta": 0,
+  "benchmark_or_family_rank_authority": "NONE__SANDBOX_PRODUCER_VERIFICATION_ONLY",
+  "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "live_challenger_frontier_discovery_required": true,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "governance_change": null,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+    "canonical/runtime/os_isolation_v1.py",
+    "canonical/runtime/byte_effect_oracle_v1.py",
+    "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+    "canonical/runtime/brain_unified_model_v1.py",
+    "canonical/runtime/creature_runtime_v1.py",
+    "canonical/runtime/unified_hidden_capability_federation_v1.py",
+    "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+    "canonical/tests/test_frontier_leapfrog_wave36_v1.py",
+    "canonical/tests/test_frontier_leapfrog_wave37_v1.py",
+    "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+  ],
+  "route_class": "INTEGRATE",
+  "route_id": "FRONTIER_LEAPFROG_WAVE36_37_OS_ISOLATION_MULTIFILE_FUTAMURA",
+  "selected_route": "FRONTIER_LEAPFROG_WAVE36_37_OS_ISOLATION_MULTIFILE_FUTAMURA",
+  "selected_surviving_route": "FRONTIER_LEAPFROG_WAVE36_37_OS_ISOLATION_MULTIFILE_FUTAMURA",
+  "route_order_walk": {
+    "DELETE": "Deleted duplicate boot_v6/route_v6 caches on merge with origin/main hot_v7 _LazyMarshalDict, stripped extraneous patch hunks via Zeller ddmin, deleted stale CPython .pyc caches before fresh disk re-verification, and eliminated unconfined host command execution in ConfinedHybridComputerUseExecutor.",
+    "BYPASS": "Bypassed repeated multi-file repository search on unseen isomorphic repos via Futamura Rung-0 alpha-normalized skill replay (1 candidate, 0 proposer calls), and bypassed sandbox launches for blocked commands via microsecond Petri inhibitor and PreCommitFailureGate checks.",
+    "REUSE": "Reused origin/main's hot_v7 lazy marshal core, stdlib_cow_test_runner_v1 os.fork() CoW test runner, unified_epistemic_portfolio_v1 96-organ portfolio, PR #7071's battle-tested os_isolation_v1.py, and federated 16 live kernels cleanly in place.",
+    "ADAPT": "Adapted FutamuraSelfCompilingCascade to multi-file repositories with dynamic coverage localization, 2-file coordinated AST synthesis, AST-span comparison rewrites for comprehensions, and stale-.pyc invalidation.",
+    "COMPOSE": "Composed real Linux kernel isolation (os_isolation_v1, CapEff=0) + Ring-0 ByteEffectOracle + CoW workspace rollback + HybridComputerUsePetriSupervisor + PreCommitFailureGate + MultifileFutamuraRepoSolver + SCoRE conformal e-values + DBSP/AGM memory.",
+    "INTEGRATE": "SELECTED: unified Waves 36+37 cleanly on top of origin/main ecf5871e97 across UnifiedModel, Creature, VerificationFirstMemoryBus, unified_hidden_capability_federation_v1 (146 federated kernels, 172 engines), and bit-identically recompiled BRAIN_UNIFIED_MODEL_V1.json."
+  },
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "CODING_TB4_GE_66_4"
+    ],
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/30",
+    "interpretation": "Unifies real Linux kernel namespace isolation (CapEff=0, 18-attempt escape probe ISOLATED), OS-confined 3-channel HCU with Ring-0 byte-effect rollback recovery, multi-file Python repository Futamura self-compilation over pure-stdlib os.fork() CoW overlays, DRA ddmin + mutation + SCoRE conformal e-values, DBSP/AGM/PreCommit memory hygiene, and 146 live federated kernels onto UnifiedModel and Creature on top of origin/main ecf5871e97 with zero capability/terminal credit claims.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "0.80",
+    "wall_clock_cost_ub": 1
+  },
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/os_isolation_v1.py",
+      "canonical/runtime/byte_effect_oracle_v1.py",
+      "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+      "canonical/runtime/brain_unified_model_v1.py",
+      "canonical/runtime/creature_runtime_v1.py",
+      "canonical/runtime/unified_hidden_capability_federation_v1.py",
+      "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+      "canonical/tests/test_frontier_leapfrog_wave36_v1.py",
+      "canonical/tests/test_frontier_leapfrog_wave37_v1.py"
+    ],
+    "route_class": "INTEGRATE",
+    "earlier_routes_exhausted_reason": "Disposable git-clone confinement lacked kernel isolation (allowing host sentinel writes), filename-only checks missed lying extensions, and single-shot repo solvers repeated search across unseen isomorphic multi-file repositories; unifying os_isolation_v1, ConfinedHybridComputerUseExecutor, MultifileFutamuraRepoSolver, and Wave 36 Ring-0 verification cleanly on top of origin/main ecf5871e97 closes all five gaps at K3=0.",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer sandbox verification only: 16/16 Wave 36+37 zero-mock tests PASS, real Linux kernel os_isolation_v1.probe() verdict=ISOLATED (CapEff=0), lying xz-as-gz caught+rolled back+recovered, multi-file Futamura Rung-0 transfer to unseen renamed repo + 2-file coordinated repair + 6/6 QuixBugs algorithmic suite PASS, 146 federated kernels / 172 engines, verify_brain_unified_model_v1 38/38 PASS, bit-identical BRAIN_COMPILE_NO_CACHE=1, and all 3 CI guards verified locally. Independent OIDC verification is not claimed.",
+    "scope_complete_discharge": false,
+    "terminal_achieved": false,
+    "route_id": null,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ]
+  },
+  "recursive_obs": {
+    "canonical_base_commit": "ecf5871e971b6adcc413b938b16cea99e48c0d68",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "duplicate boot_v6/route_v6 caches removed in favor of origin/main hot_v7 _LazyMarshalDict",
+      "unconfined host subprocess execution replaced by fail-closed Linux namespace + CapEff=0 isolation",
+      "bloated multi-hunk extraneous lines in candidate patches via Zeller ddmin atomic-line minimization",
+      "stale CPython .pyc bytecode cache hits during same-second same-size disk re-verification",
+      "repeated Rung 2 search on unseen isomorphic multi-file repositories via Futamura alpha-normalized Rung-0 compilation"
+    ],
+    "expected_parent_level_state_change": "Transforms UnifiedModel + Creature into a sub-millisecond hot_v7 self-compiling multi-file Futamura cognitive runtime with real Linux kernel namespace isolation (CapEff=0), Ring-0 byte-effect + DRA ddmin + mutation + SCoRE conformal e-value verification, real OS-confined 3-channel Petri HCU with rollback recovery, sub-ms Mealy instant learning, DBSP+AGM+PreCommit memory hygiene, and 146 live callable federated kernels at K3=0.",
+    "real_outcome": "16/16 Wave 36+37 zero-mock tests PASS; os_isolation_v1.probe() verdict=ISOLATED (CapEff=0, 18 escape probes verified); ConfinedHybridComputerUseExecutor catches lying xz-as-gz and collateral mutations with byte-for-byte rollback + gzip recovery; MultifileFutamuraRepoSolver solves multi-file repos at Rung 2 and transfers to unseen renamed repos at Rung 0 (1 candidate, 0 proposer calls), solves 2-file coordinated bugs and 6/6 QuixBugs tasks; 146 federated kernels / 172 engines.",
+    "required_capability": "Real Linux kernel namespace isolation (os_isolation_v1), OS-confined 3-channel HCU with Ring-0 byte-effect verification and CoW rollback, unified multi-file Python repository Futamura self-compiling repair over pure-stdlib os.fork() CoW overlays, Ring-0 ddmin/mutation/SCoRE e-value gating, Error-Aware L# Mealy learning, DBSP+AGM+PreCommit memory hygiene, and live kernel federation at K3=0.",
+    "selected_surviving_route": "FRONTIER_LEAPFROG_WAVE36_37_OS_ISOLATION_MULTIFILE_FUTAMURA",
+    "stop_condition": "Stop once all Wave 37, Wave 36, Wave 21-24, Seven Moves, Five Phases, Unified Epistemic Portfolio, unified-model, goal-compiler, and creature tests pass, verify_brain_unified_model_v1 passes 38/38 with bit-identical BRAIN_COMPILE_NO_CACHE=1 recompilation, runtime_answer_receipt passes, and repo_integrity_guard, enforce_load_bearing_primary_pr, and enforce_goal_hierarchy pass with 0 violations and zero overstated capability/terminal credit claims.",
+    "why_selected_route_is_fastest_sufficient": "Deletes duplicate boot caches by building cleanly atop origin/main hot_v7, harvests proven kernel namespace isolation (os_isolation_v1), reuses stdlib_cow_test_runner_v1 pure-RAM os.fork() overlays, and composes Ring-0 byte/ddmin/mutation/SCoRE gating + Futamura multi-file self-compilation with minimal code footprint at K3=0.",
+    "obs_blocker": {
+      "blocker_is": "Lack of kernel-enforced OS namespace isolation on main, lack of OS-confined byte-verified computer use with rollback recovery, lack of multi-file Futamura Rung-0 self-compilation across unseen repositories, and lack of Ring-0 byte/ddmin/SCoRE/DBSP+AGM/PreCommit integration",
+      "delete_bypass_substitute_options": [
+        "Relying on disposable git clone confinement_v1 (rejected: documented host sentinel escape while reporting host_untouched=True)",
+        "Relying on filename/exit-code checks without byte magic + roundtrip + archive SHA-256 verification (rejected: falsified by lying zip/xz-as-gz extensions)",
+        "Maintaining duplicate boot caches alongside origin/main hot_v7 (rejected: violates Elon's Law 'best part is no part')"
+      ],
+      "evidence_the_blocker_is_real": [
+        "CONFINEMENT_FRONT_DOOR_WIRING_DESIGN_20261124_V1.md recorded unconfined sentinel writes reporting host_untouched=True under confinement_v1",
+        "origin/main at ecf5871e97 lacked canonical/runtime/os_isolation_v1.py, byte_effect_oracle_v1.py, and futamura_leapfrog_kernel_v1.py"
+      ],
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_CONFINEMENT_GROUNDING_AND_SELF_COMPILATION_GAPS resolved via os_isolation_v1, byte_effect_oracle_v1, futamura_leapfrog_kernel_v1, and unified hot_v7 front-door integration",
+      "surviving_causal_blocker": "Five concrete kernel confinement, byte-level truth, multi-file Futamura self-compilation, Ring-0 risk gating, and memory-hygiene gaps remained on origin/main ecf5871e97."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": "brain_unified_model_v1.py (hot_v7), stdlib_cow_test_runner_v1.py, unified_epistemic_portfolio_v1.py, frontier_seven_moves_runtime_v1.py, canonical_memory_crystallizer_v1.py, creature_runtime_v1.py, unified_hidden_capability_federation_v1.py, and PR #7071 os_isolation_v1.py",
+      "capability_work_deleted": [
+        "duplicate boot_v6/route_v6 caches removed in favor of origin/main hot_v7 _LazyMarshalDict",
+        "extraneous bloated lines in candidate patches via Zeller ddmin",
+        "stale CPython .pyc bytecode artifacts before disk re-verification"
+      ],
+      "what_was_added": "os_isolation_v1.py, byte_effect_oracle_v1.py, futamura_leapfrog_kernel_v1.py (including ConfinedHybridComputerUseExecutor and MultifileFutamuraRepoSolver), 13 Wave 36+37 methods on UnifiedModel, 7 methods on Creature, DBSP/AGM/PreCommit ops on VerificationFirstMemoryBus, 16 newly federated kernels (146 live federated kernels / 172 engines), bit-identically recompiled BRAIN_UNIFIED_MODEL_V1.json, and 16 real-execution tests in test_frontier_leapfrog_wave36_v1.py and test_frontier_leapfrog_wave37_v1.py",
+      "external_existing_routes_checked": "Linux unprivileged user+mount+pid+net+ipc+uts namespaces + capset/PR_CAPBSET_DROP, SkillCompiler (arXiv:2610.39508), GrowLibm (arXiv:2603.24812), DRA ddmin+mutmut (arXiv:2611.34875), SCoRE conformal e-values (arXiv:2603.24704), Kumiho AGM belief revision (arXiv:2603.17244), DBSP incremental Z-sets, projectmem pre-commit gate, Error-Aware L# (arXiv:2602.21674), Hybrid-Computer-Use (arXiv:2610.41432), OSWorld-Human (MLSys 2026), PASTE speculative execution (arXiv:2603.18897)",
+      "surviving_gap": "Independent OIDC verification and containerized external benchmark evaluation on SWE-bench Pro Verified, DeepSWE, SWE-EVO, FrontierMemory, CL-bench, and OSWorld 2.1"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "claiming external benchmark or OIDC credit locally",
+        "claiming host isolation via disposable git clones without kernel namespaces and capability drop"
+      ],
+      "real_outcome": "Kernel-verified verdict=ISOLATED (CapEff=0) in ~64 ms, OS-confined HCU catching lying xz-as-gz + collateral mutations with byte-for-byte rollback recovery, multi-file Futamura Rung-0 transfer to unseen renamed repos at 0 proposer calls, 2-file coordinated repair, 6/6 QuixBugs algorithmic suite, 16/16 Wave 36+37 tests PASS, and 146 live federated kernels / 172 engines",
+      "surviving_necessity": "Independent OIDC runners on external containerized benchmarks"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "PR #7071 os_isolation_v1.py + origin/main #7129/#7130/#7121 runtimes + 16 newly federated kernels all unified cleanly through UnifiedModel and Creature",
+      "downstream_work_to_delete_or_supersede": "unconfined subprocess execution, filename-only artifact verification, duplicate boot caches, and unminimized multi-hunk candidate patch commits",
+      "fresh_reuse_plan": "Every future verified single-file or multi-file repository win compiles automatically into alpha-normalized Rung-0 rules and undergoes GrowLibm + Rubin skill-rent GC during sleep"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "hot_v7 _LazyMarshalDict avoids eager 13 MB JSON deserialization; stdlib_cow_test_runner_v1 os.fork() overlays avoid disk mutation during screening; PreCommitFailureGate skips known failing commands/patches in microseconds",
+      "search_stop_decision": "stopped after verifying all Wave 37, Wave 36, Wave 21-24, Seven Moves, Five Phases, Epistemic Portfolio, unified-model, goal-compiler, and Creature suites, 38/38 verifier, bit-identical compile, runtime receipt, and all 3 CI guards"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Disposable git-clone confinement allows host sentinel escapes; filename-only checks miss lying extensions; uncompiled search wastes repeated effort on unseen isomorphic multi-file repositories",
+      "routes_ranked": [
+        {
+          "rank": 1,
+          "route": "FRONTIER_LEAPFROG_WAVE36_37_OS_ISOLATION_MULTIFILE_FUTAMURA",
+          "why": "Unites real Linux kernel CapEff=0 isolation, OS-confined byte-verified HCU with CoW rollback, multi-file Futamura self-compilation over pure-stdlib os.fork() overlays, Ring-0 ddmin/mutation/SCoRE gating, and 146 federated kernels cleanly atop origin/main hot_v7 at K3=0"
+        },
+        {
+          "rank": 2,
+          "route": "DISPOSABLE_CLONE_CONFINEMENT_WITHOUT_BYTE_ORACLE",
+          "why": "Falsified by host sentinel escape in CONFINEMENT_FRONT_DOOR_WIRING_DESIGN_20261124_V1.md and lying-extension artifacts"
+        },
+        {
+          "rank": 3,
+          "route": "UNCOMPILED_LLM_LOOP_WITHOUT_RING0_BYTE_ORACLE",
+          "why": "Violates K3=0, pays repeated inference cost on unseen isomorphic multi-file repos, and lacks anytime-valid Ville risk bounds"
+        }
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Zero-mock real-execution tests run the actual Linux kernel 18-attempt escape payload, execute real gzip/lzma commands inside CapEff=0 namespaces with lying-extension & collateral-mutation rollback, run real multi-file and 2-file coordinated Python repo repairs in os.fork() CoW overlays with disk re-verification, and benchmark 6 QuixBugs algorithmic repairs + Rung-0 unseen-repo transfer"
+    },
+    "routes_considered": [
+      {
+        "route": "FRONTIER_LEAPFROG_WAVE36_37_OS_ISOLATION_MULTIFILE_FUTAMURA",
+        "verdict": "SELECTED",
+        "why": "Closes all five post-ecf5871e97 kernel-isolation, byte-truth, multi-file Futamura self-compilation, Ring-0 risk-gating, and memory-hygiene gaps cleanly at K3=0"
+      },
+      {
+        "route": "DISPOSABLE_CLONE_CONFINEMENT_WITHOUT_BYTE_ORACLE",
+        "verdict": "REJECTED",
+        "why": "Fails kernel isolation and lying-extension verification"
+      },
+      {
+        "route": "UNCOMPILED_LLM_LOOP_WITHOUT_RING0_BYTE_ORACLE",
+        "verdict": "REJECTED",
+        "why": "Violates K3=0, fails lying-extension byte truth, and never compiles verified wins to microsecond Rung-0 execution"
+      }
+    ],
+    "route_frontier": {
+      "canonical_base_commit": "ecf5871e971b6adcc413b938b16cea99e48c0d68",
+      "checked_at_utc": "2026-11-26T15:31:41+00:00",
+      "max_age_hours": 24,
+      "discovery_required": true,
+      "incumbent_route": "DISPOSABLE_CLONE_CONFINEMENT_WITHOUT_BYTE_ORACLE",
+      "selected_route": "FRONTIER_LEAPFROG_WAVE36_37_OS_ISOLATION_MULTIFILE_FUTAMURA",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "challenger_routes": [
+        {
+          "route": "DISPOSABLE_CLONE_CONFINEMENT_WITHOUT_BYTE_ORACLE",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "no kernel namespace isolation, no capability drop, no lying-extension byte oracle, no multi-file Futamura Rung-0 transfer",
+            "CORRECTNESS": "allows host sentinel writes while reporting host_untouched=True and accepts xz bytes named out.gz",
+            "INCREMENTAL_COST": "$0.00",
+            "RELIABILITY": "unsafe for real computer execution",
+            "VERIFIABILITY": "ungrounded label instead of kernel-enforced boundary",
+            "WALL_CLOCK": "similar setup overhead without real isolation"
+          },
+          "evidence": [
+            "CONFINEMENT_FRONT_DOOR_WIRING_DESIGN_20261124_V1.md + os_isolation_v1.probe() live 18-attempt kernel measurement"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_frontier_leapfrog_wave37_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        },
+        {
+          "route": "UNCOMPILED_LLM_LOOP_WITHOUT_RING0_BYTE_ORACLE",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "never compiles verified multi-file wins into microsecond deterministic Rung-0 skills",
+            "CORRECTNESS": "vulnerable to lying file extensions, collateral mutations, bloated multi-hunk edits, and repeated failed fixes",
+            "INCREMENTAL_COST": "non-zero per-episode model spend (violates K3=0)",
+            "RELIABILITY": "66% wasted GUI steps from loop churn (OSWorld-Human MLSys 2026) and no anytime-valid Ville risk bound",
+            "VERIFIABILITY": "no byte-level magic/roundtrip oracle or touched-line mutation kill audit",
+            "WALL_CLOCK": "seconds per LLM turn vs 64 ms kernel isolation probe and 1-candidate Rung-0 unseen-repo replay"
+          },
+          "evidence": [
+            "Measured 16/16 Wave 36+37 tests PASS: ISOLATED CapEff=0 in 64 ms, lying xz-as-gz caught+recovered, multi-file Rung-0 unseen-repo solve in 1 candidate at 0 proposer calls, 6/6 QuixBugs algorithmic repairs"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_frontier_leapfrog_wave36_v1.py",
+            "canonical/tests/test_frontier_leapfrog_wave37_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        }
+      ],
+      "negative_search_summary": "Live late-2026 research atlas + repo archaeology across PR #7071 os_isolation_v1.py, origin/main #7129/#7130/#7121, SkillCompiler (arXiv:2610.39508), GrowLibm (arXiv:2603.24812), DRA ddmin+mutmut (arXiv:2611.34875), SCoRE conformal e-values (arXiv:2603.24704), Kumiho AGM belief revision (arXiv:2603.17244), DBSP incremental Z-sets, projectmem pre-commit failure gates, Error-Aware L# (arXiv:2602.21674), Hybrid-Computer-Use (arXiv:2610.41432), OSWorld-Human (MLSys 2026), and PASTE speculative execution (arXiv:2603.18897) confirms that kernel-enforced CapEff=0 confinement + Ring-0 byte/ddmin/mutation/SCoRE verification + multi-file Futamura self-compilation cleanly atop hot_v7 strictly dominates unconfined clones and uncompiled LLM loops.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "SkillCompiler GrowLibm e-graph reverse library learning deterministic skill compilation 2026"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "DRA delta debugging ddmin mutmut SCoRE anytime-valid conformal e-values Ville inequality 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Kumiho AGM belief revision DBSP Z-set incremental agent memory projectmem pre-commit gate 2026"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "Hybrid-Computer-Use OSWorld-Human loop churn Error-Aware L# active automata PASTE speculative 2026"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/os_isolation_v1.py",
+          "canonical/runtime/brain_unified_model_v1.py",
+          "canonical/runtime/creature_runtime_v1.py",
+          "canonical/swe_kernel/stdlib_cow_test_runner_v1.py",
+          "canonical/swe_kernel/unified_epistemic_portfolio_v1.py",
+          "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+          "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+          "canonical/runtime/unified_hidden_capability_federation_v1.py"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Linux unshare(1)/namespaces(7)/capabilities(7), SkillCompiler (arXiv:2610.39508), GrowLibm (arXiv:2603.24812), DRA (arXiv:2611.34875), SCoRE (arXiv:2603.24704), Kumiho (arXiv:2603.17244), Error-Aware L# (arXiv:2602.21674), AAL with Advice (arXiv:2508.10535), Hybrid-Computer-Use (arXiv:2610.41432), OSWorld-Human (MLSys 2026), PASTE (arXiv:2603.18897)"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Python 3.11+ pure stdlib + Linux /usr/bin/unshare user/mount/pid/net/ipc/uts namespaces"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "SWE-bench Pro Verified, DeepSWE, SWE-EVO, FrontierMemory, CL-bench, OSWorld 2.1 late-2026 analyses"
+        ]
+      },
+      "unresolved_plausible_dominators": [],
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-26T15:31:41+00:00",
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "FRONTIER_LEAPFROG_WAVE36_37_OS_ISOLATION_MULTIFILE_FUTAMURA",
+        "status": "READY",
+        "execution_dependencies": [
+          {
+            "dependency": "local Python 3.11 pure stdlib + /usr/bin/unshare Linux namespaces + unified model compiler",
+            "kind": "LOCAL_RUNTIME",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "required": true,
+            "status": "READY",
+            "volatility": "STATIC",
+            "evidence": [
+              "16/16 Wave 36+37 zero-mock tests PASS; os_isolation_v1.probe() verdict=ISOLATED (CapEff=0); 146 federated kernels / 172 engines verified"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "repository integrity, goal hierarchy, and load-bearing primary admission guards",
+            "kind": "DATA_SOURCE",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "required": true,
+            "status": "READY",
+            "volatility": "STATIC",
+            "evidence": [
+              "repo_integrity_guard_v1.py + enforce_load_bearing_primary_pr.py + enforce_goal_hierarchy.py verified against base ecf5871e971b6adcc413b938b16cea99e48c0d68"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "No open truth obligation is claimed discharged by this PR. Waves 36+37 deliver real Linux kernel isolation (CapEff=0, 18 escape probes ISOLATED), OS-confined 3-channel HCU with Ring-0 byte-effect rollback recovery, multi-file Python repo Futamura self-compilation over pure-stdlib os.fork() overlays, Ring-0 ddmin/mutation/SCoRE e-value gating, DBSP/AGM/PreCommit memory hygiene, and 146 live federated kernels cleanly atop origin/main ecf5871e97 while keeping terminal truth false and capability/terminal credit deltas strictly zero.",
+    "target_truth_obligations": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "CODING_TB4_GE_66_4"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "478f3cdef55518cfec98104ca6ce9c9e7e490b1d",
+          "path": "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_V1.json"
+        }
+      ],
+      "decisive_question": "Do real Linux kernel namespace isolation (CapEff=0), OS-confined 3-channel HCU with byte-effect rollback recovery, multi-file Futamura Rung-0 self-compilation over pure-stdlib os.fork() overlays, Ring-0 ddmin/mutation/SCoRE e-value gating, DBSP/AGM/PreCommit memory hygiene, and 146 federated kernels execute deterministically end-to-end across UnifiedModel and Creature on top of origin/main ecf5871e97 at K3=0?",
+      "falsifier_id": "FRONTIER_LEAPFROG_WAVE36_37_REAL_EXECUTION_FALSIFIER",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "",
+      "proposal_id": "FRONTIER_LEAPFROG_WAVE36_20261126_V1"
+    }
+  }
+}

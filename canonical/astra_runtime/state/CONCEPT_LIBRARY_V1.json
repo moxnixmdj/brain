@@ -21,6 +21,20 @@
       ],
       "uses": 0,
       "verified_hits": 1
+    },
+    "concept_f1f3674d": {
+      "arity": 1,
+      "body_expr": "min(max(2 * _v0, 0), 100)",
+      "concept_id": "concept_f1f3674d",
+      "corpus_sites": 2,
+      "disconfirmations": 0,
+      "domain_kind": "numeric",
+      "mdl_gain_bytes": 2,
+      "param_names": [
+        "_v0"
+      ],
+      "uses": 282,
+      "verified_hits": 0
     }
   },
   "schema": "PROJECT_BRAIN_COMPOUNDING_CONCEPT_LIBRARY_V1"

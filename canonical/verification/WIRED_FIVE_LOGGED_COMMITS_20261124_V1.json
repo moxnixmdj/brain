@@ -1,0 +1,274 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "declared_before_the_run": {
+    "W1": "every counted row has a real failing test on the parent code with the post-fix test file",
+    "W2": "the witness engine is augmented with repo-native mining plus splicing and verifies with the project's runner",
+    "W3": "no commit diff, gold patch, model, network or stored parameter is read",
+    "W4": "a repair is reported only if the full test file passes after the patch"
+  },
+  "gates": {
+    "W1": true,
+    "W2": true,
+    "W3": true,
+    "W4": true
+  },
+  "generated_at_utc": "2026-11-25T15:27:22Z",
+  "rows": [
+    {
+      "failing_nodes": [
+        "tests/test_options.py::test_show_envvar_empty[None-  --units TEXT\\n-envvar1]",
+        "tests/test_options.py::test_show_envvar_empty[None-  --units TEXT\\n-]",
+        "tests/test_options.py::test_show_envvar_empty[WEATHER-  --units TEXT  [env var: WEATHER_UNITS]\\n-envvar1]",
+        "tests/test_options.py::test_show_envvar_empty[WEATHER-  --units TEXT  [env var: WEATHER_UNITS]\\n-]",
+        "tests/test_options.py::test_missing_envvar_sequence[envvar1-'--units' (env var: 'UNITS')]"
+      ],
+      "miner": {
+        "control": {
+          "partial_candidates": 0,
+          "trials": 0,
+          "verdict": "NO_TERM_PASSED"
+        },
+        "mined_terms": 0,
+        "stage": "COMPARED",
+        "treatment": {
+          "trials": 0,
+          "verdict": "NO_MINED_TERM"
+        }
+      },
+      "oracle_node": "tests/test_options.py::test_show_envvar_empty[None-  --units TEXT\\n-envvar1]",
+      "repo": "pallets/click",
+      "seconds": 6.7,
+      "sha": "c53d3732b98c764932e146c007146ad402acb229",
+      "stage": "COMPARED",
+      "witness": {
+        "actual_value": "'  --units TEXT\\n'",
+        "alphabet_size": 0,
+        "answer": "REFUSED__NO_INVERTIBLE_SITE",
+        "candidates_reproducing_the_witness": 0,
+        "control": null,
+        "detail": "600 recorded frames, no alphabet reproduces the witness",
+        "existing_expression": null,
+        "found_by": null,
+        "mining": {
+          "patches": 0,
+          "splices": 0,
+          "terms": 0
+        },
+        "records": 600,
+        "required_value": "'Usage: cli [OPTIONS]\\n\\nOptions:\\n  --units TEXT  [env var: ]\\n  --help        Show this message and exit.\\n'",
+        "site": null,
+        "sites_examined": 40,
+        "sites_invertible": 0,
+        "task": "test_options.py::test_show_envvar_empty",
+        "tried": 0,
+        "witness_mode": "equal",
+        "witness_outcome": "NO_INVERTIBLE_SITE"
+      }
+    },
+    {
+      "failing_nodes": [
+        "tests/test_arguments.py::test_argument_get_help_record_never_none[None]"
+      ],
+      "miner": {
+        "control": {
+          "partial_candidates": 0,
+          "trials": 0,
+          "verdict": "NO_TERM_PASSED"
+        },
+        "mined_terms": 0,
+        "stage": "COMPARED",
+        "treatment": {
+          "trials": 0,
+          "verdict": "NO_MINED_TERM"
+        }
+      },
+      "oracle_node": "tests/test_arguments.py::test_argument_get_help_record_never_none[None]",
+      "repo": "pallets/click",
+      "seconds": 3.4,
+      "sha": "05f6fd0df4ecbd104eb7a229f9f185c2484dee69",
+      "stage": "COMPARED",
+      "witness": {
+        "actual_value": "None",
+        "alphabet_size": 0,
+        "answer": "REFUSED__NO_INVERTIBLE_SITE",
+        "candidates_reproducing_the_witness": 0,
+        "control": null,
+        "detail": "176 recorded frames, no alphabet reproduces the witness",
+        "existing_expression": null,
+        "found_by": null,
+        "mining": {
+          "patches": 0,
+          "splices": 0,
+          "terms": 0
+        },
+        "records": 176,
+        "required_value": "('SRC', '')",
+        "site": null,
+        "sites_examined": 7,
+        "sites_invertible": 0,
+        "task": "test_arguments.py::test_argument_get_help_record_never_none",
+        "tried": 0,
+        "witness_mode": "equal",
+        "witness_outcome": "NO_INVERTIBLE_SITE"
+      }
+    },
+    {
+      "failing_nodes": [
+        "tests/test_abort_interrupt.py::test_interrupt_while_reporting_abort[prompt-1]",
+        "tests/test_abort_interrupt.py::test_interrupt_while_reporting_abort[body-1]",
+        "tests/test_abort_interrupt.py::test_interrupt_while_reporting_abort[body-2]",
+        "tests/test_abort_interrupt.py::test_interrupt_while_reporting_error",
+        "tests/test_abort_interrupt.py::test_interrupt_while_exiting_after_success"
+      ],
+      "miner": {
+        "control": {
+          "partial_candidates": 0,
+          "trials": 0,
+          "verdict": "NO_TERM_PASSED"
+        },
+        "mined_terms": 0,
+        "stage": "COMPARED",
+        "treatment": {
+          "trials": 0,
+          "verdict": "NO_MINED_TERM"
+        }
+      },
+      "oracle_node": "tests/test_abort_interrupt.py::test_interrupt_while_reporting_abort[prompt-1]",
+      "repo": "pallets/click",
+      "seconds": 3.0,
+      "sha": "fc518e41218b447e875fe27244ae692c269bcb77",
+      "stage": "COMPARED",
+      "witness": {
+        "actual_value": null,
+        "alphabet_size": 0,
+        "answer": "REFUSED__NO_REPORT",
+        "candidates_reproducing_the_witness": 0,
+        "control": null,
+        "detail": ".F.FF                                                                    [100%]\n=========================== short test summary info ============================\nFAILED tests/test_abort_interrupt.py::test_interrupt_while_reporting_abort[prompt-1]\nFAILED tests/test_abort_interrupt.py::test_interrupt_while_reporting_abort[body-1]\nFAILED tests/test_abort_interrupt.py::test_interrupt_while_reporting_abort[body-2]\n3 failed, 2 passed in 0.02s\n",
+        "existing_expression": null,
+        "found_by": null,
+        "mining": {
+          "patches": 0,
+          "splices": 0,
+          "terms": 0
+        },
+        "records": null,
+        "required_value": null,
+        "site": null,
+        "sites_examined": null,
+        "sites_invertible": 0,
+        "task": "test_abort_interrupt.py::test_interrupt_while_reporting_abort",
+        "tried": 0,
+        "witness_mode": null,
+        "witness_outcome": "NO_REPORT"
+      }
+    },
+    {
+      "failing_nodes": [
+        "tests/test_routing.py::TestNoDomainMatching::test_build_relative"
+      ],
+      "miner": {
+        "control": {
+          "partial_candidates": 0,
+          "trials": 0,
+          "verdict": "NO_TERM_PASSED"
+        },
+        "mined_terms": 0,
+        "stage": "COMPARED",
+        "treatment": {
+          "trials": 0,
+          "verdict": "NO_MINED_TERM"
+        }
+      },
+      "oracle_node": "tests/test_routing.py::TestNoDomainMatching::test_build_relative",
+      "repo": "pallets/werkzeug",
+      "seconds": 9.2,
+      "sha": "884437aef93e543ebaff3b9cdbe857ee47e7e00c",
+      "stage": "COMPARED",
+      "witness": {
+        "actual_value": null,
+        "alphabet_size": 0,
+        "answer": "REFUSED__NO_REPORT",
+        "candidates_reproducing_the_witness": 0,
+        "control": null,
+        "detail": "\nno tests ran in 0.17s\nERROR: not found: /tmp/tmpo0vp2xc6/wt/tests/test_routing.py::test_build_relative\n(no match in any of [<Module test_routing.py>])\n\n",
+        "existing_expression": null,
+        "found_by": null,
+        "mining": {
+          "patches": 0,
+          "splices": 0,
+          "terms": 0
+        },
+        "records": null,
+        "required_value": null,
+        "site": null,
+        "sites_examined": null,
+        "sites_invertible": 0,
+        "task": "test_routing.py::test_build_relative",
+        "tried": 0,
+        "witness_mode": null,
+        "witness_outcome": "NO_REPORT"
+      }
+    },
+    {
+      "failing_nodes": [
+        "tests/test_http.py::TestHTTPUtility::test_www_authenticate_header"
+      ],
+      "miner": {
+        "control": {
+          "partial_candidates": 0,
+          "trials": 0,
+          "verdict": "NO_TERM_PASSED"
+        },
+        "mined_terms": 0,
+        "stage": "COMPARED",
+        "treatment": {
+          "trials": 0,
+          "verdict": "NO_MINED_TERM"
+        }
+      },
+      "oracle_node": "tests/test_http.py::TestHTTPUtility::test_www_authenticate_header",
+      "repo": "pallets/werkzeug",
+      "seconds": 3.7,
+      "sha": "051fd66352cf8b3f0797249858068dedaead6d39",
+      "stage": "COMPARED",
+      "witness": {
+        "actual_value": null,
+        "alphabet_size": 0,
+        "answer": "REFUSED__NO_REPORT",
+        "candidates_reproducing_the_witness": 0,
+        "control": null,
+        "detail": "\nno tests ran in 0.17s\nERROR: not found: /tmp/tmp3j6fz7y_/wt/tests/test_http.py::test_www_authenticate_header\n(no match in any of [<Module test_http.py>])\n\n",
+        "existing_expression": null,
+        "found_by": null,
+        "mining": {
+          "patches": 0,
+          "splices": 0,
+          "terms": 0
+        },
+        "records": null,
+        "required_value": null,
+        "site": null,
+        "sites_examined": null,
+        "sites_invertible": 0,
+        "task": "test_http.py::test_www_authenticate_header",
+        "tried": 0,
+        "witness_mode": null,
+        "witness_outcome": "NO_REPORT"
+      }
+    }
+  ],
+  "schema": "PROJECT_BRAIN_WIRED_COMMIT_PROBE_V1",
+  "summary": {
+    "gold_patch_reads": 0,
+    "miner_repairs": 0,
+    "model_calls": 0,
+    "network_calls": 0,
+    "parameters_stored": 0,
+    "rows": 5,
+    "seconds": 26.0,
+    "wired_witness_repairs": 0,
+    "with_oracle": 5
+  },
+  "verdict": "FAIL"
+}

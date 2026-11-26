@@ -60,11 +60,13 @@ class ZygotePrewarmedPool:
         artifact_path: str | pathlib.Path | None = None,
         ledger_db_path: str | pathlib.Path | None = None,
         workflow_db_path: str | pathlib.Path | None = None,
+        prewarm_enabled: bool = True,
     ) -> None:
         self.artifact_path = pathlib.Path(artifact_path) if artifact_path else None
         self.ledger_db_path = pathlib.Path(ledger_db_path) if ledger_db_path else None
         self.workflow_db_path = pathlib.Path(workflow_db_path) if workflow_db_path else None
-        self._warmed = False
+        self._prewarm_enabled = bool(prewarm_enabled)
+        self._warmed = not self._prewarm_enabled
         self._warm_ms = 0.0
         self._model: Any = None
         self._registry_count = 0
@@ -99,7 +101,7 @@ class ZygotePrewarmedPool:
 
     def run_isolated(self, fn: Callable[[], Mapping[str, Any]], *, timeout_s: float = 30.0) -> dict[str, Any]:
         """Execute `fn` in an isolated `os.fork()` CoW child and return its JSON dict."""
-        if not self._warmed:
+        if not self._warmed and self._prewarm_enabled:
             self.prewarm()
         t0 = time.perf_counter_ns()
         if not hasattr(os, "fork"):
@@ -155,14 +157,14 @@ class ZygotePrewarmedPool:
 
     def route_isolated(self, goal: str, *, top_k: int = 5) -> dict[str, Any]:
         """Route `goal` inside an isolated CoW child at warm RAM speed (~1.5 ms)."""
-        if not self._warmed:
+        if not self._warmed and self._prewarm_enabled:
             self.prewarm()
         model = self._model
         return self.run_isolated(lambda: model.route(goal, top_k=top_k))
 
     def solve_or_learn_isolated(self, request: Mapping[str, Any] | str, **kwargs: Any) -> dict[str, Any]:
         """Run `solve_or_learn` inside an isolated CoW child with pre-warmed caches."""
-        if not self._warmed:
+        if not self._warmed and self._prewarm_enabled:
             self.prewarm()
         from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import solve_or_learn
         return self.run_isolated(lambda: solve_or_learn(request, **kwargs))
@@ -178,7 +180,7 @@ class ZygotePrewarmedPool:
         import select
         import signal
 
-        if not self._warmed:
+        if not self._warmed and self._prewarm_enabled:
             self.prewarm()
         t0 = time.perf_counter_ns()
         if not shard_fns:

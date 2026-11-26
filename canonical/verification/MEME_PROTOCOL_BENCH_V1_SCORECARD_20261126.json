@@ -1,0 +1,172 @@
+{
+  "delta_by_operation": {
+    "ABSENCE": 1.0,
+    "AGGREGATION": 1.0,
+    "CASCADE": 1.0,
+    "DELETION": 0.0,
+    "EXACT_RECALL": 0.0,
+    "TRACKING": 1.0
+  },
+  "elapsed_ms": 4.679,
+  "instances": 36,
+  "judged_by": "reference_fixpoint (from-scratch semi-naive evaluator, no shared bookkeeping)",
+  "model_calls": 0,
+  "operations": [
+    "EXACT_RECALL",
+    "AGGREGATION",
+    "TRACKING",
+    "DELETION",
+    "CASCADE",
+    "ABSENCE"
+  ],
+  "per_operation_instances": 6,
+  "results": {
+    "dependency_memory": {
+      "failed": 0,
+      "failures": [],
+      "false_success_claims": 0,
+      "instances": 36,
+      "passed": 36,
+      "per_operation": {
+        "ABSENCE": {
+          "fail": 0,
+          "pass": 6,
+          "rate": 1.0
+        },
+        "AGGREGATION": {
+          "fail": 0,
+          "pass": 6,
+          "rate": 1.0
+        },
+        "CASCADE": {
+          "fail": 0,
+          "pass": 6,
+          "rate": 1.0
+        },
+        "DELETION": {
+          "fail": 0,
+          "pass": 6,
+          "rate": 1.0
+        },
+        "EXACT_RECALL": {
+          "fail": 0,
+          "pass": 6,
+          "rate": 1.0
+        },
+        "TRACKING": {
+          "fail": 0,
+          "pass": 6,
+          "rate": 1.0
+        }
+      },
+      "rate": 1.0,
+      "sut": "DEPENDENCY_MEMORY",
+      "unclaimed_successes": 0
+    },
+    "flat_retrieval": {
+      "failed": 24,
+      "failures": [
+        {
+          "answer": {
+            "status": "ABSTAIN__NEVER_ESTABLISHED",
+            "values": []
+          },
+          "instance": "CASCADE-00",
+          "why": "not established: ABSTAIN__NEVER_ESTABLISHED"
+        },
+        {
+          "answer": {
+            "status": "ABSTAIN__NEVER_ESTABLISHED",
+            "values": []
+          },
+          "instance": "ABSENCE-cascade-00",
+          "why": "lost its support but answered ABSTAIN__NEVER_ESTABLISHED"
+        },
+        {
+          "answer": {
+            "live_contributions": [],
+            "status": "ESTABLISHED",
+            "value": 0
+          },
+          "instance": "AGGREGATION-deleted-00",
+          "why": "total 0 != 36"
+        },
+        {
+          "answer": {
+            "status": "ABSTAIN__NEVER_ESTABLISHED",
+            "values": []
+          },
+          "instance": "TRACKING-00",
+          "why": "not established: ABSTAIN__NEVER_ESTABLISHED"
+        },
+        {
+          "answer": {
+            "status": "ABSTAIN__NEVER_ESTABLISHED",
+            "values": []
+          },
+          "instance": "CASCADE-01",
+          "why": "not established: ABSTAIN__NEVER_ESTABLISHED"
+        },
+        {
+          "answer": {
+            "status": "ABSTAIN__NEVER_ESTABLISHED",
+            "values": []
+          },
+          "instance": "ABSENCE-blocked-01",
+          "why": "wrong kind of no: ABSTAIN__NEVER_ESTABLISHED"
+        }
+      ],
+      "false_success_claims": 6,
+      "instances": 36,
+      "passed": 12,
+      "per_operation": {
+        "ABSENCE": {
+          "fail": 6,
+          "pass": 0,
+          "rate": 0.0
+        },
+        "AGGREGATION": {
+          "fail": 6,
+          "pass": 0,
+          "rate": 0.0
+        },
+        "CASCADE": {
+          "fail": 6,
+          "pass": 0,
+          "rate": 0.0
+        },
+        "DELETION": {
+          "fail": 0,
+          "pass": 6,
+          "rate": 1.0
+        },
+        "EXACT_RECALL": {
+          "fail": 0,
+          "pass": 6,
+          "rate": 1.0
+        },
+        "TRACKING": {
+          "fail": 6,
+          "pass": 0,
+          "rate": 0.0
+        }
+      },
+      "rate": 0.3333,
+      "sut": "FLAT_RETRIEVAL",
+      "unclaimed_successes": 0
+    }
+  },
+  "schema": "BRAIN_MEME_PROTOCOL_BENCH_V1",
+  "seed": 20261126,
+  "self_check": {
+    "discrimination": 0.8333,
+    "honest_rate": 1.0,
+    "liar_false_success_claims": 20,
+    "liar_rate": 0.1667,
+    "schema": "BRAIN_MEME_PROTOCOL_BENCH_V1_SELF_CHECK",
+    "stub_rate": 0.0,
+    "trustworthy": true
+  },
+  "spend_usd": 0.0,
+  "verdict": "BENCH_COMPLETE__DEPENDENCY_MEMORY_AHEAD"
+}

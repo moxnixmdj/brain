@@ -1,0 +1,57 @@
+{
+ "schema": "BRAIN_HISTORY_TEMPLATE_REPAIR_20261125_V43",
+ "generated": "2026-11-26T02:43:28Z",
+ "question": "If the weights may hold no world knowledge, where does the CONTENT of an added line come from? The repository's own commit history is the only external, inspectable, editable store of additions that exists on disk. Is it sufficient?",
+ "answer": "NO. Measured three ways, and each bound is lower than the last.",
+ "the_mechanism": "Mine (anchor shape -> added statements) from `git log <PARENT>` only, so the fix commit is unreachable by construction; retrieve by anti-unification against a coverage-selected insert point; instantiate hole names positionally; execute. No model in the loop.",
+ "bound_1_substitution_family": {
+  "from": "V42",
+  "tasks_solvable_by_a_single_substitutable_edit": 0,
+  "tasks_solvable_by_any_number": 1,
+  "of": 28
+ },
+ "bound_2_history_recall": {
+  "added_lines_total": 600,
+  "added_lines_present_in_project_history": 196,
+  "recall": 0.327,
+  "tasks_with_every_added_line_in_history": 2,
+  "of": 28,
+  "tasks": [
+   "8c37b047",
+   "2aada00b"
+  ],
+  "reading": "Even with a PERFECT retriever and a PERFECT site localiser, a project's own history can supply at most a third of the added lines its bugs need, and only 2 of 28 tasks in full. The other 67% of additions are novel relative to the entire prior history of the project that wrote them. This number was re-measured after the shape function was fixed and did not move (196 vs 197), so it is not an artefact of the corrupted shaper."
+ },
+ "bound_3_retrieval_precision": {
+  "observation": "matching insert points per task, over hundreds of AST-valid insert points: 0 to 9. Joint coverage x history hit rate is what the mechanism can act on.",
+  "per_task_examples": {
+   "f91ea793": "covered 3, insert points 195, both 0",
+   "491af5d5": "covered 46, insert points 173, both 0",
+   "a03bde12": "covered 81, insert points 75, both 9"
+  }
+ },
+ "the_repair_run": {
+  "tasks": 28,
+  "solved": 0,
+  "candidates_screened": 136,
+  "outcomes": {
+   "UNSOLVED": 28
+  },
+  "note": "All 28 tasks, executed end to end after the shaper fix: every candidate applied and tested against the target node and the whole module. 136 candidates, 0 solved. The recall bound does not depend on this run; the run is reported so the bound is not mistaken for a claim about code that never ran."
+ },
+ "defects_found_in_my_own_instruments": [
+  "the first retrieval key was a single line's shape, so `\"<S>\",` matched dozens of unrelated lines and insertion produced unparsable Python on 60% of attempts; the key had to become AST-scoped",
+  "unified=0 hunks carry no context line, so treating the first added line as the ANCHOR keyed every template on the added text itself -- the mined index matched nothing real until the hunk header's enclosing scope was used as the anchor instead",
+  "adding an enclosing-scope component to the key silently drove eligibility to 0 of 8 tasks, because the site side had qualified names (`Marker.__init__`) while the diff side had bare ones (`__init__`); a key mismatch that yields a clean, plausible zero",
+  "the workspace reset to base mid-round and deleted .venv and both checkouts; rebuilt before trusting any subsequent number",
+  "the shape function was two regex passes, so the identifier pass rewrote its own holes and an f-string became `<<I>>`; every shape downstream was wrong and the only symptom was 'the index matched nothing'. Caught by a unit test asserting the exact shape, not by the pipeline failing. Re-measuring the bound after the fix moved it 197 -> 196 lines, which is how we know the bound is real."
+ ],
+ "what_this_settles_about_the_hidden_capability_hypothesis": "The claim was that the repository already contains the missing capabilities under non-obvious names. Across V40-V43 that claim has been tested and fails on every axis measured: 6 of 19 named identifiers exist as code and 9 of 9 named commits do not exist at all; the reach census shows 64% of canonical/ is never reached by the runtime; the surfaced machinery executes and produces 0 candidates on 26 of 27 tasks; the substitution family's ceiling is 0-1 of 28; and now the repository's own history is insufficient by 67% for the additions its own bugs need. There is no hidden capability large enough to close a 0/28 to a frontier rate. That is the finding, and continuing to search for one would be the dishonest move.",
+ "cost": {
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_at_run_time": 0,
+  "mining_seconds_per_task": "2.6 to 6.2 (800 commits)"
+ },
+ "authority": "NONE -- development corpus; no benchmark row claimed; section 6 DONE not met"
+}

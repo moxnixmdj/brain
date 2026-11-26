@@ -1,0 +1,290 @@
+{
+  "all_claims_hold": true,
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "claims": {
+    "admitted_on_two_unseen_instances": true,
+    "corrupted_rule_refused": true,
+    "empty_store_yields_no_claim": true,
+    "recall_on_new_instance_goal_observed": true,
+    "saved_mechanism_contains_no_instance_data": true,
+    "trace_generalized_to_mechanism": true,
+    "train_goal_observed": true
+  },
+  "cost": {
+    "model_calls": 0,
+    "network_calls_at_run_time": 0,
+    "parameters_stored": 0
+  },
+  "date": "2026-11-24",
+  "duration_s": 26.892,
+  "environment": {
+    "app_dir": "/tmp/todomvc/todomvc-backbone-es6-gh-pages",
+    "browser": "headless Chromium via CDP (browser_launch_v1.sh)",
+    "name": "TodoMVC Backbone-ES6 (official, gh-pages, MIT)",
+    "served_on": "http://127.0.0.1:8931",
+    "source": "https://codeload.github.com/tastejs/todomvc-backbone-es6/tar.gz/refs/heads/gh-pages",
+    "tarball_sha256": "9147221e6f3e21950a3eeabaf58d059cc3bc60d811e0ba7b4641dfbd1e205180"
+  },
+  "need_admit": [
+    "BRAIN-ADMIT-A-4MZ19",
+    "BRAIN-ADMIT-B-8WVT3"
+  ],
+  "need_recall": "BRAIN-RECALL-5KDH8",
+  "need_train": "BRAIN-TRAIN-7Q2XK",
+  "saved_rule": {
+    "authority": "EXTERNAL_NEED_AND_PAGE_OBSERVATION__ADMITTED_OR_REFUSED_BY_REPLAY",
+    "created_at": 1795542882.292686,
+    "env_kind": "web_todomvc_backbone",
+    "evidence": {
+      "admit_instances": 2,
+      "admit_reached": 2,
+      "trace_sha256": "8ac9b6bbe27aab34",
+      "train_elements_seen": 3
+    },
+    "goal_family": "todo_add_and_complete",
+    "kind": "gui_action_sketch",
+    "plan_sketch": [
+      {
+        "role": "textbox",
+        "target": "UNIQUE",
+        "text": "S0",
+        "verb": "set_text"
+      },
+      {
+        "key": "Enter",
+        "verb": "press"
+      },
+      {
+        "container_contains": "S0",
+        "role": "checkbox",
+        "verb": "click"
+      }
+    ],
+    "rule_id": "gui-sketch-ebaff70d7db1b37b",
+    "schema": "BRAIN_THE_PAGE_IS_THE_GUIDE_20261124_V1",
+    "scope": {
+      "env_kind": "web_todomvc_backbone",
+      "goal_family": "todo_add_and_complete"
+    },
+    "slots": [
+      {
+        "id": "S0",
+        "kind": "string",
+        "source": "need"
+      }
+    ]
+  },
+  "schema": "BRAIN_THE_PAGE_IS_THE_GUIDE_20261124_V1",
+  "stages": {
+    "admit": [
+      {
+        "action_result": {
+          "status": "PASS__EXECUTED",
+          "trace": [
+            {
+              "role": "textbox",
+              "target": "UNIQUE",
+              "text": "BRAIN-ADMIT-A-4MZ19",
+              "verb": "set_text"
+            },
+            {
+              "key": "Enter",
+              "verb": "press"
+            },
+            {
+              "container_contains": "BRAIN-ADMIT-A-4MZ19",
+              "role": "checkbox",
+              "verb": "click"
+            }
+          ]
+        },
+        "console_errors": [
+          "LOG.ERROR: Permissions policy violation: unload is not allowed in this document.",
+          "LOG.ERROR: Permissions policy violation: unload is not allowed in this document.",
+          "LOG.ERROR: Permissions policy violation: unload is not allowed in this document.",
+          "LOG.ERROR: Permissions policy violation: unload is not allowed in this document."
+        ],
+        "elements_seen": 3,
+        "goal_reached": true,
+        "need_title_sha256": "f354089b5648c5a0",
+        "status": "PASS__GOAL_OBSERVED",
+        "todos_after": [
+          {
+            "completed": true,
+            "title": "BRAIN-ADMIT-A-4MZ19"
+          }
+        ]
+      },
+      {
+        "action_result": {
+          "status": "PASS__EXECUTED",
+          "trace": [
+            {
+              "role": "textbox",
+              "target": "UNIQUE",
+              "text": "BRAIN-ADMIT-B-8WVT3",
+              "verb": "set_text"
+            },
+            {
+              "key": "Enter",
+              "verb": "press"
+            },
+            {
+              "container_contains": "BRAIN-ADMIT-B-8WVT3",
+              "role": "checkbox",
+              "verb": "click"
+            }
+          ]
+        },
+        "console_errors": [
+          "LOG.ERROR: Permissions policy violation: unload is not allowed in this document.",
+          "LOG.ERROR: Permissions policy violation: unload is not allowed in this document.",
+          "LOG.ERROR: Permissions policy violation: unload is not allowed in this document.",
+          "LOG.ERROR: Permissions policy violation: unload is not allowed in this document.",
+          "LOG.ERROR: Permissions policy violation: unload is not allowed in this document."
+        ],
+        "elements_seen": 3,
+        "goal_reached": true,
+        "need_title_sha256": "8b8b62e602bcff35",
+        "status": "PASS__GOAL_OBSERVED",
+        "todos_after": [
+          {
+            "completed": true,
+            "title": "BRAIN-ADMIT-B-8WVT3"
+          }
+        ]
+      }
+    ],
+    "corruption_control": {
+      "action_result": {
+        "detail": {
+          "candidates": 0,
+          "reason": "NO_MATCH",
+          "status": "ESCALATE"
+        },
+        "status": "ESCALATE",
+        "step": {
+          "container_contains": "S0-ABSENT-CORRUPTED",
+          "role": "checkbox",
+          "verb": "click"
+        }
+      },
+      "console_errors": [
+        "LOG.ERROR: Permissions policy violation: unload is not allowed in this document.",
+        "LOG.ERROR: Permissions policy violation: unload is not allowed in this document.",
+        "LOG.ERROR: Permissions policy violation: unload is not allowed in this document.",
+        "LOG.ERROR: Permissions policy violation: unload is not allowed in this document.",
+        "LOG.ERROR: Permissions policy violation: unload is not allowed in this document.",
+        "LOG.ERROR: Permissions policy violation: unload is not allowed in this document.",
+        "LOG.ERROR: Permissions policy violation: unload is not allowed in this document."
+      ],
+      "control": "corrupted_rule_must_not_pass",
+      "elements_seen": 3,
+      "goal_reached": false,
+      "need_title_sha256": "f86b401bbd99aefe",
+      "status": "OPEN__GOAL_NOT_OBSERVED",
+      "todos_after": [
+        {
+          "completed": false,
+          "title": "BRAIN-RECALL-5KDH8-CORRUPTION"
+        }
+      ]
+    },
+    "empty_store_control": {
+      "rule_found": false,
+      "rules": 0,
+      "status": "REFUSED__NO_RULE_IN_STORE"
+    },
+    "recall": {
+      "action_result": {
+        "status": "PASS__EXECUTED",
+        "trace": [
+          {
+            "role": "textbox",
+            "target": "UNIQUE",
+            "text": "BRAIN-RECALL-5KDH8",
+            "verb": "set_text"
+          },
+          {
+            "key": "Enter",
+            "verb": "press"
+          },
+          {
+            "container_contains": "BRAIN-RECALL-5KDH8",
+            "role": "checkbox",
+            "verb": "click"
+          }
+        ]
+      },
+      "bindings_tried": 0,
+      "console_errors": [
+        "LOG.ERROR: Permissions policy violation: unload is not allowed in this document.",
+        "LOG.ERROR: Permissions policy violation: unload is not allowed in this document.",
+        "LOG.ERROR: Permissions policy violation: unload is not allowed in this document.",
+        "LOG.ERROR: Permissions policy violation: unload is not allowed in this document.",
+        "LOG.ERROR: Permissions policy violation: unload is not allowed in this document.",
+        "LOG.ERROR: Permissions policy violation: unload is not allowed in this document."
+      ],
+      "elements_seen": 3,
+      "goal_reached": true,
+      "need_title_sha256": "ab73d14b8bd23566",
+      "replayed_rule_id": "gui-sketch-ebaff70d7db1b37b",
+      "scan_used": false,
+      "status": "PASS__GOAL_OBSERVED",
+      "todos_after": [
+        {
+          "completed": true,
+          "title": "BRAIN-RECALL-5KDH8"
+        }
+      ]
+    },
+    "save": {
+      "rule_id": "gui-sketch-ebaff70d7db1b37b",
+      "status": "PASS__SAVED_TO_MEMORY"
+    },
+    "train": {
+      "action_result": {
+        "status": "PASS__EXECUTED",
+        "trace": [
+          {
+            "role": "textbox",
+            "target": "UNIQUE",
+            "text": "BRAIN-TRAIN-7Q2XK",
+            "verb": "set_text"
+          },
+          {
+            "key": "Enter",
+            "verb": "press"
+          },
+          {
+            "container_contains": "BRAIN-TRAIN-7Q2XK",
+            "role": "checkbox",
+            "verb": "click"
+          }
+        ]
+      },
+      "console_errors": [
+        "LOG.ERROR: Permissions policy violation: unload is not allowed in this document.",
+        "LOG.ERROR: Permissions policy violation: unload is not allowed in this document.",
+        "LOG.ERROR: Permissions policy violation: unload is not allowed in this document.",
+        "LOG.ERROR: Permissions policy violation: unload is not allowed in this document."
+      ],
+      "elements_seen": 3,
+      "goal_reached": true,
+      "need_title_sha256": "9f7ad1431c5c8ec7",
+      "status": "PASS__GOAL_OBSERVED",
+      "todos_after": [
+        {
+          "completed": true,
+          "title": "BRAIN-TRAIN-7Q2XK"
+        }
+      ]
+    }
+  },
+  "what_this_is_not": [
+    "not a benchmark result (no OSWorld, no SWE-bench Pro, no Terminal-Bench)",
+    "not independent verification: producer sandbox measurement only",
+    "not a security boundary: trusted input events, local page only",
+    "closed shadow roots are opaque; failures are reported, never hidden"
+  ]
+}

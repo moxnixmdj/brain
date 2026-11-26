@@ -1,0 +1,1825 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "corpus": {
+    "commits": 15,
+    "repositories": [
+      "marshmallow-code/marshmallow",
+      "pallets/click"
+    ],
+    "selection": "sha absent from every existing receipt and corpus file; one source and one test file; oracle executes",
+    "shards": 4
+  },
+  "declared_before_the_run": {
+    "N1": "at least one fresh real commit is VERIFIED by substituting a name that existed in the executed frame",
+    "N2": "the substituted name is not the name at the site and the whole suite stays green",
+    "N3": "the generator reads no commit diff and no human edit before the verdict",
+    "N4": "zero parameters stored, zero model calls, zero network calls",
+    "N5": "every counted row has a real failing test and a whole-file execution"
+  },
+  "gates": {
+    "N1": false,
+    "N2": true,
+    "N3": true,
+    "N4": true,
+    "N5": true
+  },
+  "generated_at_utc": "2026-11-24T23:02:52Z",
+  "rows": [
+    {
+      "candidates": 0,
+      "commit": "4113c8ac3f5234130776c21c33207f1de9b09c05",
+      "executed_lines": 111,
+      "failing": "tests/test_options.py::TestFieldOrdering::test_ordered_option_is_deprecate",
+      "failing_count": 1,
+      "failing_share": 0.0556,
+      "failing_test": "tests/test_options.py::TestFieldOrdering::test_ordered_option_is_deprecate",
+      "holes": 145,
+      "keep": true,
+      "repo": "marshmallow",
+      "seconds": 12.6,
+      "sources": [
+        "src/marshmallow/schema.py"
+      ],
+      "spec_strings": 0,
+      "stage": "NO_FRAME_NAME_PASSED",
+      "test": "tests/test_options.py",
+      "tested": 0,
+      "tests": 18,
+      "tests_in_file": 18,
+      "tried": [],
+      "verification": null
+    },
+    {
+      "candidates": 0,
+      "commit": "b047565aec9a76a877197f0edd2c62cc5ec9b236",
+      "executed_lines": 148,
+      "failing": "tests/test_deserialization.py::TestFieldDeserialization::test_fields_accept_internal_types[DateTime]",
+      "failing_count": 5,
+      "failing_share": 0.0131,
+      "failing_test": "tests/test_deserialization.py::TestFieldDeserialization::test_fields_accept_internal_types[DateTime]",
+      "holes": 169,
+      "keep": true,
+      "repo": "marshmallow",
+      "seconds": 22.6,
+      "sources": [
+        "src/marshmallow/fields.py"
+      ],
+      "spec_strings": 30,
+      "stage": "NO_FRAME_NAME_PASSED",
+      "test": "tests/test_deserialization.py",
+      "tested": 0,
+      "tests": 382,
+      "tests_in_file": 382,
+      "tried": [],
+      "verification": null
+    },
+    {
+      "candidates": 0,
+      "commit": "6fac57d41cc86fd960cbd92daca9c32181a21aed",
+      "executed_lines": 1,
+      "failing": "tests/test_schema.py::TestContext::test_context_load_dump",
+      "failing_count": 1,
+      "failing_share": 0.0046,
+      "failing_test": "tests/test_schema.py::TestContext::test_context_load_dump",
+      "holes": 0,
+      "keep": true,
+      "repo": "marshmallow",
+      "seconds": 14.7,
+      "sources": [
+        "src/marshmallow/context.py"
+      ],
+      "spec_strings": 2,
+      "stage": "NO_FRAME_NAME_PASSED",
+      "test": "tests/test_schema.py",
+      "tested": 0,
+      "tests": 216,
+      "tests_in_file": 216,
+      "tried": [],
+      "verification": null
+    },
+    {
+      "candidates": 76,
+      "commit": "c4dd0cd968f61d0ee7a163af810bd695ed893ec3",
+      "executed_lines": 306,
+      "failing": "tests/test_commands.py::test_deprecated_help_text_is_not_translated",
+      "failing_count": 1,
+      "failing_share": 0.0096,
+      "failing_test": "tests/test_commands.py::test_deprecated_help_text_is_not_translated",
+      "holes": 389,
+      "keep": true,
+      "repo": "click",
+      "seconds": 262.8,
+      "sources": [
+        "src/click/core.py"
+      ],
+      "spec_strings": 6,
+      "stage": "NO_FRAME_NAME_PASSED",
+      "test": "tests/test_commands.py",
+      "tested": 76,
+      "tests": 104,
+      "tests_in_file": 104,
+      "tried": [
+        {
+          "broken": [
+            "tests/test_commands.py::test_auto_shorthelp",
+            "tests/test_commands.py::test_command_no_args_is_help",
+            "tests/test_commands.py::test_group_with_args[args0-2-Error: Missing command.]"
+          ],
+          "broken_count": 22,
+          "fixed": false,
+          "from": "None",
+          "hole": "365:22:parent",
+          "observed": "sub",
+          "score": 26,
+          "to": "info_name"
+        },
+        {
+          "broken": [
+            "tests/test_commands.py::test_other_command_forward",
+            "tests/test_commands.py::test_forwarded_params_consistency",
+            "tests/test_commands.py::test_auto_shorthelp"
+          ],
+          "broken_count": 31,
+          "fixed": false,
+          "from": "<Command sub>",
+          "hole": "367:23:command",
+          "observed": "sub",
+          "score": 26,
+          "to": "info_name"
+        },
+        {
+          "broken": [
+            "tests/test_commands.py::test_object_propagation"
+          ],
+          "broken_count": 1,
+          "fixed": false,
+          "from": "None",
+          "hole": "387:19:obj",
+          "observed": "sub",
+          "score": 26,
+          "to": "info_name"
+        },
+        {
+          "broken": [
+            "tests/test_commands.py::test_other_command_invoke",
+            "tests/test_commands.py::test_other_command_forward",
+            "tests/test_commands.py::test_forwarded_params_consistency"
+          ],
+          "broken_count": 28,
+          "fixed": false,
+          "from": "None",
+          "hole": "399:27:default_map",
+          "observed": "sub",
+          "score": 26,
+          "to": "info_name"
+        },
+        {
+          "broken": [
+            "tests/test_commands.py::test_auto_shorthelp",
+            "tests/test_commands.py::test_command_no_args_is_help",
+            "tests/test_commands.py::test_group_with_args[args0-2-Error: Missing command.]"
+          ],
+          "broken_count": 22,
+          "fixed": false,
+          "from": "None",
+          "hole": "417:30:terminal_width",
+          "observed": "sub",
+          "score": 26,
+          "to": "info_name"
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "from": "None",
+          "hole": "424:33:max_content_width",
+          "observed": "sub",
+          "score": 26,
+          "to": "info_name"
+        },
+        {
+          "broken": [
+            "tests/test_commands.py::test_group_parse_args_collects_base_option_prefixes"
+          ],
+          "broken_count": 1,
+          "fixed": false,
+          "from": "False",
+          "hole": "433:32:allow_extra_args",
+          "observed": "sub",
+          "score": 26,
+          "to": "info_name"
+        },
+        {
+          "broken": [
+            "tests/test_commands.py::test_forwarded_params_consistency",
+            "tests/test_commands.py::test_custom_parser",
+            "tests/test_commands.py::test_aliased_command_canonical_name"
+          ],
+          "broken_count": 3,
+          "fixed": false,
+          "from": "True",
+          "hole": "442:39:allow_interspersed_args",
+          "observed": "sub",
+          "score": 26,
+          "to": "info_name"
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "from": "False",
+          "hole": "455:38:ignore_unknown_options",
+          "observed": "sub",
+          "score": 26,
+          "to": "info_name"
+        },
+        {
+          "broken": [
+            "tests/test_commands.py::test_other_command_invoke",
+            "tests/test_commands.py::test_other_command_forward",
+            "tests/test_commands.py::test_forwarded_params_consistency"
+          ],
+          "broken_count": 69,
+          "fixed": false,
+          "from": "['--help']",
+          "hole": "464:33:help_option_names",
+          "observed": "sub",
+          "score": 26,
+          "to": "info_name"
+        },
+        {
+          "broken": [
+            "tests/test_commands.py::test_other_command_invoke",
+            "tests/test_commands.py::test_other_command_forward",
+            "tests/test_commands.py::test_forwarded_params_consistency"
+          ],
+          "broken_count": 52,
+          "fixed": false,
+          "from": "None",
+          "hole": "471:36:token_normalize_func",
+          "observed": "sub",
+          "score": 26,
+          "to": "info_name"
+        },
+        {
+          "broken": [
+            "tests/test_commands.py::test_auto_shorthelp",
+            "tests/test_commands.py::test_command_no_args_is_help",
+            "tests/test_commands.py::test_group_with_args[args1-0-Show this message and exit.]"
+          ],
+          "broken_count": 21,
+          "fixed": false,
+          "from": "False",
+          "hole": "476:33:resilient_parsing",
+          "observed": "sub",
+          "score": 26,
+          "to": "info_name"
+        }
+      ],
+      "verification": null
+    },
+    {
+      "candidates": 100,
+      "commit": "c53d3732b98c764932e146c007146ad402acb229",
+      "executed_lines": 300,
+      "failing": "tests/test_options.py::test_show_envvar_empty[None-  --units TEXT\\n-envvar1]",
+      "failing_count": 14,
+      "failing_share": 0.0206,
+      "failing_test": "tests/test_options.py::test_show_envvar_empty[None-  --units TEXT\\n-envvar1]",
+      "holes": 371,
+      "keep": true,
+      "repo": "click",
+      "seconds": 335.6,
+      "sources": [
+        "src/click/core.py"
+      ],
+      "spec_strings": 11,
+      "stage": "NO_FRAME_NAME_PASSED",
+      "test": "tests/test_options.py",
+      "tested": 100,
+      "tests": 681,
+      "tests_in_file": 681,
+      "tried": [
+        {
+          "broken": [
+            "tests/test_options.py::test_prefixes",
+            "tests/test_options.py::test_deprecated_usage[True]",
+            "tests/test_options.py::test_deprecated_usage[USE B INSTEAD]"
+          ],
+          "broken_count": 581,
+          "fixed": false,
+          "from": "{'--help': None}",
+          "hole": "1195:20:all_names",
+          "observed": "--units",
+          "score": 22,
+          "to": "name"
+        },
+        {
+          "broken": [
+            "tests/test_options.py::test_prefixes",
+            "tests/test_options.py::test_deprecated_usage[True]",
+            "tests/test_options.py::test_deprecated_usage[USE B INSTEAD]"
+          ],
+          "broken_count": 587,
+          "fixed": false,
+          "from": "['--units']",
+          "hole": "3336:21:opts",
+          "observed": "--units",
+          "score": 22,
+          "to": "decl"
+        },
+        {
+          "broken": [
+            "tests/test_options.py::test_prefixes",
+            "tests/test_options.py::test_deprecated_usage[True]",
+            "tests/test_options.py::test_deprecated_usage[USE B INSTEAD]"
+          ],
+          "broken_count": 634,
+          "fixed": false,
+          "from": "[]",
+          "hole": "3336:27:secondary_opts",
+          "observed": "--units",
+          "score": 22,
+          "to": "decl"
+        },
+        {
+          "broken": [
+            "tests/test_options.py::test_prefixes",
+            "tests/test_options.py::test_deprecated_usage[True]",
+            "tests/test_options.py::test_deprecated_usage[USE B INSTEAD]"
+          ],
+          "broken_count": 507,
+          "fixed": false,
+          "from": "[('--', 'units')]",
+          "hole": "3313:12:possible_names",
+          "observed": "--units",
+          "score": 22,
+          "to": "decl"
+        },
+        {
+          "broken": [
+            "tests/test_options.py::test_prefixes",
+            "tests/test_options.py::test_deprecated_usage[True]",
+            "tests/test_options.py::test_deprecated_usage[USE B INSTEAD]"
+          ],
+          "broken_count": 579,
+          "fixed": false,
+          "from": "{'--help': None}",
+          "hole": "1194:16:all_names",
+          "observed": "--units",
+          "score": 22,
+          "to": "name"
+        },
+        {
+          "broken": [
+            "tests/test_options.py::test_prefixes",
+            "tests/test_options.py::test_deprecated_usage[True]",
+            "tests/test_options.py::test_deprecated_usage[USE B INSTEAD]"
+          ],
+          "broken_count": 658,
+          "fixed": false,
+          "from": "[]",
+          "hole": "3309:20:possible_names",
+          "observed": "--units",
+          "score": 22,
+          "to": "decl"
+        },
+        {
+          "broken": [
+            "tests/test_options.py::test_prefixes",
+            "tests/test_options.py::test_deprecated_usage[True]",
+            "tests/test_options.py::test_deprecated_usage[USE B INSTEAD]"
+          ],
+          "broken_count": 658,
+          "fixed": false,
+          "from": "[]",
+          "hole": "3310:20:opts",
+          "observed": "--units",
+          "score": 22,
+          "to": "decl"
+        },
+        {
+          "broken": [
+            "tests/test_options.py::test_deprecated_usage[True]",
+            "tests/test_options.py::test_deprecated_usage[USE B INSTEAD]",
+            "tests/test_options.py::test_deprecated_empty_help_no_leading_space[-True-(DEPRECATED)]"
+          ],
+          "broken_count": 76,
+          "fixed": false,
+          "from": "<Option units>",
+          "hole": "3400:26:self",
+          "observed": "--units",
+          "score": 22,
+          "to": "rv"
+        },
+        {
+          "broken": [
+            "tests/test_options.py::test_choice_usage_rendering[choices0-[TEXT]]",
+            "tests/test_options.py::test_choice_usage_rendering[choices1-[INTEGER]]",
+            "tests/test_options.py::test_choice_usage_rendering[choices2-[FLOAT]]"
+          ],
+          "broken_count": 36,
+          "fixed": false,
+          "from": "<click.core.Context object at 0x7fecedfe2e10>",
+          "hole": "3400:48:ctx",
+          "observed": "--units",
+          "score": 22,
+          "to": "rv"
+        },
+        {
+          "broken": [
+            "tests/test_options.py::test_prefixes",
+            "tests/test_options.py::test_deprecated_usage[True]",
+            "tests/test_options.py::test_deprecated_usage[USE B INSTEAD]"
+          ],
+          "broken_count": 507,
+          "fixed": false,
+          "from": "[('--', 'units')]",
+          "hole": "3314:19:possible_names",
+          "observed": "--units",
+          "score": 22,
+          "to": "decl"
+        },
+        {
+          "broken": [
+            "tests/test_options.py::test_prefixes",
+            "tests/test_options.py::test_invalid_option",
+            "tests/test_options.py::test_deprecated_usage[True]"
+          ],
+          "broken_count": 667,
+          "fixed": true,
+          "from": "<module 'typing' from '/usr/lib/python3.11/typing.py'>",
+          "hole": "55:4:t",
+          "observed": "None",
+          "score": 13,
+          "to": "__doc__"
+        },
+        {
+          "broken": [
+            "tests/test_options.py::test_prefixes",
+            "tests/test_options.py::test_invalid_option",
+            "tests/test_options.py::test_deprecated_usage[True]"
+          ],
+          "broken_count": 667,
+          "fixed": true,
+          "from": "<module 'typing' from '/usr/lib/python3.11/typing.py'>",
+          "hole": "56:4:t",
+          "observed": "None",
+          "score": 13,
+          "to": "__doc__"
+        }
+      ],
+      "verification": null
+    },
+    {
+      "candidates": 4,
+      "commit": "f25f697a439acc2b0d84aa8f5413330f4e2e75cf",
+      "executed_lines": 302,
+      "failing": "tests/test_arguments.py::test_argument_help_lists_undocumented_arguments",
+      "failing_count": 3,
+      "failing_share": 0.0265,
+      "failing_test": "tests/test_arguments.py::test_argument_help_lists_undocumented_arguments",
+      "holes": 381,
+      "keep": true,
+      "repo": "click",
+      "seconds": 29.4,
+      "sources": [
+        "src/click/core.py"
+      ],
+      "spec_strings": 10,
+      "stage": "NO_FRAME_NAME_PASSED",
+      "test": "tests/test_arguments.py",
+      "tested": 4,
+      "tests": 113,
+      "tests_in_file": 113,
+      "tried": [
+        {
+          "broken": [
+            "tests/test_arguments.py::test_nargs_star",
+            "tests/test_arguments.py::test_nargs_tup",
+            "tests/test_arguments.py::test_nargs_tup_composite[opts0]"
+          ],
+          "broken_count": 87,
+          "fixed": false,
+          "from": "{'--help': None}",
+          "hole": "1195:20:all_names",
+          "observed": "extra",
+          "score": 13,
+          "to": "name"
+        },
+        {
+          "broken": [
+            "tests/test_arguments.py::test_nargs_star",
+            "tests/test_arguments.py::test_nargs_tup",
+            "tests/test_arguments.py::test_nargs_tup_composite[opts0]"
+          ],
+          "broken_count": 87,
+          "fixed": false,
+          "from": "{'--help': None}",
+          "hole": "1194:16:all_names",
+          "observed": "src",
+          "score": 13,
+          "to": "name"
+        },
+        {
+          "broken": [
+            "tests/test_arguments.py::test_nargs_star",
+            "tests/test_arguments.py::test_nargs_tup",
+            "tests/test_arguments.py::test_nargs_tup_composite[opts0]"
+          ],
+          "broken_count": 88,
+          "fixed": false,
+          "from": "[]",
+          "hole": "3295:20:possible_names",
+          "observed": "--help",
+          "score": 13,
+          "to": "decl"
+        },
+        {
+          "broken": [
+            "tests/test_arguments.py::test_nargs_star",
+            "tests/test_arguments.py::test_nargs_tup",
+            "tests/test_arguments.py::test_nargs_tup_composite[opts0]"
+          ],
+          "broken_count": 88,
+          "fixed": false,
+          "from": "[]",
+          "hole": "3296:20:opts",
+          "observed": "--help",
+          "score": 13,
+          "to": "decl"
+        }
+      ],
+      "verification": null
+    },
+    {
+      "candidates": 100,
+      "commit": "271effb3d96da5575eb527216ce3552bd7628fab",
+      "executed_lines": 173,
+      "failing": "tests/test_options.py::test_help_spec[False-param_decls0-kwargs0--v, --verbose]",
+      "failing_count": 16,
+      "failing_share": 0.0238,
+      "failing_test": "tests/test_options.py::test_help_spec[False-param_decls0-kwargs0--v, --verbose]",
+      "holes": 155,
+      "keep": true,
+      "repo": "click",
+      "seconds": 293.1,
+      "sources": [
+        "src/click/core.py"
+      ],
+      "spec_strings": 17,
+      "stage": "NO_FRAME_NAME_PASSED",
+      "test": "tests/test_options.py",
+      "tested": 100,
+      "tests": 672,
+      "tests_in_file": 672,
+      "tried": [
+        {
+          "broken": [
+            "tests/test_options.py::test_prefixes",
+            "tests/test_options.py::test_deprecated_usage[True]",
+            "tests/test_options.py::test_deprecated_usage[USE B INSTEAD]"
+          ],
+          "broken_count": 651,
+          "fixed": false,
+          "from": "[]",
+          "hole": "3295:20:possible_names",
+          "observed": "-v",
+          "score": 32,
+          "to": "decl"
+        },
+        {
+          "broken": [
+            "tests/test_options.py::test_prefixes",
+            "tests/test_options.py::test_deprecated_usage[True]",
+            "tests/test_options.py::test_deprecated_usage[USE B INSTEAD]"
+          ],
+          "broken_count": 651,
+          "fixed": false,
+          "from": "[]",
+          "hole": "3296:20:opts",
+          "observed": "-v",
+          "score": 32,
+          "to": "decl"
+        },
+        {
+          "broken": [
+            "tests/test_options.py::test_prefixes",
+            "tests/test_options.py::test_deprecated_usage[True]",
+            "tests/test_options.py::test_deprecated_usage[USE B INSTEAD]"
+          ],
+          "broken_count": 570,
+          "fixed": false,
+          "from": "verbose",
+          "hole": "3322:15:name",
+          "observed": "/",
+          "score": 31,
+          "to": "split_char"
+        },
+        {
+          "broken": [
+            "tests/test_options.py::test_prefixes",
+            "tests/test_options.py::test_deprecated_usage[True]",
+            "tests/test_options.py::test_deprecated_usage[USE B INSTEAD]"
+          ],
+          "broken_count": 573,
+          "fixed": false,
+          "from": "['-v', '--verbose']",
+          "hole": "3322:21:opts",
+          "observed": "/",
+          "score": 31,
+          "to": "split_char"
+        },
+        {
+          "broken": [
+            "tests/test_options.py::test_prefixes",
+            "tests/test_options.py::test_deprecated_warning[True]",
+            "tests/test_options.py::test_deprecated_warning[USE B INSTEAD]"
+          ],
+          "broken_count": 420,
+          "fixed": false,
+          "from": "[]",
+          "hole": "3322:27:secondary_opts",
+          "observed": "/",
+          "score": 31,
+          "to": "split_char"
+        },
+        {
+          "broken": [
+            "tests/test_options.py::test_prefixes",
+            "tests/test_options.py::test_deprecated_usage[True]",
+            "tests/test_options.py::test_deprecated_usage[USE B INSTEAD]"
+          ],
+          "broken_count": 496,
+          "fixed": false,
+          "from": "[('-', 'v'), ('--', 'verbose')]",
+          "hole": "3299:12:possible_names",
+          "observed": "/",
+          "score": 31,
+          "to": "split_char"
+        },
+        {
+          "broken": [
+            "tests/test_options.py::test_prefixes",
+            "tests/test_options.py::test_deprecated_usage[True]",
+            "tests/test_options.py::test_deprecated_usage[USE B INSTEAD]"
+          ],
+          "broken_count": 501,
+          "fixed": false,
+          "from": "-v",
+          "hole": "3296:32:decl",
+          "observed": "/",
+          "score": 31,
+          "to": "split_char"
+        },
+        {
+          "broken": [
+            "tests/test_options.py::test_prefixes",
+            "tests/test_options.py::test_deprecated_usage[True]",
+            "tests/test_options.py::test_deprecated_usage[USE B INSTEAD]"
+          ],
+          "broken_count": 651,
+          "fixed": false,
+          "from": "[]",
+          "hole": "3295:20:possible_names",
+          "observed": "/",
+          "score": 31,
+          "to": "split_char"
+        },
+        {
+          "broken": [
+            "tests/test_options.py::test_prefixes",
+            "tests/test_options.py::test_deprecated_usage[True]",
+            "tests/test_options.py::test_deprecated_usage[USE B INSTEAD]"
+          ],
+          "broken_count": 415,
+          "fixed": false,
+          "from": "-v",
+          "hole": "3295:53:decl",
+          "observed": "/",
+          "score": 31,
+          "to": "split_char"
+        },
+        {
+          "broken": [
+            "tests/test_options.py::test_prefixes",
+            "tests/test_options.py::test_deprecated_usage[True]",
+            "tests/test_options.py::test_deprecated_usage[USE B INSTEAD]"
+          ],
+          "broken_count": 651,
+          "fixed": false,
+          "from": "[]",
+          "hole": "3296:20:opts",
+          "observed": "/",
+          "score": 31,
+          "to": "split_char"
+        },
+        {
+          "broken": [
+            "tests/test_options.py::test_prefixes",
+            "tests/test_options.py::test_deprecated_usage[True]",
+            "tests/test_options.py::test_deprecated_usage[USE B INSTEAD]"
+          ],
+          "broken_count": 496,
+          "fixed": false,
+          "from": "[('--', 'verbose'), ('-', 'v')]",
+          "hole": "3300:19:possible_names",
+          "observed": "/",
+          "score": 31,
+          "to": "split_char"
+        },
+        {
+          "broken": [
+            "tests/test_options.py::test_prefixes",
+            "tests/test_options.py::test_deprecated_usage[True]",
+            "tests/test_options.py::test_deprecated_usage[USE B INSTEAD]"
+          ],
+          "broken_count": 576,
+          "fixed": false,
+          "from": "['-v', '--verbose']",
+          "hole": "3322:21:opts",
+          "observed": "--verbose",
+          "score": 19,
+          "to": "decl"
+        }
+      ],
+      "verification": null
+    },
+    {
+      "candidates": 7,
+      "commit": "1f9cd54f686eb343cec714230ad825ce972739ab",
+      "executed_lines": 21,
+      "failing": "tests/test_termui.py::test_tempfile_pager_closes_file_before_unlink",
+      "failing_count": 1,
+      "failing_share": 0.0041,
+      "failing_test": "tests/test_termui.py::test_tempfile_pager_closes_file_before_unlink",
+      "holes": 24,
+      "keep": true,
+      "repo": "click",
+      "seconds": 44.4,
+      "sources": [
+        "src/click/_termui_impl.py"
+      ],
+      "spec_strings": 7,
+      "stage": "NO_FRAME_NAME_PASSED",
+      "test": "tests/test_termui.py",
+      "tested": 7,
+      "tests": 245,
+      "tests_in_file": 245,
+      "tried": [
+        {
+          "broken": [
+            "tests/test_termui.py::test_tempfile_pager_accepts_text[get_pager_file]",
+            "tests/test_termui.py::test_tempfile_pager_accepts_text[echo_via_pager]",
+            "tests/test_termui.py::test_tempfile_pager_handles_ansi[strip ansi]"
+          ],
+          "broken_count": 4,
+          "fixed": false,
+          "from": "<module 'shutil' from '/usr/lib/python3.11/shutil.py'>",
+          "hole": "612:19:shutil",
+          "observed": "cat",
+          "score": 26,
+          "to": "cmd"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_tempfile_pager_accepts_text[get_pager_file]",
+            "tests/test_termui.py::test_tempfile_pager_accepts_text[echo_via_pager]",
+            "tests/test_termui.py::test_tempfile_pager_handles_ansi[strip ansi]"
+          ],
+          "broken_count": 4,
+          "fixed": false,
+          "from": "<module 'tempfile' from '/usr/lib/python3.11/tempfile.py'>",
+          "hole": "634:8:tempfile",
+          "observed": "cat",
+          "score": 26,
+          "to": "cmd"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_tempfile_pager_accepts_text[get_pager_file]",
+            "tests/test_termui.py::test_tempfile_pager_accepts_text[echo_via_pager]",
+            "tests/test_termui.py::test_tempfile_pager_handles_ansi[strip ansi]"
+          ],
+          "broken_count": 4,
+          "fixed": false,
+          "from": "/usr/bin/cat",
+          "hole": "624:20:cmd_filepath",
+          "observed": "cat",
+          "score": 26,
+          "to": "cmd"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_tempfile_pager_accepts_text[get_pager_file]",
+            "tests/test_termui.py::test_tempfile_pager_accepts_text[echo_via_pager]",
+            "tests/test_termui.py::test_tempfile_pager_handles_ansi[strip ansi]"
+          ],
+          "broken_count": 6,
+          "fixed": false,
+          "from": "utf-8",
+          "hole": "636:37:encoding",
+          "observed": "cat",
+          "score": 26,
+          "to": "cmd"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_tempfile_pager_handles_ansi[strip ansi]"
+          ],
+          "broken_count": 1,
+          "fixed": false,
+          "from": "False",
+          "hole": "636:47:color",
+          "observed": "cat",
+          "score": 26,
+          "to": "cmd"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_tempfile_pager_accepts_text[get_pager_file]",
+            "tests/test_termui.py::test_tempfile_pager_accepts_text[echo_via_pager]",
+            "tests/test_termui.py::test_tempfile_pager_handles_ansi[strip ansi]"
+          ],
+          "broken_count": 4,
+          "fixed": false,
+          "from": "<tempfile._TemporaryFileWrapper object at 0x7fcda2666cd0>",
+          "hole": "641:18:f",
+          "observed": "cat",
+          "score": 26,
+          "to": "cmd"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_tempfile_pager_accepts_text[get_pager_file]",
+            "tests/test_termui.py::test_tempfile_pager_accepts_text[echo_via_pager]",
+            "tests/test_termui.py::test_tempfile_pager_handles_ansi[strip ansi]"
+          ],
+          "broken_count": 4,
+          "fixed": false,
+          "from": "<tempfile._TemporaryFileWrapper object at 0x7fcda2666cd0>",
+          "hole": "636:33:f",
+          "observed": "cat",
+          "score": 26,
+          "to": "cmd"
+        }
+      ],
+      "verification": null
+    },
+    {
+      "candidates": 100,
+      "commit": "f316d5cb3aa89b57c14aee54da6ac9062ac5bec4",
+      "executed_lines": 78,
+      "failing": "tests/test_termui.py::test_progressbar_lands_on_final_position[iterate-3]",
+      "failing_count": 6,
+      "failing_share": 0.0246,
+      "failing_test": "tests/test_termui.py::test_progressbar_lands_on_final_position[iterate-3]",
+      "holes": 114,
+      "keep": true,
+      "repo": "click",
+      "seconds": 335.5,
+      "sources": [
+        "src/click/_termui_impl.py"
+      ],
+      "spec_strings": 7,
+      "stage": "NO_FRAME_NAME_PASSED",
+      "test": "tests/test_termui.py",
+      "tested": 100,
+      "tests": 244,
+      "tests_in_file": 244,
+      "tried": [
+        {
+          "broken": [
+            "tests/test_termui.py::test_progressbar_strip_regression",
+            "tests/test_termui.py::test_progressbar_length_hint",
+            "tests/test_termui.py::test_progressbar_no_tty"
+          ],
+          "broken_count": 40,
+          "fixed": false,
+          "from": "<click._termui_impl.ProgressBar object at 0x7f8b1482fcd0>",
+          "hole": "114:8:self",
+          "observed": "20",
+          "score": 13,
+          "to": "length"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_progressbar_strip_regression",
+            "tests/test_termui.py::test_progressbar_length_hint",
+            "tests/test_termui.py::test_progressbar_no_tty"
+          ],
+          "broken_count": 40,
+          "fixed": false,
+          "from": "range(0, 20)",
+          "hole": "114:43:iterable",
+          "observed": "20",
+          "score": 13,
+          "to": "length"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_progressbar_strip_regression",
+            "tests/test_termui.py::test_progressbar_length_hint",
+            "tests/test_termui.py::test_progressbar_no_tty"
+          ],
+          "broken_count": 40,
+          "fixed": false,
+          "from": "<click._termui_impl.ProgressBar object at 0x7f8b1482fcd0>",
+          "hole": "115:8:self",
+          "observed": "20",
+          "score": 13,
+          "to": "length"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_progressbar_strip_regression",
+            "tests/test_termui.py::test_progressbar_length_hint",
+            "tests/test_termui.py::test_progressbar_no_tty"
+          ],
+          "broken_count": 40,
+          "fixed": false,
+          "from": "<click._termui_impl.ProgressBar object at 0x7f8b1482fcd0>",
+          "hole": "116:8:self",
+          "observed": "20",
+          "score": 13,
+          "to": "length"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_progressbar_strip_regression",
+            "tests/test_termui.py::test_progressbar_length_hint",
+            "tests/test_termui.py::test_progressbar_no_tty"
+          ],
+          "broken_count": 40,
+          "fixed": false,
+          "from": "<click._termui_impl.ProgressBar object at 0x7f8b1482fcd0>",
+          "hole": "117:8:self",
+          "observed": "20",
+          "score": 13,
+          "to": "length"
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "from": "<click._termui_impl.ProgressBar object at 0x7f8b1482fcd0>",
+          "hole": "118:8:self",
+          "observed": "20",
+          "score": 13,
+          "to": "length"
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "from": "<click._termui_impl.ProgressBar object at 0x7f8b1482fcd0>",
+          "hole": "119:8:self",
+          "observed": "20",
+          "score": 13,
+          "to": "length"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_progressbar_strip_regression",
+            "tests/test_termui.py::test_progressbar_length_hint",
+            "tests/test_termui.py::test_progressbar_no_tty"
+          ],
+          "broken_count": 40,
+          "fixed": false,
+          "from": "<click._termui_impl.ProgressBar object at 0x7f8b1482fcd0>",
+          "hole": "120:8:self",
+          "observed": "20",
+          "score": 13,
+          "to": "length"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_progressbar_strip_regression",
+            "tests/test_termui.py::test_progressbar_length_hint",
+            "tests/test_termui.py::test_progressbar_no_tty"
+          ],
+          "broken_count": 40,
+          "fixed": false,
+          "from": "<click._termui_impl.ProgressBar object at 0x7f8b1482fcd0>",
+          "hole": "120:21:self",
+          "observed": "20",
+          "score": 13,
+          "to": "length"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_progressbar_strip_regression",
+            "tests/test_termui.py::test_progressbar_length_hint",
+            "tests/test_termui.py::test_progressbar_no_tty"
+          ],
+          "broken_count": 40,
+          "fixed": false,
+          "from": "<click._termui_impl.ProgressBar object at 0x7f8b1482fcd0>",
+          "hole": "121:8:self",
+          "observed": "20",
+          "score": 13,
+          "to": "length"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_progressbar_strip_regression",
+            "tests/test_termui.py::test_progressbar_length_hint",
+            "tests/test_termui.py::test_progressbar_no_tty"
+          ],
+          "broken_count": 40,
+          "fixed": false,
+          "from": "<click._termui_impl.ProgressBar object at 0x7f8b1482fcd0>",
+          "hole": "122:8:self",
+          "observed": "20",
+          "score": 13,
+          "to": "length"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_progressbar_strip_regression",
+            "tests/test_termui.py::test_progressbar_length_hint",
+            "tests/test_termui.py::test_progressbar_no_tty"
+          ],
+          "broken_count": 40,
+          "fixed": false,
+          "from": "<click._termui_impl.ProgressBar object at 0x7f8b1482fcd0>",
+          "hole": "123:8:self",
+          "observed": "20",
+          "score": 13,
+          "to": "length"
+        }
+      ],
+      "verification": null
+    },
+    {
+      "candidates": 25,
+      "commit": "047adef258fc25566163ffc3efd14effc0ef7352",
+      "executed_lines": 134,
+      "failing": "tests/test_commands.py::test_get_help_option_names[order-short-long]",
+      "failing_count": 5,
+      "failing_share": 0.0388,
+      "failing_test": "tests/test_commands.py::test_get_help_option_names[order-short-long]",
+      "holes": 78,
+      "keep": true,
+      "repo": "click",
+      "seconds": 65.2,
+      "sources": [
+        "src/click/core.py"
+      ],
+      "spec_strings": 26,
+      "stage": "NO_FRAME_NAME_PASSED",
+      "test": "tests/test_commands.py",
+      "tested": 25,
+      "tests": 103,
+      "tests_in_file": 103,
+      "tried": [
+        {
+          "broken": [
+            "tests/test_commands.py::test_other_command_invoke",
+            "tests/test_commands.py::test_other_command_forward",
+            "tests/test_commands.py::test_forwarded_params_consistency"
+          ],
+          "broken_count": 54,
+          "fixed": false,
+          "from": "{}",
+          "hole": "1060:32:context_settings",
+          "observed": "cli",
+          "score": 16,
+          "to": "name"
+        },
+        {
+          "broken": [
+            "tests/test_commands.py::test_other_command_invoke",
+            "tests/test_commands.py::test_other_command_forward",
+            "tests/test_commands.py::test_forwarded_params_consistency"
+          ],
+          "broken_count": 30,
+          "fixed": false,
+          "from": "None",
+          "hole": "1064:24:callback",
+          "observed": "cli",
+          "score": 16,
+          "to": "name"
+        },
+        {
+          "broken": [
+            "tests/test_commands.py::test_auto_shorthelp",
+            "tests/test_commands.py::test_deprecated_empty_help_no_leading_space[-True]",
+            "tests/test_commands.py::test_deprecated_empty_help_no_leading_space[-USE OTHER COMMAND INSTEAD]"
+          ],
+          "broken_count": 5,
+          "fixed": false,
+          "from": "None",
+          "hole": "1069:20:help",
+          "observed": "cli",
+          "score": 16,
+          "to": "name"
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "from": "None",
+          "hole": "1070:22:epilog",
+          "observed": "cli",
+          "score": 16,
+          "to": "name"
+        },
+        {
+          "broken": [
+            "tests/test_commands.py::test_subcommand_metavar_marks_optional[False-False-COMMAND [ARGS]...]",
+            "tests/test_commands.py::test_subcommand_metavar_marks_optional[False-True-[COMMAND] [ARGS]...]",
+            "tests/test_commands.py::test_subcommand_metavar_marks_optional[True-False-COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]...]"
+          ],
+          "broken_count": 5,
+          "fixed": false,
+          "from": "[OPTIONS]",
+          "hole": "1071:31:options_metavar",
+          "observed": "cli",
+          "score": 16,
+          "to": "name"
+        },
+        {
+          "broken": [
+            "tests/test_commands.py::test_auto_shorthelp"
+          ],
+          "broken_count": 1,
+          "fixed": false,
+          "from": "None",
+          "hole": "1072:26:short_help",
+          "observed": "cli",
+          "score": 16,
+          "to": "name"
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "from": "True",
+          "hole": "1073:31:add_help_option",
+          "observed": "cli",
+          "score": 16,
+          "to": "name"
+        },
+        {
+          "broken": [
+            "tests/test_commands.py::test_other_command_invoke",
+            "tests/test_commands.py::test_other_command_forward",
+            "tests/test_commands.py::test_default_maps"
+          ],
+          "broken_count": 30,
+          "fixed": false,
+          "from": "False",
+          "hole": "1075:31:no_args_is_help",
+          "observed": "cli",
+          "score": 16,
+          "to": "name"
+        },
+        {
+          "broken": [
+            "tests/test_commands.py::test_auto_shorthelp"
+          ],
+          "broken_count": 1,
+          "fixed": false,
+          "from": "False",
+          "hole": "1076:22:hidden",
+          "observed": "cli",
+          "score": 16,
+          "to": "name"
+        },
+        {
+          "broken": [
+            "tests/test_commands.py::test_other_command_invoke",
+            "tests/test_commands.py::test_other_command_forward",
+            "tests/test_commands.py::test_forwarded_params_consistency"
+          ],
+          "broken_count": 13,
+          "fixed": false,
+          "from": "False",
+          "hole": "1077:26:deprecated",
+          "observed": "cli",
+          "score": 16,
+          "to": "name"
+        },
+        {
+          "broken": [
+            "tests/test_commands.py::test_other_command_invoke",
+            "tests/test_commands.py::test_other_command_forward",
+            "tests/test_commands.py::test_forwarded_params_consistency"
+          ],
+          "broken_count": 63,
+          "fixed": false,
+          "from": "<Command cli>",
+          "hole": "1060:8:self",
+          "observed": "cli",
+          "score": 16,
+          "to": "name"
+        },
+        {
+          "broken": [
+            "tests/test_commands.py::test_other_command_invoke",
+            "tests/test_commands.py::test_other_command_forward",
+            "tests/test_commands.py::test_forwarded_params_consistency"
+          ],
+          "broken_count": 63,
+          "fixed": false,
+          "from": "<Command cli>",
+          "hole": "1064:8:self",
+          "observed": "cli",
+          "score": 16,
+          "to": "name"
+        }
+      ],
+      "verification": null
+    },
+    {
+      "candidates": 22,
+      "commit": "93ba0075f4881b858b61f89a753c7c10e330027e",
+      "executed_lines": 16,
+      "failing": "tests/test_termui.py::test_prompt_and_confirm_ansi_respects_color[confirm-no-color]",
+      "failing_count": 2,
+      "failing_share": 0.0088,
+      "failing_test": "tests/test_termui.py::test_prompt_and_confirm_ansi_respects_color[confirm-no-color]",
+      "holes": 22,
+      "keep": true,
+      "repo": "click",
+      "seconds": 53.8,
+      "sources": [
+        "src/click/termui.py"
+      ],
+      "spec_strings": 17,
+      "stage": "NO_FRAME_NAME_PASSED",
+      "test": "tests/test_termui.py",
+      "tested": 22,
+      "tests": 228,
+      "tests_in_file": 228,
+      "tried": [
+        {
+          "broken": [
+            "tests/test_termui.py::test_flag_value_prompt[--flag/--no-flag-opt_params3-args3-[Y/n]--True]",
+            "tests/test_termui.py::test_flag_value_prompt[--flag/--no-flag-opt_params11-args11-[Y/n]--True]",
+            "tests/test_termui.py::test_flag_value_prompt[--flag-opt_params57-args57-[Y/n]--True]"
+          ],
+          "broken_count": 4,
+          "fixed": false,
+          "from": "True",
+          "hole": "287:11:rv",
+          "observed": "y",
+          "score": 18,
+          "to": "value"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_flag_value_prompt[--flag/--no-flag-opt_params0-args0-[y/N]-y-True]",
+            "tests/test_termui.py::test_flag_value_prompt[--flag/--no-flag-opt_params1-args1-[y/N]-n-False]",
+            "tests/test_termui.py::test_flag_value_prompt[--flag/--no-flag-opt_params2-args2-[y/N]--False]"
+          ],
+          "broken_count": 36,
+          "fixed": false,
+          "from": "True",
+          "hole": "287:11:rv",
+          "observed": "\u001b[32mHello World!\u001b[0m [y/N]: ",
+          "score": 13,
+          "to": "prompt"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_flag_value_prompt[--flag/--no-flag-opt_params0-args0-[y/N]-y-True]",
+            "tests/test_termui.py::test_flag_value_prompt[--flag/--no-flag-opt_params1-args1-[y/N]-n-False]",
+            "tests/test_termui.py::test_flag_value_prompt[--flag/--no-flag-opt_params2-args2-[y/N]--False]"
+          ],
+          "broken_count": 36,
+          "fixed": false,
+          "from": "True",
+          "hole": "287:11:rv",
+          "observed": "\u001b[32mHello World!\u001b[0m",
+          "score": 13,
+          "to": "text"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_choices_list_in_prompt",
+            "tests/test_termui.py::test_file_prompt_default_format[file_kwargs0]",
+            "tests/test_termui.py::test_file_prompt_default_format[file_kwargs1]"
+          ],
+          "broken_count": 93,
+          "fixed": false,
+          "from": "<function CliRunner.isolation.<locals>.visible_input at 0x7f423f0123e0>",
+          "hole": "90:11:func",
+          "observed": "\u001b[32mHello World!\u001b[0m [y/N]: ",
+          "score": 13,
+          "to": "text"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_flag_value_prompt[--flag/--no-flag-opt_params0-args0-[y/N]-y-True]",
+            "tests/test_termui.py::test_flag_value_prompt[--flag/--no-flag-opt_params1-args1-[y/N]-n-False]",
+            "tests/test_termui.py::test_flag_value_prompt[--flag/--no-flag-opt_params2-args2-[y/N]--False]"
+          ],
+          "broken_count": 38,
+          "fixed": false,
+          "from": "False",
+          "hole": "272:66:err",
+          "observed": "\u001b[32mHello World!\u001b[0m [y/N]: ",
+          "score": 13,
+          "to": "prompt"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_flag_value_prompt[--flag/--no-flag-opt_params0-args0-[y/N]-y-True]",
+            "tests/test_termui.py::test_flag_value_prompt[--flag/--no-flag-opt_params1-args1-[y/N]-n-False]",
+            "tests/test_termui.py::test_flag_value_prompt[--flag/--no-flag-opt_params2-args2-[y/N]--False]"
+          ],
+          "broken_count": 38,
+          "fixed": false,
+          "from": "False",
+          "hole": "272:66:err",
+          "observed": "\u001b[32mHello World!\u001b[0m",
+          "score": 13,
+          "to": "text"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_flag_value_prompt[--flag/--no-flag-opt_params0-args0-[y/N]-y-True]",
+            "tests/test_termui.py::test_flag_value_prompt[--flag/--no-flag-opt_params1-args1-[y/N]-n-False]",
+            "tests/test_termui.py::test_flag_value_prompt[--flag/--no-flag-opt_params2-args2-[y/N]--False]"
+          ],
+          "broken_count": 36,
+          "fixed": false,
+          "from": "True",
+          "hole": "287:11:rv",
+          "observed": ": ",
+          "score": 12,
+          "to": "prompt_suffix"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_flag_value_prompt[--flag/--no-flag-opt_params0-args0-[y/N]-y-True]",
+            "tests/test_termui.py::test_flag_value_prompt[--flag/--no-flag-opt_params1-args1-[y/N]-n-False]",
+            "tests/test_termui.py::test_flag_value_prompt[--flag/--no-flag-opt_params2-args2-[y/N]--False]"
+          ],
+          "broken_count": 38,
+          "fixed": false,
+          "from": "False",
+          "hole": "272:66:err",
+          "observed": ": ",
+          "score": 12,
+          "to": "prompt_suffix"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_file_prompt_default_format[file_kwargs0]",
+            "tests/test_termui.py::test_file_prompt_default_format[file_kwargs1]",
+            "tests/test_termui.py::test_file_prompt_default_format[file_kwargs2]"
+          ],
+          "broken_count": 63,
+          "fixed": false,
+          "from": ": ",
+          "hole": "108:22:suffix",
+          "observed": "\u001b[32mHello World!\u001b[0m [y/N]",
+          "score": 10,
+          "to": "prompt"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_file_prompt_default_format[file_kwargs0]",
+            "tests/test_termui.py::test_file_prompt_default_format[file_kwargs1]",
+            "tests/test_termui.py::test_file_prompt_default_format[file_kwargs2]"
+          ],
+          "broken_count": 63,
+          "fixed": false,
+          "from": ": ",
+          "hole": "108:22:suffix",
+          "observed": "\u001b[32mHello World!\u001b[0m",
+          "score": 10,
+          "to": "text"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_file_prompt_default_format[file_kwargs0]",
+            "tests/test_termui.py::test_file_prompt_default_format[file_kwargs1]",
+            "tests/test_termui.py::test_file_prompt_default_format[file_kwargs2]"
+          ],
+          "broken_count": 51,
+          "fixed": false,
+          "from": "y/N",
+          "hole": "107:46:default",
+          "observed": "\u001b[32mHello World!\u001b[0m",
+          "score": 10,
+          "to": "prompt"
+        },
+        {
+          "broken": [
+            "tests/test_termui.py::test_file_prompt_default_format[file_kwargs0]",
+            "tests/test_termui.py::test_file_prompt_default_format[file_kwargs1]",
+            "tests/test_termui.py::test_file_prompt_default_format[file_kwargs2]"
+          ],
+          "broken_count": 51,
+          "fixed": false,
+          "from": "y/N",
+          "hole": "107:46:default",
+          "observed": "\u001b[32mHello World!\u001b[0m",
+          "score": 10,
+          "to": "text"
+        }
+      ],
+      "verification": null
+    },
+    {
+      "candidates": 100,
+      "commit": "6f85d26dcd50c1745e81040ed4f2b61f8bf293cf",
+      "executed_lines": 95,
+      "failing": "tests/test_types.py::test_path_dash_no_byteswarning",
+      "failing_count": 1,
+      "failing_share": 0.0233,
+      "failing_test": "tests/test_types.py::test_path_dash_no_byteswarning",
+      "holes": 55,
+      "keep": true,
+      "repo": "click",
+      "seconds": 289.4,
+      "sources": [
+        "src/click/types.py"
+      ],
+      "spec_strings": 4,
+      "stage": "NO_FRAME_NAME_PASSED",
+      "test": "tests/test_types.py",
+      "tested": 100,
+      "tests": 43,
+      "tests_in_file": 43,
+      "tried": [
+        {
+          "broken": [
+            "tests/test_types.py::test_path_type[None-a/b/c.txt]",
+            "tests/test_types.py::test_path_type[str-a/b/c.txt]",
+            "tests/test_types.py::test_path_type[bytes-a/b/c.txt]"
+          ],
+          "broken_count": 7,
+          "fixed": false,
+          "from": "<click.types.Path object at 0x7fecc3306710>",
+          "hole": "1107:18:self",
+          "observed": "-",
+          "score": 28,
+          "to": "rv"
+        },
+        {
+          "broken": [
+            "tests/test_types.py::test_path_type[None-a/b/c.txt]",
+            "tests/test_types.py::test_path_type[str-a/b/c.txt]",
+            "tests/test_types.py::test_path_type[bytes-a/b/c.txt]"
+          ],
+          "broken_count": 7,
+          "fixed": false,
+          "from": "<click.types.Path object at 0x7fecc3306710>",
+          "hole": "1107:18:self",
+          "observed": "-",
+          "score": 28,
+          "to": "value"
+        },
+        {
+          "broken": [
+            "tests/test_types.py::test_path_type[None-a/b/c.txt]",
+            "tests/test_types.py::test_path_type[str-a/b/c.txt]",
+            "tests/test_types.py::test_path_type[bytes-a/b/c.txt]"
+          ],
+          "broken_count": 7,
+          "fixed": false,
+          "from": "<click.types.Path object at 0x7fecc3306710>",
+          "hole": "1107:37:self",
+          "observed": "-",
+          "score": 28,
+          "to": "rv"
+        },
+        {
+          "broken": [
+            "tests/test_types.py::test_path_type[None-a/b/c.txt]",
+            "tests/test_types.py::test_path_type[str-a/b/c.txt]",
+            "tests/test_types.py::test_path_type[bytes-a/b/c.txt]"
+          ],
+          "broken_count": 7,
+          "fixed": false,
+          "from": "<click.types.Path object at 0x7fecc3306710>",
+          "hole": "1107:37:self",
+          "observed": "-",
+          "score": 28,
+          "to": "value"
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "from": "strict",
+          "hole": "906:22:errors",
+          "observed": "r",
+          "score": 5,
+          "to": "mode"
+        },
+        {
+          "broken": [
+            "tests/test_types.py::test_file_surrogates[type0]"
+          ],
+          "broken_count": 1,
+          "fixed": false,
+          "from": "False",
+          "hole": "908:22:atomic",
+          "observed": "r",
+          "score": 5,
+          "to": "mode"
+        },
+        {
+          "broken": [
+            "tests/test_types.py::test_range[type0-3-3]",
+            "tests/test_types.py::test_range[type1-5-5]",
+            "tests/test_types.py::test_range[type2-100-100]"
+          ],
+          "broken_count": 42,
+          "fixed": true,
+          "from": "<click.types.File object at 0x7fc39d5eadd0>",
+          "hole": "904:8:self",
+          "observed": "r",
+          "score": 5,
+          "to": "mode"
+        },
+        {
+          "broken": [
+            "tests/test_types.py::test_range[type0-3-3]",
+            "tests/test_types.py::test_range[type1-5-5]",
+            "tests/test_types.py::test_range[type2-100-100]"
+          ],
+          "broken_count": 42,
+          "fixed": true,
+          "from": "<click.types.File object at 0x7fc39d5eadd0>",
+          "hole": "905:8:self",
+          "observed": "r",
+          "score": 5,
+          "to": "mode"
+        },
+        {
+          "broken": [
+            "tests/test_types.py::test_range[type0-3-3]",
+            "tests/test_types.py::test_range[type1-5-5]",
+            "tests/test_types.py::test_range[type2-100-100]"
+          ],
+          "broken_count": 42,
+          "fixed": true,
+          "from": "<click.types.File object at 0x7fc39d5eadd0>",
+          "hole": "906:8:self",
+          "observed": "r",
+          "score": 5,
+          "to": "mode"
+        },
+        {
+          "broken": [
+            "tests/test_types.py::test_range[type0-3-3]",
+            "tests/test_types.py::test_range[type1-5-5]",
+            "tests/test_types.py::test_range[type2-100-100]"
+          ],
+          "broken_count": 42,
+          "fixed": true,
+          "from": "<click.types.File object at 0x7fc39d5eadd0>",
+          "hole": "907:8:self",
+          "observed": "r",
+          "score": 5,
+          "to": "mode"
+        },
+        {
+          "broken": [
+            "tests/test_types.py::test_range[type0-3-3]",
+            "tests/test_types.py::test_range[type1-5-5]",
+            "tests/test_types.py::test_range[type2-100-100]"
+          ],
+          "broken_count": 42,
+          "fixed": true,
+          "from": "<click.types.File object at 0x7fc39d5eadd0>",
+          "hole": "908:8:self",
+          "observed": "r",
+          "score": 5,
+          "to": "mode"
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "from": "<class 'click.types.UnprocessedParamType'>",
+          "hole": "1348:21:UnprocessedParamType",
+          "observed": "None",
+          "score": 3,
+          "to": "__doc__"
+        }
+      ],
+      "verification": null
+    },
+    {
+      "candidates": 1,
+      "commit": "399919f740bfd26cb30d544877fafd03cfcd9091",
+      "executed_lines": 13,
+      "failing": "tests/test_termui.py::test_echo_via_pager_streams_each_write",
+      "failing_count": 1,
+      "failing_share": 0.0045,
+      "failing_test": "tests/test_termui.py::test_echo_via_pager_streams_each_write",
+      "holes": 18,
+      "keep": true,
+      "repo": "click",
+      "seconds": 12.5,
+      "sources": [
+        "src/click/termui.py"
+      ],
+      "spec_strings": 9,
+      "stage": "NO_FRAME_NAME_PASSED",
+      "test": "tests/test_termui.py",
+      "tested": 1,
+      "tests": 222,
+      "tests_in_file": 222,
+      "tried": [
+        {
+          "broken": [
+            "tests/test_termui.py::test_echo_via_pager_real_pager_handles_ansi[strip ansi]",
+            "tests/test_termui.py::test_echo_via_pager_real_pager_handles_ansi[preserve ansi]"
+          ],
+          "broken_count": 2,
+          "fixed": false,
+          "from": "<click._termui_impl._SkipClose object at 0x7f22124c8810>",
+          "hole": "348:12:pager",
+          "observed": "a\n",
+          "score": 26,
+          "to": "text"
+        }
+      ],
+      "verification": null
+    },
+    {
+      "candidates": 8,
+      "commit": "4d3db84b251518e97299a38a5ca4bab3d01873a2",
+      "executed_lines": 16,
+      "failing": "tests/test_utils.py::test_echo_custom_file",
+      "failing_count": 1,
+      "failing_share": 0.0068,
+      "failing_test": "tests/test_utils.py::test_echo_custom_file",
+      "holes": 8,
+      "keep": true,
+      "repo": "click",
+      "seconds": 34.8,
+      "sources": [
+        "src/click/utils.py"
+      ],
+      "spec_strings": 2,
+      "stage": "NO_FRAME_NAME_PASSED",
+      "test": "tests/test_utils.py",
+      "tested": 8,
+      "tests": 147,
+      "tests_in_file": 147,
+      "tried": [
+        {
+          "broken": [
+            "tests/test_utils.py::test_echo",
+            "tests/test_utils.py::test_echo_color_flag"
+          ],
+          "broken_count": 2,
+          "fixed": false,
+          "from": "None",
+          "hole": "323:38:color",
+          "observed": "hello",
+          "score": 26,
+          "to": "message"
+        },
+        {
+          "broken": [
+            "tests/test_utils.py::test_echo",
+            "tests/test_utils.py::test_prompts",
+            "tests/test_utils.py::test_confirm_repeat"
+          ],
+          "broken_count": 21,
+          "fixed": false,
+          "from": "<_io.StringIO object at 0x7f0ffd403be0>",
+          "hole": "333:4:file",
+          "observed": "hello",
+          "score": 26,
+          "to": "message"
+        },
+        {
+          "broken": [
+            "tests/test_utils.py::test_echo",
+            "tests/test_utils.py::test_prompts",
+            "tests/test_utils.py::test_confirm_repeat"
+          ],
+          "broken_count": 21,
+          "fixed": false,
+          "from": "<_io.StringIO object at 0x7f0ffd403be0>",
+          "hole": "334:4:file",
+          "observed": "hello",
+          "score": 26,
+          "to": "message"
+        },
+        {
+          "broken": [
+            "tests/test_utils.py::test_echo",
+            "tests/test_utils.py::test_prompts",
+            "tests/test_utils.py::test_confirm_repeat"
+          ],
+          "broken_count": 20,
+          "fixed": false,
+          "from": "hello\n",
+          "hole": "333:15:out",
+          "observed": "hello",
+          "score": 13,
+          "to": "message"
+        },
+        {
+          "broken": [
+            "tests/test_utils.py::test_echo",
+            "tests/test_utils.py::test_echo_color_flag"
+          ],
+          "broken_count": 2,
+          "fixed": false,
+          "from": "None",
+          "hole": "323:38:color",
+          "observed": "hello\n",
+          "score": 13,
+          "to": "out"
+        },
+        {
+          "broken": [
+            "tests/test_utils.py::test_echo",
+            "tests/test_utils.py::test_prompts",
+            "tests/test_utils.py::test_confirm_repeat"
+          ],
+          "broken_count": 21,
+          "fixed": false,
+          "from": "<_io.StringIO object at 0x7f0ffd403be0>",
+          "hole": "333:4:file",
+          "observed": "hello\n",
+          "score": 13,
+          "to": "out"
+        },
+        {
+          "broken": [
+            "tests/test_utils.py::test_echo",
+            "tests/test_utils.py::test_prompts",
+            "tests/test_utils.py::test_confirm_repeat"
+          ],
+          "broken_count": 21,
+          "fixed": false,
+          "from": "<_io.StringIO object at 0x7f0ffd403be0>",
+          "hole": "334:4:file",
+          "observed": "hello\n",
+          "score": 13,
+          "to": "out"
+        },
+        {
+          "broken": [
+            "tests/test_utils.py::test_echo",
+            "tests/test_utils.py::test_prompts",
+            "tests/test_utils.py::test_confirm_repeat"
+          ],
+          "broken_count": 20,
+          "fixed": false,
+          "from": "hello\n",
+          "hole": "326:29:out",
+          "observed": "hello",
+          "score": 13,
+          "to": "message"
+        }
+      ],
+      "verification": null
+    },
+    {
+      "candidates": 0,
+      "commit": "1aa2d53d63ff68bf14b35931177aac9270e39713",
+      "executed_lines": 11,
+      "failing": "tests/test_termui.py::test_get_pager_file_nullpager_keeps_stringio_stream",
+      "failing_count": 2,
+      "failing_share": 0.0092,
+      "failing_test": "tests/test_termui.py::test_get_pager_file_nullpager_keeps_stringio_stream",
+      "holes": 16,
+      "keep": true,
+      "repo": "click",
+      "seconds": 10.2,
+      "sources": [
+        "src/click/_termui_impl.py"
+      ],
+      "spec_strings": 6,
+      "stage": "NO_FRAME_NAME_PASSED",
+      "test": "tests/test_termui.py",
+      "tested": 0,
+      "tests": 217,
+      "tests_in_file": 217,
+      "tried": [],
+      "verification": null
+    }
+  ],
+  "schema": "PROJECT_BRAIN_THE_NAME_IS_A_HOLE_V1",
+  "summary": {
+    "candidate_executions": 543,
+    "model_calls": 0,
+    "network_calls": 0,
+    "parameters_stored": 0,
+    "rows": 15,
+    "seconds": 1816.6,
+    "verified": 0
+  },
+  "verdict": "FAIL",
+  "what_this_is_not": [
+    "not a benchmark: real commits, producer-run, no independent verifier",
+    "not general SWE: single identifier substitution on an executed line",
+    "not trained: the substitutions are computed from the frame and the test's own strings"
+  ]
+}

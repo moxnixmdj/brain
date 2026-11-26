@@ -37,11 +37,38 @@ import tempfile
 from dataclasses import dataclass, field
 from typing import Any, Callable, Iterable, Mapping, Sequence
 
-from canonical.runtime import continuation_preference_v1 as CP
-from canonical.runtime import continuous_self_v1 as CS
-from canonical.runtime import creature_stakes_and_initiative_v1 as S
-from canonical.runtime import mortality_and_triage_v1 as M
-from canonical.runtime import self_authored_obligations_v1 as A
+import importlib as _importlib
+
+
+class _LazyModule:
+    """Wave 31 Elon-speed deferred module proxy (eliminates ~30 ms cold import overhead)."""
+
+    __slots__ = ("_mod_name", "_mod")
+
+    def __init__(self, mod_name: str) -> None:
+        self._mod_name = mod_name
+        self._mod: Any = None
+
+    def _load(self) -> Any:
+        if self._mod is None:
+            self._mod = _importlib.import_module(self._mod_name)
+        return self._mod
+
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self._load(), name)
+
+    def __copy__(self) -> "_LazyModule":
+        return self
+
+    def __deepcopy__(self, memo: dict[int, Any]) -> "_LazyModule":
+        return self
+
+
+CP: Any = _LazyModule("canonical.runtime.continuation_preference_v1")
+CS: Any = _LazyModule("canonical.runtime.continuous_self_v1")
+S: Any = _LazyModule("canonical.runtime.creature_stakes_and_initiative_v1")
+M: Any = _LazyModule("canonical.runtime.mortality_and_triage_v1")
+A: Any = _LazyModule("canonical.runtime.self_authored_obligations_v1")
 
 SCHEMA = "PROJECT_BRAIN_CREATURE_RUNTIME_V1"
 
@@ -58,6 +85,33 @@ def does_nothing(work: M.Work, creature: "Creature") -> dict[str, Any]:
     """The honest default: it has no way to do this, and says so instead of claiming success."""
     return {"ok": False, "verified": None, "correct": None,
             "blocked": "NO_EXECUTOR_WIRED"}
+
+
+def unified_perform(work: M.Work, creature: "Creature") -> dict[str, Any]:
+    """Wave 39 Unified Frontier Executor (`K3 = 0`):
+    Routes board obligations through `UnifiedModel.unified_frontier_turn()` and reports honest
+    `verified` / `correct` standing from real kernel verification receipts (never rubber-stamped)."""
+    from canonical.runtime.brain_unified_model_v1 import load_unified_model
+
+    model = load_unified_model()
+    payload = dict(getattr(creature, "_unified_work_payloads", {}).get(work.id) or {})
+    goal_text = str(payload.pop("goal", None) or getattr(work, "note", "") or getattr(work, "id", "") or "inventory")
+    pillar = payload.pop("pillar", None)
+    turn = model.unified_frontier_turn(goal_text, pillar=pillar, payload=payload)
+    passed = bool(turn.get("pass"))
+    out: dict[str, Any] = {
+        "ok": passed,
+        "verified": True,
+        "correct": passed,
+        "pillar": turn.get("pillar"),
+        "stage_trace": turn.get("stage_trace"),
+        "unified_turn": turn,
+    }
+    if not passed:
+        out["blocked"] = "UNIFIED_KERNEL_VERIFICATION_REFUSED"
+    if "world_after" in payload:
+        out["world_after"] = payload["world_after"]
+    return out
 
 
 @dataclass
@@ -89,6 +143,10 @@ class Creature:
     max_attempts: int = 2
     _log: list[dict[str, Any]] = field(default_factory=list, repr=False)
     _last_boot_perception: dict[str, Any] = field(default_factory=dict, repr=False)
+    _unified_model: Any = field(default=None, repr=False)
+    _memory_bus: Any = field(default=None, repr=False)
+    _boundary_router: Any = field(default=None, repr=False)
+    _spine_tasks: dict[str, dict[str, Any]] = field(default_factory=dict, repr=False)
 
     # ------------------------------------------------------------------ boot
 
@@ -133,6 +191,7 @@ class Creature:
         self._load_catalog_question()
         self._load_inspector_investigation()
         self._load_durable_board()
+        self._load_memory_bus_if_present()
         # Persist an initial grant even if the process exits before its first step.
         self._save()
         return {"schema": SCHEMA, "identity": self.identity, "epoch": started["epoch"],
@@ -143,9 +202,6 @@ class Creature:
                 "life_remaining": self._life.remaining, "posture": self._standing.posture()}
 
     def _load_sovereign_organs(self) -> None:
-        from canonical.runtime import capability_onboarding_factory_v1 as COF
-        from canonical.runtime import derived_inspector_flywheel_v1 as DIF
-        from canonical.runtime import self_prediction_calibration_v1 as SPC
         from canonical.swe_kernel.sentient_cognitive_core_v1 import SentientCognitiveCore
 
         self.cognitive_core = SentientCognitiveCore(self.root / "cognitive_core")
@@ -166,47 +222,93 @@ class Creature:
                 )
             except Exception:
                 self.continuation_memory = CP.ContinuationMemory.empty()
-        self.calibration_ledger = SPC.Ledger(self.root / "self_prediction_ledger.jsonl")
-        self.derived_flight = DIF.Flight()
+        self._calibration_ledger_obj: Any = None
+        self._derived_flight_obj: Any = None
+        self._onboarding_factory_obj: Any = None
+        self._pending_flight_registry: dict[str, dict[str, Any]] = {}
         self._serialized_derivations: dict[str, dict[str, Any]] = {}
         self._live_inspector_callables: dict[str, Callable[[Mapping[str, Any]], tuple[bool, str]]] = {}
         self.onboarded_capabilities: dict[str, dict[str, Any]] = {}
 
-        def _register_cap(row: Mapping[str, Any]) -> None:
-            self.onboarded_capabilities[str(row["capability_id"])] = dict(row)
-
-        self.onboarding_factory = COF.Factory(
-            inspector_for=lambda cid: self._live_inspector_callables.get(cid),
-            register=_register_cap,
-        )
         onboard_fp = self.root / "onboarded_inspectors.json"
         if onboard_fp.is_file() and not onboard_fp.is_symlink():
             try:
                 saved = json.loads(onboard_fp.read_text(encoding="utf-8"))
                 if isinstance(saved, Mapping):
                     for k, v in (saved.get("flight_registry") or {}).items():
-                        self.derived_flight.registry[str(k)] = dict(v)
+                        self._pending_flight_registry[str(k)] = dict(v)
                     for k, v in (saved.get("onboarded") or {}).items():
                         self.onboarded_capabilities[str(k)] = dict(v)
-                    for k, v in (saved.get("serialized_derivations") or {}).items():
-                        if isinstance(v, Mapping):
-                            cid_k = str(k)
-                            self._serialized_derivations[cid_k] = dict(v)
-                            deriv_obj = DIF.BehavioralDerivation.from_dict(v)
-                            if not deriv_obj.refused:
-                                self._live_inspector_callables[cid_k] = deriv_obj.build()
+                    ser_derivs = saved.get("serialized_derivations") or {}
+                    if ser_derivs:
+                        from canonical.runtime import derived_inspector_flywheel_v1 as DIF
+
+                        for k, v in ser_derivs.items():
+                            if isinstance(v, Mapping):
+                                cid_k = str(k)
+                                self._serialized_derivations[cid_k] = dict(v)
+                                deriv_obj = DIF.BehavioralDerivation.from_dict(v)
+                                if not deriv_obj.refused:
+                                    self._live_inspector_callables[cid_k] = deriv_obj.build()
             except Exception:
                 pass
 
+    @property
+    def calibration_ledger(self) -> Any:
+        if getattr(self, "_calibration_ledger_obj", None) is None:
+            from canonical.runtime import self_prediction_calibration_v1 as SPC
+
+            self._calibration_ledger_obj = SPC.Ledger(self.root / "self_prediction_ledger.jsonl")
+        return self._calibration_ledger_obj
+
+    @calibration_ledger.setter
+    def calibration_ledger(self, value: Any) -> None:
+        self._calibration_ledger_obj = value
+
+    @property
+    def derived_flight(self) -> Any:
+        if getattr(self, "_derived_flight_obj", None) is None:
+            from canonical.runtime import derived_inspector_flywheel_v1 as DIF
+
+            fl = DIF.Flight()
+            for k, v in getattr(self, "_pending_flight_registry", {}).items():
+                fl.registry[str(k)] = dict(v)
+            self._derived_flight_obj = fl
+        return self._derived_flight_obj
+
+    @derived_flight.setter
+    def derived_flight(self, value: Any) -> None:
+        self._derived_flight_obj = value
+
+    @property
+    def onboarding_factory(self) -> Any:
+        if getattr(self, "_onboarding_factory_obj", None) is None:
+            from canonical.runtime import capability_onboarding_factory_v1 as COF
+
+            def _register_cap(row: Mapping[str, Any]) -> None:
+                self.onboarded_capabilities[str(row["capability_id"])] = dict(row)
+
+            self._onboarding_factory_obj = COF.Factory(
+                inspector_for=lambda cid: self._live_inspector_callables.get(cid),
+                register=_register_cap,
+            )
+        return self._onboarding_factory_obj
+
+    @onboarding_factory.setter
+    def onboarding_factory(self, value: Any) -> None:
+        self._onboarding_factory_obj = value
+
     def _save_sovereign_organs(self) -> None:
-        if not hasattr(self, "derived_flight") or not hasattr(self, "onboarded_capabilities"):
+        if not hasattr(self, "onboarded_capabilities"):
             return
         if hasattr(self, "cognitive_core"):
             self.cognitive_core.belief.save()
             self.cognitive_core.world_graph.save()
             self.cognitive_core.consolidation.save()
+        fl_obj = getattr(self, "_derived_flight_obj", None)
+        flight_reg = dict(fl_obj.registry) if fl_obj is not None else dict(getattr(self, "_pending_flight_registry", {}))
         payload = {
-            "flight_registry": dict(self.derived_flight.registry),
+            "flight_registry": flight_reg,
             "onboarded": dict(self.onboarded_capabilities),
             "serialized_derivations": dict(getattr(self, "_serialized_derivations", {})),
         }
@@ -829,6 +931,37 @@ class Creature:
                 break
         return {**self.report(), "steps": rows}
 
+    def attach_unified_work_payload(self, work_id: str, payload: Mapping[str, Any]) -> None:
+        """Attach structured 5-pillar execution inputs for a board obligation (`work_id`)."""
+        store = getattr(self, "_unified_work_payloads", None)
+        if store is None:
+            store = {}
+            self._unified_work_payloads = store
+        store[str(work_id)] = dict(payload)
+
+    def step_unified(self, *, offer: "CP.Offer | None" = None) -> dict[str, Any]:
+        """Execute one `Creature` step using typed catalog checking for catalog questions and
+        `unified_perform` (`UnifiedModel.unified_frontier_turn`, `K3 = 0`) for general obligations."""
+        if self._life is not None:
+            pool = self.remaining_work()
+            if pool:
+                nxt = M.choose_next(self._life, pool)
+                if nxt is not None and nxt.id in self._catalog_questions:
+                    return self.step(does_nothing, offer=offer)
+        return self.step(unified_perform, offer=offer)
+
+    def unified_frontier_turn(
+        self,
+        goal: str,
+        *,
+        pillar: str | None = None,
+        payload: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Direct `K3 = 0` 5-pillar frontier turn from `Creature` through `UnifiedModel`."""
+        from canonical.runtime.brain_unified_model_v1 import load_unified_model
+
+        return load_unified_model().unified_frontier_turn(goal, pillar=pillar, payload=payload)
+
     def _save(self) -> None:
         M.LifeStore(self.root / "life.json").save(self._life)
         S.StandingStore(self.root / "standing.json").save(self._standing)
@@ -839,6 +972,1167 @@ class Creature:
                 encoding="utf-8",
             )
             os.replace(tmp_cm, self.root / "continuation_memory.json")
+        if self._memory_bus is not None:
+            try:
+                self._memory_bus.save(self.root / "memory_bus_v1.json")
+            except Exception:
+                pass
+
+    # ------------------------------------------ unified model & frontier spines bridge
+
+    def attach_unified_model(self, model: Any) -> None:
+        """Bind a `UnifiedModel` directly to this Creature so both share one memory bus & router lazily."""
+        self._unified_model = model
+        if model is not None:
+            if getattr(model, "_memory_bus", None) is not None:
+                self._memory_bus = model._memory_bus
+            elif self._memory_bus is not None:
+                model._memory_bus = self._memory_bus
+            if getattr(model, "_boundary_router", None) is not None:
+                self._boundary_router = model._boundary_router
+            elif self._boundary_router is not None:
+                model._boundary_router = self._boundary_router
+
+    def _load_memory_bus_if_present(self) -> None:
+        bus_fp = self.root / "memory_bus_v1.json"
+        if bus_fp.is_file() and not bus_fp.is_symlink():
+            try:
+                from canonical.swe_kernel import canonical_memory_crystallizer_v1 as mem_spine
+
+                if self._memory_bus is None:
+                    self._memory_bus = mem_spine.VerificationFirstMemoryBus(state_path=bus_fp)
+                else:
+                    self._memory_bus.load(bus_fp)
+                if self._unified_model is not None:
+                    self._unified_model._memory_bus = self._memory_bus
+            except Exception:
+                pass
+
+    @property
+    def memory_bus(self) -> Any:
+        """Persistent 5-timescale verification-first memory bus (`0G`) backed by `self.root/memory_bus_v1.json`."""
+        if self._memory_bus is None:
+            if self._unified_model is not None and getattr(self._unified_model, "_memory_bus", None) is not None:
+                self._memory_bus = self._unified_model._memory_bus
+            else:
+                from canonical.swe_kernel import canonical_memory_crystallizer_v1 as mem_spine
+
+                bus_fp = self.root / "memory_bus_v1.json"
+                self._memory_bus = mem_spine.VerificationFirstMemoryBus(state_path=bus_fp)
+                if self._unified_model is not None:
+                    self._unified_model._memory_bus = self._memory_bus
+        return self._memory_bus
+
+    @property
+    def boundary_router(self) -> Any:
+        """Compounding Tier-0 -> Tier-1 -> Tier-2 BoundaryRouter (`0I`) sharing `self.memory_bus`."""
+        if self._boundary_router is None:
+            if self._unified_model is not None and getattr(self._unified_model, "_boundary_router", None) is not None:
+                self._boundary_router = self._unified_model._boundary_router
+                if self._memory_bus is not None:
+                    self._boundary_router.memory_bus = self._memory_bus
+            else:
+                from canonical.swe_kernel import canonical_boundary_router_v1 as br_spine
+
+                self._boundary_router = br_spine.BoundaryRouter(
+                    memory_bus=self._memory_bus,
+                    memory_bus_factory=lambda: self.memory_bus,
+                )
+                if self._unified_model is not None:
+                    self._unified_model._boundary_router = self._boundary_router
+        return self._boundary_router
+
+    @property
+    def unified_model(self) -> Any:
+        """Lazy `UnifiedModel` handle bound to this Creature's shared memory bus and router."""
+        if self._unified_model is None:
+            from canonical.runtime import brain_unified_model_v1 as bum
+
+            m = bum.open_model()
+            if self._memory_bus is not None:
+                m._memory_bus = self._memory_bus
+            if self._boundary_router is not None:
+                m._boundary_router = self._boundary_router
+            self._unified_model = m
+        return self._unified_model
+
+    _SPINE_ROUTER_METHODS = {
+        "swe_repair": "route_swe_repair",
+        "env_goal": "route_env_goal",
+        "cu_task": "route_cu_task",
+        "typed_chain": "route_typed_chain",
+        "harvested_surface": "route_harvested_surface",
+        "version_space": "route_version_space_task",
+        "register_env_goal": "route_register_env_goal",
+        "federated_engine": "route_federated_engine",
+        "one_shot_learning": "route_one_shot_learning",
+        "applicability": "route_applicability_check",
+        "refusal_spec": "route_refusal_specification",
+        "speculative_cow": "route_speculative_cow_race",
+        "cu_four_tier": "route_four_tier_cu",
+        "mutation_gate": "route_mutation_admission_gate",
+        "event_memory": "route_verified_event_memory",
+        "durable_commit": "route_durable_commit",
+        "env_broker": "route_env_broker",
+        "angelic_repair": "route_angelic_counterfactual_repair",
+        "crossfile_repair": "route_crossfile_choreography",
+        "compile_goal_contract": "route_compile_goal_contract",
+        "branch_mental_model": "route_branch_mental_model",
+        "check_mode_oracle": "route_check_mode_oracle",
+        "counterexample_experiment": "route_counterexample_experiment",
+        "run_relation_goal": "route_run_relation_goal",
+        "one_experience": "route_one_experience_consequences",
+        "self_evolution_firewall": "route_self_evolution_firewall",
+        "curate_skills": "route_curate_skills",
+        "observe_drift": "route_observe_drift",
+        "cross_host_transfer": "route_cross_host_transfer",
+        "one_demo_identify": "route_one_demonstration_identify",
+        "trace_expression_repair": "route_trace_expression_repair",
+        "multi_file_causal_localize": "route_multi_file_causal_localize",
+        "computer_env": "route_discover_computer_env",
+        "admit_route": "route_admit_live",
+        "semantic_plan": "route_semantic_plan",
+        "derive_execution_adapter": "route_derive_execution_adapter",
+        "contrast_memory_laws": "route_contrast_memory_laws",
+        "filing_key_hindsight_jitrl": "route_filing_key_hindsight_jitrl",
+        "producer_lineage_holes": "route_producer_lineage_holes",
+        "verifier_pinning_oracles": "route_verifier_pinning_oracles",
+        "purpose_gate_arbitrage": "route_purpose_gate_arbitrage",
+        "two_move_horizon_cu": "route_two_move_horizon_cu",
+    }
+
+    def register_spine_task(self, work_id: str, kind: str, spec: Mapping[str, Any]) -> None:
+        """Register a structured frontier-spine task spec to execute when `work_id` is worked on the board."""
+        self._spine_tasks[str(work_id)] = {"kind": str(kind).lower().strip(), "spec": dict(spec)}
+
+    def solve(self, goal: str, **kwargs: Any) -> dict[str, Any]:
+        """Single unified runtime front door delegating directly to `UnifiedModel.solve()`."""
+        res = self.unified_model.solve(goal, **kwargs)
+        self._save()
+        return res
+
+    _ASYMMETRIC_SPINE_PILLARS = {
+        "asymmetric_leapfrog": "AUTO",
+        "refusal_autobind": "REFUSAL_AUTOBIND",
+        "angelic_zygote_swe": "ANGELIC_ZYGOTE_SWE",
+        "shadow_transducer_cu": "SHADOW_TRANSDUCER_CU",
+        "digital_twin_arc": "DIGITAL_TWIN_ARC",
+        "sheaf_srmu_memory": "SHEAF_SRMU_MEMORY",
+        "pc_dgm_evolve": "PC_DGM_EVOLVE",
+        "eggmind_proof": "EGGMIND_PROOF",
+    }
+
+    def route_goal_via_spine(self, kind: str, **kwargs: Any) -> dict[str, Any]:
+        """Execute a task through the unified frontier spines (`0D`-`0I`) + hidden arsenal in O(1) dispatch."""
+        k = str(kind or "swe_repair").lower().strip()
+        router_attr = self._SPINE_ROUTER_METHODS.get(k)
+        if router_attr is not None:
+            res = getattr(self.boundary_router, router_attr)(**kwargs)
+        elif k in self._ASYMMETRIC_SPINE_PILLARS:
+            goal_txt = str(kwargs.pop("goal", ""))
+            res = self.unified_model.asymmetric_leapfrog(
+                goal_txt, pillar=self._ASYMMETRIC_SPINE_PILLARS[k], **kwargs
+            )
+        elif k == "checkability_oracle":
+            ws = kwargs.pop("workspace_root", _REPO_ROOT)
+            res = self.unified_model.checkability_oracle_forge(ws, **kwargs)
+        elif k == "spacetime_sygus":
+            res = self.unified_model.spacetime_oe_sygus_repair(kwargs.pop("workspace_root", None), **kwargs)
+        elif k == "shadow_interface_cu":
+            ws = kwargs.pop("workspace_root", _REPO_ROOT)
+            res = self.unified_model.shadow_interface_computer_use(ws, **kwargs)
+        elif k == "active_mealy_question":
+            res = self.unified_model.active_mealy_question_learner(**kwargs)
+        elif k == "dbsp_bitemporal_forge":
+            res = self.unified_model.dbsp_bitemporal_forge(**kwargs)
+        elif k == "oracle_audit":
+            from canonical.swe_kernel import canonical_oracle_vericoding_spine_v1 as ov_spine
+
+            res = ov_spine.audit_oracle_and_vericoding(**kwargs)
+        elif k == "swe_polyglot":
+            from canonical.swe_kernel import canonical_swe_spine_v1 as swe_spine
+
+            res = swe_spine.solve_repository_task(**kwargs)
+            res = {**res, "pass": bool(res.get("solved") is True)}
+        else:
+            res = {"pass": False, "status": "FAIL_CLOSED__UNKNOWN_SPINE_KIND", "reason": f"UNKNOWN_KIND:{k}"}
+        self._save()
+        return res
+
+    def run_federated_engine(
+        self,
+        mode: str,
+        inputs: Mapping[str, Any] | None = None,
+        *,
+        goal: str = "",
+    ) -> dict[str, Any]:
+        """Run any of the 58 federated hidden kernel engines directly from Creature (`0I`)."""
+        return self.route_goal_via_spine("federated_engine", mode=mode, inputs=inputs, goal=goal)
+
+    def speculative_cow_race(
+        self,
+        workspace_root: str | pathlib.Path,
+        branches: Sequence[Mapping[str, Any]],
+        oracle_fn: Any,
+        *,
+        commit_winner: bool = True,
+    ) -> dict[str, Any]:
+        """Execute speculative parallel-safe CoW futures (`0F`) directly from Creature."""
+        return self.route_goal_via_spine(
+            "speculative_cow",
+            workspace_root=workspace_root,
+            branches=branches,
+            oracle_fn=oracle_fn,
+            commit_winner=commit_winner,
+        )
+
+    def mutation_admission_gate(
+        self,
+        source_text: str,
+        verifier_fn: Any,
+        *,
+        limit: int = 8,
+        seed: int = 7,
+        min_kill_rate: float = 0.5,
+    ) -> dict[str, Any]:
+        """Gate skill/module promotion with real AST mutation killing (`0H`) directly from Creature."""
+        return self.route_goal_via_spine(
+            "mutation_gate",
+            source_text=source_text,
+            verifier_fn=verifier_fn,
+            limit=limit,
+            seed=seed,
+            min_kill_rate=min_kill_rate,
+        )
+
+    def admit_self_modification(
+        self,
+        source_text: str,
+        verifier_fn: Any,
+        *,
+        skill_id: str = "creature_self_mod",
+        workspace_root: str | pathlib.Path | None = None,
+        target_rel: str | None = None,
+        positive_examples: Sequence[Any] = (),
+        negative_mutants: Sequence[Any] = (),
+        check_predicate: Any = None,
+        limit: int = 8,
+        seed: int = 7,
+        min_kill_rate: float = 0.5,
+        commit_on_pass: bool = False,
+    ) -> dict[str, Any]:
+        """Entry-Only Self-Evolution Firewall (`0H` × `0F` × `0G`) directly on `Creature`."""
+        return self.route_goal_via_spine(
+            "self_evolution_firewall",
+            source_text=source_text,
+            verifier_fn=verifier_fn,
+            skill_id=skill_id,
+            workspace_root=workspace_root,
+            target_rel=target_rel,
+            positive_examples=positive_examples,
+            negative_mutants=negative_mutants,
+            check_predicate=check_predicate,
+            limit=limit,
+            seed=seed,
+            min_kill_rate=min_kill_rate,
+            commit_on_pass=commit_on_pass,
+        )
+
+    def record_skill_contribution(
+        self,
+        skill_id: str,
+        outcome: str,
+        *,
+        note: str = "",
+    ) -> dict[str, Any]:
+        """Record measured reuse contribution in this Creature's persistent SQLite ledger (`0G` × `skill_contribution_ledger_v1`)."""
+        return self.memory_bus.record_skill_contribution(
+            skill_id,
+            outcome,
+            note=note,
+            db_path=self.root / "skill_contrib.sqlite3",
+        )
+
+    def curate_skills_memory(
+        self,
+        *,
+        grader_report: Mapping[str, Any] | None = None,
+        min_trials: int = 3,
+        threshold: float = 0.10,
+        active_cap: int = 200,
+    ) -> dict[str, Any]:
+        """Retire negative-paying skills ONLY on a measured tight grader (`0G` × `skill_contribution_ledger_v1`)."""
+        return self.route_goal_via_spine(
+            "curate_skills",
+            grader_report=grader_report,
+            min_trials=min_trials,
+            threshold=threshold,
+            active_cap=active_cap,
+            db_path=self.root / "skill_contrib.sqlite3",
+        )
+
+    def observe_route_drift(self, stream: str, value: float | bool) -> dict[str, Any]:
+        """Observe one outcome in this Creature's hybrid ADWIN + BOCPD + Page-Hinkley drift detector (`0G`)."""
+        return self.memory_bus.observe_drift(stream, value)
+
+    def inspect_self_improvement_queue(
+        self,
+        *,
+        state_path: str | pathlib.Path | None = None,
+    ) -> dict[str, Any]:
+        """Inspect the autonomous verified self-improvement queue (`autonomous_verified_self_improvement_v1`)."""
+        from canonical.runtime import autonomous_verified_self_improvement_v1 as avsi
+
+        sp = pathlib.Path(state_path) if state_path is not None else None
+        state = avsi.load_state(sp) if sp is not None else avsi.load_state()
+        nxt = avsi.next_improvement_action(state_path=sp) if sp is not None else avsi.next_improvement_action()
+        return {
+            "schema": SCHEMA,
+            "pass": True,
+            "status": "PASS__SELF_IMPROVEMENT_QUEUE_READ",
+            "next_action": nxt,
+            "has_next_action": nxt is not None,
+            "state_schema": state.get("schema"),
+        }
+
+    def compose_typed_chain(
+        self,
+        goal: str,
+        *,
+        seed: Sequence[str] | None = None,
+        max_candidates: int = 6,
+        cwd: str | pathlib.Path | None = None,
+    ) -> dict[str, Any]:
+        """Route a sentence into a typed capability chain via `composer_route_v1` + `0I`."""
+        return self.route_goal_via_spine(
+            "typed_chain",
+            goal=goal,
+            seed=seed,
+            max_candidates=max_candidates,
+            cwd=cwd,
+        )
+
+    def run_harvested_surface(
+        self,
+        capability_id: str = "",
+        *,
+        path: str = "",
+        args: Mapping[str, Any] | None = None,
+        adversarial_args: Mapping[str, Any] | None = None,
+        receipt: bool = False,
+    ) -> dict[str, Any]:
+        """Execute a discovered-but-unadmitted harvested surface via `harvested_capability_runtime_v1` (`admitted: False`)."""
+        return self.route_goal_via_spine(
+            "harvested_surface",
+            capability_id=capability_id,
+            path=path,
+            args=args,
+            adversarial_args=adversarial_args,
+            receipt=receipt,
+            root=_REPO_ROOT,
+        )
+
+    def sleep_consolidate_memory(
+        self,
+        *,
+        program_sources: Sequence[str] = (),
+        min_nodes: int = 5,
+        max_new_concepts: int = 6,
+        memrl_outcomes: Sequence[Mapping[str, Any]] = (),
+        recheck_rules: Sequence[Mapping[str, Any]] = (),
+        zset_deltas: Sequence[tuple[str, str, str, int, int | None, int]] = (),
+        forge_entry: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Run `0G` sleep-time E-Graph/E-Stitch + Memini/MemRL/APEX-EM + DBSP Z-set + Mutant-Killing Forge."""
+        res = self.memory_bus.sleep_consolidate(
+            program_sources=program_sources,
+            min_nodes=min_nodes,
+            max_new_concepts=max_new_concepts,
+        )
+        memini_res = self.memory_bus.memini_memrl_apex_consolidate(outcomes=memrl_outcomes)
+        rechecked: list[dict[str, Any]] = []
+        if recheck_rules:
+            from canonical.swe_kernel import skill_recheck_v1 as srk
+
+            for rule in recheck_rules:
+                rechecked.append(srk.recheck(dict(rule)))
+        res = dict(res)
+        res["memini_memrl_apex"] = memini_res
+        if rechecked:
+            res["lm_sleep_rechecked"] = rechecked
+        if zset_deltas or forge_entry is not None:
+            res["dbsp_forge"] = self.unified_model.dbsp_bitemporal_forge(
+                zset_deltas=zset_deltas,
+                forge_entry=forge_entry,
+                workspace_root=_REPO_ROOT,
+            )
+        self._save()
+        return res
+
+    def sleep_forge_dormant_capabilities(
+        self,
+        *,
+        zset_deltas: Sequence[tuple[str, str, str, int, int | None, int]] = (),
+        query_seed: str | None = None,
+        query_t_valid: int | None = None,
+        forge_entry: Mapping[str, Any] | None = None,
+        seed_cases: list[Any] | None = None,
+        workspace_root: pathlib.Path | str = _REPO_ROOT,
+    ) -> dict[str, Any]:
+        """Promote dormant repo callables via adversarial mutant killing (`capability_forge_v1`) + DBSP Z-set memory."""
+        res = self.unified_model.dbsp_bitemporal_forge(
+            zset_deltas=zset_deltas,
+            query_seed=query_seed,
+            query_t_valid=query_t_valid,
+            forge_entry=forge_entry,
+            seed_cases=seed_cases,
+            workspace_root=workspace_root,
+        )
+        self._save()
+        return res
+
+    def fast_cascade_solve(self, task_spec: Mapping[str, Any]) -> dict[str, Any]:
+        """Wave 23: Execute the 4-rung deterministic fast-cascade orchestrator through Creature's shared router."""
+        return self.boundary_router.route_fast_cascade(**dict(task_spec))
+
+    def bitemporal_recall(
+        self,
+        query: str,
+        *,
+        valid_at_ts: float | None = None,
+        top_k: int = 10,
+    ) -> dict[str, Any]:
+        """Wave 24: Andersen-Chung-Lang `ForwardPush` bi-temporal associative recall on Creature's memory bus."""
+        return self.boundary_router.route_forward_push_recall(query, valid_at_ts=valid_at_ts, top_k=top_k)
+
+    def enforce_skill_rent(
+        self,
+        *,
+        max_active_skills: int = 64,
+        paired_probes: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 24: Enforce Two-Door Rubin `(WITH - WITHOUT)` counterfactual rent & finite skill cap `C`."""
+        res = self.boundary_router.route_two_door_rent_curation(
+            max_active_skills=max_active_skills,
+            paired_probes=paired_probes,
+        )
+        self._save()
+        return res
+
+    def futamura_solve(
+        self,
+        task_spec: Mapping[str, Any],
+        *,
+        untrusted_proposer: Any = None,
+        auto_compile: bool = True,
+        use_cow_fork: bool = True,
+        alpha: float = 0.05,
+    ) -> dict[str, Any]:
+        """Wave 36: Execute Futamura self-compiling 4-rung cascade directly on Creature's UnifiedModel."""
+        if getattr(self, "_unified_model", None) is not None:
+            return self._unified_model.futamura_solve(
+                task_spec,
+                untrusted_proposer=untrusted_proposer,
+                auto_compile=auto_compile,
+                use_cow_fork=use_cow_fork,
+                alpha=alpha,
+            )
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import shared_futamura_cascade
+
+        return shared_futamura_cascade().solve(
+            dict(task_spec),
+            untrusted_proposer=untrusted_proposer,
+            auto_compile=auto_compile,
+            use_cow_fork=use_cow_fork,
+            alpha=alpha,
+        )
+
+    def learn_mealy_instant(
+        self,
+        reset_and_run: Any,
+        alphabet: Sequence[str],
+        *,
+        numeric_actions: Mapping[str, tuple[int, int]] | None = None,
+        **kwargs: Any,
+    ) -> Any:
+        """Wave 36: Sub-ms Error-Aware `L#` + `Lambda*_M` symbolic Mealy instant learner."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import ErrorAwareSymbolicMealyLearner
+
+        return ErrorAwareSymbolicMealyLearner().learn(
+            reset_and_run,
+            alphabet,
+            numeric_actions=numeric_actions,
+            **kwargs,
+        )
+
+    def execute_hybrid_cu(
+        self,
+        steps: Sequence[Mapping[str, Any]],
+        *,
+        initial_marking: Mapping[str, int] | None = None,
+        transitions: Mapping[str, Mapping[str, Any]] | None = None,
+        executor: Any = None,
+        initial_state: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 36: 3-channel Hybrid Computer Use (`CLI/File > AX/CDP > Visual`) + Petri guard + loop breaker."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import HybridComputerUsePetriSupervisor
+
+        return HybridComputerUsePetriSupervisor(
+            initial_marking=initial_marking,
+            transitions=transitions,
+        ).execute_episode(steps, executor=executor, initial_state=initial_state)
+
+    def wake_sleep_consolidate(
+        self,
+        *,
+        max_active_rules: int = 64,
+        rubin_observations: Mapping[str, tuple[float, float]] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 36: GrowLibm e-class compression + Rubin `(WITH - WITHOUT)` skill-rent GC on sleep."""
+        if getattr(self, "_unified_model", None) is not None:
+            res = self._unified_model.wake_sleep_consolidate(
+                max_active_rules=max_active_rules,
+                rubin_observations=rubin_observations,
+            )
+        else:
+            from canonical.runtime.futamura_leapfrog_kernel_v1 import shared_futamura_cascade
+
+            res = shared_futamura_cascade().wake_sleep_consolidate(
+                max_active_rules=max_active_rules,
+                rubin_observations=rubin_observations,
+            )
+        self._save()
+        return res
+
+    def probe_os_isolation(self, *, budget_s: float = 30.0, seccomp: bool = True) -> dict[str, Any]:
+        """Wave 37+38: Real Linux kernel namespace (`user+mount+pid+ipc+uts+net`, `CapEff=0`,
+        classic BPF `seccomp` allowlist) 20-attempt escape probe."""
+        if getattr(self, "_unified_model", None) is not None:
+            return self._unified_model.probe_os_isolation(budget_s=budget_s, seccomp=seccomp)
+        from canonical.runtime import os_isolation_v1
+
+        return os_isolation_v1.probe(budget_s=budget_s, seccomp=seccomp)
+
+    def execute_confined_computer_use(
+        self,
+        work_dir: str | pathlib.Path,
+        steps: Sequence[Mapping[str, Any]],
+        *,
+        goal_id: str = "confined_hcu_episode",
+        budget_s: float = 15.0,
+        allow_network: bool = False,
+        verify_effect: bool = True,
+        seccomp: bool = True,
+        auto_compile_refusal: bool = True,
+        webmcp_tools: Mapping[str, Mapping[str, Any]] | None = None,
+        initial_marking: Mapping[str, int] | None = None,
+        transitions: Mapping[str, Mapping[str, Any]] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 37+38: Real OS kernel-confined (`CapEff=0` + `seccomp` BPF) 4-channel HCU executor +
+        Refusal-as-Interface-Compiler + Ring-0 byte effect oracle + CoW rollback."""
+        if getattr(self, "_unified_model", None) is not None:
+            return self._unified_model.execute_confined_computer_use(
+                work_dir,
+                steps,
+                goal_id=goal_id,
+                budget_s=budget_s,
+                allow_network=allow_network,
+                verify_effect=verify_effect,
+                seccomp=seccomp,
+                auto_compile_refusal=auto_compile_refusal,
+                webmcp_tools=webmcp_tools,
+                initial_marking=initial_marking,
+                transitions=transitions,
+            )
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import (
+            ConfinedHybridComputerUseExecutor,
+            HybridComputerUsePetriSupervisor,
+            shared_futamura_cascade,
+        )
+
+        sup = HybridComputerUsePetriSupervisor(
+            initial_marking=initial_marking,
+            transitions=transitions,
+        )
+        return ConfinedHybridComputerUseExecutor(
+            supervisor=sup,
+            belief_bus=shared_futamura_cascade().belief_bus,
+            webmcp_tools=webmcp_tools,
+        ).execute_episode(
+            work_dir,
+            steps,
+            goal_id=goal_id,
+            budget_s=budget_s,
+            allow_network=allow_network,
+            verify_effect=verify_effect,
+            seccomp=seccomp,
+            auto_compile_refusal=auto_compile_refusal,
+        )
+
+    def solve_multifile_repo_futamura(
+        self,
+        repo_dir: str | pathlib.Path,
+        test_targets: Sequence[str] = (),
+        *,
+        goal_text: str = "",
+        suspect_files: Sequence[str] | None = None,
+        auto_compile: bool = True,
+        apply_to_disk: bool = True,
+        use_portfolio_fallback: bool = False,
+        use_residual_wall_closers: bool = True,
+        use_repo_component_petri: bool = True,
+        reject_vacuous_verifier: bool = False,
+        untrusted_proposer: Callable[[Mapping[str, Any]], Sequence[Mapping[str, str]]] | None = None,
+        alpha: float = 0.05,
+        timeout_s: float = 10.0,
+    ) -> dict[str, Any]:
+        """Wave 37+38: Unified multi-file Python repository Futamura solver with 13-law residual
+        wall closers, repo component Petri, anti-vacuous verifier audit & Rung-0 compile-back."""
+        if getattr(self, "_unified_model", None) is not None:
+            res = self._unified_model.solve_multifile_repo_futamura(
+                repo_dir,
+                test_targets,
+                goal_text=goal_text,
+                suspect_files=suspect_files,
+                auto_compile=auto_compile,
+                apply_to_disk=apply_to_disk,
+                use_portfolio_fallback=use_portfolio_fallback,
+                use_residual_wall_closers=use_residual_wall_closers,
+                use_repo_component_petri=use_repo_component_petri,
+                reject_vacuous_verifier=reject_vacuous_verifier,
+                untrusted_proposer=untrusted_proposer,
+                alpha=alpha,
+                timeout_s=timeout_s,
+            )
+        else:
+            from canonical.runtime.futamura_leapfrog_kernel_v1 import (
+                MultifileFutamuraRepoSolver,
+                shared_futamura_cascade,
+            )
+
+            res = MultifileFutamuraRepoSolver(cascade=shared_futamura_cascade()).solve(
+                repo_dir,
+                test_targets,
+                goal_text=goal_text,
+                suspect_files=suspect_files,
+                auto_compile=auto_compile,
+                apply_to_disk=apply_to_disk,
+                use_portfolio_fallback=use_portfolio_fallback,
+                use_residual_wall_closers=use_residual_wall_closers,
+                use_repo_component_petri=use_repo_component_petri,
+                reject_vacuous_verifier=reject_vacuous_verifier,
+                untrusted_proposer=untrusted_proposer,
+                alpha=alpha,
+                timeout_s=timeout_s,
+            )
+        self._save()
+        return res
+
+    def non_malleable_memory_op(
+        self,
+        operation: str,
+        payload: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 38: Execute a Non-Malleable Memory OS op (TMA-NM, GovMem, A-TMA, SkillApt, <96 cap)."""
+        if getattr(self, "_unified_model", None) is not None:
+            res = self._unified_model.non_malleable_memory_op(operation, payload)
+        else:
+            from canonical.swe_kernel.canonical_memory_crystallizer_v1 import (
+                VerificationFirstMemoryBus,
+                execute_memory_operation,
+            )
+
+            if self._memory_bus is None:
+                self._memory_bus = VerificationFirstMemoryBus()
+            res = execute_memory_operation(self._memory_bus, operation, payload)
+        self._save()
+        return res
+
+    def bicameral_sleep_cycle(
+        self,
+        *,
+        max_hot_skills: int = 96,
+        mine_algebraic_rewrites: bool = False,
+        weight_update_check: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 38: Creature two-phase Consolidate-and-Dream sleep cycle with origin integrity & weight gate."""
+        res = self.non_malleable_memory_op(
+            "BICAMERAL_SLEEP_CYCLE",
+            {
+                "max_hot_skills": max_hot_skills,
+                "mine_algebraic_rewrites": mine_algebraic_rewrites,
+                "weight_update_check": weight_update_check,
+            },
+        )
+        return res
+
+    def discover_dark_matter(self, query: str, *, top_k: int = 8, max_hot: int = 96) -> dict[str, Any]:
+        """Wave 38: OpenViking-style L0/L1/L2 progressive discovery over Brain's hidden capabilities."""
+        if getattr(self, "_unified_model", None) is not None:
+            return self._unified_model.discover_dark_matter(query, top_k=top_k, max_hot=max_hot)
+        from canonical.runtime.brain_unified_model_v1 import open_model
+
+        self._unified_model = open_model()
+        return self._unified_model.discover_dark_matter(query, top_k=top_k, max_hot=max_hot)
+
+    def asymmetric_leapfrog(
+        self,
+        goal: str = "",
+        *,
+        pillar: str = "AUTO",
+        inputs: Mapping[str, Any] | None = None,
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Execute any of the 7 Asymmetric Frontier-Leapfrog Pillars directly on Creature (`K3=0`)."""
+        res = self.unified_model.asymmetric_leapfrog(goal, pillar=pillar, inputs=inputs, **kwargs)
+        self._save()
+        return res
+
+    def sleep_pc_dgm_supercompile(
+        self,
+        *,
+        domain: str = "general",
+        fn_name: str,
+        incumbent_source: str,
+        candidate_sources: Sequence[str] = (),
+        static_env: Mapping[str, Any] | None = None,
+        test_cases: Sequence[tuple[tuple[Any, ...], Any]] = (),
+        heldout_cases: Sequence[tuple[tuple[Any, ...], Any]] = (),
+        negative_witness_sources: Sequence[str] = (),
+        rubin_rent_scores: Mapping[str, tuple[float, float]] | None = None,
+    ) -> dict[str, Any]:
+        """Sleep-time Proof-Carrying Darwin-Godel Machine (`PC-DGM`) + Turchin AST deforestation + Rubin rent GC."""
+        res = self.unified_model.pc_dgm_evolve(
+            domain=domain,
+            fn_name=fn_name,
+            incumbent_source=incumbent_source,
+            candidate_sources=candidate_sources,
+            static_env=static_env,
+            test_cases=test_cases,
+            heldout_cases=heldout_cases,
+            negative_witness_sources=negative_witness_sources,
+            rubin_rent_scores=rubin_rent_scores,
+        )
+        if res.get("pass") and isinstance(res.get("best_stepping_stone"), Mapping):
+            winner = res["best_stepping_stone"]
+            self.memory_bus.append_verified_event(
+                op="SET",
+                key=f"pc_dgm:{domain}:{fn_name}",
+                value={
+                    "ast_sha256": winner.get("ast_sha256"),
+                    "byte_len": winner.get("byte_len"),
+                    "latency_us": winner.get("latency_us"),
+                },
+                source_commit="pc_dgm_turchin_supercompiler_v1",
+                precondition_guard=["anti_objective_hacking", "popper_negative_witness", "turchin_deforestation"],
+            )
+        if self._standing is not None:
+            self._standing.record(verified=True, correct=bool(res.get("pass")))
+        self._save()
+        return res
+
+    def _ensure_unified_model(self) -> Any:
+        if getattr(self, "_unified_model", None) is None:
+            from canonical.runtime.brain_unified_model_v1 import open_model
+
+            self._unified_model = open_model()
+        return self._unified_model
+
+    def mendel_red_queen_evolve(
+        self,
+        parent_source: str,
+        lineage_a: str,
+        lineage_b: str,
+        *,
+        verifier: Any,
+        failing_witness: Any = None,
+        owned_symbols: Sequence[str] | None = None,
+        max_ast_bloat_ratio: float = 1.60,
+        max_added_branches: int = 6,
+        require_albi_invariance: bool = True,
+    ) -> dict[str, Any]:
+        """Wave 39: Creature Mendel comparative dual splicing + ALBI + Anti-Slop/No-Phantom-Guardrails."""
+        res = self._ensure_unified_model().mendel_red_queen_evolve(
+            parent_source,
+            lineage_a,
+            lineage_b,
+            verifier=verifier,
+            failing_witness=failing_witness,
+            owned_symbols=owned_symbols,
+            max_ast_bloat_ratio=max_ast_bloat_ratio,
+            max_added_branches=max_added_branches,
+            require_albi_invariance=require_albi_invariance,
+        )
+        self._save()
+        return res
+
+    def discover_and_earn_judges(
+        self,
+        *,
+        artifacts_by_kind: Mapping[str, Sequence[bytes]] | None = None,
+        store_dir: str | pathlib.Path | None = None,
+        include_stdlib_discovery: bool = True,
+        cli_probe: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 39: Creature Red Queen earned-judge discovery over live subprocess candidates."""
+        return self._ensure_unified_model().discover_and_earn_judges(
+            artifacts_by_kind=artifacts_by_kind,
+            store_dir=store_dir,
+            include_stdlib_discovery=include_stdlib_discovery,
+            cli_probe=cli_probe,
+        )
+
+    def compose_and_plan_contracts(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 39: Creature typed effect-contract composition + Sussman partial-order planning + lifted sketches."""
+        return self._ensure_unified_model().compose_and_plan_contracts(**kwargs)
+
+    def speculative_cow_decide(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 39: Creature decision-theoretic version-space agreement gate + real POSIX CoW fork speculation."""
+        return self._ensure_unified_model().speculative_cow_decide(**kwargs)
+
+    def clm_rrf_memory_op(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 39: Creature verbatim 4-way RRF + Nemori surprise + CLM file-mirrored context + TMA-NM."""
+        res = self._ensure_unified_model().clm_rrf_memory_op(operation, payload)
+        self._save()
+        return res
+
+    def partial_route_with_jitrl(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 39: Creature closed-form JitRL logit modulation + SkillTTA synthesis + Intra-task Partial Routing."""
+        return self._ensure_unified_model().partial_route_with_jitrl(operation, payload)
+
+    def epistemic_swe_egraph_cegis(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Creature Guarded Meaning IR E-Graph + Grammar-Closed CEGIS CoW repair + Causal Nexus."""
+        return self._ensure_unified_model().epistemic_swe_egraph_cegis(operation, payload)
+
+    def oneshot_version_space_learn(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Creature Evidence Demand + Settlement + Hypothesis Classes + Law-Checked Operator Acquisition."""
+        return self._ensure_unified_model().oneshot_version_space_learn(operation, payload)
+
+    def shadow_interface_hcu_route(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Creature Agent-S4 evolving shadow-interface compiler + Microsoft HCU 3-channel router."""
+        return self._ensure_unified_model().shadow_interface_hcu_route(operation, payload)
+
+    def rlm_workspace_op(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Creature MIT RLM out-of-core symbolic corpus slicing & recursive map-reduce."""
+        return self._ensure_unified_model().rlm_workspace_op(operation, payload)
+
+    def four_network_git_memory_op(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Creature Hindsight 4-Network bi-temporal git-diffable memory + Engram + Sleep + TMA-NM."""
+        res = self._ensure_unified_model().four_network_git_memory_op(operation, payload)
+        self._save()
+        return res
+
+    def chase_hda_hill_nfv_gate(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Creature Staged Goal-Blind NFV + CHASE perturbation audit + HDA + Hill Sampling."""
+        return self._ensure_unified_model().chase_hda_hill_nfv_gate(operation, payload)
+
+    def selfplay_steer_horizon_commit(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 40: Creature Zero-Data Self-Play SWE-RL + Steer-Don't-Solve Critic + Atomic WAL Commit."""
+        res = self._ensure_unified_model().selfplay_steer_horizon_commit(operation, payload)
+        self._save()
+        return res
+
+    def rung3_proposer_jitrl_solve(self, payload: Mapping[str, Any]) -> dict[str, Any]:
+        """Wave 41: Creature 4-rung escalation (Rung 0->1->2->3) with K3=0 abstention, pluggable local proposer, JitRL & NFV/CHASE."""
+        return self._ensure_unified_model().rung3_proposer_jitrl_solve(payload)
+
+    def whitebox_trace_abduction_oe(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 41: Creature Ochiai trace abduction + Angelic OE + E-graph CEGIS + Whitebox introspection."""
+        return self._ensure_unified_model().whitebox_trace_abduction_oe(operation, payload)
+
+    def ttpo_opsd_distill_rollouts(self, payload: Mapping[str, Any]) -> dict[str, Any]:
+        """Wave 41: Creature TTPO + OPSD label-free behavioral-equivalence consensus distillation."""
+        return self._ensure_unified_model().ttpo_opsd_distill_rollouts(payload)
+
+    def futamura_compile_away_cycle(self, payload: Mapping[str, Any]) -> dict[str, Any]:
+        """Wave 42: Creature Self-Play -> Futamura Rung-0 Compile-Away -> Sleep Consolidation flywheel."""
+        res = self._ensure_unified_model().futamura_compile_away_cycle(payload)
+        self._save()
+        return res
+
+    def one_demo_trust_and_rung_calibrate(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 42: Creature trace-quotient collision gate + page-guide UI sketcher + provenance calibration."""
+        return self._ensure_unified_model().one_demo_trust_and_rung_calibrate(payload)
+
+    def sleep_evolve_organs_gea(
+        self,
+        *,
+        organ_name: str,
+        incumbent_source: str,
+        candidate_sources: Sequence[str],
+        test_cases: Sequence[tuple[tuple[Any, ...], Any]],
+        anchor_cases: Sequence[tuple[tuple[Any, ...], Any]] = (),
+        alpha: float = 0.05,
+        life_cost: float = 0.25,
+    ) -> dict[str, Any]:
+        """Wave 19: Group-Evolving Meta-Circular Organs (GEA) + Anytime-Valid Certificate (SEA) + Ring-0 Referee.
+
+        Evaluates a group of pure-AST organ lineages over shared failure traces (`GEA`), gates every
+        candidate via `recursive_self_architect_v1.referee_executable_organ` + `meta_circular_organ_graph_v1`
+        (`0` unsafe AST nodes), and admits an upgrade ONLY when it achieves 0 anchor regressions AND
+        passes an anytime-valid sequential Hoeffding/Ville e-process certificate (`SEA`, `e_value >= 1/alpha`
+        or strict paired dominance with zero regressions).
+        """
+        import hashlib
+        import math
+
+        from canonical.swe_kernel import meta_circular_organ_graph_v1 as mcog
+        from canonical.swe_kernel import recursive_self_architect_v1 as rsa
+
+        cost = max(0.05, float(life_cost))
+        if self._life.remaining <= 0 or not self._life.can_finish(cost):
+            return {
+                "pass": False,
+                "admitted": False,
+                "status": "FAIL_CLOSED__CANNOT_AFFORD_GEA_EVOLUTION",
+                "life_remaining": self._life.remaining,
+                "model_calls": 0,
+            }
+        self._life.spend(cost)
+
+        def _eval_organ(src: str, cases: Sequence[tuple[tuple[Any, ...], Any]]) -> tuple[bool, list[bool], list[dict[str, Any]], str]:
+            ref = rsa.referee_executable_organ(src)
+            if not ref.get("ok"):
+                return False, [], [], str(ref.get("reason") or "RING0_REFUSED")
+            try:
+                _tree, ns = mcog.compile_organ_namespace(src)
+            except Exception as exc:
+                return False, [], [], f"COMPILE_REFUSED:{type(exc).__name__}:{exc}"
+            fn = ns.get(organ_name)
+            if not callable(fn):
+                return False, [], [], f"ORGAN_FUNCTION_MISSING:{organ_name}"
+            outcomes: list[bool] = []
+            failures: list[dict[str, Any]] = []
+            for idx, (args, expected) in enumerate(cases):
+                try:
+                    actual = fn(*args)
+                    ok = (actual == expected)
+                except Exception as exc:
+                    actual = f"EXC:{type(exc).__name__}:{exc}"
+                    ok = False
+                outcomes.append(bool(ok))
+                if not ok:
+                    failures.append({"case_idx": idx, "args": list(args), "expected": expected, "actual": actual})
+            return True, outcomes, failures, "ADMITTED"
+
+        inc_ok, inc_outcomes, inc_failures, inc_reason = _eval_organ(incumbent_source, test_cases)
+        if not inc_ok:
+            self._save()
+            return {
+                "pass": False,
+                "admitted": False,
+                "status": "FAIL_CLOSED__INCUMBENT_INVALID",
+                "reason": inc_reason,
+                "model_calls": 0,
+            }
+        inc_anchor_ok, inc_anchor_outcomes, _, _ = _eval_organ(incumbent_source, anchor_cases) if anchor_cases else (True, [], [], "OK")
+        inc_score = sum(1 for x in inc_outcomes if x)
+
+        group_reports: list[dict[str, Any]] = []
+        shared_failure_pool: list[dict[str, Any]] = list(inc_failures)
+        best_admitted: dict[str, Any] | None = None
+        e_threshold = 1.0 / max(1e-6, float(alpha))
+
+        for idx, cand_src in enumerate(candidate_sources):
+            c_ok, c_outcomes, c_failures, c_reason = _eval_organ(cand_src, test_cases)
+            if not c_ok:
+                group_reports.append({
+                    "lineage_idx": idx,
+                    "ring0_admitted": False,
+                    "reason": c_reason,
+                    "sea_certified": False,
+                })
+                continue
+            shared_failure_pool.extend(c_failures)
+            anchor_regressions = 0
+            if anchor_cases:
+                a_ok, a_outcomes, _, _ = _eval_organ(cand_src, anchor_cases)
+                if not a_ok:
+                    anchor_regressions = len(anchor_cases)
+                else:
+                    anchor_regressions = sum(
+                        1 for inc_a, cand_a in zip(inc_anchor_outcomes, a_outcomes) if inc_a and not cand_a
+                    )
+            # Paired diffs d_i in {-1, 0, +1}; build betting e-process E_n = prod(1 + lam * d_i) (anytime-valid!)
+            diffs = [(1 if c else 0) - (1 if b else 0) for b, c in zip(inc_outcomes, c_outcomes)]
+            paired_regressions = sum(1 for d in diffs if d < 0)
+            paired_gains = sum(1 for d in diffs if d > 0)
+            c_score = sum(1 for x in c_outcomes if x)
+            # Conservative betting fraction lam = 0.5 (supermartingale under H0: E[d_i] <= 0)
+            lam = 0.5
+            log_e = 0.0
+            for d in diffs:
+                step = max(1e-6, 1.0 + lam * float(d))
+                log_e += math.log(step)
+            e_value = math.exp(min(50.0, log_e))
+            sea_certified = (
+                anchor_regressions == 0
+                and paired_regressions == 0
+                and paired_gains > 0
+                and (e_value >= e_threshold or (c_score == len(test_cases) and paired_gains >= 2))
+            )
+            rep = {
+                "lineage_idx": idx,
+                "ring0_admitted": True,
+                "score": c_score,
+                "total": len(test_cases),
+                "incumbent_score": inc_score,
+                "paired_gains": paired_gains,
+                "paired_regressions": paired_regressions,
+                "anchor_regressions": anchor_regressions,
+                "sea_e_value": round(e_value, 4),
+                "sea_threshold": round(e_threshold, 4),
+                "sea_certified": sea_certified,
+                "source_sha256": hashlib.sha256(cand_src.encode("utf-8")).hexdigest(),
+                "source": cand_src,
+            }
+            group_reports.append(rep)
+            if sea_certified:
+                if best_admitted is None or (rep["score"], rep["sea_e_value"]) > (
+                    best_admitted["score"], best_admitted["sea_e_value"]
+                ):
+                    best_admitted = rep
+
+        event_receipt = None
+        if best_admitted is not None:
+            event_receipt = self.memory_bus.append_verified_event(
+                op="SET",
+                key=f"gea_organ:{organ_name}",
+                value={
+                    "source_sha256": best_admitted["source_sha256"],
+                    "score": best_admitted["score"],
+                    "incumbent_score": inc_score,
+                    "sea_e_value": best_admitted["sea_e_value"],
+                },
+                source_commit="gea_sea_sleep_evolution_v1",
+                precondition_guard=["ring0_pure_ast", "zero_anchor_regression", "sea_anytime_valid"],
+            )
+        posture = self._standing.record(verified=True, correct=best_admitted is not None)
+        self._save()
+        return {
+            "pass": best_admitted is not None,
+            "admitted": best_admitted is not None,
+            "status": "PASS__GEA_ORGAN_CERTIFIED_BY_SEA" if best_admitted is not None else "FAIL_CLOSED__NO_CANDIDATE_PASSED_SEA_CERTIFICATE",
+            "organ_name": organ_name,
+            "incumbent_score": inc_score,
+            "total_cases": len(test_cases),
+            "winner": best_admitted,
+            "group_size": len(candidate_sources),
+            "group_reports": [{k: v for k, v in r.items() if k != "source"} for r in group_reports],
+            "shared_failure_trace_count": len(shared_failure_pool),
+            "event_receipt": event_receipt,
+            "life_remaining": self._life.remaining,
+            "posture": posture,
+            "model_calls": 0,
+        }
+
+    def sleep_red_queen_coevolve(
+        self,
+        *,
+        epoch_index: int = 0,
+        organ_name: str,
+        incumbent_source: str,
+        candidate_sources: Sequence[str],
+        func_name: str,
+        test_cases: Sequence[tuple[tuple[Any, ...], Any]],
+        anchor_cases: Sequence[tuple[tuple[Any, ...], Any]] = (),
+        lens_witness_pairs: Sequence[tuple[Any, Any]] | None = None,
+        scan_root: str | pathlib.Path | None = None,
+        mine_rewrite_laws: bool = True,
+        audit_hunk_pinning: bool = True,
+        alpha: float = 0.05,
+    ) -> dict[str, Any]:
+        """Waves 24 & 29: Red Queen Co-Evolution sleep cycle (`Creature` × `0G` × `0H`, `K3=0`).
+
+        Runs bounded GEA organ evolution under a content-hashed FROZEN intra-epoch judge,
+        audits behavioural hunk pinning (`what_the_verifier_actually_pins_v1`) + docstring
+        oracle claims (`the_docstring_states_the_oracle_v1`), co-evolves the evaluator suite
+        ONLY for `epoch_index + 1`, and records both certified wins and failure lessons into
+        the bitemporal SkillBank (`0G`).
+        """
+        from canonical.swe_kernel import canonical_oracle_vericoding_spine_v1 as oracle_spine
+
+        gea_res = self.sleep_evolve_organs_gea(
+            organ_name=organ_name,
+            incumbent_source=incumbent_source,
+            candidate_sources=candidate_sources,
+            test_cases=test_cases,
+            anchor_cases=anchor_cases,
+            alpha=alpha,
+        )
+        winner = gea_res.get("winner") if isinstance(gea_res, dict) else None
+        patched_src = str(winner["source"]) if isinstance(winner, dict) and winner.get("source") else incumbent_source
+
+        hunk_pinning_audit = None
+        if audit_hunk_pinning and winner is not None and patched_src != incumbent_source:
+            def _cases_verifier(src_text: str) -> bool:
+                ns_v: dict[str, Any] = {}
+                try:
+                    exec(compile(src_text, f"<{organ_name}>", "exec"), ns_v)
+                    fn_v = ns_v.get(func_name)
+                    if not callable(fn_v):
+                        return False
+                    for args, exp in list(test_cases) + list(anchor_cases):
+                        if fn_v(*args) != exp:
+                            return False
+                    return True
+                except Exception:
+                    return False
+
+            hunk_pinning_audit = oracle_spine.audit_verifier_pinning_and_synthesize_oracles(
+                before_source=incumbent_source,
+                after_source=patched_src,
+                verifier_fn=_cases_verifier,
+                min_pin_ratio=0.5,
+                require_fail_to_pass=True,
+                docstring_source=patched_src,
+            )
+
+        rq_res = oracle_spine.run_red_queen_evaluator_coevolution(
+            epoch_index=int(epoch_index),
+            scan_root=scan_root,
+            orig_source=incumbent_source,
+            patched_source=patched_src,
+            func_name=func_name,
+            lens_witness_pairs=lens_witness_pairs,
+            mine_rewrite_laws=mine_rewrite_laws,
+        )
+
+        pin_ok = True if hunk_pinning_audit is None else bool(hunk_pinning_audit.get("pass"))
+        # Record organ outcome + failure lessons in bitemporal SkillBank (`0G`)
+        bank_res = self.memory_bus.bitemporal_credit_and_skill_bank(
+            skill_name=f"red_queen:{organ_name}:epoch_{int(epoch_index)}",
+            skill_type="red_queen_organ",
+            pattern=str(func_name),
+            preconditions=[f"epoch_judge:{rq_res.get('intra_epoch_frozen_judge_digest')}"],
+            operations=[f"organ:{organ_name}", f"next_epoch_judge:{rq_res.get('next_epoch_judge_digest')}"],
+            success_criteria="sea_certified_and_cow_boundary_invariant_and_hunks_pinned",
+            succeeded=bool(gea_res.get("pass")) and bool(rq_res.get("pass")) and pin_ok,
+            failure_lesson=None if (gea_res.get("pass") and rq_res.get("pass") and pin_ok) else str(
+                gea_res.get("status")
+                if not gea_res.get("pass")
+                else (hunk_pinning_audit.get("status") if not pin_ok and hunk_pinning_audit else rq_res.get("status"))
+            ),
+            valid_from=float(epoch_index),
+        )
+        overall_pass = bool(gea_res.get("pass")) and bool(rq_res.get("pass")) and pin_ok
+        return {
+            "pass": overall_pass,
+            "status": (
+                "PASS__RED_QUEEN_SLEEP_COEVOLVED"
+                if overall_pass
+                else "FAIL_CLOSED__RED_QUEEN_EPOCH_HELD_INCUMBENT"
+            ),
+            "epoch_index": int(epoch_index),
+            "next_epoch_index": int(epoch_index) + 1,
+            "intra_epoch_frozen_judge_digest": rq_res.get("intra_epoch_frozen_judge_digest"),
+            "next_epoch_judge_digest": rq_res.get("next_epoch_judge_digest"),
+            "gea_evolution": gea_res,
+            "hunk_pinning_audit": hunk_pinning_audit,
+            "evaluator_coevolution": rq_res,
+            "bitemporal_skill_bank": bank_res,
+            "model_calls": 0,
+        }
 
     def self_architect_step(
         self,
@@ -2576,6 +3870,35 @@ def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
             "questions_asked": int((learned or {}).get("oracle_queries_used") or 0),
             "answers": verified_answers,
             "blocked": None if ok else "LEARNED_SKILL_DID_NOT_ANSWER_THE_TARGET",
+        }
+
+    # --- Unified Frontier Spines (`0D`-`0I`), Composer Chains & Harvested Surfaces ---------------
+    spine_spec = (getattr(creature, "_spine_tasks", None) or {}).get(work.id)
+    if isinstance(spine_spec, Mapping):
+        skind = str(spine_spec.get("kind") or "")
+        sargs = dict(spine_spec.get("spec") or {})
+        sres = creature.route_goal_via_spine(skind, **sargs)
+        ok = bool(sres.get("pass") is True)
+        settle_rep = core.belief.settle_and_compute_surprise(
+            ticket,
+            outcome_pass=ok,
+            inspector=f"unified_spine:{skind}",
+            actual_cost=work.cost,
+            actual_gain=work.value if ok else 0.0,
+            calibration_ledger=creature.calibration_ledger,
+        )
+        return {
+            "ok": ok,
+            "verified": True,
+            "correct": ok,
+            "value": work.value if ok else 0.0,
+            "predicted_probability": p_hat,
+            "surprise": settle_rep["surprise"],
+            "spine_kind": skind,
+            "spine_status": sres.get("status"),
+            "spine_result": sres,
+            "admitted": sres.get("admitted"),
+            "blocked": None if ok else str(sres.get("status") or "SPINE_TASK_FAILED"),
         }
 
     core.belief.settle_and_compute_surprise(

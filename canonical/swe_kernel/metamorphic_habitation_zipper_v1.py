@@ -41,6 +41,7 @@ from __future__ import annotations
 import ast
 import difflib
 import hashlib
+import importlib.util
 import json
 import os
 import pathlib
@@ -154,14 +155,37 @@ def parse_pytest_failures(output: str) -> list[str]:
     return seen
 
 
+_HAS_PYTEST = importlib.util.find_spec("pytest") is not None
+
+
 def run_pytest_targets(
     repo_root: pathlib.Path,
     targets: Sequence[str],
     *,
     timeout_s: float = 15.0,
     tb_style: str = "short",
+    prefer_cow_fork: bool = False,
 ) -> dict[str, Any]:
-    """Execute pytest in an isolated subprocess with deterministic warning/plugin flags."""
+    """Execute Python test targets via `os.fork()` CoW stdlib runner (when `pytest` is absent
+    or `prefer_cow_fork=True`) or isolated `pytest` subprocess."""
+    if not _HAS_PYTEST or prefer_cow_fork:
+        from canonical.swe_kernel import stdlib_cow_test_runner_v1 as cow_runner
+
+        res = cow_runner.run_targets_cow_fork(
+            repo_root,
+            targets,
+            timeout_s=timeout_s,
+            capture_frames=False,
+        )
+        return {
+            "ok": bool(res["ok"]),
+            "rc": int(res["rc"]),
+            "passed": int(res["passed"]),
+            "failed_nodeids": list(res["failed_nodeids"]),
+            "output": str(res["output"]),
+            "elapsed_s": float(res["elapsed_s"]),
+        }
+
     env = _repo_python_env(repo_root)
     cmd = [
         sys.executable,
