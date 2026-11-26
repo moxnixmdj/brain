@@ -1,0 +1,201 @@
+{
+  "action_id": "SEVENTH_CAPABILITY_CENSUS_RERAN_AND_FRONT_DOOR_BINDING_20261126_V1",
+  "action_intent_id": "SEVENTH_CAPABILITY_CENSUS_RERAN_AND_FRONT_DOOR_BINDING_20261126_V1",
+  "action_kind": "INSTRUMENTATION",
+  "action_summary": "Seventh answer to 'know all of our capabilities and say who wins at each'. Two things this round does that passes 1-6 did not. (1) Re-runs all eleven true-capability specs on OS_URANDOM seeds the author cannot choose: 5,500 instances, 5,500 passes, 0 model imports, 0 network. (2) Executes the front door on ten ordinary sentences and measures what a person actually gets, which passes 1-6 never did. Measured: at mode AUTO every one of the ten goals fails closed, and the execution envelope names the cause: BoundExecutionError:RENDERED_BOUND_ACTION_CAPABILITY_ID_MISMATCH for file.copy.v1 - the adapter renders the resolved capability id and then rejects it. The same goals pass only when a different route (raw-goal compiler) fires instead. Separately: a whole-tree AST census on today's merge gives 6,521 python files, 2,448 runtime modules, 18,441 runtime functions (pass 6 measured 2,238/16,155 on 2026-11-25); verifier 38/38 at digest b9a782c3. The comparison table is anchored to frontier numbers read from the live boards on 2026-11-26 rather than to FRONTIER_CAPABILITY_SURFACE_NORMALIZED_V1 (2026-09-28), which understates the frontier on at least three rows - ARC-AGI-3 7.78% there vs 81.2% on the ARC Prize board today.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "OUR_CAPABILITIES_VS_NOV_2026_FRONTIER_20261126_V1.md",
+      "canonical/action_intents/SEVENTH_CAPABILITY_CENSUS_RERAN_AND_FRONT_DOOR_BINDING_20261126_V1.json"
+    ],
+    "route_class": "INTEGRATE",
+    "earlier_routes_exhausted_reason": "Not claimed for INTEGRATE. The earlier routes were walked in order: DELETE (the six passes that preceded this one are not duplicated, they are cited and superseded), BYPASS (the ledger and the matrix were not trusted, the harness was re-run), REUSE (all eleven specs, the verifier, open_model(), the existing receipt lane, the existing census tools), SUBSTITUTE (a fresh web read of the live frontier boards replaced FRONTIER_CAPABILITY_SURFACE_NORMALIZED_V1), and INTEGRATE (the seven passes are consolidated into one document that carries the current frontier beside the current measurement).",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "scope_complete_discharge": false,
+    "terminal_achieved": false,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer-run sandbox only. Every number is a receipt: 5,500 fresh harness instances with seeds printed in the document, 11 receipt files written under /tmp/tc, verifier 38/38 at digest b9a782c3, and an AST census that reproduces in 8 s. Independent verification is open and is required.",
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md",
+      "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+    ]
+  },
+  "benchmark_or_family_rank_authority": "NONE__INTERNAL_MEASUREMENT_AND_WEB_READ_FRONTIER_REFERENCE",
+  "canonical_base_commit": "c5d59dd0cb20cf1d2b4c02136ccd7dd76423e7aa",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "canonical/runtime/brain_unified_model_v1.py + execution_guard/true_capability_harness_v1.py",
+  "causal_blocker": "Two separate blockers. FIRST, the comparison itself was stale: passes 1-6 compared artefacts against FRONTIER_CAPABILITY_SURFACE_NORMALIZED_V1, observed 2026-09-28, which records ARC-AGI-3 at 7.78% for GPT-5.6 Sol while the ARC Prize board today records 81.2% for GPT-6 Astra; a comparison built on a stale reference understates the frontier and therefore flatters us on every row. SECOND, and larger: passes 1-6 read artefacts and never executed the front door on a sentence, so all six compared capabilities nobody can ask for. Measured today, at mode AUTO, ten of ten ordinary goals fail closed and the envelope names the cause - BoundExecutionError:RENDERED_BOUND_ACTION_CAPABILITY_ID_MISMATCH for file.copy.v1, a capability whose own kernel passes 500/500 on fresh seeds.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Two separate blockers. FIRST, the comparison itself was stale: passes 1-6 compared artefacts against FRONTIER_CAPABILITY_SURFACE_NORMALIZED_V1, observed 2026-09-28, which records ARC-AGI-3 at 7.78% for GPT-5.6 Sol while the ARC Prize board today records 81.2% for GPT-6 Astra; a comparison built on a stale reference understates the frontier and therefore flatters us on every row. SECOND, and larger: passes 1-6 read artefacts and never executed the front door on a sentence, so all six compared capabilities nobody can ask for. Measured today, at mode AUTO, ten of ten ordinary goals fail closed and the envelope names the cause - BoundExecutionError:RENDERED_BOUND_ACTION_CAPABILITY_ID_MISMATCH for file.copy.v1, a capability whose own kernel passes 500/500 on fresh seeds.",
+  "date": "2026-11-26",
+  "expected_parent_change": "The bottleneck is named and it is one layer below routing. Routing is 4-11 ms and lands 14 of 20 goals on the right family; the binding between the resolved capability id and the adapter's rendered action is what refuses, at AUTO, for the two capabilities the tree measures most strongly. The next round's work is therefore one repair, not another census.",
+  "expected_parent_frontier_change": "The bottleneck is named and it is one layer below routing. Routing is 4-11 ms and lands 14 of 20 goals on the right family; the binding between the resolved capability id and the adapter's rendered action is what refuses, at AUTO, for the two capabilities the tree measures most strongly. The next round's work is therefore one repair, not another census.",
+  "explicit_user_authorization": [
+    "Compare our most advanced capabilities with the frontier's ai models nov 2026 most advanced capabilities but first of all you must know all of our most advanced capabilities, whether they are in domain or they are in other branches here or there. You must know all of them. and tell who wins at each capability"
+  ],
+  "falsification_condition": "FALSIFIED if any of the eleven harness results does not reproduce from its stated seed; if any frontier number in the document is not on the cited page as of 2026-11-26; if any 'we win' row is stated without its scope bound; if the AUTO-mode binding failure does not reproduce on a clean checkout at this base commit; if the AST census numbers do not reproduce from the repository; or if this document is read as a capability, ownership, promotion or terminal claim rather than as instrumentation with authority NONE.",
+  "generic_repair_from_single_probe": false,
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/50",
+    "interpretation": "Instrumentation only. The round makes the gap measurable and names the one defect between the tree's measured kernels and a person's sentence. It discharges no truth obligation and grants no credit.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1/2",
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "harness_rerun": {
+      "specs": 11,
+      "instances_per_spec": 500,
+      "instances_total": 5500,
+      "passes": 5500,
+      "verdicts": "11 PASS, 0 FAIL",
+      "seeds": "OS_URANDOM, printed per spec in the document; two specs re-run on a second independent seed",
+      "second_seed_reproductions": [
+        "FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1 66bee2dd then d90561df"
+      ]
+    },
+    "front_door": {
+      "mode_auto": "0 of 10 goals passed; all 10 FAIL_CLOSED",
+      "mode_solve_or_learn": "5 of 10 passed via the raw-goal compiler route, 1 fail-closed, 4 not re-run",
+      "named_cause": "BoundExecutionError:RENDERED_BOUND_ACTION_CAPABILITY_ID_MISMATCH",
+      "capability_affected": "file.copy.v1, whose own kernel passes 500/500 on unseen seeds"
+    },
+    "route_probe": {
+      "goals": 20,
+      "correct_family": 14,
+      "out_of_domain_fail_closed": "5 of 5",
+      "latency_ms": "4-11 per goal"
+    },
+    "census": {
+      "python_files_whole_tree": 6521,
+      "runtime_modules": 2448,
+      "runtime_functions": 18441,
+      "pass_6_comparison": "2,238 modules and 16,155 functions on 2026-11-25; +210 modules and +2,286 functions in one day of merged PRs 7127-7136"
+    },
+    "unified_model": {
+      "digest": "b9a782c32e2b495da4853ac7f88919ca8a0de1ac166bdb59e207e12f05cfdfe7",
+      "verifier": "38/38 PASS",
+      "capabilities": 462,
+      "bound": 153,
+      "receipt_backed": 309,
+      "engines": 206,
+      "harvested": 656,
+      "source_index_modules": 2258
+    },
+    "cost": {
+      "model_calls": 0,
+      "network_calls_at_run_time": 0,
+      "parameters_stored": 0
+    }
+  },
+  "next_step": "Repair the route-to-executor binding so that a resolved capability id renders an action the adapter accepts, and prove it on the two capabilities the harness measures most strongly (FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1 and DOCX_EXACT_TEXT_EDIT_V1) end to end from one sentence at mode AUTO, on a clean checkout, with the harness re-run beside it on a fresh seed. Acceptance declared before the run: the sentence produces the measured artefact, the adapter returns the same capability id it was given, and the harness result is unchanged.",
+  "prior_work_reused": [
+    "execution_guard/true_capability_harness_v1.py",
+    "canonical/runtime/brain_unified_model_v1.py",
+    "canonical/runtime/verify_brain_unified_model_v1.py",
+    "canonical/capabilities/true/specs/*.json (11 specs)",
+    "canonical/verification/FOURTH_PASS_UNOPENED_SURFACES_20261125_V3.md",
+    "canonical/verification/FIFTH_PASS_THE_94_FILE_DELTA_20261125_V4.md",
+    "canonical/verification/SIXTH_PASS_MEASURING_THE_UNREVIEWED_20261125_V5.md",
+    "canonical/verification/EVERY_CAPABILITY_AGAINST_THE_FRONTIER_20261125_V2.md"
+  ],
+  "probe_specific": false,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+    "OUR_CAPABILITIES_VS_NOV_2026_FRONTIER_20261126_V1.md"
+  ],
+  "real_outcome": "The comparison is now anchored to the current frontier instead of a 2026-09-28 snapshot, and the reachability question has a measured answer one layer below routing: the adapter rejects the id it was handed, so the tree's strongest measured capabilities are not reachable by a person speaking, at the default mode, today.",
+  "recursive_obs": {
+    "canonical_base_commit": "c5d59dd0cb20cf1d2b4c02136ccd7dd76423e7aa",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "trusting the ledger's stored verdict instead of re-running the harness",
+      "trusting FRONTIER_CAPABILITY_SURFACE_NORMALIZED_V1 as the current frontier",
+      "an eighth enumeration of artefacts as if counting were the question",
+      "reporting the frontier's best published number where the sources disagree, instead of the lowest honest one"
+    ],
+    "expected_parent_frontier_change": "The bottleneck is named and it is one layer below routing. Routing is 4-11 ms and lands 14 of 20 goals on the right family; the binding between the resolved capability id and the adapter's rendered action is what refuses, at AUTO, for the two capabilities the tree measures most strongly.",
+    "expected_parent_level_state_change": "The bottleneck is named and it is one layer below routing. Routing is 4-11 ms and lands 14 of 20 goals on the right family; the binding between the resolved capability id and the adapter's rendered action is what refuses, at AUTO, for the two capabilities the tree measures most strongly.",
+    "independent_verification_required": true,
+    "iteration_limit": 1,
+    "obs_blocker": {
+      "blocker_is": "A stale frontier reference and an unexecuted front door. Neither is a capability gap; both are measurement gaps, and both made six previous answers wrong in the same direction - toward us.",
+      "delete_bypass_substitute_options": [
+        "delete: a seventh artefact census - the six that exist are cited and consolidated rather than repeated",
+        "bypass: the ledger's stored numbers - the harness was re-run on seeds the author cannot choose",
+        "substitute: the 2026-09-28 normalized frontier surface - replaced by the live boards read on 2026-11-26"
+      ],
+      "evidence_the_blocker_is_real": [
+        "0 of 10 goals passed at AUTO in a real directory, with the named adapter error in the envelope",
+        "the same capabilities pass their own harness at 500/500 on fresh seeds, so the failure is binding, not capability",
+        "the normalized surface records 7.78% on ARC-AGI-3 where the live board records 81.2%",
+        "six previous passes each found surfaces the previous one missed, and none of them executed the front door"
+      ],
+      "intrinsic_or_path_specific": "PATH_SPECIFIC__STALE_REFERENCE_AND_AN_UNEXECUTED_FRONT_DOOR"
+    },
+    "real_outcome": "The comparison is now anchored to the current frontier instead of a 2026-09-28 snapshot, and the reachability question has a measured answer one layer below routing: the adapter rejects the id it was handed, so the tree's strongest measured capabilities are not reachable by a person speaking, at the default mode, today.",
+    "required_capability": "A binding that preserves capability identity from route to render to adapter to receipt, and a comparison method that re-reads the frontier it is comparing against.",
+    "selected_surviving_route": "RE_RUN_THE_HARNESS_AND_EXECUTE_THE_FRONT_DOOR_THEN_COMPARE_AGAINST_THE_LIVE_FRONTIER",
+    "stop_condition": "Stop once the document exists, the intent passes orientation, drift and load-bearing checks, the referee is green, and no capability, ownership, family or terminal credit has changed.",
+    "why_selected_route_is_fastest_sufficient": "It is the only route that changes an answer. Another artefact count would produce an eighth nearly-identical document; executing the front door produced a defect that is one repair wide and blocks everything the other eight passes measured."
+  },
+  "route_id": "RE_RUN_THE_HARNESS_AND_EXECUTE_THE_FRONT_DOOR_THEN_COMPARE_AGAINST_THE_LIVE_FRONTIER",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "scope_complete_discharge": false,
+  "selected_route": "RE_RUN_THE_HARNESS_AND_EXECUTE_THE_FRONT_DOOR_THEN_COMPARE_AGAINST_THE_LIVE_FRONTIER",
+  "status": "PROPOSED__PRODUCER_MEASURED__ELEVEN_SPECS_RERUN_AND_FRONT_DOOR_EXECUTED__INDEPENDENT_VERIFICATION_OPEN",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "truth": {
+    "achieved": false,
+    "the_law_this_round_adds": "A COMPARISON IS ONLY AS CURRENT AS THE REFERENCE IT MEASURES AGAINST, AND A CAPABILITY NOBODY CAN ASK FOR IS A MEASUREMENT OF CODE, NOT OF CAPABILITY. Six censuses compared artefacts to a four-week-old frontier snapshot and never once executed the front door; the answer they produced was right about the artefacts and wrong about the machine.",
+    "what_is_false_in_the_claim_that_we_know_our_capabilities": [
+      "that enumerating artefacts answers the question: 2,448 modules, 18,441 functions and 742 public-runner receipts still do not tell you what happens when a person types a sentence, and the sentance test took 30 seconds and found a defect",
+      "that the routed capability is the executed capability: the id resolves in 4-11 ms and is then rejected by the adapter that was handed it",
+      "that the stored frontier reference is current: it is 59 days old and wrong by up to 73 points",
+      "that a capability measurement transfers to a user path: file.copy.v1 passes 500/500 on unseen seeds and fails at the front door",
+      "that 'all of them' is available: the sixth pass established that the artefact that would make it available, TRUE_CAPABILITY_AUDIT, declines to audit about 2,200 modules"
+    ]
+  },
+  "user_authorized_governance_change": false,
+  "verification": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "commands": [
+      "python3 execution_guard/true_capability_harness_v1.py run --spec canonical/capabilities/true/specs/<SPEC>.json --receipt-dir /tmp/tc  (x11)",
+      "python3 canonical/runtime/verify_brain_unified_model_v1.py",
+      "python3 execution_guard/agent_orientation_check_v1.py intent-check canonical/action_intents/SEVENTH_CAPABILITY_CENSUS_RERAN_AND_FRONT_DOOR_BINDING_20261126_V1.json"
+    ],
+    "independent_verification_completed": false,
+    "independent_verification_required": true,
+    "tests_green": 38
+  },
+  "weakens_existing_guard": false
+}
