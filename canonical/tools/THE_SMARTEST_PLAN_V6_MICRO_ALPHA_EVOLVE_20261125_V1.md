@@ -232,3 +232,54 @@ Lesson, repo-wide: any harness that runs code it just wrote must treat bytecode
 cache as adversarial state. A verifier's word is only as good as its freshest
 read; "insanely fast" loops that re-read through a stale cache are not fast,
 they are wrong at high speed.
+
+## §10 A yardstick that bites again: the 2-var family (this round)
+
+A saturated family measures nothing, so `micro_evolve_bench_v1.py` gained
+`--two-var` (same generator discipline: fixed seeds, fresh-process re-verify):
+cross-variable programs — `x*y+a`, `(x+c)*(y+c')`, `abs(x-y)*a`, compound
+conditionals. First blood: **7/10**, the loop's honest failure profile.
+
+Root causes found and fixed same round, all in `stochastic_synthesizer_v1`
+(the OE module still untouched):
+1. The 2c base atoms were single-var; added PAIRED cross atoms (x±y, x*y,
+   neg/abs over them) → `abs(x-y)*4`-class recovered.
+2. `(x+4)*(y-3)` needs TERM x TERM. Measured the feared blowup: after
+   signature-dedup the full product was 72 atoms -> 5184 pairs -> **19 ms**.
+   Added the product behind a |inner|<=256 cap: exceeding it forfeits the
+   extra class, never correctness (soundness by construction — every
+   candidate is still verified on all examples).
+
+Family verdict after fixes: **2-var 26/30 (9/9/8 on seeds 65/99/2026),
+mean ~1030 ms, 0 LLM samples, 0 tokens**; 1-var still 10/10 (no regression);
+9/9 unit+e2e tests pass.
+
+The frontier is now named, not guessed: the residual misses are (a) compound
+conditionals needing product-sized atoms UNDER both ITE branches and (b) the
+same 2c class at |inner|>256 (2-var consts widen the pool past the cap).
+Candidate levers, each behind its own gate, measured NOT yet adopted: coverage-
+ordered branch pairing over the product-augmented pool; MUL-only product with
+cap 1024 (measured cost estimate 2-5 s on the miss path — over the loop's
+~1 s budget, so the gate is: only if a solved-task counts >=2 improvement at
+<=2.5 s mean miss-path cost).
+
+External context this round (the axis we are on, corroborated):
+- The stale-world-model literature names our pyc bug's genus: agents decide on
+  outdated state, failures "quiet, irreversible, compounding"; "no framework
+  solves it automatically" (tianpan.co, 2026-04). Our fix is one concrete
+  freshness guarantee in the verifier path.
+- SlopCodeBench (arXiv 2603.24755): no agent solves iterative tasks end-to-end
+  across 11 models; pass-rate benchmarks miss structural decay; prompt fixes
+  shift intercept, not slope. Read as: verification-coupled loops (ours) over
+  bigger generators (theirs) on horizons where the generator degrades.
+- Compounding math (85%/step -> 20% at 10 steps) is the argument for the only
+  remaining big axis: per-step reliability of the JUDGE, not the generator —
+  our judge is a unittest run, which cannot drift. The pyc incident was the
+  judge being wrong for a mechanical reason; now fixed at all three carriers.
+- Edinburgh synthesis work: LLM outputs mined as heuristics for enumerative
+  search hit 80.1% on SyGuS — recorded as REJECTED-shape for this repo (it
+  re-introduces the sampling tax); our deterministic pool completions are the
+  zero-sample version of "search the neighborhood".
+
+Reach on certified HARD-51: still 0 (unchanged all session; different problem
+class, honestly tracked).

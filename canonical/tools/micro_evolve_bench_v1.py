@@ -36,16 +36,33 @@ GEN = [
     lambda a, b: f"-(x * {a}) if x < 0 else x * {a} + {b}",
 ]
 
+# 2-var family (v6 section 10): the loop's home family saturated at 40/40;
+# a saturated yardstick measures nothing. These shapes require cross-variable
+# composition the single-var 2c completion does not cover.
+GEN2 = [
+    lambda a, b: f"x * y + {a}",
+    lambda a, b: f"(x + {a}) * (y - {b})",
+    lambda a, b: f"x if x > y + {a} else y * {b}",
+    lambda a, b: f"abs(x - y) * {a}",
+    lambda a, b: f"(x * {a} + y) if (x + y) >= {b} else -(x * {a}) - y",
+]
 
-def make_family(n: int, seed: int, points: int):
+
+def make_family(n: int, seed: int, points: int, *, two_var: bool = False):
     rng = random.Random(seed)
     tasks = []
     for i in range(n):
-        g = GEN[i % len(GEN)]
+        gen = GEN2 if two_var else GEN
+        g = gen[i % len(gen)]
         a, b = rng.randint(1, 4), rng.randint(1, 3)
         expr = g(a, b)
-        f = eval(f"lambda x: {expr}", {"abs": abs}, {})  # noqa: S307
-        pts = rng.sample(range(-6, 7), points)
+        if two_var:
+            f = eval(f"lambda x, y: {expr}", {"abs": abs}, {})  # noqa: S307
+            grid = [(x, y) for x in range(-3, 4) for y in range(-3, 4)]
+            pts = rng.sample(grid, points)
+        else:
+            f = eval(f"lambda x: {expr}", {"abs": abs}, {})  # noqa: S307
+            pts = rng.sample(range(-6, 7), points)
         tasks.append({"expr": expr, "f": f, "pts": pts})
     return tasks
 
@@ -56,11 +73,15 @@ def run_task(task, steps: int) -> tuple[bool, float]:
 
     bound = model_v1.bind(bum.SOVEREIGN_ZERO_LLM_MODEL_SPEC)
     f = task["f"]
+    arity = f.__code__.co_argcount
+    sig = "(x)" if arity == 1 else "(x, y)"
+    argstr = (lambda p: str(p)) if arity == 1 else (lambda p: f"{p[0]}, {p[1]}")
     with tempfile.TemporaryDirectory(prefix="micro-evolve-") as td:
         ws = pathlib.Path(td)
-        (ws / "impl.py").write_text("def f(x):\n    return 0\n", encoding="utf-8")
+        (ws / "impl.py").write_text(f"def f{sig}:\n    return 0\n", encoding="utf-8")
         asserts = "".join(
-            f"        self.assertEqual(f({p}), {f(p)})\n" for p in task["pts"]
+            f"        self.assertEqual(f({argstr(p)}), {f(*p) if arity == 2 else f(p)})\n"
+            for p in task["pts"]
         )
         (ws / "test_f.py").write_text(
             "import unittest\nfrom impl import f\nclass T(unittest.TestCase):\n"
@@ -91,9 +112,11 @@ def main(argv=None) -> int:
     ap.add_argument("--seed", type=int, default=65)
     ap.add_argument("--steps", type=int, default=6)
     ap.add_argument("--points", type=int, default=6)
+    ap.add_argument("--two-var", action="store_true",
+                    help="2-variable family (hard yardstick; v6 section 10)")
     ns = ap.parse_args(argv)
 
-    family = make_family(ns.tasks, ns.seed, ns.points)
+    family = make_family(ns.tasks, ns.seed, ns.points, two_var=ns.two_var)
     rows = []
     for t in family:
         ok, ms = run_task(t, ns.steps)
@@ -103,7 +126,7 @@ def main(argv=None) -> int:
     mean_ms = sum(r["ms"] for r in rows) / max(1, len(rows))
     print(json.dumps({
         "schema": "MICRO_EVOLVE_BENCH_V1", "tasks": ns.tasks, "seed": ns.seed,
-        "steps": ns.steps, "points": ns.points,
+        "steps": ns.steps, "points": ns.points, "two_var": ns.two_var,
         "solved": solved, "mean_ms": round(mean_ms), "llm_samples": 0, "tokens": 0,
         "rows": rows,
     }))

@@ -207,23 +207,36 @@ def _level2c_exhaustive(
     def _leaf(vname: str, cval: Any) -> OE.Expr:
         return OE.Expr("var", (vname,), 1) if vname else OE.Expr("const", (cval,), 1)
 
-    # Level 1..2 with signature dedup
+    # Level 1..2 with signature dedup. v6 section 10: bases include PAIRED
+    # cross-variable atoms (x-y, abs(x-y), ...) so the 2-var class
+    # ((x op c)*(y op c), u(x op y) op c) is completed the same deterministic
+    # way the 1-var class was; caps keep the product honest (pool is deduped).
     inner: dict[tuple, OE.Expr] = {}
     pool: dict[tuple, OE.Expr] = {}
+    bases: list = []
     for v in var_names:
-        base = [_leaf(v, None)] + [OE.Expr(u, (_leaf(v, None),), 2) for u in ("neg", "abs")]
-        for b in base:
-            for op1 in _BINARY_OPS:
-                for c in consts:
-                    for e in (OE.Expr(op1, (b, _leaf(None, c)), b.size + 2),
-                              OE.Expr(op1, (_leaf(None, c), b), b.size + 2)):
-                        s = _sig(e)
-                        if s is None:
-                            continue
-                        if s == target_sig:
-                            return [{"code": OE.emit_expr(e, lang), "expr": e, "size": e.size}]
-                        pool.setdefault(s, e)
-                        inner.setdefault(s, e)
+        bases.append(_leaf(v, None))
+        bases.extend(OE.Expr(u, (_leaf(v, None),), 2) for u in ("neg", "abs"))
+    for i in range(len(var_names)):
+        for j in range(len(var_names)):
+            if i == j:
+                continue
+            for cop in ("+", "-", "*"):
+                cross = OE.Expr(cop, (_leaf(var_names[i], None), _leaf(var_names[j], None)), 3)
+                bases.append(cross)
+                bases.extend(OE.Expr(u, (cross,), 4) for u in ("neg", "abs"))
+    for b in bases:
+        for op1 in _BINARY_OPS:
+            for c in consts:
+                for e in (OE.Expr(op1, (b, _leaf(None, c)), b.size + 2),
+                          OE.Expr(op1, (_leaf(None, c), b), b.size + 2)):
+                    s = _sig(e)
+                    if s is None:
+                        continue
+                    if s == target_sig:
+                        return [{"code": OE.emit_expr(e, lang), "expr": e, "size": e.size}]
+                    pool.setdefault(s, e)
+                    inner.setdefault(s, e)
     # Level 3 over deduplicated signatures
     for _s, l2 in inner.items():
         for op2 in _BINARY_OPS:
@@ -240,6 +253,18 @@ def _level2c_exhaustive(
                     # pool: the exact TACAS'17 / EUSolver pattern — terms and
                     # conditionals are separate grammars combined by if-then-else.
                     pool.setdefault(s3, e)
+    # Term x term product (v6 section 10): (x+4)*(y-3) needs two composed
+    # terms, one per side. Signature dedup keeps this cheap, MEASURED: 72
+    # deduped atoms -> 5184 pairs -> 19 ms. The cap is insurance for bigger
+    # var/const sets; exceeding it forfeits the product, never correctness.
+    if len(inner) <= 256:
+        _items = list(inner.items())
+        for _s1, e1 in _items:
+            for _s2, e2 in _items:
+                for opm in ("*", "+", "-"):
+                    em = OE.Expr(opm, (e1, e2), e1.size + e2.size + 1)
+                    if _sig(em) == target_sig:
+                        return [{"code": OE.emit_expr(em, lang), "expr": em, "size": em.size}]
     # --- ITE composition over the 2c pool (same coverage+guard pattern OE
     # uses at its level 3, run on the deeper pool; miss-path only).
     n = len(envs)
