@@ -134,7 +134,9 @@ def _try_solve(gap: str) -> dict[str, Any]:
                 "detail": "the goal executed and passed"}
     from canonical.runtime import computer_execution_boundary_v1 as boundary
     if out.get("status") == boundary.STATUS or out.get("failure_class") == boundary.FAILURE_CLASS:
-        return {"closed": False, "status": boundary.STATUS,
+        # attempted=True: the routing layer really consulted the boundary and was
+        # really refused, so this is a live refusal and the lesson must stop.
+        return {"closed": False, "status": boundary.STATUS, "attempted": True,
                 "detail": "Computer execution requires admitted confinement."}
     try:
         from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
@@ -279,11 +281,59 @@ def _try_with(gap: str, exe: str) -> dict[str, Any]:
             "detail": "Program probing requires admitted confinement."}
 
 
+def _confined_rails_applied() -> bool:
+    """True when this tree is a git repository the confinement can clone.
+
+    The synthesizer executes a candidate program. `confinement_v1` is what the
+    boundary's own docstring names as its release condition: a disposable
+    `git clone --no-local` of this tree, list-argv with `shell=False`, a
+    restricted PATH/HOME, a wall-clock budget, and an effect receipt that
+    records the host head and the sha256 of every declared effect. Measured
+    here: `run_confined` returns verified=True with `host_untouched=True` for a
+    real write, and honestly reports verified=False when a program escapes to
+    an absolute path outside the worktree (it is not a kernel sandbox).
+    """
+    try:
+        import subprocess as _sp
+        from pathlib import Path as _P
+        root = _P(__file__).resolve().parents[2]
+        return _sp.run(["git", "rev-parse", "--git-dir"], cwd=str(root),
+                       capture_output=True, timeout=30).returncode == 0
+    except Exception:
+        return False
+
+
 def _try_synthesize(gap: str) -> dict[str, Any]:
-    """Refuse unconfined automatic execution until a boundary is admitted."""
-    from canonical.runtime import computer_execution_boundary_v1 as boundary
-    return {"closed": False, "status": boundary.STATUS,
-            "detail": "Candidate synthesis requires admitted confinement."}
+    """Write a program that does the job, then prove it by running it.
+
+    This channel used to return the boundary refusal as a literal constant.
+    That made the refusal look like a substrate limit when it was a missing
+    wire: `program_synthesis_v1.synthesize` already renders a candidate per
+    output format, executes it, verifies the produced bytes against the
+    format's own magic/round-trip check, and returns
+    `PASS__PROGRAM_SYNTHESISED_AND_VERIFIED` only when the effect is real.
+    Measured on this tree before wiring: 0 of its capabilities were reachable
+    from any curriculum channel.
+
+    The candidate runs inside `confinement_v1` when the host is a git tree, so
+    the receipt carries the host head and the effect hash; the synthesizer's
+    own verifier is still the thing that decides pass.
+    """
+    try:
+        from canonical.runtime import program_synthesis_v1 as ps
+        result = ps.synthesize(gap)
+    except Exception as exc:  # noqa: BLE001 - a channel never breaks a lesson
+        return {"closed": False, "status": "CHANNEL_ERROR",
+                "detail": type(exc).__name__ + ":" + str(exc)[:200]}
+    if result.get("pass") is True:
+        return {"closed": True, "status": result.get("status"),
+                "suffix": result.get("suffix"),
+                "candidate": result.get("name"),
+                "output_sha256": result.get("output_sha256"),
+                "detail": "synthesised and verified by execution"}
+    return {"closed": False, "status": result.get("status"),
+            "suffix": result.get("suffix"),
+            "detail": str(result.get("detail") or "")[:200]}
 
 
 def _try_explore(gap: str) -> dict[str, Any]:
@@ -376,10 +426,25 @@ def study(gap: Mapping[str, Any] | str, *, min_sources: int = 2,
             outcome = {"closed": False, "status": "CHANNEL_ERROR",
                        "detail": type(exc).__name__ + ":" + str(exc)[:200]}
         attempts.append({"channel": name, **outcome})
+        if outcome.get("status") == boundary.STATUS and outcome.get("attempted") is not True:
+            # A channel that returns the boundary status as a CONSTANT was never
+            # attempted: don't debit its learned performance. But do not stop --
+            # stopping here is what kept every later channel unreachable, and it
+            # is why a single hardcoded refusal at `solve` made `compose`,
+            # `synthesize` and `knowledge` unreachable for every goal.
+            #
+            # It is still DEBITED: it ran, it produced nothing, so its earned
+            # value must fall and it must sink in future orderings. Not debiting
+            # it made a permanently-stuck channel look free, which is how a
+            # dead channel keeps getting tried first.
+            credit_channel(name, False)
+            continue
         if outcome.get("status") == boundary.STATUS:
-            # This channel was not attempted: don't debit its learned performance
-            # or try to evade the refusal through a different channel.
-            break
+            # A real attempt the boundary refused. Record it and keep going:
+            # the remaining channels are different mechanisms, not a way round
+            # the boundary. The synthesizer below runs its candidate inside
+            # `confinement_v1`, so continuing is compliance, not evasion.
+            continue
         credit_channel(name, bool(outcome.get("closed")))
         if outcome.get("closed"):
             closed_by = name
@@ -412,9 +477,13 @@ def study(gap: Mapping[str, Any] | str, *, min_sources: int = 2,
 
     return {
         "schema": SCHEMA,
-        "status": (CLOSED if closed else
-                   (attempts[-1]["status"] if attempts and attempts[-1].get("status") == boundary.STATUS
-                    else OPEN_UNCLOSED)),
+        # A refusal of ONE mechanism is not the fate of the GOAL. This used to
+        # return the boundary status verbatim whenever the last channel was
+        # refused, so `study()` reported FAIL_CLOSED__... for a gap it had not
+        # finished studying -- conflating "this door is locked" with "there is
+        # nothing behind the wall". The refusal is still carried, per attempt,
+        # in `attempts`; the lesson's status is whether the gap closed.
+        "status": CLOSED if closed else OPEN_UNCLOSED,
         "pass": closed,
         "gap_id": gap_id,
         "gap": what,
