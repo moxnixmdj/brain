@@ -1,0 +1,122 @@
+{
+  "authority": "NONE",
+  "banned_modules_detected": [],
+  "blobs": {
+    "generator": {
+      "git_blob_sha": "d67622ba553841dd84fd872e0f6a716b7dc3b31c",
+      "path": "canonical/capabilities/true/generators/file_change_request_gen_v1.py",
+      "sha256": "6577c420005c647cf2c0c21bc49b995b63444366122915e146b7a93de3c4c63a"
+    },
+    "kernels": [
+      {
+        "git_blob_sha": "1d1585a96d5f40a5dc28fce53262f643ca7fc3f3",
+        "path": "canonical/runtime/live_brain_route_admission_v1.py",
+        "sha256": "b110fe1bf3537d7884e31c1659961e37a6e3a2caf2078dc008f68558a39c974a"
+      },
+      {
+        "git_blob_sha": "2737338025c6ae964e5af7dabd07ca86b80c4e42",
+        "path": "canonical/runtime/goal_compiler.py",
+        "sha256": "b7f787aea59c40231187b6a4b5f760febc3907f97f14a428f0ce90fdf476d877"
+      },
+      {
+        "git_blob_sha": "555bb25a0fbcac8592e8481b2aa09c7788e88bd1",
+        "path": "canonical/runtime/goal_front_compiler_v1.py",
+        "sha256": "7ad424ffbfe2353f71bf26070a3d3c6a5d3aeff8489c14083ead059cd8dee603"
+      },
+      {
+        "git_blob_sha": "7e0cf6a1c83348a032fbf40a623e8a2126a44f70",
+        "path": "canonical/runtime/bound_capabilities/file_ops.py",
+        "sha256": "fa4e19a81841f1d2fdd19ac0154210e64cbde149dbb8c712423afa50df410b28"
+      },
+      {
+        "git_blob_sha": "0d55efa6d0a04025bee525f686e622abf301f198",
+        "path": "canonical/runtime/bound_capabilities/file_edit.py",
+        "sha256": "153c5ef30c7fa34489900d19145ef32ae2545146b844e500976459485b60a847"
+      },
+      {
+        "git_blob_sha": "1d76b8b8a6cf10d5bd27b04ea95778b2577621e8",
+        "path": "canonical/runtime/bound_capabilities/stated_file_path.py",
+        "sha256": "feccfa9e337e27e4a56761f85690c568b2fa1a8ee5fd50b8b01371c5cd8262eb"
+      },
+      {
+        "git_blob_sha": "37944a7a2467f5069d415d03e9f937b917a62ff7",
+        "path": "canonical/runtime/file_artifact_expectation_v1.py",
+        "sha256": "fc865119196c16322987ebd1c69f382dc3164b3a4f78d43e0fb78e90db5425e2"
+      }
+    ],
+    "oracles": {
+      "git_blob_sha": "812c3a95838eea9ccde6f1dff0222ff09f20df02",
+      "path": "canonical/capabilities/true/oracles/file_change_request_oracles_v1.py",
+      "sha256": "97539efd912492834993391d07c94d5ec2d335c9d34bf1836e593c718d15d226"
+    },
+    "solver": {
+      "git_blob_sha": "5e907c5001e3adf6180713a178ab3ae0184054fc",
+      "path": "canonical/runtime/file_change_true_capability_adapter_v1.py",
+      "sha256": "2de29e514d5bef119b5d0dade6d00cbd9cf8759867a26b0be4b98cef4e093b77"
+    }
+  },
+  "canaries": [],
+  "canary_pass": "0/0",
+  "capability_id": "FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1",
+  "carrier": "SANDBOX",
+  "claim": "Asked through the front door in one of fifteen plain phrasings, a request to copy a file to a new name, to rename a file to a new name, or to append one line to a file leaves the folder holding exactly what the request determines and nothing else changed; the same request with a word no row accounts for, with a destination that already exists, or naming a file that is not there is refused and the folder is left byte for byte as it was.",
+  "failures_sample": [],
+  "fresh_pass_rate": 1.0,
+  "github": {
+    "GITHUB_REF": null,
+    "GITHUB_REPOSITORY": null,
+    "GITHUB_RUN_ATTEMPT": null,
+    "GITHUB_RUN_ID": null,
+    "GITHUB_SHA": null
+  },
+  "independent_oracle_ids": [
+    "FOLDER_BY_CONSTRUCTION"
+  ],
+  "instance_pass": 500,
+  "instances": 500,
+  "kind": "FRESH_INSTANCE_MEASUREMENT",
+  "network_blocked": true,
+  "nonstdlib_modules_loaded": [],
+  "oracle_classes": {
+    "ASKED_AGAIN_RELATION": "METAMORPHIC",
+    "FOLDER_BY_CONSTRUCTION": "ANALYTIC_CLOSED_FORM",
+    "UNTOUCHED_AND_BY_THE_ROW": "PROPERTY"
+  },
+  "pass_threshold": 1.0,
+  "per_oracle": {
+    "ASKED_AGAIN_RELATION": {
+      "error": 0,
+      "fail": 0,
+      "pass": 500
+    },
+    "FOLDER_BY_CONSTRUCTION": {
+      "error": 0,
+      "fail": 0,
+      "pass": 500
+    },
+    "UNTOUCHED_AND_BY_THE_ROW": {
+      "error": 0,
+      "fail": 0,
+      "pass": 500
+    }
+  },
+  "python": "3.11.2",
+  "replay": false,
+  "schema": "TRUE_CAPABILITY_RECEIPT_V1",
+  "scope_limits": [
+    "NO phrasing outside the fifteen in the generator's tables; other wordings are mostly refused and that is not measured here",
+    "NO overwriting: a request that asks to replace an existing destination is never generated",
+    "NO directories as source or destination, no destination in another or a missing folder, no absolute paths, no path outside the repository",
+    "NO appended line that is an ordinary English word, contains a quotation mark, or spans lines",
+    "NO files above a few hundred bytes, no binary content, no symbolic links, no concurrent writers",
+    "NO claim about any other file operation, and nothing that starts a program"
+  ],
+  "seed": "47bef8f1ea2618efb527583d28c7fd424a80a36d580d9046b7f2925d4d64b74b",
+  "seed_source": "OS_URANDOM",
+  "self_description": "Measurement of a solver on instances generated after the solver was frozen, judged by oracles in separate files. authority NONE: it records what was observed on this carrier and grants no credit; only a referee-signed run on a public runner may be cited.",
+  "solver_errors": 0,
+  "spec_path": "canonical/capabilities/true/specs/FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1.json",
+  "spec_sha256": "0fe0106f97df667b83b41c08109e78dc389caf7363acb1df24684b034add85e9",
+  "verdict": "PASS",
+  "wall_seconds": 278.365
+}
