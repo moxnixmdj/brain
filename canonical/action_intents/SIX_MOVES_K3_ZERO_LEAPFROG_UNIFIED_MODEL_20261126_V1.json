@@ -43,7 +43,8 @@
    "canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
    "canonical/tools/domain_atlas_v1.py",
    "canonical/tests/test_six_moves_leapfrog_v1.py",
-   "canonical/tests/test_seven_moves_frontier_master_plan_v1.py"
+   "canonical/tests/test_seven_moves_frontier_master_plan_v1.py",
+   "canonical/tests/test_post_frontier_five_phases_v1.py"
   ],
   "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
   "route_id": null,
@@ -110,7 +111,8 @@
   "canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
   "canonical/tools/domain_atlas_v1.py",
   "canonical/tests/test_six_moves_leapfrog_v1.py",
-  "canonical/tests/test_seven_moves_frontier_master_plan_v1.py"
+  "canonical/tests/test_seven_moves_frontier_master_plan_v1.py",
+  "canonical/tests/test_post_frontier_five_phases_v1.py"
  ],
  "real_outcome": "UnifiedModel now opens cold in 2.59 ms, delta-compiles byte-identically in 561.6 ms, queries FTS5 in 1.01 ms, speculates candidates via os.fork() CoW + RENAME_EXCHANGE, repairs Python defects on bare stdlib without pytest at K3=0, consolidates laws with 0 held-out false refutations, discovers drifting environments in 7.85x fewer steps, and kills 15/16 AST mutants across all .hidden.v1 contract capabilities.",
  "recursive_obs": {

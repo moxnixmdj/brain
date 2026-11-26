@@ -934,9 +934,9 @@ def _synthesize_move3_candidates_for_file(
         # 2c. Arithmetic operator & off-by-one boundary inversions (`witness_inversion_v1`)
         elif isinstance(node, ast.BinOp):
             bin_alts: dict[type[ast.operator], tuple[type[ast.operator], ...]] = {
-                ast.Add: (ast.Sub,),
-                ast.Sub: (ast.Add,),
-                ast.Mult: (ast.FloorDiv,),
+                ast.Add: (ast.Sub, ast.Mult),
+                ast.Sub: (ast.Add, ast.Mult),
+                ast.Mult: (ast.FloorDiv, ast.Add),
                 ast.Div: (ast.FloorDiv,),
                 ast.FloorDiv: (ast.Div,),
             }
@@ -1007,6 +1007,101 @@ def _synthesize_move3_candidates_for_file(
                                 _emit("assertion_demand_return", mhz._splice_ast_node(orig_src, node, f"return {expr_str}"))
         except Exception:
             pass
+
+    # Channel 4 (Phase 4): Putback Backward AST Witness Propagation (`reverse_tomography_algebra_v1`),
+    # Stateful Mutable-Default Isolation (`SWE-Serve`), & Asymptotic `O(N^2)->O(N)` Set-Hoist (`SWE-Perf`).
+    try:
+        from canonical.swe_kernel import reverse_tomography_algebra_v1 as rta
+
+        residual = rta.extract_output_residual(failure_output)
+        ranked_lines_rta = [
+            {"lineno": int(fr.get("lineno", 1)), "score": 1.0}
+            for fr in frame_records
+            if fr.get("lineno")
+        ] or [{"lineno": ln, "score": 0.8} for ln in list(cov_set)[:8]]
+        if ranked_lines_rta:
+            for p_src, _ln, p_rule in rta.backpropagate_ast_repairs(
+                orig_src, ranked_lines_rta, residual, max_patches=10
+            ):
+                _emit(f"putback_ast:{p_rule}", p_src)
+    except Exception:
+        pass
+
+    # Channel 4b (`SWE-Serve`): Mutable default argument isolation (`def f(x, acc=[])` -> `acc=None`)
+    for fn_idx, node in enumerate(all_nodes):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.args.defaults:
+            n_args = len(node.args.args)
+            n_defs = len(node.args.defaults)
+            mut_positions: list[tuple[int, str, str]] = []
+            for d_i, d_node in enumerate(node.args.defaults):
+                arg_obj = node.args.args[n_args - n_defs + d_i]
+                if isinstance(d_node, ast.List) and not d_node.elts:
+                    mut_positions.append((d_i, arg_obj.arg, "[]"))
+                elif isinstance(d_node, ast.Dict) and not d_node.keys:
+                    mut_positions.append((d_i, arg_obj.arg, "{}"))
+                elif isinstance(d_node, ast.Call) and isinstance(d_node.func, ast.Name) and d_node.func.id == "set" and not d_node.args:
+                    mut_positions.append((d_i, arg_obj.arg, "set()"))
+            if mut_positions:
+                t_copy = copy.deepcopy(orig_tree)
+                fn_copy = list(ast.walk(t_copy))[fn_idx]
+                if isinstance(fn_copy, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                    guards: list[ast.stmt] = []
+                    for d_i, arg_name, init_expr in mut_positions:
+                        fn_copy.args.defaults[d_i] = ast.Constant(value=None)
+                        guards.extend(ast.parse(f"if {arg_name} is None:\n    {arg_name} = {init_expr}\n").body)
+                    # Preserve docstring as first statement when present
+                    if (
+                        fn_copy.body
+                        and isinstance(fn_copy.body[0], ast.Expr)
+                        and isinstance(fn_copy.body[0].value, ast.Constant)
+                        and isinstance(fn_copy.body[0].value.value, str)
+                    ):
+                        fn_copy.body = [fn_copy.body[0], *guards, *fn_copy.body[1:]]
+                    else:
+                        fn_copy.body = [*guards, *fn_copy.body]
+                    ast.fix_missing_locations(t_copy)
+                    _emit("stateful_mutable_default_isolation", ast.unparse(t_copy))
+
+    # Channel 4c (`SWE-Perf`): Asymptotic `O(N^2) -> O(N)` loop membership `set()` hoist
+    for fn_idx, node in enumerate(all_nodes):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            param_names = {a.arg for a in node.args.args}
+            for stmt_i, stmt in enumerate(node.body):
+                if isinstance(stmt, ast.For):
+                    mutated_in_loop = {
+                        sub.func.value.id
+                        for sub in ast.walk(stmt)
+                        if isinstance(sub, ast.Call)
+                        and isinstance(sub.func, ast.Attribute)
+                        and isinstance(sub.func.value, ast.Name)
+                        and sub.func.attr in ("append", "extend", "pop", "remove", "clear", "insert")
+                    }
+                    seq_cands: list[str] = []
+                    for sub in ast.walk(stmt):
+                        if isinstance(sub, ast.Compare) and len(sub.ops) == 1 and isinstance(sub.ops[0], (ast.In, ast.NotIn)):
+                            comp0 = sub.comparators[0]
+                            if isinstance(comp0, ast.Name) and comp0.id in param_names and comp0.id not in mutated_in_loop:
+                                if comp0.id not in seq_cands:
+                                    seq_cands.append(comp0.id)
+                    if seq_cands:
+                        t_copy = copy.deepcopy(orig_tree)
+                        fn_copy = list(ast.walk(t_copy))[fn_idx]
+                        if isinstance(fn_copy, (ast.FunctionDef, ast.AsyncFunctionDef)) and stmt_i < len(fn_copy.body):
+                            for_copy = fn_copy.body[stmt_i]
+                            hoist_stmts: list[ast.stmt] = []
+                            rename_map: dict[str, str] = {}
+                            for s_name in seq_cands:
+                                h_name = f"_fast_set_{s_name}"
+                                rename_map[s_name] = h_name
+                                hoist_stmts.extend(ast.parse(f"{h_name} = set({s_name})\n").body)
+                            for sub in ast.walk(for_copy):
+                                if isinstance(sub, ast.Compare) and len(sub.ops) == 1 and isinstance(sub.ops[0], (ast.In, ast.NotIn)):
+                                    comp0 = sub.comparators[0]
+                                    if isinstance(comp0, ast.Name) and comp0.id in rename_map:
+                                        comp0.id = rename_map[comp0.id]
+                            fn_copy.body = [*fn_copy.body[:stmt_i], *hoist_stmts, *fn_copy.body[stmt_i:]]
+                            ast.fix_missing_locations(t_copy)
+                            _emit("asymptotic_loop_set_hoist", ast.unparse(t_copy))
 
     return cands
 
@@ -1095,11 +1190,13 @@ def _run_cow_demand_abduction_fast_lane(
             cow_jobs.append((cid, _make_shard()))
 
     # Screen in parallel `os.fork()` CoW worker batches via `ZygotePrewarmedPool` (`0` disk writes!)
+    base_passed = int(frame_run.get("passed", 0))
     pool = zygote_pool.ZygotePrewarmedPool(prewarm_enabled=False)
     passing_cids: list[str] = []
+    partial_by_file: dict[str, tuple[int, str, str, str]] = {}
     forked_total = 0
     per_batch_timeout = min(5.0, max(1.5, timeout_s / 2.0))
-    for start in range(0, min(len(cow_jobs), 80), 8):
+    for start in range(0, min(len(cow_jobs), 96), 8):
         batch = cow_jobs[start : start + 8]
         forked_total += len(batch)
         res = pool.run_parallel_sharded(
@@ -1108,10 +1205,71 @@ def _run_cow_demand_abduction_fast_lane(
             timeout_s=per_batch_timeout,
         )
         for item in res.get("results") or ():
-            if item.get("passed") and item.get("candidate_id") in job_payloads:
-                passing_cids.append(str(item["candidate_id"]))
+            cid_i = str(item.get("candidate_id") or "")
+            if cid_i not in job_payloads:
+                continue
+            if item.get("passed"):
+                passing_cids.append(cid_i)
+            else:
+                tp = int(item.get("tests_passed", 0))
+                if tp > base_passed:
+                    r_rel_i, tag_i, src_i = job_payloads[cid_i]
+                    prev = partial_by_file.get(r_rel_i)
+                    if prev is None or tp > prev[0]:
+                        partial_by_file[r_rel_i] = (tp, cid_i, tag_i, src_i)
         if passing_cids:
             break
+
+    # Phase 4 Multi-File Orthogonal CoW Patch Composition (`FeatureBench` cross-module synthesis):
+    # When single-file candidates strictly increase `tests_passed` on >= 2 distinct files, compose
+    # their orthogonal file overlays in `os.fork()` CoW (`0` disk writes!) and verify jointly on disk!
+    if not passing_cids and len(partial_by_file) >= 2:
+        multi_edits = {r_rel: tup[3] for r_rel, tup in sorted(partial_by_file.items())}
+        multi_tags = "+".join(f"{r_rel}:{tup[2]}" for r_rel, tup in sorted(partial_by_file.items()))
+
+        def _multi_shard() -> Mapping[str, Any]:
+            devnull = os.open(os.devnull, os.O_WRONLY)
+            os.dup2(devnull, 1)
+            os.dup2(devnull, 2)
+            os.close(devnull)
+            out = cow_runner._execute_suite_in_current_process(
+                repo_root,
+                all_targets,
+                overlays=multi_edits,
+                capture_frames=False,
+            )
+            return {"passed": bool(out.get("ok")), "tests_passed": int(out.get("passed", 0))}
+
+        forked_total += 1
+        m_res = pool.run_parallel_sharded([_multi_shard], winner_predicate=None, timeout_s=per_batch_timeout)
+        m_items = list(m_res.get("results") or ())
+        if m_items and m_items[0].get("passed"):
+            ok_m, _reason_m, meta_m = _verify_python_candidate_edits(
+                repo_root,
+                multi_edits,
+                base_snapshot,
+                test_targets,
+                regression_tests=regression_tests,
+                neg_guard=neg_guard,
+                timeout_s=timeout_s,
+            )
+            if ok_m:
+                first_rel = sorted(multi_edits.keys())[0]
+                return {
+                    "solved": True,
+                    "channel": f"orthogonal_multifile:{multi_tags}",
+                    "modified_files": sorted(multi_edits.keys()),
+                    "patched_source": multi_edits[first_rel],
+                    "candidates_screened_cow": forked_total,
+                    "version_space": {
+                        "passing_candidates_in_batch": 1,
+                        "equivalence_classes": 1,
+                        "diagnosis": "IDENTIFIED_BY_ORTHOGONAL_MULTIFILE_TESTS",
+                    },
+                    "covered_source_files": [r for r in ranked_files if cov_lines.get(r)],
+                    "test_run": meta_m.get("test_run"),
+                }
+            _restore_tree(repo_root, base_snapshot)
 
     # Move IV Fallback: Value-Space Angelic + Bottom-Up Observational Equivalence (`angelic_oe_synthesizer_v1`)
     if not passing_cids and ranked_files and test_targets:
@@ -1198,6 +1356,119 @@ def _run_cow_demand_abduction_fast_lane(
         "covered_source_files": [r for r in ranked_files if cov_lines.get(r)],
         "test_run": meta.get("test_run"),
     }
+
+
+def _synthesize_zero_test_oracle(
+    root: pathlib.Path,
+    *,
+    issue_text: str = "",
+) -> str | None:
+    """Phase 4 Zero-Test Oracle Harvester (`the_guide_is_a_test_suite_v1` + `metamorphic_laws_v1` + `reverse_tomography_algebra_v1`).
+
+    Synthesizes an executable pytest file for a testless repository (`0` `test_*.py` files) from:
+      1. Docstring `>>> expr` / expected-value transcripts (`doctest` + `the_guide_is_a_test_suite_v1`).
+      2. Metamorphic & stateful multi-call laws (`f(x) == f(x)` repeat-call purity + `f(f(x)) == f(x)` idempotence).
+      3. `reverse_tomography_algebra_v1.synthesize_metamorphic_oracle_test` when `issue_text` is provided.
+    """
+    import doctest
+
+    py_files = sorted(
+        p
+        for p in root.rglob("*.py")
+        if not any(part in _SKIP_DIRS for part in p.parts)
+        and not p.name.startswith("test_")
+        and not p.name.startswith("_canonical_spine_")
+    )
+    if not py_files:
+        return None
+
+    assertions: list[str] = []
+    imports_needed: set[str] = set()
+    dt_parser = doctest.DocTestParser()
+
+    for pf in py_files[:12]:
+        rel_mod = pf.relative_to(root).with_suffix("").as_posix().replace("/", ".")
+        if rel_mod.endswith(".__init__"):
+            rel_mod = rel_mod[: -len(".__init__")]
+        if not rel_mod or "." in pf.stem:
+            continue
+        try:
+            src = pf.read_text(encoding="utf-8", errors="replace")
+            tree = ast.parse(src)
+        except Exception:
+            continue
+
+        # 1. Harvest docstring `>>>` examples (`the_guide_is_a_test_suite_v1` discipline)
+        docstrings: list[str] = []
+        mod_doc = ast.get_docstring(tree)
+        if mod_doc:
+            docstrings.append(mod_doc)
+        pub_fns: list[ast.FunctionDef] = []
+        for node in tree.body:
+            if isinstance(node, ast.FunctionDef) and not node.name.startswith("_"):
+                pub_fns.append(node)
+                fdoc = ast.get_docstring(node)
+                if fdoc:
+                    docstrings.append(fdoc)
+
+        for ds in docstrings:
+            if ">>>" not in ds:
+                continue
+            try:
+                examples = dt_parser.get_examples(ds)
+            except Exception:
+                examples = []
+            setup_lines: list[str] = []
+            for ex in examples:
+                s_src = ex.source.strip()
+                s_want = ex.want.strip()
+                if not s_src:
+                    continue
+                if not s_want:
+                    setup_lines.append(s_src)
+                elif "\n" not in s_src and "\n" not in s_want and not s_want.startswith("Traceback"):
+                    imports_needed.add(f"from {rel_mod} import *")
+                    prefix = ("; ".join(setup_lines) + "; ") if setup_lines else ""
+                    assertions.append(f"    {prefix}assert ({s_src}) == ({s_want})")
+
+        # 2. Metamorphic & stateful repeat-call purity probes (`metamorphic_laws_v1` discipline)
+        for fn_node in pub_fns[:8]:
+            req_arity = len(fn_node.args.args) - len(fn_node.args.defaults)
+            fname = fn_node.name
+            if req_arity == 1:
+                imports_needed.add(f"import {rel_mod} as _m_{rel_mod.replace('.', '_')}")
+                m_alias = f"_m_{rel_mod.replace('.', '_')}"
+                # Repeat-call purity via `repr()` snapshot (catches in-place mutable-default leaks!)
+                if fn_node.args.defaults:
+                    assertions.append(
+                        f"    _r1 = repr({m_alias}.{fname}('probe_a')); _r2 = repr({m_alias}.{fname}('probe_a')); assert _r1 == _r2"
+                    )
+                if any(k in fname.lower() for k in ("normalize", "canonical", "clean", "sanitize", "trim")):
+                    assertions.append(
+                        f"    _v = {m_alias}.{fname}('  HeLLo  '); assert {m_alias}.{fname}(_v) == _v"
+                    )
+
+    if assertions:
+        lines = sorted(imports_needed) + ["", "def test_synthesized_zero_test_oracle():"] + assertions + [""]
+        return "\n".join(lines)
+
+    # 3. Issue-text metamorphic oracle fallback (`reverse_tomography_algebra_v1`)
+    if issue_text.strip():
+        try:
+            from canonical.swe_kernel import reverse_tomography_algebra_v1 as rta
+
+            tmp_name = "_canonical_rta_probe_oracle.py"
+            res_o = rta.synthesize_metamorphic_oracle_test(root, issue_text, oracle_filename=tmp_name, timeout_s=8)
+            p_tmp = root / tmp_name
+            if p_tmp.is_file():
+                code_o = p_tmp.read_text(encoding="utf-8")
+                p_tmp.unlink()
+                if res_o.get("synthesized") or "def test_" in code_o:
+                    return code_o
+        except Exception:
+            pass
+
+    return None
 
 
 def solve_repository_task(
@@ -1399,6 +1670,8 @@ def solve_repository_task(
         }
 
     # ------------------------------------------------------------- PYTHON LANE
+    temp_witness_rel: str | None = None
+    zero_test_oracle_synthesized = False
     if not test_file:
         # Discover a default test file if present
         cands = sorted(
@@ -1407,27 +1680,49 @@ def solve_repository_task(
             if not any(part in _SKIP_DIRS for part in p.parts)
         )
         if not cands:
-            return {
-                "schema": SCHEMA,
-                "authority": AUTHORITY,
-                "language": "python",
-                "solved": False,
-                "status": "FAIL_CLOSED",
-                "reason": "NO_PYTHON_TEST_TARGET_FOUND",
-                "stages_run": stages_run,
-                "model_calls": 0,
-                "modified_files": [],
-                "elapsed_s": round(time.perf_counter() - t0, 4),
-            }
-        test_file = cands[0]
+            zt_code = _synthesize_zero_test_oracle(root, issue_text=issue_text)
+            if zt_code:
+                stages_run.append("ZERO_TEST_ORACLE_SYNTHESIS")
+                temp_witness_rel = "_canonical_spine_wall1_witness_test.py"
+                (root / temp_witness_rel).write_text(zt_code, encoding="utf-8")
+                test_file = temp_witness_rel
+                zero_test_oracle_synthesized = True
+            else:
+                return {
+                    "schema": SCHEMA,
+                    "authority": AUTHORITY,
+                    "language": "python",
+                    "solved": False,
+                    "status": "FAIL_CLOSED",
+                    "reason": "NO_PYTHON_TEST_TARGET_FOUND",
+                    "stages_run": stages_run,
+                    "model_calls": 0,
+                    "modified_files": [],
+                    "elapsed_s": round(time.perf_counter() - t0, 4),
+                }
+        else:
+            test_file = cands[0]
 
     # Stage 0: Run baseline oracle
     stages_run.append("BASELINE_ORACLE")
     base_run = mhz.run_pytest_targets(root, [test_file], timeout_s=min(15.0, timeout_s))
     base_output = str(base_run.get("output") or "")
     base_failed = _pytest_failed(base_run)
+    if zero_test_oracle_synthesized and not base_failed:
+        _restore_tree(root, base_snapshot)
+        return {
+            "schema": SCHEMA,
+            "authority": AUTHORITY,
+            "language": "python",
+            "solved": False,
+            "status": "FAIL_CLOSED",
+            "reason": "NO_PYTHON_TEST_TARGET_FOUND",
+            "stages_run": stages_run,
+            "model_calls": 0,
+            "modified_files": [],
+            "elapsed_s": round(time.perf_counter() - t0, 4),
+        }
     active_test_file = test_file
-    temp_witness_rel: str | None = None
 
     # Stage 1: Fail-Closed Green-Suite Gate + Wall-1 Witness Abduction
     if not base_failed:
@@ -1494,7 +1789,7 @@ def solve_repository_task(
         # Snapshot with the verified witness in place for candidate testing
         witness_snapshot = _snapshot_tree(root)
     else:
-        witness_snapshot = base_snapshot
+        witness_snapshot = _snapshot_tree(root) if zero_test_oracle_synthesized else base_snapshot
 
     test_targets = list(dict.fromkeys([active_test_file, test_file, *regression_tests]))
 
