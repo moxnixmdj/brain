@@ -128,7 +128,42 @@ regression anywhere*.
   subset of files that touch the changed modules, compared file-by-file. **No whole-suite claim
   is made.**
 * Single machine, producer-run, `authority: NONE`. It is not independent verification. The
-  referee on `main` is the only independent judge, and it has not run on this branch.
+  referee on `main` is the only independent judge.
+
+### 4c. What the referee actually did
+
+This section was written while the branch was still unmerged and it said the referee had not run.
+It has now run, so that sentence is replaced rather than left standing.
+
+The merge (`68ade705`, PR #7093) went through `gh pr merge --auto`, which is the only merge this
+repository permits: GitHub completes it only when the check the branch ruleset requires is green.
+That required check is `referee/repo-integrity-guard`, and it passed. The ruleset requires exactly
+one check — measured from the ruleset itself, not assumed.
+
+Four things went red on the way there, and none of them was a defect this round introduced. They
+are recorded because each one is a way a green branch can be believed for a wrong reason:
+
+* **`verify-brain-unified-model-v1` failed at `recompilation_is_byte_identical`.** This one *was*
+  mine, and it was the artifact working correctly. The compiled model indexes root `*.md`, so
+  adding this document changed the tree the artifact records, and the artifact was stale.
+  Regenerated with the compiler — never by hand — and the branch went to 33/33, later 38/38 after
+  main admitted two hidden surfaces. **A content-addressed artifact is a function of the tree; the
+  fix for a changed tree is a recompile, not a hand-edit.**
+* **`declaration-floor` failed, and fails on `main` too.** Measured directly: base `c4f529eb` 596,
+  `main` 607, this branch after merging main **607 — identical to main, adding zero**. The
+  +1 that appeared at one point came from an *untracked* 119 MB test-scratch file under
+  `canonical/astra_runtime/tmp/`, which the floor scans because it walks JSON on disk while the
+  ignore rules only govern git. Deleting the scratch returned the count to main's. The floor's
+  steady rise is a real repo-wide condition and is not this round's to claim.
+* **`Drift Immunity Guard` and `Load-bearing primary admission` failed on the merge commit
+  itself** — `ACTION_INTENT_MISSING` and `EXACTLY_ONE_ACTION_INTENT_REQUIRED`. The merge had
+  carried nine runtime state files written by verification runs, and `canonical/runtime/state/` is
+  under the sensitive prefix, so the guards fired on a state file rather than on the work. Both
+  pass once the merge carries only what it changes. **A merge that carries a run's side effects
+  cannot be read for what it changed** — which is why they were stripped.
+
+Both guards and the model verifier were reproduced locally against the exact commits, not inferred
+from a check name. On `main` after the merge: 21/21 modifier tests, 38/38 model verifier.
 * 480 failures pre-exist at `c4f529eb` in these files. They are **not** this round's work to claim.
   They are the backlog.
 * One earlier, in-repo-harness run produced a false regression signal (4a). It is recorded because
