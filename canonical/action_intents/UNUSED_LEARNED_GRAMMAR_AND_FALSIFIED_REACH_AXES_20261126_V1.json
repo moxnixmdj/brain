@@ -39,7 +39,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::the live repair loop's ensemble fallback re-derived its own hand-written atom grammar and never consulted canonical/swe_kernel/concept_library_v1.py, so (a) program shapes outside that grammar returned None on specs whose generating function is a stored, already-admitted concept, and (b) the fallback's shortest-candidate tiebreak preferred a shorter ad-hoc if-then-else that passes the visible points and is wrong off-spec, discarding the learned abstraction it had just been given access to",
-  "canonical_base_commit": "b28dffd863a00fca76e52fc09f16c1f5edc08b44",
+  "canonical_base_commit": "e17bc1ca3429b0bf3b1d2c7204d96df619ea6365",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_law_compliance": {
@@ -85,7 +85,7 @@
   "parent_capability": "canonical/runtime/stochastic_synthesizer_v1.py + canonical/swe_kernel/concept_library_v1.py",
   "prior_work_reused": "canonical/swe_kernel/concept_library_v1.py (CompoundingConceptLibrary: admission by description-length compression + probe determinism + syntactic-mutant kill, Levin/Laplace log-priors, uses/verified_hits/disconfirmations/retired), the Expr algebra in canonical/runtime/oe_sygus_synthesizer_v1.py, the OE separation of terms from predicates combined by ITE, canonical/runtime/memory_policy_v1.py's existing READ_ONLY scope, and canonical/runtime/compile_brain_unified_model_v1.py. Zero new modules: 2 runtime files edited, 1 test added, 1 yardstick extended, 1 artifact recompiled.",
   "recursive_obs": {
-    "canonical_base_commit": "b28dffd863a00fca76e52fc09f16c1f5edc08b44",
+    "canonical_base_commit": "e17bc1ca3429b0bf3b1d2c7204d96df619ea6365",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "A_NEW_SYNTHESIS_MODULE",
@@ -200,7 +200,7 @@
       "selected_route": "INTEGRATE_ALREADY_OWNED_CONCEPT_LIBRARY_INTO_THE_LIVE_REPAIR_FALLBACK",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-26T03:54:50Z",
+        "checked_at_utc": "2026-11-26T03:58:20Z",
         "execution_dependencies": [
           {
             "dependency": "CPYTHON3_STDLIB_ONLY_DETERMINISTIC_ENUMERATION_AND_EVAL",
