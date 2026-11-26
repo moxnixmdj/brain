@@ -2745,6 +2745,10 @@ class UnifiedModel:
     ) -> dict[str, Any]:
         requested = str(mode or "AUTO").strip().upper()
         inputs = dict(inputs or {})
+        if requested == "LIVE_BROWSER_STEP":
+            return self._epistemic_envelope(requested, goal, self.live_browser_step(goal, **inputs))
+        if requested == "REPO_NATIVE_SWE":
+            return self.solve_swe_repo_native(inputs.pop("repo_root", cwd), **inputs)
         if requested == "RECALL":
             return self.recall(goal)
         # Unified Hidden-Arsenal fast rungs (addressable via explicit mode or AUTO structured inputs)
@@ -6072,13 +6076,21 @@ class UnifiedModel:
 
         return uul.lift_protocol_and_verify_effect(**kwargs)
 
+    def live_browser_step(self, goal: str, *, room: Any, **kwargs: Any) -> dict[str, Any]:
+        from canonical.runtime.witnessed_browser_v1 import step
+        return step(room, goal, **kwargs)
+
+    def revision_memory(self, path: str | Path, operation: str, **payload: Any) -> dict[str, Any]:
+        from canonical.swe_kernel.witnessed_revision_store_v1 import RevisionStore
+        return RevisionStore(path).apply(operation, payload)
+
     def semiring_jtms_memory_cycle(
         self,
         *,
         chain_count: int = 24,
         chain_depth: int = 4,
     ) -> dict[str, Any]:
-        """Move 3: Why-Provenance Semiring `(2^(2^V), union, join)` over `Z`-set DBSP (`100%` `MEME` Cascade & Absence)."""
+        """Move 3: Structured chain retraction control, not a score on MEME conversations."""
         from canonical.swe_kernel import unified_unfamiliar_leapfrog_v1 as uul
 
         return uul.run_meme_semiring_benchmark(chain_count=chain_count, chain_depth=chain_depth)

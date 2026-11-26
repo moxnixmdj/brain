@@ -1608,6 +1608,15 @@ class Creature:
             self._unified_model = open_model()
         return self._unified_model
 
+    def solve_swe_repo_native(self, repo_root: str | pathlib.Path, **kwargs: Any) -> dict[str, Any]:
+        return self._ensure_unified_model().solve_swe_repo_native(repo_root, **kwargs)
+
+    def live_browser_step(self, goal: str, **kwargs: Any) -> dict[str, Any]:
+        return self._ensure_unified_model().live_browser_step(goal, **kwargs)
+
+    def revision_memory(self, operation: str, **payload: Any) -> dict[str, Any]:
+        return self._ensure_unified_model().revision_memory(self.root / "revisions.sqlite", operation, **payload)
+
     def mendel_red_queen_evolve(
         self,
         parent_source: str,

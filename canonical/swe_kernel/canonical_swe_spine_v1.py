@@ -2956,9 +2956,8 @@ def solve_swe_repo_native_multifile(
          (`synthesize_causal_structural_patches` + `synthesize_oe_expression`) for repo-native synthesis.
       5. `cow_zygote_speculative_verifier_v1` (`verify_candidate_patch_cow` / `select_impacted_tests`)
          for sub-2 ms `os.fork()` CoW Zygote candidate verification alongside full CoW test confirmation.
-      6. Seamless fallback to Wave 16 `solve_swe_inverted_microscope` (+ optional `residual_proposer`
-         socket, default `None` fail-closed), automatically folding any verified fix back into
-         `updated_repair_vocab` so future bugs of the same class solve at `$0`.
+      6. Return a serializable, removable vocabulary of repair proposals. Each receiver must
+         reproduce a failing case and pass its own unchanged surface before accepting one.
     """
     import ast as _ast
     import os as _os
@@ -2972,7 +2971,9 @@ def solve_swe_repo_native_multifile(
     from canonical.swe_kernel import repo_component_petri_v1 as petri
     from canonical.tools import arm_learned_from_its_own_verified_repairs_v1 as arm_learn
     from canonical.tools import assertion_localisation_v1 as assert_loc
-    from canonical.tools import history_template_repair_v1 as hist_rep
+    from canonical.swe_kernel import prior_owned_insertions_v1 as history
+    from canonical.swe_kernel import repair_input_dependency_gate_v1 as dependencies
+    from canonical.swe_kernel.repo_native_test_surface_v1 import test_surface, merge_vocab, export_vocab
     from canonical.tools import line_localisation_v1 as line_loc
 
     t0 = time.perf_counter()
@@ -2986,35 +2987,40 @@ def solve_swe_repo_native_multifile(
             "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
         }
 
+    if residual_proposer is not None:
+        return {"pass": False, "status": "REFUSED__MODEL_FREE_ROUTE", "model_calls": 0}
+    # Never accept an out-of-workspace source or an edit to a test as a product fix.
+    for target in [*(candidate_files or ()), *(test_targets or ())]:
+        name = str(target).split("::")[0]
+        if pathlib.Path(name).is_absolute() or not (root / name).resolve().is_relative_to(root):
+            return {"pass": False, "status": "REFUSED__PATH_OUTSIDE_WORKSPACE", "model_calls": 0}
     # Build/merge in-run alpha-canonical repair vocabulary from any prior verified demonstrations.
-    vocab: dict[str, Any] = dict(in_run_repair_vocab) if isinstance(in_run_repair_vocab, Mapping) else {}
+    try:
+        vocab = merge_vocab({}, in_run_repair_vocab) if in_run_repair_vocab else {}
+    except (AttributeError, KeyError, TypeError, ValueError):
+        return {"pass": False, "status": "REFUSED__INVALID_VOCABULARY", "model_calls": 0}
     demos_list: list[tuple[str, str, str]] = [
         (str(a), str(b), str(c)) for a, b, c in prior_demonstrations
     ]
     if demos_list:
         folded = arm_learn.fold(demos_list)
-        if not vocab:
-            vocab = folded
-        else:
-            merged_rules = list(vocab.get("rules") or ()) + list(folded.get("rules") or ())
-            vocab = {**vocab, **folded, "rules": merged_rules}
+        vocab = merge_vocab(vocab, folded)
 
-    def _run_suite_in_dir(ws_dir: Path) -> tuple[bool, str]:
-        targets = [str(t) for t in (test_targets or ())]
-        py_files_t = [t for t in targets if t.endswith(".py") and (ws_dir / t).is_file()]
-        cmd: list[str]
-        if py_files_t:
-            cmd = [sys.executable, "-m", "unittest"] + [str(ws_dir / p) for p in py_files_t]
-        elif targets:
-            cmd = [sys.executable, "-m", "unittest"] + targets
-        else:
-            cmd = [sys.executable, "-m", "unittest", "discover", "-s", ".", "-p", "test*.py"]
-        env = {**_os.environ, "PYTHONDONTWRITEBYTECODE": "1", "PYTHONPATH": str(ws_dir)}
-        proc = _sp.run(cmd, cwd=str(ws_dir), capture_output=True, text=True, timeout=min(15.0, timeout_s), env=env)
-        return proc.returncode == 0, (proc.stdout or "") + "\n" + (proc.stderr or "")
+    deadline = time.monotonic() + timeout_s
+    history_info = {"base": None, "candidates": 0, "error": None}
+    oracle = lambda ws: test_surface(ws, test_targets, timeout=deadline - time.monotonic())
+    baseline = oracle(root)
 
     def _verify_in_isolated_cow(rel_edits: Mapping[str, str], *, single_test_src: str | None = None) -> tuple[bool, str, bool]:
         """Screen single-file edit via 1.58 ms `os.fork()` CoW Zygote when self-contained, then confirm on CoW workspace."""
+        if time.monotonic() >= deadline:
+            return False, "BUDGET_EXHAUSTED", False
+        for rel, candidate in rel_edits.items():
+            if rel not in py_source_rels:
+                return False, "NOT_PRODUCT_SOURCE", False
+            dep = dependencies.gate((root / rel).read_text(encoding="utf-8"), candidate)
+            if dep["status"] != dependencies.PASS:
+                return False, dep["reason"], False
         zygote_used = False
         if len(rel_edits) == 1 and single_test_src:
             only_rel, new_src = next(iter(rel_edits.items()))
@@ -3039,15 +3045,17 @@ def solve_swe_repo_native_multifile(
                     pass
         with _tf.TemporaryDirectory(prefix="wave23_cow_") as td:
             ws = pathlib.Path(td) / "repo"
-            _shutil.copytree(root, ws, copy_function=_os.link, ignore=_shutil.ignore_patterns(".git", "__pycache__", "*.pyc"))
+            _shutil.copytree(root, ws, ignore=_shutil.ignore_patterns(".git", "__pycache__", "*.pyc"))
             for rel, content in rel_edits.items():
                 dst = ws / rel
                 dst.parent.mkdir(parents=True, exist_ok=True)
                 if dst.exists() or dst.is_symlink():
                     dst.unlink()
                 dst.write_text(content, encoding="utf-8")
-            ok, out = _run_suite_in_dir(ws)
-            return ok, out, zygote_used
+            checked = oracle(ws)
+            ok = (checked["status"] == "GREEN" and checked["passed"] == baseline["passed"] | baseline["failed"]
+                  and checked["skipped"] == baseline["skipped"])
+            return ok, checked["output"], zygote_used
 
     def _crystallize_and_finish(
         edits: Mapping[str, str],
@@ -3063,8 +3071,8 @@ def solve_swe_repo_native_multifile(
             orig_p = root / rel
             if orig_p.is_file():
                 orig_src = orig_p.read_text(encoding="utf-8", errors="replace")
-                new_demos.append((orig_src, new_src, rel))
-        updated_vocab = arm_learn.fold(new_demos) if new_demos else vocab
+                new_demos.append((f"{rel}@{hashlib.sha256(orig_src.encode()).hexdigest()}:{hashlib.sha256(new_src.encode()).hexdigest()}", orig_src, new_src))
+        updated_vocab = merge_vocab(vocab, arm_learn.fold(new_demos))
         if keep_patch_applied:
             for rel, new_src in sorted(edits.items()):
                 dst = root / rel
@@ -3078,9 +3086,12 @@ def solve_swe_repo_native_multifile(
             "patched_files": sorted(edits.keys()),
             "patches": dict(edits),
             "localization": dict(localization),
+            "history": dict(history_info),
+            "tested_surface_count": len(baseline["passed"]) + len(baseline["failed"]),
+            "knowledge_status": "TEACHER_HYPOTHESIS_RECHECK_ON_RECEIVER",
             "stages_run": stages,
             "zygote_screened_candidates": zygote_screened,
-            "updated_repair_vocab": updated_vocab,
+            "updated_repair_vocab": export_vocab(updated_vocab),
             "crystallized_demo_count": len(new_demos),
             "host_mutated": bool(keep_patch_applied),
             "model_calls": 0,
@@ -3089,15 +3100,19 @@ def solve_swe_repo_native_multifile(
         }
 
     # Baseline run
-    base_ok, base_out = _run_suite_in_dir(root)
-    if base_ok:
+    base_out = baseline["output"]
+    if baseline["status"] not in {"GREEN", "RED"}:
+        return {"schema": SCHEMA, "pass": False, "status": "UNMEASURED__" + baseline["status"],
+                "model_calls": 0, "detail": base_out[-500:]}
+    if baseline["status"] == "GREEN":
         return {
             "schema": SCHEMA,
             "pass": True,
             "status": "PASS__BASELINE_ALREADY_GREEN",
             "tier": "ALREADY_GREEN",
+            "tested_surface_count": len(baseline["passed"]), "issue_satisfied": None,
             "patched_files": [],
-            "updated_repair_vocab": vocab,
+            "updated_repair_vocab": export_vocab(vocab),
             "model_calls": 0,
             "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
         }
@@ -3110,7 +3125,9 @@ def solve_swe_repo_native_multifile(
         for p in sorted(root.rglob("*.py"))
         if ".git" not in p.parts
         and "__pycache__" not in p.parts
-        and not p.name.startswith("test_")
+        and not p.name.startswith("test_") and not p.name.endswith("_test.py")
+        and p.name != "conftest.py" and not p.is_symlink()
+        and p.relative_to(root).as_posix() not in {str(t).split("::")[0] for t in test_targets or ()}
         and "/tests/" not in f"/{p.relative_to(root).as_posix()}"
     ]
     test_rels = [
@@ -3144,7 +3161,7 @@ def solve_swe_repo_native_multifile(
     ranked_files: list[str] = []
     if candidate_files:
         for cf in candidate_files:
-            if (root / cf).is_file() and cf not in ranked_files:
+            if cf in py_source_rels and cf not in ranked_files:
                 ranked_files.append(str(cf))
     for fr in crash_frames:
         f_file = str(fr.get("file") or "")
@@ -3229,20 +3246,13 @@ def solve_swe_repo_native_multifile(
     if mine_git_history and (root / ".git").exists():
         stages_run.append("STAGE_2_GIT_HISTORY_TEMPLATE_REPAIR")
         try:
-            h_index = hist_rep.mine_history(root, "HEAD", limit=int(history_limit))
-            history_templates_mined = sum(len(v) for v in h_index.values())
+            history_info["base"] = history._git(root, "rev-parse", "HEAD").strip()
+            h_index = history.mine(root, history_info["base"], ranked_files[:4], int(history_limit))
+            history_templates_mined = sum(map(len, h_index.values()))
             for rel in ranked_files[:4]:
                 orig_src = (root / rel).read_text(encoding="utf-8", errors="replace")
-                covered = ranked_lines_by_file.get(rel) or []
-                cands = hist_rep.site_candidates(orig_src, covered, h_index, budget=16)
-                for cand in cands:
-                    ln = int(cand.get("line") or cand.get("line_no") or 0)
-                    blk = str(cand.get("block") or cand.get("code") or "")
-                    if ln <= 0 or not blk:
-                        continue
-                    patched = hist_rep.insert_after(orig_src, ln, blk)
-                    if patched == orig_src:
-                        continue
+                for patched, origin in history.candidates(orig_src, rel, ranked_lines_by_file[rel], h_index):
+                    history_info["candidates"] += 1
                     ok, _out, zused = _verify_in_isolated_cow({rel: patched}, single_test_src=single_test_src)
                     zygote_screened += int(zused)
                     if ok:
@@ -3252,10 +3262,10 @@ def solve_swe_repo_native_multifile(
                             localization=localization_report,
                             stages=stages_run,
                             zygote_screened=zygote_screened,
-                            extra={"history_templates_mined": history_templates_mined},
+                            extra={"history_templates_mined": history_templates_mined, "template_origin": origin},
                         )
-        except Exception:
-            pass
+        except (OSError, ValueError, SyntaxError, _sp.TimeoutExpired) as exc:
+            history_info["error"] = str(exc)[:200]
 
     # Stage 3: Repo-native Petri neighborhood mining + Angelic OE synthesis (`repo_component_petri_v1` + `angelic_oe_synthesizer_v1`)
     stages_run.append("STAGE_3_REPO_PETRI_AND_ANGELIC_OE")
@@ -3337,56 +3347,22 @@ def solve_swe_repo_native_multifile(
                                 },
                             )
 
-    # Stage 4: Fall through to Wave 16 Inverted SWE Microscope (+ optional Evaporating-LLM residual_proposer)
-    stages_run.append("STAGE_4_INVERTED_MICROSCOPE_AND_EVAPORATING_SOCKET")
-    micro = solve_swe_inverted_microscope(
-        root,
-        test_files=test_targets,
-        apply_to_source=keep_patch_applied,
-        residual_proposer=residual_proposer,
-        timeout_s=timeout_s,
-    )
-    if micro.get("pass"):
-        # Crystallize any verified patch back into the alpha-canonical repair vocab so the proposer evaporates!
-        edits_map: dict[str, str] = {}
-        if isinstance(micro.get("patches"), Mapping):
-            edits_map = {str(k): str(v) for k, v in micro["patches"].items()}
-        elif micro.get("patched_files"):
-            for pf in micro["patched_files"]:
-                pp = root / str(pf)
-                if pp.is_file():
-                    edits_map[str(pf)] = pp.read_text(encoding="utf-8", errors="replace")
-        new_demos = list(demos_list)
-        if edits_map and keep_patch_applied:
-            # Already on disk; vocab fold still runs when orig != new via caller demos if provided
-            pass
-        updated_vocab = arm_learn.fold(new_demos) if new_demos else vocab
-        return {
-            **micro,
-            "stages_run": stages_run,
-            "localization": localization_report,
-            "history_templates_mined": history_templates_mined,
-            "mined_repo_components": mined_components_total,
-            "oe_synthesized_exprs": oe_synthesized_exprs[:5],
-            "zygote_screened_candidates": zygote_screened,
-            "updated_repair_vocab": updated_vocab,
-            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
-        }
-
+    # The older microscope uses a different acceptance oracle and can return a
+    # green baseline without a patch. Do not bypass this route's witness gate.
     return {
         "schema": SCHEMA,
         "pass": False,
-        "status": str(micro.get("status") or "FAIL_CLOSED__REPO_NATIVE_EXHAUSTED"),
+        "status": "FAIL_CLOSED__REPO_NATIVE_EXHAUSTED",
         "tier": "REPO_NATIVE_EXHAUSTED_FAIL_CLOSED",
         "stages_run": stages_run,
         "localization": localization_report,
         "history_templates_mined": history_templates_mined,
+        "history": history_info,
         "mined_repo_components": mined_components_total,
         "oe_synthesized_exprs": oe_synthesized_exprs[:5],
         "zygote_screened_candidates": zygote_screened,
-        "angelic_hole_packet": micro.get("angelic_hole_packet"),
-        "updated_repair_vocab": vocab,
-        "model_calls": int(micro.get("model_calls") or 0),
+        "updated_repair_vocab": export_vocab(vocab),
+        "model_calls": 0,
         "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
     }
 
