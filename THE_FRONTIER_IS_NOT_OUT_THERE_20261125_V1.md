@@ -126,6 +126,31 @@ surface. A module that is indexed but unreachable from `solve()` is paying nothi
 adding a single module. The fix must be a route entry, not a new engine — if it needs a new file, the
 answer is that the existing file's contract was wrong, and that is the finding.
 
+**EXECUTED 2026-11-25.** And the door was smaller than the acceptance criteria, because the ceiling I
+wrote was wrong. `reachability()` built `adapter_of` from the bound registry alone, so **116 routing
+targets — every engine — resolved to a string that can never be a module stem** and scored MISS even
+when the engine's `carrier_path` is a catalogued candidate. 26 of the `instant_learning` candidates
+were carried by engines the runtime was already returning. One resolver, no module added, no route
+changed:
+
+```
+instant_learning   0.000 -> 1.000
+world_model        0.000 -> 0.333
+computer_use       0.333 -> 0.667
+coding_agents      1.000 -> 1.000   (unchanged)
+```
+
+`world_model` stopping at 0.333 is the control: a resolver that lifts every number is a thumb on the
+scale. And I was wrong about the invariant — I asserted `route <= source`, "you cannot route to what
+you cannot find", and the measurement refused it (`continual_learning` routes 0.333 while searching
+0.000). Route scores tokens over capability ids; `find_source` ranks lexically over module text. They
+are different acts, so the honest invariant is that they must not be *redundant*.
+
+**The lesson is the one this document is about, turned on itself:** my own headline number was a
+measurement artifact. `0.000` did not mean "unreachable". It meant "the instrument had no adapter for
+this kind of answer." Before deleting 46% of a corpus, check that the instrument can see what it is
+looking at.
+
 ### Door 5 — Speculation, where the verification is already free.
 
 This is the round's genuinely new idea, and it comes from a collision between two 2026 papers and one
