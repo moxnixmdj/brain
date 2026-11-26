@@ -6702,7 +6702,7 @@ class UnifiedModel:
                 verbatim_text=str(p["verbatim_text"]),
                 payload=p.get("payload"),
                 valid_from=p.get("valid_from"),
-                origin_token=str(p.get("origin_token", "TRUSTED_VERIFIER")),
+                origin_token=str(p.get("origin_token", "UNTRUSTED_EXTERNAL")),
                 min_surprise=float(p.get("min_surprise", 0.25)),
                 entities=p.get("entities") or (),
                 source_code=str(p.get("source_code", "")),

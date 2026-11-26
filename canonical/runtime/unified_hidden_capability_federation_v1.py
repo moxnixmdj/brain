@@ -4728,7 +4728,7 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
                 verbatim_text=str(inputs["verbatim_text"]),
                 payload=inputs.get("payload"),
                 valid_from=inputs.get("valid_from"),
-                origin_token=str(inputs.get("origin_token", "TRUSTED_VERIFIER")),
+                origin_token=str(inputs.get("origin_token", "UNTRUSTED_EXTERNAL")),
                 min_surprise=float(inputs.get("min_surprise", 0.25)),
                 entities=inputs.get("entities") or (),
                 source_code=str(inputs.get("source_code", "")),

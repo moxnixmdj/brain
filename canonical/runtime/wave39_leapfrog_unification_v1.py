@@ -940,12 +940,19 @@ class CLMRRFMemoryEngine:
         verbatim_text: str,
         payload: Mapping[str, Any] | None = None,
         valid_from: float | None = None,
-        origin_token: str = "RUNTIME_VERIFIED",
+        origin_token: str = "UNTRUSTED_EXTERNAL",
         min_surprise: float = 0.25,
         entities: Sequence[str] = (),
         source_code: str = "",
     ) -> dict[str, Any]:
         """Nemori surprise-gated verbatim-first write sealed with TMA-NM HMAC-SHA256 origin binding."""
+        # Distinguish a user utterance from a verifier. The backing bus uses
+        # different class names; never elevate an unknown spelling to verifier.
+        origin_cls = {"USER_DIRECT": "TRUSTED_USER", "RUNTIME_OBSERVATION": "DERIVED_INTERNAL",
+                      "UNTRUSTED_RETRIEVAL": "UNTRUSTED_EXTERNAL"}.get(origin_token, origin_token)
+        if origin_cls not in ("TRUSTED_VERIFIER", "TRUSTED_USER", "DERIVED_INTERNAL", "UNTRUSTED_EXTERNAL"):
+            return {"schema": SCHEMA, "engine": "LEAPFROG_W39_CLM_RRF_MEMORY_BUS", "pass": False,
+                    "admitted": False, "status": "UNKNOWN_ORIGIN_CLASS", "model_calls": MODEL_CALLS}
         toks = set(_tokenize_lower(verbatim_text))
         ast_toks = set(_extract_ast_tokens(source_code)) if source_code else set(_extract_ast_tokens(verbatim_text))
         ent_set = {str(e).lower() for e in entities if str(e).strip()}
@@ -984,12 +991,7 @@ class CLMRRFMemoryEngine:
         full_payload["_verbatim_sha256"] = _sha256_text(verbatim_text)
         full_payload["_verbatim_len"] = len(verbatim_text)
 
-        # Write through TMA-NM cryptographic origin-binding on VerificationFirstMemoryBus!
-        origin_cls = (
-            origin_token
-            if origin_token in ("TRUSTED_VERIFIER", "RUNTIME_OBSERVATION", "USER_DIRECT", "UNTRUSTED_RETRIEVAL")
-            else "TRUSTED_VERIFIER"
-        )
+        # Hash binds the declared origin; it is not an independent attestation.
         tma_res = self.memory_bus.write_origin_bound_record(
             record_id=record_id,
             key=key,
