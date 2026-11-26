@@ -4,8 +4,9 @@
 **Authority:** `NONE__PRODUCER_RUN_LOCAL_MEASUREMENT` · **Model calls:** 0 · **Network calls:** 0
 
 The plan (`FRONTIER_LEAPFROG_PLAN_20261125_V1.md`, PR #7095) proposed six plays and gave each
-a first measurable step and a kill criterion. This file is the first pass at turning those
-plays into numbers. Two were runnable offline; one was not, and says so.
+a first measurable step and a kill criterion. This file turns those plays into numbers.
+Three were runnable offline — four, five, six — and play two was not, and says so. Two of the
+three fail their own kill criterion, which is the point of writing the criterion down.
 
 Every number below was produced by a script in this tree, in this repository, on this
 machine. Where a figure is a retained artefact rather than a fresh run, it is labelled.
@@ -118,6 +119,67 @@ predictive; unrecognised reasons are counted `UNCLASSIFIED` rather than guessed.
 
 ---
 
+## Play 6 — mutation as admission, and the determinism it needs first
+
+**Claim under test.** A capability should be admitted only if the tests that guard it can
+tell it from a mutant of itself. If that gate works, "receipt-backed" stops being a claim
+about a file existing and becomes a claim about a suite that discriminates.
+
+**Apparatus.** `canonical/tools/mutation_admission_probe_v1.py`. Ten `swe_kernel` modules
+with paired suites. Each mutant is derived from the module's **AST** and rewrites exactly
+one operator at its own source span (`==`↔`!=`, `<`↔`<=`, `and`↔`or`, `not` dropped, an
+integer bumped), never a substring inside a string literal, never a line inside a
+`__main__` guard. Only the paired test file is run, and the module is restored
+byte-for-byte with a digest check afterwards.
+
+A mutant counts as **discriminating** only if the suite went red *and* the module still
+imported *and* at least one test actually ran. An `ImportError` or an empty run is a kill
+that proves nothing, and is counted as such.
+
+| module | mutants | killed | discriminating | score |
+|---|---:|---:|---:|---:|
+| `skill_sequence_verify_v1` | 6 | 6 | 6 | 1.000 |
+| `rule_expiry_v1` | 6 | 5 | 5 | 0.833 |
+| `boundary_disjunction_normalization_v1` | 6 | 5 | 3 | 0.500 |
+| `dual_program_splicing_v1` | 6 | 3 | 3 | 0.500 |
+| `metamorphic_oracle_v1` | 6 | 3 | 3 | 0.500 |
+| `skill_precondition_presence_v1` | 6 | 3 | 3 | 0.500 |
+| `violation_attribution_v1` | 6 | 2 | 2 | 0.333 |
+| `assertion_operand_tomography_v1` | 6 | 0 | 0 | 0.000 |
+| `value_producer_localization_v1` | 6 | 3 | 0 | 0.000 |
+| **aggregate** | **54** | 30 | **25** | **0.463** |
+
+`workflow_goal_generalization_v1` is **excluded**: its suite returned 1 on both baseline
+runs, so a mutant's red says nothing about the mutant.
+
+**Two findings, both about the instrumental precondition rather than the score.**
+
+1. **The suites are not deterministic.** The mutant set is deterministic (tested), and the
+   module is restored byte-exactly (tested), yet four consecutive runs of the same probe
+   produced **0.463, 0.483, 0.517, 0.537** — and `workflow_goal_generalization_v1`'s baseline
+   went green on one run and red on the next. A gate built on that oracle would admit and
+   refuse at random. So a per-module baseline determinism check is now part of the probe,
+   and a suite that fails it is excluded rather than scored.
+2. **Half of our own suites cannot tell an operator inversion from the original.** 25 of 54
+   mutants survived a suite that was green before and after; `assertion_operand_tomography_v1`
+   killed none of six while its suite ran three tests. That is not a benchmark gap, it is a
+   local one: the tests exercise the function but not the decision inside it.
+
+**Verdict.** The gate threshold (≥ 0.8) **fails**. The play's kill criterion ("under 0.5, the
+gate cannot be sold yet") sits *inside* the measurement's own run-to-run spread (0.463–0.537),
+so Play 6 is recorded as **not established and not killable** until the oracle is
+deterministic. The repair is concrete and cheap: re-run each suite three times before probing
+it, and add a discriminating test wherever a mutant survives. Both are CI-shaped, zero model
+calls.
+
+**Not claimed.** Six mutants per module is a sample, not a mutation score in the
+industrial sense; the operators are single and syntactic; no claim is made about the
+*correctness* of a module whose suite happens to discriminate.
+
+**Artefact:** `canonical/Immediate_Results/mutation_admission_probe_20261125_V1.json`.
+
+---
+
 ## Play 2 — blocked, and why
 
 The play needs a corpus of past states of *this* knowledge base (the 45-commit population the
@@ -136,6 +198,7 @@ recorded as blocked rather than approximated.
 - Nothing here is a comparison against a frontier system; the frontier numbers in the plan
   remain as labelled there.
 - `flat_claim_holds` is a statement about a synthetic store, not about solver quality.
+- The mutation score is a sample of six mutants per module over five syntactic operators.
 - The refusal census is a description of what this repository writes down, not of what it can do.
 
 ## Reproduction
@@ -143,5 +206,6 @@ recorded as blocked rather than approximated.
 ```bash
 python3 canonical/tools/measure_law_store_flat_lookup_v1.py
 python3 canonical/tools/refusal_ledger_v1.py
-python3 -m pytest -q canonical/tests/test_leapfrog_play4_play5_instruments_v1.py
+python3 canonical/tools/mutation_admission_probe_v1.py
+python3 -m pytest -q canonical/tests/test_leapfrog_play_instruments_v1.py
 ```
