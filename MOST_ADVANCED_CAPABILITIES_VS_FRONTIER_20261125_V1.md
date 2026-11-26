@@ -320,3 +320,44 @@ What this does to the claims in this document:
   that change would go to CI untested and could turn all 51 rows into a new error class. The field that would
   carry it (`external_knowledge_isolated`) is already emitted, so the fail-closed step is a behavior change
   on top of existing evidence, not a missing piece of evidence.
+
+### 5h. "One CI run away" was wrong, and here is the number that says so
+
+The honest-100 % statement in this document ended with: the nine are registered, and admission is one CI run
+away. It is not. `true-capability-receipt.yml` — the only place a receipt can become `MEASURED_PUBLIC_RUNNER` —
+could not finish, for a reason that had nothing to do with the capabilities:
+
+    The job has exceeded the maximum execution time of 15m0s        (run 45708611780, head 4fc832f2)
+
+Measured on this host, 2026-11-26, with the harness itself (`execution_guard/true_capability_harness_v1.py run
+--spec … --instances 2000`, the workflow's own command):
+
+| spec | wall time at 2,000 instances |
+|---|---|
+| `SACCR_CREDIT_ADDON_V1` | 1 s |
+| `PARETO_FRONTIER_UPDATE_V1` | 7 s |
+| `DOCX_EXACT_TEXT_EDIT_V1` | 11 s |
+| all 11 specs, end to end | 734 s, **10 of 11 produced a receipt** |
+| `FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1` | **> 1,000 s, no receipt, no oracle output** |
+
+Three things follow, and they pull in different directions:
+
+1. **The budget was never adequate** — 11 specs at 734 s plus a full clone of a 92 MB object store cannot fit in
+   15 minutes. Fixed: the timeout is now sized from the table above, the checkout is shallow, and each spec
+   prints its own elapsed time so the next adjustment starts from a log line.
+2. **One spec is itself a defect, and it stays visible.** The job still exits 1 if it fails, and it is not
+   skipped. `FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1` declares a minimum of 500 instances but costs more than
+   16 minutes at 2,000, which is an order of magnitude more than any of the nine enrolled capabilities — that is
+   a fact about that spec's cost structure, and deleting it from the loop would replace a measurement problem
+   with an accounting trick.
+3. **Admission needs a producer, not just a green run.** Even a completed run uploads receipts as *artifacts*
+   (`actions/upload-artifact`, `if: always()`); nothing in the tree commits them back, and the lane's
+   `run_reference_is_attested` accepts only `token.actions.githubusercontent.com`-signed claims. So the path from
+   447 → 456 admitted is: run completes → receipt minted per capability → evidence file committed under
+   `canonical/astra_runtime/evidence/CAPABILITY__**` → `capability-receipt-verification.yml` attests. The first
+   step is unblocked now; the second still needs driving per capability, and a bulk `--verify` would walk all
+   816 discoverable candidates.
+
+Which changes how to read the nine rows in §1: they are measured, reproducible and byte-matched to their
+certifications, and **not admitted** — and the gap is now a cost problem in one foreign spec plus a missing
+producer step, not an unexplained silence.
