@@ -1251,6 +1251,34 @@ class Creature:
         self._save()
         return res
 
+    def fast_cascade_solve(self, task_spec: Mapping[str, Any]) -> dict[str, Any]:
+        """Wave 23: Execute the 4-rung deterministic fast-cascade orchestrator through Creature's shared router."""
+        return self.boundary_router.route_fast_cascade(**dict(task_spec))
+
+    def bitemporal_recall(
+        self,
+        query: str,
+        *,
+        valid_at_ts: float | None = None,
+        top_k: int = 10,
+    ) -> dict[str, Any]:
+        """Wave 24: Andersen-Chung-Lang `ForwardPush` bi-temporal associative recall on Creature's memory bus."""
+        return self.boundary_router.route_forward_push_recall(query, valid_at_ts=valid_at_ts, top_k=top_k)
+
+    def enforce_skill_rent(
+        self,
+        *,
+        max_active_skills: int = 64,
+        paired_probes: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 24: Enforce Two-Door Rubin `(WITH - WITHOUT)` counterfactual rent & finite skill cap `C`."""
+        res = self.boundary_router.route_two_door_rent_curation(
+            max_active_skills=max_active_skills,
+            paired_probes=paired_probes,
+        )
+        self._save()
+        return res
+
     def sleep_evolve_organs_gea(
         self,
         *,

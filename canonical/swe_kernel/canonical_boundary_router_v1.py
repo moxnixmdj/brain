@@ -1856,6 +1856,76 @@ class BoundaryRouter:
         self._record_cluster(cluster, tier="TIER_0_CSP_PERTURBATION", passed=ok)
         return res
 
+    def route_c_level_traced_adapter(
+        self,
+        module_rel_path: str,
+        *,
+        repo_root: str | Path | None = None,
+    ) -> dict[str, Any]:
+        """Wave 22 route: PEP 669 `sys.monitoring` / C-level `sys.setprofile` execution-traced adapter
+        + 2-run scratch determinism + content-SHA256 non-destructiveness + provenance capsule (`64.04%` survival)."""
+        from canonical.runtime import execution_traced_callable_compiler_v1 as etcc
+
+        cluster = "c_level_traced_adapter"
+        rr = Path(repo_root).resolve() if repo_root else _REPO_ROOT
+        res = etcc.derive_verified_module_adapter(module_rel_path, root=rr)
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_0_C_TRACED_ADAPTER" if ok else "UNSOLVED", passed=ok)
+        return res
+
+    def route_fast_cascade(self, **task_spec: Any) -> dict[str, Any]:
+        """Wave 23 route: 4-Rung Zero-LLM Fast Cascade (`AstDiscrTree` -> State-Alias Guard -> CoW Zygote -> Petri Cut-Vertex)."""
+        from canonical.runtime import fast_cascade_orchestrator_v1 as fco
+
+        cluster = "fast_cascade"
+        quarantined = set(self.memory_bus._anti_skills.keys()) if self._memory_bus is not None else set()
+        res = fco.execute_fast_cascade(task_spec, quarantined_skills=quarantined)
+        ok = bool(res.get("pass"))
+        rung = res.get("rung_selected")
+        tier = f"TIER_{rung}_FAST_CASCADE" if rung is not None else "ABSTAIN"
+        self._record_cluster(cluster, tier=tier, passed=ok)
+        return res
+
+    def route_forward_push_recall(
+        self,
+        query: str,
+        *,
+        valid_at_ts: float | None = None,
+        alpha: float = 0.20,
+        epsilon: float = 1e-3,
+        top_k: int = 10,
+    ) -> dict[str, Any]:
+        """Wave 24 route: Andersen-Chung-Lang `ForwardPush` Local PPR Bi-Temporal Associative Recall."""
+        cluster = "forward_push_recall"
+        res = self.memory_bus.forward_push_bitemporal_recall(
+            query,
+            valid_at_ts=valid_at_ts,
+            alpha=alpha,
+            epsilon=epsilon,
+            top_k=top_k,
+        )
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_0_FORWARD_PUSH_PPR", passed=ok)
+        return res
+
+    def route_two_door_rent_curation(
+        self,
+        *,
+        max_active_skills: int = 64,
+        paired_probes: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
+        latency_penalty_per_ms: float = 0.002,
+    ) -> dict[str, Any]:
+        """Wave 24 route: Two-Door Rubin `(WITH - WITHOUT)` Skill Rent & Finite Cap Curator."""
+        cluster = "two_door_rent_curation"
+        res = self.memory_bus.enforce_two_door_rent_and_cap(
+            max_active_skills=max_active_skills,
+            paired_probes=paired_probes,
+            latency_penalty_per_ms=latency_penalty_per_ms,
+        )
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_0_TWO_DOOR_RENT", passed=ok)
+        return res
+
     def status_summary(self) -> dict[str, Any]:
         return {
             "schema": SCHEMA,
