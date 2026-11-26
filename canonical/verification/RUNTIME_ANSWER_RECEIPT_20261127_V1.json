@@ -1,0 +1,87 @@
+{
+ "artifact": {
+  "bytes": 13487224,
+  "capabilities": 462,
+  "digest": {
+   "algorithm": "sha256",
+   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
+   "value": "cddfd5097b88ee93a2d66176690d2805dd37370f17d44aeb19bffe2635d974b1"
+  },
+  "path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+ },
+ "budgets": {
+  "load_p95_ms": 2000.0,
+  "query_p95_ms": 5.0,
+  "total_wall_clock_s": 60.0
+ },
+ "checks": {
+  "load_p95_ms": 269.4325,
+  "query_p95_ms": 1.4786,
+  "total_wall_clock_s": 0.979
+ },
+ "cost_of_asking": {
+  "agent_loop_tokens_per_question_for_comparison": 28142,
+  "load_ms": 269.432,
+  "model_calls": 0,
+  "network_calls": 0,
+  "prompt_tokens_per_question": 0,
+  "total_wall_clock_s": 0.979,
+  "wrap_ms": 172.517
+ },
+ "measured_at_utc": "2026-11-26T03:15:22Z",
+ "promotion": {
+  "callable_now": 31,
+  "candidates": 849,
+  "lookup_ms_per_call": 5.5e-05
+ },
+ "queries": [
+  "archive tar gz create from manifest",
+  "archive verify tar gz gnu",
+  "auto apt zint",
+  "auto npm dfinity-cbor",
+  "auto npm msgpack-msgpack",
+  "auto npm shelacek-ubjson",
+  "auto pypi bson-modern",
+  "auto pypi msgpack",
+  "brain module function invoke",
+  "canonical runtime abstain gated skill induction v1 hidden v1",
+  "canonical runtime adversarial mutation admission gate v1 hidden v1",
+  "canonical runtime binding pin is current v1 hidden v1"
+ ],
+ "questions": {
+  "composite_can_you_do_this": {
+   "answered": 480,
+   "max_ms": 1.311,
+   "n": 480,
+   "p50_ms": 0.015,
+   "p95_ms": 0.9918,
+   "queries": 12
+  },
+  "find_any_source": {
+   "empty_answers": 0,
+   "max_ms": 2.5352,
+   "mean_ms": 0.3959,
+   "n": 480,
+   "p50_ms": 0.0552,
+   "p95_ms": 1.4786
+  },
+  "find_source": {
+   "empty_answers": 0,
+   "max_ms": 1.7521,
+   "mean_ms": 0.2752,
+   "n": 480,
+   "p50_ms": 0.0201,
+   "p95_ms": 1.0128
+  },
+  "route": {
+   "empty_answers": 0,
+   "max_ms": 12.2328,
+   "mean_ms": 0.1794,
+   "n": 480,
+   "p50_ms": 0.1659,
+   "p95_ms": 0.2193
+  }
+ },
+ "schema": "PROJECT_BRAIN_RUNTIME_ANSWER_RECEIPT_V1",
+ "verdict": "FAST"
+}
