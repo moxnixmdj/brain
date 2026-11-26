@@ -573,11 +573,22 @@ both cheaper to write down than to re-learn:
    runs rebind -> recompile -> all four gates in the one order that works, and
    `intent_added_by_this_branch` explains why rebinding an already-merged intent
    fails both referees at once (`MULTIPLE_ACTION_INTENTS_IN_ONE_PR`).
-2. **The base is `origin/main`'s tip, not the merge base.** The drift guard
-   compares `recursive_obs.canonical_base_commit` against
-   `github.event.pull_request.base.sha`. On a repo moving 23,992 commits per
-   merge window, a local rebind to `git merge-base` passes at home and fails in
-   CI every single time.
+2. **Bind the base to the sha the referee is *given*, and check what that
+   actually is.** `enforce_goal_hierarchy.py` compares
+   `recursive_obs.canonical_base_commit` to `--base`, and
+   `drift-immunity-guard.yml` passes `github.event.pull_request.base.sha`
+   verbatim. `rebind_intent_and_verify_gates_v1.py` rebinds to
+   `git rev-parse origin/main` on the documented theory that base.sha is main's
+   current tip. That theory is **falsified on this PR**: the API reported
+   `base.sha = b28dffd8` (main's tip when the PR was opened, which is also
+   `merge-base(origin/main, HEAD)` here) while main had already moved twice.
+   Binding the tip therefore produced `RECURSIVE_OBS_STALE_BASE_COMMIT` in CI
+   and `DRIFT_GUARD_PASS` at home — the inversion of the failure the tool was
+   written to prevent. What is stable is the equality `base.sha == merge-base`
+   for an un-updated branch, and both move together when the branch *is*
+   updated, so bind `git merge-base origin/main HEAD` and re-stamp
+   `selected_route_preflight.checked_at_utc` inside its 2-hour window in the
+   same push.
 
 Honest accounting of the four reds after the fixes: `admission`, `integrity` and
 `unified_model` (38/38) pass locally, and `guard` passes once the receipt is
@@ -591,3 +602,9 @@ not fix them and does not claim to.
 
 No capability claim in this section: it is plumbing that made the shipped §7-§14
 work mergeable, and the loop's numbers are unchanged by it.
+
+Before pushing, run both gates with the base CI will use, not with a
+convenience value: `enforce_goal_hierarchy.py --base $(gh api
+repos/<repo>/pulls/<n> --jq .base.sha) --head HEAD` and the same base for
+`enforce_load_bearing_primary_pr.py`. A green local run against the wrong base
+proves nothing — that is exactly how a red `guard` job reached CI.

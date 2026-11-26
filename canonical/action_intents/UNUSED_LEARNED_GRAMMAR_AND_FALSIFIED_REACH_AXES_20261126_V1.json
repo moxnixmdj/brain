@@ -200,7 +200,7 @@
       "selected_route": "INTEGRATE_ALREADY_OWNED_CONCEPT_LIBRARY_INTO_THE_LIVE_REPAIR_FALLBACK",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-26T03:44:30Z",
+        "checked_at_utc": "2026-11-26T03:46:55Z",
         "execution_dependencies": [
           {
             "dependency": "CPYTHON3_STDLIB_ONLY_DETERMINISTIC_ENUMERATION_AND_EVAL",
