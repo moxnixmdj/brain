@@ -21,15 +21,15 @@
    "contract": 0
   },
   "canonical/runtime": {
-   "cli": 75,
-   "contract": 45
+   "cli": 76,
+   "contract": 37
   },
   "canonical/swe_kernel": {
    "cli": 94,
    "contract": 0
   },
   "canonical/tools": {
-   "cli": 322,
+   "cli": 331,
    "contract": 0
   },
   "execution_guard": {
@@ -58,19 +58,19 @@
   }
  },
  "counts": {
-  "cli": 1187,
-  "contract": 308,
-  "declared": 850,
+  "cli": 1197,
+  "contract": 313,
+  "declared": 863,
   "declared_by_capability_id": 19,
-  "files": 3464,
-  "hidden_executable": 626,
-  "library": 1918,
+  "files": 3485,
+  "hidden_executable": 628,
+  "library": 1924,
   "self_described": 6,
   "tests": 45,
   "unparseable": 6
  },
- "declared_ids_seen": 2466,
- "digest": "baf55997157d145f8054af26166a11e531b442d5eda20a320d8ec3a9a39dc02e",
+ "declared_ids_seen": 2479,
+ "digest": "a772c960e7866a4a1c0ec4c1483663564567e22328d34e4791b860d53fec4903",
  "hidden": [
   {
    "bytes": 31118,
@@ -422,7 +422,7 @@
    ]
   },
   {
-   "bytes": 128259,
+   "bytes": 148071,
    "declared_capability_id": null,
    "declared_inputs": [],
    "declared_result_fields": [],
@@ -448,7 +448,7 @@
    ],
    "kind": "cli",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "c70df1f54a0a9d83f85d347f86da86bb920a10441484322eabdb25a4f84386e9",
+   "sha256": "96138a1a2e45b7ffc06e3f2c6d42d6ca37bf0770591f3670964c9dd00b855097",
    "signals": [
     "evidence",
     "json_stdout",
@@ -514,7 +514,7 @@
    ]
   },
   {
-   "bytes": 37287,
+   "bytes": 40067,
    "declared_capability_id": null,
    "declared_inputs": [],
    "declared_result_fields": [],
@@ -541,7 +541,7 @@
    ],
    "kind": "cli",
    "path": "canonical/runtime/capability_receipt_lane_v1.py",
-   "sha256": "94bf102a17227e4911d538315dd567c2d58c24ab2b2be6da696a223f9a37a7a0",
+   "sha256": "010f48260037ff0b58e1d13a557cbe9e7fb070c6cc59e24c6ccc44b306965471",
    "signals": [
     "evidence",
     "json_stdout",
@@ -1253,7 +1253,7 @@
    ]
   },
   {
-   "bytes": 52127,
+   "bytes": 52110,
    "declared_capability_id": null,
    "declared_inputs": [],
    "declared_result_fields": [],
@@ -1279,7 +1279,7 @@
    ],
    "kind": "cli",
    "path": "canonical/tools/auditability_report_v1.py",
-   "sha256": "3d335cddb2666f80a5455489bfa5b45dd67de23d3f17722018e352d1511765fa",
+   "sha256": "c6c9986781e25403c734a38cbdd1b1ce9c77c5e4a72f9497781204eefd25e4dc",
    "signals": [
     "evidence",
     "json_stdout",
@@ -1300,6 +1300,54 @@
     "still",
     "shown",
     "true"
+   ]
+  },
+  {
+   "bytes": 24438,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "doc": "Where the machine's five frontier functions actually live, and whether the model can see them.",
+   "entrypoint": "main",
+   "id": "canonical.tools.domain_atlas_v1.hidden.v1",
+   "imports": [
+    "__future__",
+    "argparse",
+    "ast",
+    "canonical",
+    "hashlib",
+    "json",
+    "math",
+    "pathlib",
+    "re",
+    "sys",
+    "typing"
+   ],
+   "kind": "cli",
+   "path": "canonical/tools/domain_atlas_v1.py",
+   "sha256": "70e3acfe107964a41230f15f5c37b6ec4cbe81c0becab093f3c888a0ce6cda4b",
+   "signals": [
+    "evidence",
+    "json_stdout",
+    "measured",
+    "receipt",
+    "refusal",
+    "schema",
+    "sha256",
+    "verification"
+   ],
+   "triggers": [
+    "domain",
+    "atlas",
+    "machine",
+    "five",
+    "frontier",
+    "functions",
+    "actually",
+    "live",
+    "whether",
+    "model",
+    "see"
    ]
   },
   {
@@ -2269,96 +2317,6 @@
    ]
   },
   {
-   "bytes": 18141,
-   "declared_capability_id": null,
-   "declared_inputs": [],
-   "declared_result_fields": [],
-   "doc": "Deterministic diff-to-minimal-test-set selection (change impact analysis).",
-   "entrypoint": "run",
-   "id": "canonical.runtime.bound_capabilities.python_change_impact_testselect.hidden.v1",
-   "imports": [
-    "__future__",
-    "canonical",
-    "hashlib",
-    "importlib",
-    "json",
-    "pathlib",
-    "re"
-   ],
-   "kind": "contract",
-   "path": "canonical/runtime/bound_capabilities/python_change_impact_testselect.py",
-   "sha256": "ac8493c4fc864b7e088448c642593d2400fb086c514e4b3c887fd5eb50f519ed",
-   "signals": [
-    "evidence",
-    "json_stdout",
-    "measured",
-    "refusal",
-    "schema",
-    "sha256",
-    "verification"
-   ],
-   "triggers": [
-    "python",
-    "change",
-    "impact",
-    "testselect",
-    "deterministic",
-    "diff",
-    "minimal",
-    "test",
-    "set",
-    "selection",
-    "analysis"
-   ]
-  },
-  {
-   "bytes": 30838,
-   "declared_capability_id": null,
-   "declared_inputs": [],
-   "declared_result_fields": [],
-   "doc": "Deterministic repository-local Python semantic symbol index (stdlib ast).",
-   "entrypoint": "run",
-   "id": "canonical.runtime.bound_capabilities.python_source_symbol_index.hidden.v1",
-   "imports": [
-    "__future__",
-    "ast",
-    "builtins",
-    "canonical",
-    "collections",
-    "concurrent",
-    "hashlib",
-    "json",
-    "os",
-    "pathlib",
-    "subprocess",
-    "sys"
-   ],
-   "kind": "contract",
-   "path": "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
-   "sha256": "10bf5f7589e64535c09e7a62715d94d808bff74f8d46bf3344446023c6c7127a",
-   "signals": [
-    "evidence",
-    "json_stdout",
-    "measured",
-    "refusal",
-    "schema",
-    "sha256",
-    "verification"
-   ],
-   "triggers": [
-    "python",
-    "source",
-    "symbol",
-    "index",
-    "deterministic",
-    "repository",
-    "local",
-    "semantic",
-    "stdlib",
-    "ast"
-   ]
-  },
-  {
    "bytes": 10684,
    "declared_capability_id": null,
    "declared_inputs": [],
@@ -2448,7 +2406,7 @@
    ]
   },
   {
-   "bytes": 59349,
+   "bytes": 68227,
    "declared_capability_id": null,
    "declared_inputs": [],
    "declared_result_fields": [],
@@ -2469,7 +2427,7 @@
    ],
    "kind": "cli",
    "path": "canonical/runtime/compile_brain_unified_model_v1.py",
-   "sha256": "bb85206e6ee8457a873452c007c12c36035e4e1371222b5a9332c2352b22f50f",
+   "sha256": "71fe16e153e8cae47f4d6caa60afe858cf30974d3cd885ca05e74b5264b2e046",
    "signals": [
     "evidence",
     "json_stdout",
@@ -2669,6 +2627,48 @@
     "done",
     "work",
     "reuse"
+   ]
+  },
+  {
+   "bytes": 84014,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "doc": "Unified Hidden-Capability Federation Runtime \u2014 v1.",
+   "entrypoint": "main",
+   "id": "canonical.runtime.unified_hidden_capability_federation_v1.hidden.v1",
+   "imports": [
+    "__future__",
+    "ast",
+    "canonical",
+    "dataclasses",
+    "hashlib",
+    "importlib",
+    "json",
+    "math",
+    "pathlib",
+    "re",
+    "typing",
+    "warnings"
+   ],
+   "kind": "cli",
+   "path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
+   "sha256": "706658ca4dd0853bca78d6678b4fab7c82a4f6995d0482390f13f1a499a40083",
+   "signals": [
+    "evidence",
+    "measured",
+    "receipt",
+    "refusal",
+    "schema",
+    "sha256",
+    "verification"
+   ],
+   "triggers": [
+    "unified",
+    "hidden",
+    "capability",
+    "federation",
+    "runtime"
    ]
   },
   {
@@ -3611,6 +3611,46 @@
    ]
   },
   {
+   "bytes": 8754,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "doc": "Inventory every capability the project owns, grouped by what it can do.",
+   "entrypoint": "main",
+   "id": "canonical.tools.capability_inventory_by_domain_v1.hidden.v1",
+   "imports": [
+    "__future__",
+    "argparse",
+    "json",
+    "os",
+    "pathlib",
+    "re",
+    "sys",
+    "typing"
+   ],
+   "kind": "cli",
+   "path": "canonical/tools/capability_inventory_by_domain_v1.py",
+   "sha256": "78ad4cb981861e39483c4e8fc08fa189f30023cac988028fdb438a68c823514e",
+   "signals": [
+    "evidence",
+    "json_stdout",
+    "measured",
+    "receipt",
+    "refusal",
+    "schema",
+    "verification"
+   ],
+   "triggers": [
+    "capability",
+    "inventory",
+    "domain",
+    "every",
+    "project",
+    "owns",
+    "grouped"
+   ]
+  },
+  {
    "bytes": 19224,
    "declared_capability_id": null,
    "declared_inputs": [],
@@ -4491,6 +4531,43 @@
     "disk",
     "separate",
     "process"
+   ]
+  },
+  {
+   "bytes": 12242,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "doc": "Ledger of recorded decisions: what was attempted, what was refused, and why.",
+   "entrypoint": "main",
+   "id": "canonical.tools.refusal_ledger_v1.hidden.v1",
+   "imports": [
+    "__future__",
+    "argparse",
+    "json",
+    "pathlib",
+    "re",
+    "typing"
+   ],
+   "kind": "cli",
+   "path": "canonical/tools/refusal_ledger_v1.py",
+   "sha256": "82089aee38319c87ee585e167fe1f0e0ad800f91ebc0fd3330c49e0a2f14807b",
+   "signals": [
+    "evidence",
+    "json_stdout",
+    "measured",
+    "receipt",
+    "refusal",
+    "schema",
+    "verification"
+   ],
+   "triggers": [
+    "refusal",
+    "ledger",
+    "recorded",
+    "decisions",
+    "attempted",
+    "refused"
    ]
   },
   {
@@ -5720,42 +5797,6 @@
     "semantic",
     "acceptance",
     "cells"
-   ]
-  },
-  {
-   "bytes": 4798,
-   "declared_capability_id": null,
-   "declared_inputs": [],
-   "declared_result_fields": [],
-   "doc": "Deterministic repository-local Python source structural audit.",
-   "entrypoint": "run",
-   "id": "canonical.runtime.bound_capabilities.python_source_audit.hidden.v1",
-   "imports": [
-    "__future__",
-    "ast",
-    "hashlib",
-    "json",
-    "pathlib"
-   ],
-   "kind": "contract",
-   "path": "canonical/runtime/bound_capabilities/python_source_audit.py",
-   "sha256": "f5c5a7bb1dc067b1c06f6e1fe88575946a9c6662998e623bad07d8a8d35f1f7a",
-   "signals": [
-    "json_stdout",
-    "measured",
-    "refusal",
-    "schema",
-    "sha256",
-    "verification"
-   ],
-   "triggers": [
-    "python",
-    "source",
-    "audit",
-    "deterministic",
-    "repository",
-    "local",
-    "structural"
    ]
   },
   {
@@ -8192,6 +8233,47 @@
    ]
   },
   {
+   "bytes": 14443,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "doc": "Deterministic Capability Consolidation & Truth Auditor (`capability_consolidation_audit_v1`).",
+   "entrypoint": "main",
+   "id": "canonical.tools.capability_consolidation_audit_v1.hidden.v1",
+   "imports": [
+    "__future__",
+    "argparse",
+    "canonical",
+    "importlib",
+    "json",
+    "pathlib",
+    "re",
+    "subprocess",
+    "sys",
+    "time",
+    "typing"
+   ],
+   "kind": "cli",
+   "path": "canonical/tools/capability_consolidation_audit_v1.py",
+   "sha256": "daa02dd41b93f754369d2f40393437a64f8a89380287c41c122ab03fbaa6eaeb",
+   "signals": [
+    "evidence",
+    "json_stdout",
+    "measured",
+    "receipt",
+    "schema",
+    "verification"
+   ],
+   "triggers": [
+    "capability",
+    "consolidation",
+    "audit",
+    "deterministic",
+    "truth",
+    "auditor"
+   ]
+  },
+  {
    "bytes": 9630,
    "declared_capability_id": null,
    "declared_inputs": [],
@@ -9406,6 +9488,50 @@
    ]
   },
   {
+   "bytes": 15987,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "doc": "Mutation as admission (leapfrog Play 6), measured on this repository's own suites.",
+   "entrypoint": "main",
+   "id": "canonical.tools.mutation_admission_probe_v1.hidden.v1",
+   "imports": [
+    "__future__",
+    "argparse",
+    "ast",
+    "hashlib",
+    "json",
+    "pathlib",
+    "re",
+    "subprocess",
+    "sys",
+    "time",
+    "typing"
+   ],
+   "kind": "cli",
+   "path": "canonical/tools/mutation_admission_probe_v1.py",
+   "sha256": "e0a9dcb1a4e36071f7f946a204597acd7352dd1e7b448ca42d10d287f8676a10",
+   "signals": [
+    "evidence",
+    "json_stdout",
+    "measured",
+    "schema",
+    "sha256",
+    "verification"
+   ],
+   "triggers": [
+    "mutation",
+    "admission",
+    "probe",
+    "leapfrog",
+    "play",
+    "measured",
+    "repository",
+    "own",
+    "suites"
+   ]
+  },
+  {
    "bytes": 11578,
    "declared_capability_id": null,
    "declared_inputs": [],
@@ -9778,6 +9904,46 @@
     "repo",
     "own",
     "tests"
+   ]
+  },
+  {
+   "bytes": 21144,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "doc": "Fill the recursive-OBS receipt and live route frontier for this round's action intent.",
+   "entrypoint": "main",
+   "id": "canonical.tools.refresh_action_intent_recursive_obs_20261126.hidden.v1",
+   "imports": [
+    "__future__",
+    "datetime",
+    "json",
+    "pathlib",
+    "subprocess"
+   ],
+   "kind": "cli",
+   "path": "canonical/tools/refresh_action_intent_recursive_obs_20261126.py",
+   "sha256": "7e0480ea2ee559bf0236740dd8c59b0e4c17677a7eddc24e225857fce48601fc",
+   "signals": [
+    "evidence",
+    "json_stdout",
+    "measured",
+    "receipt",
+    "refusal",
+    "verification"
+   ],
+   "triggers": [
+    "refresh",
+    "action",
+    "intent",
+    "recursive",
+    "obs",
+    "fill",
+    "receipt",
+    "live",
+    "route",
+    "frontier",
+    "round"
    ]
   },
   {
@@ -11882,48 +12048,6 @@
    ]
   },
   {
-   "bytes": 8150,
-   "declared_capability_id": null,
-   "declared_inputs": [],
-   "declared_result_fields": [],
-   "doc": "Hardcore SWE deterministic kernel \u2014 insanely fast, only right way.",
-   "entrypoint": "run",
-   "id": "canonical.runtime.bound_capabilities.hardcore_software_engineering_orchestrator_v1.hidden.v1",
-   "imports": [
-    "__future__",
-    "canonical",
-    "hashlib",
-    "json",
-    "pathlib",
-    "sys",
-    "typing"
-   ],
-   "kind": "contract",
-   "path": "canonical/runtime/bound_capabilities/hardcore_software_engineering_orchestrator_v1.py",
-   "sha256": "7ec082df163b7888f4760a5e7ba327eb0130c2b79f1cf69c29d3a944a55b3932",
-   "signals": [
-    "evidence",
-    "json_stdout",
-    "schema",
-    "sha256",
-    "verification"
-   ],
-   "triggers": [
-    "hardcore",
-    "software",
-    "engineering",
-    "orchestrator",
-    "swe",
-    "deterministic",
-    "kernel",
-    "insanely",
-    "fast",
-    "only",
-    "right",
-    "way"
-   ]
-  },
-  {
    "bytes": 9838,
    "declared_capability_id": null,
    "declared_inputs": [],
@@ -12006,48 +12130,6 @@
     "directed",
     "specification",
     "synthesizer"
-   ]
-  },
-  {
-   "bytes": 15592,
-   "declared_capability_id": null,
-   "declared_inputs": [],
-   "declared_result_fields": [],
-   "doc": "Cross-file Python signature evolution (`python.refactor.add_parameter.v1`).",
-   "entrypoint": "run",
-   "id": "canonical.runtime.bound_capabilities.python_source_add_parameter.hidden.v1",
-   "imports": [
-    "__future__",
-    "ast",
-    "hashlib",
-    "json",
-    "keyword",
-    "os",
-    "pathlib",
-    "subprocess",
-    "sys",
-    "typing"
-   ],
-   "kind": "contract",
-   "path": "canonical/runtime/bound_capabilities/python_source_add_parameter.py",
-   "sha256": "ac274c5921a4f321d22d1f79411d07ec62d869f57ed8e94ff0909e168c04067c",
-   "signals": [
-    "json_stdout",
-    "measured",
-    "schema",
-    "sha256",
-    "verification"
-   ],
-   "triggers": [
-    "python",
-    "source",
-    "add",
-    "parameter",
-    "cross",
-    "file",
-    "signature",
-    "evolution",
-    "refactor"
    ]
   },
   {
@@ -15132,7 +15214,7 @@
    ]
   },
   {
-   "bytes": 7108,
+   "bytes": 7188,
    "declared_capability_id": null,
    "declared_inputs": [],
    "declared_result_fields": [],
@@ -15152,7 +15234,7 @@
    ],
    "kind": "cli",
    "path": "canonical/tools/harvest_capability_receipts_v1.py",
-   "sha256": "2f8868547089013731b036d6aedd9a253061b75275f9ceccc369589c1e10795b",
+   "sha256": "3acd5ee647e6988fe7f33fdd116eb828f09a948349460072ebb63a2332d0118a",
    "signals": [
     "evidence",
     "json_stdout",
@@ -18778,49 +18860,6 @@
    ]
   },
   {
-   "bytes": 18540,
-   "declared_capability_id": null,
-   "declared_inputs": [],
-   "declared_result_fields": [],
-   "doc": "Multi-language deterministic parser \u2014 tree-sitter + deterministic polyglot structural kernel.",
-   "entrypoint": "run",
-   "id": "canonical.runtime.bound_capabilities.code_multilanguage_tree_sitter_v1.hidden.v1",
-   "imports": [
-    "__future__",
-    "ast",
-    "canonical",
-    "hashlib",
-    "json",
-    "pathlib",
-    "re",
-    "tree_sitter",
-    "tree_sitter_languages",
-    "typing"
-   ],
-   "kind": "contract",
-   "path": "canonical/runtime/bound_capabilities/code_multilanguage_tree_sitter_v1.py",
-   "sha256": "0fb865a5b9eeb0324295bbd29e10db4b1add20b71fc2522e98fbf234ef3364df",
-   "signals": [
-    "json_stdout",
-    "schema",
-    "sha256",
-    "verification"
-   ],
-   "triggers": [
-    "code",
-    "multilanguage",
-    "tree",
-    "sitter",
-    "multi",
-    "language",
-    "deterministic",
-    "parser",
-    "polyglot",
-    "structural",
-    "kernel"
-   ]
-  },
-  {
    "bytes": 3020,
    "declared_capability_id": null,
    "declared_inputs": [],
@@ -19079,47 +19118,6 @@
     "native",
     "identity",
     "extraction"
-   ]
-  },
-  {
-   "bytes": 3810,
-   "declared_capability_id": null,
-   "declared_inputs": [],
-   "declared_result_fields": [],
-   "doc": "Bounded program synthesis \u2014 finite grid inducer harvest, only right way.",
-   "entrypoint": "run",
-   "id": "canonical.runtime.bound_capabilities.software_synthesis_grid_induction_v1.hidden.v1",
-   "imports": [
-    "__future__",
-    "canonical",
-    "hashlib",
-    "json",
-    "pathlib",
-    "sys",
-    "typing"
-   ],
-   "kind": "contract",
-   "path": "canonical/runtime/bound_capabilities/software_synthesis_grid_induction_v1.py",
-   "sha256": "6b06260459a02a137b44377730bb3bae4e3913ffe41516adeaa3fe6fff673e96",
-   "signals": [
-    "json_stdout",
-    "schema",
-    "sha256",
-    "verification"
-   ],
-   "triggers": [
-    "software",
-    "synthesis",
-    "grid",
-    "induction",
-    "bounded",
-    "program",
-    "finite",
-    "inducer",
-    "harvest",
-    "only",
-    "right",
-    "way"
    ]
   },
   {
@@ -20262,6 +20260,45 @@
     "kinds",
     "never",
     "seen"
+   ]
+  },
+  {
+   "bytes": 6636,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "doc": "Does the DEFER form transfer, or does it fire only on the task that suggested it?",
+   "entrypoint": "main",
+   "id": "canonical.tools.defer_transfer_calibration_v1.hidden.v1",
+   "imports": [
+    "__future__",
+    "argparse",
+    "canonical",
+    "json",
+    "os",
+    "pathlib",
+    "subprocess",
+    "sys",
+    "typing"
+   ],
+   "kind": "cli",
+   "path": "canonical/tools/defer_transfer_calibration_v1.py",
+   "sha256": "a50cc212bea9e403ca26544de19eec1ad447aca294f540e52d0993ad06eaabbb",
+   "signals": [
+    "json_stdout",
+    "measured",
+    "schema",
+    "verification"
+   ],
+   "triggers": [
+    "defer",
+    "transfer",
+    "calibration",
+    "form",
+    "fire",
+    "only",
+    "task",
+    "suggested"
    ]
   },
   {
@@ -23297,37 +23334,6 @@
    ]
   },
   {
-   "bytes": 3755,
-   "declared_capability_id": null,
-   "declared_inputs": [],
-   "declared_result_fields": [],
-   "doc": "Second independent oracle: concrete execution.",
-   "entrypoint": "run",
-   "id": "canonical.runtime.bound_capabilities.concrete_execution_oracle.hidden.v1",
-   "imports": [
-    "__future__",
-    "json",
-    "pathlib",
-    "re",
-    "sys"
-   ],
-   "kind": "contract",
-   "path": "canonical/runtime/bound_capabilities/concrete_execution_oracle.py",
-   "sha256": "f37063bbcfcb9e0250e3b037bc687f1c48855ac099be68749d25b340ccf73b73",
-   "signals": [
-    "evidence",
-    "json_stdout",
-    "schema"
-   ],
-   "triggers": [
-    "concrete",
-    "execution",
-    "oracle",
-    "second",
-    "independent"
-   ]
-  },
-  {
    "bytes": 2860,
    "declared_capability_id": null,
    "declared_inputs": [],
@@ -24209,6 +24215,44 @@
    ]
   },
   {
+   "bytes": 16383,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "doc": "The site was right and both the value and its form were wrong.",
+   "entrypoint": "main",
+   "id": "canonical.tools.deferred_definition_form_v1.hidden.v1",
+   "imports": [
+    "__future__",
+    "argparse",
+    "ast",
+    "json",
+    "pathlib",
+    "re",
+    "sys",
+    "typing"
+   ],
+   "kind": "cli",
+   "path": "canonical/tools/deferred_definition_form_v1.py",
+   "sha256": "cb85223c0878a694bec692459535b9a6200e1b66305f742711ad81efd14c3f13",
+   "signals": [
+    "json_stdout",
+    "measured",
+    "schema"
+   ],
+   "triggers": [
+    "deferred",
+    "definition",
+    "form",
+    "site",
+    "right",
+    "both",
+    "value",
+    "were",
+    "wrong"
+   ]
+  },
+  {
    "bytes": 23050,
    "declared_capability_id": null,
    "declared_inputs": [],
@@ -24420,6 +24464,44 @@
     "not",
     "arbitrary",
     "task"
+   ]
+  },
+  {
+   "bytes": 9685,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "doc": "Measure whether a bucketed law store's *lookup* is flat as the store grows.",
+   "entrypoint": "main",
+   "id": "canonical.tools.measure_law_store_flat_lookup_v1.hidden.v1",
+   "imports": [
+    "__future__",
+    "argparse",
+    "hashlib",
+    "json",
+    "pathlib",
+    "random",
+    "statistics",
+    "time",
+    "typing"
+   ],
+   "kind": "cli",
+   "path": "canonical/tools/measure_law_store_flat_lookup_v1.py",
+   "sha256": "975fc3dccd7d82031c97f41025c1903977433f22772385728495c8dfa0dc781a",
+   "signals": [
+    "json_stdout",
+    "measured",
+    "schema"
+   ],
+   "triggers": [
+    "measure",
+    "law",
+    "store",
+    "flat",
+    "lookup",
+    "whether",
+    "bucketed",
+    "grows"
    ]
   },
   {

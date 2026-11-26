@@ -1,0 +1,36 @@
+{
+ "capability_id": "canonical.runtime.bound_capabilities.python_source_add_parameter.hidden.v1",
+ "elapsed_ms": 98.828,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "input_digests": {
+  "source_root": "2750d47bc36cf75ee60abb42867f2a6c9cfa172e77c21068a84e0b3eaf1b7539"
+ },
+ "invoked_args": {
+  "default_expr": "\"!\"",
+  "output_path": "canonical/astra_runtime/tmp/harvest_lift_20261124/add_param_out.json",
+  "param_name": "prefix",
+  "qualname": "greet",
+  "source_root": "canonical/astra_runtime/tmp/harvest_lift_20261124/single_mod.py"
+ },
+ "kind": "contract",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bound_capabilities/python_source_add_parameter.py",
+ "module_sha256": "ac274c5921a4f321d22d1f79411d07ec62d869f57ed8e94ff0909e168c04067c",
+ "observed": {
+  "output_verified": true
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "harvest-local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.bound_capabilities.python_source_add_parameter.hidden.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 11,
+ "result_sha256": "64a1edaf50d3a7716d80f9492213071603c1f003e7b95d0926b1d2c1c90dfb63",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
