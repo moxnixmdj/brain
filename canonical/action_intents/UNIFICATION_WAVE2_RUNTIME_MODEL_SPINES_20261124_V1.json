@@ -9,11 +9,11 @@
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "parent_capability": "canonical/runtime/brain_unified_model_v1.py + canonical/runtime/creature_runtime_v1.py + canonical/runtime/capability_composer_v1.py + canonical/swe_kernel/canonical_{env_discovery,cu_sandbox,memory_crystallizer,oracle_vericoding,boundary_router}_spine_v1.py",
-  "canonical_base_commit": "9a8a8d0798443aa64487ada5354bd5715835cb52",
+  "canonical_base_commit": "6ca2a98c71719fd4113cb63fad490ef34f2a2e84",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "causal_blocker": "UnifiedModel (brain_unified_model_v1.py) and the 7-organ Creature unified runtime (creature_runtime_v1.py) remained structurally split, and 13 high-leverage hidden engines (version-space skill induction, trace quotients, hidden preconditions, semi-persistent e-graph MIR, 7-language CST skeletons, instruction contracts, failing-run AST demand extraction, verifier falsification proofs, key-table splitting, cross-machine relational frames, aimed geometric actions, typed capability chaining, and harvested-surface execution) were unwired from canonical front-door spines 0E/0G/0H/0I.",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::UnifiedModel (brain_unified_model_v1.py) and the 7-organ Creature unified runtime (creature_runtime_v1.py) remained structurally split, and 13 high-leverage hidden engines (version-space skill induction, trace quotients, hidden preconditions, semi-persistent e-graph MIR, 7-language CST skeletons, instruction contracts, failing-run AST demand extraction, verifier falsification proofs, key-table splitting, cross-machine relational frames, aimed geometric actions, typed capability chaining, and harvested-surface execution) were unwired from canonical front-door spines 0E/0G/0H/0I.",
-  "action_summary": "Unification Waves 2-6 fuse brain_unified_model_v1.py (UnifiedModel) and creature_runtime_v1.py (7-organ Creature runtime) around one shared lazy persistent VerificationFirstMemoryBus (0G, persisted to memory_bus_v1.json) and lazy BoundaryRouter (0I, import 301ms->19.8ms), eliminate monolithic secondary JSON hydration via per-section .marshal sidecars (harvested_surfaces 182ms->1.8ms, source_index 182ms->11.8ms) and mtime-keyed composer registry/graph caching (warm 8.6ms->0.88ms), wire all 58 federated hidden kernel engines + 1-shot instant learning + exact applicability boundaries + refusal-first specification compilation + speculative CoW multi-future race with zero side-effect rollback + AST mutation admission gate + 4-tier zero-pixel-first CU ladder + anti-authority-collapse SHA-256 event-sourced memory into spines 0E/0F/0G/0H/0I, recompile BRAIN_UNIFIED_MODEL_V1.json (38/38 PASS), and prove every capability end-to-end on 22 real-execution frontier tests.",
+  "action_summary": "Unification Waves 2-10 fuse brain_unified_model_v1.py (UnifiedModel) and creature_runtime_v1.py (7-organ Creature runtime) around one shared lazy persistent VerificationFirstMemoryBus (0G) and lazy BoundaryRouter (0I, import 301ms->19.8ms), eliminate monolithic secondary hydration via Salsa racy-clean stat caching (open_model 26.7ms->7.6ms), 5 isolated per-section .marshal sidecars with inverted postings (find_source 120ms->19ms, harvested_surfaces 182ms->1.8ms), lazy SentientCognitiveCore/MetaCircularOrganGraph properties (open_creature 143ms->77ms cold / 3.6ms warm), reflink-first CoW + crash-safe multi-path journal commits (the_record_is_the_commit_v1), wire all 90 federated kernel engines + Angelic/Counterfactual CEGIS synthesis (11,388 LOC) + zero-token goal contract compiler (goal_front_compiler_v1 + declared_input_derivation_v1) + Branch-is-the-Model & check-mode oracle + whole-run relational goals & counterexample experiments + WebMCP/OSWorld-v2.1/env-broker zero-pixel CU + Entry-Only Self-Evolution Firewall across spines 0D-0I, recompile BRAIN_UNIFIED_MODEL_V1.json (38/38 PASS), and prove every capability end-to-end across 32 real-execution frontier tests.",
   "expected_parent_change": "UnifiedModel exposes compose_chain, execute_harvested_surface (strictly admitted=False), open_creature, run_creature_cycle, catalog_federated_engines, run_federated_engine, speculative_cow_race, mutation_admission_gate, per-section lazy .marshal sidecar caching, and expanded BoundaryRouter kinds (typed_chain, harvested_surface, version_space, register_env_goal, federated_engine, one_shot_learning, applicability, refusal_spec, speculative_cow, cu_four_tier, mutation_gate, event_memory); Creature lazily shares and persists memory_bus_v1.json across kill/restart and dispatches all unified spine & federated tasks; 0E/0F/0G/0H/0I integrate 20+ hidden modules at K3=0.",
   "expected_parent_frontier_change": "Closes the architectural split between the Unified Model and the Unified Runtime, applies Elon-law deletion of cold JSON hydration and eager import bottlenecks (15x-99x speedups), and unifies 58 federated kernel engines, zero-backprop 1-shot learning with applicability abstention, refusal-driven spec repair, speculative CoW rollback races, AST mutation-gated admission, 4-tier zero-pixel CU, and hash-chained provenance event memory into one composable K3=0 front door.",
   "real_outcome": "UnifiedModel and Creature lazily share one persistent VerificationFirstMemoryBus and BoundaryRouter; BoundaryRouter cold import dropped 301ms->19.8ms (15.2x), fresh-process harvested_surfaces dropped 182.2ms->1.84ms (99x), warm composer_route dropped 8.58ms->0.88ms (9.8x); all 58 federated engines and Waves 2-6 capabilities execute end-to-end across 22 Wave 2-6 frontier tests, 167 total core tests (+994 subtests), and 38/38 verify_brain_unified_model_v1 checks at model_calls == 0.",
@@ -39,11 +39,14 @@
     "canonical/runtime/capability_composer_v1.py",
     "canonical/runtime/creature_runtime_v1.py",
     "canonical/runtime/verifier_falsification_v1.py",
+    "canonical/swe_kernel/canonical_swe_spine_v1.py",
     "canonical/swe_kernel/canonical_cu_sandbox_spine_v1.py",
     "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
     "canonical/swe_kernel/canonical_oracle_vericoding_spine_v1.py",
     "canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
     "canonical/swe_kernel/canonical_boundary_router_v1.py",
+    "canonical/swe_kernel/sentient_cognitive_core_v1.py",
+    "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
     "canonical/tests/test_unification_wave2_frontier_v1.py",
     "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
   ],
@@ -112,7 +115,7 @@
     ]
   },
   "recursive_obs": {
-    "canonical_base_commit": "9a8a8d0798443aa64487ada5354bd5715835cb52",
+    "canonical_base_commit": "6ca2a98c71719fd4113cb63fad490ef34f2a2e84",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "dead nonexistent import `from canonical.runtime import importlib` inside canonical/runtime/verifier_falsification_v1.py",
@@ -222,8 +225,8 @@
       }
     ],
     "route_frontier": {
-      "canonical_base_commit": "9a8a8d0798443aa64487ada5354bd5715835cb52",
-      "checked_at_utc": "2026-11-26T02:06:00+00:00",
+      "canonical_base_commit": "6ca2a98c71719fd4113cb63fad490ef34f2a2e84",
+      "checked_at_utc": "2026-11-26T02:42:00+00:00",
       "max_age_hours": 24,
       "discovery_required": true,
       "incumbent_route": "SEPARATE_UNIFIED_MODEL_AND_CREATURE_SILOS",
@@ -334,7 +337,7 @@
       "unresolved_plausible_dominators": [],
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-26T02:06:00+00:00",
+        "checked_at_utc": "2026-11-26T02:42:00+00:00",
         "execution_dependencies_complete": true,
         "failed_dependencies": [],
         "max_age_hours": 2,
