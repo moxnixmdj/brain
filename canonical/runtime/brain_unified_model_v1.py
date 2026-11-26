@@ -499,6 +499,8 @@ class UnifiedModel:
                 "source_index_entry_points": src_ep,
                 "research_index_records": res_len,
                 "routing_tokens": len(self.index),
+                "harvested_capabilities": declared.get("harvested_capabilities"),
+                "frontier_leapfrog_organs": 17,
             },
             "source_index_is_addressable_not_executable": True,
             "declared_dependencies_present": present,
@@ -511,6 +513,80 @@ class UnifiedModel:
                 "terminal_credit_delta": 0,
             },
         }
+
+    # --------------------------------------------------------- frontier organs
+
+    def frontier_organs(self) -> dict[str, Any]:
+        """Enumerate the 13 `swe_kernel` organs and 4 Frontier Leapfrog Plays wired into the Unified Runtime."""
+        from canonical.runtime import swe_kernel_organ_bridge_v1 as bridge
+
+        swe_organs = bridge.list_organs()
+        plays = [
+            {
+                "organ_id": "play_1_contract_world_model",
+                "module_path": "canonical/runtime/state_contract_world_model_v1.py",
+                "frontier_domain": "computer_use",
+                "capability_role": "State-as-contract desktop effect-delta world model with volatile canonicalization",
+            },
+            {
+                "organ_id": "play_2_law_consolidation",
+                "module_path": "canonical/runtime/gradient_free_law_consolidation_v1.py",
+                "frontier_domain": "continual_learning",
+                "capability_role": "Gradient-free episodic law consolidation over the 45-commit real OSS corpus",
+            },
+            {
+                "organ_id": "play_3_abstain_skill_induction",
+                "module_path": "canonical/runtime/abstain_gated_skill_induction_v1.py",
+                "frontier_domain": "instant_learning",
+                "capability_role": "Abstain-gated structural AST skill induction over 40 real-commit episodes",
+            },
+            {
+                "organ_id": "play_6_mutation_admission_gate",
+                "module_path": "canonical/runtime/adversarial_mutation_admission_gate_v1.py",
+                "frontier_domain": "coding_agents",
+                "capability_role": "Adversarial AST mutation admission gate over harvested capability receipts",
+            },
+        ]
+        return {
+            "schema": SOLUTION_SCHEMA,
+            "operation": "FRONTIER_ORGANS",
+            "swe_kernel_organs_count": len(swe_organs),
+            "leapfrog_plays_count": len(plays),
+            "total_organs": len(swe_organs) + len(plays),
+            "swe_kernel_organs": swe_organs,
+            "leapfrog_plays": plays,
+            "model_dependency_count": 0,
+        }
+
+    def invoke_frontier_organ(
+        self,
+        organ_id: str,
+        payload: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Execute a wired `swe_kernel` organ or Frontier Leapfrog Play through the Unified Runtime."""
+        req = dict(payload or {})
+        if organ_id == "play_1_contract_world_model":
+            from canonical.runtime import state_contract_world_model_v1 as p1
+
+            return p1.run(req, ROOT)
+        if organ_id == "play_2_law_consolidation":
+            from canonical.runtime import gradient_free_law_consolidation_v1 as p2
+
+            return p2.run(req, ROOT)
+        if organ_id == "play_3_abstain_skill_induction":
+            from canonical.runtime import abstain_gated_skill_induction_v1 as p3
+
+            return p3.run(req, ROOT)
+        if organ_id == "play_6_mutation_admission_gate":
+            from canonical.runtime import adversarial_mutation_admission_gate_v1 as p6
+
+            return p6.run(req, ROOT)
+
+        from canonical.runtime import swe_kernel_organ_bridge_v1 as bridge
+
+        if organ_id == "probe_all_swe_kernel_organs":
+            return bridge.probe_all_organs(ROOT)
+        return bridge.invoke_organ(organ_id, req, ROOT)
 
     # ------------------------------------------------------------------- route
 
@@ -2736,6 +2812,9 @@ def main(argv: list[str] | None = None) -> int:
     recall_p = sub.add_parser("recall", help="just-in-time knowledge retrieval")
     recall_p.add_argument("query")
     recall_p.add_argument("--top-k", type=int, default=5)
+    organs_p = sub.add_parser("organs", help="list or invoke unified swe_kernel organs and leapfrog plays")
+    organs_p.add_argument("--invoke", default="", help="organ_id or play_id to execute")
+    organs_p.add_argument("--inputs", default="{}", help="JSON object of organ arguments")
     solve_p = sub.add_parser("solve", help="route and execute")
     solve_p.add_argument("goal")
     solve_p.add_argument("--inputs", default="{}", help="JSON object of inputs")
@@ -2754,6 +2833,21 @@ def main(argv: list[str] | None = None) -> int:
     if ns.command == "recall":
         _print(model.recall(ns.query, top_k=ns.top_k))
         return 0
+    if ns.command == "organs":
+        if not ns.invoke:
+            _print(model.frontier_organs())
+            return 0
+        try:
+            organ_inputs = json.loads(ns.inputs)
+        except json.JSONDecodeError:
+            _print({"status": "FAIL_CLOSED", "reason": "INPUTS_NOT_JSON"})
+            return 2
+        if not isinstance(organ_inputs, dict):
+            _print({"status": "FAIL_CLOSED", "reason": "INPUTS_NOT_OBJECT"})
+            return 2
+        res = model.invoke_frontier_organ(ns.invoke, organ_inputs)
+        _print(res)
+        return 0 if res.get("status") not in ("UNKNOWN_ORGAN", "FAIL_CLOSED", "ERROR") else 1
     try:
         inputs = json.loads(ns.inputs)
     except json.JSONDecodeError:
