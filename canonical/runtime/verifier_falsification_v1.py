@@ -52,10 +52,6 @@ if _ROOT not in sys.path:
 
 
 def _mod(name):
-    try:
-        from canonical.runtime import importlib  # type: ignore
-    except Exception:
-        pass
     return __import__(name)
 
 
