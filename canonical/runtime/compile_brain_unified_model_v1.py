@@ -58,6 +58,55 @@ from typing import Any, Iterable, Mapping
 _DBSP_CACHE_VERSION = 2
 
 
+def _fast_scandir_files(
+    root_str: str,
+    rel_root: str,
+    *,
+    suffix: str | None = None,
+    skip_dirs: frozenset[str] = frozenset({".git", "__pycache__"}),
+    skip_rel_prefixes: tuple[str, ...] = (),
+) -> list[tuple[str, str, os.stat_result]]:
+    """Wave 21 Elon-speed `os.scandir` walker returning `(abs_path, rel_posix, stat)` sorted identically to `Path`."""
+    start = os.path.join(root_str, rel_root) if rel_root else root_str
+    if not os.path.isdir(start):
+        return []
+    out: list[tuple[str, str, os.stat_result]] = []
+    stack: list[tuple[str, str]] = [(start, rel_root.strip("/"))]
+    while stack:
+        cur_dir, cur_rel = stack.pop()
+        try:
+            with os.scandir(cur_dir) as it:
+                for entry in it:
+                    name = entry.name
+                    rel = f"{cur_rel}/{name}" if cur_rel else name
+                    try:
+                        is_dir = entry.is_dir(follow_symlinks=True)
+                    except OSError:
+                        continue
+                    if is_dir:
+                        if name in skip_dirs:
+                            continue
+                        if skip_rel_prefixes and any(rel == p or rel.startswith(p + "/") for p in skip_rel_prefixes):
+                            continue
+                        stack.append((entry.path, rel))
+                        continue
+                    if suffix is not None and not name.endswith(suffix):
+                        continue
+                    if skip_rel_prefixes and any(rel == p or rel.startswith(p + "/") for p in skip_rel_prefixes):
+                        continue
+                    try:
+                        if not entry.is_file(follow_symlinks=True):
+                            continue
+                        st = entry.stat(follow_symlinks=True)
+                    except OSError:
+                        continue
+                    out.append((entry.path, rel, st))
+        except OSError:
+            continue
+    out.sort(key=lambda item: item[1].split("/"))
+    return out
+
+
 class _DBSPCompileCache:
     """Wave 14 DBSP / Merkle per-file incremental compile cache (O(|Δ|) vs O(|DB|)).
 
@@ -956,6 +1005,120 @@ def _skill_rows(root: Path) -> list[dict[str, Any]]:
 
 # --------------------------------------------------------------------------- model
 
+# Natural-language trigger supplements for federated engines.
+#
+# The federation descriptors carry technical triggers ("instant_one_shot_learning",
+# "rule_expiry_v1") that a caller describing a goal in plain words never types.
+# Measured: "learn a new capability from a single demonstration without training"
+# routed to `python.source.add_function.v1` (coverage 0.5) instead of
+# `engine:INSTANT_ONE_SHOT_LEARNER` (zero token overlap); "keep improving on new
+# tasks without forgetting earlier ones" failed closed entirely. These phrases
+# are the frontier vocabulary from DOMAIN_ATLAS queries, mapped to the engine
+# that implements each function. They are routing words only: they grant no
+# capability, change no required input, and cannot make an engine execute
+# without its declared inputs (the federation still fails closed on those).
+_FRONTIER_TRIGGER_SUPPLEMENTS: dict[str, tuple[str, ...]] = {
+    "INSTANT_ONE_SHOT_LEARNER": (
+        "learn from one example",
+        "single demonstration",
+        "learn a new capability",
+        "one shot learning",
+        "generalize from one episode",
+        "infer a program from one example",
+        "adapt from one episode without touching weights",
+    ),
+    "CAUSAL_TRACE_SKILL_COMPILER": (
+        "compile trace to skill",
+        "demonstration to program",
+        "watch once learn forever",
+        "elevate demonstration to program",
+    ),
+    "VERIFIED_SKILL_CRYSTALLIZER": (
+        "crystallize skill",
+        "learn rule from fix",
+        "anti unify bugfix",
+    ),
+    "ASSOCIATIVE_EPISODIC_MEMORY": (
+        "recall prior episode",
+        "remember previous",
+        "episodic memory",
+        "context stays correct",
+        "recall from memory",
+        "durable memory",
+        "keep a durable memory of prior runs",
+    ),
+    "PROCEDURE_TRAJECTORY_MEMORY": (
+        "procedure memory",
+        "episode journal",
+        "remember procedure",
+        "recall the right prior episode",
+    ),
+    "RULE_EXPIRY_WORLD_FINGERPRINT": (
+        "keep improving without forgetting",
+        "continual learning",
+        "without forgetting",
+        "without drifting",
+        "expire stale rules",
+        "detect drift",
+        "keep improving on new tasks",
+    ),
+    "GRADIENT_FREE_LAW_CONSOLIDATION": (
+        "consolidate without drift",
+        "sleep consolidation",
+        "consolidate learning",
+        "keep the store current",
+    ),
+    "WAKE_SLEEP_CONSOLIDATION": (
+        "promote repair episode to permanent rule",
+        "check a learned rule is not a constant",
+        "expire stale rules and forget low value episodes",
+        "consolidate repair episodes",
+        "two independent witnesses",
+        "memory hygiene",
+    ),
+    "VERIFICATION_FIRST_MEMORY_BUS": (
+        "memory operating system",
+        "forget one skill without damaging others",
+        "create a durable memory of prior runs",
+        "organize memory into durable long term structure",
+        "consolidate memory during idle time",
+        "selective unlearning",
+        "resolve conflicting memories",
+        "keep a durable memory of prior runs",
+        "drive an unfamiliar desktop application without screenshots",
+    ),
+    "PREDICTIVE_HOARE_CONTRACT": (
+        "what action does",
+        "simulate consequence",
+        "what an action does before doing it",
+    ),
+    "INTERFACE_ACTION_GRAMMAR": (
+        "drive GUI",
+        "unfamiliar desktop",
+        "operate desktop application",
+        "computer use",
+        "drive a GUI",
+        "operate browser page",
+        "drive an unfamiliar desktop application",
+    ),
+    "STATE_CONTRACT_WORLD_MODEL": (
+        "screen state prediction",
+        "simulate action consequence",
+        "world model desktop",
+        "screen state before action",
+    ),
+    "CAUSAL_GOAL_COMPUTER_AGENT": (
+        "computer agent",
+        "drive computer",
+        "operate computer",
+    ),
+    "OSWORLD_BROWSER_OPS": (
+        "browser ops",
+        "operate browser page",
+        "click elements on screen",
+    ),
+}
+
 
 def _engine_rows(root: Path) -> list[dict[str, Any]]:
     from canonical.runtime.unified_hidden_capability_federation_v1 import (
@@ -1010,7 +1173,11 @@ def _engine_rows(root: Path) -> list[dict[str, Any]]:
         src_sha = digest_file(src_file) if src_file.is_file() else None
         trig_list: list[str] = []
         seen_t: set[str] = set()
-        for phrase in [mode.replace("_", " ").lower(), *(spec.get("triggers") or [])]:
+        for phrase in [
+            mode.replace("_", " ").lower(),
+            *(spec.get("triggers") or []),
+            *(_FRONTIER_TRIGGER_SUPPLEMENTS.get(mode) or ()),
+        ]:
             p_str = str(phrase).strip()
             if p_str and p_str not in seen_t:
                 seen_t.add(p_str)
@@ -1090,20 +1257,25 @@ def _harvested_rows(
         declared = census.declared_ids(root)
         declared_paths = census.declared_source_paths(root)
         shape_hint = re.compile(r"^\s*(?:async\s+)?def\s+(?:run|execute)\s*\(", re.MULTILINE)
+        skip_prefixes = tuple(census.SKIP_PATH_PREFIXES)
         raw_rows = []
-        for path in census.walk_python(root):
-            if census.TEST_NAME_RE.search(path.name):
+        for abs_path, rel, st in _fast_scandir_files(
+            str(root),
+            "",
+            suffix=".py",
+            skip_dirs=frozenset(census.SKIP_DIRS),
+        ):
+            base_name = os.path.basename(abs_path)
+            if census.TEST_NAME_RE.search(base_name):
                 continue
-            rel = path.relative_to(root).as_posix()
-            try:
-                st = path.stat()
-            except OSError:
+            if any(rel.startswith(p) for p in skip_prefixes):
                 continue
             hit, cached = cache.get("harvest", rel, st)
             if not hit:
                 cached = None
                 try:
-                    source = path.read_text(encoding="utf-8", errors="replace")
+                    with open(abs_path, "r", encoding="utf-8", errors="replace") as fh:
+                        source = fh.read()
                 except OSError:
                     source = ""
                 if "__main__" in source or shape_hint.search(source) or "def main(" in source:
@@ -1123,7 +1295,7 @@ def _harvested_rows(
                                 "declared_inputs": list(contract["inputs"]),
                                 "declared_result_fields": list(contract["result_fields"]),
                                 "triggers": list(census.triggers_for(rel, named or "")),
-                                "sha256": census.sha256_file(path),
+                                "sha256": census.sha256_file(Path(abs_path)),
                             }
                     except (SyntaxError, ValueError):
                         cached = None
@@ -1192,38 +1364,33 @@ def _source_index_rows(
     # measured fact rather than a guess.
     _seen: set[str] = set()
     importers: dict[str, set[str]] = {}
-    py_files: list[Path] = []
-    astra_tmp = root / "canonical" / "astra_runtime" / "tmp"
+    root_str = str(root)
+    py_entries: list[tuple[str, str, os.stat_result]] = []
     for name in ("canonical", "tests"):
-        base = root / name
-        if base.is_dir():
-            py_files.extend(
-                p
-                for p in sorted(base.rglob("*.py"))
-                if ".git" not in p.parts
-                and "__pycache__" not in p.parts
-                and not p.is_relative_to(astra_tmp)
+        py_entries.extend(
+            _fast_scandir_files(
+                root_str,
+                name,
+                suffix=".py",
+                skip_dirs=frozenset({".git", "__pycache__"}),
+                skip_rel_prefixes=("canonical/astra_runtime/tmp",),
             )
-    for path in py_files:
-        rel_imp = path.relative_to(root).as_posix()
-        posix_imp = path.as_posix()
+        )
+    for abs_path, rel_imp, st_imp in py_entries:
+        posix_imp = abs_path.replace(os.sep, "/")
         mods: tuple[str, ...] | None = None
-        st_imp: os.stat_result | None = None
         if cache is not None and cache.enabled:
-            try:
-                st_imp = path.stat()
-                hit, cached_mods = cache.get("imports", rel_imp, st_imp)
-                if hit:
-                    mods = cached_mods
-            except OSError:
-                continue
+            hit, cached_mods = cache.get("imports", rel_imp, st_imp)
+            if hit:
+                mods = cached_mods
         if mods is None:
             try:
-                text = path.read_text(encoding="utf-8", errors="replace")
+                with open(abs_path, "r", encoding="utf-8", errors="replace") as fh:
+                    text = fh.read()
             except OSError:
                 continue
             mods = tuple({m.split(".")[0] for m in _IMPORT_RE.findall(text)})
-            if cache is not None and cache.enabled and st_imp is not None:
+            if cache is not None and cache.enabled:
                 cache.put("imports", rel_imp, st_imp, mods)
         for mod_root in mods:
             importers.setdefault(mod_root, set()).add(posix_imp)
@@ -1242,30 +1409,25 @@ def _source_index_rows(
     # cannot select it, and a module that *is* a capability is still excluded by
     # ``covered`` before it can be indexed as non-executable source.
     for source_root in _SOURCE_ROOTS:
-        base_dir = root / source_root
-        if not base_dir.is_dir():
-            continue
-        for path in sorted(base_dir.rglob("*.py")):
-            if ".git" in path.parts or "__pycache__" in path.parts:
-                continue
-            rel = path.relative_to(root).as_posix()
+        for abs_path, rel, st_src in _fast_scandir_files(
+            root_str,
+            source_root,
+            suffix=".py",
+            skip_dirs=frozenset({".git", "__pycache__"}),
+        ):
             if rel in covered or rel in _seen:
                 continue
             _seen.add(rel)
-            stem = path.stem
+            stem = os.path.splitext(os.path.basename(abs_path))[0]
             cached_src: dict[str, Any] | None = None
-            st_src: os.stat_result | None = None
             if cache is not None and cache.enabled:
-                try:
-                    st_src = path.stat()
-                    hit, val = cache.get("source", rel, st_src)
-                    if hit:
-                        cached_src = val
-                except OSError:
-                    continue
+                hit, val = cache.get("source", rel, st_src)
+                if hit:
+                    cached_src = val
             if cached_src is None:
                 try:
-                    raw = path.read_bytes()
+                    with open(abs_path, "rb") as fh:
+                        raw = fh.read()
                 except OSError:
                     continue
                 text = raw.decode("utf-8", errors="replace")
@@ -1404,28 +1566,25 @@ def _research_rows(
     restate what the tree already holds.
     """
     rows: list[dict[str, Any]] = []
+    root_str = str(root)
+    skip_dirs = frozenset(_NON_SOURCE_DIRS)
     for rel_root in _RESEARCH_ROOTS:
-        base = root / rel_root
-        if not base.is_dir():
-            continue
-        for path in sorted(base.rglob("*")):
-            if not path.is_file() or any(part in _NON_SOURCE_DIRS for part in path.parts):
-                continue
-            rel = path.relative_to(root).as_posix()
+        for abs_path, rel, st_res in _fast_scandir_files(
+            root_str,
+            rel_root,
+            suffix=None,
+            skip_dirs=skip_dirs,
+        ):
             if rel in covered or rel in _GENERATED_OUTPUTS:
                 continue
-            st_res: os.stat_result | None = None
             if cache is not None and cache.enabled:
-                try:
-                    st_res = path.stat()
-                    hit, cached_row = cache.get("research", rel, st_res)
-                    if hit:
-                        rows.append({**cached_row, "terms": dict(cached_row["terms"])})
-                        continue
-                except OSError:
+                hit, cached_row = cache.get("research", rel, st_res)
+                if hit:
+                    rows.append({**cached_row, "terms": dict(cached_row["terms"])})
                     continue
             try:
-                raw = path.read_bytes()
+                with open(abs_path, "rb") as fh:
+                    raw = fh.read()
             except OSError:
                 continue
             text = raw.decode("utf-8", errors="replace")
@@ -1435,7 +1594,9 @@ def _research_rows(
             date = ""
             action_id = ""
             parts: list[str] = []
-            if path.suffix == ".json":
+            base_name = os.path.basename(abs_path)
+            stem, ext = os.path.splitext(base_name)
+            if ext == ".json":
                 try:
                     doc = json.loads(text)
                 except ValueError:
@@ -1450,7 +1611,7 @@ def _research_rows(
                         if isinstance(value, str) and value:
                             parts.append(value)
 
-            haystack = " ".join(parts) + " " + path.stem.replace("_", " ").replace("-", " ")
+            haystack = " ".join(parts) + " " + stem.replace("_", " ").replace("-", " ")
             row_obj = {
                 "id": "research:" + rel,
                 "kind": "RESEARCH_RECORD",
@@ -1464,7 +1625,7 @@ def _research_rows(
                 "capability": False,
                 "terms": _term_counts(haystack, limit=32),
             }
-            if cache is not None and cache.enabled and st_res is not None:
+            if cache is not None and cache.enabled:
                 cache.put("research", rel, st_res, row_obj)
             rows.append(row_obj)
     return rows

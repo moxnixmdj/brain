@@ -949,7 +949,10 @@ class Creature:
             else:
                 from canonical.swe_kernel import canonical_boundary_router_v1 as br_spine
 
-                self._boundary_router = br_spine.BoundaryRouter(memory_bus=self.memory_bus)
+                self._boundary_router = br_spine.BoundaryRouter(
+                    memory_bus=self._memory_bus,
+                    memory_bus_factory=lambda: self.memory_bus,
+                )
                 if self._unified_model is not None:
                     self._unified_model._boundary_router = self._boundary_router
         return self._boundary_router
@@ -1048,6 +1051,18 @@ class Creature:
             res = br.route_semantic_plan(**kwargs)
         elif k == "derive_execution_adapter":
             res = br.route_derive_execution_adapter(**kwargs)
+        elif k == "contrast_memory_laws":
+            res = br.route_contrast_memory_laws(**kwargs)
+        elif k == "filing_key_hindsight_jitrl":
+            res = br.route_filing_key_hindsight_jitrl(**kwargs)
+        elif k == "producer_lineage_holes":
+            res = br.route_producer_lineage_holes(**kwargs)
+        elif k == "verifier_pinning_oracles":
+            res = br.route_verifier_pinning_oracles(**kwargs)
+        elif k == "purpose_gate_arbitrage":
+            res = br.route_purpose_gate_arbitrage(**kwargs)
+        elif k == "two_move_horizon_cu":
+            res = br.route_two_move_horizon_cu(**kwargs)
         elif k == "oracle_audit":
             from canonical.swe_kernel import canonical_oracle_vericoding_spine_v1 as ov_spine
 
@@ -1448,6 +1463,114 @@ class Creature:
             "event_receipt": event_receipt,
             "life_remaining": self._life.remaining,
             "posture": posture,
+            "model_calls": 0,
+        }
+
+    def sleep_red_queen_coevolve(
+        self,
+        *,
+        epoch_index: int = 0,
+        organ_name: str,
+        incumbent_source: str,
+        candidate_sources: Sequence[str],
+        func_name: str,
+        test_cases: Sequence[tuple[tuple[Any, ...], Any]],
+        anchor_cases: Sequence[tuple[tuple[Any, ...], Any]] = (),
+        lens_witness_pairs: Sequence[tuple[Any, Any]] | None = None,
+        scan_root: str | pathlib.Path | None = None,
+        mine_rewrite_laws: bool = True,
+        audit_hunk_pinning: bool = True,
+        alpha: float = 0.05,
+    ) -> dict[str, Any]:
+        """Waves 24 & 29: Red Queen Co-Evolution sleep cycle (`Creature` × `0G` × `0H`, `K3=0`).
+
+        Runs bounded GEA organ evolution under a content-hashed FROZEN intra-epoch judge,
+        audits behavioural hunk pinning (`what_the_verifier_actually_pins_v1`) + docstring
+        oracle claims (`the_docstring_states_the_oracle_v1`), co-evolves the evaluator suite
+        ONLY for `epoch_index + 1`, and records both certified wins and failure lessons into
+        the bitemporal SkillBank (`0G`).
+        """
+        from canonical.swe_kernel import canonical_oracle_vericoding_spine_v1 as oracle_spine
+
+        gea_res = self.sleep_evolve_organs_gea(
+            organ_name=organ_name,
+            incumbent_source=incumbent_source,
+            candidate_sources=candidate_sources,
+            test_cases=test_cases,
+            anchor_cases=anchor_cases,
+            alpha=alpha,
+        )
+        winner = gea_res.get("winner") if isinstance(gea_res, dict) else None
+        patched_src = str(winner["source"]) if isinstance(winner, dict) and winner.get("source") else incumbent_source
+
+        hunk_pinning_audit = None
+        if audit_hunk_pinning and winner is not None and patched_src != incumbent_source:
+            def _cases_verifier(src_text: str) -> bool:
+                ns_v: dict[str, Any] = {}
+                try:
+                    exec(compile(src_text, f"<{organ_name}>", "exec"), ns_v)
+                    fn_v = ns_v.get(func_name)
+                    if not callable(fn_v):
+                        return False
+                    for args, exp in list(test_cases) + list(anchor_cases):
+                        if fn_v(*args) != exp:
+                            return False
+                    return True
+                except Exception:
+                    return False
+
+            hunk_pinning_audit = oracle_spine.audit_verifier_pinning_and_synthesize_oracles(
+                before_source=incumbent_source,
+                after_source=patched_src,
+                verifier_fn=_cases_verifier,
+                min_pin_ratio=0.5,
+                require_fail_to_pass=True,
+                docstring_source=patched_src,
+            )
+
+        rq_res = oracle_spine.run_red_queen_evaluator_coevolution(
+            epoch_index=int(epoch_index),
+            scan_root=scan_root,
+            orig_source=incumbent_source,
+            patched_source=patched_src,
+            func_name=func_name,
+            lens_witness_pairs=lens_witness_pairs,
+            mine_rewrite_laws=mine_rewrite_laws,
+        )
+
+        pin_ok = True if hunk_pinning_audit is None else bool(hunk_pinning_audit.get("pass"))
+        # Record organ outcome + failure lessons in bitemporal SkillBank (`0G`)
+        bank_res = self.memory_bus.bitemporal_credit_and_skill_bank(
+            skill_name=f"red_queen:{organ_name}:epoch_{int(epoch_index)}",
+            skill_type="red_queen_organ",
+            pattern=str(func_name),
+            preconditions=[f"epoch_judge:{rq_res.get('intra_epoch_frozen_judge_digest')}"],
+            operations=[f"organ:{organ_name}", f"next_epoch_judge:{rq_res.get('next_epoch_judge_digest')}"],
+            success_criteria="sea_certified_and_cow_boundary_invariant_and_hunks_pinned",
+            succeeded=bool(gea_res.get("pass")) and bool(rq_res.get("pass")) and pin_ok,
+            failure_lesson=None if (gea_res.get("pass") and rq_res.get("pass") and pin_ok) else str(
+                gea_res.get("status")
+                if not gea_res.get("pass")
+                else (hunk_pinning_audit.get("status") if not pin_ok and hunk_pinning_audit else rq_res.get("status"))
+            ),
+            valid_from=float(epoch_index),
+        )
+        overall_pass = bool(gea_res.get("pass")) and bool(rq_res.get("pass")) and pin_ok
+        return {
+            "pass": overall_pass,
+            "status": (
+                "PASS__RED_QUEEN_SLEEP_COEVOLVED"
+                if overall_pass
+                else "FAIL_CLOSED__RED_QUEEN_EPOCH_HELD_INCUMBENT"
+            ),
+            "epoch_index": int(epoch_index),
+            "next_epoch_index": int(epoch_index) + 1,
+            "intra_epoch_frozen_judge_digest": rq_res.get("intra_epoch_frozen_judge_digest"),
+            "next_epoch_judge_digest": rq_res.get("next_epoch_judge_digest"),
+            "gea_evolution": gea_res,
+            "hunk_pinning_audit": hunk_pinning_audit,
+            "evaluator_coevolution": rq_res,
+            "bitemporal_skill_bank": bank_res,
             "model_calls": 0,
         }
 
