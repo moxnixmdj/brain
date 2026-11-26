@@ -9,7 +9,7 @@
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "parent_capability": "canonical/runtime/brain_unified_model_v1.py + canonical/runtime/creature_runtime_v1.py",
-  "canonical_base_commit": "e79efc324647eb44a17ee0540e4367e7ecab566e",
+  "canonical_base_commit": "09b1e34929783be213703e34da6858596c43d410",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "causal_blocker": "2,822 non-obvious capability modules in canonical/{runtime,swe_kernel,tools}/ were unreachable from UnifiedModel.solve() and Creature, while open_model() deserialized 49.4 MB cold (346.6 ms) / 14 MB warm (9.93 ms), find_source() scanned Python dicts (45 ms cold / 18.1 ms warm) instead of mmap CSR, and duplicated envelope/dispatch wrappers bloated brain_unified_model_v1.py (6,934L) and creature_runtime_v1.py",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::2,822 non-obvious capability modules in canonical/{runtime,swe_kernel,tools}/ were unreachable from UnifiedModel.solve() and Creature, while open_model() deserialized 49.4 MB cold (346.6 ms) / 14 MB warm (9.93 ms), find_source() scanned Python dicts (45 ms cold / 18.1 ms warm) instead of mmap CSR, and duplicated envelope/dispatch wrappers bloated brain_unified_model_v1.py (6,934L) and creature_runtime_v1.py",
@@ -122,7 +122,7 @@
     "wall_clock_cost_ub": 1
   },
   "recursive_obs": {
-    "canonical_base_commit": "e79efc324647eb44a17ee0540e4367e7ecab566e",
+    "canonical_base_commit": "09b1e34929783be213703e34da6858596c43d410",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "1,158 inline SovereignZeroLLMPlanner lines moved out of brain_unified_model_v1.py hot import path",
@@ -233,8 +233,8 @@
       }
     ],
     "route_frontier": {
-      "canonical_base_commit": "e79efc324647eb44a17ee0540e4367e7ecab566e",
-      "checked_at_utc": "2026-11-26T16:41:00+00:00",
+      "canonical_base_commit": "09b1e34929783be213703e34da6858596c43d410",
+      "checked_at_utc": "2026-11-26T17:00:00+00:00",
       "max_age_hours": 24,
       "discovery_required": true,
       "incumbent_route": "EAGER_MONOLITHIC_UNIFIED_MODEL_WITH_DISCONNECTED_MODULES",
@@ -344,7 +344,7 @@
       "unresolved_plausible_dominators": [],
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-26T16:41:00+00:00",
+        "checked_at_utc": "2026-11-26T17:00:00+00:00",
         "execution_dependencies_complete": true,
         "failed_dependencies": [],
         "max_age_hours": 2,
@@ -389,7 +389,7 @@
             "required": false,
             "status": "READY",
             "volatility": "VOLATILE",
-            "observed_at_utc": "2026-11-26T16:41:00+00:00",
+            "observed_at_utc": "2026-11-26T17:00:00+00:00",
             "evidence": [
               "model_calls == 0 across all unified hidden-arsenal kernels"
             ],

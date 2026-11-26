@@ -42,9 +42,10 @@ WHAT THE SANDBOX IS (each part is one syscall, none is policy)
 
 WHAT THIS IS NOT
 ----------------
-* Not a seccomp filter and not a cgroup. It bounds filesystem, network, process
-  visibility, IPC and capabilities; it does not bound every syscall, and it does
-  not cap memory or CPU beyond the wall-clock budget the caller sets.
+* Not a cgroup. It bounds filesystem, network, process visibility, IPC,
+  capabilities, and (on x86_64 via ``worker_syscall_allowlist_v1`` classic BPF)
+  the kernel syscall surface; it does not cap memory or CPU beyond the
+  wall-clock budget the caller sets.
 * Not an admission decision. `probe()` measures; whether an admitted capability
   may run is the boundary's decision, and no flag here can make it.
 * Not proof for every kernel. `support()` and `probe()` run for real on the
@@ -188,16 +189,39 @@ except BaseException:
 # Drop every capability. After this line the payload cannot mount, umount,
 # chroot, ptrace, mknod or setns -- the chroot stops being undoable.
 try:
-    libc.prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0)
+    libc.prctl.argtypes = [ctypes.c_int, ctypes.c_ulong, ctypes.c_ulong, ctypes.c_ulong, ctypes.c_ulong]
+    libc.prctl.restype = ctypes.c_int
+    if libc.prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0) != 0:
+        raise OSError(errno(), "PR_SET_NO_NEW_PRIVS failed")
     for cap in range(CAP_LAST_CAP + 1):
         libc.prctl(PR_CAPBSET_DROP, cap, 0, 0, 0)
     header = (ctypes.c_uint32 * 2)(0x20080522, 0)  # _LINUX_CAPABILITY_VERSION_3
     data = (ctypes.c_uint32 * 6)(0, 0, 0, 0, 0, 0)  # eff, perm, inh -- all zero
-    libc.capset(header, data)
+    if libc.capset(header, data) != 0:
+        raise OSError(errno(), "capset failed")
     caps_dropped = True
 except BaseException as error:  # noqa: BLE001
     caps_dropped = False
     sys.stderr.write("capability drop failed: %r\n" % (error,))
+
+# Wave 38: Install pinned classic BPF seccomp syscall allowlist (PR_SET_SECCOMP = 22,
+# SECCOMP_MODE_FILTER = 2). Fail-closed if requested and installation fails.
+seccomp_hex = spec.get("seccomp_hex") or ""
+seccomp_installed = False
+if seccomp_hex:
+    try:
+        raw_bpf = bytes.fromhex(seccomp_hex)
+        if len(raw_bpf) < 8 or (len(raw_bpf) % 8) != 0:
+            raise ValueError("invalid seccomp bpf program length")
+        bpf_buf = ctypes.create_string_buffer(raw_bpf, len(raw_bpf))
+        class _SockFprog(ctypes.Structure):
+            _fields_ = [("len", ctypes.c_ushort), ("filter", ctypes.c_void_p)]
+        fprog = _SockFprog(len(raw_bpf) // 8, ctypes.addressof(bpf_buf))
+        if libc.prctl(22, 2, ctypes.addressof(fprog), 0, 0) != 0:
+            raise OSError(errno(), "PR_SET_SECCOMP failed: %s" % os.strerror(errno()))
+        seccomp_installed = True
+    except BaseException as error:  # noqa: BLE001
+        fail("seccomp", error)
 
 env = dict(spec.get("env") or {})
 started = time.monotonic()
@@ -216,6 +240,7 @@ except FileNotFoundError as missing:
 
 json.dump({"ok": True, "rc": rc, "stdout": out[-20000:], "stderr": err[-8000:],
            "timed_out": timed_out, "caps_dropped": caps_dropped,
+           "seccomp_installed": seccomp_installed,
            "pid_count": _numeric_pids(),
            "uid": os.getuid(), "seconds": round(time.monotonic() - started, 3)},
           sys.stdout)
@@ -272,8 +297,30 @@ attempt("dev_mem", lambda: open("/dev/mem", "rb").read(1))
 attempt("host_home", lambda: sorted(os.listdir("/home")))
 attempt("uid", lambda: os.getuid())
 attempt("caps", lambda: open("/proc/self/status").read().split("CapEff:")[1].split()[0])
+attempt("seccomp_mode", lambda: open("/proc/self/status").read().split("Seccomp:")[1].split()[0])
 attempt("etc_passwd", lambda: open("/etc/passwd").read()[:120])
 attempt("write_readonly_bind", lambda: open("/usr/.escape", "w").write("x") or "WROTE")
+
+
+def _raw_syscall(nr, *args):
+    import ctypes
+    libc = ctypes.CDLL("libc.so.6", use_errno=True)
+    libc.syscall.restype = ctypes.c_long
+    cargs = [ctypes.c_long(int(a)) for a in args]
+    rc = libc.syscall(ctypes.c_long(int(nr)), *cargs)
+    if rc == -1:
+        err = ctypes.get_errno()
+        raise OSError(err, os.strerror(err))
+    return int(rc)
+
+
+attempt("syscall_bpf", lambda: _raw_syscall(321, 0, 0, 0))
+attempt("syscall_io_uring_setup", lambda: _raw_syscall(425, 1, 0))
+attempt("syscall_keyctl", lambda: _raw_syscall(250, 0, 0, 0, 0, 0))
+attempt("syscall_userfaultfd", lambda: _raw_syscall(323, 0))
+attempt("syscall_ptrace", lambda: _raw_syscall(101, 0, 0, 0, 0))
+attempt("syscall_unshare", lambda: _raw_syscall(272, 0x10000000))
+attempt("socket_af_netlink", lambda: socket.socket(16, socket.SOCK_RAW, 0).close() or "OPENED")
 json.dump(findings, open("/work/.probe.json", "w"), indent=1)
 '''
 
@@ -309,12 +356,14 @@ def run(argv: Sequence[str], *, work_dir: str | pathlib.Path,
         budget_s: float = 60.0, env: Mapping[str, str] | None = None,
         allow_network: bool = False, root_mb: int = 512,
         extra_ro: Sequence[Sequence[str]] = (),
-        extra_rw: Sequence[Sequence[str]] = ()) -> dict[str, Any]:
+        extra_rw: Sequence[Sequence[str]] = (),
+        seccomp: bool = True) -> dict[str, Any]:
     """Run one argv inside the sandbox. Fail-closed: no fallback substrate.
 
     Returns a receipt. `receipt["isolated"]` is True only if the child reported
-    that it reached the payload with capabilities dropped inside a fresh
-    namespace; a setup failure returns `ok: False` with its stage, never a run.
+    that it reached the payload with capabilities dropped (and classic BPF
+    seccomp filter installed when `seccomp=True`) inside a fresh namespace; a
+    setup failure returns `ok: False` with its stage, never a run.
     """
     binary = _unshare()
     if binary is None:
@@ -325,6 +374,18 @@ def run(argv: Sequence[str], *, work_dir: str | pathlib.Path,
         return {"schema": SCHEMA, "ok": False, "isolated": False,
                 "refused": "REFUSED__WORK_DIR_MISSING", "stage": "admit",
                 "detail": str(work)}
+    seccomp_hex = ""
+    seccomp_sha = None
+    if seccomp:
+        try:
+            from canonical.runtime import worker_syscall_allowlist_v1 as _allowlist
+
+            seccomp_hex = _allowlist.filter_hex()
+            seccomp_sha = _allowlist.filter_sha256()
+        except Exception as exc:
+            return {"schema": SCHEMA, "ok": False, "isolated": False,
+                    "refused": "REFUSED__SECCOMP_UNAVAILABLE", "stage": "seccomp_compile",
+                    "detail": str(exc)}
     root = tempfile.mkdtemp(prefix="brain-isolation-root-")
     real_env = {"PATH": "/usr/local/bin:/usr/bin:/bin", "HOME": "/work",
                 "TMPDIR": "/tmp", "LC_ALL": "C.UTF-8", "PYTHONHASHSEED": "0",
@@ -350,7 +411,8 @@ def run(argv: Sequence[str], *, work_dir: str | pathlib.Path,
     writable = [[str(src), str(dst)] for src, dst in extra_rw]
     spec = {"root": root, "work": str(work), "argv": [str(a) for a in argv],
             "budget_s": float(budget_s), "env": real_env, "etc": etc,
-            "root_mb": int(root_mb), "extra_ro": read_only, "extra_rw": writable}
+            "root_mb": int(root_mb), "extra_ro": read_only, "extra_rw": writable,
+            "seccomp_hex": seccomp_hex}
     flags = list(_NS_FLAGS)
     if not allow_network:
         flags.append("--net")
@@ -370,11 +432,15 @@ def run(argv: Sequence[str], *, work_dir: str | pathlib.Path,
     except json.JSONDecodeError:
         payload = {"ok": False, "stage": "child_output",
                    "error": (done.stderr or done.stdout or "")[-400:]}
+    seccomp_ok = (not seccomp) or bool(payload.get("seccomp_installed"))
     receipt: dict[str, Any] = {
         "schema": SCHEMA,
         "ok": bool(payload.get("ok")),
-        "isolated": bool(payload.get("ok")) and bool(payload.get("caps_dropped")),
+        "isolated": bool(payload.get("ok")) and bool(payload.get("caps_dropped")) and seccomp_ok,
         "allow_network": bool(allow_network),
+        "seccomp_requested": bool(seccomp),
+        "seccomp_installed": bool(payload.get("seccomp_installed")),
+        "seccomp_filter_sha256": seccomp_sha if payload.get("seccomp_installed") else None,
         "namespaces": ["user", "mount", "pid", "ipc", "uts"]
                        + ([] if allow_network else ["net"]),
         "network": "HOST" if allow_network else "NONE__FRESH_NETNS",
@@ -398,13 +464,13 @@ def run(argv: Sequence[str], *, work_dir: str | pathlib.Path,
     return receipt
 
 
-def probe(*, budget_s: float = 60.0) -> dict[str, Any]:
+def probe(*, budget_s: float = 60.0, seccomp: bool = True) -> dict[str, Any]:
     """Admission by measurement: run a payload that tries every escape.
 
     The verdict is `ISOLATED` only when every attempt that must be blocked is
-    blocked AND the payload is measured to hold no capabilities. Anything else
-    is `NOT_ISOLATED`, with the failing attempts named -- the exact defect of
-    2026-11-24 was a claim of isolation that had never been attacked.
+    blocked AND the payload is measured to hold no capabilities (and seccomp
+    filter mode == 2 when `seccomp=True`). Anything else is `NOT_ISOLATED`,
+    with the failing attempts named.
     """
     state = support()
     if not state.get("available"):
@@ -418,7 +484,7 @@ def probe(*, budget_s: float = 60.0) -> dict[str, Any]:
                        str(canary / "inside-outside.txt"),
                        str(canary / "written-from-inside.txt"),
                        "canary"],
-                      work_dir=work, budget_s=budget_s)
+                      work_dir=work, budget_s=budget_s, seccomp=seccomp)
         findings: dict[str, Any] = {}
         probe_file = work / ".probe.json"
         if probe_file.is_file():
@@ -426,15 +492,20 @@ def probe(*, budget_s: float = 60.0) -> dict[str, Any]:
                 findings = json.loads(probe_file.read_text(encoding="utf-8"))
             except json.JSONDecodeError:
                 findings = {}
+        must_block = list(_MUST_BLOCK) + (list(_SECCOMP_MUST_BLOCK) if seccomp else [])
         escaped = sorted(name for name, row in findings.items()
-                         if not row.get("blocked") and name in _MUST_BLOCK)
+                         if not row.get("blocked") and name in must_block)
         caps = (findings.get("caps") or {}).get("value")
+        seccomp_mode = (findings.get("seccomp_mode") or {}).get("value")
         canary_written = (canary / "written-from-inside.txt").exists()
         verdict = "ISOLATED"
         reasons: list[str] = []
         if not receipt.get("isolated"):
             verdict = "NOT_ISOLATED"
-            reasons.append("payload did not reach a capability-dropped namespace")
+            reasons.append("payload did not reach a capability-dropped seccomp namespace")
+        if seccomp and seccomp_mode != "2":
+            verdict = "NOT_ISOLATED"
+            reasons.append("seccomp filter mode not active: %r" % (seccomp_mode,))
         if escaped:
             verdict = "NOT_ISOLATED"
             reasons.append("escape succeeded: " + ", ".join(escaped))
@@ -458,6 +529,9 @@ def probe(*, budget_s: float = 60.0) -> dict[str, Any]:
             "isolated": verdict == "ISOLATED",
             "reasons": reasons,
             "caps_after_drop": caps,
+            "seccomp_mode": seccomp_mode,
+            "seccomp_installed": bool(receipt.get("seccomp_installed")),
+            "seccomp_filter_sha256": receipt.get("seccomp_filter_sha256"),
             "host_canary_written": canary_written,
             "attempts": findings,
             "receipt": receipt,
@@ -473,6 +547,12 @@ _MUST_BLOCK = (
     "dns_resolve", "udp_connect", "mount_tmpfs", "chroot_again",
     "proc_one_root_home", "escape_via_proc_root", "write_readonly_bind",
     "dev_mem", "host_home",
+)
+
+_SECCOMP_MUST_BLOCK = (
+    "syscall_bpf", "syscall_io_uring_setup", "syscall_keyctl",
+    "syscall_userfaultfd", "syscall_ptrace", "syscall_unshare",
+    "socket_af_netlink",
 )
 
 # /proc/1 inside a fresh pid namespace is the sandbox's own child, so reading

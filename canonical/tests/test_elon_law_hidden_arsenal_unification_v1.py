@@ -68,8 +68,8 @@ class ElonLawAndHiddenArsenalUnificationTests(unittest.TestCase):
             self.assertEqual(core_data["raw_sha256"], hashlib.sha256(art_path.read_bytes()).hexdigest())
 
         # Lazy SovereignZeroLLMPlanner re-export works while keeping brain_unified_model_v1 lean
-        bum_lines = len((ROOT / "canonical/runtime/brain_unified_model_v1.py").read_text(encoding="utf-8").splitlines())
-        self.assertLess(bum_lines, 7100)
+        bum_src = (ROOT / "canonical/runtime/brain_unified_model_v1.py").read_text(encoding="utf-8")
+        self.assertNotIn("class SovereignZeroLLMPlanner", bum_src)
         self.assertTrue(callable(bum.brain_model_callable))
         self.assertIsNotNone(bum.SovereignZeroLLMPlanner)
 

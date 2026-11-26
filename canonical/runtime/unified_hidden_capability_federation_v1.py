@@ -1554,9 +1554,149 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "domain": "MULTIFILE_REPO_SWE_SELF_COMPILING_REPAIR",
         "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
         "entrypoint": "run",
-        "summary": "Unified multi-file Python repository Futamura solver uniting Rung-0 compiled skills + stdlib_cow_test_runner_v1 os.fork CoW overlays + multi-file dynamic coverage + extended AST synthesis + Ring-0 ddmin/mutation/conformal gate + automatic Rung-0 compile-back.",
+        "summary": "Unified multi-file Python repository Futamura solver uniting Rung-0 compiled skills + stdlib_cow_test_runner_v1 os.fork CoW overlays + multi-file dynamic coverage + extended AST + 13-law residual wall closers + repo component Petri + Ring-0 ddmin/mutation/conformal gate + automatic Rung-0 compile-back.",
         "triggers": ["multifile futamura repo repair", "multi file cow fork swe solver", "cross file ast repair compile back"],
         "required_inputs": ["repo_dir"],
+        "declared_dependencies": [],
+    },
+    # --- WAVE 38: SECCOMP BPF, REFUSAL INTERFACE HCU, WALL-CLOSING SWE, NON-MALLEABLE MEMORY OS & BICAMERAL SLEEP ---
+    "LEAPFROG_W38_SECCOMP_SYSCALL_ALLOWLIST": {
+        "domain": "OS_KERNEL_CONFINEMENT_AND_ESCAPE_PROBE",
+        "source_path": "canonical/runtime/worker_syscall_allowlist_v1.py",
+        "entrypoint": "describe",
+        "summary": "Pinned classic BPF x86_64 seccomp syscall allowlist (default-deny ENOSYS, EPERM on bpf/io_uring/keyctl/ptrace/unshare/userfaultfd/AF_NETLINK, KILL_PROCESS on x32/int80) with offline decision interpreter.",
+        "triggers": ["seccomp bpf syscall allowlist", "kernel syscall filter", "worker syscall allowlist", "verify seccomp policy"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W38_REFUSAL_SPEC_COMPILER": {
+        "domain": "OS_CONFINED_COMPUTER_USE_AND_EFFECT_ORACLE",
+        "source_path": "canonical/runtime/a_refusal_is_a_specification_v1.py",
+        "entrypoint": "read_refusal",
+        "summary": "Refusal-as-specification interface compiler (Agent-S4 + a_refusal_is_a_specification): parses CLI/app refusals into typed non-guessed flag/option repairs and compiles verified interfaces.",
+        "triggers": ["refusal is a specification", "manufacture what the refusal asks for instead of faking it", "compile refusal to interface", "agent s4 evolving interface"],
+        "required_inputs": ["text"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W38_OSWORLD_VERIFIED_LEDGER": {
+        "domain": "OS_CONFINED_COMPUTER_USE_AND_EFFECT_ORACLE",
+        "source_path": "canonical/runtime/osworld_verified_task_ledger_v1.py",
+        "entrypoint": "decide",
+        "summary": "External OSWorld verified task ledger gating desktop and browser screen-read, action selection, WebMCP typed tool dispatch, and real effect verification on cryptographic receipts.",
+        "triggers": ["read screen decide action verify effect", "osworld verified task ledger", "webmcp navigator modelcontext", "verify screen action effect"],
+        "required_inputs": ["state"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W38_TYPED_CEGIS_INVENTION": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/typed_invention_v1.py",
+        "entrypoint": "typed_cegis_synthesize",
+        "summary": "Type-pruned CEGIS(T) program synthesis combined with adaptive constant V9 invention and multi-concept composition bridges at zero LLM calls.",
+        "triggers": ["typed invention cegis", "cegis t typed synthesis", "adaptive constant concept bridge", "composition concept bridge"],
+        "required_inputs": ["spec"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W38_RESIDUAL_WALL_CLOSERS": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/residual_wall_closers_v1.py",
+        "entrypoint": "ResidualWallCloser",
+        "summary": "Thirteen statement-shaped residual wall closers (NoneGuardToTruthiness, AssertContractToTypedRaise, EmptyContainerPrefixArm, OptionalTupleShapeCompletion, DocstringDefaultUngating, etc.).",
+        "triggers": ["residual wall closers", "statement shaped code repair", "assert contract to typed raise", "none guard to truthiness"],
+        "required_inputs": ["source", "target_function"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W38_REPO_COMPONENT_PETRI": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/repo_component_petri_v1.py",
+        "entrypoint": "synthesize_repo_petri_repairs",
+        "summary": "Repo-native callable and exception component miner with Type-Transition Petri-Net expression and handler widening synthesis.",
+        "triggers": ["repo component petri", "mine repo neighborhood components", "exception handler widening synthesis"],
+        "required_inputs": ["repo_root", "rel_path", "source_text", "line_no"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS": {
+        "domain": "DBSP_AGM_MEMORY_AND_CONFORMAL_EVALUE",
+        "source_path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+        "entrypoint": "execute_memory_operation",
+        "summary": "Non-malleable memory OS and bicameral sleep daemon: TMA-NM write-time cryptographic origin binding (0% laundering), GovMem independent-witness contrast promotion, A-TMA anti-ghost-memory state views, SkillApt counterfactual activation, <96 hot-tier cap, drift detection, and continual improvement without forgetting or dropping facts.",
+        "triggers": [
+            "keep improving on new tasks without forgetting earlier ones",
+            "detect drift between what was taught and what is now true",
+            "consolidate without drift and keep the store current",
+            "compact an episode journal retaining verified facts",
+            "verify that a receipt was not edited after the fact",
+            "tma-nm origin binding",
+            "govmem correlated false promotion",
+            "ghost memory state view",
+            "skillapt counterfactual activation",
+            "bicameral sleep cycle",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W38_CONTENT_ADDRESSED_CHUNK_ARCHIVE": {
+        "domain": "BITEMPORAL_MEMORY_AND_SKILL_RENT",
+        "source_path": "canonical/runtime/release_chunk_archive_v1.py",
+        "entrypoint": "planned_chunk_count",
+        "summary": "Content-addressed release chunk archive supporting SHA-256 verified chunk splitting, recall from the chunk archive by content address, and exact reconstruction.",
+        "triggers": ["recall from the chunk archive by content address", "release chunk archive", "content addressed chunk reconstruct"],
+        "required_inputs": ["size_bytes"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W38_SAFE_ACTION_WORLD_MODEL": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/safe_action_model_v1.py",
+        "entrypoint": "describe",
+        "summary": "Verified safe action world model forecasting whether an outcome will follow from a plan, simulating state deltas, and falsifying control loop hypotheses before acting.",
+        "triggers": [
+            "forecast whether an outcome will follow from this plan",
+            "falsify the control loop hypothesis",
+            "safe action world model transition",
+            "simulate action outcome before acting",
+        ],
+        "required_inputs": ["state"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W38_CONSISTENCY_EQUIVALENCE_AND_JUDGE": {
+        "domain": "VERIFICATION_AND_CHECKABILITY",
+        "source_path": "canonical/swe_kernel/consistency_vs_equivalence_v1.py",
+        "entrypoint": "combined_admission_verdict",
+        "summary": "Separates sample consistency from behavioral equivalence, verifies two non-constant witnesses, and audits verifier non-vacuity via judge_the_judge before trusting a pass verdict.",
+        "triggers": [
+            "verify two witnesses that are not constant",
+            "consistency vs equivalence admission",
+            "judge the judge vacuous verifier audit",
+            "verify receipt integrity non constant witness",
+        ],
+        "required_inputs": ["gate_report"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W38_MINED_REWRITE_AND_WEIGHT_GATE": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/mined_rewrite_theory_v1.py",
+        "entrypoint": "mine_rules",
+        "summary": "Execution-discovered e-graph algebraic rewrite law miner, minimal vocabulary distinction creator, and out-of-training-set weight update admission gate.",
+        "triggers": [
+            "mined rewrite theory",
+            "weight update admission gate",
+            "minimal vocabulary distinction created",
+            "discover egraph rewrite laws by execution",
+        ],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W38_COW_LENS_NEGATIVE_SPACE": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/cow_lens_fuzz_and_negative_space_v1.py",
+        "entrypoint": "synthesize_bidirectional_fst_lens",
+        "summary": "Bidirectional FST/lens synthesizer, CoW differential boundary fuzzer, angelic fault blame, and persistent L3 negative-space refutation store.",
+        "triggers": [
+            "cow lens fuzz negative space",
+            "bidirectional fst lens synthesis",
+            "negative space refutation store",
+            "angelic cow fault blame",
+        ],
+        "required_inputs": ["pairs"],
         "declared_dependencies": [],
     },
     "METAMORPHIC_HABITATION_ZIPPER": {
@@ -1958,6 +2098,9 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
             "unshare",
             "capeff zero",
             "capability drop",
+            "seccomp",
+            "seccomp bpf",
+            "syscall allowlist",
             "escape probe",
             "confined computer use",
             "multifile futamura",
@@ -1966,13 +2109,125 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
         ],
         "engines": [
             "engine:LEAPFROG_W37_OS_KERNEL_ISOLATION",
+            "engine:LEAPFROG_W38_SECCOMP_SYSCALL_ALLOWLIST",
             "engine:LEAPFROG_W37_CONFINED_HYBRID_CU",
             "engine:LEAPFROG_W37_MULTIFILE_FUTAMURA_REPO",
         ],
         "koan_modules": [
             "canonical/runtime/os_isolation_v1.py",
+            "canonical/runtime/worker_syscall_allowlist_v1.py",
             "canonical/runtime/futamura_leapfrog_kernel_v1.py",
             "canonical/swe_kernel/stdlib_cow_test_runner_v1.py",
+        ],
+    },
+    "agent_s4_refusal_interface_webmcp_hcu": {
+        "external_names": [
+            "agent s4",
+            "evolving agent interfaces",
+            "hybrid computer use",
+            "hcu",
+            "webmcp",
+            "navigator.modelcontext",
+            "refusal specification",
+            "cli-anything",
+            "opencli",
+            "recreationworld",
+            "osworld v2",
+            "osworld ledger",
+            "read screen decide action verify effect",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W37_CONFINED_HYBRID_CU",
+            "engine:LEAPFROG_W38_REFUSAL_SPEC_COMPILER",
+            "engine:LEAPFROG_W38_OSWORLD_VERIFIED_LEDGER",
+            "engine:LEAPFROG_W38_SAFE_ACTION_WORLD_MODEL",
+        ],
+        "koan_modules": [
+            "canonical/runtime/a_refusal_is_a_specification_v1.py",
+            "canonical/runtime/osworld_verified_task_ledger_v1.py",
+            "canonical/tools/the_refusal_is_the_curriculum_v1.py",
+            "canonical/swe_kernel/safe_action_model_v1.py",
+        ],
+    },
+    "wall_closing_swe_cegist_petri_harness_evolution": {
+        "external_names": [
+            "cegis(t)",
+            "typed cegis",
+            "typed invention",
+            "residual wall closers",
+            "statement shaped repair",
+            "repo component petri",
+            "harnessflow",
+            "meta-harness",
+            "darwin godel machine",
+            "dgm",
+            "codeskill",
+            "live-swe-agent",
+            "judge the judge",
+            "vacuous verifier",
+            "bidirectional lens",
+            "negative space refutation",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W37_MULTIFILE_FUTAMURA_REPO",
+            "engine:LEAPFROG_W38_TYPED_CEGIS_INVENTION",
+            "engine:LEAPFROG_W38_RESIDUAL_WALL_CLOSERS",
+            "engine:LEAPFROG_W38_REPO_COMPONENT_PETRI",
+            "engine:LEAPFROG_W38_CONSISTENCY_EQUIVALENCE_AND_JUDGE",
+            "engine:LEAPFROG_W38_COW_LENS_NEGATIVE_SPACE",
+        ],
+        "koan_modules": [
+            "canonical/swe_kernel/typed_invention_v1.py",
+            "canonical/swe_kernel/residual_wall_closers_v1.py",
+            "canonical/swe_kernel/repo_component_petri_v1.py",
+            "canonical/tools/judge_the_judge_v1.py",
+            "canonical/swe_kernel/cow_lens_fuzz_and_negative_space_v1.py",
+            "canonical/swe_kernel/consistency_vs_equivalence_v1.py",
+        ],
+    },
+    "non_malleable_memory_os_and_bicameral_sleep": {
+        "external_names": [
+            "tma-nm",
+            "origin binding",
+            "origin laundering",
+            "govmem",
+            "correlated trace promotion",
+            "a-tma",
+            "ghost memory",
+            "state view packet",
+            "trustmem",
+            "memgate",
+            "openviking",
+            "viking://",
+            "progressive disclosure",
+            "skillapt",
+            "rubin potential outcome",
+            "dreamprover",
+            "language models need sleep",
+            "bicameral sleep",
+            "ascent",
+            "oattt",
+            "guidance-ttt",
+            "ttt-discover",
+            "absolute zero reasoner",
+            "weight update admission",
+            "mined rewrite theory",
+            "minimal vocabulary distinction",
+            "chunk archive content address",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
+            "engine:LEAPFROG_W38_CONTENT_ADDRESSED_CHUNK_ARCHIVE",
+            "engine:LEAPFROG_W38_MINED_REWRITE_AND_WEIGHT_GATE",
+            "engine:LEAPFROG_W36_DBSP_AGM_CONFORMAL",
+        ],
+        "koan_modules": [
+            "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+            "canonical/runtime/release_chunk_archive_v1.py",
+            "canonical/swe_kernel/weight_update_admission_v1.py",
+            "canonical/swe_kernel/mined_rewrite_theory_v1.py",
+            "canonical/swe_kernel/the_distinction_is_created_v1.py",
+            "canonical/tools/a_law_carries_its_reason_v1.py",
         ],
     },
 }
@@ -3930,6 +4185,144 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
 
         res = m.run({"op": "multifile_repo_solve", **dict(inputs)}, ROOT)
         return _ok(mode, str(res.get("rung") or "MULTIFILE_FUTAMURA_RESOLVED"), res)
+
+    if mode == "LEAPFROG_W38_SECCOMP_SYSCALL_ALLOWLIST":
+        from canonical.runtime import worker_syscall_allowlist_v1 as m
+
+        if "syscall_number" in inputs or "syscall_name" in inputs:
+            num = (
+                int(inputs["syscall_number"])
+                if "syscall_number" in inputs
+                else int(m.X86_64[str(inputs["syscall_name"])])
+            )
+            verdict = m.decide(
+                num,
+                tuple(int(a) for a in (inputs.get("args") or ())),
+                arch=str(inputs.get("arch") or "x86_64"),
+            )
+            return _ok(mode, "SYSCALL_DECIDED", {"syscall_number": num, "verdict": verdict, "filter_sha256": m.filter_sha256("x86_64")})
+        desc = m.describe(inputs.get("arch"))
+        return _ok(mode, "SECCOMP_ALLOWLIST_DESCRIBED", desc)
+
+    if mode == "LEAPFROG_W38_REFUSAL_SPEC_COMPILER":
+        from canonical.runtime import a_refusal_is_a_specification_v1 as m
+
+        clause = m.read_refusal(str(inputs["text"]))
+        if clause is None:
+            return _fail(mode, "REFUSAL_UNREADABLE")
+        return _ok(
+            mode,
+            f"REFUSAL_PARSED_{clause.form}",
+            {
+                "form": clause.form,
+                "choices": list(getattr(clause, "choices", ()) or ()),
+                "raw": str(getattr(clause, "raw", "")),
+            },
+        )
+
+    if mode == "LEAPFROG_W38_OSWORLD_VERIFIED_LEDGER":
+        from canonical.runtime import osworld_verified_task_ledger_v1 as m
+
+        res = m.decide(dict(inputs["state"]), inputs.get("base_decide"))
+        return _ok(mode, str(res.get("status") or "OSWORLD_LEDGER_DECIDED"), res)
+
+    if mode == "LEAPFROG_W38_TYPED_CEGIS_INVENTION":
+        from canonical.runtime import futamura_leapfrog_kernel_v1 as m
+
+        res = m.run({"op": "typed_cegis_solve", **dict(inputs)}, ROOT)
+        return _ok(mode, str(res.get("stage") or "TYPED_CEGIS_DONE"), res)
+
+    if mode == "LEAPFROG_W38_RESIDUAL_WALL_CLOSERS":
+        from canonical.swe_kernel import residual_wall_closers_v1 as m
+
+        closer = m.ResidualWallCloser()
+        cands = closer.mine_all(
+            str(inputs["source"]),
+            str(inputs["target_function"]),
+            functions=tuple(inputs.get("functions") or ()),
+            repo_sources=tuple(inputs.get("repo_sources") or ()),
+            test_sources=tuple(inputs.get("test_sources") or ()),
+        )
+        rows = [
+            {
+                "mechanism": c.mechanism,
+                "target_function": c.target_function,
+                "lineno": c.lineno,
+                "explanation": c.explanation,
+                "patched_module_source": c.patched_module_source,
+            }
+            for c in cands
+        ]
+        return _ok(mode, "RESIDUAL_WALLS_MINED", {"candidates": rows, "count": len(rows)})
+
+    if mode == "LEAPFROG_W38_REPO_COMPONENT_PETRI":
+        from canonical.swe_kernel import repo_component_petri_v1 as m
+
+        cands, n_mined = m.synthesize_repo_petri_repairs(
+            repo_root=Path(str(inputs["repo_root"])),
+            rel_path=str(inputs["rel_path"]),
+            source_text=str(inputs["source_text"]),
+            line_no=int(inputs["line_no"]),
+            pass_samples=list(inputs.get("pass_samples") or ()),
+            fail_samples=list(inputs.get("fail_samples") or ()),
+            escaping_exceptions=list(inputs.get("escaping_exceptions") or ()),
+            spec_literals=inputs.get("spec_literals"),
+            called_symbols=set(inputs.get("called_symbols") or ()) if inputs.get("called_symbols") else None,
+        )
+        return _ok(
+            mode,
+            "REPO_PETRI_REPAIRS_SYNTHESIZED",
+            {"candidates": [{"label": lb, "source": src} for lb, src in cands], "count": len(cands), "mined_components": n_mined},
+        )
+
+    if mode == "LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS":
+        from canonical.swe_kernel import canonical_memory_crystallizer_v1 as m
+
+        bus = inputs.get("bus") if isinstance(inputs.get("bus"), m.VerificationFirstMemoryBus) else m.VerificationFirstMemoryBus()
+        payload = {k: v for k, v in inputs.items() if k not in ("operation", "bus")}
+        res = m.execute_memory_operation(bus, str(inputs["operation"]), payload)
+        if res.get("pass"):
+            return _ok(mode, str(res.get("status") or "MEMORY_OS_OK"), res)
+        return _fail(mode, str(res.get("status") or "MEMORY_OS_FAIL"), **res)
+
+    if mode == "LEAPFROG_W38_CONTENT_ADDRESSED_CHUNK_ARCHIVE":
+        from canonical.runtime import release_chunk_archive_v1 as m
+
+        size_b = int(inputs["size_bytes"])
+        chunk_b = int(inputs.get("chunk_bytes", 1024 * 1024))
+        return _ok(mode, "CHUNK_COUNT_PLANNED", {"size_bytes": size_b, "chunk_bytes": chunk_b, "planned_chunks": m.planned_chunk_count(size_b, chunk_b)})
+
+    if mode == "LEAPFROG_W38_SAFE_ACTION_WORLD_MODEL":
+        from canonical.swe_kernel import safe_action_model_v1 as m
+
+        state = dict(inputs["state"])
+        desc = m.describe(state)
+        return _ok(mode, "SAFE_ACTION_STATE_DESCRIBED", {"descriptor": sorted(str(x) for x in desc)})
+
+    if mode == "LEAPFROG_W38_CONSISTENCY_EQUIVALENCE_AND_JUDGE":
+        from canonical.swe_kernel import consistency_vs_equivalence_v1 as m
+
+        res = m.combined_admission_verdict(dict(inputs["gate_report"]), inputs.get("equivalence"))
+        return _ok(mode, str(res.get("verdict") or "ADMISSION_EVALUATED"), res)
+
+    if mode == "LEAPFROG_W38_MINED_REWRITE_AND_WEIGHT_GATE":
+        from canonical.swe_kernel import mined_rewrite_theory_v1 as m
+
+        res = m.mine_rules(
+            max_size=int(inputs.get("max_size", 3)),
+            term_limit=int(inputs.get("term_limit", 96)),
+            witnesses_per_round=int(inputs.get("witnesses_per_round", 12)),
+            verify_rounds=int(inputs.get("verify_rounds", 2)),
+        )
+        return _ok(mode, "REWRITE_THEORY_MINED", {"rules_count": len(res.get("rules") or ()), "summary": res})
+
+    if mode == "LEAPFROG_W38_COW_LENS_NEGATIVE_SPACE":
+        from canonical.swe_kernel import cow_lens_fuzz_and_negative_space_v1 as m
+
+        lens = m.synthesize_bidirectional_fst_lens([(str(a), str(b)) for a, b in inputs["pairs"]])
+        if lens is None:
+            return _fail(mode, "NO_BIDIRECTIONAL_LENS")
+        return _ok(mode, "BIDIRECTIONAL_LENS_SYNTHESIZED", {"lens_kind": type(lens).__name__, "description": repr(lens)[:240]})
 
     if mode == "METAMORPHIC_HABITATION_ZIPPER":
         from canonical.swe_kernel import metamorphic_habitation_zipper_v1 as m
