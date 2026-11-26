@@ -115,6 +115,27 @@ benchmark bookkeeping admitted -> 136 · tie-break dropped -> 65 · validation r
 removed -> 74 · unverified candidate admitted -> 200 · receipt binding removed -> 372 · zero-spend check removed -> 15 · wrong
 dominance -> 221.
 
+### PYTHON_COUPLED_COMPARISON_REPAIR_V1 (adapter `canonical/runtime/python_coupled_comparison_repair_true_adapter_v1.py`)
+
+Claim: in a fresh disposable two-module Python repository, repair the specific two-edit nonmonotonic case where
+`value < left_threshold` must become `value <= left_threshold` and `value > right_threshold` must become
+`value >= right_threshold`. The visible test requires both edits, so either repair alone leaves the failure.
+
+Scope limits: exactly two pure one-argument modules, one comparison per module, a one-candidate-per-file / one-pair
+search budget, no imports, no arbitrary-program guarantee, no persistent source write or promotion. This is a narrow
+model-free coding component, not a claim of general software repair.
+
+The adapter invokes the existing bounded coupled repair kernel in a temporary directory. Its generator is separate;
+the independent stdlib oracle reconstructs the generated sources, applies the returned unified diffs with its own
+strict replayer, checks the inclusive formulas across held-out neighborhoods, tests boundary monotonicity, and checks
+source restoration, two replay passes, zero model dependencies, zero external providers, and zero spend.
+
+Measured in the sandbox on 2026-10-17: **2000/2000** (`MEASURED_SANDBOX`, non-crediting), with all three oracle
+families passing. Test of the test: a scratch copy with the left comparison mutation changed from `<` to `>=` gives
+**0/500**, rejected by the analytic, metamorphic, and patch/provenance oracles. The measurement binds the current
+adapter blob and current coupled-kernel blob; the 2026-10-17 audit amendment records it as a component only and grants
+no family, benchmark, terminal, or scoreboard credit.
+
 ### DOCX span editors: DOCX_RUN_SPAN_REPLACE_V1, DOCX_TEXT_EDIT_TRANSACTION_V1, DOCX_STORY_PART_REPLACE_V1
 
 Solvers `canonical/runtime/docx_run_span_replace.py` (`replace_unique_paragraph_span`), `docx_text_edit_transaction.py`
@@ -146,9 +167,10 @@ removed -> 11 · touching spans rejected -> 24 · best-effort partial transactio
 
 ## Audit of every claimed capability
 
-`TRUE_CAPABILITY_AUDIT_20261014_V1.json` classifies the 19 Opus-5.5 family routes and the components they name.
+`TRUE_CAPABILITY_AUDIT_20261014_V1.json` classifies the 19 Opus-5.5 family routes and the components they name; its
+2026-10-17 amendment records the bounded Python repair measurement without changing the audit's original date or identifier.
 Headline: 15 of 19 family routes contain an external model or service and are therefore **not Brain capabilities under the law**,
 including four the matrix marks PASS/VERIFIED; 2 families are model-free and measurable but unmeasured; 2 families have a measured
-component (DOCX; same-identity supervisor). Components: 5 MEASURED_PASS (9 specs), 4 MEASURABLE_PENDING, 1 CHECKER_GAMING,
-2 NOT_YET_AUDITED.
+component, and 3 external-model routes name a separately measurable component. Components: 6 MEASURED_PASS (10 specs),
+4 MEASURABLE_PENDING, 1 CHECKER_GAMING, 2 NOT_YET_AUDITED.
 The audit changes no matrix status, predicate or pointer.
