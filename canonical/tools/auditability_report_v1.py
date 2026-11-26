@@ -871,7 +871,7 @@ def write_baseline(path: pathlib.Path, root: pathlib.Path = REPO_ROOT) -> dict[s
         "schema": "AUDITABILITY_DECLARATION_FLOOR_V1",
         "authority": ("NONE -- a measurement of this tree, not a verification receipt and not "
                       "independent verification of anything"),
-        "producer": "canonical/tools/auditability_report_v1.py --floor --write-baseline",
+        "producer": "canonical/tools/auditability_report_v1.py --floor",
         "carrier": "SANDBOX",
         "measured_at_git_head": head,
         "measured_on": _dt.date.today().isoformat(),

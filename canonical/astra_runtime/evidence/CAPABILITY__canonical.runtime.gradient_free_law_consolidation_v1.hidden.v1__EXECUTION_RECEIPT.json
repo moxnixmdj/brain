@@ -1,0 +1,28 @@
+{
+ "capability_id": "canonical.runtime.gradient_free_law_consolidation_v1.hidden.v1",
+ "elapsed_ms": 52.63,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "kind": "contract",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/gradient_free_law_consolidation_v1.py",
+ "module_sha256": "07e1ab9391c8fe564e76d1c26c65fc6cc737e3bb6ea9f283c50b6f9be5c98efe",
+ "observed": {
+  "output_verified": true,
+  "status": "CONSOLIDATED_WITH_HELDOUT_TRANSFER_GAP"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "harvest-local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.gradient_free_law_consolidation_v1.hidden.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 25,
+ "result_sha256": "4aa1165b949f1c09c570abb5bb0a16c7944b2cb3db06b20d21342a04e75cbf05",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

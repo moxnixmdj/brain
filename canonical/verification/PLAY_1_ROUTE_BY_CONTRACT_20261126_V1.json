@@ -1,0 +1,1682 @@
+{
+ "ablation_topic_only_recall_at_1": 0.476,
+ "ablation_topic_only_recall_at_5": 0.952,
+ "by_kind": {
+  "frontier": {
+   "contract_recall_at_5": 0.905,
+   "incumbent_recall_at_5": 0.619
+  },
+  "native": {
+   "contract_recall_at_5": 0.905,
+   "incumbent_recall_at_5": 0.714
+  }
+ },
+ "chance_topic_at_5": 0.8456,
+ "chance_uniform_at_5": 0.0059,
+ "claim_limit": "Ground truth is the atlas classification, not a human label: a hit means the router returned a module the atlas places in that domain. It measures navigation, not capability, and it says nothing about whether the module works. Producer-run in one sandbox; independent reproduction is open.",
+ "contract_recall_at_1": 0.548,
+ "contract_recall_at_5": 0.905,
+ "contract_recall_executable_at_5": 0.0,
+ "date_utc": "2026-11-26T01:28:56Z",
+ "gain_over_incumbent": 0.238,
+ "incumbent_recall_at_5": 0.667,
+ "kill_floor": 0.53,
+ "method": {
+  "admission": "at least one verb in common, or at least two objects; topic overlap alone is refused",
+  "ground_truth": "returned module stem is among the domain's atlas candidate stems",
+  "incumbent": "UnifiedModel.find_source, the channel that already beats route() 0.76 to 0.33",
+  "pool": "every module the atlas ranked into one of the seven domains",
+  "weights": {
+   "object": 1.0,
+   "topic": 0.25,
+   "verb": 2.0
+  }
+ },
+ "model_calls": 0,
+ "network_calls": 0,
+ "per_domain": {
+  "coding_agents": {
+   "ablation_topic_only_recall_at_1": 0.833,
+   "ablation_topic_only_recall_at_5": 1.0,
+   "chance_topic_at_5": 1.0,
+   "chance_uniform_at_5": 0.0059,
+   "contract_recall_at_1": 0.667,
+   "contract_recall_at_5": 1.0,
+   "contract_recall_executable_at_5": 0.0,
+   "incumbent_recall_at_5": 0.833,
+   "mean_admissible": 82.5,
+   "queries": 6
+  },
+  "computer_use": {
+   "ablation_topic_only_recall_at_1": 0.5,
+   "ablation_topic_only_recall_at_5": 1.0,
+   "chance_topic_at_5": 0.9434,
+   "chance_uniform_at_5": 0.0059,
+   "contract_recall_at_1": 0.667,
+   "contract_recall_at_5": 1.0,
+   "contract_recall_executable_at_5": 0.0,
+   "incumbent_recall_at_5": 0.667,
+   "mean_admissible": 57.3,
+   "queries": 6
+  },
+  "continual_learning": {
+   "ablation_topic_only_recall_at_1": 0.0,
+   "ablation_topic_only_recall_at_5": 0.667,
+   "chance_topic_at_5": 0.1815,
+   "chance_uniform_at_5": 0.0059,
+   "contract_recall_at_1": 0.0,
+   "contract_recall_at_5": 0.5,
+   "contract_recall_executable_at_5": 0.0,
+   "incumbent_recall_at_5": 0.167,
+   "mean_admissible": 24.2,
+   "queries": 6
+  },
+  "instant_learning": {
+   "ablation_topic_only_recall_at_1": 0.667,
+   "ablation_topic_only_recall_at_5": 1.0,
+   "chance_topic_at_5": 1.0,
+   "chance_uniform_at_5": 0.0059,
+   "contract_recall_at_1": 0.833,
+   "contract_recall_at_5": 1.0,
+   "contract_recall_executable_at_5": 0.0,
+   "incumbent_recall_at_5": 1.0,
+   "mean_admissible": 55.0,
+   "queries": 6
+  },
+  "memory": {
+   "ablation_topic_only_recall_at_1": 0.0,
+   "ablation_topic_only_recall_at_5": 1.0,
+   "chance_topic_at_5": 1.0,
+   "chance_uniform_at_5": 0.0059,
+   "contract_recall_at_1": 0.5,
+   "contract_recall_at_5": 1.0,
+   "contract_recall_executable_at_5": 0.0,
+   "incumbent_recall_at_5": 0.833,
+   "mean_admissible": 25.2,
+   "queries": 6
+  },
+  "verification_abstention": {
+   "ablation_topic_only_recall_at_1": 1.0,
+   "ablation_topic_only_recall_at_5": 1.0,
+   "chance_topic_at_5": 1.0,
+   "chance_uniform_at_5": 0.0059,
+   "contract_recall_at_1": 0.833,
+   "contract_recall_at_5": 1.0,
+   "contract_recall_executable_at_5": 0.0,
+   "incumbent_recall_at_5": 0.5,
+   "mean_admissible": 74.2,
+   "queries": 6
+  },
+  "world_model": {
+   "ablation_topic_only_recall_at_1": 0.333,
+   "ablation_topic_only_recall_at_5": 1.0,
+   "chance_topic_at_5": 0.7947,
+   "chance_uniform_at_5": 0.0059,
+   "contract_recall_at_1": 0.333,
+   "contract_recall_at_5": 0.833,
+   "contract_recall_executable_at_5": 0.0,
+   "incumbent_recall_at_5": 0.667,
+   "mean_admissible": 47.5,
+   "queries": 6
+  }
+ },
+ "pool": 845,
+ "queries": 42,
+ "rows": [
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": true,
+   "ablation_top": [
+    "one_demonstration_basin_v1",
+    "miniwob_one_success_generalisation_measure_v1",
+    "compile_brain_unified_model_v1",
+    "one_demonstration_reach_v1",
+    "perfect_algorithm_unified_v8"
+   ],
+   "admissible": 69,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": false,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "goal_front_compiler_v1",
+    "creature_stakes_and_initiative_v1",
+    "mortality_and_triage_v1",
+    "edit_by_example_v1",
+    "causal_nexus_v1"
+   ],
+   "domain": "instant_learning",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "permanence_amplifies_check_v1",
+    "learn_to_learn_v1",
+    "demonstration_version_space_v1",
+    "systematic_edit_supply_v1",
+    "one_demonstration_basin_v1"
+   ],
+   "kind": "frontier",
+   "query": "learn a new capability from a single demonstration without training",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 586
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": true,
+   "ablation_top": [
+    "edit_by_example_v1",
+    "operator_acquisition_v1",
+    "documentation_mining_v1",
+    "teach_actions_v1",
+    "capability_forge_v1"
+   ],
+   "admissible": 85,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "creature_stakes_and_initiative_v1",
+    "reverse_tomography_algebra_v1",
+    "causal_nexus_v1",
+    "computer_env_v1",
+    "humanevalfix_experience_stream_measure_v1"
+   ],
+   "domain": "instant_learning",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "cli_capability_acquisition_v1",
+    "program_synthesis_v1",
+    "quoted_in_the_task_text_v1",
+    "take_out_v1",
+    "expression_operator_pack_v1"
+   ],
+   "kind": "frontier",
+   "query": "infer a program from one example and prove it works",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 740
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": true,
+   "ablation_top": [
+    "perfect_algorithm_v1",
+    "verifier_falsification_v1",
+    "grid_delta_rule_inducer_v1",
+    "instruction_contract_v1",
+    "swe_self_improvement_bridge_v1"
+   ],
+   "admissible": 42,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "verifier_falsification_v1",
+    "edit_by_example_v1",
+    "the_page_is_the_guide_v1",
+    "a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1",
+    "passing_patch_shape_measure_v1"
+   ],
+   "domain": "instant_learning",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "universal_solver_episode_verification_authenticator_v1",
+    "python_test_corpus_discovery_v1",
+    "operator_generalization_v1",
+    "perfect_algorithm_v1",
+    "safe_action_model_v1"
+   ],
+   "kind": "frontier",
+   "query": "generalize one episode into a reusable rule",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 487
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": false,
+   "ablation_top": [
+    "what_the_vocabulary_cannot_say_v1",
+    "environment_reuse_v1",
+    "curriculum_v1",
+    "r3_independent_learning_verifier_v1",
+    "closed_loop_trace_abduction_repair_v1"
+   ],
+   "admissible": 27,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "humanevalfix_experience_stream_measure_v1",
+    "goal_front_compiler_v1",
+    "the_assertion_is_the_demand_v1",
+    "creature_stakes_and_initiative_v1",
+    "livebench_union25_mandatory_footprint_v1"
+   ],
+   "domain": "instant_learning",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "cli_capability_acquisition_v1",
+    "auto_python_source_codec_acquisition",
+    "finite_grid_program_inducer_v1",
+    "program_synthesis_v1",
+    "swe_observational_program_synthesizer_v1"
+   ],
+   "kind": "native",
+   "query": "acquire a capability by inducing the program then proving it works",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 735
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": true,
+   "ablation_top": [
+    "perfect_algorithm_v1",
+    "verifier_falsification_v1",
+    "causal_trace_to_skill_compiler_v1",
+    "petri_cow_splicing_engine_v1",
+    "semantic_causal_engine_v1"
+   ],
+   "admissible": 47,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "verifier_falsification_v1",
+    "verified_skill_crystallizer_v1",
+    "a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1",
+    "passing_patch_shape_measure_v1",
+    "grammar_closed_repair_v1"
+   ],
+   "domain": "instant_learning",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "edit_by_example_v1",
+    "python_test_corpus_discovery_v1",
+    "a_goal_that_needs_two_moves_v1",
+    "root3_two_class_attempt_authorizer_v1",
+    "expression_operator_pack_v1"
+   ],
+   "kind": "native",
+   "query": "anti-unify two examples into one rule",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 513
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": false,
+   "ablation_top": [
+    "closed_loop_trace_abduction_repair_v1",
+    "lesson_localization_v1",
+    "one_demonstration_identifies_v1",
+    "operator_semantics_v1",
+    "perfect_algorithm_verifier_bridge_v1"
+   ],
+   "admissible": 60,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "quixbugs_one_fix_transfer_measure_v1",
+    "semantic_causal_engine_v1",
+    "universal_semantic_ir_v1",
+    "edit_by_example_v1",
+    "small_passing_patch_place_measure_v1"
+   ],
+   "domain": "instant_learning",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "lesson_localization_v1",
+    "take_out_v1",
+    "lesson_admission_gate_v1",
+    "verified_lesson_pipeline_v1",
+    "closed_loop_trace_abduction_repair_v1"
+   ],
+   "kind": "native",
+   "query": "teach a lesson from one trace",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 540
+  },
+  {
+   "ablation_hit": false,
+   "ablation_hit_at_1": false,
+   "ablation_top": [
+    "goal_front_compiler_v1",
+    "systematic_exploration_v1",
+    "closed_loop_trace_abduction_repair_v1",
+    "predictive_contract_v1",
+    "renewable_action_v1"
+   ],
+   "admissible": 22,
+   "chance_topic": 0.1685,
+   "chance_uniform": 0.0059,
+   "contract_hit": false,
+   "contract_hit_at_1": false,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "humanevalfix_experience_stream_measure_v1",
+    "file_found_from_task_text_measure_v1",
+    "expert_fix_repetition_measure_v1",
+    "witness_inversion_v1",
+    "quixbugs_end_to_end_repair_measure_v1"
+   ],
+   "domain": "continual_learning",
+   "incumbent_hit": false,
+   "incumbent_top": [
+    "edit_by_example_v1",
+    "regression_sweep_v1",
+    "every_call_site_v1",
+    "answer_ledger_v1",
+    "adaptive_constant_concept_bridge_v1"
+   ],
+   "kind": "frontier",
+   "query": "keep improving on new tasks without forgetting earlier ones",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 356
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": false,
+   "ablation_top": [
+    "frontier_unified_engine_v1",
+    "petri_cow_splicing_engine_v1",
+    "live_frontier_benchmark_runner_v1",
+    "verifier_falsification_v1",
+    "cross_modal_tomography_petri_v1"
+   ],
+   "admissible": 43,
+   "chance_topic": 0.1699,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": false,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "humanevalfix_experience_stream_measure_v1",
+    "verifier_falsification_v1",
+    "rule_expiry_v1",
+    "semantic_generalization_engine_v1",
+    "work_unit_validity_guard_v2"
+   ],
+   "domain": "continual_learning",
+   "incumbent_hit": false,
+   "incumbent_top": [
+    "harbor_science_evidence_store_v1",
+    "instant_condition_store_v1",
+    "instruction_policy_v1",
+    "consistency_vs_equivalence_v1",
+    "instruction_contract_for_code_v1"
+   ],
+   "kind": "frontier",
+   "query": "expire rules that no longer hold and keep the store current",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 765
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": false,
+   "ablation_top": [
+    "the_frame_crosses_the_machine_v1",
+    "finance_quantitative_algebra_v1",
+    "capability_consolidation_audit_v1",
+    "perfect_algorithm_v1",
+    "capability_forge_v1"
+   ],
+   "admissible": 15,
+   "chance_topic": 0.1674,
+   "chance_uniform": 0.0059,
+   "contract_hit": false,
+   "contract_hit_at_1": false,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "the_frame_crosses_the_machine_v1",
+    "evidence_demand_v1",
+    "capability_forge_v1",
+    "module_invocation_evidence_v1",
+    "diagnostics_perf_and_design_engine_v1"
+   ],
+   "domain": "continual_learning",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "taught_words_true_capability_adapter_v1",
+    "taught_words_v1",
+    "test_suite_admission_v1",
+    "associative_memory_v1",
+    "continuous_self_v1"
+   ],
+   "kind": "frontier",
+   "query": "detect drift between what was taught and what is now true",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 687
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": false,
+   "ablation_top": [
+    "cross_modal_tomography_petri_v1",
+    "frontier_unified_engine_v1",
+    "perfect_algorithm_unified_v5",
+    "petri_cow_splicing_engine_v1",
+    "live_frontier_benchmark_runner_v1"
+   ],
+   "admissible": 33,
+   "chance_topic": 0.1708,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": false,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "the_same_guard_twice_is_the_discriminator_v1",
+    "rule_expiry_v1",
+    "skill_scope_acquisition_v1",
+    "rule_scope_learning_v1",
+    "operand_invention_v1"
+   ],
+   "domain": "continual_learning",
+   "incumbent_hit": false,
+   "incumbent_top": [
+    "rule_scope_learning_v1",
+    "instruction_policy_v1",
+    "consistency_vs_equivalence_v1",
+    "instruction_contract_for_code_v1",
+    "structural_check_of_real_changes_v1"
+   ],
+   "kind": "native",
+   "query": "expire a rule whose scope no longer holds",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 322
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": false,
+   "ablation_top": [
+    "capability_forge_v1",
+    "autonomous_awake_loop_v1",
+    "computer_use_agent_v1",
+    "frontier_unified_engine_v1",
+    "petri_cow_splicing_engine_v1"
+   ],
+   "admissible": 20,
+   "chance_topic": 0.1699,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": false,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "humanevalfix_experience_stream_measure_v1",
+    "sentient_cognitive_core_v1",
+    "semantic_generalization_engine_v1",
+    "module_invocation_evidence_v1",
+    "grammar_closed_repair_v1"
+   ],
+   "domain": "continual_learning",
+   "incumbent_hit": false,
+   "incumbent_top": [
+    "harbor_science_evidence_store_v1",
+    "instant_condition_store_v1",
+    "edit_by_example_v1",
+    "current_escape_o_objective_acceptance_v1",
+    "current_escape_q_qualitative_acceptance_v1"
+   ],
+   "kind": "native",
+   "query": "consolidate without drift and keep the store current",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 765
+  },
+  {
+   "ablation_hit": false,
+   "ablation_hit_at_1": false,
+   "ablation_top": [
+    "tree_sitter_cst_skill_skeleton_v1",
+    "language_neutral_skill_bridge_v1",
+    "across_environments_v1",
+    "terminal_authority_epoch_guard_v1",
+    "terminal_frontier_compiler_v1"
+   ],
+   "admissible": 12,
+   "chance_topic": 0.2423,
+   "chance_uniform": 0.0059,
+   "contract_hit": false,
+   "contract_hit_at_1": false,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "mechanism_discovery_v6",
+    "universal_active_transfer_learner_v2",
+    "hierarchical_skill_library_v1",
+    "the_premise_is_the_sense_v1",
+    "the_same_guard_twice_is_the_discriminator_v1"
+   ],
+   "domain": "continual_learning",
+   "incumbent_hit": false,
+   "incumbent_top": [
+    "decision_evidence_locate_verify",
+    "cognitive_decision_kernel",
+    "deterministic_decision_primitives",
+    "general_adequate_decision_fixed_point_v2",
+    "goal_to_decision_binding_authority_v1"
+   ],
+   "kind": "native",
+   "query": "refine a decision across epochs without regressing",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 227
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": false,
+   "ablation_top": [
+    "verifier_falsification_v1",
+    "exact_stated_geometry_measure_v1",
+    "automationbench_stirrup_client_v1",
+    "harbor_science_evidence_store_v1",
+    "identify_a_real_bugs_fix_v1"
+   ],
+   "admissible": 30,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": false,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "humanevalfix_experience_stream_measure_v1",
+    "perfect_algorithm_v1",
+    "meta_learning_policy_v9",
+    "verifier_falsification_v1",
+    "automationbench_stirrup_client_v1"
+   ],
+   "domain": "memory",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "universal_solver_episode_verification_authenticator_v1",
+    "fibo_q2_2026_full_release_authority_v1",
+    "property_v1",
+    "retrieval_adversarial_recall_benchmark_v1",
+    "arm_margin_context_identity_v1"
+   ],
+   "kind": "frontier",
+   "query": "recall the right prior episode as context when the window is nearly full",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 724
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": false,
+   "ablation_top": [
+    "verifier_falsification_v1",
+    "creature_runtime_v1",
+    "systematic_exploration_v1",
+    "generalization_rung_gradient_v1",
+    "flywheel_v1"
+   ],
+   "admissible": 12,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "perfect_algorithm_v1",
+    "verifier_falsification_v1",
+    "capability_selection_retrieval_v1",
+    "brain_unified_model_v1",
+    "perfect_algorithm_v1"
+   ],
+   "domain": "memory",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "associative_memory_v1",
+    "h100_zero_learned_event_memory_v1",
+    "memory_policy_v1",
+    "procedure_memory_v1",
+    "scan_and_diff_against_memory_v1"
+   ],
+   "kind": "frontier",
+   "query": "keep a durable memory of prior runs that stays correct as it grows",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 483
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": false,
+   "ablation_top": [
+    "frontier_unified_engine_v1",
+    "perfect_algorithm_unified_v5",
+    "cross_modal_tomography_petri_v1",
+    "petri_cow_splicing_engine_v1",
+    "live_frontier_benchmark_runner_v1"
+   ],
+   "admissible": 17,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": false,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "humanevalfix_experience_stream_measure_v1",
+    "weight_space_fuel_v1",
+    "program_synthesis_v1",
+    "universal_solver_skill_bridge_v1",
+    "teach_actions_v1"
+   ],
+   "domain": "memory",
+   "incumbent_hit": false,
+   "incumbent_top": [
+    "p1_trajectory_t0_t2_multiplex_preflight",
+    "trajectory_failure_information_safe_candidate",
+    "trajectory_failure_information_safe_candidate_v2",
+    "trajectory_failure_information_safe_proof",
+    "trajectory_failure_information_safe_proof_v2"
+   ],
+   "kind": "frontier",
+   "query": "compress a long trajectory without losing the facts it carried",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 716
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": false,
+   "ablation_top": [
+    "a_fact_is_a_conjunction_of_its_readers_v1",
+    "goal_front_compiler_v1",
+    "harbor_science_evidence_store_v1",
+    "release_chunk_archive_v1",
+    "scan_and_diff_against_memory_v1"
+   ],
+   "admissible": 42,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "procedure_memory_v1",
+    "causal_trace_to_skill_compiler_v1",
+    "solve_with_a_calibrated_judge_v1",
+    "humanevalfix_experience_stream_measure_v1",
+    "instant_learning_in_a_new_environment_v1"
+   ],
+   "domain": "memory",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "release_chunk_archive_v1",
+    "raw_goal_archive_acceptance_v1",
+    "raw_goal_archive_compound_acceptance_v1",
+    "retrieval_adversarial_recall_benchmark_v1",
+    "rs_archive_clone_stage_b_verifier_v1"
+   ],
+   "kind": "native",
+   "query": "recall from the chunk archive by content address",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 738
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": false,
+   "ablation_top": [
+    "verifier_falsification_v1",
+    "harbor_science_evidence_store_v1",
+    "identify_a_real_bugs_fix_v1",
+    "target_undominated_escape_reduction_v1",
+    "terminal_theorem_minimality_falsifier_v1"
+   ],
+   "admissible": 29,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": false,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "humanevalfix_experience_stream_measure_v1",
+    "reach_of_the_grammar_v1",
+    "provenance_not_shape_v1",
+    "verified_skill_crystallizer_v1",
+    "certificate_gated_selected_route_runtime_entrypoint_v2"
+   ],
+   "domain": "memory",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "verify_taught_words_provenance_v1",
+    "fibo_q2_2026_full_release_authority_v1",
+    "unknown_domain_direct_candidate_v1",
+    "source_candidate_provenance_verify",
+    "cursorbench_typed_acceptance_dependency_provenance_atom_v1"
+   ],
+   "kind": "native",
+   "query": "retrieve a receipt by provenance when the context is full",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 730
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": false,
+   "ablation_top": [
+    "safe_action_model_v1",
+    "a_goal_that_needs_two_moves_v1",
+    "a_refusal_is_a_specification_v1",
+    "autonomous_verified_self_improvement_v1",
+    "binding_pin_is_current_v1"
+   ],
+   "admissible": 21,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "universal_verified_skill_ratchet_v1",
+    "meta_learning_policy_v9",
+    "harbor_science_agent_v10",
+    "harbor_science_agent_v11",
+    "harbor_science_agent_v12"
+   ],
+   "domain": "memory",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "universal_solver_episode_verification_authenticator_v1",
+    "executable_skill_program_v7",
+    "universal_verified_adaptive_solver_v4",
+    "bytes_v14_single_artifact_compact_v14",
+    "bytes_v15_single_artifact_compact"
+   ],
+   "kind": "native",
+   "query": "compact an episode journal without losing facts",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 237
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": true,
+   "ablation_top": [
+    "dom_state_environment_v1",
+    "gui_room_v1",
+    "instruction_contract_v1",
+    "what_a_demonstration_leaves_open_v1",
+    "aimed_action_v1"
+   ],
+   "admissible": 22,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "the_refusal_is_the_curriculum_v1",
+    "instruction_contract_v1",
+    "gui_room_v1",
+    "html_svg_diagram_mechanics_v1",
+    "arc_agi_3_public_exploration_measure_v1"
+   ],
+   "domain": "computer_use",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "browser_state_information_safe_candidate",
+    "aimed_action_v1",
+    "gui_room_v1",
+    "browser_t2_objective_binding_validator",
+    "browser_transition_objective_audit_v1"
+   ],
+   "kind": "frontier",
+   "query": "operate a browser page by clicking elements on screen",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 127
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": false,
+   "ablation_top": [
+    "live_brain_route_admission_v1",
+    "creature_runtime_v1",
+    "predicate_world_abstraction_v1",
+    "verified_capability_bridge_index_v1",
+    "interface_action_grammar_v1"
+   ],
+   "admissible": 6,
+   "chance_topic": 0.9524,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "cad_partspec",
+    "systematic_exploration_v1",
+    "environment_learning_v1",
+    "live_integrated_brain_v1",
+    "transfer_learning_v1"
+   ],
+   "domain": "computer_use",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "environment_learning_v1",
+    "gui_room_v1",
+    "osworld_v21_gui_goal_verifier_v1",
+    "osworld_v21_workflow_policy_v13",
+    "interface_action_grammar_v1"
+   ],
+   "kind": "frontier",
+   "query": "drive an unfamiliar desktop application through its GUI",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 294
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": false,
+   "ablation_top": [
+    "computer_use_agent_v1",
+    "frontier_unified_engine_v1",
+    "consequence_table_v1",
+    "perfect_algorithm_v1",
+    "reach_of_the_grammar_v1"
+   ],
+   "admissible": 229,
+   "chance_topic": 0.8451,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": false,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "humanevalfix_experience_stream_measure_v1",
+    "tool_census_v1",
+    "sentient_cognitive_core_v1",
+    "the_right_question_is_an_experiment_v1",
+    "instant_learning_in_a_new_environment_v1"
+   ],
+   "domain": "computer_use",
+   "incumbent_hit": false,
+   "incumbent_top": [
+    "cross_document_effect_hypothesis_worldset_verify_v1",
+    "effect_witness_v1",
+    "terminal_next_action_compiler_v1",
+    "cross_document_effect_calculus_verify_v1",
+    "cross_document_effect_semantic_lattice_verify_v2"
+   ],
+   "kind": "frontier",
+   "query": "read the screen, decide the next action, and verify the effect",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 781
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": true,
+   "ablation_top": [
+    "osworld_verified_task_ledger_v1",
+    "predicate_world_abstraction_v1",
+    "osworld_computer_surface_v1",
+    "osworld_v21_browser_ops_v1",
+    "perfect_algorithm_unified_v8"
+   ],
+   "admissible": 10,
+   "chance_topic": 0.8626,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "cad_partspec",
+    "humanevalfix_experience_stream_measure_v1",
+    "osworld_v21_generic_policy_v3",
+    "goal_compiler",
+    "html_svg_diagram_mechanics_v1"
+   ],
+   "domain": "computer_use",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "osworld_v21_browser_ops_v1",
+    "osworld_v21_host_guest_ops_v1",
+    "osworld_v21_browser_cdp_v1",
+    "osworld_v21_host_browser_ops_v1",
+    "osworld_sensor_request_bridge_v1"
+   ],
+   "kind": "native",
+   "query": "drive the OSWorld guest through CDP browser ops",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 713
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": false,
+   "ablation_top": [
+    "orthographic_visual_hull",
+    "swe_typed_plan_v1",
+    "self_prediction_baseline_v1",
+    "egraph_and_deductive_synthesizer_v1",
+    "sentient_cognitive_core_v1"
+   ],
+   "admissible": 24,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "gui_room_v1",
+    "arc_agi_3_public_exploration_measure_v1",
+    "astra_hidden_visual_executor",
+    "jit_knowledge_v1",
+    "follow_the_pointer_v1"
+   ],
+   "domain": "computer_use",
+   "incumbent_hit": false,
+   "incumbent_top": [
+    "compound_visual_feature_resolver",
+    "engineering_feature_notation",
+    "explicit_compound_requirement_decomposer",
+    "raw_goal_archive_compound_acceptance_v1",
+    "feature_constraint_composer"
+   ],
+   "kind": "native",
+   "query": "resolve a compound visual feature to a click coordinate",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 137
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": true,
+   "ablation_top": [
+    "osworld_verified_task_ledger_v1",
+    "insufficiency_certificate_probe_v1",
+    "perfect_algorithm_v1",
+    "verifier_falsification_v1",
+    "osworld_sensor_request_bridge_v1"
+   ],
+   "admissible": 53,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": false,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "goal_front_compiler_v1",
+    "instant_learning_in_a_new_environment_v1",
+    "tool_census_v1",
+    "browser_v1",
+    "verifier_falsification_v1"
+   ],
+   "domain": "computer_use",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "osworld_sensor_request_bridge_v1",
+    "osworld_v21_state_ops_v1",
+    "osworld_v21_browser_ops_v1",
+    "osworld_v21_host_guest_ops_v1",
+    "browser_v1"
+   ],
+   "kind": "native",
+   "query": "bind a sensor request into guest state ops",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 420
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": true,
+   "ablation_top": [
+    "angelic_cegis_repair_v1",
+    "cow_angelic_zygote_v1",
+    "repo_component_petri_v1",
+    "angelic_lens_cow_repair_v1",
+    "epistemic_agent_benchmark_v1"
+   ],
+   "admissible": 42,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "identify_a_real_bugs_fix_v1",
+    "real_fix_oracle_baseline_v1",
+    "compression_gain_v1",
+    "expert_fix_repetition_measure_v1",
+    "file_found_from_task_text_measure_v1"
+   ],
+   "domain": "coding_agents",
+   "incumbent_hit": false,
+   "incumbent_top": [
+    "metamorphic_oracle_v1",
+    "edit_kind_learning_v1",
+    "fix_shape_v1",
+    "python_issue_nl_parse_edit_intent",
+    "python_issue_to_pr_orchestrate"
+   ],
+   "kind": "frontier",
+   "query": "fix a failing test in a repository from an issue description",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 577
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": true,
+   "ablation_top": [
+    "cow_impact_repair_engine_v1",
+    "capability_forge_v1",
+    "consequence_table_v1",
+    "c_asan_cegis_repair_v1",
+    "canonical_oracle_vericoding_spine_v1"
+   ],
+   "admissible": 29,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": false,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "type_level_composer_v1",
+    "humanevalfix_experience_stream_measure_v1",
+    "producer_lineage_graph_v1",
+    "force_the_value_and_see_v1",
+    "metamorphic_habitation_zipper_v1"
+   ],
+   "domain": "coding_agents",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "p2_membership_residual_localizer_v1",
+    "function_the_task_text_points_at_v1",
+    "r3_deterministic_mapping_guard_patch_author_v1",
+    "r3_deterministic_mode_guard_patch_author_v1",
+    "python_source_add_function"
+   ],
+   "kind": "frontier",
+   "query": "localize the faulty function and produce a patch",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 759
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": true,
+   "ablation_top": [
+    "verifier_falsification_v1",
+    "lesson_localization_v1",
+    "residual_wall_closers_v1",
+    "a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1",
+    "grammar_closed_repair_v1"
+   ],
+   "admissible": 197,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": false,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "humanevalfix_experience_stream_measure_v1",
+    "humanevalfix_edit_kind_transfer_measure_v1",
+    "edit_by_example_v1",
+    "quixbugs_one_fix_transfer_measure_v1",
+    "module_invocation_evidence_v1"
+   ],
+   "domain": "coding_agents",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "r3_deterministic_mapping_guard_patch_author_v1",
+    "r3_deterministic_mode_guard_patch_author_v1",
+    "python_tests_generate_scaffold",
+    "discovered_tests_v1",
+    "tests_as_the_judge_v1"
+   ],
+   "kind": "frontier",
+   "query": "verify a patch with the tests that guard the changed code",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 770
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": true,
+   "ablation_top": [
+    "frontier_unified_engine_v1",
+    "angelic_cegis_repair_v1",
+    "autonomous_awake_loop_v1",
+    "metamorphic_habitation_zipper_v1",
+    "multistep_repo_closed_loop_solver_v1"
+   ],
+   "admissible": 73,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "identify_a_real_bugs_fix_v1",
+    "real_fix_oracle_baseline_v1",
+    "semantic_causal_engine_v1",
+    "verifier_falsification_v1",
+    "universal_computer_agent_v1"
+   ],
+   "domain": "coding_agents",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "metamorphic_oracle_v1",
+    "metamorphic_laws_v1",
+    "oracle_density_v1",
+    "law_repair_synthesis_v1",
+    "metamorphic_plugin_v1"
+   ],
+   "kind": "native",
+   "query": "repair a repository from a failing test using a metamorphic oracle",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 615
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": true,
+   "ablation_top": [
+    "multistep_repo_closed_loop_solver_v1",
+    "harbor_science_agent_v10",
+    "harbor_science_agent_v11",
+    "harbor_science_agent_v12",
+    "harbor_science_agent_v13"
+   ],
+   "admissible": 14,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "cow_impact_repair_engine_v1",
+    "humanevalfix_experience_stream_measure_v1",
+    "multistep_repo_closed_loop_solver_v1",
+    "metamorphic_habitation_zipper_v1",
+    "p2_membership_residual_localizer_v1"
+   ],
+   "domain": "coding_agents",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "p2_membership_residual_localizer_v1",
+    "angelic_lens_cow_repair_v1",
+    "raw_task_acceptance_residual_localizer_v1"
+   ],
+   "kind": "native",
+   "query": "localize the fault by bisecting revisions",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 706
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": false,
+   "ablation_top": [
+    "consequence_table_v1",
+    "cow_impact_repair_engine_v1",
+    "dual_program_splicing_v1",
+    "frontier_unified_engine_v1",
+    "global_extrapolation_chase_spine_v1"
+   ],
+   "admissible": 140,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "causal_nexus_v1",
+    "witness_inversion_v1",
+    "the_constant_is_a_hole_v1",
+    "the_name_is_a_hole_v1",
+    "manufactured_contrast_v1"
+   ],
+   "domain": "coding_agents",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "r3_deterministic_mapping_guard_patch_author_v1",
+    "r3_deterministic_mode_guard_patch_author_v1",
+    "harbor_pro_patch_handoff_v1",
+    "hle_evidence_candidate_synthesis_v1",
+    "hle_evidence_candidate_synthesis_v2"
+   ],
+   "kind": "native",
+   "query": "synthesize a candidate patch and measure acceptance",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 713
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": true,
+   "ablation_top": [
+    "verifier_falsification_v1",
+    "bridge_enumeration_v1",
+    "continuation_preference_v1",
+    "residual_wall_closers_v1",
+    "the_environment_broker_v1"
+   ],
+   "admissible": 19,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": false,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "humanevalfix_experience_stream_measure_v1",
+    "the_environment_broker_v1",
+    "a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1",
+    "creature_runtime_v1",
+    "computer_use_agent_v1"
+   ],
+   "domain": "verification_abstention",
+   "incumbent_hit": false,
+   "incumbent_top": [
+    "evidence_demand_v1",
+    "standing_facts_v1",
+    "r2_exact_evidence_claim_support_direct_adequacy_v1",
+    "the_refuse_share_v1",
+    "external_hard_slice_v1"
+   ],
+   "kind": "frontier",
+   "query": "refuse when the evidence does not establish the claim",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 730
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": true,
+   "ablation_top": [
+    "mined_rewrite_theory_v1",
+    "a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1",
+    "insufficiency_certificate_probe_v1",
+    "brain_module_invoke_v1",
+    "python_counterfactual_spec_repair_v1"
+   ],
+   "admissible": 53,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "learned_skill_verdict_v1",
+    "finite_probe_nonidentifiability_certificate_v1",
+    "humanevalfix_experience_stream_measure_v1",
+    "verifier_falsification_v1",
+    "universal_solver_value_state_v1"
+   ],
+   "domain": "verification_abstention",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "brain_witness_normalization_verifier_v1",
+    "differential_witness_inversion_v1",
+    "effect_witness_v1",
+    "ownership_promotion_independent_verifier_v1",
+    "r3_independent_learning_verifier_v1"
+   ],
+   "kind": "frontier",
+   "query": "prove the result with an independent witness",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 750
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": true,
+   "ablation_top": [
+    "verifier_falsification_v1",
+    "lesson_admission_gate_v1",
+    "a_goal_that_needs_two_moves_v1",
+    "a_refusal_is_a_specification_v1",
+    "python_counterfactual_spec_repair_v1"
+   ],
+   "admissible": 162,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "epistemic_admission_and_self_play_v1",
+    "edit_by_example_v1",
+    "residual_wall_closers_v1",
+    "capability_forge_v1",
+    "humanevalfix_experience_stream_measure_v1"
+   ],
+   "domain": "verification_abstention",
+   "incumbent_hit": false,
+   "incumbent_top": [
+    "sec_inline_xbrl_fact_anchor_verify_v1",
+    "h100_verified_capability_registry_v3",
+    "regcap_contextual_fact_independent_verify_v1",
+    "attested_state_v1",
+    "standing_facts_v1"
+   ],
+   "kind": "frontier",
+   "query": "verify that a receipt was not edited after the fact",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 759
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": true,
+   "ablation_top": [
+    "verifier_falsification_v1",
+    "python_tests_generate_scaffold",
+    "residual_wall_closers_v1",
+    "settled_admission_v1",
+    "verified_index_and_calculated_parameter_admission_v1"
+   ],
+   "admissible": 51,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "edit_by_example_v1",
+    "operand_invention_v1",
+    "humanevalfix_experience_stream_measure_v1",
+    "verifier_falsification_v1",
+    "saccr_credit_addon_oracles_v1"
+   ],
+   "domain": "verification_abstention",
+   "incumbent_hit": false,
+   "incumbent_top": [
+    "cad_t0_post_refreeze_binding_v4_validator",
+    "professional_quality_r3_root_subject_binding_verify_v2",
+    "checkability_by_differential_pin_v1",
+    "the_refuse_share_v1",
+    "cad_t0_post_refreeze_binding_v3_validator"
+   ],
+   "kind": "native",
+   "query": "refuse fail-closed when the binding pin is not current",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 749
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": true,
+   "ablation_top": [
+    "verifier_falsification_v1",
+    "instant_learning_in_a_new_environment_v1",
+    "the_assertion_is_the_demand_v1",
+    "aimed_action_v1",
+    "python_counterfactual_spec_repair_v1"
+   ],
+   "admissible": 151,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "tool_census_v1",
+    "renewable_action_v1",
+    "skill_scope_acquisition_v1",
+    "deep_understanding_engine_v1",
+    "edit_by_example_v1"
+   ],
+   "domain": "verification_abstention",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "adaptive_constant_concept_bridge_v1",
+    "file_artifact_expectation_v1",
+    "a_goal_that_needs_two_moves_v1",
+    "root3_two_class_attempt_authorizer_v1",
+    "cursorbench_typed_acceptance_source_coverage_atoms_v1"
+   ],
+   "kind": "native",
+   "query": "verify two witnesses that are not constant",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 654
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": true,
+   "ablation_top": [
+    "residual_wall_closers_v1",
+    "one_demonstration_reach_v1",
+    "ask_instead_of_stare_v1",
+    "solve_with_a_calibrated_judge_v1",
+    "the_goal_is_a_quotient_of_the_trace_v1"
+   ],
+   "admissible": 9,
+   "chance_topic": 1.0,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "the_frame_crosses_the_machine_v1",
+    "humanevalfix_experience_stream_measure_v1",
+    "instruction_contract_v1",
+    "the_guide_is_an_action_grammar_v1",
+    "evidence_demand_v1"
+   ],
+   "domain": "verification_abstention",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "manufacture_what_the_refusal_asks_for_v1",
+    "distinguishing_projection_v1",
+    "a_refusal_is_a_specification_v1",
+    "picker_answer_v1",
+    "manufactured_contrast_v1"
+   ],
+   "kind": "native",
+   "query": "manufacture what the refusal asks for instead of faking it",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 753
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": false,
+   "ablation_top": [
+    "systematic_exploration_v1",
+    "instant_learning_in_a_new_environment_v1",
+    "the_goal_is_a_relation_over_the_run_v1",
+    "attested_state_v1",
+    "dom_state_environment_v1"
+   ],
+   "admissible": 84,
+   "chance_topic": 0.7719,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": false,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "humanevalfix_experience_stream_measure_v1",
+    "miniwob_one_success_generalisation_measure_v1",
+    "instruction_policy_v1",
+    "reverse_tomography_algebra_v1",
+    "dom_state_environment_v1"
+   ],
+   "domain": "world_model",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "safe_action_model_v1",
+    "terminal_next_action_compiler_v1",
+    "demonstration_sufficiency_v1",
+    "ask_the_subcommand_before_you_call_it_unbound_v1",
+    "look_before_v1"
+   ],
+   "kind": "frontier",
+   "query": "predict the next screen state before taking the action",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 732
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": false,
+   "ablation_top": [
+    "python_repair_apply_verified_v1",
+    "passing_patch_shape_measure_v1",
+    "quixbugs_end_to_end_repair_measure_v1",
+    "a_goal_that_needs_two_moves_v1",
+    "python_counterfactual_spec_repair_v1"
+   ],
+   "admissible": 53,
+   "chance_topic": 0.7713,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "first_principles_mental_cegis_v1",
+    "guarded_meaning_ir_v1",
+    "partial_order_planner_v1",
+    "humanevalfix_experience_stream_measure_v1",
+    "same_identity_supervisor_oracles_v1"
+   ],
+   "domain": "world_model",
+   "incumbent_hit": false,
+   "incumbent_top": [
+    "r3_deterministic_mapping_guard_patch_author_v1",
+    "r3_deterministic_mode_guard_patch_author_v1",
+    "ask_the_subcommand_before_you_call_it_unbound_v1",
+    "look_before_v1",
+    "h100_generic_patch_search_transfer_v1"
+   ],
+   "kind": "frontier",
+   "query": "simulate the consequence of a patch before applying it",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 726
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": true,
+   "ablation_top": [
+    "live_brain_route_admission_v1",
+    "decision_evidence_locate_verify",
+    "self_prediction_calibration_v1",
+    "transfer_learning_v1",
+    "one_demonstration_reach_v1"
+   ],
+   "admissible": 58,
+   "chance_topic": 0.8476,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": true,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "creature_stakes_and_initiative_v1",
+    "reverse_tomography_algebra_v1",
+    "follow_the_pointer_v1",
+    "speculative_cow_petri_agent_v1",
+    "one_case_chosen_not_assumed_v1"
+   ],
+   "domain": "world_model",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "safe_action_model_v1",
+    "bound_goal_plan_adapter_v1",
+    "explicit_rubric_plan_optimizer",
+    "pre_exposure_isolation_plan_v1",
+    "swe_typed_plan_v1"
+   ],
+   "kind": "frontier",
+   "query": "forecast whether an outcome will follow from this plan",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 643
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": false,
+   "ablation_top": [
+    "a_goal_that_needs_two_moves_v1",
+    "dom_state_environment_v1",
+    "demonstration_sufficiency_v1",
+    "predictive_contract_v1",
+    "residual_wall_closers_v1"
+   ],
+   "admissible": 39,
+   "chance_topic": 0.7666,
+   "chance_uniform": 0.0059,
+   "contract_hit": false,
+   "contract_hit_at_1": false,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "predicate_world_abstraction_v1",
+    "dom_state_environment_v1",
+    "computer_env_v1",
+    "tool_census_v1",
+    "arc_agi_3_public_exploration_measure_v1"
+   ],
+   "domain": "world_model",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "look_before_v1",
+    "evidence_state",
+    "ask_the_subcommand_before_you_call_it_unbound_v1",
+    "m3_structured_effect_induction",
+    "osworld_v21_unified_policy_v17"
+   ],
+   "kind": "native",
+   "query": "project the state delta of an action before doing it",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 737
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": true,
+   "ablation_top": [
+    "causal_dataflow_graph_v1",
+    "closed_loop_trace_abduction_repair_v1",
+    "ask_instead_of_stare_v1",
+    "capability_receipt_lane_v1",
+    "instruction_contract_v1"
+   ],
+   "admissible": 41,
+   "chance_topic": 0.8373,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": false,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "automationbench_owned_policy_kernel_v1",
+    "global_extrapolation_chase_spine_v1",
+    "causal_dataflow_graph_v1",
+    "target_undominated_escape_reduction_v1",
+    "instant_learning_in_a_new_environment_v1"
+   ],
+   "domain": "world_model",
+   "incumbent_hit": false,
+   "incumbent_top": [
+    "cross_document_residual_effect_frontier_verify_v1",
+    "compounding_probe_rank_v5",
+    "residual_priority_v8",
+    "cross_document_residual_effect_frontier_v1",
+    "r2_cross_document_residual_effect_direct_adequacy_v1"
+   ],
+   "kind": "native",
+   "query": "rank residual causes for an observed effect",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 633
+  },
+  {
+   "ablation_hit": true,
+   "ablation_hit_at_1": false,
+   "ablation_top": [
+    "cli_capability_acquisition_v1",
+    "perfect_algorithm_v1",
+    "angelic_oe_synthesizer_v1",
+    "composition_concept_bridge_v1",
+    "multistep_repo_closed_loop_solver_v1"
+   ],
+   "admissible": 10,
+   "chance_topic": 0.7736,
+   "chance_uniform": 0.0059,
+   "contract_hit": true,
+   "contract_hit_at_1": false,
+   "contract_hit_executable": false,
+   "contract_top": [
+    "closed_loop_trace_abduction_repair_v1",
+    "humanevalfix_experience_stream_measure_v1",
+    "the_frame_crosses_the_machine_v1",
+    "coverage_is_the_bottleneck_not_hypotheses_v1",
+    "the_machine_is_the_definition_v1"
+   ],
+   "domain": "world_model",
+   "incumbent_hit": true,
+   "incumbent_top": [
+    "terminal_falsification_control_loop_v1",
+    "terminal_falsification_control_loop_v2",
+    "terminal_falsification_control_loop_v3",
+    "cross_document_effect_hypothesis_worldset_v1",
+    "cross_document_effect_hypothesis_worldset_verify_v1"
+   ],
+   "kind": "native",
+   "query": "falsify the control loop hypothesis",
+   "reason": "CONTRACT_AGREEMENT",
+   "topic_pool": 711
+  }
+ ],
+ "schema": "PROJECT_BRAIN_CONTRACT_ROUTING_V1",
+ "verdict": "KILLED",
+ "verdict_rule": "KILLED if mean recall@5 is below 0.53, or if a topic-only bag of words over the same pool does at least as well, or if the gain over the topic-sharing chance baseline is under twenty points. The third clause was added after the first run showed the metric saturating: a random five drawn from the modules that share any query word already lands in the right domain 84.6% of the time."
+}

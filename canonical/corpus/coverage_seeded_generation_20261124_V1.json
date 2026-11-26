@@ -1,0 +1,321 @@
+{
+ "schema": "BRAIN_COVERAGE_SEEDED_GENERATION_V1",
+ "generated": "2026-11-26T01:17:26Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 1263.4
+ },
+ "question": "With a coverage pointer instead of a traceback frame, do site-local edits recombining tokens already in the file solve real fail-to-pass tasks?",
+ "rule": "A task is solved only when the target node flips AND the whole test module stays green. Target-flips-but-module-breaks is recorded and never counted.",
+ "budget_per_task": 40,
+ "tasks": 28,
+ "solved": 0,
+ "resolve_rate": 0.0,
+ "outcomes": {
+  "UNSOLVED": 28
+ },
+ "solved_detail": [],
+ "rows": [
+  {
+   "sha": "f91ea793",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 0,
+   "pool": 0,
+   "has_source_frame": true,
+   "covered": 3,
+   "target_flipped_module_broke": null
+  },
+  {
+   "sha": "f1c57155",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 71,
+   "target_flipped_module_broke": null
+  },
+  {
+   "sha": "0efe21aa",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 0,
+   "pool": 0,
+   "has_source_frame": false,
+   "covered": 7,
+   "target_flipped_module_broke": null
+  },
+  {
+   "sha": "46167dcd",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": true,
+   "covered": 277,
+   "target_flipped_module_broke": null
+  },
+  {
+   "sha": "8efde605",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 99,
+   "target_flipped_module_broke": {
+    "family": "GUARD",
+    "why": "invert the boolean test"
+   }
+  },
+  {
+   "sha": "7d0611d4",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": true,
+   "covered": 48,
+   "target_flipped_module_broke": null
+  },
+  {
+   "sha": "491af5d5",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 46,
+   "target_flipped_module_broke": {
+    "family": "GUARD",
+    "why": "invert the boolean test"
+   }
+  },
+  {
+   "sha": "a03bde12",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 81,
+   "target_flipped_module_broke": null
+  },
+  {
+   "sha": "cd91074b",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 320,
+   "target_flipped_module_broke": null
+  },
+  {
+   "sha": "8c37b047",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 48,
+   "target_flipped_module_broke": null
+  },
+  {
+   "sha": "b1c439b0",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 296,
+   "target_flipped_module_broke": {
+    "family": "GUARD",
+    "why": "guard a return on its own value"
+   }
+  },
+  {
+   "sha": "31b2d013",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 81,
+   "target_flipped_module_broke": {
+    "family": "GUARD",
+    "why": "invert the boolean test"
+   }
+  },
+  {
+   "sha": "bddb6903",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 89,
+   "target_flipped_module_broke": null
+  },
+  {
+   "sha": "2d57ce2b",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 95,
+   "target_flipped_module_broke": null
+  },
+  {
+   "sha": "5706b87c",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 30,
+   "target_flipped_module_broke": null
+  },
+  {
+   "sha": "4b243af9",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 42,
+   "target_flipped_module_broke": null
+  },
+  {
+   "sha": "2aada00b",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 18,
+   "target_flipped_module_broke": {
+    "family": "GUARD",
+    "why": "invert the boolean test"
+   }
+  },
+  {
+   "sha": "2c87a33f",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 54,
+   "target_flipped_module_broke": null
+  },
+  {
+   "sha": "959bb79c",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 92,
+   "target_flipped_module_broke": null
+  },
+  {
+   "sha": "d17cfaf0",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 7,
+   "target_flipped_module_broke": null
+  },
+  {
+   "sha": "2602dd07",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 27,
+   "target_flipped_module_broke": {
+    "family": "GUARD",
+    "why": "invert the boolean test"
+   }
+  },
+  {
+   "sha": "23669b1b",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 231,
+   "target_flipped_module_broke": null
+  },
+  {
+   "sha": "55cbf1b9",
+   "repo": "pypa/packaging",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 202,
+   "target_flipped_module_broke": null
+  },
+  {
+   "sha": "e1fdb94b",
+   "repo": "hukkin/tomli",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 193,
+   "target_flipped_module_broke": null
+  },
+  {
+   "sha": "d1d6a857",
+   "repo": "hukkin/tomli",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 74,
+   "target_flipped_module_broke": null
+  },
+  {
+   "sha": "4e245a4b",
+   "repo": "hukkin/tomli",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 75,
+   "target_flipped_module_broke": null
+  },
+  {
+   "sha": "794c8e50",
+   "repo": "hukkin/tomli",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": false,
+   "covered": 167,
+   "target_flipped_module_broke": null
+  },
+  {
+   "sha": "8b962e13",
+   "repo": "hukkin/tomli",
+   "status": "UNSOLVED",
+   "candidates_screened": 40,
+   "pool": 40,
+   "has_source_frame": true,
+   "covered": 74,
+   "target_flipped_module_broke": null
+  }
+ ],
+ "authority": "NONE -- development corpus, not a benchmark; no benchmark row claimed"
+}

@@ -1,0 +1,31 @@
+{
+ "capability_id": "canonical.runtime.abstain_gated_skill_induction_v1.hidden.v1",
+ "elapsed_ms": 182.542,
+ "independent_run_reference": {
+  "github_run_id": 45738695803,
+  "oidc_claims": {
+   "actor": "brain-automation[bot]",
+   "aud": "https://github.com/moxnixmdj/brain",
+   "event_name": "push",
+   "head_ref": "",
+   "iss": "https://token.actions.githubusercontent.com",
+   "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
+   "jti": "4c282d06-091c-4a37-b1b9-d2e0ddff98da",
+   "repository": "moxnixmdj/brain",
+   "repository_id": "1364778274",
+   "run_attempt": "1",
+   "run_id": "45738695803",
+   "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
+  }
+ },
+ "independent_verifier": "github-actions:moxnixmdj/brain",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/abstain_gated_skill_induction_v1.py",
+ "module_sha256": "371a30019dc2a956e064218cd64e92244b7d64009a8d30f0d06d9d126cb85583",
+ "producer_ran_by": "harvest-local-session",
+ "producer_receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.abstain_gated_skill_induction_v1.hidden.v1__EXECUTION_RECEIPT.json",
+ "producer_result_sha256": "670d9edc6f4b7658ef349891ca29f2e3462abab98726296fdbaf79dfef975ef3",
+ "reproduced": true,
+ "schema": "PROJECT_BRAIN_CAPABILITY_INDEPENDENT_VERIFICATION_V1",
+ "verifier_result_sha256": "670d9edc6f4b7658ef349891ca29f2e3462abab98726296fdbaf79dfef975ef3"
+}

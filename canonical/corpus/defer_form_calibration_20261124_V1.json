@@ -1,0 +1,306 @@
+{
+ "schema": "BRAIN_DEFER_FORM_CALIBRATION_V1",
+ "generated": "2026-11-24",
+ "question": "The engine emits 0 candidates from a correctly localised site. Is the missing thing a form, and does that form transfer?",
+ "the_isolated_defect": {
+  "task": "pypa/packaging dec6213e + added test test_invalid_marker_defers_argument_formatting",
+  "localisation": "CORRECT -- the engine lands on markers.py:89, site __init__:IFEXP_BODY@89:28, orig_code str(self)",
+  "emission": "synthesize_candidates_for_witness returns 0 candidates for all 5 witnesses",
+  "repair_status": "UNSOLVED, candidates_screened 0, elapsed 691ms",
+  "reading": "the engine never proposes an edit, so it cannot be said to have tried and failed",
+  "substitutions_at_the_located_site_measured": {
+   "as_is_control": "fail",
+   "str(self)->super().__str__()": "fail",
+   "str(self)->repr(self)": "fail",
+   "hoist_value_above_line": "fail"
+  },
+  "why_they_all_fail": "the test constructs the object, then mutates the argument, then reads the attribute; any eager evaluation is wrong by construction"
+ },
+ "the_form": {
+  "name": "DEFER",
+  "class": "definition-level edit, not an expression substitution",
+  "spellings": [
+   "plain @property with setter and stored-value lookup",
+   "functools.cached_property"
+  ],
+  "derived_from": "the traceback shape only -- __init__ mid-assignment calling a method of the object under construction which reads an unset attribute",
+  "never_reads": "the fix commit's source diff"
+ },
+ "calibration": {
+  "rule": "stated before measurement: the form must fire on tasks that are NOT the one that suggested it",
+  "eligible": 27,
+  "solved": 1,
+  "outcomes": {
+   "SOLVED": 1,
+   "NO_CANDIDATE_EMITTED": 26,
+   "SKIPPED_NOT_FAIL_TO_PASS": 1
+  },
+  "solved_task": "dec6213e -- the task that suggested the form",
+  "transfer": "NONE OBSERVED",
+  "rows": [
+   {
+    "task": "dec6213e",
+    "target": "src/packaging/markers.py",
+    "applies": true,
+    "reason": "DEFERRED_DEFINITION_CANDIDATES_EMITTED",
+    "candidates_tried": 1,
+    "outcome": "SOLVED",
+    "solved_by": "property"
+   },
+   {
+    "task": "0efe21aa",
+    "target": "src/packaging/_structures.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "46167dcd",
+    "target": "src/packaging/markers.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "ecf963ad",
+    "target": "src/packaging/ranges.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "8e21512a",
+    "target": "src/packaging/dependency_groups.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "491af5d5",
+    "target": "src/packaging/markers.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "a03bde12",
+    "target": "src/packaging/markers.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "cd91074b",
+    "target": "src/packaging/requirements.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "15d35165",
+    "target": "src/packaging/ranges.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "7f843b21",
+    "target": "src/packaging/licenses/__init__.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "984e4383",
+    "target": "src/packaging/metadata.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "bddb6903",
+    "target": "src/packaging/dependency_groups.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "80fe325a",
+    "target": "src/packaging/markers.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "6973aafb",
+    "target": "src/packaging/dependency_groups.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "4b243af9",
+    "target": "src/packaging/markers.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "7464e389",
+    "target": "src/packaging/requirements.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "2c87a33f",
+    "outcome": "SKIPPED_NOT_FAIL_TO_PASS"
+   },
+   {
+    "task": "0625596e",
+    "target": "src/packaging/licenses/__init__.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "d17cfaf0",
+    "target": "src/packaging/dependency_groups.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "f7c930eb",
+    "target": "src/packaging/_parser.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "23669b1b",
+    "target": "src/packaging/_tokenizer.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "7b898d9f",
+    "target": "src/packaging/pylock.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "4840c3a6",
+    "target": "src/packaging/_ranges.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "c20c4911",
+    "target": "src/tomli/_parser.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "59ed9efb",
+    "target": "src/tomli/_parser.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "facdab0f",
+    "target": "src/tomli/_parser.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "0eaf93dd",
+    "target": "src/tomli/_parser.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   },
+   {
+    "task": "e4da05c3",
+    "target": "src/tomli/_parser.py",
+    "applies": false,
+    "reason": "TRACEBACK_DOES_NOT_SHOW_REENTRANT_SELF_FAILURE",
+    "candidates_tried": 0,
+    "outcome": "NO_CANDIDATE_EMITTED",
+    "solved_by": null
+   }
+  ]
+ },
+ "the_honest_reading": "A definition-level DEFER form solves 1 of 27 mined tasks, and that one is the task it was derived from. On the other 26 the detector does not even fire: their tracebacks do not show a re-entrant self failure, so the form never emits a candidate. This is the same failure the engine already had, moved one layer up: the vocabulary is still keyed to a failure shape that a human noticed. It is a genuine solve rather than a false positive -- the target flips and the whole test module (2493 tests) stays green -- but one solve at the design point is a fit, not a capability. V38 named this exact trap and this round walked into it, which is why the calibration was written down before the number was measured.",
+ "bugs_found_in_my_own_instruments_this_round": [
+  "the first detector read the class name from the AttributeError; that class was defined inside the test, not in the source file -- the deferral target is the __init__ frame's file and line",
+  "the first emitter matched ast.Assign and missed the AnnAssign spelling (self.x: str = ...), emitting nothing",
+  "an inline property ended __init__ early, absorbing the statements below it (measured: source missing, 2 tests failed)",
+  "emitting @cached_property unqualified raised NameError at class creation (rc=4)",
+  "a plain @property conflicted with the conditional assignment until a setter and stored-value lookup were added",
+  "the detector accepted only one pytest traceback spelling; the harness ran --tb=short and the form scored 0 on all 23 tasks until both spellings were accepted"
+ ],
+ "cost": {
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_at_run_time": 0
+ },
+ "what_this_is_not": "not a capability gain. 1 of 27, and the 1 is the design point. No benchmark row. The engine still emits 0 candidates on the engine's own repair path -- this form is a separate tool and has not been wired into it.",
+ "contamination_disclosure": "I had PRIOR EXPOSURE to this task's upstream fix: in the previous round, while checking that round's report for leakage, I printed the fix diff, which shows functools.cached_property and super().__str__(). The CODE PATH is traceback-only -- emit_for_traceback never reads the fix commit -- but MY derivation of the form was not blind. This makes the 1-of-27 result stronger evidence against the form, not weaker: a form designed with knowledge of the answer still transfers to nothing."
+}

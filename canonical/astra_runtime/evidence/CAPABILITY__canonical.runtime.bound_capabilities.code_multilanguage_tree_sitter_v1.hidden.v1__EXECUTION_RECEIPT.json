@@ -1,0 +1,30 @@
+{
+ "capability_id": "canonical.runtime.bound_capabilities.code_multilanguage_tree_sitter_v1.hidden.v1",
+ "elapsed_ms": 9.113,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "output_path": "canonical/astra_runtime/tmp/harvest_lift_20261124/ts_out.json",
+  "source_root": "canonical/capabilities/internalized/artifact_creation/aws_sample_agent_skills_dd0bdc07/office-excel/scripts"
+ },
+ "kind": "contract",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bound_capabilities/code_multilanguage_tree_sitter_v1.py",
+ "module_sha256": "0fb865a5b9eeb0324295bbd29e10db4b1add20b71fc2522e98fbf234ef3364df",
+ "observed": {
+  "output_verified": true
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "harvest-local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.bound_capabilities.code_multilanguage_tree_sitter_v1.hidden.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 14,
+ "result_sha256": "cced727a6a60b8b950d1b69149bad3b49d29567bccd9991dbdd683625c9ab630",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

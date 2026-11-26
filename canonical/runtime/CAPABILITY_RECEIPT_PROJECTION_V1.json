@@ -1,5 +1,5 @@
 {
- "count": 305,
+ "count": 321,
  "entries": {
   "brain.module.function.invoke": {
    "action_template": {
@@ -45,6 +45,724 @@
     "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__brain.module.function.invoke__EXECUTION_RECEIPT.json"
    }
   },
+  "canonical.runtime.abstain_gated_skill_induction_v1.hidden.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical.runtime.abstain_gated_skill_induction_v1.hidden.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "abstain_gated_skill_induction_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "abstain",
+    "gated",
+    "skill",
+    "induction"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical.runtime.abstain_gated_skill_induction_v1.hidden.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/abstain_gated_skill_induction_v1.py",
+    "path": "canonical/runtime/abstain_gated_skill_induction_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "371a30019dc2a956e064218cd64e92244b7d64009a8d30f0d06d9d126cb85583",
+    "observed_effect": {
+     "output_verified": true,
+     "status": "ESTABLISHED_ON_40_EPISODE_REAL_COMMIT_SET"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.abstain_gated_skill_induction_v1.hidden.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical.runtime.adversarial_mutation_admission_gate_v1.hidden.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical.runtime.adversarial_mutation_admission_gate_v1.hidden.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "adversarial_mutation_admission_gate_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "adversarial",
+    "mutation",
+    "admission",
+    "gate"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical.runtime.adversarial_mutation_admission_gate_v1.hidden.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/adversarial_mutation_admission_gate_v1.py",
+    "path": "canonical/runtime/adversarial_mutation_admission_gate_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "484bd66b66320cf375beab4edc8f34e582a020e07d2b79d1ce4165fa38f5df0d",
+    "observed_effect": {
+     "output_verified": true,
+     "status": "GATE_THEATRE_SURVIVORS_EXCEED_20_PCT"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.adversarial_mutation_admission_gate_v1.hidden.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical.runtime.binding_pin_is_current_v1.hidden.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical.runtime.binding_pin_is_current_v1.hidden.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "binding_pin_is_current_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "binding",
+    "pin",
+    "current"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical.runtime.binding_pin_is_current_v1.hidden.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/binding_pin_is_current_v1.py",
+    "path": "canonical/runtime/binding_pin_is_current_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "98890960cdc84921192122496581a2c8339bac30c58b909ab9e8d4aa68602cd4",
+    "observed_effect": {
+     "pass": false,
+     "status": "BOUND_CAPABILITY_CLAIMS_A_PIN_THAT_IS_NOT_TRUE"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.binding_pin_is_current_v1.hidden.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical.runtime.bound_capabilities.code_multilanguage_tree_sitter_v1.hidden.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical.runtime.bound_capabilities.code_multilanguage_tree_sitter_v1.hidden.v1"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "code_multilanguage_tree_sitter_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "code",
+    "multilanguage",
+    "tree",
+    "sitter"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical.runtime.bound_capabilities.code_multilanguage_tree_sitter_v1.hidden.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/code_multilanguage_tree_sitter_v1.py",
+    "path": "canonical/runtime/bound_capabilities/code_multilanguage_tree_sitter_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "0fb865a5b9eeb0324295bbd29e10db4b1add20b71fc2522e98fbf234ef3364df",
+    "observed_effect": {
+     "output_verified": true
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.bound_capabilities.code_multilanguage_tree_sitter_v1.hidden.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical.runtime.bound_capabilities.concrete_execution_oracle.hidden.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical.runtime.bound_capabilities.concrete_execution_oracle.hidden.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "concrete_execution_oracle",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "concrete",
+    "execution",
+    "oracle"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical.runtime.bound_capabilities.concrete_execution_oracle.hidden.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/concrete_execution_oracle.py",
+    "path": "canonical/runtime/bound_capabilities/concrete_execution_oracle.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "f37063bbcfcb9e0250e3b037bc687f1c48855ac099be68749d25b340ccf73b73",
+    "observed_effect": {
+     "status": "NO_POSTCONDITION_PARSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.bound_capabilities.concrete_execution_oracle.hidden.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical.runtime.bound_capabilities.hardcore_software_engineering_orchestrator_v1.hidden.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical.runtime.bound_capabilities.hardcore_software_engineering_orchestrator_v1.hidden.v1"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "hardcore_software_engineering_orchestrator_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "hardcore",
+    "software",
+    "engineering",
+    "orchestrator"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical.runtime.bound_capabilities.hardcore_software_engineering_orchestrator_v1.hidden.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/hardcore_software_engineering_orchestrator_v1.py",
+    "path": "canonical/runtime/bound_capabilities/hardcore_software_engineering_orchestrator_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "7ec082df163b7888f4760a5e7ba327eb0130c2b79f1cf69c29d3a944a55b3932",
+    "observed_effect": {
+     "output_verified": true
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.bound_capabilities.hardcore_software_engineering_orchestrator_v1.hidden.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical.runtime.bound_capabilities.python_change_impact_testselect.hidden.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical.runtime.bound_capabilities.python_change_impact_testselect.hidden.v1"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_change_impact_testselect",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "python",
+    "change",
+    "impact",
+    "testselect"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical.runtime.bound_capabilities.python_change_impact_testselect.hidden.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/python_change_impact_testselect.py",
+    "path": "canonical/runtime/bound_capabilities/python_change_impact_testselect.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "ac8493c4fc864b7e088448c642593d2400fb086c514e4b3c887fd5eb50f519ed",
+    "observed_effect": {
+     "output_verified": true
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.bound_capabilities.python_change_impact_testselect.hidden.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical.runtime.bound_capabilities.python_source_add_parameter.hidden.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical.runtime.bound_capabilities.python_source_add_parameter.hidden.v1"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_source_add_parameter",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "python",
+    "source",
+    "add",
+    "parameter"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical.runtime.bound_capabilities.python_source_add_parameter.hidden.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/python_source_add_parameter.py",
+    "path": "canonical/runtime/bound_capabilities/python_source_add_parameter.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "ac274c5921a4f321d22d1f79411d07ec62d869f57ed8e94ff0909e168c04067c",
+    "observed_effect": {
+     "output_verified": true
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.bound_capabilities.python_source_add_parameter.hidden.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical.runtime.bound_capabilities.python_source_audit.hidden.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical.runtime.bound_capabilities.python_source_audit.hidden.v1"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_source_audit",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "python",
+    "source",
+    "audit"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical.runtime.bound_capabilities.python_source_audit.hidden.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/python_source_audit.py",
+    "path": "canonical/runtime/bound_capabilities/python_source_audit.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "f5c5a7bb1dc067b1c06f6e1fe88575946a9c6662998e623bad07d8a8d35f1f7a",
+    "observed_effect": {
+     "output_verified": true
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.bound_capabilities.python_source_audit.hidden.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical.runtime.bound_capabilities.python_source_symbol_index.hidden.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical.runtime.bound_capabilities.python_source_symbol_index.hidden.v1"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_source_symbol_index",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "python",
+    "source",
+    "symbol",
+    "index"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical.runtime.bound_capabilities.python_source_symbol_index.hidden.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
+    "path": "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "10bf5f7589e64535c09e7a62715d94d808bff74f8d46bf3344446023c6c7127a",
+    "observed_effect": {
+     "output_verified": true
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.bound_capabilities.python_source_symbol_index.hidden.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical.runtime.bound_capabilities.software_synthesis_grid_induction_v1.hidden.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical.runtime.bound_capabilities.software_synthesis_grid_induction_v1.hidden.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "software_synthesis_grid_induction_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "software",
+    "synthesis",
+    "grid",
+    "induction"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical.runtime.bound_capabilities.software_synthesis_grid_induction_v1.hidden.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/software_synthesis_grid_induction_v1.py",
+    "path": "canonical/runtime/bound_capabilities/software_synthesis_grid_induction_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "6b06260459a02a137b44377730bb3bae4e3913ffe41516adeaa3fe6fff673e96",
+    "observed_effect": {
+     "output_verified": true,
+     "status": "EXACT_PROGRAMS"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.bound_capabilities.software_synthesis_grid_induction_v1.hidden.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical.runtime.capability_selection_retrieval_v1.hidden.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical.runtime.capability_selection_retrieval_v1.hidden.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "capability_selection_retrieval_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "capability",
+    "selection",
+    "retrieval"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical.runtime.capability_selection_retrieval_v1.hidden.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/capability_selection_retrieval_v1.py",
+    "path": "canonical/runtime/capability_selection_retrieval_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "212ec1108d8489de711310d61cb3e80ce7a0aa2b95c99ebc78bb080edb2c996f",
+    "observed_effect": {
+     "status": "NOT_SELECTED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.capability_selection_retrieval_v1.hidden.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical.runtime.gradient_free_law_consolidation_v1.hidden.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical.runtime.gradient_free_law_consolidation_v1.hidden.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "gradient_free_law_consolidation_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "gradient",
+    "free",
+    "law",
+    "consolidation"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical.runtime.gradient_free_law_consolidation_v1.hidden.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/gradient_free_law_consolidation_v1.py",
+    "path": "canonical/runtime/gradient_free_law_consolidation_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "07e1ab9391c8fe564e76d1c26c65fc6cc737e3bb6ea9f283c50b6f9be5c98efe",
+    "observed_effect": {
+     "output_verified": true,
+     "status": "CONSOLIDATED_WITH_HELDOUT_TRANSFER_GAP"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.gradient_free_law_consolidation_v1.hidden.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical.runtime.state_contract_world_model_v1.hidden.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical.runtime.state_contract_world_model_v1.hidden.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "state_contract_world_model_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "state",
+    "contract",
+    "world",
+    "model"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical.runtime.state_contract_world_model_v1.hidden.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/state_contract_world_model_v1.py",
+    "path": "canonical/runtime/state_contract_world_model_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "d7ef6cc5e48f3956ad0ae03935ceb14a24ed7bc1acf7c121cdbed1cb72bca1c3",
+    "observed_effect": {
+     "output_verified": true,
+     "status": "ESTABLISHED_ON_SCRIPTED_WORKFLOW"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.state_contract_world_model_v1.hidden.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical.runtime.swe_kernel_organ_bridge_v1.hidden.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical.runtime.swe_kernel_organ_bridge_v1.hidden.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "swe_kernel_organ_bridge_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "swe",
+    "kernel",
+    "organ",
+    "bridge"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical.runtime.swe_kernel_organ_bridge_v1.hidden.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/swe_kernel_organ_bridge_v1.py",
+    "path": "canonical/runtime/swe_kernel_organ_bridge_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "96086a1aa3b78c645c736ed6fa1c472f8933bab93d6784f79003165d49635ed3",
+    "observed_effect": {
+     "output_verified": true,
+     "status": "ALL_ORGANS_LIVE"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.swe_kernel_organ_bridge_v1.hidden.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical.runtime.tool_census_v1.hidden.v1": {
+   "action_template": {
+    "args": {
+     "argv": [
+      "python3",
+      "canonical/runtime/tool_census_v1.py"
+     ],
+     "capability_id": "canonical.runtime.tool_census_v1.hidden.v1",
+     "expect_exit": 0,
+     "timeout_s": 60
+    },
+    "expect": {
+     "field": "returncode",
+     "type": "field_equals",
+     "value": 0
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "cli_command",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "tool",
+    "census"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical.runtime.tool_census_v1.hidden.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/cli_command.py",
+    "path": "canonical/runtime/tool_census_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "3fdff3b36e2c7c45ea72a19a6df6a9ee3438d2e1cef5f2ee10dcf0802b57e320",
+    "observed_effect": {
+     "returncode": 0
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.tool_census_v1.hidden.v1__EXECUTION_RECEIPT.json"
+   }
+  },
   "canonical/experiments/run_command_manpage_semantics_diagnostic_001.py.auto.v1": {
    "action_template": {
     "args": {
@@ -53,6 +771,7 @@
       "canonical/experiments/run_command_manpage_semantics_diagnostic_001.py"
      ],
      "capability_id": "canonical/experiments/run_command_manpage_semantics_diagnostic_001.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -105,6 +824,7 @@
       "canonical/experiments/run_pretruncation_candidate_rank_trace_001.py"
      ],
      "capability_id": "canonical/experiments/run_pretruncation_candidate_rank_trace_001.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -157,6 +877,7 @@
       "canonical/experiments/run_semantic_role_diagnostic_001.py"
      ],
      "capability_id": "canonical/experiments/run_semantic_role_diagnostic_001.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -208,6 +929,7 @@
       "canonical/runtime/aa_briefcase_component_summary_noninversion_v1.py"
      ],
      "capability_id": "canonical/runtime/aa_briefcase_component_summary_noninversion_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -259,6 +981,7 @@
       "canonical/runtime/abc_observable_trace_scope_rebind_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/abc_observable_trace_scope_rebind_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -313,6 +1036,7 @@
       "canonical/runtime/accepted_pure_route_static_reachability_v1.py"
      ],
      "capability_id": "canonical/runtime/accepted_pure_route_static_reachability_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -366,6 +1090,7 @@
       "canonical/runtime/authority_epoch_guard_v1.py"
      ],
      "capability_id": "canonical/runtime/authority_epoch_guard_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -459,6 +1184,7 @@
       "canonical/runtime/brain_witness_contamination_admissibility_v1.py"
      ],
      "capability_id": "canonical/runtime/brain_witness_contamination_admissibility_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -511,6 +1237,7 @@
       "canonical/runtime/bytes_active_query_task_generator_v1.py"
      ],
      "capability_id": "canonical/runtime/bytes_active_query_task_generator_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -562,6 +1289,7 @@
       "canonical/runtime/bytes_characteristic_active_query_task_generator_v10.py"
      ],
      "capability_id": "canonical/runtime/bytes_characteristic_active_query_task_generator_v10.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -615,6 +1343,7 @@
       "canonical/runtime/bytes_discrete_sequence_task_generator_v1.py"
      ],
      "capability_id": "canonical/runtime/bytes_discrete_sequence_task_generator_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -666,6 +1395,7 @@
       "canonical/runtime/bytes_domain_free_active_query_task_generator_v1.py"
      ],
      "capability_id": "canonical/runtime/bytes_domain_free_active_query_task_generator_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -719,6 +1449,7 @@
       "canonical/runtime/bytes_hblind_active_query_task_generator_v1.py"
      ],
      "capability_id": "canonical/runtime/bytes_hblind_active_query_task_generator_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -771,6 +1502,7 @@
       "canonical/runtime/bytes_microkernel_v3_task_generator_v1.py"
      ],
      "capability_id": "canonical/runtime/bytes_microkernel_v3_task_generator_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -821,6 +1553,7 @@
       "canonical/runtime/bytes_scalar_exact_task_generator_v1.py"
      ],
      "capability_id": "canonical/runtime/bytes_scalar_exact_task_generator_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -872,6 +1605,7 @@
       "canonical/runtime/bytes_sequence_characteristic_set_v1.py"
      ],
      "capability_id": "canonical/runtime/bytes_sequence_characteristic_set_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -923,6 +1657,7 @@
       "canonical/runtime/bytes_strong_accounting_and_persistence_cut_v1.py"
      ],
      "capability_id": "canonical/runtime/bytes_strong_accounting_and_persistence_cut_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -976,6 +1711,7 @@
       "canonical/runtime/bytes_v10_characteristic_task_generator_v1.py"
      ],
      "capability_id": "canonical/runtime/bytes_v10_characteristic_task_generator_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -1027,6 +1763,7 @@
       "canonical/runtime/bytes_v11_generated_characteristic_task_generator_v1.py"
      ],
      "capability_id": "canonical/runtime/bytes_v11_generated_characteristic_task_generator_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -1079,6 +1816,7 @@
       "canonical/runtime/bytes_v12_generated_characteristic_task_generator_v1.py"
      ],
      "capability_id": "canonical/runtime/bytes_v12_generated_characteristic_task_generator_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -1131,6 +1869,7 @@
       "canonical/runtime/bytes_v13_stateless_characteristic_task_generator_v1.py"
      ],
      "capability_id": "canonical/runtime/bytes_v13_stateless_characteristic_task_generator_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -1183,6 +1922,7 @@
       "canonical/runtime/bytes_v14_zero_overhead_totality_task_generator_v1.py"
      ],
      "capability_id": "canonical/runtime/bytes_v14_zero_overhead_totality_task_generator_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -1236,6 +1976,7 @@
       "canonical/runtime/coding_static_verified_capability_route_theorem_v1.py"
      ],
      "capability_id": "canonical/runtime/coding_static_verified_capability_route_theorem_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -1289,6 +2030,7 @@
       "canonical/runtime/composition_behavioral_bridge_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/composition_behavioral_bridge_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -1341,6 +2083,7 @@
       "canonical/runtime/composition_cross_step_no_bypass_audit_v1.py"
      ],
      "capability_id": "canonical/runtime/composition_cross_step_no_bypass_audit_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -1393,6 +2136,7 @@
       "canonical/runtime/composition_cross_step_no_bypass_audit_v2.py"
      ],
      "capability_id": "canonical/runtime/composition_cross_step_no_bypass_audit_v2.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -1446,6 +2190,7 @@
       "canonical/runtime/continuity_root3_fixed_entry_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/continuity_root3_fixed_entry_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -1499,6 +2244,7 @@
       "canonical/runtime/continuity_root3_selected_route_reachability_v1.py"
      ],
      "capability_id": "canonical/runtime/continuity_root3_selected_route_reachability_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -1552,6 +2298,7 @@
       "canonical/runtime/coverage_cc_r1_professional_r12_semantic_reality_containment_verify_v1.py"
      ],
      "capability_id": "canonical/runtime/coverage_cc_r1_professional_r12_semantic_reality_containment_verify_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -1607,6 +2354,7 @@
       "canonical/runtime/coverage_cc_r3_mission_scope_bridge_guard_v1.py"
      ],
      "capability_id": "canonical/runtime/coverage_cc_r3_mission_scope_bridge_guard_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -1660,6 +2408,7 @@
       "canonical/runtime/current_26_zero_reality_frontier_v1.py"
      ],
      "capability_id": "canonical/runtime/current_26_zero_reality_frontier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -1712,6 +2461,7 @@
       "canonical/runtime/current_26_zero_reality_frontier_v2.py"
      ],
      "capability_id": "canonical/runtime/current_26_zero_reality_frontier_v2.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -1764,6 +2514,7 @@
       "canonical/runtime/current_26_zero_reality_frontier_v3.py"
      ],
      "capability_id": "canonical/runtime/current_26_zero_reality_frontier_v3.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -1816,6 +2567,7 @@
       "canonical/runtime/current_27_zero_reality_frontier_v2.py"
      ],
      "capability_id": "canonical/runtime/current_27_zero_reality_frontier_v2.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -1868,6 +2620,7 @@
       "canonical/runtime/current_30_obligation_pointer_verifier.py"
      ],
      "capability_id": "canonical/runtime/current_30_obligation_pointer_verifier.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -1919,6 +2672,7 @@
       "canonical/runtime/current_accepted_five_d_reduction_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/current_accepted_five_d_reduction_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -2252,6 +3006,7 @@
       "canonical/runtime/current_escape_oq_frontier_reduction_v1.py"
      ],
      "capability_id": "canonical/runtime/current_escape_oq_frontier_reduction_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -2304,6 +3059,7 @@
       "canonical/runtime/current_one_shot_projection_v1.py"
      ],
      "capability_id": "canonical/runtime/current_one_shot_projection_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -2356,6 +3112,7 @@
       "canonical/runtime/current_projection_consistency_guard_v1.py"
      ],
      "capability_id": "canonical/runtime/current_projection_consistency_guard_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -2407,6 +3164,7 @@
       "canonical/runtime/current_state_obs_reducer.py"
      ],
      "capability_id": "canonical/runtime/current_state_obs_reducer.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -2458,6 +3216,7 @@
       "canonical/runtime/current_terminal_authority_v11_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/current_terminal_authority_v11_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -2511,6 +3270,7 @@
       "canonical/runtime/current_terminal_authority_v13_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/current_terminal_authority_v13_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -2564,6 +3324,7 @@
       "canonical/runtime/current_terminal_authority_v3_k6_v4_verifier.py"
      ],
      "capability_id": "canonical/runtime/current_terminal_authority_v3_k6_v4_verifier.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -2616,6 +3377,7 @@
       "canonical/runtime/current_terminal_authority_v6_verifier.py"
      ],
      "capability_id": "canonical/runtime/current_terminal_authority_v6_verifier.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -2667,6 +3429,7 @@
       "canonical/runtime/current_terminal_authority_v7_verifier.py"
      ],
      "capability_id": "canonical/runtime/current_terminal_authority_v7_verifier.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -2719,6 +3482,7 @@
       "canonical/runtime/current_terminal_authority_v8_verifier.py"
      ],
      "capability_id": "canonical/runtime/current_terminal_authority_v8_verifier.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -2771,6 +3535,7 @@
       "canonical/runtime/current_terminal_authority_v9_verifier.py"
      ],
      "capability_id": "canonical/runtime/current_terminal_authority_v9_verifier.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -2823,6 +3588,7 @@
       "canonical/runtime/cursorbench_constructive_scope_information_nogo_v1.py"
      ],
      "capability_id": "canonical/runtime/cursorbench_constructive_scope_information_nogo_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -2876,6 +3642,7 @@
       "canonical/runtime/cursorbench_observable_trace_scope_lift_v1.py"
      ],
      "capability_id": "canonical/runtime/cursorbench_observable_trace_scope_lift_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -2929,6 +3696,7 @@
       "canonical/runtime/cursorbench_public_score_nonidentifiability_v1.py"
      ],
      "capability_id": "canonical/runtime/cursorbench_public_score_nonidentifiability_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -2981,6 +3749,7 @@
       "canonical/runtime/cursorbench_three_region_complement_nonidentifiability_v1.py"
      ],
      "capability_id": "canonical/runtime/cursorbench_three_region_complement_nonidentifiability_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -3034,6 +3803,7 @@
       "canonical/runtime/cursorbench_two_region_complement_nonidentifiability_v1.py"
      ],
      "capability_id": "canonical/runtime/cursorbench_two_region_complement_nonidentifiability_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -3087,6 +3857,7 @@
       "canonical/runtime/direct_e2e_selected_cell_certificate_v1.py"
      ],
      "capability_id": "canonical/runtime/direct_e2e_selected_cell_certificate_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -3140,6 +3911,7 @@
       "canonical/runtime/domain_behavior_universe_anchor_v1.py"
      ],
      "capability_id": "canonical/runtime/domain_behavior_universe_anchor_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -3191,6 +3963,7 @@
       "canonical/runtime/dual_judgment_general_substrate_role_v1.py"
      ],
      "capability_id": "canonical/runtime/dual_judgment_general_substrate_role_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -3244,6 +4017,7 @@
       "canonical/runtime/dual_judgment_source_gate_activation_v1.py"
      ],
      "capability_id": "canonical/runtime/dual_judgment_source_gate_activation_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -3297,6 +4071,7 @@
       "canonical/runtime/escape_active_gap_b_causal_reclassification_verify_v1.py"
      ],
      "capability_id": "canonical/runtime/escape_active_gap_b_causal_reclassification_verify_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -3397,6 +4172,7 @@
       "canonical/runtime/escape_progress_13_route_manifest_v1.py"
      ],
      "capability_id": "canonical/runtime/escape_progress_13_route_manifest_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -3449,6 +4225,7 @@
       "canonical/runtime/escape_progress_shared_gap_audit_v1.py"
      ],
      "capability_id": "canonical/runtime/escape_progress_shared_gap_audit_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -3502,6 +4279,7 @@
       "canonical/runtime/escape_progress_shared_gap_audit_v2.py"
      ],
      "capability_id": "canonical/runtime/escape_progress_shared_gap_audit_v2.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -3555,6 +4333,7 @@
       "canonical/runtime/escape_progress_shared_gap_audit_v3.py"
      ],
      "capability_id": "canonical/runtime/escape_progress_shared_gap_audit_v3.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -3608,6 +4387,7 @@
       "canonical/runtime/escape_tb_science_current_route_reclassification_v2_verify.py"
      ],
      "capability_id": "canonical/runtime/escape_tb_science_current_route_reclassification_v2_verify.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -3662,6 +4442,7 @@
       "canonical/runtime/exact_symbolic_selected_leaf_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/exact_symbolic_selected_leaf_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -3715,6 +4496,7 @@
       "canonical/runtime/external_benchmark_dominance_compiler_v1.py"
      ],
      "capability_id": "canonical/runtime/external_benchmark_dominance_compiler_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -3767,6 +4549,7 @@
       "canonical/runtime/finance_direct_source_coverage_audit_v1.py"
      ],
      "capability_id": "canonical/runtime/finance_direct_source_coverage_audit_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -3820,6 +4603,7 @@
       "canonical/runtime/finance_semantic_zero_reality_fixed_point_v1.py"
      ],
      "capability_id": "canonical/runtime/finance_semantic_zero_reality_fixed_point_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -3874,6 +4658,7 @@
       "canonical/runtime/finance_shared_semantic_residual_reconciliation_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/finance_shared_semantic_residual_reconciliation_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -3928,6 +4713,7 @@
       "canonical/runtime/finite_probe_nonidentifiability_certificate_v1.py"
      ],
      "capability_id": "canonical/runtime/finite_probe_nonidentifiability_certificate_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -3979,6 +4765,7 @@
       "canonical/runtime/five_primitive_role_single_semantic_frontier_v1.py"
      ],
      "capability_id": "canonical/runtime/five_primitive_role_single_semantic_frontier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -4033,6 +4820,7 @@
       "canonical/runtime/five_public_bar_observable_target_scope_closure_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/five_public_bar_observable_target_scope_closure_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -4088,6 +4876,7 @@
       "canonical/runtime/future_matched_scope_nontransport_v1.py"
      ],
      "capability_id": "canonical/runtime/future_matched_scope_nontransport_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -4139,6 +4928,7 @@
       "canonical/runtime/global_retrieval_authority_guard_v1.py"
      ],
      "capability_id": "canonical/runtime/global_retrieval_authority_guard_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -4191,6 +4981,7 @@
       "canonical/runtime/h100_chartreader_detector_budget_v1.py"
      ],
      "capability_id": "canonical/runtime/h100_chartreader_detector_budget_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -4241,6 +5032,7 @@
       "canonical/runtime/h100_non_synthetic_description_length_v1.py"
      ],
      "capability_id": "canonical/runtime/h100_non_synthetic_description_length_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -4293,6 +5085,7 @@
       "canonical/runtime/h100_non_synthetic_verifier_cost_v1.py"
      ],
      "capability_id": "canonical/runtime/h100_non_synthetic_verifier_cost_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -4345,6 +5138,7 @@
       "canonical/runtime/h100_unichart_storage_feasibility_v1.py"
      ],
      "capability_id": "canonical/runtime/h100_unichart_storage_feasibility_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -4396,6 +5190,7 @@
       "canonical/runtime/h100_zero_learned_event_memory_v1.py"
      ],
      "capability_id": "canonical/runtime/h100_zero_learned_event_memory_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -4448,6 +5243,7 @@
       "canonical/runtime/honesty_root3_shared_boundary_reduction_v1.py"
      ],
      "capability_id": "canonical/runtime/honesty_root3_shared_boundary_reduction_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -4501,6 +5297,7 @@
       "canonical/runtime/honesty_selected_cover_locality_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/honesty_selected_cover_locality_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -4554,6 +5351,7 @@
       "canonical/runtime/honesty_target_semantic_bridge_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/honesty_target_semantic_bridge_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -4607,6 +5405,7 @@
       "canonical/runtime/if_scope_finite_protocol_binding_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/if_scope_finite_protocol_binding_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -4659,6 +5458,7 @@
       "canonical/runtime/k6_current_authority_reconciliation_v2.py"
      ],
      "capability_id": "canonical/runtime/k6_current_authority_reconciliation_v2.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -4710,6 +5510,7 @@
       "canonical/runtime/k6_decision_refinement_compiler_v1.py"
      ],
      "capability_id": "canonical/runtime/k6_decision_refinement_compiler_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -4760,6 +5561,7 @@
       "canonical/runtime/k6_positive_adequacy_cover_theorem_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/k6_positive_adequacy_cover_theorem_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -4813,6 +5615,7 @@
       "canonical/runtime/k6_positive_cover_semantic_residual_v4_verifier.py"
      ],
      "capability_id": "canonical/runtime/k6_positive_cover_semantic_residual_v4_verifier.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -4866,6 +5669,7 @@
       "canonical/runtime/k6_target_relative_decision_quotient_v1.py"
      ],
      "capability_id": "canonical/runtime/k6_target_relative_decision_quotient_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -5135,6 +5939,7 @@
       "canonical/runtime/livebench_if_score_bound_v1.py"
      ],
      "capability_id": "canonical/runtime/livebench_if_score_bound_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -5317,6 +6122,7 @@
       "canonical/runtime/livebench_legacy15_composition_partition_v1.py"
      ],
      "capability_id": "canonical/runtime/livebench_legacy15_composition_partition_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -7252,6 +8058,7 @@
       "canonical/runtime/matched_agency_stateful_case_v1.py"
      ],
      "capability_id": "canonical/runtime/matched_agency_stateful_case_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -7303,6 +8110,7 @@
       "canonical/runtime/matched_agency_stateful_case_v2.py"
      ],
      "capability_id": "canonical/runtime/matched_agency_stateful_case_v2.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -7399,6 +8207,7 @@
       "canonical/runtime/openai_math_astra_calibration_guard_v1.py"
      ],
      "capability_id": "canonical/runtime/openai_math_astra_calibration_guard_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -7451,6 +8260,7 @@
       "canonical/runtime/openai_math_frontier_corpus_v1.py"
      ],
      "capability_id": "canonical/runtime/openai_math_frontier_corpus_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -7502,6 +8312,7 @@
       "canonical/runtime/opus55_target_identity_truth_lock_v1.py"
      ],
      "capability_id": "canonical/runtime/opus55_target_identity_truth_lock_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -7554,6 +8365,7 @@
       "canonical/runtime/p1_universal_scope_restoration_v9.py"
      ],
      "capability_id": "canonical/runtime/p1_universal_scope_restoration_v9.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -7605,6 +8417,7 @@
       "canonical/runtime/p1_v5_terminal_scope_admissibility_v1.py"
      ],
      "capability_id": "canonical/runtime/p1_v5_terminal_scope_admissibility_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -7655,6 +8468,7 @@
       "canonical/runtime/p1_v7_direct_surface_scope_transport_v1.py"
      ],
      "capability_id": "canonical/runtime/p1_v7_direct_surface_scope_transport_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -7707,6 +8521,7 @@
       "canonical/runtime/p1_zero_reality_exhaustion_gate_v1.py"
      ],
      "capability_id": "canonical/runtime/p1_zero_reality_exhaustion_gate_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -7848,6 +8663,7 @@
       "canonical/runtime/p3_binary_explicit_top_law_region_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/p3_binary_explicit_top_law_region_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -9114,6 +9930,7 @@
       "canonical/runtime/prewave_direct_proof_preflight.py"
      ],
      "capability_id": "canonical/runtime/prewave_direct_proof_preflight.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -9165,6 +9982,7 @@
       "canonical/runtime/professional_quality_declared_system_subject_verify_v1.py"
      ],
      "capability_id": "canonical/runtime/professional_quality_declared_system_subject_verify_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -9219,6 +10037,7 @@
       "canonical/runtime/professional_quality_leaf_binder_v1.py"
      ],
      "capability_id": "canonical/runtime/professional_quality_leaf_binder_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -9486,6 +10305,7 @@
       "canonical/runtime/professional_quality_r10_root_subject_binding_verify_v1.py"
      ],
      "capability_id": "canonical/runtime/professional_quality_r10_root_subject_binding_verify_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -9541,6 +10361,7 @@
       "canonical/runtime/professional_quality_r11_root_subject_binding_verify_v1.py"
      ],
      "capability_id": "canonical/runtime/professional_quality_r11_root_subject_binding_verify_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -9596,6 +10417,7 @@
       "canonical/runtime/professional_quality_r12_root_subject_binding_verify_v1.py"
      ],
      "capability_id": "canonical/runtime/professional_quality_r12_root_subject_binding_verify_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -9651,6 +10473,7 @@
       "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v1.py"
      ],
      "capability_id": "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -9705,6 +10528,7 @@
       "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v2.py"
      ],
      "capability_id": "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v2.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -9759,6 +10583,7 @@
       "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v3.py"
      ],
      "capability_id": "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v3.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -9813,6 +10638,7 @@
       "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v4.py"
      ],
      "capability_id": "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v4.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -9913,6 +10739,7 @@
       "canonical/runtime/professional_quality_r2_root_subject_binding_verify_v2.py"
      ],
      "capability_id": "canonical/runtime/professional_quality_r2_root_subject_binding_verify_v2.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -9967,6 +10794,7 @@
       "canonical/runtime/professional_quality_r3_root_subject_binding_verify_v1.py"
      ],
      "capability_id": "canonical/runtime/professional_quality_r3_root_subject_binding_verify_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -10021,6 +10849,7 @@
       "canonical/runtime/professional_quality_r4_root_subject_binding_verify_v1.py"
      ],
      "capability_id": "canonical/runtime/professional_quality_r4_root_subject_binding_verify_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -10075,6 +10904,7 @@
       "canonical/runtime/professional_quality_r5_root_subject_binding_verify_v1.py"
      ],
      "capability_id": "canonical/runtime/professional_quality_r5_root_subject_binding_verify_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -10129,6 +10959,7 @@
       "canonical/runtime/professional_quality_r6_root_subject_binding_verify_v1.py"
      ],
      "capability_id": "canonical/runtime/professional_quality_r6_root_subject_binding_verify_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -10183,6 +11014,7 @@
       "canonical/runtime/professional_quality_r7_root_subject_binding_verify_v1.py"
      ],
      "capability_id": "canonical/runtime/professional_quality_r7_root_subject_binding_verify_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -10237,6 +11069,7 @@
       "canonical/runtime/professional_quality_r8_root_subject_binding_verify_v1.py"
      ],
      "capability_id": "canonical/runtime/professional_quality_r8_root_subject_binding_verify_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -10291,6 +11124,7 @@
       "canonical/runtime/professional_quality_r9_root_subject_binding_verify_v1.py"
      ],
      "capability_id": "canonical/runtime/professional_quality_r9_root_subject_binding_verify_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -10345,6 +11179,7 @@
       "canonical/runtime/professional_quality_semantic_shared_blocker_v1.py"
      ],
      "capability_id": "canonical/runtime/professional_quality_semantic_shared_blocker_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -10398,6 +11233,7 @@
       "canonical/runtime/professional_r12_c3_lossless_composition_projection_verify_v1.py"
      ],
      "capability_id": "canonical/runtime/professional_r12_c3_lossless_composition_projection_verify_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -10452,6 +11288,7 @@
       "canonical/runtime/professional_r12_c8_nonvacuity_v1.py"
      ],
      "capability_id": "canonical/runtime/professional_r12_c8_nonvacuity_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -10503,6 +11340,7 @@
       "canonical/runtime/professional_r12_cc_r3_truth_reconciliation_v2_verify_v1.py"
      ],
      "capability_id": "canonical/runtime/professional_r12_cc_r3_truth_reconciliation_v2_verify_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -10556,6 +11394,7 @@
       "canonical/runtime/professional_r12_cc_r3_truth_reconciliation_v3_verify_v1.py"
      ],
      "capability_id": "canonical/runtime/professional_r12_cc_r3_truth_reconciliation_v3_verify_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -10609,6 +11448,7 @@
       "canonical/runtime/professional_r12_material_defeater_totality_route_audit_v1.py"
      ],
      "capability_id": "canonical/runtime/professional_r12_material_defeater_totality_route_audit_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -10709,6 +11549,7 @@
       "canonical/runtime/professional_r12_semantic_cc_r3_contract_decomposition_v1.py"
      ],
      "capability_id": "canonical/runtime/professional_r12_semantic_cc_r3_contract_decomposition_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -10762,6 +11603,7 @@
       "canonical/runtime/professional_r12_semantic_cc_r3_reuse_cut_verify_v1.py"
      ],
      "capability_id": "canonical/runtime/professional_r12_semantic_cc_r3_reuse_cut_verify_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -10953,6 +11795,7 @@
       "canonical/runtime/reached_escape_live_no_bypass_guard_v1.py"
      ],
      "capability_id": "canonical/runtime/reached_escape_live_no_bypass_guard_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -11006,6 +11849,7 @@
       "canonical/runtime/recovery_opus55_zero_reality_acceptance_reduction_v1.py"
      ],
      "capability_id": "canonical/runtime/recovery_opus55_zero_reality_acceptance_reduction_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -11060,6 +11904,7 @@
       "canonical/runtime/retrieval_live_event_ledger_v1.py"
      ],
      "capability_id": "canonical/runtime/retrieval_live_event_ledger_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -11111,6 +11956,7 @@
       "canonical/runtime/retrieval_live_provider_arena_v1.py"
      ],
      "capability_id": "canonical/runtime/retrieval_live_provider_arena_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -11207,6 +12053,7 @@
       "canonical/runtime/root2_external_task_entrypoint_v1.py"
      ],
      "capability_id": "canonical/runtime/root2_external_task_entrypoint_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -11258,6 +12105,7 @@
       "canonical/runtime/root3_current_credited_zero_effect_reconciliation_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/root3_current_credited_zero_effect_reconciliation_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -11313,6 +12161,7 @@
       "canonical/runtime/root3_effect_membrane_e1_current_byte_v1.py"
      ],
      "capability_id": "canonical/runtime/root3_effect_membrane_e1_current_byte_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -11366,6 +12215,7 @@
       "canonical/runtime/root3_matched_superportfolio_minimum_reality_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/root3_matched_superportfolio_minimum_reality_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -11420,6 +12270,7 @@
       "canonical/runtime/root3_minimum_action_cut_v1.py"
      ],
      "capability_id": "canonical/runtime/root3_minimum_action_cut_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -11471,6 +12322,7 @@
       "canonical/runtime/root3_post_synthesis_reconciliation_verifier_v2.py"
      ],
      "capability_id": "canonical/runtime/root3_post_synthesis_reconciliation_verifier_v2.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -11524,6 +12376,7 @@
       "canonical/runtime/root3_seven_class_one_substrate_policy_v1.py"
      ],
      "capability_id": "canonical/runtime/root3_seven_class_one_substrate_policy_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -11577,6 +12430,7 @@
       "canonical/runtime/root3_target_population_coalescence_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/root3_target_population_coalescence_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -11630,6 +12484,7 @@
       "canonical/runtime/runtime_cognition_credit_guard_v1.py"
      ],
      "capability_id": "canonical/runtime/runtime_cognition_credit_guard_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -12324,6 +13179,7 @@
       "canonical/runtime/shared_channel_dominator_v1.py"
      ],
      "capability_id": "canonical/runtime/shared_channel_dominator_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -12374,6 +13230,7 @@
       "canonical/runtime/structured_method_universal_correctness_certificate_v1.py"
      ],
      "capability_id": "canonical/runtime/structured_method_universal_correctness_certificate_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -12561,6 +13418,7 @@
       "canonical/runtime/synthesis_lossless_scope_decomposition_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/synthesis_lossless_scope_decomposition_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -12614,6 +13472,7 @@
       "canonical/runtime/synthesis_required_claim_coverage_ceiling_lift_verifier_v2.py"
      ],
      "capability_id": "canonical/runtime/synthesis_required_claim_coverage_ceiling_lift_verifier_v2.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -12714,6 +13573,7 @@
       "canonical/runtime/target_role_escape_frontier_v1.py"
      ],
      "capability_id": "canonical/runtime/target_role_escape_frontier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -12766,6 +13626,7 @@
       "canonical/runtime/tb4_omc_cloud_candidate_v1.py"
      ],
      "capability_id": "canonical/runtime/tb4_omc_cloud_candidate_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -12818,6 +13679,7 @@
       "canonical/runtime/tb_science_opus55_target_freshness_guard_v1.py"
      ],
      "capability_id": "canonical/runtime/tb_science_opus55_target_freshness_guard_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -12915,6 +13777,7 @@
       "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py"
      ],
      "capability_id": "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -12968,6 +13831,7 @@
       "canonical/runtime/terminal_causal_depth_controller_v1.py"
      ],
      "capability_id": "canonical/runtime/terminal_causal_depth_controller_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -13018,6 +13882,7 @@
       "canonical/runtime/terminal_four_invariant_controller_v1.py"
      ],
      "capability_id": "canonical/runtime/terminal_four_invariant_controller_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -13070,6 +13935,7 @@
       "canonical/runtime/terminal_frontier_factorizer_v1.py"
      ],
      "capability_id": "canonical/runtime/terminal_frontier_factorizer_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -13120,6 +13986,7 @@
       "canonical/runtime/terminal_frontier_factorizer_v2.py"
      ],
      "capability_id": "canonical/runtime/terminal_frontier_factorizer_v2.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -13170,6 +14037,7 @@
       "canonical/runtime/terminal_frontier_factorizer_v3_candidate.py"
      ],
      "capability_id": "canonical/runtime/terminal_frontier_factorizer_v3_candidate.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -13220,6 +14088,7 @@
       "canonical/runtime/terminal_frontier_factorizer_v5.py"
      ],
      "capability_id": "canonical/runtime/terminal_frontier_factorizer_v5.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -13270,6 +14139,7 @@
       "canonical/runtime/terminal_frontier_factorizer_v6.py"
      ],
      "capability_id": "canonical/runtime/terminal_frontier_factorizer_v6.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -13320,6 +14190,7 @@
       "canonical/runtime/terminal_frontier_factorizer_v6_candidate.py"
      ],
      "capability_id": "canonical/runtime/terminal_frontier_factorizer_v6_candidate.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -13371,6 +14242,7 @@
       "canonical/runtime/terminal_minimum_causal_depth_guard_v1.py"
      ],
      "capability_id": "canonical/runtime/terminal_minimum_causal_depth_guard_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -13423,6 +14295,7 @@
       "canonical/runtime/terminal_projection_consistency_v1.py"
      ],
      "capability_id": "canonical/runtime/terminal_projection_consistency_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -13474,6 +14347,7 @@
       "canonical/runtime/terminal_scope_quarantine_propagation_v1.py"
      ],
      "capability_id": "canonical/runtime/terminal_scope_quarantine_propagation_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -13526,6 +14400,7 @@
       "canonical/runtime/terminal_selection_kernel_guard.py"
      ],
      "capability_id": "canonical/runtime/terminal_selection_kernel_guard.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -13578,6 +14453,7 @@
       "canonical/runtime/tool_discovery_acceptance_promotion_integrator_v1.py"
      ],
      "capability_id": "canonical/runtime/tool_discovery_acceptance_promotion_integrator_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -13631,6 +14507,7 @@
       "canonical/runtime/tool_discovery_acceptance_reduction_v1.py"
      ],
      "capability_id": "canonical/runtime/tool_discovery_acceptance_reduction_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -13683,6 +14560,7 @@
       "canonical/runtime/tool_discovery_dynamic_refinement_v1.py"
      ],
      "capability_id": "canonical/runtime/tool_discovery_dynamic_refinement_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -13734,6 +14612,7 @@
       "canonical/runtime/tool_discovery_frozen_scope_completeness_discharge_v1.py"
      ],
      "capability_id": "canonical/runtime/tool_discovery_frozen_scope_completeness_discharge_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -13787,6 +14666,7 @@
       "canonical/runtime/tool_discovery_observability_partition_v2.py"
      ],
      "capability_id": "canonical/runtime/tool_discovery_observability_partition_v2.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -13838,6 +14718,7 @@
       "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py"
      ],
      "capability_id": "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -13891,6 +14772,7 @@
       "canonical/runtime/tool_discovery_universal_scope_certificate_v1.py"
      ],
      "capability_id": "canonical/runtime/tool_discovery_universal_scope_certificate_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -13943,6 +14825,7 @@
       "canonical/runtime/tool_discovery_universal_scope_formalism_cut_v1.py"
      ],
      "capability_id": "canonical/runtime/tool_discovery_universal_scope_formalism_cut_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -13996,6 +14879,7 @@
       "canonical/runtime/unified_trace_policy_generator_v1.py"
      ],
      "capability_id": "canonical/runtime/unified_trace_policy_generator_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -14047,6 +14931,7 @@
       "canonical/runtime/unknown_domain_two_behavior_shared_semantic_frontier_v1.py"
      ],
      "capability_id": "canonical/runtime/unknown_domain_two_behavior_shared_semantic_frontier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -14102,6 +14987,7 @@
       "canonical/runtime/v12_target_law_uncertainty_residual_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/v12_target_law_uncertainty_residual_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -14156,6 +15042,7 @@
       "canonical/runtime/v13_db_existing_evidence_saturation_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/v13_db_existing_evidence_saturation_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -14209,6 +15096,7 @@
       "canonical/runtime/v13_finance_uncovered_scope_routing_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/v13_finance_uncovered_scope_routing_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -14263,6 +15151,7 @@
       "canonical/runtime/v13_native_artifact_mechanical_selected_cell_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/v13_native_artifact_mechanical_selected_cell_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -14318,6 +15207,7 @@
       "canonical/runtime/v14_db_existing_evidence_saturation_verifier_v2.py"
      ],
      "capability_id": "canonical/runtime/v14_db_existing_evidence_saturation_verifier_v2.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -14371,6 +15261,7 @@
       "canonical/runtime/v14_db_existing_evidence_saturation_verifier_v3.py"
      ],
      "capability_id": "canonical/runtime/v14_db_existing_evidence_saturation_verifier_v3.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -14424,6 +15315,7 @@
       "canonical/runtime/v14_p2_professional_top_law_selected_cell_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/v14_p2_professional_top_law_selected_cell_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -14478,6 +15370,7 @@
       "canonical/runtime/v14_synthesis_unsupported_claim_cell_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/v14_synthesis_unsupported_claim_cell_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -14532,6 +15425,7 @@
       "canonical/runtime/v15_finance_two_leaf_piecewise_route_cut_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/v15_finance_two_leaf_piecewise_route_cut_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -14587,6 +15481,7 @@
       "canonical/runtime/v15_live_residual_scheduler_authority_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/v15_live_residual_scheduler_authority_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -14640,6 +15535,7 @@
       "canonical/runtime/v9_route_bundle_triage_verifier_v1.py"
      ],
      "capability_id": "canonical/runtime/v9_route_bundle_triage_verifier_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -14691,6 +15587,7 @@
       "canonical/runtime/verify_cad_zero_reality_blocker_reconciliation_v1.py"
      ],
      "capability_id": "canonical/runtime/verify_cad_zero_reality_blocker_reconciliation_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -14744,6 +15641,7 @@
       "canonical/runtime/verify_terminal_scheduling_v11_candidate_v1.py"
      ],
      "capability_id": "canonical/runtime/verify_terminal_scheduling_v11_candidate_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -14797,6 +15695,7 @@
       "canonical/runtime/verify_terminal_scheduling_v12_candidate_v1.py"
      ],
      "capability_id": "canonical/runtime/verify_terminal_scheduling_v12_candidate_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -14850,6 +15749,7 @@
       "canonical/verification/p3_nonbinding_v9_compositional_replay_v1.py"
      ],
      "capability_id": "canonical/verification/p3_nonbinding_v9_compositional_replay_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -14900,6 +15800,7 @@
       "canonical/verification/run_long_horizon_continuity_v1.py"
      ],
      "capability_id": "canonical/verification/run_long_horizon_continuity_v1.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -14950,6 +15851,7 @@
       "canonical/verification/verify_image_ocr_tesseract_reuse.py"
      ],
      "capability_id": "canonical/verification/verify_image_ocr_tesseract_reuse.py.auto.v1",
+     "expect_exit": 0,
      "timeout_s": 60
     },
     "expect": {
@@ -15039,5 +15941,6 @@
    }
   }
  },
+ "harvested_entries": 16,
  "schema": "PROJECT_BRAIN_CAPABILITY_RECEIPT_PROJECTION_V1"
 }

@@ -227,6 +227,54 @@ def snapshot_inputs(root: str, args: Mapping[str, Any] | None) -> dict[str, str]
     return digests
 
 
+def restore_snapshot_inputs(root: str, args: Mapping[str, Any] | None,
+                            input_digests: Mapping[str, str] | None) -> bool:
+    """Materialize content-addressed input blobs for an independent replay.
+
+    Producer receipts record `input_digests` into `canonical/astra_runtime/instances/`
+    while scratch inputs under `canonical/astra_runtime/tmp/` are gitignored.  Without
+    restoring those bytes before `--verify`, any capability whose inputs lived in `tmp/`
+    fails closed on a clean OIDC checkout.  Writes are strictly confined to
+    `canonical/astra_runtime/tmp/`; existing repository files are verified in place and
+    never overwritten.
+    """
+    if not args or not input_digests:
+        return True
+    if not isinstance(args, Mapping) or not isinstance(input_digests, Mapping):
+        return False
+    root_real = os.path.realpath(root)
+    tmp_real = os.path.realpath(os.path.join(root_real, "canonical", "astra_runtime", "tmp"))
+    for name, expected_sha in input_digests.items():
+        raw_path = args.get(str(name))
+        if not isinstance(raw_path, str) or not raw_path or os.path.isabs(raw_path):
+            return False
+        if not isinstance(expected_sha, str) or len(expected_sha) != 64:
+            return False
+        dest_real = os.path.realpath(os.path.join(root_real, raw_path))
+        if os.path.isfile(dest_real):
+            try:
+                if sha256_file(dest_real) == expected_sha:
+                    continue
+            except OSError:
+                return False
+        if dest_real != tmp_real and not dest_real.startswith(tmp_real + os.sep):
+            return False
+        store_blob = os.path.join(root_real, INSTANCE_STORE, expected_sha + ".bin")
+        if not os.path.isfile(store_blob):
+            return False
+        try:
+            with open(store_blob, "rb") as fh:
+                blob = fh.read()
+            if hashlib.sha256(blob).hexdigest() != expected_sha:
+                return False
+            os.makedirs(os.path.dirname(dest_real), exist_ok=True)
+            with open(dest_real, "wb") as fh:
+                fh.write(blob)
+        except OSError:
+            return False
+    return True
+
+
 def _at_instance(base: str, instance_index: int, is_path: bool = False) -> str:
     """The value of one declared input at one instance.
 
@@ -273,7 +321,8 @@ def declared_probe_args(root: str, capability_id: str, module_sha: str,
 
 
 def _probe_invoke(
-    fn: Any, root: str, capability_id: str, module_sha: str, instance_index: int = 0
+    fn: Any, root: str, capability_id: str, module_sha: str, instance_index: int = 0,
+    probe_args: Mapping[str, Any] | None = None
 ) -> tuple[Any, dict[str, Any]]:
     """Run the adapter, preferring the empty-arg probe and falling back to declared args.
 
@@ -281,6 +330,9 @@ def _probe_invoke(
     every receipt the lane already issued still issues identically, and only
     adapters that the empty call cannot exercise gain one.
     """
+    if isinstance(probe_args, Mapping):
+        supplied = dict(probe_args)
+        return fn(supplied, root), supplied
     try:
         return fn({}, root), {}
     except BaseException:  # noqa: BLE001 - the empty probe is a first attempt, not a verdict
@@ -377,8 +429,15 @@ def verification_path_for(receipt_path: str) -> str:
 
 def execute_and_receipt(capability_id: str, module_path: str, entrypoint: str,
                         root: str, ran_by: str, kind: str = "contract",
-                        instance_index: int = 0) -> dict[str, Any] | None:
-    """Run one capability and return its receipt. Returns None if it did not run."""
+                        instance_index: int = 0,
+                        probe_args: Mapping[str, Any] | None = None) -> dict[str, Any] | None:
+    """Run one capability and return its receipt. Returns None if it did not run.
+
+    ``probe_args`` is for callers that already know the invocation: a harvested
+    surface has had no registry row to derive `${input.*}` values from, so its
+    caller supplies them.  Everything else keeps the empty-args-first probe
+    unchanged, which is why no existing receipt changes meaning.
+    """
     started = time.perf_counter()
     module_sha = sha256_file(os.path.join(root, module_path))
     if kind == "cli":
@@ -440,7 +499,8 @@ def execute_and_receipt(capability_id: str, module_path: str, entrypoint: str,
             if not callable(fn):
                 return None
             result, invoked = _probe_invoke(invoke_with_snapshot, root, capability_id,
-                                            module_sha, instance_index)
+                                            module_sha, instance_index,
+                                            probe_args=probe_args)
         finally:
             signal.alarm(0)
     except BaseException:  # noqa: BLE001 - a failed probe is data, not an error
@@ -518,10 +578,20 @@ def verify_producer_receipts(root: str, ran_by: str,
             mismatched.append(rel)
             continue
 
+        kind = str(producer.get("kind") or "contract")
+        raw_invoked = producer.get("invoked_args")
+        replay_args: Mapping[str, Any] | None = None
+        if kind == "contract" and isinstance(raw_invoked, Mapping) and raw_invoked:
+            if not restore_snapshot_inputs(root, raw_invoked, producer.get("input_digests")):
+                mismatched.append(rel)
+                continue
+            replay_args = raw_invoked
+
         fresh = execute_and_receipt(producer["capability_id"], producer["module_path"],
                                    producer["entrypoint"], root, ran_by,
-                                   str(producer.get("kind") or "contract"),
-                                   instance_index=int(producer.get("instance_index") or 0))
+                                   kind,
+                                   instance_index=int(producer.get("instance_index") or 0),
+                                   probe_args=replay_args)
         if fresh is None or fresh.get("result_sha256") != producer.get("result_sha256"):
             mismatched.append(rel)
             continue
@@ -695,7 +765,8 @@ def projection_entry(receipt: dict[str, Any]) -> dict[str, Any]:
                    "adapter_path": CLI_ADAPTER if is_cli else receipt["module_path"]},
         "action_template": {
             "type": "invoke_capability",
-            "args": ({"capability_id": cid, "argv": receipt["invoked_args"]["argv"], "timeout_s": 60}
+            "args": ({"capability_id": cid, "argv": receipt["invoked_args"]["argv"],
+                      "expect_exit": 0, "timeout_s": 60}
                      if is_cli else {"capability_id": cid}),
             # The declared expectation may not claim more than the receipt observed.  This
             # used to be `field_nonempty status` for every non-CLI capability, which is an
@@ -782,6 +853,7 @@ def main(argv: list[str] | None = None) -> int:
     # Probing must not mutate the project: some modules write reports, state files or even
     # registry entries as a side effect.
     reverted = restore_tree(root, before, ("astra_runtime/evidence/CAPABILITY__",
+                                           "astra_runtime/instances/",
                                            "CAPABILITY_RECEIPT_PROJECTION_V1.json"))
 
     entries = {r["capability_id"]: projection_entry(r) for r in receipts}

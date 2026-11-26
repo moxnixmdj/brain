@@ -1,0 +1,32 @@
+{
+ "capability_id": "canonical.runtime.tool_census_v1.hidden.v1",
+ "elapsed_ms": 4246.19,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/tool_census_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/tool_census_v1.py",
+ "module_sha256": "3fdff3b36e2c7c45ea72a19a6df6a9ee3438d2e1cef5f2ee10dcf0802b57e320",
+ "observed": {
+  "returncode": 0
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "harvest-local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.tool_census_v1.hidden.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 4,
+ "result_sha256": "304a145cd8495b6308dae520fc3e1b91c792fcc786e3412cd9823886d37b9daa",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

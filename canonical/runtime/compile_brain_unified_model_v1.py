@@ -677,10 +677,17 @@ def _build_grammar(capabilities: list[Mapping[str, Any]], engines: list[Mapping[
         rows.append((cid.casefold(), cid, 12))
     for engine in engines:
         eid = str(engine["id"])
+        is_federated = engine.get("kind") == "FEDERATED_KERNEL_ENGINE"
+        seen_eng: set[str] = set()
         for trigger in engine.get("triggers") or []:
+            trig_weight = 3 if (is_federated and " " in str(trigger)) else 2
             for token in tokenize(str(trigger)):
-                rows.append((token, eid, 2))
+                if token in seen_eng:
+                    continue
+                seen_eng.add(token)
+                rows.append((token, eid, trig_weight))
         rows.append((eid.casefold().replace("engine:", ""), eid, 8))
+        rows.append((eid.casefold(), eid, 12))
 
     postings: dict[str, dict[str, int]] = {}
     doc_freq: dict[str, int] = {}
@@ -831,6 +838,11 @@ def _skill_rows(root: Path) -> list[dict[str, Any]]:
 
 
 def _engine_rows(root: Path) -> list[dict[str, Any]]:
+    from canonical.runtime.unified_hidden_capability_federation_v1 import (
+        CARRIER_REL_PATH as FEDERATED_CARRIER_PATH,
+        FEDERATED_KERNEL_DESCRIPTORS,
+    )
+
     engines, meta = _fabric_surfaces(root)
     fabric_sha = digest_file(root / FABRIC_PATH)
     rows: list[dict[str, Any]] = []
@@ -870,6 +882,50 @@ def _engine_rows(root: Path) -> list[dict[str, Any]]:
                 "host_providers_may_be_required": True,
             }
         )
+    federated_carrier_sha = digest_file(root / FEDERATED_CARRIER_PATH)
+    for mode in sorted(FEDERATED_KERNEL_DESCRIPTORS):
+        spec = FEDERATED_KERNEL_DESCRIPTORS[mode]
+        src_rel = str(spec["source_path"])
+        src_file = root / src_rel
+        src_sha = digest_file(src_file) if src_file.is_file() else None
+        trig_list: list[str] = []
+        seen_t: set[str] = set()
+        for phrase in [mode.replace("_", " ").lower(), *(spec.get("triggers") or [])]:
+            p_str = str(phrase).strip()
+            if p_str and p_str not in seen_t:
+                seen_t.add(p_str)
+                trig_list.append(p_str)
+        deps = sorted({str(d) for d in (spec.get("declared_dependencies") or []) if str(d)})
+        rows.append(
+            {
+                "id": "engine:" + mode,
+                "kind": "FEDERATED_KERNEL_ENGINE",
+                "mode": mode,
+                "domain": str(spec["domain"]),
+                "descriptor": f"{src_rel}:{spec['entrypoint']}",
+                "summary": str(spec["summary"]),
+                "required_inputs": [str(k) for k in (spec.get("required_inputs") or [])],
+                "declared_dependencies": {
+                    "kind": "PYTHON_SOURCE",
+                    "declared_dependencies_checked": deps,
+                    "declared_dependency_executables": [],
+                },
+                "incremental_spend_usd": 0,
+                "model_dependency_count": 0,
+                "triggers": trig_list,
+                "route": {
+                    "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
+                    "carrier_path": FEDERATED_CARRIER_PATH,
+                    "carrier_sha256": federated_carrier_sha,
+                    "source_path": src_rel,
+                    "source_sha256": src_sha,
+                    "entrypoint": str(spec["entrypoint"]),
+                    "call": "run_federated_engine(mode, inputs, goal=goal)",
+                    "authority": "LOCAL_DETERMINISTIC_KERNEL__ZERO_MODEL",
+                },
+                "host_providers_may_be_required": False,
+            }
+        )
     return rows
 
 
@@ -881,6 +937,56 @@ _IMPORT_RE = re.compile(r"^\s*(?:from|import)\s+([A-Za-z_][\w.]*)", re.M)
 # addressable source: it is the oracle, and indexing it would let a goal be
 # answered with the test that is supposed to judge the answer.
 _SOURCE_ROOTS = ("canonical/runtime", "canonical/swe_kernel")
+
+
+def _harvested_rows(root: Path, admitted_paths: set[str] | None = None) -> list[dict[str, Any]]:
+    """Executable surfaces the registry cannot see, derived from the tree itself.
+
+    Measured on this checkout: 625 modules carry an invocation shape (a
+    ``run(args, root)`` contract or a program entry point), are absent from both
+    registries and from the receipt projection, and are therefore invisible to
+    ``source_index`` too -- ``source_index`` only walks ``canonical/runtime``, and
+    462 of the 625 live outside it (``canonical/tools`` 322,
+    ``canonical/swe_kernel`` 94, ``execution_guard`` 25).
+
+    This is a *description*, not an admission.  Every row says
+    ``admitted: false``; execution goes through the harvested-capability runtime,
+    which issues a receipt and still cannot promote anything, because the loader
+    requires an independent identity with signed OIDC claims to re-run it.
+    """
+    if str(root) not in sys.path:
+        sys.path.insert(0, str(root))
+    from canonical.tools import harvest_hidden_capabilities_v1 as census
+
+    admitted_paths = admitted_paths or set()
+    rows: list[dict[str, Any]] = []
+    for row in census.harvested_rows(root):
+        # A bound capability may record only `adapter_module`, never a path, so the
+        # census cannot know that `bound_capabilities/<stem>.py` is already declared.
+        # The compiler can: it resolves that adapter itself.  Without this filter five
+        # modules appeared both as admitted capabilities and as discovered surfaces --
+        # the same file claiming two different statuses in one artifact.
+        if row["path"] in admitted_paths:
+            continue
+        rows.append({
+            "id": row["id"],
+            "kind": "HARVESTED_EXECUTABLE_SURFACE",
+            "path": row["path"],
+            "sha256": row["sha256"],
+            "invocation": row["kind"],
+            "entrypoint": row["entrypoint"],
+            "declared_capability_id": row.get("declared_capability_id"),
+            "declared_inputs": row.get("declared_inputs") or [],
+            "declared_result_fields": row.get("declared_result_fields") or [],
+            "summary": row.get("doc") or "",
+            "triggers": row["triggers"],
+            # The load-bearing distinction, on every row.
+            "admitted": False,
+            "capability": False,
+            "admission_state": "DISCOVERED_NOT_ADMITTED",
+            "route": "canonical/runtime/harvested_capability_runtime_v1.py",
+        })
+    return rows
 
 
 def _source_index_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
@@ -902,11 +1008,16 @@ def _source_index_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
     _seen: set[str] = set()
     importers: dict[str, set[str]] = {}
     py_files: list[Path] = []
+    astra_tmp = root / "canonical" / "astra_runtime" / "tmp"
     for name in ("canonical", "tests"):
         base = root / name
         if base.is_dir():
             py_files.extend(
-                p for p in sorted(base.rglob("*.py")) if ".git" not in p.parts
+                p
+                for p in sorted(base.rglob("*.py"))
+                if ".git" not in p.parts
+                and "__pycache__" not in p.parts
+                and not p.is_relative_to(astra_tmp)
             )
     for path in py_files:
         try:
@@ -1215,6 +1326,122 @@ def _theory_block() -> dict[str, Any]:
     }
 
 
+
+ANATOMY_PATH = "canonical/unified_model/DOMAIN_ATLAS_V1.json"
+
+
+def _anatomy_block(root: Path) -> dict[str, Any]:
+    """The five frontier functions, projected into the model as *navigation*.
+
+    Measured before this block existed: the model could point at the machinery for
+    instant learning (``find_source`` recall 1.00, 13x chance) and could not route to it
+    (``route`` recall 0.00) even when asked in the repository's own vocabulary. The
+    modules were in the tree and in ``source_index``; what was missing was a
+    function-first view of them.
+
+    This block is that view. It is a projection of ``DOMAIN_ATLAS_V1.json``, which is
+    itself a projection of the tree -- so it is reproducible, and it is rebuilt when the
+    tree changes. Every row stays ``capability: false``: a module that scores as "this is
+    the memory subsystem" has not been executed, so it has not been admitted, and the
+    model must not pretend otherwise.
+    """
+    path = root / ANATOMY_PATH
+    if not path.is_file():
+        return {
+            "schema": "BRAIN_MODEL_ANATOMY_V1",
+            "source": ANATOMY_PATH,
+            "present": False,
+            "reason": "ATLAS_NOT_COMPILED__RUN_canonical/tools/domain_atlas_v1.py",
+            "domains": {},
+        }
+    atlas = json.loads(path.read_text(encoding="utf-8"))
+    domains: dict[str, Any] = {}
+    for name, row in sorted((atlas.get("domains") or {}).items()):
+        domains[name] = {
+            "frontier_function": row.get("frontier_function"),
+            "candidates": row.get("candidates"),
+            "indexed_all": row.get("indexed_all"),
+            "harvested_all": row.get("harvested_all"),
+            "hidden_share_all": row.get("hidden_share_all"),
+            "top": [
+                {
+                    "path": item.get("path"),
+                    "score": item.get("score"),
+                    "summary": item.get("summary"),
+                    "executable_surface": bool(item.get("harvested")),
+                    "indexed_as_source": bool(item.get("source_index")),
+                    "capability": False,
+                }
+                for item in (row.get("top") or [])[:12]
+            ],
+        }
+    reach = atlas.get("reachability") or {}
+    return {
+        "schema": "BRAIN_MODEL_ANATOMY_V1",
+        "source": ANATOMY_PATH,
+        "source_sha256": digest_file(path),
+        "present": True,
+        "domains": domains,
+        "reachability": {
+            name: {
+                key: value
+                for key, value in (row or {}).items()
+                if key in ("frontier_source_hit_recall", "native_route_hit_recall",
+                           "chance_source_recall", "chance_route_recall")
+            }
+            for name, row in sorted(reach.items())
+        },
+        "claim_limit": atlas.get("claim_limit"),
+    }
+
+
+LEDGER_PATH = "canonical/verification/PROMOTION_LEDGER_20261127_V1.json"
+
+
+def _promotion_block(root: Path) -> dict[str, Any]:
+    """What stands between the tree's frontier-function code and a call from ``solve()``.
+
+    The anatomy block answers *where* the five functions live. It does not answer why a
+    module that implements one of them still cannot be called. Measured on 849 classified
+    modules: 31 are callable and receipted, 36 are callable with no receipt, 641 are indexed
+    source with no adapter, and 137 are not indexed at all. Three quarters of the machinery
+    is one thin adapter away from the runtime, which is a different job from writing
+    capability -- and until the number was written down, every round guessed at it.
+
+    The block is a projection of the ledger, so it is rebuilt when the ledger is, and every
+    count in it is a row of that artifact. It admits nothing: a ``ROUTED`` row has a receipt,
+    not a proof of correctness.
+    """
+    path = root / LEDGER_PATH
+    if not path.is_file():
+        return {
+            "schema": "BRAIN_MODEL_PROMOTION_V1",
+            "source": LEDGER_PATH,
+            "present": False,
+            "reason": "LEDGER_NOT_COMPILED__RUN_canonical/tools/promotion_ledger_v1.py",
+        }
+    ledger = json.loads(path.read_text(encoding="utf-8"))
+    totals = ledger.get("totals") or {}
+    return {
+        "schema": "BRAIN_MODEL_PROMOTION_V1",
+        "source": LEDGER_PATH,
+        "source_sha256": digest_file(path),
+        "present": True,
+        "candidates": ledger.get("candidates"),
+        "callable_now": ledger.get("callable_now"),
+        "callable_share": ledger.get("callable_share"),
+        "by_missing_attribute": totals,
+        "promotable_without_new_code": int(totals.get("RECEIPTED_UNBOUND") or 0) + int(
+            totals.get("ADAPTER_UNRECEIPTED") or 0
+        ),
+        "needs_a_thin_adapter": int(totals.get("SOURCE_ONLY") or 0),
+        "not_indexed": int(totals.get("INVISIBLE") or 0),
+        "per_domain_callable": ledger.get("domain_executable_now") or {},
+        "next_actions": ledger.get("next_actions") or [],
+        "claim_limit": ledger.get("claim_limit"),
+    }
+
+
 def compile_model(root: str | Path | None = None) -> dict[str, Any]:
     """Compile the model in memory. The caller decides whether to persist it."""
     base = Path(root or ROOT).resolve()
@@ -1244,6 +1471,28 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
         if row["provenance"].get("source_path")
     )
     source_index = _source_index_rows(base, covered_paths)
+    admitted_paths: set[str] = set()
+    for row in capabilities:
+        for key in ("source_path", "adapter_path"):
+            value = row["provenance"].get(key)
+            if isinstance(value, str):
+                admitted_paths.add(value)
+    harvested = _harvested_rows(base, admitted_paths)
+    # `source_index` now scans `canonical/swe_kernel` as well as `canonical/runtime`,
+    # so some harvested rows are already findable there.  Say so on the row instead
+    # of hiding the executable half: findable and callable are different facts.
+    indexed_paths = {row["path"] for row in source_index}
+    for row in harvested:
+        row["also_in_source_index"] = row["path"] in indexed_paths
+
+    from canonical.runtime.unified_hidden_capability_federation_v1 import (
+        CARRIER_REL_PATH as FEDERATED_CARRIER_PATH,
+        compile_extended_source_index_rows,
+    )
+
+    extended_source_index = compile_extended_source_index_rows(
+        base, covered_paths | indexed_paths
+    )
 
     # The research record behind the capabilities: governance decisions,
     # verification receipts, action intents. Records, not capabilities -- see
@@ -1255,6 +1504,8 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
         if not row["triggers"]:
             raise UnifiedModelCompileError("CAPABILITY_WITHOUT_TRIGGERS:" + row["id"])
 
+    anatomy = _anatomy_block(base)
+    promotion = _promotion_block(base)
     grammar = _build_grammar(capabilities, engines)
     grammar["adapter_ast_index"] = _extract_adapter_ast_index(base, capabilities)
 
@@ -1268,9 +1519,17 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
         evidence_sha = row["verification"].get("evidence_sha256")
         if isinstance(evidence_path, str) and isinstance(evidence_sha, str):
             included_sources.append((evidence_path, evidence_sha))
+    for erow in engines:
+        eroute = erow.get("route") if isinstance(erow.get("route"), Mapping) else {}
+        esrc_path = eroute.get("source_path")
+        esrc_sha = eroute.get("source_sha256")
+        if isinstance(esrc_path, str) and isinstance(esrc_sha, str):
+            included_sources.append((esrc_path, esrc_sha))
     for row in knowledge + skills:
         included_sources.append((str(row["path"]), str(row["sha256"])))
-    for rel in (FABRIC_PATH, REGISTRY_PATH):
+    for row in harvested:
+        included_sources.append((row["path"], row["sha256"]))
+    for rel in (FABRIC_PATH, REGISTRY_PATH, FEDERATED_CARRIER_PATH):
         path = base / rel
         if path.is_file():
             included_sources.append((rel, digest_file(path)))
@@ -1286,8 +1545,12 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
         "skills": skills,
         "knowledge": knowledge,
         "source_index": source_index,
+        "extended_source_index": extended_source_index,
+        "harvested_capabilities": harvested,
         "research_index": research_index,
         "grammar": grammar,
+        "anatomy": anatomy,
+        "promotion": promotion,
         "counts": {
             "capabilities": len(capabilities),
             "bound_capabilities": sum(
@@ -1297,14 +1560,31 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
                 1 for row in capabilities if row["kind"] == "RECEIPT_BACKED_CAPABILITY"
             ),
             "engines": len(engines),
+            "federated_kernel_engines": sum(
+                1 for row in engines if row.get("kind") == "FEDERATED_KERNEL_ENGINE"
+            ),
             "skills": len(skills),
             "knowledge_documents": len(knowledge),
             "source_index_modules": len(source_index),
+            "harvested_capabilities": len(harvested),
+            "harvested_contract_surfaces": sum(
+                1 for row in harvested if row["invocation"] == "contract"
+            ),
+            "harvested_program_surfaces": sum(
+                1 for row in harvested if row["invocation"] == "cli"
+            ),
+            "harvested_admitted": sum(1 for row in harvested if row["admitted"]),
             "source_index_entry_points": sum(
                 1 for row in source_index if row["classification"] == "ENTRY_POINT"
             ),
+            "extended_source_index_modules": len(extended_source_index),
             "research_index_records": len(research_index),
             "routing_tokens": len(grammar["index"]),
+            "anatomy_domains": len(anatomy.get("domains") or {}),
+            "anatomy_modules": sum(len(row.get("top") or []) for row in
+                                   (anatomy.get("domains") or {}).values()),
+            "promotion_candidates": promotion.get("candidates") or 0,
+            "promotion_callable": promotion.get("callable_now") or 0,
         },
         "provenance": {
             "compiler": "canonical/runtime/compile_brain_unified_model_v1.py",
@@ -1330,6 +1610,7 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
             "COVERAGE_IS_NOT_CAPABILITY__EXECUTION_STILL_REQUIRES_DECLARED_SUBSTRATE",
             "SOURCE_INDEX_IS_ADDRESSABLE_NOT_EXECUTABLE__NOT_REACHABLE_THROUGH_SOLVE",
             "RESEARCH_INDEX_IS_EVIDENCE_ABOUT_CAPABILITIES__NOT_A_CAPABILITY_ITSELF",
+            "HARVESTED_SURFACE_IS_DISCOVERED_NOT_ADMITTED__EXECUTION_ISSUES_A_RECEIPT_AND_PROMOTES_NOTHING",
         ],
     }
     model["digest"] = {
@@ -1353,6 +1634,10 @@ def write_model(
     target.parent.mkdir(parents=True, exist_ok=True)
     text = json.dumps(model, indent=1, sort_keys=True, ensure_ascii=False) + "\n"
     target.write_text(text, encoding="utf-8")
+    if target.resolve() == (ROOT / DEFAULT_OUTPUT).resolve():
+        from canonical.runtime.brain_unified_model_v1 import prewarm_sidecar_caches
+
+        prewarm_sidecar_caches(model, target)
     return target
 
 

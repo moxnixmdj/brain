@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical.runtime.bound_capabilities.jq_query.hidden.v1",
+ "elapsed_ms": 61.003,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "input_digests": {
+  "input_path": "921b7570dd9c6d225a07de715ea45326d183b9ad1d84ae56ea950bde685f4b55"
+ },
+ "invoked_args": {
+  "filter": ".repos | map(select(.stars > 5)) | .[0].name",
+  "input_path": "canonical/astra_runtime/tmp/HARVEST_JQ_eyg9g2bc/in.json",
+  "output_path": "canonical/astra_runtime/tmp/HARVEST_JQ_eyg9g2bc/out.json"
+ },
+ "kind": "contract",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bound_capabilities/jq_query.py",
+ "module_sha256": "214ed15f81f2268dfe7f1f5092be65f82be93e9d197648aea0e2ca94dc673bf2",
+ "observed": {
+  "output_verified": true
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "harvested-runtime",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.bound_capabilities.jq_query.hidden.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 11,
+ "result_sha256": "0825febec6014068df2ab18d3c5df01fec80d7589f8547ea3c2257428527e111",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

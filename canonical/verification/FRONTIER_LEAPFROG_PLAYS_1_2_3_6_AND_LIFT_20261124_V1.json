@@ -1,0 +1,113 @@
+{
+  "authority": "NONE -- sandbox execution measurement; independent promotion requires GitHub OIDC re-execution",
+  "base_commit": "ab5a2df83c6be0d92bb58355ac839ad188adea4a",
+  "date": "2026-11-24",
+  "harvested_oidc_pipeline_lift": {
+    "clean_tmp_contract_replay_reproduced": 16,
+    "clean_tmp_contract_replay_total": 16,
+    "newly_receipted_contract_surfaces": 12,
+    "previously_broken_now_reproducible_surfaces": [
+      "canonical.runtime.bound_capabilities.jq_query.hidden.v1",
+      "canonical.runtime.bound_capabilities.concrete_execution_oracle.hidden.v1"
+    ],
+    "staged_harvested_projection_entries": 16
+  },
+  "incremental_spend_usd": 0,
+  "infrastructure_defects_repaired": [
+    "canonical/runtime/capability_receipt_lane_v1.py: verify_producer_receipts now restores content-addressed input_digests into canonical/astra_runtime/tmp/ and forwards invoked_args to execute_and_receipt, unblocking OIDC verification for input-requiring contract surfaces.",
+    "canonical/runtime/capability_receipt_lane_v1.py: projection_entry now attaches expect_exit=0 on CLI action_template.args, eliminating 185 unchecked declarations in CAPABILITY_RECEIPT_PROJECTION_V1.json that had pushed auditability_report_v1 --floor to 607 > 595 on main.",
+    "canonical/runtime/capability_receipt_lane_v1.py & canonical/tools/harvest_capability_receipts_v1.py: restore_tree preserves canonical/astra_runtime/instances/ content-addressed input blobs."
+  ],
+  "model_dependency_count": 0,
+  "play_measurements": {
+    "play_1_state_contract_world_model": {
+      "action_loops_prevented": 15,
+      "baseline_loop_count": 15,
+      "branch_points_exercised": 4,
+      "contract_guarded_loop_count": 0,
+      "delta_prediction_accuracy": 0.8214,
+      "kill_triggered": false,
+      "state_loss_events_caught": 3,
+      "status": "ESTABLISHED_ON_SCRIPTED_WORKFLOW",
+      "trace_sha256": "ab896ef87997cdbfe2d1448a041318b1c61f7c9e36e900e589d9cfcaf1e9158a",
+      "unobservable_effects_refused": 1,
+      "valid_precondition_delta_accuracy": 1.0,
+      "workflow_steps_executed": 16
+    },
+    "play_2_gradient_free_law_consolidation": {
+      "byte_compression_ratio": 0.4915,
+      "causal_diagnosis": "Consolidation compressed 135 -> 50 laws (62.96% reduction, 49.15% byte reduction), lifted clean in-corpus refutation power 13 -> 44, and cut corpus false refutations 122 -> 0 (held-out false refutations 36 -> 4). However, pruning the overbroad AST_HEAD:Return:OPS=Call false-refuter reduced held-out clean hits 1 -> 0 (pyjwt 93f187f8), triggering the held-out transfer kill criterion.",
+      "clean_refutation_power_after": 44,
+      "clean_refutation_power_before": 13,
+      "compression_ratio": 0.6296,
+      "consolidated_store_sha256": "1ca163c269668ea42f4fcb71a0aac1fd60e28da5341cf68ee563a450dc687995",
+      "corpus_commits_total": 45,
+      "false_refutations_after": 0,
+      "false_refutations_before": 122,
+      "held_out_evaluation": {
+        "held_out_clean_coverage_after": 0,
+        "held_out_clean_coverage_before": 1,
+        "held_out_commits_total": 23,
+        "held_out_false_refutations_after": 4,
+        "held_out_false_refutations_before": 36,
+        "held_out_in_corpus_commits": 15,
+        "held_out_unseen_repo_commits": 8,
+        "train_commits": 30
+      },
+      "kill_triggered": true,
+      "laws_after": 50,
+      "laws_before": 135,
+      "status": "CONSOLIDATED_WITH_HELDOUT_TRANSFER_GAP"
+    },
+    "play_3_abstain_gated_skill_induction": {
+      "cross_family_transfer_hits": 2,
+      "cross_family_transfer_opportunities": 38,
+      "episodes_total": 40,
+      "kill_triggered": false,
+      "precision": 0.8,
+      "precision_lift_over_ungated": 0.6387,
+      "recall": 0.2857,
+      "skills_admitted": 12,
+      "skills_rejected_by_abstain_gate": 28,
+      "status": "ESTABLISHED_ON_40_EPISODE_REAL_COMMIT_SET",
+      "summary_sha256": "55bc75a68ab2c9e38ef8058073cb39587f998b16710b5a3834a00aaa7af6bf31",
+      "test_probes_total": 120,
+      "ungated_baseline_precision": 0.1613,
+      "unseen_negative_refusal_rate": 0.975
+    },
+    "play_6_adversarial_mutation_admission_gate": {
+      "audit_sha256": "e1358d8ea1a07b3e351444cbd0e7c927824340bfa66125f37e217b6d8b3c44aa",
+      "capabilities_tested": 16,
+      "kill_triggered": true,
+      "mutants_generated": 16,
+      "mutants_killed_by_receipt_oracle": 9,
+      "mutants_killed_by_template_expect_alone": 5,
+      "status": "GATE_THEATRE_SURVIVORS_EXCEED_20_PCT",
+      "surviving_mutant_count": 7,
+      "surviving_mutant_ids": [
+        "canonical.runtime.abstain_gated_skill_induction_v1.hidden.v1",
+        "canonical.runtime.adversarial_mutation_admission_gate_v1.hidden.v1",
+        "canonical.runtime.bound_capabilities.hardcore_software_engineering_orchestrator_v1.hidden.v1",
+        "canonical.runtime.bound_capabilities.software_synthesis_grid_induction_v1.hidden.v1",
+        "canonical.runtime.capability_selection_retrieval_v1.hidden.v1",
+        "canonical.runtime.gradient_free_law_consolidation_v1.hidden.v1",
+        "canonical.runtime.swe_kernel_organ_bridge_v1.hidden.v1"
+      ],
+      "survivor_rate": 0.4375,
+      "template_expect_blind_spot_count": 4
+    }
+  },
+  "schema": "PROJECT_BRAIN_FRONTIER_LEAPFROG_MEASUREMENT_20261124_V1",
+  "unified_swe_kernel_organ_bridge": {
+    "domains_covered": [
+      "coding_agents",
+      "computer_use",
+      "continual_learning",
+      "instant_learning",
+      "memory"
+    ],
+    "organs_live": 13,
+    "organs_total": 13,
+    "probe_digest_sha256": "a73a943adfbc3d50ecec01b5fc88de045b75e9242241aa058428025f19d86a25"
+  }
+}
