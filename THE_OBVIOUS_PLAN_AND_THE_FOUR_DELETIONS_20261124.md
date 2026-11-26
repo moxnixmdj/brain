@@ -189,6 +189,50 @@ things **name themselves — offline, once, at 23,008× less cost than asking by
 
 ---
 
+## 8. Addendum: the wall is two missing declarations, and it took one chain to find
+
+Chasing the largest failure block in the suite (`14` failures in
+`test_a_directory_a_sentence_names_absolutely_must_survive_...`) ended at **one line**:
+
+```
+solve(goal) -> composer_route_v1.execute_chain -> step 0 = shell.command.run
+            -> FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT
+```
+
+**What already worked, measured:** `composer_route_v1.extract_paths` returned the absolute directory
+correctly; capability matching selected a capability; route admission *passed*. The refusal is at
+execution, on one id.
+
+**What already exists and is already wired:** `confinement_v1.py` exposes `admit`/`execute`/
+`release`; `confined_dispatch_v1.py` exposes `run_confined_capability(cid, entry, action)` whose
+runner does `import_module("canonical.runtime.bound_capabilities."+name)` then `fn(payload, ".")`.
+That is **the same `run(args, root)` contract all 92 loadable capabilities share.** The confined
+path already speaks the fleet's one contract.
+
+**The gap is a declaration:**
+
+| | count |
+|---|---|
+| capabilities declared in `CONFINED_EFFECT_DECLARATIONS_V1.json` | **13** |
+| ids `is_unconfined_capability_id()` refuses | **2** |
+| of those 2, declared in confinement | **0** |
+| shell-ish declarations in the whole file | **0** |
+
+The only two ids the boundary will not run are the only two nobody has written an effect declaration
+for. 13 of 15 covered — and the two that matter are the two missing.
+
+**I did not write those declarations.** A confinement declaration is the reviewed artifact stating
+what a capability may touch on the host. Writing one to turn 14 tests green would be the same error
+as resealing R1: byte-current, substantively unfounded. The module's own docstring says automatic
+routes are unavailable *"until a reviewed, admitted confinement and effect-verification path
+exists."* Review is the missing ingredient. **That is a decision for you, not a commit from me.**
+
+This sharpens plan item #5. The execution floor is **one reviewed declaration** away from usable, and
+everything above it — the 243 KB composer, route admission, the whole sentence-to-typed-chain path —
+is already correct and already tested.
+
+---
+
 ## Provenance
 
 - `canonical/tools/capability_concept_coverage_v1.py` — layers 0–3 + the speed lane, CLI and JSON
@@ -196,5 +240,6 @@ things **name themselves — offline, once, at 23,008× less cost than asking by
 - `substrate-requirements.txt` — Pillow, with the 9-capability measurement in the comment
 - `root3_runtime_process_universe_v2.py`, `root3_subprocess_effect_class_registry_v2.py`,
   `root3_read_only_local_file_query_executor_v1.py`, `root3_read_only_declared_query_executor_v2.py`
+- Addendum §8: the confinement wall, measured end to end
 - Latency and contract measurements: `/tmp/latency.py`, `/tmp/failcost.py` (method and numbers
   reproduced in §3)
