@@ -48,20 +48,37 @@ GEN2 = [
 ]
 
 
-def make_family(n: int, seed: int, points: int, *, two_var: bool = False):
+# Concept-shaped family (v6 section 14): clamps. `min`/`max` are NOT atoms in
+# the hand-written micro grammar at any depth, so this family probes a
+# different organ -- the compounding concept library, whose admitted concepts
+# ARE template atoms. The point domain is widened so both clamp edges are
+# visible (a 6-point sample in -6..6 never reaches 100, which would make the
+# upper clamp unobservable and the family measure nothing).
+GEN3 = [
+    lambda a, b: f"min(max(x * {a}, 0), 100)",
+    lambda a, b: f"min(max(x * {a} + {b}, 0), 100)",
+    lambda a, b: f"max(min(x * {a}, 2 * {b} * {a} * 3), -{b} * 10)",
+]
+
+
+def make_family(n: int, seed: int, points: int, *, two_var: bool = False,
+                family: str | None = None):
     rng = random.Random(seed)
     tasks = []
     for i in range(n):
-        gen = GEN2 if two_var else GEN
+        gen = {"clamp": GEN3}.get(family or "", GEN2 if two_var else GEN)
         g = gen[i % len(gen)]
         a, b = rng.randint(1, 4), rng.randint(1, 3)
         expr = g(a, b)
-        if two_var:
+        if family == "clamp":
+            f = eval(f"lambda x: {expr}", {"abs": abs, "min": min, "max": max}, {})  # noqa: S307
+            pts = rng.sample(list(range(-80, 81)), points)
+        elif two_var:
             f = eval(f"lambda x, y: {expr}", {"abs": abs}, {})  # noqa: S307
             grid = [(x, y) for x in range(-3, 4) for y in range(-3, 4)]
             pts = rng.sample(grid, points)
         else:
-            f = eval(f"lambda x: {expr}", {"abs": abs}, {})  # noqa: S307
+            f = eval(f"lambda x: {expr}", {"abs": abs}, {})  # noqa: S307  # 1-var
             pts = rng.sample(range(-6, 7), points)
         tasks.append({"expr": expr, "f": f, "pts": pts})
     return tasks
@@ -89,10 +106,19 @@ def run_task(task, steps: int) -> tuple[bool, float]:
             encoding="utf-8",
         )
         t0 = time.perf_counter()
-        out = solve_v1.solve(
-            "fix f in impl.py so test_f.py passes", str(ws),
-            model=bound, steps=steps, learn=False,
-        )
+        # Read-only memory for the duration of a measured run. `learn=False`
+        # already suppresses the loop's own learning, but it does NOT cover the
+        # concept library: the observational synthesizer credits `uses` on the
+        # ambient policy, so a benchmark run used to persist learning state into
+        # a COMMITTED file (git diff showed `uses: 0 -> 2` after one family).
+        # A yardstick that mutates the system it measures is not a yardstick --
+        # the same lesson as the §9 bytecode-cache verifier lie, one level up.
+        from canonical.runtime.memory_policy_v1 import READ_ONLY, memory_policy_scope
+        with memory_policy_scope(READ_ONLY):
+            out = solve_v1.solve(
+                "fix f in impl.py so test_f.py passes", str(ws),
+                model=bound, steps=steps, learn=False,
+            )
         ms = (time.perf_counter() - t0) * 1000
         ok = out.get("verdict") == "DONE"
         if ok:  # independent re-verification, fresh process
@@ -114,9 +140,12 @@ def main(argv=None) -> int:
     ap.add_argument("--points", type=int, default=6)
     ap.add_argument("--two-var", action="store_true",
                     help="2-variable family (hard yardstick; v6 section 10)")
+    ap.add_argument("--clamp", action="store_true",
+                    help="concept-shaped clamp family (v6 section 14)")
     ns = ap.parse_args(argv)
 
-    family = make_family(ns.tasks, ns.seed, ns.points, two_var=ns.two_var)
+    family = make_family(ns.tasks, ns.seed, ns.points, two_var=ns.two_var,
+                         family="clamp" if ns.clamp else None)
     rows = []
     for t in family:
         ok, ms = run_task(t, ns.steps)
@@ -126,7 +155,7 @@ def main(argv=None) -> int:
     mean_ms = sum(r["ms"] for r in rows) / max(1, len(rows))
     print(json.dumps({
         "schema": "MICRO_EVOLVE_BENCH_V1", "tasks": ns.tasks, "seed": ns.seed,
-        "steps": ns.steps, "points": ns.points, "two_var": ns.two_var,
+        "steps": ns.steps, "points": ns.points, "two_var": ns.two_var, "clamp": ns.clamp,
         "solved": solved, "mean_ms": round(mean_ms), "llm_samples": 0, "tokens": 0,
         "rows": rows,
     }))

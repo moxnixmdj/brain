@@ -425,3 +425,122 @@ solution"; the fix there is decomposition, here it was scoping the inversion to
 the branch. SlopCodeBench (2603.24755) reports pass-rate benchmarks hiding
 structural decay; the 6/10-vs-30/30 split above is the same trap one level down,
 which is why the generalization grid is now part of how this family is read.
+
+## §14 The loop learns to read its own learned grammar (this "go")
+
+HARD-51 first, because it keeps being quoted as the gap and it is not what it
+looks like: `canonical/tools/pro_hard51_preflight_v1.py` says `Read-only ...
+NEVER runs tasks`, and its own docstring pins an upstream checksum manifest. So
+`0/51` is a **certification and data wall, not a search result** — no splice in
+this repo changes it, and I stopped treating it as a capability number
+(external: the Hard split spans 52.9-98.0% across frontier systems, Opus 5
+(xhigh) failing 4 tasks; SWE-2 Flash 89.9%, and Flint 89.7% on full v2 with
+~2.5B active parameters. None of that is reachable from a zero-token loop that
+is not authorized to run the tasks.)
+
+The round therefore went after the thing the session keeps finding: an organ
+that already exists, wired to the wrong doors. `K3` here is
+`canonical/swe_kernel/concept_library_v1.py` — a 122 KB **CompoundingConceptLibrary**:
+anti-unification over solved programs, admission only if the concept compresses
+executable description length AND evaluates deterministically on probes AND
+kills a syntactic mutant, Levin/Laplace log-priors, per-concept contribution
+stats (`uses`, `verified_hits`, `disconfirmations`, `retired`), persistence
+gated by `memory_policy_v1`. Its docstring states its purpose: close "the
+frozen-hypothesis-space limitation (`G_0 = const`)". The SWE-side observational
+synthesizer already consults it; **the ensemble fallback this session has been
+tuned for six rounds did not** — it re-derived a hand-written atom grammar and
+ignored everything the repo had learned.
+
+Move, entirely read-side: `numeric_concept_templates(library)` (first-order,
+live, numeric entries only) feeding a new `concepts=` argument through
+`synthesize_body_from_examples` into `_level2c_exhaustive`, where each concept
+is instantiated as a TEMPLATE — hole filled with a variable or with any atom the
+enumerator already produced, plus literal-lifted variants and the min/max dual.
+Wired at the unified model's own affordance call site, so it is the *loop* that
+reads the library, not just the function.
+
+Measured (synthesizer level, 6-point specs, ±16 grid for generalization):
+
+| arm | clamp family spec-pass | clamp generalizes | cost/call |
+|---|---|---|---|
+| hand-written grammar only | 4/10 | 1/10 | 294 ms |
+| + learned templates | **7/10** | **2/10** | 303 ms |
+| 1-var family (regression) | 10/10 both | 6/10 both | 258 → 254 ms |
+| 2-var family (regression) | 10/10 both | 6/10 both | 492 → 511 ms |
+
+`min`/`max` are not atoms in the micro grammar at ANY depth, so the 3 rows this
+recovered are not "found faster" — they are **unreachable before, reachable
+now**. The falsifier is the cleanest kind: on the clamp row at seed 65 the
+fallback returns `None` without the wiring and `return min(max(2 * (x), 0), 100)`
+— the generating function itself — with it, verified on all 33 grid points.
+`test_learned_grammar_read_path_v1.py` pins exactly that pair against a stub
+library, so it cannot drift with the real one's contents.
+
+Two findings that cut against me, recorded rather than smoothed over:
+
+1. **The end-to-end number did not move: clamp family 7/10 before, 7/10 after**
+   (847-927 ms). The primary path already consults the library — it emits
+   `def concept_f1f3674d(_v0): return min(max(2 * _v0, 0), 100)` and calls it —
+   so on this family the fallback rarely gets control. Verdict: the §14 gate
+   ("extend end-to-end reach") is **NOT met**; the splice is kept because it
+   costs 0 ms where it is not needed and turns a hard `None` into a correct
+   program where it is, but no end-to-end claim is being made. Arm C — consult
+   the deep pass even when a candidate already verified, to displace overfits —
+   was implemented, measured at +150-330 ms and worse results, and **refused**.
+2. **Dreaming on the repo's own source does not pay for this grammar.** Running
+   the organ over 116 runtime modules (970 KB) took 84.5 s and admitted 4 real
+   concepts (`len(_v0) != len(set(_v0))` from 9 sites; a whitespace normalizer
+   from 6). Handing that library to the observational synthesizer on 9
+   string-shaped specs changed nothing: 6/9 and 3/9 in both arms. Its concept
+   instantiation is numeric-shaped, so a string template is admitted, persisted,
+   and then never applied. The write path also refuses to fire at micro sizes:
+   `sleep_abstract` admitted 0 of 3-5 solved loop programs even at `min_nodes=2`
+   — which is what LILO reports as *correct* early-learning behavior ("the
+   actual library size can be smaller than iterations ... avoids introducing
+   abstractions that have no utility"), not a bug to chase.
+
+What the round actually taught me about my own code: **the tiebreak was throwing
+away the win.** `_scan` selects the shortest verified candidate, and a concept
+instance is longer than the ad-hoc ITE that overfits the visible points, so
+ranking by length silently discarded the learned abstraction — generalization
+1/10. Candidates now carry a grammar-aware `rank` (naming a library concept
+costs a node, not its body) and the tiebreak uses it; that is the difference
+between paying for a learned grammar and using it. Related trap, also measured:
+truncating the instantiated candidates to `max_results` lost solves (7/10 ->
+5/10) by starving the good ones — the verifier selects, the enumerator should not.
+
+Hygiene, found by accident and worth more than the feature: after one 10-task
+family run, `git status` showed the **committed** learning-state file modified —
+`"uses": 0 -> 2`. The loop persists learning state while benchmarking, and
+`solve(learn=False)` does not cover it (the synthesizer credits concept use on
+the ambient memory policy). A yardstick that mutates the system it measures is
+not a yardstick; the bench now runs inside the already-existing
+`memory_policy_scope(READ_ONLY)` and the file stays pristine through a full run.
+The module itself documents the same genus one level up: `record_concept_outcome`
+notes the synthesizer "was previously mislabelling" use as a verified hit, so a
+concept used only inside WRONG bodies raised its own prior. Self-crediting
+learning is the same failure as a stale-bytecode verifier, wearing a different
+name — which is why the external literature's fix (Library Drift, Zhang 2026:
+contribution logs, outcome-based retirement, active-library cap) is already
+sitting in this file's dataclass.
+
+Frontier context for the axis, from this round's search: CODESKILL (2605.25430)
+trains an RL policy for skill extraction/bank maintenance and reports +11.03
+points over a no-skill baseline while keeping the bank compact; SAGE (ACL 2026)
+gets +8.9% scenario completion with 26% fewer steps and 59% fewer tokens by
+accumulating skills across a task chain; Anthropic's "dreaming" and Letta's
+sleep-time compute are the productized form of the same offline pass (~5x less
+test-time compute reported). SkillLearnBench and ContinualSkillBench are the
+counterweight: skill gains are inconsistent across tasks and models, and
+unconditional accumulation can degrade performance — a positive average often
+hides a narrow set of gains. Our version of that lesson is already structural:
+admission requires compression plus mutant-killing, and retirement is an entry
+field, so the loop cannot inflate its own grammar with junk. What we do NOT have
+is the RL half — and per the standing rule, we do not buy it with samples.
+
+Ledger after §14: 1-var 40/40 @ ~920 ms; 2-var 50/50 @ ~1000 ms; clamp family
+7/10 loop-level (fallback 4/10 -> 7/10 at unit level); 27 unit/e2e tests green,
+planner suite 62/62 + 927 subtests, carrier recompiled through the repo's own
+compiler; integrity guard clean; 0 LLM samples and 0 tokens for the entire
+session; certified HARD-51 reach 0/51, now explicitly labelled a policy wall
+rather than a capability claim.

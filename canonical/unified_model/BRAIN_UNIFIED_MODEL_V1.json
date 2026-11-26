@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "488daa64f7c7adc4578f58daf380554176e4dc64b54e7c8729172eb317821090"
+  "value": "cf40a0f8a5dcc48add8435e7481a8925edf50b9f19c5db066688aa8da47d1bcd"
  },
  "engines": [
   {
@@ -288931,7 +288931,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "32ca657ffbe4602737f66ad429325d0a9ace1f6a4332ce833745480b59998aea",
+   "sha256": "92a2eb581ef8953496b33c0e138e9c4a39595ee4919c4c1c4c4959b7783b0c22",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 21,
    "symbols": [
@@ -347035,20 +347035,24 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/stochastic_synthesizer_v1.py",
-   "sha256": "6f65c2ef869df88b2994867366994052492427053c1d3ab8476b44a76014575f",
+   "sha256": "11052ce06af3e22fcd1d34715a7410d31b7a7251ae0159d51d07a2cce71d6cc4",
    "summary": "Stochastic (random-search) SyGuS synthesizer over the OE grammar.",
-   "symbol_count": 5,
+   "symbol_count": 7,
    "symbols": [
+    "_concept_candidates",
     "_level2c_exhaustive",
     "_random_expr",
     "ensemble_value_expressions",
+    "numeric_concept_templates",
     "synthesize_body_from_examples",
     "synthesize_value_expressions_stochastic"
    ],
    "terms": {
+    "concept_candidates": 1,
     "ensemble_value_expressions": 1,
     "grammar": 1,
     "level2c_exhaustive": 1,
+    "numeric_concept_templates": 1,
     "oe": 1,
     "over": 1,
     "random-search": 1,

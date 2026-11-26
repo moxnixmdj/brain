@@ -2371,10 +2371,18 @@ class SovereignZeroLLMPlanner:
                             # the affordance otherwise had no candidate at all --
                             # it cannot slow a step that would have failed.
                             from canonical.runtime.stochastic_synthesizer_v1 import (
+                                numeric_concept_templates,
                                 synthesize_body_from_examples,
                             )
                             body_code = synthesize_body_from_examples(
                                 p_names, valid_exs,
+                                # Learned grammar (v6 section 14): the concept
+                                # library's admitted templates are atoms this
+                                # enumerator cannot build at any depth. Read
+                                # only -- nothing here mutates the library.
+                                concepts=numeric_concept_templates(
+                                    getattr(core, "concept_library", None),
+                                ),
                             )
                         if body_code:
                             upd = wits._replace_function_body_in_source(cur_src, fn_nd.name, body_code)
