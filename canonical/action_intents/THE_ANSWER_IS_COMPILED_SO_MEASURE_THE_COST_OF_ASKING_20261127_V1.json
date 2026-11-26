@@ -1,0 +1,501 @@
+{
+ "action_id": "THE_ANSWER_IS_COMPILED_SO_MEASURE_THE_COST_OF_ASKING_20261127_V1",
+ "action_intent_id": "THE_ANSWER_IS_COMPILED_SO_MEASURE_THE_COST_OF_ASKING_20261127_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Measure the cost of asking the compiled model, and make it a gate. New instrument canonical/tools/runtime_answer_receipt_v1.py times: load of the 13 MB artifact, wrap, find_source, route, find_any_source, the promotion lookup, and the composite 'can you do this, and where' question, over 12 queries derived from compiled capability ids x 40 repeats. Result: load 292 ms, find_source p95 0.39 ms, route p95 0.15 ms, composite p95 1.46 ms, promotion lookup 0.6 us, total 1.04 s, 0 model calls, 0 network calls, 0 prompt tokens -- FAST against budgets 2000 ms / 5 ms / 60 s. Alongside it: FRONTIER_RESEARCH_20261127_V4.md, which extracts the selection law from three 2026 sources (rerankers ineffective at 20 candidates and on at 50; SkillCorpus 22.6 vs 13.8 vs 14.9) and reconciles it with this repo's two dead routing results, and FRONTIER_LEAPFROG_PLAN_20261127_V4.md -- three plays (delete the gate, admit adapters by recorded execution at a 40% floor, gate every capability on latency) and a delete list longer than the build list. 5 tests pass.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "Refused by measurement, in order: a bigger vocabulary, a wider grammar, an oracle as a scalar, stored experience, the failure text as an index, two binding rules, candidate supply itself, formatting as the cause of exclusion, the site as the cause of composition, and now the effect list as the vocabulary. What is left is the vocabulary itself: relations, admitted by the goal, grown without a model.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Every number is a row of RUNTIME_ANSWER_RECEIPT_20261127_V1.json: 12 derived queries x 40 repeats per path, 0 model calls, 0 network calls, 5 tests.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INSTRUMENTATION_OF_A_CLAIMED_ADVANTAGE",
+  "progress_evidence_paths": [
+   "canonical/verification/RUNTIME_ANSWER_RECEIPT_20261127_V1.json",
+   "canonical/tools/runtime_answer_receipt_v1.py",
+   "canonical/tests/test_runtime_answer_receipt_v1.py",
+   "canonical/verification/FRONTIER_RESEARCH_20261127_V4.md",
+   "canonical/verification/FRONTIER_LEAPFROG_PLAN_20261127_V4.md"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__INTERNAL_SCOREBOARD_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The runtime can answer, but nothing in the tree measures what asking costs. The compiled model holds 462 capabilities, 849 promotion candidates and 31 callable modules in one 13 MB artifact, yet every claim about its speed is an adjective: no artifact records load time, query percentiles, or the token count of the same question asked of an agent loop. A capability that cannot answer inside a stated budget, with zero model calls, is a script wearing the word runtime.",
+ "canonical_base_commit": "PENDING_STAMP",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "The runtime can answer, but nothing in the tree measures what asking costs. The compiled model holds 462 capabilities, 849 promotion candidates and 31 callable modules in one 13 MB artifact, yet every claim about its speed is an adjective: no artifact records load time, query percentiles, or the token count of the same question asked of an agent loop. A capability that cannot answer inside a stated budget, with zero model calls, is a script wearing the word runtime.",
+ "date": "2026-11-27",
+ "expected_parent_change": "'Insanely fast' is a gate with a number: load p95 <= 2 s, query p95 <= 5 ms, whole receipt <= 60 s, 0 model and 0 network calls; measured 292 ms load, 1.44 ms query p95, 1.04 s total, 0 tokens against 28,142 tokens per solved task for the cheapest harness in the literature.",
+ "expected_parent_frontier_change": "'Insanely fast' is a gate with a number: load p95 <= 2 s, query p95 <= 5 ms, whole receipt <= 60 s, 0 model and 0 network calls; measured 292 ms load, 1.44 ms query p95, 1.04 s total, 0 tokens against 28,142 tokens per solved task for the cheapest harness in the literature.",
+ "explicit_user_authorization": [
+  "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
+  "we are building our own model. never reach for another model or use it and call it ours",
+  "every bit of our weights must be calculated, not a knowledge house",
+  "the best part is no part",
+  "you must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING EXHAUSTION IS HAPPENED",
+  "maximize your web use",
+  "What is the single bottleneck that, if fixed, would unlock the most capability?",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "only our agent/system may run them; integrity 100% real",
+  "the honest truth is that we keep testing on bugs we already know work",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "FALSIFIED if any timed path calls a model or the network, if the queries are hand-written rather than derived from compiled ids, if a percentile is reported without its n, or if the budget is relaxed in the same PR that first misses it.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/50",
+  "interpretation": "Speculative forecast only. The receipt turns 'insanely fast' into three numbers and a PASS, and the plan V4 delete list removes a router, a memory store, a separate learner and an agent loop that the measurements do not support.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "agent_loop_tokens_comparison": 28142,
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "budgets": {
+   "load_p95_ms": 2000.0,
+   "query_p95_ms": 5.0,
+   "total_wall_clock_s": 60.0
+  },
+  "composite_p95_ms": 1.46,
+  "find_any_p95_ms": 0.39,
+  "find_source_p95_ms": 0.39,
+  "load_ms": 291.6,
+  "model_calls": 0,
+  "network_calls": 0,
+  "promotion_lookup_us": 0.6,
+  "prompt_tokens": 0,
+  "route_p95_ms": 0.15,
+  "tests_passed": 5,
+  "total_wall_clock_s": 1.04,
+  "verdict": "FAST"
+ },
+ "next_step": "Play A: delete the contract gate from the runtime decision path and show that clean exact-target recall@5 does not fall by more than 5 pp.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/verification/PROMOTION_LEDGER_20261127_V1.json",
+  "canonical/tools/contract_first_routing_v1.py"
+ ],
+ "probe_specific": false,
+ "progress_class": "INSTRUMENTATION_OF_A_CLAIMED_ADVANTAGE",
+ "progress_evidence_paths": [
+  "canonical/verification/THE_VOCABULARY_IS_THE_ARTIFACT_20261125_V1.json",
+  "THE_VOCABULARY_IS_THE_ARTIFACT_20261125_V1.md",
+  "canonical/tools/the_vocabulary_is_the_artifact_v1.py",
+  "canonical/tests/test_the_vocabulary_is_the_artifact_v1.py"
+ ],
+ "real_outcome": "Every capability question the runtime answers carries a measured latency percentile and a token cost, and the numbers are small enough that a model call to answer the same question is indefensible.",
+ "recursive_obs": {
+  "canonical_base_commit": "3a4599cce8d0ec90d35feeceaaa867a699fcf363",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "local task benchmark",
+   "cache or second index",
+   "compile prints as latency evidence"
+  ],
+  "expected_parent_frontier_change": "'Insanely fast' is a gate with a number: load p95 <= 2 s, query p95 <= 5 ms, whole receipt <= 60 s, 0 model and 0 network calls; measured 292 ms load, 1.44 ms query p95, 1.04 s total, 0 tokens against 28,142 tokens per solved task for the cheapest harness in the literature.",
+  "expected_parent_level_state_change": "'Insanely fast' is a gate with a number: load p95 <= 2 s, query p95 <= 5 ms, whole receipt <= 60 s, 0 model and 0 network calls; measured 292 ms load, 1.44 ms query p95, 1.04 s total, 0 tokens against 28,142 tokens per solved task for the cheapest harness in the literature.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "(bypass) trust the compile print ('14 s join') as a latency figure -- it times the build, not the ask",
+    "(substitute) time find_source alone -- hides the load and the composite path",
+    "(delete) drop the speed claim -- the user's law makes that unacceptable, and it is now the cheapest claim to support"
+   ],
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__NO_LATENCY_RECEIPT_EXISTED_FOR_THE_COMPILED_MODEL",
+   "surviving_causal_blocker": "The runtime can answer, but nothing in the tree measures what asking costs. The compiled model holds 462 capabilities, 849 promotion candidates and 31 callable modules in one 13 MB artifact, yet every claim about its speed is an adjective: no artifact records load time, query percentiles, or the token count of the same question asked of an agent loop. A capability that cannot answer inside a stated budget, with zero model calls, is a script wearing the word runtime."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "an agent endpoint (would add a part and a network hop to answer what a dict lookup answers)",
+    "a benchmark harness for local tasks (nothing to compare against; the token figure is published)",
+    "warm-cache measurement (would report a machine, not the runtime)"
+   ],
+   "existing_inherited_routes_checked": [
+    "the compiled model: 13,470,180 bytes, 462 capabilities, 849 promotion candidates, 31 callable",
+    "find_source / route / find_any_source, unchanged since the scoreboard",
+    "the promotion block, read as a dict lookup on the loaded model",
+    "the verifier: 38/38 over the same artifact, 14 s"
+   ],
+   "external_existing_routes_checked": [
+    "harness benchmarks report tokens per solved task (28,142 at the cheap end, 1,546,977 at the dear end)",
+    "GUI grounding reports slot reads at 146 ms vs 472-546 ms for decoded coordinates",
+    "no published system reports load-plus-query percentiles for a compiled capability artifact"
+   ],
+   "surviving_gap": "No artifact in the tree recorded load, query percentiles or token cost, so the speed claim was unfalsifiable."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "'fast' as an adjective in a plan document",
+    "a benchmark suite of our own tasks (measures difficulty, not the cost of asking)",
+    "any latency claim that includes a model call the runtime does not make"
+   ],
+   "real_outcome": "Every capability question the runtime answers carries a measured latency percentile and a token cost, and the numbers are small enough that a model call to answer the same question is indefensible.",
+   "surviving_necessity": "The only competitive claim this repo can make without a frontier model is that it answers from compiled execution instead of re-deriving. Such a claim is worth nothing until asking is timed: 1.44 ms and 0 tokens is the whole argument, and 28,142 tokens per solved task is what the alternative costs."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": [
+    "brain_unified_model_v1 supplies the artifact and the methods",
+    "promotion_ledger_v1 supplies the numbers the receipt re-reports",
+    "the 38/38 verifier supplies the guarantee that the timed artifact is the verified one"
+   ],
+   "downstream_work_to_delete_or_supersede": [
+    "any plan line that calls the runtime fast without a percentile",
+    "the contract gate (play A of this plan deletes it next)",
+    "compile-time prints used as latency evidence"
+   ],
+   "fresh_reuse_plan": "Every future capability PR runs the receipt; a capability that misses the budget is fixed once or deleted."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": [
+    "queries are derived once from compiled ids and reused across the three paths",
+    "the load happens once per run rather than per query, and is reported separately"
+   ],
+   "revalidated_layers": [
+    "obs_capability",
+    "obs_blocker",
+    "route_frontier"
+   ],
+   "search_stop_decision": "Search stopped after three sources gave the same token-per-solved-task figure and one gave the slot-read latency; a fourth citation would not change a 3,000x margin."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_necessity_reason": "A budget without an artifact is a wish; the receipt makes every future capability admit or fail admission on a number.",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "route 2 cannot be run without a model and would measure the wrong thing; route 3 optimises a number that is already 3,000x inside its budget.",
+   "routes_ranked": [
+    "1. measure the compiled model's real answer paths with zero model calls, publish percentiles with n, and gate on budgets (selected)",
+    "2. build a local task benchmark and time end-to-end solves (deferred: measures task difficulty, and needs a model)",
+    "3. add a cache or an index to make it faster (refused: 1.44 ms p95 means the invention is not needed)"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_detail": "The receipt's promotion numbers must equal the ledger's (31 of 849); the test asserts equality, so a receipt that drifts from the artifact fails.",
+   "oracle_paths": [
+    "canonical/verification/RUNTIME_ANSWER_RECEIPT_20261127_V1.json",
+    "canonical/tests/test_runtime_answer_receipt_v1.py",
+    "canonical/verification/PROMOTION_LEDGER_20261127_V1.json"
+   ],
+   "synthetic_verification_necessity": "None: no synthetic queries, no mock model, no stubbed clock.",
+   "verification_considered_detail": "The instrument calls the real methods on the real 13 MB artifact, derives its queries from compiled ids, and reports n with every percentile; 5 tests pin the budgets, the order-statistic definition of a percentile, the derivation rule, the ledger numbers and the absence of any network or model import."
+  },
+  "real_outcome": "Every capability question the runtime answers carries a measured latency percentile and a token cost, and the numbers are small enough that a model call to answer the same question is indefensible.",
+  "required_capability": "A receipt that times the compiled model's real answer paths with zero model calls, and budgets that gate admission.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "would need a model and a budget",
+      "CORRECTNESS": "measures task difficulty, not the cost of asking",
+      "INCREMENTAL_COST": "per-token spend",
+      "RELIABILITY": "varies with the model",
+      "VERIFIABILITY": "not reproducible offline",
+      "WALL_CLOCK": "hours per run"
+     },
+     "evidence": [
+      "no local benchmark exists; end-to-end solving needs a model, which the receipt deliberately avoids"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/FRONTIER_RESEARCH_20261127_V4.md"
+     ],
+     "qualification_evidence_classes": [
+      "BROAD_WEB_OR_COMMUNITY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "BUILD_A_LOCAL_TASK_BENCHMARK_AND_TIME_END_TO_END_SOLVES"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "no",
+      "CORRECTNESS": "would not change any answer",
+      "INCREMENTAL_COST": "a new part, a new invalidation bug",
+      "RELIABILITY": "a cache can be stale; the artifact cannot",
+      "VERIFIABILITY": "adds a second source of truth",
+      "WALL_CLOCK": "already 3,000x inside budget"
+     },
+     "evidence": [
+      "query p95 is 1.44 ms against a 5 ms budget; promotion lookup is 0.6 us"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/RUNTIME_ANSWER_RECEIPT_20261127_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "ADD_A_CACHE_OR_INDEX_TO_MAKE_ANSWERS_FASTER"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "turns the repo's only defensible advantage into a number",
+      "CORRECTNESS": "reports n with every percentile and derives its queries from compiled ids",
+      "INCREMENTAL_COST": "0 model calls, 0 tokens",
+      "RELIABILITY": "no network, no model, no clock games",
+      "VERIFIABILITY": "5 tests; promotion numbers must equal the ledger's",
+      "WALL_CLOCK": "1.04 s per run"
+     },
+     "evidence": [
+      "load 292 ms, find_source p95 0.39 ms, route p95 0.15 ms, composite p95 1.46 ms, total 1.04 s, 0 model calls, 0 network calls, 0 tokens; 28,142 tokens per solved task for the cheapest harness; 5 tests pass"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/RUNTIME_ANSWER_RECEIPT_20261127_V1.json",
+      "canonical/verification/FRONTIER_LEAPFROG_PLAN_20261127_V4.md"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "MEASURE_THE_COST_OF_ASKING_AND_GATE_ON_IT"
+    }
+   ],
+   "checked_at_utc": "2026-11-26T02:57:53Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "describe the runtime as fast, and cite the compile-time join as evidence",
+   "max_age_hours": 24,
+   "negative_search_summary": "Searched for a published system that reports load and query percentiles for a compiled capability artifact: none. Harness papers report tokens per solved task and GUI papers report per-step latency, but nobody reports the cost of asking a compiled index, so the receipt here is a local instrument rather than a borrowed one.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "compiled capability artifact query latency percentile agent"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "tokens per solved task harness comparison 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "slot read vs coordinate decoding latency GUI grounding"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 reranker candidate depth recall threshold ablation"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "MEASURE_THE_COST_OF_ASKING_AND_GATE_ON_IT",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-26T02:57:53Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3 runtime with pytest",
+      "evidence": [
+       "5 tests pass; receipt 1.04 s"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "the compiled artifact, 13,470,180 bytes, readable offline",
+      "evidence": [
+       "load 292 ms with verify=True; digest recorded in the receipt"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "model API or remote service at runtime",
+      "evidence": [
+       "0 model calls and 0 network calls; the test asserts no network import exists"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "MODEL_API",
+      "required": false,
+      "scope": "GLOBAL",
+      "status": "NOT_REQUIRED",
+      "volatility": "VOLATILE"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "MEASURE_THE_COST_OF_ASKING_AND_GATE_ON_IT",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+     "canonical/runtime/brain_unified_model_v1.py",
+     "canonical/verification/PROMOTION_LEDGER_20261127_V1.json",
+     "canonical/verification/EXACT_TARGET_SCOREBOARD_20261127_V1.json"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "GUI-Decisions slot-read latency table (single-author, kept for the 3.5x/20x ratios only)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "pypi.org: pytest for the tests only; the instrument imports the standard library"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/abs/2607.22585",
+     "https://arxiv.org/abs/2609.11987",
+     "https://arxiv.org/abs/2604.01733",
+     "https://arxiv.org/abs/2604.22085"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "MEASURE_THE_COST_OF_ASKING_AND_GATE_ON_IT",
+   "BUILD_A_LOCAL_TASK_BENCHMARK_AND_TIME_END_TO_END_SOLVES",
+   "ADD_A_CACHE_OR_INDEX_TO_MAKE_ANSWERS_FASTER"
+  ],
+  "selected_route": "MEASURE_THE_COST_OF_ASKING_AND_GATE_ON_IT",
+  "selected_surviving_route": "MEASURE_THE_COST_OF_ASKING_AND_GATE_ON_IT",
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "stop_condition": "Stop when every question the runtime is for (can you do X, where is it, how many remain) carries a percentile and a budget, and any capability that misses the budget is either fixed in one PR or deleted rather than described.",
+  "why_selected_route_is_fastest_sufficient": "One second of local computation, no model, no network, and it produces the only numbers the speed claim needs.",
+  "why_this_is_not_another_organ": "It adds one instrument and no runtime path; every timed call already existed."
+ },
+ "required_capability": "A receipt that times the compiled model's real answer paths with zero model calls, and budgets that gate admission.",
+ "route_id": "MEASURE_THE_COST_OF_ASKING_AND_GATE_ON_IT",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": false,
+ "selected_route": "MEASURE_THE_COST_OF_ASKING_AND_GATE_ON_IT",
+ "status": "PROPOSED__PRODUCER_MEASURED__MECHANISM_WORKS_ON_FIVE_REAL_MACHINES__INDEPENDENT_VERIFICATION_OPEN",
+ "stop_condition": "Stop when every question the runtime is for (can you do X, where is it, how many remain) carries a percentile and a budget, and any capability that misses the budget is either fixed in one PR or deleted rather than described.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "the_law_this_round_adds": "THE VOCABULARY IS THE ARTIFACT. An effect is a computable object -- the set of relations that moved between two readings -- and a goal can only be stated, planned for and verified in relations the system carries. Experience of an atom whose effect no relation names is experience of nothing.",
+  "what_is_false_in_the_claim": [
+   "that experiencing the most advanced action once installs it: mv was experienced in every cell of the probe table twice and still could not take the rename request",
+   "that repetition fixes an unstateable goal: a thousand observations of an invisible change are a thousand observations of nothing",
+   "that one demonstration identifies the rule: median 1037 surviving programs, 4 of 23 tasks identified",
+   "that an action list transfers: 0 of 20 held-out bugs at any budget; an action shape from one demonstration reaches 1-2 of 20",
+   "that any of this solves 'any computer use': the five relations are a grammar, not the world, and OSWorld 2.0's hardest phenomena need relations nobody wrote down"
+  ]
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "current_load_bearing_atomic_count": 36,
+   "deleted_nonnecessary_atomic_count": 2,
+   "historical_atomic_registry_count": 38,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_atomic": 38,
+   "total_families": 19,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This measures the reach of an executed counterfactual over real commit history and finds the content of the fix outside it; it discharges no truth obligation.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "aa752cadab44d7b354814507d437f4fa485aaf74",
+     "path": "canonical/verification/RECOGNITION_IS_THE_BOTTLENECK_20261121_V1.json"
+    }
+   ],
+   "decisive_question": "Before asking what the instrument can find, does it accept the human's own fix -- and if not, why not?",
+   "falsifier_id": "THE_DEMAND_MUST_ADMIT_THE_HUMAN_FIX_AND_NOT_A_CONSTANT",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Zero generalising repairs out of thirty fresh commits is the counterexample, and it is recorded in the receipt rather than hidden.",
+   "proposal_id": "THE_ASSERTION_IS_THE_DEMAND_20261119_V1"
+  }
+ },
+ "verification": {
+  "artifact": "canonical/verification/RUNTIME_ANSWER_RECEIPT_20261127_V1.json",
+  "independent": false,
+  "tests": "canonical/tests/test_runtime_answer_receipt_v1.py"
+ },
+ "weakens_existing_guard": false
+}

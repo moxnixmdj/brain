@@ -1136,6 +1136,10 @@ _GENERATED_OUTPUTS = frozenset(
     {
         "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
         "canonical/verification/BRAIN_UNIFIED_MODEL_V1_VERIFICATION_20261020.json",
+        # Measured on the runtime answer receipt: it records the artifact's digest and wall-clock
+        # percentiles, so indexing it made every recompile differ from the last one -- the same
+        # cycle as the two entries above, with a clock inside it.
+        "canonical/verification/RUNTIME_ANSWER_RECEIPT_20261127_V1.json",
     }
 )
 
