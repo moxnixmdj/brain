@@ -33042,7 +33042,7 @@
   "harvested_capabilities": 639,
   "harvested_contract_surfaces": 33,
   "harvested_program_surfaces": 606,
-  "knowledge_documents": 751,
+  "knowledge_documents": 752,
   "promotion_callable": 31,
   "promotion_candidates": 849,
   "receipt_backed_capabilities": 309,
@@ -33055,7 +33055,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8e3ee53814a22f0c36571d7f3a4c51e66bcea45efe1ac83c35511b4de808b121"
+  "value": "6ac894c96adc2928fc7b3c83fb4bbae7004086aa4f39e2a5bb10212a665b5755"
  },
  "engines": [
   {
@@ -105811,6 +105811,84 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 9074,
+   "headings": [
+    "Nobody has executed it",
+    "0. I have to correct the previous three plans first",
+    "1. The law",
+    "2. Five instruments, ranked by how much of the roadmap they invalidate",
+    "3. The one door",
+    "Door 8 — Take the census to the gate.",
+    "4. Why this beats the frontier and does not merely tidy up",
+    "5. What I measured, and what I refuse to claim",
+    "6. Reproduce",
+    "462 Counter({'receipt_projection': 309, None: 153}) <- the gate works, today",
+    "bound 153 + receipt 309 = 462",
+    "harvested 636 admitted 0 <- counts a population that cannot contain a one",
+    "the counter, and the test that pins it to 0"
+   ],
+   "kind": "DOCUMENT",
+   "path": "NOBODY_HAS_EXECUTED_IT_20261125_V1.md",
+   "sha256": "9198158ed5b663e0247220235cb359c5eb0e629f65aa543a270f60a679467f12",
+   "summary": "*2026-11-25 · branch `arena/a0db4e27-brain` @ `f1066dbb` · $0, zero model calls*",
+   "terms": {
+    "153": 3,
+    "309": 12,
+    "462": 4,
+    "640": 11,
+    "admitted": 13,
+    "all": 4,
+    "already": 3,
+    "been": 7,
+    "bound": 3,
+    "cannot": 7,
+    "canonical": 3,
+    "capabilities": 6,
+    "capability_source": 3,
+    "census": 13,
+    "claim": 3,
+    "claimed": 3,
+    "counter": 5,
+    "counts": 4,
+    "different": 4,
+    "every": 6,
+    "gate": 9,
+    "harvested": 4,
+    "harvested_admitted": 7,
+    "honest": 4,
+    "mean": 4,
+    "measured": 4,
+    "module": 4,
+    "must": 4,
+    "never": 6,
+    "no": 8,
+    "not": 17,
+    "nothing": 7,
+    "number": 6,
+    "one": 10,
+    "only": 5,
+    "over": 5,
+    "plans": 5,
+    "population": 4,
+    "receipt": 5,
+    "rows": 4,
+    "surface": 4,
+    "surfaces": 4,
+    "test": 7,
+    "those": 5,
+    "three": 5,
+    "verdict": 6,
+    "verification": 4,
+    "wrong": 5
+   },
+   "title": "Nobody has executed it",
+   "title_terms": [
+    "executed",
+    "nobody"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 7069,
    "headings": [
     "Nobody Was Ever Predicting",
@@ -151560,10 +151638,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 2313,
+  "included_source_count": 2314,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "f1187c3f677f8962e21b50674ee70bf748e45b480d1aa42eb5e4a79eb45469e8"
+  "source_tree_digest": "07d6fd7206642c80df61838ff8809a452fc8354b59d1aeb69cc5755efc657617"
  },
  "research_index": [
   {
