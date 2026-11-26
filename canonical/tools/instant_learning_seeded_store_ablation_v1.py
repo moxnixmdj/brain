@@ -195,7 +195,10 @@ def prepare_env(work: pathlib.Path, extra_deps: Sequence[str]) -> dict[str, Any]
     Without this the controls are meaningless: an import error is not a failing test, it is an
     unmeasurable task.  Deps come from the sandbox's package index only, never from a guess.
     """
-    venv = work.parent / f"venv-{work.name}"
+    # the dep set is part of the cache key: a venv built for one dependency list must never be reused
+    # as if it satisfied another, and "it exists" is not a proof that the suite can be imported
+    key = hashlib.sha256("|".join(sorted(extra_deps)).encode("utf-8")).hexdigest()[:10]
+    venv = work.parent / f"venv-{work.name}-{key}"
     py = venv / "bin" / "python"
     if py.is_file():
         # Re-prove the referee even on a cached venv: a half-installed venv that merely *exists* is how
@@ -266,7 +269,7 @@ def oracle_apply(repo: pathlib.Path, sha: str, work: pathlib.Path) -> bool:
                           input=patch, text=True, capture_output=True, timeout=300).returncode == 0
 
 
-def transfer_probe(repo: pathlib.Path, probe: Mapping[str, Any], morph, scratch: pathlib.Path,
+def transfer_probe(repos_dir: pathlib.Path, probe: Mapping[str, Any], morph, scratch: pathlib.Path,
                    py: str | None) -> dict[str, Any]:
     """Apply the lifted morphism to a THIRD, disjoint broken commit and see whether its tests go green.
 
@@ -280,15 +283,27 @@ def transfer_probe(repo: pathlib.Path, probe: Mapping[str, Any], morph, scratch:
     from canonical.swe_kernel import epistemic_admission_and_self_play_v1 as EASP
 
     out: dict[str, Any] = {"attempted": True, "passed": False, "why": "", "on": ""}
+    # the probe commit lives in ITS OWN clone: asking the werkzeug repository to produce a click tree
+    # is not a strict probe, it is a broken one that quietly always fails
+    repo = repos_dir / str(probe["repo"])
     out["on"] = f"{probe.get('repo')}@{str(probe.get('sha'))[:9]}"
     pw = scratch / f"probe-{str(probe['sha'])[:9]}"
     mat = materialize_task(repo, str(probe["sha"]), str(probe["test_target"]), pw)
     if not mat.get("materialized"):
+        shutil.rmtree(pw, ignore_errors=True)
+        out["why"] = f"PROBE_MATERIALIZE_FAILED:{str(mat.get('reason'))[:90]}"
+        return out
+    if not mat.get("materialized"):
         out["why"] = f"PROBE_MATERIALIZE_FAILED:{str(mat.get('reason'))[:80]}"
         return out
-    target_name = str(probe["test_target"])
-    src = next((c for c in sorted(pw.rglob("*.py"))
-                if c.name == target_name.rsplit("/", 1)[-1] and "tests" not in c.parts), None)
+    # rewrite the file the *probe's own* fix touched -- that is where its assertion lives. Matching on
+    # the test file's name instead found nothing in a different project, and a probe that never applies
+    # is indistinguishable from a probe that fails, which is how a bug becomes a "no transfer" result.
+    changed_probe = [f for f in _git(repo, "diff", "--name-only", f"{probe['sha']}^", probe["sha"]).stdout.split("\n")
+                     if f and not f.startswith("tests/") and f.endswith(".py")]
+    cands = [pw / f for f in changed_probe if (pw / f).is_file()]
+    src = cands[0] if cands else next((c for c in sorted(pw.rglob("*.py"))
+                                      if "tests" not in c.parts and "docs" not in c.parts), None)
     if src is None:
         shutil.rmtree(pw, ignore_errors=True)
         out["why"] = "PROBE_HAS_NO_MATCHING_SOURCE_FILE"
@@ -300,7 +315,7 @@ def transfer_probe(repo: pathlib.Path, probe: Mapping[str, Any], morph, scratch:
         out["why"] = "PATTERN_DOES_NOT_UNIFY_ON_THE_HELD_OUT_COMMIT"
         return out
     src.write_text(rewritten, encoding="utf-8")
-    st = _pytest_state(pw, target_name, py, 240.0)
+    st = _pytest_state(pw, str(probe["test_target"]), py, 240.0)
     out["still_failing"] = len(st.get("failing", []))
     out["passed"] = bool(st.get("ran")) and not st.get("failing")
     out["why"] = "APPLIED_AND_THE_HELD_OUT_TESTS_GO_GREEN" if out["passed"] else f"APPLIED_BUT_{out['still_failing']}_STILL_FAIL"
@@ -309,7 +324,8 @@ def transfer_probe(repo: pathlib.Path, probe: Mapping[str, Any], morph, scratch:
 
 
 def seed_store(repo: pathlib.Path, train: Mapping[str, Any], work: pathlib.Path, *, generalize: bool,
-               probe: Mapping[str, Any] | None = None, scratch: pathlib.Path | None = None) -> dict[str, Any]:
+               probe: Mapping[str, Any] | None = None, scratch: pathlib.Path | None = None,
+               repos_dir: pathlib.Path | None = None) -> dict[str, Any]:
     """Build the external store from ONE disjoint exposure -- the single-experience test itself.
 
     The exposure is the *training* commit's real fix, so the gates the store demands can be measured
@@ -353,7 +369,7 @@ def seed_store(repo: pathlib.Path, train: Mapping[str, Any], work: pathlib.Path,
         # measurements; neither is a hope. The probe runs before admission precisely so the filter can
         # say no -- and a `no` here is a result we report, not an error we route around.
         innocuous = bool(verified_on_oracle) and not (set(a["failing"]) - set(b["failing"]))
-        transfer = (transfer_probe(repo, probe, morph, scratch or pathlib.Path("/tmp/ilsa"), tpy)
+        transfer = (transfer_probe(repos_dir or repo.parent, probe, morph, scratch or pathlib.Path("/tmp/ilsa"), tpy)
                     if probe is not None else
                     {"attempted": False, "passed": False, "why": "NO_HELD_OUT_COMMIT_AVAILABLE", "on": ""})
         try:
@@ -505,10 +521,14 @@ def evaluate(repos_dir: pathlib.Path, tasks: list[dict[str, Any]], *, arms: tupl
                 # patch would make the second arm's gate evidence wrong rather than merely duplicated.
                 train_work = scratch / f"train-{train['sha'][:9]}-{arm}"
                 materialize_task(repos_dir / train["repo"], train["sha"], train["test_target"], train_work)
-                probe_task = next((t for t in (train_pool or tasks)
-                                   if t["sha"] != train["sha"] and t["sha"] != task["sha"]), None)
+                pool_rest = [t for t in (train_pool or tasks)
+                             if t["sha"] != train["sha"] and t["sha"] != task["sha"]]
+                # same project, different bug: the defensible held-out. Cross-project is a bonus probe.
+                probe_task = next((t for t in pool_rest if t["repo"] == train["repo"]), None) or \
+                    next(iter(pool_rest), None)
                 seeded = seed_store(repos_dir / train["repo"], train, train_work,
-                                    generalize=(arm == "general"), probe=probe_task, scratch=scratch)
+                                    generalize=(arm == "general"), probe=probe_task, scratch=scratch,
+                                    repos_dir=repos_dir)
                 store_obj, seed_note = seeded["store"], seeded
                 if probe_task is not None:
                     pr = seeded.get("probe") or {}

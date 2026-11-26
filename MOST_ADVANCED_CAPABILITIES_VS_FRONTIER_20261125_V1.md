@@ -361,3 +361,62 @@ Three things follow, and they pull in different directions:
 Which changes how to read the nine rows in §1: they are measured, reproducible and byte-matched to their
 certifications, and **not admitted** — and the gap is now a cost problem in one foreign spec plus a missing
 producer step, not an unexplained silence.
+
+## §5i  The mission prompt's Wave-47 claims, verified against this tree -- and the blocker the ablation found
+
+The mission prompt (and the "leapfrog" plan appended to it) is a list of inputs to verify, not a to-do
+list of facts. Checked here with instruments, in one sitting, at branch head `0761b9f4`.
+
+| quoted claim | verdict | the measurement |
+|---|---|---|
+| "1,746 still-unwired non-test modules >= 180 LOC (876,219 LOC)" | **plausible-but-not-here** | my own census of `canonical/**` at this head: **1,711 files / 861,604 LOC**. Same order of magnitude, different tree -- the quoted figure was measured on a tree ahead of ours. |
+| "90-ish sentence-named tools = 158 'koan' files" | **false as named** | the naming pattern is real (**90** `canonical/tools/<a_sentence>_v1.py`), the word "koan" appears **0** times. A count of a pattern is not a count of a category. |
+| `futamura_leapfrog_kernel_v1` `byte_effect_oracle_v1` `unified_epistemic_portfolio_v1` `canonical_memory_crystallizer_v1` + 5 more, "already solved in this repo" | **true on `main`, absent here** | 9 of the 42 cited modules are not in our checkout but every one of the 9 exists in `main`'s tree. This is branch lag, not fiction -- and it is why §11.1 starts with wiring, not with building. |
+| LOC of the 33 present modules | **verified, mildly inflated** | 27 exact to the line; 6 off by 1-59 (`meta_circular_organ_graph_v1` 5,175 claimed / 5,116 actual). Nothing fabricated. |
+| "`typed_invention_v1.py`: depth-3 cap, ~80,000-candidate forward enumeration" | **verified verbatim** | on `main`: 446 lines, `max_depth: int = 3` (l.242), and l.6 reads *"depth3 untyped explodes (~200*4*200 = 80k > budget)"*. Zero mentions of backward or constraint propagation: the characterisation "forward enumeration" is accurate. |
+| "`metamorphic_laws_v1.py` already does reverse-execution synthesis" | **false** | it is a law *checker* (round-trip, idempotence, canonicality, error-inconsistency). Its 14 "backward/constraint-propagation" hits are prose. Rebuilding it would have been the §1.3 mistake. |
+| "#7144 22/22 CI green" / "756 open PRs" | **verified exactly** | `gh pr view 7144` → 22 SUCCESS, 0 fail; open-PR count via pagination → **756**. |
+| "Agent S4: 27B model 3.8x on OSWorld V2, 21.3 %, beating GPT-5.5/Opus 4.8 at 1.5-4.3 % of cost" | **verified** | arXiv:2610.28601 (20 Oct 2026), full 108-task OSWorld V2, 21.30 % binary at $1.10/task vs GPT-5.5 13.00 % at $25.50 and Opus 4.8 20.60 % at $72.40; ScienceBoard 41.4 → 58.6 %; interfaces evolved from *synthetic, verifier-free* tasks with held-out selection. |
+| "BiSpace proves external memory beats weight editing (+20-32 % after 10K edits)" | **direction verified, wording overstated** | arXiv:2611.25861 reports +23 % abstract / "nearly 20 % on WikiBigEdit, >32 % on CounterFact" at 10K edits, and an independent replication (arXiv:2606.26783) confirms AlphaEdit degrades past ~5K edits. But BiSpace still *injects into hidden states* via a sparse codebook -- it decouples retrieval from injection, it does not remove the parameter write. Our store holds no weights at all, so the analogy supports the boundary and does not launder it. |
+| "frontier collapses to 0 % after 2 h on OSWorld-V2" / "35-50 % on SWE-bench Pro would shatter the Pareto frontier" | **false** | OSWorld V2's open-source SOTA is 21.3 % binary (§ above, non-zero by definition), and SWE-bench Pro V2's top entries sit at ~99 % -- a saturated board cannot be shattered at 40 %. |
+
+### The measurement this section was really waiting for
+
+`canonical/tools/instant_learning_seeded_store_ablation_v1.py` now *produces* the instant-learning claim
+instead of reporting it, and the first thing it produces is a correction to us:
+
+| task | controls | `cold` (empty store) | `general` (one disjoint exposure, generalized) | `raw` (same evidence, ungeneralized) |
+|---|---|---|---|---|
+| click@`05f6fd0df` | COMPLETE f2p=1 p2p=114 | **RESOLVED** 37-81 s | RESOLVED | RESOLVED |
+| click@`c53d3732b` | COMPLETE f2p=7 p2p=637 | abstained 44 s | abstained | abstained |
+| werkzeug@`051fd6635` | COMPLETE f2p=1 p2p=118 | abstained 0.7 s | abstained | abstained |
+| werkzeug@`884437aef` | COMPLETE f2p=1 p2p=149 | abstained | abstained | abstained |
+| click@`fc518e412` | MATERIALIZATION_FAILED | excluded, named | excluded | excluded |
+
+`per_arm`: `cold 1/4`, `general 1/4`, `raw 1/4`. Zero model calls, $0.00, nothing written to weights.
+
+1. **The one genuine success is real and repeatable.** click@`05f6fd0df` was resolved with an *empty*
+   store, five independent times this turn, referee-graded by a fresh pytest. Whatever the store does or
+   does not do, this capability is ours and it is measured.
+2. **`werkzeug@051fd6635` does not reproduce.** `five_named_commits_20261124_v1.json` records it as
+   `upgraded_solved: true`; with complete controls and a producer that can be re-run, the engine abstains
+   in 0.7 s. 2/5 becomes 1/5. That is the entire argument for producers: a number in a document is a
+   report; a number with a command line behind it is a measurement.
+3. **The store is currently inert, and the reason is not the gate being too strict.** Every generalized
+   skill was refused -- with four of five gates *earned*: `verified`, `goal_relevant`,
+   `prediction_error_bearing`, `compressible` all true (`compression_ratio 143.2`). Only `reusable`
+   failed, and it failed honestly: the held-out probe applied the lifted morphism to a *different* bug in
+   the *same project* and got `PATTERN_DOES_NOT_UNIFY_ON_THE_HELD_OUT_COMMIT`, four tasks out of four.
+4. **So the answer to "what stops us" is the generalizer, not the benchmark, the weights, or the
+   filter.** `lift_python_subtree_morphism` binds the source commit's identifiers, so a skill lifted from
+   one fix cannot address the next one. Notably the remedy is already in the same module --
+   `anti_unify_subtree_morphisms` (l.1386) -- but anti-unification needs *two* witnesses, and the instant
+   learning story promises *one*. That gap, stated plainly, is the project's real bottleneck today: either
+   the lift gets abstract enough to transfer from a single example, or "one exposure" has to be refined
+   to "one exposure plus one re-probe", where the store holds a candidate skill provisionally and earns
+   `reusable` the second time the shape appears.
+5. **Two harness lessons that would each have falsified everything silently.** A referee must import the
+   mutated tree: while the repo was pip-installed into site-packages, the *reference patch itself* appeared
+   to fix nothing ("1 failed, 115 passed" before and after, identically). And a whole-file pass criterion
+   makes tasks with pre-existing environment failures permanently unsolvable -- werkzeug's conftest imports
+   `ephemeral_port_reserve`, so its first measurement was an import error dressed as a capability zero.
