@@ -132,6 +132,21 @@ def _params(fn) -> set[str]:
     return names
 
 
+def _names_in(node) -> list:
+    """The `ast.Name` nodes a target expression binds.
+
+    `ast.walk(tgt)` for a single `Name` builds a deque and a generator to yield the
+    node itself. Most assignment targets in real code are exactly that, and this
+    runs once per target per parameter per round. Measured 2026-11-24: this was the
+    single hottest `ast.walk` site (169k invocations) in a 145 s capability.
+    """
+    if node is None:
+        return []
+    if isinstance(node, ast.Name):
+        return [node]
+    return [n for n in ast.walk(node) if isinstance(n, ast.Name)]
+
+
 def _returns_expr(fn):
     for node in ast.walk(fn):
         if isinstance(node, ast.Return) and node.value is not None:
@@ -217,34 +232,45 @@ def _compute_interprocedural_summaries(
     param_to_return: dict[str, set[int]] = {name: set() for name, _, _ in fn_defs}
     param_to_sink: dict[str, dict[int, str]] = {name: {} for name, _, _ in fn_defs}
 
+    # The tree does not change between rounds, so walking it does not either. The first
+    # version walked each function three times *per parameter per round* -- 12 x params x 3
+    # full traversals of an unchanged AST. Measured 2026-11-24: 145 s for one goal, 61x
+    # the cost of its sibling `python.source.symbols.index.ast`. Hoisting the walks out
+    # of both loops removes the redundancy without changing what is computed.
+    shapes: dict[str, tuple[list[ast.AST], list[ast.AST], list[ast.AST]]] = {}
+    for name, fn_node, _p_list in fn_defs:
+        if name in shapes:
+            continue
+        nodes = list(ast.walk(fn_node))
+        assigns = [st for st in nodes if isinstance(st, (ast.Assign, ast.AnnAssign, ast.AugAssign))]
+        calls = [st for st in nodes if isinstance(st, ast.Call)]
+        shapes[name] = (assigns, calls, list(_returns_expr(fn_node)))
+
     changed = True
     rounds = 0
     while changed and rounds < 12:
         changed = False
         rounds += 1
         for name, fn_node, p_list in fn_defs:
+            assigns, calls, returns = shapes[name]
             for idx, p_name in enumerate(p_list):
                 tainted = {p_name}
-                for st in ast.walk(fn_node):
+                for st in assigns:
                     if isinstance(st, ast.Assign) and _flows_taint(st.value, tainted, set(), param_to_return, sanitizers):
                         for tgt in st.targets:
-                            for sub in ast.walk(tgt):
-                                if isinstance(sub, ast.Name):
-                                    tainted.add(sub.id)
+                            for sub in _names_in(tgt):
+                                tainted.add(sub.id)
                     elif isinstance(st, (ast.AnnAssign, ast.AugAssign)):
                         val = getattr(st, "value", None)
                         if val is not None and _flows_taint(val, tainted, set(), param_to_return, sanitizers):
-                            for sub in ast.walk(st.target):
-                                if isinstance(sub, ast.Name):
-                                    tainted.add(sub.id)
-                for ret_e in _returns_expr(fn_node):
+                            for sub in _names_in(st.target):
+                                tainted.add(sub.id)
+                for ret_e in returns:
                     if idx not in param_to_return[name] and _flows_taint(ret_e, tainted, set(), param_to_return, sanitizers):
                         param_to_return[name].add(idx)
                         changed = True
                 if idx not in param_to_sink[name]:
-                    for st in ast.walk(fn_node):
-                        if not isinstance(st, ast.Call):
-                            continue
+                    for st in calls:
                         called = _call_name(st)
                         dotted = _dotted(st)
                         is_direct_sink = (
@@ -312,12 +338,16 @@ def run(args, root):
     # That is the standard definition -- sources are the input boundary, not a
     # function a caller has to nominate -- and it means the row needs no second
     # path key to be usable.  When the sentence DOES name one, it wins.
+    # Every pass below used to re-walk each file's whole AST just to find its function
+    # definitions. The trees never change between passes, so the index is built once.
+    # Measured 2026-11-24: `ast.walk` was 98M calls and 72% of run time.
+    fn_index = [(path, node) for path, tree in parsed
+                for node in ast.walk(tree)
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))]
+
     taint_returning: set[str] = set()
     sources_found = []
-    for path, tree in parsed:
-        for node in ast.walk(tree):
-            if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
-                continue
+    for path, node in fn_index:
             if source_fn and node.name != source_fn:
                 continue
             if not source_fn and not _parses_its_input(node):
@@ -334,17 +364,15 @@ def run(args, root):
         fp_changed = True
         while fp_changed:
             fp_changed = False
-            for path, tree in parsed:
-                for node in ast.walk(tree):
-                    if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) or node.name in taint_returning:
+            for path, node in fn_index:
+                    if node.name in taint_returning:
                         continue
                     local_tainted: set[str] = set()
                     for st in ast.walk(node):
                         if isinstance(st, ast.Assign) and _flows_taint(st.value, local_tainted, taint_returning, param_to_return, sanitizers):
                             for tgt in st.targets:
-                                for sub in ast.walk(tgt):
-                                    if isinstance(sub, ast.Name):
-                                        local_tainted.add(sub.id)
+                                for sub in _names_in(tgt):
+                                    local_tainted.add(sub.id)
                     for expr in _returns_expr(node):
                         if _flows_taint(expr, local_tainted, taint_returning, param_to_return, sanitizers):
                             taint_returning.add(node.name)
@@ -354,13 +382,10 @@ def run(args, root):
     traced = []
     reached = False
     finding = None
-    for path, tree in parsed:
-        for fn in ast.walk(tree):
-            if not isinstance(fn, (ast.FunctionDef, ast.AsyncFunctionDef)):
-                continue
+    source_fn_names = {row["function"] for row in sources_found}
+    for path, fn in fn_index:
             # Only seed function parameters as tainted on TRUE source functions,
             # not intermediate helpers that merely call a source with no args.
-            source_fn_names = {row["function"] for row in sources_found}
             tainted = set(_params(fn)) if fn.name in source_fn_names else set()
             # Two-pass local propagation inside `fn` so out-of-order ast.walk doesn't miss sequential assignments
             for _ in range(2):
@@ -368,9 +393,8 @@ def run(args, root):
                     if isinstance(node, ast.Assign):
                         if _flows_taint(node.value, tainted, taint_returning, param_to_return, sanitizers):
                             for target in node.targets:
-                                for t in ast.walk(target):
-                                    if isinstance(t, ast.Name):
-                                        tainted.add(t.id)
+                                for t in _names_in(target):
+                                    tainted.add(t.id)
                     elif isinstance(node, (ast.AnnAssign, ast.AugAssign)):
                         value = getattr(node, "value", None)
                         if value is not None and _flows_taint(value, tainted, taint_returning, param_to_return, sanitizers):

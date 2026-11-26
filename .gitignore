@@ -1,52 +1,45 @@
-__pycache__/
-.guard_trusted/
-
-# Litter written by the test suite into tracked directories.  Running
-# `pytest canonical/tests` once creates ~470 of these; `git add -A` afterwards
-# would commit them as if they were evidence.  (Added 2026-10-14, see
-# canonical/governance/REPO_INTEGRITY_POLICY_V1.json.)  Files already tracked
-# under canonical/astra_runtime/tmp/ are unaffected by this rule.
-canonical/astra_runtime/tmp/
-canonical/astra_runtime/evidence/GROUNDING-*
-canonical/astra_runtime/evidence/TEST-BOUND-*
-canonical/astra_runtime/state/LIVE_BRAIN_*
-canonical/astra_runtime/state/probe-*
-canonical/runtime/r3_learning_verification_receipts/
-canonical/runtime/SELF_IMPROVEMENT_STATE_V1.json
 
 # Environments this system created. Never part of the project.
-.brain_venv/
-.venv/
-
-# derived cache: rebuilt from MODULE_INVOCATION_EVIDENCE_V1.json in ~80ms
-canonical/runtime/state/module_bridge_index_v1.json
-
-# Practice environments the machine downloads to work against.
-# Not part of the project, and their own conftest.py is not ours to police.
-canonical/astra_runtime/state/real_env/
-
 # Heartbeat run artifacts: the receipt and the job summary are published by the
-# live-brain-heartbeat workflow (upload-artifact), not versioned as source.  The
-# controller checkpoints one heartbeat run leaves behind are run litter, same as
-# the test-suite litter above.
-heartbeat_out/
-canonical/astra_runtime/state/E2E_*
-
+# Litter written by the test suite into tracked directories.  Running
+# Not part of the project, and their own conftest.py is not ours to police.
+# Practice environments the machine downloads to work against.
 # The long-horizon continuity capability writes its report into the repository
-# root when it runs.  It is run litter, not source: `git add -A` must never
+# Third-party benchmark clones (QuixBugs etc.). Never part of the project.
+# `pytest canonical/tests` once creates ~470 of these; `git add -A` afterwards
+# a cache of what this machine's programs do: keyed on their bytes, so it is
+# canonical/governance/REPO_INTEGRITY_POLICY_V1.json.)  Files already tracked
 # commit it as if it were evidence.
-LONG_HORIZON_CONTINUITY_REPORT.json
-
+# controller checkpoints one heartbeat run leaves behind are run litter, same as
+# derived cache: rebuilt from MODULE_INVOCATION_EVIDENCE_V1.json in ~80ms
+# live-brain-heartbeat workflow (upload-artifact), not versioned as source.  The
+# machine-local by construction and must never be committed
+# root when it runs.  It is run litter, not source: `git add -A` must never
 # scratch worlds and spool artifacts from live measurements
+# the test-suite litter above.
+# under canonical/astra_runtime/tmp/ are unaffected by this rule.
+# would commit them as if they were evidence.  (Added 2026-10-14, see
+**/__pycache__/
+*.fingerprints.json
+.benchmarks/
+.brain_venv/
+.guard_trusted/
+.pytest_cache/
+.venv/
+LONG_HORIZON_CONTINUITY_REPORT.json
+__pycache__/
+canonical/astra_runtime/evidence/GROUNDING-*
+canonical/astra_runtime/evidence/TEST-BOUND-*
+canonical/astra_runtime/state/*.json
+canonical/astra_runtime/state/E2E_*
+canonical/astra_runtime/state/LIVE_BRAIN_*
+canonical/astra_runtime/state/probe-*
+canonical/astra_runtime/state/real_env/
+canonical/astra_runtime/tmp/
 canonical/astra_runtime/tmp/spool_*
 canonical/astra_runtime/tmp/tmp_*
-**/__pycache__/
-.pytest_cache/
+canonical/runtime/SELF_IMPROVEMENT_STATE_V1.json
+canonical/runtime/r3_learning_verification_receipts/
+canonical/runtime/state/module_bridge_index_v1.json
 canonical/tmp_*.json
-
-# a cache of what this machine's programs do: keyed on their bytes, so it is
-# machine-local by construction and must never be committed
-*.fingerprints.json
-
-# Third-party benchmark clones (QuixBugs etc.). Never part of the project.
-.benchmarks/
+heartbeat_out/
