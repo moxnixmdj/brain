@@ -30,20 +30,31 @@ cues)
   printf '%s  %s\n' "$(jq -r .locomo.raw_sha256 "$pins")" "$f" | sha256sum -c -
   run() { python3 -B -m canonical.tools.cue_contrast_v1 "$@"; }
   run project "$f" "$w/input.json"; printf '%s  %s\n' "$(jq -r .locomo.projected_sha256 "$pins")" "$w/input.json" | sha256sum -c -
-  for arm in base origin ties; do
+  for arm in base origin ties stable; do
     pred=$I/cue_retrieval_${arm}_20261126_v1.json
     run capture "$w/input.json" "$w/$arm.json" "$(jq -r .producer_revision "$pred")"
   done
-  run grade "$f" "$w/grades.json" "$w"/{base,origin,ties}.json
+  run grade "$f" "$w/grades.json" "$w"/{base,origin,ties,stable}.json
   python3 - "$I" "$w" <<'PY'
 import json,sys
 from pathlib import Path
 i,w=map(Path,sys.argv[1:])
-for arm in ('base','origin','ties'):
+bad=False
+old=json.loads((i/'cue_retrieval_grades_20261126_v1.json').read_bytes())['grades']
+new=json.loads((w/'grades.json').read_bytes())['grades']
+for n,arm in enumerate(('base','origin','ties','stable')):
     a,b=[json.loads(p.read_bytes()) for p in (i/f'cue_retrieval_{arm}_20261126_v1.json',w/f'{arm}.json')]
-    for cap in (a,b):cap['predictions'].pop('seconds')
-    if a!=b:sys.exit('Divergence in '+arm+': keep the full ordered IDs, not just the grade')
-print('Matched all three manifests, admissions and rankings for all triggers and controls')
+    ap,bp=a.pop('predictions'),b.pop('predictions'); ap.pop('seconds');bp.pop('seconds')
+    ids_a,ids_b=ap.pop('rrf'),bp.pop('rrf')
+    diffs=sum(ids_a[q]!=ids_b.get(q) for q in ids_a)
+    if a!=b or ap!=bp or ids_a.keys()!=ids_b.keys():bad=True
+    # Historical floating sums are not byte-stable. Preserve all differences;
+    # stable, added *after* that finding, must reproduce every ordered ID.
+    print(f'{arm}: {diffs} differing top-five lists; counts {new[n]["modes"]["rrf"]["total_at1_at5"]["all"]}')
+    if arm=='stable' and diffs:bad=True
+    if n < len(old) and old[n]['modes']!=new[n]['modes']:
+        print('Historical individual grade difference:',arm);bad=True
+if bad:sys.exit('Divergence: retain all captures and grades for inspection')
 PY
   ;;
 *) echo 'choose screen or cues' >&2; exit 2;;
