@@ -6622,6 +6622,22 @@ class UnifiedModel:
         """Wave 39 Pillar V: `Babble`/`Stitch` Meaning-IR anti-unification, zero-shot verified cross-language
         transfer across Python/JS/TS/Go/Rust, 4-gate Hoare sequence composition, and MDL bit-rent eviction."""
         return self._get_five_pillar_kernel().skill_ratchet.consolidate_and_transfer(**kwargs)
+
+    # ------------------------------------------------------------- Wave 40 held-out bench
+
+    def frontier_bench(self, *, seed: int | None = None, per_category: int = 3,
+                       categories: Sequence[str] | None = None, self_check: bool = False) -> dict[str, Any]:
+        """Wave 40: the held-out, oracle-judged benchmark (`canonical/evaluation/frontier_bench_v1.py`).
+
+        Instances are generated from `seed` at call time and judged by oracles that never read this
+        model's own `pass` flag, so `pass_rate` measures unseen instances, not its own fixtures."""
+        from canonical.evaluation import frontier_bench_v1 as bench
+
+        resolved = bench.DEFAULT_SEED if seed is None else int(seed)
+        scorecard = bench.run_bench(seed=resolved, per_category=int(per_category), categories=categories)
+        if self_check:
+            scorecard["self_check"] = bench.bench_self_check(seed=resolved, per_category=int(per_category))
+        return scorecard
     # --- Wave 39: Dark-Organ Unification, Red-Queen/Mendel Co-Evolution, CLM+RRF Memory & Partial-Routing/JitRL ---
 
     def _get_clm_rrf_memory_engine(self) -> Any:

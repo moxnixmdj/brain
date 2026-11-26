@@ -1770,6 +1770,21 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "required_inputs": [],
         "declared_dependencies": [],
     },
+    "LEAPFROG_W40_FRONTIER_BENCH_HARNESS": {
+        "domain": "VERIFICATION_MEASUREMENT_AND_ABSTENTION",
+        "source_path": "canonical/evaluation/frontier_bench_v1.py",
+        "entrypoint": "run_bench",
+        "summary": "Held-out, oracle-judged capability benchmark: six capability classes generated from a seed, each judged by an independent oracle (BFS, program interpretation, disk state, a subprocess running the repaired repo's own tests), scoring the engine's behaviour and separately counting claims of success the oracle refutes.",
+        "triggers": [
+            "frontier bench",
+            "held out capability benchmark",
+            "oracle judged evaluation",
+            "false success claim measurement",
+            "self check liar control",
+        ],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
     "LEAPFROG_W39_MEANING_IR_CROSS_LANG_RATCHET": {
         "domain": "SKILL_COMPILATION_AND_ANTI_UNIFICATION",
         "source_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
@@ -2696,6 +2711,23 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
             "canonical/tools/the_check_mode_is_the_oracle_v1.py",
             "canonical/tools/an_actions_vocabulary_is_its_refusal_surface_v1.py",
             "canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py",
+        ],
+    },
+    "frontier_bench_heldout_measurement_w40": {
+        "external_names": [
+            "held-out evaluation",
+            "oracle-judged benchmark",
+            "swe-bench shaped",
+            "terminal-bench shaped",
+            "claim disagreement",
+            "false success claim",
+            "instrument calibration",
+            "liar control",
+        ],
+        "engines": ["engine:LEAPFROG_W40_FRONTIER_BENCH_HARNESS"],
+        "koan_modules": [
+            "canonical/evaluation/frontier_bench_v1.py",
+            "canonical/runtime/brain_unified_model_v1.py",
         ],
     },
     "five_pillar_frontier_unification_w39": {
@@ -4882,6 +4914,21 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
         if not res.get("pass"):
             return _fail(mode, "PROSPECTIVE_MEMTX_BLOCKED", detail=res)
         return _ok(mode, "PROSPECTIVE_MEMTX_COMMITTED", res)
+
+    if mode == "LEAPFROG_W40_FRONTIER_BENCH_HARNESS":
+        from canonical.evaluation import frontier_bench_v1 as bench
+
+        scorecard = bench.run_bench(
+            seed=int(inputs.get("seed", bench.DEFAULT_SEED)),
+            per_category=int(inputs.get("per_category", 2)),
+            categories=inputs.get("categories"),
+            sut=None,
+        )
+        if not scorecard.get("instances"):
+            return _fail(mode, "NO_INSTANCES")
+        if scorecard.get("errors"):
+            return _fail(mode, "BENCH_ERRORS", scorecard=scorecard)
+        return _ok(mode, str(scorecard.get("verdict")), scorecard)
 
     if mode == "LEAPFROG_W39_MEANING_IR_CROSS_LANG_RATCHET":
         from canonical.swe_kernel.unified_five_pillar_frontier_kernel_v1 import shared_five_pillar_kernel
