@@ -9,7 +9,7 @@
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "parent_capability": "canonical/runtime/brain_unified_model_v1.py + canonical/runtime/creature_runtime_v1.py + canonical/swe_kernel/canonical_{env_discovery,memory_crystallizer,oracle_vericoding,boundary_router}_spine_v1.py",
-  "canonical_base_commit": "2a7de69c98510a4334508036aa6f350d7ad4e8bf",
+  "canonical_base_commit": "3a3b92840835defcfd4693dab5b0f64192fd1259",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "causal_blocker": "UnifiedModel (brain_unified_model_v1.py) and the 7-organ Creature unified runtime (creature_runtime_v1.py) remained structurally split, and 13 high-leverage hidden engines (version-space skill induction, trace quotients, hidden preconditions, semi-persistent e-graph MIR, 7-language CST skeletons, instruction contracts, failing-run AST demand extraction, verifier falsification proofs, key-table splitting, cross-machine relational frames, aimed geometric actions, typed capability chaining, and harvested-surface execution) were unwired from canonical front-door spines 0E/0G/0H/0I.",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::UnifiedModel (brain_unified_model_v1.py) and the 7-organ Creature unified runtime (creature_runtime_v1.py) remained structurally split, and 13 high-leverage hidden engines (version-space skill induction, trace quotients, hidden preconditions, semi-persistent e-graph MIR, 7-language CST skeletons, instruction contracts, failing-run AST demand extraction, verifier falsification proofs, key-table splitting, cross-machine relational frames, aimed geometric actions, typed capability chaining, and harvested-surface execution) were unwired from canonical front-door spines 0E/0G/0H/0I.",
@@ -110,7 +110,7 @@
     ]
   },
   "recursive_obs": {
-    "canonical_base_commit": "2a7de69c98510a4334508036aa6f350d7ad4e8bf",
+    "canonical_base_commit": "3a3b92840835defcfd4693dab5b0f64192fd1259",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "dead nonexistent import `from canonical.runtime import importlib` inside canonical/runtime/verifier_falsification_v1.py",
@@ -218,8 +218,8 @@
       }
     ],
     "route_frontier": {
-      "canonical_base_commit": "2a7de69c98510a4334508036aa6f350d7ad4e8bf",
-      "checked_at_utc": "2026-11-26T00:54:39+00:00",
+      "canonical_base_commit": "3a3b92840835defcfd4693dab5b0f64192fd1259",
+      "checked_at_utc": "2026-11-26T01:02:21+00:00",
       "max_age_hours": 24,
       "discovery_required": true,
       "incumbent_route": "SEPARATE_UNIFIED_MODEL_AND_CREATURE_SILOS",
@@ -330,7 +330,7 @@
       "unresolved_plausible_dominators": [],
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-26T00:54:39+00:00",
+        "checked_at_utc": "2026-11-26T01:02:21+00:00",
         "execution_dependencies_complete": true,
         "failed_dependencies": [],
         "max_age_hours": 2,
