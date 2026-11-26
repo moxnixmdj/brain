@@ -138,7 +138,22 @@ class EpistemicSpecOracleV1Tests(unittest.TestCase):
     def test_01_zero_test_multifile_repair_and_tier0_cross_codebase_transfer(self) -> None:
         """Enter unseen zero-test codebase Alpha -> synthesize metamorphic oracles -> repair
         BOTH `sessions.py` and `gc.py` while keeping `types.py` read-only -> save/reload JSON
-        memory -> Tier-0 recall on disjoint codebase Beta -> inspectable memory deletion."""
+        memory -> Tier-0 recall on disjoint codebase Beta -> inspectable memory deletion.
+
+        KNOWN RED ON THIS BRANCH, AND IT IS LEFT RED ON PURPOSE. The merged engine repairs
+        `test_m1_aggregate_merge_conservation` and returns `PARTIAL / METAMORPHIC_ORACLE_PARTIAL`
+        with `invariants_repaired: 1`, deterministically across repeated runs. The reason is legible
+        in the payload: `remaining_failed_invariants` carries the bare test name, not
+        `test_m2…:POLICY_REJECTED:…`, so the read-only and banned-import guards were never the
+        obstacle -- `SWE.solve_repository` simply returned no verified winner for the retention
+        invariant inside its 25 s candidate budget. That is a repair-lane gap in the candidate
+        generator, which is the thing §11's self-play loop exists to close; asserting
+        `PARTIAL` here would retire the only executable statement of the gap, and a green that
+        describes a weaker program than the one claimed is worse than a red that names it.
+        Reproduce: python -m pytest -q canonical/tests/test_epistemic_spec_oracle_v1.py::\
+EpistemicSpecOracleV1Tests::test_01_zero_test_multifile_repair_and_tier0_cross_codebase_transfer
+        No CI workflow runs this file, so the red blocks nothing on the path to merge; it is not
+        wired into one either, which is its own defect and is recorded in the mission doc."""
         model = open_model()
         mem = UEK.new_universal_memory()
 
