@@ -143,3 +143,18 @@ def test_pending_teacher_resumes_once_and_alternate_teacher_survives(tmp_path):
     with memory_policy_scope(OFF):
         with pytest.raises(MemoryPolicyError):teachers()
     journal.forget(k2);assert not teachers();assert journal.enqueue(cert,rows)==key and journal.sleep()==[]
+
+
+def test_explicit_proposals_cannot_enter_the_model_free_door_or_journal(tmp_path):
+    root = tmp_path / 'app'
+    root.mkdir()
+    calls = []
+    def propose(packet):
+        calls.append(packet)
+        return []
+    model = open_model()
+    params = dict(repo_root=root, residual_proposer=propose, skill_store_path=tmp_path / 'external.json')
+    assert model.solve('repair', mode='REPO_NATIVE_SWE', inputs=params)['reason'] == 'REFUSED__MODEL_FREE_ROUTE'
+    res = model.solve_swe_repo_native(**params, repair_store=tmp_path / 'journal.sqlite')['swe_result']
+    assert res['status'] == 'REFUSED__MODEL_FREE_ROUTE' and not calls
+    assert not (tmp_path / 'external.json').exists() and not (tmp_path / 'journal.sqlite').exists()

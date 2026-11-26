@@ -1383,6 +1383,14 @@ def _rule_bucket(node: ast.AST) -> tuple[str, ...]:
     return (kind, type(op).__name__) if op is not None else (kind,)
 
 
+def _template_bucket(pattern: ast.AST) -> tuple[str, ...]:
+    # __C slots are represented by ast.Name in storage, but can match only a
+    # concrete Constant. Use the same bucket on compilation and rehydration.
+    if isinstance(pattern, ast.Name) and pattern.id.startswith("__C") and pattern.id.endswith("__"):
+        return ("Constant",)
+    return _rule_bucket(pattern)
+
+
 def _match_template(pattern: ast.AST, concrete: ast.AST, bindings: dict[str, ast.AST]) -> bool:
     """Match an alpha-normalized AST `pattern` against `concrete`, populating `bindings`."""
     if isinstance(pattern, ast.Name) and pattern.id.startswith(("__V", "__C")) and pattern.id.endswith("__"):
@@ -1550,6 +1558,11 @@ class FutamuraSelfCompilingCascade:
                 after_ast = ast.parse(str(row["after_template"]), mode="eval").body
             except (KeyError, SyntaxError, TypeError, ValueError):
                 continue
+            before_names = {n.id for n in ast.walk(before_ast) if isinstance(n, ast.Name)}
+            after_slots = {n.id for n in ast.walk(after_ast) if isinstance(n, ast.Name)
+                           and n.id.startswith(("__V", "__C")) and n.id.endswith("__")}
+            if not after_slots.issubset(before_names):
+                continue  # Persistence cannot supply a missing receiver binding.
             rule = CompiledRung0Rule(
                 rule_id=str(row.get("rule_id") or f"persisted_{len(self._persisted)}"),
                 preorder_key=_preorder_signature(before_ast),
@@ -1571,7 +1584,7 @@ class FutamuraSelfCompilingCascade:
                 continue
             self._rules_by_id[rule.rule_id] = rule
             self._rung0_by_key.setdefault(rule.preorder_key, []).append(rule)
-            self._rung0_by_bucket.setdefault(_rule_bucket(rule.before_ast), []).append(rule)
+            self._rung0_by_bucket.setdefault(_template_bucket(rule.before_ast), []).append(rule)
             self._persisted[rule.rule_id] = dict(row)
 
     def persisted_law_ids(self) -> list[str]:
@@ -1736,7 +1749,7 @@ class FutamuraSelfCompilingCascade:
         )
         self._rules_by_id[rule_id] = rule
         self._rung0_by_key.setdefault(pkey, []).append(rule)
-        self._rung0_by_bucket.setdefault(_rule_bucket(rule.before_ast), []).append(rule)
+        self._rung0_by_bucket.setdefault(_template_bucket(rule.before_ast), []).append(rule)
         # A law that dies with the interpreter is a cache, not a compilation.
         try:
             self.save_laws()

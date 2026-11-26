@@ -29,7 +29,11 @@ def test_submitted_foreign_names_are_not_a_receiver_owned_binding(tmp_path, monk
     raw='def f(x): return x+2'; changed='def f(x): return x+3'
     r=c.compile_verified_win_to_rung0(raw,changed,source_rung=2)
     assert r['compiled'] and r['after_template']=='3'
-    solved=c.solve({'source':raw,'test_cases':['assert f(0)==3','assert f(8)==11']})
+    # Re-open the real persisted rule: __C is a template Name, but it must
+    # still be indexed under the receiver's Constant.
+    reopened=FutamuraSelfCompilingCascade()
+    assert r['rule_id'] in reopened.persisted_law_ids()
+    solved=reopened.solve({'source':raw,'test_cases':['assert f(0)==3','assert f(8)==11']})
     assert solved['rung_used']==0 and solved['patched_source']==changed
 
 
