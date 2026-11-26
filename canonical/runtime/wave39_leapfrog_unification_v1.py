@@ -1129,20 +1129,29 @@ class CLMRRFMemoryEngine:
             trust = 1.0 if rec["origin_token"] == "TRUSTED_VERIFIER" else 0.5
             return trust + 0.2 * float(rec.get("surprise_score", 0.0))
 
-        channels = {
-            "lexical": sorted(eligible, key=lambda r: (-_lex_score(r), r["record_id"])),
-            "structural_ast": sorted(eligible, key=lambda r: (-_ast_score(r), r["record_id"])),
-            "temporal_entity": sorted(eligible, key=lambda r: (-_temporal_entity_score(r), r["record_id"])),
-            "origin_trust": sorted(eligible, key=lambda r: (-_trust_score(r), r["record_id"])),
-        }
-
-        rrf_scores: dict[str, float] = {r["record_id"]: 0.0 for r in eligible}
-        channel_ranks: dict[str, dict[str, int]] = {r["record_id"]: {} for r in eligible}
-        for cname, ranked in channels.items():
-            for rank_idx, rec in enumerate(ranked, 1):
-                rid = rec["record_id"]
-                rrf_scores[rid] += 1.0 / float(int(rrf_k) + rank_idx)
-                channel_ranks[rid][cname] = rank_idx
+        channels = {"lexical": _lex_score, "structural_ast": _ast_score,
+                    "temporal_entity": _temporal_entity_score, "origin_trust": _trust_score}
+        if int(rrf_k) < 0:
+            raise ValueError("rrf_k must be nonnegative")
+        rrf_scores = {r["record_id"]: 0.0 for r in eligible}
+        channel_ranks: dict[str, dict[str, float]] = {rid: {} for rid in rrf_scores}
+        for cname, score in channels.items():
+            groups: dict[float, list[str]] = {}
+            for rec in eligible:
+                groups.setdefault(score(rec), []).append(rec["record_id"])
+            first = 1
+            for value in sorted(groups, reverse=True):
+                ids = groups[value]
+                stop = first + len(ids)
+                # Expected reciprocal vote under all permutations of the tie.
+                # No sorting by record ID *inside a channel*: a constant channel
+                # then adds one constant to every candidate and cannot decide.
+                vote = sum(1.0 / (int(rrf_k) + i) for i in range(first, stop)) / len(ids)
+                mid = (first + stop - 1) / 2
+                for rid in ids:
+                    rrf_scores[rid] += vote
+                    channel_ranks[rid][cname] = mid
+                first = stop
 
         ranked_ids = sorted(rrf_scores.keys(), key=lambda rid: (-rrf_scores[rid], rid))
         budget = max(32, int(char_budget))
