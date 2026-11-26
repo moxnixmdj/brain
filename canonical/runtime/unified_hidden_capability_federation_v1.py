@@ -1785,6 +1785,23 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "required_inputs": ["rule", "source_text", "target_language", "verifier"],
         "declared_dependencies": [],
     },
+    "LEAPFROG_W42_MEME_PROTOCOL_MEMORY": {
+        "domain": "MEMORY_AND_DEPENDENCY_PROPAGATION",
+        "source_path": "canonical/swe_kernel/meme_protocol_memory_v1.py",
+        "entrypoint": "run_protocol",
+        "summary": "Answers the three MEME protocol operations the semiring store could not: exact Z-set aggregates that refuse to report a total over a set that lost a member, rename tracking that carries derived facts and poisons the stale name, and absence for a rule that never fired; scored by a six-operation bench judged by a from-scratch fixpoint oracle.",
+        "triggers": [
+            "memory cascade",
+            "memory absence",
+            "dependency invalidation",
+            "aggregate over invalidated facts",
+            "entity rename tracking",
+            "upstream superseded",
+            "meme protocol",
+        ],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
     "LEAPFROG_W40_FRONTIER_BENCH_HARNESS": {
         "domain": "VERIFICATION_MEASUREMENT_AND_ABSTENTION",
         "source_path": "canonical/evaluation/frontier_bench_v1.py",
@@ -2896,6 +2913,23 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
             "canonical/tools/the_check_mode_is_the_oracle_v1.py",
             "canonical/tools/an_actions_vocabulary_is_its_refusal_surface_v1.py",
             "canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py",
+        ],
+    },
+    "meme_protocol_memory_w42": {
+        "external_names": [
+            "memory cascade",
+            "memory absence",
+            "dependency invalidation",
+            "upstream superseded",
+            "incremental view maintenance",
+            "why provenance",
+            "entity rename tracking",
+            "aggregate over a set that lost a member",
+        ],
+        "engines": ["engine:LEAPFROG_W42_MEME_PROTOCOL_MEMORY"],
+        "koan_modules": [
+            "canonical/swe_kernel/meme_protocol_memory_v1.py",
+            "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
         ],
     },
     "refusal_acquire_retry_w41": {
@@ -5305,6 +5339,21 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
         if not acquired.get("pass"):
             return _fail(mode, str(acquired.get("status") or "ACQUISITION_FAILED"), acquisition=acquired)
         return _ok(mode, "PASS__ACQUIRED_AFTER_REFUSAL", acquired)
+
+    if mode == "LEAPFROG_W42_MEME_PROTOCOL_MEMORY":
+        from canonical.swe_kernel.meme_protocol_memory_v1 import run_protocol
+
+        report = run_protocol(
+            per_op=int(inputs.get("per_op", 4)),
+            seed=int(inputs.get("seed", 20261126)),
+        )
+        if not report.get("instances"):
+            return _fail(mode, "NO_PROTOCOL_INSTANCES")
+        if (report.get("dependency_memory_rate") or 0.0) < 0.999:
+            return _fail(mode, "MEME_PROTOCOL_OPERATION_UNANSWERED", report=report)
+        if not (report.get("self_check") or {}).get("trustworthy"):
+            return _fail(mode, "MEME_PROTOCOL_INSTRUMENT_NOT_TRUSTWORTHY", report=report)
+        return _ok(mode, "MEME_PROTOCOL_MEASURED", report)
 
     if mode == "LEAPFROG_W40_FRONTIER_BENCH_HARNESS":
         from canonical.evaluation import frontier_bench_v1 as bench
