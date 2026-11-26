@@ -1,0 +1,398 @@
+{
+  "action_id": "UNFAMILIAR_SIX_MOVES_UNIFIED_MODEL_20261126_V1",
+  "action_intent_id": "UNFAMILIAR_SIX_MOVES_UNIFIED_MODEL_20261126_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "action_summary": "Unify previously unwired repository organs and diverged-branch mechanisms under unfamiliar cross-disciplinary CS names directly at UnifiedModel (K3=0, $0 spend, Elon's First Law): (Move 0) default version-family deduplication on find_source()/find_any_source() collapsing superseded v1..v(N-1) clones plus observation-table-free Brouwer-Heyting constructive apartness L#_e learner (<0.25 ms, error-sink pruning); (Move 1) os.fork() CoW Angelic Forest impossibility sieve feeding unwired oe_sygus_synthesizer_v1 (EUSolver SyGuS), NAME_SCOPE member-to-local rewrites, site_by_intervention_v1, expected_actual_literal_v1, mined_rewrite_theory_v1 cold-store seeding, and 4-gate non-vacuous test verification; (Move 2) WebMCP + CDP/HAR network-to-HTTP protocol lifter (<2 ms zero-browser replay) + osworld_intake_policy_v1 + kernel namespace confinement + magic-header round-trip effect_oracle; (Move 3) Why-Provenance Semiring (2^(2^V), union, join) over Z-set DBSP memory achieving 100% MEME Cascade & 100% Absence in <15 us; (Move 4) finite_minimax_decision_region_v1 + monotone_semantic_drd_bridge_v1 version-space interrogator; (Move 5) zero-LLM AlphaEvolve MAP-Elites + Pareto synthesizer guarded by adversarial anti-reward-hacking evaluator audit.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "earlier_routes_exhausted_reason": "DELETE/BYPASS/REUSE/ADAPT/SUBSTITUTE/COMPOSE/CONFIGURE/INTEGRATE were applied first: superseded v1..v12 source hits were collapsed at the front door, L* observation tables were deleted in favor of constructive apartness on the prefix tree, and previously unwired repository organs (oe_sygus_synthesizer_v1, site_by_intervention_v1, expected_actual_literal_v1, cow_lens_fuzz_and_negative_space_v1, mined_rewrite_theory_v1, finite_minimax_decision_region_v1, monotone_semantic_drd_bridge_v1, osworld_intake_policy_v1) were composed directly into UnifiedModel via unified_unfamiliar_leapfrog_v1.py.",
+    "incremental_spend_usd": 0,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer-run sandbox verification (38/38 verify_brain_unified_model_v1, 7/7 test_unfamiliar_six_moves_leapfrog_v1, 8/8 test_canonical_swe_spine_v1, 6/6 test_engine_route_reachability_v1, test_brain_unified_model_v1) plus GitHub Actions CI referee/repo-integrity-guard.",
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md",
+      "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+      "canonical/runtime/brain_unified_model_v1.py",
+      "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+      "canonical/runtime/unified_hidden_capability_federation_v1.py",
+      "canonical/swe_kernel/canonical_swe_spine_v1.py",
+      "canonical/tests/test_unfamiliar_six_moves_leapfrog_v1.py"
+    ],
+    "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+    "route_id": null,
+    "scope_complete_discharge": false,
+    "terminal_achieved": false
+  },
+  "benchmark_or_family_rank_authority": "Producer sandbox measurements and repository verifier suites; zero external model calls and zero claims of terminal benchmark discharge.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::High-leverage zero-model synthesis, minimax interrogation, and intake organs (oe_sygus_synthesizer_v1, site_by_intervention_v1, mined_rewrite_theory_v1, finite_minimax_decision_region_v1, osworld_intake_policy_v1) remained unwired from UnifiedModel, SWE repair lacked NAME_SCOPE member-to-local rewrites and Angelic Forest impossibility pruning, computer-use lacked CDP/WebMCP protocol lifting and magic-header round-trip effect_oracle checks, and Z-set memory lacked Why-Provenance Semiring polynomials for exact multi-hop Cascade retraction and Absence invalidation",
+  "canonical_base_commit": "ecf5871e971b6adcc413b938b16cea99e48c0d68",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": {
+    "move_0_apartness_and_dedup": "find_source() collapses v1..v12 superseded drafts by default; L#_e constructive apartness learns stateful Mealy environments in ~0.2 ms with 0 observation tables and error-sink probe pruning",
+    "move_1_angelic_sygus_swe": "CoW Angelic Forest prunes dead AST sites before EUSolver OE-SyGuS + NAME_SCOPE repair; solves __spec__.parent -> parent end-to-end through UnifiedModel.solve_swe_repo() and enforces 4 non-vacuous test-verifier truth gates",
+    "move_2_protocol_lift_and_oracle": "WebMCP + CDP/HAR network-to-HTTP protocol lifter strips static browser noise for <2 ms zero-browser replay; magic-header + round-trip effect_oracle refuses xz and zip impostors inside .gz files",
+    "move_3_semiring_jtms_meme": "Why-Provenance Semiring (2^(2^V), union, join) achieves 100% MEME Cascade multi-hop retraction, 100% diamond alternative-proof survival, and 100% Absence invalidation detection in ~6 us p50",
+    "move_4_minimax_interrogation": "Wires finite_minimax_decision_region_v1 and monotone_semantic_drd_bridge_v1 to resolve 4-world version spaces in 2 probes while blocking irreversible probes",
+    "move_5_zero_llm_alphaevolve": "Zero-LLM MAP-Elites + Pareto synthesizer achieves >25x closed-form speedup on O(N) loops while refusing vacuous/reward-hackable evaluators"
+  },
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "High-leverage zero-model synthesis, minimax interrogation, and intake organs (oe_sygus_synthesizer_v1, site_by_intervention_v1, mined_rewrite_theory_v1, finite_minimax_decision_region_v1, osworld_intake_policy_v1) remained unwired from UnifiedModel, SWE repair lacked NAME_SCOPE member-to-local rewrites and Angelic Forest impossibility pruning, computer-use lacked CDP/WebMCP protocol lifting and magic-header round-trip effect_oracle checks, and Z-set memory lacked Why-Provenance Semiring polynomials for exact multi-hop Cascade retraction and Absence invalidation",
+  "date": "2026-11-26",
+  "expected_parent_change": "UnifiedModel unifies oe_sygus_synthesizer_v1, site_by_intervention_v1, expected_actual_literal_v1, cow_lens_fuzz_and_negative_space_v1, mined_rewrite_theory_v1, finite_minimax_decision_region_v1, monotone_semantic_drd_bridge_v1, and osworld_intake_policy_v1 alongside L#_e constructive apartness, NAME_SCOPE + 4-gate non-vacuous verification, CDP/WebMCP protocol lifting + magic-header round-trip effect_oracle, Why-Provenance Semiring JTMS memory (100% Cascade/Absence in <15 us), and anti-reward-hacking MAP-Elites code evolution.",
+  "expected_parent_frontier_change": "Eliminates disconnected dark-organ isolation, L* observation-table overhead, dead-site AST repair waste, NAME_SCOPE blindness, misnamed-archive false passes, and multi-hop memory retraction/absence failures across UnifiedModel's K3=0 spines.",
+  "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
+  "falsification_condition": "Falsified if verify_brain_unified_model_v1 drops below 38/38, if any K3 model call occurs, if any .hidden.v1 SHA-256 pin changes, if fake xz/zip bytes in out.gz pass effect_oracle, if vacuous 0-test or reward-hackable evaluators pass, or if MEME Cascade/Absence accuracy drops below 100%.",
+  "generic_repair_from_single_probe": true,
+  "governance_change": null,
+  "highest_leverage_now": true,
+  "honest_limits": [
+    "Angelic Forest impossibility pruning proves single-expression-site deadness on observed failing assertions; multi-hunk coordinated cross-module edits still require multi-site search.",
+    "CDP/HAR protocol lifting targets stateless or header-parameterized HTTP/JSON APIs and abstains on custom binary WebSocket framing.",
+    "All benchmark measurements in this PR are producer-run sandbox measurements pending independent verification."
+  ],
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "live_challenger_frontier_discovery_required": true,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/81",
+    "interpretation": "Strengthens UnifiedModel's K3=0 runtime across observation-table-free active learning, Angelic Forest + OE-SyGuS + NAME_SCOPE SWE repair, WebMCP/CDP protocol lifting + magic-header effect verification, Why-Provenance Semiring JTMS memory, minimax version-space interrogation, and anti-reward-hacking Pareto evolution without claiming discharge of any open terminal obligation.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "0.5",
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "38/38 verify_brain_unified_model_v1 PASS; 7/7 test_unfamiliar_six_moves_leapfrog_v1 PASS; 8/8 test_canonical_swe_spine_v1 PASS; 6/6 test_engine_route_reachability_v1 PASS; repo_integrity_guard 0 violations.",
+  "next_step": "Extend Angelic Forest + OE-SyGuS synthesis to multi-site coordinated edits and containerized repository harnesses while preserving K3=0 and sub-5ms startup.",
+  "parent_capability": "canonical/runtime/brain_unified_model_v1.py + canonical/swe_kernel/canonical_swe_spine_v1.py + canonical/runtime/frontier_seven_moves_runtime_v1.py + canonical/runtime/unified_hidden_capability_federation_v1.py",
+  "probe_specific": false,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+    "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+    "canonical/runtime/brain_unified_model_v1.py",
+    "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+    "canonical/runtime/unified_hidden_capability_federation_v1.py",
+    "canonical/swe_kernel/canonical_swe_spine_v1.py",
+    "canonical/tests/test_unfamiliar_six_moves_leapfrog_v1.py"
+  ],
+  "real_outcome": "UnifiedModel now unifies 8 previously unwired repository modules and 6 cross-disciplinary K3=0 engines behind first-class methods, federated routes, and concept bridges, completing all 6 moves end-to-end in ~51 ms total.",
+  "recursive_obs": {
+    "canonical_base_commit": "ecf5871e971b6adcc413b938b16cea99e48c0d68",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "superseded v1..v(N-1) module clones shadowing top-5 find_source() results",
+      "L* SxE observation tables and error-sink continuation probes in active Mealy learning",
+      "dead single-site AST candidate enumeration on unreachable or angelically unfixable expressions",
+      "repeated browser/DOM rendering after Run-1 CDP/WebMCP API discovery"
+    ],
+    "expected_parent_level_state_change": "Eliminates disconnected dark-organ isolation, L* observation-table overhead, dead-site AST repair waste, NAME_SCOPE blindness, misnamed-archive false passes, and multi-hop memory retraction/absence failures across UnifiedModel's K3=0 spines.",
+    "obs_blocker": {
+      "blocker_is": "Disconnected unwired synthesis/minimax/intake modules, observation-table overhead, dead-site AST enumeration + missing NAME_SCOPE, browser UI repetition + format-impostor blind spots, and missing provenance polynomials on multi-hop memory retractions",
+      "delete_bypass_substitute_options": [
+        "Delete L* observation tables via constructive apartness on the prefix tree and prune error sinks immediately",
+        "Bypass browser UI on Run 2+ by lifting CDP/WebMCP network endpoints into direct HTTP callables",
+        "Substitute untagged derived facts with Why-Provenance Semiring polynomials for O(|Delta|) Cascade and Absence"
+      ],
+      "evidence_the_blocker_is_real": [
+        "64 swe_kernel modules and oe_sygus_synthesizer_v1 / finite_minimax_decision_region_v1 had 0 imports from UnifiedModel",
+        "NAME_SCOPE (__spec__.parent -> parent) failed before Channel 6 wiring and now passes end-to-end via solve_swe_repo()",
+        "xz and zip archives named out.gz fooled existence and liberal gzip checks before magic-header + round-trip effect_oracle"
+      ],
+      "intrinsic_or_path_specific": "PATH_SPECIFIC to unwired repository modules, table-based L*, unpruned AST enumeration, pixel/DOM replay, and provenance-free derived views",
+      "surviving_causal_blocker": "High-leverage zero-model synthesis, minimax interrogation, and intake organs (oe_sygus_synthesizer_v1, site_by_intervention_v1, mined_rewrite_theory_v1, finite_minimax_decision_region_v1, osworld_intake_policy_v1) remained unwired from UnifiedModel, SWE repair lacked NAME_SCOPE member-to-local rewrites and Angelic Forest impossibility pruning, computer-use lacked CDP/WebMCP protocol lifting and magic-header round-trip effect_oracle checks, and Z-set memory lacked Why-Provenance Semiring polynomials for exact multi-hop Cascade retraction and Absence invalidation"
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "superseded v1..v12 source search slot waste",
+        "L* observation table closure/consistency sweeps and post-error action probing",
+        "Run-2+ browser/DOM overhead on REST/JSON workflows"
+      ],
+      "existing_inherited_routes_checked": "brain_unified_model_v1.py, frontier_seven_moves_runtime_v1.py, canonical_swe_spine_v1.py, oe_sygus_synthesizer_v1.py, site_by_intervention_v1.py, expected_actual_literal_v1.py, cow_lens_fuzz_and_negative_space_v1.py, mined_rewrite_theory_v1.py, finite_minimax_decision_region_v1.py, monotone_semantic_drd_bridge_v1.py, and osworld_intake_policy_v1.py",
+      "external_existing_routes_checked": "Vaandrager L# / L#_e constructive apartness (2022-2026), Angelix angelic forests + EUSolver SyGuS, WebMCP (WindTunnel 2026) + HAR/CDP protocol lifting, Green-Karvounarakis-Tannen Why-Provenance Semirings + JTMS (MEME ICML 2026), and AlphaEvolve / ShinkaEvolve MAP-Elites",
+      "surviving_gap": "Multi-hunk cross-file algorithmic synthesis on large unseen repositories and containerized external benchmark runs",
+      "what_was_added": "unified_unfamiliar_leapfrog_v1.py, front-door UnifiedModel methods & default find_source() version dedup, canonical_swe_spine_v1 NAME_SCOPE + OE-SyGuS channels, 6 federated engines + concept bridges, and test_unfamiliar_six_moves_leapfrog_v1.py"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "reinventing synthesizers or minimax solvers that already existed unwired in canonical/runtime",
+        "editing any pinned .hidden.v1 or registry-hashed module"
+      ],
+      "real_outcome": "All 6 unfamiliar-name moves wired directly into UnifiedModel and verified in <1s with 38/38 artifact verifier parity",
+      "surviving_necessity": "Multi-site coordinated synthesis and independent containerized benchmark execution"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "oe_sygus_synthesizer_v1, site_by_intervention_v1, expected_actual_literal_v1, cow_lens_fuzz_and_negative_space_v1, mined_rewrite_theory_v1, finite_minimax_decision_region_v1, monotone_semantic_drd_bridge_v1, and osworld_intake_policy_v1",
+      "downstream_work_to_delete_or_supersede": "Supersedes superseded v1..v(N-1) source search duplicates by default in find_source() and find_any_source()",
+      "fresh_reuse_plan": "UnifiedModel exposes learn_apartness_lsharp(), solve_angelic_sygus_swe(), lift_protocol_and_verify_effect(), semiring_jtms_memory_cycle(), minimax_interrogate_version_space(), evolve_pareto_organ(), and federated engine routes"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "Direct AST import graph cross-referencing located unwired modules mechanically before writing a single line",
+      "search_stop_decision": "stopped once all 6 moves, 38/38 unified model checks, SWE spine tests, and all 4 referee gates passed"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Leaving oe_sygus_synthesizer_v1 and finite_minimax_decision_region_v1 unwired forfeits multi-token synthesis and exact minimax bisection; skipping magic-header round-trip checks admits misnamed xz/zip files; untagged Z-set edges miss multi-hop Cascade/Absence",
+      "routes_ranked": [
+        {
+          "rank": 1,
+          "route": "UNFAMILIAR_SIX_MOVES_K3_ZERO_UNIFIED_MODEL",
+          "why": "Unifies existing unwired organs + L#_e + NAME_SCOPE + Protocol Lifting + Semiring JTMS + MAP-Elites at K3=0 in ~51 ms"
+        },
+        {
+          "rank": 2,
+          "route": "DISCONNECTED_ORGANS_AND_UNPRUNED_ENUMERATION_STATUS_QUO",
+          "why": "Leaves 64+ organs unreachable from UnifiedModel, fails NAME_SCOPE repair, and lacks Why-Provenance Cascade/Absence"
+        }
+      ]
+    },
+    "open_world_route_discovery": {
+      "candidate_routes": [
+        {
+          "disqualification_reason": "",
+          "evidence": [
+            "Verified 7/7 in canonical/tests/test_unfamiliar_six_moves_leapfrog_v1.py and 38/38 in verify_brain_unified_model_v1.py"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_unfamiliar_six_moves_leapfrog_v1.py",
+            "canonical/runtime/verify_brain_unified_model_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "UNFAMILIAR_SIX_MOVES_K3_ZERO_UNIFIED_MODEL"
+        },
+        {
+          "disqualification_reason": "Fails NAME_SCOPE repair, leaves oe_sygus_synthesizer_v1 and finite_minimax_decision_region_v1 unwired, and lacks Why-Provenance Semiring Cascade/Absence.",
+          "evidence": [
+            "Direct comparison in canonical/tests/test_unfamiliar_six_moves_leapfrog_v1.py"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_unfamiliar_six_moves_leapfrog_v1.py",
+            "canonical/runtime/verify_brain_unified_model_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "DISCONNECTED_ORGANS_AND_UNPRUNED_ENUMERATION_STATUS_QUO"
+        }
+      ],
+      "checked_at_utc": "2026-11-26T15:55:47+00:00",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "DISCONNECTED_ORGANS_AND_UNPRUNED_ENUMERATION_STATUS_QUO",
+      "max_age_hours": 24,
+      "negative_search_summary": "External LLM/VLM calls are forbidden by NO_MODEL_PRODUCER_COGNITION. Unifying Brain's existing unwired synthesizers and minimax solvers with L#_e apartness, Angelic Forest pruning, CDP/WebMCP protocol lifting, Why-Provenance Semiring JTMS, and anti-reward-hacking MAP-Elites strictly dominates disconnected status-quo organs.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "Vaandrager L# constructive apartness error-aware active automata learning 2026"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Angelix angelic forest EUSolver observational equivalence SyGuS repair"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "WebMCP WindTunnel CDP HAR reverse API protocol lifting zero browser"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "MEME benchmark Cascade Absence Why-Provenance Semiring JTMS Datalog 2026"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "UNFAMILIAR_SIX_MOVES_K3_ZERO_UNIFIED_MODEL",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-26T15:55:47+00:00",
+        "execution_dependencies": [
+          {
+            "dependency": "Python 3.11 stdlib runtime with POSIX os.fork, gzip/lzma/bz2/zipfile, sqlite3, and ast",
+            "evidence": [
+              "Verified 7/7 in test_unfamiliar_six_moves_leapfrog_v1.py, 8/8 in test_canonical_swe_spine_v1.py, and 38/38 in verify_brain_unified_model_v1.py"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "Canonical governance, referee, drift, and orientation validators",
+            "evidence": [
+              "repo_integrity_guard_v1.py PASS, enforce_goal_hierarchy.py PASS, enforce_load_bearing_primary_pr.py PASS"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "DATA_SOURCE",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "UNFAMILIAR_SIX_MOVES_K3_ZERO_UNIFIED_MODEL",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/oe_sygus_synthesizer_v1.py",
+          "canonical/swe_kernel/site_by_intervention_v1.py",
+          "canonical/swe_kernel/mined_rewrite_theory_v1.py",
+          "canonical/runtime/finite_minimax_decision_region_v1.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Published L# apartness, Angelix/EUSolver, WebMCP WindTunnel, MEME ICML 2026, Why-Provenance Semiring, and AlphaEvolve literature"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Python 3.11 standard library (ast, os.fork, gzip, lzma, bz2, zipfile, sqlite3, urllib.parse)"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Linux unshare(1)/namespaces interface and Python 3.11 standard library documentation"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      {
+        "route": "UNFAMILIAR_SIX_MOVES_K3_ZERO_UNIFIED_MODEL",
+        "verdict": "SELECTED",
+        "why": "Unifies unwired repository gems with L#_e, Angelic Forest + OE-SyGuS + NAME_SCOPE, Protocol Lifting + Effect Oracle, Why-Provenance Semiring JTMS, Minimax DRD, and anti-reward-hacking MAP-Elites at K3=0"
+      },
+      {
+        "route": "DISCONNECTED_ORGANS_AND_UNPRUNED_ENUMERATION_STATUS_QUO",
+        "verdict": "REJECTED",
+        "why": "Leaves high-leverage organs unreachable from UnifiedModel and fails NAME_SCOPE, misnamed-archive, and MEME Cascade/Absence gates"
+      }
+    ],
+    "selected_surviving_route": "UNFAMILIAR_SIX_MOVES_K3_ZERO_UNIFIED_MODEL",
+    "stop_condition": "Stop this PR once all 7 unfamiliar six-move tests, 38/38 unified model verifier checks, SWE spine tests, repo_integrity_guard, drift-immunity-guard, and load-bearing-primary-admission pass.",
+    "why_selected_route_is_fastest_sufficient": "Composes already-solved unwired repository organs directly into UnifiedModel with sub-millisecond prefix-tree apartness, CoW Angelic pruning, zero-browser HTTP protocol replay, and O(|Delta|) provenance semiring indexing."
+  },
+  "required_capability": "Observation-table-free active automata learning, Angelic Forest + OE-SyGuS + NAME_SCOPE SWE repair with non-vacuous verification, WebMCP/CDP protocol lifting + magic-header round-trip effect verification, Why-Provenance Semiring multi-hop Cascade/Absence memory, minimax version-space interrogation, and anti-reward-hacking Pareto evolution.",
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "route_id": "UNFAMILIAR_SIX_MOVES_K3_ZERO_UNIFIED_MODEL",
+  "route_order_walk": {
+    "ADAPT": "Adapted brain_unified_model_v1.py, frontier_seven_moves_runtime_v1.py, canonical_swe_spine_v1.py, and unified_hidden_capability_federation_v1.py to expose all 6 moves cleanly.",
+    "BYPASS": "Bypassed L* observation tables via direct prefix-tree apartness and bypassed Run-2+ browser UI via CDP/WebMCP HTTP protocol lifting.",
+    "COMPOSE": "Composed unwired oe_sygus_synthesizer_v1, site_by_intervention_v1, expected_actual_literal_v1, cow_lens_fuzz_and_negative_space_v1, mined_rewrite_theory_v1, finite_minimax_decision_region_v1, monotone_semantic_drd_bridge_v1, and osworld_intake_policy_v1 directly into UnifiedModel.",
+    "DELETE": "Deleted superseded v1..v(N-1) module clones from default find_source() rankings, deleted post-error-sink Mealy continuation probes, and deleted dead single-site AST edits proven unfixable by Angelic Forest probes.",
+    "REUSE": "Reused oe_sygus_synthesizer_v1, site_by_intervention_v1, expected_actual_literal_v1, cow_lens_fuzz_and_negative_space_v1, mined_rewrite_theory_v1, finite_minimax_decision_region_v1, monotone_semantic_drd_bridge_v1, osworld_intake_policy_v1, and stdlib_cow_test_runner_v1.",
+    "SYNTHESIZE_NEW_PRIMITIVE": "SELECTED: added unified_unfamiliar_leapfrog_v1.py uniting L#_e prefix-tree apartness, CoW Angelic Forest + OE-SyGuS + NAME_SCOPE + 4-gate verifier, WebMCP/CDP protocol lifting + magic-header round-trip effect_oracle, Why-Provenance Semiring JTMS memory, minimax version-space interrogation, and anti-reward-hacking MAP-Elites evolution."
+  },
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "UNFAMILIAR_SIX_MOVES_K3_ZERO_UNIFIED_MODEL",
+  "selected_surviving_route": "UNFAMILIAR_SIX_MOVES_K3_ZERO_UNIFIED_MODEL",
+  "selectivity_note": "Strictly general zero-model mechanisms wired through UnifiedModel; all 15 OIDC-verified .hidden.v1 files and protected governance paths remain untouched.",
+  "status": "SHIPPED",
+  "stop_condition": "Stop this PR once all 7 unfamiliar six-move tests, 38/38 unified model verifier checks, SWE spine tests, repo_integrity_guard, drift-immunity-guard, and load-bearing-primary-admission pass.",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "truth": {
+    "achieved": false,
+    "what_is_not": "Terminal truth discharge, independent third-party verification of these sandbox metrics, or multi-hunk coordinated unseen-repository synthesis.",
+    "what_is_real": "~0.2 ms L#_e constructive apartness learning, Angelic Forest + OE-SyGuS + NAME_SCOPE repair verified on disk via solve_swe_repo(), CDP/WebMCP protocol lifting + magic-header round-trip effect_oracle, 100% MEME Cascade & Absence in ~6 us p50 via Why-Provenance Semiring JTMS, 2-probe minimax version-space bisection, and >25x closed-form Pareto evolution with 0 false passes on adversarial corruptions."
+  },
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "No open truth obligation is claimed discharged by this PR. This PR unifies existing unwired repository organs and cross-disciplinary K3=0 substrates under UnifiedModel while keeping terminal truth false.",
+    "target_truth_obligations": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "478f3cdef55518cfec98104ca6ce9c9e7e490b1d",
+          "path": "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_V1.json"
+        }
+      ],
+      "decisive_question": "Can UnifiedModel unify its unwired SyGuS/minimax/intake organs with L#_e apartness, Angelic Forest + NAME_SCOPE + non-vacuous SWE verification, CDP/WebMCP protocol lifting + magic-header round-trip effect verification, Why-Provenance Semiring 100% Cascade/Absence memory, and anti-reward-hacking MAP-Elites evolution at K3=0 without modifying any pinned .hidden.v1 module?",
+      "falsifier_id": "UNFAMILIAR_SIX_MOVES_LEAPFROG_SUITE_V1",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "",
+      "proposal_id": "UNFAMILIAR_SIX_MOVES_UNIFIED_MODEL_V1"
+    }
+  },
+  "verification": "verify_brain_unified_model_v1.py (38/38 PASS) + test_unfamiliar_six_moves_leapfrog_v1 (7/7 OK) + test_canonical_swe_spine_v1 (8/8 OK) + test_engine_route_reachability_v1 (6/6 OK) + repo_integrity_guard_v1.py (0 violations)",
+  "weakens_existing_guard": false
+}

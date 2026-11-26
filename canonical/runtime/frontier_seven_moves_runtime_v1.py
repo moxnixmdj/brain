@@ -2920,8 +2920,9 @@ def learn_instant_environment(
     numeric_prefix: Sequence[str] = (),
     target_output: str | None = None,
     cli_flag_catalog: Mapping[str, Sequence[str]] | None = None,
+    algorithm: str = "auto",
 ) -> dict[str, Any]:
-    """Phase 2 Entrypoint: Kalman-surprise check (`< 50 us`) + active Symbolic Mealy learning (`< 5.0 ms`)."""
+    """Phase 2 Entrypoint: Kalman-surprise check (`< 50 us`) + active Symbolic Mealy / `L#_e` Apartness (`< 5.0 ms`)."""
     learner = SymbolicMealyInstantLearner()
     first_act = str(alphabet[0])
     first_out = str(execute_trace([first_act])[0])
@@ -2931,6 +2932,18 @@ def learn_instant_environment(
         observed_success=not is_refusal,
         context_predicates=[f"initial_probe:{first_act}"],
     )
+    if str(algorithm).lower() in ("lsharp", "apartness") and numeric_action is None and cli_flag_catalog is None:
+        from canonical.swe_kernel.unified_unfamiliar_leapfrog_v1 import ApartnessTreeInstantLearner
+
+        lsharp_res = ApartnessTreeInstantLearner().learn(
+            alphabet=alphabet,
+            execute_trace=execute_trace,
+            held_out_traces=held_out_traces,
+            target_output=target_output,
+        )
+        lsharp_res["kalman_surprise_gate"] = surprise
+        return lsharp_res
+
     learned = learner.learn_mealy(
         alphabet=alphabet,
         execute_trace=execute_trace,
@@ -3693,6 +3706,9 @@ def dbsp_memory_and_wake_sleep_cycle(
 
     early_p50 = sorted(early_us)[len(early_us) // 2]
     late_p50 = sorted(late_us)[len(late_us) // 2]
+    from canonical.swe_kernel.unified_unfamiliar_leapfrog_v1 import run_meme_semiring_benchmark
+
+    meme_semiring = run_meme_semiring_benchmark(chain_count=12, chain_depth=3)
     return {
         "schema": SCHEMA,
         "operation": "DBSP_BITEMPORAL_PPR_AND_WAKE_SLEEP",
@@ -3703,6 +3719,7 @@ def dbsp_memory_and_wake_sleep_cycle(
             and unwitnessed_refusal["accepted"] is False
             and ws_res["admitted_count"] == 1
             and ws_res["top_level_capabilities_added"] == 0
+            and bool(meme_semiring["pass"])
         ),
         "scale_events_ingested": scale_events,
         "early_100_update_p50_us": round(early_p50, 3),
@@ -3714,14 +3731,19 @@ def dbsp_memory_and_wake_sleep_cycle(
         "unwitnessed_write_refused": not unwitnessed_refusal["accepted"],
         "multihop_ppr": ppr_res,
         "wake_sleep": ws_res,
+        "why_provenance_semiring_meme": meme_semiring,
         "model_calls": 0,
     }
 
 
 def run(payload: Mapping[str, Any] | None = None, root: pathlib.Path = ROOT) -> dict[str, Any]:
-    """Unified organ entrypoint dispatching Moves `I`–`VII` and Post-PR-#7121 Phases `1`–`5`."""
+    """Unified organ entrypoint dispatching Moves `I`–`VII`, Post-PR-#7121 Phases `1`–`5`, and Unfamiliar Moves `0`–`5`."""
     req = dict(payload or {})
     op = str(req.get("op") or "summary").lower()
+    if op == "unfamiliar_six_moves":
+        from canonical.swe_kernel.unified_unfamiliar_leapfrog_v1 import run_unfamiliar_six_moves_suite
+
+        return run_unfamiliar_six_moves_suite()
     if op == "trigram_search":
         return get_trigram_index(root).search(
             str(req.get("pattern") or ""),
