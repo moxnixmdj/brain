@@ -3789,3 +3789,58 @@ def propagate_relational_zipper_hop(
     finally:
         mental.restore_originals(root_rels)
     return coupled_out[:6], eval_cnt
+
+
+def self_check() -> dict[str, Any]:
+    """Falsifiable behavioral contract for failure parsing & repo idiom/symbol mining.
+
+    Proves:
+    1. Pytest failure parser extracts exact failing node IDs while ignoring passing lines.
+    2. Repo idiom miner discovers defined exception classes and functions across a temporary
+       package without leaking unrelated symbols.
+    3. Negative control: clean passing pytest output yields zero parsed failures.
+    """
+    import tempfile as _tempfile
+
+    failures: list[str] = []
+
+    def check(label: str, ok: bool) -> None:
+        if not ok:
+            failures.append(label)
+
+    sample_out = (
+        "FAILED tests/test_a.py::test_one - AssertionError\n"
+        "FAILED tests/test_b.py::TestC::test_two - TypeError\n"
+        "PASSED tests/test_a.py::test_ok\n"
+        "2 failed, 1 passed\n"
+    )
+    parsed = parse_pytest_failures(sample_out)
+    check(
+        "parses exact failing pytest node IDs",
+        parsed == ["tests/test_a.py::test_one", "tests/test_b.py::TestC::test_two"],
+    )
+
+    clean = parse_pytest_failures("PASSED tests/test_a.py::test_ok\n1 passed in 0.01s\n")
+    check("negative control: passing suite yields 0 failing nodes", clean == [])
+
+    with _tempfile.TemporaryDirectory() as td:
+        root = pathlib.Path(td)
+        (root / "mod.py").write_text(
+            "class CustomErr(ValueError):\n    pass\n\n"
+            "def clamp(x: int) -> int:\n    if x < 0:\n        raise CustomErr('neg')\n    return x\n",
+            encoding="utf-8",
+        )
+        prof = mine_repo_idiom_profile(root)
+        check("mines repo file count accurately", prof.file_count == 1)
+        check("indexes CustomErr symbol to mod.py", prof.symbol_to_files.get("CustomErr") == ["mod.py"])
+        check("indexes clamp function to mod.py", prof.symbol_to_files.get("clamp") == ["mod.py"])
+        check("negative control: unmentioned symbol is absent", "NonExistentSymbol" not in prof.symbol_to_files)
+
+    total = 6
+    return {
+        "schema": "BRAIN_METAMORPHIC_HABITATION_ZIPPER_V1_SELF_CHECK",
+        "checks": total,
+        "passed": total - len(failures),
+        "failures": failures,
+        "verdict": "SELF_CHECK_PASS" if not failures else "SELF_CHECK_FAIL",
+    }

@@ -2825,3 +2825,46 @@ class RecursiveSelfArchitect:
             "incremental_spend_usd": 0.0,
         }
 
+
+def self_check() -> dict[str, Any]:
+    """Falsifiable behavioral contract for Ring-0 self-patch firewall & executable organ referee.
+
+    Proves:
+    1. Ring-0 SelfPatchFirewall blocks path traversal (`..`), absolute paths, and immutable
+       governance guards (`execution_guard/`), while allowing Ring-1 organ paths.
+    2. Executable organ referee admits a pure deterministic function and rejects an organ
+       importing `subprocess` or `os`.
+    3. Executable byte measure assigns strictly smaller MDL size to simpler code and ignores
+       pure comments/whitespace inflation.
+    """
+    failures: list[str] = []
+
+    def check(label: str, ok: bool) -> None:
+        if not ok:
+            failures.append(label)
+
+    fw = SelfPatchFirewall()
+    check("blocks execution_guard Ring-0 path", fw.is_ring0_immutable("execution_guard/repo_integrity_guard_v1.py")[0] is True)
+    check("blocks parent path traversal", fw.is_ring0_immutable("../etc/passwd")[0] is True)
+    check("allows Ring-1 mutable organ path", fw.is_ring0_immutable("canonical/swe_kernel/some_organ_v1.py")[0] is False)
+
+    ok_org = referee_executable_organ("def solve(x):\n    return x + 1\n")
+    check("admits pure deterministic organ", bool(ok_org.get("ok")))
+
+    bad_org = referee_executable_organ("import subprocess\ndef solve(x):\n    return subprocess.run(['ls'])\n")
+    check("negative control: rejects subprocess-importing organ", not bool(bad_org.get("ok")))
+
+    m_small = executable_byte_measure("def f(x):\n    return x\n")
+    m_comment = executable_byte_measure("# big comment padding\ndef f(x):\n    return x\n")
+    m_big = executable_byte_measure("def f(x):\n    y = x * x + 1\n    return y + 2 + 3\n")
+    check("executable byte measure ignores comment bloat and scales with AST size", m_small == m_comment and m_small < m_big)
+
+    total = 6
+    return {
+        "schema": "BRAIN_RECURSIVE_SELF_ARCHITECT_V1_SELF_CHECK",
+        "checks": total,
+        "passed": total - len(failures),
+        "failures": failures,
+        "verdict": "SELF_CHECK_PASS" if not failures else "SELF_CHECK_FAIL",
+    }
+

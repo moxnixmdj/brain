@@ -5174,3 +5174,57 @@ class MetaCircularOrganGraph:
             self.bootstrap_inductions = max(0, int(raw.get("bootstrap_inductions") or 0))
         except (TypeError, ValueError):
             self.bootstrap_inductions = 0
+
+
+def self_check() -> dict[str, Any]:
+    """Falsifiable behavioral contract for the meta-circular pure-AST organ graph & referee.
+
+    Proves:
+    1. Ring-0 AST referee admits a pure arithmetic organ and compiles it into an executable organ.
+    2. Negative controls: unsafe organs attempting `import os` / `eval` are strictly rejected.
+    3. Periodic operator induction recovers exact period p=3 on mod-3 observations, while
+       rejecting non-periodic/insufficient observations.
+    """
+    failures: list[str] = []
+
+    def check(label: str, ok: bool) -> None:
+        if not ok:
+            failures.append(label)
+
+    safe_src = "def run(x):\n    return (x * 2) + 1\n"
+    safe_ref = ring0_referee_organ_source(safe_src)
+    check("admits pure arithmetic organ", bool(safe_ref.get("ok")))
+
+    organ = make_organ(
+        stratum="SKILL",
+        name="double_plus_one",
+        task_signature="int->int",
+        entrypoint="run",
+        source_code=safe_src,
+    )
+    _tree, ns = compile_organ_namespace(organ.source_code)
+    check("compiled organ executes accurately", ns["run"](7) == 15)
+
+    # Negative controls: impure imports and dynamic eval must be rejected
+    bad_import = ring0_referee_organ_source("import os\ndef run(x):\n    return os.system('id')\n")
+    check("negative control: rejects os import organ", not bool(bad_import.get("ok")))
+
+    bad_eval = ring0_referee_organ_source("def run(x):\n    return eval(x)\n")
+    check("negative control: rejects eval organ", not bool(bad_eval.get("ok")))
+
+    # Periodic induction
+    per = induce_periodic_operator([((i,), i % 3) for i in range(10)])
+    check("induces exact period 3 operator", isinstance(per, dict) and per.get("period") == 3)
+
+    # Negative control: non-periodic monotonic sequence does not falsely claim period 3
+    non_per = induce_periodic_operator([((i,), i * i) for i in range(10)])
+    check("negative control: quadratic sequence has no false period", non_per is None)
+
+    total = 6
+    return {
+        "schema": "BRAIN_META_CIRCULAR_ORGAN_GRAPH_V1_SELF_CHECK",
+        "checks": total,
+        "passed": total - len(failures),
+        "failures": failures,
+        "verdict": "SELF_CHECK_PASS" if not failures else "SELF_CHECK_FAIL",
+    }

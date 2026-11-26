@@ -575,18 +575,18 @@ def _extract_secondary_indexes(full: Mapping[str, Any], raw_sha: str) -> dict[st
 # --------------------------------------------------------------------------- model
 
 
-# The full installation includes the Wave 40–42 provider; blind worker mounts
-# deliberately omit it. Do not hide a missing *dependency* of an installed wave.
+# The full installation includes Waves 40-50; blind worker mounts deliberately omit them.
 try:
-    from canonical.runtime.wave41_rung3_proposer_jitrl_continual_flywheel_v1 import (
-        Wave40To42UnifiedModelMixin as _Wave40To42UnifiedModelMixin,
+    from canonical.runtime.wave49_50_structural_ast_repair_and_titan_adjudication_v1 import (
+        Wave49To50UnifiedModelMixin as _Wave49To50UnifiedModelMixin,
     )
+    _Wave40To42UnifiedModelMixin = _Wave49To50UnifiedModelMixin
 except ModuleNotFoundError as exc:
-    if exc.name != "canonical.runtime.wave41_rung3_proposer_jitrl_continual_flywheel_v1":
+    if not str(exc.name or "").startswith("canonical.runtime.wave4"):
         raise
-    _Wave40To42UnifiedModelMixin = object
+    _Wave49To50UnifiedModelMixin = _Wave40To42UnifiedModelMixin = object
 
-class UnifiedModel(_Wave40To42UnifiedModelMixin):
+class UnifiedModel(_Wave49To50UnifiedModelMixin):
     """A loaded, digest-verified unified model."""
 
     def __init__(

@@ -1886,6 +1886,114 @@ class Creature:
         """Wave 42: Creature trace-quotient collision gate + page-guide UI sketcher + provenance calibration."""
         return self._ensure_unified_model().one_demo_trust_and_rung_calibrate(payload)
 
+    def git_history_seeded_repair(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 43: Creature git-history self-seeding AST store + online alpha-canonical learning + FixedBench abstention."""
+        return self._ensure_unified_model().git_history_seeded_repair(operation, payload)
+
+    def trace_literal_causal_slice_gate(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 43: Creature cross-file causal dual-slicing + constant-hole CEGIS + anti-slop input-dependency gate."""
+        return self._ensure_unified_model().trace_literal_causal_slice_gate(operation, payload)
+
+    def cow_contrastive_minimax_op(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 43: Creature POSIX CoW contrastive micro-factory + exact minimax partition-lattice interrogation."""
+        return self._ensure_unified_model().cow_contrastive_minimax_op(operation, payload)
+
+    def meme_dbsp_memory_op(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 44: Creature DBSP/AGM MEME Cascade/Deletion/Absence memory + OpenViking L0/L1/L2 + DeltaMem/MemRL."""
+        res = self._ensure_unified_model().meme_dbsp_memory_op(operation, payload)
+        self._save()
+        return res
+
+    def webmcp_osworld_hcu_op(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 44: Creature Chrome 150+ WebMCP (document.modelContext) compiler + OSWorld 2.1 AT-SPI HCU router."""
+        return self._ensure_unified_model().webmcp_osworld_hcu_op(operation, payload)
+
+    def nested_skillrl_rqgm_gea_op(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 44: Creature Google Nested Learning CMS + SkillRL counterfactual SkillBank + GEA + RQGM co-evolution."""
+        res = self._ensure_unified_model().nested_skillrl_rqgm_gea_op(operation, payload)
+        self._save()
+        return res
+
+    def quotient_angelic_probe_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 45: Creature coarsest trace-quotient induction + angelic forcing + systematic graph exploration."""
+        return self._ensure_unified_model().quotient_angelic_probe_op(payload)
+
+    def metamorphic_lineage_swe_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 45: Creature repo seed-corpus harvesting + metamorphic laws + producer lineage + symbol-owned hole/guard repair."""
+        return self._ensure_unified_model().metamorphic_lineage_swe_op(payload)
+
+    def ax_guard_zero_shot_hcu_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 45: Creature Microsoft HCU AX-guard + accessibility-debt audit + zero-screenshot cache + OSWorld ledger."""
+        return self._ensure_unified_model().ax_guard_zero_shot_hcu_op(payload)
+
+    def anti_manufactured_confidence_memory_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 46: Creature Anti-Manufactured-Confidence 6-op MEME DependencyMemory + LAPSE temporal fidelity + capsule rollback."""
+        res = self._ensure_unified_model().anti_manufactured_confidence_memory_op(payload)
+        self._save()
+        return res
+
+    def anytime_valid_evalue_gate_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 46: Creature SCoRE conformal e-values + Ville anytime-valid gate + verifier falsification + Thompson-poisoning guard."""
+        return self._ensure_unified_model().anytime_valid_evalue_gate_op(payload)
+
+    def three_tier_zero_forgetting_continual_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 46: Creature 3-tier continual kernel (HierarchicalSkillLibrary + Doc-to-LoRA manifest + LRCP orthogonal consolidation)."""
+        res = self._ensure_unified_model().three_tier_zero_forgetting_continual_op(payload)
+        self._save()
+        return res
+
+    def futamura_skill_compiler_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 47: Creature Futamura trace-to-skill compiler + symbolic Mealy/DBSP/e-value + typed CLI/A11y action grammar."""
+        return self._ensure_unified_model().futamura_skill_compiler_op(payload)
+
+    def reverse_tomography_lens_swe_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 47: Creature reverse-execution tomography + certified ddmin + bidirectional FST/lens + assertion-demand counterfactual repair."""
+        return self._ensure_unified_model().reverse_tomography_lens_swe_op(payload)
+
+    def meaning_egraph_vericoding_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 47: Creature E-graph equality saturation + Universal Meaning UIR + vericoding mutation-oracle + exact global proof-cut."""
+        return self._ensure_unified_model().meaning_egraph_vericoding_op(payload)
+
+    def evolving_interface_byte_effect_hcu_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 48: Creature Agent-S4 interface evolution + Petri dominator cuts + crash-safe transactional commit + Ring-0 byte-effect oracle."""
+        return self._ensure_unified_model().evolving_interface_byte_effect_hcu_op(payload)
+
+    def five_timescale_sleep_csr_memory_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 48: Creature 5-timescale verification-first sleep crystallizer + zero-copy mmap CSR + cross-language IR 5-gate admission."""
+        res = self._ensure_unified_model().five_timescale_sleep_csr_memory_op(payload)
+        self._save()
+        return res
+
+    def meta_circular_refusal_adjudicator_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 48: Creature meta-circular AST organs + Plotkin LGG + active-inference refusal curriculum + subprocess dark-matter adjudication."""
+        return self._ensure_unified_model().meta_circular_refusal_adjudicator_op(payload)
+
+    def traceback_zero_line_localize_op(self, operation: str = "localize", **kwargs: Any) -> dict[str, Any]:
+        """Wave 49: Creature zero-executed-line traceback+AST localizer & checkout-import provenance guard."""
+        return self._ensure_unified_model().traceback_zero_line_localize_op(operation, **kwargs)
+
+    def structural_ast_multi_hunk_synth_op(self, operation: str = "repair_workspace", **kwargs: Any) -> dict[str, Any]:
+        """Wave 49: Creature structural AST multi-hunk synthesizer (kwarg+context threading, dunder guards, __module__ re-export, !r repr, recursive guards, owned site transfer)."""
+        return self._ensure_unified_model().structural_ast_multi_hunk_synth_op(operation, **kwargs)
+
+    def minimax_interrogation_contrastive_op(self, operation: str = "minimax_query", **kwargs: Any) -> dict[str, Any]:
+        """Wave 49: Creature exact-minimax version-space interrogation + contrastive mutant-kill oracle & paired transfer."""
+        return self._ensure_unified_model().minimax_interrogation_contrastive_op(operation, **kwargs)
+
+    def kernel_boundary_effect_hcu_op(self, operation: str = "effect_oracle", **kwargs: Any) -> dict[str, Any]:
+        """Wave 50: Creature fail-closed kernel-boundary SHA-256 byte-effect oracle & dual-channel code/GUI router."""
+        return self._ensure_unified_model().kernel_boundary_effect_hcu_op(operation, **kwargs)
+
+    def crash_resumable_life_loop_op(self, operation: str = "wal_tick", **kwargs: Any) -> dict[str, Any]:
+        """Wave 50: Creature hash-chained WAL crash-resumable life ticks & self-verifying capability enrollment."""
+        res = self._ensure_unified_model().crash_resumable_life_loop_op(operation, **kwargs)
+        self._save()
+        return res
+
+    def titan_behavioral_adjudicator_op(self, operation: str = "adjudicate", **kwargs: Any) -> dict[str, Any]:
+        """Wave 50: Creature subprocess-isolated behavioral proof adjudication across flagship titans + K3=0 audit."""
+        return self._ensure_unified_model().titan_behavioral_adjudicator_op(operation, **kwargs)
+
     def sleep_evolve_organs_gea(
         self,
         *,

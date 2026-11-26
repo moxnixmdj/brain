@@ -2142,6 +2142,339 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "required_inputs": [],
         "declared_dependencies": [],
     },
+    "LEAPFROG_W43_GIT_HISTORY_SEEDED_REPAIR": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/runtime/wave43_44_dark_matter_meme_webmcp_leapfrog_v1.py",
+        "entrypoint": "GitHistorySeededRepairKernel",
+        "summary": "Wave 43 live unifier for 5 awakened DARK SWE modules (history_template_repair_v1, the_store_is_the_only_thing_that_learns_v1, arm_learned_from_its_own_verified_repairs_v1, operator_generalization_v1, verified_lesson_pipeline_v1): self-seeds per-repo AST template stores from pre-base git history at K3=0, folds online alpha-canonical repairs, generalizes operator swaps, and enforces FixedBench already-passing abstention.",
+        "triggers": [
+            "git history self seeding ast template repair",
+            "online alpha canonical repair folding",
+            "fixedbench already passing abstention gate",
+            "operator swap family generalization locus filter",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W43_TRACE_LITERAL_CAUSAL_SLICE_GATE": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/runtime/wave43_44_dark_matter_meme_webmcp_leapfrog_v1.py",
+        "entrypoint": "TraceLiteralCausalSliceGateKernel",
+        "summary": "Wave 43 live unifier for 8 awakened DARK trace/literal/causal SWE modules (causal_dataflow_graph_v1, causal_dependency_repair_v1, repair_input_dependency_gate_v1, the_constant_is_a_hole_v1, the_literal_is_the_defect_v1, the_relation_not_the_value_v1, the_failing_run_names_the_expression_v1, the_same_guard_twice_is_the_discriminator_v1): ARISE/CausalRepair cross-file dual-slicing, constant-hole CEGIS literal repair, truthiness guard rewriting, and anti-slop input-dependency gating.",
+        "triggers": [
+            "arise causal dataflow dual slicing root cause",
+            "constant is a hole cegis literal regex repair",
+            "anti slop repair input dependency gate",
+            "truthiness boolean coercion guard rewrite",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W43_COW_CONTRASTIVE_MINIMAX_FACTORY": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/wave43_44_dark_matter_meme_webmcp_leapfrog_v1.py",
+        "entrypoint": "CoWContrastiveMinimaxFactoryKernel",
+        "summary": "Wave 43 live unifier for 6 awakened DARK active-contrast modules (the_counterexample_is_the_next_experiment_v1, the_branch_is_the_model_v1, the_refusal_is_the_other_half_v1, the_index_is_the_bottleneck_v1, verified_capability_bridge_index_v1, counterexample_guided_causal_architecture_synthesizer_v1): POSIX CoW contrastive single-feature micro-factory + exact minimax partition-lattice interrogation + filing-key collision diagnostics.",
+        "triggers": [
+            "cow fork contrastive micro factory single feature",
+            "exact minimax partition lattice witness interrogation",
+            "the refusal is the other half hypothesis lattice",
+            "the index is the bottleneck filing key collision",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W44_MEME_DBSP_CASCADE_ABSENCE_MEMORY": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/wave43_44_dark_matter_meme_webmcp_leapfrog_v1.py",
+        "entrypoint": "MEMEDBSPCascadeAbsenceMemoryEngine",
+        "summary": "Wave 44 DBSP Z-set + AGM dependency memory conquering all 6 MEME benchmark tasks (Exact Recall, Aggregation, Tracking, Deletion, Multi-Hop Dependency Cascade, and Formal Absence Witness) plus OpenViking L0/L1/L2 progressive disclosure, DeltaMem residual skill trees, and MemRL runtime Q-value retrieval at K3=0.",
+        "triggers": [
+            "meme benchmark dependency cascade absence deletion",
+            "dbsp zset agm transitive cascade recomputation",
+            "openviking l0 l1 l2 progressive context disclosure",
+            "deltamem residual skill tree memrl runtime utility",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W44_WEBMCP_GUI_ROOM_OSWORLD_HCU": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/runtime/wave43_44_dark_matter_meme_webmcp_leapfrog_v1.py",
+        "entrypoint": "WebMCPGuiRoomOSWorldHCUKernel",
+        "summary": "Wave 44 live unifier for 4 awakened DARK browser/OSWorld surfaces (gui_room_v1, osworld_v21_host_browser_ops_v1, osworld_v21_generic_policy_v1, osworld_computer_surface_v1) + Chrome 150+ W3C WebMCP (document.modelContext ?? navigator.modelContext) compiler lifting HTML forms and CDP/HAR XHR calls to Channel-0 tools before structural AT-SPI A11y routing.",
+        "triggers": [
+            "chrome 150 webmcp document modelcontext registertool",
+            "osworld 2 1 atspi a11y parse_a11y typed pyautogui",
+            "gui room structural cdp browser zero pixel",
+            "lifted html form har xhr webmcp shadow tool",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W44_NESTED_SKILLRL_RQGM_GEA_CONTINUAL": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/wave43_44_dark_matter_meme_webmcp_leapfrog_v1.py",
+        "entrypoint": "NestedSkillRLRQGMGEAContinualKernel",
+        "summary": "Wave 44 continual-learning unifier combining Google Nested Learning multi-frequency Continuum Memory System (CMS clock bands), SkillRL differential success & counterfactual-failure SkillBank distillation, Group-Evolving Agents (GEA intra-group experience sharing), and Red Queen Godel Machine (RQGM anchor-gated evaluator co-evolution with selective utility erasure).",
+        "triggers": [
+            "google nested learning continuum memory system cms",
+            "skillrl differential counterfactual failure skillbank",
+            "group evolving agents gea intra group experience",
+            "red queen godel machine rqgm selective erasure",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W45_QUOTIENT_ANGELIC_PROBE_INDUCER": {
+        "domain": "SYNTHESIS_AND_INDUCTION",
+        "source_path": "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+        "entrypoint": "QuotientAngelicProbeInducerKernel",
+        "summary": "Wave 45 instant-learning kernel computing coarsest sufficient trace quotients, angelic value forcing + expression synthesis, computed vs. hand-written vocabulary separation, contrastive probes, guard-width law learning, and single-pass systematic graph exploration at K3=0.",
+        "triggers": [
+            "coarsest quotient of the trace",
+            "angelic value forcing expression synthesis",
+            "computed vocabulary not written",
+            "contrast is a probe guard width",
+            "systematic graph exploration",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W45_METAMORPHIC_LINEAGE_CORPUS_SWE": {
+        "domain": "SWE_LOCALIZATION_AND_REPAIR",
+        "source_path": "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+        "entrypoint": "MetamorphicLineageCorpusSWEKernel",
+        "summary": "Wave 45 formal SWE kernel harvesting repository seed corpora, enforcing zero-test metamorphic canonicality laws, tracing interprocedural producer lineage for rejected values, repairing variable name holes and coupled two-guard edits within the file's own alphabet, enforcing symbol ownership, and auditing source taint flows at K3=0.",
+        "triggers": [
+            "repository seed corpus metamorphic laws",
+            "producer lineage graph rejected value producer",
+            "variable name hole two guard coupled repair",
+            "symbol ownership taint flow alphabet",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W45_AX_GUARD_ZERO_SHOT_CACHE_HCU": {
+        "domain": "COMPUTER_USE_AND_TERMINAL",
+        "source_path": "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+        "entrypoint": "AXGuardZeroShotCacheHCUKernel",
+        "summary": "Wave 45 Microsoft HCU AX-guard kernel combining view-independent AX target binding, pre-input action guards, accessibility-debt auditing (visual fallback only on undescribed widgets), verified zero-screenshot CDP/A11y action caching, partial-order planning, and literal-evidence OSWorld verified task ledgers at K3=0.",
+        "triggers": [
+            "microsoft hcu ax guard batched wait diff",
+            "accessibility debt undescribed widgets visual fallback",
+            "verified zero screenshot action cache cdp",
+            "osworld verified task ledger partial order",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W46_ANTI_MANUFACTURED_CONFIDENCE_MEMORY": {
+        "domain": "MEMORY_AND_BELIEF_REVISION",
+        "source_path": "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+        "entrypoint": "AntiManufacturedConfidenceMemoryEngine",
+        "summary": "Wave 46 anti-manufactured-confidence memory unifying PR #7145 6-op MEME DependencyMemory with Kwon 2026 Manufactured-Confidence immunity (quarantining single-source hedged hearsay), LAPSE temporal-shape fidelity (preserving progressive/bounded facts without stative coercion), reader conjunctions, capture-recapture unseen estimation, and rollbackable composition state capsules at K3=0.",
+        "triggers": [
+            "manufactured confidence hedged provenance quarantine",
+            "lapse temporal fidelity progressive bounded stative",
+            "meme protocol 6 op dependency memory capsule rollback",
+            "kumiho agm hansson belief revision",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W46_ANYTIME_VALID_EVALUE_EVOLUTION_GATE": {
+        "domain": "VERIFICATION_AND_EPISTEMIC_GATES",
+        "source_path": "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+        "entrypoint": "AnytimeValidEValueEvolutionGateKernel",
+        "summary": "Wave 46 self-evolution verification gate enforcing SCoRE conformal e-values, Ville's inequality anytime-valid betting supermartingales, mutation-tested verifier falsification (can_say_no), cross-verifier conditional error correlation phi, skill-scope admission, and Thompson-compiler security poisoning defense at K3=0.",
+        "triggers": [
+            "score conformal e values ville anytime valid supermartingale",
+            "verifier falsification mutant kill rate phi correlation",
+            "endogenous loop collapse thompson poisoning gate",
+            "skill scope bundle learned skill verdict",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W46_THREE_TIER_ZERO_FORGETTING_CONTINUAL": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+        "entrypoint": "ThreeTierZeroForgettingContinualKernel",
+        "summary": "Wave 46 three-tier zero-forgetting continual kernel uniting Tier-0 HierarchicalSkillLibrary with O(1) unlearning, Tier-1 Doc-to-LoRA single-pass rank-budgeted adapter manifests (<50 MB), and Tier-2 LRCP Gram-Schmidt orthogonal-subspace projection + sparse memory slot consolidation gated by anytime-valid e-values at K3=0.",
+        "triggers": [
+            "doc to lora single pass hypernetwork adapter manifest",
+            "lrcp orthogonal subspace projection zero forgetting",
+            "sparse memory finetuning sae fd hierarchical skill library",
+            "three tier continual learning o1 unlearning",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W47_FUTAMURA_SKILL_COMPILER_GRAMMAR": {
+        "domain": "SYNTHESIS_AND_INDUCTION",
+        "source_path": "canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py",
+        "entrypoint": "FutamuraSkillCompilerGrammarKernel",
+        "summary": "Wave 47 Futamura partial-evaluation kernel compiling slow UI/CLI traces to fastest causal layers (<5ms parameterized skills), running symbolic Mealy + DBSP + conformal e-value cycles, and solving typed CLI/A11y action-grammar goals at K3=0.",
+        "triggers": [
+            "futamura projection partial evaluation compile away frontier",
+            "causal trace to skill compiler anti unify workflow",
+            "guide action grammar interface action grammar a11y",
+            "symbolic mealy dbsp conformal evalue",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W47_REVERSE_TOMOGRAPHY_ANGELIC_LENS_SWE": {
+        "domain": "SWE_LOCALIZATION_AND_REPAIR",
+        "source_path": "canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py",
+        "entrypoint": "ReverseTomographyAngelicLensSWEKernel",
+        "summary": "Wave 47 reverse-execution tomography kernel backpropagating failing output residuals to AST patches, certifying ddmin minimal witnesses, synthesizing invertible bidirectional FST/lenses with L3 negative-space refutation pruning, and reading demands from failing assertions for counterfactual interior synthesis at K3=0.",
+        "triggers": [
+            "reverse tomography algebra backward residual ast repair",
+            "angelic lens cow repair bidirectional fst lens",
+            "assertion is the demand counterfactual spec repair",
+            "ddmin shrink certified negative space invariant store",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W47_MEANING_EGRAPH_VERICODING_PROOF_CUT": {
+        "domain": "VERIFICATION_AND_EPISTEMIC_GATES",
+        "source_path": "canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py",
+        "entrypoint": "MeaningEGraphVericodingProofCutKernel",
+        "summary": "Wave 47 e-graph equality saturation & vericoding kernel unifying EGraph optimal extraction, Universal Meaning UIR canonicalization, mutation-tested verifier falsification (can_say_no), sound Python request semantic acceptance cells, orthogonal patch merging, and exact lexicographic global proof-cut compilation at K3=0.",
+        "triggers": [
+            "egraph equality saturation egglog universal meaning uir",
+            "vericoding prove verifier can say no semantic acceptance",
+            "global proof cut compiler dominance deletion frozen universe",
+            "orthogonal patch merge deductive synthesizer",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W48_EVOLVING_INTERFACE_BYTE_EFFECT_HCU": {
+        "domain": "COMPUTER_USE_AND_TERMINAL",
+        "source_path": "canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py",
+        "entrypoint": "EvolvingInterfaceByteEffectHCUKernel",
+        "summary": "Wave 48 Agent-S4 evolving-interface HCU kernel anti-unifying trajectories into typed CLI/tool interfaces, computing Petri-net dominator cut-vertices for checkpointing, executing crash-recoverable transactional commits, and enforcing Ring-0 byte-format & directory-diff effect oracles at K3=0.",
+        "triggers": [
+            "agent s4 evolving agent interfaces anti unify templates",
+            "petri dominator cut vertices universal computer agent",
+            "durable transactional commit crash recovery cow sandbox",
+            "ring 0 byte effect oracle unauthorized write diff",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W48_FIVE_TIMESCALE_SLEEP_CSR_MEMORY": {
+        "domain": "MEMORY_AND_BELIEF_REVISION",
+        "source_path": "canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py",
+        "entrypoint": "FiveTimescaleSleepCrystallizerCSRMemoryEngine",
+        "summary": "Wave 48 five-timescale verification-first memory & sleep-time crystallizer uniting bi-temporal supersession, ADWIN+BOCPD+Page-Hinkley drift detection, zero-copy binary mmap CSR slot/postings indices, cross-language Python/JS/C Semantic IR anti-unification, and 5-gate epistemic admission at K3=0.",
+        "triggers": [
+            "five timescale sleep time compute memory crystallizer",
+            "mmap csr binary slot index zero copy postings",
+            "cross language semantic ir anti unification 5 gate admission",
+            "verification first memory bus bitemporal drift detector",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W48_META_CIRCULAR_REFUSAL_ADJUDICATOR": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py",
+        "entrypoint": "MetaCircularConceptRefusalAdjudicatorKernel",
+        "summary": "Wave 48 meta-circular self-improvement & adjudication kernel verifying pure-AST organs behind SelfPatchFirewall + Ring0SelfReferee, inventing higher-order Plotkin LGG abstractions (LILO/Stitch fold_scan) and periodic operators, turning refusals into active-inference EFE curricula, and running subprocess dark-matter adjudication + static K3=0 endpoint audits.",
+        "triggers": [
+            "meta circular organ graph self patch firewall ring 0 referee",
+            "higher order plotkin lgg lilo stitch concept library",
+            "refusal is the curriculum active inference efe experiment",
+            "dark matter adjudicator proven verdict k3 model surface audit",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W49_TRACEBACK_SIGNATURE_ZERO_LINE_LOCALIZER": {
+        "domain": "SWE_LOCALIZATION_AND_REPAIR",
+        "source_path": "canonical/runtime/wave49_50_structural_ast_repair_and_titan_adjudication_v1.py",
+        "entrypoint": "TracebackSignatureZeroLineLocalizerKernel",
+        "summary": "Wave 49 zero-executed-line traceback & AST symbol localizer breaking NO_EXECUTED_REPO_LINES on TypeError/AttributeError/ImportError/dunder/module-reexport failures with fail-closed checkout-import provenance verification.",
+        "triggers": [
+            "zero line traceback localizer unexpected keyword argument",
+            "checkout import provenance site packages shadow guard",
+            "dunder comparison typeerror reflexive assertion localization",
+            "no executed repo lines static ast symbol localizer",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W49_STRUCTURAL_AST_MULTI_HUNK_SYNTHESIZER": {
+        "domain": "SWE_LOCALIZATION_AND_REPAIR",
+        "source_path": "canonical/runtime/wave49_50_structural_ast_repair_and_titan_adjudication_v1.py",
+        "entrypoint": "StructuralASTMultiHunkSynthesizerKernel",
+        "summary": "Wave 49 structural AST multi-hunk synthesizer breaking the value-substitution wall: kwarg addition & context/converter threading, dunder self-comparison guards, __module__ re-export normalization, !r/repr f-string repairs, recursive seen-set cycle guards, version split repairs, and symbol-ownership-bounded multi-site expression transfer.",
+        "triggers": [
+            "structural ast multi hunk repair parameter addition threading",
+            "dunder reflexive isinstance guard module reexport normalization",
+            "fstring repr redundant quotes recursive seen set cycle guard",
+            "bounded site general expression synthesis symbol ownership transfer",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W49_MINIMAX_INTERROGATION_CONTRASTIVE_ORACLE": {
+        "domain": "INSTANT_LEARNING_AND_SYNTHESIS",
+        "source_path": "canonical/runtime/wave49_50_structural_ast_repair_and_titan_adjudication_v1.py",
+        "entrypoint": "MinimaxInterrogationContrastiveOracleKernel",
+        "summary": "Wave 49 exact-minimax version-space interrogation loop (witness computed, not remembered) paired with contrastive mutant-killing oracle bootstrap and McNemar paired transfer delta.",
+        "triggers": [
+            "exact minimax interrogation witness computed version space",
+            "contrastive oracle bootstrap mutant kill paired transfer",
+            "mcnemar discordant pairs rubber stamp verifier rejection",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W50_KERNEL_BOUNDARY_DUAL_CHANNEL_EFFECT_HCU": {
+        "domain": "COMPUTER_USE_AND_SANDBOX",
+        "source_path": "canonical/runtime/wave49_50_structural_ast_repair_and_titan_adjudication_v1.py",
+        "entrypoint": "KernelBoundaryDualChannelEffectHCUKernel",
+        "summary": "Wave 50 fail-closed kernel boundary + cryptographic pre/post SHA-256 byte-effect oracle + CoAct-1 / Agent S4 dual-channel structured-CLI vs GUI action-grammar router.",
+        "triggers": [
+            "kernel boundary effect oracle sha256 manifest cannot lie",
+            "dual channel hcu router coact1 cli sqlite gui a11y",
+            "unauthorized protected file modification detection",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W50_CRASH_RESUMABLE_SELF_VERIFYING_LIFE_LOOP": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/wave49_50_structural_ast_repair_and_titan_adjudication_v1.py",
+        "entrypoint": "CrashResumableSelfVerifyingLifeLoopKernel",
+        "summary": "Wave 50 resident crash-resumable hash-chained WAL creature life-loop ticks + self-verifying execution enrollment of never-run capabilities with adversarial negative controls.",
+        "triggers": [
+            "crash resumable continuous creature life loop wal replay",
+            "self verifying capability enrollment by execution",
+            "hash chained append only tick journal zero duplication",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W50_TITAN_BEHAVIORAL_PROOF_ADJUDICATOR": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/wave49_50_structural_ast_repair_and_titan_adjudication_v1.py",
+        "entrypoint": "TitanBehavioralProofAdjudicatorKernel",
+        "summary": "Wave 50 subprocess-isolated behavioral proof adjudicator verifying 19+ flagship titans (69,000+ PROVEN LOC) with falsifiable adversarial self_check() contracts and static K3=0 endpoint audits.",
+        "triggers": [
+            "titan behavioral proof adjudicator subprocess proven loc",
+            "falsifiable self check adversarial negative control audit",
+            "dark matter adjudicator titan suite k3 zero verification",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
     "METAMORPHIC_HABITATION_ZIPPER": {
         "domain": "SWE_LOCALIZATION_AND_REPAIR",
         "source_path": "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
@@ -3185,6 +3518,369 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
             "canonical/tools/generalization_rung_gradient_v1.py",
             "canonical/tools/the_frame_crosses_the_machine_v1.py",
             "canonical/tools/the_space_is_the_artifact_v1.py",
+        ],
+    },
+    "git_history_seed_causal_dual_slice_constant_cegis_and_minimax": {
+        "external_names": [
+            "git history template repair",
+            "self seeding repo store",
+            "fixedbench abstention",
+            "arise causal dual slicing",
+            "causalrepair dataflow graph",
+            "slopcodebench anti slop gate",
+            "repair input dependency gate",
+            "constant is a hole cegis",
+            "the literal is the defect",
+            "the relation not the value",
+            "truthiness guard rewrite",
+            "contrastive oracle bootstrap",
+            "minimax partition lattice interrogation",
+            "the refusal is the other half",
+            "the index is the bottleneck",
+            "filing key collision",
+            "arm learned from its own verified repairs",
+            "operator generalization cross language",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W43_GIT_HISTORY_SEEDED_REPAIR",
+            "engine:LEAPFROG_W43_TRACE_LITERAL_CAUSAL_SLICE_GATE",
+            "engine:LEAPFROG_W43_COW_CONTRASTIVE_MINIMAX_FACTORY",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave43_44_dark_matter_meme_webmcp_leapfrog_v1.py",
+            "canonical/tools/history_template_repair_v1.py",
+            "canonical/tools/the_constant_is_a_hole_v1.py",
+            "canonical/tools/the_relation_not_the_value_v1.py",
+            "canonical/tools/the_refusal_is_the_other_half_v1.py",
+            "canonical/tools/the_counterexample_is_the_next_experiment_v1.py",
+            "canonical/swe_kernel/causal_dataflow_graph_v1.py",
+            "canonical/swe_kernel/repair_input_dependency_gate_v1.py",
+        ],
+    },
+    "meme_cascade_absence_deltamem_openviking_memrl": {
+        "external_names": [
+            "meme benchmark",
+            "memory cascade",
+            "memory absence",
+            "dependency cascade memory",
+            "absence uncertainty witness",
+            "explicit zset deletion",
+            "memconflict",
+            "openviking",
+            "vikingmem",
+            "l0 l1 l2 progressive disclosure",
+            "deltamem",
+            "residual delta skill tree",
+            "memrl",
+            "runtime reinforcement learning episodic memory",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W44_MEME_DBSP_CASCADE_ABSENCE_MEMORY",
+            "engine:LEAPFROG_W40_FOUR_NETWORK_GIT_ENGRAM_MEMORY",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave43_44_dark_matter_meme_webmcp_leapfrog_v1.py",
+            "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+        ],
+    },
+    "webmcp_document_modelcontext_osworld_nested_skillrl_rqgm_gea": {
+        "external_names": [
+            "webmcp",
+            "document.modelcontext",
+            "navigator.modelcontext",
+            "chrome 150 webmcp",
+            "gui room cdp",
+            "osworld 2.1 atspi",
+            "parse_a11y",
+            "google nested learning",
+            "hope continuum memory system",
+            "skillrl",
+            "skillbank counterfactual failure",
+            "group evolving agents",
+            "gea experience sharing",
+            "red queen godel machine",
+            "rqgm selective erasure",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W44_WEBMCP_GUI_ROOM_OSWORLD_HCU",
+            "engine:LEAPFROG_W44_NESTED_SKILLRL_RQGM_GEA_CONTINUAL",
+            "engine:LEAPFROG_W40_SHADOW_INTERFACE_HCU_ROUTER",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave43_44_dark_matter_meme_webmcp_leapfrog_v1.py",
+            "canonical/runtime/gui_room_v1.py",
+            "canonical/runtime/osworld_v21_generic_policy_v1.py",
+            "canonical/runtime/osworld_computer_surface_v1.py",
+            "canonical/runtime/osworld_v21_host_browser_ops_v1.py",
+        ],
+    },
+    "quotient_angelic_metamorphic_hcu": {
+        "external_names": [
+            "coarsest trace quotient",
+            "angelic value forcing",
+            "computed vocabulary",
+            "contrast is a probe",
+            "repository seed corpus",
+            "metamorphic laws",
+            "producer lineage graph",
+            "name hole repair",
+            "two guard coupled edit",
+            "microsoft hcu",
+            "hybrid computer use",
+            "accessibility debt",
+            "a11y cua",
+            "zero screenshot action cache",
+            "osworld verified task ledger",
+            "partial order plan",
+            "sussman anomaly",
+            "agentic symbolic execution",
+            "symbolon",
+            "fixedbench",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W45_QUOTIENT_ANGELIC_PROBE_INDUCER",
+            "engine:LEAPFROG_W45_METAMORPHIC_LINEAGE_CORPUS_SWE",
+            "engine:LEAPFROG_W45_AX_GUARD_ZERO_SHOT_CACHE_HCU",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+            "canonical/tools/the_goal_is_a_quotient_of_the_trace_v1.py",
+            "canonical/tools/force_the_value_and_see_v1.py",
+            "canonical/swe_kernel/metamorphic_laws_v1.py",
+            "canonical/swe_kernel/producer_lineage_graph_v1.py",
+            "canonical/runtime/verified_zero_screenshot_action_cache_v1.py",
+            "canonical/runtime/osworld_verified_task_ledger_v1.py",
+        ],
+    },
+    "manufactured_confidence_lapse_kumiho_meme": {
+        "external_names": [
+            "manufactured confidence",
+            "kwon 2026 manufactured confidence",
+            "lapse temporal fidelity",
+            "coerced stative",
+            "hedged hearsay quarantine",
+            "kumiho agm",
+            "hansson belief revision",
+            "meme protocol 6 op",
+            "dependency memory semiring",
+            "composition state capsule rollback",
+            "capture recapture unseen",
+            "always on engram",
+            "memoryarena",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W46_ANTI_MANUFACTURED_CONFIDENCE_MEMORY",
+            "engine:LEAPFROG_W44_MEME_DBSP_CASCADE_ABSENCE_MEMORY",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+            "canonical/swe_kernel/meme_protocol_memory_v1.py",
+            "canonical/runtime/composition_state_capsule_v2.py",
+            "canonical/runtime/residual_witness_retrieval_compiler_v1.py",
+            "canonical/tools/a_fact_is_a_conjunction_of_its_readers_v1.py",
+        ],
+    },
+    "anytime_valid_evalue_score_d2l_lrcp": {
+        "external_names": [
+            "score conformal e values",
+            "conformal e values",
+            "ville inequality supermartingale",
+            "anytime valid certificate",
+            "endogenous loop collapse",
+            "thompson poisoning",
+            "verifier falsification",
+            "verifier conditional correlation phi",
+            "doc to lora",
+            "text to lora",
+            "lrcp orthogonal projection",
+            "sparse memory finetuning",
+            "sae fd",
+            "hierarchical skill library",
+            "hyperagents dgm h",
+            "self healing harness",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W46_ANYTIME_VALID_EVALUE_EVOLUTION_GATE",
+            "engine:LEAPFROG_W46_THREE_TIER_ZERO_FORGETTING_CONTINUAL",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+            "canonical/runtime/verifier_falsification_v1.py",
+            "canonical/swe_kernel/skill_scope_bundle_v1.py",
+            "canonical/swe_kernel/learned_skill_verdict_v1.py",
+            "canonical/swe_kernel/hierarchical_skill_library_v1.py",
+        ],
+    },
+    "futamura_reverse_tomography_egraph_vericoding": {
+        "external_names": [
+            "futamura projection",
+            "partial evaluation",
+            "compile away the frontier",
+            "reverse execution tomography",
+            "bidirectional fst lens",
+            "egglog",
+            "relational equality saturation",
+            "equality saturation",
+            "vericoding",
+            "goedel prover",
+            "pypantograph",
+            "global proof cut",
+            "assertion is the demand",
+            "counterfactual spec repair",
+            "ddmin shrink certified",
+            "locagent",
+            "repomem",
+            "joern cpg",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W47_FUTAMURA_SKILL_COMPILER_GRAMMAR",
+            "engine:LEAPFROG_W47_REVERSE_TOMOGRAPHY_ANGELIC_LENS_SWE",
+            "engine:LEAPFROG_W47_MEANING_EGRAPH_VERICODING_PROOF_CUT",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py",
+            "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+            "canonical/swe_kernel/reverse_tomography_algebra_v1.py",
+            "canonical/swe_kernel/angelic_lens_cow_repair_v1.py",
+            "canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py",
+            "canonical/swe_kernel/semantic_causal_engine_v1.py",
+            "canonical/runtime/global_proof_cut_compiler.py",
+        ],
+    },
+    "agent_s4_evolving_interfaces_sleep_crystallizer_mmap": {
+        "external_names": [
+            "agent s4",
+            "evolving agent interfaces",
+            "coact 1",
+            "surfer h holo1",
+            "petri dominator cut vertices",
+            "ring 0 byte effect oracle",
+            "sleep time compute",
+            "feldera dbsp",
+            "incremental view maintenance",
+            "agent zero memory",
+            "five timescale memory crystallizer",
+            "mmap csr index",
+            "cross language semantic ir",
+            "lact lacet ttr compressor",
+            "bispace lifelong editing",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W48_EVOLVING_INTERFACE_BYTE_EFFECT_HCU",
+            "engine:LEAPFROG_W48_FIVE_TIMESCALE_SLEEP_CSR_MEMORY",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py",
+            "canonical/swe_kernel/universal_computer_agent_v1.py",
+            "canonical/swe_kernel/canonical_cu_sandbox_spine_v1.py",
+            "canonical/runtime/byte_effect_oracle_v1.py",
+            "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+            "canonical/runtime/mmap_csr_slot_index_v1.py",
+        ],
+    },
+    "meta_circular_plotkin_lgg_active_inference_adjudicator": {
+        "external_names": [
+            "meta circular organ graph",
+            "self patch firewall",
+            "higher order plotkin lgg",
+            "lilo stitch",
+            "dreamcoder library learning",
+            "gepa genetic pareto",
+            "sica self improving coding agent",
+            "absolute zero reasoner",
+            "active inference efe",
+            "expected free energy context acquisition",
+            "optimal question asking",
+            "refusal is the curriculum",
+            "dark matter adjudicator",
+            "proven self check verdict",
+            "model call surface audit",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W48_META_CIRCULAR_REFUSAL_ADJUDICATOR",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py",
+            "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
+            "canonical/swe_kernel/recursive_self_architect_v1.py",
+            "canonical/swe_kernel/concept_library_v1.py",
+            "canonical/tools/the_refusal_is_the_curriculum_v1.py",
+            "canonical/tools/the_right_question_is_an_experiment_v1.py",
+            "canonical/tools/dark_matter_adjudicator_v1.py",
+            "canonical/tools/model_call_surface_audit_v1.py",
+        ],
+    },
+    "STRUCTURAL_AST_MULTI_HUNK_ZERO_LINE_SWE_REPAIR": {
+        "external_names": [
+            "structural ast repair",
+            "multi hunk patch synthesis",
+            "parameter addition threading",
+            "zero executed repo lines",
+            "checkout import provenance",
+            "site packages shadowing",
+            "dunder reflexive comparison guard",
+            "module reexport normalization",
+            "fstring repr redundant quotes",
+            "recursive seen set cycle guard",
+            "site general expression synthesis",
+            "symbol ownership blast radius",
+            "featurebench",
+            "swe polybench",
+            "commit 0",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W49_TRACEBACK_SIGNATURE_ZERO_LINE_LOCALIZER",
+            "engine:LEAPFROG_W49_STRUCTURAL_AST_MULTI_HUNK_SYNTHESIZER",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave49_50_structural_ast_repair_and_titan_adjudication_v1.py",
+            "canonical/tools/honest_per_task_baseline_v1.py",
+            "canonical/tools/grammar_closed_repair_v1.py",
+            "canonical/tools/real_fix_minimal_repair_census_v1.py",
+        ],
+    },
+    "MINIMAX_INTERROGATION_CONTRASTIVE_KERNEL_EFFECT_ORACLE": {
+        "external_names": [
+            "exact minimax interrogation",
+            "witness is computed not remembered",
+            "version space optimal query",
+            "contrastive oracle bootstrap",
+            "paired transfer evaluation",
+            "mcnemar discordant pairs",
+            "kernel boundary effect oracle",
+            "coact 1 dual channel",
+            "osworld v2",
+            "verigui",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W49_MINIMAX_INTERROGATION_CONTRASTIVE_ORACLE",
+            "engine:LEAPFROG_W50_KERNEL_BOUNDARY_DUAL_CHANNEL_EFFECT_HCU",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave49_50_structural_ast_repair_and_titan_adjudication_v1.py",
+            "canonical/tools/version_space_selection_measure_v1.py",
+            "canonical/runtime/verify_file_facts_provenance_v1.py",
+        ],
+    },
+    "CRASH_RESUMABLE_LIFE_LOOP_AND_TITAN_BEHAVIORAL_ADJUDICATION": {
+        "external_names": [
+            "crash resumable continuous life loop",
+            "wal tick replay",
+            "self verifying capability enrollment",
+            "titan behavioral proof adjudicator",
+            "proven loc falsifiable self check",
+            "adversarial negative control contract",
+            "sleep time compute",
+            "zero forgetting continual",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W50_CRASH_RESUMABLE_SELF_VERIFYING_LIFE_LOOP",
+            "engine:LEAPFROG_W50_TITAN_BEHAVIORAL_PROOF_ADJUDICATOR",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave49_50_structural_ast_repair_and_titan_adjudication_v1.py",
+            "canonical/tools/dark_matter_adjudicator_v1.py",
+            "canonical/runtime/current_state_obs_reducer.py",
         ],
     },
 }
@@ -5791,6 +6487,275 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
             one_shot_candidates=inputs.get("one_shot_candidates") or (),
         )
         return _ok(mode, "W42_ONE_DEMO_TRUST_CALIBRATED", res) if res.get("pass") else _fail(mode, "W42_ONE_DEMO_TRUST_FAILED", res)
+
+    if mode == "LEAPFROG_W43_GIT_HISTORY_SEEDED_REPAIR":
+        from canonical.runtime.wave43_44_dark_matter_meme_webmcp_leapfrog_v1 import GitHistorySeededRepairKernel
+
+        op = str(inputs.get("operation") or "FIXEDBENCH_GATE").upper()
+        if op == "MINE_REPO_HISTORY":
+            res = GitHistorySeededRepairKernel.mine_repo_history_store(
+                inputs.get("repo_path") or ROOT,
+                base_commit=str(inputs.get("base_commit", "HEAD")),
+                commit_limit=int(inputs.get("commit_limit", 80)),
+                target_source=inputs.get("target_source"),
+                covered_lines=inputs.get("covered_lines"),
+                candidate_budget=int(inputs.get("candidate_budget", 24)),
+            )
+        elif op == "REPAIR_WITH_HISTORY":
+            res = GitHistorySeededRepairKernel.repair_with_history_and_online_learning(
+                buggy_source=str(inputs["buggy_source"]),
+                fn_name=str(inputs["fn_name"]),
+                test_cases=inputs.get("test_cases") or (),
+                prior_verified_demos=inputs.get("prior_verified_demos") or (),
+                history_lines=inputs.get("history_lines") or (),
+                executed_lines=inputs.get("executed_lines"),
+                enforce_input_dependency_gate=bool(inputs.get("enforce_input_dependency_gate", True)),
+            )
+        else:
+            res = GitHistorySeededRepairKernel.fixedbench_abstention_gate(
+                str(inputs["source"]),
+                str(inputs["fn_name"]),
+                inputs.get("test_cases") or (),
+            )
+        return _ok(mode, f"W43_HISTORY_{op}", res) if res.get("pass") else _fail(mode, f"W43_HISTORY_{op}_FAILED", res)
+
+    if mode == "LEAPFROG_W43_TRACE_LITERAL_CAUSAL_SLICE_GATE":
+        from canonical.runtime.wave43_44_dark_matter_meme_webmcp_leapfrog_v1 import TraceLiteralCausalSliceGateKernel
+
+        op = str(inputs.get("operation") or "ANTI_SLOP_GATE").upper()
+        if op == "CAUSAL_DUAL_SLICE":
+            res = TraceLiteralCausalSliceGateKernel.causal_dual_slice_and_truthiness_audit(
+                files=inputs.get("files") or {},
+                error_file=str(inputs.get("error_file", "mod.py")),
+                error_line=int(inputs.get("error_line", 1)),
+                target_source=inputs.get("target_source"),
+                crash_stderr=str(inputs.get("crash_stderr", "")),
+            )
+        elif op == "CONSTANT_HOLE_CEGIS":
+            res = TraceLiteralCausalSliceGateKernel.repair_constant_hole_cegis(
+                buggy_source=str(inputs["buggy_source"]),
+                fn_name=str(inputs["fn_name"]),
+                test_cases=inputs.get("test_cases") or (),
+                extra_chars=str(inputs.get("extra_chars", "")),
+                max_candidates=int(inputs.get("max_candidates", 80)),
+            )
+        else:
+            res = TraceLiteralCausalSliceGateKernel.anti_slop_input_dependency_gate(
+                before_source=str(inputs["before_source"]),
+                after_source=str(inputs["after_source"]),
+                function_name=inputs.get("function_name"),
+                probe_pairs=inputs.get("probe_pairs") or (),
+                expected_direction_by_pair=inputs.get("expected_direction_by_pair"),
+            )
+        return _ok(mode, f"W43_SLICE_GATE_{op}", res) if res.get("pass") else _fail(mode, f"W43_SLICE_GATE_{op}_FAILED", res)
+
+    if mode == "LEAPFROG_W43_COW_CONTRASTIVE_MINIMAX_FACTORY":
+        from canonical.runtime.wave43_44_dark_matter_meme_webmcp_leapfrog_v1 import CoWContrastiveMinimaxFactoryKernel
+
+        op = str(inputs.get("operation") or "CONTRASTIVE_MINIMAX_PIN").upper()
+        if op == "DIAGNOSE_FILING_KEYS":
+            res = CoWContrastiveMinimaxFactoryKernel.diagnose_filing_keys_and_semantic_roles(
+                feature_keys=inputs.get("feature_keys") or {},
+                winners=inputs.get("winners") or {},
+                goal_text=str(inputs.get("goal_text") or goal),
+            )
+        else:
+            res = CoWContrastiveMinimaxFactoryKernel.run_contrastive_minimax_pinning(
+                feature_names=inputs.get("feature_names") or (),
+                initial_state=inputs.get("initial_state") or {},
+                oracle=inputs["oracle"],
+                max_queries=int(inputs.get("max_queries", 16)),
+            )
+        return _ok(mode, f"W43_MINIMAX_{op}", res) if res.get("pass") else _fail(mode, f"W43_MINIMAX_{op}_FAILED", res)
+
+    if mode == "LEAPFROG_W44_MEME_DBSP_CASCADE_ABSENCE_MEMORY":
+        from canonical.runtime.wave43_44_dark_matter_meme_webmcp_leapfrog_v1 import MEMEDBSPCascadeAbsenceMemoryEngine
+
+        op = str(inputs.get("operation") or "RUN_MEME_SUITE").upper()
+        if op == "RUN_MEME_SUITE":
+            res = MEMEDBSPCascadeAbsenceMemoryEngine.run_meme_6task_suite()
+        else:
+            eng = inputs.get("engine") or MEMEDBSPCascadeAbsenceMemoryEngine(root_dir=inputs.get("root_dir"))
+            if op == "ASSERT_FACT":
+                res = eng.assert_fact(str(inputs["entity"]), inputs["value"], valid_from=inputs.get("valid_from"))
+            elif op == "DELETE_FACT":
+                res = eng.delete_fact(str(inputs["entity"]), at_time=inputs.get("at_time"))
+            else:
+                res = eng.query_entity(str(inputs["entity"]), tier=str(inputs.get("tier", "L1")))
+                res = {"pass": True, **res}
+        return _ok(mode, f"W44_MEME_{op}", res) if res.get("pass") else _fail(mode, f"W44_MEME_{op}_FAILED", res)
+
+    if mode == "LEAPFROG_W44_WEBMCP_GUI_ROOM_OSWORLD_HCU":
+        from canonical.runtime.wave43_44_dark_matter_meme_webmcp_leapfrog_v1 import WebMCPGuiRoomOSWorldHCUKernel
+
+        op = str(inputs.get("operation") or "COMPILE_WEBMCP").upper()
+        if op == "ROUTE_OSWORLD_HCU":
+            res = WebMCPGuiRoomOSWorldHCUKernel.route_osworld_a11y_and_typed_surface(
+                instruction=str(inputs.get("instruction") or goal),
+                a11y_xml=inputs.get("a11y_xml"),
+                webmcp_tools=inputs.get("webmcp_tools") or (),
+                screen_width=int(inputs.get("screen_width", 1920)),
+                screen_height=int(inputs.get("screen_height", 1080)),
+                typed_action=inputs.get("typed_action"),
+            )
+        else:
+            res = WebMCPGuiRoomOSWorldHCUKernel.compile_webmcp_document_model_context(
+                html_source=str(inputs.get("html_source", "")),
+                observed_xhr_calls=inputs.get("observed_xhr_calls") or (),
+                page_origin=str(inputs.get("page_origin", "https://app.local")),
+            )
+        return _ok(mode, f"W44_WEBMCP_HCU_{op}", res) if res.get("pass") else _fail(mode, f"W44_WEBMCP_HCU_{op}_FAILED", res)
+
+    if mode == "LEAPFROG_W44_NESTED_SKILLRL_RQGM_GEA_CONTINUAL":
+        from canonical.runtime.wave43_44_dark_matter_meme_webmcp_leapfrog_v1 import NestedSkillRLRQGMGEAContinualKernel
+
+        eng = inputs.get("engine") or NestedSkillRLRQGMGEAContinualKernel()
+        op = str(inputs.get("operation") or "SKILLRL_DISTILL").upper()
+        if op == "CMS_UPDATE":
+            res = eng.cms_update(band=str(inputs["band"]), key=str(inputs["key"]), value=inputs["value"], tick=inputs.get("tick"))
+        elif op == "GEA_EVOLVE":
+            res = eng.gea_group_evolve(inputs.get("agents") or (), group_size=int(inputs.get("group_size", 2)))
+        elif op == "RQGM_CO_EVOLVE":
+            res = eng.rqgm_co_evolve_evaluator(
+                current_anchor_accuracy=float(inputs["current_anchor_accuracy"]),
+                candidate_anchor_accuracy=float(inputs["candidate_anchor_accuracy"]),
+                min_improvement=float(inputs.get("min_improvement", 0.01)),
+            )
+        else:
+            res = eng.skillrl_distill_trajectories(inputs.get("trajectories") or ())
+        return _ok(mode, f"W44_CONTINUAL_{op}", res) if res.get("pass") else _fail(mode, f"W44_CONTINUAL_{op}_FAILED", res)
+
+    if mode == "LEAPFROG_W45_QUOTIENT_ANGELIC_PROBE_INDUCER":
+        from canonical.runtime.wave45_46_anytime_valid_quotient_metamorphic_hcu_v1 import QuotientAngelicProbeInducerKernel
+
+        eng = inputs.get("engine") or QuotientAngelicProbeInducerKernel()
+        res = eng.run(inputs)
+        return _ok(mode, "W45_QUOTIENT_ANGELIC_PROBE", res) if res.get("pass") else _fail(mode, "W45_QUOTIENT_ANGELIC_PROBE_FAILED", res)
+
+    if mode == "LEAPFROG_W45_METAMORPHIC_LINEAGE_CORPUS_SWE":
+        from canonical.runtime.wave45_46_anytime_valid_quotient_metamorphic_hcu_v1 import MetamorphicLineageCorpusSWEKernel
+
+        eng = inputs.get("engine") or MetamorphicLineageCorpusSWEKernel()
+        res = eng.run(inputs)
+        return _ok(mode, "W45_METAMORPHIC_LINEAGE_SWE", res) if res.get("pass") else _fail(mode, "W45_METAMORPHIC_LINEAGE_SWE_FAILED", res)
+
+    if mode == "LEAPFROG_W45_AX_GUARD_ZERO_SHOT_CACHE_HCU":
+        from canonical.runtime.wave45_46_anytime_valid_quotient_metamorphic_hcu_v1 import AXGuardZeroShotCacheHCUKernel
+
+        eng = inputs.get("engine") or AXGuardZeroShotCacheHCUKernel()
+        res = eng.run(inputs)
+        return _ok(mode, "W45_AX_GUARD_HCU", res) if res.get("pass") else _fail(mode, "W45_AX_GUARD_HCU_FAILED", res)
+
+    if mode == "LEAPFROG_W46_ANTI_MANUFACTURED_CONFIDENCE_MEMORY":
+        from canonical.runtime.wave45_46_anytime_valid_quotient_metamorphic_hcu_v1 import AntiManufacturedConfidenceMemoryEngine
+
+        eng = inputs.get("engine") or AntiManufacturedConfidenceMemoryEngine()
+        res = eng.run(inputs)
+        return _ok(mode, "W46_ANTI_MANUFACTURED_CONFIDENCE_MEMORY", res) if res.get("pass") else _fail(mode, "W46_ANTI_MANUFACTURED_CONFIDENCE_MEMORY_FAILED", res)
+
+    if mode == "LEAPFROG_W46_ANYTIME_VALID_EVALUE_EVOLUTION_GATE":
+        from canonical.runtime.wave45_46_anytime_valid_quotient_metamorphic_hcu_v1 import AnytimeValidEValueEvolutionGateKernel
+
+        eng = inputs.get("engine") or AnytimeValidEValueEvolutionGateKernel()
+        res = eng.run(inputs)
+        return _ok(mode, "W46_ANYTIME_VALID_EVALUE_GATE", res) if res.get("pass") else _fail(mode, "W46_ANYTIME_VALID_EVALUE_GATE_FAILED", res)
+
+    if mode == "LEAPFROG_W46_THREE_TIER_ZERO_FORGETTING_CONTINUAL":
+        from canonical.runtime.wave45_46_anytime_valid_quotient_metamorphic_hcu_v1 import ThreeTierZeroForgettingContinualKernel
+
+        eng = inputs.get("engine") or ThreeTierZeroForgettingContinualKernel()
+        res = eng.run(inputs)
+        return _ok(mode, "W46_THREE_TIER_CONTINUAL", res) if res.get("pass") else _fail(mode, "W46_THREE_TIER_CONTINUAL_FAILED", res)
+
+    if mode == "LEAPFROG_W47_FUTAMURA_SKILL_COMPILER_GRAMMAR":
+        from canonical.runtime.wave47_48_futamura_tomography_egraph_crystallizer_v1 import FutamuraSkillCompilerGrammarKernel
+
+        eng = inputs.get("engine") or FutamuraSkillCompilerGrammarKernel()
+        res = eng.run(inputs)
+        return _ok(mode, "W47_FUTAMURA_SKILL_COMPILER", res) if res.get("pass") else _fail(mode, "W47_FUTAMURA_SKILL_COMPILER_FAILED", res)
+
+    if mode == "LEAPFROG_W47_REVERSE_TOMOGRAPHY_ANGELIC_LENS_SWE":
+        from canonical.runtime.wave47_48_futamura_tomography_egraph_crystallizer_v1 import ReverseTomographyAngelicLensSWEKernel
+
+        eng = inputs.get("engine") or ReverseTomographyAngelicLensSWEKernel()
+        res = eng.run(inputs)
+        return _ok(mode, "W47_REVERSE_TOMOGRAPHY_LENS_SWE", res) if res.get("pass") else _fail(mode, "W47_REVERSE_TOMOGRAPHY_LENS_SWE_FAILED", res)
+
+    if mode == "LEAPFROG_W47_MEANING_EGRAPH_VERICODING_PROOF_CUT":
+        from canonical.runtime.wave47_48_futamura_tomography_egraph_crystallizer_v1 import MeaningEGraphVericodingProofCutKernel
+
+        eng = inputs.get("engine") or MeaningEGraphVericodingProofCutKernel()
+        res = eng.run(inputs)
+        return _ok(mode, "W47_MEANING_EGRAPH_VERICODING", res) if res.get("pass") else _fail(mode, "W47_MEANING_EGRAPH_VERICODING_FAILED", res)
+
+    if mode == "LEAPFROG_W48_EVOLVING_INTERFACE_BYTE_EFFECT_HCU":
+        from canonical.runtime.wave47_48_futamura_tomography_egraph_crystallizer_v1 import EvolvingInterfaceByteEffectHCUKernel
+
+        eng = inputs.get("engine") or EvolvingInterfaceByteEffectHCUKernel()
+        res = eng.run(inputs)
+        return _ok(mode, "W48_EVOLVING_INTERFACE_BYTE_EFFECT_HCU", res) if res.get("pass") else _fail(mode, "W48_EVOLVING_INTERFACE_BYTE_EFFECT_HCU_FAILED", res)
+
+    if mode == "LEAPFROG_W48_FIVE_TIMESCALE_SLEEP_CSR_MEMORY":
+        from canonical.runtime.wave47_48_futamura_tomography_egraph_crystallizer_v1 import FiveTimescaleSleepCrystallizerCSRMemoryEngine
+
+        eng = inputs.get("engine") or FiveTimescaleSleepCrystallizerCSRMemoryEngine()
+        res = eng.run(inputs)
+        return _ok(mode, "W48_FIVE_TIMESCALE_SLEEP_CSR_MEMORY", res) if res.get("pass") else _fail(mode, "W48_FIVE_TIMESCALE_SLEEP_CSR_MEMORY_FAILED", res)
+
+    if mode == "LEAPFROG_W48_META_CIRCULAR_REFUSAL_ADJUDICATOR":
+        from canonical.runtime.wave47_48_futamura_tomography_egraph_crystallizer_v1 import MetaCircularConceptRefusalAdjudicatorKernel
+
+        eng = inputs.get("engine") or MetaCircularConceptRefusalAdjudicatorKernel()
+        res = eng.run(inputs)
+        return _ok(mode, "W48_META_CIRCULAR_REFUSAL_ADJUDICATOR", res) if res.get("pass") else _fail(mode, "W48_META_CIRCULAR_REFUSAL_ADJUDICATOR_FAILED", res)
+
+    if mode == "LEAPFROG_W49_TRACEBACK_SIGNATURE_ZERO_LINE_LOCALIZER":
+        from canonical.runtime.wave49_50_structural_ast_repair_and_titan_adjudication_v1 import Wave49To50UnifiedModelMixin
+
+        op = str(inputs.get("operation", inputs.get("op", "localize")))
+        kw = {k: v for k, v in inputs.items() if k not in ("operation", "op")}
+        res = Wave49To50UnifiedModelMixin().traceback_zero_line_localize_op(op, **kw)
+        return _ok(mode, "W49_TRACEBACK_ZERO_LINE_LOCALIZER", res) if res.get("pass") else _fail(mode, "W49_TRACEBACK_ZERO_LINE_LOCALIZER_FAILED", res)
+
+    if mode == "LEAPFROG_W49_STRUCTURAL_AST_MULTI_HUNK_SYNTHESIZER":
+        from canonical.runtime.wave49_50_structural_ast_repair_and_titan_adjudication_v1 import Wave49To50UnifiedModelMixin
+
+        op = str(inputs.get("operation", inputs.get("op", "repair_workspace")))
+        kw = {k: v for k, v in inputs.items() if k not in ("operation", "op")}
+        res = Wave49To50UnifiedModelMixin().structural_ast_multi_hunk_synth_op(op, **kw)
+        return _ok(mode, "W49_STRUCTURAL_AST_MULTI_HUNK_SYNTH", res) if res.get("pass") else _fail(mode, "W49_STRUCTURAL_AST_MULTI_HUNK_SYNTH_FAILED", res)
+
+    if mode == "LEAPFROG_W49_MINIMAX_INTERROGATION_CONTRASTIVE_ORACLE":
+        from canonical.runtime.wave49_50_structural_ast_repair_and_titan_adjudication_v1 import Wave49To50UnifiedModelMixin
+
+        op = str(inputs.get("operation", inputs.get("op", "minimax_query")))
+        kw = {k: v for k, v in inputs.items() if k not in ("operation", "op")}
+        res = Wave49To50UnifiedModelMixin().minimax_interrogation_contrastive_op(op, **kw)
+        return _ok(mode, "W49_MINIMAX_CONTRASTIVE_ORACLE", res) if res.get("pass") else _fail(mode, "W49_MINIMAX_CONTRASTIVE_ORACLE_FAILED", res)
+
+    if mode == "LEAPFROG_W50_KERNEL_BOUNDARY_DUAL_CHANNEL_EFFECT_HCU":
+        from canonical.runtime.wave49_50_structural_ast_repair_and_titan_adjudication_v1 import Wave49To50UnifiedModelMixin
+
+        op = str(inputs.get("operation", inputs.get("op", "route_dual_channel")))
+        kw = {k: v for k, v in inputs.items() if k not in ("operation", "op")}
+        res = Wave49To50UnifiedModelMixin().kernel_boundary_effect_hcu_op(op, **kw)
+        return _ok(mode, "W50_KERNEL_BOUNDARY_EFFECT_HCU", res) if res.get("pass") else _fail(mode, "W50_KERNEL_BOUNDARY_EFFECT_HCU_FAILED", res)
+
+    if mode == "LEAPFROG_W50_CRASH_RESUMABLE_SELF_VERIFYING_LIFE_LOOP":
+        from canonical.runtime.wave49_50_structural_ast_repair_and_titan_adjudication_v1 import Wave49To50UnifiedModelMixin
+
+        op = str(inputs.get("operation", inputs.get("op", "wal_tick")))
+        kw = {k: v for k, v in inputs.items() if k not in ("operation", "op")}
+        res = Wave49To50UnifiedModelMixin().crash_resumable_life_loop_op(op, **kw)
+        return _ok(mode, "W50_CRASH_RESUMABLE_LIFE_LOOP", res) if res.get("pass") else _fail(mode, "W50_CRASH_RESUMABLE_LIFE_LOOP_FAILED", res)
+
+    if mode == "LEAPFROG_W50_TITAN_BEHAVIORAL_PROOF_ADJUDICATOR":
+        from canonical.runtime.wave49_50_structural_ast_repair_and_titan_adjudication_v1 import Wave49To50UnifiedModelMixin
+
+        op = str(inputs.get("operation", inputs.get("op", "adjudicate")))
+        kw = {k: v for k, v in inputs.items() if k not in ("operation", "op")}
+        res = Wave49To50UnifiedModelMixin().titan_behavioral_adjudicator_op(op, **kw)
+        return _ok(mode, "W50_TITAN_BEHAVIORAL_ADJUDICATOR", res) if res.get("pass") else _fail(mode, "W50_TITAN_BEHAVIORAL_ADJUDICATOR_FAILED", res)
 
     if mode == "METAMORPHIC_HABITATION_ZIPPER":
         from canonical.swe_kernel import metamorphic_habitation_zipper_v1 as m

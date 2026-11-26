@@ -2824,5 +2824,64 @@ def main(argv: Sequence[str] | None = None) -> int:
     return 0
 
 
+def self_check() -> dict[str, Any]:
+    """Falsifiable behavioral contract for witnessed-relation signature induction & composition.
+
+    Proves:
+    1. Sentence segmentation preserves deterministic sentence boundaries.
+    2. `induce_signatures` admits only relations backed by a concrete witness output, rejecting
+       unwitnessed claims (prose without witness does not create an edge).
+    3. `compose_plan` chains two witnessed relations (`file -> compressed -> file`) and refuses
+       unreachable goals instead of hallucinating a chain.
+    """
+    failures: list[str] = []
+
+    def check(label: str, ok: bool) -> None:
+        if not ok:
+            failures.append(label)
+
+    sents = sentences("Gzip compresses a file into a gz archive. Gunzip decompresses a gz archive back to a file.")
+    check("segments two declarative sentences", len(sents) == 2)
+
+    witnessed_relations = [
+        {
+            "relation_id": "rel_compress",
+            "relation": "compresses",
+            "object_kind": "file",
+            "program": "gzip",
+            "observable": "gzip_out",
+            "predicate": "exists",
+            "witness": {"reads": "sample.txt", "output": "sample.txt.gz"},
+        },
+        {
+            "relation_id": "rel_unwitnessed",
+            "relation": "teleports",
+            "object_kind": "file",
+            "program": "magic",
+            "observable": "magic_out",
+            "predicate": "exists",
+            "witness": {"reads": "sample.txt", "output": ""},
+        },
+    ]
+    sigs = induce_signatures(witnessed_relations, actions=["gzip"])
+    check("induces witnessed compresses signature", "compresses" in sigs)
+    check("negative control: unwitnessed relation creates no edge", "teleports" not in sigs)
+
+    plan_ok = compose_plan(witnessed_relations, ["gzip"], start="file", goal="compresses")
+    check("composes witnessed plan for reachable goal", bool(plan_ok.get("steps")) and plan_ok.get("status") != "refused")
+
+    plan_refused = compose_plan(witnessed_relations, ["gzip"], start="file", goal="teleports")
+    check("negative control: refuses unreachable unwitnessed goal", not bool(plan_refused.get("steps")))
+
+    total = 5
+    return {
+        "schema": "BRAIN_THE_RIGHT_QUESTION_IS_AN_EXPERIMENT_V1_SELF_CHECK",
+        "checks": total,
+        "passed": total - len(failures),
+        "failures": failures,
+        "verdict": "SELF_CHECK_PASS" if not failures else "SELF_CHECK_FAIL",
+    }
+
+
 if __name__ == "__main__":
     raise SystemExit(main())
