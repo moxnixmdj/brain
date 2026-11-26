@@ -321,5 +321,135 @@
   },
   "initial_environment_error": {
     "before_installing_receiver_metadata": "all three native-suite collections exited 2: importlib.metadata.PackageNotFoundError(click). No native grade on that configuration. Complete rerun above; candidate bytes unchanged."
+  },
+  "followup_original_parent_calibration": {
+    "generator_revision": "9ad3b2f6 (unchanged frozen candidates); full original parent checkout, same two evaluation surfaces",
+    "rows": {
+      "empty": {
+        "native": {
+          "exit": 0,
+          "seconds": 7.15,
+          "log_sha256": "f61440d94cacd0654a6a9c0f852fd19773f1451e9dc9715713c22f5da26a3485",
+          "status": "RAN",
+          "counts": {
+            "passed": 2064,
+            "xfailed": 1,
+            "skipped": 24
+          },
+          "same_test_names_as_empty": true,
+          "lost_passes": {
+            "count": 0,
+            "first_six": []
+          },
+          "failures_to_pass": {
+            "count": 0,
+            "first_six": []
+          }
+        },
+        "teacher_check": {
+          "exit": 1,
+          "seconds": 0.515,
+          "log_sha256": "0c0df0b5ff2cccef132ee7d35922df0bae7709d8d9c7482aa4df3dcb1c65af9e",
+          "status": "RAN",
+          "counts": {
+            "passed": 115,
+            "failure": 1
+          },
+          "same_test_names_as_empty": true,
+          "lost_passes": {
+            "count": 0,
+            "first_six": []
+          },
+          "failures_to_pass": {
+            "count": 0,
+            "first_six": []
+          }
+        }
+      },
+      "raw_traces": {
+        "native": {
+          "exit": 0,
+          "seconds": 6.937,
+          "log_sha256": "4543e20781cd9af619de58b0cf0529306c2bcccb8fa0dd6f1a465d86dd3684fe",
+          "status": "RAN",
+          "counts": {
+            "passed": 2064,
+            "xfailed": 1,
+            "skipped": 24
+          },
+          "same_test_names_as_empty": true,
+          "lost_passes": {
+            "count": 0,
+            "first_six": []
+          },
+          "failures_to_pass": {
+            "count": 0,
+            "first_six": []
+          }
+        },
+        "teacher_check": {
+          "exit": 0,
+          "seconds": 0.516,
+          "log_sha256": "d6638a832dceacb06e67ad1dc223b2375d9d58684d17a297029f71c1359b2431",
+          "status": "RAN",
+          "counts": {
+            "passed": 116
+          },
+          "same_test_names_as_empty": true,
+          "lost_passes": {
+            "count": 0,
+            "first_six": []
+          },
+          "failures_to_pass": {
+            "count": 1,
+            "first_six": [
+              "tests.test_arguments::test_argument_get_help_record_never_none[None]"
+            ]
+          }
+        }
+      },
+      "generalized": {
+        "native": {
+          "exit": 0,
+          "seconds": 6.94,
+          "log_sha256": "4543e20781cd9af619de58b0cf0529306c2bcccb8fa0dd6f1a465d86dd3684fe",
+          "status": "RAN",
+          "counts": {
+            "passed": 2064,
+            "xfailed": 1,
+            "skipped": 24
+          },
+          "same_test_names_as_empty": true,
+          "lost_passes": {
+            "count": 0,
+            "first_six": []
+          },
+          "failures_to_pass": {
+            "count": 0,
+            "first_six": []
+          }
+        },
+        "teacher_check": {
+          "exit": 0,
+          "seconds": 0.566,
+          "log_sha256": "d6638a832dceacb06e67ad1dc223b2375d9d58684d17a297029f71c1359b2431",
+          "status": "RAN",
+          "counts": {
+            "passed": 116
+          },
+          "same_test_names_as_empty": true,
+          "lost_passes": {
+            "count": 0,
+            "first_six": []
+          },
+          "failures_to_pass": {
+            "count": 1,
+            "first_six": [
+              "tests.test_arguments::test_argument_get_help_record_never_none[None]"
+            ]
+          }
+        }
+      }
+    }
   }
 }

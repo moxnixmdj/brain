@@ -38,7 +38,8 @@ SOURCES = (
 )
 
 
-def stage(destination: Path) -> dict[str, str]:
+def stage(destination: Path, *, source_root: Path = ROOT) -> dict[str, str]:
+    source_root = source_root.resolve(strict=True)
     destination.mkdir(exist_ok=False)  # Never inherit a previous run's memory or files.
     manifest: dict[str, str] = {}
 
@@ -49,7 +50,7 @@ def stage(destination: Path) -> dict[str, str]:
         manifest[name] = hashlib.sha256(data).hexdigest()
 
     for name in SOURCES:
-        source = ROOT / name
+        source = source_root / name
         if source.resolve(strict=True) != source or not source.is_file():
             raise ValueError(f'not a regular source in the checkout: {name}')
         put(name, source.read_bytes())

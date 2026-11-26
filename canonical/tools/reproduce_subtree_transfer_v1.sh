@@ -48,4 +48,9 @@ py="$w/grader-venv/bin/python"
 "$py" -m pip install --no-deps --no-index --no-build-isolation "$w/variant"
 "$py" -m canonical.tools.grade_frozen_click_transfer_v1 --checkout "$w/variant" --teacher-check "$w/check.py" \
   --frozen "$w/frozen/2" --probe "$w/probe.json" --index 2 --output "$w/checks" > "$w/grading.json"
-printf 'Measured results: %s/probe.json and %s/grading.json\n' "$w" "$w"
+mkdir "$w/full-parent"
+git --git-dir="$w/click.git" archive "$parent" | tar -x -C "$w/full-parent"
+"$py" -m pip install --no-index --no-deps --no-build-isolation --force-reinstall "$w/full-parent"
+"$py" -m canonical.tools.grade_frozen_click_transfer_v1 --checkout "$w/full-parent" --teacher-check "$w/check.py" \
+  --frozen "$w/frozen/3" --probe "$w/probe.json" --index 3 --output "$w/calibration-checks" > "$w/calibration.json"
+printf 'Measured results under %s: probe.json, grading.json, calibration.json\n' "$w"
