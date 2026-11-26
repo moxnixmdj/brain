@@ -87,6 +87,33 @@ def does_nothing(work: M.Work, creature: "Creature") -> dict[str, Any]:
             "blocked": "NO_EXECUTOR_WIRED"}
 
 
+def unified_perform(work: M.Work, creature: "Creature") -> dict[str, Any]:
+    """Wave 39 Unified Frontier Executor (`K3 = 0`):
+    Routes board obligations through `UnifiedModel.unified_frontier_turn()` and reports honest
+    `verified` / `correct` standing from real kernel verification receipts (never rubber-stamped)."""
+    from canonical.runtime.brain_unified_model_v1 import load_unified_model
+
+    model = load_unified_model()
+    payload = dict(getattr(creature, "_unified_work_payloads", {}).get(work.id) or {})
+    goal_text = str(payload.pop("goal", None) or getattr(work, "note", "") or getattr(work, "id", "") or "inventory")
+    pillar = payload.pop("pillar", None)
+    turn = model.unified_frontier_turn(goal_text, pillar=pillar, payload=payload)
+    passed = bool(turn.get("pass"))
+    out: dict[str, Any] = {
+        "ok": passed,
+        "verified": True,
+        "correct": passed,
+        "pillar": turn.get("pillar"),
+        "stage_trace": turn.get("stage_trace"),
+        "unified_turn": turn,
+    }
+    if not passed:
+        out["blocked"] = "UNIFIED_KERNEL_VERIFICATION_REFUSED"
+    if "world_after" in payload:
+        out["world_after"] = payload["world_after"]
+    return out
+
+
 @dataclass
 class Creature:
     """One body. State lives on disk; nothing is remembered in the process alone."""
@@ -904,6 +931,37 @@ class Creature:
                 break
         return {**self.report(), "steps": rows}
 
+    def attach_unified_work_payload(self, work_id: str, payload: Mapping[str, Any]) -> None:
+        """Attach structured 5-pillar execution inputs for a board obligation (`work_id`)."""
+        store = getattr(self, "_unified_work_payloads", None)
+        if store is None:
+            store = {}
+            self._unified_work_payloads = store
+        store[str(work_id)] = dict(payload)
+
+    def step_unified(self, *, offer: "CP.Offer | None" = None) -> dict[str, Any]:
+        """Execute one `Creature` step using typed catalog checking for catalog questions and
+        `unified_perform` (`UnifiedModel.unified_frontier_turn`, `K3 = 0`) for general obligations."""
+        if self._life is not None:
+            pool = self.remaining_work()
+            if pool:
+                nxt = M.choose_next(self._life, pool)
+                if nxt is not None and nxt.id in self._catalog_questions:
+                    return self.step(does_nothing, offer=offer)
+        return self.step(unified_perform, offer=offer)
+
+    def unified_frontier_turn(
+        self,
+        goal: str,
+        *,
+        pillar: str | None = None,
+        payload: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Direct `K3 = 0` 5-pillar frontier turn from `Creature` through `UnifiedModel`."""
+        from canonical.runtime.brain_unified_model_v1 import load_unified_model
+
+        return load_unified_model().unified_frontier_turn(goal, pillar=pillar, payload=payload)
+
     def _save(self) -> None:
         M.LifeStore(self.root / "life.json").save(self._life)
         S.StandingStore(self.root / "standing.json").save(self._standing)
@@ -1672,6 +1730,75 @@ class Creature:
             self._standing.record(verified=True, correct=bool(res.get("pass")))
         self._save()
         return res
+
+    def _ensure_unified_model(self) -> Any:
+        if getattr(self, "_unified_model", None) is None:
+            from canonical.runtime.brain_unified_model_v1 import open_model
+
+            self._unified_model = open_model()
+        return self._unified_model
+
+    def mendel_red_queen_evolve(
+        self,
+        parent_source: str,
+        lineage_a: str,
+        lineage_b: str,
+        *,
+        verifier: Any,
+        failing_witness: Any = None,
+        owned_symbols: Sequence[str] | None = None,
+        max_ast_bloat_ratio: float = 1.60,
+        max_added_branches: int = 6,
+        require_albi_invariance: bool = True,
+    ) -> dict[str, Any]:
+        """Wave 39: Creature Mendel comparative dual splicing + ALBI + Anti-Slop/No-Phantom-Guardrails."""
+        res = self._ensure_unified_model().mendel_red_queen_evolve(
+            parent_source,
+            lineage_a,
+            lineage_b,
+            verifier=verifier,
+            failing_witness=failing_witness,
+            owned_symbols=owned_symbols,
+            max_ast_bloat_ratio=max_ast_bloat_ratio,
+            max_added_branches=max_added_branches,
+            require_albi_invariance=require_albi_invariance,
+        )
+        self._save()
+        return res
+
+    def discover_and_earn_judges(
+        self,
+        *,
+        artifacts_by_kind: Mapping[str, Sequence[bytes]] | None = None,
+        store_dir: str | pathlib.Path | None = None,
+        include_stdlib_discovery: bool = True,
+        cli_probe: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 39: Creature Red Queen earned-judge discovery over live subprocess candidates."""
+        return self._ensure_unified_model().discover_and_earn_judges(
+            artifacts_by_kind=artifacts_by_kind,
+            store_dir=store_dir,
+            include_stdlib_discovery=include_stdlib_discovery,
+            cli_probe=cli_probe,
+        )
+
+    def compose_and_plan_contracts(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 39: Creature typed effect-contract composition + Sussman partial-order planning + lifted sketches."""
+        return self._ensure_unified_model().compose_and_plan_contracts(**kwargs)
+
+    def speculative_cow_decide(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 39: Creature decision-theoretic version-space agreement gate + real POSIX CoW fork speculation."""
+        return self._ensure_unified_model().speculative_cow_decide(**kwargs)
+
+    def clm_rrf_memory_op(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 39: Creature verbatim 4-way RRF + Nemori surprise + CLM file-mirrored context + TMA-NM."""
+        res = self._ensure_unified_model().clm_rrf_memory_op(operation, payload)
+        self._save()
+        return res
+
+    def partial_route_with_jitrl(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 39: Creature closed-form JitRL logit modulation + SkillTTA synthesis + Intra-task Partial Routing."""
+        return self._ensure_unified_model().partial_route_with_jitrl(operation, payload)
 
     def sleep_evolve_organs_gea(
         self,

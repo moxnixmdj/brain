@@ -457,6 +457,7 @@ def _pack_hot_marshal_tiers(core: Mapping[str, Any]) -> tuple[dict[str, Any], by
         "artifact_bytes": int(core.get("artifact_bytes") or 0),
         "digest_needle_offset": int(core.get("digest_needle_offset") if core.get("digest_needle_offset") is not None else -1),
         "schema_needle_offset": int(core.get("schema_needle_offset") if core.get("schema_needle_offset") is not None else -1),
+        "section_byte_spans": dict(core.get("section_byte_spans") or {}),
         "objective_verbatim": str(core.get("objective_verbatim") or ""),
         "counts": dict(core.get("counts") or {}),
         "confidence": dict(core.get("confidence") or {}),
@@ -949,6 +950,46 @@ class UnifiedModel:
         except Exception:
             pass
 
+    def _load_cold_section_rows(self, section_key: str) -> list[Any]:
+        """Wave 39 Elon-Speed Cold-Section Slice Loader (`os.pread` over `section_byte_spans`):
+        Reads and parses ONLY the requested JSON array slice (e.g. `447 KB` `harvested_capabilities`
+        or `597 KB` `extended_source_index`) instead of parsing the entire `13.47 MB` full JSON.
+        Falls back fail-closed to `_ensure_full_model()` whenever `self._model_loaded` is already
+        resident, `self.path != MODEL_PATH`, or `st_size != artifact_bytes` (tamper protection)."""
+        if self._model_loaded is not None:
+            return list(self._model_loaded.get(section_key) or [])
+        spans = self._core_meta.get("section_byte_spans")
+        expected_bytes = int(self._core_meta.get("artifact_bytes") or -1)
+        target = self._target_path
+        default_target = (ROOT / DEFAULT_ARTIFACT).resolve()
+        if (
+            target is not None
+            and target.resolve() == default_target
+            and isinstance(spans, Mapping)
+            and section_key in spans
+            and expected_bytes > 0
+            and target.exists()
+        ):
+            span = spans[section_key]
+            if isinstance(span, Sequence) and len(span) == 2:
+                start, end = int(span[0]), int(span[1])
+                if 0 <= start < end <= expected_bytes:
+                    try:
+                        fd = os.open(str(target), os.O_RDONLY)
+                        try:
+                            st = os.fstat(fd)
+                            if st.st_size == expected_bytes:
+                                chunk = os.pread(fd, end - start, start)
+                                parsed = json.loads(chunk.decode("utf-8"))
+                                if isinstance(parsed, list):
+                                    return parsed
+                        finally:
+                            os.close(fd)
+                    except Exception:
+                        pass
+        full = self._ensure_full_model()
+        return list(full.get(section_key) or [])
+
     def _ensure_harvested(self) -> None:
         if self._harvested_cache is not None:
             return
@@ -956,10 +997,10 @@ class UnifiedModel:
         if isinstance(cached, dict):
             self._harvested_cache = cached
             return
-        full = self._ensure_full_model()
+        raw_rows = self._load_cold_section_rows("harvested_capabilities")
         self._harvested_cache = {
             str(row["id"]): dict(row)
-            for row in full.get("harvested_capabilities") or []
+            for row in raw_rows
             if isinstance(row, Mapping) and row.get("id")
         }
         self._write_section_cache("harvested", self._harvested_cache)
@@ -986,10 +1027,10 @@ class UnifiedModel:
             df = cached["df"]
             postings = cached["postings"]
         else:
-            full = self._ensure_full_model()
+            raw_rows = self._load_cold_section_rows("source_index")
             rows = {
                 str(row["path"]): dict(row)
-                for row in full.get("source_index") or []
+                for row in raw_rows
                 if isinstance(row, Mapping) and row.get("path")
             }
             df = {}
@@ -1038,10 +1079,10 @@ class UnifiedModel:
             self._extended_source_df_cache = cached["df"]
             self._extended_source_postings_cache = cached["postings"]
             return
-        full = self._ensure_full_model()
+        raw_rows = self._load_cold_section_rows("extended_source_index")
         rows = {
             str(row["path"]): dict(row)
-            for row in full.get("extended_source_index") or []
+            for row in raw_rows
             if isinstance(row, Mapping) and row.get("path")
         }
         df: dict[str, int] = {}
@@ -1126,10 +1167,10 @@ class UnifiedModel:
             self._research_df_cache = cached["df"]
             self._research_postings_cache = cached["postings"]
             return
-        full = self._ensure_full_model()
+        raw_rows = self._load_cold_section_rows("research_index")
         rows = {
             str(row["path"]): dict(row)
-            for row in full.get("research_index") or []
+            for row in raw_rows
             if isinstance(row, Mapping) and row.get("path")
         }
         df: dict[str, int] = {}
@@ -1166,9 +1207,9 @@ class UnifiedModel:
             self._knowledge_postings_cache = cached["postings"]
             self._knowledge_title_postings_cache = cached["title_postings"]
             return
-        full = self._ensure_full_model()
+        raw_rows = self._load_cold_section_rows("knowledge")
         rows = [
-            dict(row) for row in (full.get("knowledge") or []) if isinstance(row, Mapping)
+            dict(row) for row in raw_rows if isinstance(row, Mapping)
         ]
         df: dict[str, int] = {}
         lengths: list[int] = []
@@ -1745,6 +1786,42 @@ class UnifiedModel:
                 "frontier_domain": "continual_learning",
                 "capability_role": "Zero-LLM AlphaEvolve MAP-Elites + Pareto synthesizer guarded by adversarial anti-reward-hacking evaluator audit",
             },
+            {
+                "organ_id": "w39_zero_adapter_inventory_bridge",
+                "module_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+                "frontier_domain": "capability_composition",
+                "capability_role": "Zero-wrapper bridge composing module_bridge_v1 (5,221 functions) with type_level_composer_v1 type graphs",
+            },
+            {
+                "organ_id": "w39_moore_ontology_witness_learner",
+                "module_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+                "frontier_domain": "instant_learning",
+                "capability_role": "Action-invariant Moore bisimulation transfer + OPINE-World ontology residual + FlashMeta D4 witness inversion + Galois lattice",
+            },
+            {
+                "organ_id": "w39_lens_standing_fact_cu",
+                "module_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+                "frontier_domain": "computer_use",
+                "capability_role": "OOXML/JSON bijective lenses + relational anchored frame + CAS stale-click guard + standing-fact batch clobber recovery",
+            },
+            {
+                "organ_id": "w39_deltastate_sibling_swe",
+                "module_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+                "frontier_domain": "coding_agents",
+                "capability_role": "Oracle calibration + Plastic Surgery donor mining + Coccinelle multi-file sibling closure + DeltaBox warm-zygote os.fork() rollout",
+            },
+            {
+                "organ_id": "w39_prospective_memtx_replay",
+                "module_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+                "frontier_domain": "memory",
+                "capability_role": "Kumiho prospective cue indexing + CPB Sybil echo block + AGM K*7/K*8 entrenchment + RD-Forget selective replay unlearning",
+            },
+            {
+                "organ_id": "w39_meaning_ir_cross_lang_ratchet",
+                "module_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+                "frontier_domain": "continual_learning",
+                "capability_role": "Babble/Stitch Meaning-IR anti-unification + zero-shot verified cross-language recall (Python/JS/TS/Go/Rust) + MDL bit-rent eviction",
+            },
         ]
         return {
             "schema": SOLUTION_SCHEMA,
@@ -1848,6 +1925,20 @@ class UnifiedModel:
             from canonical.runtime import cow_zygote_speculative_verifier_v1 as pd
 
             return pd.run(req, ROOT)
+        if organ_id == "w39_zero_adapter_inventory_bridge":
+            goal = str(req.pop("goal", "inventory"))
+            return self.zero_adapter_inventory_bridge(goal, **req)
+        if organ_id == "w39_moore_ontology_witness_learner":
+            return self.instant_learn_moore_witness(**req)
+        if organ_id == "w39_lens_standing_fact_cu":
+            return self.execute_lens_standing_fact_cu(**req)
+        if organ_id == "w39_deltastate_sibling_swe":
+            rr = req.pop("repo_root", ROOT)
+            return self.repair_swe_deltastate_siblings(rr, **req)
+        if organ_id == "w39_prospective_memtx_replay":
+            return self.prospective_memtx_op(**req)
+        if organ_id == "w39_meaning_ir_cross_lang_ratchet":
+            return self.consolidate_meaning_ir_skill(**req)
 
         from canonical.runtime import swe_kernel_organ_bridge_v1 as bridge
 
@@ -6372,25 +6463,30 @@ class UnifiedModel:
         l2_sources = self.find_source(query, top_k=k)
 
         q_toks = set(tokenize(query))
+        self._ensure_extended_source_index()
+        ext_rows = self._extended_source_index_cache or {}
+        ext_postings = self._extended_source_postings_cache or {}
+        ext_scores: dict[str, float] = {}
+        for tok in q_toks:
+            for path_str, tf_val in ext_postings.get(tok, ()):
+                ext_scores[path_str] = ext_scores.get(path_str, 0.0) + float(tf_val)
         ext_hits: list[tuple[float, dict[str, Any]]] = []
-        for row in (self.model.get("extended_source_index") or ()):
+        for path_str, overlap in ext_scores.items():
+            row = ext_rows.get(path_str)
             if not isinstance(row, Mapping):
                 continue
-            terms = row.get("terms") or {}
-            overlap = sum(float(terms.get(t, 0)) for t in q_toks if t in terms)
-            if overlap > 0.0:
-                ext_hits.append(
-                    (
-                        overlap,
-                        {
-                            "path": row.get("path"),
-                            "tree": row.get("tree"),
-                            "summary": row.get("summary", ""),
-                            "classification": row.get("classification"),
-                            "score": round(overlap, 3),
-                        },
-                    )
+            ext_hits.append(
+                (
+                    overlap,
+                    {
+                        "path": row.get("path"),
+                        "tree": row.get("tree"),
+                        "summary": row.get("summary", ""),
+                        "classification": row.get("classification"),
+                        "score": round(overlap, 3),
+                    },
                 )
+            )
         ext_hits.sort(key=lambda item: (-item[0], str(item[1].get("path") or "")))
         l2_extended = [item[1] for item in ext_hits[:k]]
 
@@ -6456,6 +6552,327 @@ class UnifiedModel:
     def eggmind_prove(self, **kwargs: Any) -> dict[str, Any]:
         """Pillar 7: `EggMind` Proof-Motif E-Graph + `Pantograph` Tactic Goal-Tree Prover."""
         return self.asymmetric_leapfrog(pillar="EGGMIND_PROOF", **kwargs)
+
+    # ------------------------------------------------------------------ Wave 39 Unified Five-Pillar Frontier Kernel
+
+    def _get_five_pillar_kernel(self) -> Any:
+        kern = getattr(self, "_w39_five_pillar_kernel", None)
+        if kern is None:
+            from canonical.swe_kernel.unified_five_pillar_frontier_kernel_v1 import (
+                UnifiedFivePillarKernel,
+            )
+
+            kern = UnifiedFivePillarKernel()
+            self._w39_five_pillar_kernel = kern
+        return kern
+
+    def unified_frontier_turn(
+        self,
+        goal: str,
+        *,
+        pillar: str | None = None,
+        payload: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 39 Unified 4-Stage `K3 = 0` Turn (`Observe/Ground -> Hypothesize -> CoW Verify -> Consolidate`)
+        across all 5 Pillars + the Zero-Adapter `5,221`-function Inventory Bridge."""
+        return self._get_five_pillar_kernel().run_turn(goal, pillar=pillar, payload=payload)
+
+    def zero_adapter_inventory_bridge(
+        self,
+        goal: str,
+        *,
+        inputs: Mapping[str, Any] | None = None,
+        registry: Mapping[str, Any] | None = None,
+        top_k: int = 6,
+        execute_if_bound: bool = False,
+        max_chain_len: int = 2,
+    ) -> dict[str, Any]:
+        """Wave 39 Zero-Adapter Inventory Bridge: composes `module_bridge_v1` (`5,221` functions)
+        with `type_level_composer_v1` type graphs (`0` thin wrappers)."""
+        return self._get_five_pillar_kernel().inventory_bridge.query_and_compose(
+            goal,
+            inputs=inputs,
+            registry=registry,
+            top_k=top_k,
+            execute_if_bound=execute_if_bound,
+            max_chain_len=max_chain_len,
+        )
+
+    def instant_learn_moore_witness(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 39 Pillar I: Action-invariant Moore bisimulation transfer, `OPINE-World` ontology-error
+        separating predicate synthesis, FCA Galois concept lattices, and `FlashMeta D4` witness inversion."""
+        return self._get_five_pillar_kernel().instant_learner.learn_and_transfer(**kwargs)
+
+    def execute_lens_standing_fact_cu(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 39 Pillar II: Zero-screenshot OOXML/JSON bijective lenses, relational record frames,
+        CAS stale-frame click guards, standing-fact batch clobber recovery, and anti-false-`DONE` checks."""
+        return self._get_five_pillar_kernel().computer_use.execute_workflow(**kwargs)
+
+    def repair_swe_deltastate_siblings(self, repo_root: str | Path, **kwargs: Any) -> dict[str, Any]:
+        """Wave 39 Pillar III: Calibrated non-vacuous test oracle + Plastic Surgery donor mining +
+        `Coccinelle`/`SyDIT` multi-file sibling closure + `DeltaBox` warm-zygote `os.fork()` CoW rollout."""
+        return self._get_five_pillar_kernel().swe_kernel.repair_repository(repo_root, **kwargs)
+
+    def prospective_memtx_op(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 39 Pillar IV: `Kumiho` write-time prospective cue indexing, `CPB` root-disjoint Sybil
+        echo defense, AGM $K^*7/K^*8$ ordinal entrenchment, and `RD-Forget` selective replay unlearning."""
+        return self._get_five_pillar_kernel().run_turn("prospective_memtx_op", pillar="MEMORY", payload=kwargs)
+
+    def consolidate_meaning_ir_skill(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 39 Pillar V: `Babble`/`Stitch` Meaning-IR anti-unification, zero-shot verified cross-language
+        transfer across Python/JS/TS/Go/Rust, 4-gate Hoare sequence composition, and MDL bit-rent eviction."""
+        return self._get_five_pillar_kernel().skill_ratchet.consolidate_and_transfer(**kwargs)
+    # --- Wave 39: Dark-Organ Unification, Red-Queen/Mendel Co-Evolution, CLM+RRF Memory & Partial-Routing/JitRL ---
+
+    def _get_clm_rrf_memory_engine(self) -> Any:
+        eng = getattr(self, "_clm_rrf_memory_engine", None)
+        if eng is None:
+            from canonical.runtime.wave39_leapfrog_unification_v1 import CLMRRFMemoryEngine
+
+            eng = CLMRRFMemoryEngine(memory_bus=self._get_non_malleable_memory_bus())
+            self._clm_rrf_memory_engine = eng
+        return eng
+
+    def mendel_red_queen_evolve(
+        self,
+        parent_source: str,
+        lineage_a: str,
+        lineage_b: str,
+        *,
+        verifier: Any,
+        failing_witness: Any = None,
+        owned_symbols: Sequence[str] | None = None,
+        max_ast_bloat_ratio: float = 1.60,
+        max_added_branches: int = 6,
+        require_albi_invariance: bool = True,
+    ) -> dict[str, Any]:
+        """Wave 39: Mendel comparative dual splicing + ALBI semantic-anonymization + Anti-Slop/No-Phantom-Guardrails gate."""
+        from canonical.runtime.wave39_leapfrog_unification_v1 import RedQueenMendelEvolver
+
+        return RedQueenMendelEvolver.mendel_splice_and_verify(
+            parent_source,
+            lineage_a,
+            lineage_b,
+            verifier=verifier,
+            failing_witness=failing_witness,
+            owned_symbols=owned_symbols,
+            max_ast_bloat_ratio=max_ast_bloat_ratio,
+            max_added_branches=max_added_branches,
+            require_albi_invariance=require_albi_invariance,
+        )
+
+    def audit_anti_slop_patch(
+        self,
+        parent_source: str,
+        candidate_source: str,
+        *,
+        failing_witness: Any = None,
+        owned_symbols: Sequence[str] | None = None,
+        max_ast_bloat_ratio: float = 1.60,
+        max_added_branches: int = 6,
+        require_albi_invariance: bool = True,
+    ) -> dict[str, Any]:
+        """Wave 39: Anti-Slop (AST bloat/cyclomatic) + No-Phantom-Guardrails + Symbol-Ownership + ALBI gate."""
+        from canonical.runtime.wave39_leapfrog_unification_v1 import RedQueenMendelEvolver
+
+        return RedQueenMendelEvolver.audit_anti_slop_and_phantom_guardrails(
+            parent_source,
+            candidate_source,
+            failing_witness=failing_witness,
+            owned_symbols=owned_symbols,
+            max_ast_bloat_ratio=max_ast_bloat_ratio,
+            max_added_branches=max_added_branches,
+            require_albi_invariance=require_albi_invariance,
+        )
+
+    def discover_and_earn_judges(
+        self,
+        *,
+        artifacts_by_kind: Mapping[str, Sequence[bytes]] | None = None,
+        store_dir: str | Path | None = None,
+        include_stdlib_discovery: bool = True,
+        cli_probe: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 39: Red Queen earned-judge discovery over live stdlib/CLI subprocess candidates (zero hand-written oracles)."""
+        from canonical.runtime.wave39_leapfrog_unification_v1 import EarnedJudgeAndRefusalLifter
+
+        return EarnedJudgeAndRefusalLifter.discover_and_earn_judges(
+            artifacts_by_kind=artifacts_by_kind,
+            store_dir=store_dir,
+            include_stdlib_discovery=include_stdlib_discovery,
+            cli_probe=cli_probe,
+        )
+
+    def lift_refusal_and_check_oracle(
+        self,
+        help_text: str,
+        *,
+        refusal_lines: Sequence[str] = (),
+        action_argv: Sequence[str] = ("tool", "target"),
+        paths: Sequence[str] = (),
+        type_map: Mapping[str, str] | None = None,
+        labels: Mapping[str, str] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 39: Lift CLI `--help` + stderr refusals into `--check`/`--dry-run` oracle probes, vocabulary classes & collapsed types."""
+        from canonical.runtime.wave39_leapfrog_unification_v1 import EarnedJudgeAndRefusalLifter
+
+        return EarnedJudgeAndRefusalLifter.lift_refusal_and_check_oracle(
+            help_text,
+            refusal_lines=refusal_lines,
+            action_argv=action_argv,
+            paths=paths,
+            type_map=type_map,
+            labels=labels,
+        )
+
+    def compose_and_plan_contracts(
+        self,
+        *,
+        use_measured_advance_pair: bool = True,
+        contracts: Sequence[Mapping[str, Any]] | None = None,
+        initial_facts: Sequence[str] = (),
+        goal_facts: Sequence[str] = (),
+        operators: Sequence[Mapping[str, Any]] = (),
+        concrete_plan: Sequence[Any] | None = None,
+        success_states: Sequence[Any] | None = None,
+        failure_states: Sequence[Any] | None = None,
+        ast_provenance_source: str | None = None,
+        run_observation_refutation: bool = False,
+    ) -> dict[str, Any]:
+        """Wave 39: Typed (P,O,A,V,F) effect-contract composition + Sussman partial-order planning + lifted sketches + provenance."""
+        from canonical.runtime.wave39_leapfrog_unification_v1 import ContractPlannerAndLiftedGeneralizer
+
+        return ContractPlannerAndLiftedGeneralizer.compose_and_plan(
+            use_measured_advance_pair=use_measured_advance_pair,
+            contracts=contracts,
+            initial_facts=initial_facts,
+            goal_facts=goal_facts,
+            operators=operators,
+            concrete_plan=concrete_plan,
+            success_states=success_states,
+            failure_states=failure_states,
+            ast_provenance_source=ast_provenance_source,
+            run_observation_refutation=run_observation_refutation,
+        )
+
+    def speculative_cow_decide(
+        self,
+        *,
+        survivor_requirements: Sequence[Any],
+        observed_facts: Sequence[str],
+        p_correct: float = 0.5,
+        wrong_commit_cost: float = 10.0,
+        cow_trial_cost: float = 0.002,
+        candidates: Sequence[tuple[str, Any]] | None = None,
+        verifier: Any = None,
+        timeout_s: float = 5.0,
+    ) -> dict[str, Any]:
+        """Wave 39: Decision-theoretic version-space agreement gate + real POSIX `os.fork()` CoW speculation."""
+        from canonical.runtime.wave39_leapfrog_unification_v1 import SpeculativeCoWDecisionGate
+
+        return SpeculativeCoWDecisionGate.decide_and_speculate(
+            survivor_requirements=survivor_requirements,
+            observed_facts=observed_facts,
+            p_correct=p_correct,
+            wrong_commit_cost=wrong_commit_cost,
+            cow_trial_cost=cow_trial_cost,
+            candidates=candidates,
+            verifier=verifier,
+            timeout_s=timeout_s,
+        )
+
+    def clm_rrf_memory_op(
+        self,
+        operation: str,
+        payload: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 39: Verbatim-first 4-way RRF budgeted retrieval + Nemori surprise gating + CLM file-mirrored context + TMA-NM."""
+        eng = self._get_clm_rrf_memory_engine()
+        p = dict(payload or {})
+        op = str(operation).upper()
+        if op == "WRITE_SURPRISE_GATED":
+            return eng.write_surprise_gated(
+                record_id=str(p["record_id"]),
+                key=str(p["key"]),
+                verbatim_text=str(p["verbatim_text"]),
+                payload=p.get("payload"),
+                valid_from=p.get("valid_from"),
+                origin_token=str(p.get("origin_token", "TRUSTED_VERIFIER")),
+                min_surprise=float(p.get("min_surprise", 0.25)),
+                entities=p.get("entities") or (),
+                source_code=str(p.get("source_code", "")),
+            )
+        if op == "RETRIEVE_4WAY_RRF_BUDGETED":
+            return eng.retrieve_4way_rrf_budgeted(
+                str(p.get("query", "")),
+                char_budget=int(p.get("char_budget", 1200)),
+                top_k=int(p.get("top_k", 5)),
+                rrf_k=int(p.get("rrf_k", 60)),
+                query_source_code=str(p.get("query_source_code", "")),
+                query_entities=p.get("query_entities") or (),
+                at_time=p.get("at_time"),
+            )
+        if op == "CLM_OFFLOAD":
+            return eng.clm_offload(
+                str(p["context_text"]),
+                workspace_dir=p["workspace_dir"],
+                label=str(p.get("label", "working_ctx")),
+                min_bytes=int(p.get("min_bytes", 128)),
+            )
+        if op == "CLM_GREP_RESTORE":
+            return eng.clm_grep_restore(
+                p["offload_ref"],
+                pattern=p.get("pattern"),
+                max_chars=int(p.get("max_chars", 2000)),
+            )
+        raise UnifiedModelError(f"Unsupported CLM/RRF memory operation: {operation}")
+
+    def partial_route_with_jitrl(
+        self,
+        operation: str,
+        payload: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 39: Closed-form JitRL logit modulation + SkillTTA dynamic skill synthesis + Intra-task Partial Routing."""
+        from canonical.runtime.wave39_leapfrog_unification_v1 import PartialRoutingJitRLSkillTTAEngine
+
+        p = dict(payload or {})
+        op = str(operation).upper()
+        if op == "JITRL_MODULATE":
+            return PartialRoutingJitRLSkillTTAEngine.jitrl_modulate_logits(
+                p["prior_logits"],
+                state_signature=str(p.get("state_signature", "")),
+                episodic_receipts=p.get("episodic_receipts") or (),
+                beta=float(p.get("beta", 1.0)),
+            )
+        if op == "SKILLTTA_SYNTHESIZE":
+            return PartialRoutingJitRLSkillTTAEngine.skilltta_synthesize(
+                p["target_task"],
+                verified_traces=p.get("verified_traces") or (),
+                top_k=int(p.get("top_k", 3)),
+            )
+        if op == "PARTIAL_ROUTE":
+            return PartialRoutingJitRLSkillTTAEngine.partial_route_subtasks(
+                p.get("subtasks") or (),
+                compiled_skills=p.get("compiled_skills"),
+                symbolic_solver=p.get("symbolic_solver"),
+                mendel_solver=p.get("mendel_solver"),
+                pluggable_proposer=p.get("pluggable_proposer"),
+                delta_threshold=float(p.get("delta_threshold", 0.55)),
+                episodic_receipts=p.get("episodic_receipts") or (),
+                beta=float(p.get("beta", 0.5)),
+            )
+        raise UnifiedModelError(f"Unsupported Partial-Routing/JitRL operation: {operation}")
+
+    def self_verify_harvested_surfaces(self, *, limit: int = 40) -> dict[str, Any]:
+        """Wave 39: Live offline AST + SHA-256 + public-entrypoint audit over `harvested_capabilities`."""
+        from canonical.runtime.wave39_leapfrog_unification_v1 import PartialRoutingJitRLSkillTTAEngine
+
+        harvested = list(self.model.get("harvested_capabilities") or ())
+        return PartialRoutingJitRLSkillTTAEngine.self_verify_harvested_surfaces(
+            harvested,
+            repo_root=ROOT,
+            limit=int(limit),
+        )
 
 
 # --------------------------------------------------------------------------- helpers
@@ -6962,6 +7379,9 @@ def open_model(
     inst._model_loaded = full
     _OPEN_MODEL_MEM_CACHE[mem_key] = inst
     return inst
+
+
+load_unified_model = open_model
 
 
 def adapter_ast_index_map(path: Path | str | None = None) -> dict[str, Any]:

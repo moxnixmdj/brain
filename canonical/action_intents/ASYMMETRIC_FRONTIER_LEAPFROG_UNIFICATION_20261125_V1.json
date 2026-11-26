@@ -9,7 +9,7 @@
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "parent_capability": "canonical/runtime/brain_unified_model_v1.py + canonical/runtime/creature_runtime_v1.py",
-  "canonical_base_commit": "197373269a9f53dd15446a9fc84a65e3455e6830",
+  "canonical_base_commit": "414758fcc55b259ea8e37de7c17abd62bd1cf82e",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "causal_blocker": "Dormant repository engines (a_refusal_is_a_specification_v1, declared_input_derivation_v1, angelic_cegis_repair_v1, cow_angelic_zygote_v1, metamorphic_habitation_zipper_v1, passing_repairs_version_space_v1, osworld_v21_browser_cdp_v1, harbor_science_agent_v13, terminal_proof_supercompiler) were unwired from UnifiedModel and Creature, python_iterative_software_repair_loop_v1 starved non-legacy defect families and accepted vacuous 0-test/collection-error exits, browser_v1 blocked loopback HTTP on SPKI pinning, and UnifiedModel lacked OPINE/Twin replay-verified digital twins, exact Q cellular sheaf H^1 contradiction firewalls, SRMU hypervectors, Dual NNF Why-Absent semirings, PC-DGM Turchin supercompilation, and EggMind motif-cached goal-tree proving.",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Dormant repository engines (a_refusal_is_a_specification_v1, declared_input_derivation_v1, angelic_cegis_repair_v1, cow_angelic_zygote_v1, metamorphic_habitation_zipper_v1, passing_repairs_version_space_v1, osworld_v21_browser_cdp_v1, harbor_science_agent_v13, terminal_proof_supercompiler) were unwired from UnifiedModel and Creature, python_iterative_software_repair_loop_v1 starved non-legacy defect families and accepted vacuous 0-test/collection-error exits, browser_v1 blocked loopback HTTP on SPKI pinning, and UnifiedModel lacked OPINE/Twin replay-verified digital twins, exact Q cellular sheaf H^1 contradiction firewalls, SRMU hypervectors, Dual NNF Why-Absent semirings, PC-DGM Turchin supercompilation, and EggMind motif-cached goal-tree proving.",
@@ -123,7 +123,7 @@
     "wall_clock_cost_ub": 1
   },
   "recursive_obs": {
-    "canonical_base_commit": "197373269a9f53dd15446a9fc84a65e3455e6830",
+    "canonical_base_commit": "414758fcc55b259ea8e37de7c17abd62bd1cf82e",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "11 duplicated boundary-router envelope wrappers in brain_unified_model_v1.py collapsed into _wrap_boundary_call() (-29 net lines)",
@@ -233,7 +233,7 @@
       }
     ],
     "route_frontier": {
-      "canonical_base_commit": "197373269a9f53dd15446a9fc84a65e3455e6830",
+      "canonical_base_commit": "414758fcc55b259ea8e37de7c17abd62bd1cf82e",
       "checked_at_utc": "2026-11-26T18:15:47+00:00",
       "max_age_hours": 24,
       "discovery_required": true,

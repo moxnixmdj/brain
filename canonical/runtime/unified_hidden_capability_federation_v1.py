@@ -1699,6 +1699,232 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "required_inputs": ["pairs"],
         "declared_dependencies": [],
     },
+    "LEAPFROG_W39_ZERO_ADAPTER_INVENTORY_BRIDGE": {
+        "domain": "CAPABILITY_COMPOSITION_AND_ROUTING",
+        "source_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+        "entrypoint": "ZeroAdapterInventoryTypeBridge",
+        "summary": "Zero-wrapper bridge composing module_bridge_v1 (5,221 inventoried functions) with type_level_composer_v1 type graphs and tier-honest provenance.",
+        "triggers": [
+            "zero adapter inventory bridge",
+            "module bridge 5221 functions",
+            "type level composer chains",
+            "zero thin adapter dispatch",
+        ],
+        "required_inputs": ["goal"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W39_MOORE_ONTOLOGY_WITNESS_LEARNER": {
+        "domain": "INSTANT_LEARNING_AND_WORLD_MODELS",
+        "source_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+        "entrypoint": "GaloisWitnessMooreInstantLearner",
+        "summary": "Instant learning unifying action-invariant Moore bisimulation transfer, OPINE-World ontology-error predicate synthesis, FCA Galois lattices, and FlashMeta D4 witness inversion.",
+        "triggers": [
+            "moore bisimulation isomorphism transfer",
+            "opine world ontology error residual",
+            "flashmeta d4 inverse witness synthesis",
+            "fca galois concept lattice",
+            "unified_five_pillar_frontier_kernel",
+        ],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W39_LENS_STANDING_FACT_CU": {
+        "domain": "COMPUTER_USE_AND_GROUNDING",
+        "source_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+        "entrypoint": "LensStandingFactComputerUseEngine",
+        "summary": "Zero-screenshot computer use combining OOXML/JSON bijective lenses, relational record frames, CAS stale-frame click guards, standing-fact clobber recovery, and anti-false-DONE checks.",
+        "triggers": [
+            "bijective ooxml lens computer use",
+            "relational anchored frame cas seal",
+            "standing facts batch clobber recovery",
+            "anti false done implied ending gate",
+        ],
+        "required_inputs": ["instruction"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W39_DELTASTATE_SIBLING_SWE": {
+        "domain": "SWE_LOCALIZATION_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+        "entrypoint": "DeltaStateSiblingClosedSWEKernel",
+        "summary": "Multi-file SWE repair combining non-vacuous oracle calibration, Plastic Surgery donor mining, Coccinelle/SyDIT sibling closure, and DeltaBox warm-zygote os.fork() CoW rollouts.",
+        "triggers": [
+            "deltastate cow fork swe repair",
+            "coccinelle sydit multi file sibling closure",
+            "plastic surgery donor alphabet mining",
+            "calibrated judge non vacuous swe",
+        ],
+        "required_inputs": ["repo_root"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W39_PROSPECTIVE_MEMTX_REPLAY": {
+        "domain": "MEMORY_AND_BELIEF_REVISION",
+        "source_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+        "entrypoint": "ProspectiveEntrenchedMemTXEngine",
+        "summary": "Write-time Kumiho prospective cue indexing, MemTX/CPB root-disjoint Sybil echo blocking, AGM K*7/K*8 ordinal entrenchment, and RD-Forget selective replay unlearning.",
+        "triggers": [
+            "kumiho prospective cue indexing",
+            "memtx cpb sybil lineage gate",
+            "agm k7 k8 epistemic entrenchment",
+            "rd forget selective replay unlearning",
+        ],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W39_MEANING_IR_CROSS_LANG_RATCHET": {
+        "domain": "SKILL_COMPILATION_AND_ANTI_UNIFICATION",
+        "source_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+        "entrypoint": "MeaningIRSkillRatchetEngine",
+        "summary": "Babble/Stitch Meaning-IR anti-unification, zero-shot cross-language verified skill recall across Python/JS/TS/Go/Rust, 4-gate Hoare sequence verification, and MDL bit-rent eviction.",
+        "triggers": [
+            "meaning ir cross language skill transfer",
+            "babble stitch anti unification ratchet",
+            "hoare contract sequence undo gate",
+            "mdl bit rent active store eviction",
+        ],
+        "required_inputs": ["before_snippet", "after_snippet"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W39_AUTO_JUDGE_DISCOVERY": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/swe_kernel/auto_judge_discovery_v1.py",
+        "entrypoint": "discover_stdlib_candidates",
+        "summary": "Red Queen earned-judge discovery & refutation store (auto_judge_discovery_v1 + earn_a_judge_v1): earns live format/CLI judges from positive, decoy, and cross-kind bytes with zero hand-written oracles.",
+        "triggers": [
+            "auto judge discovery",
+            "earn a judge",
+            "red queen judge coevolution",
+            "stdlib artifact judge oracle",
+        ],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W39_EFFECT_CONTRACT_COMPOSER": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/effect_contract_composition_v1.py",
+        "entrypoint": "compose_chain",
+        "summary": "Typed (P,O,A,V,F) effect-contract chain composer and holdout survival verifier (effect_contract_composition_v1 + composition_verification_v1).",
+        "triggers": [
+            "effect contract composition",
+            "composition verification",
+            "typed skill chain undo conflict",
+            "poavf contract chain",
+        ],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W39_PARTIAL_ORDER_PLANNER": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/swe_kernel/partial_order_planner_v1.py",
+        "entrypoint": "plan",
+        "summary": "Complete causal-link partial-order planner solving Sussman's anomaly over measured operators plus horizon-bounded task decomposition.",
+        "triggers": [
+            "partial order planner",
+            "sussman anomaly planner",
+            "causal link threat resolution",
+            "horizon bounded execution",
+        ],
+        "required_inputs": ["initial_facts", "goal_facts", "operators"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W39_LIFTED_GENERALIZER": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/perfect_algorithm_lifted_generalization_v1.py",
+        "entrypoint": "lift_plan_sketch",
+        "summary": "Variable-invariant plan sketch lifter, applicability inducer, and 1-demonstration attraction basin verifier (perfect_algorithm_lifted_generalization_v1 + one_demonstration_basin_v1).",
+        "triggers": [
+            "lifted plan generalization",
+            "one demonstration basin",
+            "schema programmatic world model",
+            "tycho lifted skill sketch",
+        ],
+        "required_inputs": ["concrete_plan"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W39_REFUSAL_ORACLE_LIFTER": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/tools/the_check_mode_is_the_oracle_v1.py",
+        "entrypoint": "tokens_of",
+        "summary": "CLI-Anything/Agent-S4 --check/--dry-run oracle lifter, refusal-surface vocabulary classifier, and live witness type collapse (the_check_mode_is_the_oracle_v1 + an_actions_vocabulary_is_its_refusal_surface_v1 + a_type_you_wrote_is_a_type_you_guess_v1).",
+        "triggers": [
+            "check mode is the oracle",
+            "refusal surface vocabulary",
+            "dry run oracle lifter",
+            "witness type collapse",
+        ],
+        "required_inputs": ["help_text"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W39_OBSERVATION_REFUTATION_AND_PROVENANCE": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/runtime/observation_refutation_v1.py",
+        "entrypoint": "run",
+        "summary": "Live observation refutation survival gate, relational run-goal version-space identification, and AST provenance-over-shape feature lifting.",
+        "triggers": [
+            "observation refutation",
+            "goal relation over run",
+            "provenance not shape",
+            "causal refutation witness",
+        ],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W39_DECISION_COST_COW_GATE": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/tools/what_a_decision_costs_v1.py",
+        "entrypoint": "decisive",
+        "summary": "DeltaBox/Sandlock-style decision-theoretic version-space agreement gate + real POSIX os.fork() Copy-on-Write speculative verifier paying forks ONLY where surviving hypotheses disagree.",
+        "triggers": [
+            "what a decision costs",
+            "decision cost cow gate",
+            "deltabox sandlock cow speculation",
+            "version space agreement fork",
+        ],
+        "required_inputs": ["survivor_requirements", "observed_facts"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W39_RED_QUEEN_MENDEL_EVOLVER": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/runtime/wave39_leapfrog_unification_v1.py",
+        "entrypoint": "RedQueenMendelEvolver.mendel_splice_and_verify",
+        "summary": "Mendel Gödel Machine comparative cross-lineage patch splicing + ALBI semantic-anonymization invariance + Anti-Slop (SlopCodeBench), No-Phantom-Guardrails, and Symbol-Ownership admission gate.",
+        "triggers": [
+            "mendel godel machine",
+            "red queen godel machine",
+            "dual program splicing",
+            "albi semantic anonymization",
+            "anti slop phantom guardrails",
+        ],
+        "required_inputs": ["parent_source", "lineage_a", "lineage_b"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W39_CLM_RRF_MEMORY_BUS": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/wave39_leapfrog_unification_v1.py",
+        "entrypoint": "CLMRRFMemoryEngine",
+        "summary": "Verbatim-first 4-way RRF budgeted retrieval (Hindsight/BEAM-10M) + Nemori free-energy surprise gating + CLM file-mirrored editable working context with TMA-NM HMAC integrity.",
+        "triggers": [
+            "clm context language model",
+            "hindsight 4-way rrf",
+            "nemori surprise gated memory",
+            "verbatim budgeted memory retrieval",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W39_PARTIAL_ROUTING_AND_JITRL": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/wave39_leapfrog_unification_v1.py",
+        "entrypoint": "PartialRoutingJitRLSkillTTAEngine",
+        "summary": "Exact closed-form KL-RL JitRL logit modulation + SkillTTA dynamic task-contract skill synthesis + intra-task Partial Routing (Rung 0->1->2->3) + live offline harvested-surface self-verifier.",
+        "triggers": [
+            "jitrl closed form logit modulation",
+            "skilltta dynamic skill compilation",
+            "intra task partial routing",
+            "harvested surface live self verifier",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
     "METAMORPHIC_HABITATION_ZIPPER": {
         "domain": "SWE_LOCALIZATION_AND_REPAIR",
         "source_path": "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
@@ -2332,6 +2558,193 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
             "canonical/runtime/swe_observational_program_synthesizer_v1.py",
             "canonical/runtime/osworld_v21_browser_cdp_v1.py",
             "canonical/runtime/terminal_proof_supercompiler.py",
+        ],
+    },
+    "mendel_red_queen_anti_slop_coevolution": {
+        "external_names": [
+            "mendel godel machine",
+            "mendel gm",
+            "red queen godel machine",
+            "red queen gm",
+            "hyperagents",
+            "albi",
+            "reason popper-ly",
+            "semantic anonymization",
+            "slopcodebench",
+            "bad genius",
+            "phantom guardrails",
+            "when good verifiers go bad",
+            "harness evolution hits a ceiling",
+            "dual program splicing",
+            "earned judge",
+            "auto judge discovery",
+            "self-play swe-rl",
+            "spade",
+            "adaptive auto-harness",
+            "evaluation-free rsi",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W39_RED_QUEEN_MENDEL_EVOLVER",
+            "engine:LEAPFROG_W39_AUTO_JUDGE_DISCOVERY",
+            "engine:LEAPFROG_W38_CONSISTENCY_EQUIVALENCE_AND_JUDGE",
+            "engine:LEAPFROG_W38_RESIDUAL_WALL_CLOSERS",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave39_leapfrog_unification_v1.py",
+            "canonical/swe_kernel/dual_program_splicing_v1.py",
+            "canonical/swe_kernel/auto_judge_discovery_v1.py",
+            "canonical/runtime/earn_a_judge_v1.py",
+        ],
+    },
+    "clm_hindsight_nemori_verbatim_memory": {
+        "external_names": [
+            "clm",
+            "context language models",
+            "rlm",
+            "recursive language models",
+            "hindsight",
+            "beam-10m",
+            "memoryarena",
+            "beyond memory leaderboards",
+            "verbatim memory",
+            "4-way rrf",
+            "nemori",
+            "sleepgate",
+            "lightmem",
+            "evermemos",
+            "graphiti",
+            "mempalace",
+            "memory-r1",
+            "a-mac",
+            "cl-bench",
+            "file mirrored working context",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W39_CLM_RRF_MEMORY_BUS",
+            "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
+            "engine:LEAPFROG_W38_CONTENT_ADDRESSED_CHUNK_ARCHIVE",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave39_leapfrog_unification_v1.py",
+            "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+        ],
+    },
+    "partial_routing_jitrl_skilltta_world_models": {
+        "external_names": [
+            "jitrl",
+            "skilltta",
+            "partial routing",
+            "schema world model",
+            "tycho",
+            "prime agent",
+            "weight-space programming",
+            "doc-to-lora",
+            "microfitting",
+            "sdft",
+            "op-mix",
+            "l#^2",
+            "l#_e",
+            "active automata learning",
+            "effect contract composition",
+            "partial order planner",
+            "sussman anomaly",
+            "lifted generalization",
+            "one demonstration basin",
+            "observation refutation",
+            "provenance not shape",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W39_PARTIAL_ROUTING_AND_JITRL",
+            "engine:LEAPFROG_W39_EFFECT_CONTRACT_COMPOSER",
+            "engine:LEAPFROG_W39_PARTIAL_ORDER_PLANNER",
+            "engine:LEAPFROG_W39_LIFTED_GENERALIZER",
+            "engine:LEAPFROG_W39_OBSERVATION_REFUTATION_AND_PROVENANCE",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave39_leapfrog_unification_v1.py",
+            "canonical/swe_kernel/effect_contract_composition_v1.py",
+            "canonical/swe_kernel/partial_order_planner_v1.py",
+            "canonical/swe_kernel/perfect_algorithm_lifted_generalization_v1.py",
+            "canonical/runtime/observation_refutation_v1.py",
+            "canonical/tools/provenance_not_shape_v1.py",
+        ],
+    },
+    "deltabox_sandlock_decision_cost_cow_and_check_oracle": {
+        "external_names": [
+            "deltabox",
+            "deltafs",
+            "deltacr",
+            "sandlock",
+            "what a decision costs",
+            "decision cost cow gate",
+            "the check mode is the oracle",
+            "refusal surface vocabulary",
+            "a type you wrote is a type you guess",
+            "witness type discovery",
+            "scalecua",
+            "qwen-ui-agent",
+            "verigen",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W39_DECISION_COST_COW_GATE",
+            "engine:LEAPFROG_W39_REFUSAL_ORACLE_LIFTER",
+            "engine:LEAPFROG_W38_SECCOMP_SYSCALL_ALLOWLIST",
+            "engine:LEAPFROG_W37_OS_KERNEL_ISOLATION",
+        ],
+        "koan_modules": [
+            "canonical/tools/what_a_decision_costs_v1.py",
+            "canonical/tools/the_check_mode_is_the_oracle_v1.py",
+            "canonical/tools/an_actions_vocabulary_is_its_refusal_surface_v1.py",
+            "canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py",
+        ],
+    },
+    "five_pillar_frontier_unification_w39": {
+        "external_names": [
+            "flashmeta",
+            "prose d4",
+            "inverse witness function",
+            "galois concept lattice",
+            "tycho moore machine",
+            "opine-world",
+            "ontology error residual",
+            "optician boomerang lens",
+            "anchored relational frame",
+            "standing facts frame axiom",
+            "deltabox",
+            "warm zygote cow fork",
+            "coccinelle",
+            "sydit sibling edit",
+            "plastic surgery hypothesis",
+            "kumiho",
+            "prospective cue indexing",
+            "memtx",
+            "cpb sybil echo",
+            "epistemic entrenchment",
+            "rd-forget",
+            "forgetting without restarting",
+            "selective replay unlearning",
+            "babble stitch",
+            "cross language meaning ir",
+            "mdl bit rent",
+            "zero adapter module bridge",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W39_ZERO_ADAPTER_INVENTORY_BRIDGE",
+            "engine:LEAPFROG_W39_MOORE_ONTOLOGY_WITNESS_LEARNER",
+            "engine:LEAPFROG_W39_LENS_STANDING_FACT_CU",
+            "engine:LEAPFROG_W39_DELTASTATE_SIBLING_SWE",
+            "engine:LEAPFROG_W39_PROSPECTIVE_MEMTX_REPLAY",
+            "engine:LEAPFROG_W39_MEANING_IR_CROSS_LANG_RATCHET",
+        ],
+        "koan_modules": [
+            "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+            "canonical/runtime/module_bridge_v1.py",
+            "canonical/runtime/type_level_composer_v1.py",
+            "canonical/runtime/transition_system_identity_v1.py",
+            "canonical/runtime/anchored_frame_v1.py",
+            "canonical/swe_kernel/standing_facts_v1.py",
+            "canonical/swe_kernel/systematic_edit_supply_v1.py",
+            "canonical/swe_kernel/language_neutral_skill_bridge_v1.py",
         ],
     },
 }
@@ -4427,6 +4840,239 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
         if lens is None:
             return _fail(mode, "NO_BIDIRECTIONAL_LENS")
         return _ok(mode, "BIDIRECTIONAL_LENS_SYNTHESIZED", {"lens_kind": type(lens).__name__, "description": repr(lens)[:240]})
+
+    if mode == "LEAPFROG_W39_ZERO_ADAPTER_INVENTORY_BRIDGE":
+        from canonical.swe_kernel.unified_five_pillar_frontier_kernel_v1 import shared_five_pillar_kernel
+
+        req_in = dict(inputs)
+        goal_str = str(req_in.pop("goal"))
+        res = shared_five_pillar_kernel().inventory_bridge.query_and_compose(goal_str, **req_in)
+        return _ok(mode, "ZERO_ADAPTER_INVENTORY_QUERIED", res)
+
+    if mode == "LEAPFROG_W39_MOORE_ONTOLOGY_WITNESS_LEARNER":
+        from canonical.swe_kernel.unified_five_pillar_frontier_kernel_v1 import shared_five_pillar_kernel
+
+        res = shared_five_pillar_kernel().instant_learner.learn_and_transfer(**dict(inputs))
+        if not res.get("pass"):
+            return _fail(mode, "MOORE_WITNESS_UNRESOLVED", detail=res)
+        return _ok(mode, "MOORE_WITNESS_LEARNED", res)
+
+    if mode == "LEAPFROG_W39_LENS_STANDING_FACT_CU":
+        from canonical.swe_kernel.unified_five_pillar_frontier_kernel_v1 import shared_five_pillar_kernel
+
+        res = shared_five_pillar_kernel().computer_use.execute_workflow(**dict(inputs))
+        if not res.get("pass"):
+            return _fail(mode, "LENS_CU_REFUSED", detail=res)
+        return _ok(mode, "LENS_CU_VERIFIED", res)
+
+    if mode == "LEAPFROG_W39_DELTASTATE_SIBLING_SWE":
+        from canonical.swe_kernel.unified_five_pillar_frontier_kernel_v1 import shared_five_pillar_kernel
+
+        req_in = dict(inputs)
+        rr = req_in.pop("repo_root")
+        res = shared_five_pillar_kernel().swe_kernel.repair_repository(rr, **req_in)
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("status") or "DELTASTATE_SWE_UNSOLVED"), detail=res)
+        return _ok(mode, str(res.get("status") or "DELTASTATE_SWE_REPAIRED"), res)
+
+    if mode == "LEAPFROG_W39_PROSPECTIVE_MEMTX_REPLAY":
+        from canonical.swe_kernel.unified_five_pillar_frontier_kernel_v1 import shared_five_pillar_kernel
+
+        res = shared_five_pillar_kernel().run_turn("memtx_op", pillar="MEMORY", payload=dict(inputs))
+        if not res.get("pass"):
+            return _fail(mode, "PROSPECTIVE_MEMTX_BLOCKED", detail=res)
+        return _ok(mode, "PROSPECTIVE_MEMTX_COMMITTED", res)
+
+    if mode == "LEAPFROG_W39_MEANING_IR_CROSS_LANG_RATCHET":
+        from canonical.swe_kernel.unified_five_pillar_frontier_kernel_v1 import shared_five_pillar_kernel
+
+        res = shared_five_pillar_kernel().skill_ratchet.consolidate_and_transfer(**dict(inputs))
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("status") or "MEANING_IR_RATCHET_REFUSED"), detail=res)
+        return _ok(mode, "MEANING_IR_RATCHET_CONSOLIDATED", res)
+
+    if mode == "LEAPFROG_W39_AUTO_JUDGE_DISCOVERY":
+        from canonical.runtime.wave39_leapfrog_unification_v1 import EarnedJudgeAndRefusalLifter
+
+        res = EarnedJudgeAndRefusalLifter.discover_and_earn_judges(
+            artifacts_by_kind=inputs.get("artifacts_by_kind"),
+            store_dir=inputs.get("store_dir"),
+            include_stdlib_discovery=bool(inputs.get("include_stdlib_discovery", True)),
+            cli_probe=inputs.get("cli_probe"),
+        )
+        return _ok(mode, "AUTO_JUDGES_DISCOVERED", res) if res.get("pass") else _fail(mode, "JUDGE_DISCOVERY_FAILED", res)
+
+    if mode == "LEAPFROG_W39_EFFECT_CONTRACT_COMPOSER":
+        from canonical.runtime.wave39_leapfrog_unification_v1 import ContractPlannerAndLiftedGeneralizer
+
+        res = ContractPlannerAndLiftedGeneralizer.compose_and_plan(
+            use_measured_advance_pair=bool(inputs.get("use_measured_advance_pair", True)),
+            contracts=inputs.get("contracts"),
+        )
+        return _ok(mode, "EFFECT_CONTRACTS_COMPOSED", res) if res.get("pass") else _fail(mode, "CONTRACT_COMPOSITION_FAILED", res)
+
+    if mode == "LEAPFROG_W39_PARTIAL_ORDER_PLANNER":
+        from canonical.runtime.wave39_leapfrog_unification_v1 import ContractPlannerAndLiftedGeneralizer
+
+        res = ContractPlannerAndLiftedGeneralizer.compose_and_plan(
+            use_measured_advance_pair=False,
+            initial_facts=inputs.get("initial_facts") or (),
+            goal_facts=inputs.get("goal_facts") or (),
+            operators=inputs.get("operators") or (),
+        )
+        return _ok(mode, "PARTIAL_ORDER_PLAN_SOLVED", res) if res.get("pass") else _fail(mode, "PARTIAL_ORDER_PLAN_FAILED", res)
+
+    if mode == "LEAPFROG_W39_LIFTED_GENERALIZER":
+        from canonical.runtime.wave39_leapfrog_unification_v1 import ContractPlannerAndLiftedGeneralizer
+
+        res = ContractPlannerAndLiftedGeneralizer.compose_and_plan(
+            use_measured_advance_pair=False,
+            concrete_plan=inputs.get("concrete_plan") or (),
+            goal_facts=inputs.get("goal_facts") or (),
+            success_states=inputs.get("success_states"),
+            failure_states=inputs.get("failure_states"),
+        )
+        return _ok(mode, "PLAN_SKETCH_LIFTED", res) if res.get("pass") else _fail(mode, "PLAN_LIFT_FAILED", res)
+
+    if mode == "LEAPFROG_W39_REFUSAL_ORACLE_LIFTER":
+        from canonical.runtime.wave39_leapfrog_unification_v1 import EarnedJudgeAndRefusalLifter
+
+        res = EarnedJudgeAndRefusalLifter.lift_refusal_and_check_oracle(
+            str(inputs.get("help_text") or ""),
+            refusal_lines=inputs.get("refusal_lines") or (),
+            action_argv=inputs.get("action_argv") or ("tool", "target"),
+            paths=inputs.get("paths") or (),
+            type_map=inputs.get("type_map"),
+            labels=inputs.get("labels"),
+        )
+        return _ok(mode, "REFUSAL_ORACLE_LIFTED", res) if res.get("pass") else _fail(mode, "REFUSAL_ORACLE_LIFT_FAILED", res)
+
+    if mode == "LEAPFROG_W39_OBSERVATION_REFUTATION_AND_PROVENANCE":
+        from canonical.runtime.wave39_leapfrog_unification_v1 import ContractPlannerAndLiftedGeneralizer
+
+        res = ContractPlannerAndLiftedGeneralizer.compose_and_plan(
+            use_measured_advance_pair=False,
+            ast_provenance_source=inputs.get("ast_provenance_source"),
+            run_observation_refutation=bool(inputs.get("run_observation_refutation", True)),
+        )
+        return _ok(mode, "OBSERVATION_REFUTATION_AND_PROVENANCE_COMPLETE", res)
+
+    if mode == "LEAPFROG_W39_DECISION_COST_COW_GATE":
+        from canonical.runtime.wave39_leapfrog_unification_v1 import SpeculativeCoWDecisionGate
+
+        res = SpeculativeCoWDecisionGate.decide_and_speculate(
+            survivor_requirements=inputs.get("survivor_requirements") or (),
+            observed_facts=inputs.get("observed_facts") or (),
+            p_correct=float(inputs.get("p_correct", 0.5)),
+            wrong_commit_cost=float(inputs.get("wrong_commit_cost", 10.0)),
+            cow_trial_cost=float(inputs.get("cow_trial_cost", 0.002)),
+            candidates=inputs.get("candidates"),
+            verifier=inputs.get("verifier"),
+            timeout_s=float(inputs.get("timeout_s", 5.0)),
+        )
+        return _ok(mode, "COW_DECISION_GATE_COMPLETE", res) if res.get("pass") else _fail(mode, "COW_DECISION_GATE_FAILED", res)
+
+    if mode == "LEAPFROG_W39_RED_QUEEN_MENDEL_EVOLVER":
+        from canonical.runtime.wave39_leapfrog_unification_v1 import RedQueenMendelEvolver
+
+        if inputs.get("audit_only"):
+            res = RedQueenMendelEvolver.audit_anti_slop_and_phantom_guardrails(
+                str(inputs["parent_source"]),
+                str(inputs["candidate_source"]),
+                failing_witness=inputs.get("failing_witness"),
+                owned_symbols=inputs.get("owned_symbols"),
+                max_ast_bloat_ratio=float(inputs.get("max_ast_bloat_ratio", 1.60)),
+                max_added_branches=int(inputs.get("max_added_branches", 6)),
+                require_albi_invariance=bool(inputs.get("require_albi_invariance", True)),
+            )
+            return _ok(mode, "ANTI_SLOP_AUDIT_COMPLETE", res) if res.get("admitted") else _fail(mode, "ANTI_SLOP_REJECTED", res)
+        verifier = inputs.get("verifier")
+        if not callable(verifier):
+            return _fail(mode, "VERIFIER_CALLABLE_REQUIRED")
+        res = RedQueenMendelEvolver.mendel_splice_and_verify(
+            str(inputs["parent_source"]),
+            str(inputs["lineage_a"]),
+            str(inputs["lineage_b"]),
+            verifier=verifier,
+            failing_witness=inputs.get("failing_witness"),
+            owned_symbols=inputs.get("owned_symbols"),
+            max_ast_bloat_ratio=float(inputs.get("max_ast_bloat_ratio", 1.60)),
+            max_added_branches=int(inputs.get("max_added_branches", 6)),
+            require_albi_invariance=bool(inputs.get("require_albi_invariance", True)),
+        )
+        return _ok(mode, "MENDEL_RED_QUEEN_EVOLVED", res) if res.get("pass") else _fail(mode, "MENDEL_NO_ADMITTED_HYBRID", res)
+
+    if mode == "LEAPFROG_W39_CLM_RRF_MEMORY_BUS":
+        from canonical.runtime.wave39_leapfrog_unification_v1 import CLMRRFMemoryEngine
+
+        eng = inputs.get("engine") or CLMRRFMemoryEngine()
+        op = str(inputs.get("operation") or "RETRIEVE_4WAY_RRF_BUDGETED").upper()
+        if op == "WRITE_SURPRISE_GATED":
+            res = eng.write_surprise_gated(
+                record_id=str(inputs["record_id"]),
+                key=str(inputs["key"]),
+                verbatim_text=str(inputs["verbatim_text"]),
+                payload=inputs.get("payload"),
+                valid_from=inputs.get("valid_from"),
+                origin_token=str(inputs.get("origin_token", "TRUSTED_VERIFIER")),
+                min_surprise=float(inputs.get("min_surprise", 0.25)),
+                entities=inputs.get("entities") or (),
+                source_code=str(inputs.get("source_code", "")),
+            )
+        elif op == "CLM_OFFLOAD":
+            res = eng.clm_offload(
+                str(inputs["context_text"]),
+                workspace_dir=inputs["workspace_dir"],
+                label=str(inputs.get("label", "working_ctx")),
+                min_bytes=int(inputs.get("min_bytes", 128)),
+            )
+        elif op == "CLM_GREP_RESTORE":
+            res = eng.clm_grep_restore(
+                inputs["offload_ref"],
+                pattern=inputs.get("pattern"),
+                max_chars=int(inputs.get("max_chars", 2000)),
+            )
+        else:
+            res = eng.retrieve_4way_rrf_budgeted(
+                str(inputs.get("query") or goal),
+                char_budget=int(inputs.get("char_budget", 1200)),
+                top_k=int(inputs.get("top_k", 5)),
+                rrf_k=int(inputs.get("rrf_k", 60)),
+                query_source_code=str(inputs.get("query_source_code", "")),
+                query_entities=inputs.get("query_entities") or (),
+                at_time=inputs.get("at_time"),
+            )
+        return _ok(mode, f"CLM_RRF_{op}", res) if res.get("pass") else _fail(mode, f"CLM_RRF_{op}_FAILED", res)
+
+    if mode == "LEAPFROG_W39_PARTIAL_ROUTING_AND_JITRL":
+        from canonical.runtime.wave39_leapfrog_unification_v1 import PartialRoutingJitRLSkillTTAEngine
+
+        op = str(inputs.get("operation") or "JITRL_MODULATE").upper()
+        if op == "SKILLTTA_SYNTHESIZE":
+            res = PartialRoutingJitRLSkillTTAEngine.skilltta_synthesize(
+                inputs["target_task"],
+                verified_traces=inputs.get("verified_traces") or (),
+                top_k=int(inputs.get("top_k", 3)),
+            )
+        elif op == "PARTIAL_ROUTE":
+            res = PartialRoutingJitRLSkillTTAEngine.partial_route_subtasks(
+                inputs.get("subtasks") or (),
+                compiled_skills=inputs.get("compiled_skills"),
+                symbolic_solver=inputs.get("symbolic_solver"),
+                mendel_solver=inputs.get("mendel_solver"),
+                pluggable_proposer=inputs.get("pluggable_proposer"),
+                delta_threshold=float(inputs.get("delta_threshold", 0.55)),
+                episodic_receipts=inputs.get("episodic_receipts") or (),
+                beta=float(inputs.get("beta", 0.5)),
+            )
+        else:
+            res = PartialRoutingJitRLSkillTTAEngine.jitrl_modulate_logits(
+                inputs["prior_logits"],
+                state_signature=str(inputs.get("state_signature") or goal),
+                episodic_receipts=inputs.get("episodic_receipts") or (),
+                beta=float(inputs.get("beta", 1.0)),
+            )
+        return _ok(mode, f"PARTIAL_JITRL_{op}", res) if res.get("pass") else _fail(mode, f"PARTIAL_JITRL_{op}_FAILED", res)
 
     if mode == "METAMORPHIC_HABITATION_ZIPPER":
         from canonical.swe_kernel import metamorphic_habitation_zipper_v1 as m
