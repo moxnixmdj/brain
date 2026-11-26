@@ -5277,6 +5277,7 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
         residual_proposer: Any = None,
         keep_patch_applied: bool = False,
         timeout_s: float = 30.0,
+        skill_store_path: str | Path | None = None,
     ) -> dict[str, Any]:
         """Wave 23: Repo-Native Multi-File SWE Engine (`0D` × 7 hidden SWE superweapons + CoW Zygote + online crystallization)."""
         res = self.boundary_router.route_swe_repo_native_multifile(
@@ -5292,6 +5293,7 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
             residual_proposer=residual_proposer,
             keep_patch_applied=keep_patch_applied,
             timeout_s=timeout_s,
+            skill_store_path=skill_store_path,
         )
         passed = bool(res.get("pass"))
         return self._envelope(

@@ -1,0 +1,137 @@
+{
+  "arms": {
+    "EMPTY_STORE_NO_PROPOSER": {
+      "BINOP_INVERT": {
+        "elapsed_s": 0.118,
+        "expect_shape_present": true,
+        "learned_skill_id": "trm_cc27e48e4337de74",
+        "model_calls": 0,
+        "pass_independently_verified": true,
+        "pass_reported": true,
+        "recalled_morphism_id": null,
+        "status": "PASS__REPO_NATIVE_ANGELIC_OE_STRUCTURAL",
+        "task": "BINOP_INVERT",
+        "tier": "ANGELIC_OE_STRUCTURAL"
+      },
+      "GUARD_NONE_FALLBACK": {
+        "elapsed_s": 0.454,
+        "expect_shape_present": false,
+        "learned_skill_id": null,
+        "model_calls": 0,
+        "pass_independently_verified": false,
+        "pass_reported": false,
+        "recalled_morphism_id": null,
+        "status": "FAIL_CLOSED__RESIDUAL_HOLE_NEEDS_PROPOSER",
+        "task": "GUARD_NONE_FALLBACK",
+        "tier": "REPO_NATIVE_EXHAUSTED_FAIL_CLOSED"
+      },
+      "HELD_OUT_DIFFERENT_VOCABULARY": {
+        "elapsed_s": 0.428,
+        "expect_shape_present": false,
+        "learned_skill_id": null,
+        "model_calls": 0,
+        "pass_independently_verified": false,
+        "pass_reported": false,
+        "recalled_morphism_id": null,
+        "status": "FAIL_CLOSED__RESIDUAL_HOLE_NEEDS_PROPOSER",
+        "task": "HELD_OUT_DIFFERENT_VOCABULARY",
+        "tier": "REPO_NATIVE_EXHAUSTED_FAIL_CLOSED"
+      }
+    },
+    "OVERFIT_LITERAL_ADMISSION": {
+      "GUARD_NONE_FALLBACK": {
+        "elapsed_s": 0.415,
+        "expect_shape_present": false,
+        "learned_skill_id": null,
+        "model_calls": 1,
+        "pass_independently_verified": false,
+        "pass_reported": false,
+        "recalled_morphism_id": null,
+        "status": "FAIL_CLOSED__RESIDUAL_PROPOSALS_REJECTED_BY_COW_ORACLE",
+        "task": "GUARD_NONE_FALLBACK",
+        "tier": "REPO_NATIVE_EXHAUSTED_FAIL_CLOSED"
+      }
+    },
+    "SEEDED_STORE_NO_PROPOSER": {
+      "HELD_OUT_DIFFERENT_VOCABULARY": {
+        "elapsed_s": 0.136,
+        "expect_shape_present": true,
+        "learned_skill_id": null,
+        "model_calls": 0,
+        "pass_independently_verified": true,
+        "pass_reported": true,
+        "recalled_morphism_id": "trm_33fd6e7daaf9970e",
+        "status": "PASS__SKILL_STORE_RECALL_VERIFIED",
+        "task": "HELD_OUT_DIFFERENT_VOCABULARY",
+        "tier": "SKILL_STORE_RECALL"
+      },
+      "TEACH_GUARD_NONE_FALLBACK": {
+        "elapsed_s": 0.451,
+        "expect_shape_present": true,
+        "learned_skill_id": "trm_33fd6e7daaf9970e",
+        "model_calls": 1,
+        "pass_independently_verified": true,
+        "pass_reported": true,
+        "recalled_morphism_id": null,
+        "status": "PASS__INVERTED_RESIDUAL_HOLE_VERIFIED",
+        "task": "GUARD_NONE_FALLBACK",
+        "tier": "INVERTED_RESIDUAL_HOLE_VERIFIED"
+      }
+    }
+  },
+  "authority": "NONE_SANDBOX",
+  "model_counts": {
+    "bound_capabilities": 153,
+    "capabilities": 462,
+    "engines": 234,
+    "extended_source_index_modules": 675,
+    "federated_kernel_engines": 208,
+    "frontier_leapfrog_organs": 21,
+    "harvested_capabilities": 659,
+    "knowledge_documents": 754,
+    "receipt_backed_capabilities": 309,
+    "research_index_records": 7444,
+    "routing_tokens": 3147,
+    "skills": 18,
+    "source_index_entry_points": 567,
+    "source_index_modules": 2264
+  },
+  "model_digest": "3b07552726d7c05719f7c905570656d98293ea93bd9b8a52f865ac4505a3e864",
+  "not_the_real_benchmarks": [
+    "SWE_BENCH_PRO_V2_NOT_RUN__DOCKER_UNAVAILABLE",
+    "TERMINAL_BENCH_4_NOT_RUN__DOCKER_UNAVAILABLE",
+    "OSWORLD_2_1_NOT_RUN__NO_DISPLAY_AND_NO_DOCKER"
+  ],
+  "schema": "SWE_BENCH_LOCAL_HARNESS_V1",
+  "summary": {
+    "ablations": {
+      "admission_gate": {
+        "overfit_patch_status": "FAIL_CLOSED__RESIDUAL_PROPOSALS_REJECTED_BY_COW_ORACLE",
+        "overfit_patch_verified": false,
+        "reading": "A suite-green patch that hardcodes the witness must be refused, not shipped."
+      },
+      "memory_empty_vs_seeded_transfer": {
+        "empty_store_held_out_pass": false,
+        "reading": "If these differ, the store carried the capability and nothing else did.",
+        "seeded_store_held_out_pass": true
+      }
+    },
+    "arms": {
+      "EMPTY_STORE_NO_PROPOSER": {
+        "independently_verified_passes": 1,
+        "tasks": 3,
+        "total_model_calls": 0
+      },
+      "OVERFIT_LITERAL_ADMISSION": {
+        "independently_verified_passes": 0,
+        "tasks": 1,
+        "total_model_calls": 1
+      },
+      "SEEDED_STORE_NO_PROPOSER": {
+        "independently_verified_passes": 2,
+        "tasks": 2,
+        "total_model_calls": 1
+      }
+    }
+  }
+}

@@ -29,6 +29,7 @@ import json
 import os
 import pathlib
 import select
+import shutil
 import signal
 import sys
 import tempfile
@@ -258,6 +259,16 @@ def _execute_suite_in_current_process(
 ) -> dict[str, Any]:
     """Run discovered tests inside an already-isolated child process."""
     os.chdir(str(repo_root))
+    # A stale `.pyc` from a previous run in the same directory reports the OLD source. Measured
+    # 2026-11-26: after a verified patch was applied, the runner still reported the pre-patch
+    # assertion, so the post-state could never be confirmed. The runner never needs a bytecode
+    # cache (each child is a fresh fork), so caching is disabled outright rather than invalidated.
+    sys.dont_write_bytecode = True
+    for _cache in repo_root.rglob("__pycache__"):
+        try:
+            shutil.rmtree(_cache, ignore_errors=True)
+        except OSError:
+            pass
     src_dir = repo_root / "src"
     for p in ([str(src_dir), str(repo_root)] if src_dir.is_dir() else [str(repo_root)]):
         if p in sys.path:
