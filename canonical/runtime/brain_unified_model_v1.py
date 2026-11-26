@@ -121,7 +121,12 @@ def path_literals(text: str, root: str | Path | None = None) -> list[str]:
     what keeps prose out -- "and/or", "read/write" and "input/output" match the
     path shape but resolve to no parent directory, so they stay question words.
     """
-    body = _URL_LITERAL.sub(" ", str(text or ""))
+    s_text = str(text or "")
+    if "/" not in s_text:
+        return []
+    body = _URL_LITERAL.sub(" ", s_text)
+    if "/" not in body:
+        return []
     rr = Path(ROOT if root is None else root).resolve()
     found: list[str] = []
     for match in _PATH_LITERAL.finditer(body):
@@ -164,8 +169,9 @@ def ask_tokens(text: str, root: str | Path | None = None) -> list[str]:
     untouched: only the denominator of the coverage budget changes.
     """
     ask = str(text or "")
-    for literal in path_literals(ask, root):
-        ask = ask.replace(literal, " ")
+    if "/" in ask:
+        for literal in path_literals(ask, root):
+            ask = ask.replace(literal, " ")
     return tokenize(ask)
 
 
@@ -173,11 +179,33 @@ def ask_tokens(text: str, root: str | Path | None = None) -> list[str]:
 
 
 _VERIFIED_BLOB_DIGESTS: dict[str, str] = {}
+_VERIFIED_DIGEST_TO_RAW_SHA: dict[str, str] = {}
 _OPEN_MODEL_MEM_CACHE: dict[tuple[str, int, int], "UnifiedModel"] = {}
+_MMAP_CSR_MEM_CACHE: dict[tuple[str, str], Any] = {}
 
 
 def _core_cache_dir() -> Path:
     return ROOT / "canonical" / "astra_runtime" / "tmp"
+
+
+def _get_mmap_csr(section: str, raw_sha: str) -> Any | None:
+    if not raw_sha:
+        return None
+    key = (section, raw_sha)
+    hit = _MMAP_CSR_MEM_CACHE.get(key)
+    if hit is not None:
+        return hit
+    csr_path = _core_cache_dir() / f"unified_model_csr_{section}_{raw_sha[:32]}.bin"
+    if not csr_path.is_file():
+        return None
+    try:
+        from canonical.runtime.mmap_csr_slot_index_v1 import MmapCSRIndex
+
+        reader = MmapCSRIndex(csr_path)
+        _MMAP_CSR_MEM_CACHE[key] = reader
+        return reader
+    except Exception:
+        return None
 
 
 def load_model(
@@ -203,6 +231,22 @@ def load_model(
     if verify:
         declared = (model.get("digest") or {}).get("value")
         cached_dig = _VERIFIED_BLOB_DIGESTS.get(raw_sha)
+        if cached_dig is None:
+            core_file = _core_cache_dir() / f"unified_model_core_{raw_sha[:32]}.marshal"
+            if core_file.is_file():
+                try:
+                    core_blob = marshal.loads(core_file.read_bytes())
+                    if (
+                        isinstance(core_blob, dict)
+                        and core_blob.get("core_format_v") == 5
+                        and core_blob.get("raw_sha256") == raw_sha
+                        and core_blob.get("schema") == SCHEMA
+                        and core_blob.get("digest_value")
+                    ):
+                        cached_dig = str(core_blob["digest_value"])
+                        _VERIFIED_BLOB_DIGESTS[raw_sha] = cached_dig
+                except Exception:
+                    cached_dig = None
         if cached_dig is not None:
             recomputed = cached_dig
         else:
@@ -211,6 +255,7 @@ def load_model(
                 _VERIFIED_BLOB_DIGESTS[raw_sha] = recomputed
         if not declared or declared != recomputed:
             raise UnifiedModelError("MODEL_DIGEST_MISMATCH")
+        _VERIFIED_DIGEST_TO_RAW_SHA[str(declared)] = raw_sha
     return model
 
 
@@ -423,8 +468,27 @@ class UnifiedModel:
             confidence = self._core_meta.get("confidence") or {}
         else:
             self._model_loaded = dict(model)
-            self._core_meta = _extract_routing_core(self._model_loaded, "")
-            self.digest = str((model.get("digest") or {}).get("value") or "")
+            declared_dig = str((model.get("digest") or {}).get("value") or "")
+            inferred_sha = _VERIFIED_DIGEST_TO_RAW_SHA.get(declared_dig, "")
+            reused_core: dict[str, Any] | None = None
+            if inferred_sha:
+                core_f = _core_cache_dir() / f"unified_model_core_{inferred_sha[:32]}.marshal"
+                if core_f.is_file():
+                    try:
+                        c_blob = marshal.loads(core_f.read_bytes())
+                        if (
+                            isinstance(c_blob, dict)
+                            and c_blob.get("core_format_v") == 5
+                            and c_blob.get("raw_sha256") == inferred_sha
+                            and c_blob.get("digest_value") == declared_dig
+                            and len(model.get("capabilities") or ()) == len(c_blob.get("capabilities_map") or {})
+                            and len(model.get("source_index") or ()) == int(c_blob.get("source_index_len") or -1)
+                        ):
+                            reused_core = c_blob
+                    except Exception:
+                        reused_core = None
+            self._core_meta = reused_core if reused_core is not None else _extract_routing_core(self._model_loaded, inferred_sha)
+            self.digest = declared_dig
             self.capabilities = dict(self._core_meta["capabilities_map"])
             self.engines = dict(self._core_meta["engines_map"])
             self._capability_id_terms = {
@@ -441,15 +505,39 @@ class UnifiedModel:
         self._cid_folded_pairs: tuple[tuple[str, str], ...] = tuple(
             (cid, cid.casefold()) for cid in self.capabilities
         )
+        self._cid_dot_pairs: tuple[tuple[str, str], ...] = tuple(
+            (cid, cf) for cid, cf in self._cid_folded_pairs if "." in cf
+        )
+        self._cid_nodot_pairs: tuple[tuple[str, str], ...] = tuple(
+            (cid, cf) for cid, cf in self._cid_folded_pairs if "." not in cf
+        )
         for cid, cf in self._cid_folded_pairs:
             self._exact_id_lookup[cf] = cid
         eid_pairs: list[tuple[str, str, str]] = []
+        mode_by_word: dict[str, list[tuple[str, str]]] = {}
         for eid in self.engines:
             ef = eid.casefold()
             mode_phrase = eid.split(":", 1)[-1].replace("_", " ").casefold()
             eid_pairs.append((eid, ef, mode_phrase))
             self._exact_id_lookup[ef] = eid
+            if mode_phrase:
+                first_w = mode_phrase.split(" ", 1)[0]
+                mode_by_word.setdefault(first_w, []).append((eid, mode_phrase))
         self._eid_folded_triples: tuple[tuple[str, str, str], ...] = tuple(eid_pairs)
+        self._mode_phrase_by_word: dict[str, tuple[tuple[str, str], ...]] = {
+            k: tuple(v) for k, v in mode_by_word.items()
+        }
+        scaled_idx: dict[str, tuple[tuple[str, float], ...]] = {}
+        for tok, postings in self.index.items():
+            scaled_idx[tok] = tuple(
+                (
+                    cid,
+                    (2.0 if tok in self._capability_id_terms.get(cid, ()) else 1.0)
+                    * math.log1p(weight),
+                )
+                for cid, weight in postings.items()
+            )
+        self._scaled_index: dict[str, tuple[tuple[str, float], ...]] = scaled_idx
 
         self._unrunnable: dict[str, list[str]] | None = None
         self._source_index_cache: dict[str, dict[str, Any]] | None = None
@@ -473,15 +561,21 @@ class UnifiedModel:
         self._knowledge_title_postings_cache: dict[str, tuple[int, ...]] | None = None
         self._memory_bus: Any = None
         self._boundary_router: Any = None
+        self._traced_catalog_cache: dict[str, Any] | None = None
+        self._traced_adapter_cache: dict[str, dict[str, Any]] = {}
         self._fts5_model_conn: Any = None
         self._symbol_graph_conns: dict[str, Any] = {}
         self._dark_matter_verified: dict[str, dict[str, Any]] = {}
+        self._source_csr: Any = None
+        self._combined_source_csr: Any = None
+        self._route_memo: dict[tuple[str, int], dict[str, Any]] = {}
         self._raw_sha256: str = str(self._core_meta.get("raw_sha256") or "")
 
         self.min_score = float(confidence.get("minimum_best_score", 1.0))
         self.min_coverage = float(confidence.get("minimum_coverage", 0.34))
-        if not _core_only:
-            self._hydrate_secondary_indexes()
+        # Secondary indexes (research_index 5.96MB, source_index, extended_source_index,
+        # knowledge, harvested) remain strictly lazy until their property or query method
+        # is called (Elon's Law: never deserialize 14,336 records upfront).
 
     def _section_cache_path(self, section: str) -> Path | None:
         if not self._raw_sha256:
@@ -529,6 +623,19 @@ class UnifiedModel:
 
     def _ensure_source_index(self) -> None:
         if self._source_index_cache is not None and self._source_postings_cache is not None:
+            return
+        csr = _get_mmap_csr("source_index", self._raw_sha256)
+        if csr is not None:
+            from canonical.runtime.mmap_csr_slot_index_v1 import (
+                MmapDFProxy,
+                MmapDocTableProxy,
+                MmapPostingsProxy,
+            )
+
+            self._source_csr = csr
+            self._source_index_cache = MmapDocTableProxy(csr)  # type: ignore[assignment]
+            self._source_df_cache = MmapDFProxy(csr)  # type: ignore[assignment]
+            self._source_postings_cache = MmapPostingsProxy(csr)  # type: ignore[assignment]
             return
         cached = self._read_section_cache("source_index")
         if isinstance(cached, dict) and "rows" in cached and "df" in cached and "postings" in cached:
@@ -591,6 +698,17 @@ class UnifiedModel:
 
     def _ensure_combined_source_index(self) -> None:
         if self._combined_source_index_cache is not None and self._combined_source_postings_cache is not None:
+            return
+        csr = _get_mmap_csr("combined_source", self._raw_sha256)
+        if csr is not None:
+            from canonical.runtime.mmap_csr_slot_index_v1 import (
+                MmapDocTableProxy,
+                MmapPostingsProxy,
+            )
+
+            self._combined_source_csr = csr
+            self._combined_source_index_cache = MmapDocTableProxy(csr)  # type: ignore[assignment]
+            self._combined_source_postings_cache = MmapPostingsProxy(csr)  # type: ignore[assignment]
             return
         self._ensure_source_index()
         self._ensure_extended_source_index()
@@ -929,7 +1047,7 @@ class UnifiedModel:
         )
         src_ep = (
             sum(1 for row in self._source_index_cache.values() if row.get("classification") == "ENTRY_POINT")
-            if self._source_index_cache is not None
+            if isinstance(self._source_index_cache, dict)
             else int(self._core_meta.get("source_entry_points") or 0)
         )
         ext_src_len = (
@@ -1194,14 +1312,26 @@ class UnifiedModel:
         exact = self._exact_id_lookup.get(folded)
         if exact is not None:
             hits.add(exact)
-        for cid, cf in self._cid_folded_pairs:
+        if "." in folded:
+            for cid, cf in self._cid_dot_pairs:
+                if cf in folded:
+                    hits.add(cid)
+        for cid, cf in self._cid_nodot_pairs:
             if cf in folded:
                 hits.add(cid)
-        for eid, ef, mode_phrase in self._eid_folded_triples:
-            if ef in folded:
-                hits.add(eid)
-            elif mode_phrase and mode_phrase in folded:
-                hits.add(eid)
+        if ":" in folded:
+            for eid, ef, _mp in self._eid_folded_triples:
+                if ef in folded:
+                    hits.add(eid)
+        by_word = self._mode_phrase_by_word
+        if by_word:
+            # Split into simple alphanumeric words to probe first-word buckets in O(|words|).
+            for raw_w in re.findall(r"[a-z0-9]+", folded):
+                cand_list = by_word.get(raw_w)
+                if cand_list:
+                    for eid, mode_phrase in cand_list:
+                        if mode_phrase in folded:
+                            hits.add(eid)
         return hits
 
     def unrunnable_capabilities(self) -> dict[str, list[str]]:
@@ -1237,6 +1367,16 @@ class UnifiedModel:
         return self._unrunnable
 
     def route(self, goal: str, *, top_k: int = 5) -> dict[str, Any]:
+        memo_key = (str(goal or ""), max(1, int(top_k)))
+        memo_hit = self._route_memo.get(memo_key)
+        if memo_hit is not None:
+            return {
+                **memo_hit,
+                "query_tokens": list(memo_hit["query_tokens"]),
+                "unrunnable_on_this_host": list(memo_hit["unrunnable_on_this_host"]),
+                "best": dict(memo_hit["best"]) if memo_hit["best"] is not None else None,
+                "candidates": [dict(r) for r in memo_hit["candidates"]],
+            }
         tokens = tokenize(goal)
         mentioned = self._ids_mentioned(goal)
         # Score the ASK, not the sentence. A stated path is data, and its tokens
@@ -1262,7 +1402,8 @@ class UnifiedModel:
         # about what is being asked, so each distinct token votes once.
         ask_list: list[str] = []
         seen: set[str] = set()
-        for token in ask_tokens(goal) + addressed_tokens:
+        base_ask = ask_tokens(goal) if "/" in str(goal or "") else tokens
+        for token in base_ask + addressed_tokens:
             if token not in seen:
                 seen.add(token)
                 ask_list.append(token)
@@ -1270,25 +1411,16 @@ class UnifiedModel:
         matched: set[str] = set()
         unrunnable_known = self._unrunnable
         unrunnable_matched: set[str] = set()
+        scaled_idx = self._scaled_index
         for token in ask_list:
-            postings = self.index.get(token)
-            if not postings:
+            scaled_postings = scaled_idx.get(token)
+            if not scaled_postings:
                 continue
             matched.add(token)
-            for cid, weight in postings.items():
+            for cid, contrib in scaled_postings:
                 if unrunnable_known is not None and cid in unrunnable_known:
                     unrunnable_matched.add(cid)
-                # A query token that is also in the capability id is direct
-                # operation evidence, not merely effect vocabulary. Count that
-                # same declared IDF posting a second time for the identity
-                # channel. Measured on "Audit the python source tree with an
-                # AST": the audit owner has four identity hits, while the
-                # legacy tree-sitter parser's rare `tree` hit comes only from
-                # its provides and otherwise steals the route.
-                identity_weight = (
-                    2.0 if token in self._capability_id_terms.get(cid, ()) else 1.0
-                )
-                scores[cid] = scores.get(cid, 0.0) + identity_weight * math.log1p(weight)
+                scores[cid] = scores.get(cid, 0.0) + contrib
         # Wave 31 Elon speed pass: when `unrunnable_capabilities()` has not been materialized yet,
         # resolve declared dependencies lazily ONLY for matched capability candidates (memoized
         # per unique dep name inside this call's local `probe_cache`), guaranteeing the exact same
@@ -1357,7 +1489,7 @@ class UnifiedModel:
             and best[1] >= self.min_score
             and coverage >= self.min_coverage
         )
-        return {
+        out_route = {
             "schema": SOLUTION_SCHEMA,
             "operation": "ROUTE",
             "model_digest": self.digest,
@@ -1374,6 +1506,16 @@ class UnifiedModel:
                 if confident
                 else "GOAL_NOT_REPRESENTED_IN_MODEL__FAIL_CLOSED"
             ),
+        }
+        if len(self._route_memo) >= 2048:
+            self._route_memo.clear()
+        self._route_memo[memo_key] = out_route
+        return {
+            **out_route,
+            "query_tokens": list(tokens),
+            "unrunnable_on_this_host": list(out_route["unrunnable_on_this_host"]),
+            "best": dict(rows[0]) if rows else None,
+            "candidates": [dict(r) for r in rows],
         }
 
     # -------------------------------------------------------------- source index
@@ -1392,34 +1534,38 @@ class UnifiedModel:
         wanted = set(terms)
         self._ensure_source_index()
         src_map = self._source_index_cache or {}
-        src_df = self._source_df_cache or {}
-        src_postings = self._source_postings_cache or {}
-        total_docs = max(1, len(src_map))
-        acc_scores: dict[str, float] = {}
-        # Sorted, not `wanted`: floats do not add associatively, so summing idf contributions in
-        # hash order made near-ties depend on PYTHONHASHSEED. Measured with the answer fingerprint:
-        # 1 of 404 questions returned a different rank-3 module in a second process, which no
-        # verifier check could see because the model was still internally consistent.
-        for term in sorted(wanted):
-            plist = src_postings.get(term)
-            if not plist:
-                continue
-            df = max(1, src_df.get(term, 1))
-            idf = math.log(1.0 + (total_docs - df + 0.5) / (df + 0.5))
-            for path, tf in plist:
-                acc_scores[path] = acc_scores.get(path, 0.0) + idf * (1.0 + math.log(tf))
-        q_folded = query.casefold()
-        scored: list[tuple[float, str, dict[str, Any]]] = []
-        for path, score in acc_scores.items():
-            if score <= 0.0:
-                continue
-            if path.casefold() in q_folded:
-                score += 8.0
-            scored.append((score, path, src_map[path]))
-        scored.sort(key=lambda item: (-item[0], item[1]))
+        if self._source_csr is not None:
+            scored_top = self._source_csr.search_ranked(wanted, query.casefold(), top_k=top_k)
+        else:
+            src_df = self._source_df_cache or {}
+            src_postings = self._source_postings_cache or {}
+            total_docs = max(1, len(src_map))
+            acc_scores: dict[str, float] = {}
+            # Sorted, not `wanted`: floats do not add associatively, so summing idf contributions in
+            # hash order made near-ties depend on PYTHONHASHSEED. Measured with the answer fingerprint:
+            # 1 of 404 questions returned a different rank-3 module in a second process, which no
+            # verifier check could see because the model was still internally consistent.
+            for term in sorted(wanted):
+                plist = src_postings.get(term)
+                if not plist:
+                    continue
+                df = max(1, src_df.get(term, 1))
+                idf = math.log(1.0 + (total_docs - df + 0.5) / (df + 0.5))
+                for path, tf in plist:
+                    acc_scores[path] = acc_scores.get(path, 0.0) + idf * (1.0 + math.log(tf))
+            q_folded = query.casefold()
+            scored: list[tuple[float, str, dict[str, Any]]] = []
+            for path, score in acc_scores.items():
+                if score <= 0.0:
+                    continue
+                if path.casefold() in q_folded:
+                    score += 8.0
+                scored.append((score, path, src_map[path]))
+            scored.sort(key=lambda item: (-item[0], item[1]))
+            scored_top = scored[: max(1, int(top_k))]
 
         rows: list[dict[str, Any]] = []
-        for score, path, row in scored[: max(1, int(top_k))]:
+        for score, path, row in scored_top:
             rows.append(
                 {
                     "path": path,
@@ -1459,30 +1605,34 @@ class UnifiedModel:
         wanted = set(terms)
         self._ensure_combined_source_index()
         combined = self._combined_source_index_cache or {}
-        comb_postings = self._combined_source_postings_cache or {}
-        src_df = self._source_df_cache or {}
-        ext_df = self._extended_source_df_cache or {}
-        total_docs = max(1, len(combined))
-        acc_scores: dict[str, float] = {}
-        for term in sorted(wanted):  # see find_source: float order must not depend on the hash seed
-            plist = comb_postings.get(term)
-            if not plist:
-                continue
-            df = max(1, src_df.get(term, 0) + ext_df.get(term, 0))
-            idf = math.log(1.0 + (total_docs - df + 0.5) / (df + 0.5))
-            for path, tf in plist:
-                acc_scores[path] = acc_scores.get(path, 0.0) + idf * (1.0 + math.log(tf))
-        q_folded = query.casefold()
-        scored: list[tuple[float, str, dict[str, Any]]] = []
-        for path, score in acc_scores.items():
-            if score <= 0.0:
-                continue
-            if path.casefold() in q_folded:
-                score += 8.0
-            scored.append((score, path, combined[path]))
-        scored.sort(key=lambda item: (-item[0], item[1]))
+        if self._combined_source_csr is not None:
+            scored_top = self._combined_source_csr.search_ranked(wanted, query.casefold(), top_k=top_k)
+        else:
+            comb_postings = self._combined_source_postings_cache or {}
+            src_df = self._source_df_cache or {}
+            ext_df = self._extended_source_df_cache or {}
+            total_docs = max(1, len(combined))
+            acc_scores: dict[str, float] = {}
+            for term in sorted(wanted):  # see find_source: float order must not depend on the hash seed
+                plist = comb_postings.get(term)
+                if not plist:
+                    continue
+                df = max(1, src_df.get(term, 0) + ext_df.get(term, 0))
+                idf = math.log(1.0 + (total_docs - df + 0.5) / (df + 0.5))
+                for path, tf in plist:
+                    acc_scores[path] = acc_scores.get(path, 0.0) + idf * (1.0 + math.log(tf))
+            q_folded = query.casefold()
+            scored: list[tuple[float, str, dict[str, Any]]] = []
+            for path, score in acc_scores.items():
+                if score <= 0.0:
+                    continue
+                if path.casefold() in q_folded:
+                    score += 8.0
+                scored.append((score, path, combined[path]))
+            scored.sort(key=lambda item: (-item[0], item[1]))
+            scored_top = scored[: max(1, int(top_k))]
         rows: list[dict[str, Any]] = []
-        for score, path, row in scored[: max(1, int(top_k))]:
+        for score, path, row in scored_top:
             rows.append(
                 {
                     "path": path,
@@ -4582,9 +4732,159 @@ class UnifiedModel:
                 transitions=transitions,
                 **kwargs,
             )
+        if m == "fast_cascade":
+            return self.fast_cascade_solve(kwargs)
+        if m == "bitemporal_recall" or m == "forward_push":
+            return self.bitemporal_associative_recall(goal, **kwargs)
         if m == "memory" or m == "fts5":
             return self.fts5_recall(goal, **kwargs)
         return self.fts5_recall(goal, **kwargs)
+
+    # ------------------------------------------------- Waves 21-24 Frontier Leapfrog Surfaces
+
+    def fast_cascade_solve(
+        self,
+        task_spec: Mapping[str, Any],
+    ) -> dict[str, Any]:
+        """Wave 23: 4-Rung Zero-LLM Fast-Cascade Orchestrator (`AstDiscrTree` -> CoW State-Alias
+        5-Layer Tomography -> CoW Zygote Slicing & 64-Vector Boundary Fuzz -> Petri Cut-Vertex / Active Contrast)."""
+        return self.boundary_router.route_fast_cascade(**dict(task_spec))
+
+    def traced_callable_catalog(
+        self,
+        *,
+        domain: str | None = None,
+        top_k: int | None = None,
+    ) -> dict[str, Any]:
+        """Wave 22: Query the `260`-module (`64.04%` full-population survival) execution-traced
+        `SOURCE_ONLY` callable catalog (`EXECUTION_TRACED_CALLABLE_CENSUS_20261126_V1.json`)."""
+        if self._traced_catalog_cache is None:
+            census_fp = ROOT / "canonical" / "verification" / "EXECUTION_TRACED_CALLABLE_CENSUS_20261126_V1.json"
+            if census_fp.is_file():
+                self._traced_catalog_cache = json.loads(census_fp.read_text(encoding="utf-8"))
+            else:
+                self._traced_catalog_cache = {"verified_adapters": [], "survived_two_run_and_sha256_guard_count": 0}
+
+        mods = list(self._traced_catalog_cache.get("verified_adapters") or ())
+        domain_counts: dict[str, int] = {}
+        for row in mods:
+            for d in row.get("domains") or ("general",):
+                domain_counts[str(d)] = domain_counts.get(str(d), 0) + 1
+        if domain:
+            dom = str(domain).strip().lower()
+            mods = [m for m in mods if dom in [str(d).lower() for d in (m.get("domains") or ())]]
+        if top_k is not None:
+            mods = mods[: max(1, int(top_k))]
+        return self._envelope(
+            operation="TRACED_CALLABLE_CATALOG",
+            goal=f"domain={domain or 'ALL'}",
+            status="PASS__TRACED_CALLABLE_CATALOG",
+            **{"pass": bool(mods)},
+            total_verified_count=int(self._traced_catalog_cache.get("survived_two_run_and_sha256_guard_count", len(mods))),
+            survival_rate=float(self._traced_catalog_cache.get("survival_rate", 0.0)),
+            lift_multiple_vs_ast_literal_baseline=float(
+                self._traced_catalog_cache.get("lift_multiple_vs_ast_literal_baseline", 0.0)
+            ),
+            domain_counts=domain_counts,
+            modules=mods,
+        )
+
+    def invoke_traced_module(
+        self,
+        module_or_stem: str,
+        *,
+        args: Sequence[Any] | None = None,
+        kwargs: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 22: Derive (or reuse) C-level execution-traced adapter + SHA256 non-destructive guard
+        for `module_or_stem` and execute its verified entrypoint inside an isolated scratch sandbox."""
+        from canonical.runtime import execution_traced_callable_compiler_v1 as etcc
+
+        q = str(module_or_stem).strip()
+        rel_path = q
+        if not q.endswith(".py"):
+            cat = self.traced_callable_catalog()
+            matched = [m for m in cat.get("modules") or () if m.get("stem") == q or m.get("module") == q]
+            if matched:
+                rel_path = str(matched[0]["module"])
+            else:
+                found = self.find_source(q, top_k=1)
+                cands = found.get("candidates") or ()
+                if cands:
+                    rel_path = str(cands[0].get("path") or q)
+
+        adapter = self._traced_adapter_cache.get(rel_path)
+        if adapter is None:
+            derived = etcc.derive_verified_module_adapter(rel_path, root=ROOT)
+            if not derived.get("pass"):
+                return self._envelope(
+                    operation="INVOKE_TRACED_MODULE",
+                    goal=q,
+                    status=str(derived.get("reason") or "FAIL_CLOSED__TRACED_ADAPTER_UNVERIFIED"),
+                    **{"pass": False},
+                    detail=derived,
+                )
+            adapter = dict(derived)
+            self._traced_adapter_cache[rel_path] = adapter
+
+        inv = etcc.invoke_verified_traced_adapter(
+            adapter,
+            override_args=args,
+            override_kwargs=kwargs,
+            root=ROOT,
+        )
+        if not inv.get("pass"):
+            return self._envelope(
+                operation="INVOKE_TRACED_MODULE",
+                goal=q,
+                status=str(inv.get("reason") or "FAIL_CLOSED__TRACED_INVOKE_FAILED"),
+                **{"pass": False},
+                detail=inv,
+            )
+        return self._envelope(
+            operation="INVOKE_TRACED_MODULE",
+            goal=q,
+            status="PASS__TRACED_MODULE_INVOKED",
+            **{"pass": True},
+            module_path=rel_path,
+            entrypoint=adapter["entrypoint"],
+            output_digest=inv["output_digest"],
+            matches_recorded_witness=inv.get("matches_recorded_witness"),
+            capsule_head_hash=adapter.get("capsule_head_hash"),
+            result=inv.get("result"),
+        )
+
+    def bitemporal_associative_recall(
+        self,
+        query: str,
+        *,
+        valid_at_ts: float | None = None,
+        alpha: float = 0.20,
+        epsilon: float = 1e-3,
+        top_k: int = 10,
+    ) -> dict[str, Any]:
+        """Wave 24: Andersen-Chung-Lang `ForwardPush` Local PPR Bi-Temporal Associative Recall (`< 0.5 ms` p95)."""
+        return self.boundary_router.route_forward_push_recall(
+            query,
+            valid_at_ts=valid_at_ts,
+            alpha=alpha,
+            epsilon=epsilon,
+            top_k=top_k,
+        )
+
+    def curate_skill_rent(
+        self,
+        *,
+        max_active_skills: int = 64,
+        paired_probes: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
+        latency_penalty_per_ms: float = 0.002,
+    ) -> dict[str, Any]:
+        """Wave 24: Two-Door Rubin `(WITH - WITHOUT)` Counterfactual Skill Rent & Finite Cap Curator."""
+        return self.boundary_router.route_two_door_rent_curation(
+            max_active_skills=max_active_skills,
+            paired_probes=paired_probes,
+            latency_penalty_per_ms=latency_penalty_per_ms,
+        )
 
     def open_creature(
         self,
@@ -4847,7 +5147,28 @@ def prewarm_sidecar_caches(model: Mapping[str, Any] | None = None, target: Path 
             tmp_f = p.with_name(f".{p.name}.{os.getpid()}.tmp")
             tmp_f.write_bytes(marshal.dumps({"v": 2, "raw_sha256": raw_sha, "data": sec_data}))
             tmp_f.replace(p)
-        # Wave 21: Pre-warm the SQLite FTS5 unified model index at compile time so the very
+        try:
+            from canonical.runtime.mmap_csr_slot_index_v1 import (
+                build_csr_bytes,
+                write_csr_atomic,
+            )
+
+            src_csr_bytes = build_csr_bytes(sec["source_index"], sec["source_df"])
+            write_csr_atomic(
+                cache_dir / f"unified_model_csr_source_index_{raw_sha[:32]}.bin",
+                src_csr_bytes,
+            )
+            comb_df: dict[str, int] = dict(sec["source_df"])
+            for k_df, v_df in sec["extended_source_df"].items():
+                comb_df[k_df] = comb_df.get(k_df, 0) + int(v_df)
+            comb_csr_bytes = build_csr_bytes(sec["combined_source_index"], comb_df)
+            write_csr_atomic(
+                cache_dir / f"unified_model_csr_combined_source_{raw_sha[:32]}.bin",
+                comb_csr_bytes,
+            )
+        except Exception:
+            pass
+        # Pre-warm the SQLite FTS5 unified model index at compile time so the very
         # first fresh-process `fts5_recall()` hits disk cache in ~1 ms instead of ~185 ms.
         try:
             import sqlite3 as _sq

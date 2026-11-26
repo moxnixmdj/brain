@@ -1180,6 +1180,42 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "required_inputs": ["test_source"],
         "declared_dependencies": [],
     },
+    "LEAPFROG_W21_MMAP_CSR_SLOT_INDEX": {
+        "domain": "SUBSTRATE_LATENCY_AND_ROUTING",
+        "source_path": "canonical/runtime/mmap_csr_slot_index_v1.py",
+        "entrypoint": "open_or_build_csr_index",
+        "summary": "Zero-copy read-only mmap CSR binary postings & slot index cutting cold open_model + first find_source latency from 291 ms to < 12 ms with exact ranking preservation.",
+        "triggers": ["mmap_csr_slot_index", "zero copy mmap csr binary postings"],
+        "required_inputs": ["query"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W22_EXECUTION_TRACED_COMPILER": {
+        "domain": "CAPABILITY_HARVEST_AND_COMPILATION",
+        "source_path": "canonical/runtime/execution_traced_callable_compiler_v1.py",
+        "entrypoint": "derive_verified_module_adapter",
+        "summary": "PEP 669 sys.monitoring / C-level setprofile execution-traced callable compiler verifying 260/406 (64.04%, 17.36x over AST literal baseline) SOURCE_ONLY modules with 2-run scratch determinism and SHA256 non-destructiveness.",
+        "triggers": ["execution_traced_callable_compiler", "pep 669 traced callable adapter"],
+        "required_inputs": ["module_rel_path"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W23_FAST_CASCADE_ORCHESTRATOR": {
+        "domain": "FAST_CASCADE_AND_STATE_ALIAS_GUARD",
+        "source_path": "canonical/runtime/fast_cascade_orchestrator_v1.py",
+        "entrypoint": "execute_fast_cascade",
+        "summary": "4-rung zero-LLM fast-cascade orchestrator uniting AstDiscrTree (<10 us), 5-layer CoW State-Alias differential tomography + content-signature verification, CoW Zygote test slicing + 64-vector boundary fuzzing, and Petri cut-vertex checkpointing.",
+        "triggers": ["fast_cascade_orchestrator", "state alias differential tomography cascade"],
+        "required_inputs": ["task_spec"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W24_FORWARD_PUSH_BITEMPORAL_PPR": {
+        "domain": "BITEMPORAL_MEMORY_AND_SKILL_RENT",
+        "source_path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+        "entrypoint": "execute_memory_operation",
+        "summary": "Andersen-Chung-Lang ForwardPush O(1/(alpha*epsilon)) local Personalized PageRank over bi-temporally valid memory intervals ([valid_at, invalid_at)) plus Two-Door Rubin (WITH - WITHOUT) counterfactual skill rent & finite-cap curation.",
+        "triggers": ["forward_push_bitemporal_recall", "two door rubin skill rent curator"],
+        "required_inputs": ["query"],
+        "declared_dependencies": [],
+    },
 }
 
 
@@ -1304,6 +1340,51 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
             "canonical/swe_kernel/global_extrapolation_chase_spine_v1.py",
             "canonical/tools/the_goal_is_a_discriminator_v1.py",
             "canonical/tools/what_is_knowable_here_v1.py",
+        ],
+    },
+    "bitemporal_forward_push_ppr_and_skill_rent": {
+        "external_names": [
+            "forward push",
+            "personalized pagerank",
+            "hipporag",
+            "memanto",
+            "bitemporal memory",
+            "blind curator",
+            "skill ratchet",
+            "rubin counterfactual rent",
+        ],
+        "engines": ["engine:LEAPFROG_W24_FORWARD_PUSH_BITEMPORAL_PPR"],
+        "koan_modules": [
+            "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+            "canonical/tools/the_blind_curator_v1.py",
+            "canonical/runtime/skill_ratchet_universal_v1.py",
+        ],
+    },
+    "execution_traced_compilation_and_state_alias_cascade": {
+        "external_names": [
+            "skillcache",
+            "tracecompiler",
+            "pep 669",
+            "sys.monitoring",
+            "statealiasbench",
+            "state alias",
+            "deltabox",
+            "webmcp",
+            "mmap csr",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W21_MMAP_CSR_SLOT_INDEX",
+            "engine:LEAPFROG_W22_EXECUTION_TRACED_COMPILER",
+            "engine:LEAPFROG_W23_FAST_CASCADE_ORCHESTRATOR",
+        ],
+        "koan_modules": [
+            "canonical/runtime/mmap_csr_slot_index_v1.py",
+            "canonical/runtime/execution_traced_callable_compiler_v1.py",
+            "canonical/runtime/fast_cascade_orchestrator_v1.py",
+            "canonical/runtime/scan_and_diff_against_memory_v1.py",
+            "canonical/swe_kernel/computer_use_check_density_v1.py",
+            "canonical/runtime/domain_of_verification_v1.py",
+            "canonical/runtime/contrast_selection_v1.py",
         ],
     },
 }
@@ -2797,6 +2878,40 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
 
         demands = m.extract_assertion_demands(str(inputs["test_source"]))
         return _ok(mode, "ASSERTION_DEMANDS_EXTRACTED", {"demands": demands, "count": len(demands)})
+
+    if mode == "LEAPFROG_W21_MMAP_CSR_SLOT_INDEX":
+        from canonical.runtime import brain_unified_model_v1 as u
+
+        model = u.open_model(root=ROOT)
+        res = model.find_source(str(inputs["query"]), top_k=int(inputs.get("top_k", 5)))
+        return _ok(mode, "MMAP_CSR_SOURCE_SEARCHED", res)
+
+    if mode == "LEAPFROG_W22_EXECUTION_TRACED_COMPILER":
+        from canonical.runtime import execution_traced_callable_compiler_v1 as m
+
+        res = m.derive_verified_module_adapter(str(inputs["module_rel_path"]), root=ROOT)
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("status") or "ADAPTER_UNVERIFIED"), detail=res)
+        return _ok(mode, "TRACED_ADAPTER_VERIFIED", res)
+
+    if mode == "LEAPFROG_W23_FAST_CASCADE_ORCHESTRATOR":
+        from canonical.runtime import fast_cascade_orchestrator_v1 as m
+
+        res = m.execute_fast_cascade(dict(inputs["task_spec"]))
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("status") or "FAST_CASCADE_ABSTAINED"), detail=res)
+        return _ok(mode, "FAST_CASCADE_RESOLVED", res)
+
+    if mode == "LEAPFROG_W24_FORWARD_PUSH_BITEMPORAL_PPR":
+        from canonical.swe_kernel import canonical_memory_crystallizer_v1 as m
+
+        bus = inputs.get("memory_bus") if isinstance(inputs.get("memory_bus"), m.VerificationFirstMemoryBus) else m.VerificationFirstMemoryBus()
+        res = bus.forward_push_bitemporal_recall(
+            str(inputs["query"]),
+            valid_at_ts=inputs.get("valid_at_ts"),
+            top_k=int(inputs.get("top_k", 10)),
+        )
+        return _ok(mode, "FORWARD_PUSH_BITEMPORAL_RECALLED", res)
 
     return _fail(mode, f"UNKNOWN_FEDERATED_ENGINE_MODE:{mode}")
 

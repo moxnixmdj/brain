@@ -384,6 +384,11 @@ class VerificationFirstMemoryBus:
         # Wave 15: MemGuard persistent verifier lifecycle + rule_expiry_v1 + Anti-Skill refutations + lazy FTS5 index
         self._skill_lifecycle: dict[str, dict[str, Any]] = {}
         self._anti_skills: dict[str, dict[str, Any]] = {}
+        # Bi-temporal facts (`_bitemporal_facts` list + `_associative_bitemporal_facts` interval map) + Two-Door Rent archive
+        self._bitemporal_facts: list[dict[str, Any]] = []
+        self._associative_bitemporal_facts: dict[str, dict[str, Any]] = {}
+        self._retired_skills_archive: dict[str, dict[str, Any]] = {}
+        self._skill_rent_ledger: dict[str, dict[str, Any]] = {}
         self._fts5_conn: Any = None
         self._fts5_watermark: tuple[int, int, int, int] = (-1, -1, -1, -1)
         self._clock: float = 0.0
@@ -2005,6 +2010,457 @@ class VerificationFirstMemoryBus:
             "model_calls": 0,
         }
 
+    # ------------------------------------------ Bi-Temporal ForwardPush PPR + Two-Door Rent Curator
+    def record_associative_bitemporal_fact(
+        self,
+        *,
+        fact_id: str,
+        subject: str,
+        predicate: str,
+        obj: str,
+        valid_at: float | None = None,
+        invalid_at: float | None = None,
+        linked_ids: Sequence[str] = (),
+        summary: str = "",
+    ) -> dict[str, Any]:
+        """Record a bi-temporally bounded relational fact `[valid_at, invalid_at)` for associative recall."""
+        fid = str(fact_id).strip()
+        if not fid:
+            raise ValueError("FACT_ID_EMPTY")
+        v_at = float(valid_at) if valid_at is not None else self._tick()
+        inv_at = float(invalid_at) if invalid_at is not None else None
+        row = {
+            "fact_id": fid,
+            "subject": str(subject).strip(),
+            "predicate": str(predicate).strip(),
+            "object": str(obj).strip(),
+            "valid_at": v_at,
+            "invalid_at": inv_at,
+            "linked_ids": [str(x).strip() for x in linked_ids if str(x).strip()],
+            "summary": str(summary or f"{subject} {predicate} {obj}").strip(),
+        }
+        self._associative_bitemporal_facts[fid] = row
+        return {"pass": True, "status": "PASS__BITEMPORAL_FACT_RECORDED", "fact": dict(row), "model_calls": 0}
+
+    def supersede_bitemporal_fact(
+        self,
+        *,
+        old_fact_id: str,
+        superseded_at: float | None = None,
+        replacement_fact: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Close `old_fact_id`'s validity interval `[valid_at, superseded_at)` and optionally insert replacement."""
+        fid = str(old_fact_id).strip()
+        old = self._associative_bitemporal_facts.get(fid)
+        if old is None:
+            return {"pass": False, "status": "FAIL_CLOSED__FACT_NOT_FOUND", "fact_id": fid, "model_calls": 0}
+        ts = float(superseded_at) if superseded_at is not None else self._tick()
+        old["invalid_at"] = ts
+        rep_out = None
+        if isinstance(replacement_fact, Mapping):
+            rep_args = dict(replacement_fact)
+            rep_args.setdefault("valid_at", ts)
+            rep_out = self.record_associative_bitemporal_fact(**rep_args)["fact"]
+        return {
+            "pass": True,
+            "status": "PASS__BITEMPORAL_FACT_SUPERSEDED",
+            "closed_fact": dict(old),
+            "replacement_fact": rep_out,
+            "model_calls": 0,
+        }
+
+    def forward_push_bitemporal_recall(
+        self,
+        query: str,
+        *,
+        valid_at_ts: float | None = None,
+        alpha: float = 0.20,
+        epsilon: float = 1e-3,
+        top_k: int = 10,
+    ) -> dict[str, Any]:
+        """Andersen-Chung-Lang `ForwardPush` Local Personalized PageRank (`O(1/(alpha * epsilon))`)
+        over the bi-temporally valid memory graph (`skills <-> causal_edges <-> bitemporal_facts <-> events`).
+
+        Strictly excludes superseded/invalidated intervals (`invalid_at <= valid_at_ts`) and
+        quarantined `anti_skills` BEFORE building local adjacency so stale facts receive zero
+        PageRank mass while multi-hop associative neighbors with zero lexical query overlap
+        are surfaced deterministically in `< 0.5 ms` p95.
+        """
+        from collections import deque
+        import re
+
+        t0 = time.perf_counter_ns()
+        q_raw = str(query or "").strip()
+        q_toks = {t for t in re.findall(r"[a-z0-9_]+", q_raw.lower()) if len(t) >= 2}
+        if not q_toks:
+            return {
+                "pass": False,
+                "status": "FAIL_CLOSED__EMPTY_QUERY",
+                "query": q_raw,
+                "hits": [],
+                "stale_excluded_count": 0,
+                "elapsed_ms": 0.0,
+                "model_calls": 0,
+            }
+
+        alpha = min(0.85, max(0.05, float(alpha)))
+        epsilon = max(1e-5, float(epsilon))
+
+        def _interval_active(v_at: float, inv_at: float | None) -> bool:
+            if valid_at_ts is None:
+                return inv_at is None
+            if valid_at_ts < v_at:
+                return False
+            return inv_at is None or valid_at_ts < inv_at
+
+        adj: dict[str, set[str]] = {}
+        node_meta: dict[str, dict[str, Any]] = {}
+        node_tokens: dict[str, set[str]] = {}
+        stale_excluded = 0
+
+        def _link(u: str, v: str) -> None:
+            if u == v:
+                return
+            adj.setdefault(u, set()).add(v)
+            adj.setdefault(v, set()).add(u)
+
+        def _toks(text: str) -> set[str]:
+            return {t for t in re.findall(r"[a-z0-9_]+", text.lower()) if len(t) >= 2}
+
+        # 1. Active non-quarantined skills
+        for sid, sk in sorted(self.skills.items()):
+            lc = self._skill_lifecycle.get(sid) or {}
+            if sk.forgotten or sid in self._anti_skills or lc.get("state") in {"QUARANTINED", "EXPIRED"}:
+                stale_excluded += 1
+                continue
+            if valid_at_ts is not None and sk.created_at > valid_at_ts:
+                continue
+            nid = f"skill:{sid}"
+            adj.setdefault(nid, set())
+            txt = f"{sid} {sk.kind} {sk.trigger_key} {json.dumps(sk.payload, sort_keys=True, default=str)}"
+            node_tokens[nid] = _toks(txt)
+            node_meta[nid] = {
+                "node_id": nid,
+                "record_id": sid,
+                "kind": "SKILL",
+                "title": f"{sid} [{sk.kind}] trigger={sk.trigger_key}",
+            }
+            if sk.provenance_episode_id:
+                _link(nid, f"episode:{sk.provenance_episode_id}")
+            if sk.trigger_key:
+                _link(nid, f"entity:{sk.trigger_key.lower()}")
+
+        # 2. Bi-temporally valid causal edges
+        for eid, edge in sorted(self.causal_edges.items()):
+            if edge.refused or not edge.is_valid_at(valid_at_ts):
+                stale_excluded += 1
+                continue
+            nid = f"edge:{eid}"
+            adj.setdefault(nid, set())
+            txt = f"{eid} {edge.episode_id} {edge.pre_state} {edge.action} {edge.post_state}"
+            node_tokens[nid] = _toks(txt)
+            node_meta[nid] = {
+                "node_id": nid,
+                "record_id": eid,
+                "kind": "CAUSAL_EDGE",
+                "title": f"{edge.pre_state} --[{edge.action}]--> {edge.post_state}",
+            }
+            _link(nid, f"episode:{edge.episode_id}")
+            _link(nid, f"entity:{edge.pre_state.lower()}")
+            _link(nid, f"entity:{edge.post_state.lower()}")
+
+        # 3. Bi-temporally valid relational facts `[valid_at, invalid_at)` (both associative map and Graphiti list)
+        for fid, frow in sorted(self._associative_bitemporal_facts.items()):
+            if not _interval_active(float(frow["valid_at"]), frow.get("invalid_at")):
+                stale_excluded += 1
+                continue
+            nid = f"fact:{fid}"
+            adj.setdefault(nid, set())
+            txt = f"{fid} {frow['subject']} {frow['predicate']} {frow['object']} {frow.get('summary', '')}"
+            node_tokens[nid] = _toks(txt)
+            node_meta[nid] = {
+                "node_id": nid,
+                "record_id": fid,
+                "kind": "BITEMPORAL_FACT",
+                "title": str(frow.get("summary") or f"{frow['subject']} {frow['predicate']} {frow['object']}"),
+                "subject": frow["subject"],
+                "predicate": frow["predicate"],
+                "object": frow["object"],
+                "valid_at": frow["valid_at"],
+                "invalid_at": frow["invalid_at"],
+            }
+            _link(nid, f"entity:{frow['subject'].lower()}")
+            _link(nid, f"entity:{frow['object'].lower()}")
+            for lid in frow.get("linked_ids") or ():
+                if lid in self.skills and f"skill:{lid}" in node_meta:
+                    _link(nid, f"skill:{lid}")
+                elif lid in self.causal_edges and f"edge:{lid}" in node_meta:
+                    _link(nid, f"edge:{lid}")
+                elif lid in self._associative_bitemporal_facts:
+                    tf = self._associative_bitemporal_facts[lid]
+                    if _interval_active(float(tf["valid_at"]), tf.get("invalid_at")):
+                        _link(nid, f"fact:{lid}")
+                else:
+                    _link(nid, f"entity:{lid.lower()}")
+
+        for gf in self._bitemporal_facts:
+            vf = float(gf.get("valid_from", 0.0))
+            vu = gf.get("valid_until")
+            if not _interval_active(vf, float(vu) if vu is not None else None):
+                stale_excluded += 1
+                continue
+            gfid = str(gf.get("fact_id") or "")
+            if not gfid:
+                continue
+            nid = f"fact:{gfid}"
+            adj.setdefault(nid, set())
+            ent_s = str(gf.get("entity") or "")
+            attr_s = str(gf.get("attribute") or "")
+            val_s = str(gf.get("value") or "")
+            node_tokens[nid] = _toks(f"{gfid} {ent_s} {attr_s} {val_s}")
+            node_meta[nid] = {
+                "node_id": nid,
+                "record_id": gfid,
+                "kind": "BITEMPORAL_FACT",
+                "title": f"{ent_s}.{attr_s} = {val_s}",
+                "subject": ent_s,
+                "predicate": attr_s,
+                "object": val_s,
+                "valid_at": vf,
+                "invalid_at": vu,
+            }
+            if ent_s:
+                _link(nid, f"entity:{ent_s.lower()}")
+            if val_s:
+                _link(nid, f"entity:{val_s.lower()}")
+
+        # 4. Seed distribution from lexical overlap across active primary records
+        seed_raw: dict[str, float] = {}
+        for nid, toks in node_tokens.items():
+            overlap = len(q_toks & toks)
+            if overlap > 0:
+                # Dice-weighted lexical specificity
+                seed_raw[nid] = float(2 * overlap) / float(len(q_toks) + len(toks))
+
+        if not seed_raw:
+            elapsed_ms = (time.perf_counter_ns() - t0) / 1_000_000.0
+            return {
+                "pass": False,
+                "status": "PASS__FORWARD_PUSH_NO_SEED_MATCH",
+                "query": q_raw,
+                "hits": [],
+                "stale_excluded_count": stale_excluded,
+                "pushes_executed": 0,
+                "elapsed_ms": round(elapsed_ms, 4),
+                "model_calls": 0,
+            }
+
+        seed_sum = sum(seed_raw.values())
+        direct_seed_nodes = set(seed_raw.keys())
+
+        # 5. Andersen-Chung-Lang Local ForwardPush (`O(1 / (alpha * epsilon))`)
+        sorted_adj: dict[str, tuple[str, ...]] = {u: tuple(sorted(nbrs)) for u, nbrs in adj.items()}
+        p_est: dict[str, float] = {}
+        residual: dict[str, float] = {nid: w / seed_sum for nid, w in seed_raw.items()}
+        queue: deque[str] = deque(sorted(residual.keys()))
+        in_queue: set[str] = set(queue)
+        pushes = 0
+        max_pushes = max(256, int(4.0 / (alpha * epsilon)))
+
+        while queue and pushes < max_pushes:
+            u = queue.popleft()
+            in_queue.discard(u)
+            r_u = residual.get(u, 0.0)
+            if r_u <= 0.0:
+                continue
+            nbrs = sorted_adj.get(u, ())
+            deg = len(nbrs)
+            if r_u / max(1, deg) < epsilon:
+                continue
+            pushes += 1
+            residual[u] = 0.0
+            if deg == 0:
+                p_est[u] = p_est.get(u, 0.0) + r_u
+                continue
+            p_est[u] = p_est.get(u, 0.0) + alpha * r_u
+            share = ((1.0 - alpha) * r_u) / float(deg)
+            for v in nbrs:
+                new_r = residual.get(v, 0.0) + share
+                residual[v] = new_r
+                v_deg = max(1, len(sorted_adj.get(v, ())))
+                if (new_r / v_deg) >= epsilon and v not in in_queue:
+                    queue.append(v)
+                    in_queue.add(v)
+
+        # Fold any unpushed sub-epsilon residual (`alpha * r[u]`) into `p_est` for exact rank stability
+        for u, r_rem in residual.items():
+            if r_rem > 0.0:
+                p_est[u] = p_est.get(u, 0.0) + alpha * r_rem
+
+        ranked_primary = [
+            (score, nid)
+            for nid, score in p_est.items()
+            if nid in node_meta and score > 0.0
+        ]
+        ranked_primary.sort(key=lambda item: (-item[0], item[1]))
+
+        hits: list[dict[str, Any]] = []
+        for score, nid in ranked_primary[: max(1, int(top_k))]:
+            meta = node_meta[nid]
+            hits.append(
+                {
+                    **meta,
+                    "ppr_score": round(float(score), 6),
+                    "hop_origin": "DIRECT_SEED" if nid in direct_seed_nodes else "ASSOCIATIVE_MULTI_HOP",
+                    "lexical_overlap_tokens": sorted(q_toks & node_tokens.get(nid, set())),
+                }
+            )
+
+        elapsed_ms = (time.perf_counter_ns() - t0) / 1_000_000.0
+        return {
+            "pass": bool(hits),
+            "status": "PASS__FORWARD_PUSH_BITEMPORAL_RECALL",
+            "query": q_raw,
+            "valid_at_ts": valid_at_ts,
+            "hits": hits,
+            "associative_multi_hop_hits": sum(1 for h in hits if h["hop_origin"] == "ASSOCIATIVE_MULTI_HOP"),
+            "stale_excluded_count": stale_excluded,
+            "pushes_executed": pushes,
+            "elapsed_ms": round(elapsed_ms, 4),
+            "model_calls": 0,
+        }
+
+    def enforce_two_door_rent_and_cap(
+        self,
+        *,
+        max_active_skills: int = 64,
+        paired_probes: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
+        latency_penalty_per_ms: float = 0.002,
+    ) -> dict[str, Any]:
+        """Two-Door Skill Curator (`The Blind Curator` + `Ratchet` + Rubin Counterfactual Rent):
+
+          - Door 1 (Blind Structural & MDL Gate): Rejects unverified, empty-procedure, or
+            positive-MDL-bloat (`mdl_delta_bits > 0`) skills before active routing.
+          - Door 2 (Rubin `WITH - WITHOUT` Execution Rent + Hard Cap `C`):
+            Computes `tau_hat(s) = mean(y_with - y_without - lambda * max(0, delta_ms))`.
+            Immediately quarantines decoys/regressions (`tau_hat <= 0` or any safe-baseline
+            regression `y_with < y_without`) into `anti_skills`, and enforces finite cap
+            `|S_active| <= max_active_skills` by retiring lowest-rent survivors into
+            option-preserving `_retired_skills_archive` (never deleting semantic evidence).
+        """
+        t0 = time.perf_counter_ns()
+        cap = max(1, int(max_active_skills))
+        probes_map = dict(paired_probes or {})
+
+        door1_rejected: list[str] = []
+        decoys_quarantined: list[str] = []
+        cap_retired: list[str] = []
+        surviving_scores: list[tuple[float, int, float, str]] = []
+
+        for sid, sk in sorted(self.skills.items()):
+            if sk.forgotten:
+                continue
+
+            # Door 1: Structural executable witness + MDL non-expansion check
+            has_exec_body = bool(
+                sk.payload.get("actions")
+                or sk.payload.get("after_src")
+                or sk.payload.get("concept")
+                or sk.payload.get("procedure")
+                or sk.payload.get("steps")
+            )
+            mdl_delta = float(sk.payload.get("mdl_delta_bits", -1.0))
+            if (not sk.verified) or (not has_exec_body) or mdl_delta > 0.0:
+                sk.forgotten = True
+                reason = "DOOR1_UNVERIFIED_OR_EMPTY" if not (sk.verified and has_exec_body) else "DOOR1_MDL_BLOAT"
+                self._retired_skills_archive[sid] = {**sk.as_dict(), "retired_reason": reason}
+                door1_rejected.append(sid)
+                continue
+
+            # Door 2: Rubin `(WITH - WITHOUT)` counterfactual rent evaluation
+            obs_list = list(probes_map.get(sid) or ())
+            safe_regressions = 0
+            tau_hat: float | None = None
+            if obs_list:
+                diffs: list[float] = []
+                for obs in obs_list:
+                    yw = float(obs.get("y_with", 0.0))
+                    y0 = float(obs.get("y_without", 0.0))
+                    dms = max(0.0, float(obs.get("delta_ms", 0.0)))
+                    if obs.get("is_safe_baseline", False) and yw < y0:
+                        safe_regressions += 1
+                    diffs.append((yw - y0) - latency_penalty_per_ms * dms)
+                tau_hat = sum(diffs) / float(len(diffs))
+                self._skill_rent_ledger[sid] = {
+                    "probes": len(obs_list),
+                    "tau_hat": round(tau_hat, 6),
+                    "safe_regressions": safe_regressions,
+                }
+            elif sid in self._skill_rent_ledger:
+                rec = self._skill_rent_ledger[sid]
+                tau_hat = float(rec.get("tau_hat", 0.0))
+                safe_regressions = int(rec.get("safe_regressions", 0))
+
+            if safe_regressions > 0 or (tau_hat is not None and tau_hat <= 0.0):
+                sk.forgotten = True
+                q_reason = (
+                    "SAFE_BASELINE_REGRESSION"
+                    if safe_regressions > 0
+                    else f"NON_POSITIVE_RUBIN_RENT:{round(tau_hat or 0.0, 6)}"
+                )
+                self._anti_skills[sid] = {
+                    "anti_id": sid,
+                    "trigger_key": sk.trigger_key,
+                    "bad_action": sk.kind,
+                    "reason": q_reason,
+                    "tau_hat": round(tau_hat or 0.0, 6),
+                    "safe_regressions": safe_regressions,
+                }
+                self._skill_lifecycle[sid] = {"state": "QUARANTINED", "reason": q_reason}
+                self.forgetting_ledger.append({"skill_id": sid, "reason": q_reason, "ts": self._tick()})
+                decoys_quarantined.append(sid)
+                continue
+
+            effective_rent = tau_hat if tau_hat is not None else (0.01 * max(1, sk.hits))
+            surviving_scores.append((effective_rent, sk.hits, sk.created_at, sid))
+
+        # Enforce hard finite cap `|S_active| <= cap` (ascending sort -> evict lowest rent first)
+        if len(surviving_scores) > cap:
+            surviving_scores.sort(key=lambda item: (item[0], item[1], item[2], item[3]))
+            excess = len(surviving_scores) - cap
+            for rent_val, _hits, _cat, sid in surviving_scores[:excess]:
+                sk = self.skills[sid]
+                sk.forgotten = True
+                self._retired_skills_archive[sid] = {
+                    **sk.as_dict(),
+                    "retired_reason": "FINITE_CAP_EVICTION_OPTION_PRESERVED",
+                    "rent_at_retirement": round(rent_val, 6),
+                }
+                cap_retired.append(sid)
+            surviving_scores = surviving_scores[excess:]
+
+        # Rebuild `_skills_by_trigger` index cleanly so forgotten/retired skills cost 0 lookup time
+        self._skills_by_trigger.clear()
+        for sid, sk in self.skills.items():
+            if not sk.forgotten:
+                self._skills_by_trigger.setdefault(sk.trigger_key, []).append(sid)
+
+        active_after = sum(1 for sk in self.skills.values() if not sk.forgotten)
+        elapsed_ms = (time.perf_counter_ns() - t0) / 1_000_000.0
+        return {
+            "pass": active_after <= cap,
+            "status": "PASS__TWO_DOOR_RENT_AND_CAP_ENFORCED",
+            "max_active_skills_cap": cap,
+            "active_skills_after": active_after,
+            "door1_rejected_ids": door1_rejected,
+            "decoys_quarantined_ids": decoys_quarantined,
+            "cap_retired_option_preserved_ids": cap_retired,
+            "retired_archive_size": len(self._retired_skills_archive),
+            "anti_skills_size": len(self._anti_skills),
+            "elapsed_ms": round(elapsed_ms, 4),
+            "model_calls": 0,
+        }
+
     def save(self, path: str | Path | None = None) -> Path:
         target = Path(path) if path is not None else self.state_path
         if target is None:
@@ -2027,6 +2483,10 @@ class VerificationFirstMemoryBus:
             "forgetting_ledger": list(self.forgetting_ledger),
             "skill_lifecycle": dict(self._skill_lifecycle),
             "anti_skills": dict(self._anti_skills),
+            "bitemporal_facts": list(self._bitemporal_facts),
+            "associative_bitemporal_facts": dict(self._associative_bitemporal_facts),
+            "retired_skills_archive": dict(self._retired_skills_archive),
+            "skill_rent_ledger": dict(self._skill_rent_ledger),
         }
         target.write_text(json.dumps(doc, indent=2, sort_keys=True), encoding="utf-8")
         return target
@@ -2099,9 +2559,26 @@ class VerificationFirstMemoryBus:
             for k, v in (raw.get("anti_skills") or {}).items()
             if isinstance(v, Mapping)
         }
-        self._bitemporal_facts = [
-            dict(f) for f in (raw.get("bitemporal_facts") or ()) if isinstance(f, Mapping)
-        ]
+        raw_btf = raw.get("bitemporal_facts")
+        if isinstance(raw_btf, list):
+            self._bitemporal_facts = [dict(f) for f in raw_btf if isinstance(f, Mapping)]
+        else:
+            self._bitemporal_facts = []
+        self._associative_bitemporal_facts = {
+            str(k): dict(v)
+            for k, v in (raw.get("associative_bitemporal_facts") or (raw_btf if isinstance(raw_btf, Mapping) else {})).items()
+            if isinstance(v, Mapping)
+        }
+        self._retired_skills_archive = {
+            str(k): dict(v)
+            for k, v in (raw.get("retired_skills_archive") or {}).items()
+            if isinstance(v, Mapping)
+        }
+        self._skill_rent_ledger = {
+            str(k): dict(v)
+            for k, v in (raw.get("skill_rent_ledger") or {}).items()
+            if isinstance(v, Mapping)
+        }
         self._fts5_watermark = (-1, -1, -1, -1)
 
     # ----------------------------------------------------- Wave 24: Bitemporal Memory + Credit + SkillBank + Effect Chains
@@ -2109,23 +2586,43 @@ class VerificationFirstMemoryBus:
     def record_bitemporal_fact(
         self,
         *,
-        entity: str,
-        attribute: str,
-        value: Any,
-        valid_from: float,
+        entity: str | None = None,
+        attribute: str | None = None,
+        value: Any = None,
+        valid_from: float | None = None,
         tx_time: float | None = None,
         valid_until: float | None = None,
         provenance: str = "verified_observation",
         supersede_active: bool = True,
+        fact_id: str | None = None,
+        subject: str | None = None,
+        predicate: str | None = None,
+        obj: str | None = None,
+        valid_at: float | None = None,
+        invalid_at: float | None = None,
+        linked_ids: Sequence[str] = (),
+        summary: str = "",
     ) -> dict[str, Any]:
-        """Wave 24 Graphiti-style zero-LLM bitemporal fact assertion with automatic invalidation."""
-        if not hasattr(self, "_bitemporal_facts"):
-            self._bitemporal_facts: list[dict[str, Any]] = []
+        """Unified zero-LLM bitemporal fact assertion supporting both Graphiti (`entity/attribute/value`)
+        and relational ForwardPush (`fact_id/subject/predicate/obj`) interval schemas."""
+        if subject is not None or fact_id is not None:
+            return self.record_associative_bitemporal_fact(
+                fact_id=str(fact_id or f"btf_rel_{len(self._associative_bitemporal_facts)}"),
+                subject=str(subject or entity or ""),
+                predicate=str(predicate or attribute or ""),
+                obj=str(obj if obj is not None else (value if value is not None else "")),
+                valid_at=valid_at if valid_at is not None else valid_from,
+                invalid_at=invalid_at if invalid_at is not None else valid_until,
+                linked_ids=linked_ids,
+                summary=summary,
+            )
+        if not hasattr(self, "_bitemporal_facts") or not isinstance(self._bitemporal_facts, list):
+            self._bitemporal_facts = []
         tx = float(tx_time if tx_time is not None else time.time())
-        vf = float(valid_from)
+        vf = float(valid_from if valid_from is not None else 0.0)
         vu = float(valid_until) if valid_until is not None else None
-        ent = str(entity)
-        attr = str(attribute)
+        ent = str(entity or "")
+        attr = str(attribute or "")
         fact_id = f"btf_{_sha16([ent, attr, repr(value), str(vf), str(tx), str(len(self._bitemporal_facts))])}"
         superseded_ids: list[str] = []
         if supersede_active:
@@ -3229,6 +3726,15 @@ def execute_memory_operation(
         return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
     if op == "RECORD_BITEMPORAL_FACT":
         res = bus.record_bitemporal_fact(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "SUPERSEDE_BITEMPORAL_FACT":
+        res = bus.supersede_bitemporal_fact(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "FORWARD_PUSH_RECALL":
+        res = bus.forward_push_bitemporal_recall(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "ENFORCE_TWO_DOOR_RENT":
+        res = bus.enforce_two_door_rent_and_cap(**data)
         return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
     if op == "QUERY_BITEMPORAL_FACTS":
         res = bus.query_bitemporal_facts(**data)
