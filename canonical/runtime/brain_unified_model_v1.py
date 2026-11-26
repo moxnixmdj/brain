@@ -589,7 +589,14 @@ class UnifiedModel:
             postings = self.index.get(token)
             if not postings:
                 continue
-            matched.add(token)
+            # Coverage is a claim about how much of the ASK the model recognised, and a token
+            # qualifies only if it can actually separate capabilities. A token with a single
+            # posting recognises nothing: measured on "write a poem about the sea", the `about`
+            # that appears inside one capability's description had df=1, coverage reached the
+            # 0.34 floor on it alone, and json.file.write answered a request for a poem.
+            # A keyword scorer with no discrimination is not a router.
+            if len(postings) > 1:
+                matched.add(token)
             for cid, weight in postings.items():
                 if cid in unrunnable:
                     # Recorded, not removed. `route()` answers "what does the

@@ -90,6 +90,25 @@ def docstring_sentence(cid: str, rec: dict[str, Any], root: pathlib.Path) -> str
     return first if len(first) >= 20 else None
 
 
+def _self_locating(model: Any, caps: dict[str, Any]) -> dict[str, Any]:
+    """Can a capability be found by describing what it does, using its own recorded description?
+
+    This is the measure the artifact could not report before the compiler started carrying
+    the module's docstring sentence: with no description stored, the numerator is zero by
+    construction, whatever the router is capable of.
+    """
+    described = {cid: str(rec["described_as"]) for cid, rec in caps.items()
+                 if isinstance(rec, dict) and rec.get("described_as")}
+    if not described:
+        return {"n": 0, "found": 0, "share": 0.0}
+    found = 0
+    for cid, sentence in described.items():
+        routed = model.route(sentence, top_k=1)
+        if (routed.get("best") or {}).get("id") == cid:
+            found += 1
+    return {"n": len(described), "found": found, "share": round(found / len(described), 4)}
+
+
 def census(root: str | pathlib.Path = ".", *, sample: int = 200, trials: int = 24,
            seed: int = 20261124) -> dict[str, Any]:
     sys.path.insert(0, str(pathlib.Path(root).resolve()))
@@ -178,6 +197,8 @@ def census(root: str | pathlib.Path = ".", *, sample: int = 200, trials: int = 2
         "unresolved_module": len(unresolved),
         "askable_in_words": len(askable),
         "askable_share": round(len(askable) / max(1, len(caps)), 4),
+        "described_as": sum(1 for rec in caps.values() if isinstance(rec, dict) and rec.get("described_as")),
+        "self_locating": _self_locating(model, caps),
         "with_docstring": len(with_doc),
         "generic_docstrings": generic,
         "distinct_docstrings": len(doc_counts),
@@ -207,6 +228,9 @@ def main(argv: list[str] | None = None) -> int:
     print(f"  unresolved module              : {report['unresolved_module']}")
     print(f"  askable in words               : {report['askable_in_words']}"
           f"  ({report['askable_share'] * 100:.0f}%)")
+    print(f"  carries a description          : {report['described_as']}"
+          f"  (found by its own description: {report['self_locating']['found']}"
+          f"/{report['self_locating']['n']} = {report['self_locating']['share'] * 100:.1f}%)")
     print(f"  has a docstring                : {report['with_docstring']}"
           f"  (generic: {report['generic_docstrings']}, distinct: {report['distinct_docstrings']})")
     print(f"\n  {'library size':>13s}  {'recall@1':>9s}  {'95% CI':>18s}  n")

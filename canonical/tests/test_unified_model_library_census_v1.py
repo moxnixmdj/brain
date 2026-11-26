@@ -62,12 +62,30 @@ class TestMeasuredLibraryShape(unittest.TestCase):
             "expected one adapter file registered under >100 ids",
         )
 
-    def test_most_capabilities_cannot_be_asked_for_in_words(self):
+    def test_most_capabilities_can_now_be_asked_for_in_words(self):
+        """Changed on 2026-11-24: the compiler now carries each module's docstring sentence.
+
+        This test previously asserted the defect -- that under 25% of the library was askable.
+        The fix landed (L1), so it now asserts the property we want, at the level measured:
+        211 of 447 declarations carry a phrase a caller could say, up from 49.
+        """
         report = self.report
-        self.assertLess(
-            report["askable_share"], 0.25,
-            "askable share rose above a quarter: either descriptions were added (good, "
-            "update the plan) or the phrase filter loosened (a measurement bug)",
+        self.assertGreaterEqual(
+            report["askable_in_words"], 150,
+            "askable share collapsed; the compiler stopped carrying descriptions",
+        )
+
+    def test_capabilities_carry_the_description_they_are_found_by(self):
+        report = self.report
+        self.assertGreaterEqual(
+            report["described_as"], 150,
+            "fewer capabilities carry a described_as field than the 188 measured",
+        )
+        # Self-location against the full library is lower than the isolated 98.9% because
+        # sibling capabilities of one family now compete on shared family vocabulary.
+        self.assertGreaterEqual(
+            report["self_locating"]["share"], 0.40,
+            f"self-location fell to {report['self_locating']['share']:.2f}",
         )
 
     def test_docstrings_are_mostly_present_but_generic(self):

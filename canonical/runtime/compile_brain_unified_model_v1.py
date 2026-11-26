@@ -146,6 +146,29 @@ def tokenize(text: str) -> list[str]:
     return out
 
 
+# Function words that a prose sentence contains and a request almost never turns on. A word that
+# appears in exactly one capability's description gets an IDF of ~224, so a weight-1 posting of
+# "about" outscored every declared trigger for "write a poem about the sea" and made it route
+# confidently. These are dropped from descriptions only; declared triggers keep their own words.
+DESCRIPTION_SKIPWORDS = frozenset(
+    """about above after again against all also although among any around because been before
+    being below between both during each either else enough even ever every few find first for
+    from further get given gives had has have how into its itself just least less like made make
+    many may might more most much must near need neither never next none nor not now off often
+    once only onto other others ought our out over own per perhaps put rather same see seems
+    several shall should show since some such take than that their them then there these they
+    thing things this those through thus together too toward under until upon very was way well
+    were what when where whether which while whom whose will with within without would yet""".split()
+)
+
+
+def _counter(items: Iterable[str]) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for item in items:
+        counts[item] = counts.get(item, 0) + 1
+    return counts
+
+
 def _unique(items: Iterable[str]) -> list[str]:
     seen: set[str] = set()
     out: list[str] = []
@@ -178,6 +201,32 @@ def _headings(text: str, limit: int = 40) -> list[str]:
         if len(out) >= limit:
             break
     return out
+
+
+def _module_docstring_sentence(root: Path, source_path: str | None) -> str | None:
+    """The first sentence of the module's own docstring.
+
+    Written by whoever wrote the module, and until now read by nobody: the compiler emitted
+    `provides: <module path>`, so a capability whose author had already described it in one
+    sentence was addressable only by its filename. A file that opens with a generic sentence
+    shared by a hundred other files describes nothing, and is dropped rather than counted.
+    """
+    if not isinstance(source_path, str) or not source_path:
+        return None
+    target = root / source_path
+    if not target.is_file():
+        return None
+    try:
+        doc = ast.get_docstring(ast.parse(target.read_text(encoding="utf-8", errors="replace")))
+    except (SyntaxError, OSError):
+        return None
+    if not doc:
+        return None
+    flat = " ".join(doc.split())
+    sentence = " ".join(flat.split(". ")[0].split())
+    if len(sentence) < 20 or len(sentence) > 240:
+        return None
+    return sentence
 
 
 def _term_counts(text: str, limit: int = 48) -> dict[str, int]:
@@ -578,10 +627,16 @@ def _capability_row(
     for item in provides:
         provide_tokens.extend(tokenize(item.replace(".", " ").replace("_", " ")))
 
+    described_as = _module_docstring_sentence(
+        root,
+        (source.get("adapter_path") or source.get("path")) if isinstance(source, Mapping) else None,
+    )
+
     triggers = _unique(
         [k.casefold() for k in keywords]
         + id_tokens
         + provide_tokens
+        + ([described_as.casefold()] if described_as else [])
     )
 
     expect = contract.get("expect") if isinstance(contract.get("expect"), Mapping) else {}
@@ -619,6 +674,7 @@ def _capability_row(
         "output_fields": [expected_field] if expected_field else [],
         "requires": sorted(str(x) for x in (entry.get("requires") or [])),
         "provides": sorted(provides),
+        "described_as": described_as,
         "adapter_module": entry.get("adapter_module"),
         "entrypoint": entry.get("entrypoint"),
         "route": {
@@ -668,6 +724,17 @@ def _build_grammar(capabilities: list[Mapping[str, Any]], engines: list[Mapping[
                     continue
                 seen.add(token)
                 rows.append((token, cid, 3 if " " in str(trigger) else 2))
+        # A description is evidence about what the capability does, not the ask. Weighted below
+        # every declared trigger so it can promote a capability on a verb it never declared, but
+        # can never outrank one that declares the verb. Without this split the sentence "Write a
+        # JSON file from records" made "write a poem about the sea" route confidently to
+        # json.file.write: the coverage floor counted description tokens as ask tokens.
+        provided = {tok for item in (cap.get("provides") or []) for tok in tokenize(str(item))}
+        for token in tokenize(str(cap.get("described_as") or "")):
+            if token in seen or token in provided or token in DESCRIPTION_SKIPWORDS:
+                continue
+            seen.add(token)
+            rows.append((token, cid, 1))
         for token in tokenize(cid):
             if token not in seen:
                 rows.append((token, cid, 3))
@@ -1231,6 +1298,23 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
         if not row["triggers"]:
             raise UnifiedModelCompileError("CAPABILITY_WITHOUT_TRIGGERS:" + row["id"])
 
+    # A description shared by many capabilities describes none of them. 176 of this model's
+    # modules open with the same generic adapter sentence; counting it as a trigger would make
+    # 176 capabilities tie with each other on the only words that were supposed to tell them
+    # apart. Measured: giving every capability its own docstring sentence lifts self-routing on
+    # the 188 capabilities that HAVE a distinct sentence from 67.6% to 98.9%, and moves the 182
+    # that do not by +0.6 points -- so the templated ones are dropped, not counted.
+    described = [str(c.get("described_as")) for c in capabilities if c.get("described_as")]
+    shared = {text for text, n in _counter(described).items() if n > 1}
+    if shared:
+        for cap in capabilities:
+            if cap.get("described_as") in shared:
+                cap["described_as"] = None
+                cap["triggers"] = [
+                    trig for trig in cap.get("triggers") or []
+                    if str(trig) not in {text.casefold() for text in shared}
+                ]
+        capabilities = list(capabilities)
     grammar = _build_grammar(capabilities, engines)
     grammar["adapter_ast_index"] = _extract_adapter_ast_index(base, capabilities)
 
