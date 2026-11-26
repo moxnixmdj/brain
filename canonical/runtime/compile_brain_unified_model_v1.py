@@ -1105,7 +1105,7 @@ _IMPORT_RE = re.compile(r"^\s*(?:from|import)\s+([A-Za-z_][\w.]*)", re.M)
 # ``tests`` is scanned for the reverse-import graph above but is not offered as
 # addressable source: it is the oracle, and indexing it would let a goal be
 # answered with the test that is supposed to judge the answer.
-_SOURCE_ROOTS = ("canonical/runtime", "canonical/swe_kernel", "canonical/tools")
+_SOURCE_ROOTS = ("canonical/runtime", "canonical/swe_kernel")
 
 
 def _harvested_rows(
