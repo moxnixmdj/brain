@@ -2031,7 +2031,7 @@ class SentientCognitiveCore:
         surprise_threshold: float = _TWO_SHANNON_BITS_NATS,
     ) -> None:
         from canonical.swe_kernel.concept_library_v1 import CompoundingConceptLibrary
-        from canonical.swe_kernel.recursive_self_architect_v1 import RecursiveSelfArchitect
+        from canonical.swe_kernel.meta_circular_organ_graph_v1 import MetaCircularOrganGraph
 
         self.root_dir = pathlib.Path(root_dir).resolve() if root_dir is not None else None
         if self.root_dir is not None:
@@ -2042,6 +2042,7 @@ class SentientCognitiveCore:
             else pathlib.Path(tempfile.gettempdir()) / f"brain_self_arch_{os.getpid()}"
         )
         base_state_dir.mkdir(parents=True, exist_ok=True)
+        self._base_state_dir = base_state_dir
         self.belief = EpistemicSelfBeliefEngine(
             (self.root_dir / "belief_state.json") if self.root_dir is not None else None,
             surprise_threshold=surprise_threshold,
@@ -2055,21 +2056,45 @@ class SentientCognitiveCore:
         self.voi_controller = GlobalVoIDominanceController()
         self.concept_library = CompoundingConceptLibrary(base_state_dir / "concept_library_v1.json")
         self.associative_memory_path = base_state_dir / "associative_memory_v1.json"
-        self.self_architect = RecursiveSelfArchitect(
-            base_state_dir / "self_architect",
-            concept_library=self.concept_library,
-        )
+        # Lazy-initialized heavy subsystems (Elon's Law: delete ~50ms eager boot import tax).
+        self._self_architect: Any = None
+        self._cost_router: Any = None
         self.trace_harvester = SelfTraceHarvester(salt=f"escrow:{base_state_dir.name}")
-        from canonical.swe_kernel.meta_circular_organ_graph_v1 import MetaCircularOrganGraph
-        from canonical.swe_kernel.transactional_parallel_execution_v1 import LatencyReliabilityCostRouter
-
         self.organ_graph = MetaCircularOrganGraph(
             base_state_dir / "meta_circular_organ_graph_v1.json",
             concept_library=self.concept_library,
         )
-        self.cost_router = LatencyReliabilityCostRouter()
         self.verified_programs_buffer: list[str] = []
         self.unresolved_failure_buffer: list[dict[str, Any]] = []
+
+    @property
+    def self_architect(self) -> Any:
+        if self._self_architect is None:
+            from canonical.swe_kernel.recursive_self_architect_v1 import RecursiveSelfArchitect
+
+            self._self_architect = RecursiveSelfArchitect(
+                self._base_state_dir / "self_architect",
+                concept_library=self.concept_library,
+            )
+        return self._self_architect
+
+    @self_architect.setter
+    def self_architect(self, value: Any) -> None:
+        self._self_architect = value
+
+    @property
+    def cost_router(self) -> Any:
+        if self._cost_router is None:
+            from canonical.swe_kernel.transactional_parallel_execution_v1 import (
+                LatencyReliabilityCostRouter,
+            )
+
+            self._cost_router = LatencyReliabilityCostRouter()
+        return self._cost_router
+
+    @cost_router.setter
+    def cost_router(self, value: Any) -> None:
+        self._cost_router = value
 
     def evaluate_global_open_world_decision(
         self,

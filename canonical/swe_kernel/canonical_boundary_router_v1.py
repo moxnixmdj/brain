@@ -810,6 +810,7 @@ class BoundaryRouter:
         oracle_fn: Callable[[Path], bool],
         *,
         commit_winner: bool = True,
+        durable_commit: bool = False,
         cluster: str = "speculative_cow",
     ) -> dict[str, Any]:
         """Run N side-effecting candidate futures in isolated CoW sandboxes (`0F`), committing ONLY a verified winner."""
@@ -819,6 +820,7 @@ class BoundaryRouter:
             branches,
             oracle_fn,
             commit_winner=commit_winner,
+            durable_commit=durable_commit,
         )
         ok = bool(res.get("pass"))
         self._record_cluster(cluster, tier="TIER_1_SPECULATIVE_COW" if ok else "UNSOLVED", passed=ok)
@@ -836,17 +838,21 @@ class BoundaryRouter:
         self,
         *,
         direct_command: Sequence[str] | None = None,
+        webmcp_tool: Mapping[str, Any] | None = None,
         typed_action: Mapping[str, Any] | None = None,
+        osworld_v21_state: Mapping[str, Any] | None = None,
         aimed_observation: Mapping[str, Any] | None = None,
         screen_width: int = 1920,
         screen_height: int = 1080,
         cluster: str = "cu_four_tier",
     ) -> dict[str, Any]:
-        """Zero-Pixel-First 4-tier computer-use ladder (`0F`)."""
+        """Zero-Pixel-First computer-use ladder (`0F` — CLI -> WebMCP -> Typed Surface -> OSWorld v2.1 -> Aimed Geometry)."""
         t0 = time.perf_counter()
         res = cu_spine.compile_four_tier_cu_action(
             direct_command=direct_command,
+            webmcp_tool=webmcp_tool,
             typed_action=typed_action,
+            osworld_v21_state=osworld_v21_state,
             aimed_observation=aimed_observation,
             screen_width=screen_width,
             screen_height=screen_height,
@@ -858,6 +864,288 @@ class BoundaryRouter:
             "pass": ok,
             "status": "PASS__CU_TIER_COMPILED" if ok else res.get("status"),
             "cu_plan": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    # ------------------------------------------------- Waves 7-10 Unified Front-Door Routes
+
+    def route_durable_commit(
+        self,
+        workspace_root: str | Path,
+        file_writes: Mapping[str, bytes | str],
+        *,
+        crash_at: str | None = None,
+        recover_after_crash: bool = False,
+        cluster: str = "durable_commit",
+    ) -> dict[str, Any]:
+        """Crash-safe multi-path journaled commit (`0F` × `the_record_is_the_commit_v1`)."""
+        t0 = time.perf_counter()
+        res = cu_spine.durable_transactional_commit(
+            workspace_root,
+            file_writes,
+            crash_at=crash_at,
+            recover_after_crash=recover_after_crash,
+        )
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_1_DURABLE_COMMIT" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": res.get("status"),
+            "commit": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_env_broker(
+        self,
+        repo_root: str | Path,
+        *,
+        cluster: str = "env_broker",
+    ) -> dict[str, Any]:
+        """Zero-model environment broker inspection (`0F` × `the_environment_broker_v1` × `causal_computer_use_agent_v1`)."""
+        t0 = time.perf_counter()
+        res = cu_spine.inspect_repo_environment_broker(repo_root)
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_1_ENV_BROKER" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": res.get("status"),
+            "broker": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_angelic_counterfactual_repair(
+        self,
+        *,
+        cluster: str = "angelic_counterfactual",
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Zero-model Angelic + Counterfactual Interior-Spec + CEGIS synthesis (`0D`)."""
+        t0 = time.perf_counter()
+        res = swe_spine.synthesize_counterfactual_and_angelic_repair(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_1_ANGELIC_CEGIS" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": res.get("status"),
+            "tier_used": "TIER_1_ANGELIC_CEGIS" if ok else "NONE",
+            "synthesis": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_crossfile_choreography(
+        self,
+        args: Mapping[str, Any],
+        root: str | Path,
+        *,
+        cluster: str = "crossfile_repair",
+    ) -> dict[str, Any]:
+        """Cross-file staged / in-place repair choreography (`0D` × `software_repair_crossfile_choreograph_v1`)."""
+        t0 = time.perf_counter()
+        res = swe_spine.choreograph_crossfile_repair(args, root)
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_1_CROSSFILE" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": res.get("status"),
+            "choreography": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_compile_goal_contract(
+        self,
+        goal: str,
+        *,
+        admissible: Mapping[str, Mapping[str, Any]] | None = None,
+        root: str | Path | None = None,
+        cluster: str = "goal_contract_compiler",
+    ) -> dict[str, Any]:
+        """Zero-token natural-language -> typed capability contract compiler (`0D` × `goal_front_compiler_v1` × `declared_input_derivation_v1`)."""
+        t0 = time.perf_counter()
+        res = swe_spine.compile_plain_goal_contract(goal, admissible=admissible, root=root)
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_0_GOAL_COMPILER" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": res.get("status"),
+            "contract": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_branch_mental_model(
+        self,
+        workspace_root: str | Path,
+        *,
+        required_files: Mapping[str, Mapping[str, Any]] | None = None,
+        candidate_commands: Sequence[Sequence[str]] | None = None,
+        commit_winner: bool = False,
+        cluster: str = "branch_mental_model",
+    ) -> dict[str, Any]:
+        """'The Branch Is the Model' (`0E` × `executable_mental_model_v1` × `the_branch_is_the_model_v1`)."""
+        t0 = time.perf_counter()
+        res = env_spine.solve_via_branch_model_and_mental_model(
+            workspace_root,
+            required_files=required_files,
+            candidate_commands=candidate_commands,
+            commit_winner=commit_winner,
+        )
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_1_BRANCH_MODEL" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": res.get("status"),
+            "mental_model": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_check_mode_oracle(
+        self,
+        *,
+        argv: Sequence[str] | None = None,
+        cwd: str | Path | None = None,
+        refusal_messages: Sequence[str] = (),
+        written_types_root: str | Path | None = None,
+        type_names: Sequence[str] = (),
+        cluster: str = "check_mode_oracle",
+    ) -> dict[str, Any]:
+        """'The Check Mode Is the Oracle' + Refusal & Empirical Type Vocabulary (`0E`)."""
+        t0 = time.perf_counter()
+        res = env_spine.discover_check_mode_oracle(
+            argv,
+            cwd=cwd,
+            refusal_messages=refusal_messages,
+            written_types_root=written_types_root,
+            type_names=type_names,
+        )
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_1_CHECK_MODE_ORACLE" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": res.get("status"),
+            "oracle": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_counterexample_experiment(
+        self,
+        traces: Sequence[Sequence[Sequence[tuple[str, Any]]]],
+        labels: Sequence[bool],
+        *,
+        asked: Sequence[tuple[int, int]] = (),
+        cluster: str = "counterexample_experiment",
+    ) -> dict[str, Any]:
+        """'The Counterexample Is the Next Experiment' (`0G`)."""
+        t0 = time.perf_counter()
+        res = self.memory_bus.propose_counterexample_experiment(traces, labels, asked=asked)
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_1_COUNTEREXAMPLE" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": res.get("status"),
+            "experiment": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_run_relation_goal(
+        self,
+        traces: Sequence[Sequence[Sequence[tuple[str, Any]]]],
+        labels: Sequence[bool],
+        *,
+        cluster: str = "run_relation_goal",
+    ) -> dict[str, Any]:
+        """'The Goal Is a Relation Over the Run' (`0G`)."""
+        t0 = time.perf_counter()
+        res = self.memory_bus.induce_run_relation_goal(traces, labels)
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_1_RUN_RELATION" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": res.get("status"),
+            "run_relation": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_one_experience_consequences(
+        self,
+        training: Sequence[tuple[str, Any, Any]],
+        conditions: Sequence[Any],
+        *,
+        cluster: str = "one_experience",
+    ) -> dict[str, Any]:
+        """'One Experience, Every Consequence' (`0G`)."""
+        t0 = time.perf_counter()
+        res = self.memory_bus.extract_one_experience_consequences(training, conditions)
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_1_ONE_EXPERIENCE" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": res.get("status"),
+            "consequences": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_self_evolution_firewall(
+        self,
+        source_text: str,
+        verifier_fn: Callable[[Mapping[str, Any]], bool],
+        *,
+        skill_id: str = "self_mod_candidate",
+        workspace_root: str | Path | None = None,
+        target_rel: str | None = None,
+        positive_examples: Sequence[Any] = (),
+        negative_mutants: Sequence[Any] = (),
+        check_predicate: Callable[[Any], bool] | None = None,
+        limit: int = 8,
+        seed: int = 7,
+        min_kill_rate: float = 0.5,
+        commit_on_pass: bool = False,
+        cluster: str = "self_evolution_firewall",
+    ) -> dict[str, Any]:
+        """Wave 10 Entry-Only Self-Evolution Firewall (`0H` × `0F` × `0G`, blocking poisoned state at entry)."""
+        t0 = time.perf_counter()
+        res = oracle_spine.audit_self_evolution_entry(
+            source_text,
+            verifier_fn,
+            skill_id=skill_id,
+            workspace_root=workspace_root,
+            target_rel=target_rel,
+            positive_examples=positive_examples,
+            negative_mutants=negative_mutants,
+            check_predicate=check_predicate,
+            limit=limit,
+            seed=seed,
+            min_kill_rate=min_kill_rate,
+            commit_on_pass=commit_on_pass,
+            memory_bus=self.memory_bus,
+        )
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_1_ENTRY_FIREWALL" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "admitted": bool(res.get("admitted")),
+            "status": res.get("status"),
+            "firewall": res,
             "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
             "model_calls": 0,
         }

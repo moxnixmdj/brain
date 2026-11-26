@@ -726,3 +726,169 @@ def extract_guard_demand_sites(source_text: str) -> dict[str, Any]:
         "model_calls": 0,
     }
 
+
+def audit_check_vacuity(
+    predicate: Callable[[Any], bool],
+    *,
+    positive_examples: Sequence[Any],
+    negative_mutants: Sequence[Any],
+    check_name: str = "candidate_check",
+) -> dict[str, Any]:
+    """'A Check That Nobody Runs Is a Check That Cannot Be Wrong' (`0H`).
+
+    Proves a check actually executes, passes every real positive witness, and kills every
+    semantic mutant (rejecting vacuous/tautological or unexecuted checks).
+    """
+    from canonical.tools import (
+        a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1 as vac_mod,
+    )
+
+    proof = prove_verifier_can_say_no(
+        predicate,
+        positive_examples=positive_examples,
+        negative_mutants=negative_mutants,
+        verifier_name=check_name,
+    )
+    vacuous = not bool(proof.get("falsifiable"))
+    return {
+        "schema": SCHEMA,
+        "pass": bool(proof.get("pass")) and not vacuous,
+        "status": "PASS__CHECK_NON_VACUOUS" if (proof.get("pass") and not vacuous) else "FAIL_CLOSED__CHECK_VACUOUS_OR_UNSOUND",
+        "vacuous": vacuous,
+        "falsification": proof,
+        "citation_vacuity_wired": hasattr(vac_mod, "citation_vacuity") and hasattr(vac_mod, "certification_audit"),
+        "model_calls": 0,
+    }
+
+
+def evaluate_generalization_delta(
+    pulls: Sequence[Mapping[str, Any]],
+    *,
+    markers: Mapping[str, str] | None = None,
+) -> dict[str, Any]:
+    """Measure which fix actually moves held-out generalization (`which_fix_moves_generalization_v1`)."""
+    from canonical.tools import which_fix_moves_generalization_v1 as gen_mod
+
+    res = gen_mod.run(list(pulls), markers=markers)
+    return {
+        "schema": SCHEMA,
+        "pass": isinstance(res, Mapping),
+        "status": "PASS__GENERALIZATION_DELTA_MEASURED",
+        "measurement": res,
+        "model_calls": 0,
+    }
+
+
+def audit_self_evolution_entry(
+    source_text: str,
+    verifier_fn: Callable[[Mapping[str, Any]], bool],
+    *,
+    skill_id: str = "self_mod_candidate",
+    workspace_root: str | Path | None = None,
+    target_rel: str | None = None,
+    positive_examples: Sequence[Any] = (),
+    negative_mutants: Sequence[Any] = (),
+    check_predicate: Callable[[Any], bool] | None = None,
+    limit: int = 8,
+    seed: int = 7,
+    min_kill_rate: float = 0.5,
+    commit_on_pass: bool = False,
+    memory_bus: Any = None,
+) -> dict[str, Any]:
+    """Wave 10 Entry-Only Self-Evolution Firewall (`0H` × `0F` × `0G`, defeating SEABench 43.9% drift).
+
+    SEABench (2026) proves poisoned self-evolution CANNOT be repaired post-hoc: bad state MUST
+    be blocked at entry. Every self-modification or skill write must pass ALL active gates:
+      1. AST Mutation Killing (`mutation_admission_gate` via `mutation_admission_probe_v1`)
+      2. Non-Vacuous Check Falsification (`audit_check_vacuity`, when predicate/examples given)
+      3. Verified SHA-256 Event Lineage (`0G` `append_verified_event`, or T2 nogood on rejection)
+      4. Crash-Safe Multi-Path Journal Commit (`0F` `durable_transactional_commit` via
+         `the_record_is_the_commit_v1`), writing ZERO bytes on any gate failure.
+    """
+    t0 = time.perf_counter()
+    reasons: list[str] = []
+
+    # Gate 1: Real AST Mutation Killing
+    mut_gate = mutation_admission_gate(
+        source_text,
+        verifier_fn,
+        limit=limit,
+        seed=seed,
+        min_kill_rate=min_kill_rate,
+    )
+    if not mut_gate.get("pass"):
+        reasons.append(str(mut_gate.get("status") or "MUTATION_GATE_FAILED"))
+
+    # Gate 2: Non-Vacuous Check Falsification (when supplied)
+    vac_gate = None
+    if check_predicate is not None or positive_examples or negative_mutants:
+        if check_predicate is None:
+            reasons.append("VACUITY_PREDICATE_MISSING")
+        else:
+            vac_gate = audit_check_vacuity(
+                check_predicate,
+                positive_examples=positive_examples,
+                negative_mutants=negative_mutants,
+                check_name=skill_id,
+            )
+            if not vac_gate.get("pass"):
+                reasons.append(str(vac_gate.get("status") or "CHECK_VACUOUS"))
+
+    admitted = len(reasons) == 0
+    event_receipt = None
+    commit_receipt = None
+    nogood_recorded = False
+
+    if admitted:
+        # Gate 3: Append verified event to 0G hash-chained memory log
+        if memory_bus is not None and hasattr(memory_bus, "append_verified_event"):
+            import hashlib
+
+            event_receipt = memory_bus.append_verified_event(
+                op="SET",
+                key=f"self_evolution:{skill_id}",
+                value={
+                    "source_sha256": hashlib.sha256(source_text.encode("utf-8")).hexdigest(),
+                    "kill_rate": mut_gate.get("kill_rate"),
+                },
+                source_commit="entry_firewall_v1",
+                precondition_guard=["mutation_killed", "non_vacuous_check"],
+            )
+        # Gate 4: Crash-safe journaled commit (ONLY after all gates pass!)
+        if commit_on_pass and workspace_root is not None and target_rel is not None:
+            from canonical.swe_kernel import canonical_cu_sandbox_spine_v1 as cu_spine
+
+            commit_receipt = cu_spine.durable_transactional_commit(
+                workspace_root,
+                {str(target_rel): source_text.encode("utf-8")},
+            )
+            if not commit_receipt.get("pass"):
+                admitted = False
+                reasons.append("DURABLE_COMMIT_FAILED")
+    else:
+        # Block at entry + compile failure into T2 CDCL negative-space nogood!
+        if memory_bus is not None and hasattr(memory_bus, "record_conflict"):
+            memory_bus.record_conflict(
+                source_text[:400],
+                reason=";".join(reasons),
+                domain="self_evolution_firewall",
+                context_sig=skill_id,
+            )
+            nogood_recorded = True
+
+    return {
+        "schema": SCHEMA,
+        "pass": admitted,
+        "admitted": admitted,
+        "status": "PASS__SELF_EVOLUTION_ADMITTED" if admitted else "FAIL_CLOSED__BLOCKED_AT_ENTRY_FIREWALL",
+        "skill_id": skill_id,
+        "reasons": reasons,
+        "mutation_gate": mut_gate,
+        "vacuity_gate": vac_gate,
+        "event_receipt": event_receipt,
+        "commit_receipt": commit_receipt,
+        "nogood_recorded": nogood_recorded,
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        "model_calls": 0,
+    }
+

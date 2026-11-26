@@ -24,9 +24,9 @@ Covers the exact 2026 frontier failure modes:
 """
 from __future__ import annotations
 
-import time
-
 import pathlib
+import sys
+import time
 from typing import Any
 
 import pytest
@@ -908,5 +908,338 @@ def test_22_one_shot_instant_learning_crystallizes_skill_and_boundary(tmp_path: 
     chk_no = model.memory_bus.check_skill_applicability("read_target_skill_v22", ["file_missing"])
     assert chk_ok["decision"] == "APPLY"
     assert chk_no["decision"] == "REJECT"
+
+
+def test_23_wave7_per_section_isolation_and_salsa_stat_boot(tmp_path: Path) -> None:
+    """Wave 7 Elon's Law: per-section sidecars with postings never hydrate unrelated sections."""
+    art_path = ROOT / bum.DEFAULT_ARTIFACT
+    raw_bytes = art_path.read_bytes()
+    raw_sha = bum.hashlib.sha256(raw_bytes).hexdigest()
+    # Ensure v2 isolated sidecars exist
+    full = bum.load_model(art_path, verify=True)
+    bum.prewarm_sidecar_caches(full, art_path)
+    core_cache = bum._core_cache_dir() / f"unified_model_core_{raw_sha[:32]}.marshal"
+    core = bum.marshal.loads(core_cache.read_bytes())
+
+    # 1) Querying find_source() must ONLY hydrate source_index (NOT 5.66 MB research_index or knowledge!)
+    m_src = bum.UnifiedModel(core, _raw_bytes=None, _core_only=True, _target_path=art_path)
+    res_src = m_src.find_source("angelic")
+    assert len(res_src["candidates"]) > 0
+    assert m_src._source_index_cache is not None
+    assert m_src._source_postings_cache is not None
+    assert m_src._research_index_cache is None
+    assert m_src._knowledge_cache is None
+    assert m_src._model_loaded is None
+
+    # 2) Querying recall() must ONLY hydrate knowledge (NOT research_index or source_index!)
+    m_knw = bum.UnifiedModel(core, _raw_bytes=None, _core_only=True, _target_path=art_path)
+    res_knw = m_knw.recall("unified model")
+    assert res_knw["hit_count"] > 0
+    assert m_knw._knowledge_cache is not None
+    assert m_knw._research_index_cache is None
+    assert m_knw._source_index_cache is None
+    assert m_knw._model_loaded is None
+
+    # 3) Lazy SentientCognitiveCore properties don't eagerly instantiate self_architect on boot
+    c = m_src.open_creature(tmp_path / "creature_lazy_core")
+    assert c.cognitive_core._self_architect is None
+    assert c.organ_graph._policy_archive_init is False
+
+
+def test_24_wave7_durable_transactional_commit_crash_recovery(tmp_path: Path) -> None:
+    """Wave 7: crash-safe multi-path journaled commit (`the_record_is_the_commit_v1`) recovers mid-commit crashes."""
+    model = bum.open_model()
+    ws1 = tmp_path / "ws_clean"
+    ws1.mkdir()
+    clean = model.durable_commit(ws1, {"a.txt": "alpha\n", "sub/b.txt": "beta\n"})
+    assert clean["pass"] is True
+    assert clean["commit"]["commit"]["all_committed"] is True
+    assert (ws1 / "a.txt").read_text(encoding="utf-8") == "alpha\n"
+    assert (ws1 / "sub/b.txt").read_text(encoding="utf-8") == "beta\n"
+
+    # Inject a crash right after writing a.txt, then verify deterministic journal recovery finishes commit cleanly
+    ws2 = tmp_path / "ws_crash"
+    ws2.mkdir()
+    rec = model.durable_commit(
+        ws2,
+        {"a.txt": "first\n", "b.txt": "second\n"},
+        crash_at="after_op:a.txt",
+        recover_after_crash=True,
+    )
+    assert rec["pass"] is True
+    assert rec["commit"]["commit"]["all_committed"] is True
+    assert (ws2 / "a.txt").read_text(encoding="utf-8") == "first\n"
+    assert (ws2 / "b.txt").read_text(encoding="utf-8") == "second\n"
+
+
+def test_25_wave7_reflink_cow_race_with_durable_commit(tmp_path: Path) -> None:
+    """Wave 7: CoW speculative race uses reflink/CoW cloning + durable commit for the winning branch."""
+    ws = tmp_path / "ws_cow_durable"
+    ws.mkdir()
+    (ws / "state.txt").write_text("v0\n", encoding="utf-8")
+    model = bum.open_model()
+
+    branches = [
+        {"branch_id": "bad", "apply_fn": lambda d: (d / "state.txt").write_text("corrupt\n", encoding="utf-8")},
+        {"branch_id": "good", "apply_fn": lambda d: (d / "state.txt").write_text("verified_v1\n", encoding="utf-8")},
+    ]
+    res = model.route_with_boundary(
+        "speculative_cow",
+        workspace_root=ws,
+        branches=branches,
+        oracle_fn=lambda d: (d / "state.txt").read_text(encoding="utf-8").strip() == "verified_v1",
+        commit_winner=True,
+        durable_commit=True,
+    )
+    assert res["pass"] is True
+    race = res["boundary_route"]["race"]
+    assert race["winner_branch_id"] == "good"
+    assert race["clone_mode"] in {"REFLINK_AUTO", "COPYTREE_FALLBACK"}
+    assert race["durable_commit_receipt"]["all_committed"] is True
+    assert (ws / "state.txt").read_text(encoding="utf-8").strip() == "verified_v1"
+
+
+def test_26_wave8_angelic_counterfactual_cegis_and_guard_discriminator(tmp_path: Path) -> None:
+    """Wave 8: `0D` exposes bottom-up CEGIS synthesis, guard discrimination, and repo-level counterfactual/angelic repair."""
+    model = bum.open_model()
+
+    # 1) Bottom-up CEGIS expression synthesis from (env, expected) examples at K3=0
+    syn_res = model.angelic_counterfactual_repair(
+        examples=[({"x": 1}, 3), ({"x": 2}, 5), ({"x": 4}, 9)],
+        var_names=["x"],
+        constants=(0, 1, 2),
+    )
+    assert syn_res["pass"] is True
+    assert syn_res["synthesis"]["model_calls"] == 0
+
+    # 2) Guard discriminator extraction (`the_same_guard_twice_is_the_discriminator_v1`)
+    guard_res = model.angelic_counterfactual_repair(
+        guard_source="def check(x, limit):\n    if x >= limit and limit > 0:\n        return True\n    return False\n",
+    )
+    assert guard_res["pass"] is True
+    assert len(guard_res["synthesis"]["synthesis"]["guards"]) == 1
+
+    # 3) Real failing Python mini-repo solved by counterfactual interior-spec / angelic repair at K3=0
+    repo = tmp_path / "mini_cf_repo"
+    repo.mkdir()
+    (repo / "calc.py").write_text(
+        "def bonus(x: int) -> int:\n    if x < 10:\n        return x * 2\n    return x\n",
+        encoding="utf-8",
+    )
+    (repo / "test_calc.py").write_text(
+        "from calc import bonus\n"
+        "def test_bonus():\n"
+        "    assert bonus(5) == 5\n"
+        "    assert bonus(12) == 24\n",
+        encoding="utf-8",
+    )
+    rep_res = model.angelic_counterfactual_repair(
+        repo_root=repo,
+        source_path="calc.py",
+        test_file="test_calc.py",
+        keep_patch_applied=True,
+    )
+    assert rep_res["pass"] is True
+    assert rep_res["synthesis"]["model_calls"] == 0
+
+
+def test_27_wave8_zero_token_goal_contract_compiler() -> None:
+    """Wave 8: `goal_front_compiler_v1` + `declared_input_derivation_v1` compile plain goals at K3=0."""
+    model = bum.open_model()
+    res = model.compile_goal_contract("fix failing pytest in canonical/runtime/brain_unified_model_v1.py")
+    assert res["pass"] is True
+    c = res["contract"]["contract"]
+    assert c["model_calls"] == 0
+    assert c["is_swe_request"] is True
+    assert "canonical/runtime/brain_unified_model_v1.py" in c["stated_existing_files"]
+
+
+def test_28_wave9_branch_is_the_model_and_mental_model_cow_speculation(tmp_path: Path) -> None:
+    """Wave 9: 'The Branch Is the Model' (`executable_mental_model_v1` + `the_branch_is_the_model_v1`) via `0E`."""
+    ws = tmp_path / "ws_branch_model"
+    ws.mkdir()
+    (ws / "in.csv").write_text("name,score\nb,2\na,1\n", encoding="utf-8")
+
+    model = bum.open_model()
+    res = model.route_with_boundary(
+        "branch_mental_model",
+        workspace_root=ws,
+        required_files={"out.csv": {"kind": "csv", "min_rows": 2}},
+        candidate_commands=[
+            [sys.executable, "-c", "open('wrong.txt','w').write('nope')"],
+            [sys.executable, "-c", "open('out.csv','w').write('name,score\\na,1\\nb,2\\n')"],
+        ],
+        commit_winner=True,
+    )
+    assert res["pass"] is True
+    mm = res["boundary_route"]["mental_model"]
+    assert mm["branch_is_model_wired"] is True
+    assert mm["model_calls"] == 0
+    assert (ws / "out.csv").is_file()
+    assert not (ws / "wrong.txt").exists()
+
+
+def test_29_wave9_check_mode_oracle_and_refusal_vocabulary(tmp_path: Path) -> None:
+    """Wave 9: `the_check_mode_is_the_oracle_v1` + refusal vocabulary + empirical type audit via `0E`."""
+    ws = tmp_path / "ws_check_mode"
+    ws.mkdir()
+    (ws / "keep.txt").write_text("untouched\n", encoding="utf-8")
+
+    model = bum.open_model()
+    res = model.route_with_boundary(
+        "check_mode_oracle",
+        argv=[sys.executable, "--help"],
+        cwd=ws,
+        refusal_messages=[
+            "error: unrecognized arguments: --bogus",
+            "fatal: not a git repository",
+        ],
+    )
+    assert res["pass"] is True
+    oracle = res["boundary_route"]["oracle"]
+    assert oracle["check_mode"]["read_only_preserved"] is True
+    assert oracle["check_mode"]["looks_like_help"] is True
+    assert len(oracle["refusal_vocabulary"]) == 2
+    assert oracle["empirical_type_collapse_wired"] is True
+
+
+def test_30_wave9_counterexample_experiment_and_run_relation_goal() -> None:
+    """Wave 9: `0G` solves whole-run relational goals (where final states are identical) & proposes counterexample experiments."""
+    model = bum.open_model()
+    # Identical final states `(("a", "v"), ("b", "w"))`: only runs where `a` precedes `b` succeed!
+    traces = [
+        ((), (("a", "v"),), (("a", "v"), ("b", "w"))),
+        ((), (("b", "w"),), (("a", "v"), ("b", "w"))),
+        ((("c", "z"),), (("a", "v"), ("c", "z")), (("a", "v"), ("b", "w"))),
+        ((("c", "z"),), (("b", "w"), ("c", "z")), (("a", "v"), ("b", "w"))),
+    ]
+    labels = [True, False, True, False]
+
+    rel_res = model.route_with_boundary("run_relation_goal", traces=traces, labels=labels)
+    assert rel_res["pass"] is True
+    rr = rel_res["boundary_route"]["run_relation"]
+    assert rr["full_run_accuracy"] == 1.0
+    assert rr["beats_end_only"] is True
+
+    # Counterexample-guided experiment proposal on separable traces
+    cex_traces = [
+        ((("a", "ok"),), (("a", "ok"), ("b", "1"))),
+        ((("a", "ok"),), (("a", "bad"), ("b", "1"))),
+        ((("a", "ok"),), (("a", "ok"), ("b", "2"))),
+        ((("a", "ok"),), (("a", "bad"), ("b", "2"))),
+    ]
+    cex_res = model.route_with_boundary("counterexample_experiment", traces=cex_traces, labels=[True, False, True, False])
+    assert cex_res["pass"] is True
+    assert cex_res["boundary_route"]["experiment"]["lattice_size"] > 0
+
+
+def test_31_wave10_webmcp_osworld_v21_and_env_broker_zero_pixel_cu(tmp_path: Path) -> None:
+    """Wave 10: `0F` Zero-Pixel CU ladder adds Tier 0.5 WebMCP, Tier 1.5 OSWorld v2.1 policy, and Repo Environment Broker."""
+    model = bum.open_model()
+
+    # Tier 0.5: WebMCP typed tool (0 pixels)
+    t_webmcp = model.route_with_boundary(
+        "cu_four_tier",
+        webmcp_tool={"name": "checkout.submit", "arguments": {"cart_id": "c-42"}, "origin": "https://shop.example"},
+    )
+    assert t_webmcp["pass"] is True
+    assert t_webmcp["boundary_route"]["cu_plan"]["tier"] == "TIER_0_5_WEBMCP_TYPED_TOOL"
+    assert t_webmcp["boundary_route"]["cu_plan"]["pixels_used"] == 0
+
+    # Tier 1.5: OSWorld v2.1 zero-model a11y policy (0 pixels, real Linux AT-SPI XML)
+    t_osw21 = model.route_with_boundary(
+        "cu_four_tier",
+        osworld_v21_state={
+            "instruction": "Click the Save button",
+            "a11y_tree": '<desktop><push-button name="Save" screencoord="(120, 60)" size="(80, 30)"/></desktop>',
+        },
+    )
+    assert t_osw21["pass"] is True
+    assert t_osw21["boundary_route"]["cu_plan"]["tier"] == "TIER_1_5_OSWORLD_V21_ZERO_MODEL_POLICY"
+    assert t_osw21["boundary_route"]["cu_plan"]["pixels_used"] == 0
+
+    # Environment Broker (`the_environment_broker_v1` + `causal_computer_use_agent_v1`)
+    proj = tmp_path / "broker_proj"
+    proj.mkdir()
+    (proj / "pyproject.toml").write_text("[project]\nname = 'demo'\nversion = '0.1.0'\n", encoding="utf-8")
+    (proj / "tests").mkdir()
+    (proj / "tests" / "test_ok.py").write_text("def test_ok():\n    assert True\n", encoding="utf-8")
+    brk = model.route_with_boundary("env_broker", repo_root=proj)
+    assert brk["pass"] is True
+    assert brk["boundary_route"]["broker"]["causal_cu_agent_wired"] is True
+
+
+def test_32_wave10_entry_only_self_evolution_firewall_blocks_poison_commits_valid(tmp_path: Path) -> None:
+    """Wave 10 Entry-Only Firewall (`0H` × `0F` × `0G`): blocks vacuous/poisoned self-updates at entry; durably commits verified ones."""
+    model = bum.open_model()
+    creature = model.open_creature(tmp_path / "creature_firewall")
+    ws = tmp_path / "skills_ws"
+    ws.mkdir()
+
+    skill_src = (
+        "def classify_risk(score: int) -> str:\n"
+        "    if score >= 80:\n"
+        "        return 'HIGH'\n"
+        "    if score >= 40:\n"
+        "        return 'MED'\n"
+        "    return 'LOW'\n"
+    )
+
+    # 1) Poisoned / vacuous verifier (always returns True -> fails AST mutation killing!) MUST BE BLOCKED AT ENTRY
+    blocked = creature.admit_self_modification(
+        skill_src,
+        lambda ns: True,
+        skill_id="poisoned_skill",
+        workspace_root=ws,
+        target_rel="poisoned_skill.py",
+        commit_on_pass=True,
+    )
+    assert blocked["pass"] is False
+    assert blocked["admitted"] is False
+    assert blocked["status"] == "FAIL_CLOSED__BLOCKED_AT_ENTRY_FIREWALL"
+    assert blocked["firewall"]["nogood_recorded"] is True
+    assert not (ws / "poisoned_skill.py").exists()  # ZERO bytes written!
+
+    # 2) Vacuous check predicate (fails falsification against mutants) MUST ALSO BE BLOCKED AT ENTRY
+    strong_verifier = lambda ns: (
+        ns["classify_risk"](90) == "HIGH"
+        and ns["classify_risk"](80) == "HIGH"
+        and ns["classify_risk"](50) == "MED"
+        and ns["classify_risk"](40) == "MED"
+        and ns["classify_risk"](10) == "LOW"
+    )
+    blocked_vac = creature.admit_self_modification(
+        skill_src,
+        strong_verifier,
+        skill_id="vacuous_check_skill",
+        workspace_root=ws,
+        target_rel="vacuous_check_skill.py",
+        positive_examples=[90],
+        negative_mutants=[-1],
+        check_predicate=lambda x: True,  # vacuous!
+        commit_on_pass=True,
+    )
+    assert blocked_vac["pass"] is False
+    assert not (ws / "vacuous_check_skill.py").exists()
+
+    # 3) Strong verifier + non-vacuous check -> ADMITTED, hash-chained in 0G event log, AND durably committed via 0F journal!
+    admitted = creature.admit_self_modification(
+        skill_src,
+        strong_verifier,
+        skill_id="verified_risk_skill",
+        workspace_root=ws,
+        target_rel="verified_risk_skill.py",
+        positive_examples=[85, 95],
+        negative_mutants=[10, 39],
+        check_predicate=lambda x: x >= 80,
+        commit_on_pass=True,
+    )
+    assert admitted["pass"] is True
+    assert admitted["admitted"] is True
+    assert admitted["status"] == "PASS__SELF_EVOLUTION_ADMITTED"
+    assert admitted["firewall"]["commit_receipt"]["all_committed"] is True
+    assert admitted["firewall"]["event_receipt"]["pass"] is True
+    assert (ws / "verified_risk_skill.py").read_text(encoding="utf-8") == skill_src
+
 
 

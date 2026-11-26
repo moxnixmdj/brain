@@ -963,6 +963,28 @@ class Creature:
             res = br.route_mutation_admission_gate(**kwargs)
         elif k == "event_memory":
             res = br.route_verified_event_memory(**kwargs)
+        elif k == "durable_commit":
+            res = br.route_durable_commit(**kwargs)
+        elif k == "env_broker":
+            res = br.route_env_broker(**kwargs)
+        elif k == "angelic_repair":
+            res = br.route_angelic_counterfactual_repair(**kwargs)
+        elif k == "crossfile_repair":
+            res = br.route_crossfile_choreography(**kwargs)
+        elif k == "compile_goal_contract":
+            res = br.route_compile_goal_contract(**kwargs)
+        elif k == "branch_mental_model":
+            res = br.route_branch_mental_model(**kwargs)
+        elif k == "check_mode_oracle":
+            res = br.route_check_mode_oracle(**kwargs)
+        elif k == "counterexample_experiment":
+            res = br.route_counterexample_experiment(**kwargs)
+        elif k == "run_relation_goal":
+            res = br.route_run_relation_goal(**kwargs)
+        elif k == "one_experience":
+            res = br.route_one_experience_consequences(**kwargs)
+        elif k == "self_evolution_firewall":
+            res = br.route_self_evolution_firewall(**kwargs)
         elif k == "oracle_audit":
             from canonical.swe_kernel import canonical_oracle_vericoding_spine_v1 as ov_spine
 
@@ -1021,6 +1043,39 @@ class Creature:
             limit=limit,
             seed=seed,
             min_kill_rate=min_kill_rate,
+        )
+
+    def admit_self_modification(
+        self,
+        source_text: str,
+        verifier_fn: Any,
+        *,
+        skill_id: str = "creature_self_mod",
+        workspace_root: str | pathlib.Path | None = None,
+        target_rel: str | None = None,
+        positive_examples: Sequence[Any] = (),
+        negative_mutants: Sequence[Any] = (),
+        check_predicate: Any = None,
+        limit: int = 8,
+        seed: int = 7,
+        min_kill_rate: float = 0.5,
+        commit_on_pass: bool = False,
+    ) -> dict[str, Any]:
+        """Entry-Only Self-Evolution Firewall (`0H` × `0F` × `0G`) directly on `Creature`."""
+        return self.route_goal_via_spine(
+            "self_evolution_firewall",
+            source_text=source_text,
+            verifier_fn=verifier_fn,
+            skill_id=skill_id,
+            workspace_root=workspace_root,
+            target_rel=target_rel,
+            positive_examples=positive_examples,
+            negative_mutants=negative_mutants,
+            check_predicate=check_predicate,
+            limit=limit,
+            seed=seed,
+            min_kill_rate=min_kill_rate,
+            commit_on_pass=commit_on_pass,
         )
 
     def compose_typed_chain(

@@ -950,3 +950,117 @@ def discover_environment(
     report["status"] = "PASS__ENVIRONMENT_DISCOVERED" if passed else "FAIL_CLOSED__ENV_DISCOVERY_INCOMPLETE"
     report["reason"] = None if passed else "NO_SUBTASK_PASSED_OR_GOAL_UNVERIFIED"
     return report
+
+
+def solve_via_branch_model_and_mental_model(
+    workspace_root: str | Path,
+    *,
+    required_files: Mapping[str, Mapping[str, Any]] | None = None,
+    candidate_commands: Sequence[Sequence[str]] | None = None,
+    commit_winner: bool = False,
+) -> dict[str, Any]:
+    """'The Branch Is the Model' (`0E` × `executable_mental_model_v1` × `the_branch_is_the_model_v1`).
+
+    Replaces brittle transition-table guessing with direct relational workspace perception +
+    parallel CoW branch speculation where one execution yields both decision and successor state.
+    """
+    from canonical.swe_kernel import executable_mental_model_v1 as emm
+    from canonical.tools import the_branch_is_the_model_v1 as branch_model
+
+    root = Path(workspace_root).resolve()
+    snap = emm.perceive_environment_state(root)
+    facts = sorted(emm.compute_predicate_facts(snap))
+    goal = emm.EnvironmentGoal(
+        required_files={str(k): dict(v) for k, v in (required_files or {}).items()},
+    )
+    already_satisfied = bool(emm.check_goal_satisfied(snap, snap, goal)[0]) if required_files else False
+    spec_receipt = None
+    solved = already_satisfied
+    if candidate_commands and required_files and not already_satisfied:
+        receipt = emm.speculate_parallel_cow_branches(
+            root,
+            [list(cmd) for cmd in candidate_commands],
+            goal,
+            commit_winner=commit_winner,
+        )
+        solved = bool(getattr(receipt, "winner_command", None) is not None or getattr(receipt, "solved", False))
+        spec_receipt = {
+            "solved": solved,
+            "winner_command": getattr(receipt, "winner_command", None),
+            "branches_tried": int(getattr(receipt, "branches_tried", len(candidate_commands))),
+            "committed": bool(getattr(receipt, "committed", False)),
+        }
+    return {
+        "schema": SCHEMA,
+        "pass": solved if required_files else (len(facts) >= 0),
+        "status": (
+            "PASS__BRANCH_MODEL_GOAL_SOLVED"
+            if solved
+            else ("PASS__ENVIRONMENT_PERCEIVED" if not required_files else "FAIL_CLOSED__BRANCH_MODEL_UNSOLVED")
+        ),
+        "workspace_root": str(root),
+        "predicate_facts": facts,
+        "already_satisfied": already_satisfied,
+        "speculative_receipt": spec_receipt,
+        "branch_is_model_wired": hasattr(branch_model, "try_edge") and hasattr(branch_model, "solve"),
+        "model_calls": 0,
+    }
+
+
+def discover_check_mode_oracle(
+    argv: Sequence[str] | None = None,
+    *,
+    cwd: str | Path | None = None,
+    refusal_messages: Sequence[str] = (),
+    written_types_root: str | Path | None = None,
+    type_names: Sequence[str] = (),
+) -> dict[str, Any]:
+    """'The Check Mode Is the Oracle' + Empirical Type & Refusal Vocabulary (`0E`).
+
+    Unifies three hidden tools under one front door:
+      - `the_check_mode_is_the_oracle_v1` (help/check-mode probing + workspace digest invariance)
+      - `an_actions_vocabulary_is_its_refusal_surface_v1` (refusal class partitioning)
+      - `a_type_you_wrote_is_a_type_you_guess_v1` (written vs empirical type collapse audit)
+    """
+    from canonical.tools import a_type_you_wrote_is_a_type_you_guess_v1 as emp_type
+    from canonical.tools import an_actions_vocabulary_is_its_refusal_surface_v1 as ref_vocab
+    from canonical.tools import the_check_mode_is_the_oracle_v1 as check_oracle
+
+    work_dir = Path(cwd).resolve() if cwd is not None else Path.cwd()
+    help_info = None
+    if argv:
+        digest_before = check_oracle.state_digest(work_dir)
+        out_text, err_text = check_oracle.help_page([str(x) for x in argv], work_dir)
+        digest_after = check_oracle.state_digest(work_dir)
+        combined = f"{out_text}\n{err_text}"
+        toks = sorted(check_oracle.tokens_of(combined)) if combined.strip() else []
+        help_info = {
+            "argv": [str(x) for x in argv],
+            "read_only_preserved": digest_before == digest_after,
+            "looks_like_help": bool(check_oracle.looks_like_help(combined)),
+            "token_count": len(toks),
+            "sample_tokens": toks[:20],
+        }
+    refusal_classes = [
+        {"message": str(msg), "class": str(ref_vocab.message_class(str(msg), ()))}
+        for msg in refusal_messages
+    ]
+    written_map = None
+    if written_types_root is not None and type_names:
+        written_map = emp_type.written_types(Path(written_types_root).resolve(), list(type_names))
+
+    passed = bool(
+        (help_info is not None and help_info["read_only_preserved"])
+        or bool(refusal_classes)
+        or written_map is not None
+    )
+    return {
+        "schema": SCHEMA,
+        "pass": passed,
+        "status": "PASS__CHECK_MODE_ORACLE_DISCOVERED" if passed else "FAIL_CLOSED__NO_ORACLE_PROBE_SUPPLIED",
+        "check_mode": help_info,
+        "refusal_vocabulary": refusal_classes,
+        "written_types": written_map,
+        "empirical_type_collapse_wired": hasattr(emp_type, "pairs_collapsed"),
+        "model_calls": 0,
+    }

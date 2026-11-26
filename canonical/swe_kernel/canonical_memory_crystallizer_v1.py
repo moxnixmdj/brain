@@ -1168,6 +1168,127 @@ class VerificationFirstMemoryBus:
             "forgetting_events": len(self.forgetting_ledger),
         }
 
+    # ------------------------------------------------- Wave 9: Active 1-Shot & Run Relations
+
+    def propose_counterexample_experiment(
+        self,
+        traces: Sequence[Sequence[Sequence[tuple[str, Any]]]],
+        labels: Sequence[bool],
+        *,
+        asked: Sequence[tuple[int, int]] = (),
+    ) -> dict[str, Any]:
+        """'The Counterexample Is the Next Experiment' (`0G` × `the_counterexample_is_the_next_experiment_v1`).
+
+        Fits the coarsest quotient over observed traces and turns any conflation into the exact
+        next distinguishing experiment pair to execute.
+        """
+        from canonical.tools import the_counterexample_is_the_next_experiment_v1 as cex_mod
+
+        norm_traces = [
+            tuple(tuple((str(k), v) for k, v in state) for state in trace)
+            for trace in traces
+        ]
+        norm_labels = [bool(x) for x in labels]
+        fitted = cex_mod.fit(norm_traces, norm_labels)
+        winner = fitted.get("winner")
+        projs = list(fitted.get("projections") or ())
+        confl = None
+        next_pairs: list[tuple[int, int]] = []
+        if projs:
+            confl = cex_mod.conflations(projs, fitted["generators"], norm_traces, norm_labels)
+            next_pairs = cex_mod.candidate_pairs(confl, set((int(a), int(b)) for a, b in asked))
+        ok = winner is not None or len(next_pairs) > 0
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": (
+                "PASS__QUOTIENT_SUFFICIENT"
+                if (winner is not None and not next_pairs)
+                else ("PASS__COUNTEREXAMPLE_EXPERIMENT_PROPOSED" if next_pairs else "FAIL_CLOSED__NO_QUOTIENT")
+            ),
+            "lattice_size": int(fitted.get("lattice_size") or 0),
+            "sufficient_count": int(fitted.get("sufficient") or 0),
+            "projections": projs,
+            "next_experiment_pairs": [list(p) for p in next_pairs[:8]],
+            "model_calls": 0,
+        }
+
+    def induce_run_relation_goal(
+        self,
+        traces: Sequence[Sequence[Sequence[tuple[str, Any]]]],
+        labels: Sequence[bool],
+    ) -> dict[str, Any]:
+        """'The Goal Is a Relation Over the Run' (`0G` × `the_goal_is_a_relation_over_the_run_v1`).
+
+        Distinguishes trajectories that end in identical final states by inducing conjunctions
+        over the entire run (whole-run terms vs end-only terms).
+        """
+        from canonical.tools import the_goal_is_a_relation_over_the_run_v1 as run_rel
+
+        norm_traces = [
+            tuple(tuple((str(k), v) for k, v in state) for state in trace)
+            for trace in traces
+        ]
+        norm_labels = [bool(x) for x in labels]
+        full_terms, end_only_terms = run_rel.run_terms(norm_traces)
+        full_space = run_rel.Space(full_terms, norm_traces)
+        end_space = run_rel.Space(end_only_terms, norm_traces)
+        full_ident = run_rel.identify(full_space, norm_labels)
+        end_ident = run_rel.identify(end_space, norm_labels)
+        full_acc = float(full_ident.get("agreeing_goal_accuracy") or 0.0)
+        end_acc = float(end_ident.get("agreeing_goal_accuracy") or 0.0)
+        ok = full_acc >= 0.999
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": "PASS__RUN_RELATION_IDENTIFIED" if ok else "FAIL_CLOSED__RUN_RELATION_INCOMPLETE",
+            "full_run_term_count": len(full_terms),
+            "end_only_term_count": len(end_only_terms),
+            "full_run_accuracy": full_acc,
+            "end_only_accuracy": end_acc,
+            "beats_end_only": full_acc > end_acc,
+            "full_identification": {
+                "identified_after": full_ident.get("identified_after"),
+                "emptied_after": full_ident.get("vocabulary_emptied_after"),
+                "agreeing_goal_accuracy": full_acc,
+            },
+            "end_only_identification": {
+                "identified_after": end_ident.get("identified_after"),
+                "emptied_after": end_ident.get("vocabulary_emptied_after"),
+                "agreeing_goal_accuracy": end_acc,
+            },
+            "model_calls": 0,
+        }
+
+    def extract_one_experience_consequences(
+        self,
+        training: Sequence[tuple[str, Any, Any]],
+        conditions: Sequence[Any],
+    ) -> dict[str, Any]:
+        """'One Experience, Every Consequence' (`0G` × `one_experience_every_consequence_v1` × `one_demonstration_basin_v1`)."""
+        from canonical.swe_kernel import one_demonstration_basin_v1 as demo_basin
+        from canonical.tools import one_experience_every_consequence_v1 as one_exp
+
+        ops = one_exp.one_shot(list(training), list(conditions))
+        serialized = [
+            {
+                "action": str(getattr(op, "action", getattr(op, "atom", ""))),
+                "preconditions": len(getattr(op, "preconditions", ()) or ()),
+                "add_effects": len(getattr(op, "add_effects", getattr(op, "added", ())) or ()),
+                "delete_effects": len(getattr(op, "delete_effects", getattr(op, "deleted", ())) or ()),
+            }
+            for op in ops
+        ]
+        return {
+            "schema": SCHEMA,
+            "pass": len(serialized) > 0,
+            "status": "PASS__ONE_EXPERIENCE_EXTRACTED" if serialized else "FAIL_CLOSED__NO_SAFE_OPERATOR",
+            "operator_count": len(serialized),
+            "operators": serialized,
+            "one_demo_basin_wired": hasattr(demo_basin, "explore") and hasattr(demo_basin, "path_to"),
+            "model_calls": 0,
+        }
+
     def save(self, path: str | Path | None = None) -> Path:
         target = Path(path) if path is not None else self.state_path
         if target is None:
@@ -1388,6 +1509,15 @@ def execute_memory_operation(
     if op == "REPLAY_VERIFIED_EVENTS":
         res = bus.replay_verified_events()
         return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": "PASS__VERIFIED_EVENTS_REPLAYED", **res}
+    if op == "COUNTEREXAMPLE_EXPERIMENT":
+        res = bus.propose_counterexample_experiment(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "INDUCE_RUN_RELATION":
+        res = bus.induce_run_relation_goal(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "ONE_EXPERIENCE_CONSEQUENCES":
+        res = bus.extract_one_experience_consequences(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
     if op == "STATS":
         return {"schema": SCHEMA, "pass": True, "status": "PASS__MEMORY_STATS", "stats": bus.stats()}
     return {
