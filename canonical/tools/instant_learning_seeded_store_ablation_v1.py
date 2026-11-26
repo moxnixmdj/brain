@@ -99,7 +99,10 @@ def materialize_task(repo: pathlib.Path, sha: str, test_target: str, work: pathl
             shutil.rmtree(stale, ignore_errors=True)
         else:
             stale.unlink(missing_ok=True)
+    _git(repo, "worktree", "prune")  # a removed worktree stays registered in .git until pruned
     co = _git(repo, "worktree", "add", "--detach", str(work), f"{sha}^")
+    if co.returncode != 0:
+        co = _git(repo, "worktree", "add", "-f", "--detach", str(work), f"{sha}^")
     if co.returncode != 0:
         return {"materialized": False, "reason": f"WORKTREE_ADD_FAILED:{co.stderr.strip()[:160]}"}
     files = _git(repo, "diff", "--name-only", f"{sha}^", sha).stdout.split("\n")
@@ -125,6 +128,44 @@ def materialize_task(repo: pathlib.Path, sha: str, test_target: str, work: pathl
     }
 
 
+def _source_env(work: pathlib.Path) -> dict[str, str]:
+    """PYTHONPATH that makes `import <pkg>` resolve to the mutated work tree, not an installed copy."""
+    src = work / "src"
+    root = src if src.is_dir() else work
+    return {**dict(__import__("os").environ), "PYTHONPATH": str(root)}
+
+
+def _pytest_state(work: pathlib.Path, target: str, python: str | None, timeout_s: float) -> dict[str, Any]:
+    """Collect the node ids, then run once and return which of them fail.
+
+    Why not "did pytest exit 0": in a 2022 checkout there are often failures that exist before and
+    after the reference patch (environment noise). Grading on the whole file would call such a task
+    permanently unsolvable and hide the real signal. SWE-bench's own criterion is the transition of
+    the FAIL_TO_PASS set plus the preservation of PASS_TO_PASS, so that is what we compute.
+    """
+    exe = python or sys.executable
+    coll = subprocess.run([exe, "-m", "pytest", "-q", "--no-header", "--tb=no", "-p", "no:cacheprovider",
+                           "--collect-only", target], cwd=str(work), text=True, capture_output=True,
+                           timeout=timeout_s, env=_source_env(work))
+    # collect-only -q prints one node id per line, e.g. `tests/test_arguments.py::test_foo[x]`.
+    ids = {ln.strip().split(" ")[0] for ln in (coll.stdout or "").splitlines() if "::" in ln.strip()}
+    run = subprocess.run([exe, "-m", "pytest", "-q", "--no-header", "--tb=no", "-rf", "-p", "no:cacheprovider", target],
+                         cwd=str(work), text=True, capture_output=True, timeout=timeout_s,
+                         env=_source_env(work))
+    out = run.stdout or ""
+    failing = {ln.split(" ")[1] for ln in out.splitlines() if ln.startswith("FAILED ") and "::" in ln}
+    failing |= {ln.split(" ")[1] for ln in out.splitlines() if ln.startswith("ERROR ") and "::" in ln}
+    if not failing and " failed" in out:
+        # A summary line says tests failed but no FAILED line was printed (pytest < 7 with -q, or a
+        # truncated stream). Name it rather than reporting a clean run: a silent empty failing-set is
+        # exactly how "cannot parse" becomes "everything passes".
+        return {"ran": True, "ids": sorted(ids), "failing": [], "unparsed": True,
+                "summary": (out.strip().splitlines() or [""])[-1][:160], "returncode": run.returncode}
+    tail = [ln for ln in out.strip().splitlines() if "passed" in ln or "failed" in ln or "error" in ln]
+    return {"ran": run.returncode in (0, 1), "ids": sorted(ids), "failing": sorted(failing & ids),
+            "summary": tail[-1][:160] if tail else (run.stderr or "").strip()[-160:], "returncode": run.returncode}
+
+
 def prepare_env(work: pathlib.Path, extra_deps: Sequence[str]) -> dict[str, Any]:
     """Install the repo under test into a throwaway venv so its own tests can import it.
 
@@ -134,7 +175,12 @@ def prepare_env(work: pathlib.Path, extra_deps: Sequence[str]) -> dict[str, Any]
     venv = work.parent / f"venv-{work.name}"
     py = venv / "bin" / "python"
     if py.is_file():
-        return {"ready": True, "python": str(py), "cached": True}
+        # Re-prove the referee even on a cached venv: a half-installed venv that merely *exists* is how
+        # a run silently turns "cannot execute" into "did not pass".
+        sanity = subprocess.run([str(py), "-m", "pytest", "--version"], text=True, capture_output=True, timeout=120)
+        if sanity.returncode == 0:
+            return {"ready": True, "python": str(py), "cached": True, "reason": ""}
+        shutil.rmtree(venv, ignore_errors=True)
     mk = subprocess.run([sys.executable, "-m", "venv", "--without-pip", str(venv)],
                         text=True, capture_output=True, timeout=300)
     if mk.returncode != 0:
@@ -144,13 +190,26 @@ def prepare_env(work: pathlib.Path, extra_deps: Sequence[str]) -> dict[str, Any]
     if boot.returncode != 0 and not py.is_file():
         return {"ready": False, "reason": f"VENV_PIP_FAILED:{boot.stderr.strip()[:120]}"}
     installs = []
-    for spec in list(extra_deps) + [str(work)]:
-        r = subprocess.run([str(py), "-m", "pip", "install", "-q", "--no-deps", spec],
+    # The referee's own deps must resolve fully: a pytest without pluggy cannot run, and a referee that
+    # cannot run reports "did not pass", which would silently fabricate failing controls.
+    for spec in list(extra_deps):
+        r = subprocess.run([str(py), "-m", "pip", "install", "-q", spec],
                            text=True, capture_output=True, timeout=900)
-        installs.append((spec.split("/")[-1] if "/" in spec else spec, r.returncode, r.stderr.strip()[-90:]))
+        installs.append((spec, r.returncode, r.stderr.strip()[-90:]))
+    # The repo under test is deliberately NOT installed. An install copies the tree into
+    # site-packages, and then every patch the solver writes is invisible to `import click` -- the
+    # run would report "no test changed" for a real fix, and every task would look unsolvable.
+    # Instead the work tree itself is put on PYTHONPATH, so the mutated source is what gets imported.
     bad = [i for i in installs if i[1] != 0]
-    return {"ready": not bad, "python": str(py), "installs": installs,
-            "reason": f"PIP_FAILED:{bad[0][2][:120]}" if bad else ""}
+    if bad:
+        return {"ready": False, "python": str(py), "installs": installs,
+                "reason": f"PIP_FAILED:{bad[0][0]}:{bad[0][2][:120]}"}
+    sanity = subprocess.run([str(py), "-m", "pytest", "--version"],
+                            text=True, capture_output=True, timeout=120)
+    if sanity.returncode != 0:
+        return {"ready": False, "python": str(py), "installs": installs,
+                "reason": f"PYTEST_UNUSABLE:{(sanity.stderr or sanity.stdout).strip()[-120:]}"}
+    return {"ready": True, "python": str(py), "installs": installs, "reason": ""}
 
 
 def run_pytest(work: pathlib.Path, target: str, timeout_s: float = 180.0, *, python: str | None = None) -> dict[str, Any]:
@@ -159,7 +218,7 @@ def run_pytest(work: pathlib.Path, target: str, timeout_s: float = 180.0, *, pyt
     try:
         proc = subprocess.run(
             [exe, "-m", "pytest", "-x", "-q", "--no-header", "-p", "no:cacheprovider", target],
-            cwd=str(work), text=True, capture_output=True, timeout=timeout_s,
+            cwd=str(work), text=True, capture_output=True, timeout=timeout_s, env=_source_env(work),
         )
     except subprocess.TimeoutExpired:
         return {"ran": False, "status": "PYTEST_TIMEOUT", "passed": False, "tail": ""}
@@ -208,9 +267,14 @@ def seed_store(repo: pathlib.Path, train: Mapping[str, Any], work: pathlib.Path,
     # Gate evidence, measured on the training commit only -- never on the evaluated task.
     train_env = prepare_env(work, TASK_DEPS.get(str(train["repo"]), ()))
     tpy = train_env.get("python") if train_env.get("ready") else None
-    before_failed = run_pytest(work, str(train["test_target"]), python=tpy)
-    verified_on_oracle = bool(oracle_apply(repo, str(train["sha"]), work)) and bool(
-        run_pytest(work, str(train["test_target"]), python=tpy).get("passed"))
+    tgt = str(train["test_target"])
+    b = _pytest_state(work, tgt, tpy, 300.0)                     # what the training commit's tests do before
+    applied = bool(oracle_apply(repo, str(train["sha"]), work))
+    a = _pytest_state(work, tgt, tpy, 300.0) if applied else {"failing": b["failing"], "ran": False}
+    fixed_by_training_fix = set(b["failing"]) - set(a["failing"])
+    # graded the same way as the evaluation: the fix must close its own FAIL_TO_PASS set and break
+    # nothing that was green, rather than "the whole file is green" (which environment noise forbids)
+    verified_on_oracle = bool(applied and fixed_by_training_fix and not set(a["failing"]) - set(b["failing"]))
     morph = EASP.lift_python_subtree_morphism(before, after) if generalize else None
     fid = hashlib.sha256((before + "\0" + after).encode("utf-8")).hexdigest()[:16]
     entry_id = f"seed-{str(train['sha'])[:9]}-{'general' if generalize else 'raw'}"
@@ -226,7 +290,7 @@ def seed_store(repo: pathlib.Path, train: Mapping[str, Any], work: pathlib.Path,
                          "prediction_error_bearing_source": "the training tests fail before this fix"},
                 provenance=prov, version_fingerprint=fid,
                 verified_on_oracle=bool(verified_on_oracle), goal_relevant=True,
-                prediction_error_bearing=bool(before_failed.get("ran") and not before_failed["passed"]),
+                prediction_error_bearing=bool(fixed_by_training_fix),
                 held_out_transfer_passed=False,  # not yet observed: a single exposure cannot have transferred
                 innocent_controls_preserved=bool(verified_on_oracle), raw_episode_text=f"{entry_id}\n{after[:4000]}",
             )
@@ -299,22 +363,40 @@ def evaluate(repos_dir: pathlib.Path, tasks: list[dict[str, Any]], *, arms: tupl
             continue
         py = env["python"]
         # Controls first: they define whether any causal number below can mean anything.
-        nop = run_pytest(work, task["test_target"], python=py)
-        row["nop_passed"] = nop["passed"]
+        nop = _pytest_state(work, task["test_target"], py, 300.0)
         oracle_ok = oracle_apply(repo, task["sha"], work)
-        oracle = run_pytest(work, task["test_target"], python=py) if oracle_ok else {"passed": False, "status": "ORACLE_PATCH_FAILED"}
-        row["oracle_passed"] = bool(oracle.get("passed"))
-        ctrl = "COMPLETE" if (nop["ran"] and not nop["passed"] and oracle_ok and row["oracle_passed"]) else "INCOMPLETE"
-        row["controls"] = ctrl
+        orac = _pytest_state(work, task["test_target"], py, 300.0) if oracle_ok else {"ran": False, "ids": [], "failing": []}
+        nop_fail = set(nop["failing"]); orac_fail = set(orac["failing"])
+        f2p = sorted(nop_fail - orac_fail)          # broken before the reference fix, green after it
+        p2p = sorted(set(nop["ids"]) - nop_fail - orac_fail)  # green in both -- must stay green
+        row["controls"] = {"nop_ran": bool(nop["ran"]), "oracle_applied": bool(oracle_ok),
+                           "fail_to_pass": len(f2p), "pass_to_pass": len(p2p),
+                           "pre_existing_environment_failures": sorted(orac_fail),
+                           "state": "COMPLETE" if (nop["ran"] and oracle_ok and f2p) else "INCOMPLETE"}
+        row["nop_passed"] = not nop_fail
+        row["oracle_passed"] = not orac_fail and bool(f2p)
+        row["referee_summary"] = {"nop": nop["summary"], "oracle": orac["summary"]}
         # Reset for the causal arms: the oracle mutated the worktree.
         shutil.rmtree(work, ignore_errors=True)
         materialize_task(repo, task["sha"], task["test_target"], work)
 
         train = next((t for t in tasks if t["sha"] != task["sha"] and t["repo"] != task["repo"]),
                      next((t for t in tasks if t["sha"] != task["sha"]), None))
+        f2p_set, p2p_set = set(f2p), set(p2p)
         for arm in arms:
+            # Reset to the broken starting state for EVERY arm. Without this, arm 1's successful edit
+            # is still on disk for arm 2, which then "abstains" -- and an abstention that is really
+            # "the tests already pass" reads as a failure of the mechanism being measured.
+            shutil.rmtree(work, ignore_errors=True)
+            remat = materialize_task(repo, task["sha"], task["test_target"], work)
+            if not remat.get("materialized"):
+                row.setdefault("arms", {})[arm] = {"arm": arm, "status": "ARM_RESET_FAILED",
+                                                   "referee_passed": False, "reason": remat.get("reason")}
+                continue
             store_obj = None
             seed_note: dict[str, Any] = {"arm": arm}
+            if arm != "cold" and train is None:
+                seed_note = {"arm": arm, "seeded": False, "reason": "NO_DISJOINT_TRAINING_EXPOSURE_IN_THIS_RUN"}
             if arm != "cold" and train is not None:
                 # A fresh worktree per arm: seeding applies the training fix, and an already-applied
                 # patch would make the second arm's gate evidence wrong rather than merely duplicated.
@@ -324,13 +406,18 @@ def evaluate(repos_dir: pathlib.Path, tasks: list[dict[str, Any]], *, arms: tupl
                 store_obj, seed_note = seeded["store"], seeded
                 shutil.rmtree(train_work, ignore_errors=True)
             res = solve_arm(store_obj, work, task["test_target"], solve_timeout_s)
-            after = run_pytest(work, task["test_target"], python=py)
+            after = _pytest_state(work, task["test_target"], py, 300.0)
+            now_fail = set(after["failing"])
             rows_row = {
                 "arm": arm,
                 "solver_status": res.get("status"),
+                # the solver's own claim is recorded so the gap between "claims VERIFIED" and
+                # "the tests do not pass" stays visible in the receipt; it is never the verdict.
                 "solver_claimed_pass": res.get("pass_claimed_by_solver", res.get("pass")),
-                "referee_passed": after["passed"],
-                "pytest_tail": after.get("tail", ""),
+                "referee_passed": bool(f2p_set) and not (f2p_set & now_fail) and not (p2p_set & now_fail),
+                "fail_to_pass_broken": sorted(f2p_set & now_fail)[:4],
+                "pass_to_pass_broken": sorted(p2p_set & now_fail)[:4],
+                "pytest_tail": after.get("summary", ""),
                 "model_calls": res.get("model_calls", 0),
                 "elapsed_s": res.get("elapsed_s"),
                 "store_seeded": bool(seed_note.get("seeded")) if arm != "cold" else False,
@@ -351,7 +438,7 @@ def build_receipt(repos_dir: pathlib.Path, arms: tuple[str, ...], solve_timeout_
     train_shas = {t["sha"] for t in tasks}
     result = evaluate(repos_dir, tasks, arms=arms, solve_timeout_s=solve_timeout_s, keep=keep)
     rows = result["rows"]
-    counted = [r for r in rows if "arms" in r and r.get("controls") == "COMPLETE"]
+    counted = [r for r in rows if "arms" in r and (r.get("controls") or {}).get("state") == "COMPLETE"]
     per_arm = {
         arm: {
             "measured": sum(1 for r in counted if arm in r.get("arms", {})),
@@ -392,6 +479,11 @@ def render_markdown(d: Mapping[str, Any]) -> str:
     L.append(f"- Authority: `{d['authority']}`. Model calls: **{d['cost']['model_calls']}**, cost **${d['cost']['cost_usd']:.2f}**.")
     L.append(f"- Controls: nop-fails {d['controls']['nop_must_fail']}, oracle-passes {d['controls']['oracle_must_pass']}, "
              f"excluded for incomplete controls: {d['controls']['tasks_with_incomplete_controls_excluded_from_counts']}")
+    for r in d["tasks"]:
+        c = r.get("controls") or {}
+        if isinstance(c, dict) and c:
+            L.append(f"- {r['repo']}@{r['sha']}: {c['state']} -- FAIL_TO_PASS {c['fail_to_pass']}, "
+                     f"PASS_TO_PASS {c['pass_to_pass']}, environment failures excluded {len(c['pre_existing_environment_failures'])}")
     L.append("")
     L.append("| task | " + " | ".join(f"`{a}` resolved (referee)" for a in d["arms"]) + " | controls |")
     L.append("|---" * (len(d["arms"]) + 2) + "|")
@@ -403,7 +495,7 @@ def render_markdown(d: Mapping[str, Any]) -> str:
         for a in d["arms"]:
             row = r["arms"].get(a, {})
             cells.append(f"{'YES' if row.get('referee_passed') else 'no'} ({row.get('solver_status')}, {row.get('elapsed_s')}s)")
-        L.append(f"| {r['repo']}@{r['sha']} | " + " | ".join(cells) + f" | {r.get('controls')} |")
+        L.append(f"| {r['repo']}@{r['sha']} | " + " | ".join(cells) + f" | {(r.get('controls') or {}).get('state')} |")
     L += ["", "## Per arm", "", "```", json.dumps(d["per_arm"], indent=1), "```", "",
           "## Honest limits", "",
           "- Producer-run sandbox only; `authority: NONE`. No CI identity has re-run this.",
@@ -437,6 +529,11 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--md-out", default=None)
     ap.add_argument("--self-test", action="store_true")
     ns = ap.parse_args(argv)
+    # argv is a shared global, and some engine modules here parse it at import time (a click CLI that
+    # dies on "--repos-dir" and prints a usage error into the middle of a measurement). We have our
+    # options; hand the rest of the process a neutral argv so an import cannot re-read our command line.
+    if argv is None:
+        sys.argv = [sys.argv[0] if sys.argv else "engine"]
     if ns.self_test:
         return self_test()
     d = build_receipt(pathlib.Path(ns.repos_dir), tuple(a for a in ns.arms.split(",") if a),

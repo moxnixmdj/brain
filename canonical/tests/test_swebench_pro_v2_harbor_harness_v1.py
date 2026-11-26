@@ -755,3 +755,66 @@ def test_the_engine_s_own_account_of_a_refusal_reaches_the_committed_report() ->
         md = "\n".join(CI.to_markdown({"causal": rep}, benchmark="B", commit="c"))
         assert "Why the trials ended the way they did" in md
         assert "ALREADY_PASSING__NO_PATCH" in md and "gap-0" in md
+
+
+def test_observe_egress_reports_a_state_it_measured_not_a_policy_it_hopes_for() -> None:
+    """`observe_egress` must answer with an observed value; a bare "no network" claim was the bug."""
+    saved = AG._EGRESS_PROBE_TARGET
+    try:
+        AG._EGRESS_PROBE_TARGET = ("127.0.0.1", 9)  # discard port: no agent is listening here
+        got = AG.observe_egress(timeout_s=0.5)
+    finally:
+        AG._EGRESS_PROBE_TARGET = saved
+    assert set(got) >= {"observed", "detail"}, got
+    assert got["observed"] in {"REFUSED", "AVAILABLE", "ERROR"}, got
+    assert isinstance(got["detail"], str) and got["detail"], got
+    assert got["observed"] != "AVAILABLE", f"nothing listens on port 9: {got}"
+
+
+def test_network_guard_classifies_only_escaped_transport_errors() -> None:
+    """The guard names and counts transport refusals; it does not decide tasks and does not blind us."""
+    guard, attempts = AG.network_guard(True)
+    with pytest.raises(AG.NetworkRefusedByHarness):
+        with guard:
+            raise OSError(101, "Network is unreachable")
+    assert attempts and attempts[0].startswith("transport-refusal:"), attempts
+
+    # a fresh guard: a generator context manager is single-use, reusing it would silently no-op
+    guard2, attempts2 = AG.network_guard(True)
+    with pytest.raises(ValueError):
+        with guard2:
+            raise ValueError("bad literal")
+    assert attempts2 == [], "an engine bug is not an egress refusal and must not be laundered into one"
+
+
+def test_network_guard_disabled_is_a_passthrough_not_a_blinder() -> None:
+    guard, attempts = AG.network_guard(False)
+    with guard:
+        pass
+    assert attempts == []
+    guard_open, attempts_open = AG.network_guard(False)
+    with pytest.raises(OSError):
+        with guard_open:
+            raise OSError(101, "unreachable")
+    assert attempts_open == [], "allow_web=True must not relabel real failures as refusals"
+
+
+def test_escaped_refusal_becomes_a_named_row_not_a_bare_harness_error(tmp_path: pathlib.Path) -> None:
+    def solver(*, instruction: str, tree: object, inputs: dict) -> dict:
+        raise OSError(101, "Network is unreachable")
+
+    out = AG.run_engine_on_tree(tmp_path, "fix it", ablate_store=True, solver=solver, inputs_allow_web=False)
+    assert "NETWORK_REFUSED__NOT_A_CAPABILITY_RESULT" in json.dumps(out, default=str), out
+
+
+def test_engine_bug_stays_an_engine_bug(tmp_path: pathlib.Path) -> None:
+    """Symmetrically: a solver crash must not be granted the mercy of a `not a capability result` label."""
+    def solver(*, instruction: str, tree: object, inputs: dict) -> dict:
+        raise ZeroDivisionError("our arithmetic, not the sandbox's")
+
+    try:
+        out = AG.run_engine_on_tree(tmp_path, "fix it", ablate_store=True, solver=solver, inputs_allow_web=False)
+    except ZeroDivisionError:
+        return  # propagated untouched: also correct
+    blob = json.dumps(out, default=str)
+    assert "NETWORK_REFUSED" not in blob, f"an engine bug was relabeled as an environment failure: {blob[:200]}"
