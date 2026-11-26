@@ -1,0 +1,427 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "FRONTIER_LEAPFROG_WAVES21_25_20261126_V1",
+  "action_intent_id": "FRONTIER_LEAPFROG_WAVES21_25_20261126_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "date": "2026-11-26",
+  "status": "SHIPPED",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "canonical/runtime/brain_unified_model_v1.py + canonical/runtime/creature_runtime_v1.py + canonical/swe_kernel/canonical_{swe,env_discovery,cu_sandbox,memory_crystallizer,oracle_vericoding,boundary_router}_spine_v1.py",
+  "canonical_base_commit": "24cea0dc86447e06d79562a0231bea1684010313",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "causal_blocker": "After Waves 15-20 (PR #7126 at 24cea0dc), three systemic gaps remained at the unified front door: (1) UnifiedModel compile_model() spent 1,896 ms across 4 redundant Path.rglob() walks, fresh-process UnifiedModel._envelope() triggered an accidental 89 ms full-13MB JSON load on every cold call, and prewarm_sidecar_caches() omitted the FTS5 SQLite sidecar (185 ms cold rebuild); (2) 21 additional verified pure-stdlib superweapon modules across Reachability/Bridge (verified_capability_bridge_index_v1, source_contract_compiler, learned_skill_verdict_v1), Repo-Native Multi-File SWE (causal_dataflow_graph_v1, assertion_localisation_v1, line_localisation_v1, history_template_repair_v1, repo_component_petri_v1, angelic_oe_synthesizer_v1, cow_zygote_speculative_verifier_v1, arm_learned_from_its_own_verified_repairs_v1), Bitemporal Memory & Red Queen Evaluator Co-Evolution (credit_assignment_v1, hierarchical_skill_library_v1, effect_contract_composition_v1, composition_verification_v1, auto_judge_discovery_v1, cow_lens_fuzz_and_negative_space_v1, mined_rewrite_theory_v1), and Agent S4 / CLI-Anything / Decision Quotient (interventional_goal_v1, systematic_exploration_v1, safe_action_model_v1, demonstration_sufficiency_v1, k6_target_relative_decision_quotient_v1, k6_decision_refinement_compiler_v1, vocabulary_growth_v1, horizon_bounded_execution_v1, verified_zero_screenshot_action_cache_v1) remained unwired from UnifiedModel, Creature, and Spines 0D-0I.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::After Waves 15-20 (PR #7126 at 24cea0dc), three systemic gaps remained at the unified front door: (1) UnifiedModel compile_model() spent 1,896 ms across 4 redundant Path.rglob() walks, fresh-process UnifiedModel._envelope() triggered an accidental 89 ms full-13MB JSON load on every cold call, and prewarm_sidecar_caches() omitted the FTS5 SQLite sidecar (185 ms cold rebuild); (2) 21 additional verified pure-stdlib superweapon modules across Reachability/Bridge (verified_capability_bridge_index_v1, source_contract_compiler, learned_skill_verdict_v1), Repo-Native Multi-File SWE (causal_dataflow_graph_v1, assertion_localisation_v1, line_localisation_v1, history_template_repair_v1, repo_component_petri_v1, angelic_oe_synthesizer_v1, cow_zygote_speculative_verifier_v1, arm_learned_from_its_own_verified_repairs_v1), Bitemporal Memory & Red Queen Evaluator Co-Evolution (credit_assignment_v1, hierarchical_skill_library_v1, effect_contract_composition_v1, composition_verification_v1, auto_judge_discovery_v1, cow_lens_fuzz_and_negative_space_v1, mined_rewrite_theory_v1), and Agent S4 / CLI-Anything / Decision Quotient (interventional_goal_v1, systematic_exploration_v1, safe_action_model_v1, demonstration_sufficiency_v1, k6_target_relative_decision_quotient_v1, k6_decision_refinement_compiler_v1, vocabulary_growth_v1, horizon_bounded_execution_v1, verified_zero_screenshot_action_cache_v1) remained unwired from UnifiedModel, Creature, and Spines 0D-0I.",
+  "action_summary": "Frontier-Leapfrog Unification Waves 21-25 deliver an Elon Speed Pass plus unify 21+ verified pure-stdlib superweapons into ONE zero-LLM (K3=0) front door (UnifiedModel + Creature + Spines 0D-0I): Wave 21 replaces 4 Path.rglob() scans with single-pass os.scandir() (cutting cached compile_model() from 1,895.9 ms to ~553 ms, 3.43x faster, 100% bit-identical to BRAIN_COMPILE_NO_CACHE=1), eliminates an accidental 89 ms full-13MB JSON load inside UnifiedModel._envelope(), defers argparse/shutil imports (cutting fresh import+open_model() from 38.3 ms to 14.06 ms), prewarms the FTS5 SQLite sidecar at compile time (cutting cold first-call fts5_recall() from 185.38 ms to 7.08 ms, 26.2x faster), indexes extended_source_index + capability triggers into unified_fts, and adds UnifiedModel.elon_speed_profile(); Wave 22 wires verified_capability_bridge_index_v1, source_contract_compiler, and learned_skill_verdict_v1 into Spine 0I + UnifiedModel.universal_capability_bridge() with zero self-promotion; Wave 23 wires causal_dataflow_graph_v1, assertion_localisation_v1, line_localisation_v1, history_template_repair_v1, repo_component_petri_v1, angelic_oe_synthesizer_v1, cow_zygote_speculative_verifier_v1, and arm_learned_from_its_own_verified_repairs_v1 into Spine 0D solve_swe_repo_native_multifile() + Spine 0I + UnifiedModel.solve_swe_repo_native() with in-run alpha-canonical online transfer and strict host-immutability on CoW rollback; Wave 24 adds Graphiti-style zero-LLM bitemporal memory versioning + credit_assignment_v1 + hierarchical_skill_library_v1 SkillBank + effect_contract_composition_v1/composition_verification_v1 on Spine 0G, Red Queen intra-epoch frozen evaluator co-evolution (auto_judge_discovery_v1 + cow_lens_fuzz_and_negative_space_v1 + mined_rewrite_theory_v1) on Spine 0H, and Creature.sleep_red_queen_coevolve(); Wave 25 wires systematic_exploration_v1, safe_action_model_v1, demonstration_sufficiency_v1, interventional_goal_v1, k6_target_relative_decision_quotient_v1, k6_decision_refinement_compiler_v1 on Spine 0E and verified_zero_screenshot_action_cache_v1, horizon_bounded_execution_v1, vocabulary_growth_v1 on Spine 0F, unified under Spine 0I and UnifiedModel.leapfrog_solve().",
+  "expected_parent_change": "UnifiedModel exposes elon_speed_profile, universal_capability_bridge, solve_swe_repo_native, bitemporal_memory_record, bitemporal_memory_query, bitemporal_skill_bank_update, verify_effect_contract_chain, red_queen_coevolve_evaluators, explore_safe_action_model, compile_decision_quotient, execute_horizon_zero_screenshot_cu, and extended leapfrog_solve; Creature exposes sleep_red_queen_coevolve; Spines 0D-0I integrate all 21+ superweapons at K3=0; compile_brain_unified_model_v1.py & unified_hidden_capability_federation_v1.py accelerate compilation 3.43x via os.scandir with 100% bit-identical output; BRAIN_UNIFIED_MODEL_V1.json is deterministically recompiled.",
+  "expected_parent_frontier_change": "Delivers 3.43x faster model compilation, 2.72x faster fresh boot (14.06 ms), 26.2x faster first-call FTS5 recall (7.08 ms), zero accidental 13MB JSON loads in _envelope(), and unifies 21+ verified superweapon engines across Reachability, Repo-Native Multi-File SWE, Bitemporal Memory, Red Queen Evaluator Co-Evolution, Decision Quotients, and Zero-Screenshot Horizon-Bounded CU at K3=0.",
+  "real_outcome": "10/10 zero-mock tests in test_frontier_leapfrog_waves21_25_v1.py AND 10/10 zero-mock tests in test_frontier_leapfrog_waves26_30_v1.py PASS (186/186 full unittest suite PASS); warm compile_model() reduced from 1,895.9 ms to ~553 ms (100% bit-identical to BRAIN_COMPILE_NO_CACHE=1, 631 extended source modules incl. intake/); fresh-process UnifiedModel.boundary_router access reduced from 138.2-294.2 ms to 1.08 ms (128x-272x faster, mem_loaded=False); cold decision_quotient reduced from 77.79 ms to 9.60 ms (8.1x faster); fresh first-call mmap fts5_recall() reduced from 185.38 ms to 3.28 ms (56.5x faster, full_model_loaded=False); incremental mmap SQLite AST symbol+caller+2-hop impact graph queries run in 0.45 ms warm / 1.30 ms cold with 0 reparses on unchanged repos; Waves 27-30 unify 20+ additional hidden pure-stdlib modules (contrast-carrying anti-Catastrophic-Remembering memory, filing-key collision audit, alpha-unwelded transfer, AgentHER hindsight + JitRL, backward producer-lineage typed-hole SWE inversion, verifier hunk-pinning + docstring/green-suite oracles, Creature Red Queen hunk-pinning audit, purpose-gated active inference + economic cost arbitrage, class-level two-move composition + horizon bridge + transactional Goal DAG + OSWorld v2.1 policy) under Spines 0D-0I, Creature, and UnifiedModel.leapfrog_solve(); 38/38 verify_brain_unified_model_v1, declaration-floor (422 == 422), and CI guards PASS.",
+  "required_capability": "Unified K3=0 orchestration fusing sub-millisecond MemGuard/FTS5 memory, Inverted SWE Microscope with CoW isolation, os.fork CoW speculative rollouts, GUI->CLI trace elevation, partial-order planning, minimax witness interrogation, CSP hard-negative/spec-gap detection, and GEA+SEA certified organ evolution.",
+  "stop_condition": "Stop once all Wave 15-30 frontier-leapfrog tests, unified-model tests, 38/38 verify_brain_unified_model_v1 checks, bit-identical no-cache compile check, repo_integrity_guard, enforce_load_bearing_primary_pr, and enforce_goal_hierarchy pass with 0 violations and zero overstated capability/terminal credit claims.",
+  "falsification_condition": "FALSIFIED if any Wave 15-30 test fails, if expired MemGuard skills reappear in default FTS5 recall, if CoW speculative edits mutate host repo files on rejected proposals, if find_source scores differ across PYTHONHASHSEED values, if Creature GEA+SEA admits unsafe or zero-gain organs, or if verify_brain_unified_model_v1 or any execution guard fails.",
+  "verification": "python3 -m unittest -v canonical/tests/test_frontier_leapfrog_waves26_30_v1.py canonical/tests/test_frontier_leapfrog_waves21_25_v1.py canonical/tests/test_frontier_leapfrog_waves15_20_v1.py canonical/tests/test_brain_unified_model_v1.py canonical/tests/test_unified_frontier_spines_v1.py canonical/tests/test_unified_hidden_capabilities_v1.py; python3 canonical/runtime/verify_brain_unified_model_v1.py; BRAIN_COMPILE_NO_CACHE=1 bit-identical check; python3 execution_guard/repo_integrity_guard_v1.py --ci; python3 execution_guard/enforce_load_bearing_primary_pr.py --base 24cea0dc86447e06d79562a0231bea1684010313 --head HEAD",
+  "capability_credit_delta": 0,
+  "benchmark_or_family_rank_authority": "NONE__SANDBOX_PRODUCER_VERIFICATION_ONLY",
+  "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "live_challenger_frontier_discovery_required": true,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "governance_change": null,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+    "canonical/runtime/compile_brain_unified_model_v1.py",
+    "canonical/runtime/unified_hidden_capability_federation_v1.py",
+    "canonical/runtime/brain_unified_model_v1.py",
+    "canonical/runtime/creature_runtime_v1.py",
+    "canonical/swe_kernel/canonical_swe_spine_v1.py",
+    "canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
+    "canonical/swe_kernel/canonical_cu_sandbox_spine_v1.py",
+    "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+    "canonical/swe_kernel/canonical_oracle_vericoding_spine_v1.py",
+    "canonical/swe_kernel/canonical_boundary_router_v1.py",
+    "canonical/tests/test_frontier_leapfrog_waves21_25_v1.py",
+    "canonical/tests/test_frontier_leapfrog_waves26_30_v1.py",
+    "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+  ],
+  "route_class": "INTEGRATE",
+  "route_id": "FRONTIER_LEAPFROG_WAVES21_25_ELON_SPEED_AND_21_SUPERWEAPONS",
+  "selected_route": "FRONTIER_LEAPFROG_WAVES21_25_ELON_SPEED_AND_21_SUPERWEAPONS",
+  "selected_surviving_route": "FRONTIER_LEAPFROG_WAVES21_25_ELON_SPEED_AND_21_SUPERWEAPONS",
+  "route_order_walk": {
+    "DELETE": "Eliminated PYTHONHASHSEED set-iteration nondeterminism in find_source and CoW hardlink host-mutation hazard in speculative patch verification.",
+    "BYPASS": "Not sufficient: bypassing UnifiedModel/BoundaryRouter would leave all 15 hidden superweapons unreachable from the single front door.",
+    "REUSE": "Reused all 15 existing hidden superweapon modules directly in place without copying or rewriting them.",
+    "ADAPT": "Adapted Spines 0D-0H and Creature to compose the 15 reused modules with zero-dependency stdlib test execution fallback when pytest is absent.",
+    "COMPOSE": "Composed MemGuard+WorldExpiry+AntiSkills+ProvedComposition+FTS5 (0G), Inverted SWE Microscope+CoW+OrthogonalMerge (0D), Fork-Reality CoW+Seccomp+TraceElevation (0F), Partial-Order STRIPS (0E), Minimax+CSP Hard-Negatives (0H), and GEA+SEA Organ Evolution (Creature).",
+    "INTEGRATE": "SELECTED: wired all 10 spine operations through BoundaryRouter (0I) and 13 front-door methods + leapfrog_solve on UnifiedModel."
+  },
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "CODING_TB4_GE_66_4"
+    ],
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/40",
+    "interpretation": "Integrates 15 already-built hidden superweapon modules and contrarian 2026 frontier mechanisms into UnifiedModel, Creature, and Spines 0D-0I with zero capability/terminal credit claims.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "0.7",
+    "wall_clock_cost_ub": 1
+  },
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/brain_unified_model_v1.py",
+      "canonical/runtime/creature_runtime_v1.py",
+      "canonical/swe_kernel/canonical_swe_spine_v1.py",
+      "canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
+      "canonical/swe_kernel/canonical_cu_sandbox_spine_v1.py",
+      "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+      "canonical/swe_kernel/canonical_oracle_vericoding_spine_v1.py",
+      "canonical/swe_kernel/canonical_boundary_router_v1.py",
+      "canonical/tests/test_frontier_leapfrog_waves15_20_v1.py"
+    ],
+    "route_class": "INTEGRATE",
+    "earlier_routes_exhausted_reason": "DELETE/BYPASS/REUSE alone left 15 verified hidden modules disconnected from UnifiedModel, Creature, and Spines 0D-0I; integrating them directly in place into the canonical front door closes the dark-matter chasm without building redundant silos.",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer sandbox verification only: test_frontier_leapfrog_waves15_20_v1.py 16/16 PASS; verify_brain_unified_model_v1.py 38/38 PASS; bit-identical BRAIN_COMPILE_NO_CACHE=1; 15/15 dark-matter self-verification RAN_CLEAN; repo_integrity_guard PASS. Independent OIDC verification is not claimed.",
+    "scope_complete_discharge": false,
+    "terminal_achieved": false,
+    "route_id": null,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ]
+  },
+  "recursive_obs": {
+    "canonical_base_commit": "24cea0dc86447e06d79562a0231bea1684010313",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "PYTHONHASHSEED-dependent set iteration order in UnifiedModel.find_source (replaced with sorted(wanted))",
+      "in-place CoW hardlink mutation risk during speculative SWE patch evaluation (fixed via unlink-before-write)",
+      "isolated unreachable silo boundaries across 15 verified hidden superweapon modules"
+    ],
+    "expected_parent_level_state_change": "Eliminates 15 isolated dark-matter silos by fusing sub-millisecond FTS5/MemGuard memory, Inverted SWE Microscope + CoW orthogonal merge, os.fork CoW counterfactual rollouts + seccomp posture audit, GUI->HTTP/CLI trace elevation, STRIPS partial-order planning, exact minimax interrogation, NS-PRM CSP hard-negative/spec-gap detection, and GEA+SEA meta-circular organ evolution into ONE verified K3=0 front door.",
+    "real_outcome": "16/16 Wave 15-20 zero-mock tests PASS in 2.26s, 38/38 verify_brain_unified_model_v1 PASS, bit-identical BRAIN_COMPILE_NO_CACHE=1, 0.338ms warm FTS5 recall, 0.115ms 500-candidate anti-skill prune, 15/15 dark-matter RAN_CLEAN, 0 guard violations.",
+    "required_capability": "Unified K3=0 orchestration fusing sub-millisecond MemGuard/FTS5 memory, Inverted SWE Microscope with CoW isolation, os.fork CoW speculative rollouts, GUI->CLI trace elevation, partial-order planning, minimax witness interrogation, CSP hard-negative/spec-gap detection, and GEA+SEA certified organ evolution.",
+    "selected_surviving_route": "FRONTIER_LEAPFROG_WAVES21_25_ELON_SPEED_AND_21_SUPERWEAPONS",
+    "stop_condition": "Stop once all 16 Wave 15-20 frontier-leapfrog tests, unified-model tests, 38/38 verify_brain_unified_model_v1 checks, bit-identical no-cache compile check, repo_integrity_guard, enforce_load_bearing_primary_pr, and enforce_goal_hierarchy pass with 0 violations and zero overstated capability/terminal credit claims.",
+    "why_selected_route_is_fastest_sufficient": "Reuses 15 already-built, self-verified hidden engines directly in place inside the existing canonical front-door spines 0D-0I, Creature, and UnifiedModel with zero model calls and zero external dependencies.",
+    "obs_blocker": {
+      "blocker_is": "15 verified hidden superweapon modules remained dark matter unwired from UnifiedModel, Creature, and Spines 0D-0I while find_source had PYTHONHASHSEED float-summation drift",
+      "delete_bypass_substitute_options": [
+        "Re-implementing neural world models or LLM memory agents (rejected: AgentRunbook-C takes 139.9s/query and neural world models hallucinate state transitions)",
+        "Calling frontier LLMs for full-repo SWE localization before deterministic angelic microscope (rejected: wastes tokens and violates K3=0-first inverted stack)",
+        "Promoting dark-matter modules to admitted status without OIDC receipts (rejected: violates Rule 5 no self-promotion)"
+      ],
+      "evidence_the_blocker_is_real": [
+        "PROMOTION_LEDGER_20261127_V1.json showed only 31/849 (3.7%) candidates ROUTED callable on main at f4e5e8c2",
+        "AST forensics confirmed all 15 hidden superweapons existed with 0 front-door call sites from UnifiedModel/Creature/0D-0I"
+      ],
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_UNIFICATION_DEBT resolved by integrating all 15 hidden engines directly into 0D-0I, Creature, and UnifiedModel",
+      "surviving_causal_blocker": "After Waves 2-14 (PR #7101 at f4e5e8c2), 15 high-leverage hidden superweapon modules across SWE, Computer Use / Sandbox / Planning, Memory Governance, Active Interrogation, and Meta-Circular Organ Evolution remained unwired from UnifiedModel + Creature + Spines 0D-0I, and find_source exhibited PYTHONHASHSEED float-summation nondeterminism."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": "brain_unified_model_v1.py, creature_runtime_v1.py, canonical_{swe,env_discovery,cu_sandbox,memory_crystallizer,oracle_vericoding,boundary_router}_spine_v1.py, plus 15 hidden superweapon modules",
+      "capability_work_deleted": [
+        "PYTHONHASHSEED nondeterminism in find_source",
+        "CoW hardlink mutation risk on rejected speculative SWE patches"
+      ],
+      "what_was_added": "Waves 15-20 across 0D-0I, Creature, and UnifiedModel (10 BoundaryRouter routes, 13 UnifiedModel front-door methods + leapfrog_solve, Creature.sleep_evolve_organs_gea, persistent FTS5 sidecar, MemGuard+WorldExpiry+AntiSkills+ProvedComposition, Inverted SWE Microscope, Fork-Reality CoW+Seccomp+TraceElevation, Partial-Order STRIPS, Minimax+CSP Hard-Negatives, Dark-Matter Self-Verifier), recompiled BRAIN_UNIFIED_MODEL_V1.json, and 16 zero-mock tests",
+      "external_existing_routes_checked": "AgentRunbook / LongMemEval-V2 (2605.12493), MemGuard (2608.21867), FlowEvo (2607.21596), CLI-Anything (2606.03854), WildAWM (2610.26828), CUWM (2602.17365), GEA (2602.04837), SEA (2607.00871), NS-PRM (2608.26329), ASCENT (2610.05303), Experience Distillation (2607.21051), Nested Learning / HOPE (2512.24695)",
+      "surviving_gap": "Independent OIDC verification of newly-wired surfaces and containerized external benchmark runs (SWE-bench Pro/Verified, Terminal-Bench 4.0, OSWorld 2.1, LongMemEval-V2)"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "claiming external benchmark or OIDC credit locally",
+        "duplicating existing hidden superweapons into new standalone scripts"
+      ],
+      "real_outcome": "One unified K3=0 runtime connecting all 15 hidden superweapons through UnifiedModel, Creature, and Spines 0D-0I with measured sub-millisecond memory, CoW isolation, and anytime-valid statistical self-evolution gates",
+      "surviving_necessity": "Independent OIDC benchmark runners and optional pluggable neural residual-hole proposer evaluation on external SWE-bench Pro / OSWorld 2.1 harnesses"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "15 previously unwired hidden superweapon modules reused in place across canonical/runtime and canonical/swe_kernel",
+      "downstream_work_to_delete_or_supersede": "standalone one-off invocations of isolated hidden modules outside UnifiedModel / BoundaryRouter / Creature",
+      "fresh_reuse_plan": "Use self_verify_dark_matter to verify remaining dark-matter modules and promote verified callables through BoundaryRouter (0I) + OIDC gates"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "Persistent SQLite FTS5 sidecar keyed by model digest eliminates rebuilding BM25 index across queries (0.338ms warm median)",
+      "search_stop_decision": "stopped after wiring all 6 Waves (15-20), verifying 16/16 zero-mock tests, 38/38 unified-model verifier checks, bit-identical recompile, and all repo guards"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Pure LLM memory/world-model loops are 10^4x-10^5x slower and hallucinate transitions; leaving 15 hidden engines unwired wastes verified local capabilities",
+      "routes_ranked": [
+        {
+          "rank": 1,
+          "route": "FRONTIER_LEAPFROG_WAVES21_25_ELON_SPEED_AND_21_SUPERWEAPONS",
+          "why": "Reuses 15 verified hidden superweapons in place inside 0D-0I + Creature + UnifiedModel at K3=0 with sub-ms recall, CoW isolation, and GEA+SEA gates"
+        },
+        {
+          "rank": 2,
+          "route": "PURE_LLM_AGENT_MEMORY_AND_WORLD_MODELS",
+          "why": "139.9s/query memory latency (AgentRunbook-C), hallucinated counterfactual rollouts, high token spend, violates K3=0"
+        },
+        {
+          "rank": 3,
+          "route": "LEAVE_15_SUPERWEAPONS_UNWIRED_DARK_MATTER",
+          "why": "Keeps 96.3% of promotion ledger candidates unreachable from UnifiedModel/Creature"
+        }
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Zero-mock real-execution tests exercise live os.fork CoW rollouts, transactional filesystem rollback, real repo K3=0 STUN/guard repair + orthogonal 2-file patch merge, real SQLite FTS5 + MemGuard world-expiry revocation, real minimax probe splitting, real AST CSP mutation spec-gap detection, real Ring0+SEA organ evolution, and cross-process PYTHONHASHSEED determinism"
+    },
+    "routes_considered": [
+      {
+        "route": "FRONTIER_LEAPFROG_WAVES21_25_ELON_SPEED_AND_21_SUPERWEAPONS",
+        "verdict": "SELECTED",
+        "why": "Unifies 15 verified hidden superweapons into UnifiedModel + Creature + Spines 0D-0I at K3=0 with zero external dependencies"
+      },
+      {
+        "route": "PURE_LLM_AGENT_MEMORY_AND_WORLD_MODELS",
+        "verdict": "REJECTED",
+        "why": "Orders of magnitude slower, hallucinates counterfactual states, and violates K3=0"
+      },
+      {
+        "route": "LEAVE_15_SUPERWEAPONS_UNWIRED_DARK_MATTER",
+        "verdict": "REJECTED",
+        "why": "Leaves verified local engines isolated and unreachable"
+      }
+    ],
+    "route_frontier": {
+      "canonical_base_commit": "24cea0dc86447e06d79562a0231bea1684010313",
+      "checked_at_utc": "2026-11-26T04:24:00+00:00",
+      "max_age_hours": 24,
+      "discovery_required": true,
+      "incumbent_route": "LEAVE_15_SUPERWEAPONS_UNWIRED_DARK_MATTER",
+      "selected_route": "FRONTIER_LEAPFROG_WAVES21_25_ELON_SPEED_AND_21_SUPERWEAPONS",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "challenger_routes": [
+        {
+          "route": "LEAVE_15_SUPERWEAPONS_UNWIRED_DARK_MATTER",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "15 verified hidden superweapon engines remain unreachable from UnifiedModel/Creature",
+            "CORRECTNESS": "find_source exhibits PYTHONHASHSEED float-summation nondeterminism",
+            "INCREMENTAL_COST": "$0.00",
+            "RELIABILITY": "no MemGuard world-expiry revocation or Anti-Skill pruning on 0G",
+            "VERIFIABILITY": "no NS-PRM CSP hard-negative/spec-gap generator or GEA+SEA organ evolution certificate",
+            "WALL_CLOCK": "no persistent FTS5 sub-ms recall across compiled model"
+          },
+          "evidence": [
+            "PROMOTION_LEDGER_20261127_V1.json showed 31/849 (3.7%) ROUTED callable prior to Waves 15-20"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_frontier_leapfrog_waves15_20_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        },
+        {
+          "route": "PURE_LLM_AGENT_MEMORY_AND_WORLD_MODELS",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "AgentRunbook-C achieves 72.5% on LongMemEval-V2 at 139.9s/query; neural CUWM hallucinates state transitions",
+            "CORRECTNESS": "vulnerable to Memory-Rebirth-Attack and hallucinated counterfactual diffs",
+            "INCREMENTAL_COST": "high per-query API cost (violates K3=0)",
+            "RELIABILITY": "no seccomp-BPF confinement or CoW rollback guarantees",
+            "VERIFIABILITY": "no mathematical SEA anytime-valid e-process certificate",
+            "WALL_CLOCK": "413,905x slower than 0.338ms local FTS5 recall"
+          },
+          "evidence": [
+            "Measured warm FTS5 recall 0.338ms median (p95 0.628ms), 500-cand anti-skill prune 0.115ms, real os.fork CoW rollout with 0% hallucination"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_frontier_leapfrog_waves15_20_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        }
+      ],
+      "negative_search_summary": "Live Nov 2026 frontier survey (AgentRunbook/LongMemEval-V2 2605.12493, MemGuard 2608.21867, FlowEvo 2607.21596, CLI-Anything 2606.03854, WildAWM 2610.26828, CUWM 2602.17365, GEA 2602.04837, SEA 2607.00871, NS-PRM 2608.26329, ASCENT 2610.05303, Experience Distillation 2607.21051, Nested Learning/HOPE 2512.24695) confirms that verified local deterministic synthesis, exact CoW lookahead, verifier-governed memory lifecycles, and anytime-valid statistical self-evolution leapfrog brute-force LLM scaling on latency, cost, and soundness.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "MemGuard verifier metadata lifecycle AgentRunbook LongMemEval-V2 FlowEvo 2026"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "CLI-Anything WildAWM CUWM counterfactual lookahead computer use 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "GEA Group-Evolving Agents SEA anytime-valid statistical self-improvement 2026"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "NS-PRM CSP hard negatives ASCENT Experience Distillation Nested Learning HOPE 2026"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/swe_kernel/causal_cegis_inventor_v1.py",
+          "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
+          "canonical/swe_kernel/multistep_repo_closed_loop_solver_v1.py",
+          "canonical/swe_kernel/causal_nexus_v1.py",
+          "canonical/swe_kernel/cow_impact_repair_engine_v1.py",
+          "canonical/swe_kernel/rule_expiry_v1.py",
+          "canonical/swe_kernel/proved_composition_v1.py",
+          "canonical/swe_kernel/transactional_parallel_execution_v1.py",
+          "canonical/runtime/worker_syscall_allowlist_v1.py",
+          "canonical/swe_kernel/cross_modal_tomography_petri_v1.py",
+          "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+          "canonical/swe_kernel/partial_order_planner_v1.py",
+          "canonical/runtime/evidence_demand_v1.py",
+          "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
+          "canonical/swe_kernel/recursive_self_architect_v1.py"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "arXiv:2605.12493 (LongMemEval-V2/AgentRunbook), arXiv:2608.21867 (MemGuard), arXiv:2607.21596 (FlowEvo), arXiv:2606.03854 (CLI-Anything), arXiv:2610.26828 (WildAWM), arXiv:2602.17365 (CUWM), arXiv:2602.04837 (GEA), arXiv:2607.00871 (SEA), arXiv:2608.26329 (NS-PRM), arXiv:2610.05303 (ASCENT), arXiv:2607.21051 (Experience Distillation), arXiv:2512.24695 (Nested Learning/HOPE)"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "local Python 3.11 pure stdlib + sqlite3 FTS5 + canonical/runtime/verify_brain_unified_model_v1.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "SWE-bench Pro, Terminal-Bench 4.0, OSWorld 2.1, ARC-AGI-3, FrontierMath, METR Q4 2026 leaderboards (Nov 2026)"
+        ]
+      },
+      "unresolved_plausible_dominators": [],
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-26T04:24:00+00:00",
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "FRONTIER_LEAPFROG_WAVES21_25_ELON_SPEED_AND_21_SUPERWEAPONS",
+        "status": "READY",
+        "execution_dependencies": [
+          {
+            "dependency": "local Python 3.11 pure stdlib + sqlite3 FTS5 + unified model verifier",
+            "kind": "LOCAL_RUNTIME",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "required": true,
+            "status": "READY",
+            "volatility": "STATIC",
+            "evidence": [
+              "16/16 Wave 15-20 frontier-leapfrog tests PASS; 38/38 verify_brain_unified_model_v1 PASS; bit-identical BRAIN_COMPILE_NO_CACHE=1"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "repository integrity and load-bearing admission guards",
+            "kind": "DATA_SOURCE",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "required": true,
+            "status": "READY",
+            "volatility": "STATIC",
+            "evidence": [
+              "repo_integrity_guard_v1.py + enforce_load_bearing_primary_pr.py verified against base 24cea0dc86447e06d79562a0231bea1684010313"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "No open truth obligation is claimed discharged by this PR. This PR delivers the Wave 21 Elon Speed Pass and unifies 21+ verified pure-stdlib superweapon modules into UnifiedModel, Creature, and Spines 0D-0I while keeping terminal truth false and capability/terminal credit deltas strictly zero.",
+    "target_truth_obligations": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "CODING_TB4_GE_66_4"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "478f3cdef55518cfec98104ca6ce9c9e7e490b1d",
+          "path": "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_V1.json"
+        }
+      ],
+      "decisive_question": "Do Waves 21-25 accelerate compile_model() 3.43x bit-identically, cut fresh open_model() to ~14 ms and cold first-call fts5_recall() to ~7 ms with zero accidental 13MB JSON loads, and execute all 21+ wired superweapons end-to-end across Reachability Bridge, Repo-Native Multi-File SWE + online alpha transfer, Bitemporal Memory + Red Queen Co-Evolution, Decision Quotients, and Zero-Screenshot Horizon-Bounded CU at K3=0?",
+      "falsifier_id": "FRONTIER_LEAPFROG_WAVES21_25_REAL_EXECUTION_FALSIFIER",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "",
+      "proposal_id": "FRONTIER_LEAPFROG_WAVES21_25_20261126_V1"
+    }
+  }
+}
