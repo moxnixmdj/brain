@@ -1,0 +1,1099 @@
+{
+  "kind": "static import and exact-literal source reach, not dispatch coverage",
+  "date_utc": "2026-11-26",
+  "nominees": [
+    "canonical.runtime.futamura_leapfrog_kernel_v1",
+    "canonical.swe_kernel.verified_skill_crystallizer_v1",
+    "canonical.swe_kernel.causal_trace_to_skill_compiler_v1",
+    "canonical.swe_kernel.reverse_tomography_algebra_v1",
+    "canonical.swe_kernel.cow_angelic_zygote_v1",
+    "canonical.swe_kernel.angelic_lens_cow_repair_v1",
+    "canonical.swe_kernel.prior_owned_insertions_v1",
+    "canonical.swe_kernel.egraph_and_deductive_synthesizer_v1",
+    "canonical.swe_kernel.canonical_oracle_vericoding_spine_v1",
+    "canonical.swe_kernel.typed_invention_v1",
+    "canonical.swe_kernel.unified_unfamiliar_leapfrog_v1",
+    "canonical.swe_kernel.universal_computer_agent_v1",
+    "canonical.swe_kernel.perfect_algorithm_lifted_generalization_v1",
+    "canonical.runtime.finite_minimax_decision_region_v1",
+    "canonical.tools.the_refusal_is_the_curriculum_v1",
+    "canonical.swe_kernel.witnessed_revision_store_v1",
+    "canonical.swe_kernel.epistemic_admission_and_self_play_v1",
+    "canonical.swe_kernel.meta_circular_organ_graph_v1",
+    "canonical.runtime.wave39_leapfrog_unification_v1",
+    "canonical.runtime.fast_cascade_orchestrator_v1"
+  ],
+  "snapshots": [
+    {
+      "roots": [
+        "canonical.runtime.brain_unified_model_v1",
+        "canonical.runtime.creature_runtime_v1",
+        "canonical.runtime.unified_hidden_capability_federation_v1"
+      ],
+      "tree_files_sha256": "93da2077d0564034a8e3e90b629a19b4d4c541d9733e740568ee9fcb22d83964",
+      "all": {
+        "modules": 3045,
+        "physical_lines": 1001090
+      },
+      "parse_errors": [
+        [
+          "canonical/runtime/livebench_legacy_predecessor_compiler_audit_v1.py",
+          "SyntaxError"
+        ],
+        [
+          "canonical/runtime/osworld_v21_app_policy_overlay_v1.py",
+          "SyntaxError"
+        ]
+      ],
+      "reachable_imports": {
+        "modules": 1036,
+        "physical_lines": 577992
+      },
+      "outside_imports": {
+        "modules": 2009,
+        "physical_lines": 423098
+      },
+      "reachable_with_literal_addresses": {
+        "modules": 1219,
+        "physical_lines": 631247
+      },
+      "outside_even_with_addresses": {
+        "modules": 1826,
+        "physical_lines": 369843
+      },
+      "nominees": {
+        "canonical.runtime.futamura_leapfrog_kernel_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.brain_unified_model_v1",
+            "canonical.runtime.creature_runtime_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.canonical_memory_crystallizer_v1"
+          ]
+        },
+        "canonical.swe_kernel.verified_skill_crystallizer_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.bound_capabilities.software_repair_crossfile_choreograph_v1",
+            "canonical.runtime.live_brain_route_admission_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.autonomous_awake_loop_v1",
+            "canonical.swe_kernel.computer_use_agent_v1",
+            "canonical.swe_kernel.consistency_vs_equivalence_v1",
+            "canonical.swe_kernel.contrastive_oracle_bootstrap_v1",
+            "canonical.swe_kernel.cow_impact_repair_engine_v1",
+            "canonical.swe_kernel.effect_contract_composition_v1",
+            "canonical.swe_kernel.language_neutral_skill_bridge_v1",
+            "canonical.swe_kernel.lesson_admission_gate_v1",
+            "canonical.swe_kernel.lesson_localization_v1",
+            "canonical.swe_kernel.multistep_repo_closed_loop_solver_v1",
+            "canonical.swe_kernel.paired_transfer_evaluation_v1",
+            "canonical.swe_kernel.perfect_algorithm_v1",
+            "canonical.swe_kernel.petri_cow_splicing_engine_v1",
+            "canonical.swe_kernel.polyglot_build_ci_engine_v1",
+            "canonical.swe_kernel.proved_composition_v1",
+            "canonical.swe_kernel.retained_repair_session_v1",
+            "canonical.swe_kernel.rule_scope_learning_v1",
+            "canonical.swe_kernel.skill_recheck_v1",
+            "canonical.swe_kernel.skill_scope_ledger_v1",
+            "canonical.swe_kernel.skill_sequence_verify_v1",
+            "canonical.swe_kernel.swe_self_improvement_bridge_v1",
+            "canonical.swe_kernel.the_ceiling_of_learn_once_v1",
+            "canonical.swe_kernel.unified_epistemic_portfolio_v1",
+            "canonical.swe_kernel.verified_lesson_pipeline_v1",
+            "canonical.swe_kernel.verified_skill_crystallizer_ir_bridge_v1",
+            "canonical.swe_kernel.weights_from_scratch_v1",
+            "canonical.tools.auditability_report_v1",
+            "canonical.tools.compose_hardcore_swe_problem_inventory_v1",
+            "canonical.tools.cross_language_lesson_transfer_probe_v1",
+            "canonical.tools.instant_learning_boundary_probe_v1",
+            "canonical.tools.invalidation_enforcement_v1",
+            "canonical.tools.learn_path_verification_wiring_v1",
+            "canonical.tools.lesson_admission_harm_measure_20261113_v1",
+            "canonical.tools.live_scoped_transfer_benchmark_v1",
+            "canonical.tools.one_lesson_one_kind_probe_20261112_v1",
+            "canonical.tools.pr_c2_apply_time_broadening_benchmark_v1",
+            "canonical.tools.quixbugs_one_fix_transfer_measure_v1",
+            "canonical.tools.real_repair_localization_probe_v1",
+            "canonical.tools.rule_generalization_probe_v1",
+            "canonical.tools.shared_skill_transfer_benchmark_v1",
+            "canonical.tools.skill_scope_acquisition_probe_v1"
+          ]
+        },
+        "canonical.swe_kernel.causal_trace_to_skill_compiler_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.curriculum_v1",
+            "canonical.runtime.live_brain_route_admission_v1",
+            "canonical.runtime.solve_v1",
+            "canonical.runtime.sovereign_zero_llm_planner_v1",
+            "canonical.runtime.swe_kernel_organ_bridge_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.runtime.verified_zero_screenshot_action_cache_v1",
+            "canonical.runtime.verifier_falsification_v1",
+            "canonical.swe_kernel.autonomous_awake_loop_v1",
+            "canonical.swe_kernel.canonical_cu_sandbox_spine_v1",
+            "canonical.swe_kernel.closed_loop_autonomous_controller_v1",
+            "canonical.swe_kernel.learned_skill_verdict_v1",
+            "canonical.swe_kernel.predicate_world_abstraction_v1",
+            "canonical.swe_kernel.swe_self_improvement_bridge_v1",
+            "canonical.swe_kernel.zygote_worker_pool_v1",
+            "canonical.tools.miniwob_one_success_generalisation_measure_v1",
+            "canonical.tools.teach_actions_v1"
+          ]
+        },
+        "canonical.swe_kernel.reverse_tomography_algebra_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.angelic_cegis_repair_v1",
+            "canonical.swe_kernel.canonical_swe_spine_v1",
+            "canonical.swe_kernel.metamorphic_habitation_zipper_v1",
+            "canonical.swe_kernel.unified_epistemic_portfolio_v1",
+            "canonical.swe_kernel.universal_computer_agent_v1"
+          ]
+        },
+        "canonical.swe_kernel.cow_angelic_zygote_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.swe_kernel_organ_bridge_v1",
+            "canonical.swe_kernel.metamorphic_habitation_zipper_v1",
+            "canonical.swe_kernel.unified_epistemic_portfolio_v1"
+          ]
+        },
+        "canonical.swe_kernel.angelic_lens_cow_repair_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.swe_kernel_organ_bridge_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.cross_modal_tomography_petri_v1",
+            "canonical.tools.live_frontier_benchmark_runner_v1"
+          ]
+        },
+        "canonical.swe_kernel.prior_owned_insertions_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.swe_kernel.canonical_swe_spine_v1"
+          ]
+        },
+        "canonical.swe_kernel.egraph_and_deductive_synthesizer_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.bound_capabilities.python_swe_transform_and_synthesize_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.concept_library_v1",
+            "canonical.swe_kernel.diagnostics_perf_and_design_engine_v1",
+            "canonical.swe_kernel.meta_circular_organ_graph_v1",
+            "canonical.swe_kernel.verified_skill_crystallizer_v1",
+            "canonical.tools.invalidation_enforcement_v1"
+          ]
+        },
+        "canonical.swe_kernel.canonical_oracle_vericoding_spine_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.brain_unified_model_v1",
+            "canonical.runtime.creature_runtime_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.canonical_boundary_router_v1"
+          ]
+        },
+        "canonical.swe_kernel.typed_invention_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.futamura_leapfrog_kernel_v1",
+            "canonical.swe_kernel.adaptive_constant_concept_bridge_v1",
+            "canonical.swe_kernel.canonical_env_discovery_spine_v1",
+            "canonical.swe_kernel.composition_concept_bridge_v1",
+            "canonical.swe_kernel.perfect_algorithm_unified_v5",
+            "canonical.swe_kernel.perfect_algorithm_unified_v8"
+          ]
+        },
+        "canonical.swe_kernel.unified_unfamiliar_leapfrog_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.brain_unified_model_v1",
+            "canonical.runtime.frontier_seven_moves_runtime_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.canonical_swe_spine_v1"
+          ]
+        },
+        "canonical.swe_kernel.universal_computer_agent_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.osworld_v21_zero_model_policy_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.c_asan_cegis_repair_v1",
+            "canonical.swe_kernel.js_causal_cegis_repair_v1",
+            "canonical.swe_kernel.perfect_algorithm_v1",
+            "canonical.swe_kernel.reverse_tomography_algebra_v1",
+            "canonical.swe_kernel.unified_epistemic_portfolio_v1"
+          ]
+        },
+        "canonical.swe_kernel.perfect_algorithm_lifted_generalization_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.wave39_leapfrog_unification_v1",
+            "canonical.swe_kernel.canonical_memory_crystallizer_v1",
+            "canonical.swe_kernel.perfect_algorithm_unified_v5",
+            "canonical.swe_kernel.perfect_algorithm_unified_v8"
+          ]
+        },
+        "canonical.runtime.finite_minimax_decision_region_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.monotone_semantic_drd_bridge_v1",
+            "canonical.runtime.u_scope_complete_depletion_orchestrator_v1",
+            "canonical.swe_kernel.unified_unfamiliar_leapfrog_v1"
+          ]
+        },
+        "canonical.tools.the_refusal_is_the_curriculum_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.unified_epistemic_portfolio_v1"
+          ]
+        },
+        "canonical.swe_kernel.witnessed_revision_store_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.brain_unified_model_v1",
+            "canonical.runtime.dialogue_revision_reader_v1",
+            "canonical.swe_kernel.repair_journal_v1",
+            "canonical.tools.live_interface_trial_v1"
+          ]
+        },
+        "canonical.swe_kernel.epistemic_admission_and_self_play_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.brain_unified_model_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.angelic_lens_cow_repair_v1",
+            "canonical.swe_kernel.cross_modal_tomography_petri_v1",
+            "canonical.tools.live_frontier_benchmark_runner_v1",
+            "canonical.tools.receiver_cli_contrast_v1"
+          ]
+        },
+        "canonical.swe_kernel.meta_circular_organ_graph_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.creature_runtime_v1",
+            "canonical.runtime.self_prediction_baseline_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.recursive_self_architect_v1",
+            "canonical.swe_kernel.repair_input_dependency_gate_v1",
+            "canonical.swe_kernel.sentient_cognitive_core_v1",
+            "canonical.swe_kernel.unified_epistemic_portfolio_v1",
+            "canonical.tools.one_try_compounding_probe_20261112_v1",
+            "canonical.tools.one_try_state_probe_20261112_v1"
+          ]
+        },
+        "canonical.runtime.wave39_leapfrog_unification_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.brain_unified_model_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1"
+          ]
+        },
+        "canonical.runtime.fast_cascade_orchestrator_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.canonical_boundary_router_v1"
+          ]
+        }
+      },
+      "label": "branch",
+      "commit": "6e02f4b92e0394822a4d2b95289a48ee27ff6965",
+      "artifact": {
+        "sha256": "87eb935fbec322c56b5d426d0f220d93e2bb1e919d061789e3e5ff564c8806ba",
+        "bytes": 13875061,
+        "rows": {
+          "engines": 206,
+          "capabilities": 462,
+          "harvested_capabilities": 656,
+          "skills": 18
+        },
+        "counts": {
+          "federated_kernel_engines": 180,
+          "bound_capabilities": 153,
+          "harvested_admitted": 0
+        }
+      }
+    },
+    {
+      "roots": [
+        "canonical.runtime.brain_unified_model_v1",
+        "canonical.runtime.creature_runtime_v1",
+        "canonical.runtime.unified_hidden_capability_federation_v1"
+      ],
+      "tree_files_sha256": "d67ead5c293a8631f0cfb79924838cac924ac6d9223d5f864c9bb270c829215e",
+      "all": {
+        "modules": 3028,
+        "physical_lines": 1008957
+      },
+      "parse_errors": [
+        [
+          "canonical/runtime/livebench_legacy_predecessor_compiler_audit_v1.py",
+          "SyntaxError"
+        ],
+        [
+          "canonical/runtime/osworld_v21_app_policy_overlay_v1.py",
+          "SyntaxError"
+        ]
+      ],
+      "reachable_imports": {
+        "modules": 1053,
+        "physical_lines": 597355
+      },
+      "outside_imports": {
+        "modules": 1975,
+        "physical_lines": 411602
+      },
+      "reachable_with_literal_addresses": {
+        "modules": 1230,
+        "physical_lines": 647661
+      },
+      "outside_even_with_addresses": {
+        "modules": 1798,
+        "physical_lines": 361296
+      },
+      "nominees": {
+        "canonical.runtime.futamura_leapfrog_kernel_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.brain_unified_model_v1",
+            "canonical.runtime.creature_runtime_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.canonical_memory_crystallizer_v1"
+          ]
+        },
+        "canonical.swe_kernel.verified_skill_crystallizer_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.bound_capabilities.software_repair_crossfile_choreograph_v1",
+            "canonical.runtime.live_brain_route_admission_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.autonomous_awake_loop_v1",
+            "canonical.swe_kernel.computer_use_agent_v1",
+            "canonical.swe_kernel.consistency_vs_equivalence_v1",
+            "canonical.swe_kernel.contrastive_oracle_bootstrap_v1",
+            "canonical.swe_kernel.cow_impact_repair_engine_v1",
+            "canonical.swe_kernel.effect_contract_composition_v1",
+            "canonical.swe_kernel.language_neutral_skill_bridge_v1",
+            "canonical.swe_kernel.lesson_admission_gate_v1",
+            "canonical.swe_kernel.lesson_localization_v1",
+            "canonical.swe_kernel.multistep_repo_closed_loop_solver_v1",
+            "canonical.swe_kernel.paired_transfer_evaluation_v1",
+            "canonical.swe_kernel.perfect_algorithm_v1",
+            "canonical.swe_kernel.petri_cow_splicing_engine_v1",
+            "canonical.swe_kernel.polyglot_build_ci_engine_v1",
+            "canonical.swe_kernel.proved_composition_v1",
+            "canonical.swe_kernel.retained_repair_session_v1",
+            "canonical.swe_kernel.rule_scope_learning_v1",
+            "canonical.swe_kernel.skill_recheck_v1",
+            "canonical.swe_kernel.skill_scope_ledger_v1",
+            "canonical.swe_kernel.skill_sequence_verify_v1",
+            "canonical.swe_kernel.swe_self_improvement_bridge_v1",
+            "canonical.swe_kernel.the_ceiling_of_learn_once_v1",
+            "canonical.swe_kernel.unified_epistemic_portfolio_v1",
+            "canonical.swe_kernel.unified_five_pillar_frontier_kernel_v1",
+            "canonical.swe_kernel.verified_lesson_pipeline_v1",
+            "canonical.swe_kernel.verified_skill_crystallizer_ir_bridge_v1",
+            "canonical.swe_kernel.weights_from_scratch_v1",
+            "canonical.tools.auditability_report_v1",
+            "canonical.tools.compose_hardcore_swe_problem_inventory_v1",
+            "canonical.tools.cross_language_lesson_transfer_probe_v1",
+            "canonical.tools.instant_learning_boundary_probe_v1",
+            "canonical.tools.invalidation_enforcement_v1",
+            "canonical.tools.learn_path_verification_wiring_v1",
+            "canonical.tools.lesson_admission_harm_measure_20261113_v1",
+            "canonical.tools.live_scoped_transfer_benchmark_v1",
+            "canonical.tools.one_lesson_one_kind_probe_20261112_v1",
+            "canonical.tools.pr_c2_apply_time_broadening_benchmark_v1",
+            "canonical.tools.quixbugs_one_fix_transfer_measure_v1",
+            "canonical.tools.real_repair_localization_probe_v1",
+            "canonical.tools.rule_generalization_probe_v1",
+            "canonical.tools.shared_skill_transfer_benchmark_v1",
+            "canonical.tools.skill_scope_acquisition_probe_v1"
+          ]
+        },
+        "canonical.swe_kernel.causal_trace_to_skill_compiler_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.asymmetric_frontier_leapfrog_v1",
+            "canonical.runtime.curriculum_v1",
+            "canonical.runtime.live_brain_route_admission_v1",
+            "canonical.runtime.solve_v1",
+            "canonical.runtime.sovereign_zero_llm_planner_v1",
+            "canonical.runtime.swe_kernel_organ_bridge_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.runtime.verified_zero_screenshot_action_cache_v1",
+            "canonical.runtime.verifier_falsification_v1",
+            "canonical.swe_kernel.autonomous_awake_loop_v1",
+            "canonical.swe_kernel.canonical_cu_sandbox_spine_v1",
+            "canonical.swe_kernel.closed_loop_autonomous_controller_v1",
+            "canonical.swe_kernel.learned_skill_verdict_v1",
+            "canonical.swe_kernel.predicate_world_abstraction_v1",
+            "canonical.swe_kernel.swe_self_improvement_bridge_v1",
+            "canonical.swe_kernel.zygote_worker_pool_v1",
+            "canonical.tools.miniwob_one_success_generalisation_measure_v1",
+            "canonical.tools.teach_actions_v1"
+          ]
+        },
+        "canonical.swe_kernel.reverse_tomography_algebra_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.angelic_cegis_repair_v1",
+            "canonical.swe_kernel.canonical_swe_spine_v1",
+            "canonical.swe_kernel.metamorphic_habitation_zipper_v1",
+            "canonical.swe_kernel.unified_epistemic_portfolio_v1",
+            "canonical.swe_kernel.universal_computer_agent_v1"
+          ]
+        },
+        "canonical.swe_kernel.cow_angelic_zygote_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.asymmetric_frontier_leapfrog_v1",
+            "canonical.runtime.swe_kernel_organ_bridge_v1",
+            "canonical.swe_kernel.metamorphic_habitation_zipper_v1",
+            "canonical.swe_kernel.unified_epistemic_portfolio_v1"
+          ]
+        },
+        "canonical.swe_kernel.angelic_lens_cow_repair_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.swe_kernel_organ_bridge_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.cross_modal_tomography_petri_v1",
+            "canonical.tools.live_frontier_benchmark_runner_v1"
+          ]
+        },
+        "canonical.swe_kernel.egraph_and_deductive_synthesizer_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.bound_capabilities.python_swe_transform_and_synthesize_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.concept_library_v1",
+            "canonical.swe_kernel.diagnostics_perf_and_design_engine_v1",
+            "canonical.swe_kernel.meta_circular_organ_graph_v1",
+            "canonical.swe_kernel.verified_skill_crystallizer_v1",
+            "canonical.tools.invalidation_enforcement_v1"
+          ]
+        },
+        "canonical.swe_kernel.canonical_oracle_vericoding_spine_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.brain_unified_model_v1",
+            "canonical.runtime.creature_runtime_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.canonical_boundary_router_v1"
+          ]
+        },
+        "canonical.swe_kernel.typed_invention_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.futamura_leapfrog_kernel_v1",
+            "canonical.swe_kernel.adaptive_constant_concept_bridge_v1",
+            "canonical.swe_kernel.canonical_env_discovery_spine_v1",
+            "canonical.swe_kernel.composition_concept_bridge_v1",
+            "canonical.swe_kernel.perfect_algorithm_unified_v5",
+            "canonical.swe_kernel.perfect_algorithm_unified_v8"
+          ]
+        },
+        "canonical.swe_kernel.unified_unfamiliar_leapfrog_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.asymmetric_frontier_leapfrog_v1",
+            "canonical.runtime.brain_unified_model_v1",
+            "canonical.runtime.frontier_seven_moves_runtime_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.canonical_swe_spine_v1",
+            "canonical.swe_kernel.meme_protocol_memory_v1"
+          ]
+        },
+        "canonical.swe_kernel.universal_computer_agent_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.asymmetric_frontier_leapfrog_v1",
+            "canonical.runtime.osworld_v21_zero_model_policy_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.c_asan_cegis_repair_v1",
+            "canonical.swe_kernel.js_causal_cegis_repair_v1",
+            "canonical.swe_kernel.perfect_algorithm_v1",
+            "canonical.swe_kernel.reverse_tomography_algebra_v1",
+            "canonical.swe_kernel.unified_epistemic_portfolio_v1"
+          ]
+        },
+        "canonical.swe_kernel.perfect_algorithm_lifted_generalization_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.wave39_leapfrog_unification_v1",
+            "canonical.swe_kernel.canonical_memory_crystallizer_v1",
+            "canonical.swe_kernel.perfect_algorithm_unified_v5",
+            "canonical.swe_kernel.perfect_algorithm_unified_v8"
+          ]
+        },
+        "canonical.runtime.finite_minimax_decision_region_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.monotone_semantic_drd_bridge_v1",
+            "canonical.runtime.u_scope_complete_depletion_orchestrator_v1",
+            "canonical.swe_kernel.unified_unfamiliar_leapfrog_v1"
+          ]
+        },
+        "canonical.tools.the_refusal_is_the_curriculum_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.unified_epistemic_portfolio_v1"
+          ]
+        },
+        "canonical.swe_kernel.epistemic_admission_and_self_play_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.brain_unified_model_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.angelic_lens_cow_repair_v1",
+            "canonical.swe_kernel.cross_modal_tomography_petri_v1",
+            "canonical.tools.live_frontier_benchmark_runner_v1"
+          ]
+        },
+        "canonical.swe_kernel.meta_circular_organ_graph_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.creature_runtime_v1",
+            "canonical.runtime.self_prediction_baseline_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.recursive_self_architect_v1",
+            "canonical.swe_kernel.repair_input_dependency_gate_v1",
+            "canonical.swe_kernel.sentient_cognitive_core_v1",
+            "canonical.swe_kernel.unified_epistemic_portfolio_v1",
+            "canonical.tools.one_try_compounding_probe_20261112_v1",
+            "canonical.tools.one_try_state_probe_20261112_v1"
+          ]
+        },
+        "canonical.runtime.wave39_leapfrog_unification_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.brain_unified_model_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.runtime.wave41_rung3_proposer_jitrl_continual_flywheel_v1"
+          ]
+        },
+        "canonical.runtime.fast_cascade_orchestrator_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.canonical_boundary_router_v1"
+          ]
+        }
+      },
+      "label": "main",
+      "commit": "3e652cf2c973e6694a9c64eb806c6fd59d527d70",
+      "artifact": {
+        "sha256": "2a33547b001bbcb8078df8fafd42c791ef8542d337b68cdc58ddbc06e53233c7",
+        "bytes": 13989964,
+        "rows": {
+          "engines": 234,
+          "capabilities": 462,
+          "harvested_capabilities": 660,
+          "skills": 18
+        },
+        "counts": {
+          "federated_kernel_engines": 208,
+          "bound_capabilities": 153,
+          "harvested_admitted": 0
+        }
+      }
+    },
+    {
+      "roots": [
+        "canonical.runtime.brain_unified_model_v1",
+        "canonical.runtime.creature_runtime_v1",
+        "canonical.runtime.unified_hidden_capability_federation_v1"
+      ],
+      "tree_files_sha256": "fd02907e90d417f4cf49c89a2f3d54996a9046f1b7a3ab26525c98917cfc9c0c",
+      "all": {
+        "modules": 3029,
+        "physical_lines": 1012481
+      },
+      "parse_errors": [
+        [
+          "canonical/runtime/livebench_legacy_predecessor_compiler_audit_v1.py",
+          "SyntaxError"
+        ],
+        [
+          "canonical/runtime/osworld_v21_app_policy_overlay_v1.py",
+          "SyntaxError"
+        ]
+      ],
+      "reachable_imports": {
+        "modules": 1057,
+        "physical_lines": 602220
+      },
+      "outside_imports": {
+        "modules": 1972,
+        "physical_lines": 410261
+      },
+      "reachable_with_literal_addresses": {
+        "modules": 1241,
+        "physical_lines": 655544
+      },
+      "outside_even_with_addresses": {
+        "modules": 1788,
+        "physical_lines": 356937
+      },
+      "nominees": {
+        "canonical.runtime.futamura_leapfrog_kernel_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.brain_unified_model_v1",
+            "canonical.runtime.creature_runtime_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.runtime.wave43_44_dark_matter_meme_webmcp_leapfrog_v1",
+            "canonical.swe_kernel.canonical_memory_crystallizer_v1"
+          ]
+        },
+        "canonical.swe_kernel.verified_skill_crystallizer_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.bound_capabilities.software_repair_crossfile_choreograph_v1",
+            "canonical.runtime.live_brain_route_admission_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.autonomous_awake_loop_v1",
+            "canonical.swe_kernel.computer_use_agent_v1",
+            "canonical.swe_kernel.consistency_vs_equivalence_v1",
+            "canonical.swe_kernel.contrastive_oracle_bootstrap_v1",
+            "canonical.swe_kernel.cow_impact_repair_engine_v1",
+            "canonical.swe_kernel.effect_contract_composition_v1",
+            "canonical.swe_kernel.language_neutral_skill_bridge_v1",
+            "canonical.swe_kernel.lesson_admission_gate_v1",
+            "canonical.swe_kernel.lesson_localization_v1",
+            "canonical.swe_kernel.multistep_repo_closed_loop_solver_v1",
+            "canonical.swe_kernel.paired_transfer_evaluation_v1",
+            "canonical.swe_kernel.perfect_algorithm_v1",
+            "canonical.swe_kernel.petri_cow_splicing_engine_v1",
+            "canonical.swe_kernel.polyglot_build_ci_engine_v1",
+            "canonical.swe_kernel.proved_composition_v1",
+            "canonical.swe_kernel.retained_repair_session_v1",
+            "canonical.swe_kernel.rule_scope_learning_v1",
+            "canonical.swe_kernel.skill_recheck_v1",
+            "canonical.swe_kernel.skill_scope_ledger_v1",
+            "canonical.swe_kernel.skill_sequence_verify_v1",
+            "canonical.swe_kernel.swe_self_improvement_bridge_v1",
+            "canonical.swe_kernel.the_ceiling_of_learn_once_v1",
+            "canonical.swe_kernel.unified_epistemic_portfolio_v1",
+            "canonical.swe_kernel.unified_five_pillar_frontier_kernel_v1",
+            "canonical.swe_kernel.verified_lesson_pipeline_v1",
+            "canonical.swe_kernel.verified_skill_crystallizer_ir_bridge_v1",
+            "canonical.swe_kernel.weights_from_scratch_v1",
+            "canonical.tools.auditability_report_v1",
+            "canonical.tools.compose_hardcore_swe_problem_inventory_v1",
+            "canonical.tools.cross_language_lesson_transfer_probe_v1",
+            "canonical.tools.instant_learning_boundary_probe_v1",
+            "canonical.tools.invalidation_enforcement_v1",
+            "canonical.tools.learn_path_verification_wiring_v1",
+            "canonical.tools.lesson_admission_harm_measure_20261113_v1",
+            "canonical.tools.live_scoped_transfer_benchmark_v1",
+            "canonical.tools.one_lesson_one_kind_probe_20261112_v1",
+            "canonical.tools.pr_c2_apply_time_broadening_benchmark_v1",
+            "canonical.tools.quixbugs_one_fix_transfer_measure_v1",
+            "canonical.tools.real_repair_localization_probe_v1",
+            "canonical.tools.rule_generalization_probe_v1",
+            "canonical.tools.shared_skill_transfer_benchmark_v1",
+            "canonical.tools.skill_scope_acquisition_probe_v1"
+          ]
+        },
+        "canonical.swe_kernel.causal_trace_to_skill_compiler_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.asymmetric_frontier_leapfrog_v1",
+            "canonical.runtime.curriculum_v1",
+            "canonical.runtime.live_brain_route_admission_v1",
+            "canonical.runtime.solve_v1",
+            "canonical.runtime.sovereign_zero_llm_planner_v1",
+            "canonical.runtime.swe_kernel_organ_bridge_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.runtime.verified_zero_screenshot_action_cache_v1",
+            "canonical.runtime.verifier_falsification_v1",
+            "canonical.swe_kernel.autonomous_awake_loop_v1",
+            "canonical.swe_kernel.canonical_cu_sandbox_spine_v1",
+            "canonical.swe_kernel.closed_loop_autonomous_controller_v1",
+            "canonical.swe_kernel.learned_skill_verdict_v1",
+            "canonical.swe_kernel.predicate_world_abstraction_v1",
+            "canonical.swe_kernel.swe_self_improvement_bridge_v1",
+            "canonical.swe_kernel.zygote_worker_pool_v1",
+            "canonical.tools.miniwob_one_success_generalisation_measure_v1",
+            "canonical.tools.teach_actions_v1"
+          ]
+        },
+        "canonical.swe_kernel.reverse_tomography_algebra_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.angelic_cegis_repair_v1",
+            "canonical.swe_kernel.canonical_swe_spine_v1",
+            "canonical.swe_kernel.metamorphic_habitation_zipper_v1",
+            "canonical.swe_kernel.unified_epistemic_portfolio_v1",
+            "canonical.swe_kernel.universal_computer_agent_v1"
+          ]
+        },
+        "canonical.swe_kernel.cow_angelic_zygote_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.asymmetric_frontier_leapfrog_v1",
+            "canonical.runtime.swe_kernel_organ_bridge_v1",
+            "canonical.swe_kernel.metamorphic_habitation_zipper_v1",
+            "canonical.swe_kernel.unified_epistemic_portfolio_v1"
+          ]
+        },
+        "canonical.swe_kernel.angelic_lens_cow_repair_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.swe_kernel_organ_bridge_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.cross_modal_tomography_petri_v1",
+            "canonical.tools.live_frontier_benchmark_runner_v1"
+          ]
+        },
+        "canonical.swe_kernel.egraph_and_deductive_synthesizer_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.bound_capabilities.python_swe_transform_and_synthesize_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.concept_library_v1",
+            "canonical.swe_kernel.diagnostics_perf_and_design_engine_v1",
+            "canonical.swe_kernel.meta_circular_organ_graph_v1",
+            "canonical.swe_kernel.verified_skill_crystallizer_v1",
+            "canonical.tools.invalidation_enforcement_v1"
+          ]
+        },
+        "canonical.swe_kernel.canonical_oracle_vericoding_spine_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.brain_unified_model_v1",
+            "canonical.runtime.creature_runtime_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.canonical_boundary_router_v1"
+          ]
+        },
+        "canonical.swe_kernel.typed_invention_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.futamura_leapfrog_kernel_v1",
+            "canonical.swe_kernel.adaptive_constant_concept_bridge_v1",
+            "canonical.swe_kernel.canonical_env_discovery_spine_v1",
+            "canonical.swe_kernel.composition_concept_bridge_v1",
+            "canonical.swe_kernel.perfect_algorithm_unified_v5",
+            "canonical.swe_kernel.perfect_algorithm_unified_v8"
+          ]
+        },
+        "canonical.swe_kernel.unified_unfamiliar_leapfrog_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.asymmetric_frontier_leapfrog_v1",
+            "canonical.runtime.brain_unified_model_v1",
+            "canonical.runtime.frontier_seven_moves_runtime_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.canonical_swe_spine_v1",
+            "canonical.swe_kernel.meme_protocol_memory_v1"
+          ]
+        },
+        "canonical.swe_kernel.universal_computer_agent_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.asymmetric_frontier_leapfrog_v1",
+            "canonical.runtime.osworld_v21_zero_model_policy_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.c_asan_cegis_repair_v1",
+            "canonical.swe_kernel.js_causal_cegis_repair_v1",
+            "canonical.swe_kernel.perfect_algorithm_v1",
+            "canonical.swe_kernel.reverse_tomography_algebra_v1",
+            "canonical.swe_kernel.unified_epistemic_portfolio_v1"
+          ]
+        },
+        "canonical.swe_kernel.perfect_algorithm_lifted_generalization_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.wave39_leapfrog_unification_v1",
+            "canonical.swe_kernel.canonical_memory_crystallizer_v1",
+            "canonical.swe_kernel.perfect_algorithm_unified_v5",
+            "canonical.swe_kernel.perfect_algorithm_unified_v8"
+          ]
+        },
+        "canonical.runtime.finite_minimax_decision_region_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.monotone_semantic_drd_bridge_v1",
+            "canonical.runtime.u_scope_complete_depletion_orchestrator_v1",
+            "canonical.swe_kernel.unified_unfamiliar_leapfrog_v1"
+          ]
+        },
+        "canonical.tools.the_refusal_is_the_curriculum_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.unified_epistemic_portfolio_v1"
+          ]
+        },
+        "canonical.swe_kernel.epistemic_admission_and_self_play_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.brain_unified_model_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.angelic_lens_cow_repair_v1",
+            "canonical.swe_kernel.cross_modal_tomography_petri_v1",
+            "canonical.tools.live_frontier_benchmark_runner_v1"
+          ]
+        },
+        "canonical.swe_kernel.meta_circular_organ_graph_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.creature_runtime_v1",
+            "canonical.runtime.self_prediction_baseline_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.recursive_self_architect_v1",
+            "canonical.swe_kernel.repair_input_dependency_gate_v1",
+            "canonical.swe_kernel.sentient_cognitive_core_v1",
+            "canonical.swe_kernel.unified_epistemic_portfolio_v1",
+            "canonical.tools.one_try_compounding_probe_20261112_v1",
+            "canonical.tools.one_try_state_probe_20261112_v1"
+          ]
+        },
+        "canonical.runtime.wave39_leapfrog_unification_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.brain_unified_model_v1",
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.runtime.wave41_rung3_proposer_jitrl_continual_flywheel_v1"
+          ]
+        },
+        "canonical.runtime.fast_cascade_orchestrator_v1": {
+          "import_reachable": true,
+          "address_reachable": true,
+          "direct_importers": [
+            "canonical.runtime.unified_hidden_capability_federation_v1",
+            "canonical.swe_kernel.canonical_boundary_router_v1"
+          ]
+        }
+      },
+      "label": "7144",
+      "commit": "faea7c3177fc447499e0c7fe2abc5fe0575c23d0",
+      "artifact": {
+        "sha256": "e7e37d72f62ff2b4196537b48bfd1ceb97fa46a23be053e26d8a886556ad9e15",
+        "bytes": 14037557,
+        "rows": {
+          "engines": 246,
+          "capabilities": 462,
+          "harvested_capabilities": 659,
+          "skills": 18
+        },
+        "counts": {
+          "federated_kernel_engines": 220,
+          "bound_capabilities": 153,
+          "harvested_admitted": 0
+        }
+      }
+    }
+  ],
+  "open_prs_at_acquisition": 756,
+  "pr_snapshots": [
+    {
+      "base": "370005ad198fc7caff1e843909161f48037b42cd",
+      "head": "feaa15e64cf2ae68a2c2e26a1de61a541a55e8db",
+      "merge_commit_sha": null,
+      "mergeable": false,
+      "mergeable_state": "dirty",
+      "merged": false,
+      "merged_at": null,
+      "n": 4723,
+      "state": "open",
+      "title": "feat: 2,019 Brain modules (5,205 functions) callable read-only from one sentence \u2014 find-by-task + honest tiers + Batch 1"
+    },
+    {
+      "base": "370005ad198fc7caff1e843909161f48037b42cd",
+      "head": "5619ab5c2ba084833ca27e86f16c3ca75dfd74f6",
+      "merge_commit_sha": null,
+      "mergeable": false,
+      "mergeable_state": "dirty",
+      "merged": false,
+      "merged_at": null,
+      "n": 4726,
+      "state": "open",
+      "title": "feat: test-derived intake \u2014 473 verified capabilities alive in one change"
+    },
+    {
+      "base": "73f773d164805d9f8c131eb0e45c67a1112af1fa",
+      "head": "1f15c2c8b988f0d6f7964572371fe0e0c1ce6cb8",
+      "merge_commit_sha": null,
+      "mergeable": false,
+      "mergeable_state": "dirty",
+      "merged": false,
+      "merged_at": null,
+      "n": 6605,
+      "state": "open",
+      "title": "Turn on continuous life: resident crash-resumable creature life loop + scheduled workflow (INTEGRATE, K3=0, $0)"
+    },
+    {
+      "base": "0875df1c05ddcd8f427d8253d902e12a6350bad2",
+      "head": "f83cf82b19ab9d931939df73fa5453558052e7fe",
+      "merge_commit_sha": null,
+      "mergeable": false,
+      "mergeable_state": "dirty",
+      "merged": false,
+      "merged_at": null,
+      "n": 6613,
+      "state": "open",
+      "title": "feat(creature): a capability nothing has ever run now verifies itself by running"
+    },
+    {
+      "base": "e5be642e7ed7dcddb5215beeca11a5946e983eb4",
+      "head": "12107c8c6626509610c1f248120317d83a93d146",
+      "merge_commit_sha": null,
+      "mergeable": false,
+      "mergeable_state": "dirty",
+      "merged": false,
+      "merged_at": null,
+      "n": 6857,
+      "state": "open",
+      "title": "Who owns the place: symbol ownership halves the damage; the corpus cannot evidence weights"
+    },
+    {
+      "base": "784edc8bbbb3197a16c83b0793b45d1cbb65e4d8",
+      "head": "f247563228102c67282d1696806b42b3aa2e29b4",
+      "merge_commit_sha": "979c897ccdbb1b075b6fd9c4a9e0ea8a91db587b",
+      "mergeable": true,
+      "mergeable_state": "behind",
+      "merged": false,
+      "merged_at": null,
+      "n": 6933,
+      "state": "open",
+      "title": "Add bounded site-general expression synthesis"
+    },
+    {
+      "base": "55c4e05e02843928d3580fa35bcade02d43ba19c",
+      "head": "2a32e8a2284d6288d3cffaab8dd1600a38a5a054",
+      "merge_commit_sha": null,
+      "mergeable": false,
+      "mergeable_state": "dirty",
+      "merged": false,
+      "merged_at": null,
+      "n": 7019,
+      "state": "open",
+      "title": "feat: contrastive oracle bootstrap + paired transfer evaluation"
+    },
+    {
+      "base": "68bf040064452b740701dd81ad081d6f41f89b57",
+      "head": "baec8e5d1c237583b637f24003f9490f027531b6",
+      "merge_commit_sha": null,
+      "mergeable": false,
+      "mergeable_state": "dirty",
+      "merged": false,
+      "merged_at": null,
+      "n": 7049,
+      "state": "open",
+      "title": "The witness is computed, not remembered: an exact-minimax interrogation loop"
+    },
+    {
+      "base": "c4f529eb086d3a11e6e8d3479f24176a9e2d590f",
+      "head": "eb3cd5e1f4d90dab4b90e66911f942ef94f56f85",
+      "merge_commit_sha": null,
+      "mergeable": false,
+      "mergeable_state": "dirty",
+      "merged": false,
+      "merged_at": null,
+      "n": 7071,
+      "state": "open",
+      "title": "A kernel boundary and an effect oracle: the loop can act, and cannot lie about what it made"
+    },
+    {
+      "base": "ac5c1015e62612ec85a2efbfab0ac6f7e6b28468",
+      "head": "faea7c3177fc447499e0c7fe2abc5fe0575c23d0",
+      "merge_commit_sha": null,
+      "mergeable": false,
+      "mergeable_state": "dirty",
+      "merged": false,
+      "merged_at": null,
+      "n": 7144,
+      "state": "open",
+      "title": "Waves 43-46: Awaken 56 DARK Modules (100 Cumulative) + 12 Frontier-Leapfrog K3=0 Engines (MEME/Anti-MC, Quotient/Angelic, Metamorphic/Lineage, HCU/WebMCP, SCoRE E-Values, LRCP)"
+    },
+    {
+      "base": "aae7c958b9f37c3067b283aafc3e04e65b3de724",
+      "head": "83248171d77f0ad790b934ec3f7ed6c9657e4190",
+      "merge_commit_sha": "ac5c1015e62612ec85a2efbfab0ac6f7e6b28468",
+      "mergeable": null,
+      "mergeable_state": "unknown",
+      "merged": true,
+      "merged_at": "2026-11-26T20:09:06Z",
+      "n": 7145,
+      "state": "closed",
+      "title": "Wave 42: the memory answers six operations, not three \u2014 aggregation, tracking and rule-blocked absence"
+    }
+  ],
+  "head_checks_7144": {
+    "groups": [
+      [
+        "success",
+        22
+      ]
+    ],
+    "total": 22
+  }
+}
