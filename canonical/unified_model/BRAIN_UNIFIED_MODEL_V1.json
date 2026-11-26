@@ -33046,7 +33046,7 @@
   "promotion_callable": 31,
   "promotion_candidates": 849,
   "receipt_backed_capabilities": 309,
-  "research_index_records": 7427,
+  "research_index_records": 7428,
   "routing_tokens": 3120,
   "skills": 18,
   "source_index_entry_points": 562,
@@ -33055,7 +33055,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "5eb965beba048847028922b04dd85246ede9a064a24d951c20e0149cf09e5cae"
+  "value": "5b3479a18f10666b5dd744b3577ba6c18214e4e6840a49be8dc760846d2a3e49"
  },
  "engines": [
   {
@@ -33549,7 +33549,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "run",
     "source_path": "canonical/runtime/abstain_gated_skill_induction_v1.py",
     "source_sha256": "371a30019dc2a956e064218cd64e92244b7d64009a8d30f0d06d9d126cb85583"
@@ -33583,7 +33583,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "invoke",
     "source_path": "canonical/runtime/bound_capabilities/brain_module_invoke_v1.py",
     "source_sha256": "366bd7e909fa2eecb611fd1ad0119c3e6ec9f01d0103fdde997d78068e63da1d"
@@ -33615,7 +33615,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "run",
     "source_path": "canonical/runtime/adversarial_mutation_admission_gate_v1.py",
     "source_sha256": "484bd66b66320cf375beab4edc8f34e582a020e07d2b79d1ce4165fa38f5df0d"
@@ -33647,7 +33647,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "synthesize_bidirectional_lens",
     "source_path": "canonical/swe_kernel/angelic_lens_cow_repair_v1.py",
     "source_sha256": "8da6b19c5845543ccc9aedecb9945ba8436185ba5e6733445d9152dd5d89f4f6"
@@ -33683,7 +33683,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "instrument",
     "source_path": "canonical/swe_kernel/assertion_operand_tomography_v1.py",
     "source_sha256": "ba2b58b22ad44be6a3e5ced2861137f13cad95055663d31ac2cd650fcf957b93"
@@ -33716,7 +33716,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "recall",
     "source_path": "canonical/runtime/associative_memory_v1.py",
     "source_sha256": "d248643cd4ceb6293a851a12cb2267dd1b29ff361a9c345ac6a5c83e00ad1c35"
@@ -33757,7 +33757,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "solve_schedule",
     "source_path": "canonical/runtime/scheduler_true_capability_adapters_v1.py",
     "source_sha256": "3ed847567788e0016d8061836c8fc0c082f804cae985a096a566759e3ce11026"
@@ -33793,7 +33793,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "generate_code",
     "source_path": "canonical/runtime/cad_partspec_generator.py",
     "source_sha256": "3dca941e41341b90ee10b1f3db6a5a8d2309a4872fb14398567c10dee561ed26"
@@ -33830,7 +33830,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "template",
     "source_path": "canonical/swe_kernel/canonical_frame_v1.py",
     "source_sha256": "f248c5e155edf98368e9bf87cff6baefd36d4b9d7443b47f509560099840b10c"
@@ -33863,10 +33863,10 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "extract_assertion_demands",
     "source_path": "canonical/swe_kernel/canonical_oracle_vericoding_spine_v1.py",
-    "source_sha256": "2c1b5978488beabdd5cc52bc87244b8543c061909fbe04933d51d26de96bdcea"
+    "source_sha256": "1f3bd309e83385573e66a33d6f2f80f762c090dd493137d4e80a1e1684de0fb5"
    },
    "summary": "Canonical oracle & vericoding spine extracting test assertion demands, generating goal-negation mutants, and refusing unestablished claims.",
    "triggers": [
@@ -33898,7 +33898,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "solve_ranking",
     "source_path": "canonical/runtime/scheduler_true_capability_adapters_v1.py",
     "source_sha256": "3ed847567788e0016d8061836c8fc0c082f804cae985a096a566759e3ce11026"
@@ -33934,7 +33934,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "GoalDirectedAgent",
     "source_path": "canonical/runtime/causal_computer_use_agent_v1.py",
     "source_sha256": "f447e2041865687d151eb9a05dd4a4297824e9622daa7a44ce90f75df209c845"
@@ -33971,7 +33971,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "elevate_trace_to_fastest_layer",
     "source_path": "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
     "source_sha256": "365a2822b898e2b997435d5af6217038099cebc20b20887e125adea659885d59"
@@ -34010,7 +34010,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "solve",
     "source_path": "canonical/runtime/chartography_deterministic_professional_solver_v1.py",
     "source_sha256": "1e58b537ee09af65d2476f421c43e451b632088db20b459b65594aed39b3013d"
@@ -34044,7 +34044,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "compress_corpus",
     "source_path": "canonical/swe_kernel/compression_gain_v1.py",
     "source_sha256": "18f129fca9947cc348fc5020190f3f215b09d0eeae0e683f426617267de8a13c"
@@ -34079,7 +34079,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "canonicalize_ast_via_egraph",
     "source_path": "canonical/swe_kernel/concept_library_v1.py",
     "source_sha256": "84723bd972511142e9d14792807325981a67d7179aaddf3d272a1f38a6c76f92"
@@ -34114,7 +34114,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "what_the_condition_wants",
     "source_path": "canonical/swe_kernel/what_the_condition_wants_v1.py",
     "source_sha256": "a403958e9bd5afe7ad0dd012e6d8247b6d5eb600711141615f5b99b6a86b0a0d"
@@ -34149,7 +34149,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "identify_rule",
     "source_path": "canonical/swe_kernel/contrastive_oracle_bootstrap_v1.py",
     "source_sha256": "952336a54bc8307651c4b990d7c1e5a715b6e3d04abb4d0ccdf47744b1af3192"
@@ -34181,7 +34181,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "run",
     "source_path": "canonical/runtime/counterfactual_discr_tree_skill_router_v1.py",
     "source_sha256": "652e3b974a026ca74646f5810687392ec3b141da908bf61d035c03cfe109dc42"
@@ -34217,7 +34217,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "select_impacted_tests_fast",
     "source_path": "canonical/swe_kernel/cow_impact_repair_engine_v1.py",
     "source_sha256": "fa6ec14272a7670bd211ce264dc280509a481c2c31887e9648d542ff95e3f1c3"
@@ -34249,7 +34249,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "run",
     "source_path": "canonical/runtime/cow_zygote_speculative_verifier_v1.py",
     "source_sha256": "e4ff324b2fd589269b5d33cc31679a3f548d6bc977ba6567e86c70ce6eda6d1e"
@@ -34282,7 +34282,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "capture_multilayer_state",
     "source_path": "canonical/swe_kernel/cross_modal_tomography_petri_v1.py",
     "source_sha256": "f9cf1508b4f689b7a89409ab84811c18e9820a751915acc10142aa692c9b601b"
@@ -34318,7 +34318,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "synthesize_c_causal_patches",
     "source_path": "canonical/swe_kernel/c_asan_cegis_repair_v1.py",
     "source_sha256": "84dadd78146c788e025076fc66946b0d2d52e9eb24ebaf5add44c3fd30413178"
@@ -34354,7 +34354,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "are_semantically_equivalent",
     "source_path": "canonical/swe_kernel/deep_understanding_engine_v1.py",
     "source_sha256": "efff6f6d67ab09e55148e2e82bf7e98cf3a626dc9b2237ae95ce419e042cbd9c"
@@ -34390,7 +34390,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "synthesise_guard",
     "source_path": "canonical/swe_kernel/distinction_creation_v1.py",
     "source_sha256": "70871e72260380c766bdcdb01e986dc5523dea2ecd0dbe646c256fc0b198be4f"
@@ -34427,7 +34427,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "solve_instance",
     "source_path": "canonical/runtime/docx_exact_text_edit.py",
     "source_sha256": "5f7667c43064e6a70b3680908def12c3caf78ed6b1a98a252b4e6d84a3cca53e"
@@ -34465,7 +34465,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "solve_span",
     "source_path": "canonical/runtime/docx_true_capability_adapters_v1.py",
     "source_sha256": "a37e3dc6e115c2bf580ef45a7b6b46c0edf58fa75d0f6a9cf96a37e06dd47101"
@@ -34503,7 +34503,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "solve_story",
     "source_path": "canonical/runtime/docx_true_capability_adapters_v1.py",
     "source_sha256": "a37e3dc6e115c2bf580ef45a7b6b46c0edf58fa75d0f6a9cf96a37e06dd47101"
@@ -34539,7 +34539,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "solve_transaction",
     "source_path": "canonical/runtime/docx_true_capability_adapters_v1.py",
     "source_sha256": "a37e3dc6e115c2bf580ef45a7b6b46c0edf58fa75d0f6a9cf96a37e06dd47101"
@@ -34574,7 +34574,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "snapshot_to_elements",
     "source_path": "canonical/runtime/dom_state_environment_v1.py",
     "source_sha256": "053e03ebd2d58b4e8d9a30b7a46cc975b1163be38dd09a1db6287fe7cab33e5f"
@@ -34610,7 +34610,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "splice",
     "source_path": "canonical/swe_kernel/dual_program_splicing_v1.py",
     "source_sha256": "acfde590496b13039f162ba5744a772d5bd34fbb1057dfae34d2f70471c45f6c"
@@ -34646,7 +34646,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "edit_by_example",
     "source_path": "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
     "source_sha256": "a9c8dbda6074f59c3eda3e945307330927c8176f206f3d994be14744fabb6c14"
@@ -34682,7 +34682,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "egraph_optimize_function",
     "source_path": "canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py",
     "source_sha256": "7ba8749974c49bb7b4012ebf391ab5ffda6faa924c14a95b58de03ab1ef81c88"
@@ -34717,7 +34717,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "detect_layout",
     "source_path": "canonical/swe_kernel/the_environment_broker_v1.py",
     "source_sha256": "372dc0904dfe304cf4ab414a1eee530caea80815e3d7c701b4fe9478dcbbdb4b"
@@ -34753,7 +34753,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "transfer_ir_rule_to_snippet",
     "source_path": "canonical/swe_kernel/epistemic_admission_and_self_play_v1.py",
     "source_sha256": "fda6b13b28e35bd973041c5d82c8599c7eda5e045420a41cd9ea550f8f3576a6"
@@ -34788,7 +34788,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "solve",
     "source_path": "canonical/runtime/exact_linear_parameter_polytope_v1.py",
     "source_sha256": "6a597ddfbab97e8c0bb91d21aec3d50055e6834d14341f6124d68b906f2df725"
@@ -34825,7 +34825,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "simulate_python_fast",
     "source_path": "canonical/swe_kernel/executable_simulator_mental_model_v1.py",
     "source_sha256": "ac4811f9b01665b39fdaa7e1d69aff6556a1a03eeeb3ecb5841782eb6e88b6ce"
@@ -34858,7 +34858,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "exact_label_candidates",
     "source_path": "canonical/runtime/fibo_q2_2026_bounded_finance_authority_v1.py",
     "source_sha256": "f716b33962003cd8c5db4fd733452a3c752dcba1f46787460b305bcb97f4457d"
@@ -34894,7 +34894,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "simplified_lbo_model",
     "source_path": "canonical/runtime/finance_modeling_workflows_v1.py",
     "source_sha256": "6c41e88d9fc56f9fe46f71e6205f2144ca06a68095ca78e6ac993d75f488fc83"
@@ -34930,7 +34930,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "percent_change",
     "source_path": "canonical/runtime/finance_quantitative_algebra_v1.py",
     "source_sha256": "7a481e6f00ce5d9bc11fbb2d53cc09fa1b00bb4d34653f3bb65cbba2e512dc37"
@@ -34964,7 +34964,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "egraph_canonicalize",
     "source_path": "canonical/swe_kernel/first_principles_mental_cegis_v1.py",
     "source_sha256": "8013e57d228a3318185727bcb9bf8c1bb065738fccf4a1b64f505a3a5357bb51"
@@ -34999,7 +34999,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "synthesize_fst_lens",
     "source_path": "canonical/swe_kernel/frontier_unified_engine_v1.py",
     "source_sha256": "0b80eb8a50b5229c345a5bfdf9951da6590dfec6144150620c69b8c0d8f8a2af"
@@ -35033,7 +35033,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "solve_minimax_interval_probe_policy",
     "source_path": "canonical/swe_kernel/global_extrapolation_chase_spine_v1.py",
     "source_sha256": "2dea16a77afeccf773fc5de8721f94d8f8da1c7874cf5981ecbbd70247883622"
@@ -35066,7 +35066,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "run",
     "source_path": "canonical/runtime/gradient_free_law_consolidation_v1.py",
     "source_sha256": "07e1ab9391c8fe564e76d1c26c65fc6cc737e3bb6ea9f283c50b6f9be5c98efe"
@@ -35104,7 +35104,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "compile_compositional_roles",
     "source_path": "canonical/runtime/h100_zero_learned_compositional_language_v1.py",
     "source_sha256": "ffb6d28a8a8b0a936a33543b96ab81ed2c3ae0dd908996fded0a8bd0aba2ec54"
@@ -35139,7 +35139,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "discover",
     "source_path": "canonical/runtime/h100_zero_learned_parametric_unary_v1.py",
     "source_sha256": "3e8b4334be23883420263c6df6dd0a86019a94bdd41633333cc187e7916fa5fe"
@@ -35173,7 +35173,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "query_import_cycles",
     "source_path": "canonical/swe_kernel/incremental_semantic_graph_v1.py",
     "source_sha256": "e3ffc5cf0454e404ab0794839052c64fbf862c69cb273b0068ea888ee219a306"
@@ -35209,7 +35209,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "classify_applicability",
     "source_path": "canonical/swe_kernel/instant_one_shot_learning_v1.py",
     "source_sha256": "aa3658e4dd40634e497a94dffaf3928661d424856947b82e3ff78fbdd404204b"
@@ -35252,7 +35252,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "compile_contract",
     "source_path": "canonical/runtime/instruction_contract_v1.py",
     "source_sha256": "0d7fd126ad015fecacab3ab7a896733adf3b6ce2cfb1623031dd2060a19c9ac7"
@@ -35286,7 +35286,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "solve_gui_goal",
     "source_path": "canonical/swe_kernel/interface_action_grammar_v1.py",
     "source_sha256": "2266185a2d4fdb71298cb00e3f72680d0f64f7306f08505e0496f9db1cd90dd9"
@@ -35329,7 +35329,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "synthesize_js_causal_patches",
     "source_path": "canonical/swe_kernel/js_causal_cegis_repair_v1.py",
     "source_sha256": "e2007ffb6f2af00e3e51a1bd87da49e5d7091193832c41bb6fc7925320824dc9"
@@ -35364,7 +35364,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "forms_of",
     "source_path": "canonical/tools/aimed_edits_from_the_program_and_the_failure_v1.py",
     "source_sha256": "a3bd0ce79477135a2b8090dbf6afa691af7af1186cafb16aa4cc648a123107ee"
@@ -35400,7 +35400,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "conditional_productions",
     "source_path": "canonical/tools/the_assertion_is_the_demand_v1.py",
     "source_sha256": "b10b311d690103c1ae546484961ca661e9896b7db378de728d5299fa2027ad12"
@@ -35435,7 +35435,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "emit_for_traceback",
     "source_path": "canonical/tools/deferred_definition_form_v1.py",
     "source_sha256": "cb85223c0878a694bec692459535b9a6200e1b66305f742711ad81efd14c3f13"
@@ -35470,7 +35470,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "instrumented_source",
     "source_path": "canonical/tools/force_the_value_and_see_v1.py",
     "source_sha256": "f22fb1db8892713fa005feb0d90b7b57e635a7f861aa9b4997d60a0416702892"
@@ -35504,7 +35504,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "read_demand",
     "source_path": "canonical/tools/the_refusal_is_the_curriculum_v1.py",
     "source_sha256": "f53edb4f349f4fc67d164e16998a7b5693ac8741ee0632e1c6b90e48b8cca36c"
@@ -35538,7 +35538,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "error_discipline_candidates",
     "source_path": "canonical/swe_kernel/law_repair_synthesis_v1.py",
     "source_sha256": "56749ea6239e02721d8a4328c0347316d7daacac64a9eaac863e8ecf09c85844"
@@ -35572,7 +35572,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "open_or_build_csr_index",
     "source_path": "canonical/runtime/mmap_csr_slot_index_v1.py",
     "source_sha256": "e4c60e3a67fc6b7479a61ac02e34e89d2f381a5cf8c48b0156cd7d766a4c05e1"
@@ -35606,7 +35606,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "derive_verified_module_adapter",
     "source_path": "canonical/runtime/execution_traced_callable_compiler_v1.py",
     "source_sha256": "88cb9ca090091e708629a81b9c480316dc362c5cb2ea9cb169d9d5c64fb504e4"
@@ -35640,7 +35640,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "execute_fast_cascade",
     "source_path": "canonical/runtime/fast_cascade_orchestrator_v1.py",
     "source_sha256": "5d913df7183acbe3a5171c577a64c37ed96d783b027c76958bbc5af1ac2ce440"
@@ -35674,10 +35674,10 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "execute_memory_operation",
     "source_path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
-    "source_sha256": "f26ced562e23e7c5f80a801b7fe67e9830aeb7c93536270cd24c81117081e27b"
+    "source_sha256": "b0adf2857ee5d828b2af8e3f35f3b77510f2cd597e8b4aa2aa093d4a3aa432fc"
    },
    "summary": "Andersen-Chung-Lang ForwardPush O(1/(alpha*epsilon)) local Personalized PageRank over bi-temporally valid memory intervals ([valid_at, invalid_at)) plus Two-Door Rubin (WITH - WITHOUT) counterfactual skill rent & finite-cap curation.",
    "triggers": [
@@ -35706,7 +35706,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "evaluate",
     "source_path": "canonical/swe_kernel/lesson_admission_gate_v1.py",
     "source_sha256": "088763da812262ea57ed2cc8553442fece805024e63cce33c2ee3c89656074a3"
@@ -35741,7 +35741,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "solve",
     "source_path": "canonical/runtime/livebench_if_single_checker_solver_v1.py",
     "source_sha256": "9c9d199f10961f4ffbe9075846a626dee9f723b8297761a4fd290dfafcc8556d"
@@ -35776,7 +35776,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "literals",
     "source_path": "canonical/swe_kernel/manufactured_contrast_v1.py",
     "source_sha256": "296ac45a2839636d4321982547fd8c8d3e15a99481f9eef521616b2391f985d1"
@@ -35811,7 +35811,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "static_assert_validation",
     "source_path": "canonical/swe_kernel/metamorphic_laws_v1.py",
     "source_sha256": "b4d29c8557f5aebe28f2dd618729e446c31bc7c2d85ac253908b6f7f37c5093e"
@@ -35846,7 +35846,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "build_metamorphic_tuple",
     "source_path": "canonical/swe_kernel/metamorphic_cli_compiler_v1.py",
     "source_sha256": "cf2614775a5cff41768b6743115806841c9df223ad849d179bbcf43b3e5162d8"
@@ -35879,7 +35879,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "induce_periodic_operator",
     "source_path": "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
     "source_sha256": "9cc5c9de62033c2ca53cf651a40d2f7fc45db48180151178314abe758cc7faf3"
@@ -35915,7 +35915,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "separating_word",
     "source_path": "canonical/runtime/minimal_experiment_v1.py",
     "source_sha256": "73525c8344546432497d232f7cd502010f1bb11462cf710ddcaf64a0f5862723"
@@ -35949,7 +35949,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "normalize_candidates",
     "source_path": "canonical/swe_kernel/multi_producer_normalization_v1.py",
     "source_sha256": "b04ee5edecf5fe441abc4dda6c714973785e88ad6733d5e94be257aa6a518702"
@@ -35983,7 +35983,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "validate_ooxml_package",
     "source_path": "canonical/runtime/ooxml_package_integrity.py",
     "source_sha256": "491f47f3f57b593b1d68e9d57723a029587d5d4c26d9a4152ec27397440fc4aa"
@@ -36020,7 +36020,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "reconstruct_visual_hull",
     "source_path": "canonical/runtime/orthographic_visual_hull.py",
     "source_sha256": "e2dcefc700a56c1169b420c54dd7505f17caf0a4a1a95e23ccdba8ecfb0e9ab5"
@@ -36055,7 +36055,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "compile_browser_op",
     "source_path": "canonical/runtime/osworld_v21_browser_ops_v1.py",
     "source_sha256": "b53dab6d7cb6bf74521fb6f0058686fbb8ff53ffaf07d9144383bd7db2c1fae3"
@@ -36092,7 +36092,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "extract_contract",
     "source_path": "canonical/swe_kernel/paired_transfer_evaluation_v1.py",
     "source_sha256": "db78c098797cdb29fa19eafcd77e51975e42c528af9a9df297a3ef69d6283d04"
@@ -36126,7 +36126,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "solve_frontier",
     "source_path": "canonical/runtime/scheduler_true_capability_adapters_v1.py",
     "source_sha256": "3ed847567788e0016d8061836c8fc0c082f804cae985a096a566759e3ce11026"
@@ -36163,7 +36163,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "replace_unique_pdf_text_operand",
     "source_path": "canonical/runtime/pdf_native_edit_transaction.py",
     "source_sha256": "c76a53edaacf0844f7cda40ca7aa3c2a4cce63fa8c2f27c41272a21e8b4b3647"
@@ -36197,7 +36197,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "to_umg",
     "source_path": "canonical/runtime/perfect_algorithm_v1.py",
     "source_sha256": "071d364d82c71ae02e8ae4b3a0b824024147f9afe27cc2aaf6c6a158395ba339"
@@ -36232,7 +36232,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "security_audit_package",
     "source_path": "canonical/swe_kernel/diagnostics_perf_and_design_engine_v1.py",
     "source_sha256": "37c2e6dcea47a87fd002131005798556af360659fac634b24f34db85f90229ef"
@@ -36267,7 +36267,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "estimate_unseen_opportunity_space",
     "source_path": "canonical/runtime/global_open_world_extrapolator_v1.py",
     "source_sha256": "c34004505ae2dffe51717bea14b7ecdade20082ff042ec96f5f77c403decaf2d"
@@ -36304,7 +36304,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "rust_transform_and_verify",
     "source_path": "canonical/swe_kernel/polyglot_build_ci_engine_v1.py",
     "source_sha256": "f27ecfaf48b4c5d5ec0ab045aac041c98377ccff0b18a57efbfa7fa587da2907"
@@ -36338,7 +36338,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "project_computer_observation",
     "source_path": "canonical/swe_kernel/predicate_world_abstraction_v1.py",
     "source_sha256": "9d6b9624cfb909f3a012ade34d2b72d81c203b1d0140c7c57f4814a335a0d1a4"
@@ -36373,7 +36373,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "derive_clauses",
     "source_path": "canonical/swe_kernel/predictive_contract_v1.py",
     "source_sha256": "7608f847c5cede41428412835ba042af52fb99abd163735bc258e51bc67212f5"
@@ -36413,7 +36413,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "brute_force_minimum",
     "source_path": "canonical/swe_kernel/the_premise_is_the_sense_v1.py",
     "source_sha256": "eef9e38bfccb52438d2a8773fb5e78d0d82e2e23b5a53529975000e56c9bb036"
@@ -36448,7 +36448,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "signature",
     "source_path": "canonical/runtime/procedure_memory_v1.py",
     "source_sha256": "7e49ebd78d5b35735abd741536f080b3309c45095d76eecd861a4187f5f77605"
@@ -36486,7 +36486,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "extract_claims",
     "source_path": "canonical/tools/the_right_question_is_an_experiment_v1.py",
     "source_sha256": "dddee8a20f5bccc4f6798cf48f44ee642da94cc182435682eb370becc1213413"
@@ -36522,7 +36522,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "compose",
     "source_path": "canonical/swe_kernel/proved_composition_v1.py",
     "source_sha256": "bf5869117b63986d39c05088400c56430bbc08711927ab35c55ddd7d8fa745c8"
@@ -36557,7 +36557,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "referee_executable_organ",
     "source_path": "canonical/swe_kernel/recursive_self_architect_v1.py",
     "source_sha256": "cf88543d6177d6f3e622a76a415a4db9586d442481993af74a5b077b9774e541"
@@ -36593,7 +36593,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "producer_for",
     "source_path": "canonical/runtime/manufacture_what_the_refusal_asks_for_v1.py",
     "source_sha256": "342b3f0b787e2327f46df19fa63ac522329aff97aed4be73df671f7b63b84b3a"
@@ -36625,7 +36625,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "run",
     "source_path": "canonical/runtime/relational_guard_addition_symbolic_repair_v1.py",
     "source_sha256": "1c135097c7ea1c2a7ec007a23fe61c1676a9761b28c4c9148e2e05e6dc434e70"
@@ -36658,7 +36658,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "backpropagate_ast_repairs",
     "source_path": "canonical/swe_kernel/reverse_tomography_algebra_v1.py",
     "source_sha256": "70b66d2b58f67af5a4aaa0821920eac736a6b9d5dfac9f96cf673657b357132b"
@@ -36692,7 +36692,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "world_fingerprint",
     "source_path": "canonical/swe_kernel/rule_expiry_v1.py",
     "source_sha256": "d6c97632e311a0aeb4c0466d9f7f3847a6426c2f43405948ed1ba43909273d37"
@@ -36733,7 +36733,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "blocked_sites",
     "source_path": "canonical/swe_kernel/a_name_gets_its_value_from_the_run_v1.py",
     "source_sha256": "40694259af2cdb5117ba7b99fbd1a4e39495bd19c2a5a1b07823719b3059c63b"
@@ -36767,7 +36767,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "solve_instance",
     "source_path": "canonical/runtime/saccr_credit_kernel.py",
     "source_sha256": "ecaa0cb898dca7d83e21475edbe9e761f4d546bd643b0cfb0c7f70f837633eff"
@@ -36804,7 +36804,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "solve_instance",
     "source_path": "canonical/runtime/same_identity_supervisor.py",
     "source_sha256": "7fa7286dab30d622de7d74d00414ae2af91e36c3a1bddb6adece08a03e96bb71"
@@ -36839,7 +36839,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "semantically_equivalent",
     "source_path": "canonical/swe_kernel/semantic_causal_engine_v1.py",
     "source_sha256": "7e579c1dcbcf0fcec79929c700ed96328c5e5154044463cf5597e19bd1f39778"
@@ -36873,7 +36873,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "mine_exception_contracts",
     "source_path": "canonical/swe_kernel/spec_contract_synthesis_v1.py",
     "source_sha256": "b194ef6b03d0c2fa126fadb51be32f14f34e23b14a4bf3d3bdb3ad76ed5b9e04"
@@ -36905,7 +36905,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "run",
     "source_path": "canonical/runtime/state_contract_world_model_v1.py",
     "source_sha256": "d7ef6cc5e48f3956ad0ae03935ceb14a24ed7bc1acf7c121cdbed1cb72bca1c3"
@@ -36943,7 +36943,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "learn_rules",
     "source_path": "canonical/swe_kernel/structural_rewrite_induction_v1.py",
     "source_sha256": "2bdcd3307056d9c2c527e7c3273209e077b9a7196ac95b5b2af219cd48c3f602"
@@ -36977,7 +36977,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "derive",
     "source_path": "canonical/swe_kernel/specification_from_structure_v1.py",
     "source_sha256": "27737218ab7f9caa9d76a6b38887d68e20a910a16b7859def12b9cfea246ef14"
@@ -37011,7 +37011,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "what_to_ask",
     "source_path": "canonical/runtime/ask_the_subcommand_before_you_call_it_unbound_v1.py",
     "source_sha256": "b3b264b09f69572fbde5e3ce1200d74b7c05f3bfa0d1d8842a5eb3af97e6b849"
@@ -37045,7 +37045,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "fit_shared_period",
     "source_path": "canonical/runtime/tb_science_zero_model_scientific_kernel_v1.py",
     "source_sha256": "c53da31edb9c3b49a29d1c8f92fa667f3d14c4ad0680901d11a485183ce2f606"
@@ -37080,7 +37080,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "compute_petri_dominator_cut_vertices",
     "source_path": "canonical/swe_kernel/universal_computer_agent_v1.py",
     "source_sha256": "912489810b1f7b826616b110387d983c348db618dc89e9bb901ce6de07e53840"
@@ -37116,7 +37116,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "lower_source_to_uir",
     "source_path": "canonical/swe_kernel/universal_semantic_ir_v1.py",
     "source_sha256": "8e7b955f7bb456634dbc232d645b8d46dec99eb60565ec242d5c00b9cb29597f"
@@ -37151,7 +37151,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "induce_laws",
     "source_path": "canonical/runtime/value_algebra_v1.py",
     "source_sha256": "0ae04adcf0716cca87300c4dc437b2e784604daab012227e6b0b0497b3fbc818"
@@ -37184,10 +37184,10 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "execute_memory_operation",
     "source_path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
-    "source_sha256": "f26ced562e23e7c5f80a801b7fe67e9830aeb7c93536270cd24c81117081e27b"
+    "source_sha256": "b0adf2857ee5d828b2af8e3f35f3b77510f2cd597e8b4aa2aa093d4a3aa432fc"
    },
    "summary": "Memory operating system front door (0G): verification-first five-timescale memory with lossless causal episode chains, CDCL nogood conflicts, Tier-0 skill lookup, sleep-time consolidation, and O(1) selective unlearning.",
    "triggers": [
@@ -37227,7 +37227,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "anti_unify_code_rule",
     "source_path": "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
     "source_sha256": "df520b604d2bee02d021324730382e77e41b8c77805dcb8c7c6e497e06e6da4d"
@@ -37262,7 +37262,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "run",
     "source_path": "canonical/runtime/verified_zero_screenshot_action_cache_v1.py",
     "source_sha256": "6bd5c9a473162d14f689aa3007177eebf8d1c88b15cf5a5aafe8bd352475007c"
@@ -37297,7 +37297,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "run_wake_sleep_operation",
     "source_path": "canonical/swe_kernel/sentient_cognitive_core_v1.py",
     "source_sha256": "d32a7badda8dc0bfd48191e1cf2fdf8e113b2c3c4d0f90708444264b4f9edf23"
@@ -37338,7 +37338,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "synthesize_bidirectional_lens",
     "source_path": "canonical/swe_kernel/witness_inversion_v1.py",
     "source_sha256": "c5dd7093f8d3223481d44e3dc4b308b1bd53d2995ea781a929e434ed9a756c3b"
@@ -37373,7 +37373,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "named_destination",
     "source_path": "canonical/runtime/world_binding_v1.py",
     "source_sha256": "2096289b994ea33bc4932262cc8b3171f9636b8eccf75f183da00554ce91aa5f"
@@ -37407,7 +37407,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "summarize",
     "source_path": "canonical/runtime/zero_learned_extractive_summary_v1.py",
     "source_sha256": "816c4e4fe9193a7ba4745f56ca6a942380091e1fe3087b168dabfda7b215f848"
@@ -37443,7 +37443,7 @@
     "call": "run_federated_engine(mode, inputs, goal=goal)",
     "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
     "carrier_path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-    "carrier_sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+    "carrier_sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
     "entrypoint": "screen_python_candidates_cow",
     "source_path": "canonical/swe_kernel/zygote_worker_pool_v1.py",
     "source_sha256": "34771c39887e702be94014c62a85e8c09d3586241ee5c937a00b5738888f155c"
@@ -81810,7 +81810,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "393d2913a69fe697ffde5bc2bcce1a19a62a84de7c12218f91e3e24b4813d235",
+   "sha256": "8ae41220fc7293663ffbe8cfd74456edae2de8d10211f6082d59800a876a104e",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "triggers": [
     "brain",
@@ -81960,7 +81960,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/compile_brain_unified_model_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "3d0a6fa698cbc3859f86ba9a70a8d486a0e298993c4a52ef3c2c75688103efcb",
+   "sha256": "3a12cdb9be80dd919c91083d63f55af8372db15134646a5171c36f8adbf01d8b",
    "summary": "Compile the whole live Brain into one content-addressed model artifact.",
    "triggers": [
     "compile",
@@ -82094,7 +82094,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/creature_runtime_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "dfe6e23d27a5893b5ddba0d0942f9d1fa06af241474a18d864d7fb0e7a41b879",
+   "sha256": "b4c51f260f209429fa0a59fb243e8b9fa4aa176c6d88de04d93c402cc7568198",
    "summary": "Seven organs, finally in one body.",
    "triggers": [
     "creature",
@@ -83154,7 +83154,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+   "sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
    "summary": "Unified Hidden-Capability Federation Runtime — v1.",
    "triggers": [
     "unified",
@@ -154463,14 +154463,14 @@
  },
  "provenance": {
   "compiler": "canonical/runtime/compile_brain_unified_model_v1.py",
-  "compiler_sha256": "3d0a6fa698cbc3859f86ba9a70a8d486a0e298993c4a52ef3c2c75688103efcb",
+  "compiler_sha256": "3a12cdb9be80dd919c91083d63f55af8372db15134646a5171c36f8adbf01d8b",
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
   "included_source_count": 2347,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "7eec5880ed141f320d3093f5f90ca0a9deb9084539b02dc38b52c299279707b2"
+  "source_tree_digest": "9669a54155990934df9b8c92078ef3ca36fefb91802326c3040fe20874ef49f3"
  },
  "research_index": [
   {
@@ -316386,7 +316386,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FRONTIER_LEAPFROG_WAVES21_24_20261126_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "0b2b891cafc2967969466d4bae28f520acd9321f3a78d96a34434e2c6ae6d3d6",
+   "sha256": "807c5ac2bba4920f7bbc206aa8934b50a4cc43a5364fe3c6d5f52827e12843c8",
    "status": "SHIPPED",
    "terms": {
     "13.55": 1,
@@ -316466,6 +316466,51 @@
     "swe": 2,
     "unifiedmodel": 2,
     "verified": 2
+   }
+  },
+  {
+   "action_id": "FRONTIER_LEAPFROG_WAVES31_35_20261126_V1",
+   "capability": false,
+   "date": "2026-11-26",
+   "id": "research:canonical/action_intents/FRONTIER_LEAPFROG_WAVES31_35_20261126_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/FRONTIER_LEAPFROG_WAVES31_35_20261126_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "2173cb2ebb853aef03a39da4a694659ce5383f6169b66487a06d513edeac2702",
+   "status": "SHIPPED",
+   "terms": {
+    "0d-0i": 2,
+    "1.65x": 1,
+    "12.17": 1,
+    "13.57": 1,
+    "2.1": 1,
+    "2.76": 1,
+    "20261126": 1,
+    "21-30": 1,
+    "31-35": 1,
+    "35": 1,
+    "37.55": 1,
+    "39": 1,
+    "4.41x": 1,
+    "46": 2,
+    "across": 3,
+    "cegis": 2,
+    "cold": 2,
+    "compile_model": 2,
+    "creature": 2,
+    "eagerly": 2,
+    "faster": 2,
+    "frontier": 2,
+    "modules": 3,
+    "ms": 5,
+    "organ": 2,
+    "pure-stdlib": 3,
+    "remained": 2,
+    "route": 2,
+    "spines": 2,
+    "unifiedmodel": 2,
+    "warm": 2,
+    "waves": 2
    }
   },
   {
@@ -342093,9 +342138,9 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "393d2913a69fe697ffde5bc2bcce1a19a62a84de7c12218f91e3e24b4813d235",
+   "sha256": "8ae41220fc7293663ffbe8cfd74456edae2de8d10211f6082d59800a876a104e",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
-   "symbol_count": 27,
+   "symbol_count": 28,
    "symbols": [
     "SovereignZeroLLMPlanner",
     "UnifiedModel",
@@ -342117,10 +342162,10 @@
     "ask_tokens",
     "brain_model_callable",
     "canonical_json",
+    "dedupe_version_families",
     "digest_value",
     "load_model",
-    "main",
-    "open_model"
+    "main"
    ],
    "terms": {
     "adapter_ast_entry": 1,
@@ -342131,6 +342176,7 @@
     "compiled": 1,
     "core_cache_dir": 1,
     "declared_triggers_for_row": 1,
+    "dedupe_version_families": 1,
     "digest_value": 1,
     "door": 1,
     "excerpt": 1,
@@ -342148,7 +342194,6 @@
     "path_literals": 1,
     "prewarm_sidecar_caches": 1,
     "read_stat_sha": 1,
-    "sovereignzerollmplanner": 1,
     "stat_cache_path": 1,
     "tokenize": 1,
     "unified": 2,
@@ -348171,12 +348216,13 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/compile_brain_unified_model_v1.py",
-   "sha256": "3d0a6fa698cbc3859f86ba9a70a8d486a0e298993c4a52ef3c2c75688103efcb",
+   "sha256": "3a12cdb9be80dd919c91083d63f55af8372db15134646a5171c36f8adbf01d8b",
    "summary": "Compile the whole live Brain into one content-addressed model artifact.",
-   "symbol_count": 41,
+   "symbol_count": 44,
    "symbols": [
     "UnifiedModelCompileError",
     "_DBSPCompileCache",
+    "_RepoTreeSnapshot",
     "_adapter_executed_programs",
     "_adapter_imports",
     "_adapter_path_of",
@@ -348185,6 +348231,7 @@
     "_anatomy_block",
     "_build_grammar",
     "_bullets",
+    "_cached_digest_file",
     "_capability_row",
     "_dependency_declaration",
     "_engine_rows",
@@ -348196,20 +348243,16 @@
     "_headings",
     "_knowledge_rows",
     "_law_family_and_version",
-    "_live_registry",
-    "_objective_block",
-    "_placeholders"
+    "_live_registry"
    ],
    "terms": {
-    "adapter_executed_programs": 1,
     "adapter_imports": 1,
     "adapter_path_of": 1,
-    "adapter_runpy_targets": 1,
-    "adapter_static_deps": 1,
     "artifact": 1,
     "artifact_digest": 1,
     "brain": 2,
     "bullets": 1,
+    "cached_digest_file": 1,
     "canonical_json": 1,
     "compile": 2,
     "content-addressed": 1,
@@ -348228,6 +348271,8 @@
     "model": 2,
     "one": 1,
     "placeholders": 1,
+    "registry_stamp_sig": 1,
+    "repotreesnapshot": 1,
     "term_counts": 1,
     "tokenize": 1,
     "unified": 1,
@@ -350743,11 +350788,12 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/creature_runtime_v1.py",
-   "sha256": "dfe6e23d27a5893b5ddba0d0942f9d1fa06af241474a18d864d7fb0e7a41b879",
+   "sha256": "b4c51f260f209429fa0a59fb243e8b9fa4aa176c6d88de04d93c402cc7568198",
    "summary": "Seven organs, finally in one body.",
-   "symbol_count": 16,
+   "symbol_count": 17,
    "symbols": [
     "Creature",
+    "_LazyModule",
     "_eval_learned_organ",
     "_evidence_shape_signature",
     "_extract_capability_feature_flags",
@@ -350774,6 +350820,7 @@
     "evidence_shape_signature": 1,
     "extract_capability_feature_flags": 1,
     "finally": 1,
+    "lazymodule": 1,
     "main": 1,
     "onboard_typed_capability_inspector": 1,
     "one": 1,
@@ -407116,7 +407163,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
-   "sha256": "1c083587513afb0a7624367f5c9ef1dabffeffdb3c25bf122f1047665fab3686",
+   "sha256": "7fde73614c39afd81ac5dc6035625f9a044f9a371e92b61cd4232538369d8d8b",
    "summary": "Unified Hidden-Capability Federation Runtime — v1.",
    "symbol_count": 13,
    "symbols": [
@@ -411803,7 +411850,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/canonical_boundary_router_v1.py",
-   "sha256": "72e760bc27e5a444abc7510bf0b5db6c63408591f62e01eb338bf23cb61de324",
+   "sha256": "ae472d40dd3084161d275e4fb0baaf6749bf42ffef3ad2325f0279a29fc9d7fc",
    "summary": "Canonical BoundaryRouter & Compounding Closed-Loop Orchestrator (`0I`).",
    "symbol_count": 2,
    "symbols": [
@@ -411831,9 +411878,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/canonical_cu_sandbox_spine_v1.py",
-   "sha256": "dcf4aaf29565f958a3216b7078afdd3fd6f8324a8e65076003155092d7632c4d",
+   "sha256": "28c3bcd0af09278c2bf1297b8a18a92995c28b49d5040382ead75fd8d46ad99d",
    "summary": "Canonical Speculative CoW Rollback & Code-over-GUI Computer-Use Spine (`0F`).",
-   "symbol_count": 15,
+   "symbol_count": 17,
    "symbols": [
     "SpeculativeProbeResult",
     "SpeculativeSandbox",
@@ -411844,11 +411891,13 @@
     "durable_transactional_commit",
     "elevate_gui_trace_to_cli_skill",
     "execute_horizon_bounded_zero_screenshot_cu",
+    "execute_osworld_v21_and_epistemic_cu",
     "execute_speculative_computer_task",
     "fork_reality_speculate_and_commit",
     "inspect_repo_environment_broker",
     "plan_two_move_and_horizon_bridge",
     "speculative_cow_race",
+    "speculative_macro_commit",
     "workspace_tree_digest"
    ],
    "terms": {
@@ -411864,6 +411913,7 @@
     "durable_transactional_commit": 1,
     "elevate_gui_trace_to_cli_skill": 1,
     "execute_horizon_bounded_zero_screenshot_cu": 1,
+    "execute_osworld_v21_and_epistemic_cu": 1,
     "execute_speculative_computer_task": 1,
     "fork_reality_speculate_and_commit": 1,
     "inspect_repo_environment_broker": 1,
@@ -411873,6 +411923,7 @@
     "sandbox": 1,
     "speculative": 1,
     "speculative_cow_race": 1,
+    "speculative_macro_commit": 1,
     "speculativeproberesult": 1,
     "speculativesandbox": 1,
     "spine": 2,
@@ -411888,9 +411939,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
-   "sha256": "49e9f56beb07b28f32b1d479e0d4a3cbf0c766e818c88db97cc922e948d2119f",
+   "sha256": "0f311433ca57277202b1e8a8fb1daae2d9da7f39556252afa653db16b8d800f7",
    "summary": "Canonical Environment Discovery & Conflict-Aware Active Automata Spine (`0E`).",
-   "symbol_count": 22,
+   "symbol_count": 23,
    "symbols": [
     "ConflictAwareMealyLearner",
     "LearnedAutomaton",
@@ -411900,6 +411951,7 @@
     "RegisterGuardTransition",
     "_LazyModule",
     "_stable_digest",
+    "active_repertoire_and_typed_invention",
     "compile_decision_quotient_and_refinement",
     "compile_refusal_specification",
     "derive_aimed_actions",
@@ -411918,6 +411970,7 @@
    "terms": {
     "0e": 1,
     "active": 1,
+    "active_repertoire_and_typed_invention": 1,
     "automata": 1,
     "canonical": 2,
     "compile_decision_quotient_and_refinement": 1,
@@ -412019,7 +412072,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
-   "sha256": "f26ced562e23e7c5f80a801b7fe67e9830aeb7c93536270cd24c81117081e27b",
+   "sha256": "b0adf2857ee5d828b2af8e3f35f3b77510f2cd597e8b4aa2aa093d4a3aa432fc",
    "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`).",
    "symbol_count": 9,
    "symbols": [
@@ -412062,9 +412115,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/canonical_oracle_vericoding_spine_v1.py",
-   "sha256": "2c1b5978488beabdd5cc52bc87244b8543c061909fbe04933d51d26de96bdcea",
+   "sha256": "1f3bd309e83385573e66a33d6f2f80f762c090dd493137d4e80a1e1684de0fb5",
    "summary": "Canonical Dual-Channel Witness Inversion, Goal-Negation Oracle & Formal Vericoding Spine (`0H`).",
-   "symbol_count": 20,
+   "symbol_count": 21,
    "symbols": [
     "_LazyModule",
     "_generate_goal_negation_mutants",
@@ -412083,6 +412136,7 @@
     "generate_csp_hard_negatives",
     "interrogate_minimax_witness",
     "mutation_admission_gate",
+    "prove_equivalence_and_amplify_verdict",
     "prove_verifier_can_say_no",
     "run_red_queen_evaluator_coevolution",
     "verify_coq_certificate_bundle"
@@ -412111,6 +412165,7 @@
     "lazymodule": 1,
     "mutation_admission_gate": 1,
     "oracle": 2,
+    "prove_equivalence_and_amplify_verdict": 1,
     "prove_verifier_can_say_no": 1,
     "run_red_queen_evaluator_coevolution": 1,
     "run_witness_in_clone": 1,
@@ -412129,9 +412184,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/canonical_swe_spine_v1.py",
-   "sha256": "99c0fc16e0ad2487adb4c8bd067e7e12c8b7660cc9e2c1912120b80a9b124291",
+   "sha256": "4e2c11b42acd347c4f6e0b4b855f37c5bc1146dc8f06146d179a7b4bf4c12da5",
    "summary": "Canonical Unified Polyglot SWE Spine (`canonical_swe_spine_v1`).",
-   "symbol_count": 23,
+   "symbol_count": 24,
    "symbols": [
     "CanonicalLawStore",
     "StructuralLaw",
@@ -412149,6 +412204,7 @@
     "choreograph_crossfile_repair",
     "compile_plain_goal_contract",
     "detect_repository_language",
+    "disambiguate_and_synthesize_repairs",
     "multi_file_causal_localize_and_repair",
     "solve_producer_lineage_hole_inversion",
     "solve_repository_task",
@@ -412166,6 +412222,7 @@
     "choreograph_crossfile_repair": 1,
     "compile_plain_goal_contract": 1,
     "detect_repository_language": 1,
+    "disambiguate_and_synthesize_repairs": 1,
     "is_test_relpath": 1,
     "lazymodule": 1,
     "multi_file_causal_localize_and_repair": 1,

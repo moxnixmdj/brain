@@ -2122,6 +2122,56 @@ class BoundaryRouter:
         self._record_cluster("two_move_horizon_cu", tier="TIER_0_TWO_MOVE_HORIZON_CU", passed=ok)
         return res
 
+    # ----------------------------------------------------- Waves 32-35 Frontier Leapfrog Routes
+    def route_disambiguate_and_pin_repairs(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 32 route: Version-Space Repair Selection + Angelic CEGIS + Inverse Completion + Repo-Seeded SWE (`0D`)."""
+        res = swe_spine.disambiguate_and_synthesize_repairs(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster("wave32_version_space_swe", tier="TIER_1_VERSION_SPACE_SWE", passed=ok)
+        return res
+
+    def route_prove_equivalence_and_amplify(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 32 route: Behavioral-Equivalence Proof + Distinguishing Projection + Reverted-Part Pinning + Verdict Amplification (`0H`)."""
+        res = oracle_spine.prove_equivalence_and_amplify_verdict(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster("wave32_equivalence_oracle", tier="TIER_0_EQUIVALENCE_ORACLE", passed=ok)
+        return res
+
+    def route_meaning_first_transfer(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 33 route: Meaning-First IR Crystallization + Cross-Language Transfer + Scoped Skills + Weight Admission (`0G`)."""
+        res = self.memory_bus.crystallize_meaning_first_and_transfer(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster("wave33_meaning_first_transfer", tier="TIER_0_MEANING_FIRST_TRANSFER", passed=ok)
+        return res
+
+    def route_memini_memrl_apex(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 33 route: Memini (w_fast/w_slow) + MemRL (TD Q + 2-phase) + APEX-EM (3-channel) Consolidation (`0G`)."""
+        res = self.memory_bus.memini_memrl_apex_consolidate(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster("wave33_memini_memrl_apex", tier="TIER_0_MEMINI_MEMRL_APEX", passed=ok)
+        return res
+
+    def route_osworld_v21_epistemic_cu(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 34 route: OSWorld 2.1 Pure-Stdlib CU Engine + Epistemic Computer Agent + Action-Grammar Guide (`0F`)."""
+        res = cu_spine.execute_osworld_v21_and_epistemic_cu(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster("wave34_osworld_v21_cu", tier="TIER_0_OSWORLD_V21_CU", passed=ok)
+        return res
+
+    def route_speculative_macro_commit(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 34 route: TomasuLLM Speculative Macro Commit + Standing-Fact Invalidation + Effect Witnesses + Parallel Frontier (`0F`)."""
+        res = cu_spine.speculative_macro_commit(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster("wave34_speculative_commit", tier="TIER_0_SPECULATIVE_MACRO_COMMIT", passed=ok)
+        return res
+
+    def route_active_repertoire_typed_invention(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 35 route: Active-Inference Repertoire Query + Typed CEGIS(T) + Distinction Creation + Counterfactual Contracts (`0E`)."""
+        res = env_spine.active_repertoire_and_typed_invention(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster("wave35_active_repertoire", tier="TIER_0_ACTIVE_REPERTOIRE_CEGIS_T", passed=ok)
+        return res
+
     def status_summary(self) -> dict[str, Any]:
         return {
             "schema": SCHEMA,

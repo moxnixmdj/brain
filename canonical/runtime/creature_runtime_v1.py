@@ -37,11 +37,38 @@ import tempfile
 from dataclasses import dataclass, field
 from typing import Any, Callable, Iterable, Mapping, Sequence
 
-from canonical.runtime import continuation_preference_v1 as CP
-from canonical.runtime import continuous_self_v1 as CS
-from canonical.runtime import creature_stakes_and_initiative_v1 as S
-from canonical.runtime import mortality_and_triage_v1 as M
-from canonical.runtime import self_authored_obligations_v1 as A
+import importlib as _importlib
+
+
+class _LazyModule:
+    """Wave 31 Elon-speed deferred module proxy (eliminates ~30 ms cold import overhead)."""
+
+    __slots__ = ("_mod_name", "_mod")
+
+    def __init__(self, mod_name: str) -> None:
+        self._mod_name = mod_name
+        self._mod: Any = None
+
+    def _load(self) -> Any:
+        if self._mod is None:
+            self._mod = _importlib.import_module(self._mod_name)
+        return self._mod
+
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self._load(), name)
+
+    def __copy__(self) -> "_LazyModule":
+        return self
+
+    def __deepcopy__(self, memo: dict[int, Any]) -> "_LazyModule":
+        return self
+
+
+CP: Any = _LazyModule("canonical.runtime.continuation_preference_v1")
+CS: Any = _LazyModule("canonical.runtime.continuous_self_v1")
+S: Any = _LazyModule("canonical.runtime.creature_stakes_and_initiative_v1")
+M: Any = _LazyModule("canonical.runtime.mortality_and_triage_v1")
+A: Any = _LazyModule("canonical.runtime.self_authored_obligations_v1")
 
 SCHEMA = "PROJECT_BRAIN_CREATURE_RUNTIME_V1"
 
@@ -1256,13 +1283,26 @@ class Creature:
         program_sources: Sequence[str] = (),
         min_nodes: int = 5,
         max_new_concepts: int = 6,
+        memrl_outcomes: Sequence[Mapping[str, Any]] = (),
+        recheck_rules: Sequence[Mapping[str, Any]] = (),
     ) -> dict[str, Any]:
-        """Run `0G` sleep-time E-Graph/E-Stitch consolidation and persist `memory_bus_v1.json` to disk."""
+        """Run `0G` sleep-time E-Graph/E-Stitch + Wave 33 Memini/MemRL/APEX-EM + LM-Sleep rejection consolidation."""
         res = self.memory_bus.sleep_consolidate(
             program_sources=program_sources,
             min_nodes=min_nodes,
             max_new_concepts=max_new_concepts,
         )
+        memini_res = self.memory_bus.memini_memrl_apex_consolidate(outcomes=memrl_outcomes)
+        rechecked: list[dict[str, Any]] = []
+        if recheck_rules:
+            from canonical.swe_kernel import skill_recheck_v1 as srk
+
+            for rule in recheck_rules:
+                rechecked.append(srk.recheck(dict(rule)))
+        res = dict(res)
+        res["memini_memrl_apex"] = memini_res
+        if rechecked:
+            res["lm_sleep_rechecked"] = rechecked
         self._save()
         return res
 
