@@ -32,12 +32,17 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
+from canonical.runtime import demonstration_version_space_v1 as demo_vs
 from canonical.swe_kernel import concept_library_v1 as concept_lib
 from canonical.swe_kernel import egraph_and_deductive_synthesizer_v1 as egraph_synth
+from canonical.swe_kernel import guarded_meaning_ir_v1 as meaning_ir
 from canonical.swe_kernel import structural_rewrite_induction_v1 as rewrite_ind
+from canonical.swe_kernel import tree_sitter_cst_skill_skeleton_v1 as cst_skeleton
 from canonical.swe_kernel import verified_skill_crystallizer_v1 as skill_cryst
 from canonical.swe_kernel import witness_inversion_v1 as witness_inv
 from canonical.tools import an_actions_effect_is_a_provenance_map_v1 as prov_map
+from canonical.tools import the_goal_is_a_quotient_of_the_trace_v1 as trace_quotient
+from canonical.tools import the_precondition_is_not_in_the_trace_v1 as precond_ind
 
 SCHEMA = "PROJECT_BRAIN_CANONICAL_MEMORY_CRYSTALLIZER_V1"
 NON_CLAIMS = (
@@ -167,12 +172,16 @@ class VerificationFirstMemoryBus:
         self._neg_store = witness_inv.NegativeSpaceInvariantStore(path=None)
         self.conflict_clauses: dict[str, ConflictClause] = {}
         self._conflict_lookup: dict[tuple[str, str, str], str] = {}
-        # T3: crystallized skills + compounding concept library
+        # T3: crystallized skills + compounding concept library + version-space skills
         self.skills: dict[str, CrystallizedSkill] = {}
         self._skills_by_trigger: dict[str, list[str]] = {}
         self._repair_pairs: list[tuple[str, str, str]] = []  # (pair_id, before_src, after_src)
         self._induced_rewrite_rules: list[rewrite_ind.Rule] = []
         self._concept_library = concept_lib.CompoundingConceptLibrary(state_path=None)
+        self._version_spaces: dict[str, demo_vs.SkillSet] = {}
+        self._version_space_traces: dict[str, list[list[tuple[dict[str, Any], str]]]] = {}
+        self._version_space_library = demo_vs.SkillLibrary()
+        self._semi_egraph = meaning_ir.SemiPersistentEGraph()
         # T4: optional external adapter descriptors (metadata only, never required)
         self.external_adapters: dict[str, dict[str, Any]] = {}
         # Immutable selective-forgetting provenance log
@@ -571,8 +580,22 @@ class VerificationFirstMemoryBus:
             else:
                 seen_macros[sig] = sid
 
-        # E-graph sanity check & compact rewrite induction count
+        # E-graph sanity check, semi-persistent e-graph MIR compression & CST minimization
         eg = egraph_synth.EGraph()
+        mir_modules_lowered = 0
+        self._semi_egraph.push()
+        try:
+            for src in sources[:32]:
+                try:
+                    mod = meaning_ir.lower_python(src)
+                    for t in mod.terms[:64]:
+                        self._semi_egraph.add(t)
+                    mir_modules_lowered += 1
+                except Exception:
+                    continue
+            egraph_nodes = self._semi_egraph.size()
+        finally:
+            self._semi_egraph.pop()
         elapsed_ms = round((time.perf_counter() - t0) * 1000.0, 3)
         return {
             "schema": SCHEMA,
@@ -580,10 +603,260 @@ class VerificationFirstMemoryBus:
             "sources_scanned": len(sources),
             "concept_abstraction": concept_report,
             "macros_deduplicated": deduped,
+            "mir_modules_lowered": mir_modules_lowered,
+            "semi_egraph_nodes": egraph_nodes,
+            "version_space_tasks": len(self._version_spaces),
             "active_skill_count": sum(1 for s in self.skills.values() if not s.forgotten),
             "active_causal_edge_count": sum(1 for e in self.causal_edges.values() if e.invalid_at is None),
             "active_conflict_count": sum(1 for c in self.conflict_clauses.values() if not c.retracted),
             "egraph_engine_ready": eg is not None,
+        }
+
+    # ------------------------------------------ Selective Procedural Abstraction (Wave 2)
+    def induce_version_space_skill(
+        self,
+        task_id: str,
+        traces: Sequence[Sequence[tuple[Mapping[str, Any], str]]],
+        *,
+        provenance_episode_id: str = "",
+    ) -> dict[str, Any]:
+        """Induce or refine a Version-Space Skill (`demonstration_version_space_v1`) from 1..N traces.
+
+        Instead of lossy text summarization (which fails under shift on SkillEvolBench),
+        every hypothesis consistent with all observed demonstrations is retained explicitly
+        so ambiguity triggers abstention rather than silent hallucination.
+        """
+        tid = str(task_id)
+        skill_set = self._version_spaces.get(tid)
+        if skill_set is None:
+            skill_set = demo_vs.SkillSet()
+            self._version_spaces[tid] = skill_set
+            self._version_space_library.add(tid, skill_set)
+        trace_log = self._version_space_traces.setdefault(tid, [])
+        outcomes: list[str] = []
+        for tr in traces:
+            norm_tr = [(dict(obs), str(act)) for obs, act in tr]
+            status = skill_set.add_success(norm_tr)
+            outcomes.append(str(status))
+            trace_log.append(norm_tr)
+
+        desc = skill_set.describe()
+        sid = f"sk_vs_{_sha16([tid, len(trace_log)])}"
+        # Keep one active CrystallizedSkill index row for this version-space task
+        for old_sid in list(self._skills_by_trigger.get(f"vs:{tid}", ())):
+            old_sk = self.skills.get(old_sid)
+            if old_sk is not None and old_sk.kind == "VERSION_SPACE":
+                old_sk.forgotten = True
+        self._skills_by_trigger[f"vs:{tid}"] = [sid]
+        sk = CrystallizedSkill(
+            skill_id=sid,
+            kind="VERSION_SPACE",
+            trigger_key=f"vs:{tid}",
+            payload={"task_id": tid, "description": desc, "trace_count": len(trace_log)},
+            provenance_episode_id=str(provenance_episode_id or f"ep_vs_{tid}"),
+            verified=True,
+            created_at=self._tick(),
+        )
+        self.skills[sid] = sk
+        return {
+            "schema": SCHEMA,
+            "pass": bool(outcomes),
+            "task_id": tid,
+            "skill_id": sid,
+            "outcomes": outcomes,
+            "description": desc,
+        }
+
+    def query_version_space_or_abstain(
+        self,
+        observation: Mapping[str, Any],
+        *,
+        task_id: str | None = None,
+        abstain_on_disagreement: bool = True,
+    ) -> dict[str, Any]:
+        """Selective procedural execution: ACT when version-space hypotheses agree, ABSTAIN on disagreement."""
+        obs = dict(observation)
+        resolved_tid = str(task_id) if task_id else None
+        skill_set = self._version_spaces.get(resolved_tid) if resolved_tid is not None else None
+        if skill_set is None:
+            origin, chosen = self._version_space_library.choose(obs)
+            if origin is not None and chosen is not None:
+                resolved_tid = origin
+                skill_set = self._version_spaces.get(origin)
+        if skill_set is None:
+            return {
+                "schema": SCHEMA,
+                "decision": "ABSTAIN",
+                "reason": "NO_VERSION_SPACE_SKILL_REGISTERED",
+                "task_id": resolved_tid,
+                "action": None,
+                "disagreement": None,
+            }
+        dis = skill_set.disagreement(obs)
+        distinct = int(dis.get("distinct_actions") or 0)
+        if abstain_on_disagreement and (distinct > 1 or bool(dis.get("guaranteed_discrimination"))):
+            return {
+                "schema": SCHEMA,
+                "decision": "ABSTAIN",
+                "reason": "VERSION_SPACE_DISAGREEMENT__PROBE_OR_DEMO_NEEDED",
+                "task_id": resolved_tid,
+                "action": None,
+                "disagreement": dis,
+            }
+        execution = skill_set.start(obs)
+        action = execution.next_action(obs) if execution is not None else None
+        if action is None:
+            return {
+                "schema": SCHEMA,
+                "decision": "ABSTAIN",
+                "reason": "NO_APPLICABLE_ACTION_IN_VERSION_SPACE",
+                "task_id": resolved_tid,
+                "action": None,
+                "disagreement": dis,
+            }
+        return {
+            "schema": SCHEMA,
+            "decision": "ACT",
+            "reason": None,
+            "task_id": resolved_tid,
+            "action": action,
+            "disagreement": dis,
+        }
+
+    def induce_trace_quotient(
+        self,
+        traces: Sequence[Sequence[Sequence[tuple[str, Any]]]],
+        labels: Sequence[bool],
+        *,
+        max_size: int = 2,
+    ) -> dict[str, Any]:
+        """Compute the smallest & coarsest sufficient trace quotient (`the_goal_is_a_quotient_of_the_trace_v1`)."""
+        norm_traces = [
+            tuple(tuple((str(k), v) for k, v in state) for state in trace)
+            for trace in traces
+        ]
+        norm_labels = [bool(x) for x in labels]
+        gens = trace_quotient.generators_for(norm_traces)
+        lattice = trace_quotient.enumerate_lattice(
+            gens, list(gens.keys()), norm_traces, norm_labels, max_size=int(max_size)
+        )
+        sufficient = [row for row in lattice if row.get("sufficient") is True]
+        best_small = trace_quotient.smallest(sufficient) if sufficient else None
+        best_coarse = trace_quotient.coarsest(sufficient) if sufficient else None
+
+        def _clean(row: Mapping[str, Any] | None) -> dict[str, Any] | None:
+            if row is None:
+                return None
+            return {k: v for k, v in row.items() if not str(k).startswith("_")}
+
+        return {
+            "schema": SCHEMA,
+            "pass": best_small is not None,
+            "generator_count": len(gens),
+            "sufficient_count": len(sufficient),
+            "smallest_quotient": _clean(best_small),
+            "coarsest_quotient": _clean(best_coarse),
+        }
+
+    def induce_exact_precondition(
+        self,
+        table: Sequence[tuple[Sequence[str], bool]],
+        vocabulary: Sequence[str],
+        *,
+        max_size: int = 4,
+    ) -> dict[str, Any]:
+        """Recover exact minimal action preconditions (`the_precondition_is_not_in_the_trace_v1`)."""
+        norm_table = [(frozenset(str(f) for f in facts), bool(applies)) for facts, applies in table]
+        vocab = [str(v) for v in vocabulary]
+        rule = precond_ind.exact_precondition(norm_table, vocab, max_size=int(max_size))
+        acc = (
+            precond_ind.accuracy(lambda facts: set(rule).issubset(facts), norm_table)
+            if rule is not None
+            else None
+        )
+        return {
+            "schema": SCHEMA,
+            "pass": rule is not None,
+            "precondition": list(rule) if rule is not None else None,
+            "accuracy": acc,
+        }
+
+    def egraph_anti_unify_and_compress(
+        self,
+        source_a: str,
+        source_b: str,
+        *,
+        rounds: int = 6,
+    ) -> dict[str, Any]:
+        """Anti-unify two Python expressions/functions modulo `SemiPersistentEGraph` (`guarded_meaning_ir_v1`)."""
+        mod_a = meaning_ir.lower_python(source_a)
+        mod_b = meaning_ir.lower_python(source_b)
+        term_a = mod_a.terms[-1] if mod_a.terms else meaning_ir.const(None)
+        term_b = mod_b.terms[-1] if mod_b.terms else meaning_ir.const(None)
+        g = meaning_ir.SemiPersistentEGraph()
+        res = meaning_ir.anti_unify(term_a, term_b, g)
+        eq = meaning_ir.terms_equal(term_a, term_b, rounds=int(rounds))
+        schema_term = res.get("schema")
+        return {
+            "schema": SCHEMA,
+            "pass": True,
+            "semantically_equal": bool(eq),
+            "schema_repr": repr(schema_term),
+            "hole_count": len(res.get("holes") or []),
+            "holes": list(res.get("holes") or []),
+            "egraph_nodes": g.size(),
+        }
+
+    def apply_cross_language_cst_skills(
+        self,
+        source_text: str,
+        *,
+        target_language: str,
+        trigger_key: str | None = None,
+        max_candidates: int = 8,
+    ) -> dict[str, Any]:
+        """Lift crystallized code-repair rules through 7-language Tree-Sitter CST skeletons."""
+        candidates: list[dict[str, Any]] = []
+        unavailable_reason: str | None = None
+        for sk in self.skills.values():
+            if sk.forgotten or sk.kind != "CODE_REWRITE":
+                continue
+            if trigger_key is not None and sk.trigger_key != trigger_key:
+                continue
+            rule = sk.payload.get("rule")
+            if not isinstance(rule, Mapping):
+                continue
+            try:
+                skel = cst_skeleton.compile_rule_to_cst_skeleton(rule)
+                if skel is None:
+                    continue
+                for rewritten in cst_skeleton.iter_cst_skeleton_candidates(
+                    source_text,
+                    rule,
+                    target_language=target_language,
+                    max_candidates=max_candidates,
+                    minimize=True,
+                ):
+                    if rewritten != source_text:
+                        candidates.append(
+                            {
+                                "skill_id": sk.skill_id,
+                                "target_language": target_language,
+                                "mechanism": "TREE_SITTER_CST_SKELETON",
+                                "patched_source": rewritten,
+                            }
+                        )
+            except cst_skeleton.CstSubstrateUnavailable as exc:
+                unavailable_reason = str(exc)
+                break
+            except Exception:
+                continue
+        return {
+            "schema": SCHEMA,
+            "pass": len(candidates) > 0,
+            "target_language": target_language,
+            "candidates": candidates[:max_candidates],
+            "cst_substrate_unavailable": unavailable_reason,
         }
 
     # ------------------------------------------------- O(1) Selective Unlearning
@@ -650,6 +923,7 @@ class VerificationFirstMemoryBus:
             "t2_active_conflict_clauses": sum(1 for c in self.conflict_clauses.values() if not c.retracted),
             "t3_active_skills": sum(1 for s in self.skills.values() if not s.forgotten),
             "t3_forgotten_skills": sum(1 for s in self.skills.values() if s.forgotten),
+            "t3_version_space_tasks": len(self._version_spaces),
             "t4_external_adapters": len(self.external_adapters),
             "forgetting_events": len(self.forgetting_ledger),
         }
@@ -665,6 +939,10 @@ class VerificationFirstMemoryBus:
             "causal_edges": [e.as_dict() for e in self.causal_edges.values()],
             "conflict_clauses": [c.as_dict() for c in self.conflict_clauses.values()],
             "skills": [s.as_dict() for s in self.skills.values()],
+            "version_space_traces": {
+                tid: [[[obs, act] for obs, act in tr] for tr in traces]
+                for tid, traces in self._version_space_traces.items()
+            },
             "external_adapters": dict(self.external_adapters),
             "forgetting_ledger": list(self.forgetting_ledger),
         }
@@ -699,6 +977,21 @@ class VerificationFirstMemoryBus:
             self.skills[s.skill_id] = s
             if not s.forgotten:
                 self._skills_by_trigger.setdefault(s.trigger_key, []).append(s.skill_id)
+
+        self._version_spaces.clear()
+        self._version_space_traces.clear()
+        self._version_space_library = demo_vs.SkillLibrary()
+        for tid, trace_list in (raw.get("version_space_traces") or {}).items():
+            ss = demo_vs.SkillSet()
+            norm_list: list[list[tuple[dict[str, Any], str]]] = []
+            for tr in trace_list:
+                norm_tr = [(dict(obs), str(act)) for obs, act in tr]
+                ss.add_success(norm_tr)
+                norm_list.append(norm_tr)
+            if norm_list:
+                self._version_spaces[str(tid)] = ss
+                self._version_space_traces[str(tid)] = norm_list
+                self._version_space_library.add(str(tid), ss)
 
         self.external_adapters = dict(raw.get("external_adapters", {}))
         self.forgetting_ledger = list(raw.get("forgetting_ledger", []))
@@ -774,6 +1067,45 @@ def execute_memory_operation(
             "pass": ok,
             "status": "PASS__EPISODE_FORGOTTEN" if ok else "FAIL_CLOSED__EPISODE_NOT_FOUND",
             "forgetting": res,
+        }
+    if op == "INDUCE_VERSION_SPACE":
+        res = bus.induce_version_space_skill(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": "PASS__VERSION_SPACE_INDUCED" if res.get("pass") else "FAIL_CLOSED__VERSION_SPACE_EMPTY", **res}
+    if op == "QUERY_VERSION_SPACE":
+        res = bus.query_version_space_or_abstain(**data)
+        acted = res.get("decision") == "ACT"
+        return {
+            "schema": SCHEMA,
+            "pass": acted,
+            "status": "PASS__VERSION_SPACE_ACT" if acted else "PASS_ABSTAIN__VERSION_SPACE_DISAGREEMENT",
+            **res,
+        }
+    if op == "INDUCE_TRACE_QUOTIENT":
+        res = bus.induce_trace_quotient(**data)
+        return {
+            "schema": SCHEMA,
+            "pass": bool(res.get("pass")),
+            "status": "PASS__TRACE_QUOTIENT_INDUCED" if res.get("pass") else "FAIL_CLOSED__NO_SUFFICIENT_QUOTIENT",
+            **res,
+        }
+    if op == "INDUCE_PRECONDITION":
+        res = bus.induce_exact_precondition(**data)
+        return {
+            "schema": SCHEMA,
+            "pass": bool(res.get("pass")),
+            "status": "PASS__PRECONDITION_INDUCED" if res.get("pass") else "FAIL_CLOSED__NO_EXACT_PRECONDITION",
+            **res,
+        }
+    if op == "EGRAPH_ANTI_UNIFY":
+        res = bus.egraph_anti_unify_and_compress(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": "PASS__EGRAPH_ANTI_UNIFIED", **res}
+    if op == "APPLY_CST_SKILLS":
+        res = bus.apply_cross_language_cst_skills(**data)
+        return {
+            "schema": SCHEMA,
+            "pass": bool(res.get("pass")),
+            "status": "PASS__CST_SKILLS_APPLIED" if res.get("pass") else "FAIL_CLOSED__NO_CST_CANDIDATE",
+            **res,
         }
     if op == "STATS":
         return {"schema": SCHEMA, "pass": True, "status": "PASS__MEMORY_STATS", "stats": bus.stats()}

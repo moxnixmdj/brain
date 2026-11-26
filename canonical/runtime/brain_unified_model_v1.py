@@ -505,6 +505,12 @@ class UnifiedModel:
             "source_index_is_addressable_not_executable": True,
             "declared_dependencies_present": present,
             "declared_dependencies_missing": len(self.capabilities) - present,
+            "unified_runtime_bridge": {
+                "creature_runtime": "canonical/runtime/creature_runtime_v1.py",
+                "harvested_runtime": "canonical/runtime/harvested_capability_runtime_v1.py",
+                "composer_route": "canonical/runtime/composer_route_v1.py",
+                "spines": ["0D", "0E", "0F", "0G", "0H", "0I"],
+            },
             "objective": self._core_meta.get("objective_verbatim"),
             "non_claims": list(NON_CLAIMS),
             "credit": {
@@ -1766,6 +1772,14 @@ class UnifiedModel:
             res = self.boundary_router.route_env_goal(**kwargs)
         elif k == "cu_task":
             res = self.boundary_router.route_cu_task(**kwargs)
+        elif k == "typed_chain":
+            res = self.boundary_router.route_typed_chain(**kwargs)
+        elif k == "harvested_surface":
+            res = self.boundary_router.route_harvested_surface(**kwargs)
+        elif k == "version_space":
+            res = self.boundary_router.route_version_space_task(**kwargs)
+        elif k == "register_env_goal":
+            res = self.boundary_router.route_register_env_goal(**kwargs)
         elif k == "status":
             res = {"pass": True, "status": "PASS__BOUNDARY_STATUS", **self.boundary_router.status_summary()}
         else:
@@ -1778,6 +1792,107 @@ class UnifiedModel:
             **{"pass": passed},
             reason=None if passed else str(res.get("reason") or "BOUNDARY_ROUTE_FAILED"),
             boundary_route=res,
+        )
+
+    def compose_chain(
+        self,
+        goal: str,
+        *,
+        seed: Sequence[str] | None = None,
+        max_candidates: int = 6,
+        cwd: str | Path | None = None,
+    ) -> dict[str, Any]:
+        """Compile a natural-language goal into a typed multi-step capability chain (`composer_route_v1`)."""
+        res = self.boundary_router.route_typed_chain(
+            goal,
+            seed=seed,
+            max_candidates=max_candidates,
+            cwd=cwd,
+        )
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="COMPOSE_TYPED_CHAIN",
+            goal=goal,
+            status=str(res.get("status") or ("PASS__TYPED_CHAIN_ROUTED" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("refusal") or "TYPED_CHAIN_UNROUTED"),
+            typed_chain=res,
+        )
+
+    def execute_harvested_surface(
+        self,
+        capability_id: str = "",
+        *,
+        path: str = "",
+        args: Mapping[str, Any] | None = None,
+        adversarial_args: Mapping[str, Any] | None = None,
+        receipt: bool = False,
+        goal: str = "",
+    ) -> dict[str, Any]:
+        """Execute a discovered-but-unadmitted harvested surface via `BoundaryRouter` (`admitted: False`)."""
+        res = self.boundary_router.route_harvested_surface(
+            capability_id=capability_id,
+            path=path,
+            args=args,
+            adversarial_args=adversarial_args,
+            receipt=receipt,
+            root=ROOT,
+        )
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="EXECUTE_HARVESTED_SURFACE",
+            goal=goal or capability_id or path or "harvested_surface",
+            status=str(res.get("status") or ("PASS__HARVESTED_EXECUTED" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            admitted=False,
+            admission="NOT_ADMITTED",
+            reason=None if passed else str((res.get("harvested_result") or {}).get("refusal") or "HARVESTED_REFUSED"),
+            harvested_execution=res,
+        )
+
+    def open_creature(
+        self,
+        root: str | Path,
+        *,
+        identity: str = "creature",
+        life: float = 40.0,
+        world_probe: Any = None,
+    ) -> Any:
+        """Boot the persistent 7-organ `Creature` runtime bound directly to this `UnifiedModel`."""
+        from canonical.runtime import creature_runtime_v1 as creature_rt
+
+        creature = creature_rt.Creature(identity=identity, root=Path(root), life_grant=float(life))
+        creature.attach_unified_model(self)
+        creature.boot(world_probe=world_probe)
+        return creature
+
+    def run_creature_cycle(
+        self,
+        root: str | Path,
+        *,
+        identity: str = "creature",
+        life: float = 40.0,
+        cycles: int = 1,
+        perform: Any = None,
+        world_probe: Any = None,
+        sleep_consolidate: bool = False,
+    ) -> dict[str, Any]:
+        """Boot and run persistent unified-body cycles via `creature_runtime_v1` sharing `self.memory_bus`."""
+        from canonical.runtime import creature_runtime_v1 as creature_rt
+
+        creature = self.open_creature(root, identity=identity, life=life, world_probe=world_probe)
+        fn = perform if perform is not None else creature_rt.sovereign_perform
+        steps = creature.run(cycles=int(cycles), perform=fn)
+        consol = creature.sleep_consolidate_memory() if sleep_consolidate else None
+        rep = creature.report()
+        return self._envelope(
+            operation="RUN_CREATURE_CYCLE",
+            goal=f"creature:{identity}:cycles={cycles}",
+            status="PASS__CREATURE_UNIFIED_CYCLE",
+            **{"pass": True},
+            creature_report=rep,
+            steps=steps,
+            sleep_consolidation=consol,
         )
 
 

@@ -89,6 +89,10 @@ class Creature:
     max_attempts: int = 2
     _log: list[dict[str, Any]] = field(default_factory=list, repr=False)
     _last_boot_perception: dict[str, Any] = field(default_factory=dict, repr=False)
+    _unified_model: Any = field(default=None, repr=False)
+    _memory_bus: Any = field(default=None, repr=False)
+    _boundary_router: Any = field(default=None, repr=False)
+    _spine_tasks: dict[str, dict[str, Any]] = field(default_factory=dict, repr=False)
 
     # ------------------------------------------------------------------ boot
 
@@ -133,6 +137,7 @@ class Creature:
         self._load_catalog_question()
         self._load_inspector_investigation()
         self._load_durable_board()
+        self._load_memory_bus_if_present()
         # Persist an initial grant even if the process exits before its first step.
         self._save()
         return {"schema": SCHEMA, "identity": self.identity, "epoch": started["epoch"],
@@ -839,6 +844,159 @@ class Creature:
                 encoding="utf-8",
             )
             os.replace(tmp_cm, self.root / "continuation_memory.json")
+        if self._memory_bus is not None:
+            try:
+                self._memory_bus.save(self.root / "memory_bus_v1.json")
+            except Exception:
+                pass
+
+    # ------------------------------------------ unified model & frontier spines bridge
+
+    def attach_unified_model(self, model: Any) -> None:
+        """Bind a `UnifiedModel` directly to this Creature so both share one memory bus & router."""
+        self._unified_model = model
+        if model is not None:
+            self._memory_bus = model.memory_bus
+            self._boundary_router = model.boundary_router
+
+    def _load_memory_bus_if_present(self) -> None:
+        bus_fp = self.root / "memory_bus_v1.json"
+        if bus_fp.is_file() and not bus_fp.is_symlink():
+            try:
+                from canonical.swe_kernel import canonical_memory_crystallizer_v1 as mem_spine
+
+                if self._memory_bus is None:
+                    self._memory_bus = mem_spine.VerificationFirstMemoryBus(state_path=bus_fp)
+                else:
+                    self._memory_bus.load(bus_fp)
+            except Exception:
+                pass
+
+    @property
+    def memory_bus(self) -> Any:
+        """Persistent 5-timescale verification-first memory bus (`0G`) backed by `self.root/memory_bus_v1.json`."""
+        if self._memory_bus is None:
+            from canonical.swe_kernel import canonical_memory_crystallizer_v1 as mem_spine
+
+            bus_fp = self.root / "memory_bus_v1.json"
+            self._memory_bus = mem_spine.VerificationFirstMemoryBus(state_path=bus_fp)
+            if self._unified_model is not None:
+                self._unified_model._memory_bus = self._memory_bus
+        return self._memory_bus
+
+    @property
+    def boundary_router(self) -> Any:
+        """Compounding Tier-0 -> Tier-1 -> Tier-2 BoundaryRouter (`0I`) sharing `self.memory_bus`."""
+        if self._boundary_router is None:
+            from canonical.swe_kernel import canonical_boundary_router_v1 as br_spine
+
+            self._boundary_router = br_spine.BoundaryRouter(memory_bus=self.memory_bus)
+            if self._unified_model is not None:
+                self._unified_model._boundary_router = self._boundary_router
+        return self._boundary_router
+
+    @property
+    def unified_model(self) -> Any:
+        """Lazy `UnifiedModel` handle bound to this Creature's shared memory bus and router."""
+        if self._unified_model is None:
+            from canonical.runtime import brain_unified_model_v1 as bum
+
+            m = bum.open_model()
+            if self._memory_bus is not None:
+                m._memory_bus = self._memory_bus
+            if self._boundary_router is not None:
+                m._boundary_router = self._boundary_router
+            self._unified_model = m
+        return self._unified_model
+
+    def register_spine_task(self, work_id: str, kind: str, spec: Mapping[str, Any]) -> None:
+        """Register a structured frontier-spine task spec to execute when `work_id` is worked on the board."""
+        self._spine_tasks[str(work_id)] = {"kind": str(kind).lower().strip(), "spec": dict(spec)}
+
+    def route_goal_via_spine(self, kind: str, **kwargs: Any) -> dict[str, Any]:
+        """Execute a task through the unified frontier spines (`0D`-`0I`) and persist memory updates."""
+        k = str(kind or "swe_repair").lower().strip()
+        br = self.boundary_router
+        if k == "swe_repair":
+            res = br.route_swe_repair(**kwargs)
+        elif k == "env_goal":
+            res = br.route_env_goal(**kwargs)
+        elif k == "cu_task":
+            res = br.route_cu_task(**kwargs)
+        elif k == "typed_chain":
+            res = br.route_typed_chain(**kwargs)
+        elif k == "harvested_surface":
+            res = br.route_harvested_surface(**kwargs)
+        elif k == "version_space":
+            res = br.route_version_space_task(**kwargs)
+        elif k == "register_env_goal":
+            res = br.route_register_env_goal(**kwargs)
+        elif k == "oracle_audit":
+            from canonical.swe_kernel import canonical_oracle_vericoding_spine_v1 as ov_spine
+
+            res = ov_spine.audit_oracle_and_vericoding(**kwargs)
+        elif k == "swe_polyglot":
+            from canonical.swe_kernel import canonical_swe_spine_v1 as swe_spine
+
+            res = swe_spine.solve_repository_task(**kwargs)
+            res = {**res, "pass": bool(res.get("solved") is True)}
+        else:
+            res = {"pass": False, "status": "FAIL_CLOSED__UNKNOWN_SPINE_KIND", "reason": f"UNKNOWN_KIND:{k}"}
+        self._save()
+        return res
+
+    def compose_typed_chain(
+        self,
+        goal: str,
+        *,
+        seed: Sequence[str] | None = None,
+        max_candidates: int = 6,
+        cwd: str | pathlib.Path | None = None,
+    ) -> dict[str, Any]:
+        """Route a sentence into a typed capability chain via `composer_route_v1` + `0I`."""
+        return self.route_goal_via_spine(
+            "typed_chain",
+            goal=goal,
+            seed=seed,
+            max_candidates=max_candidates,
+            cwd=cwd,
+        )
+
+    def run_harvested_surface(
+        self,
+        capability_id: str = "",
+        *,
+        path: str = "",
+        args: Mapping[str, Any] | None = None,
+        adversarial_args: Mapping[str, Any] | None = None,
+        receipt: bool = False,
+    ) -> dict[str, Any]:
+        """Execute a discovered-but-unadmitted harvested surface via `harvested_capability_runtime_v1` (`admitted: False`)."""
+        return self.route_goal_via_spine(
+            "harvested_surface",
+            capability_id=capability_id,
+            path=path,
+            args=args,
+            adversarial_args=adversarial_args,
+            receipt=receipt,
+            root=_REPO_ROOT,
+        )
+
+    def sleep_consolidate_memory(
+        self,
+        *,
+        program_sources: Sequence[str] = (),
+        min_nodes: int = 5,
+        max_new_concepts: int = 6,
+    ) -> dict[str, Any]:
+        """Run `0G` sleep-time E-Graph/E-Stitch consolidation and persist `memory_bus_v1.json` to disk."""
+        res = self.memory_bus.sleep_consolidate(
+            program_sources=program_sources,
+            min_nodes=min_nodes,
+            max_new_concepts=max_new_concepts,
+        )
+        self._save()
+        return res
 
     def self_architect_step(
         self,
@@ -2576,6 +2734,35 @@ def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
             "questions_asked": int((learned or {}).get("oracle_queries_used") or 0),
             "answers": verified_answers,
             "blocked": None if ok else "LEARNED_SKILL_DID_NOT_ANSWER_THE_TARGET",
+        }
+
+    # --- Unified Frontier Spines (`0D`-`0I`), Composer Chains & Harvested Surfaces ---------------
+    spine_spec = (getattr(creature, "_spine_tasks", None) or {}).get(work.id)
+    if isinstance(spine_spec, Mapping):
+        skind = str(spine_spec.get("kind") or "")
+        sargs = dict(spine_spec.get("spec") or {})
+        sres = creature.route_goal_via_spine(skind, **sargs)
+        ok = bool(sres.get("pass") is True)
+        settle_rep = core.belief.settle_and_compute_surprise(
+            ticket,
+            outcome_pass=ok,
+            inspector=f"unified_spine:{skind}",
+            actual_cost=work.cost,
+            actual_gain=work.value if ok else 0.0,
+            calibration_ledger=creature.calibration_ledger,
+        )
+        return {
+            "ok": ok,
+            "verified": True,
+            "correct": ok,
+            "value": work.value if ok else 0.0,
+            "predicted_probability": p_hat,
+            "surprise": settle_rep["surprise"],
+            "spine_kind": skind,
+            "spine_status": sres.get("status"),
+            "spine_result": sres,
+            "admitted": sres.get("admitted"),
+            "blocked": None if ok else str(sres.get("status") or "SPINE_TASK_FAILED"),
         }
 
     core.belief.settle_and_compute_surprise(

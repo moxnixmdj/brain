@@ -35,13 +35,17 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
-from typing import Any, Mapping, Sequence
+from typing import Any, Callable, Mapping, Sequence
 
+from canonical.runtime import instruction_contract_v1 as instr_contract
+from canonical.runtime import verifier_falsification_v1 as verifier_falsif
 from canonical.swe_kernel import diagnostics_perf_and_design_engine_v1 as diag_engine
 from canonical.swe_kernel import metamorphic_habitation_zipper_v1 as mhz
 from canonical.swe_kernel import repair_input_dependency_gate_v1 as dep_gate
+from canonical.swe_kernel import what_the_condition_wants_v1 as cond_wants
 from canonical.swe_kernel import witness_inversion_v1 as witness_inv
 from canonical.tools import the_assertion_is_the_demand_v1 as assert_demand
+from canonical.tools import the_relation_is_read_from_the_failing_run_v1 as failing_rel
 from canonical.tools import the_right_question_is_an_experiment_v1 as claim_exp
 
 SCHEMA = "PROJECT_BRAIN_CANONICAL_ORACLE_VERICODING_SPINE_V1"
@@ -350,6 +354,173 @@ def verify_coq_certificate_bundle(
     }
 
 
+def compile_and_check_instruction_contract(
+    utterance: str,
+    observation: Mapping[str, Any],
+    *,
+    trace: Sequence[tuple[Mapping[str, Any], str]] | None = None,
+) -> dict[str, Any]:
+    """Compile a natural-language instruction into a checkable contract (`instruction_contract_v1`)
+    and optionally judge a trace against it (or return an explicit named refusal).
+    """
+    refusal = instr_contract.refusal_for(utterance)
+    contract = instr_contract.compile_contract(utterance, observation)
+    effective_refusal = refusal or contract.get("refusal")
+    check_res = None
+    if trace is not None and effective_refusal is None:
+        check_res = instr_contract.check_contract(contract, list(trace))
+    if effective_refusal is not None:
+        passed = False
+        status = "FAIL_CLOSED__CONTRACT_REFUSED"
+    elif check_res is not None:
+        passed = str(check_res.get("verdict") or "").upper() == "PASS"
+        status = "PASS__INSTRUCTION_CONTRACT_VERIFIED" if passed else "FAIL_CLOSED__INSTRUCTION_CONTRACT_VIOLATED"
+    else:
+        clauses = contract.get("clauses") or []
+        passed = len(clauses) > 0
+        status = "PASS__INSTRUCTION_CONTRACT_COMPILED" if passed else "FAIL_CLOSED__EMPTY_INSTRUCTION_CONTRACT"
+    return {
+        "schema": SCHEMA,
+        "pass": passed,
+        "status": status,
+        "refusal": effective_refusal,
+        "contract": contract,
+        "check": check_res,
+    }
+
+
+def extract_failing_run_demands(
+    source_text: str,
+    *,
+    failing_facts: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Extract AST decision/production sites and demanded relations from a failing run
+    (`the_relation_is_read_from_the_failing_run_v1` + `what_the_condition_wants_v1`).
+    """
+    sites = failing_rel.sites_in(source_text)
+    demanded = failing_rel.demanded_values(failing_facts) if failing_facts is not None else {}
+    forbidden = failing_rel.forbidden_token(failing_facts) if failing_facts is not None else None
+    return {
+        "schema": SCHEMA,
+        "pass": len(sites) > 0,
+        "site_count": len(sites),
+        "sites": [s.as_dict() for s in sites[:64]],
+        "demanded_values": demanded,
+        "forbidden_token": forbidden,
+        "condition_harvester_available": hasattr(cond_wants, "harvest"),
+    }
+
+
+def prove_verifier_can_say_no(
+    predicate: Callable[[Any], bool],
+    *,
+    positive_examples: Sequence[Any],
+    negative_mutants: Sequence[Any],
+    verifier_name: str = "custom_verifier",
+) -> dict[str, Any]:
+    """Falsification proof (`verifier_falsification_v1` invariant): prove a verifier says YES
+    on every valid example AND says NO on every adversarial/semantic mutant.
+
+    Directly eliminates vacuous/tautological oracles (the STING / Terminal-Bench 4.0 defect).
+    """
+    pos_passed = 0
+    pos_failures: list[int] = []
+    for idx, ex in enumerate(positive_examples):
+        try:
+            ok = bool(predicate(ex))
+        except Exception:
+            ok = False
+        if ok:
+            pos_passed += 1
+        else:
+            pos_failures.append(idx)
+
+    neg_killed = 0
+    surviving_mutants: list[int] = []
+    for idx, mut in enumerate(negative_mutants):
+        try:
+            accepted = bool(predicate(mut))
+        except Exception:
+            accepted = False
+        if not accepted:
+            neg_killed += 1
+        else:
+            surviving_mutants.append(idx)
+
+    pos_total = len(positive_examples)
+    neg_total = len(negative_mutants)
+    falsifiable = neg_total > 0 and neg_killed == neg_total
+    sound_on_positives = pos_total > 0 and pos_passed == pos_total
+    passed = sound_on_positives and falsifiable
+    kill_rate = round(neg_killed / neg_total, 4) if neg_total > 0 else 0.0
+    return {
+        "schema": SCHEMA,
+        "pass": passed,
+        "status": "PASS__VERIFIER_PROVEN_FALSIFIABLE" if passed else "FAIL_CLOSED__VERIFIER_NOT_FALSIFIABLE",
+        "verifier_name": verifier_name,
+        "positive_passed": pos_passed,
+        "positive_total": pos_total,
+        "positive_failures": pos_failures,
+        "mutants_killed": neg_killed,
+        "mutants_total": neg_total,
+        "surviving_mutants": surviving_mutants,
+        "mutation_kill_rate": kill_rate,
+        "falsifiable": falsifiable,
+        "repo_falsification_suite_wired": hasattr(verifier_falsif, "run"),
+    }
+
+
+def audit_harvested_surface_with_falsification(
+    capability_id: str = "",
+    *,
+    path: str = "",
+    probe_args: Mapping[str, Any] | None = None,
+    adversarial_args: Mapping[str, Any] | None = None,
+    root: str | Path | None = None,
+) -> dict[str, Any]:
+    """Dry-run audit a discovered harvested surface via ``harvested_capability_runtime_v1``
+    without writing producer receipts or claiming admission (always ``admitted: False``).
+    """
+    from canonical.runtime import harvested_capability_runtime_v1 as harvested_rt
+
+    base = Path(root).resolve() if root is not None else ROOT
+    pos = harvested_rt.run(
+        {
+            "capability_id": capability_id,
+            "path": path,
+            "args": dict(probe_args or {}),
+            "receipt": False,
+        },
+        root=base,
+    )
+    adv = None
+    if adversarial_args is not None:
+        adv = harvested_rt.run(
+            {
+                "capability_id": capability_id,
+                "path": path,
+                "args": dict(adversarial_args),
+                "receipt": False,
+            },
+            root=base,
+        )
+    executed = bool(pos.get("executed") is True)
+    adv_distinguished = True if adv is None else (
+        (not bool(adv.get("executed"))) or (adv.get("result_sha256") != pos.get("result_sha256"))
+    )
+    passed = executed and adv_distinguished
+    return {
+        "schema": SCHEMA,
+        "pass": passed,
+        "status": "PASS__HARVESTED_SURFACE_AUDITED_UNADMITTED" if passed else "FAIL_CLOSED__HARVESTED_SURFACE_AUDIT_FAILED",
+        "admitted": False,
+        "admission": "NOT_ADMITTED",
+        "positive_probe": pos,
+        "adversarial_probe": adv,
+        "adversarial_distinguished": adv_distinguished,
+    }
+
+
 def audit_oracle_and_vericoding(
     *,
     repo_root: str | Path | None = None,
@@ -361,6 +532,12 @@ def audit_oracle_and_vericoding(
     diagnostics_target: str | Path | None = None,
     coq_bundle_dir: str | Path | None = None,
     verify_default_coq: bool = False,
+    instruction_utterance: str | None = None,
+    instruction_observation: Mapping[str, Any] | None = None,
+    instruction_trace: Sequence[tuple[Mapping[str, Any], str]] | None = None,
+    failing_source: str | None = None,
+    failing_facts: Mapping[str, Any] | None = None,
+    falsification_spec: Mapping[str, Any] | None = None,
     timeout_s: float = 20.0,
 ) -> dict[str, Any]:
     """Unified front-door entrypoint (`0H`) for dual-channel oracle & vericoding verification."""
@@ -418,6 +595,33 @@ def audit_oracle_and_vericoding(
         coq_res = verify_coq_certificate_bundle(coq_bundle_dir)
         report["coq_certificate_audit"] = coq_res
         sub_passes.append(bool(coq_res["pass"]))
+
+    if instruction_utterance is not None and instruction_observation is not None:
+        report["modules_invoked"].append("canonical.runtime.instruction_contract_v1")
+        ic_res = compile_and_check_instruction_contract(
+            instruction_utterance,
+            instruction_observation,
+            trace=instruction_trace,
+        )
+        report["instruction_contract"] = ic_res
+        sub_passes.append(bool(ic_res["pass"]))
+
+    if failing_source is not None:
+        report["modules_invoked"].append("canonical.tools.the_relation_is_read_from_the_failing_run_v1")
+        rel_res = extract_failing_run_demands(failing_source, failing_facts=failing_facts)
+        report["failing_run_demands"] = rel_res
+        sub_passes.append(bool(rel_res["pass"]))
+
+    if falsification_spec is not None:
+        report["modules_invoked"].append("canonical.runtime.verifier_falsification_v1")
+        f_res = prove_verifier_can_say_no(
+            falsification_spec["predicate"],
+            positive_examples=falsification_spec.get("positive_examples") or (),
+            negative_mutants=falsification_spec.get("negative_mutants") or (),
+            verifier_name=str(falsification_spec.get("verifier_name") or "custom_verifier"),
+        )
+        report["verifier_falsification"] = f_res
+        sub_passes.append(bool(f_res["pass"]))
 
     passed = bool(sub_passes) and all(sub_passes)
     report["pass"] = passed

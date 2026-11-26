@@ -24,6 +24,8 @@ import time
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
+from canonical.runtime import composer_route_v1 as composer_route
+from canonical.runtime import harvested_capability_runtime_v1 as harvested_rt
 from canonical.swe_kernel import canonical_cu_sandbox_spine_v1 as cu_spine
 from canonical.swe_kernel import canonical_env_discovery_spine_v1 as env_spine
 from canonical.swe_kernel import canonical_memory_crystallizer_v1 as mem_spine
@@ -195,6 +197,7 @@ class BoundaryRouter:
                 for c in self.memory_bus.conflict_clauses.values()
                 if not c.retracted and c.domain == cluster
             ]
+            failing_demands = oracle_spine.extract_failing_run_demands(before_source)
             context = {
                 "repo_root": str(root),
                 "target_rel": target_rel,
@@ -202,6 +205,7 @@ class BoundaryRouter:
                 "test_file": test_file,
                 "issue_text": issue_text,
                 "active_conflict_clauses": active_nogoods,
+                "failing_run_decision_sites": failing_demands.get("sites", [])[:24],
             }
             proposals = list(untrusted_proposer(context) or ())
             for idx, prop_src in enumerate(proposals):
@@ -366,6 +370,272 @@ class BoundaryRouter:
             {"route_selected": res.get("route_selected"), "pass": res.get("pass")},
         )
         return res
+
+    def route_typed_chain(
+        self,
+        goal: str,
+        *,
+        seed: Sequence[str] | None = None,
+        max_candidates: int = 6,
+        cwd: str | Path | None = None,
+        cluster: str = "typed_chain",
+    ) -> dict[str, Any]:
+        """Route a natural-language goal to a typed capability chain (`composer_route_v1`)
+        with Tier-0 chain crystallization in `0G`.
+        """
+        t0 = time.perf_counter()
+        trigger = f"chain:{goal.strip().lower()[:120]}"
+        for sk in self.memory_bus.lookup_tier0_skills(trigger):
+            chain = list(sk["payload"].get("actions") or ())
+            if chain:
+                self._record_cluster(cluster, tier="TIER_0_CRYSTALLIZED_REFLEX", passed=True)
+                return {
+                    "schema": SCHEMA,
+                    "pass": True,
+                    "status": "PASS__TIER0_TYPED_CHAIN_RECALLED",
+                    "tier_used": "TIER_0_CRYSTALLIZED_REFLEX",
+                    "skill_id": sk["skill_id"],
+                    "chain": chain,
+                    "goal": goal,
+                    "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+                }
+
+        refusal = composer_route.stated_command_refusal(goal)
+        routed = composer_route.route(
+            goal,
+            seed=seed,
+            max_candidates=max_candidates,
+            cwd=cwd,
+        )
+        chain = list(routed.get("chain") or ())
+        ok = bool(chain) and str(routed.get("status") or "").startswith("PASS")
+        sk_id = None
+        if ok:
+            sk = self.memory_bus.crystallize_action_macro(
+                trigger_key=trigger,
+                actions=chain,
+                provenance_episode_id=f"ep_chain_{len(self.memory_bus.skills)}",
+            )
+            sk_id = sk.skill_id
+            self.memory_bus.record_causal_step(
+                episode_id=sk.provenance_episode_id,
+                step_idx=0,
+                pre_state=f"goal:{goal[:80]}",
+                action="COMPOSER_ROUTE_TYPED_CHAIN",
+                exact_args={"goal": goal, "seed": list(seed or ())},
+                effect={"chain": chain, "token": routed.get("token")},
+                post_state=f"chain:{'->'.join(chain)}",
+                provenance="TIER_1",
+            )
+            self._record_cluster(cluster, tier="TIER_1_COMPOSER_ROUTE", passed=True)
+        else:
+            self._record_cluster(cluster, tier="UNSOLVED", passed=False)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": "PASS__TYPED_CHAIN_ROUTED_AND_CRYSTALLIZED" if ok else "FAIL_CLOSED__TYPED_CHAIN_UNROUTED",
+            "tier_used": "TIER_1_COMPOSER_ROUTE" if ok else "NONE",
+            "goal": goal,
+            "chain": chain,
+            "token": routed.get("token"),
+            "refusal": refusal or routed.get("refusal"),
+            "crystallized_skill_id": sk_id,
+            "composer_result": routed,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+    def route_harvested_surface(
+        self,
+        *,
+        capability_id: str = "",
+        path: str = "",
+        args: Mapping[str, Any] | None = None,
+        adversarial_args: Mapping[str, Any] | None = None,
+        receipt: bool = False,
+        root: str | Path | None = None,
+        cluster: str = "harvested_surface",
+    ) -> dict[str, Any]:
+        """Execute a discovered-but-unadmitted harvested surface via `harvested_capability_runtime_v1`
+        with optional `0H` adversarial falsification check. NEVER promotes or claims admission.
+        """
+        t0 = time.perf_counter()
+        if adversarial_args is not None and not receipt:
+            audited = oracle_spine.audit_harvested_surface_with_falsification(
+                capability_id,
+                path=path,
+                probe_args=args,
+                adversarial_args=adversarial_args,
+                root=root,
+            )
+            res = audited["positive_probe"]
+            ok = bool(audited["pass"])
+            audit_payload: dict[str, Any] | None = audited
+        else:
+            res = harvested_rt.run(
+                {
+                    "capability_id": capability_id,
+                    "path": path,
+                    "args": dict(args or {}),
+                    "receipt": bool(receipt),
+                },
+                root=root,
+            )
+            ok = bool(res.get("executed") is True)
+            audit_payload = None
+
+        self.memory_bus.record_causal_step(
+            episode_id=f"ep_harvested_{capability_id or path}",
+            step_idx=0,
+            pre_state=f"surface:{capability_id or path}",
+            action="EXECUTE_HARVESTED_SURFACE",
+            exact_args={"capability_id": capability_id, "path": path, "receipt": bool(receipt)},
+            effect={"executed": ok, "admitted": False, "result_sha256": res.get("result_sha256")},
+            post_state=f"harvested_executed:{ok}",
+            refused=not ok,
+            provenance="TIER_1_HARVESTED_UNADMITTED",
+        )
+        self._record_cluster(cluster, tier="TIER_1_HARVESTED_UNADMITTED" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": "PASS__HARVESTED_SURFACE_EXECUTED_UNADMITTED" if ok else "FAIL_CLOSED__HARVESTED_SURFACE_REFUSED",
+            "tier_used": "TIER_1_HARVESTED_UNADMITTED" if ok else "NONE",
+            "admitted": False,
+            "admission": "NOT_ADMITTED",
+            "harvested_result": res,
+            "falsification_audit": audit_payload,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+    def route_version_space_task(
+        self,
+        task_id: str,
+        observation: Mapping[str, Any],
+        *,
+        training_traces: Sequence[Sequence[tuple[Mapping[str, Any], str]]] = (),
+        abstain_on_disagreement: bool = True,
+        check_contract: bool = True,
+        cluster: str = "version_space_skill",
+    ) -> dict[str, Any]:
+        """Selective procedural abstraction router: induces/queries `0G` Version-Space skill,
+        abstains cleanly on hypothesis disagreement, verifies action against `0H` instruction
+        contract when available, and surfaces `0E` aimed-action fallbacks.
+        """
+        t0 = time.perf_counter()
+        if training_traces:
+            self.memory_bus.induce_version_space_skill(task_id, training_traces)
+        q = self.memory_bus.query_version_space_or_abstain(
+            observation,
+            task_id=task_id,
+            abstain_on_disagreement=abstain_on_disagreement,
+        )
+        decision = q["decision"]
+        action = q.get("action")
+        contract_res = None
+        if decision == "ACT" and check_contract and observation.get("utterance"):
+            contract_res = oracle_spine.compile_and_check_instruction_contract(
+                str(observation.get("utterance") or ""),
+                observation,
+                trace=[(observation, str(action))],
+            )
+            if contract_res.get("refusal") is None and contract_res.get("check") is not None:
+                if str(contract_res["check"].get("verdict") or "").upper() == "FAIL":
+                    decision = "ABSTAIN"
+                    q["reason"] = "CONTRACT_REJECTED_VERSION_SPACE_ACTION"
+                    action = None
+
+        aimed_fallback = None
+        if decision == "ABSTAIN":
+            aimed_fallback = env_spine.derive_aimed_actions(observation)
+
+        acted = decision == "ACT" and action is not None
+        self._record_cluster(cluster, tier="TIER_0_CRYSTALLIZED_REFLEX" if acted else "UNSOLVED", passed=acted)
+        return {
+            "schema": SCHEMA,
+            "pass": acted,
+            "decision": decision,
+            "status": "PASS__VERSION_SPACE_ACTION_VERIFIED" if acted else "PASS_ABSTAIN__VERSION_SPACE_ABSTAINED",
+            "tier_used": "TIER_0_CRYSTALLIZED_REFLEX" if acted else "ABSTAIN",
+            "task_id": task_id,
+            "action": action,
+            "reason": q.get("reason"),
+            "disagreement": q.get("disagreement"),
+            "contract_check": contract_res,
+            "aimed_action_fallback": aimed_fallback,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+    def route_register_env_goal(
+        self,
+        register_env: Any,
+        *,
+        actions: Sequence[str],
+        parameterized_actions: Sequence[str] = (),
+        goal_predicate: Callable[[Any], bool],
+        trigger_key: str = "register_env_goal",
+        cluster: str = "register_automaton",
+        max_depth: int = 6,
+        max_queries: int = 250,
+    ) -> dict[str, Any]:
+        """Route parameterized data-register environments across Tier-0 symbolic replay -> Tier-1 `0E` RegisterGuardAutomatonLearner."""
+        t0 = time.perf_counter()
+        for sk in self.memory_bus.lookup_tier0_skills(trigger_key):
+            sym_plan = sk["payload"].get("actions") or []
+            if sym_plan and isinstance(sym_plan[0], (list, tuple)):
+                replay = env_spine.RegisterGuardAutomatonLearner.replay_symbolic_plan(
+                    register_env, sym_plan, goal_predicate=goal_predicate
+                )
+                if replay.get("pass"):
+                    self._record_cluster(cluster, tier="TIER_0_CRYSTALLIZED_REFLEX", passed=True)
+                    return {
+                        "schema": SCHEMA,
+                        "pass": True,
+                        "status": "PASS__TIER0_REGISTER_PLAN_REPLAYED",
+                        "tier_used": "TIER_0_CRYSTALLIZED_REFLEX",
+                        "skill_id": sk["skill_id"],
+                        "symbolic_plan": sym_plan,
+                        "replay": replay,
+                        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+                    }
+                self.memory_bus.forget_skill(sk["skill_id"], reason="STALE_REGISTER_PLAN_ON_REPLAY")
+
+        disc = env_spine.discover_environment(
+            register_env=register_env,
+            actions=actions,
+            parameterized_actions=parameterized_actions,
+            goal_predicate=goal_predicate,
+            max_depth=max_depth,
+            max_queries=max_queries,
+        )
+        ra = disc.get("register_automaton") or {}
+        if disc.get("pass") and ra.get("symbolic_goal_plan") is not None:
+            sym_plan = ra["symbolic_goal_plan"]
+            sk = self.memory_bus.crystallize_action_macro(
+                trigger_key=trigger_key,
+                actions=sym_plan,
+                provenance_episode_id=f"ep_reg_{trigger_key}",
+            )
+            self._record_cluster(cluster, tier="TIER_1_REGISTER_AUTOMATON", passed=True)
+            return {
+                "schema": SCHEMA,
+                "pass": True,
+                "status": "PASS__TIER1_REGISTER_AUTOMATON_LEARNED_AND_CRYSTALLIZED",
+                "tier_used": "TIER_1_REGISTER_AUTOMATON",
+                "crystallized_skill_id": sk.skill_id,
+                "symbolic_plan": sym_plan,
+                "register_automaton": ra,
+                "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            }
+
+        self._record_cluster(cluster, tier="UNSOLVED", passed=False)
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__REGISTER_ENV_UNSOLVED",
+            "tier_used": "NONE",
+            "discovery": disc,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
 
     def status_summary(self) -> dict[str, Any]:
         return {
