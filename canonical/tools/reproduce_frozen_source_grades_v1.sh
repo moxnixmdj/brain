@@ -23,6 +23,9 @@ h51|h51-next)
   if [[ $suite = h51-next ]]; then
     prov=$PWD/canonical/verification/SINGLE_EPISODE_INPUTS_20261126.json
     pin=$(jq -er .h51.suite "$prov"); rows='.h51.tasks[]'
+    # The release invokes the real pytest console script by name at position 7.
+    # Relocate its pip-generated interpreter path, never edit the upstream runner.
+    sed -i '1c#!/venv/bin/python' "$w/venv/bin/pytest"
     # Python 3.9 must work relocated to /venv in the private verifier root.
     # Provide a clean CPython prefix; the 3.11 grader cannot run this release's 3.9 units.
     cp -a "${PYTHON39_PREFIX:?need relocatable CPython 3.9.25 prefix}" "$w/py39"
@@ -37,7 +40,7 @@ h51|h51-next)
     for file in tests/{test.sh,config.json,test_patch.patch,parser.py,run_script.sh} solution/gold_patch.diff; do blob "$repo" "$pin" "v2/tasks/$id/$file" "$task/$file"; done
     venv="$w/venv"; seconds=220
     case "$pos" in 7) seconds=1200;; 8) venv="$w/py39"; seconds=600;; esac
-    "$py" -m canonical.tools.replay_source_verifier_v1 "$app" "$task" "$venv" "$(result hard51_pos${pos}_source_predictions)" --verifier-timeout "$seconds" > "$w/pos-$pos.json"
+    "$py" -m canonical.tools.replay_source_verifier_v1 "$app" "$task" "$venv" "$(result hard51_pos${pos}_source_predictions)" --verifier-timeout "$seconds" --jobs "${GRADER_JOBS:-1}" > "$w/pos-$pos.json"
   done < <(jq -r "$rows"'|[.position,.base,.instance_id]|@tsv' "$prov")
   ;;
 tb)
