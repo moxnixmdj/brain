@@ -50,7 +50,9 @@ from typing import Any
 from canonical.runtime.byte_effect_oracle_v1 import (
     audit_patch_mutation_kill,
     ddmin_minimize_hunks,
+    snapshot_directory_hashes,
     verify_byte_effect,
+    verify_directory_effect_diff,
 )
 
 SCHEMA = "PROJECT_BRAIN_FUTAMURA_LEAPFROG_KERNEL_V1"
@@ -1538,6 +1540,7 @@ class FutamuraSelfCompilingCascade:
 
         # Gather all AST subtrees matching any compiled rule preorder key.
         matched_attempts = 0
+        eval_overhead_s = 0.0
         for node in ast.walk(tree):
             if not hasattr(node, "lineno") or not hasattr(node, "end_lineno"):
                 continue
@@ -1558,9 +1561,12 @@ class FutamuraSelfCompilingCascade:
                 prop_sig = hashlib.sha256(cand_src.encode("utf-8")).hexdigest()[:16]
                 if not self.belief_bus.check_pre_commit_gate(ctx_key, prop_sig)["allowed"]:
                     continue
-                lookup_us = (time.perf_counter() - t0) * 1e6
+                lookup_us = max(0.0, (time.perf_counter() - t0 - eval_overhead_s) * 1e6)
                 rule.hits += 1
-                if _eval_candidate_in_process(cand_src, test_cases):
+                t_ev = time.perf_counter()
+                passed_ev = _eval_candidate_in_process(cand_src, test_cases)
+                eval_overhead_s += time.perf_counter() - t_ev
+                if passed_ev:
                     rule.successes += 1
                     return {
                         "rule_id": rule.rule_id,
@@ -1822,6 +1828,914 @@ class FutamuraSelfCompilingCascade:
         }
 
 
+# ===========================================================================
+# 7. Wave 37: Real OS Kernel-Confined 3-Channel Computer-Use Executor
+# ===========================================================================
+
+
+def _snapshot_work_dir_bytes(work_dir: Path) -> dict[str, bytes]:
+    snap: dict[str, bytes] = {}
+    if not work_dir.exists():
+        return snap
+    for p in sorted(work_dir.rglob("*")):
+        if p.is_file():
+            rel = str(p.relative_to(work_dir)).replace("\\", "/")
+            snap[rel] = p.read_bytes()
+    return snap
+
+
+def _restore_work_dir_bytes(work_dir: Path, snap: Mapping[str, bytes]) -> None:
+    if work_dir.exists():
+        for p in sorted(work_dir.rglob("*"), reverse=True):
+            if p.is_file():
+                rel = str(p.relative_to(work_dir)).replace("\\", "/")
+                if rel not in snap:
+                    p.unlink(missing_ok=True)
+            elif p.is_dir():
+                try:
+                    p.rmdir()
+                except OSError:
+                    pass
+    for rel, raw in snap.items():
+        dst = work_dir / rel
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        dst.write_bytes(raw)
+
+
+def _digest_work_dir(snap: Mapping[str, bytes]) -> str:
+    h = hashlib.sha256()
+    for rel in sorted(snap):
+        h.update(rel.encode("utf-8"))
+        h.update(b"\x00")
+        h.update(hashlib.sha256(snap[rel]).digest())
+    return h.hexdigest()[:16]
+
+
+class ConfinedHybridComputerUseExecutor:
+    """Real OS-confined 3-channel HCU executor:
+    - Real Linux kernel isolation (`os_isolation_v1.run`: user+mount+pid+ipc+uts+net, CapEff=0)
+    - Strict fail-closed if unprivileged namespaces are unavailable (never runs unconfined)
+    - `HybridComputerUsePetriSupervisor` (3-channel elevation, Petri guard, 2-step loop-churn breaker)
+    - Ring-0 Byte Effect Oracle (`verify_byte_effect`) + CoW workspace rollback + `PreCommitFailureGate`
+    """
+
+    def __init__(
+        self,
+        *,
+        supervisor: HybridComputerUsePetriSupervisor | None = None,
+        belief_bus: DBSPBeliefRevisionBus | None = None,
+        loop_churn_threshold: int = 2,
+    ) -> None:
+        self.supervisor = supervisor or HybridComputerUsePetriSupervisor()
+        self.belief_bus = belief_bus or DBSPBeliefRevisionBus()
+        self.loop_churn_threshold = max(1, int(loop_churn_threshold))
+
+    @staticmethod
+    def probe_isolation(*, budget_s: float = 30.0) -> dict[str, Any]:
+        from canonical.runtime import os_isolation_v1
+
+        return os_isolation_v1.probe(budget_s=budget_s)
+
+    @staticmethod
+    def _run_confined_argv(
+        argv: Sequence[str],
+        *,
+        work_dir: Path,
+        budget_s: float = 15.0,
+        allow_network: bool = False,
+        env: Mapping[str, str] | None = None,
+    ) -> dict[str, Any]:
+        from canonical.runtime import os_isolation_v1
+
+        sup = os_isolation_v1.support()
+        if not sup.get("available"):
+            return {
+                "isolated": False,
+                "ok": False,
+                "caps_dropped": False,
+                "status": "ISOLATION_UNAVAILABLE",
+                "reason": sup.get("reason", os_isolation_v1.UNAVAILABLE),
+            }
+        return os_isolation_v1.run(
+            list(argv),
+            work_dir=work_dir,
+            budget_s=budget_s,
+            allow_network=allow_network,
+            env=env,
+        )
+
+    def execute_episode(
+        self,
+        work_dir: str | Path,
+        steps: Sequence[Mapping[str, Any]],
+        *,
+        goal_id: str = "confined_hcu_episode",
+        budget_s: float = 15.0,
+        allow_network: bool = False,
+        verify_effect: bool = True,
+    ) -> dict[str, Any]:
+        t0 = time.perf_counter()
+        wd = Path(work_dir).resolve()
+        wd.mkdir(parents=True, exist_ok=True)
+
+        trace: list[dict[str, Any]] = []
+        recent_pairs: list[tuple[str, str]] = []
+        channel_counts = {"programmatic": 0, "semantic": 0, "visual": 0}
+        total_cost = 0.0
+        rolled_back_steps = 0
+        recovered_steps = 0
+        effect_rejections = 0
+        failure_gate_skips = 0
+        all_ok = True
+
+        for idx, step in enumerate(steps):
+            action_name = str(step.get("action") or f"step_{idx}")
+            candidates: list[Mapping[str, Any]] = [step]
+            for fb in step.get("fallback_steps") or ():
+                if isinstance(fb, Mapping):
+                    candidates.append(fb)
+
+            step_resolved = False
+            step_records: list[dict[str, Any]] = []
+
+            for c_idx, cand in enumerate(candidates):
+                cand_action = str(cand.get("action") or f"{action_name}__alt_{c_idx}")
+                argv = [str(x) for x in (cand.get("argv") or ())]
+                elev_in = dict(cand)
+                if argv and not elev_in.get("programmatic_cmd"):
+                    elev_in["programmatic_cmd"] = " ".join(argv)
+                channel, _chosen, _saved = self.supervisor.elevate_channel(elev_in)
+                cost = float(_CHANNEL_COST.get(channel, 1.0))
+
+                pre_snap = _snapshot_work_dir_bytes(wd)
+                pre_digest = _digest_work_dir(pre_snap)
+                cmd_sig = hashlib.sha256(json.dumps(argv, sort_keys=True).encode("utf-8")).hexdigest()[:16]
+                ctx_key = f"{goal_id}:{pre_digest}"
+
+                # 1. PreCommitFailureGate check
+                fg = self.belief_bus.check_pre_commit_gate(ctx_key, cmd_sig)
+                if not fg["allowed"]:
+                    failure_gate_skips += 1
+                    step_records.append(
+                        {
+                            "attempt": c_idx,
+                            "action": cand_action,
+                            "status": "BLOCKED_BY_FAILURE_GATE",
+                            "reason": fg.get("reason", "REPEATED_FAILING_ACTION"),
+                        }
+                    )
+                    continue
+
+                # 2. OSWorld-Human 2-step loop-churn breaker
+                pair = (f"{cand_action}:{cmd_sig[:8]}", pre_digest)
+                if recent_pairs.count(pair) >= self.loop_churn_threshold:
+                    step_records.append(
+                        {
+                            "attempt": c_idx,
+                            "action": cand_action,
+                            "status": "LOOP_CHURN_BROKEN",
+                            "state_digest": pre_digest,
+                        }
+                    )
+                    continue
+
+                # 3. Microsecond Petri guard check
+                t_name = str(cand.get("petri_transition") or cand_action)
+                if t_name in self.supervisor.transitions:
+                    p_ok, p_reason, p_us = self.supervisor.check_petri_transition(t_name)
+                    if not p_ok:
+                        step_records.append(
+                            {
+                                "attempt": c_idx,
+                                "action": cand_action,
+                                "status": "BLOCKED_BY_PETRI_GUARD",
+                                "reason": p_reason,
+                                "petri_us": round(p_us, 3),
+                            }
+                        )
+                        continue
+
+                channel_counts[channel] = channel_counts.get(channel, 0) + 1
+                total_cost += cost
+                recent_pairs.append(pair)
+
+                if not argv:
+                    step_records.append({"attempt": c_idx, "action": cand_action, "status": "NO_ARGV"})
+                    continue
+
+                # 4. Real Linux kernel-isolated execution
+                iso_res = self._run_confined_argv(
+                    argv,
+                    work_dir=wd,
+                    budget_s=float(cand.get("budget_s", budget_s)),
+                    allow_network=bool(cand.get("allow_network", allow_network)),
+                    env=cand.get("env"),
+                )
+                if not iso_res.get("isolated") or not iso_res.get("caps_dropped"):
+                    _restore_work_dir_bytes(wd, pre_snap)
+                    rolled_back_steps += 1
+                    all_ok = False
+                    step_records.append(
+                        {
+                            "attempt": c_idx,
+                            "action": cand_action,
+                            "status": "FAIL_CLOSED_ISOLATION_REQUIRED",
+                            "isolation": {
+                                "isolated": bool(iso_res.get("isolated")),
+                                "caps_dropped": bool(iso_res.get("caps_dropped")),
+                                "reason": iso_res.get("reason", ""),
+                            },
+                        }
+                    )
+                    break
+
+                if not iso_res.get("ok"):
+                    _restore_work_dir_bytes(wd, pre_snap)
+                    rolled_back_steps += 1
+                    self.belief_bus.record_failure_witness(
+                        ctx_key,
+                        cmd_sig,
+                        witness=f"NONZERO_RC:{iso_res.get('returncode')}",
+                    )
+                    step_records.append(
+                        {
+                            "attempt": c_idx,
+                            "action": cand_action,
+                            "status": "CMD_FAILED_ROLLED_BACK",
+                            "returncode": iso_res.get("returncode"),
+                            "stderr": str(iso_res.get("stderr", ""))[:240],
+                            "isolated": True,
+                            "caps_dropped": True,
+                        }
+                    )
+                    continue
+
+                # 5. Ring-0 Byte Effect Oracle verification
+                effect_contract = cand.get("effect_contract") or step.get("effect_contract")
+                effect_report: dict[str, Any] | None = None
+                if verify_effect and isinstance(effect_contract, Mapping):
+                    out_rel = str(effect_contract.get("output_path") or "")
+                    out_file = (wd / out_rel).resolve() if out_rel else wd
+                    exp_src_path = effect_contract.get("expected_source_path")
+                    if isinstance(exp_src_path, (str, Path)) and not Path(exp_src_path).is_absolute():
+                        exp_src_path = (wd / exp_src_path).resolve()
+                    effect_report = verify_byte_effect(
+                        out_file,
+                        expected_format=effect_contract.get("expected_format"),
+                        expected_source_bytes=effect_contract.get("expected_source_bytes"),
+                        expected_source_path=exp_src_path,
+                        baseline_archive_hashes=effect_contract.get("baseline_archive_hashes"),
+                        allowed_archive_mutations=effect_contract.get("allowed_archive_mutations") or (),
+                    )
+                    if not effect_report.get("pass"):
+                        effect_rejections += 1
+                        _restore_work_dir_bytes(wd, pre_snap)
+                        rolled_back_steps += 1
+                        self.belief_bus.record_failure_witness(
+                            ctx_key,
+                            cmd_sig,
+                            witness=str(effect_report.get("status", "EFFECT_ORACLE_FAILED")),
+                        )
+                        step_records.append(
+                            {
+                                "attempt": c_idx,
+                                "action": cand_action,
+                                "status": "EFFECT_ORACLE_REJECTED_ROLLED_BACK",
+                                "effect_status": effect_report.get("status"),
+                                "effect_verdict": effect_report.get("verdict"),
+                                "isolated": True,
+                                "caps_dropped": True,
+                            }
+                        )
+                        continue
+
+                # 6. Directory diff contract (zero collateral file mutations)
+                allowed_files = cand.get("allowed_modified_files") or step.get("allowed_modified_files")
+                dir_diff: dict[str, Any] | None = None
+                if allowed_files is not None:
+                    post_snap = _snapshot_work_dir_bytes(wd)
+                    before_h = {k: hashlib.sha256(v).hexdigest() for k, v in pre_snap.items()}
+                    after_h = {k: hashlib.sha256(v).hexdigest() for k, v in post_snap.items()}
+                    dir_diff = verify_directory_effect_diff(
+                        before_h,
+                        after_h,
+                        allowed_writes=[str(x) for x in allowed_files],
+                    )
+                    if not dir_diff.get("pass"):
+                        effect_rejections += 1
+                        _restore_work_dir_bytes(wd, pre_snap)
+                        rolled_back_steps += 1
+                        self.belief_bus.record_failure_witness(
+                            ctx_key,
+                            cmd_sig,
+                            witness=f"COLLATERAL_FILE_MUTATION:{dir_diff.get('unexpected_writes', [])}",
+                        )
+                        step_records.append(
+                            {
+                                "attempt": c_idx,
+                                "action": cand_action,
+                                "status": "COLLATERAL_MUTATION_ROLLED_BACK",
+                                "dir_diff": dir_diff,
+                                "isolated": True,
+                                "caps_dropped": True,
+                            }
+                        )
+                        continue
+
+                # Commit Petri marking and succeed
+                if t_name in self.supervisor.transitions:
+                    self.supervisor.fire_petri_transition(t_name)
+                if c_idx > 0:
+                    recovered_steps += 1
+                step_resolved = True
+                step_records.append(
+                    {
+                        "attempt": c_idx,
+                        "action": cand_action,
+                        "channel": channel,
+                        "status": "EXECUTED_VERIFIED",
+                        "isolated": True,
+                        "caps_dropped": True,
+                        "namespaces": list(iso_res.get("namespaces") or ()),
+                        "seconds": iso_res.get("seconds"),
+                        "stdout": str(iso_res.get("stdout", ""))[:240],
+                        "effect_report": effect_report,
+                        "dir_diff": dir_diff,
+                    }
+                )
+                break
+
+            trace.append(
+                {
+                    "step": idx,
+                    "action": action_name,
+                    "resolved": step_resolved,
+                    "attempts": step_records,
+                }
+            )
+            if not step_resolved:
+                all_ok = False
+                break
+
+        baseline_visual_cost = float(max(1, sum(channel_counts.values()))) * _CHANNEL_COST["visual"]
+        cost_reduction_pct = round((1.0 - total_cost / max(1e-9, baseline_visual_cost)) * 100.0, 2)
+        return {
+            "schema": "BRAIN_CONFINED_HYBRID_CU_V1",
+            "pass": bool(all_ok),
+            "work_dir": str(wd),
+            "steps_executed": len(trace),
+            "channel_counts": channel_counts,
+            "total_cost": round(total_cost, 4),
+            "cost_reduction_vs_visual_only_pct": cost_reduction_pct,
+            "rolled_back_steps": rolled_back_steps,
+            "recovered_steps": recovered_steps,
+            "effect_rejections": effect_rejections,
+            "failure_gate_skips": failure_gate_skips,
+            "trace": trace,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+
+# ===========================================================================
+# 8. Wave 37: Unified Multi-File Repo Futamura Portfolio Solver
+# ===========================================================================
+
+
+def _generate_extended_ast_candidates(
+    source: str,
+    suspect_lines: Sequence[int] | None = None,
+    failure_witnesses: Sequence[str] = (),
+    *,
+    max_candidates: int = 96,
+) -> list[tuple[str, str]]:
+    """Pure-stdlib zero-LLM byte-span AST repair synthesizer covering real multi-file
+    repo & QuixBugs algorithmic bug classes (relational/arithmetic/boolean/unary/
+    builtin min-max/off-by-one/break-continue/operand-swap/constant tweaks)."""
+    eng = ZeroOverheadCoWZygoteRepairEngine()
+    base = eng.synthesize_candidates(source, list(suspect_lines or ()), list(failure_witnesses))
+    seen: set[str] = {source}
+    out: list[tuple[str, str]] = []
+    for label, cand in base:
+        if cand not in seen:
+            seen.add(cand)
+            out.append((label, cand))
+
+    try:
+        tree = ast.parse(source)
+    except SyntaxError:
+        return out[:max_candidates]
+
+    lines = source.splitlines(keepends=True)
+    suspect_set = set(suspect_lines) if suspect_lines else set()
+
+    def _replace_line_token(lineno: int, old: str, new: str, label: str) -> None:
+        if len(out) >= max_candidates or lineno < 1 or lineno > len(lines):
+            return
+        line = lines[lineno - 1]
+        if old in line:
+            cand = "".join(lines[: lineno - 1] + [line.replace(old, new, 1)] + lines[lineno:])
+            if cand not in seen:
+                try:
+                    ast.parse(cand)
+                except SyntaxError:
+                    return
+                seen.add(cand)
+                out.append((label, cand))
+
+    def _replace_span(node: ast.AST, replacement: str, label: str) -> None:
+        if len(out) >= max_candidates:
+            return
+        l1 = getattr(node, "lineno", None)
+        c1 = getattr(node, "col_offset", None)
+        l2 = getattr(node, "end_lineno", None)
+        c2 = getattr(node, "end_col_offset", None)
+        if None in (l1, c1, l2, c2) or l1 != l2:
+            return
+        line = lines[l1 - 1]
+        new_line = line[:c1] + replacement + line[c2:]
+        cand = "".join(lines[: l1 - 1] + [new_line] + lines[l1:])
+        if cand not in seen:
+            try:
+                ast.parse(cand)
+            except SyntaxError:
+                return
+            seen.add(cand)
+            out.append((label, cand))
+
+    def _node_src(node: ast.AST) -> str | None:
+        l1 = getattr(node, "lineno", None)
+        c1 = getattr(node, "col_offset", None)
+        l2 = getattr(node, "end_lineno", None)
+        c2 = getattr(node, "end_col_offset", None)
+        if None in (l1, c1, l2, c2) or l1 != l2:
+            return None
+        return lines[l1 - 1][c1:c2]
+
+    builtin_swaps = {"min": "max", "max": "min", "any": "all", "all": "any"}
+    for node in ast.walk(tree):
+        if len(out) >= max_candidates:
+            break
+        ln = getattr(node, "lineno", 0)
+        if suspect_set and ln not in suspect_set:
+            continue
+        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name):
+            fname = node.func.id
+            if fname in builtin_swaps:
+                _replace_span(node.func, builtin_swaps[fname], f"builtin_{fname}_to_{builtin_swaps[fname]}@L{ln}")
+            if fname == "range" and len(node.args) in (1, 2):
+                stop_node = node.args[-1]
+                stop_src = _node_src(stop_node)
+                if stop_src:
+                    _replace_span(stop_node, f"({stop_src}) + 1", f"range_stop_plus1@L{ln}")
+                    _replace_span(stop_node, f"({stop_src}) - 1", f"range_stop_minus1@L{ln}")
+        elif isinstance(node, ast.Subscript):
+            slc = _node_src(node.slice)
+            if slc and ":" not in slc:
+                _replace_span(node.slice, f"({slc}) - 1", f"index_minus1@L{ln}")
+                _replace_span(node.slice, f"({slc}) + 1", f"index_plus1@L{ln}")
+        elif isinstance(node, ast.Break):
+            _replace_line_token(ln, "break", "continue", f"break_to_continue@L{ln}")
+        elif isinstance(node, ast.Continue):
+            _replace_line_token(ln, "continue", "break", f"continue_to_break@L{ln}")
+        elif isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.Not):
+            inner = _node_src(node.operand)
+            if inner:
+                _replace_span(node, inner, f"drop_not@L{ln}")
+        elif isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.USub):
+            inner = _node_src(node.operand)
+            if inner:
+                _replace_span(node, inner, f"drop_usub@L{ln}")
+        elif isinstance(node, ast.Compare) and len(node.ops) == 1 and len(node.comparators) == 1:
+            op = node.ops[0]
+            lhs_s = _node_src(node.left)
+            rhs_s = _node_src(node.comparators[0])
+            if lhs_s and rhs_s:
+                if isinstance(op, ast.In):
+                    _replace_span(node, f"{lhs_s} not in {rhs_s}", f"in_to_not_in@L{ln}")
+                elif isinstance(op, ast.NotIn):
+                    _replace_span(node, f"{lhs_s} in {rhs_s}", f"not_in_to_in@L{ln}")
+                elif isinstance(op, ast.Is):
+                    _replace_span(node, f"{lhs_s} is not {rhs_s}", f"is_to_is_not@L{ln}")
+                elif isinstance(op, ast.IsNot):
+                    _replace_span(node, f"{lhs_s} is {rhs_s}", f"is_not_to_is@L{ln}")
+        elif isinstance(node, ast.BinOp):
+            left_s = _node_src(node.left)
+            right_s = _node_src(node.right)
+            if left_s and right_s:
+                ext_binop_swaps = {
+                    ast.Add: ("-", "*"),
+                    ast.Sub: ("+", "*"),
+                    ast.Mult: ("+", "-", "//", "/"),
+                    ast.Div: ("*", "//", "%"),
+                    ast.FloorDiv: ("/", "*", "%"),
+                    ast.Mod: ("//", "/", "*"),
+                }
+                for alt_tok in ext_binop_swaps.get(type(node.op), ()):
+                    _replace_span(node, f"({left_s}) {alt_tok} ({right_s})", f"ext_binop_{alt_tok}@L{ln}")
+                if left_s != right_s and isinstance(node.op, (ast.Sub, ast.Div, ast.FloorDiv, ast.Mod)):
+                    op_tok = {ast.Sub: "-", ast.Div: "/", ast.FloorDiv: "//", ast.Mod: "%"}[type(node.op)]
+                    _replace_span(node, f"({right_s}) {op_tok} ({left_s})", f"swap_binop_operands@L{ln}")
+        elif isinstance(node, ast.Constant) and isinstance(node.value, int) and not isinstance(node.value, bool):
+            if -2 <= node.value <= 2:
+                for delta in (1, -1):
+                    _replace_span(node, str(node.value + delta), f"int_const_{node.value}_to_{node.value + delta}@L{ln}")
+    return out[:max_candidates]
+
+
+class MultifileFutamuraRepoSolver:
+    """Unified multi-file Python repository repair solver uniting:
+    - Rung 0: Alpha-normalized compiled Futamura AST rules (< 2 ms scan across repo files)
+    - Pure-stdlib `os.fork()` CoW overlay execution (`stdlib_cow_test_runner_v1`) — ZERO disk mutation on screen
+    - Multi-file dynamic coverage localization (`capture_frames=True` -> covered suspect lines)
+    - Extended zero-LLM byte-span AST repair synthesis (single-file + 2-file coordinated edits)
+      + optional `#7130` 96-organ epistemic portfolio fallback
+    - Ring-0 Gate: atomic `ddmin_minimize_hunks` + `audit_patch_mutation_kill` + `verify_directory_effect_diff`
+      + `ConformalEValueGate` (`alpha=0.05`) + `PreCommitFailureGate`
+    - Automatic Futamura Compile-Back: verified multi-file repairs compile directly into Rung-0 rules
+      so unseen isomorphic multi-file repos solve at Rung 0 with 0 search & 0 LLM calls.
+    """
+
+    def __init__(self, *, cascade: FutamuraSelfCompilingCascade | None = None) -> None:
+        self.cascade = cascade or FutamuraSelfCompilingCascade()
+
+    @staticmethod
+    def _is_test_rel(rel: str, test_targets: Sequence[str]) -> bool:
+        norm = rel.replace("\\", "/")
+        if norm in {str(t).replace("\\", "/") for t in test_targets}:
+            return True
+        name = Path(norm).name
+        parts = set(Path(norm).parts)
+        return name.startswith("test_") or name.endswith("_test.py") or "tests" in parts
+
+    @staticmethod
+    def _discover_repo_py_files(repo_dir: Path, test_targets: Sequence[str]) -> list[str]:
+        rels: list[str] = []
+        for p in sorted(repo_dir.rglob("*.py")):
+            rel = str(p.relative_to(repo_dir)).replace("\\", "/")
+            if any(seg.startswith(".") or seg == "__pycache__" for seg in Path(rel).parts):
+                continue
+            if MultifileFutamuraRepoSolver._is_test_rel(rel, test_targets):
+                continue
+            rels.append(rel)
+        return rels
+
+    def _try_rung0_on_source(self, source: str) -> list[tuple[str, str]]:
+        """Yield `(rule_id, patched_source)` matches from compiled Rung-0 alpha-normalized rules."""
+        if not self.cascade._rung0_by_key:
+            return []
+        try:
+            tree = ast.parse(source)
+        except SyntaxError:
+            return []
+        matches: list[tuple[str, str]] = []
+        seen: set[str] = {source}
+        for node in ast.walk(tree):
+            if not hasattr(node, "lineno") or not hasattr(node, "end_lineno"):
+                continue
+            pkey = _preorder_signature(node)
+            rules = self.cascade._rung0_by_key.get(pkey)
+            if not rules:
+                continue
+            for rule in rules:
+                if rule.quarantined or rule.rubin_tau_hat <= 0.0:
+                    continue
+                bindings: dict[str, ast.AST] = {}
+                if not _match_template(rule.before_ast, node, bindings):
+                    continue
+                instantiated = _instantiate_template(rule.after_ast, bindings)
+                cand_src = splice_ast_byte_span(source, node, ast.unparse(instantiated))
+                if cand_src not in seen:
+                    seen.add(cand_src)
+                    matches.append((rule.rule_id, cand_src))
+        return matches
+
+    def solve(
+        self,
+        repo_dir: str | Path,
+        test_targets: Sequence[str],
+        *,
+        goal_text: str = "",
+        suspect_files: Sequence[str] | None = None,
+        auto_compile: bool = True,
+        apply_to_disk: bool = True,
+        use_portfolio_fallback: bool = False,
+        alpha: float = 0.05,
+        timeout_s: float = 10.0,
+        max_candidates_per_file: int = 96,
+    ) -> dict[str, Any]:
+        from canonical.swe_kernel import stdlib_cow_test_runner_v1 as cow_tr
+
+        t0 = time.perf_counter()
+        root = Path(repo_dir).resolve()
+        targets = [str(t) for t in test_targets]
+        if not targets:
+            targets = sorted(
+                str(p.relative_to(root)).replace("\\", "/")
+                for p in root.rglob("test_*.py")
+            )
+
+        # 0. Baseline CoW fork test + coverage localization
+        base_res = cow_tr.run_targets_cow_fork(root, targets, timeout_s=timeout_s, capture_frames=True)
+        if base_res.get("ok"):
+            return {
+                "schema": "BRAIN_MULTIFILE_FUTAMURA_SOLVE_V1",
+                "pass": True,
+                "rung": "ALREADY_PASSING",
+                "repo_dir": str(root),
+                "modified_files": [],
+                "candidates_evaluated": 0,
+                "proposer_calls": 0,
+                "compiled_rules_total": len(self.cascade._rules_by_id),
+                "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            }
+
+        failure_witnesses = [str(base_res.get("output") or "")]
+        covered_map: dict[str, set[int]] = {}
+        for k, line_list in (base_res.get("covered_lines") or {}).items():
+            norm_k = str(k).replace("\\", "/")
+            if not self._is_test_rel(norm_k, targets) and (root / norm_k).is_file():
+                covered_map[norm_k] = {int(ln) for ln in line_list if int(ln) > 0}
+
+        all_py = self._discover_repo_py_files(root, targets)
+        ordered_files: list[str] = []
+        if suspect_files:
+            for sf in suspect_files:
+                s = str(sf).replace("\\", "/")
+                if (root / s).is_file() and s not in ordered_files:
+                    ordered_files.append(s)
+        for rel in sorted(covered_map, key=lambda r: (Path(r).name == "__init__.py", -len(covered_map[r]), r)):
+            if rel not in ordered_files:
+                ordered_files.append(rel)
+        for rel in all_py:
+            if rel not in ordered_files:
+                ordered_files.append(rel)
+
+        orig_sources = {rel: (root / rel).read_text(encoding="utf-8") for rel in ordered_files}
+        candidates_evaluated = 0
+        failure_gate_skips = 0
+        winning_overlays: dict[str, str] | None = None
+        winning_rung = "NONE"
+        winning_rule_id = ""
+
+        # 1. Rung 0: Fast multi-file Futamura compiled skill scan (< 2 ms lookup)
+        t_r0 = time.perf_counter()
+        if self.cascade._rung0_by_key:
+            for rel in ordered_files:
+                src = orig_sources[rel]
+                src_sig = hashlib.sha256(src.encode("utf-8")).hexdigest()[:16]
+                r0_matches = self._try_rung0_on_source(src)
+                for rule_id, cand_src in r0_matches:
+                    p_sig = hashlib.sha256(f"{rel}:{cand_src}".encode("utf-8")).hexdigest()[:16]
+                    if not self.cascade.belief_bus.check_pre_commit_gate(src_sig, p_sig)["allowed"]:
+                        failure_gate_skips += 1
+                        continue
+                    candidates_evaluated += 1
+                    rule = self.cascade._rules_by_id.get(rule_id)
+                    if rule is not None:
+                        rule.hits += 1
+                    chk = cow_tr.run_targets_cow_fork(
+                        root, targets, overlays={rel: cand_src}, timeout_s=timeout_s
+                    )
+                    if chk.get("ok"):
+                        if rule is not None:
+                            rule.successes += 1
+                        winning_overlays = {rel: cand_src}
+                        winning_rung = "RUNG_0_COMPILED_SKILL"
+                        winning_rule_id = rule_id
+                        break
+                    if rule is not None:
+                        rule.failures += 1
+                    self.cascade.belief_bus.record_failure_witness(
+                        src_sig, p_sig, witness="RUNG0_OVERLAY_FAIL"
+                    )
+                if winning_overlays is not None:
+                    break
+        rung0_ms = round((time.perf_counter() - t_r0) * 1000.0, 3)
+
+        # 2. Rung 2: Multi-file dynamic coverage + extended AST synthesis in pure-RAM CoW overlay
+        screen_timeout_s = min(float(timeout_s), 1.5)
+        if winning_overlays is None:
+            per_file_cands: dict[str, list[tuple[str, str]]] = {}
+            for rel in ordered_files:
+                src = orig_sources[rel]
+                sus_lines = sorted(covered_map.get(rel) or ())
+                cands = _generate_extended_ast_candidates(
+                    src,
+                    suspect_lines=sus_lines or None,
+                    failure_witnesses=failure_witnesses,
+                    max_candidates=max_candidates_per_file,
+                )
+                if not cands and sus_lines:
+                    cands = _generate_extended_ast_candidates(
+                        src,
+                        suspect_lines=None,
+                        failure_witnesses=failure_witnesses,
+                        max_candidates=max_candidates_per_file,
+                    )
+                per_file_cands[rel] = cands
+                src_sig = hashlib.sha256(src.encode("utf-8")).hexdigest()[:16]
+                for _label, cand_src in cands:
+                    p_sig = hashlib.sha256(f"{rel}:{cand_src}".encode("utf-8")).hexdigest()[:16]
+                    if not self.cascade.belief_bus.check_pre_commit_gate(src_sig, p_sig)["allowed"]:
+                        failure_gate_skips += 1
+                        continue
+                    candidates_evaluated += 1
+                    chk = cow_tr.run_targets_cow_fork(
+                        root, targets, overlays={rel: cand_src}, timeout_s=screen_timeout_s
+                    )
+                    if chk.get("ok"):
+                        winning_overlays = {rel: cand_src}
+                        winning_rung = "RUNG_2_MULTIFILE_COW_AST"
+                        break
+                    self.cascade.belief_bus.record_failure_witness(
+                        src_sig, p_sig, witness="COW_OVERLAY_FAIL"
+                    )
+                if winning_overlays is not None:
+                    break
+
+            # 2b. Coordinated 2-file edit search (for genuine multi-file coupled bugs!)
+            if winning_overlays is None and len(ordered_files) >= 2:
+                top_files = [f for f in ordered_files if per_file_cands.get(f)][:4]
+                for i in range(len(top_files)):
+                    if winning_overlays is not None:
+                        break
+                    fa = top_files[i]
+                    for j in range(i + 1, len(top_files)):
+                        if winning_overlays is not None:
+                            break
+                        fb = top_files[j]
+                        for _la, ca in per_file_cands[fa][:16]:
+                            if winning_overlays is not None:
+                                break
+                            for _lb, cb in per_file_cands[fb][:16]:
+                                candidates_evaluated += 1
+                                chk = cow_tr.run_targets_cow_fork(
+                                    root,
+                                    targets,
+                                    overlays={fa: ca, fb: cb},
+                                    timeout_s=screen_timeout_s,
+                                )
+                                if chk.get("ok"):
+                                    winning_overlays = {fa: ca, fb: cb}
+                                    winning_rung = "RUNG_2_MULTIFILE_COORDINATED_AST"
+                                    break
+
+            # 2c. Optional fallback to #7130 96-Organ Epistemic Portfolio
+            if winning_overlays is None and use_portfolio_fallback:
+                try:
+                    from canonical.swe_kernel import unified_epistemic_portfolio_v1 as uep
+
+                    pre_snap = _snapshot_work_dir_bytes(root)
+                    p_res = uep.run_unified_epistemic_portfolio(
+                        workspace_dir=root,
+                        goal_text=goal_text or f"repair {targets}",
+                        pytest_targets=targets,
+                        suspect_files=ordered_files[:6],
+                        timeout_s=timeout_s,
+                    )
+                    post_snap = _snapshot_work_dir_bytes(root)
+                    if p_res.get("ok") or p_res.get("repaired"):
+                        diff_ov: dict[str, str] = {}
+                        for rel in ordered_files:
+                            if post_snap.get(rel) != pre_snap.get(rel) and rel in post_snap:
+                                diff_ov[rel] = post_snap[rel].decode("utf-8", errors="replace")
+                        _restore_work_dir_bytes(root, pre_snap)
+                        if diff_ov:
+                            chk = cow_tr.run_targets_cow_fork(root, targets, overlays=diff_ov, timeout_s=timeout_s)
+                            if chk.get("ok"):
+                                winning_overlays = diff_ov
+                                winning_rung = "RUNG_2_EPISTEMIC_PORTFOLIO_96"
+                    else:
+                        _restore_work_dir_bytes(root, pre_snap)
+                except Exception:
+                    pass
+
+        if winning_overlays is None:
+            return {
+                "schema": "BRAIN_MULTIFILE_FUTAMURA_SOLVE_V1",
+                "pass": False,
+                "rung": "UNSOLVED",
+                "repo_dir": str(root),
+                "suspect_files": ordered_files,
+                "modified_files": [],
+                "candidates_evaluated": candidates_evaluated,
+                "failure_gate_skips": failure_gate_skips,
+                "proposer_calls": 0,
+                "compiled_rules_total": len(self.cascade._rules_by_id),
+                "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            }
+
+        # 3. Ring-0 Gate: atomic ddmin + touched-line mutation kill + ConformalEValueGate
+        minimized_overlays: dict[str, str] = dict(winning_overlays)
+        ddmin_reports: dict[str, Any] = {}
+        mutation_reports: dict[str, Any] = {}
+        egate = ConformalEValueGate(alpha=alpha)
+        egate.observe("cow_overlay_suite_pass", passed=True, null_pass_prob=0.10)
+
+        for rel in sorted(winning_overlays):
+            before_src = orig_sources[rel]
+            after_src = minimized_overlays[rel]
+            other_ov = {k: v for k, v in minimized_overlays.items() if k != rel}
+
+            def _make_oracle(r_key: str, others: dict[str, str]) -> Callable[[str], bool]:
+                def _oracle(cand_text: str) -> bool:
+                    ov = dict(others)
+                    ov[r_key] = cand_text
+                    return bool(cow_tr.run_targets_cow_fork(root, targets, overlays=ov, timeout_s=timeout_s).get("ok"))
+                return _oracle
+
+            file_oracle = _make_oracle(rel, other_ov)
+            dd = ddmin_minimize_hunks(before_src, after_src, file_oracle)
+            minimized_overlays[rel] = str(dd["minimized_source"])
+            ddmin_reports[rel] = {
+                "original_hunks": dd["original_hunk_count"],
+                "minimized_hunks": dd["minimized_hunk_count"],
+                "hunks_removed": dd["pruned_hunk_count"],
+            }
+            mut = audit_patch_mutation_kill(before_src, minimized_overlays[rel], file_oracle, max_mutants=8)
+            mutation_reports[rel] = {
+                "mutants_generated": mut["mutants_tested"],
+                "mutants_killed": mut["mutants_killed"],
+                "kill_rate": mut["mutation_kill_ratio"],
+            }
+            if mut["mutants_tested"] > 0:
+                egate.observe(
+                    f"mutation_kill:{rel}",
+                    passed=bool(mut["mutation_kill_ratio"] >= 0.5),
+                    null_pass_prob=0.25,
+                )
+
+        # 4. Atomic disk commit + directory diff invariance + fresh on-disk re-verification
+        dir_diff_report: dict[str, Any] | None = None
+        if apply_to_disk:
+            snap_before = snapshot_directory_hashes(root)
+            for rel, new_src in minimized_overlays.items():
+                (root / rel).write_text(new_src, encoding="utf-8")
+            snap_after = snapshot_directory_hashes(root)
+            dir_diff_report = verify_directory_effect_diff(
+                snap_before,
+                snap_after,
+                allowed_writes=sorted(minimized_overlays),
+            )
+            # Invalidate stale CPython .pyc caches (same-second + same-size edits hit stale bytecode!)
+            for rel in minimized_overlays:
+                p_mod = root / rel
+                pycache = p_mod.parent / "__pycache__"
+                if pycache.is_dir():
+                    for pyc in pycache.glob(f"{p_mod.stem}.*.pyc"):
+                        pyc.unlink(missing_ok=True)
+            fresh_chk = cow_tr.run_targets_cow_fork(root, targets, timeout_s=timeout_s)
+            egate.observe(
+                "fresh_disk_reverify",
+                passed=bool(fresh_chk.get("ok") and dir_diff_report.get("pass")),
+                null_pass_prob=0.10,
+                hard_contradiction=not bool(fresh_chk.get("ok") and dir_diff_report.get("pass")),
+            )
+            if not (fresh_chk.get("ok") and dir_diff_report.get("pass")):
+                for rel in minimized_overlays:
+                    (root / rel).write_text(orig_sources[rel], encoding="utf-8")
+                return {
+                    "schema": "BRAIN_MULTIFILE_FUTAMURA_SOLVE_V1",
+                    "pass": False,
+                    "rung": "RING0_DISK_VERIFY_REJECTED",
+                    "dir_diff": dir_diff_report,
+                    "conformal": egate.decision(),
+                    "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+                }
+
+        # 5. Futamura Compile-Back: compile every verified file diff into Rung-0 alpha-normalized rules
+        compiled_rule_ids: list[str] = []
+        if auto_compile and winning_rung != "RUNG_0_COMPILED_SKILL":
+            for rel, new_src in sorted(minimized_overlays.items()):
+                rec = self.cascade.compile_verified_win_to_rung0(
+                    orig_sources[rel],
+                    new_src,
+                    source_rung=2,
+                )
+                if rec.get("compiled") and rec.get("rule_id"):
+                    compiled_rule_ids.append(str(rec["rule_id"]))
+
+        return {
+            "schema": "BRAIN_MULTIFILE_FUTAMURA_SOLVE_V1",
+            "pass": True,
+            "rung": winning_rung,
+            "winning_rule_id": winning_rule_id,
+            "compiled_rule_ids": compiled_rule_ids,
+            "compiled_rules_total": len(self.cascade._rules_by_id),
+            "repo_dir": str(root),
+            "modified_files": sorted(minimized_overlays),
+            "candidates_evaluated": candidates_evaluated,
+            "failure_gate_skips": failure_gate_skips,
+            "proposer_calls": 0,
+            "rung0_ms": rung0_ms,
+            "ddmin": ddmin_reports,
+            "mutation_audit": mutation_reports,
+            "dir_diff": dir_diff_report,
+            "conformal": egate.decision(),
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+
 # Process-shared default Futamura cascade instance (for `UnifiedModel` / `Creature` reuse).
 _SHARED_CASCADE: FutamuraSelfCompilingCascade | None = None
 
@@ -1844,6 +2758,33 @@ def run(payload: Mapping[str, Any], _root: Path | None = None) -> dict[str, Any]
             auto_compile=bool(payload.get("auto_compile", True)),
             use_cow_fork=bool(payload.get("use_cow_fork", True)),
             alpha=float(payload.get("alpha", 0.05)),
+        )
+    if op == "multifile_repo_solve":
+        cascade = payload.get("cascade") if isinstance(payload.get("cascade"), FutamuraSelfCompilingCascade) else shared_futamura_cascade()
+        solver = MultifileFutamuraRepoSolver(cascade=cascade)
+        return solver.solve(
+            payload["repo_dir"],
+            list(payload.get("test_targets") or ()),
+            goal_text=str(payload.get("goal_text") or ""),
+            suspect_files=payload.get("suspect_files"),
+            auto_compile=bool(payload.get("auto_compile", True)),
+            apply_to_disk=bool(payload.get("apply_to_disk", True)),
+            use_portfolio_fallback=bool(payload.get("use_portfolio_fallback", False)),
+            alpha=float(payload.get("alpha", 0.05)),
+        )
+    if op == "confined_hybrid_cu":
+        ex = ConfinedHybridComputerUseExecutor()
+        return ex.execute_episode(
+            payload["work_dir"],
+            list(payload.get("steps") or ()),
+            goal_id=str(payload.get("goal_id") or "confined_hcu_episode"),
+            budget_s=float(payload.get("budget_s", 15.0)),
+            allow_network=bool(payload.get("allow_network", False)),
+            verify_effect=bool(payload.get("verify_effect", True)),
+        )
+    if op == "probe_os_isolation":
+        return ConfinedHybridComputerUseExecutor.probe_isolation(
+            budget_s=float(payload.get("budget_s", 30.0)),
         )
     if op == "conformal_evalue":
         gate = ConformalEValueGate(alpha=float(payload.get("alpha", 0.05)))

@@ -1053,34 +1053,39 @@ def solve_epistemic_workspace_cow(
 
     actions_log: list[str] = []
 
-    # Stage 4–7 (Regime A): Local Pytest Repair -> Green-Suite Metamorphic Fallback
-    if local_tests:
-        rep = ALCR.repair_git_repo_from_pytest(
-            repo_dir=ws,
-            pytest_targets=local_tests[:4],
-            store=active_store,
+    # Stage 4–7 (Regime A): Unified Epistemic Portfolio (Warm CoW Fork + Whole-Slice Mutant-Killing Gate + Polyglot)
+    has_polyglot = any(
+        p.suffix in (".c", ".js") and ".git" not in p.parts and "node_modules" not in p.parts
+        for p in ws.rglob("*")
+    )
+    if local_tests or (not all_py and has_polyglot):
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as UEP
+
+        port_res = UEP.run_unified_epistemic_portfolio(
+            workspace_dir=ws,
+            goal_text=goal_text,
+            pytest_targets=local_tests if local_tests else None,
+            suspect_files=suspect_files,
             timeout_s=timeout_s,
         )
-        actions_log.append(f"pytest_repair:{rep.get('status')}")
-        if rep.get("status") == "VERIFIED":
-            if rep.get("patched_files"):
-                for rf, rc in rep["patched_files"].items():
-                    (ws / rf).write_text(rc, encoding="utf-8")
-            elif rep.get("patched_file") and rep.get("patched_source"):
-                (ws / rep["patched_file"]).write_text(rep["patched_source"], encoding="utf-8")
+        actions_log.append(f"unified_portfolio:{port_res.get('status')}:{port_res.get('mechanism', '')}")
+        if port_res.get("status") == "VERIFIED" and port_res.get("pass") is True:
             return {
                 "status": "VERIFIED",
                 "pass": True,
-                "regime": "PYTEST_ANGELIC_COW_REPAIR",
-                "mechanism": rep.get("mechanism"),
-                "learned_skill_id": rep.get("learned_skill_id"),
+                "regime": port_res.get("regime", "UNIFIED_EPISTEMIC_PORTFOLIO_WHOLE_SLICE_VERIFIED"),
+                "mechanism": port_res.get("mechanism"),
+                "learned_skill_id": port_res.get("learned_motif_id"),
+                "patched_files": port_res.get("patched_files"),
+                "gate_telemetry": port_res.get("gate_telemetry"),
+                "organ_trace": port_res.get("organ_trace"),
                 "recalled_skill_hits": recalled_skill_hits,
                 "actions_taken": actions_log,
                 "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 2),
                 "model_calls": 0,
                 "parameters_stored": 0,
             }
-        if rep.get("status") == "ALREADY_PASSING" and non_test_py:
+        if port_res.get("status") == "ALREADY_PASSING" and non_test_py and local_tests:
             meta_rep = ALCR.repair_issue_only_green_repo_cow(
                 repo_dir=ws,
                 suspect_files=non_test_py[:4],

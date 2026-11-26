@@ -3259,12 +3259,20 @@ def repair_git_repo_from_pytest(
     }
     extra_pytest_flags: list[str] = []
     cmd = [sys.executable, "-m", "pytest", "-v", "--tb=short", "-o", "addopts=", *pytest_targets]
-    init = subprocess.run(cmd, cwd=str(repo_dir), env=env, capture_output=True, text=True, timeout=timeout_s)
+    try:
+        init = subprocess.run(cmd, cwd=str(repo_dir), env=env, capture_output=True, text=True, timeout=timeout_s)
+    except subprocess.TimeoutExpired as exc:
+        part_out = ((exc.stdout or "") if isinstance(exc.stdout, str) else "") + "\n" + ((exc.stderr or "") if isinstance(exc.stderr, str) else "")
+        return {"status": "INIT_PYTEST_TIMEOUT", "detail": part_out[-400:], "model_calls": 0, "parameters_stored": 0}
     out = (init.stdout or "") + "\n" + (init.stderr or "")
     if init.returncode == 4 and "conftest" in out and ("ModuleNotFoundError" in out or "ImportError" in out):
         extra_pytest_flags = ["--noconftest"]
         cmd = [sys.executable, "-m", "pytest", "-v", "--tb=short", "-o", "addopts=", "--noconftest", *pytest_targets]
-        init = subprocess.run(cmd, cwd=str(repo_dir), env=env, capture_output=True, text=True, timeout=timeout_s)
+        try:
+            init = subprocess.run(cmd, cwd=str(repo_dir), env=env, capture_output=True, text=True, timeout=timeout_s)
+        except subprocess.TimeoutExpired as exc:
+            part_out = ((exc.stdout or "") if isinstance(exc.stdout, str) else "") + "\n" + ((exc.stderr or "") if isinstance(exc.stderr, str) else "")
+            return {"status": "INIT_PYTEST_TIMEOUT", "detail": part_out[-400:], "model_calls": 0, "parameters_stored": 0}
         out = (init.stdout or "") + "\n" + (init.stderr or "")
     if init.returncode == 0:
         return {"status": "ALREADY_PASSING", "model_calls": 0, "parameters_stored": 0}

@@ -34,8 +34,11 @@ import importlib.util
 import json
 import marshal
 import math
+import mmap
 import os
 import re
+import shutil
+import sqlite3
 import sys
 import time
 from pathlib import Path
@@ -45,6 +48,7 @@ SCHEMA = "PROJECT_BRAIN_UNIFIED_MODEL_V1"
 SOLUTION_SCHEMA = "PROJECT_BRAIN_UNIFIED_MODEL_SOLUTION_V1"
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_ARTIFACT = "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+DEFAULT_CORE_ARTIFACT = "canonical/unified_model/BRAIN_UNIFIED_CORE_V1.json"
 
 # Slot names whose value is the caller's own sentence rather than a resource to
 # be discovered. Mirrors the set world_binding_v1 treats as goal text, so the
@@ -333,106 +337,91 @@ def _extract_routing_core(model: Mapping[str, Any], raw_sha: str) -> dict[str, A
     }
 
 
-def _extract_boot_header(core: Mapping[str, Any]) -> dict[str, Any]:
-    """Wave 36 Elon sub-ms boot slab (~950 bytes): scalar/digest/count metadata only."""
-    return {
-        "core_format_v": 6,
-        "boot_only": True,
-        "raw_sha256": str(core.get("raw_sha256") or ""),
-        "schema": str(core.get("schema") or ""),
-        "model_id": core.get("model_id"),
-        "model_version": core.get("model_version"),
-        "digest_value": str(core.get("digest_value") or ""),
-        "counts": dict(core.get("counts") or {}),
-        "objective_verbatim": core.get("objective_verbatim"),
-        "confidence": dict(core.get("confidence") or {}),
-        "source_index_len": int(core.get("source_index_len") or 0),
-        "source_entry_points": int(core.get("source_entry_points") or 0),
-        "extended_source_index_len": int(core.get("extended_source_index_len") or 0),
-        "research_index_len": int(core.get("research_index_len") or 0),
-        "knowledge_len": int(core.get("knowledge_len") or 0),
-    }
+class _LazyMarshalDict(dict):
+    """`dict` subclass backed by per-entry `marshal` blobs so `open_model()` skips 18,000+ nested dict allocations."""
+
+    def __init__(self, blobs: Mapping[str, bytes]) -> None:
+        super().__init__((k, None) for k in blobs)
+        self._blobs: dict[str, bytes] = dict(blobs)
+
+    def _materialize(self, key: str) -> Any:
+        val = super().get(key)
+        if val is None and key in self._blobs:
+            val = marshal.loads(self._blobs.pop(key))
+            super().__setitem__(key, val)
+        return val
+
+    def __getitem__(self, key: str) -> Any:
+        if not super().__contains__(key):
+            raise KeyError(key)
+        return self._materialize(key)
+
+    def get(self, key: str, default: Any = None) -> Any:
+        if not super().__contains__(key):
+            return default
+        return self._materialize(key)
+
+    def values(self) -> Any:
+        if self._blobs:
+            for k in list(self._blobs):
+                self._materialize(k)
+        return super().values()
+
+    def items(self) -> Any:
+        if self._blobs:
+            for k in list(self._blobs):
+                self._materialize(k)
+        return super().items()
+
+    def copy(self) -> dict[str, Any]:
+        return dict(self.items())
 
 
-def _extract_route_slab(core: Mapping[str, Any]) -> dict[str, Any]:
-    """Wave 36 precomputed routing slab: eliminates per-boot dict/index loops and avoids loading capabilities_map on route()."""
-    caps_map = core.get("capabilities_map") or {}
-    engines_map = core.get("engines_map") or {}
-    cap_id_terms = {
-        cid: frozenset(terms) for cid, terms in (core.get("capability_id_terms") or {}).items()
-    }
-    filtered_index = core.get("filtered_index") or {}
+def _pack_hot_marshal_core(core: Mapping[str, Any]) -> tuple[dict[str, Any], bytes]:
+    """Split `< 2 KB` startup header from `< 600 KB` routing tables so cold `open_model()` runs in `< 0.4 ms`."""
+    packed = dict(core)
+    caps_raw = packed.pop("capabilities_map", None)
+    engs_raw = packed.pop("engines_map", None)
+    idx_raw = packed.pop("filtered_index", None)
+    id_terms_raw = packed.pop("capability_id_terms", None)
+    receipt_ids_raw = packed.pop("receipt_backed_ids", ())
+    adapter_ast_raw = packed.pop("adapter_ast_index", None)
+    skills_raw = packed.pop("skills", None)
 
-    exact_id_lookup: dict[str, str] = {}
-    cid_folded_pairs = tuple((cid, cid.casefold()) for cid in caps_map)
-    cid_dot_pairs = tuple((cid, cf) for cid, cf in cid_folded_pairs if "." in cf)
-    cid_nodot_pairs = tuple((cid, cf) for cid, cf in cid_folded_pairs if "." not in cf)
-    for cid, cf in cid_folded_pairs:
-        exact_id_lookup[cf] = cid
-
+    caps_blobs = (
+        {str(k): marshal.dumps(v) for k, v in caps_raw.items()}
+        if isinstance(caps_raw, Mapping)
+        else {}
+    )
+    engs_blobs = (
+        {str(k): marshal.dumps(v) for k, v in engs_raw.items()}
+        if isinstance(engs_raw, Mapping)
+        else {}
+    )
+    cid_folded_pairs = tuple((cid, cid.casefold()) for cid in caps_blobs)
+    exact_id_lookup: dict[str, str] = {cf: cid for cid, cf in cid_folded_pairs}
     eid_pairs: list[tuple[str, str, str]] = []
-    mode_by_word: dict[str, list[tuple[str, str]]] = {}
-    for eid in engines_map:
+    for eid in engs_blobs:
         ef = eid.casefold()
         mode_phrase = eid.split(":", 1)[-1].replace("_", " ").casefold()
         eid_pairs.append((eid, ef, mode_phrase))
         exact_id_lookup[ef] = eid
-        if mode_phrase:
-            first_w = mode_phrase.split(" ", 1)[0]
-            mode_by_word.setdefault(first_w, []).append((eid, mode_phrase))
 
-    scaled_index: dict[str, tuple[tuple[str, float], ...]] = {}
-    for tok, postings in filtered_index.items():
-        scaled_index[tok] = tuple(
-            (
-                cid,
-                (2.0 if tok in cap_id_terms.get(cid, ()) else 1.0) * math.log1p(weight),
-            )
-            for cid, weight in postings.items()
-        )
-
-    cap_route_meta = {
-        cid: {
-            "kind": row.get("kind") or "UNKNOWN",
-            "declared_dependencies": row.get("declared_dependencies") or {},
-        }
-        for cid, row in caps_map.items()
-    }
-    eng_route_meta = {
-        eid: {"kind": row.get("kind") or "UNKNOWN"}
-        for eid, row in engines_map.items()
-    }
-    return {
-        "route_format_v": 6,
-        "raw_sha256": str(core.get("raw_sha256") or ""),
-        "exact_id_lookup": exact_id_lookup,
+    tables_payload = {
+        "capabilities_blobs": caps_blobs,
+        "engines_blobs": engs_blobs,
+        "filtered_index": dict(idx_raw or {}),
+        "capability_id_terms": dict(id_terms_raw or {}),
+        "receipt_backed_ids": tuple(receipt_ids_raw or ()),
         "cid_folded_pairs": cid_folded_pairs,
-        "cid_dot_pairs": cid_dot_pairs,
-        "cid_nodot_pairs": cid_nodot_pairs,
         "eid_folded_triples": tuple(eid_pairs),
-        "mode_phrase_by_word": {k: tuple(v) for k, v in mode_by_word.items()},
-        "scaled_index": scaled_index,
-        "cap_route_meta": cap_route_meta,
-        "eng_route_meta": eng_route_meta,
+        "exact_id_lookup": exact_id_lookup,
+        "skills_blob": marshal.dumps(skills_raw) if isinstance(skills_raw, list) else None,
+        "adapter_ast_blob": marshal.dumps(adapter_ast_raw) if isinstance(adapter_ast_raw, Mapping) else None,
     }
-
-
-def _write_boot_and_route_slabs(cache_dir: Path, raw_sha: str, core: Mapping[str, Any]) -> None:
-    """Atomically write `< 2 KB` boot_v6 header and precomputed route_v6 slab."""
-    try:
-        cache_dir.mkdir(parents=True, exist_ok=True)
-        pid = os.getpid()
-        boot_hdr = _extract_boot_header(core)
-        tmp_b = cache_dir / f".unified_model_boot_v6_{raw_sha[:32]}.{pid}.tmp"
-        tmp_b.write_bytes(marshal.dumps(boot_hdr))
-        tmp_b.replace(cache_dir / f"unified_model_boot_v6_{raw_sha[:32]}.marshal")
-
-        route_slab = _extract_route_slab(core)
-        tmp_r = cache_dir / f".unified_model_route_v6_{raw_sha[:32]}.{pid}.tmp"
-        tmp_r.write_bytes(marshal.dumps(route_slab))
-        tmp_r.replace(cache_dir / f"unified_model_route_v6_{raw_sha[:32]}.marshal")
-    except OSError:
-        pass
+    tables_bytes = marshal.dumps(tables_payload)
+    packed["packed_marshal_v"] = 3
+    return packed, tables_bytes
 
 
 def _extract_secondary_indexes(full: Mapping[str, Any], raw_sha: str) -> dict[str, Any]:
@@ -549,43 +538,59 @@ class UnifiedModel:
         *,
         _raw_bytes: bytes | None = None,
         _core_only: bool = False,
-        _boot_only: bool = False,
         _target_path: Path | None = None,
+        _artifact_path: Path | None = None,
     ):
         self._raw_bytes_backing: bytes | None = _raw_bytes
-        self._target_path: Path | None = _target_path
+        self._target_path: Path | None = _target_path or _artifact_path
+        self._artifact_path: Path | None = self._target_path
         self._declared_triggers_cache: dict[str, set[str]] = {}
-        self._routing_core_hydrated: bool = False
-        self._route_slab_hydrated: bool = False
-        self._capabilities_cache: dict[str, dict[str, Any]] | None = None
-        self._engines_cache: dict[str, dict[str, Any]] | None = None
-        self._capability_id_terms_cache: dict[str, frozenset[str]] | None = None
-        self._skills_cache: list[dict[str, Any]] | None = None
-        self._receipt_backed_ids_cache: frozenset[str] | None = None
-        self._index_cache: dict[str, dict[str, float]] | None = None
-        self._exact_id_lookup_cache: dict[str, str] | None = None
-        self._cid_folded_pairs_cache: tuple[tuple[str, str], ...] | None = None
-        self._cid_dot_pairs_cache: tuple[tuple[str, str], ...] | None = None
-        self._cid_nodot_pairs_cache: tuple[tuple[str, str], ...] | None = None
-        self._eid_folded_triples_cache: tuple[tuple[str, str, str], ...] | None = None
-        self._mode_phrase_by_word_cache: dict[str, tuple[tuple[str, str], ...]] | None = None
-        self._scaled_index_cache: dict[str, tuple[tuple[str, float], ...]] | None = None
-        self._cap_route_meta_cache: dict[str, dict[str, Any]] | None = None
-        self._eng_route_meta_cache: dict[str, dict[str, Any]] | None = None
-        self._futamura_cascade: Any = None
+        self._tables_blob: bytes | None = None
+        self._tables_path: Path | None = None
+        self._capabilities_dict: dict[str, Any] | None = None
+        self._engines_dict: dict[str, Any] | None = None
+        self._index_dict: dict[str, Any] | None = None
+        self._receipt_backed_set: frozenset[str] | None = None
+        self._cap_id_terms_raw: dict[str, Any] | None = None
+        self._capability_id_terms_cache: dict[str, frozenset[str]] = {}
+        self._exact_id_lookup_map: dict[str, str] | None = None
+        self._cid_folded_pairs_tup: tuple[tuple[str, str], ...] | None = None
+        self._cid_dot_pairs_tup: tuple[tuple[str, str], ...] | None = None
+        self._cid_nodot_pairs_tup: tuple[tuple[str, str], ...] | None = None
+        self._eid_folded_triples_tup: tuple[tuple[str, str, str], ...] | None = None
+        self._mode_phrase_by_word_map: dict[str, tuple[tuple[str, str], ...]] | None = None
+        self._scaled_index_map: dict[str, tuple[tuple[str, float], ...]] | None = None
+        self._skills_lazy_blob: bytes | None = None
+        self._skills_list: list[dict[str, Any]] | None = None
 
-        if _boot_only and model.get("core_format_v") == 6:
-            # Wave 36 Elon sub-ms lazy boot: ~950-byte header only; ZERO 1 MB unpack, ZERO index loops!
+        if _core_only and model.get("core_format_v") == 5:
             self._model_loaded: dict[str, Any] | None = None
             self._core_meta: dict[str, Any] = dict(model)
             self.digest = str(model.get("digest_value") or "")
             confidence = self._core_meta.get("confidence") or {}
-        elif _core_only and model.get("core_format_v") == 5:
-            self._model_loaded = None
-            self._core_meta = dict(model)
-            self.digest = str(model.get("digest_value") or "")
-            self._apply_routing_core(self._core_meta)
-            confidence = self._core_meta.get("confidence") or {}
+            if self._core_meta.get("packed_marshal_v") == 3 and (
+                "tables_blob" in self._core_meta or "_tables_path" in self._core_meta
+            ):
+                self._tables_blob = self._core_meta.get("tables_blob")
+                tp = self._core_meta.get("_tables_path")
+                self._tables_path = Path(tp) if tp else None
+            else:
+                if "capabilities_blobs" in self._core_meta:
+                    self._capabilities_dict = _LazyMarshalDict(self._core_meta["capabilities_blobs"])
+                else:
+                    self._capabilities_dict = dict(self._core_meta.get("capabilities_map") or {})
+                if "engines_blobs" in self._core_meta:
+                    self._engines_dict = _LazyMarshalDict(self._core_meta["engines_blobs"])
+                else:
+                    self._engines_dict = dict(self._core_meta.get("engines_map") or {})
+                self._cap_id_terms_raw = dict(self._core_meta.get("capability_id_terms") or {})
+                if "skills_blob" in self._core_meta:
+                    self._skills_lazy_blob = self._core_meta["skills_blob"]
+                else:
+                    self._skills_list = list(self._core_meta.get("skills") or [])
+                self._receipt_backed_set = frozenset(self._core_meta.get("receipt_backed_ids") or ())
+                self._index_dict = dict(self._core_meta.get("filtered_index") or {})
+                self._init_folded_tables()
         else:
             self._model_loaded = dict(model)
             declared_dig = str((model.get("digest") or {}).get("value") or "")
@@ -609,8 +614,14 @@ class UnifiedModel:
                         reused_core = None
             self._core_meta = reused_core if reused_core is not None else _extract_routing_core(self._model_loaded, inferred_sha)
             self.digest = declared_dig
-            self._apply_routing_core(self._core_meta)
+            self._capabilities_dict = dict(self._core_meta["capabilities_map"])
+            self._engines_dict = dict(self._core_meta["engines_map"])
+            self._cap_id_terms_raw = dict(self._core_meta["capability_id_terms"])
+            self._skills_list = list(self._core_meta["skills"])
+            self._receipt_backed_set = frozenset(self._core_meta["receipt_backed_ids"])
+            self._index_dict = dict(self._core_meta["filtered_index"])
             confidence = self._core_meta["confidence"]
+            self._init_folded_tables()
 
         self._unrunnable: dict[str, list[str]] | None = None
         self._source_index_cache: dict[str, dict[str, Any]] | None = None
@@ -637,175 +648,198 @@ class UnifiedModel:
         self._traced_catalog_cache: dict[str, Any] | None = None
         self._traced_adapter_cache: dict[str, dict[str, Any]] = {}
         self._fts5_model_conn: Any = None
+        self._ppr_router: Any = None
         self._symbol_graph_conns: dict[str, Any] = {}
         self._dark_matter_verified: dict[str, dict[str, Any]] = {}
         self._source_csr: Any = None
         self._combined_source_csr: Any = None
         self._route_memo: dict[tuple[str, int], dict[str, Any]] = {}
+        self._futamura_cascade: Any = None
         self._raw_sha256: str = str(self._core_meta.get("raw_sha256") or "")
 
         self.min_score = float(confidence.get("minimum_best_score", 1.0))
         self.min_coverage = float(confidence.get("minimum_coverage", 0.34))
-        # Secondary indexes AND full routing core remain strictly lazy until their property or
-        # query method is called (Elon's Law: never deserialize 14,336 records or 1 MB core on boot).
+        # Secondary indexes (research_index 5.96MB, source_index, extended_source_index,
+        # knowledge, harvested) remain strictly lazy until their property or query method
+        # is called (Elon's Law: never deserialize 14,336 records upfront).
 
-    def _apply_routing_core(self, core: Mapping[str, Any]) -> None:
-        self._capabilities_cache = dict(core["capabilities_map"])
-        self._engines_cache = dict(core["engines_map"])
-        self._capability_id_terms_cache = {
-            cid: frozenset(terms)
-            for cid, terms in (core.get("capability_id_terms") or {}).items()
-        }
-        self._skills_cache = list(core.get("skills") or [])
-        self._receipt_backed_ids_cache = frozenset(core.get("receipt_backed_ids") or ())
-        self._index_cache = dict(core.get("filtered_index") or {})
-        self._routing_core_hydrated = True
+    def _init_derived_routing_tables(self) -> None:
+        cid_pairs = self._cid_folded_pairs_tup or ()
+        self._cid_dot_pairs_tup = tuple((cid, cf) for cid, cf in cid_pairs if "." in cf)
+        self._cid_nodot_pairs_tup = tuple((cid, cf) for cid, cf in cid_pairs if "." not in cf)
+        mode_by_word: dict[str, list[tuple[str, str]]] = {}
+        for eid, _ef, mode_phrase in self._eid_folded_triples_tup or ():
+            if mode_phrase:
+                first_w = mode_phrase.split(" ", 1)[0]
+                mode_by_word.setdefault(first_w, []).append((eid, mode_phrase))
+        self._mode_phrase_by_word_map = {k: tuple(v) for k, v in mode_by_word.items()}
+        scaled_idx: dict[str, tuple[tuple[str, float], ...]] = {}
+        idx = self._index_dict or {}
+        for tok, postings in idx.items():
+            scaled_idx[tok] = tuple(
+                (
+                    cid,
+                    (2.0 if tok in self._cap_id_terms_for(cid) else 1.0) * math.log1p(weight),
+                )
+                for cid, weight in postings.items()
+            )
+        self._scaled_index_map = scaled_idx
 
-    def _apply_route_slab(self, slab: Mapping[str, Any]) -> None:
-        self._exact_id_lookup_cache = dict(slab["exact_id_lookup"])
-        self._cid_folded_pairs_cache = tuple(slab["cid_folded_pairs"])
-        self._cid_dot_pairs_cache = tuple(slab["cid_dot_pairs"])
-        self._cid_nodot_pairs_cache = tuple(slab["cid_nodot_pairs"])
-        self._eid_folded_triples_cache = tuple(slab["eid_folded_triples"])
-        self._mode_phrase_by_word_cache = dict(slab["mode_phrase_by_word"])
-        self._scaled_index_cache = dict(slab["scaled_index"])
-        self._cap_route_meta_cache = dict(slab["cap_route_meta"])
-        self._eng_route_meta_cache = dict(slab["eng_route_meta"])
-        self._route_slab_hydrated = True
+    def _init_folded_tables(self) -> None:
+        caps = self._capabilities_dict or {}
+        engs = self._engines_dict or {}
+        lookup: dict[str, str] = {}
+        cid_pairs = tuple((cid, cid.casefold()) for cid in caps)
+        for cid, cf in cid_pairs:
+            lookup[cf] = cid
+        eid_pairs: list[tuple[str, str, str]] = []
+        for eid in engs:
+            ef = eid.casefold()
+            mode_phrase = eid.split(":", 1)[-1].replace("_", " ").casefold()
+            eid_pairs.append((eid, ef, mode_phrase))
+            lookup[ef] = eid
+        self._cid_folded_pairs_tup = cid_pairs
+        self._eid_folded_triples_tup = tuple(eid_pairs)
+        self._exact_id_lookup_map = lookup
+        self._init_derived_routing_tables()
 
-    def _ensure_routing_core(self) -> None:
-        if self._routing_core_hydrated:
+    def _needs_tables(self) -> bool:
+        return self._tables_blob is not None or self._tables_path is not None
+
+    def _ensure_routing_tables(self) -> None:
+        raw = self._tables_blob
+        if raw is None and self._tables_path is not None:
+            raw = self._tables_path.read_bytes()
+        if raw is None:
             return
-        raw_sha = self._raw_sha256
-        if raw_sha:
-            core_f = _core_cache_dir() / f"unified_model_core_{raw_sha[:32]}.marshal"
-            if core_f.is_file():
-                try:
-                    c_blob = marshal.loads(core_f.read_bytes())
-                    if (
-                        isinstance(c_blob, dict)
-                        and c_blob.get("core_format_v") == 5
-                        and c_blob.get("raw_sha256") == raw_sha
-                        and c_blob.get("schema") == SCHEMA
-                    ):
-                        self._core_meta = c_blob
-                        self._apply_routing_core(c_blob)
-                        return
-                except Exception:
-                    pass
-        full = self._ensure_full_model()
-        core = _extract_routing_core(full, raw_sha)
-        self._core_meta = core
-        self._apply_routing_core(core)
-
-    def _ensure_route_slab(self) -> None:
-        if self._route_slab_hydrated:
-            return
-        raw_sha = self._raw_sha256
-        if raw_sha:
-            route_f = _core_cache_dir() / f"unified_model_route_v6_{raw_sha[:32]}.marshal"
-            if route_f.is_file():
-                try:
-                    r_blob = marshal.loads(route_f.read_bytes())
-                    if (
-                        isinstance(r_blob, dict)
-                        and r_blob.get("route_format_v") == 6
-                        and r_blob.get("raw_sha256") == raw_sha
-                    ):
-                        self._apply_route_slab(r_blob)
-                        return
-                except Exception:
-                    pass
-        self._ensure_routing_core()
-        slab = _extract_route_slab(self._core_meta)
-        self._apply_route_slab(slab)
+        self._tables_blob = None
+        self._tables_path = None
+        tb = marshal.loads(raw)
+        self._capabilities_dict = _LazyMarshalDict(tb["capabilities_blobs"])
+        self._engines_dict = _LazyMarshalDict(tb["engines_blobs"])
+        self._core_meta["capabilities_map"] = self._capabilities_dict
+        self._core_meta["engines_map"] = self._engines_dict
+        self._index_dict = tb["filtered_index"]
+        self._cap_id_terms_raw = tb["capability_id_terms"]
+        self._receipt_backed_set = frozenset(tb["receipt_backed_ids"])
+        self._cid_folded_pairs_tup = tb["cid_folded_pairs"]
+        self._eid_folded_triples_tup = tb["eid_folded_triples"]
+        self._exact_id_lookup_map = tb["exact_id_lookup"]
+        self._init_derived_routing_tables()
+        if tb.get("skills_blob") is not None and self._skills_list is None:
+            self._skills_lazy_blob = tb["skills_blob"]
+        if tb.get("adapter_ast_blob") is not None and "adapter_ast_blob" not in self._core_meta:
+            self._core_meta["adapter_ast_blob"] = tb["adapter_ast_blob"]
 
     @property
-    def capabilities(self) -> dict[str, dict[str, Any]]:
-        self._ensure_routing_core()
-        return self._capabilities_cache  # type: ignore[return-value]
+    def capabilities(self) -> dict[str, Any]:
+        if self._needs_tables():
+            self._ensure_routing_tables()
+        return self._capabilities_dict  # type: ignore[return-value]
 
     @capabilities.setter
-    def capabilities(self, value: dict[str, dict[str, Any]]) -> None:
-        self._capabilities_cache = value
-        self._routing_core_hydrated = True
+    def capabilities(self, value: dict[str, Any]) -> None:
+        self._capabilities_dict = value
 
     @property
-    def engines(self) -> dict[str, dict[str, Any]]:
-        self._ensure_routing_core()
-        return self._engines_cache  # type: ignore[return-value]
+    def engines(self) -> dict[str, Any]:
+        if self._needs_tables():
+            self._ensure_routing_tables()
+        return self._engines_dict  # type: ignore[return-value]
 
     @engines.setter
-    def engines(self, value: dict[str, dict[str, Any]]) -> None:
-        self._engines_cache = value
-        self._routing_core_hydrated = True
+    def engines(self, value: dict[str, Any]) -> None:
+        self._engines_dict = value
 
     @property
-    def skills(self) -> list[dict[str, Any]]:
-        self._ensure_routing_core()
-        return self._skills_cache  # type: ignore[return-value]
+    def index(self) -> dict[str, Any]:
+        if self._needs_tables():
+            self._ensure_routing_tables()
+        return self._index_dict  # type: ignore[return-value]
 
-    @skills.setter
-    def skills(self, value: list[dict[str, Any]]) -> None:
-        self._skills_cache = value
+    @index.setter
+    def index(self, value: dict[str, Any]) -> None:
+        self._index_dict = value
 
     @property
     def receipt_backed_ids(self) -> frozenset[str]:
-        self._ensure_routing_core()
-        return self._receipt_backed_ids_cache  # type: ignore[return-value]
+        if self._needs_tables():
+            self._ensure_routing_tables()
+        return self._receipt_backed_set or frozenset()
 
     @receipt_backed_ids.setter
     def receipt_backed_ids(self, value: frozenset[str]) -> None:
-        self._receipt_backed_ids_cache = value
-
-    @property
-    def index(self) -> dict[str, dict[str, float]]:
-        self._ensure_routing_core()
-        return self._index_cache  # type: ignore[return-value]
-
-    @index.setter
-    def index(self, value: dict[str, dict[str, float]]) -> None:
-        self._index_cache = value
-
-    @property
-    def _capability_id_terms(self) -> dict[str, frozenset[str]]:
-        self._ensure_routing_core()
-        return self._capability_id_terms_cache  # type: ignore[return-value]
+        self._receipt_backed_set = value
 
     @property
     def _exact_id_lookup(self) -> dict[str, str]:
-        self._ensure_route_slab()
-        return self._exact_id_lookup_cache  # type: ignore[return-value]
+        if self._needs_tables():
+            self._ensure_routing_tables()
+        return self._exact_id_lookup_map or {}
 
     @property
     def _cid_folded_pairs(self) -> tuple[tuple[str, str], ...]:
-        self._ensure_route_slab()
-        return self._cid_folded_pairs_cache  # type: ignore[return-value]
+        if self._needs_tables():
+            self._ensure_routing_tables()
+        return self._cid_folded_pairs_tup or ()
 
     @property
     def _cid_dot_pairs(self) -> tuple[tuple[str, str], ...]:
-        self._ensure_route_slab()
-        return self._cid_dot_pairs_cache  # type: ignore[return-value]
+        if self._needs_tables():
+            self._ensure_routing_tables()
+        return self._cid_dot_pairs_tup or ()
 
     @property
     def _cid_nodot_pairs(self) -> tuple[tuple[str, str], ...]:
-        self._ensure_route_slab()
-        return self._cid_nodot_pairs_cache  # type: ignore[return-value]
-
-    @property
-    def _eid_folded_triples(self) -> tuple[tuple[str, str, str], ...]:
-        self._ensure_route_slab()
-        return self._eid_folded_triples_cache  # type: ignore[return-value]
+        if self._needs_tables():
+            self._ensure_routing_tables()
+        return self._cid_nodot_pairs_tup or ()
 
     @property
     def _mode_phrase_by_word(self) -> dict[str, tuple[tuple[str, str], ...]]:
-        self._ensure_route_slab()
-        return self._mode_phrase_by_word_cache  # type: ignore[return-value]
+        if self._needs_tables():
+            self._ensure_routing_tables()
+        return self._mode_phrase_by_word_map or {}
 
     @property
     def _scaled_index(self) -> dict[str, tuple[tuple[str, float], ...]]:
-        self._ensure_route_slab()
-        return self._scaled_index_cache  # type: ignore[return-value]
+        if self._needs_tables():
+            self._ensure_routing_tables()
+        return self._scaled_index_map or {}
+
+    @property
+    def _eid_folded_triples(self) -> tuple[tuple[str, str, str], ...]:
+        if self._needs_tables():
+            self._ensure_routing_tables()
+        return self._eid_folded_triples_tup or ()
+
+    def _cap_id_terms_for(self, cid: str) -> frozenset[str]:
+        hit = self._capability_id_terms_cache.get(cid)
+        if hit is not None:
+            return hit
+        if self._needs_tables():
+            self._ensure_routing_tables()
+        raw_t = (self._cap_id_terms_raw or {}).get(cid)
+        fs = frozenset(raw_t) if raw_t else frozenset()
+        self._capability_id_terms_cache[cid] = fs
+        return fs
+
+    @property
+    def skills(self) -> list[dict[str, Any]]:
+        if self._needs_tables():
+            self._ensure_routing_tables()
+        if self._skills_list is None:
+            if self._skills_lazy_blob is not None:
+                self._skills_list = list(marshal.loads(self._skills_lazy_blob))
+                self._skills_lazy_blob = None
+            else:
+                self._skills_list = []
+        return self._skills_list
+
+    @skills.setter
+    def skills(self, value: list[dict[str, Any]]) -> None:
+        self._skills_list = value
+        self._skills_lazy_blob = None
 
     def _section_cache_path(self, section: str) -> Path | None:
         if not self._raw_sha256:
@@ -1164,6 +1198,8 @@ class UnifiedModel:
 
     def _ensure_full_model(self) -> dict[str, Any]:
         if self._model_loaded is None:
+            if self._raw_bytes_backing is None and self._artifact_path is not None and self._artifact_path.is_file():
+                self._raw_bytes_backing = self._artifact_path.read_bytes()
             if self._raw_bytes_backing is None:
                 if self._target_path is not None and self._target_path.is_file():
                     self._raw_bytes_backing = self._target_path.read_bytes()
@@ -1171,6 +1207,99 @@ class UnifiedModel:
                     raise UnifiedModelError("MODEL_BACKING_BYTES_MISSING")
             self._model_loaded = json.loads(self._raw_bytes_backing.decode("utf-8"))
         return self._model_loaded
+
+    def _ensure_fts5_sidecar(self) -> Path:
+        """Build or open the lazy on-demand SQLite FTS5 BM25 sidecar over cold indices."""
+        cache_dir = _core_cache_dir()
+        cache_dir.mkdir(parents=True, exist_ok=True)
+        db_path = cache_dir / f"unified_model_fts5_{(self.digest or 'unhashed')[:24]}.sqlite"
+        if db_path.is_file() and db_path.stat().st_size > 4096:
+            return db_path
+
+        full = self._ensure_full_model()
+        tmp_db = cache_dir / f".unified_model_fts5_{os.getpid()}.sqlite.tmp"
+        tmp_db.unlink(missing_ok=True)
+        conn = sqlite3.connect(str(tmp_db))
+        try:
+            conn.execute("PRAGMA synchronous = OFF;")
+            conn.execute("PRAGMA journal_mode = MEMORY;")
+            conn.execute(
+                "CREATE VIRTUAL TABLE docs USING fts5(doc_id UNINDEXED, kind, path, title, body);"
+            )
+            batch: list[tuple[str, str, str, str, str]] = []
+            for row in full.get("knowledge") or []:
+                if isinstance(row, Mapping):
+                    terms_s = " ".join(str(k) for k in (row.get("terms") or {}).keys())
+                    batch.append((
+                        f"knowledge:{row.get('path', '')}",
+                        "KNOWLEDGE",
+                        str(row.get("path") or ""),
+                        str(row.get("title") or ""),
+                        f"{row.get('summary') or ''} {terms_s}",
+                    ))
+            for row in full.get("source_index") or []:
+                if isinstance(row, Mapping):
+                    terms_s = " ".join(str(k) for k in (row.get("terms") or {}).keys())
+                    syms = " ".join(str(s) for s in (row.get("symbols") or []))
+                    batch.append((
+                        str(row.get("id") or ""),
+                        "SOURCE",
+                        str(row.get("path") or ""),
+                        syms[:240],
+                        f"{row.get('docstring') or ''} {terms_s}",
+                    ))
+            for row in full.get("research_index") or []:
+                if isinstance(row, Mapping):
+                    terms_s = " ".join(str(k) for k in (row.get("terms") or {}).keys())
+                    batch.append((
+                        str(row.get("id") or ""),
+                        "RESEARCH",
+                        str(row.get("path") or ""),
+                        str(row.get("schema") or ""),
+                        f"{row.get('action_id') or ''} {row.get('status') or ''} {terms_s}",
+                    ))
+            conn.executemany("INSERT INTO docs VALUES (?, ?, ?, ?, ?);", batch)
+            conn.commit()
+        finally:
+            conn.close()
+        tmp_db.replace(db_path)
+        return db_path
+
+    def fts5_search(
+        self,
+        query: str,
+        *,
+        kind: str | None = None,
+        top_k: int = 5,
+    ) -> dict[str, Any]:
+        """Sub-millisecond SQLite FTS5 BM25 query over cold knowledge/source/research indices."""
+        tokens = [re.sub(r"[^a-z0-9_]", "", t) for t in tokenize(query)]
+        tokens = [t for t in tokens if len(t) >= 2]
+        if not tokens:
+            return {"query": query, "hits": [], "engine": "sqlite_fts5_bm25"}
+        fts_expr = " OR ".join(f'"{t}"' for t in tokens[:12])
+        db_path = self._ensure_fts5_sidecar()
+        conn = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
+        try:
+            if kind:
+                cur = conn.execute(
+                    "SELECT doc_id, kind, path, title, bm25(docs) AS score FROM docs "
+                    "WHERE docs MATCH ? AND kind = ? ORDER BY score LIMIT ?;",
+                    (fts_expr, kind.upper(), max(1, int(top_k))),
+                )
+            else:
+                cur = conn.execute(
+                    "SELECT doc_id, kind, path, title, bm25(docs) AS score FROM docs "
+                    "WHERE docs MATCH ? ORDER BY score LIMIT ?;",
+                    (fts_expr, max(1, int(top_k))),
+                )
+            hits = [
+                {"doc_id": r[0], "kind": r[1], "path": r[2], "title": r[3], "bm25": round(-float(r[4]), 4)}
+                for r in cur.fetchall()
+            ]
+        finally:
+            conn.close()
+        return {"query": query, "hits": hits, "engine": "sqlite_fts5_bm25"}
 
     def _apply_secondary_bundle(self, sec: Mapping[str, Any]) -> None:
         self._source_index_cache = dict(sec["source_index"])
@@ -1341,7 +1470,7 @@ class UnifiedModel:
     # --------------------------------------------------------- frontier organs
 
     def frontier_organs(self) -> dict[str, Any]:
-        """Enumerate the 13 `swe_kernel` organs and 8 Frontier Leapfrog Plays wired into the Unified Runtime."""
+        """Enumerate the 13 `swe_kernel` organs, 8 Frontier Leapfrog Plays, and Unified Leapfrog Moves."""
         from canonical.runtime import swe_kernel_organ_bridge_v1 as bridge
 
         swe_organs = bridge.list_organs()
@@ -1356,7 +1485,7 @@ class UnifiedModel:
                 "organ_id": "play_2_law_consolidation",
                 "module_path": "canonical/runtime/gradient_free_law_consolidation_v1.py",
                 "frontier_domain": "continual_learning",
-                "capability_role": "Gradient-free episodic law consolidation over the 45-commit real OSS corpus",
+                "capability_role": "Gradient-free episodic law consolidation v1 (historical baseline)",
             },
             {
                 "organ_id": "play_3_abstain_skill_induction",
@@ -1368,7 +1497,7 @@ class UnifiedModel:
                 "organ_id": "play_6_mutation_admission_gate",
                 "module_path": "canonical/runtime/adversarial_mutation_admission_gate_v1.py",
                 "frontier_domain": "coding_agents",
-                "capability_role": "Adversarial AST mutation admission gate over harvested capability receipts",
+                "capability_role": "Adversarial AST mutation admission gate v1 (single-probe baseline)",
             },
             {
                 "organ_id": "play_a_counterfactual_discr_tree_router",
@@ -1395,14 +1524,85 @@ class UnifiedModel:
                 "capability_role": "POSIX os.fork() copy-on-write Zygote speculative patch verifier (1.58 ms p50) with AST test impact slicing",
             },
         ]
+        moves = [
+            {
+                "organ_id": "play_2_law_consolidation_v2",
+                "module_path": "canonical/runtime/gradient_free_law_consolidation_v2.py",
+                "frontier_domain": "continual_learning",
+                "capability_role": "Popper negative-witness specialization + SemiPersistentEGraph anti-unification v2 (zero false refutations, held-out transfer)",
+            },
+            {
+                "organ_id": "play_6_mutation_admission_gate_v2",
+                "module_path": "canonical/runtime/adversarial_mutation_admission_gate_v2.py",
+                "frontier_domain": "coding_agents",
+                "capability_role": "Apartness-guided nominal/boundary/refusal distinguishing-tuple mutation gate v2 (<15% survivor rate)",
+            },
+            {
+                "organ_id": "move_2_cow_zygote_bus",
+                "module_path": "canonical/swe_kernel/canonical_cu_sandbox_spine_v1.py",
+                "frontier_domain": "computer_use",
+                "capability_role": "os.fork() CoW ZygotePrewarmedPool + renameat2(RENAME_EXCHANGE) speculative execution bus",
+            },
+            {
+                "organ_id": "move_3_swe_abduction_spine",
+                "module_path": "canonical/swe_kernel/canonical_swe_spine_v1.py",
+                "frontier_domain": "coding_agents",
+                "capability_role": "Zero-disk CoW assertion-demand + failing-relation + witness-inversion SWE fast lane",
+            },
+            {
+                "organ_id": "move_5_surprise_organism",
+                "module_path": "canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
+                "frontier_domain": "instant_learning",
+                "capability_role": "Surprise-gated active organism with refusal-curriculum prerequisite synthesis & active disambiguation",
+            },
+            {
+                "organ_id": "move_1_trigram_impact_pareto",
+                "module_path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+                "frontier_domain": "coding_agents",
+                "capability_role": "64-bit Python int-bitset positional 3-gram search (<0.5 ms), depth-3 blast radius (<0.05 ms), and bloat Pareto auditor",
+            },
+            {
+                "organ_id": "move_2_proof_mined_surface",
+                "module_path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+                "frontier_domain": "instant_learning",
+                "capability_role": "Proof-mined AST call-vector & CoW 2-run deterministic surface compiler (lifting 406 dark modules 3.7% -> 55.9%)",
+            },
+            {
+                "organ_id": "move_3_speculative_multiverse",
+                "module_path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+                "frontier_domain": "world_model",
+                "capability_role": "Two-speed 10-50us RAM SemanticIR mental model + CDCL Equivalence-Modulo-Conflict nogood pruner -> CoW Zygote",
+            },
+            {
+                "organ_id": "move_5_doors_first_hidden_smc",
+                "module_path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+                "frontier_domain": "computer_use",
+                "capability_role": "Zero-pixel 4-tier Doors-First computer use + executor-hidden Speculative Macro Commit guarded by state projections",
+            },
+            {
+                "organ_id": "move_6_unblind_continual_memory",
+                "module_path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+                "frontier_domain": "memory",
+                "capability_role": "DBSP Z-set O(1) ForgetEval deletion + rule_expiry witness check + synthesized-oracle Clopper-Pearson curator + E-Stitch",
+            },
+            {
+                "organ_id": "move_7_global_extrapolation_gate",
+                "module_path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+                "frontier_domain": "verification_abstention",
+                "capability_role": "Domain-of-verification extrapolation blocker + Purpose Gate contrast check + minimum-action global discriminator",
+            },
+        ]
         return {
             "schema": SOLUTION_SCHEMA,
             "operation": "FRONTIER_ORGANS",
             "swe_kernel_organs_count": len(swe_organs),
             "leapfrog_plays_count": len(plays),
             "total_organs": len(swe_organs) + len(plays),
+            "leapfrog_moves_count": len(moves),
+            "total_organs_including_moves": len(swe_organs) + len(plays) + len(moves),
             "swe_kernel_organs": swe_organs,
             "leapfrog_plays": plays,
+            "leapfrog_moves": moves,
             "model_dependency_count": 0,
         }
 
@@ -1411,7 +1611,7 @@ class UnifiedModel:
         organ_id: str,
         payload: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
-        """Execute a wired `swe_kernel` organ or Frontier Leapfrog Play through the Unified Runtime."""
+        """Execute a wired `swe_kernel` organ or Frontier Leapfrog Play/Move through the Unified Runtime."""
         req = dict(payload or {})
         if organ_id == "play_1_contract_world_model":
             from canonical.runtime import state_contract_world_model_v1 as p1
@@ -1421,6 +1621,10 @@ class UnifiedModel:
             from canonical.runtime import gradient_free_law_consolidation_v1 as p2
 
             return p2.run(req, ROOT)
+        if organ_id == "play_2_law_consolidation_v2":
+            from canonical.runtime import gradient_free_law_consolidation_v2 as p2v2
+
+            return p2v2.run(req, ROOT)
         if organ_id == "play_3_abstain_skill_induction":
             from canonical.runtime import abstain_gated_skill_induction_v1 as p3
 
@@ -1429,6 +1633,37 @@ class UnifiedModel:
             from canonical.runtime import adversarial_mutation_admission_gate_v1 as p6
 
             return p6.run(req, ROOT)
+        if organ_id == "play_6_mutation_admission_gate_v2":
+            from canonical.runtime import adversarial_mutation_admission_gate_v2 as p6v2
+
+            return p6v2.run(req, ROOT)
+        if organ_id == "move_2_cow_zygote_bus":
+            return self.execute_speculative(**req)
+        if organ_id == "move_3_swe_abduction_spine":
+            repo_root = req.pop("repo_root", ROOT)
+            return self.solve_swe_repo(repo_root, **req)
+        if organ_id == "move_5_surprise_organism":
+            return self.autonomous_pulse(**req)
+        if organ_id == "move_1_trigram_impact_pareto":
+            if "pattern" in req:
+                return self.trigram_search(str(req.pop("pattern")), **req)
+            if "target" in req:
+                return self.impact_blast_radius(str(req.pop("target")), **req)
+            return self.audit_bloat_pareto()
+        if organ_id == "move_2_proof_mined_surface":
+            if "invoke_module" in req:
+                return self.invoke_mined_surface(str(req.pop("invoke_module")), **req)
+            return self.derive_and_verify_surface(**req)
+        if organ_id == "move_3_speculative_multiverse":
+            return self.speculate_multiverse(**req)
+        if organ_id == "move_5_doors_first_hidden_smc":
+            ws = req.pop("workspace_dir")
+            steps = req.pop("workflow_steps")
+            return self.execute_doors_first(ws, steps, **req)
+        if organ_id == "move_6_unblind_continual_memory":
+            return self.continual_memory_cycle(**req)
+        if organ_id == "move_7_global_extrapolation_gate":
+            return self.evaluate_global_extrapolation(**req)
         if organ_id == "play_a_counterfactual_discr_tree_router":
             from canonical.runtime import counterfactual_discr_tree_skill_router_v1 as pa
 
@@ -1454,8 +1689,6 @@ class UnifiedModel:
 
     def anatomy(self, domain: str | None = None, *, top_k: int = 8) -> dict[str, Any]:
         """Where this repository implements each frontier function, by its own words."""
-        if "anatomy" not in self._core_meta:
-            self._ensure_routing_core()
         block = self._core_meta.get("anatomy")
         if not block and self._model_loaded:
             block = self._model_loaded.get("anatomy")
@@ -1538,7 +1771,8 @@ class UnifiedModel:
 
     def _ids_mentioned(self, goal: str) -> set[str]:
         folded = str(goal or "").strip().casefold()
-        if not folded:
+        f_len = len(folded)
+        if not f_len:
             return set()
         hits: set[str] = set()
         exact = self._exact_id_lookup.get(folded)
@@ -1546,14 +1780,14 @@ class UnifiedModel:
             hits.add(exact)
         if "." in folded:
             for cid, cf in self._cid_dot_pairs:
-                if cf in folded:
+                if len(cf) <= f_len and cf in folded:
                     hits.add(cid)
         for cid, cf in self._cid_nodot_pairs:
-            if cf in folded:
+            if len(cf) <= f_len and cf in folded:
                 hits.add(cid)
         if ":" in folded:
             for eid, ef, _mp in self._eid_folded_triples:
-                if ef in folded:
+                if len(ef) <= f_len and ef in folded:
                     hits.add(eid)
         by_word = self._mode_phrase_by_word
         if by_word:
@@ -1653,28 +1887,52 @@ class UnifiedModel:
                 if unrunnable_known is not None and cid in unrunnable_known:
                     unrunnable_matched.add(cid)
                 scores[cid] = scores.get(cid, 0.0) + contrib
-        # Wave 31 + Wave 36 Elon speed pass: resolve declared dependencies lazily ONLY for
-        # matched capability candidates using the lightweight precomputed `route_v6` slab
-        # (`_cap_route_meta_cache` / `_eng_route_meta_cache`), avoiding 780 KB core unpack on route()!
-        self._ensure_route_slab()
-        cap_meta = self._cap_route_meta_cache if self._cap_route_meta_cache is not None else self.capabilities
-        eng_meta = self._eng_route_meta_cache if self._eng_route_meta_cache is not None else self.engines
+        # Wave 31 Elon speed pass: when `unrunnable_capabilities()` has not been materialized yet,
+        # resolve declared dependencies lazily ONLY for matched capability candidates (memoized
+        # per unique dep name inside this call's local `probe_cache`), guaranteeing the exact same
+        # `unrunnable_on_this_host` without probing all 462 capabilities and with zero global cache state.
         if unrunnable_known is None:
             route_probe_cache: dict[tuple[str, bool], bool] = {}
             for cid in scores:
-                row = cap_meta.get(cid)
+                row = self.capabilities.get(cid)
                 if row is not None and _missing_declared_dependencies(row, probe_cache=route_probe_cache):
                     unrunnable_matched.add(cid)
         for cid in mentioned:
             scores[cid] = scores.get(cid, 0.0) + math.log1p(24.0)
             matched.add(cid.casefold())
+        # A stated path is data the caller supplied and the binder will bind, not
+        # a word of the ask. Charge only the ask to the coverage budget, so that
+        # naming a real artifact can never be the reason a request is refused.
+        #
+        # A capability's own id is the ask, not a path. 294 of the model's ids
+        # ARE repository paths -- "canonical/runtime/x_v1.py.auto.v1" -- and the
+        # path grammar matches them whole, so blanking them left no ask at all:
+        # coverage collapsed to 0.0 and every addressed capability stopped being
+        # addressable. Measured, that regressed
+        # test_every_capability_is_addressable_by_its_own_id on 294 subtests.
+        #
+        # And every token of an id the model contains is by definition a token
+        # the model recognises, so those tokens are matched as well as asked.
+        # Without that second half an addressed id measured 0.333 against the
+        # 0.34 floor and still failed, on a filename token no index carries.
         ask = set(ask_list)
         addressed_set = set(addressed_tokens)
         matched_ask = (matched & ask) | addressed_set
         coverage = (len(matched_ask) / len(ask)) if ask else 0.0
+        # Naming a capability by its own id is an address, not a keyword. Its
+        # path segments also index capabilities that legitimately claim those
+        # words, so a flat +24 can be outscored by the noise the address itself
+        # introduced. Sort addressed capabilities ahead of the rest instead of
+        # inflating the bonus until it wins by force.
+        #
+        # Engines are excluded from that priority when matched merely by mode
+        # phrase (`engine:BOUND_CAPABILITY` matches the phrase "bound capability"),
+        # which is ordinary keyword overlap, not an address. Explicit literal
+        # `engine:<MODE>` or `meta:<MODE>` addresses ARE addresses and do get
+        # address priority.
         folded_goal = str(goal or "").casefold()
-        addressed = {cid for cid in mentioned if cid in cap_meta} | {
-            eid for eid in mentioned if eid in eng_meta and eid.casefold() in folded_goal
+        addressed = {cid for cid in mentioned if cid in self.capabilities} | {
+            eid for eid in mentioned if eid in self.engines and eid.casefold() in folded_goal
         }
         ranked = sorted(
             scores.items(),
@@ -1682,7 +1940,7 @@ class UnifiedModel:
         )
         rows: list[dict[str, Any]] = []
         for cid, score in ranked[: max(1, int(top_k))]:
-            row = cap_meta.get(cid) or eng_meta.get(cid) or {}
+            row = self.capabilities.get(cid) or self.engines.get(cid) or {}
             rows.append(
                 {
                     "id": cid,
@@ -2112,6 +2370,146 @@ class UnifiedModel:
 
     # ------------------------------------------------------------------- solve
 
+    def organ_portfolio_status(self) -> dict[str, Any]:
+        """Inspect live readiness of the 64 unified zero-model SWE & runtime organs (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.organ_portfolio_status()
+
+    def learn_mealy_interface(
+        self,
+        oracle_fn: Any,
+        alphabet: Sequence[str],
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Actively learn a minimal separating-word Mealy interface (`minimal_experiment_v1`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.ActiveSymbolicMealyLearner.learn_mealy_interface(oracle_fn, alphabet, **kwargs)
+
+    def learn_version_space_ui(
+        self,
+        demonstration_traces: Sequence[Sequence[tuple[Mapping[str, Any], str]]],
+        query_observation: Mapping[str, Any] | None = None,
+        *,
+        step: int = 0,
+    ) -> dict[str, Any]:
+        """Synthesize a few-shot GUI/DOM Version-Space skill (`demonstration_version_space_v1`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.learn_and_act_version_space_ui(demonstration_traces, query_observation, step=step)
+
+    def act_on_interface(
+        self,
+        instruction: str,
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Zero-VLM 5-Tier Computer-Use, WebMCP & CLI Action-Grammar dispatcher (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.act_on_interface_unified(instruction, **kwargs)
+
+    def explore_unknown_environment(
+        self,
+        env: Any,
+        actions: Sequence[Any],
+        *,
+        is_goal: Any = None,
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Zero-instruction interactive POMDP / trace-quotient explorer (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.explore_unknown_environment_unified(env, actions, is_goal=is_goal, **kwargs)
+
+    def verify_patch_uncheatable(
+        self,
+        workspace_dir: str | Path,
+        patched_files: Mapping[str, str],
+        pytest_targets: Sequence[str],
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Uncheatable behavioural diff-mutation & structural-specification gate (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.verify_patch_uncheatable(workspace_dir, patched_files, pytest_targets, **kwargs)
+
+    def induce_hypothesis_and_vocabulary(
+        self,
+        points: Sequence[tuple[Any, Any]] | None = None,
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Symbolic/piecewise hypothesis fitting, active query design, and vocabulary induction (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.induce_hypothesis_and_vocabulary_unified(points, **kwargs)
+
+    def teach_edit_by_example(
+        self,
+        target_source: str,
+        before_example: str,
+        after_example: str,
+    ) -> dict[str, Any]:
+        """1-shot structural AST transformation transfer (`edit_by_example_v1`, `K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.teach_edit_by_example_unified(target_source, before_example, after_example)
+
+    def fast_associate_and_adapt(
+        self,
+        query_or_key: str,
+        *,
+        observe_payload: Any | None = None,
+        utility: float = 1.0,
+        credit_verified: bool = True,
+        top_k: int = 3,
+    ) -> dict[str, Any]:
+        """64-bit Hyperdimensional SimHash VSA + Sherman-Morrison/Woodbury + Bi-Temporal PPR fast adapter (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        mem = getattr(self, "_vsa_woodbury_mem", None)
+        if mem is None:
+            mem = _uep.VSAWoodburyFastMemory()
+            self._vsa_woodbury_mem = mem
+        if observe_payload is not None:
+            mem.observe(query_or_key, observe_payload, utility=utility, credit_verified=credit_verified)
+        return mem.query(query_or_key, top_k=top_k)
+
+    def decide_one_shot_sufficiency(self, **kwargs: Any) -> dict[str, Any]:
+        """Decidable 1-shot demonstration sufficiency, hidden-precondition abduction & active experiment compiler (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.decide_one_shot_sufficiency_and_experiment(**kwargs)
+
+    def compose_and_calibrate_skills(
+        self,
+        source_text: str,
+        before_after_lessons: Sequence[tuple[str, str]],
+        *,
+        target_language: str = "python",
+        pure_organ_source: str | None = None,
+    ) -> dict[str, Any]:
+        """Proved skill composition (`proved_composition_v1`), diagnostic scope calibration & 7-language CST transfer (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.compose_and_calibrate_verified_skills(
+            source_text,
+            before_after_lessons,
+            target_language=target_language,
+            pure_organ_source=pure_organ_source,
+        )
+
+    def pre_sieve_meaning_ir(
+        self,
+        baseline_source: str,
+        candidate_sources: Sequence[str],
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Microsecond Guarded Region-SSA Meaning-IR deduplicator & forward-backward abstract simulator (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.pre_sieve_and_simulate_meaning_ir(baseline_source, candidate_sources, **kwargs)
+
     def solve(
         self,
         goal: str,
@@ -2127,30 +2525,215 @@ class UnifiedModel:
         inputs = dict(inputs or {})
         if requested == "RECALL":
             return self.recall(goal)
-        if requested == "EPISTEMIC":
-            ws_arg = cwd or inputs.get("workspace_dir") or inputs.get("repo_dir")
-            if ws_arg is not None:
-                from canonical.swe_kernel import cross_modal_tomography_petri_v1 as _cmtp
-                from canonical.swe_kernel import epistemic_admission_and_self_play_v1 as _easp
-
-                store_obj = inputs.get("store")
-                if isinstance(store_obj, (str, Path)):
-                    store_obj = _easp.EpistemicStoreV1(Path(store_obj))
-                elif not isinstance(store_obj, _easp.EpistemicStoreV1):
-                    store_obj = _easp.EpistemicStoreV1()
-                ep_res = _cmtp.solve_epistemic_workspace_cow(
-                    workspace_dir=Path(ws_arg),
-                    goal_text=str(goal or ""),
-                    store=store_obj,
-                    pytest_targets=inputs.get("pytest_targets"),
-                    suspect_files=inputs.get("suspect_files"),
-                    timeout_s=float(inputs.get("timeout_s", 35.0)),
+        if requested in ("EPISTEMIC", "PORTFOLIO"):
+            if callable(inputs.get("mealy_oracle")):
+                m_res = self.learn_mealy_interface(
+                    inputs["mealy_oracle"],
+                    inputs.get("alphabet") or (),
+                    max_states=int(inputs.get("max_states", 4)),
+                    max_queries=int(inputs.get("max_queries", 48)),
                 )
                 return {
                     "schema": SOLUTION_SCHEMA,
                     "authority": "NONE",
                     "non_claims": list(NON_CLAIMS),
-                    "mode": "EPISTEMIC",
+                    "mode": requested,
+                    "goal": goal,
+                    "status": m_res.get("status", "UNSOLVED"),
+                    "pass": bool(m_res.get("pass")),
+                    "epistemic_result": m_res,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            if inputs.get("version_space_traces") is not None:
+                vs_res = self.learn_version_space_ui(
+                    inputs.get("version_space_traces") or (),
+                    inputs.get("query_observation"),
+                    step=int(inputs.get("step", 0)),
+                )
+                return {
+                    "schema": SOLUTION_SCHEMA,
+                    "authority": "NONE",
+                    "non_claims": list(NON_CLAIMS),
+                    "mode": requested,
+                    "goal": goal,
+                    "status": vs_res.get("status", "UNSOLVED"),
+                    "pass": bool(vs_res.get("pass")),
+                    "epistemic_result": vs_res,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            if inputs.get("interface_action_problem") is not None:
+                ia_spec = dict(inputs["interface_action_problem"])
+                ia_res = self.act_on_interface(str(ia_spec.pop("instruction", goal)), **ia_spec)
+                return {
+                    "schema": SOLUTION_SCHEMA,
+                    "authority": "NONE",
+                    "non_claims": list(NON_CLAIMS),
+                    "mode": requested,
+                    "goal": goal,
+                    "status": ia_res.get("status", "UNSOLVED"),
+                    "pass": bool(ia_res.get("pass")),
+                    "epistemic_result": ia_res,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            if inputs.get("unknown_environment_problem") is not None:
+                ue_spec = dict(inputs["unknown_environment_problem"])
+                ue_env = ue_spec.pop("env")
+                ue_actions = ue_spec.pop("actions", ())
+                ue_goal = ue_spec.pop("is_goal", None)
+                ue_res = self.explore_unknown_environment(ue_env, ue_actions, is_goal=ue_goal, **ue_spec)
+                return {
+                    "schema": SOLUTION_SCHEMA,
+                    "authority": "NONE",
+                    "non_claims": list(NON_CLAIMS),
+                    "mode": requested,
+                    "goal": goal,
+                    "status": ue_res.get("status", "UNSOLVED"),
+                    "pass": bool(ue_res.get("pass")),
+                    "epistemic_result": ue_res,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            if inputs.get("one_shot_sufficiency_problem") is not None:
+                os_spec = dict(inputs["one_shot_sufficiency_problem"])
+                os_res = self.decide_one_shot_sufficiency(**os_spec)
+                return {
+                    "schema": SOLUTION_SCHEMA,
+                    "authority": "NONE",
+                    "non_claims": list(NON_CLAIMS),
+                    "mode": requested,
+                    "goal": goal,
+                    "status": os_res.get("status", "UNSOLVED"),
+                    "pass": bool(os_res.get("pass")),
+                    "epistemic_result": os_res,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            if inputs.get("proved_skill_composition_problem") is not None:
+                psc_spec = dict(inputs["proved_skill_composition_problem"])
+                psc_src = str(psc_spec.pop("source_text", ""))
+                psc_lessons = psc_spec.pop("before_after_lessons", ())
+                psc_res = self.compose_and_calibrate_skills(psc_src, psc_lessons, **psc_spec)
+                return {
+                    "schema": SOLUTION_SCHEMA,
+                    "authority": "NONE",
+                    "non_claims": list(NON_CLAIMS),
+                    "mode": requested,
+                    "goal": goal,
+                    "status": psc_res.get("status", "UNSOLVED"),
+                    "pass": bool(psc_res.get("pass")),
+                    "epistemic_result": psc_res,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            if inputs.get("meaning_ir_presieve_problem") is not None:
+                mir_spec = dict(inputs["meaning_ir_presieve_problem"])
+                mir_base = str(mir_spec.pop("baseline_source", ""))
+                mir_cands = mir_spec.pop("candidate_sources", ())
+                mir_res = self.pre_sieve_meaning_ir(mir_base, mir_cands, **mir_spec)
+                return {
+                    "schema": SOLUTION_SCHEMA,
+                    "authority": "NONE",
+                    "non_claims": list(NON_CLAIMS),
+                    "mode": requested,
+                    "goal": goal,
+                    "status": mir_res.get("status", "UNSOLVED"),
+                    "pass": bool(mir_res.get("pass")),
+                    "epistemic_result": mir_res,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            if inputs.get("uncheatable_audit_problem") is not None:
+                ua_spec = dict(inputs["uncheatable_audit_problem"])
+                ua_res = self.verify_patch_uncheatable(
+                    ua_spec.pop("workspace_dir"),
+                    ua_spec.pop("patched_files"),
+                    ua_spec.pop("pytest_targets"),
+                    **ua_spec,
+                )
+                return {
+                    "schema": SOLUTION_SCHEMA,
+                    "authority": "NONE",
+                    "non_claims": list(NON_CLAIMS),
+                    "mode": requested,
+                    "goal": goal,
+                    "status": ua_res.get("status", "UNSOLVED"),
+                    "pass": bool(ua_res.get("pass")),
+                    "epistemic_result": ua_res,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            if inputs.get("hypothesis_vocabulary_problem") is not None:
+                hv_spec = dict(inputs["hypothesis_vocabulary_problem"])
+                hv_pts = hv_spec.pop("points", None)
+                hv_res = self.induce_hypothesis_and_vocabulary(hv_pts, **hv_spec)
+                return {
+                    "schema": SOLUTION_SCHEMA,
+                    "authority": "NONE",
+                    "non_claims": list(NON_CLAIMS),
+                    "mode": requested,
+                    "goal": goal,
+                    "status": hv_res.get("status", "UNSOLVED"),
+                    "pass": bool(hv_res.get("pass")),
+                    "epistemic_result": hv_res,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            if inputs.get("taught_edit_problem") is not None:
+                te_spec = dict(inputs["taught_edit_problem"])
+                te_res = self.teach_edit_by_example(
+                    str(te_spec["target_source"]),
+                    str(te_spec["before_example"]),
+                    str(te_spec["after_example"]),
+                )
+                return {
+                    "schema": SOLUTION_SCHEMA,
+                    "authority": "NONE",
+                    "non_claims": list(NON_CLAIMS),
+                    "mode": requested,
+                    "goal": goal,
+                    "status": te_res.get("status", "UNSOLVED"),
+                    "pass": bool(te_res.get("pass")),
+                    "epistemic_result": te_res,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            ws_arg = cwd or inputs.get("workspace_dir") or inputs.get("repo_dir")
+            if ws_arg is not None:
+                if inputs.get("store") is None:
+                    from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+                    ep_res = _uep.run_unified_epistemic_portfolio(
+                        workspace_dir=Path(ws_arg),
+                        goal_text=str(goal or ""),
+                        pytest_targets=inputs.get("pytest_targets"),
+                        suspect_files=inputs.get("suspect_files"),
+                        timeout_s=float(inputs.get("timeout_s", 35.0)),
+                    )
+                else:
+                    from canonical.swe_kernel import cross_modal_tomography_petri_v1 as _cmtp
+                    from canonical.swe_kernel import epistemic_admission_and_self_play_v1 as _easp
+
+                    store_obj = inputs.get("store")
+                    if isinstance(store_obj, (str, Path)):
+                        store_obj = _easp.EpistemicStoreV1(Path(store_obj))
+                    elif not isinstance(store_obj, _easp.EpistemicStoreV1):
+                        store_obj = _easp.EpistemicStoreV1()
+                    ep_res = _cmtp.solve_epistemic_workspace_cow(
+                        workspace_dir=Path(ws_arg),
+                        goal_text=str(goal or ""),
+                        store=store_obj,
+                        pytest_targets=inputs.get("pytest_targets"),
+                        suspect_files=inputs.get("suspect_files"),
+                        timeout_s=float(inputs.get("timeout_s", 35.0)),
+                    )
+                return {
+                    "schema": SOLUTION_SCHEMA,
+                    "authority": "NONE",
+                    "non_claims": list(NON_CLAIMS),
+                    "mode": requested,
                     "goal": goal,
                     "status": ep_res.get("status", "UNSOLVED"),
                     "pass": bool(ep_res.get("pass")),
@@ -2369,6 +2952,12 @@ class UnifiedModel:
                 "escape_repair_state",
                 "ooxml_preflight_target",
                 "domain_mapping_problem",
+                "epistemic_portfolio_problem",
+                "mealy_interface_problem",
+                "version_space_ui_problem",
+                "refusal_specification_problem",
+                "interface_action_problem",
+                "unknown_environment_problem",
             )
         ):
             spec_payload: dict[str, Any] = {"goal": goal, **dict(inputs)}
@@ -3076,6 +3665,216 @@ class UnifiedModel:
             **{"pass": passed},
             reason=None if passed else str(res.get("reason") or "BOUNDARY_ROUTE_FAILED"),
             boundary_route=res,
+        )
+
+    def speculate_cow_candidates(
+        self,
+        cow_candidates: Iterable[tuple[str, Callable[[], tuple[bool, Any]]]],
+        *,
+        workspace_root: str | Path | None = None,
+        max_parallel: int = 4,
+        timeout_s: float = 5.0,
+        goal: str = "",
+    ) -> dict[str, Any]:
+        """Move 2 Front-Door: Screen Python candidates in parallel `os.fork()` CoW workers (`ZygotePrewarmedPool`)."""
+        from canonical.swe_kernel import canonical_cu_sandbox_spine_v1 as cu_spine
+
+        sb = cu_spine.SpeculativeSandbox(Path(workspace_root) if workspace_root else ROOT)
+        res = sb.evaluate_cow_zygote_batch(
+            list(cow_candidates),
+            max_parallel=max_parallel,
+            per_worker_timeout_s=timeout_s,
+        )
+        passed = bool(res.get("passed"))
+        return self._envelope(
+            operation="SPECULATE_COW_ZYGOTE",
+            goal=goal or "speculate_cow_candidates",
+            status="PASS__ZYGOTE_COW_WINNER" if passed else "FAIL_CLOSED__NO_COW_WINNER",
+            **{"pass": passed},
+            reason=None if passed else "NO_CANDIDATE_PASSED_IN_COW_POOL",
+            cow_zygote=res,
+        )
+
+    def autonomous_pulse(
+        self,
+        *,
+        goal: str = "",
+        creature_workspace: str | Path | None = None,
+        blackbox_env: Any = None,
+        goal_predicate: Callable[[Any], bool] | None = None,
+        surprise_gated: bool = True,
+        action_grammar_guide: str | None = None,
+        disambiguation_candidates: Iterable[Any] | None = None,
+        disambiguation_probe_universe: Iterable[Any] | None = None,
+        disambiguation_truth_index: int = 0,
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Move 5 Front-Door: Surprise-gated autonomous pulse (`Creature` + Refusal Curriculum + Active Disambiguation)."""
+        return self.discover_environment(
+            goal=goal or "autonomous_pulse",
+            creature_workspace=creature_workspace,
+            blackbox_env=blackbox_env,
+            goal_predicate=goal_predicate,
+            surprise_gated=surprise_gated,
+            action_grammar_guide=action_grammar_guide,
+            disambiguation_candidates=list(disambiguation_candidates) if disambiguation_candidates is not None else None,
+            disambiguation_probe_universe=list(disambiguation_probe_universe) if disambiguation_probe_universe is not None else None,
+            disambiguation_truth_index=disambiguation_truth_index,
+            **kwargs,
+        )
+
+    # ------------------------------------ 7-Move Frontier Leapfrog Front Doors
+
+    def trigram_search(
+        self,
+        pattern: str,
+        *,
+        regex: bool = False,
+        case_sensitive: bool = True,
+        exclude_tests: bool = False,
+        top_k: int = 20,
+    ) -> dict[str, Any]:
+        """Move I Front-Door: Sub-millisecond 64-bit int-bitset positional 3-gram exact/regex search."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.get_trigram_index(ROOT).search(
+            pattern,
+            regex=regex,
+            case_sensitive=case_sensitive,
+            exclude_tests=exclude_tests,
+            top_k=top_k,
+        )
+
+    def impact_blast_radius(self, module_or_stem: str, *, max_depth: int = 3) -> dict[str, Any]:
+        """Move I Front-Door: `< 0.05 ms` depth-`k` reverse-importer & impacted-test bitset blast radius."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.get_trigram_index(ROOT).impact_blast_radius(module_or_stem, max_depth=max_depth)
+
+    def audit_bloat_pareto(self) -> dict[str, Any]:
+        """Move I Front-Door: Elon's First Law orphan & superseded-clone byte-cost Pareto census."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.audit_bloat_pareto(self, ROOT)
+
+    def derive_and_verify_surface(
+        self,
+        *,
+        module_paths: Sequence[str] | None = None,
+        max_modules: int | None = None,
+        per_call_timeout_s: float = 0.25,
+        workers: int = 8,
+    ) -> dict[str, Any]:
+        """Move II Front-Door: Proof-mine call vectors and verify 2-run `os.fork()` CoW determinism (`3.7% -> 55.9%`)."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.derive_and_verify_surface(
+            ROOT,
+            module_paths=module_paths,
+            max_modules=max_modules,
+            per_call_timeout_s=per_call_timeout_s,
+            workers=workers,
+        )
+
+    def invoke_mined_surface(
+        self,
+        module_or_stem: str,
+        *,
+        args: Sequence[Any] | None = None,
+        kwargs: Mapping[str, Any] | None = None,
+        entrypoint: str | None = None,
+    ) -> dict[str, Any]:
+        """Move II Front-Door: Execute any proof-mined verified dark module in an isolated CoW child."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.invoke_mined_surface(
+            module_or_stem,
+            args=args,
+            kwargs=kwargs,
+            entrypoint=entrypoint,
+            root=ROOT,
+        )
+
+    def speculate_multiverse(
+        self,
+        *,
+        base_source: str,
+        func_name: str,
+        candidate_sources: Sequence[tuple[str, str]],
+        probe_inputs: Sequence[tuple[Any, ...]],
+        postcondition: Callable[[tuple[Any, ...], Any], bool] | None = None,
+        workspace_dir: str | Path | None = None,
+        target_rel_file: str = "module.py",
+    ) -> dict[str, Any]:
+        """Move III Front-Door: Two-speed `10-50 us` RAM SemanticIR mental model + CDCL EMC nogoods -> CoW Zygote."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.speculate_multiverse(
+            base_source=base_source,
+            func_name=func_name,
+            candidate_sources=candidate_sources,
+            probe_inputs=probe_inputs,
+            postcondition=postcondition,
+            workspace_dir=workspace_dir,
+            target_rel_file=target_rel_file,
+        )
+
+    def execute_doors_first(
+        self,
+        workspace_dir: str | Path,
+        workflow_steps: Sequence[Mapping[str, Any]],
+        *,
+        smc_engine: Any = None,
+        learn_macro: bool = True,
+        require_guard_file: str | None = None,
+    ) -> dict[str, Any]:
+        """Move V Front-Door: 4-tier zero-pixel Doors-First execution + executor-hidden Speculative Macro Commit."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.execute_doors_first(
+            workspace_dir,
+            workflow_steps,
+            smc_engine=smc_engine,
+            learn_macro=learn_macro,
+            require_guard_file=require_guard_file,
+        )
+
+    def continual_memory_cycle(
+        self,
+        *,
+        active_cap: int = 32,
+        num_adversarial_mutants: int = 160,
+    ) -> dict[str, Any]:
+        """Move VI Front-Door: DBSP Z-set O(1) ForgetEval deletion + rule_expiry + unblind curator + E-Stitch."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.continual_memory_cycle(
+            active_cap=active_cap,
+            num_adversarial_mutants=num_adversarial_mutants,
+        )
+
+    def evaluate_global_extrapolation(
+        self,
+        *,
+        observed_points: Sequence[tuple[Any, Any]],
+        candidate_hypotheses: Mapping[str, Callable[[Any], Any]],
+        target_query_x: Any,
+        probe_domain: Sequence[Any],
+        world_oracle: Callable[[Any], Any] | None = None,
+        route_costs: Mapping[str, float] | None = None,
+        max_probes: int = 3,
+    ) -> dict[str, Any]:
+        """Move VII Front-Door: Domain-of-verification extrapolation blocker + Purpose Gate + global discriminator."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.evaluate_global_extrapolation(
+            observed_points=observed_points,
+            candidate_hypotheses=candidate_hypotheses,
+            target_query_x=target_query_x,
+            probe_domain=probe_domain,
+            world_oracle=world_oracle,
+            route_costs=route_costs,
+            max_probes=max_probes,
         )
 
     def catalog_federated_engines(self, *, domain: str | None = None) -> dict[str, Any]:
@@ -5094,193 +5893,6 @@ class UnifiedModel:
             latency_penalty_per_ms=latency_penalty_per_ms,
         )
 
-    # ------------------------------------------------- Wave 36 Futamura Leapfrog Unified Surfaces
-
-    def _get_futamura_cascade(self) -> Any:
-        if self._futamura_cascade is None:
-            from canonical.runtime.futamura_leapfrog_kernel_v1 import FutamuraSelfCompilingCascade
-
-            self._futamura_cascade = FutamuraSelfCompilingCascade()
-        return self._futamura_cascade
-
-    def futamura_solve(
-        self,
-        task_spec: Mapping[str, Any],
-        *,
-        untrusted_proposer: Any = None,
-        auto_compile: bool = True,
-        use_cow_fork: bool = True,
-        alpha: float = 0.05,
-    ) -> dict[str, Any]:
-        """Wave 36: Futamura self-compiling 4-rung cascade (`Rung 0 <100 us` -> `Rung 1 byte-effect` ->
-        `Rung 2 PEP-669/settrace Ochiai + byte-span AST splice + os.fork CoW + ddmin + mutation + SCoRE e-value` ->
-        optional `Rung 3` proposer) that auto-compiles every verified win into generalized Rung-0 rules."""
-        return self._get_futamura_cascade().solve(
-            dict(task_spec),
-            untrusted_proposer=untrusted_proposer,
-            auto_compile=auto_compile,
-            use_cow_fork=use_cow_fork,
-            alpha=alpha,
-        )
-
-    def verify_byte_effect(
-        self,
-        target: str | Path,
-        *,
-        expected_format: str | None = None,
-        expected_source_bytes: bytes | None = None,
-        expected_source_path: str | Path | None = None,
-        baseline_archive_hashes: Mapping[str, str] | None = None,
-        allowed_archive_mutations: Sequence[str] = (),
-    ) -> dict[str, Any]:
-        """Wave 36: Ring-0 byte-level effect oracle catching lying extensions, broken containers,
-        failed decompression roundtrips, and collateral archive mutations."""
-        from canonical.runtime.byte_effect_oracle_v1 import verify_byte_effect as _verify_be
-
-        return _verify_be(
-            target,
-            expected_format=expected_format,
-            expected_source_bytes=expected_source_bytes,
-            expected_source_path=expected_source_path,
-            baseline_archive_hashes=baseline_archive_hashes,
-            allowed_archive_mutations=allowed_archive_mutations,
-        )
-
-    def minimize_patch_ddmin(
-        self,
-        original_source: str,
-        patched_source: str,
-        oracle_fn: Any,
-    ) -> dict[str, Any]:
-        """Wave 36: DRA-style Zeller `ddmin` O(k log n) hunk minimizer stripping bloated edits."""
-        from canonical.runtime.byte_effect_oracle_v1 import ddmin_minimize_hunks
-
-        return ddmin_minimize_hunks(original_source, patched_source, oracle_fn)
-
-    def audit_patch_mutations(
-        self,
-        original_source: str,
-        patched_source: str,
-        oracle_fn: Any,
-        *,
-        max_mutants: int = 16,
-    ) -> dict[str, Any]:
-        """Wave 36: Targeted AST mutation kill audit restricted to touched patch lines."""
-        from canonical.runtime.byte_effect_oracle_v1 import audit_patch_mutation_kill
-
-        return audit_patch_mutation_kill(
-            original_source,
-            patched_source,
-            oracle_fn,
-            max_mutants=max_mutants,
-        )
-
-    def learn_mealy_instant(
-        self,
-        reset_and_run: Any,
-        alphabet: Sequence[str],
-        *,
-        numeric_actions: Mapping[str, tuple[int, int]] | None = None,
-        error_outputs: Sequence[str] = ("ERR", "ERROR", "FAIL", "DENIED"),
-        commutative_pairs: Sequence[tuple[str, str]] = (),
-        idempotent_actions: Sequence[str] = (),
-        max_states: int = 32,
-        enable_error_pruning: bool = True,
-    ) -> Any:
-        """Wave 36: Error-Aware `L#` + `Lambda*_M` sub-ms symbolic Mealy instant learner."""
-        from canonical.runtime.futamura_leapfrog_kernel_v1 import ErrorAwareSymbolicMealyLearner
-
-        return ErrorAwareSymbolicMealyLearner().learn(
-            reset_and_run,
-            alphabet,
-            numeric_actions=numeric_actions,
-            error_outputs=error_outputs,
-            commutative_pairs=commutative_pairs,
-            idempotent_actions=idempotent_actions,
-            max_states=max_states,
-            enable_error_pruning=enable_error_pruning,
-        )
-
-    def execute_hybrid_cu(
-        self,
-        steps: Sequence[Mapping[str, Any]],
-        *,
-        initial_marking: Mapping[str, int] | None = None,
-        transitions: Mapping[str, Mapping[str, Any]] | None = None,
-        executor: Any = None,
-        initial_state: Mapping[str, Any] | None = None,
-        max_loop_repeats: int = 2,
-    ) -> dict[str, Any]:
-        """Wave 36: 3-channel Hybrid Computer Use (`CLI/File > AX/CDP > Visual`) + `< 5 us` Petri guard
-        + OSWorld-Human loop-churn killer + PASTE speculative macro commit."""
-        from canonical.runtime.futamura_leapfrog_kernel_v1 import HybridComputerUsePetriSupervisor
-
-        sup = HybridComputerUsePetriSupervisor(
-            initial_marking=initial_marking,
-            transitions=transitions,
-        )
-        return sup.execute_episode(
-            steps,
-            executor=executor,
-            initial_state=initial_state,
-            max_loop_repeats=max_loop_repeats,
-        )
-
-    def dbsp_belief_bus(self) -> Any:
-        """Wave 36: Access the unified DBSP bi-temporal `Z`-set + Kumiho AGM `AnalyzeImpact` +
-        `projectmem` `PreCommitFailureGate` bus."""
-        return self._get_futamura_cascade().belief_bus
-
-    def conformal_evalue_gate(
-        self,
-        observations: Sequence[Mapping[str, Any]],
-        *,
-        alpha: float = 0.05,
-    ) -> dict[str, Any]:
-        """Wave 36: SCoRE anytime-valid conformal e-value martingale gate (Ville's inequality)."""
-        from canonical.runtime.futamura_leapfrog_kernel_v1 import ConformalEValueGate
-
-        gate = ConformalEValueGate(alpha=alpha)
-        for ev in observations:
-            gate.observe(
-                str(ev["evidence"]),
-                passed=bool(ev["passed"]),
-                null_pass_prob=float(ev.get("null_pass_prob", 0.25)),
-                hard_contradiction=bool(ev.get("hard_contradiction", False)),
-            )
-        return gate.decision()
-
-    def cow_zygote_repair(
-        self,
-        source: str,
-        test_cases: Sequence[str],
-        *,
-        use_cow_fork: bool = True,
-        run_mutation_audit: bool = True,
-        alpha: float = 0.05,
-    ) -> dict[str, Any]:
-        """Wave 36: PEP-669/settrace Ochiai localization + `< 50 us` UTF-8 byte-span AST splicing +
-        POSIX `os.fork()` CoW screening + `ddmin` + mutation-kill + conformal e-value gate."""
-        return self._get_futamura_cascade().repair_engine.repair(
-            source,
-            test_cases,
-            use_cow_fork=use_cow_fork,
-            run_mutation_audit=run_mutation_audit,
-            alpha=alpha,
-        )
-
-    def wake_sleep_consolidate(
-        self,
-        *,
-        max_active_rules: int = 64,
-        rubin_observations: Mapping[str, tuple[float, float]] | None = None,
-    ) -> dict[str, Any]:
-        """Wave 36: GrowLibm-style e-class rule compression + Rubin `(WITH - WITHOUT)` skill-rent GC."""
-        return self._get_futamura_cascade().wake_sleep_consolidate(
-            max_active_rules=max_active_rules,
-            rubin_observations=rubin_observations,
-        )
-
     def open_creature(
         self,
         root: str | Path,
@@ -5324,6 +5936,307 @@ class UnifiedModel:
             creature_report=rep,
             steps=steps,
             sleep_consolidation=consol,
+        )
+
+    def route_ppr(
+        self,
+        goal: str,
+        *,
+        top_k: int = 5,
+        executable_only: bool = True,
+    ) -> dict[str, Any]:
+        """Phase 1: `< 0.30 ms` Bipartite Specificity Personalized PageRank (`HippoRAG 2` + `DOMAIN_ATLAS_V1`)."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        if self._ppr_router is None:
+            self._ppr_router = fsm.SpecificityBipartitePPRRouter(self, root=ROOT)
+        return self._ppr_router.route(goal, top_k=top_k, executable_only=executable_only)
+
+    def learn_instant(
+        self,
+        *,
+        alphabet: Sequence[str],
+        execute_trace: Any,
+        held_out_traces: Sequence[Sequence[str]] = (),
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Phase 2: `< 50 us` Kalman surprise gate + `< 5.0 ms` Symbolic Mealy (`L^s` + `Lambda*_M`) instant learner."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.learn_instant_environment(
+            alphabet=alphabet,
+            execute_trace=execute_trace,
+            held_out_traces=held_out_traces,
+            **kwargs,
+        )
+
+    def execute_tomographic_petri(
+        self,
+        workspace: str | Path,
+        workflow: Sequence[Mapping[str, Any]],
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Phase 3: `< 20 us` Certified Petri-Net Supervisory Control (`AEPN`) + `< 3.0 ms` 5-Layer State Tomography."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.execute_tomographic_petri(Path(workspace), workflow, **kwargs)
+
+    def dbsp_memory_and_wake_sleep_cycle(
+        self,
+        *,
+        scale_events: int = 25000,
+    ) -> dict[str, Any]:
+        """Phase 5: `< 100 us` `O(|Delta|)` DBSP Bi-Temporal `Z`-Set + `< 1.0 ms` Local PPR + `[G_-, B_+]` Wake-Sleep."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.dbsp_memory_and_wake_sleep_cycle(scale_events=scale_events)
+
+    # ------------------------------------------------------------------ Wave 36 + 37 Unified Futamura & OS-Confined Front Doors
+
+    def _get_futamura_cascade(self) -> Any:
+        if self._futamura_cascade is None:
+            from canonical.runtime.futamura_leapfrog_kernel_v1 import FutamuraSelfCompilingCascade
+
+            self._futamura_cascade = FutamuraSelfCompilingCascade()
+        return self._futamura_cascade
+
+    def futamura_solve(
+        self,
+        task: Mapping[str, Any],
+        *,
+        untrusted_proposer: Any = None,
+        auto_compile: bool = True,
+        use_cow_fork: bool = True,
+        alpha: float = 0.05,
+    ) -> dict[str, Any]:
+        """Wave 36: Futamura self-compiling Rung 0 -> 1 -> 2 -> 3 cascade with Ring-0 verification."""
+        return self._get_futamura_cascade().solve(
+            task,
+            untrusted_proposer=untrusted_proposer,
+            auto_compile=auto_compile,
+            use_cow_fork=use_cow_fork,
+            alpha=alpha,
+        )
+
+    def verify_byte_effect(
+        self,
+        target: str | Path,
+        *,
+        expected_format: str | None = None,
+        expected_source_bytes: bytes | None = None,
+        expected_source_path: str | Path | None = None,
+        baseline_archive_hashes: Mapping[str, str] | None = None,
+        allowed_archive_mutations: Sequence[str] = (),
+    ) -> dict[str, Any]:
+        """Wave 36: Ring-0 byte-level effect verification (magic headers, roundtrip, lying extensions, archive invariance)."""
+        from canonical.runtime.byte_effect_oracle_v1 import verify_byte_effect
+
+        return verify_byte_effect(
+            target,
+            expected_format=expected_format,
+            expected_source_bytes=expected_source_bytes,
+            expected_source_path=expected_source_path,
+            baseline_archive_hashes=baseline_archive_hashes,
+            allowed_archive_mutations=allowed_archive_mutations,
+        )
+
+    def minimize_patch_ddmin(
+        self,
+        original_source: str,
+        patched_source: str,
+        oracle_fn: Any,
+    ) -> dict[str, Any]:
+        """Wave 36: Atomic-line Delta-Debugging (`ddmin`) hunk minimizer (`NP_code`)."""
+        from canonical.runtime.byte_effect_oracle_v1 import ddmin_minimize_hunks
+
+        return ddmin_minimize_hunks(original_source, patched_source, oracle_fn)
+
+    def audit_patch_mutations(
+        self,
+        original_source: str,
+        patched_source: str,
+        oracle_fn: Any,
+        *,
+        max_mutants: int = 16,
+    ) -> dict[str, Any]:
+        """Wave 36: Touched-line adversarial mutation-kill audit."""
+        from canonical.runtime.byte_effect_oracle_v1 import audit_patch_mutation_kill
+
+        return audit_patch_mutation_kill(
+            original_source, patched_source, oracle_fn, max_mutants=max_mutants
+        )
+
+    def learn_mealy_instant(
+        self,
+        reset_and_run: Any,
+        alphabet: Sequence[str],
+        *,
+        numeric_actions: Mapping[str, tuple[int, int]] | None = None,
+        error_outputs: Sequence[str] = ("ERR", "ERROR", "FAIL", "DENIED"),
+        commutative_pairs: Sequence[tuple[str, str]] = (),
+        idempotent_actions: Sequence[str] = (),
+        max_states: int = 32,
+        enable_error_pruning: bool = True,
+    ) -> Any:
+        """Wave 36: Error-Aware `L#` + `Lambda*_M` sub-ms symbolic Mealy instant learner."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import ErrorAwareSymbolicMealyLearner
+
+        return ErrorAwareSymbolicMealyLearner().learn(
+            reset_and_run,
+            alphabet,
+            numeric_actions=numeric_actions,
+            error_outputs=error_outputs,
+            commutative_pairs=commutative_pairs,
+            idempotent_actions=idempotent_actions,
+            max_states=max_states,
+            enable_error_pruning=enable_error_pruning,
+        )
+
+    def execute_hybrid_cu(
+        self,
+        steps: Sequence[Mapping[str, Any]],
+        *,
+        initial_marking: Mapping[str, int] | None = None,
+        transitions: Mapping[str, Mapping[str, Any]] | None = None,
+        executor: Any = None,
+        initial_state: Mapping[str, Any] | None = None,
+        max_loop_repeats: int = 2,
+        macros: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 36: 3-channel HCU (`Programmatic > Semantic > Visual`) + Petri guard + loop-churn killer + PASTE macros."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import HybridComputerUsePetriSupervisor
+
+        sup = HybridComputerUsePetriSupervisor(
+            initial_marking=initial_marking,
+            transitions=transitions,
+        )
+        for m_name, m_steps in (macros or {}).items():
+            sup.register_paste_macro(str(m_name), m_steps)
+        return sup.execute_episode(
+            steps,
+            executor=executor,
+            initial_state=initial_state,
+            max_loop_repeats=max_loop_repeats,
+        )
+
+    def dbsp_belief_bus(self) -> Any:
+        """Wave 36: Live DBSP bi-temporal `Z`-set + Kumiho AGM belief-revision + `PreCommitFailureGate` bus."""
+        return self._get_futamura_cascade().belief_bus
+
+    def conformal_evalue_gate(
+        self,
+        observations: Sequence[Mapping[str, Any]],
+        *,
+        alpha: float = 0.05,
+    ) -> dict[str, Any]:
+        """Wave 36: Anytime-valid SCoRE conformal e-process gate (`Ville bound <= alpha`)."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import ConformalEValueGate
+
+        gate = ConformalEValueGate(alpha=alpha)
+        for ev in observations:
+            gate.observe(
+                str(ev["evidence"]),
+                passed=bool(ev["passed"]),
+                null_pass_prob=float(ev.get("null_pass_prob", 0.25)),
+                hard_contradiction=bool(ev.get("hard_contradiction", False)),
+            )
+        return gate.decision()
+
+    def cow_zygote_repair(
+        self,
+        source: str,
+        test_cases: Sequence[str],
+        *,
+        use_cow_fork: bool = True,
+    ) -> dict[str, Any]:
+        """Wave 36: Zero-overhead `os.fork()` CoW zygote AST repair + ddmin + mutation-kill gate."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import ZeroOverheadCoWZygoteRepairEngine
+
+        return ZeroOverheadCoWZygoteRepairEngine().repair(
+            source, test_cases, use_cow_fork=use_cow_fork
+        )
+
+    def wake_sleep_consolidate(
+        self,
+        *,
+        max_active_rules: int = 64,
+        rubin_observations: Mapping[str, tuple[float, float]] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 36: Wake-sleep anti-unification MDL consolidation + Rubin skill-rent GC."""
+        return self._get_futamura_cascade().wake_sleep_consolidate(
+            max_active_rules=max_active_rules,
+            rubin_observations=rubin_observations,
+        )
+
+    def probe_os_isolation(self, *, budget_s: float = 30.0) -> dict[str, Any]:
+        """Wave 37: Real Linux kernel namespace (`user+mount+pid+ipc+uts+net`, `CapEff=0`) 18-attempt escape probe."""
+        from canonical.runtime import os_isolation_v1
+
+        return os_isolation_v1.probe(budget_s=budget_s)
+
+    def execute_confined_computer_use(
+        self,
+        work_dir: str | Path,
+        steps: Sequence[Mapping[str, Any]],
+        *,
+        goal_id: str = "confined_hcu_episode",
+        budget_s: float = 15.0,
+        allow_network: bool = False,
+        verify_effect: bool = True,
+        initial_marking: Mapping[str, int] | None = None,
+        transitions: Mapping[str, Mapping[str, Any]] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 37: Real OS kernel-confined 3-channel HCU executor with Ring-0 byte-effect verification & CoW rollback."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import (
+            ConfinedHybridComputerUseExecutor,
+            HybridComputerUsePetriSupervisor,
+        )
+
+        sup = HybridComputerUsePetriSupervisor(
+            initial_marking=initial_marking,
+            transitions=transitions,
+        )
+        ex = ConfinedHybridComputerUseExecutor(
+            supervisor=sup,
+            belief_bus=self._get_futamura_cascade().belief_bus,
+        )
+        return ex.execute_episode(
+            work_dir,
+            steps,
+            goal_id=goal_id,
+            budget_s=budget_s,
+            allow_network=allow_network,
+            verify_effect=verify_effect,
+        )
+
+    def solve_multifile_repo_futamura(
+        self,
+        repo_dir: str | Path,
+        test_targets: Sequence[str] = (),
+        *,
+        goal_text: str = "",
+        suspect_files: Sequence[str] | None = None,
+        auto_compile: bool = True,
+        apply_to_disk: bool = True,
+        use_portfolio_fallback: bool = False,
+        alpha: float = 0.05,
+        timeout_s: float = 10.0,
+    ) -> dict[str, Any]:
+        """Wave 37: Unified multi-file Python repository Futamura solver (Rung-0 compiled skills +
+        `stdlib_cow_test_runner_v1` CoW fork screening + extended AST synthesis + Ring-0 Gate + compile-back)."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import MultifileFutamuraRepoSolver
+
+        solver = MultifileFutamuraRepoSolver(cascade=self._get_futamura_cascade())
+        return solver.solve(
+            repo_dir,
+            test_targets,
+            goal_text=goal_text,
+            suspect_files=suspect_files,
+            auto_compile=auto_compile,
+            apply_to_disk=apply_to_disk,
+            use_portfolio_fallback=use_portfolio_fallback,
+            alpha=alpha,
+            timeout_s=timeout_s,
         )
 
 
@@ -5502,7 +6415,6 @@ def prewarm_sidecar_caches(model: Mapping[str, Any] | None = None, target: Path 
         core_tmp = cache_dir / f".unified_model_core_{raw_sha[:32]}.{os.getpid()}.tmp"
         core_tmp.write_bytes(marshal.dumps(core))
         core_tmp.replace(cache_dir / f"unified_model_core_{raw_sha[:32]}.marshal")
-        _write_boot_and_route_slabs(cache_dir, raw_sha, core)
 
         sec = _extract_secondary_indexes(model, raw_sha)
         ext_postings_tmp: dict[str, list[tuple[str, int]]] = {}
@@ -5684,6 +6596,77 @@ def open_model(
             return mem_hit
 
     cache_dir = _core_cache_dir()
+
+    # Move 1 Ultra-Fast Cold Path (`< 3 ms`):
+    # Use the `<700 KB` hot core sidecar + `.marshal` binary mirror + O(1) `mmap` window verification
+    # so `open_model()` NEVER reads or hashes the `13.35 MB` passive cold JSON on startup!
+    core_sidecar = target.parent / "BRAIN_UNIFIED_CORE_V1.json"
+    if target.name == "BRAIN_UNIFIED_MODEL_V1.json" and core_sidecar.is_file():
+        try:
+            cst = core_sidecar.stat()
+            hot_meta = cache_dir / f"unified_model_hot_v7_meta_{cst.st_size}_{cst.st_mtime_ns}.marshal"
+            hot_tables = cache_dir / f"unified_model_hot_v7_tables_{cst.st_size}_{cst.st_mtime_ns}.marshal"
+            core: dict[str, Any] | None = None
+            if hot_meta.is_file() and hot_tables.is_file():
+                loaded_m = marshal.loads(hot_meta.read_bytes())
+                if isinstance(loaded_m, dict) and loaded_m.get("core_format_v") == 5 and loaded_m.get("packed_marshal_v") == 3:
+                    loaded_m["_tables_path"] = str(hot_tables)
+                    core = loaded_m
+            if core is None:
+                loaded_j = json.loads(core_sidecar.read_text(encoding="utf-8"))
+                if isinstance(loaded_j, dict) and loaded_j.get("core_format_v") == 5:
+                    meta_dict, tables_bytes = _pack_hot_marshal_core(loaded_j)
+                    try:
+                        cache_dir.mkdir(parents=True, exist_ok=True)
+                        tmp_t = cache_dir / f".unified_model_hot_v7_t_{os.getpid()}.tmp"
+                        tmp_t.write_bytes(tables_bytes)
+                        tmp_t.replace(hot_tables)
+                        tmp_m = cache_dir / f".unified_model_hot_v7_m_{os.getpid()}.tmp"
+                        tmp_m.write_bytes(marshal.dumps(meta_dict))
+                        tmp_m.replace(hot_meta)
+                        meta_dict["_tables_path"] = str(hot_tables)
+                    except OSError:
+                        meta_dict["tables_blob"] = tables_bytes
+                    core = meta_dict
+
+            if (
+                core is not None
+                and core.get("schema") == SCHEMA
+                and int(core.get("artifact_bytes") or -1) == st.st_size
+            ):
+                digest_val = str(core.get("digest_value") or "")
+                offset = int(core.get("digest_needle_offset") or -1)
+                s_offset = int(core.get("schema_needle_offset") or -1)
+                needle = f'"value": "{digest_val}"'.encode("ascii")
+                s_needle = f'"schema": "{SCHEMA}"'.encode("ascii")
+                if (
+                    len(digest_val) == 64
+                    and offset >= 0
+                    and offset + len(needle) <= st.st_size
+                    and s_offset >= 0
+                    and s_offset + len(s_needle) <= st.st_size
+                ):
+                    fd = os.open(target_key, os.O_RDONLY)
+                    try:
+                        head_ok = os.pread(fd, len(s_needle), s_offset) == s_needle
+                        digest_ok = head_ok and (os.pread(fd, len(needle), offset) == needle)
+                    finally:
+                        os.close(fd)
+                    if head_ok and digest_ok:
+                        raw_sha = str(core.get("raw_sha256") or "")
+                        if raw_sha:
+                            _VERIFIED_BLOB_DIGESTS[raw_sha] = digest_val
+                        inst = UnifiedModel(
+                            core,
+                            _raw_bytes=None,
+                            _core_only=True,
+                            _target_path=target,
+                        )
+                        _OPEN_MODEL_MEM_CACHE[mem_key] = inst
+                        return inst
+        except Exception:
+            pass
+
     raw_bytes: bytes | None = None
     raw_sha = _read_stat_sha(target_key, st) if is_default else None
     if raw_sha is None:
@@ -5691,29 +6674,6 @@ def open_model(
         raw_sha = hashlib.sha256(raw_bytes).hexdigest()
         if is_default:
             _write_stat_sha(target_key, st, raw_sha)
-
-    # Wave 36 Elon sub-ms cold boot: read the ~950-byte `boot_v6` header first (< 0.20 ms)!
-    boot_file = cache_dir / f"unified_model_boot_v6_{raw_sha[:32]}.marshal"
-    if boot_file.is_file():
-        try:
-            boot_hdr = marshal.loads(boot_file.read_bytes())
-            if (
-                isinstance(boot_hdr, dict)
-                and boot_hdr.get("core_format_v") == 6
-                and boot_hdr.get("raw_sha256") == raw_sha
-                and boot_hdr.get("schema") == SCHEMA
-            ):
-                _VERIFIED_BLOB_DIGESTS[raw_sha] = str(boot_hdr.get("digest_value") or "")
-                inst = UnifiedModel(
-                    boot_hdr,
-                    _raw_bytes=raw_bytes,
-                    _boot_only=True,
-                    _target_path=target,
-                )
-                _OPEN_MODEL_MEM_CACHE[mem_key] = inst
-                return inst
-        except Exception:
-            pass
 
     cache_file = cache_dir / f"unified_model_core_{raw_sha[:32]}.marshal"
     if cache_file.is_file():
@@ -5726,7 +6686,6 @@ def open_model(
                 and core.get("schema") == SCHEMA
             ):
                 _VERIFIED_BLOB_DIGESTS[raw_sha] = str(core.get("digest_value") or "")
-                _write_boot_and_route_slabs(cache_dir, raw_sha, core)
                 inst = UnifiedModel(
                     core,
                     _raw_bytes=raw_bytes,
@@ -5747,8 +6706,7 @@ def open_model(
         cache_dir.mkdir(parents=True, exist_ok=True)
         tmp_f = cache_dir / f".unified_model_core_{raw_sha[:32]}.{os.getpid()}.tmp"
         tmp_f.write_bytes(marshal.dumps(core))
-        tmp_f.replace(cache_dir / f"unified_model_core_{raw_sha[:32]}.marshal")
-        _write_boot_and_route_slabs(cache_dir, raw_sha, core)
+        tmp_f.replace(cache_file)
     except OSError:
         pass
     inst = UnifiedModel(core, _raw_bytes=raw_bytes, _core_only=True, _target_path=target)
@@ -5761,8 +6719,8 @@ def adapter_ast_entry(rel_path: str, expected_sha256: str | None = None) -> dict
     """Fast RAM lookup of compile-time verified adapter AST metadata (`defaulted_keys` + `dispatch_ops`)."""
     try:
         inst = open_model()
-        if "adapter_ast_index" not in inst._core_meta:
-            inst._ensure_routing_core()
+        if "adapter_ast_index" not in inst._core_meta and "adapter_ast_blob" in inst._core_meta:
+            inst._core_meta["adapter_ast_index"] = marshal.loads(inst._core_meta.pop("adapter_ast_blob"))
         idx = inst._core_meta.get("adapter_ast_index") or {}
         row = idx.get(rel_path)
         if not isinstance(row, Mapping):
@@ -5818,6 +6776,129 @@ class SovereignZeroLLMPlanner:
     def organ_graph(self) -> Any:
         """Access the unified 5-stratum `MetaCircularOrganGraph` (`P_t`)."""
         return self._cognitive_core().organ_graph
+
+    def epistemic_portfolio_status(self) -> dict[str, Any]:
+        """Inspect readiness of the unified zero-model epistemic portfolio (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.organ_portfolio_status()
+
+    def act_on_interface(self, instruction: str, **kwargs: Any) -> dict[str, Any]:
+        """Zero-VLM 5-Tier Computer-Use, WebMCP & CLI Action-Grammar dispatcher (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.act_on_interface_unified(instruction, **kwargs)
+
+    def explore_unknown_environment(self, env: Any, actions: Sequence[Any], *, is_goal: Any = None, **kwargs: Any) -> dict[str, Any]:
+        """Zero-instruction interactive POMDP / trace-quotient explorer (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.explore_unknown_environment_unified(env, actions, is_goal=is_goal, **kwargs)
+
+    def verify_patch_uncheatable(
+        self,
+        workspace_dir: str | Path,
+        patched_files: Mapping[str, str],
+        pytest_targets: Sequence[str],
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Uncheatable behavioural diff-mutation & structural-specification gate (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.verify_patch_uncheatable(workspace_dir, patched_files, pytest_targets, **kwargs)
+
+    def induce_hypothesis_and_vocabulary(
+        self,
+        points: Sequence[tuple[Any, Any]] | None = None,
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Symbolic/piecewise hypothesis fitting, active query design, and vocabulary induction (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.induce_hypothesis_and_vocabulary_unified(points, **kwargs)
+
+    def teach_edit_by_example(
+        self,
+        target_source: str,
+        before_example: str,
+        after_example: str,
+    ) -> dict[str, Any]:
+        """1-shot structural AST transformation transfer (`edit_by_example_v1`, `K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.teach_edit_by_example_unified(target_source, before_example, after_example)
+
+    def fast_associate_and_adapt(
+        self,
+        query_or_key: str,
+        *,
+        observe_payload: Any | None = None,
+        utility: float = 1.0,
+        credit_verified: bool = True,
+        top_k: int = 3,
+    ) -> dict[str, Any]:
+        """64-bit Hyperdimensional SimHash VSA + Sherman-Morrison/Woodbury + Bi-Temporal PPR fast adapter (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        mem = getattr(self, "_vsa_woodbury_mem", None)
+        if mem is None:
+            mem = _uep.VSAWoodburyFastMemory()
+            self._vsa_woodbury_mem = mem
+        if observe_payload is not None:
+            mem.observe(query_or_key, observe_payload, utility=utility, credit_verified=credit_verified)
+        return mem.query(query_or_key, top_k=top_k)
+
+    def decide_one_shot_sufficiency(self, **kwargs: Any) -> dict[str, Any]:
+        """Decidable 1-shot demonstration sufficiency, hidden-precondition abduction & active experiment compiler (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.decide_one_shot_sufficiency_and_experiment(**kwargs)
+
+    def compose_and_calibrate_skills(
+        self,
+        source_text: str,
+        before_after_lessons: Sequence[tuple[str, str]],
+        *,
+        target_language: str = "python",
+        pure_organ_source: str | None = None,
+    ) -> dict[str, Any]:
+        """Proved skill composition (`proved_composition_v1`), diagnostic scope calibration & 7-language CST transfer (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.compose_and_calibrate_verified_skills(
+            source_text,
+            before_after_lessons,
+            target_language=target_language,
+            pure_organ_source=pure_organ_source,
+        )
+
+    def pre_sieve_meaning_ir(
+        self,
+        baseline_source: str,
+        candidate_sources: Sequence[str],
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Microsecond Guarded Region-SSA Meaning-IR deduplicator & forward-backward abstract simulator (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.pre_sieve_and_simulate_meaning_ir(baseline_source, candidate_sources, **kwargs)
+
+    def organ_portfolio_status(self) -> dict[str, Any]:
+        """Inspect readiness of all 96 unified SWE, tools & runtime organs (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.organ_portfolio_status()
+
+    def learn_mealy_interface(
+        self,
+        oracle_fn: Any,
+        alphabet: Sequence[str],
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Actively learn an unknown finite-state environment via separating words (`minimal_experiment_v1`)."""
+        from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
+
+        return _uep.ActiveSymbolicMealyLearner.learn_mealy_interface(oracle_fn, alphabet, **kwargs)
 
     def extrapolate_global_opportunity(
         self,

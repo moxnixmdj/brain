@@ -1419,6 +1419,106 @@ class Creature:
         self._save()
         return res
 
+    def probe_os_isolation(self, *, budget_s: float = 30.0) -> dict[str, Any]:
+        """Wave 37: Real Linux kernel namespace (`user+mount+pid+ipc+uts+net`, `CapEff=0`) 18-attempt escape probe."""
+        if getattr(self, "_unified_model", None) is not None:
+            return self._unified_model.probe_os_isolation(budget_s=budget_s)
+        from canonical.runtime import os_isolation_v1
+
+        return os_isolation_v1.probe(budget_s=budget_s)
+
+    def execute_confined_computer_use(
+        self,
+        work_dir: str | Path,
+        steps: Sequence[Mapping[str, Any]],
+        *,
+        goal_id: str = "confined_hcu_episode",
+        budget_s: float = 15.0,
+        allow_network: bool = False,
+        verify_effect: bool = True,
+        initial_marking: Mapping[str, int] | None = None,
+        transitions: Mapping[str, Mapping[str, Any]] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 37: Real OS kernel-confined 3-channel HCU executor + Ring-0 byte effect oracle + CoW rollback."""
+        if getattr(self, "_unified_model", None) is not None:
+            return self._unified_model.execute_confined_computer_use(
+                work_dir,
+                steps,
+                goal_id=goal_id,
+                budget_s=budget_s,
+                allow_network=allow_network,
+                verify_effect=verify_effect,
+                initial_marking=initial_marking,
+                transitions=transitions,
+            )
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import (
+            ConfinedHybridComputerUseExecutor,
+            HybridComputerUsePetriSupervisor,
+            shared_futamura_cascade,
+        )
+
+        sup = HybridComputerUsePetriSupervisor(
+            initial_marking=initial_marking,
+            transitions=transitions,
+        )
+        return ConfinedHybridComputerUseExecutor(
+            supervisor=sup,
+            belief_bus=shared_futamura_cascade().belief_bus,
+        ).execute_episode(
+            work_dir,
+            steps,
+            goal_id=goal_id,
+            budget_s=budget_s,
+            allow_network=allow_network,
+            verify_effect=verify_effect,
+        )
+
+    def solve_multifile_repo_futamura(
+        self,
+        repo_dir: str | Path,
+        test_targets: Sequence[str] = (),
+        *,
+        goal_text: str = "",
+        suspect_files: Sequence[str] | None = None,
+        auto_compile: bool = True,
+        apply_to_disk: bool = True,
+        use_portfolio_fallback: bool = False,
+        alpha: float = 0.05,
+        timeout_s: float = 10.0,
+    ) -> dict[str, Any]:
+        """Wave 37: Unified multi-file Python repository Futamura solver with Ring-0 verification & compile-back."""
+        if getattr(self, "_unified_model", None) is not None:
+            res = self._unified_model.solve_multifile_repo_futamura(
+                repo_dir,
+                test_targets,
+                goal_text=goal_text,
+                suspect_files=suspect_files,
+                auto_compile=auto_compile,
+                apply_to_disk=apply_to_disk,
+                use_portfolio_fallback=use_portfolio_fallback,
+                alpha=alpha,
+                timeout_s=timeout_s,
+            )
+        else:
+            from canonical.runtime.futamura_leapfrog_kernel_v1 import (
+                MultifileFutamuraRepoSolver,
+                shared_futamura_cascade,
+            )
+
+            res = MultifileFutamuraRepoSolver(cascade=shared_futamura_cascade()).solve(
+                repo_dir,
+                test_targets,
+                goal_text=goal_text,
+                suspect_files=suspect_files,
+                auto_compile=auto_compile,
+                apply_to_disk=apply_to_disk,
+                use_portfolio_fallback=use_portfolio_fallback,
+                alpha=alpha,
+                timeout_s=timeout_s,
+            )
+        self._save()
+        return res
+
     def sleep_evolve_organs_gea(
         self,
         *,

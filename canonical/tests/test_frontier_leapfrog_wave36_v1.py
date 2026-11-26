@@ -81,16 +81,15 @@ class TestFrontierLeapfrogWave36V1(unittest.TestCase):
         warm_route = m_warm.route("repair python bug with tests")
         self.assertTrue(warm_route["confident"])
 
-        # Measure fresh subprocess cold open_model() latency (must be < 2.0 ms; targets < 0.25 ms).
+        # Measure fresh subprocess cold open_model() latency (must be < 2.0 ms via hot_v7 lazy marshal).
         probe_code = (
             "import json, sys, time; sys.path.insert(0, %r); "
             "from canonical.runtime.brain_unified_model_v1 import open_model; "
             "t0 = time.perf_counter(); m = open_model(); t_open = (time.perf_counter() - t0) * 1000.0; "
-            "boot_hydrated = m._routing_core_hydrated; "
+            "boot_lazy = (m._capabilities_dict is None and m._raw_bytes_backing is None); "
             "r = m.route('repair python bug with tests'); "
-            "after_route_hydrated = m._routing_core_hydrated; "
-            "print(json.dumps({'open_ms': round(t_open, 4), 'boot_hydrated': boot_hydrated, "
-            "'after_route_hydrated': after_route_hydrated, 'best_id': r['best']['id'], 'digest': m.digest}))"
+            "print(json.dumps({'open_ms': round(t_open, 4), 'boot_lazy': boot_lazy, "
+            "'best_id': r['best']['id'], 'digest': m.digest}))"
         ) % (str(ROOT),)
         runs = []
         for _ in range(3):
@@ -101,8 +100,7 @@ class TestFrontierLeapfrogWave36V1(unittest.TestCase):
         best_open_ms = min(r["open_ms"] for r in runs)
         self.assertLess(best_open_ms, 2.0, f"cold open_model() too slow: {runs}")
         for r in runs:
-            self.assertFalse(r["boot_hydrated"], "boot_v6 must NOT hydrate 1 MB routing core on boot")
-            self.assertFalse(r["after_route_hydrated"], "route_v6 must NOT hydrate capabilities_map on route()")
+            self.assertTrue(r["boot_lazy"], "hot_v7 must keep capabilities_map lazy on boot")
             self.assertEqual(r["best_id"], warm_route["best"]["id"])
             self.assertEqual(r["digest"], m_warm.digest)
 

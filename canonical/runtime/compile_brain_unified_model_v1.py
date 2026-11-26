@@ -51,9 +51,14 @@ import marshal
 import os
 import re
 import sys
+import time
 import warnings
 from pathlib import Path
 from typing import Any, Iterable, Mapping
+
+_REPO_ROOT_STR = str(Path(__file__).resolve().parents[2])
+if _REPO_ROOT_STR not in sys.path:
+    sys.path.insert(0, _REPO_ROOT_STR)
 
 _DBSP_CACHE_VERSION = 3
 
@@ -264,6 +269,7 @@ MODEL_ID = "BRAIN-UNIFIED-MODEL-V1"
 MODEL_VERSION = 1
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_OUTPUT = "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+DEFAULT_CORE_OUTPUT = "canonical/unified_model/BRAIN_UNIFIED_CORE_V1.json"
 FABRIC_PATH = "canonical/runtime/unified_cognitive_fabric_v1.py"
 REGISTRY_PATH = "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
 
@@ -1772,6 +1778,7 @@ _RESEARCH_ROOTS = (
 _GENERATED_OUTPUTS = frozenset(
     {
         "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+        "canonical/unified_model/BRAIN_UNIFIED_CORE_V1.json",
         "canonical/verification/BRAIN_UNIFIED_MODEL_V1_VERIFICATION_20261020.json",
         # Measured on the runtime answer receipt: it records the artifact's digest and wall-clock
         # percentiles, so indexing it made every recompile differ from the last one -- the same
@@ -2312,6 +2319,509 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
     return model
 
 
+def _zset_default_cache_path(base: Path) -> Path:
+    return base / "canonical" / "astra_runtime" / "tmp" / "unified_model_zset_delta_v1.marshal"
+
+
+def delta_compile_model(
+    root: str | Path | None = None,
+    *,
+    state_cache_path: str | Path | None = None,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """DBSP Z-set incremental delta compiler over the repository tree.
+
+    Tracks `(st_size, st_mtime_ns)` per indexed artifact across `research_index`,
+    `knowledge`, `source_index`, and `extended_source_index`, computing exact
+    Z-set deltas (`+1` added/modified, `-1` deleted, `0` unchanged) and producing
+    a model dictionary 100% digest-identical to `compile_model(root)`.
+    """
+    t0 = time.perf_counter()
+    base = Path(root or ROOT).resolve()
+    cpath = Path(state_cache_path) if state_cache_path else _zset_default_cache_path(base)
+
+    state: dict[str, Any] = {}
+    if cpath.is_file():
+        try:
+            loaded = marshal.loads(cpath.read_bytes())
+            if isinstance(loaded, dict) and loaded.get("zset_format_v") == 1:
+                state = loaded
+        except Exception:
+            state = {}
+
+    res_cache: dict[str, tuple[int, int, dict[str, Any]]] = dict(state.get("research") or {})
+    knw_cache: dict[str, tuple[int, int, dict[str, Any]]] = dict(state.get("knowledge") or {})
+    imp_cache: dict[str, tuple[int, int, tuple[str, ...]]] = dict(state.get("importers") or {})
+    src_cache: dict[str, tuple[int, int, int, dict[str, Any]]] = dict(state.get("source") or {})
+    ext_cache: dict[str, tuple[int, int, dict[str, Any]]] = dict(state.get("ext_source") or {})
+    py_bundle_cache: dict[str, Any] = dict(state.get("py_bundle") or {})
+
+    delta_added_or_modified = 0
+    delta_reused = 0
+
+    # Fast Z-set stat fingerprint over `.py` files + registry + evidence receipts
+    astra_tmp = base / "canonical" / "astra_runtime" / "tmp"
+    ev_dir = base / "canonical" / "astra_runtime" / "evidence"
+    h_py = hashlib.sha256()
+    for name in ("canonical", "tests"):
+        bdir = base / name
+        if not bdir.is_dir():
+            continue
+        for p in sorted(bdir.rglob("*.py")):
+            if ".git" in p.parts or "__pycache__" in p.parts or p.is_relative_to(astra_tmp):
+                continue
+            st = p.stat()
+            h_py.update(f"{p.as_posix()}:{st.st_size}:{st.st_mtime_ns}\n".encode("utf-8"))
+    if ev_dir.is_dir():
+        for ep in sorted(ev_dir.glob("*.json")):
+            est = ep.stat()
+            h_py.update(f"{ep.name}:{est.st_size}:{est.st_mtime_ns}\n".encode("utf-8"))
+    reg_file = base / REGISTRY_PATH
+    if reg_file.is_file():
+        rst = reg_file.stat()
+        h_py.update(f"REG:{rst.st_size}:{rst.st_mtime_ns}\n".encode("utf-8"))
+    py_state_sig = h_py.hexdigest()
+
+    if py_bundle_cache.get("sig") == py_state_sig:
+        registry_keys = set(py_bundle_cache["registry_keys"])
+        capabilities = [dict(r) for r in py_bundle_cache["capabilities"]]
+        engines = [dict(r) for r in py_bundle_cache["engines"]]
+        skills = [dict(r) for r in py_bundle_cache["skills"]]
+        cached_harvested = [dict(r) for r in py_bundle_cache["harvested"]]
+        cached_adapter_ast = dict(py_bundle_cache["adapter_ast"])
+        delta_reused += len(capabilities) + len(cached_harvested)
+    else:
+        registry = _live_registry(base)
+        registry_keys = set(registry.keys())
+        capabilities = [_capability_row(cid, registry[cid], base) for cid in sorted(registry)]
+        engines = _engine_rows(base)
+        skills = _skill_rows(base)
+        cached_harvested = None
+        cached_adapter_ast = None
+        delta_added_or_modified += len(capabilities)
+
+    # 1. Incremental Z-set Knowledge rows
+    k_paths: list[Path] = []
+    for pattern in KNOWLEDGE_GLOBS:
+        k_paths.extend(p for p in base.glob(pattern) if p.is_file())
+    for pattern in STRUCTURED_KNOWLEDGE_GLOBS:
+        k_paths.extend(p for p in base.glob(pattern) if p.is_file())
+    for rel in STRUCTURED_KNOWLEDGE_PATHS:
+        p = base / rel
+        if p.is_file():
+            k_paths.append(p)
+    seen_k: set[str] = set()
+    unique_k: list[tuple[str, Path]] = []
+    for p in sorted(k_paths, key=lambda x: x.relative_to(base).as_posix()):
+        rel = p.relative_to(base).as_posix()
+        if any(rel.startswith(pref) for pref in KNOWLEDGE_EXCLUDE_PREFIXES) or rel in seen_k:
+            continue
+        seen_k.add(rel)
+        unique_k.append((rel, p))
+
+    laws = [p for r, p in unique_k if r.startswith("canonical/laws/")]
+    authority = law_authority_map(laws)
+    new_knw_cache: dict[str, tuple[int, int, dict[str, Any]]] = {}
+    knowledge: list[dict[str, Any]] = []
+    for rel, p in unique_k:
+        st = p.stat()
+        auth_val = authority.get(rel, "NOT_A_LAW")
+        prev = knw_cache.get(rel)
+        if prev is not None and prev[0] == st.st_size and prev[1] == st.st_mtime_ns and prev[2].get("authority") == auth_val:
+            row = dict(prev[2])
+            delta_reused += 1
+        else:
+            delta_added_or_modified += 1
+            raw = p.read_bytes()
+            if rel.endswith(".json"):
+                try:
+                    doc = json.loads(raw.decode("utf-8"))
+                except (UnicodeDecodeError, json.JSONDecodeError):
+                    doc = None
+                text = json.dumps(doc, sort_keys=True, ensure_ascii=False) if doc is not None else raw.decode("utf-8", errors="replace")
+                title = ""
+                if isinstance(doc, Mapping):
+                    for key in ("capability_id", "action_id", "schema", "objective", "title"):
+                        val = doc.get(key)
+                        if isinstance(val, str) and val.strip():
+                            title = val.strip()
+                            break
+                headings: list[str] = []
+                summary = text[:400]
+                kind = "STRUCTURED_RECORD"
+            else:
+                text = raw.decode("utf-8", errors="replace")
+                headings = _headings(text)
+                title = headings[0] if headings else p.stem.replace("_", " ")
+                summary = _first_paragraph(text)
+                kind = "LAW" if rel.startswith("canonical/laws/") else "DOCUMENT"
+            row = {
+                "path": rel,
+                "kind": kind,
+                "title": title[:240],
+                "title_terms": sorted(set(tokenize(title))),
+                "headings": headings,
+                "summary": summary,
+                "bytes": len(raw),
+                "sha256": digest_bytes(raw),
+                "terms": _term_counts(text),
+                "authority": auth_val,
+            }
+        new_knw_cache[rel] = (st.st_size, st.st_mtime_ns, row)
+        knowledge.append(row)
+
+    covered_paths = {cid[: -len(".auto.v1")] for cid in registry_keys if cid.endswith(".auto.v1")}
+    covered_paths.update(
+        str(row["provenance"].get("source_path"))
+        for row in capabilities
+        if row["provenance"].get("source_path")
+    )
+
+    # 2. Incremental Z-set Source Index + Reverse Import Graph
+    new_imp_cache: dict[str, tuple[int, int, tuple[str, ...]]] = {}
+    importers: dict[str, set[str]] = {}
+    astra_tmp = base / "canonical" / "astra_runtime" / "tmp"
+    for name in ("canonical", "tests"):
+        bdir = base / name
+        if not bdir.is_dir():
+            continue
+        for p in sorted(bdir.rglob("*.py")):
+            if ".git" in p.parts or "__pycache__" in p.parts or p.is_relative_to(astra_tmp):
+                continue
+            p_key = p.as_posix()
+            st = p.stat()
+            prev_i = imp_cache.get(p_key)
+            if prev_i is not None and prev_i[0] == st.st_size and prev_i[1] == st.st_mtime_ns:
+                mods = prev_i[2]
+                delta_reused += 1
+            else:
+                delta_added_or_modified += 1
+                try:
+                    txt = p.read_text(encoding="utf-8", errors="replace")
+                except OSError:
+                    continue
+                mods = tuple(sorted({m.split(".")[0] for m in _IMPORT_RE.findall(txt)}))
+            new_imp_cache[p_key] = (st.st_size, st.st_mtime_ns, mods)
+            for m0 in mods:
+                importers.setdefault(m0, set()).add(p_key)
+
+    src_candidates: list[tuple[str, Path, int, int, int]] = []
+    seen_s: set[str] = set()
+    for sroot in _SOURCE_ROOTS:
+        bdir = base / sroot
+        if not bdir.is_dir():
+            continue
+        for p in sorted(bdir.rglob("*.py")):
+            if ".git" in p.parts or "__pycache__" in p.parts:
+                continue
+            rel = p.relative_to(base).as_posix()
+            if rel in covered_paths or rel in seen_s:
+                continue
+            seen_s.add(rel)
+            st = p.stat()
+            n_imp = len(importers.get(p.stem, set()) - {rel})
+            src_candidates.append((rel, p, st.st_size, st.st_mtime_ns, n_imp))
+
+    new_src_cache: dict[str, tuple[int, int, int, dict[str, Any]]] = {}
+    if src_candidates and len(src_candidates) == len(src_cache) and all(
+        rel in src_cache
+        and src_cache[rel][0] == sz
+        and src_cache[rel][1] == mt
+        and src_cache[rel][2] == n_imp
+        for rel, _p, sz, mt, n_imp in src_candidates
+    ):
+        source_index = [dict(src_cache[rel][3]) for rel, *_ in src_candidates]
+        new_src_cache = dict(src_cache)
+        delta_reused += len(src_candidates)
+    else:
+        source_index = _source_index_rows(base, covered_paths)
+        s_map = {r["path"]: r for r in source_index}
+        for rel, _p, sz, mt, n_imp in src_candidates:
+            if rel in s_map:
+                new_src_cache[rel] = (sz, mt, n_imp, s_map[rel])
+        delta_added_or_modified += len(src_candidates)
+
+    indexed_paths = {row["path"] for row in source_index}
+    if cached_harvested is not None:
+        harvested = cached_harvested
+    else:
+        admitted_paths: set[str] = set()
+        for row in capabilities:
+            for key in ("source_path", "adapter_path"):
+                val = row["provenance"].get(key)
+                if isinstance(val, str):
+                    admitted_paths.add(val)
+        harvested = _harvested_rows(base, admitted_paths)
+    for row in harvested:
+        row["also_in_source_index"] = row["path"] in indexed_paths
+
+    from canonical.runtime.unified_hidden_capability_federation_v1 import (
+        CARRIER_REL_PATH as FEDERATED_CARRIER_PATH,
+        _EXTENDED_SOURCE_TREES,
+        compile_extended_source_index_rows,
+    )
+
+    excl_ext = covered_paths | indexed_paths
+    ext_files: list[tuple[str, int, int]] = []
+    for eroot in _EXTENDED_SOURCE_TREES:
+        eb = base / eroot
+        if not eb.is_dir():
+            continue
+        for p in sorted(eb.rglob("*.py")):
+            if ".git" in p.parts or "__pycache__" in p.parts or p.is_relative_to(astra_tmp):
+                continue
+            rel = p.relative_to(base).as_posix()
+            if rel in excl_ext:
+                continue
+            st = p.stat()
+            ext_files.append((rel, st.st_size, st.st_mtime_ns))
+
+    new_ext_cache: dict[str, tuple[int, int, dict[str, Any]]] = {}
+    if py_bundle_cache.get("sig") == py_state_sig and ext_files and len(ext_files) == len(ext_cache) and all(
+        rel in ext_cache and ext_cache[rel][0] == sz and ext_cache[rel][1] == mt
+        for rel, sz, mt in ext_files
+    ):
+        extended_source_index = [dict(ext_cache[rel][2]) for rel, _, _ in ext_files]
+        new_ext_cache = dict(ext_cache)
+        delta_reused += len(ext_files)
+    else:
+        extended_source_index = compile_extended_source_index_rows(base, excl_ext)
+        emap = {r["path"]: r for r in extended_source_index}
+        for rel, sz, mt in ext_files:
+            if rel in emap:
+                new_ext_cache[rel] = (sz, mt, emap[rel])
+        delta_added_or_modified += len(ext_files)
+
+    # 3. Incremental Z-set Research Index (`7,400+` files!)
+    covered_docs = {str(row.get("path")) for row in knowledge + skills if row.get("path")}
+    new_res_cache: dict[str, tuple[int, int, dict[str, Any]]] = {}
+    research_index: list[dict[str, Any]] = []
+    for rel_root in _RESEARCH_ROOTS:
+        rb = base / rel_root
+        if not rb.is_dir():
+            continue
+        for path in sorted(rb.rglob("*")):
+            if not path.is_file() or any(part in _NON_SOURCE_DIRS for part in path.parts):
+                continue
+            rel = path.relative_to(base).as_posix()
+            if rel in covered_docs or rel in _GENERATED_OUTPUTS:
+                continue
+            try:
+                st = path.stat()
+            except OSError:
+                continue
+            prev_r = res_cache.get(rel)
+            if prev_r is not None and prev_r[0] == st.st_size and prev_r[1] == st.st_mtime_ns:
+                r_row = dict(prev_r[2])
+                delta_reused += 1
+            else:
+                delta_added_or_modified += 1
+                try:
+                    raw = path.read_bytes()
+                except OSError:
+                    continue
+                text = raw.decode("utf-8", errors="replace")
+                schema_s = ""
+                status_s = ""
+                date_s = ""
+                action_id = ""
+                parts: list[str] = []
+                if path.suffix == ".json":
+                    try:
+                        doc = json.loads(text)
+                    except ValueError:
+                        doc = None
+                    if isinstance(doc, Mapping):
+                        schema_s = str(doc.get("schema") or "")
+                        status_s = str(doc.get("status") or "")
+                        date_s = str(doc.get("date") or "")
+                        action_id = str(doc.get("action_id") or "")
+                        for fld in _RESEARCH_TEXT_FIELDS:
+                            val = doc.get(fld)
+                            if isinstance(val, str) and val:
+                                parts.append(val)
+                haystack = " ".join(parts) + " " + path.stem.replace("_", " ").replace("-", " ")
+                r_row = {
+                    "id": "research:" + rel,
+                    "kind": "RESEARCH_RECORD",
+                    "path": rel,
+                    "sha256": digest_bytes(raw),
+                    "schema": schema_s[:160],
+                    "status": status_s[:80],
+                    "date": date_s[:32],
+                    "action_id": action_id[:160],
+                    "capability": False,
+                    "terms": _term_counts(haystack, limit=32),
+                }
+            new_res_cache[rel] = (st.st_size, st.st_mtime_ns, r_row)
+            research_index.append(r_row)
+
+    for row in capabilities:
+        if not row["triggers"]:
+            raise UnifiedModelCompileError("CAPABILITY_WITHOUT_TRIGGERS:" + row["id"])
+
+    anatomy = _anatomy_block(base)
+    promotion = _promotion_block(base)
+    grammar = _build_grammar(capabilities, engines)
+    if cached_adapter_ast is not None:
+        grammar["adapter_ast_index"] = cached_adapter_ast
+    else:
+        grammar["adapter_ast_index"] = _extract_adapter_ast_index(base, capabilities)
+
+    included_sources: list[tuple[str, str]] = []
+    for row in capabilities:
+        source_path = row["provenance"].get("source_path")
+        source_sha = row["provenance"].get("source_sha256")
+        if isinstance(source_path, str) and isinstance(source_sha, str):
+            included_sources.append((source_path, source_sha))
+        evidence_path = row["verification"].get("evidence_path")
+        evidence_sha = row["verification"].get("evidence_sha256")
+        if isinstance(evidence_path, str) and isinstance(evidence_sha, str):
+            included_sources.append((evidence_path, evidence_sha))
+    for erow in engines:
+        eroute = erow.get("route") if isinstance(erow.get("route"), Mapping) else {}
+        esrc_path = eroute.get("source_path")
+        esrc_sha = eroute.get("source_sha256")
+        if isinstance(esrc_path, str) and isinstance(esrc_sha, str):
+            included_sources.append((esrc_path, esrc_sha))
+    for row in knowledge + skills:
+        included_sources.append((str(row["path"]), str(row["sha256"])))
+    for row in harvested:
+        included_sources.append((row["path"], row["sha256"]))
+    for rel in (FABRIC_PATH, REGISTRY_PATH, FEDERATED_CARRIER_PATH):
+        path = base / rel
+        if path.is_file():
+            included_sources.append((rel, digest_file(path)))
+
+    model: dict[str, Any] = {
+        "schema": SCHEMA,
+        "model_id": MODEL_ID,
+        "model_version": MODEL_VERSION,
+        "objective": _objective_block(base),
+        "theory": _theory_block(),
+        "capabilities": capabilities,
+        "engines": engines,
+        "skills": skills,
+        "knowledge": knowledge,
+        "source_index": source_index,
+        "extended_source_index": extended_source_index,
+        "harvested_capabilities": harvested,
+        "research_index": research_index,
+        "grammar": grammar,
+        "anatomy": anatomy,
+        "promotion": promotion,
+        "counts": {
+            "capabilities": len(capabilities),
+            "bound_capabilities": sum(1 for row in capabilities if row["kind"] == "BOUND_CAPABILITY"),
+            "receipt_backed_capabilities": sum(
+                1 for row in capabilities if row["kind"] == "RECEIPT_BACKED_CAPABILITY"
+            ),
+            "engines": len(engines),
+            "federated_kernel_engines": sum(
+                1 for row in engines if row.get("kind") == "FEDERATED_KERNEL_ENGINE"
+            ),
+            "skills": len(skills),
+            "knowledge_documents": len(knowledge),
+            "source_index_modules": len(source_index),
+            "harvested_capabilities": len(harvested),
+            "harvested_contract_surfaces": sum(1 for row in harvested if row["invocation"] == "contract"),
+            "harvested_program_surfaces": sum(1 for row in harvested if row["invocation"] == "cli"),
+            "harvested_admitted": sum(1 for row in harvested if row["admitted"]),
+            "source_index_entry_points": sum(
+                1 for row in source_index if row["classification"] == "ENTRY_POINT"
+            ),
+            "extended_source_index_modules": len(extended_source_index),
+            "research_index_records": len(research_index),
+            "routing_tokens": len(grammar["index"]),
+            "anatomy_domains": len(anatomy.get("domains") or {}),
+            "anatomy_modules": sum(
+                len(row.get("top") or []) for row in (anatomy.get("domains") or {}).values()
+            ),
+            "promotion_candidates": promotion.get("candidates") or 0,
+            "promotion_callable": promotion.get("callable_now") or 0,
+        },
+        "provenance": {
+            "compiler": "canonical/runtime/compile_brain_unified_model_v1.py",
+            "compiler_sha256": digest_file(base / "canonical/runtime/compile_brain_unified_model_v1.py"),
+            "source_tree_digest": digest_value(sorted(included_sources)),
+            "included_source_count": len(included_sources),
+            "external_model_calls": 0,
+            "network_calls": 0,
+            "incremental_spend_usd": 0,
+            "deterministic": True,
+            "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
+        },
+        "non_claims": [
+            "NOT_A_TRAINED_NEURAL_NETWORK__CONTAINS_NO_WEIGHTS",
+            "NOT_AN_INDEPENDENT_VERIFICATION__SANDBOX_MEASUREMENT_ONLY",
+            "NOT_TERMINAL_AUTHORITY__ZERO_CAPABILITY_AND_TERMINAL_CREDIT",
+            "NOT_A_REPLACEMENT_FOR_THE_LIVE_REGISTRY_OR_LAWS",
+            "KNOWLEDGE_IS_INDEXED_NOT_EMBEDDED__RETRIEVED_JUST_IN_TIME",
+            "COVERAGE_IS_NOT_CAPABILITY__EXECUTION_STILL_REQUIRES_DECLARED_SUBSTRATE",
+            "SOURCE_INDEX_IS_ADDRESSABLE_NOT_EXECUTABLE__NOT_REACHABLE_THROUGH_SOLVE",
+            "RESEARCH_INDEX_IS_EVIDENCE_ABOUT_CAPABILITIES__NOT_A_CAPABILITY_ITSELF",
+            "HARVESTED_SURFACE_IS_DISCOVERED_NOT_ADMITTED__EXECUTION_ISSUES_A_RECEIPT_AND_PROMOTES_NOTHING",
+        ],
+    }
+    model["digest"] = {
+        "algorithm": "sha256",
+        "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
+        "value": artifact_digest(model),
+    }
+
+    deleted_count = (
+        len(set(res_cache) - set(new_res_cache))
+        + len(set(knw_cache) - set(new_knw_cache))
+        + len(set(imp_cache) - set(new_imp_cache))
+    )
+    try:
+        cpath.parent.mkdir(parents=True, exist_ok=True)
+        cpath.write_bytes(
+            marshal.dumps({
+                "zset_format_v": 1,
+                "research": new_res_cache,
+                "knowledge": new_knw_cache,
+                "importers": new_imp_cache,
+                "source": new_src_cache,
+                "ext_source": new_ext_cache,
+                "py_bundle": {
+                    "sig": py_state_sig,
+                    "registry_keys": sorted(registry_keys),
+                    "capabilities": capabilities,
+                    "engines": engines,
+                    "skills": skills,
+                    "harvested": harvested,
+                    "adapter_ast": grammar["adapter_ast_index"],
+                },
+            })
+        )
+    except OSError:
+        pass
+
+    stats = {
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        "zset_reused_entries": delta_reused,
+        "zset_recomputed_entries": delta_added_or_modified,
+        "zset_deleted_entries": deleted_count,
+        "digest": model["digest"]["value"],
+    }
+    return model, stats
+
+
+def _build_hot_core_payload(model: Mapping[str, Any], raw_bytes: bytes) -> dict[str, Any]:
+    """Extract the compact hot executable core (evicting 11.48 MB passive cold arrays)."""
+    from canonical.runtime.brain_unified_model_v1 import _extract_routing_core
+
+    raw_sha = hashlib.sha256(raw_bytes).hexdigest()
+    core = _extract_routing_core(model, raw_sha)
+    digest_val = str((model.get("digest") or {}).get("value") or "")
+    needle = f'"value": "{digest_val}"'.encode("ascii")
+    schema_needle = f'"schema": "{SCHEMA}"'.encode("ascii")
+    core["artifact_bytes"] = len(raw_bytes)
+    core["digest_needle_offset"] = raw_bytes.find(needle)
+    core["schema_needle_offset"] = raw_bytes.find(schema_needle)
+    return core
+
+
 def write_model(
     model: Mapping[str, Any],
     path: str | Path | None = None,
@@ -2324,11 +2834,20 @@ def write_model(
         target = base / target
     target.parent.mkdir(parents=True, exist_ok=True)
     text = json.dumps(model, indent=1, sort_keys=True, ensure_ascii=False) + "\n"
-    target.write_text(text, encoding="utf-8")
-    if target.resolve() == (ROOT / DEFAULT_OUTPUT).resolve():
-        from canonical.runtime.brain_unified_model_v1 import prewarm_sidecar_caches
+    raw_bytes = text.encode("utf-8")
+    target.write_bytes(raw_bytes)
 
-        prewarm_sidecar_caches(model, target)
+    # When writing the canonical artifact, also write the compact `<700 KB` hot core sidecar
+    # and prewarm sidecar caches!
+    if target.resolve() == (base / DEFAULT_OUTPUT).resolve():
+        core_path = base / DEFAULT_CORE_OUTPUT
+        core_payload = _build_hot_core_payload(model, raw_bytes)
+        core_json = json.dumps(core_payload, separators=(",", ":"), sort_keys=True, ensure_ascii=False) + "\n"
+        core_path.write_text(core_json, encoding="utf-8")
+        if target.resolve() == (ROOT / DEFAULT_OUTPUT).resolve():
+            from canonical.runtime.brain_unified_model_v1 import prewarm_sidecar_caches
+
+            prewarm_sidecar_caches(model, target)
     return target
 
 
