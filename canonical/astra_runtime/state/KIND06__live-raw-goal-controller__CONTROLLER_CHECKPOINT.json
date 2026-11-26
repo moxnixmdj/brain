@@ -105,11 +105,11 @@
   "mission_id": "KIND06",
   "next_action_index": 2,
   "plan_sha256": "9b0e18d44b3f89960f0a7356f56ef2487b3eb386d918d9615433edb79e92fe20",
-  "resume_count": 3,
-  "rewind_count": 3,
+  "resume_count": 4,
+  "rewind_count": 4,
   "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
   "status": "COMPLETE",
   "step_id": "live-raw-goal-controller",
   "test_interrupt_injected": false,
-  "updated_at_utc": "2026-11-25T17:09:38.868905+00:00"
+  "updated_at_utc": "2026-11-26T02:42:09.257226+00:00"
 }

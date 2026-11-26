@@ -11,6 +11,17 @@
    "what": "notes",
    "why": "unknown_operator root0658906fe09f"
   },
+  "g0210569e83757320121456e4d0bb8b5726adc8fc35e3038a118efcf86e18b751": {
+   "cost": 1.0,
+   "created": 1795664206.5198908,
+   "helped": 0,
+   "id": "g0210569e83757320121456e4d0bb8b5726adc8fc35e3038a118efcf86e18b751",
+   "last_seen": 1795664206.5198908,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator root6113a39a30f8"
+  },
   "g099f7533bf465975ff7c516abb5718bf4440c008cb863a1c3dd6ea251b571eec": {
    "cost": 1.0,
    "created": 1795626738.506775,
@@ -21,6 +32,39 @@
    "trials": 0,
    "what": "define",
    "why": "unknown_operator rootbf235e28c273"
+  },
+  "g0a00be51239a37a6bc2736b95ca660dc9df7fc781e98bbaab5764238e7a1fa30": {
+   "cost": 1.0,
+   "created": 1795661173.489394,
+   "helped": 0,
+   "id": "g0a00be51239a37a6bc2736b95ca660dc9df7fc781e98bbaab5764238e7a1fa30",
+   "last_seen": 1795661173.489394,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator root07aa0904de35"
+  },
+  "g0b3eb6f0d409cbbf14c1128b52d808253d498d61d134e596496a5a9c98cad067": {
+   "cost": 1.0,
+   "created": 1795662756.3821955,
+   "helped": 0,
+   "id": "g0b3eb6f0d409cbbf14c1128b52d808253d498d61d134e596496a5a9c98cad067",
+   "last_seen": 1795662756.3821955,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator root33cb9dc4085b"
+  },
+  "g0b79c121f0b8054499574d679a8a635bfa94ab884193bd275f77f9cb5b0b9ede": {
+   "cost": 1.0,
+   "created": 1795664249.608389,
+   "helped": 0,
+   "id": "g0b79c121f0b8054499574d679a8a635bfa94ab884193bd275f77f9cb5b0b9ede",
+   "last_seen": 1795664249.608389,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator root2a859f7e3279"
   },
   "g0cca4033825288a4e936d719dd601c92445e26b80903cac9386c7e7cf28833ed": {
    "cost": 1.0,
@@ -99,6 +143,17 @@
    "what": "get the writing out of that there pdf thing",
    "why": "raw goal compilation gap"
   },
+  "g10d90cb9fec715b579a149ae7e389d2d5e70ea488996a1c9cfbd1d46fdd10f69": {
+   "cost": 1.0,
+   "created": 1795662756.071532,
+   "helped": 0,
+   "id": "g10d90cb9fec715b579a149ae7e389d2d5e70ea488996a1c9cfbd1d46fdd10f69",
+   "last_seen": 1795662756.071532,
+   "resolved": false,
+   "trials": 0,
+   "what": "files",
+   "why": "unknown_operator rootb0527c5bd989"
+  },
   "g116784418683": {
    "cost": 1.0,
    "created": 1793297609.1961474,
@@ -153,6 +208,39 @@
    "trials": 0,
    "what": "get the writing out of that there pdf thing",
    "why": "raw goal compilation gap"
+  },
+  "g153dde13193c0869757ba96d30d74f5e9080a17c6cf55e9a5795fa06e856f43e": {
+   "cost": 1.0,
+   "created": 1795661173.5602703,
+   "helped": 0,
+   "id": "g153dde13193c0869757ba96d30d74f5e9080a17c6cf55e9a5795fa06e856f43e",
+   "last_seen": 1795661173.5602703,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator root3227c171806d"
+  },
+  "g16e231e326f3fbb8e9637581c35e3b2ab8e8f1f4c502eb9e7ff063fc9c060eac": {
+   "cost": 1.0,
+   "created": 1795666458.7464855,
+   "helped": 0,
+   "id": "g16e231e326f3fbb8e9637581c35e3b2ab8e8f1f4c502eb9e7ff063fc9c060eac",
+   "last_seen": 1795666458.7464855,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator root7e83288badcb"
+  },
+  "g17b12454f1daaadd2805bda4d6a80593613e057ee85342df71bcf030f2137036": {
+   "cost": 1.0,
+   "created": 1795666006.760849,
+   "helped": 0,
+   "id": "g17b12454f1daaadd2805bda4d6a80593613e057ee85342df71bcf030f2137036",
+   "last_seen": 1795666006.760849,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator root379fd08f35f1"
   },
   "g180142073164": {
    "cost": 1.0,
@@ -209,6 +297,17 @@
    "what": "profit",
    "why": "unknown_operator root8bc231daa219"
   },
+  "g1fcc3a19b648437c4e76acc979f5446d5ed6fc75ce7764dbee9fa17a0495792a": {
+   "cost": 1.0,
+   "created": 1795661173.3573978,
+   "helped": 0,
+   "id": "g1fcc3a19b648437c4e76acc979f5446d5ed6fc75ce7764dbee9fa17a0495792a",
+   "last_seen": 1795661173.3573978,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator rootf98e32003334"
+  },
   "g20ff1c1d8441b0db5a2b8605238c04ab761abf87bc4b0049f5475c654dfafa19": {
    "cost": 1.0,
    "created": 1794495950.7883563,
@@ -231,6 +330,17 @@
    "what": "lines",
    "why": "unknown_operator root079352c7e94f"
   },
+  "g2205b2820505432ffe208748dbb51c29b21ed2d0a741157f70a351b06f35e72a": {
+   "cost": 1.0,
+   "created": 1795664249.8085363,
+   "helped": 0,
+   "id": "g2205b2820505432ffe208748dbb51c29b21ed2d0a741157f70a351b06f35e72a",
+   "last_seen": 1795664249.8085363,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator root9723cc811fbd"
+  },
   "g222975461607": {
    "cost": 1.0,
    "created": 1793271690.7518563,
@@ -241,6 +351,39 @@
    "trials": 0,
    "what": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2",
    "why": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2"
+  },
+  "g2239a5146de433a499807770df234ac39064f3f50e2eb847843e89fab1f776e9": {
+   "cost": 1.0,
+   "created": 1795666006.6968522,
+   "helped": 0,
+   "id": "g2239a5146de433a499807770df234ac39064f3f50e2eb847843e89fab1f776e9",
+   "last_seen": 1795666006.6968522,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator root47513e3dbc71"
+  },
+  "g2262b75cd18d63e701e1d0c3bf2b9cbc9cc66aae3f72dafa6a376dcbe7c297b8": {
+   "cost": 1.0,
+   "created": 1795664615.054316,
+   "helped": 0,
+   "id": "g2262b75cd18d63e701e1d0c3bf2b9cbc9cc66aae3f72dafa6a376dcbe7c297b8",
+   "last_seen": 1795664615.054316,
+   "resolved": false,
+   "trials": 0,
+   "what": "files",
+   "why": "unknown_operator rootc0705b0ca261"
+  },
+  "g2360511b81d0483152f09d6abad409394c0de44611c39b1be4b1a68059c1a240": {
+   "cost": 1.0,
+   "created": 1795661173.5941756,
+   "helped": 0,
+   "id": "g2360511b81d0483152f09d6abad409394c0de44611c39b1be4b1a68059c1a240",
+   "last_seen": 1795661173.5941756,
+   "resolved": false,
+   "trials": 0,
+   "what": "notes",
+   "why": "unknown_operator root2439facc7b4a"
   },
   "g23ac2a43d04b2611fa9659bf521063c9af6cb83e9743b3707855e02a81b4c325": {
    "cost": 1.0,
@@ -253,6 +396,17 @@
    "what": "about",
    "why": "unknown_operator rootcad92f7d1554"
   },
+  "g23afbb3a421a9ccf222d32990666a5c6cf0e7290c20713b449fc95d9614d1e69": {
+   "cost": 1.0,
+   "created": 1795664249.6677616,
+   "helped": 0,
+   "id": "g23afbb3a421a9ccf222d32990666a5c6cf0e7290c20713b449fc95d9614d1e69",
+   "last_seen": 1795664249.6677616,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator root26200723ba14"
+  },
   "g23b84168528ee93fd7655ffb0eed53ba0475f5bf10db35e374a26455e301b7ac": {
    "cost": 1.0,
    "created": 1794495950.963087,
@@ -263,6 +417,17 @@
    "trials": 0,
    "what": "retry",
    "why": "unknown_operator root40ee419d72a5"
+  },
+  "g2455f69f99a1696588d49076711bd9f31a467f88cdd7020a1eefad57ef1c3835": {
+   "cost": 1.0,
+   "created": 1795664206.3338168,
+   "helped": 0,
+   "id": "g2455f69f99a1696588d49076711bd9f31a467f88cdd7020a1eefad57ef1c3835",
+   "last_seen": 1795664206.3338168,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator root71ffb886eceb"
   },
   "g246678589635": {
    "cost": 1.0,
@@ -319,6 +484,28 @@
    "what": "margin",
    "why": "unknown_operator rootbffeca5d9ebe"
   },
+  "g2642a97f7858ee75f1a3eb16afca4658ec84aa5988ae8c9c8936913143f202c9": {
+   "cost": 1.0,
+   "created": 1795661173.444129,
+   "helped": 0,
+   "id": "g2642a97f7858ee75f1a3eb16afca4658ec84aa5988ae8c9c8936913143f202c9",
+   "last_seen": 1795661173.444129,
+   "resolved": false,
+   "trials": 0,
+   "what": "lines",
+   "why": "unknown_operator root4cca05abcd74"
+  },
+  "g26742d6822f4bb6575a9a8b2c8485d3203989d9ed53cfb789c601de3467ad31e": {
+   "cost": 1.0,
+   "created": 1795662756.1900022,
+   "helped": 0,
+   "id": "g26742d6822f4bb6575a9a8b2c8485d3203989d9ed53cfb789c601de3467ad31e",
+   "last_seen": 1795662756.1900022,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator rootd800ec2b2ef0"
+  },
   "g26e5e636ddf621a676d553610848a3f09f8e30893ee534dfd83169c460cdc894": {
    "cost": 1.0,
    "created": 1794959885.8371027,
@@ -329,6 +516,17 @@
    "trials": 0,
    "what": "profit",
    "why": "unknown_operator root01ea06b37930"
+  },
+  "g27336ec73a57fe51fb230bfde0e15fe932f4899dfc748daa3b4837456eed49cc": {
+   "cost": 1.0,
+   "created": 1795661662.0218248,
+   "helped": 1,
+   "id": "g27336ec73a57fe51fb230bfde0e15fe932f4899dfc748daa3b4837456eed49cc",
+   "last_seen": 1795661662.0526557,
+   "resolved": true,
+   "trials": 1,
+   "what": "median",
+   "why": "unknown_operator roota6049cb503bb"
   },
   "g284143994353": {
    "cost": 1.0,
@@ -418,6 +616,28 @@
    "what": "define",
    "why": "unknown_operator rootd1ddcb3ed5cf"
   },
+  "g2be38fc0574b7ed1507dd0f33ba79201c964f95547eee3c1163d75706154d74b": {
+   "cost": 1.0,
+   "created": 1795666458.576258,
+   "helped": 0,
+   "id": "g2be38fc0574b7ed1507dd0f33ba79201c964f95547eee3c1163d75706154d74b",
+   "last_seen": 1795666458.576258,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator roota5b3c0a581e3"
+  },
+  "g2be667033939e51165457b42247e0967b87c833facd0b70a0daa7f760e974bea": {
+   "cost": 1.0,
+   "created": 1795663208.7508447,
+   "helped": 1,
+   "id": "g2be667033939e51165457b42247e0967b87c833facd0b70a0daa7f760e974bea",
+   "last_seen": 1795663208.7837944,
+   "resolved": true,
+   "trials": 1,
+   "what": "median",
+   "why": "unknown_operator roota6e76dbcd250"
+  },
   "g2df43ff99a052e332b6dba15330f4125c902813ce5b849b1c2197f2e6a37b3e4": {
    "cost": 1.0,
    "created": 1795627780.6409383,
@@ -428,6 +648,39 @@
    "trials": 0,
    "what": "profit",
    "why": "unknown_operator root6f35c7e8591b"
+  },
+  "g2e3670292cd842bba4600f3d8f19b15f0efdbf8d9cbcbc0f26cd6f833315e47b": {
+   "cost": 1.0,
+   "created": 1795661173.5293572,
+   "helped": 0,
+   "id": "g2e3670292cd842bba4600f3d8f19b15f0efdbf8d9cbcbc0f26cd6f833315e47b",
+   "last_seen": 1795661173.5293572,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator root3da86c75a7a6"
+  },
+  "g2f212b18cdb57cc7d719dce706f92b5684cd3e768fcee4e68fd5babd05489743": {
+   "cost": 1.0,
+   "created": 1795664615.22504,
+   "helped": 0,
+   "id": "g2f212b18cdb57cc7d719dce706f92b5684cd3e768fcee4e68fd5babd05489743",
+   "last_seen": 1795664615.22504,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator rootfd958606237e"
+  },
+  "g2ffec78e449b89dd9194a0ee5822df759e8803f526090c48f20168373753c42c": {
+   "cost": 1.0,
+   "created": 1795666006.9643598,
+   "helped": 0,
+   "id": "g2ffec78e449b89dd9194a0ee5822df759e8803f526090c48f20168373753c42c",
+   "last_seen": 1795666006.9643598,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator rootdd7048977c92"
   },
   "g312ae628b1d6617fd45c18670df163b05974fdb4a45483b1090a83fc57ba0117": {
    "cost": 1.0,
@@ -484,6 +737,28 @@
    "what": "probe:--output|--data",
    "why": "empirical cli probe"
   },
+  "g3474b495b141592de68920b3d3cbf3216f03a6fbb1fc2199a49ad2ce1abc3458": {
+   "cost": 1.0,
+   "created": 1795664249.8450205,
+   "helped": 0,
+   "id": "g3474b495b141592de68920b3d3cbf3216f03a6fbb1fc2199a49ad2ce1abc3458",
+   "last_seen": 1795664249.8450205,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator rootdcd340836c2a"
+  },
+  "g36de3f5ce93dfc91374c009713188b5e8ec0fe25ec5d162da7947b50b1bae2fc": {
+   "cost": 1.0,
+   "created": 1795666006.5842586,
+   "helped": 0,
+   "id": "g36de3f5ce93dfc91374c009713188b5e8ec0fe25ec5d162da7947b50b1bae2fc",
+   "last_seen": 1795666006.5842586,
+   "resolved": false,
+   "trials": 0,
+   "what": "files",
+   "why": "unknown_operator rootb19e1ed890b6"
+  },
   "g3700392acbc902738c36e3dd799f7814fb4cff2f1bfadc88c9cd7f45e876e765": {
    "cost": 1.0,
    "created": 1794494227.693348,
@@ -538,6 +813,17 @@
    "trials": 0,
    "what": "practice:python_fault_localize",
    "why": "live learning cycle"
+  },
+  "g399815ff0885a73f0f5a55449bb74f8be7ab3ba58f964054d8ba0e67334e3c39": {
+   "cost": 1.0,
+   "created": 1795664206.3299072,
+   "helped": 0,
+   "id": "g399815ff0885a73f0f5a55449bb74f8be7ab3ba58f964054d8ba0e67334e3c39",
+   "last_seen": 1795664206.3299072,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator root71ffb886eceb"
   },
   "g3bd4a7143f296c82d046f1e5dd51b233ae9026ce5ce2ccbe2f4315726052dbd0": {
    "cost": 1.0,
@@ -627,6 +913,17 @@
    "what": "revenue",
    "why": "unknown_operator rootfc0ad1739484"
   },
+  "g4345eac1435df36cd23bb3e3fbdaf7fd62e5e55d713563c8e91c77632f0d72f1": {
+   "cost": 1.0,
+   "created": 1795666006.7563863,
+   "helped": 0,
+   "id": "g4345eac1435df36cd23bb3e3fbdaf7fd62e5e55d713563c8e91c77632f0d72f1",
+   "last_seen": 1795666006.7563863,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator root379fd08f35f1"
+  },
   "g435729428781": {
    "cost": 1.0,
    "created": 1793290330.1585608,
@@ -715,6 +1012,17 @@
    "what": "probe:-o|-d",
    "why": "empirical cli probe"
   },
+  "g475f2e07bc540e4eba9f7df7f86183244d15ba110b3c5c01c67baabb3c348f4e": {
+   "cost": 1.0,
+   "created": 1795666927.2487037,
+   "helped": 0,
+   "id": "g475f2e07bc540e4eba9f7df7f86183244d15ba110b3c5c01c67baabb3c348f4e",
+   "last_seen": 1795666927.2487037,
+   "resolved": false,
+   "trials": 0,
+   "what": "revenue",
+   "why": "unknown_operator root8679e7000a78"
+  },
   "g482551162764": {
    "cost": 1.0,
    "created": 1793266064.3790646,
@@ -725,6 +1033,17 @@
    "trials": 1,
    "what": "probe:--output|stdin",
    "why": "empirical cli probe"
+  },
+  "g4904fa0734f891c7b8d949d920c62fbd78555daeafae3d9709a5404e6ae3a695": {
+   "cost": 1.0,
+   "created": 1795664615.1618948,
+   "helped": 0,
+   "id": "g4904fa0734f891c7b8d949d920c62fbd78555daeafae3d9709a5404e6ae3a695",
+   "last_seen": 1795664615.1618948,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator root11f4c2885bbe"
   },
   "g4939909819": {
    "cost": 1.0,
@@ -748,6 +1067,17 @@
    "what": "zzzz",
    "why": "unknown_operator roote0444e677a4e"
   },
+  "g4accbf974bbd81a9508450a27792a0fcb2edae18dd21dd7e4ea8a76d007c26d2": {
+   "cost": 1.0,
+   "created": 1795665089.3066185,
+   "helped": 1,
+   "id": "g4accbf974bbd81a9508450a27792a0fcb2edae18dd21dd7e4ea8a76d007c26d2",
+   "last_seen": 1795665089.3388643,
+   "resolved": true,
+   "trials": 1,
+   "what": "median",
+   "why": "unknown_operator root6cbcc7908e81"
+  },
   "g50740825268": {
    "cost": 1.0,
    "created": 1793437330.1316137,
@@ -770,6 +1100,17 @@
    "what": "extract text from the pdf file /tmp/none.pdf",
    "why": "raw goal compilation gap"
   },
+  "g51e11594422ea9a4cf0fa07b67588f64c72376c2ee6fbc5afe86e0c29214be5d": {
+   "cost": 1.0,
+   "created": 1795666926.560683,
+   "helped": 0,
+   "id": "g51e11594422ea9a4cf0fa07b67588f64c72376c2ee6fbc5afe86e0c29214be5d",
+   "last_seen": 1795666926.560683,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator root326ead271a3c"
+  },
   "g51fc60c5d5b9ce41a411c8e21269d38289ba5d398ac1d9f748ea90a3e182ae0e": {
    "cost": 1.0,
    "created": 1795629476.268444,
@@ -780,6 +1121,17 @@
    "trials": 0,
    "what": "define",
    "why": "unknown_operator rootf9504268e24a"
+  },
+  "g525cd0d7a2d2cc63482aed3ffddce74f04d21f31a146205ea2efd38eae9db81a": {
+   "cost": 1.0,
+   "created": 1795664615.3955467,
+   "helped": 0,
+   "id": "g525cd0d7a2d2cc63482aed3ffddce74f04d21f31a146205ea2efd38eae9db81a",
+   "last_seen": 1795664615.3955467,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator roota1b10ad76d52"
   },
   "g52c67a19217dfbd8e54a2109c388e953f8544ba88efe3516c0de7d58f83497c4": {
    "cost": 1.0,
@@ -803,6 +1155,17 @@
    "what": "probe:--output|--input",
    "why": "empirical cli probe"
   },
+  "g54aed2a7039e0d25d12629e30ed2fb69a0a493b14d1ab6111deaacdee0a220d9": {
+   "cost": 1.0,
+   "created": 1795664249.6726146,
+   "helped": 0,
+   "id": "g54aed2a7039e0d25d12629e30ed2fb69a0a493b14d1ab6111deaacdee0a220d9",
+   "last_seen": 1795664249.6726146,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator root26200723ba14"
+  },
   "g551145256379": {
    "cost": 1.0,
    "created": 1793444502.8267083,
@@ -824,6 +1187,28 @@
    "trials": 11,
    "what": "probe:>|stdin",
    "why": "empirical cli probe"
+  },
+  "g56305386f90181f5e628d4657c9e10496071b4c61db084ee1b382296e08a2d13": {
+   "cost": 1.0,
+   "created": 1795663023.016139,
+   "helped": 0,
+   "id": "g56305386f90181f5e628d4657c9e10496071b4c61db084ee1b382296e08a2d13",
+   "last_seen": 1795663023.016139,
+   "resolved": false,
+   "trials": 0,
+   "what": "zzzz",
+   "why": "unknown_operator root277a1fb46b4c"
+  },
+  "g56e5b45343e94b0093e66b226c6bdf2a435126ea16029b30eedbf9587332ea9d": {
+   "cost": 1.0,
+   "created": 1795662756.4209912,
+   "helped": 0,
+   "id": "g56e5b45343e94b0093e66b226c6bdf2a435126ea16029b30eedbf9587332ea9d",
+   "last_seen": 1795662756.4209912,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator root1fb4a3e68450"
   },
   "g573174454126": {
    "cost": 1.0,
@@ -891,6 +1276,28 @@
    "what": "probe:--output|--data",
    "why": "empirical cli probe"
   },
+  "g595ae9de20f3e92afed6a9de0a15e9a29129a8a332a7e22b78a571d318d9630f": {
+   "cost": 1.0,
+   "created": 1795664615.4601893,
+   "helped": 0,
+   "id": "g595ae9de20f3e92afed6a9de0a15e9a29129a8a332a7e22b78a571d318d9630f",
+   "last_seen": 1795664615.4601893,
+   "resolved": false,
+   "trials": 0,
+   "what": "notes",
+   "why": "unknown_operator root802a5989eebc"
+  },
+  "g5dd36188c8c68a607b076790dde2c37dfa0d5f5cc791ba04b045835c81603a6f": {
+   "cost": 1.0,
+   "created": 1795662756.1127307,
+   "helped": 0,
+   "id": "g5dd36188c8c68a607b076790dde2c37dfa0d5f5cc791ba04b045835c81603a6f",
+   "last_seen": 1795662756.1127307,
+   "resolved": false,
+   "trials": 0,
+   "what": "define",
+   "why": "unknown_operator root14813cb63036"
+  },
   "g610520316647": {
    "cost": 1.0,
    "created": 1793295116.2316787,
@@ -923,6 +1330,17 @@
    "trials": 1,
    "what": "probe:--out|positional",
    "why": "empirical cli probe"
+  },
+  "g62bb0481c7631f8b808b7f6fada3739bf70f2c934b50dcadc9211b3b871c5ebd": {
+   "cost": 1.0,
+   "created": 1795662756.253957,
+   "helped": 0,
+   "id": "g62bb0481c7631f8b808b7f6fada3739bf70f2c934b50dcadc9211b3b871c5ebd",
+   "last_seen": 1795662756.253957,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator root2f659d94c013"
   },
   "g633549333077": {
    "cost": 1.0,
@@ -1022,6 +1440,28 @@
    "trials": 0,
    "what": "about",
    "why": "unknown_operator root9c7beefe24d7"
+  },
+  "g6cdafdb4a039b86ba87a7de325a57567a222ce0f260fd8d8fb104e5d95cd9eba": {
+   "cost": 1.0,
+   "created": 1795664206.4775827,
+   "helped": 0,
+   "id": "g6cdafdb4a039b86ba87a7de325a57567a222ce0f260fd8d8fb104e5d95cd9eba",
+   "last_seen": 1795664206.4775827,
+   "resolved": false,
+   "trials": 0,
+   "what": "lines",
+   "why": "unknown_operator rootc4fe5a20c59b"
+  },
+  "g6eee9d272087fc7d03469934e702564a3818b60be0c79262075409768ac8aa38": {
+   "cost": 1.0,
+   "created": 1795666458.6607895,
+   "helped": 0,
+   "id": "g6eee9d272087fc7d03469934e702564a3818b60be0c79262075409768ac8aa38",
+   "last_seen": 1795666458.6607895,
+   "resolved": false,
+   "trials": 0,
+   "what": "lines",
+   "why": "unknown_operator root8ef7b8e43fbd"
   },
   "g6fad61212c7718923169b44b0d0cac4d5c66a7129301c2f3917f61b1c93af5f5": {
    "cost": 1.0,
@@ -1144,6 +1584,28 @@
    "what": "margin",
    "why": "unknown_operator rootd402a7cb3e0a"
   },
+  "g7761bad8c52bb1622ae64f414fb7b34c1f89da3b0bad67e5fb930672a53181ec": {
+   "cost": 1.0,
+   "created": 1795664615.1571515,
+   "helped": 0,
+   "id": "g7761bad8c52bb1622ae64f414fb7b34c1f89da3b0bad67e5fb930672a53181ec",
+   "last_seen": 1795664615.1571515,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator root11f4c2885bbe"
+  },
+  "g77788cf25067f4022cea196fd48eac7a51a6dbc57ea53fbf6e437c4c01c3b872": {
+   "cost": 1.0,
+   "created": 1795664615.2200294,
+   "helped": 0,
+   "id": "g77788cf25067f4022cea196fd48eac7a51a6dbc57ea53fbf6e437c4c01c3b872",
+   "last_seen": 1795664615.2200294,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator rootfd958606237e"
+  },
   "g779741228193": {
    "cost": 1.0,
    "created": 1793266400.9047797,
@@ -1165,6 +1627,39 @@
    "trials": 0,
    "what": "notes",
    "why": "unknown_operator root92d87bedee22"
+  },
+  "g78fd9f23f92fa347e70915d2080872af0c3d5ff8b5057f0397e9fde06e2026f9": {
+   "cost": 1.0,
+   "created": 1795664884.1255662,
+   "helped": 0,
+   "id": "g78fd9f23f92fa347e70915d2080872af0c3d5ff8b5057f0397e9fde06e2026f9",
+   "last_seen": 1795664884.1255662,
+   "resolved": false,
+   "trials": 0,
+   "what": "zzzz",
+   "why": "unknown_operator rootb04223079a88"
+  },
+  "g7b1131a4268646d83961d1f0f1c907ae3d15cf2811c8c1c0d4f516671051722b": {
+   "cost": 1.0,
+   "created": 1795666458.709067,
+   "helped": 0,
+   "id": "g7b1131a4268646d83961d1f0f1c907ae3d15cf2811c8c1c0d4f516671051722b",
+   "last_seen": 1795666458.709067,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator root12f34a5a0b4d"
+  },
+  "g7c4c50894696b7b1b1ce20901de6f36f957653995d9b1042e3de87772eb04fc1": {
+   "cost": 1.0,
+   "created": 1795661173.2983594,
+   "helped": 0,
+   "id": "g7c4c50894696b7b1b1ce20901de6f36f957653995d9b1042e3de87772eb04fc1",
+   "last_seen": 1795661173.2983594,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator root4a7c011d6bc2"
   },
   "g7e5e853bc198475473e1a55d4f2784d24ac3c2454856375a6146d9c7ceeb6031": {
    "cost": 1.0,
@@ -1188,6 +1683,17 @@
    "what": "margin",
    "why": "unknown_operator root6f35c7e8591b"
   },
+  "g804b2a700255028a261b883f662dcaa666dec7af9801297a5ffc4c0833cf0545": {
+   "cost": 1.0,
+   "created": 1795664249.7600071,
+   "helped": 0,
+   "id": "g804b2a700255028a261b883f662dcaa666dec7af9801297a5ffc4c0833cf0545",
+   "last_seen": 1795664249.7600071,
+   "resolved": false,
+   "trials": 0,
+   "what": "lines",
+   "why": "unknown_operator roota8352823ac25"
+  },
   "g807026147686": {
    "cost": 1.0,
    "created": 1793437571.7157106,
@@ -1198,6 +1704,17 @@
    "trials": 0,
    "what": "extract text from the pdf file /tmp/none.pdf",
    "why": "raw goal compilation gap"
+  },
+  "g814b577ca003ed6ec3fd34a9907e44f9f86a74b72da4b0bd6bcb2f56dcac7209": {
+   "cost": 1.0,
+   "created": 1795662756.1941547,
+   "helped": 0,
+   "id": "g814b577ca003ed6ec3fd34a9907e44f9f86a74b72da4b0bd6bcb2f56dcac7209",
+   "last_seen": 1795662756.1941547,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator rootd800ec2b2ef0"
   },
   "g815844608443": {
    "cost": 1.0,
@@ -1221,6 +1738,17 @@
    "what": "lines",
    "why": "unknown_operator rootb2fcc06b73b5"
   },
+  "g822ffe4ae18a38efab51e9582f86563cd9fcd54a75402936264f7972be99f037": {
+   "cost": 1.0,
+   "created": 1795664249.8766427,
+   "helped": 0,
+   "id": "g822ffe4ae18a38efab51e9582f86563cd9fcd54a75402936264f7972be99f037",
+   "last_seen": 1795664249.8766427,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator root7b65776b1e25"
+  },
   "g828982030742": {
    "cost": 1.0,
    "created": 1793300916.0536625,
@@ -1231,6 +1759,17 @@
    "trials": 0,
    "what": "transcribe the audio in this recording to text",
    "why": "raw goal compilation gap"
+  },
+  "g83b755d02691e0f99707e1e9335d0ea598d179c8a733e0010a8b9fedd75b44c1": {
+   "cost": 1.0,
+   "created": 1795664206.390279,
+   "helped": 0,
+   "id": "g83b755d02691e0f99707e1e9335d0ea598d179c8a733e0010a8b9fedd75b44c1",
+   "last_seen": 1795664206.390279,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator root741517a16082"
   },
   "g83be3198603b362ae751fafae073cc05e460d1383f50be0eb9002b954ab78f84": {
    "cost": 1.0,
@@ -1265,6 +1804,28 @@
    "what": "margin",
    "why": "unknown_operator roote089d9474ee8"
   },
+  "g859f89e1a3e210246c8cbb262378922c0f94e80df7f0984cb2b86da621f6c2d6": {
+   "cost": 1.0,
+   "created": 1795662756.4588284,
+   "helped": 0,
+   "id": "g859f89e1a3e210246c8cbb262378922c0f94e80df7f0984cb2b86da621f6c2d6",
+   "last_seen": 1795662756.4588284,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator roote431e6bfca37"
+  },
+  "g85abb671abf15820b67ba56ac223c769abe37bbe8ac2b85675942febd446a468": {
+   "cost": 1.0,
+   "created": 1795661655.4930527,
+   "helped": 0,
+   "id": "g85abb671abf15820b67ba56ac223c769abe37bbe8ac2b85675942febd446a468",
+   "last_seen": 1795661655.4930527,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator root24debb11719a"
+  },
   "g869610903178": {
    "cost": 1.0,
    "created": 1793264466.9942186,
@@ -1287,6 +1848,17 @@
    "what": "probe:>|positional",
    "why": "empirical cli probe"
   },
+  "g8858615cd32fab45f6febe1cbdbd933eb10f689171441a7ecc977ce7f40b2054": {
+   "cost": 1.0,
+   "created": 1795664249.5003667,
+   "helped": 0,
+   "id": "g8858615cd32fab45f6febe1cbdbd933eb10f689171441a7ecc977ce7f40b2054",
+   "last_seen": 1795664249.5003667,
+   "resolved": false,
+   "trials": 0,
+   "what": "files",
+   "why": "unknown_operator root33f36e9e5ad1"
+  },
   "g8ca81093ea2f75ec42bb3332e2dab5041801dab0a0c15894469acfc8f00f0444": {
    "cost": 1.0,
    "created": 1795626738.5499606,
@@ -1297,6 +1869,28 @@
    "trials": 0,
    "what": "profit",
    "why": "unknown_operator rootc0581dec0f1a"
+  },
+  "g8d26589f5941b9939119f613c486270bc4f7d7bef7971e2aa3f9455cfd7c96de": {
+   "cost": 1.0,
+   "created": 1795665083.4543126,
+   "helped": 0,
+   "id": "g8d26589f5941b9939119f613c486270bc4f7d7bef7971e2aa3f9455cfd7c96de",
+   "last_seen": 1795665083.4543126,
+   "resolved": false,
+   "trials": 0,
+   "what": "revenue",
+   "why": "unknown_operator rootab860c96e49d"
+  },
+  "g8d796e6449c2529bfe634a007bf78c1a35e1faabfb0bc72275c794888905c150": {
+   "cost": 1.0,
+   "created": 1795664206.22864,
+   "helped": 0,
+   "id": "g8d796e6449c2529bfe634a007bf78c1a35e1faabfb0bc72275c794888905c150",
+   "last_seen": 1795664206.22864,
+   "resolved": false,
+   "trials": 0,
+   "what": "files",
+   "why": "unknown_operator root5dd4dd385654"
   },
   "g8e45f0babc3246eadf6208a33463e37ca07acb25180e27c9758eb56ee8f302af": {
    "cost": 1.0,
@@ -1319,6 +1913,50 @@
    "trials": 1,
    "what": "median",
    "why": "unknown_operator root07e09bc9e630"
+  },
+  "g917c21cf1087c3fd27c1e67628ca9d6f508236667ca8750279f7cc9a8020dc90": {
+   "cost": 1.0,
+   "created": 1795664615.4286292,
+   "helped": 0,
+   "id": "g917c21cf1087c3fd27c1e67628ca9d6f508236667ca8750279f7cc9a8020dc90",
+   "last_seen": 1795664615.4286292,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator root7fa0ccd19ffe"
+  },
+  "g92f633cb1d7f9a3ccc3a719e49616a9813a646e2d21732d8368117d3d9f18294": {
+   "cost": 1.0,
+   "created": 1795666458.78208,
+   "helped": 0,
+   "id": "g92f633cb1d7f9a3ccc3a719e49616a9813a646e2d21732d8368117d3d9f18294",
+   "last_seen": 1795666458.78208,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator roota910f9def7ef"
+  },
+  "g93558ac0842b9e311ca0330f254352011da12d9f54e79ab3c3d2eb6b80953441": {
+   "cost": 1.0,
+   "created": 1795666006.8465912,
+   "helped": 0,
+   "id": "g93558ac0842b9e311ca0330f254352011da12d9f54e79ab3c3d2eb6b80953441",
+   "last_seen": 1795666006.8465912,
+   "resolved": false,
+   "trials": 0,
+   "what": "lines",
+   "why": "unknown_operator root5d086da3859b"
+  },
+  "g93d00f6217db70f6c85db322a479992a09ab5028b9bc01aea9bad1004bff9615": {
+   "cost": 1.0,
+   "created": 1795666458.5135143,
+   "helped": 0,
+   "id": "g93d00f6217db70f6c85db322a479992a09ab5028b9bc01aea9bad1004bff9615",
+   "last_seen": 1795666458.5135143,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator rootcf84c2f3d484"
   },
   "g941143180589": {
    "cost": 1.0,
@@ -1352,6 +1990,28 @@
    "trials": 2,
    "what": "probe:--output=|positional",
    "why": "empirical cli probe"
+  },
+  "g9536f9c45df3a54f0a9199b64ca762542430352bf6a5a4131c889fc0a0ea6b75": {
+   "cost": 1.0,
+   "created": 1795664249.5391767,
+   "helped": 0,
+   "id": "g9536f9c45df3a54f0a9199b64ca762542430352bf6a5a4131c889fc0a0ea6b75",
+   "last_seen": 1795664249.5391767,
+   "resolved": false,
+   "trials": 0,
+   "what": "define",
+   "why": "unknown_operator rootc8dbed340ca4"
+  },
+  "g9612cc4c02a2d9c50d5563fe0a023db31b8b21db0f1f0728aa2c9cc16cbc40c1": {
+   "cost": 1.0,
+   "created": 1795664206.6153624,
+   "helped": 0,
+   "id": "g9612cc4c02a2d9c50d5563fe0a023db31b8b21db0f1f0728aa2c9cc16cbc40c1",
+   "last_seen": 1795664206.6153624,
+   "resolved": false,
+   "trials": 0,
+   "what": "notes",
+   "why": "unknown_operator rootaa99345bb35a"
   },
   "g966789488070": {
    "cost": 1.0,
@@ -1408,6 +2068,17 @@
    "what": "probe:--file|positional",
    "why": "empirical cli probe"
   },
+  "g985da81e644b0286b0b62e7a197fc0d8ee91f8a7083a9485c975d2b4de81e69a": {
+   "cost": 1.0,
+   "created": 1795665082.7156622,
+   "helped": 0,
+   "id": "g985da81e644b0286b0b62e7a197fc0d8ee91f8a7083a9485c975d2b4de81e69a",
+   "last_seen": 1795665082.7156622,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator rootdd43ba1d938a"
+  },
   "g991901507885": {
    "cost": 1.0,
    "created": 1793266064.3796365,
@@ -1452,6 +2123,17 @@
    "what": "retry",
    "why": "unknown_operator root01bd5c604b99"
   },
+  "ga0281da95ccec7315000383951f4c6a3407f9d3970130e0699cd3d213862328b": {
+   "cost": 1.0,
+   "created": 1795666458.4431608,
+   "helped": 0,
+   "id": "ga0281da95ccec7315000383951f4c6a3407f9d3970130e0699cd3d213862328b",
+   "last_seen": 1795666458.4431608,
+   "resolved": false,
+   "trials": 0,
+   "what": "define",
+   "why": "unknown_operator root1b6667e8dc5d"
+  },
   "ga12751efa61b176df187851431ef15eec49be2edb9fbc9c42286ba8f76083f21": {
    "cost": 1.0,
    "created": 1795627066.4209595,
@@ -1473,6 +2155,28 @@
    "trials": 0,
    "what": "margin",
    "why": "unknown_operator rootc0581dec0f1a"
+  },
+  "ga279a4f0bc4258782f5d726da912cbea34aab24152ad6c5ba44c6513d8f60a12": {
+   "cost": 1.0,
+   "created": 1795661173.3605201,
+   "helped": 0,
+   "id": "ga279a4f0bc4258782f5d726da912cbea34aab24152ad6c5ba44c6513d8f60a12",
+   "last_seen": 1795661173.3605201,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator rootf98e32003334"
+  },
+  "ga2a4aac6c766284f459f1eec3f4786af9dcb04553c9763e3caf4090022c86d2e": {
+   "cost": 1.0,
+   "created": 1795664206.3938503,
+   "helped": 0,
+   "id": "ga2a4aac6c766284f459f1eec3f4786af9dcb04553c9763e3caf4090022c86d2e",
+   "last_seen": 1795664206.3938503,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator root741517a16082"
   },
   "ga428fc272907aa8e196f9d7806b476e5ffdffa656733bd1bdf701372ed8c8ee9": {
    "cost": 1.0,
@@ -1496,6 +2200,39 @@
    "what": "profit",
    "why": "unknown_operator rootb54e7978771c"
   },
+  "ga5c03c69ff1db7ff57b2a989ae618dbb13d2b1acade46e78c0d1a2a778767646": {
+   "cost": 1.0,
+   "created": 1795663202.5846715,
+   "helped": 0,
+   "id": "ga5c03c69ff1db7ff57b2a989ae618dbb13d2b1acade46e78c0d1a2a778767646",
+   "last_seen": 1795663202.5846715,
+   "resolved": false,
+   "trials": 0,
+   "what": "revenue",
+   "why": "unknown_operator rootd49a46ae9925"
+  },
+  "ga6ef8803a05c9e78b22ab6e02fdcc84fbdf38a7e212a382b09d42d72ac9afe99": {
+   "cost": 1.0,
+   "created": 1795661425.5623417,
+   "helped": 0,
+   "id": "ga6ef8803a05c9e78b22ab6e02fdcc84fbdf38a7e212a382b09d42d72ac9afe99",
+   "last_seen": 1795661425.5623417,
+   "resolved": false,
+   "trials": 0,
+   "what": "zzzz",
+   "why": "unknown_operator root96bce9fbf500"
+  },
+  "ga8034ef12a3101f24cf741920e51471acdd9b6948e212de11cb02412876dbca6": {
+   "cost": 1.0,
+   "created": 1795666926.5661414,
+   "helped": 0,
+   "id": "ga8034ef12a3101f24cf741920e51471acdd9b6948e212de11cb02412876dbca6",
+   "last_seen": 1795666926.5661414,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator root326ead271a3c"
+  },
   "ga92b2dc7a145428d98799ecd554f98abb2616643918f4552b9c96e7a2679c206": {
    "cost": 1.0,
    "created": 1795629650.0860338,
@@ -1506,6 +2243,50 @@
    "trials": 0,
    "what": "zzzz",
    "why": "unknown_operator rootc32dc66b201f"
+  },
+  "ga996a15d2aeb2b54ab0971882f8b26879db60d39713a466b7cf82e9f74c6c2b4": {
+   "cost": 1.0,
+   "created": 1795664206.5854783,
+   "helped": 0,
+   "id": "ga996a15d2aeb2b54ab0971882f8b26879db60d39713a466b7cf82e9f74c6c2b4",
+   "last_seen": 1795664206.5854783,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator root790aa2cace5b"
+  },
+  "gaa9db27cc009356d9ba481bad0fdd5fd0939ecd4c168ffdc5039e8ee3b407510": {
+   "cost": 1.0,
+   "created": 1795666458.814137,
+   "helped": 0,
+   "id": "gaa9db27cc009356d9ba481bad0fdd5fd0939ecd4c168ffdc5039e8ee3b407510",
+   "last_seen": 1795666458.814137,
+   "resolved": false,
+   "trials": 0,
+   "what": "notes",
+   "why": "unknown_operator rootf20c75018c90"
+  },
+  "gafbd1a3f33ecc2cf810dbc749ee2d04fcccccebcfe09302f2ef117481eee11af": {
+   "cost": 1.0,
+   "created": 1795664615.3137162,
+   "helped": 0,
+   "id": "gafbd1a3f33ecc2cf810dbc749ee2d04fcccccebcfe09302f2ef117481eee11af",
+   "last_seen": 1795664615.3137162,
+   "resolved": false,
+   "trials": 0,
+   "what": "lines",
+   "why": "unknown_operator rootc29690912cae"
+  },
+  "gb1d70120a25a3bad8f9d5649b2008f389ee66a3e104675af6a03101f4897d48b": {
+   "cost": 1.0,
+   "created": 1795664615.0927377,
+   "helped": 0,
+   "id": "gb1d70120a25a3bad8f9d5649b2008f389ee66a3e104675af6a03101f4897d48b",
+   "last_seen": 1795664615.0927377,
+   "resolved": false,
+   "trials": 0,
+   "what": "define",
+   "why": "unknown_operator roote183aa03d399"
   },
   "gb263651b7eacea941fae3621a258a396d9a06920e4b0655b594e107b2ce42ebb": {
    "cost": 1.0,
@@ -1551,6 +2332,28 @@
    "what": "about",
    "why": "unknown_operator rootf2ed4145c66b"
   },
+  "gb5ae9df08256f7d55d0ca0435ebb8cb707d985c70a0b315718a636b70afa36f5": {
+   "cost": 1.0,
+   "created": 1795666458.4035814,
+   "helped": 0,
+   "id": "gb5ae9df08256f7d55d0ca0435ebb8cb707d985c70a0b315718a636b70afa36f5",
+   "last_seen": 1795666458.4035814,
+   "resolved": false,
+   "trials": 0,
+   "what": "files",
+   "why": "unknown_operator rootaddbda241b77"
+  },
+  "gb5da61150d809d6427f9f2467c408b67d17bfe6bc594272d69438566a3328b77": {
+   "cost": 1.0,
+   "created": 1795664249.9150467,
+   "helped": 0,
+   "id": "gb5da61150d809d6427f9f2467c408b67d17bfe6bc594272d69438566a3328b77",
+   "last_seen": 1795664249.9150467,
+   "resolved": false,
+   "trials": 0,
+   "what": "notes",
+   "why": "unknown_operator rootda9b88ff9350"
+  },
   "gb5ff8303bbf3c60acfb5db55fe1fbd09c4578ba3679c32069dd8d0328ce30db7": {
    "cost": 1.0,
    "created": 1795627780.576811,
@@ -1573,6 +2376,17 @@
    "what": "retry",
    "why": "unknown_operator root2705ba36825a"
   },
+  "gb67826a3e456dc8e068af9e1ec668c7116d5c1c9c1ecbe526f1d926f91ad069b": {
+   "cost": 1.0,
+   "created": 1795666458.571241,
+   "helped": 0,
+   "id": "gb67826a3e456dc8e068af9e1ec668c7116d5c1c9c1ecbe526f1d926f91ad069b",
+   "last_seen": 1795666458.571241,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator roota5b3c0a581e3"
+  },
   "gb683d43a7e0516720067d8b01c0144e46146ed2bfa80197fba5e98d87a095f97": {
    "cost": 1.0,
    "created": 1795627780.788217,
@@ -1584,6 +2398,17 @@
    "what": "retry",
    "why": "unknown_operator root70ebd1d58e93"
   },
+  "gb70be05ddb88363533c99e517b470c5da007f30f76ff57f55a2c02574bfbe80a": {
+   "cost": 1.0,
+   "created": 1795664615.358035,
+   "helped": 0,
+   "id": "gb70be05ddb88363533c99e517b470c5da007f30f76ff57f55a2c02574bfbe80a",
+   "last_seen": 1795664615.358035,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator root1a91cd2ce51d"
+  },
   "gb848df621d800e2efa6771fe5a857a1aa90ba5d81ea22dfabe073af1841e1be5": {
    "cost": 1.0,
    "created": 1795629781.8174934,
@@ -1594,6 +2419,17 @@
    "trials": 0,
    "what": "margin",
    "why": "unknown_operator rootb54e7978771c"
+  },
+  "gb86905d4a236ea6118e00c72ff7d6d2b864027a2cc51193048d66a71229c7c09": {
+   "cost": 1.0,
+   "created": 1795661173.1470354,
+   "helped": 0,
+   "id": "gb86905d4a236ea6118e00c72ff7d6d2b864027a2cc51193048d66a71229c7c09",
+   "last_seen": 1795661173.1470354,
+   "resolved": false,
+   "trials": 0,
+   "what": "about",
+   "why": "unknown_operator root4167a9a85e44"
   },
   "gb948c84613d615b9eba969149cd4bada7132194d68246c25a0e97fa674b27278": {
    "cost": 1.0,
@@ -1650,6 +2486,17 @@
    "what": "median",
    "why": "unknown_operator root8fe5fd19bb40"
   },
+  "gc0b4f58a6c04c9361fd36e265031a3088edbd809924eb7c77096335eb92af721": {
+   "cost": 1.0,
+   "created": 1795661655.4969144,
+   "helped": 0,
+   "id": "gc0b4f58a6c04c9361fd36e265031a3088edbd809924eb7c77096335eb92af721",
+   "last_seen": 1795661655.4969144,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator root24debb11719a"
+  },
   "gc2111bc0c8d323fb1ee346b606a0413cf32c53c11ce6c4437246386be73773bd": {
    "cost": 1.0,
    "created": 1794494227.282479,
@@ -1660,6 +2507,28 @@
    "trials": 0,
    "what": "about",
    "why": "unknown_operator root996d0c94ac90"
+  },
+  "gc2a5fc0ca4666b6b344da5e56ac8c137327cf9c3528ec2e84214c86f2296542d": {
+   "cost": 1.0,
+   "created": 1795661656.1992648,
+   "helped": 0,
+   "id": "gc2a5fc0ca4666b6b344da5e56ac8c137327cf9c3528ec2e84214c86f2296542d",
+   "last_seen": 1795661656.1992648,
+   "resolved": false,
+   "trials": 0,
+   "what": "revenue",
+   "why": "unknown_operator rootff4627adeb42"
+  },
+  "gc4127497317e927630acaae3758bb9cc8e4e997a949a5022568ae1f5d7b19622": {
+   "cost": 1.0,
+   "created": 1795666006.6921985,
+   "helped": 0,
+   "id": "gc4127497317e927630acaae3758bb9cc8e4e997a949a5022568ae1f5d7b19622",
+   "last_seen": 1795666006.6921985,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator root47513e3dbc71"
   },
   "gc50b8db8fc6c2f2e7e831f5891ccb88de3e41180f91bfae33322b913797fa1a2": {
    "cost": 1.0,
@@ -1705,6 +2574,28 @@
    "what": "notes",
    "why": "unknown_operator roote1b348eb0b90"
   },
+  "gc77da22b76f69ef7359a0700bf29fb37e0601e41d61b1220fb7f2c01be90a182": {
+   "cost": 1.0,
+   "created": 1795664249.603838,
+   "helped": 0,
+   "id": "gc77da22b76f69ef7359a0700bf29fb37e0601e41d61b1220fb7f2c01be90a182",
+   "last_seen": 1795664249.603838,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator root2a859f7e3279"
+  },
+  "gc86d03b70c26c3b730d2a970c66c90f9073c40f683d462116d66fcdbd69a53f1": {
+   "cost": 1.0,
+   "created": 1795662756.4936361,
+   "helped": 0,
+   "id": "gc86d03b70c26c3b730d2a970c66c90f9073c40f683d462116d66fcdbd69a53f1",
+   "last_seen": 1795662756.4936361,
+   "resolved": false,
+   "trials": 0,
+   "what": "notes",
+   "why": "unknown_operator root94986dc566f7"
+  },
   "gc8ba5ec73c0b78cfa23f23f73405b419b04fb335929d6a7ce23e3ed9ed65b420": {
    "cost": 1.0,
    "created": 1794959885.889423,
@@ -1715,6 +2606,17 @@
    "trials": 0,
    "what": "profit",
    "why": "unknown_operator root840b27e616a3"
+  },
+  "gc9e6e5e827fc1a99c1921f1fd8b1e353d3c74dbc2b4ece2e88ea3b3a73bc47b6": {
+   "cost": 1.0,
+   "created": 1795662756.011956,
+   "helped": 0,
+   "id": "gc9e6e5e827fc1a99c1921f1fd8b1e353d3c74dbc2b4ece2e88ea3b3a73bc47b6",
+   "last_seen": 1795662756.011956,
+   "resolved": false,
+   "trials": 0,
+   "what": "about",
+   "why": "unknown_operator rootfb73d9e26169"
   },
   "gcb486a0a4a8b9d6f819387b92497b589be53cca3e007e6843d23e928a11dca34": {
    "cost": 1.0,
@@ -1738,6 +2640,17 @@
    "what": "margin",
    "why": "unknown_operator root35903d208d94"
   },
+  "gcd8888f8e25cb76495ffaa649a122f0ee02bbf3c3c3dffdf378df6d7d3aad460": {
+   "cost": 1.0,
+   "created": 1795661173.195376,
+   "helped": 0,
+   "id": "gcd8888f8e25cb76495ffaa649a122f0ee02bbf3c3c3dffdf378df6d7d3aad460",
+   "last_seen": 1795661173.195376,
+   "resolved": false,
+   "trials": 0,
+   "what": "files",
+   "why": "unknown_operator rootbceb8503f3bc"
+  },
   "gce30086c43ce0e3664609190f3efd521f7a3eb7b1ec235cc8e7d9f71763fbd69": {
    "cost": 1.0,
    "created": 1795626738.739261,
@@ -1748,6 +2661,28 @@
    "trials": 0,
    "what": "notes",
    "why": "unknown_operator rootbe6546811db8"
+  },
+  "gcec2c153371998d524027886d0cc7f1415b8c5b7372455e1175fee133b32d6ff": {
+   "cost": 1.0,
+   "created": 1795666006.893395,
+   "helped": 0,
+   "id": "gcec2c153371998d524027886d0cc7f1415b8c5b7372455e1175fee133b32d6ff",
+   "last_seen": 1795666006.893395,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator rootde30e7ab52ec"
+  },
+  "gcef62ad12c6642aba02baba822610337eeb845edfd7fa62d9ac0d2cb55ad67df": {
+   "cost": 1.0,
+   "created": 1795663201.8902454,
+   "helped": 0,
+   "id": "gcef62ad12c6642aba02baba822610337eeb845edfd7fa62d9ac0d2cb55ad67df",
+   "last_seen": 1795663201.8902454,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator root0f177ed3c92e"
   },
   "gd017788ab2e8ec97d330bee5aa1a2b5f5b24df5103b1c8c94c12437a6e953c40": {
    "cost": 1.0,
@@ -1782,6 +2717,61 @@
    "what": "retry",
    "why": "unknown_operator roota1ab4d631d7b"
   },
+  "gd320400f2f59f4fc01e3293271c38dc253e233e60d58ea6bc1e875a4a7d70532": {
+   "cost": 1.0,
+   "created": 1795663201.894226,
+   "helped": 0,
+   "id": "gd320400f2f59f4fc01e3293271c38dc253e233e60d58ea6bc1e875a4a7d70532",
+   "last_seen": 1795663201.894226,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator root0f177ed3c92e"
+  },
+  "gd36c38cd21e28f6e2bfe5144644fe1fd705da86f84bd19112a313d507643341c": {
+   "cost": 1.0,
+   "created": 1795666458.5086613,
+   "helped": 0,
+   "id": "gd36c38cd21e28f6e2bfe5144644fe1fd705da86f84bd19112a313d507643341c",
+   "last_seen": 1795666458.5086613,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator rootcf84c2f3d484"
+  },
+  "gd44ce7df80790d0b4addf2784c53805d61419d26337c8e6df2352769ca3c1153": {
+   "cost": 1.0,
+   "created": 1795661173.2333856,
+   "helped": 0,
+   "id": "gd44ce7df80790d0b4addf2784c53805d61419d26337c8e6df2352769ca3c1153",
+   "last_seen": 1795661173.2333856,
+   "resolved": false,
+   "trials": 0,
+   "what": "define",
+   "why": "unknown_operator roota4db12791e4c"
+  },
+  "gd49a6f4be9ab1c949926e0f00fb91a07614b92e6c52f85247418a5c243e706cc": {
+   "cost": 1.0,
+   "created": 1795666006.6244216,
+   "helped": 0,
+   "id": "gd49a6f4be9ab1c949926e0f00fb91a07614b92e6c52f85247418a5c243e706cc",
+   "last_seen": 1795666006.6244216,
+   "resolved": false,
+   "trials": 0,
+   "what": "define",
+   "why": "unknown_operator root67762ccbfc94"
+  },
+  "gd4b919fd3d9f55739b821156fdcba5b3304e5ef8e4c324ce0b0798b75e0d6950": {
+   "cost": 1.0,
+   "created": 1795666729.2577877,
+   "helped": 0,
+   "id": "gd4b919fd3d9f55739b821156fdcba5b3304e5ef8e4c324ce0b0798b75e0d6950",
+   "last_seen": 1795666729.2577877,
+   "resolved": false,
+   "trials": 0,
+   "what": "zzzz",
+   "why": "unknown_operator root418573fbcaf1"
+  },
   "gddc33b7088ee9d6aaa2c4f0c825a6394a15455208dfa556d9acccfbe03fdb946": {
    "cost": 1.0,
    "created": 1794495950.9045143,
@@ -1792,6 +2782,17 @@
    "trials": 0,
    "what": "lines",
    "why": "unknown_operator root144a4efec079"
+  },
+  "gde3703375cb68b3c0f1eb2482c79682f2a18d4c407541cfabc62e66cdb1ba465": {
+   "cost": 1.0,
+   "created": 1795666933.0752072,
+   "helped": 1,
+   "id": "gde3703375cb68b3c0f1eb2482c79682f2a18d4c407541cfabc62e66cdb1ba465",
+   "last_seen": 1795666933.1111033,
+   "resolved": true,
+   "trials": 1,
+   "what": "median",
+   "why": "unknown_operator root60e2b4e8378c"
   },
   "gdf289cd6d46c433692f992639412cafa1ae2d9f975f8d15700bbe05e9d286372": {
    "cost": 1.0,
@@ -1826,6 +2827,39 @@
    "what": "retry",
    "why": "unknown_operator root417cd1b4b916"
   },
+  "ge06b8c52ed0166423160da590b28fc61c615d0061604608a58837498f4007b40": {
+   "cost": 1.0,
+   "created": 1795665082.7105172,
+   "helped": 0,
+   "id": "ge06b8c52ed0166423160da590b28fc61c615d0061604608a58837498f4007b40",
+   "last_seen": 1795665082.7105172,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator rootdd43ba1d938a"
+  },
+  "ge0c1c6c4ed75116948d1f56fdb7a2d4c943df96b16f6b11beab5c61e303deff1": {
+   "cost": 1.0,
+   "created": 1795662756.3384092,
+   "helped": 0,
+   "id": "ge0c1c6c4ed75116948d1f56fdb7a2d4c943df96b16f6b11beab5c61e303deff1",
+   "last_seen": 1795662756.3384092,
+   "resolved": false,
+   "trials": 0,
+   "what": "lines",
+   "why": "unknown_operator root0280ed847d36"
+  },
+  "ge11adcc2ca98174667977daf8ae77a17202bd383bc6da8e93d9461f2ef94068e": {
+   "cost": 1.0,
+   "created": 1795662756.250498,
+   "helped": 0,
+   "id": "ge11adcc2ca98174667977daf8ae77a17202bd383bc6da8e93d9461f2ef94068e",
+   "last_seen": 1795662756.250498,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator root2f659d94c013"
+  },
   "ge1b1c4955a5e20dfa14256fa272b198d5b51fe56af5592bfe2a583052ad0748a": {
    "cost": 1.0,
    "created": 1794495950.8378599,
@@ -1836,6 +2870,17 @@
    "trials": 0,
    "what": "margin",
    "why": "unknown_operator rootafcb3f429980"
+  },
+  "ge44dd0186b5e748051dcbfee065192171aabab267c9614ca3f56c308991c5634": {
+   "cost": 1.0,
+   "created": 1795666006.9318643,
+   "helped": 0,
+   "id": "ge44dd0186b5e748051dcbfee065192171aabab267c9614ca3f56c308991c5634",
+   "last_seen": 1795666006.9318643,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator root64f63e05b950"
   },
   "ge49b08f1fa5f0cdaabe14053edb9717014e8961309468d38a547719d313cdd30": {
    "cost": 1.0,
@@ -1859,6 +2904,17 @@
    "what": "profit",
    "why": "unknown_operator rootd402a7cb3e0a"
   },
+  "ge5f7bf8115a0289d486294e2c499544b47f91e523d110eee77a3998932a9008d": {
+   "cost": 1.0,
+   "created": 1795664615.006545,
+   "helped": 0,
+   "id": "ge5f7bf8115a0289d486294e2c499544b47f91e523d110eee77a3998932a9008d",
+   "last_seen": 1795664615.006545,
+   "resolved": false,
+   "trials": 0,
+   "what": "about",
+   "why": "unknown_operator root04f58fcc0fde"
+  },
   "ge620a315d58d3df747ac59a407189261c2786f390c850eede2f14c896c1cb4c4": {
    "cost": 1.0,
    "created": 1794498181.7448015,
@@ -1870,6 +2926,17 @@
    "what": "spreadv",
    "why": "unknown_operator root5b390d825531"
   },
+  "ge6381ec8c2201e407ef63f87addeafdd8f08c253e68f7404b776b0f35ce009fd": {
+   "cost": 1.0,
+   "created": 1795664206.167823,
+   "helped": 0,
+   "id": "ge6381ec8c2201e407ef63f87addeafdd8f08c253e68f7404b776b0f35ce009fd",
+   "last_seen": 1795664206.167823,
+   "resolved": false,
+   "trials": 0,
+   "what": "about",
+   "why": "unknown_operator root7c5bc1675e33"
+  },
   "ge71a9a3e99c2b330da9c98d0824bf5e7ad0ee80fec6b5107fb7b1b81a39e92fc": {
    "cost": 1.0,
    "created": 1795626738.4413543,
@@ -1880,6 +2947,28 @@
    "trials": 0,
    "what": "about",
    "why": "unknown_operator rootdd6fe3fb1c8b"
+  },
+  "ge7573ac64807f97b1c603e3462d39f4a7cec741e5b053cac6676a2d92e6d41b0": {
+   "cost": 1.0,
+   "created": 1795664249.4316754,
+   "helped": 0,
+   "id": "ge7573ac64807f97b1c603e3462d39f4a7cec741e5b053cac6676a2d92e6d41b0",
+   "last_seen": 1795664249.4316754,
+   "resolved": false,
+   "trials": 0,
+   "what": "about",
+   "why": "unknown_operator rootd86482993c5f"
+  },
+  "ge93af90e051cc54d4cb51082c974930e62a5c69c74f56147a7bc1ce1cb1bc8bc": {
+   "cost": 1.0,
+   "created": 1795666006.517944,
+   "helped": 0,
+   "id": "ge93af90e051cc54d4cb51082c974930e62a5c69c74f56147a7bc1ce1cb1bc8bc",
+   "last_seen": 1795666006.517944,
+   "resolved": false,
+   "trials": 0,
+   "what": "about",
+   "why": "unknown_operator rootd5f3a9dad2cc"
   },
   "gee5cb663447f5814f18b244913612c6923f978d6125f1d7e4837d56829129654": {
    "cost": 1.0,
@@ -1903,6 +2992,17 @@
    "what": "define",
    "why": "unknown_operator root9d92d46e6edf"
   },
+  "gf1e853b92000342a304fbe99b20828aa9d5b002906ca83ad8b8fac462732bd57": {
+   "cost": 1.0,
+   "created": 1795664206.554905,
+   "helped": 0,
+   "id": "gf1e853b92000342a304fbe99b20828aa9d5b002906ca83ad8b8fac462732bd57",
+   "last_seen": 1795664206.554905,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator rootc13af4264011"
+  },
   "gf216beb4dfe777f90aef165b7789d3a7c772a093dab422b99e17f0c67e2259e2": {
    "cost": 1.0,
    "created": 1794494227.649512,
@@ -1913,6 +3013,28 @@
    "trials": 0,
    "what": "retry",
    "why": "unknown_operator root8c50cb195912"
+  },
+  "gf43c8d10271b8304aaab73f106023b4c47446cd738e6257b5f42f27639db2d6f": {
+   "cost": 1.0,
+   "created": 1795666006.9974904,
+   "helped": 0,
+   "id": "gf43c8d10271b8304aaab73f106023b4c47446cd738e6257b5f42f27639db2d6f",
+   "last_seen": 1795666006.9974904,
+   "resolved": false,
+   "trials": 0,
+   "what": "notes",
+   "why": "unknown_operator rootdabd5f109b66"
+  },
+  "gf44f61a8fd24cd418a397995c9a75d0815429f6d8fa44bfc655c517aeab985c2": {
+   "cost": 1.0,
+   "created": 1795666458.356354,
+   "helped": 0,
+   "id": "gf44f61a8fd24cd418a397995c9a75d0815429f6d8fa44bfc655c517aeab985c2",
+   "last_seen": 1795666458.356354,
+   "resolved": false,
+   "trials": 0,
+   "what": "about",
+   "why": "unknown_operator root9249b6f4b3c1"
   },
   "gf4e636a0b0fc80bf6346f358c26f74b7b35ce12cbb509f0a0c8e37084124ce36": {
    "cost": 1.0,
@@ -1947,6 +3069,17 @@
    "what": "margin",
    "why": "unknown_operator root8acd64cafbf2"
   },
+  "gfda53df3843924fc2d62d75261792ca71d5110ac77310d700e412f128dfb3562": {
+   "cost": 1.0,
+   "created": 1795664206.2662559,
+   "helped": 0,
+   "id": "gfda53df3843924fc2d62d75261792ca71d5110ac77310d700e412f128dfb3562",
+   "last_seen": 1795664206.2662559,
+   "resolved": false,
+   "trials": 0,
+   "what": "define",
+   "why": "unknown_operator root5c57cd7afb98"
+  },
   "gfecc13c6c1cbc1abea485a0a36ff898e02d2e2bcf38a40f313369d8813a4e2b3": {
    "cost": 1.0,
    "created": 1794494258.5879457,
@@ -1968,6 +3101,17 @@
    "trials": 2,
    "what": "median",
    "why": "unknown_operator root5393aeedfb44"
+  },
+  "gff18c25f60590ae7795048b4aa1549dd89365f21500a5c7e39f0a1f4d9be9dd8": {
+   "cost": 1.0,
+   "created": 1795661173.3014927,
+   "helped": 0,
+   "id": "gff18c25f60590ae7795048b4aa1549dd89365f21500a5c7e39f0a1f4d9be9dd8",
+   "last_seen": 1795661173.3014927,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator root4a7c011d6bc2"
   },
   "gff751c7707b67eac1cbd258fc3dc1ebc8cf90ba4d3a185be17e38e1dbdd755e3": {
    "cost": 1.0,
