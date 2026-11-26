@@ -283,6 +283,12 @@ def run_pytest_verdicts(
     }
 
 
+def _passed_baseline_nodes(before: Mapping[str, Any], after: Mapping[str, Any]) -> bool:
+    """A disappearing failure (skip, lost collection, timeout) is not a repair."""
+    required = set(before['failing']) | set(before['passing'])
+    return bool(required) and after['ok'] is True and required <= set(after['passing'])
+
+
 def verify_runner_canary(
     worktree: pathlib.Path,
     *,
@@ -2036,7 +2042,7 @@ def repair_worktree(
             full = run_pytest_verdicts(
                 worktree, test_target, python_exe=python_exe, timeout_s=40.0
             )
-            regressed = bool(full["failing"]) or len(full["passing"]) < len(passing_nodes)
+            regressed = not _passed_baseline_nodes(baseline, full)
             if regressed:
                 # Record partial-progress seed for Def-Use Relational Zipper (Wall 3):
                 # If `item` strictly fixed >= 1 original failing test (or ALL original failing tests)
@@ -2194,46 +2200,28 @@ def repair_worktree(
                 abstract_shape=item["abstract_shape"],
             )
             learned_skill_id: str | None = item.get("reused_skill_id")
+            admission = None
             if skill_store is not None and learned_skill_id is None and hasattr(skill_store, "try_admit_subtree"):
-                prim_f = str(item["primary_file"])
-                orig_f_src = originals.get(prim_f, "")
-                new_f_src = file_patches.get(prim_f, "")
-                if orig_f_src and new_f_src and orig_f_src != new_f_src:
-                    try:
-                        t_orig = ast.parse(orig_f_src)
-                        t_new = ast.parse(new_f_src)
-                        _, fn_o, _ = fpm.AngelicCEGISSynthesizer._find_enclosing_stmt_and_func(
-                            t_orig, int(item["primary_line"])
-                        )
-                        _, fn_n, _ = fpm.AngelicCEGISSynthesizer._find_enclosing_stmt_and_func(
-                            t_new, int(item["primary_line"])
-                        )
-                        if fn_o is not None and fn_n is not None and fn_o.body and fn_n.body:
-                            lo = orig_f_src.splitlines(keepends=True)
-                            ln_new = new_f_src.splitlines(keepends=True)
-                            bo_txt = "".join(lo[fn_o.body[0].lineno - 1 : getattr(fn_o.body[-1], "end_lineno", fn_o.body[-1].lineno)])
-                            bn_txt = "".join(ln_new[fn_n.body[0].lineno - 1 : getattr(fn_n.body[-1], "end_lineno", fn_n.body[-1].lineno)])
-                            mod_syms = [
-                                nd.name for nd in ast.walk(t_orig)
-                                if isinstance(nd, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
-                            ] + [a.arg for a in fn_o.args.args]
-                            ok_adm, adm_id = skill_store.try_admit_subtree(
-                                domain="swe_python",
-                                concrete_before=bo_txt,
-                                concrete_after=bn_txt,
-                                verified=True,
-                                goal_relevant=True,
-                                probes_before_success=max(1, total_generated),
-                                raw_episode_bytes=len(orig_f_src.encode("utf-8")),
-                                source_fingerprint=prim_f,
-                                witness_inputs=[{"failing_nodes": list(failing_nodes[:3])}],
-                                revalidation_probe={"test_target": test_target},
-                                allowed_module_symbols=mod_syms,
-                            )
-                            if ok_adm:
-                                learned_skill_id = adm_id
-                    except Exception:
-                        pass
+                # A green multi-file transaction does not verify any one of its
+                # edits in isolation. Feed the learner the whole checked pair
+                # or abstain; independent line numbers can point at different
+                # functions after a deletion.
+                if len(file_patches) != 1:
+                    admission = "NOT_ADMITTED__MULTI_FILE_TRANSACTION"
+                else:
+                    (rel, after), = file_patches.items()
+                    before = originals[rel]
+                    ok_adm, admission = skill_store.try_admit_subtree(
+                        domain="swe_python", concrete_before=before, concrete_after=after,
+                        verified=True, goal_relevant=True, probes_before_success=1 + len(attempts),
+                        raw_episode_bytes=len(before.encode()) + len(after.encode()),
+                        source_fingerprint=hashlib.sha256(before.encode()).hexdigest(),
+                        witness_inputs=[{"failing_nodes": list(failing_nodes[:3])}],
+                        revalidation_probe={"source": rel, "test_target": test_target,
+                                            "candidate_sha256": hashlib.sha256(after.encode()).hexdigest()},
+                    )
+                    if ok_adm:
+                        learned_skill_id = admission
 
             attempts.append({
                 "rank": idx + 1,
@@ -2251,6 +2239,7 @@ def repair_worktree(
                 "winning_family": item["family"],
                 "winning_mechanism": item["mechanism"],
                 "learned_skill_id": learned_skill_id,
+                "subtree_admission": admission,
                 "repaired_file": item["primary_file"],
                 "repaired_files": sorted(file_patches.keys()),
                 "repaired_line": item["primary_line"],
@@ -2353,8 +2342,7 @@ def repair_worktree(
                     worktree, test_target, python_exe=python_exe, timeout_s=30.0
                 )
                 if (
-                    not joint_res.get("failing")
-                    and len(joint_res.get("passing") or []) >= len(passing_nodes)
+                    _passed_baseline_nodes(baseline, joint_res)
                     and verify_runner_canary(worktree, python_exe=python_exe)
                 ):
                     verified_art = True
@@ -2440,8 +2428,7 @@ def repair_worktree(
                         worktree, union_targets, python_exe=python_exe, timeout_s=30.0
                     )
                     if (
-                        not final_check.get("failing")
-                        and len(final_check.get("passing") or []) >= len(passing_nodes)
+                        _passed_baseline_nodes(baseline, final_check)
                         and verify_runner_canary(worktree, python_exe=python_exe)
                     ):
                         combined_files = sorted({

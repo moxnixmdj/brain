@@ -59,7 +59,7 @@ import sys
 import tempfile
 import time
 from dataclasses import dataclass, field
-from typing import Any, Callable, Mapping, Sequence
+from typing import Any, Callable, Iterator, Mapping, Sequence
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
@@ -1552,6 +1552,8 @@ class AdmissionFilteredSkillStore:
         self.mode = mode
         self.store_path = pathlib.Path(store_path) if store_path else None
         self.records: dict[str, AdmittedSkillRecord] = {}
+        self._subtree_buckets: dict[str, list[tuple[AdmittedSkillRecord, list[ast.stmt]]]] | None = None
+        self._subtree_index_mode = mode
         self.rejections: list[dict[str, Any]] = []
         if self.store_path and self.store_path.is_file():
             self._load()
@@ -1565,6 +1567,9 @@ class AdmissionFilteredSkillStore:
             self.records[rec.skill_id] = rec
 
     def save(self) -> None:
+        # All supported mutations come through here, including in-memory edits,
+        # revalidation and compaction. A key-count stamp misses in-place edits.
+        self._subtree_buckets = None
         if not self.store_path:
             return
         self.store_path.parent.mkdir(parents=True, exist_ok=True)
@@ -1662,6 +1667,58 @@ class AdmissionFilteredSkillStore:
         self.records[skill_id] = rec
         self.save()
         return True, skill_id
+
+    def retrieve_for_subtree(self, code_block: str, *, target_lang: str = "python",
+                             max_matches: int = 3) -> list[tuple[str, str]]:
+        """Return proposals, never verified effects. No width or top-16 prefilter."""
+        if self.mode == "disabled" or not self.records or max_matches < 1:
+            return []
+        source = textwrap.dedent(code_block)
+        result: list[tuple[str, str]] = []
+        raw = self.mode == "raw_traces"
+        if target_lang != "python":
+            if raw:
+                return []
+            for rec in self.records.values():
+                if rec.stale or not rec.skill_id.startswith('sub_'):
+                    continue
+                proposal = ASTSubtreeAntiUnifier.apply_to_code(
+                    rec.lhs_ir_sexpr, rec.rhs_ir_sexpr, source, target_lang=target_lang)
+                if proposal is not None and proposal != source:
+                    result.append((proposal, rec.skill_id))
+                    if len(result) == max_matches:
+                        break
+            return result
+
+        if self._subtree_buckets is None or self._subtree_index_mode != self.mode:
+            buckets = {}
+            for rec in sorted(self.records.values(), key=lambda r: (-r.mdl_gain_bytes, r.skill_id)):
+                if rec.stale or not rec.skill_id.startswith('sub_'):
+                    continue
+                try:
+                    pattern = ast.parse(rec.concrete_before if raw else rec.lhs_ir_sexpr).body
+                    ast.parse(rec.concrete_after if raw else rec.rhs_ir_sexpr)
+                except (ValueError, SyntaxError):
+                    continue  # an invalid edited entry cannot supply a proposal
+                if pattern:
+                    buckets.setdefault(_stmt_structural_skeleton(pattern[0]), []).append((rec, pattern))
+            self._subtree_buckets = buckets
+            self._subtree_index_mode = self.mode
+        try:
+            tree = ast.parse(source)
+        except (ValueError, SyntaxError):
+            return []
+        for seq in ASTSubtreeAntiUnifier.suites(tree):
+            for i, stmt in enumerate(seq):
+                for rec, pattern in self._subtree_buckets.get(_stmt_structural_skeleton(stmt), ()):
+                    proposal = ASTSubtreeAntiUnifier.rewrite_window(
+                        pattern, rec.concrete_after if raw else rec.rhs_ir_sexpr,
+                        seq[i:i+len(pattern)], source, rec.concrete_before if raw else None)
+                    if proposal is not None:
+                        result.append((proposal, rec.skill_id))
+                        if len(result) == max_matches:
+                            return result
+        return result
 
     def check_and_refresh_staleness(
         self,
@@ -1836,19 +1893,22 @@ class _SchematicASTLifter(ast.NodeTransformer):
     """Order-preserving schematic lifter turning concrete identifiers & attributes in a
     minimal connected multi-statement AST subtree into canonical holes (`_V0_`, `_ATTR0_`)."""
 
-    def __init__(self, var_map: dict[str, str], attr_map: dict[str, str]) -> None:
+    def __init__(self, var_map: dict[str, str], attr_map: dict[str, str], *, bind: bool = True) -> None:
         self.var_map = var_map
         self.attr_map = attr_map
+        self.bind = bind
 
     def visit_Name(self, node: ast.Name) -> ast.AST:
         if node.id in _SAFE_BUILTINS_NAMES or node.id in ("True", "False", "None"):
             return node
-        slot = self.var_map.setdefault(node.id, f"_V{len(self.var_map)}_")
+        slot = (self.var_map.setdefault(node.id, f"_V{len(self.var_map)}_")
+                if self.bind else self.var_map.get(node.id, node.id))
         return ast.copy_location(ast.Name(id=slot, ctx=node.ctx), node)
 
     def visit_Attribute(self, node: ast.Attribute) -> ast.AST:
         new_val = self.visit(node.value)
-        slot = self.attr_map.setdefault(node.attr, f"_ATTR{len(self.attr_map)}_")
+        slot = (self.attr_map.setdefault(node.attr, f"_ATTR{len(self.attr_map)}_")
+                if self.bind else self.attr_map.get(node.attr, node.attr))
         return ast.copy_location(ast.Attribute(value=new_val, attr=slot, ctx=node.ctx), node)
 
 
@@ -1869,17 +1929,6 @@ class ASTSubtreeAntiUnifier:
     def extract_minimal_diff_slice(cls, before_code: str, after_code: str) -> tuple[list[ast.stmt], list[ast.stmt]]:
         b_stmts = cls._parse_block(before_code)
         a_stmts = cls._parse_block(after_code)
-        p = 0
-        while p < len(b_stmts) and p < len(a_stmts) and ast.dump(b_stmts[p]) == ast.dump(a_stmts[p]):
-            p += 1
-        s = 0
-        while (
-            s < (len(b_stmts) - p)
-            and s < (len(a_stmts) - p)
-            and ast.dump(b_stmts[len(b_stmts) - 1 - s]) == ast.dump(a_stmts[len(a_stmts) - 1 - s])
-        ):
-            s += 1
-
         def _syms(stmts: Sequence[ast.stmt]) -> set[str]:
             out: set[str] = set()
             for st in stmts:
@@ -1890,27 +1939,66 @@ class ASTSubtreeAntiUnifier:
                         out.add(f"A:{nd.attr}")
             return out
 
-        # Knuth-Bendix well-formedness expansion: expand `(p, s)` until `b_slice` is non-empty
-        # and `Vars(a_slice) <= Vars(b_slice)` (or full block reached) so `L -> R` has zero unbound holes!
-        while p > 0 or s > 0:
-            b_cur = b_stmts[p : len(b_stmts) - s] if s else b_stmts[p:]
-            a_cur = a_stmts[p : len(a_stmts) - s] if s else a_stmts[p:]
-            if b_cur and (_syms(a_cur) <= _syms(b_cur)):
-                return b_cur, a_cur
-            if s > 0:
-                s -= 1
-            elif p > 0:
-                p -= 1
-        return b_stmts, a_stmts
+        def key(value: Any) -> Any:
+            if isinstance(value, ast.AST):
+                return ast.dump(value)
+            if isinstance(value, list):
+                return [key(v) for v in value]
+            return value
+
+        def cut(before: list[ast.stmt], after: list[ast.stmt]) -> tuple[list[ast.stmt], list[ast.stmt]]:
+            # Strip unchanged siblings. Descend only through an unchanged
+            # wrapper with exactly one changed suite (not across two branches).
+            bk, ak = key(before), key(after)
+            p, be, ae = 0, len(before), len(after)
+            while p < min(be, ae) and bk[p] == ak[p]:
+                p += 1
+            while min(be, ae) > p and bk[be-1] == ak[ae-1]:
+                be -= 1
+                ae -= 1
+            if p == be == ae:
+                return [], []
+            if be == ae == p + 1 and type(before[p]) is type(after[p]):
+                changed = [(v, getattr(after[p], k)) for k, v in ast.iter_fields(before[p])
+                           if key(v) != key(getattr(after[p], k))]
+                if len(changed) == 1:
+                    x, y = changed[0]
+                    if (isinstance(x, list) and isinstance(y, list) and x
+                            and all(isinstance(n, ast.stmt) for n in (*x, *y))):
+                        lhs, rhs = cut(x, y)
+                        # A return may depend on a sibling outside the changed
+                        # branch. Don't discard the context that binds it.
+                        if lhs and (_syms(rhs) & _syms(before)) <= _syms(lhs):
+                            return lhs, rhs
+            available = _syms(before)
+            while True:
+                lhs, rhs = before[p:be], after[p:ae]
+                if lhs and (_syms(rhs) & available) <= _syms(lhs):
+                    return lhs, rhs
+                if be < len(before):
+                    be += 1
+                    ae += 1
+                elif p:
+                    p -= 1
+                else:
+                    return lhs, rhs
+
+        return cut(b_stmts, a_stmts)
 
     @classmethod
     def anti_unify_blocks(cls, before_code: str, after_code: str) -> tuple[str, str]:
-        b_slice, a_slice = cls.extract_minimal_diff_slice(before_code, after_code)
+        return cls._lift_slice(*cls.extract_minimal_diff_slice(before_code, after_code))
+
+    @staticmethod
+    def _lift_slice(b_slice: list[ast.stmt], a_slice: list[ast.stmt]) -> tuple[str, str]:
         var_map: dict[str, str] = {}
         attr_map: dict[str, str] = {}
         lifter = _SchematicASTLifter(var_map, attr_map)
         b_lifted = ast.Module(body=[lifter.visit(copy.deepcopy(st)) for st in b_slice], type_ignores=[])
-        a_lifted = ast.Module(body=[lifter.visit(copy.deepcopy(st)) for st in a_slice], type_ignores=[])
+        # Only the source can introduce a hole. An RHS-only API attribute
+        # is a literal requirement, not a fresh uninstantiable placeholder.
+        rhs_lifter = _SchematicASTLifter(var_map, attr_map, bind=False)
+        a_lifted = ast.Module(body=[rhs_lifter.visit(copy.deepcopy(st)) for st in a_slice], type_ignores=[])
         ast.fix_missing_locations(b_lifted)
         ast.fix_missing_locations(a_lifted)
         return ast.unparse(b_lifted), ast.unparse(a_lifted)
@@ -1933,6 +2021,8 @@ class ASTSubtreeAntiUnifier:
             return prev == tgt.id
         if type(pat) is not type(tgt):
             return False
+        if isinstance(pat, ast.Constant) and type(pat.value) is not type(tgt.value):
+            return False  # e.g. False == 0 in Python, but not in a syntax pattern
         if isinstance(pat, ast.Attribute) and isinstance(tgt, ast.Attribute):
             if pat.attr.startswith("_ATTR") and pat.attr.endswith("_"):
                 prev_a = a_bind.get(pat.attr)
@@ -1982,6 +2072,60 @@ class ASTSubtreeAntiUnifier:
         ast.fix_missing_locations(filled)
         return ast.unparse(filled)
 
+    @staticmethod
+    def suites(tree: ast.Module) -> Iterator[list[ast.stmt]]:
+        for node in ast.walk(tree):
+            for _, value in ast.iter_fields(node):
+                if isinstance(value, list) and value and isinstance(value[0], ast.stmt):
+                    yield value
+
+    @staticmethod
+    def concrete_window(source: str, window: list[ast.stmt]) -> str:
+        if not window:
+            return ''
+        first, last = window[0], window[-1]
+        lines = source.encode().splitlines(keepends=True)
+        chunk = lines[first.lineno - 1:last.end_lineno]
+        chunk[-1] = chunk[-1][:last.end_col_offset]
+        indent = chunk[0][:first.col_offset]
+        if indent.strip() or any(getattr(n, 'decorator_list', ()) for n in window):
+            raise ValueError('not a freestanding statement window')
+        return b''.join(line.removeprefix(indent) for line in chunk).decode()
+
+    @classmethod
+    def rewrite_window(cls, pattern: list[ast.stmt], rhs: str, window: list[ast.stmt],
+                       source: str, raw_before: str | None = None) -> str | None:
+        variables: dict[str, str] = {}
+        attrs: dict[str, str] = {}
+        if len(pattern) != len(window) or not all(
+            cls._match_ast_nodes(p, t, variables, attrs) for p, t in zip(pattern, window)
+        ):
+            return None
+        # Python columns are UTF-8 byte offsets. Splice only the matched
+        # statements; unparsing the entire module erases unrelated comments.
+        lines = source.encode().splitlines(keepends=True)
+        first, last = window[0], window[-1]
+        if any(getattr(n, 'decorator_list', ()) for n in window):
+            return None  # a decorator starts before its statement's lineno
+        start, end = first.lineno - 1, last.end_lineno - 1
+        indent = lines[start][:first.col_offset]
+        if indent.strip():
+            return None  # inline suite; no freestanding indentation to reuse
+        if raw_before is None:
+            new = cls._instantiate_python(rhs, variables, attrs)
+        else:  # Exact text at a statement boundary; not text inside a literal.
+            if cls.concrete_window(source, window) != raw_before:
+                return None
+            new = rhs
+        newline = b'\r\n' if lines[start].endswith(b'\r\n') else b'\n'
+        replacement = new.replace('\r\n', '\n').encode().replace(b'\n', newline + indent)
+        result = b''.join([*lines[:start], indent, replacement, lines[end][last.end_col_offset:], *lines[end+1:]]).decode()
+        try:
+            ast.parse(result)
+        except SyntaxError:
+            return None
+        return result if result != source else None
+
     @classmethod
     def apply_to_code(
         cls,
@@ -1993,21 +2137,15 @@ class ASTSubtreeAntiUnifier:
     ) -> str | None:
         """Apply a lifted multi-statement subtree morphism to unseen Python, JavaScript, or Rust code."""
         if target_lang == "python":
-            pat_stmts = cls._parse_block(lhs_schema_py)
-            tgt_stmts = cls._parse_block(target_code)
-            k = len(pat_stmts)
-            if k == 0 or len(tgt_stmts) < k:
+            source = textwrap.dedent(target_code)
+            pattern = cls._parse_block(lhs_schema_py)
+            if not pattern:
                 return None
-            for idx in range(len(tgt_stmts) - k + 1):
-                v_bind: dict[str, str] = {}
-                a_bind: dict[str, str] = {}
-                if all(cls._match_ast_nodes(pat_stmts[j], tgt_stmts[idx + j], v_bind, a_bind) for j in range(k)):
-                    repl_py = cls._instantiate_python(rhs_schema_py, v_bind, a_bind)
-                    repl_stmts = cls._parse_block(repl_py)
-                    new_body = tgt_stmts[:idx] + repl_stmts + tgt_stmts[idx + k :]
-                    new_mod = ast.Module(body=new_body, type_ignores=[])
-                    ast.fix_missing_locations(new_mod)
-                    return ast.unparse(new_mod)
+            for seq in cls.suites(ast.parse(source)):
+                for i in range(len(seq) - len(pattern) + 1):
+                    result = cls.rewrite_window(pattern, rhs_schema_py, seq[i:i+len(pattern)], source)
+                    if result is not None:
+                        return result
             return None
 
         # Cross-language multi-statement guard-to-coalesce lowering (`if x === null return null; return [a, x]` -> `return [a, x ?? ""]`)
@@ -2079,22 +2217,35 @@ def _attach_v4_store_extensions() -> None:
             return False, "REJECTED__ZERO_PREDICTION_ERROR"
         dedent_before = textwrap.dedent(concrete_before).strip("\n")
         dedent_after = textwrap.dedent(concrete_after).strip("\n")
-        unbound = check_foreign_ident_unbound(dedent_before, dedent_after, allowed_module_symbols)
-        if unbound:
-            reason = f"REJECTED__FOREIGN_IDENT_UNBOUND:{','.join(unbound)}"
-            self.rejections.append({"reason": reason})
-            return False, reason
-        lhs_schema, rhs_schema = ASTSubtreeAntiUnifier.anti_unify_blocks(dedent_before, dedent_after)
-        rule_bytes = len(lhs_schema.encode("utf-8")) + len(rhs_schema.encode("utf-8"))
-        mdl_gain = max(1, int(raw_episode_bytes) - rule_bytes)
+        try:
+            old, new = ASTSubtreeAntiUnifier.extract_minimal_diff_slice(dedent_before, dedent_after)
+            old_text = ASTSubtreeAntiUnifier.concrete_window(dedent_before, old)
+            new_text = ASTSubtreeAntiUnifier.concrete_window(dedent_after, new)
+            unbound = check_foreign_ident_unbound(old_text, new_text, allowed_module_symbols)
+            if unbound:
+                reason = f"REJECTED__FOREIGN_IDENT_UNBOUND:{','.join(unbound)}"
+                self.rejections.append({"reason": reason})
+                return False, reason
+            lhs_schema, rhs_schema = ASTSubtreeAntiUnifier._lift_slice(old, new)
+            if not lhs_schema or lhs_schema == rhs_schema:
+                return False, "REJECTED__NO_STRUCTURAL_EDIT"
+            replay = ASTSubtreeAntiUnifier.apply_to_code(lhs_schema, rhs_schema, dedent_before)
+            if replay is None or ast.dump(ast.parse(replay)) != ast.dump(ast.parse(dedent_after)):
+                return False, "REJECTED__WITNESS_NOT_REPLAYED"
+        except (SyntaxError, ValueError):
+            return False, "REJECTED__UNPARSEABLE_SUBTREE"
+        rule_bytes = len(lhs_schema.encode()) + len(rhs_schema.encode())
+        mdl_gain = int(raw_episode_bytes) - rule_bytes
+        if mdl_gain <= 0:
+            return False, "REJECTED__NOT_COMPRESSIBLE"
         skill_id = "sub_" + _sha256_text(f"{domain}::{lhs_schema}=>{rhs_schema}")[:12]
         rec = AdmittedSkillRecord(
             skill_id=skill_id,
             domain=domain,
             lhs_ir_sexpr=lhs_schema,
             rhs_ir_sexpr=rhs_schema,
-            concrete_before=dedent_before,
-            concrete_after=dedent_after,
+            concrete_before=old_text,
+            concrete_after=new_text,
             source_fingerprint=source_fingerprint,
             verified_utc=_utc_now(),
             prediction_error_probes=probes_before_success,
@@ -2105,30 +2256,6 @@ def _attach_v4_store_extensions() -> None:
         self.records[skill_id] = rec
         self.save()
         return True, skill_id
-
-    def retrieve_for_subtree(
-        self: AdmissionFilteredSkillStore,
-        code_block: str,
-        *,
-        target_lang: str = "python",
-    ) -> list[tuple[str, str]]:
-        if self.mode == "disabled":
-            return []
-        norm_in = textwrap.dedent(code_block).strip("\n")
-        out: list[tuple[str, str]] = []
-        for rec in self.records.values():
-            if rec.stale:
-                continue
-            if self.mode == "raw_traces":
-                if target_lang == "python" and rec.concrete_before in norm_in:
-                    out.append((norm_in.replace(rec.concrete_before, rec.concrete_after, 1), rec.skill_id))
-                continue
-            repaired = ASTSubtreeAntiUnifier.apply_to_code(
-                rec.lhs_ir_sexpr, rec.rhs_ir_sexpr, norm_in, target_lang=target_lang
-            )
-            if repaired is not None and repaired != norm_in:
-                out.append((repaired, rec.skill_id))
-        return out
 
     def record_negative_invariant(
         self: AdmissionFilteredSkillStore,
@@ -2168,7 +2295,6 @@ def _attach_v4_store_extensions() -> None:
         return False
 
     AdmissionFilteredSkillStore.try_admit_subtree = try_admit_subtree  # type: ignore[attr-defined]
-    AdmissionFilteredSkillStore.retrieve_for_subtree = retrieve_for_subtree  # type: ignore[attr-defined]
     AdmissionFilteredSkillStore.record_negative_invariant = record_negative_invariant  # type: ignore[attr-defined]
     AdmissionFilteredSkillStore.is_blocked_by_negative_invariant = is_blocked_by_negative_invariant  # type: ignore[attr-defined]
 
@@ -2640,7 +2766,7 @@ class SelfPlaySkillDistiller:
             concrete_after=after_block,
             verified=verified_by_suite,
             goal_relevant=True,
-            probes_before_success=max(1, probes_before_success),
+            probes_before_success=probes_before_success,
             raw_episode_bytes=raw_episode_bytes,
             source_fingerprint=source_fingerprint or _sha256_text(before_block)[:16],
             witness_inputs=[{"self_play": True}],
@@ -2716,122 +2842,6 @@ def compute_structural_fp64(code_or_schema: str) -> str:
         kw_sk = re.sub(r"[A-Za-z_]\w*", "ID", norm)
         kw_sk = re.sub(r"\s+", "", kw_sk)
         return _sha256_text("RAW:" + kw_sk)[:16]
-
-
-def _attach_o1_fingerprint_index() -> None:
-    """Upgrade `AdmissionFilteredSkillStore` with O(1) 64-bit structural fingerprint hash buckets."""
-
-    def _ensure_fp_index(self: AdmissionFilteredSkillStore) -> dict[str, list[str]]:
-        stamp = (len(self.records), tuple(sorted(self.records.keys())[:8]))
-        cached_stamp = getattr(self, "_fp_index_stamp", None)
-        idx: dict[str, list[str]] | None = getattr(self, "_fp_buckets", None)
-        if idx is not None and cached_stamp == stamp and getattr(self, "_fp_indexed_total", -1) == len(self.records):
-            return idx
-        buckets: dict[str, list[str]] = {}
-        for sid, rec in self.records.items():
-            if rec.stale:
-                continue
-            for raw_k in {rec.concrete_before, rec.lhs_ir_sexpr}:
-                if not raw_k:
-                    continue
-                fp = compute_structural_fp64(raw_k)
-                lst = buckets.setdefault(fp, [])
-                if sid not in lst:
-                    lst.append(sid)
-        # Sort each bucket highest-MDL-gain first so top-K retrieval prioritizes strongest schemas
-        for fp_k, sids in buckets.items():
-            sids.sort(key=lambda s: -self.records[s].mdl_gain_bytes)
-        setattr(self, "_fp_buckets", buckets)
-        setattr(self, "_fp_index_stamp", stamp)
-        setattr(self, "_fp_indexed_total", len(self.records))
-        return buckets
-
-    def retrieve_for_subtree_indexed(
-        self: AdmissionFilteredSkillStore,
-        code_block: str,
-        *,
-        target_lang: str = "python",
-        max_matches: int = 3,
-    ) -> list[tuple[str, str]]:
-        if self.mode == "disabled" or not self.records:
-            return []
-        norm_in = textwrap.dedent(code_block).strip("\n")
-        if self.mode == "raw_traces":
-            if target_lang != "python":
-                return []
-            buckets = _ensure_fp_index(self)
-            cand_sids: list[str] = []
-            try:
-                mod_in = ast.parse(norm_in)
-                stmts = mod_in.body
-                for win_k in range(1, min(5, len(stmts) + 1)):
-                    for i_s in range(0, len(stmts) - win_k + 1):
-                        sub_mod = ast.Module(body=stmts[i_s : i_s + win_k], type_ignores=[])
-                        w_fp = _sha256_text("BLOCK:" + "||".join(_stmt_structural_skeleton(s, 0) for s in sub_mod.body))[:16]
-                        for sid in buckets.get(w_fp, ()):
-                            if sid not in cand_sids:
-                                cand_sids.append(sid)
-            except SyntaxError:
-                cand_sids = list(self.records.keys())
-            out_raw: list[tuple[str, str]] = []
-            for sid in cand_sids:
-                rec = self.records.get(sid)
-                if rec and not rec.stale and rec.concrete_before in norm_in:
-                    out_raw.append((norm_in.replace(rec.concrete_before, rec.concrete_after, 1), rec.skill_id))
-                    if len(out_raw) >= max_matches:
-                        break
-            return out_raw
-
-        # `mode == "generalized"`: O(1) structural window lookup in Python; fallback scan on non-Python CSTs
-        cand_sids_gen: list[str] = []
-        if target_lang == "python":
-            buckets = _ensure_fp_index(self)
-            try:
-                mod_in = ast.parse(norm_in)
-                stmts = list(mod_in.body)
-                # Also index nested function/if bodies so function-wrapped blocks hit in O(1)!
-                stmt_sequences: list[list[ast.stmt]] = [stmts]
-                for node in ast.walk(mod_in):
-                    if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.If, ast.For, ast.With)):
-                        if getattr(node, "body", None):
-                            stmt_sequences.append(list(node.body))
-                seen_fp: set[str] = set()
-                for seq in stmt_sequences:
-                    for win_k in range(1, min(5, len(seq) + 1)):
-                        for i_s in range(0, len(seq) - win_k + 1):
-                            w_fp = _sha256_text(
-                                "BLOCK:" + "||".join(_stmt_structural_skeleton(s, 0) for s in seq[i_s : i_s + win_k])
-                            )[:16]
-                            if w_fp in seen_fp:
-                                continue
-                            seen_fp.add(w_fp)
-                            for sid in buckets.get(w_fp, ()):
-                                if sid not in cand_sids_gen:
-                                    cand_sids_gen.append(sid)
-            except SyntaxError:
-                cand_sids_gen = [sid for sid, r in self.records.items() if not r.stale]
-        else:
-            cand_sids_gen = [sid for sid, r in self.records.items() if not r.stale]
-
-        out: list[tuple[str, str]] = []
-        for sid in cand_sids_gen[:16]:
-            rec = self.records.get(sid)
-            if rec is None or rec.stale:
-                continue
-            repaired = ASTSubtreeAntiUnifier.apply_to_code(
-                rec.lhs_ir_sexpr, rec.rhs_ir_sexpr, norm_in, target_lang=target_lang
-            )
-            if repaired is not None and repaired != norm_in:
-                out.append((repaired, rec.skill_id))
-                if len(out) >= max_matches:
-                    break
-        return out
-
-    AdmissionFilteredSkillStore._ensure_fp_index = _ensure_fp_index  # type: ignore[attr-defined]
-    AdmissionFilteredSkillStore.retrieve_for_subtree = retrieve_for_subtree_indexed  # type: ignore[attr-defined]
-
-
-_attach_o1_fingerprint_index()
 
 
 # =========================================================================== #

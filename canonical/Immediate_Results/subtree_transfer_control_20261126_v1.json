@@ -1,0 +1,325 @@
+{
+  "schema": "SUBTREE_TRANSFER_DIAGNOSTIC_V1",
+  "authority": "none; local engineering experiment, not an official benchmark or capability grade",
+  "date_utc": "2026-11-26T18:40:00Z",
+  "python": "3.11.2",
+  "pytest": "9.2.0",
+  "file_sha256_at_measurement": {
+    "canonical/tools/subtree_transfer_probe_v1.py": "d1d70c54f6de6f2892cefde6f16a9e4720bb9ff0be657e89b21321bbbad1189e",
+    "canonical/tools/grade_frozen_click_transfer_v1.py": "6d1e09391e33c0d8555fafb56a7e0950efba1dec6716f63ee4d53adf76c68f9b",
+    "canonical/tools/reproduce_subtree_transfer_v1.sh": "feb25fc63b93b7818d22425ec16d7c626866325d44c2f700f7788461cdb4eb29",
+    "canonical/swe_kernel/petri_cow_splicing_engine_v1.py": "405ba713f1db7ea6725a8a5bf69d87c0d368622687ac2ce07c493cc130d33bcd",
+    "canonical/verification/MULTI_PRODUCER_NORMALIZATION_20261124_V9.json": "577fd9b1b3093b16f74d5a1e49c8b9f2ebe7a4c5c91d224aba78d2732c2053b9",
+    "canonical/verification/INDEPENDENT_REPLAY_FIVE_20261124_V1.json": "b4ae48ceb7b6014796a1a21fd2fec60290e2154f996d59b90db1aeeedf5c7962"
+  },
+  "protocol": {
+    "one_generated_teacher_not_gold": true,
+    "target_spec_available_to_proposer": false,
+    "source_search": "regular .py files in lib/ansible or src/click; teacher calibration only core.py; sorted paths, all parseable files, cap 1 candidate per file, freeze first file hit per arm",
+    "exposure": "developer saw public Ansible instructions, task metadata and commit-title fragment; studied Click family; no receiver evaluator/solution used for candidate generation",
+    "evaluator": "clean copies with receiver distribution metadata; selected pytest native defaults; separately transplant teacher test file after freeze; unshare user/net, no plugin autoload, process deadline 120s per run",
+    "native_default_deselected": 31000,
+    "model_calls_in_proposal_code": 0,
+    "teacher_check_sha256": "3724b419da2c30f078bf01a07f6f70a4860a92151f44f3968324f3f04bad32da",
+    "repeat_first_candidates_identical": true,
+    "source_manifest": "SHA256 over lexicographic relative path UTF-8, NUL, 32 raw SHA256 bytes of file, concatenated"
+  },
+  "teacher": {
+    "commit": "05f6fd0df4ecbd104eb7a229f9f185c2484dee69",
+    "parent_source_sha256": "cb242cbfa3190e729829ceb9292cdc5ab1856ef5ee014c501ffb110fcd3f574f",
+    "teacher_candidate_sha256": "74d3097d61e51eecf9dc28829b30aae7d64b724cb9aaae047d489d5929780418",
+    "skill_id": "sub_5792a3103335",
+    "observations": 1,
+    "schema_bytes": 184,
+    "raw_window_bytes": 180,
+    "store_file_bytes": 1313,
+    "prior_teacher_tests_passed": 116,
+    "teach_seconds": 0.2525
+  },
+  "targets": [
+    {
+      "files": 551,
+      "parsed_files": 551,
+      "unreadable": [],
+      "source_manifest_sha256": "7b0fa37104927b83c87188e0482f082f4c4a1388b93a08e98f198dcf9afce132",
+      "arms": {
+        "empty": {
+          "files_with_proposal": 0,
+          "first_candidate": null,
+          "lookup_seconds": 0.0008
+        },
+        "raw_traces": {
+          "files_with_proposal": 0,
+          "first_candidate": null,
+          "lookup_seconds": 1.2759
+        },
+        "generalized": {
+          "files_with_proposal": 0,
+          "first_candidate": null,
+          "lookup_seconds": 1.2831
+        }
+      },
+      "probe_seconds": 3.204,
+      "repo": "ansible/ansible",
+      "revision": "dcc5dac1846be3bf6e948a2950b93477b9193076",
+      "role": "cross_project_product_source",
+      "instance_id": "instance_ansible__ansible-d33bedc48fdd933b5abd65a77c081876298e2f07-v0f01c69f1e2528b935359cfe578530722bca2c59",
+      "official_reward": null,
+      "grade_reason": "NO_CONTAINER_TRIAL",
+      "source_archive_sha256": "17b7c1a0dfcacf6d410e536ee9e7604e4924f760f68e5ee561c302907d6c1607"
+    },
+    {
+      "files": 474,
+      "parsed_files": 474,
+      "unreadable": [],
+      "source_manifest_sha256": "669e59f418f623d2d084692f5c8a059f690aab2409863cbb69ab109d360b088f",
+      "arms": {
+        "empty": {
+          "files_with_proposal": 0,
+          "first_candidate": null,
+          "lookup_seconds": 0.0008
+        },
+        "raw_traces": {
+          "files_with_proposal": 0,
+          "first_candidate": null,
+          "lookup_seconds": 1.1306
+        },
+        "generalized": {
+          "files_with_proposal": 0,
+          "first_candidate": null,
+          "lookup_seconds": 1.1463
+        }
+      },
+      "probe_seconds": 2.863,
+      "repo": "ansible/ansible",
+      "revision": "df29852f3a48160e1a60635692c202531dd8b14a",
+      "role": "cross_project_product_source",
+      "instance_id": "instance_ansible__ansible-d62496fe416623e88b90139dc7917080cb04ce70-v0f01c69f1e2528b935359cfe578530722bca2c59",
+      "official_reward": null,
+      "grade_reason": "NO_CONTAINER_TRIAL",
+      "source_archive_sha256": "79fef5107aec11deca808c06bf430987b3182d125a10ab81c5a0f6cd9280cb1a"
+    },
+    {
+      "files": 17,
+      "parsed_files": 17,
+      "unreadable": [],
+      "source_manifest_sha256": "3b19aa82599716f3582e8a552cebf12d657e5c575912ac1da4676eb07c81181a",
+      "arms": {
+        "empty": {
+          "files_with_proposal": 0,
+          "first_candidate": null,
+          "lookup_seconds": 0.0
+        },
+        "raw_traces": {
+          "files_with_proposal": 1,
+          "first_candidate": {
+            "path": "core.py",
+            "sha256": "b17b043742195bc371e25ecff04e297ec1c3e41f18e32bf99e8bf95774779bcf"
+          },
+          "lookup_seconds": 0.1133
+        },
+        "generalized": {
+          "files_with_proposal": 1,
+          "first_candidate": {
+            "path": "core.py",
+            "sha256": "36e315aca8ef3ac0b2f12e7152d907cada116a0a95a4531fdb5873ae10b05b61"
+          },
+          "lookup_seconds": 0.1174
+        }
+      },
+      "probe_seconds": 0.285,
+      "repo": "pallets/click",
+      "revision": "b47c0529e99129d4785fecc2cb39a8ec8b4aa5f8",
+      "role": "cross_version_same_requirement"
+    },
+    {
+      "files": 1,
+      "parsed_files": 1,
+      "unreadable": [],
+      "source_manifest_sha256": "fda7938b76f558a222c0dc41aaed95ff30f9acbd6ef13dd8deb85a39348362eb",
+      "arms": {
+        "empty": {
+          "files_with_proposal": 0,
+          "first_candidate": null,
+          "lookup_seconds": 0.0
+        },
+        "raw_traces": {
+          "files_with_proposal": 1,
+          "first_candidate": {
+            "path": "core.py",
+            "sha256": "0e50a1b6b97630310f77ee89a2aa2046f26687376d16284bc6e101d435f43697"
+          },
+          "lookup_seconds": 0.0377,
+          "ast_equal_to_teacher": true,
+          "byte_equal_to_teacher": false
+        },
+        "generalized": {
+          "files_with_proposal": 1,
+          "first_candidate": {
+            "path": "core.py",
+            "sha256": "58d6c2fe356641a7030ca848b2d589f7ef7795706f27a25499caafbe6e231360"
+          },
+          "lookup_seconds": 0.0422,
+          "ast_equal_to_teacher": true,
+          "byte_equal_to_teacher": false
+        }
+      },
+      "probe_seconds": 0.097,
+      "repo": "pallets/click",
+      "revision": "f25f697a439acc2b0d84aa8f5413330f4e2e75cf",
+      "role": "teacher_calibration_only"
+    }
+  ],
+  "cross_version_checks": {
+    "empty": {
+      "native": {
+        "exit": 0,
+        "seconds": 8.421,
+        "log_sha256": "1410dfcb6069354d6a47c01d835475a1f2420fc96035ee5883ccb0da3120cb3d",
+        "status": "RAN",
+        "counts": {
+          "passed": 2000,
+          "xfailed": 1,
+          "skipped": 24
+        },
+        "same_test_names_as_empty": true,
+        "lost_passes": {
+          "count": 0,
+          "first_six": []
+        },
+        "failures_to_pass": {
+          "count": 0,
+          "first_six": []
+        }
+      },
+      "teacher_check": {
+        "exit": 1,
+        "seconds": 0.768,
+        "log_sha256": "4ec9f1acb96dc705afd475701180902b5df33621a99807064d91ff451fb479dc",
+        "status": "RAN",
+        "counts": {
+          "passed": 112,
+          "failure": 4
+        },
+        "same_test_names_as_empty": true,
+        "lost_passes": {
+          "count": 0,
+          "first_six": []
+        },
+        "failures_to_pass": {
+          "count": 0,
+          "first_six": []
+        }
+      }
+    },
+    "raw_traces": {
+      "native": {
+        "exit": 1,
+        "seconds": 7.395,
+        "log_sha256": "c75d39cdafad6a41525de5152533cd81532525c7816c3d8f65f3e1f9abea614c",
+        "status": "RAN",
+        "counts": {
+          "passed": 1997,
+          "xfailed": 1,
+          "failure": 3,
+          "skipped": 24
+        },
+        "same_test_names_as_empty": true,
+        "lost_passes": {
+          "count": 3,
+          "first_six": [
+            "tests.test_formatting::test_formatting_custom_type_metavar",
+            "tests.test_formatting::test_wrapping_long_command_name",
+            "tests.test_formatting::test_wrapping_long_options_strings"
+          ]
+        },
+        "failures_to_pass": {
+          "count": 0,
+          "first_six": []
+        }
+      },
+      "teacher_check": {
+        "exit": 1,
+        "seconds": 0.568,
+        "log_sha256": "20dc798268c394dcc1ab45ed76aaa924317db95a70db4347871f526ecd1cf39d",
+        "status": "RAN",
+        "counts": {
+          "passed": 115,
+          "failure": 1
+        },
+        "same_test_names_as_empty": true,
+        "lost_passes": {
+          "count": 1,
+          "first_six": [
+            "tests.test_arguments::test_argument_help_undocumented_arguments_only_no_section"
+          ]
+        },
+        "failures_to_pass": {
+          "count": 4,
+          "first_six": [
+            "tests.test_arguments::test_argument_get_help_record_never_none[None]",
+            "tests.test_arguments::test_argument_help_deprecated_without_help_lists_all",
+            "tests.test_arguments::test_argument_help_empty_string_lists_all",
+            "tests.test_arguments::test_argument_help_lists_undocumented_arguments"
+          ]
+        }
+      }
+    },
+    "generalized": {
+      "native": {
+        "exit": 1,
+        "seconds": 7.092,
+        "log_sha256": "5cff0b274baf0760453d7c515e173ba9395aedaff5ba10d9c44715c9e94db211",
+        "status": "RAN",
+        "counts": {
+          "passed": 1997,
+          "xfailed": 1,
+          "failure": 3,
+          "skipped": 24
+        },
+        "same_test_names_as_empty": true,
+        "lost_passes": {
+          "count": 3,
+          "first_six": [
+            "tests.test_formatting::test_formatting_custom_type_metavar",
+            "tests.test_formatting::test_wrapping_long_command_name",
+            "tests.test_formatting::test_wrapping_long_options_strings"
+          ]
+        },
+        "failures_to_pass": {
+          "count": 0,
+          "first_six": []
+        }
+      },
+      "teacher_check": {
+        "exit": 1,
+        "seconds": 0.566,
+        "log_sha256": "e8f6dd8337c34fa21fd426ca22b3efae87b70319c7869d442869171134ddf58d",
+        "status": "RAN",
+        "counts": {
+          "passed": 115,
+          "failure": 1
+        },
+        "same_test_names_as_empty": true,
+        "lost_passes": {
+          "count": 1,
+          "first_six": [
+            "tests.test_arguments::test_argument_help_undocumented_arguments_only_no_section"
+          ]
+        },
+        "failures_to_pass": {
+          "count": 4,
+          "first_six": [
+            "tests.test_arguments::test_argument_get_help_record_never_none[None]",
+            "tests.test_arguments::test_argument_help_deprecated_without_help_lists_all",
+            "tests.test_arguments::test_argument_help_empty_string_lists_all",
+            "tests.test_arguments::test_argument_help_lists_undocumented_arguments"
+          ]
+        }
+      }
+    }
+  },
+  "initial_environment_error": {
+    "before_installing_receiver_metadata": "all three native-suite collections exited 2: importlib.metadata.PackageNotFoundError(click). No native grade on that configuration. Complete rerun above; candidate bytes unchanged."
+  }
+}
