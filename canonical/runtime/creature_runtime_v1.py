@@ -1659,6 +1659,75 @@ class Creature:
         self._unified_model = open_model()
         return self._unified_model.discover_dark_matter(query, top_k=top_k, max_hot=max_hot)
 
+    def _ensure_unified_model(self) -> Any:
+        if getattr(self, "_unified_model", None) is None:
+            from canonical.runtime.brain_unified_model_v1 import open_model
+
+            self._unified_model = open_model()
+        return self._unified_model
+
+    def mendel_red_queen_evolve(
+        self,
+        parent_source: str,
+        lineage_a: str,
+        lineage_b: str,
+        *,
+        verifier: Any,
+        failing_witness: Any = None,
+        owned_symbols: Sequence[str] | None = None,
+        max_ast_bloat_ratio: float = 1.60,
+        max_added_branches: int = 6,
+        require_albi_invariance: bool = True,
+    ) -> dict[str, Any]:
+        """Wave 39: Creature Mendel comparative dual splicing + ALBI + Anti-Slop/No-Phantom-Guardrails."""
+        res = self._ensure_unified_model().mendel_red_queen_evolve(
+            parent_source,
+            lineage_a,
+            lineage_b,
+            verifier=verifier,
+            failing_witness=failing_witness,
+            owned_symbols=owned_symbols,
+            max_ast_bloat_ratio=max_ast_bloat_ratio,
+            max_added_branches=max_added_branches,
+            require_albi_invariance=require_albi_invariance,
+        )
+        self._save()
+        return res
+
+    def discover_and_earn_judges(
+        self,
+        *,
+        artifacts_by_kind: Mapping[str, Sequence[bytes]] | None = None,
+        store_dir: str | pathlib.Path | None = None,
+        include_stdlib_discovery: bool = True,
+        cli_probe: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 39: Creature Red Queen earned-judge discovery over live subprocess candidates."""
+        return self._ensure_unified_model().discover_and_earn_judges(
+            artifacts_by_kind=artifacts_by_kind,
+            store_dir=store_dir,
+            include_stdlib_discovery=include_stdlib_discovery,
+            cli_probe=cli_probe,
+        )
+
+    def compose_and_plan_contracts(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 39: Creature typed effect-contract composition + Sussman partial-order planning + lifted sketches."""
+        return self._ensure_unified_model().compose_and_plan_contracts(**kwargs)
+
+    def speculative_cow_decide(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 39: Creature decision-theoretic version-space agreement gate + real POSIX CoW fork speculation."""
+        return self._ensure_unified_model().speculative_cow_decide(**kwargs)
+
+    def clm_rrf_memory_op(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 39: Creature verbatim 4-way RRF + Nemori surprise + CLM file-mirrored context + TMA-NM."""
+        res = self._ensure_unified_model().clm_rrf_memory_op(operation, payload)
+        self._save()
+        return res
+
+    def partial_route_with_jitrl(self, operation: str, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 39: Creature closed-form JitRL logit modulation + SkillTTA synthesis + Intra-task Partial Routing."""
+        return self._ensure_unified_model().partial_route_with_jitrl(operation, payload)
+
     def sleep_evolve_organs_gea(
         self,
         *,

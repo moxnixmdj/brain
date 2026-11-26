@@ -6650,6 +6650,257 @@ class UnifiedModel:
         """Wave 39 Pillar V: `Babble`/`Stitch` Meaning-IR anti-unification, zero-shot verified cross-language
         transfer across Python/JS/TS/Go/Rust, 4-gate Hoare sequence composition, and MDL bit-rent eviction."""
         return self._get_five_pillar_kernel().skill_ratchet.consolidate_and_transfer(**kwargs)
+    # --- Wave 39: Dark-Organ Unification, Red-Queen/Mendel Co-Evolution, CLM+RRF Memory & Partial-Routing/JitRL ---
+
+    def _get_clm_rrf_memory_engine(self) -> Any:
+        eng = getattr(self, "_clm_rrf_memory_engine", None)
+        if eng is None:
+            from canonical.runtime.wave39_leapfrog_unification_v1 import CLMRRFMemoryEngine
+
+            eng = CLMRRFMemoryEngine(memory_bus=self._get_non_malleable_memory_bus())
+            self._clm_rrf_memory_engine = eng
+        return eng
+
+    def mendel_red_queen_evolve(
+        self,
+        parent_source: str,
+        lineage_a: str,
+        lineage_b: str,
+        *,
+        verifier: Any,
+        failing_witness: Any = None,
+        owned_symbols: Sequence[str] | None = None,
+        max_ast_bloat_ratio: float = 1.60,
+        max_added_branches: int = 6,
+        require_albi_invariance: bool = True,
+    ) -> dict[str, Any]:
+        """Wave 39: Mendel comparative dual splicing + ALBI semantic-anonymization + Anti-Slop/No-Phantom-Guardrails gate."""
+        from canonical.runtime.wave39_leapfrog_unification_v1 import RedQueenMendelEvolver
+
+        return RedQueenMendelEvolver.mendel_splice_and_verify(
+            parent_source,
+            lineage_a,
+            lineage_b,
+            verifier=verifier,
+            failing_witness=failing_witness,
+            owned_symbols=owned_symbols,
+            max_ast_bloat_ratio=max_ast_bloat_ratio,
+            max_added_branches=max_added_branches,
+            require_albi_invariance=require_albi_invariance,
+        )
+
+    def audit_anti_slop_patch(
+        self,
+        parent_source: str,
+        candidate_source: str,
+        *,
+        failing_witness: Any = None,
+        owned_symbols: Sequence[str] | None = None,
+        max_ast_bloat_ratio: float = 1.60,
+        max_added_branches: int = 6,
+        require_albi_invariance: bool = True,
+    ) -> dict[str, Any]:
+        """Wave 39: Anti-Slop (AST bloat/cyclomatic) + No-Phantom-Guardrails + Symbol-Ownership + ALBI gate."""
+        from canonical.runtime.wave39_leapfrog_unification_v1 import RedQueenMendelEvolver
+
+        return RedQueenMendelEvolver.audit_anti_slop_and_phantom_guardrails(
+            parent_source,
+            candidate_source,
+            failing_witness=failing_witness,
+            owned_symbols=owned_symbols,
+            max_ast_bloat_ratio=max_ast_bloat_ratio,
+            max_added_branches=max_added_branches,
+            require_albi_invariance=require_albi_invariance,
+        )
+
+    def discover_and_earn_judges(
+        self,
+        *,
+        artifacts_by_kind: Mapping[str, Sequence[bytes]] | None = None,
+        store_dir: str | Path | None = None,
+        include_stdlib_discovery: bool = True,
+        cli_probe: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 39: Red Queen earned-judge discovery over live stdlib/CLI subprocess candidates (zero hand-written oracles)."""
+        from canonical.runtime.wave39_leapfrog_unification_v1 import EarnedJudgeAndRefusalLifter
+
+        return EarnedJudgeAndRefusalLifter.discover_and_earn_judges(
+            artifacts_by_kind=artifacts_by_kind,
+            store_dir=store_dir,
+            include_stdlib_discovery=include_stdlib_discovery,
+            cli_probe=cli_probe,
+        )
+
+    def lift_refusal_and_check_oracle(
+        self,
+        help_text: str,
+        *,
+        refusal_lines: Sequence[str] = (),
+        action_argv: Sequence[str] = ("tool", "target"),
+        paths: Sequence[str] = (),
+        type_map: Mapping[str, str] | None = None,
+        labels: Mapping[str, str] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 39: Lift CLI `--help` + stderr refusals into `--check`/`--dry-run` oracle probes, vocabulary classes & collapsed types."""
+        from canonical.runtime.wave39_leapfrog_unification_v1 import EarnedJudgeAndRefusalLifter
+
+        return EarnedJudgeAndRefusalLifter.lift_refusal_and_check_oracle(
+            help_text,
+            refusal_lines=refusal_lines,
+            action_argv=action_argv,
+            paths=paths,
+            type_map=type_map,
+            labels=labels,
+        )
+
+    def compose_and_plan_contracts(
+        self,
+        *,
+        use_measured_advance_pair: bool = True,
+        contracts: Sequence[Mapping[str, Any]] | None = None,
+        initial_facts: Sequence[str] = (),
+        goal_facts: Sequence[str] = (),
+        operators: Sequence[Mapping[str, Any]] = (),
+        concrete_plan: Sequence[Any] | None = None,
+        success_states: Sequence[Any] | None = None,
+        failure_states: Sequence[Any] | None = None,
+        ast_provenance_source: str | None = None,
+        run_observation_refutation: bool = False,
+    ) -> dict[str, Any]:
+        """Wave 39: Typed (P,O,A,V,F) effect-contract composition + Sussman partial-order planning + lifted sketches + provenance."""
+        from canonical.runtime.wave39_leapfrog_unification_v1 import ContractPlannerAndLiftedGeneralizer
+
+        return ContractPlannerAndLiftedGeneralizer.compose_and_plan(
+            use_measured_advance_pair=use_measured_advance_pair,
+            contracts=contracts,
+            initial_facts=initial_facts,
+            goal_facts=goal_facts,
+            operators=operators,
+            concrete_plan=concrete_plan,
+            success_states=success_states,
+            failure_states=failure_states,
+            ast_provenance_source=ast_provenance_source,
+            run_observation_refutation=run_observation_refutation,
+        )
+
+    def speculative_cow_decide(
+        self,
+        *,
+        survivor_requirements: Sequence[Any],
+        observed_facts: Sequence[str],
+        p_correct: float = 0.5,
+        wrong_commit_cost: float = 10.0,
+        cow_trial_cost: float = 0.002,
+        candidates: Sequence[tuple[str, Any]] | None = None,
+        verifier: Any = None,
+        timeout_s: float = 5.0,
+    ) -> dict[str, Any]:
+        """Wave 39: Decision-theoretic version-space agreement gate + real POSIX `os.fork()` CoW speculation."""
+        from canonical.runtime.wave39_leapfrog_unification_v1 import SpeculativeCoWDecisionGate
+
+        return SpeculativeCoWDecisionGate.decide_and_speculate(
+            survivor_requirements=survivor_requirements,
+            observed_facts=observed_facts,
+            p_correct=p_correct,
+            wrong_commit_cost=wrong_commit_cost,
+            cow_trial_cost=cow_trial_cost,
+            candidates=candidates,
+            verifier=verifier,
+            timeout_s=timeout_s,
+        )
+
+    def clm_rrf_memory_op(
+        self,
+        operation: str,
+        payload: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 39: Verbatim-first 4-way RRF budgeted retrieval + Nemori surprise gating + CLM file-mirrored context + TMA-NM."""
+        eng = self._get_clm_rrf_memory_engine()
+        p = dict(payload or {})
+        op = str(operation).upper()
+        if op == "WRITE_SURPRISE_GATED":
+            return eng.write_surprise_gated(
+                record_id=str(p["record_id"]),
+                key=str(p["key"]),
+                verbatim_text=str(p["verbatim_text"]),
+                payload=p.get("payload"),
+                valid_from=p.get("valid_from"),
+                origin_token=str(p.get("origin_token", "TRUSTED_VERIFIER")),
+                min_surprise=float(p.get("min_surprise", 0.25)),
+                entities=p.get("entities") or (),
+                source_code=str(p.get("source_code", "")),
+            )
+        if op == "RETRIEVE_4WAY_RRF_BUDGETED":
+            return eng.retrieve_4way_rrf_budgeted(
+                str(p.get("query", "")),
+                char_budget=int(p.get("char_budget", 1200)),
+                top_k=int(p.get("top_k", 5)),
+                rrf_k=int(p.get("rrf_k", 60)),
+                query_source_code=str(p.get("query_source_code", "")),
+                query_entities=p.get("query_entities") or (),
+                at_time=p.get("at_time"),
+            )
+        if op == "CLM_OFFLOAD":
+            return eng.clm_offload(
+                str(p["context_text"]),
+                workspace_dir=p["workspace_dir"],
+                label=str(p.get("label", "working_ctx")),
+                min_bytes=int(p.get("min_bytes", 128)),
+            )
+        if op == "CLM_GREP_RESTORE":
+            return eng.clm_grep_restore(
+                p["offload_ref"],
+                pattern=p.get("pattern"),
+                max_chars=int(p.get("max_chars", 2000)),
+            )
+        raise UnifiedModelError(f"Unsupported CLM/RRF memory operation: {operation}")
+
+    def partial_route_with_jitrl(
+        self,
+        operation: str,
+        payload: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 39: Closed-form JitRL logit modulation + SkillTTA dynamic skill synthesis + Intra-task Partial Routing."""
+        from canonical.runtime.wave39_leapfrog_unification_v1 import PartialRoutingJitRLSkillTTAEngine
+
+        p = dict(payload or {})
+        op = str(operation).upper()
+        if op == "JITRL_MODULATE":
+            return PartialRoutingJitRLSkillTTAEngine.jitrl_modulate_logits(
+                p["prior_logits"],
+                state_signature=str(p.get("state_signature", "")),
+                episodic_receipts=p.get("episodic_receipts") or (),
+                beta=float(p.get("beta", 1.0)),
+            )
+        if op == "SKILLTTA_SYNTHESIZE":
+            return PartialRoutingJitRLSkillTTAEngine.skilltta_synthesize(
+                p["target_task"],
+                verified_traces=p.get("verified_traces") or (),
+                top_k=int(p.get("top_k", 3)),
+            )
+        if op == "PARTIAL_ROUTE":
+            return PartialRoutingJitRLSkillTTAEngine.partial_route_subtasks(
+                p.get("subtasks") or (),
+                compiled_skills=p.get("compiled_skills"),
+                symbolic_solver=p.get("symbolic_solver"),
+                mendel_solver=p.get("mendel_solver"),
+                pluggable_proposer=p.get("pluggable_proposer"),
+                delta_threshold=float(p.get("delta_threshold", 0.55)),
+                episodic_receipts=p.get("episodic_receipts") or (),
+                beta=float(p.get("beta", 0.5)),
+            )
+        raise UnifiedModelError(f"Unsupported Partial-Routing/JitRL operation: {operation}")
+
+    def self_verify_harvested_surfaces(self, *, limit: int = 40) -> dict[str, Any]:
+        """Wave 39: Live offline AST + SHA-256 + public-entrypoint audit over `harvested_capabilities`."""
+        from canonical.runtime.wave39_leapfrog_unification_v1 import PartialRoutingJitRLSkillTTAEngine
+
+        harvested = list(self.model.get("harvested_capabilities") or ())
+        return PartialRoutingJitRLSkillTTAEngine.self_verify_harvested_surfaces(
+            harvested,
+            repo_root=ROOT,
+            limit=int(limit),
+        )
 
 
 # --------------------------------------------------------------------------- helpers
