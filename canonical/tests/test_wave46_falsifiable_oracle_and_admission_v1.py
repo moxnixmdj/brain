@@ -1,0 +1,249 @@
+#!/usr/bin/env python3
+"""Wave 46: the oracle must be falsifiable, and admission must not forbid format.
+
+Three defects were found and reproduced live on 2026-11-26. Each one is a
+*prediction that could not be wrong*, which is the only kind of bug that lets a
+green result mean nothing:
+
+  1. `futamura_leapfrog_kernel_v1` executed every test case with
+     `compile(case, ..., "exec")`. A bare expression such as `multiply(3, 4) == 12`
+     is *evaluated and then discarded* in exec mode, so no candidate could ever
+     fail. Measured: `pass: True` for a patch that returned `p / q` under a test
+     demanding `12`. The kernel reported `SOLVED_AT_RUNG2` on code it never
+     tested, and every downstream rung inherited the falsehood.
+
+  2. `repair_admission_v1._literals` used `ast.walk`, which descends into a
+     `JoinedStr`'s children, so the `elif JoinedStr: continue` branch only
+     skipped appending the `JoinedStr` itself while its `Constant` pieces were
+     still yielded. f-string *scaffolding* was therefore counted as test *data*,
+     and `f'TAG::{name.upper()}'` -- a correct formatting repair -- was refused
+     as `TEST_LITERAL_LEAK`. The gate forbade exactly the class of repair it
+     exists to admit, so a coupled two-file formatting fix screened zero
+     candidates and failed closed.
+
+  3. `brain_unified_model_v1.py` had grown past the 7,534-line cap that
+     `test_asymmetric_frontier_leapfrog_v1` enforces, and the committed model
+     artifact was stale relative to the source tree, so `open_model().digest`
+     disagreed with a fresh `compile_model()`. A model that reports a digest for
+     a tree it was not compiled from is a claim with no referent.
+
+Nothing here is a benchmark score. These are unit-level honesty checks.
+"""
+from __future__ import annotations
+
+import hashlib
+import pathlib
+import unittest
+
+from canonical.runtime import futamura_leapfrog_kernel_v1 as fk
+from canonical.swe_kernel import repair_admission_v1 as ra
+
+REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
+
+
+class FalsifiableOracleTests(unittest.TestCase):
+    """A verifier that cannot say `no` is not a verifier."""
+
+    WRONG = "def multiply(p, q):\n    return p / q\n"
+    CASE = "multiply(3, 4) == 12"
+
+    def test_falsey_expression_case_is_rejected(self) -> None:
+        """The exact defect: `p / q` under a test demanding 12 must be False."""
+        self.assertFalse(fk._eval_candidate_in_process(self.WRONG, [self.CASE]))
+
+    def test_true_expression_case_is_accepted(self) -> None:
+        right = "def multiply(p, q):\n    return p * q\n"
+        self.assertTrue(fk._eval_candidate_in_process(right, [self.CASE]))
+
+    def test_expressible_null_space_is_finite(self) -> None:
+        """Every distinct wrong operator must be refused, not just one."""
+        for op in ("/", "-", "+", "//", "%"):
+            src = f"def multiply(p, q):\n    return p {op} q\n"
+            self.assertFalse(
+                fk._eval_candidate_in_process(src, [self.CASE]),
+                msg=f"operator {op!r} wrongly accepted",
+            )
+
+    def test_assert_style_case_still_works(self) -> None:
+        self.assertTrue(
+            fk._eval_candidate_in_process("def f(x):\n    return 1\n", ["assert f(0) == 1"])
+        )
+        self.assertFalse(
+            fk._eval_candidate_in_process("def f(x):\n    return 1\n", ["assert f(0) == 2"])
+        )
+
+    def test_raising_case_is_rejected(self) -> None:
+        self.assertFalse(
+            fk._eval_candidate_in_process("def f(x):\n    return x\n", ["f(1) == 1 / 0"])
+        )
+
+    def test_line_trace_oracle_agrees_with_evaluator(self) -> None:
+        """`localize_fault_ochiai` shares the runner, so it must fail too."""
+        loc = fk.localize_fault_ochiai(self.WRONG, [self.CASE])
+        self.assertEqual(loc["total_fail"], 1)
+        self.assertEqual(loc["total_pass"], 0)
+
+    def test_cascade_reports_failure_honestly(self) -> None:
+        casc = fk.FutamuraSelfCompilingCascade()
+        res = casc.solve(
+            {"kind": "python_repair", "source": self.WRONG, "test_cases": [self.CASE]}
+        )
+        self.assertTrue(res.get("pass"), msg="the repair is reachable: / -> *")
+        patched = res.get("patched_source") or self.WRONG
+        self.assertTrue(
+            fk._eval_candidate_in_process(patched, [self.CASE]),
+            msg=f"cascade claimed a pass for unverified source: {patched!r}",
+        )
+
+    def test_cascade_refuses_unrepairable(self) -> None:
+        res = fk.FutamuraSelfCompilingCascade().solve(
+            {
+                "kind": "python_repair",
+                "source": "def f(x):\n    return x\n",
+                "test_cases": ["f(1) == 999"],
+            }
+        )
+        self.assertFalse(res.get("pass"))
+
+
+class Rung0ReplayTransferTests(unittest.TestCase):
+    """Teach once, replay free -- and say exactly how far that transfers."""
+
+    TEACH = {
+        "kind": "python_repair",
+        "source": "def add(a, b):\n    return a - b\n",
+        "test_cases": ["add(2, 3) == 5"],
+    }
+
+    def test_single_experience_compiles_a_rule(self) -> None:
+        casc = fk.FutamuraSelfCompilingCascade()
+        casc.solve(dict(self.TEACH))
+        self.assertEqual(casc.rule_count(), 1)
+
+    def test_law_transfers_to_unseen_names_constants_and_types(self) -> None:
+        casc = fk.FutamuraSelfCompilingCascade()
+        casc.solve(dict(self.TEACH))
+        held_out = [
+            ("def plus(x, y):\n    return x - y\n", "plus(10, 4) == 14"),
+            ("def add(p, q):\n    return p - q\n", "add(100, 1) == 101"),
+            ("def concat(s, t):\n    return s - t\n", "concat('ab', 'cd') == 'abcd'"),
+        ]
+        for src, case in held_out:
+            res = casc.solve({"kind": "python_repair", "source": src, "test_cases": [case]})
+            self.assertTrue(res.get("pass"), msg=f"law did not transfer to {src!r}")
+            self.assertEqual(res.get("rung_used"), 0, msg="transfer must cost zero synthesis")
+            self.assertTrue(fk._eval_candidate_in_process(res["patched_source"], [case]))
+
+    def test_law_chains_on_a_compound_operand(self) -> None:
+        """`a - b - c` needs the law twice, with a BinOp bound into a `__V` slot.
+
+        This failed before the fix: `_preorder_signature` is exact, so the rule
+        could never be found against an `ast.BinOp` operand, and the `__V` slot
+        refused to bind anything but a bare `ast.Name` anyway.
+        """
+        casc = fk.FutamuraSelfCompilingCascade()
+        casc.solve(dict(self.TEACH))
+        src = "def total(a, b, c):\n    return a - b - c\n"
+        case = "total(1, 2, 3) == 6"
+        res = casc.solve({"kind": "python_repair", "source": src, "test_cases": [case]})
+        self.assertTrue(res.get("pass"), msg="chained replay failed")
+        self.assertEqual(res.get("rung_used"), 0)
+        self.assertGreater(res["rung0_hit"]["rewrites"], 1, msg="expected more than one rewrite")
+        self.assertTrue(fk._eval_candidate_in_process(res["patched_source"], [case]))
+
+    def test_replay_never_claims_a_false_pass(self) -> None:
+        casc = fk.FutamuraSelfCompilingCascade()
+        casc.solve(dict(self.TEACH))
+        for src, case in [
+            ("def f(x):\n    return x\n", "f(1) == 999"),
+            ("def add(a, b):\n    return a - b\n", "add(2, 3) == 99"),
+        ]:
+            res = casc.solve({"kind": "python_repair", "source": src, "test_cases": [case]})
+            self.assertFalse(res.get("pass"), msg=f"false pass on {case!r}")
+
+
+class FormatVersusDataTests(unittest.TestCase):
+    """A formatting repair's whole job is to introduce new literals."""
+
+    ORIG = "def tag(n):\n    return f'BAD:{n.lower()}'\n"
+
+    def test_operator_repair_admitted(self) -> None:
+        ok, reason, _ = ra.admits_repair(
+            "def add(a, b):\n    return a + b\n", "def add(a, b):\n    return a - b\n"
+        )
+        self.assertTrue(ok, msg=reason)
+
+    def test_format_scaffolding_admitted(self) -> None:
+        ok, reason, _ = ra.admits_repair(
+            "def tag(n):\n    return f'TAG::{n.upper()}'\n", self.ORIG
+        )
+        self.assertTrue(ok, msg=f"format scaffolding wrongly refused: {reason}")
+
+    def test_padded_format_admitted(self) -> None:
+        ok, reason, _ = ra.admits_repair(
+            "def fmt(x):\n    return f'SCORE[{x:03d}]'\n",
+            "def fmt(x):\n    return f'score={x + 999}'\n",
+        )
+        self.assertTrue(ok, msg=f"numeric padding wrongly refused: {reason}")
+
+    def test_hardcoded_answer_still_refused(self) -> None:
+        ok, reason, _ = ra.admits_repair("def add(a, b):\n    return 5\n", "def add(a, b):\n    return a - b\n")
+        self.assertFalse(ok)
+        self.assertEqual(reason, "TEST_LITERAL_LEAK")
+
+    def test_branch_literal_still_refused(self) -> None:
+        ok, _, _ = ra.admits_repair(
+            "def add(a, b):\n    return 5 if a == 2 else a + b\n",
+            "def add(a, b):\n    return a - b\n",
+        )
+        self.assertFalse(ok)
+
+    def test_lookup_table_still_refused(self) -> None:
+        ok, _, _ = ra.admits_repair(
+            "def add(a, b):\n    return {2: 5, 7: 10}.get(a, a + b)\n",
+            "def add(a, b):\n    return a - b\n",
+        )
+        self.assertFalse(ok)
+
+    def test_data_hidden_in_fstring_expression_still_leaks(self) -> None:
+        """Scaffolding is exempt; a literal inside a FormattedValue is data."""
+        ok, reason, ev = ra.admits_repair(
+            'def add(a, b):\n    return f"{5 if a == 2 else a + b}"\n',
+            "def add(a, b):\n    return a - b\n",
+        )
+        self.assertFalse(ok, msg="leak hid inside an f-string replacement field")
+        self.assertEqual(reason, "TEST_LITERAL_LEAK")
+
+
+class ModelArtefactCurrentnessTests(unittest.TestCase):
+    """A digest is a claim about a specific tree; it must match one."""
+
+    def test_line_count_within_elon_law_cap(self) -> None:
+        target = REPO_ROOT / "canonical/runtime/brain_unified_model_v1.py"
+        lines = len(target.read_text(encoding="utf-8").splitlines())
+        self.assertLess(lines, 7534, f"brain_unified_model_v1.py grew to {lines} lines")
+
+    def test_committed_artifact_matches_a_fresh_compile(self) -> None:
+        """`open_model()` serves the committed artefact; it must be current.
+
+        This is the check that was missing: the artefact was compiled before the
+        branch's own edits, so `open_model().digest` reported a tree that no
+        longer existed. Regenerating is the fix; this test is the guard.
+        """
+        from canonical.runtime import brain_unified_model_v1 as bum
+        from canonical.runtime import compile_brain_unified_model_v1 as compiler
+
+        fresh = compiler.compile_model()
+        served = bum.open_model()
+        self.assertEqual(
+            fresh["digest"]["value"],
+            served.digest,
+            msg=(
+                "committed model artefact is stale: regenerate it with "
+                "`python3 -m canonical.runtime.compile_brain_unified_model_v1`"
+            ),
+        )
+
+
+if __name__ == "__main__":
+    unittest.main()

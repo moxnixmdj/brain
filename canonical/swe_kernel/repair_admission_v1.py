@@ -89,16 +89,44 @@ def is_canonical_default(value: Any) -> bool:
     return False
 
 
+def _format_scaffolding_ids(node: ast.AST) -> set[int]:
+    """`id()`s of `Constant` nodes that are literal *scaffolding* of an f-string.
+
+    Measured 2026-11-26: this filter rejected `f'TAG::{name.upper()}'` -- a
+    correct repair -- as `TEST_LITERAL_LEAK`. The cause is that `ast.walk`
+    descends into a `JoinedStr`'s children, so the `elif JoinedStr: continue`
+    below never worked: it only skipped *appending* the `JoinedStr`, while the
+    walk still yielded its `Constant` pieces (`'TAG::'`, `'006'`) and they were
+    counted as data. A formatting repair's entire job is to introduce exactly
+    that scaffolding, so counting it as a leak refuses every correct formatting
+    fix -- the gate forbids the thing it is supposed to admit.
+
+    Only *direct* `Constant` pieces of the `JoinedStr` are scaffolding. A
+    constant inside a `FormattedValue` (`f"{'bob' if x else 'alice'}"`) is an
+    ordinary expression literal and stays subject to the leak rule.
+    """
+    out: set[int] = set()
+    for sub in ast.walk(node):
+        if isinstance(sub, ast.JoinedStr):
+            for piece in sub.values:
+                if isinstance(piece, ast.Constant):
+                    out.add(id(piece))
+    return out
+
+
 def _literals(node: ast.AST) -> list[Any]:
+    scaffolding = _format_scaffolding_ids(node)
     out: list[Any] = []
     for sub in ast.walk(node):
         if isinstance(sub, ast.Constant):
+            if id(sub) in scaffolding:
+                # f-string scaffolding is format, not data: a candidate cannot
+                # leak test *data* through it, and correct formatting repairs
+                # are made of nothing else.
+                continue
             val = sub.value
             if isinstance(val, (str, bytes, int, float, bool)) or val is None:
                 out.append(val)
-        elif isinstance(sub, ast.JoinedStr):
-            # f-strings: their literal pieces are format scaffolding, not data
-            continue
     return out
 
 

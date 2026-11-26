@@ -909,6 +909,27 @@ def splice_ast_byte_span(source: str, node: ast.AST, replacement_code: str) -> s
     return spliced.decode("utf-8")
 
 
+def _exec_test_case(ns: dict[str, Any], test_expr: str) -> None:
+    """Run one test case FALSIFIABLY against namespace `ns`; raise on failure.
+
+    A bare expression (`f(2) == 5`) compiled with `exec` is *evaluated and then
+    discarded*, so `exec(...)` alone accepts every candidate no matter how wrong
+    the source is -- an unfalsifiable oracle (the exact defect that makes a
+    "verifier" green on code it never checked). We therefore evaluate the case in
+    `eval` mode and require truthiness when it yields a value. `None` means the
+    case is statement-shaped (`check(x)` / `assert ...`) and passes iff it does
+    not raise, which is the standard assertion convention.
+    """
+    try:
+        expr_code = compile(test_expr, "<futamura_test>", "eval")
+    except SyntaxError:
+        exec(compile(test_expr, "<futamura_test>", "exec"), ns, ns)
+        return
+    value = eval(expr_code, ns, ns)
+    if value is not None and not value:
+        raise AssertionError(f"test case returned falsey value {value!r}: {test_expr}")
+
+
 def _run_case_with_line_trace(source: str, test_expr: str) -> tuple[bool, set[int], str]:
     """Execute one test against compiled `source` collecting exact executed line numbers."""
     ns: dict[str, Any] = {}
@@ -925,12 +946,10 @@ def _run_case_with_line_trace(source: str, test_expr: str) -> tuple[bool, set[in
 
     def _run_test() -> tuple[bool, str]:
         try:
-            test_code = compile(test_expr, "<futamura_test>", "exec")
-            exec(test_code, ns, ns)
+            _exec_test_case(ns, test_expr)
             return True, "OK"
         except Exception as exc:
             return False, f"{type(exc).__name__}:{exc}"
-
     if use_pep669:
         mon = sys.monitoring
         try:
@@ -1058,11 +1077,10 @@ def _eval_candidate_in_process(candidate_source: str, test_cases: Sequence[str])
     try:
         exec(compile(candidate_source, "<futamura_cand>", "exec"), ns, ns)
         for tc in test_cases:
-            exec(compile(tc, "<futamura_test>", "exec"), ns, ns)
+            _exec_test_case(ns, tc)
         return True
     except Exception:
         return False
-
 
 _CMP_REPAIR_ALTS: dict[type[ast.cmpop], tuple[type[ast.cmpop], ...]] = {
     ast.Lt: (ast.LtE, ast.Gt, ast.GtE),
@@ -1334,11 +1352,42 @@ def _preorder_signature(node: ast.AST, max_depth: int = 4) -> tuple[str, ...]:
     return tuple(out)
 
 
+def _rule_bucket(node: ast.AST) -> tuple[str, ...]:
+    """Coarse index key: node kind plus its operator, ignoring operand shape.
+
+    `_preorder_signature` is exact, so it cannot find a rule that should match a
+    *sub-expression* of a larger expression: the left operand of `a - b - c` is an
+    `ast.BinOp`, and the learned rule's keyed signature is `Name - Name`. Measured
+    2026-11-26, that made compiled laws unable to chain. The bucket is deliberately
+    coarse -- `_match_template` still decides, and the suite oracle still verifies
+    the final state -- so a coarse key can only add reachable candidates.
+    """
+    kind = type(node).__name__
+    op = getattr(node, "op", None)
+    if op is None:
+        ops = getattr(node, "ops", None)
+        if ops:
+            op = ops[0]
+    if op is None:
+        bops = getattr(node, "op", None)
+        op = bops
+    return (kind, type(op).__name__) if op is not None else (kind,)
+
+
 def _match_template(pattern: ast.AST, concrete: ast.AST, bindings: dict[str, ast.AST]) -> bool:
     """Match an alpha-normalized AST `pattern` against `concrete`, populating `bindings`."""
     if isinstance(pattern, ast.Name) and pattern.id.startswith(("__V", "__C")) and pattern.id.endswith("__"):
         slot = pattern.id
-        if slot.startswith("__V") and not isinstance(concrete, ast.Name):
+        # `__V` slots bind any *expression*, not just a bare name. Restricting
+        # them to `ast.Name` made the learned law `x - y -> x + y` unable to fire
+        # on a compound operand: measured 2026-11-26, replay of `a - b - c`
+        # rewrote the inner pair to `a + b - c` and then dead-ended, because the
+        # remaining `(a + b) - c` has an `ast.BinOp` on the left and the template
+        # refused to bind it. The law is re-verified by the suite oracle on every
+        # final state, so widening the binding domain can only add reachable
+        # candidates, never accept an unverified one; the cost of a wider search
+        # is bounded by RUNG0_MAX_STATES.
+        if slot.startswith("__V") and isinstance(concrete, ast.Constant):
             return False
         if slot.startswith("__C") and not isinstance(concrete, ast.Constant):
             return False
@@ -1416,6 +1465,9 @@ class FutamuraSelfCompilingCascade:
 
     def __init__(self) -> None:
         self._rung0_by_key: dict[tuple[str, ...], list[CompiledRung0Rule]] = {}
+        # Coarse (kind, operator) index so a rule can fire on a nested
+        # operand whose exact signature differs from the learned one.
+        self._rung0_by_bucket: dict[tuple[str, ...], list[CompiledRung0Rule]] = {}
         self._rules_by_id: dict[str, CompiledRung0Rule] = {}
         self.belief_bus = DBSPBeliefRevisionBus()
         self.repair_engine = ZeroOverheadCoWZygoteRepairEngine()
@@ -1514,6 +1566,7 @@ class FutamuraSelfCompilingCascade:
         )
         self._rules_by_id[rule_id] = rule
         self._rung0_by_key.setdefault(pkey, []).append(rule)
+        self._rung0_by_bucket.setdefault(_rule_bucket(rule.before_ast), []).append(rule)
         self.belief_bus.ingest_delta(
             record_id=rule_id,
             key="rung0_compiled_rule",
@@ -1532,56 +1585,83 @@ class FutamuraSelfCompilingCascade:
         self.compile_history.append(rec)
         return rec
 
-    def _try_rung0(self, source: str, test_cases: Sequence[str]) -> dict[str, Any] | None:
-        """Attempt `< 100 us` lookup + generalized instantiation of compiled Rung-0 rules."""
-        if not self._rung0_by_key:
-            return None
-        t0 = time.perf_counter()
+    # Bounds on the Rung-0 replay search. A learned law can need more than one
+    # application: `a - b - c` must fire `a - b -> a + b` twice. The search is
+    # over *sequences* of rewrites and is verified only at the END of each
+    # sequence, because a partially-applied law is expected to still fail --
+    # requiring every intermediate state to pass would make chaining impossible
+    # (measured 2026-11-26: it did, and `a - b - c` fell through to Rung 2).
+    RUNG0_MAX_REWRITES = 6
+    RUNG0_MAX_STATES = 48
+
+    def _rung0_rewrites(self, source: str) -> list[tuple[str, str]]:
+        """Every `(rule_id, rewritten_source)` reachable in ONE rewrite of `source`."""
         try:
             tree = ast.parse(source)
         except SyntaxError:
-            return None
-
-        # Gather all AST subtrees matching any compiled rule preorder key.
-        matched_attempts = 0
-        eval_overhead_s = 0.0
+            return []
+        out: list[tuple[str, str]] = []
         for node in ast.walk(tree):
             if not hasattr(node, "lineno") or not hasattr(node, "end_lineno"):
                 continue
-            pkey = _preorder_signature(node)
-            rules = self._rung0_by_key.get(pkey)
-            if not rules:
-                continue
-            for rule in rules:
+            for rule in self._rung0_by_bucket.get(_rule_bucket(node), ()):
                 if rule.quarantined or rule.rubin_tau_hat <= 0.0:
                     continue
                 bindings: dict[str, ast.AST] = {}
                 if not _match_template(rule.before_ast, node, bindings):
                     continue
-                matched_attempts += 1
                 instantiated = _instantiate_template(rule.after_ast, bindings)
                 cand_src = splice_ast_byte_span(source, node, ast.unparse(instantiated))
-                ctx_key = hashlib.sha256(source.encode("utf-8")).hexdigest()[:16]
-                prop_sig = hashlib.sha256(cand_src.encode("utf-8")).hexdigest()[:16]
-                if not self.belief_bus.check_pre_commit_gate(ctx_key, prop_sig)["allowed"]:
+                if cand_src != source:
+                    out.append((rule.rule_id, cand_src))
+        return out
+
+    def _try_rung0(self, source: str, test_cases: Sequence[str]) -> dict[str, Any] | None:
+        """Breadth-first replay of compiled Rung-0 laws to a *verified* fixpoint.
+
+        Rung 0 is the Futamura payoff: a law learned once from a verified repair
+        replays with zero synthesis. Measured 2026-11-26 with a single
+        application, the learned `a - b -> a + b` law transferred to renamed
+        functions, new constants and a `str` operand in 0.2-0.4 ms, but failed
+        `a - b - c`, where the law must fire twice. Without chaining, the
+        expensive rung is spent on a task the cheap one already knows.
+        """
+        if not self._rung0_by_key:
+            return None
+        t0 = time.perf_counter()
+        frontier: list[tuple[str, tuple[str, ...]]] = [(source, ())]
+        seen: set[str] = {source}
+        states = 0
+        while frontier and states < self.RUNG0_MAX_STATES:
+            state, fired = frontier.pop(0)
+            if len(fired) >= self.RUNG0_MAX_REWRITES:
+                continue
+            for rule_id, cand_src in self._rung0_rewrites(state):
+                if cand_src in seen:
                     continue
-                lookup_us = max(0.0, (time.perf_counter() - t0 - eval_overhead_s) * 1e6)
-                rule.hits += 1
-                t_ev = time.perf_counter()
-                passed_ev = _eval_candidate_in_process(cand_src, test_cases)
-                eval_overhead_s += time.perf_counter() - t_ev
-                if passed_ev:
-                    rule.successes += 1
+                seen.add(cand_src)
+                states += 1
+                rule = self._rules_by_id.get(rule_id)
+                if rule is not None:
+                    rule.hits += 1
+                if _eval_candidate_in_process(cand_src, test_cases):
+                    if rule is not None:
+                        rule.successes += 1
                     return {
-                        "rule_id": rule.rule_id,
-                        "before_template": rule.before_template_src,
-                        "after_template": rule.after_template_src,
+                        "rule_id": rule_id,
+                        "rule_ids": [*fired, rule_id],
+                        "rewrites": len(fired) + 1,
+                        "before_template": rule.before_template_src if rule else "",
+                        "after_template": rule.after_template_src if rule else "",
                         "patched_source": cand_src,
-                        "lookup_and_splice_us": round(lookup_us, 3),
-                        "matched_attempts": matched_attempts,
+                        "lookup_and_splice_us": round((time.perf_counter() - t0) * 1e6, 3),
+                        "matched_attempts": states,
                     }
-                rule.failures += 1
-                self.belief_bus.record_failure_witness(ctx_key, prop_sig, witness="RUNG0_TEST_FAIL")
+                if rule is not None:
+                    rule.failures += 1
+                if states >= self.RUNG0_MAX_STATES:
+                    break
+                frontier.append((cand_src, (*fired, rule_id)))
         return None
 
     def solve(
