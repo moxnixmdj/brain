@@ -2021,6 +2021,69 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "required_inputs": ["source"],
         "declared_dependencies": [],
     },
+    "ABDUCTIVE_REFUSAL_AUTOBINDER": {
+        "domain": "VERIFICATION_AND_CHECKABILITY",
+        "source_path": "canonical/runtime/asymmetric_frontier_leapfrog_v1.py",
+        "entrypoint": "abductive_refusal_contract_autobinder",
+        "summary": "Compiles CLI/Python precondition refusals + declared goal derivations (`a_refusal_is_a_specification_v1` + `declared_input_derivation_v1`) into mutant-verified executable contracts.",
+        "triggers": ["abductive_refusal_autobinder", "refusal is a specification", "declared input derivation"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "ANGELIC_ZYGOTE_VERSION_SPACE_SWE": {
+        "domain": "SWE_LOCALIZATION_AND_REPAIR",
+        "source_path": "canonical/runtime/asymmetric_frontier_leapfrog_v1.py",
+        "entrypoint": "angelic_zygote_version_space_swe",
+        "summary": "CoW-Zygote + Angelic Forest (`angelic_cegis_repair_v1`) + RepoMem git alignment + concolic version-space distinguishing oracle (`passing_repairs_version_space_v1`).",
+        "triggers": ["angelic_zygote_version_space_swe", "angelic cegis zygote", "passing repairs version space"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "ZERO_PIXEL_SHADOW_TRANSDUCER_CU": {
+        "domain": "COMPUTER_USE_AND_ENVIRONMENT_EXPLORATION",
+        "source_path": "canonical/runtime/asymmetric_frontier_leapfrog_v1.py",
+        "entrypoint": "zero_pixel_shadow_transducer_cu",
+        "summary": "Zero-pixel declarative ARIA/Shadow-DOM name-addressed CDP + counterfactual trace elevation + Petri dominator checkpoints + Vaandrager L# Mealy transducer.",
+        "triggers": ["zero_pixel_shadow_transducer_cu", "agent s4 shadow interface", "name addressed browser cdp"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "EPISTEMIC_DIGITAL_TWIN_AND_ARC": {
+        "domain": "WORLD_MODELS_AND_ABSTRACTION",
+        "source_path": "canonical/runtime/asymmetric_frontier_leapfrog_v1.py",
+        "entrypoint": "solve_digital_twin_and_arc",
+        "summary": "OPINE-World epistemic ontology exploration + Twin 100%-replay-verified BFS digital twin + ARC-NEST leave-one-out CV + E-Stitch library compression.",
+        "triggers": ["epistemic_digital_twin_and_arc", "opine world digital twin", "arc nest estitch"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "ALGEBRAIC_SHEAF_SRMU_MEMORY": {
+        "domain": "MEMORY_AND_CONTINUAL_LEARNING",
+        "source_path": "canonical/runtime/asymmetric_frontier_leapfrog_v1.py",
+        "entrypoint": "sheaf_srmu_memory_cycle",
+        "summary": "3-Layer Algebraic Memory Spine: SRMU 10,240-bit relevance-gated hypervectors + exact Q cellular sheaf H^1 contradiction firewall + Dual NNF Why-True/Why-Absent provenance semiring.",
+        "triggers": ["algebraic_sheaf_srmu_memory", "cellular sheaf h1 cohomology", "srmu hypervector dual nnf provenance"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "PC_DGM_SUPERCOMPILER": {
+        "domain": "SELF_IMPROVEMENT_AND_META_SYNTHESIS",
+        "source_path": "canonical/runtime/asymmetric_frontier_leapfrog_v1.py",
+        "entrypoint": "pc_dgm_supercompile_evolve",
+        "summary": "Proof-Carrying Darwin-Godel Machine stepping-stone archive + Turchin/Futamura AST deforestation + terminal proof supercompiler + Rubin marginal skill-rent GC.",
+        "triggers": ["pc_dgm_supercompiler", "darwin godel machine supercompiler", "turchin deforestation"],
+        "required_inputs": ["fn_name", "incumbent_source"],
+        "declared_dependencies": [],
+    },
+    "EGGMIND_GOAL_TREE_PROVER": {
+        "domain": "FORMAL_VERIFICATION_AND_THEOREM_PROVING",
+        "source_path": "canonical/runtime/asymmetric_frontier_leapfrog_v1.py",
+        "entrypoint": "eggmind_saturate_and_prove",
+        "summary": "EggMind proof-motif cached SemanticEGraph + Pantograph-style AND/OR tactic goal-tree prover over exact Q polynomial rings and Fourier-Motzkin linear arithmetic.",
+        "triggers": ["eggmind_goal_tree_prover", "eggmind motif egraph", "pantograph tactic goal tree"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
 }
 
 
@@ -2469,6 +2532,47 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
             "canonical/swe_kernel/mined_rewrite_theory_v1.py",
             "canonical/swe_kernel/the_distinction_is_created_v1.py",
             "canonical/tools/a_law_carries_its_reason_v1.py",
+        ],
+    },
+    "asymmetric_frontier_leapfrog_sheaf_srmu_opine_dgm_eggmind": {
+        "external_names": [
+            "opine-world",
+            "opine digital twin",
+            "replay verified digital twin",
+            "arc-nest leave-one-out",
+            "srmu hypervector",
+            "cellular sheaf cohomology",
+            "dual nnf provenance semiring",
+            "why-absent provenance",
+            "darwin godel machine",
+            "turchin supercompilation",
+            "eggmind motif cache",
+            "pantograph tactic tree",
+            "refusal is a specification",
+            "declared input derivation",
+            "passing repairs version space",
+        ],
+        "engines": [
+            "engine:ABDUCTIVE_REFUSAL_AUTOBINDER",
+            "engine:ANGELIC_ZYGOTE_VERSION_SPACE_SWE",
+            "engine:ZERO_PIXEL_SHADOW_TRANSDUCER_CU",
+            "engine:EPISTEMIC_DIGITAL_TWIN_AND_ARC",
+            "engine:ALGEBRAIC_SHEAF_SRMU_MEMORY",
+            "engine:PC_DGM_SUPERCOMPILER",
+            "engine:EGGMIND_GOAL_TREE_PROVER",
+        ],
+        "koan_modules": [
+            "canonical/runtime/asymmetric_frontier_leapfrog_v1.py",
+            "canonical/runtime/a_refusal_is_a_specification_v1.py",
+            "canonical/runtime/declared_input_derivation_v1.py",
+            "canonical/swe_kernel/angelic_cegis_repair_v1.py",
+            "canonical/swe_kernel/cow_angelic_zygote_v1.py",
+            "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
+            "canonical/swe_kernel/passing_repairs_version_space_v1.py",
+            "canonical/swe_kernel/causal_nexus_v1.py",
+            "canonical/runtime/swe_observational_program_synthesizer_v1.py",
+            "canonical/runtime/osworld_v21_browser_cdp_v1.py",
+            "canonical/runtime/terminal_proof_supercompiler.py",
         ],
     },
     "mendel_red_queen_anti_slop_coevolution": {
@@ -5082,6 +5186,23 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
             )
         )
         return _ok(mode, "SKILL_SCOPE_FACTS_ACQUIRED", {"facts": facts, "count": len(facts)})
+
+    _ASYM_MODE_TO_PILLAR = {
+        "ABDUCTIVE_REFUSAL_AUTOBINDER": "REFUSAL_AUTOBIND",
+        "ANGELIC_ZYGOTE_VERSION_SPACE_SWE": "ANGELIC_ZYGOTE_SWE",
+        "ZERO_PIXEL_SHADOW_TRANSDUCER_CU": "SHADOW_TRANSDUCER_CU",
+        "EPISTEMIC_DIGITAL_TWIN_AND_ARC": "DIGITAL_TWIN_ARC",
+        "ALGEBRAIC_SHEAF_SRMU_MEMORY": "SHEAF_SRMU_MEMORY",
+        "PC_DGM_SUPERCOMPILER": "PC_DGM_EVOLVE",
+        "EGGMIND_GOAL_TREE_PROVER": "EGGMIND_PROOF",
+    }
+    if mode in _ASYM_MODE_TO_PILLAR:
+        from canonical.runtime.asymmetric_frontier_leapfrog_v1 import asymmetric_leapfrog_dispatch
+
+        res = asymmetric_leapfrog_dispatch(goal, pillar=_ASYM_MODE_TO_PILLAR[mode], inputs=inputs)
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("status") or "ASYMMETRIC_LEAPFROG_REFUSED"), detail=res)
+        return _ok(mode, str(res.get("status") or "ASYMMETRIC_LEAPFROG_COMPLETE"), res)
 
     return _fail(mode, f"UNKNOWN_FEDERATED_ENGINE_MODE:{mode}")
 

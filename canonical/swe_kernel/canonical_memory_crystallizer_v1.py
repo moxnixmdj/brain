@@ -4381,6 +4381,11 @@ def execute_memory_operation(
     if op == "BICAMERAL_SLEEP_CYCLE":
         res = bus.bicameral_sleep_cycle(**data)
         return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "SHEAF_SRMU_CYCLE":
+        from canonical.runtime.asymmetric_frontier_leapfrog_v1 import sheaf_srmu_memory_cycle
+
+        res = sheaf_srmu_memory_cycle(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
     if op == "STATS":
         return {"schema": SCHEMA, "pass": True, "status": "PASS__MEMORY_STATS", "stats": bus.stats()}
     return {

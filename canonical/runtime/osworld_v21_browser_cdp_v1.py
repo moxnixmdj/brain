@@ -6,12 +6,14 @@ The API is intentionally declarative and contains no arbitrary JavaScript escape
 """
 from __future__ import annotations
 
+import re
 from typing import Any, Mapping
 from urllib.parse import urlparse
 
 SCHEMA = "PROJECT_BRAIN_OSWORLD_V21_BROWSER_CDP_V1"
 MAX_ELEMENTS = 240
 MAX_TEXT = 240
+TEXT_ROLES = ("textbox", "searchbox", "combobox", "spinbutton")
 
 
 class BrowserCDPError(ValueError):
@@ -77,6 +79,27 @@ class BrowserCDP:
             out_pages = []
             for page_index, page in enumerate(pages[:20]):
                 try:
+                    page.evaluate(
+                        """() => {
+                          const roots=[document];
+                          const push=(r)=>{for(const e of r.querySelectorAll('*'))
+                            {if(e.shadowRoot){roots.push(e.shadowRoot);push(e.shadowRoot);}}};
+                          push(document);
+                          const sel='li,tr,[role=listitem],[role=row],.todo-list>li';
+                          for (const root of roots)
+                            for (const r of root.querySelectorAll(sel)) {
+                              const t=(r.innerText||r.textContent||'').trim().replace(/\\s+/g,' ');
+                              if (!t) continue;
+                              for (const c of r.querySelectorAll(
+                                  'input,button,a,[role=button],[role=link],[role=checkbox]'))
+                                if (!c.hasAttribute('data-brain-row'))
+                                  c.setAttribute('data-brain-row', t.slice(0,200));
+                            }
+                        }"""
+                    )
+                except Exception:
+                    pass
+                try:
                     elements = page.locator(
                         "a,button,input,textarea,select,[role=button],[role=link],"
                         "[contenteditable=true],[tabindex]"
@@ -93,19 +116,74 @@ class BrowserCDP:
                             text:(e.innerText||e.textContent||'').trim().slice(0,240),
                             aria:e.getAttribute('aria-label')||'',
                             placeholder:e.getAttribute('placeholder')||'',
+                            aria_name:((e.getAttribute('aria-label')||'').trim()
+                              || (e.labels&&e.labels.length?[...e.labels].map(l=>(l.innerText||'').trim()).join(' '):'')
+                              || ((e.getAttribute('role')==='textbox'||e.tagName==='TEXTAREA')
+                                    ? (e.getAttribute('aria-labelledby')
+                                        ? (document.getElementById(e.getAttribute('aria-labelledby'))?.innerText||'').trim() : '')
+                                    : (e.innerText||e.textContent||'').trim())
+                              || (e.getAttribute('title')||'').trim()).slice(0,240),
                             name:e.getAttribute('name')||'',
                             value:('value' in e ? String(e.value) : '').slice(0,240),
                             href:e.getAttribute('href')||'',
+                            brain_row:e.getAttribute('data-brain-row')||'',
                             checked:('checked' in e ? Boolean(e.checked) : null),
                             disabled:Boolean(e.disabled)
                         }))"""
                     )
                 except Exception:
                     elements = []
+                for el in elements:
+                    el["row_text"] = el.get("brain_row") or None
+                try:
+                    body_text = page.inner_text("body", timeout=5000)
+                except Exception:
+                    body_text = ""
+                try:
+                    rows = page.evaluate(
+                        """() => {
+                          const roots=[document];
+                          const push=(r)=>{for(const e of r.querySelectorAll('*'))
+                            {if(e.shadowRoot){roots.push(e.shadowRoot);push(e.shadowRoot);}}};
+                          push(document);
+                          const sel='li,tr,[role=listitem],[role=row],.todo-list>li';
+                          const out=[]; const seen=new Set();
+                          for (const root of roots)
+                            for (const r of root.querySelectorAll(sel)) {
+                              if (seen.has(r)) continue;
+                              const t=(r.innerText||r.textContent||'').trim().replace(/\\s+/g,' ');
+                              if (!t) continue;
+                              const ctl=r.querySelector('input[type=checkbox],[role=checkbox],input[type=radio]');
+                              if (!ctl) continue;
+                              seen.add(r);
+                              out.push({
+                                index: out.length,
+                                role: r.tagName.toLowerCase(),
+                                text: t.slice(0,200),
+                                control_role: (ctl.getAttribute('role')||'checkbox').toLowerCase(),
+                                control_checked: Boolean(ctl.checked),
+                                control_name: (ctl.getAttribute('aria-label')||'').trim(),
+                              });
+                            }
+                          return out.slice(0,60);
+                        }"""
+                    )
+                except Exception:
+                    rows = []
+                try:
+                    shadow_text = page.evaluate(
+                        "() => { const out=[]; const walk=(r)=>{for(const e of r.querySelectorAll('*'))"
+                        "{if(e.shadowRoot){out.push(e.shadowRoot.textContent||'');walk(e.shadowRoot);}}};"
+                        "walk(document); return out.join(' '); }"
+                    )
+                except Exception:
+                    shadow_text = ""
                 out_pages.append({
                     "page_index": page_index,
                     "url": page.url,
                     "title": page.title(),
+                    "rows": rows,
+                    "body_text": re.sub(r"\s+", " ", (body_text or "") + " " + (shadow_text or "")).strip()[:20000],
                     "elements": elements[:MAX_ELEMENTS],
                 })
             return {
@@ -137,6 +215,72 @@ class BrowserCDP:
 
             if kind == "NAVIGATE":
                 page.goto(_url(op.get("url")), wait_until="domcontentloaded", timeout=30000)
+
+            elif kind == "CHECK_IN_ROW":
+                row_text = _text(op.get("row_text"), "ROW_TEXT", 400)
+                desired = op.get("checked", True)
+                if not isinstance(desired, bool):
+                    raise BrowserCDPError("CHECKED_MUST_BE_BOOL")
+                loc = None
+                for probe in (
+                    page.get_by_role("listitem").filter(has_text=row_text),
+                    page.get_by_role("row").filter(has_text=row_text),
+                    page.locator("li,tr,[role=listitem],[role=row]").filter(has_text=row_text),
+                ):
+                    try:
+                        if probe.count() == 0:
+                            continue
+                        cand = probe.first.get_by_role("checkbox")
+                        if cand.count() == 0:
+                            cand = probe.first.locator("input[type=checkbox],[role=checkbox]")
+                        if cand.count() == 0:
+                            continue
+                        loc = cand.first
+                        break
+                    except Exception:
+                        continue
+                if loc is None:
+                    raise BrowserCDPError("ROW_CONTROL_NOT_FOUND")
+                loc.check(timeout=10000) if desired else loc.uncheck(timeout=10000)
+
+            elif kind == "PRESS_POSITION":
+                which = _text(op.get("control"), "CONTROL", 20)
+                typed = _index(op.get("nth", 0), "NTH", 0, 49)
+                key = _text(op.get("key", "Enter"), "KEY", 100)
+                if which != "textbox":
+                    raise BrowserCDPError("CONTROL_NOT_SUPPORTED:" + which)
+                page.get_by_role("textbox").nth(typed).press(key, timeout=10000)
+
+            elif kind in ("FILL_NAME", "PRESS_NAME", "CLICK_NAME", "TOGGLE_NAME"):
+                name = _text(op.get("name"), "NAME", 400)
+                exact = op.get("exact", False)
+                if not isinstance(exact, bool):
+                    raise BrowserCDPError("EXACT_MUST_BE_BOOL")
+                role = op.get("role")
+                if role is not None:
+                    role = _text(role, "ROLE", 40).lower()
+                named = page.get_by_role(role, name=name, exact=exact) if role else page.get_by_label(name, exact=exact)
+                target = named.first
+                if kind == "FILL_NAME":
+                    value = op.get("text")
+                    if not isinstance(value, str) or len(value) > 20000:
+                        raise BrowserCDPError("FILL_TEXT_INVALID")
+                    if role is None:
+                        target = page.get_by_role("textbox", name=name, exact=exact).first
+                    target.fill(value, timeout=10000)
+                elif kind == "PRESS_NAME":
+                    key = _text(op.get("key"), "KEY", 100)
+                    if role is None:
+                        target = page.get_by_role("textbox", name=name, exact=exact).first
+                    target.press(key, timeout=10000)
+                elif kind == "TOGGLE_NAME":
+                    desired = op.get("checked", True)
+                    if not isinstance(desired, bool):
+                        raise BrowserCDPError("CHECKED_MUST_BE_BOOL")
+                    loc = page.get_by_role("checkbox", name=name, exact=exact).first
+                    loc.check(timeout=10000) if desired else loc.uncheck(timeout=10000)
+                else:
+                    target.click(timeout=10000)
 
             elif kind == "CLICK_SELECTOR":
                 selector = _text(op.get("selector"), "SELECTOR", 1000)
