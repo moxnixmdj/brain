@@ -421,3 +421,103 @@ lower-ranked one and the result is reported as success. The concrete next step i
 a test that asserts the front compiler's chosen row is the highest-scoring
 *grounded* row whenever it differs from the ranked order, applied to the 148
 messages in the "wrong logic" family, before any further kernel work.
+
+---
+
+# Wave 46f — The front door certifies work it did not do
+
+This is the most important result in this document. It is a live, reproducible
+failure of the system's central honesty claim, and it survives every fix in
+`§1`–`§11`.
+
+## 15. The reproduction
+
+Fixture: a directory with `a.py` (`def f(x): return x+1`) and `t.py`.
+
+```
+request : "Measure the mutation score of the python source root <dir>"
+chosen  : source.objective_relevance.rank.bm25        <- a BM25 ranker
+owns it?: False                                       <- it is not a mutation scorer
+status  : PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED
+pass    : True
+```
+
+The same shape occurs for a fault-localization request, which the front door
+routes to `software.hardcore.kernel.orchestrate.v1` when compiled against the
+full registry.
+
+So the system:
+- selected a capability that demonstrably does not own the sentence,
+- ran it,
+- and returned **`EXACT_SEMANTIC_ACCEPTANCE_VERIFIED`**.
+
+Nothing was measured. `r.json` was not written for the localization request that
+explicitly asked for it, and the run still reported verified success.
+
+## 16. Why this matters more than every other finding here
+
+The wave's earlier work made the *repair* oracle falsifiable, made compiled laws
+persist, and made bad laws retire. All of that is real and all of it is
+downstream of this:
+
+**A system that reports `EXACT_SEMANTIC_ACCEPTANCE_VERIFIED` for a request it did
+not perform cannot be improved by making its components better.** Every honest
+measurement taken through this door is meaningless, because the door's success
+signal is not connected to the request. This is the same class as the
+unfalsifiable `exec` oracle in `§1`, one layer up: there, a test could not fail;
+here, a request cannot fail.
+
+It also explains the composition of the 1,026 recorded failures better than my
+message-grouping did: `AssertionError: False is not true : PASS__RAW_GOAL_COMPILED_
+FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STI` is a test
+asserting that this exact self-certification should *not* have happened.
+
+## 17. What I did not do, and why
+
+I did **not** patch the acceptance path. Grounds:
+
+1. It is the central success signal of the live door. Changing it alters the
+   reported outcome of every request in the system.
+2. The correct fix is not local. `EXACT_SEMANTIC_ACCEPTANCE_VERIFIED` must be
+   conditioned on the chosen capability *owning the sentence* — which requires a
+   decidable ownership predicate, and `§13` shows the selection layer does not
+   have one today (the top-scoring row was displaced by `F24_UNSTATED_CANDIDATE_
+   SKIPPED` and selection landed on a row scoring *below* the displaced runner-up).
+3. A guessed ownership predicate would fail silently in exactly the direction
+   that inflates results. That is the one failure mode this project must not
+   ship, and shipping it while calling it a fix would be worse than the bug.
+
+What is needed, concretely, is a guard with this shape — stated so the next
+attempt is testable rather than exploratory:
+
+> `EXACT_SEMANTIC_ACCEPTANCE_VERIFIED` may only be returned when the selected
+> capability's own declared `provides`/`keywords` **and** its `target_effects`
+> intersect the effect the sentence states. When they do not intersect, the
+> honest status is `FAIL_CLOSED__SELECTED_CAPABILITY_DOES_NOT_OWN_THE_SENTENCE`,
+> and it must be returned even though the capability ran and exited zero.
+
+The measurement to drive that: run every one of the 23 benchmark goals with an
+adversarial rewrite whose stated effect no row declares, and assert the door
+refuses. Today it does not — I have only tested one such rewrite by hand, which
+is enough to establish the bug and not enough to establish the fix.
+
+## 18. Revised honest status
+
+| claim | status |
+|---|---|
+| Futamura test oracle is falsifiable | **verified** (`§1`) |
+| One experience transfers to unseen tasks at Rung 0 | **verified**, 5/5, 0.16–0.50 ms (`§10`) |
+| Laws persist across processes and retire on evidence | **verified** (`§8`, `§9`) |
+| Model artefact matches a fresh compile | **verified**, guarded by a test (`§3`) |
+| The operator grammar reaches real failures | **refuted** as the bottleneck; ≤0.7%, and fixing it moves nothing (`§12`) |
+| Ranking is the bottleneck | **refuted**; the pinned ranker is correct, the front compiler overrides it (`§13`) |
+| The door's success signal means the request succeeded | **FALSE — see `§15`** |
+| SWE-bench Pro V2 / Terminal-Bench 4.0 / OSWorld 2.1 | **not run**; `docker` absent |
+| Hard-51 | **0/51** |
+| §6 | **unmet** |
+
+The honest one-line summary of this wave: I fixed four real defects in the
+verification machinery, measured a genuine 5/5 transfer result, and then found
+that the thing which reports results is not connected to what was asked. Until
+`§17` is implemented and tested, every "pass" this door emits should be treated as
+unknown, including any number I might otherwise have reported from it.
