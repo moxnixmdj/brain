@@ -1057,7 +1057,7 @@ class UnifiedModel:
                 "research_index_records": res_len,
                 "routing_tokens": len(self.index),
                 "harvested_capabilities": declared.get("harvested_capabilities"),
-                "frontier_leapfrog_organs": 17,
+                "frontier_leapfrog_organs": 21,
             },
             "source_index_is_addressable_not_executable": True,
             "declared_dependencies_present": present,
@@ -1080,7 +1080,7 @@ class UnifiedModel:
     # --------------------------------------------------------- frontier organs
 
     def frontier_organs(self) -> dict[str, Any]:
-        """Enumerate the `swe_kernel` organs and Frontier Leapfrog Plays/Moves wired into the Unified Runtime."""
+        """Enumerate the 13 `swe_kernel` organs, 8 Frontier Leapfrog Plays, and Unified Leapfrog Moves."""
         from canonical.runtime import swe_kernel_organ_bridge_v1 as bridge
 
         swe_organs = bridge.list_organs()
@@ -1098,12 +1098,6 @@ class UnifiedModel:
                 "capability_role": "Gradient-free episodic law consolidation v1 (historical baseline)",
             },
             {
-                "organ_id": "play_2_law_consolidation_v2",
-                "module_path": "canonical/runtime/gradient_free_law_consolidation_v2.py",
-                "frontier_domain": "continual_learning",
-                "capability_role": "Popper negative-witness specialization + SemiPersistentEGraph anti-unification v2 (zero false refutations, held-out transfer)",
-            },
-            {
                 "organ_id": "play_3_abstain_skill_induction",
                 "module_path": "canonical/runtime/abstain_gated_skill_induction_v1.py",
                 "frontier_domain": "instant_learning",
@@ -1114,6 +1108,38 @@ class UnifiedModel:
                 "module_path": "canonical/runtime/adversarial_mutation_admission_gate_v1.py",
                 "frontier_domain": "coding_agents",
                 "capability_role": "Adversarial AST mutation admission gate v1 (single-probe baseline)",
+            },
+            {
+                "organ_id": "play_a_counterfactual_discr_tree_router",
+                "module_path": "canonical/runtime/counterfactual_discr_tree_skill_router_v1.py",
+                "frontier_domain": "continual_learning",
+                "capability_role": "Witness-conditioned AST discrimination-tree router (5.4 us p50) with Rubin counterfactual utility gating",
+            },
+            {
+                "organ_id": "play_b_verified_zero_screenshot_cache",
+                "module_path": "canonical/runtime/verified_zero_screenshot_action_cache_v1.py",
+                "frontier_domain": "computer_use",
+                "capability_role": "Three-tier zero-screenshot data-layer workflow elevator and volatile-invariant CDP pre-probe cache",
+            },
+            {
+                "organ_id": "play_c_relational_guard_addition_repair",
+                "module_path": "canonical/runtime/relational_guard_addition_symbolic_repair_v1.py",
+                "frontier_domain": "coding_agents",
+                "capability_role": "Semi-naive relational AST guard/exception-contract/container-sync addition synthesizer with GuardDrop mutation gate",
+            },
+            {
+                "organ_id": "play_d_cow_zygote_speculative_verifier",
+                "module_path": "canonical/runtime/cow_zygote_speculative_verifier_v1.py",
+                "frontier_domain": "verification_abstention",
+                "capability_role": "POSIX os.fork() copy-on-write Zygote speculative patch verifier (1.58 ms p50) with AST test impact slicing",
+            },
+        ]
+        moves = [
+            {
+                "organ_id": "play_2_law_consolidation_v2",
+                "module_path": "canonical/runtime/gradient_free_law_consolidation_v2.py",
+                "frontier_domain": "continual_learning",
+                "capability_role": "Popper negative-witness specialization + SemiPersistentEGraph anti-unification v2 (zero false refutations, held-out transfer)",
             },
             {
                 "organ_id": "play_6_mutation_admission_gate_v2",
@@ -1146,8 +1172,11 @@ class UnifiedModel:
             "swe_kernel_organs_count": len(swe_organs),
             "leapfrog_plays_count": len(plays),
             "total_organs": len(swe_organs) + len(plays),
+            "leapfrog_moves_count": len(moves),
+            "total_organs_including_moves": len(swe_organs) + len(plays) + len(moves),
             "swe_kernel_organs": swe_organs,
             "leapfrog_plays": plays,
+            "leapfrog_moves": moves,
             "model_dependency_count": 0,
         }
 
@@ -1189,6 +1218,22 @@ class UnifiedModel:
             return self.solve_swe_repo(repo_root, **req)
         if organ_id == "move_5_surprise_organism":
             return self.autonomous_pulse(**req)
+        if organ_id == "play_a_counterfactual_discr_tree_router":
+            from canonical.runtime import counterfactual_discr_tree_skill_router_v1 as pa
+
+            return pa.run(req, ROOT)
+        if organ_id == "play_b_verified_zero_screenshot_cache":
+            from canonical.runtime import verified_zero_screenshot_action_cache_v1 as pb
+
+            return pb.run(req, ROOT)
+        if organ_id == "play_c_relational_guard_addition_repair":
+            from canonical.runtime import relational_guard_addition_symbolic_repair_v1 as pc
+
+            return pc.run(req, ROOT)
+        if organ_id == "play_d_cow_zygote_speculative_verifier":
+            from canonical.runtime import cow_zygote_speculative_verifier_v1 as pd
+
+            return pd.run(req, ROOT)
 
         from canonical.runtime import swe_kernel_organ_bridge_v1 as bridge
 
@@ -4192,7 +4237,15 @@ class SovereignZeroLLMPlanner:
                     verifier_backed=True,
                     render_fn=lambda: (
                         "import subprocess, sys\n"
-                        "r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True)\n"
+                        "import os as _os, pathlib as _pl\n"
+                        "for _d in _pl.Path('.').rglob('__pycache__'):\n"
+                        "    for _c in _d.glob('*.pyc'):\n"
+                        "        try:\n"
+                        "            _c.unlink()\n"
+                        "        except OSError:\n"
+                        "            pass\n"
+                        "_ENV = {**_os.environ, 'PYTHONDONTWRITEBYTECODE': '1'}\n"
+                        "r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True, env=_ENV)\n"
                         "if r.returncode != 0:\n"
                         "    sys.stderr.write((r.stderr or r.stdout or 'verification_failed')[-800:])\n"
                         "    raise SystemExit(1)\n"
@@ -4202,8 +4255,16 @@ class SovereignZeroLLMPlanner:
                 # Pure-stdlib confined AST single-operator / constant-sign repair search (`confined_v1` safe — zero external imports!)
                 return (
                     "import ast, copy, pathlib, subprocess, sys\n"
+                    "import os as _os, pathlib as _pl\n"
+                    "for _d in _pl.Path('.').rglob('__pycache__'):\n"
+                    "    for _c in _d.glob('*.pyc'):\n"
+                    "        try:\n"
+                    "            _c.unlink()\n"
+                    "        except OSError:\n"
+                    "            pass\n"
+                    "_ENV = {**_os.environ, 'PYTHONDONTWRITEBYTECODE': '1'}\n"
                     "def _test_ok():\n"
-                    "    r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True)\n"
+                    "    r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True, env=_ENV)\n"
                     "    return r.returncode == 0, (r.stderr or r.stdout or '')[-800:]\n"
                     "ok0, err0 = _test_ok()\n"
                     "if ok0:\n"
@@ -4296,6 +4357,30 @@ class SovereignZeroLLMPlanner:
                             max_weight=4,
                             concept_library=core.concept_library,
                         )
+                        if not body_code:
+                            # Ensemble fallback (plan v5 move 2): OE + stochastic
+                            # union for shapes the observational grammar cannot
+                            # express at this budget (measured: branch-using
+                            # programs at max_weight 4..8, ten configs, all miss;
+                            # the union finds and verifies them in ~190 ms).
+                            # Every returned body is already verified against ALL
+                            # extracted examples, so a miss costs ~200 ms where
+                            # the affordance otherwise had no candidate at all --
+                            # it cannot slow a step that would have failed.
+                            from canonical.runtime.stochastic_synthesizer_v1 import (
+                                numeric_concept_templates,
+                                synthesize_body_from_examples,
+                            )
+                            body_code = synthesize_body_from_examples(
+                                p_names, valid_exs,
+                                # Learned grammar (v6 section 14): the concept
+                                # library's admitted templates are atoms this
+                                # enumerator cannot build at any depth. Read
+                                # only -- nothing here mutates the library.
+                                concepts=numeric_concept_templates(
+                                    getattr(core, "concept_library", None),
+                                ),
+                            )
                         if body_code:
                             upd = wits._replace_function_body_in_source(cur_src, fn_nd.name, body_code)
                             if upd:
@@ -4303,12 +4388,20 @@ class SovereignZeroLLMPlanner:
                     if cur_src != src_txt:
                         patched_files[imp_rel] = cur_src
 
-                lines = ["import pathlib, subprocess, sys"]
+                lines = ["import pathlib, subprocess, sys",
+                         "import os as _os",
+                         "for _d in pathlib.Path('.').rglob('__pycache__'):",
+                         "    for _c in _d.glob('*.pyc'):",
+                         "        try:",
+                         "            _c.unlink()",
+                         "        except OSError:",
+                         "            pass",
+                         "_ENV = {**_os.environ, 'PYTHONDONTWRITEBYTECODE': '1'}"]
                 for rel_p, new_src in sorted(patched_files.items()):
                     lines.append(f"pathlib.Path({rel_p!r}).write_text({new_src!r}, encoding='utf-8')")
                 lines.extend(
                     [
-                        "r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True)",
+                        "r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '.', '-p', 'test*.py'], capture_output=True, text=True, env=_ENV)",
                         "if r.returncode != 0:",
                         "    sys.stderr.write((r.stderr or r.stdout or 'obs_synth_h2_failed')[-800:])",
                         "    raise SystemExit(1)",

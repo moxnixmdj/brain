@@ -11,6 +11,7 @@
     "a_refusal_is_a_specification_v1",
     "a_relation_over_two_guards_v1",
     "adversarial_mutation_admission_gate_v1",
+    "adversarial_mutation_admission_gate_v2",
     "angelic_cegis_repair_v1",
     "angelic_cegis_v1",
     "angelic_lens_cow_repair_v1",
@@ -68,10 +69,12 @@
     "contract_grounded_repair_v1",
     "contract_native_proof_suites",
     "contrastive_oracle_bootstrap_v1",
+    "counterfactual_discr_tree_skill_router_v1",
     "coverage_completes_the_closure_v1",
     "cow_angelic_zygote_v1",
     "cow_impact_repair_engine_v1",
     "cow_lens_fuzz_and_negative_space_v1",
+    "cow_zygote_speculative_verifier_v1",
     "creature_runtime_v1",
     "cross_modal_tomography_petri_v1",
     "curriculum_v1",
@@ -169,6 +172,7 @@
     "module_invocation_evidence_v1",
     "multistep_repo_closed_loop_solver_v1",
     "native_artifact_render_preservation_proof_v1",
+    "oe_sygus_synthesizer_v1",
     "one_shot_reality_closure_v2",
     "orthographic_visual_hull",
     "osworld_verified_task_ledger_v1",
@@ -220,6 +224,7 @@
     "real_fix_oracle_baseline_v1",
     "recursive_self_architect_v1",
     "referent_dependence_v1",
+    "relational_guard_addition_symbolic_repair_v1",
     "repo_component_petri_v1",
     "repo_native_component_mining_v1",
     "requirement_graph_kernel",
@@ -242,6 +247,7 @@
     "software_repair_crossfile_choreograph_v1",
     "spec_contract_synthesis_v1",
     "speculative_cow_petri_agent_v1",
+    "stochastic_synthesizer_v1",
     "swe_observational_program_synthesizer_v1",
     "swe_self_improvement_bridge_v1",
     "swe_typed_plan_v1",
@@ -294,21 +300,16 @@
     "witness_inversion_v1",
     "zygote_worker_pool_v1"
    ],
-   "candidates": 290,
+   "candidates": 296,
    "frontier_function": "resolve a repository issue from a text description",
-   "harvested_all": 101,
-   "harvested_executable_top": 10,
-   "hidden_share_all": 0.014,
-   "hidden_top": [
-    "canonical/tools/swebench_issue_localizer_v1.py",
-    "canonical/capabilities/true/oracles/saccr_credit_addon_oracles_v1.py",
-    "canonical/tools/isolated_effect_receipt_verifier_v1.py",
-    "canonical/capabilities/true/oracles/scheduler_oracles_v1.py"
-   ],
-   "in_source_index_top": 21,
-   "indexed_all": 209,
-   "invisible_share": 0.014,
-   "invisible_to_model": 4,
+   "harvested_all": 105,
+   "harvested_executable_top": 11,
+   "hidden_share_all": 0.0,
+   "hidden_top": [],
+   "in_source_index_top": 25,
+   "indexed_all": 278,
+   "invisible_share": 0.0,
+   "invisible_to_model": 0,
    "top": [
     {
      "adapter_module_match": false,
@@ -326,7 +327,7 @@
      ],
      "path": "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
      "score": 41.25,
-     "sha256": "5481d2d1282c2015",
+     "sha256": "cb400c35dfcc2197",
      "source_index": true,
      "summary": "Unified Zero-Model SWE Wall-Closers V1: Metamorphic Witness Splitter, Codebase"
     },
@@ -391,6 +392,26 @@
      "summary": "Copy-on-Write Prewarmed Pytest Zygote Server, Angelic Branch Inversion,"
     },
     {
+     "adapter_module_match": true,
+     "anchored": 8.25,
+     "harvested": true,
+     "matched": [
+      "repair@doc",
+      "ast@doc",
+      "mutant@doc",
+      "mutation@doc",
+      "synthes@doc",
+      "metamorphic@doc",
+      "oracle@doc",
+      "ast@symbol"
+     ],
+     "path": "canonical/runtime/relational_guard_addition_symbolic_repair_v1.py",
+     "score": 34.25,
+     "sha256": "1c135097c7ea1c2a",
+     "source_index": true,
+     "summary": "Play C \u2014 Relational AST Guard/Addition Synthesizer & Symbolic Witness Mutation Gate (`K3 = 0`)."
+    },
+    {
      "adapter_module_match": false,
      "anchored": 10.5,
      "harvested": false,
@@ -411,7 +432,7 @@
      "summary": "Multi-Step Closed-Loop Repository Solver, Differential Trace Localizer & Race Prober."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 14.25,
      "harvested": true,
      "matched": [
@@ -431,7 +452,7 @@
      "summary": "Zero-Copy CoW Impact-Sliced STUN Guard & Coupled Multi-File Repair Engine (`K3 = 0`)."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 17.25,
      "harvested": false,
      "matched": [
@@ -451,7 +472,7 @@
      "summary": "Reverse-Execution Synthesis, Differential State Tomography, Algebraic Skill Composition,"
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 15.75,
      "harvested": false,
      "matched": [
@@ -471,7 +492,7 @@
      "summary": "1ms CoW Angelic Causal Fault Localization, Repo-Native Component Mining,"
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 9.0,
      "harvested": true,
      "matched": [
@@ -512,6 +533,26 @@
     },
     {
      "adapter_module_match": false,
+     "anchored": 13.5,
+     "harvested": false,
+     "matched": [
+      "repair@doc",
+      "swe@doc",
+      "localiz@symbol",
+      "patch@symbol",
+      "repair@symbol",
+      "diff@doc",
+      "metamorphic@doc",
+      "ast@symbol"
+     ],
+     "path": "canonical/swe_kernel/canonical_swe_spine_v1.py",
+     "score": 31.5,
+     "sha256": "fcfb079142c10e5f",
+     "source_index": true,
+     "summary": "Canonical Unified Polyglot SWE Spine (`canonical_swe_spine_v1`)."
+    },
+    {
+     "adapter_module_match": false,
      "anchored": 3.0,
      "harvested": false,
      "matched": [
@@ -529,6 +570,26 @@
      "sha256": "c6311b054e2b47b0",
      "source_index": true,
      "summary": "Closed-Loop Execution-Trace Abduction, Dynamic Vocabulary Induction &"
+    },
+    {
+     "adapter_module_match": true,
+     "anchored": 8.25,
+     "harvested": false,
+     "matched": [
+      "patch@doc",
+      "swe@doc",
+      "oracle@doc",
+      "patch@symbol",
+      "assert@doc",
+      "mutant@symbol",
+      "mutation@symbol",
+      "oracle@symbol"
+     ],
+     "path": "canonical/swe_kernel/canonical_oracle_vericoding_spine_v1.py",
+     "score": 27.25,
+     "sha256": "f6dd48ac889f4f2e",
+     "source_index": true,
+     "summary": "Canonical Dual-Channel Witness Inversion, Goal-Negation Oracle & Formal Vericoding Spine (`0H`)."
     },
     {
      "adapter_module_match": false,
@@ -572,26 +633,6 @@
     },
     {
      "adapter_module_match": false,
-     "anchored": 6.0,
-     "harvested": false,
-     "matched": [
-      "patch@doc",
-      "swe@doc",
-      "oracle@doc",
-      "patch@symbol",
-      "assert@doc",
-      "mutant@symbol",
-      "oracle@symbol",
-      "repair@doc"
-     ],
-     "path": "canonical/swe_kernel/canonical_oracle_vericoding_spine_v1.py",
-     "score": 25.0,
-     "sha256": "0476e8e7c7088b9f",
-     "source_index": true,
-     "summary": "Canonical Dual-Channel Witness Inversion, Goal-Negation Oracle & Formal Vericoding Spine (`0H`)."
-    },
-    {
-     "adapter_module_match": false,
      "anchored": 3.75,
      "harvested": true,
      "matched": [
@@ -611,7 +652,7 @@
      "summary": "Residual-wall closers: the thirteen laws a trace-literal engine cannot reach."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 10.5,
      "harvested": false,
      "matched": [
@@ -647,28 +688,28 @@
      "path": "canonical/tools/quixbugs_end_to_end_repair_measure_v1.py",
      "score": 24.5,
      "sha256": "d0dd411b74618859",
-     "source_index": false,
+     "source_index": true,
      "summary": "Can this project repair a real public bug corpus it did not write, end to end, with no model?"
     },
     {
-     "adapter_module_match": false,
-     "anchored": 5.25,
-     "harvested": false,
+     "adapter_module_match": true,
+     "anchored": 3.75,
+     "harvested": true,
      "matched": [
       "repair@doc",
-      "swe@doc",
-      "patch@symbol",
-      "diff@doc",
-      "metamorphic@doc",
-      "diff@symbol",
+      "ast@doc",
       "patch@doc",
-      "test@doc"
+      "patch@symbol",
+      "mutant@doc",
+      "candidate@doc",
+      "test@doc",
+      "bug@doc"
      ],
-     "path": "canonical/swe_kernel/canonical_swe_spine_v1.py",
-     "score": 23.25,
-     "sha256": "1d08315718e3a842",
+     "path": "canonical/runtime/cow_zygote_speculative_verifier_v1.py",
+     "score": 22.75,
+     "sha256": "e4ff324b2fd58926",
      "source_index": true,
-     "summary": "Canonical Unified Polyglot SWE Spine (`canonical_swe_spine_v1`)."
+     "summary": "Play D \u2014 Sub-5ms POSIX `os.fork()` CoW Zygote Speculative Repair Verifier (`K3 = 0`)."
     },
     {
      "adapter_module_match": false,
@@ -687,11 +728,11 @@
      "path": "canonical/tools/grammar_closed_repair_v1.py",
      "score": 22.0,
      "sha256": "2252ee025daaf6dd",
-     "source_index": false,
+     "source_index": true,
      "summary": "A repair generator with no edit library: the program's own grammar is the hypothesis space."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 9.75,
      "harvested": false,
      "matched": [
@@ -767,48 +808,8 @@
      "path": "canonical/tools/small_passing_patch_place_measure_v1.py",
      "score": 21.25,
      "sha256": "5f28a4861460715d",
-     "source_index": false,
-     "summary": "How many tries, with the place given? Where a small test-passing repair stands in the lists built here."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 3.75,
-     "harvested": true,
-     "matched": [
-      "swe@doc",
-      "ast@doc",
-      "diff@doc",
-      "repair@doc",
-      "swe@symbol",
-      "test@doc",
-      "candidate@doc",
-      "oracle@doc"
-     ],
-     "path": "canonical/tools/the_same_guard_twice_is_the_discriminator_v1.py",
-     "score": 21.25,
-     "sha256": "7c622a33ee6f25d9",
-     "source_index": false,
-     "summary": "The same guard, fired twice, is the discriminator."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 12.0,
-     "harvested": false,
-     "matched": [
-      "synthes@doc",
-      "patch@symbol",
-      "repair@symbol",
-      "ast@symbol",
-      "fault@symbol",
-      "oracle@symbol",
-      "patch@doc",
-      "repair@doc"
-     ],
-     "path": "canonical/swe_kernel/cegis_semantic_synthesizer_v1.py",
-     "score": 20.5,
-     "sha256": "96f823a9af041bdd",
      "source_index": true,
-     "summary": "Goal-Directed CEGIS Program/Patch Synthesizer & Unified Semantic Engine (`cegis_semantic_synthesizer_v1`) \u2014 Leap 3 + Full 4-Leap Fusion."
+     "summary": "How many tries, with the place given? Where a small test-passing repair stands in the lists built here."
     }
    ],
    "vendored_donors_excluded": 2
@@ -817,6 +818,7 @@
    "candidate_stems": [
     "a_type_you_wrote_is_a_type_you_guess_v1",
     "aa_briefcase_top_support_collapse_v1",
+    "adversarial_mutation_admission_gate_v2",
     "aimed_action_v1",
     "angelic_lens_cow_repair_v1",
     "arc_agi_3_public_exploration_measure_v1",
@@ -936,6 +938,7 @@
     "software_repair_crossfile_choreograph_v1",
     "source_authority_binding_ror",
     "state_contract_world_model_v1",
+    "stochastic_synthesizer_v1",
     "synthesis_dimension_scorers_and_strict_reducer_v1",
     "terminal_adaptive_minimum_action_policy_v1",
     "terminal_information_dominance_v1",
@@ -957,24 +960,42 @@
     "unknown_domain_direct_hidden_generator_v1",
     "unknown_domain_direct_hidden_scorer_v1",
     "value_algebra_v1",
+    "verified_zero_screenshot_action_cache_v1",
     "what_a_demonstration_leaves_open_v1",
     "whitebox_introspector_and_trace_synthesizer_v1",
     "zygote_worker_pool_v1"
    ],
-   "candidates": 146,
+   "candidates": 149,
    "frontier_function": "drive a GUI it has never seen",
-   "harvested_all": 24,
+   "harvested_all": 26,
    "harvested_executable_top": 6,
-   "hidden_share_all": 0.014,
-   "hidden_top": [
-    "canonical/capabilities/true/oracles/scheduler_oracles_v1.py",
-    "canonical/research/bytes/tools/fresh_quartic_unify_repair_v17.py"
-   ],
-   "in_source_index_top": 19,
-   "indexed_all": 117,
-   "invisible_share": 0.014,
-   "invisible_to_model": 2,
+   "hidden_share_all": 0.0,
+   "hidden_top": [],
+   "in_source_index_top": 25,
+   "indexed_all": 141,
+   "invisible_share": 0.0,
+   "invisible_to_model": 0,
    "top": [
+    {
+     "adapter_module_match": true,
+     "anchored": 10.5,
+     "harvested": true,
+     "matched": [
+      "gui@doc",
+      "cdp@doc",
+      "screen@doc",
+      "screenshot@doc",
+      "browser@doc",
+      "dom@doc",
+      "cdp@symbol",
+      "dom@symbol"
+     ],
+     "path": "canonical/runtime/verified_zero_screenshot_action_cache_v1.py",
+     "score": 41.5,
+     "sha256": "6bd5c9a473162d14",
+     "source_index": true,
+     "summary": "Play B \u2014 Zero-Screenshot 3-Tier Causal Ladder & Pre-Verified CDP/A11y Action Cache (`K3 = 0`)."
+    },
     {
      "adapter_module_match": false,
      "anchored": 7.5,
@@ -996,7 +1017,7 @@
      "summary": "The GUI room: a real browser, a real page, observed structurally -- never from pixels alone."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 3.75,
      "harvested": true,
      "matched": [
@@ -1012,7 +1033,7 @@
      "path": "canonical/tools/the_refusal_is_the_curriculum_v1.py",
      "score": 26.25,
      "sha256": "f53edb4f349f4fc6",
-     "source_index": false,
+     "source_index": true,
      "summary": "The refusal is the curriculum: the environment publishes its own grammar, and one visit writes the axioms that make the second visit cheaper."
     },
     {
@@ -1052,11 +1073,11 @@
      "path": "canonical/tools/miniwob_one_success_generalisation_measure_v1.py",
      "score": 24.75,
      "sha256": "7f60253471cef256",
-     "source_index": false,
+     "source_index": true,
      "summary": "Does ONE success become a skill? Measured on web tasks nobody in this repository wrote."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 3.75,
      "harvested": false,
      "matched": [
@@ -1076,7 +1097,7 @@
      "summary": "Unified Interface Action-Grammar Engine (CLI Repertoire + GUI/Browser A11y Tree)."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 3.75,
      "harvested": false,
      "matched": [
@@ -1116,7 +1137,7 @@
      "summary": ""
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 5.25,
      "harvested": false,
      "matched": [
@@ -1156,7 +1177,7 @@
      "summary": "Terminal-authority-hardening successor for the OSWorld capability stack."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 9.75,
      "harvested": false,
      "matched": [
@@ -1176,7 +1197,7 @@
      "summary": "Universal Computer-Use Agent: Zero-Model, Zero-Knowledge-House Causal Engine (v1)."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 4.5,
      "harvested": false,
      "matched": [
@@ -1285,7 +1306,7 @@
      "path": "canonical/tools/what_a_demonstration_leaves_open_v1.py",
      "score": 14.25,
      "sha256": "b18da7e2e70250df",
-     "source_index": false,
+     "source_index": true,
      "summary": "What does one demonstration leave open, and does that predict where the skill fails?"
     },
     {
@@ -1323,7 +1344,7 @@
      "path": "canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py",
      "score": 14.0,
      "sha256": "c1cf8f16ef553eb7",
-     "source_index": false,
+     "source_index": true,
      "summary": "A type you wrote is a type you guess: on a room of kinds this tree never named, the"
     },
     {
@@ -1340,7 +1361,7 @@
      "path": "canonical/tools/arc_agi_3_public_exploration_measure_v1.py",
      "score": 14.0,
      "sha256": "f53986dac7ea0b4f",
-     "source_index": false,
+     "source_index": true,
      "summary": "What does first contact with an environment NOBODY HERE WROTE actually cost?"
     },
     {
@@ -1439,23 +1460,6 @@
      "sha256": "01cdd738fde1095e",
      "source_index": true,
      "summary": "Zero-Knowledge-House Petri-Net Component Synthesis, Dual-Program Splicing & 16-Way CoW World Tomography (`petri_cow_splicing_engine_v1`)."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 3.0,
-     "harvested": true,
-     "matched": [
-      "gui@doc",
-      "gui@symbol",
-      "osworld@doc",
-      "tab@doc",
-      "app@doc"
-     ],
-     "path": "canonical/tools/the_guide_is_a_test_suite_v1.py",
-     "score": 12.5,
-     "sha256": "705b5650a3e376a4",
-     "source_index": false,
-     "summary": "Documentation holds a verifier that no author wrote: execute the examples, keep what passed."
     }
    ],
    "vendored_donors_excluded": 2
@@ -1465,16 +1469,20 @@
     "aimed_action_measure_v1",
     "associative_memory_v1",
     "autonomous_verified_self_improvement_v1",
+    "brain_unified_model_v1",
+    "canonical_env_discovery_spine_v1",
     "canonical_memory_crystallizer_v1",
     "capability_consolidation_audit_v1",
     "capability_parallel_frontier_post_composition_v2",
     "capability_parallel_frontier_post_composition_v3",
     "capability_parallel_frontier_v1",
     "capability_parallel_frontier_v2",
+    "creature_runtime_v1",
     "derived_value_measure_v1",
     "domain_mapping_truth_certificate_v1",
     "exact_stated_geometry_measure_v1",
     "gradient_free_law_consolidation_v1",
+    "gradient_free_law_consolidation_v2",
     "inert_action_prior_measure_v1",
     "instruction_contract_measure_v1",
     "k6_decision_refinement_compiler_v1",
@@ -1492,18 +1500,18 @@
     "universal_computer_agent_v1",
     "verified_skill_crystallizer_v1"
    ],
-   "candidates": 29,
+   "candidates": 33,
    "frontier_function": "keep improving without forgetting or drifting",
-   "harvested_all": 8,
-   "harvested_executable_top": 8,
-   "hidden_share_all": 0.069,
+   "harvested_all": 11,
+   "harvested_executable_top": 11,
+   "hidden_share_all": 0.061,
    "hidden_top": [
     "canonical/runtime/k6_decision_refinement_compiler_v1.py",
     "canonical/runtime/k6_target_relative_decision_quotient_v1.py"
    ],
-   "in_source_index_top": 14,
-   "indexed_all": 17,
-   "invisible_share": 0.069,
+   "in_source_index_top": 23,
+   "indexed_all": 29,
+   "invisible_share": 0.061,
    "invisible_to_model": 2,
    "top": [
     {
@@ -1520,11 +1528,11 @@
      "path": "canonical/tools/the_counterexample_is_the_next_experiment_v1.py",
      "score": 10.5,
      "sha256": "2a853bbdb3fad9dc",
-     "source_index": false,
+     "source_index": true,
      "summary": "The counterexample is the next experiment: a statistic is true only at the depth that killed it."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 5.25,
      "harvested": false,
      "matched": [
@@ -1542,6 +1550,22 @@
     },
     {
      "adapter_module_match": false,
+     "anchored": 8.25,
+     "harvested": false,
+     "matched": [
+      "consolidat@symbol",
+      "drift@symbol",
+      "forget@symbol",
+      "replay@symbol"
+     ],
+     "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+     "score": 8.25,
+     "sha256": "e522b9ea243516bb",
+     "source_index": true,
+     "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
+    },
+    {
+     "adapter_module_match": false,
      "anchored": 2.25,
      "harvested": true,
      "matched": [
@@ -1553,7 +1577,7 @@
      "path": "canonical/tools/exact_stated_geometry_measure_v1.py",
      "score": 8.25,
      "sha256": "57bade64cccd6c23",
-     "source_index": false,
+     "source_index": true,
      "summary": "Does the page's OWN geometry reach the score frames that refused every correct press?"
     },
     {
@@ -1567,12 +1591,29 @@
      ],
      "path": "canonical/swe_kernel/sentient_cognitive_core_v1.py",
      "score": 7.75,
-     "sha256": "d07b84327f2bfac0",
+     "sha256": "d32a7badda8dc0bf",
      "source_index": true,
      "summary": "Sentient Cognitive Core V1 (`sentient_cognitive_core_v1`, `K3 = 0`)."
     },
     {
      "adapter_module_match": false,
+     "anchored": 3.75,
+     "harvested": false,
+     "matched": [
+      "curriculum@doc",
+      "curriculum@symbol",
+      "drift@doc",
+      "replay@symbol",
+      "stable@symbol"
+     ],
+     "path": "canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
+     "score": 7.25,
+     "sha256": "ac389f0224352542",
+     "source_index": true,
+     "summary": "Canonical Environment Discovery & Conflict-Aware Active Automata Spine (`0E`)."
+    },
+    {
+     "adapter_module_match": true,
      "anchored": 2.25,
      "harvested": false,
      "matched": [
@@ -1596,11 +1637,11 @@
      "path": "canonical/tools/capability_consolidation_audit_v1.py",
      "score": 6.75,
      "sha256": "daa02dd41b93f754",
-     "source_index": false,
+     "source_index": true,
      "summary": "Deterministic Capability Consolidation & Truth Auditor (`capability_consolidation_audit_v1`)."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 4.5,
      "harvested": false,
      "matched": [
@@ -1632,6 +1673,22 @@
      "sha256": "01cdd738fde1095e",
      "source_index": true,
      "summary": "Zero-Knowledge-House Petri-Net Component Synthesis, Dual-Program Splicing & 16-Way CoW World Tomography (`petri_cow_splicing_engine_v1`)."
+    },
+    {
+     "adapter_module_match": false,
+     "anchored": 2.25,
+     "harvested": true,
+     "matched": [
+      "consolidat@symbol",
+      "consolidat@doc",
+      "refine@doc",
+      "regress@doc"
+     ],
+     "path": "canonical/runtime/gradient_free_law_consolidation_v2.py",
+     "score": 5.75,
+     "sha256": "96bf2a8028efa600",
+     "source_index": true,
+     "summary": "Move 4 / Play 2 v2 \u2014 Popper Negative-Witness Specialization + E-Graph Anti-Unification (`gradient_free_law_consolidation_v2`)."
     },
     {
      "adapter_module_match": true,
@@ -1675,7 +1732,7 @@
      "path": "canonical/tools/aimed_action_measure_v1.py",
      "score": 4.75,
      "sha256": "fc7fd82716668b24",
-     "source_index": false,
+     "source_index": true,
      "summary": "Can the places the instruction implies be DERIVED, and does deriving them reach the 46?"
     },
     {
@@ -1690,22 +1747,36 @@
      "path": "canonical/tools/derived_value_measure_v1.py",
      "score": 4.75,
      "sha256": "850d7750213b8588",
-     "source_index": false,
+     "source_index": true,
      "summary": "Is the wall a budget, or is it that the value the page wants cannot be EXPRESSED?"
     },
     {
      "adapter_module_match": false,
      "anchored": 4.5,
-     "harvested": false,
+     "harvested": true,
      "matched": [
       "consolidat@symbol",
-      "forget@symbol"
+      "drift@symbol"
      ],
-     "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+     "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 4.5,
-     "sha256": "fadb8e8258e413cd",
+     "sha256": "b71d11994c583535",
      "source_index": true,
-     "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
+     "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
+    },
+    {
+     "adapter_module_match": false,
+     "anchored": 4.5,
+     "harvested": true,
+     "matched": [
+      "consolidat@symbol",
+      "drift@symbol"
+     ],
+     "path": "canonical/runtime/creature_runtime_v1.py",
+     "score": 4.5,
+     "sha256": "d03ea5f6f55680bf",
+     "source_index": true,
+     "summary": "Seven organs, finally in one body."
     },
     {
      "adapter_module_match": false,
@@ -1762,7 +1833,7 @@
      "path": "canonical/tools/inert_action_prior_measure_v1.py",
      "score": 3.75,
      "sha256": "9539583dfa25205f",
-     "source_index": false,
+     "source_index": true,
      "summary": "Does knowing which actions are inert make a never-solved page solvable in fewer actions?"
     },
     {
@@ -1776,11 +1847,11 @@
      "path": "canonical/tools/instruction_contract_measure_v1.py",
      "score": 3.75,
      "sha256": "94400874e10c0ae1",
-     "source_index": false,
+     "source_index": true,
      "summary": "Can an instruction become a verifier? Measure it as a CLASSIFIER, in both directions."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 2.25,
      "harvested": false,
      "matched": [
@@ -1795,7 +1866,7 @@
      "summary": "Persistent parameterized code-repair hypotheses in the existing SQLite store."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 2.25,
      "harvested": true,
      "matched": [
@@ -1806,7 +1877,7 @@
      "path": "canonical/tools/the_right_question_is_an_experiment_v1.py",
      "score": 3.25,
      "sha256": "dddee8a20f5bccc4",
-     "source_index": false,
+     "source_index": true,
      "summary": "The right question is an experiment: compile a prose claim to a witness, and"
     },
     {
@@ -1822,62 +1893,6 @@
      "sha256": "001a999323648f12",
      "source_index": true,
      "summary": "Autonomous verified self-improvement loop V1."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 3.0,
-     "harvested": false,
-     "matched": [
-      "currentness@symbol",
-      "refresh@symbol"
-     ],
-     "path": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
-     "score": 3.0,
-     "sha256": "40b59450e37d0a3c",
-     "source_index": true,
-     "summary": ""
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 3.0,
-     "harvested": false,
-     "matched": [
-      "currentness@symbol",
-      "refresh@symbol"
-     ],
-     "path": "canonical/runtime/capability_parallel_frontier_post_composition_v3.py",
-     "score": 3.0,
-     "sha256": "99b342e864077db8",
-     "source_index": true,
-     "summary": ""
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 3.0,
-     "harvested": false,
-     "matched": [
-      "refine@symbol",
-      "refinement@symbol"
-     ],
-     "path": "canonical/runtime/domain_mapping_truth_certificate_v1.py",
-     "score": 3.0,
-     "sha256": "83801653e570c5b1",
-     "source_index": true,
-     "summary": "Domain-mapping semantic truth certificate V1."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 3.0,
-     "harvested": false,
-     "matched": [
-      "refine@symbol",
-      "refinement@symbol"
-     ],
-     "path": "canonical/runtime/k6_decision_refinement_compiler_v1.py",
-     "score": 3.0,
-     "sha256": "90138382f8d1391a",
-     "source_index": false,
-     "summary": ""
     }
    ],
    "vendored_donors_excluded": 0
@@ -1897,7 +1912,11 @@
     "autonomous_verified_self_improvement_v1",
     "brain_unified_model_v1",
     "buy_reach_with_questions_v1",
+    "canonical_boundary_router_v1",
+    "canonical_env_discovery_spine_v1",
     "canonical_memory_crystallizer_v1",
+    "canonical_oracle_vericoding_spine_v1",
+    "canonical_swe_spine_v1",
     "causal_cegis_inventor_v1",
     "causal_computer_use_agent_v1",
     "causal_nexus_v1",
@@ -1913,6 +1932,7 @@
     "concept_library_v1",
     "contract_grounded_repair_v1",
     "cow_impact_repair_engine_v1",
+    "creature_runtime_v1",
     "creature_stakes_and_initiative_v1",
     "cross_language_lesson_transfer_probe_v1",
     "curriculum_v1",
@@ -1972,6 +1992,7 @@
     "metamorphic_habitation_zipper_v1",
     "miniwob_one_success_generalisation_measure_v1",
     "mortality_and_triage_v1",
+    "oe_sygus_synthesizer_v1",
     "one_demonstration_basin_v1",
     "one_demonstration_identifies_v1",
     "one_experience_every_consequence_v1",
@@ -2058,21 +2079,41 @@
     "witness_inversion_v1",
     "world_binding_v1"
    ],
-   "candidates": 174,
+   "candidates": 180,
    "frontier_function": "adapt from one episode without touching weights",
-   "harvested_all": 65,
+   "harvested_all": 66,
    "harvested_executable_top": 11,
    "hidden_share_all": 0.006,
    "hidden_top": [
     "canonical/runtime/runtime_cognition_credit_guard_v1.py"
    ],
-   "in_source_index_top": 19,
-   "indexed_all": 141,
+   "in_source_index_top": 24,
+   "indexed_all": 178,
    "invisible_share": 0.006,
    "invisible_to_model": 1,
    "top": [
     {
      "adapter_module_match": false,
+     "anchored": 20.25,
+     "harvested": false,
+     "matched": [
+      "anti_unif@symbol",
+      "one_shot@symbol",
+      "skill@doc",
+      "demonstration@symbol",
+      "induc@symbol",
+      "induce@symbol",
+      "transfer@symbol",
+      "learn@doc"
+     ],
+     "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+     "score": 28.75,
+     "sha256": "e522b9ea243516bb",
+     "source_index": true,
+     "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
+    },
+    {
+     "adapter_module_match": true,
      "anchored": 14.25,
      "harvested": false,
      "matched": [
@@ -2148,11 +2189,11 @@
      "path": "canonical/tools/what_transfers_v1.py",
      "score": 24.75,
      "sha256": "38ac208c1a619269",
-     "source_index": false,
+     "source_index": true,
      "summary": "Does \"instant learning\" generalise to arbitrary environments, or only to the one it was shown in?"
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 8.25,
      "harvested": true,
      "matched": [
@@ -2228,7 +2269,7 @@
      "path": "canonical/tools/quixbugs_one_fix_transfer_measure_v1.py",
      "score": 20.75,
      "sha256": "f4b3f35cb5db7d07",
-     "source_index": false,
+     "source_index": true,
      "summary": "What does one bug fix teach? Measured on QuixBugs with the tree's own retention organ, unchanged."
     },
     {
@@ -2248,11 +2289,11 @@
      "path": "canonical/tools/generalization_rung_gradient_v1.py",
      "score": 20.25,
      "sha256": "768310bf4d663a35",
-     "source_index": false,
+     "source_index": true,
      "summary": "Problem 2, measured as a gradient rather than a verdict: where does memory stop generalising,"
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 3.0,
      "harvested": true,
      "matched": [
@@ -2312,7 +2353,7 @@
      "summary": "Composition Concept Bridge V1 \u2014 from single expression to multi-concept programs."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 5.25,
      "harvested": false,
      "matched": [
@@ -2352,7 +2393,7 @@
      "summary": "Play 3 \u2014 Induction With an Abstain Option (`abstain_gated_skill_induction_v1`)."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 12.0,
      "harvested": false,
      "matched": [
@@ -2388,7 +2429,7 @@
      "path": "canonical/tools/miniwob_one_success_generalisation_measure_v1.py",
      "score": 18.5,
      "sha256": "7f60253471cef256",
-     "source_index": false,
+     "source_index": true,
      "summary": "Does ONE success become a skill? Measured on web tasks nobody in this repository wrote."
     },
     {
@@ -2428,7 +2469,7 @@
      "path": "canonical/tools/teach_actions_v1.py",
      "score": 18.25,
      "sha256": "5459d0cda81a603e",
-     "source_index": false,
+     "source_index": true,
      "summary": "Teach the front door the actions in ``canonical/swe_kernel/taught_actions``."
     },
     {
@@ -2492,7 +2533,7 @@
      "summary": "What an operator MEANS is a computation, not a membership test."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 12.0,
      "harvested": false,
      "matched": [
@@ -2532,7 +2573,7 @@
      "summary": "Autonomous verified self-improvement loop V1."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 10.5,
      "harvested": false,
      "matched": [
@@ -2547,29 +2588,9 @@
      ],
      "path": "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
      "score": 17.5,
-     "sha256": "6ed969077cd88e7b",
+     "sha256": "9cc5c9de62033c2c",
      "source_index": true,
      "summary": "Meta-Circular Reflective Program Graph (`K3 = 0`, `$0` spend)."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 4.5,
-     "harvested": false,
-     "matched": [
-      "generaliz@doc",
-      "hypothes@doc",
-      "lesson@doc",
-      "general@doc",
-      "hypothes@symbol",
-      "learn@symbol",
-      "synthes@symbol",
-      "skill@doc"
-     ],
-     "path": "canonical/swe_kernel/rule_scope_learning_v1.py",
-     "score": 17.5,
-     "sha256": "c3a728270ffde3c1",
-     "source_index": true,
-     "summary": "Let a rule discover how general it actually is, instead of being told."
     }
    ],
    "vendored_donors_excluded": 0
@@ -2592,6 +2613,7 @@
     "brain_unified_model_v1",
     "browser_goal_grounding_recovery_proof",
     "browser_state_information_safe_proof",
+    "canonical_boundary_router_v1",
     "canonical_memory_crystallizer_v1",
     "canonical_swe_spine_v1",
     "capability_receipt_lane_v1",
@@ -2607,7 +2629,6 @@
     "computer_env_v1",
     "computer_use_agent_v1",
     "consistency_vs_equivalence_v1",
-    "contract_first_routing_v1",
     "contrastive_oracle_bootstrap_v1",
     "cow_angelic_zygote_v1",
     "creature_runtime_v1",
@@ -2654,6 +2675,7 @@
     "harbor_science_evidence_store_v1",
     "harbor_swe_zero_model_agent_v1",
     "history_induced_edit_grammar_v1",
+    "history_template_repair_v1",
     "hle_native_open_web_fallback_v1",
     "hle_quarantine_builder_v1",
     "hle_wikipedia_bing_transport_v1",
@@ -2764,21 +2786,39 @@
     "whitebox_introspector_and_trace_synthesizer_v1",
     "workflow_goal_generalization_v1"
    ],
-   "candidates": 189,
+   "candidates": 190,
    "frontier_function": "context that stays correct as it fills",
    "harvested_all": 50,
-   "harvested_executable_top": 8,
-   "hidden_share_all": 0.005,
-   "hidden_top": [
-    "canonical/integrations/brain_fabv2_native_v1/canonical/runtime/finance_agent_v2_zero_spend_adapter_v1.py"
-   ],
-   "in_source_index_top": 21,
-   "indexed_all": 162,
-   "invisible_share": 0.005,
-   "invisible_to_model": 1,
+   "harvested_executable_top": 9,
+   "hidden_share_all": 0.0,
+   "hidden_top": [],
+   "in_source_index_top": 25,
+   "indexed_all": 185,
+   "invisible_share": 0.0,
+   "invisible_to_model": 0,
    "top": [
     {
      "adapter_module_match": false,
+     "anchored": 9.75,
+     "harvested": false,
+     "matched": [
+      "episod@symbol",
+      "memory@doc",
+      "provenance@doc",
+      "compress@symbol",
+      "episod@doc",
+      "ledger@symbol",
+      "memory@symbol",
+      "retriev@doc"
+     ],
+     "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+     "score": 18.25,
+     "sha256": "e522b9ea243516bb",
+     "source_index": true,
+     "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
+    },
+    {
+     "adapter_module_match": true,
      "anchored": 4.5,
      "harvested": false,
      "matched": [
@@ -2794,6 +2834,46 @@
      "sha256": "d248643cd4ceb629",
      "source_index": true,
      "summary": "Memory that decides for itself what is worth keeping."
+    },
+    {
+     "adapter_module_match": false,
+     "anchored": 11.25,
+     "harvested": true,
+     "matched": [
+      "episod@symbol",
+      "recall@symbol",
+      "context@symbol",
+      "memory@symbol",
+      "recall@doc",
+      "retriev@doc",
+      "trace@symbol",
+      "index@doc"
+     ],
+     "path": "canonical/runtime/brain_unified_model_v1.py",
+     "score": 16.25,
+     "sha256": "b71d11994c583535",
+     "source_index": true,
+     "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
+    },
+    {
+     "adapter_module_match": false,
+     "anchored": 3.75,
+     "harvested": true,
+     "matched": [
+      "retriev@doc",
+      "history@doc",
+      "context@symbol",
+      "history@symbol",
+      "projec@doc",
+      "context@doc",
+      "store@doc",
+      "trace@doc"
+     ],
+     "path": "canonical/tools/history_template_repair_v1.py",
+     "score": 16.25,
+     "sha256": "51426227d88f6b8c",
+     "source_index": true,
+     "summary": "If weights may hold no world knowledge, where does the CONTENT of an added line come from?"
     },
     {
      "adapter_module_match": false,
@@ -2835,7 +2915,7 @@
      "summary": "Zero-Knowledge-House Petri-Net Component Synthesis, Dual-Program Splicing & 16-Way CoW World Tomography (`petri_cow_splicing_engine_v1`)."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 5.25,
      "harvested": false,
      "matched": [
@@ -2870,11 +2950,11 @@
      "path": "canonical/tools/scan_retrieve_fetch_v1.py",
      "score": 15.75,
      "sha256": "08b60fb6c239ff69",
-     "source_index": false,
+     "source_index": true,
      "summary": "Scan a host, retrieve what is already known, fetch only what is not."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 2.25,
      "harvested": false,
      "matched": [
@@ -2894,27 +2974,7 @@
      "summary": "Procedure memory that generalizes, and the two ways it is allowed to be wrong."
     },
     {
-     "adapter_module_match": false,
-     "anchored": 9.0,
-     "harvested": true,
-     "matched": [
-      "episod@symbol",
-      "recall@symbol",
-      "context@symbol",
-      "memory@symbol",
-      "recall@doc",
-      "retriev@doc",
-      "index@doc",
-      "cache@symbol"
-     ],
-     "path": "canonical/runtime/brain_unified_model_v1.py",
-     "score": 14.0,
-     "sha256": "4eec71b5a779bf61",
-     "source_index": true,
-     "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
-    },
-    {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 3.75,
      "harvested": true,
      "matched": [
@@ -2993,26 +3053,6 @@
     },
     {
      "adapter_module_match": false,
-     "anchored": 4.5,
-     "harvested": false,
-     "matched": [
-      "episod@symbol",
-      "memory@doc",
-      "provenance@doc",
-      "episod@doc",
-      "memory@symbol",
-      "retriev@doc",
-      "store@doc",
-      "record@symbol"
-     ],
-     "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
-     "score": 13.0,
-     "sha256": "fadb8e8258e413cd",
-     "source_index": true,
-     "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
-    },
-    {
-     "adapter_module_match": false,
      "anchored": 3.0,
      "harvested": true,
      "matched": [
@@ -3026,7 +3066,7 @@
      "path": "canonical/tools/miniwob_one_success_generalisation_measure_v1.py",
      "score": 13.0,
      "sha256": "7f60253471cef256",
-     "source_index": false,
+     "source_index": true,
      "summary": "Does ONE success become a skill? Measured on web tasks nobody in this repository wrote."
     },
     {
@@ -3102,7 +3142,7 @@
      "path": "canonical/tools/quixbugs_one_fix_transfer_measure_v1.py",
      "score": 12.0,
      "sha256": "f4b3f35cb5db7d07",
-     "source_index": false,
+     "source_index": true,
      "summary": "What does one bug fix teach? Measured on QuixBugs with the tree's own retention organ, unchanged."
     },
     {
@@ -3138,7 +3178,7 @@
      "path": "canonical/tools/what_transfers_v1.py",
      "score": 11.75,
      "sha256": "38ac208c1a619269",
-     "source_index": false,
+     "source_index": true,
      "summary": "Does \"instant learning\" generalise to arbitrary environments, or only to the one it was shown in?"
     },
     {
@@ -3161,7 +3201,7 @@
      "summary": "Experience carries over. An environment is not the first one ever seen."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 5.25,
      "harvested": false,
      "matched": [
@@ -3181,7 +3221,7 @@
      "summary": "Recursive Self-Architecting Engine (`K3 = 0`, `$0` spend, `0` host `exec()`)."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 3.75,
      "harvested": false,
      "matched": [
@@ -3201,7 +3241,7 @@
      "summary": "The Perfect Algorithm: one mechanism for any arbitrary environment."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 5.25,
      "harvested": false,
      "matched": [
@@ -3234,29 +3274,9 @@
      ],
      "path": "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
      "score": 10.5,
-     "sha256": "5481d2d1282c2015",
+     "sha256": "cb400c35dfcc2197",
      "source_index": true,
      "summary": "Unified Zero-Model SWE Wall-Closers V1: Metamorphic Witness Splitter, Codebase"
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 4.5,
-     "harvested": false,
-     "matched": [
-      "recall@doc",
-      "history@symbol",
-      "ledger@symbol",
-      "history@doc",
-      "ledger@doc",
-      "store@doc",
-      "record@symbol",
-      "store@symbol"
-     ],
-     "path": "canonical/swe_kernel/skill_contribution_ledger_v1.py",
-     "score": 10.5,
-     "sha256": "1461bc3ddfef78e3",
-     "source_index": true,
-     "summary": "A skill that stops paying for itself must stop being offered."
     }
    ],
    "vendored_donors_excluded": 2
@@ -3299,12 +3319,15 @@
     "brain_owned_semantic_relation_edge_registry_v2",
     "brain_owned_semantic_relation_edge_registry_v3",
     "brain_owned_semantic_relation_edge_registry_v4",
+    "brain_unified_model_v1",
     "bring_names_v1",
     "bytes_sequence_equivalence_presentation_v1",
     "c_load_bearing_state_quotient_v1",
     "cad_t0_oracle_adapter",
+    "canonical_boundary_router_v1",
     "canonical_env_discovery_spine_v1",
     "canonical_frame_v1",
+    "canonical_memory_crystallizer_v1",
     "canonical_oracle_vericoding_spine_v1",
     "canonical_swe_spine_v1",
     "canonical_tree_attestation_v1",
@@ -3329,6 +3352,7 @@
     "confinement_v1",
     "consistency_vs_equivalence_v1",
     "contract_native_proof_suites",
+    "counterfactual_discr_tree_skill_router_v1",
     "coverage_cc_r1_professional_r12_semantic_verify_v2",
     "coverage_cc_r1_r3_promotion_reality_containment_verify_v1",
     "coverage_cc_r2_professional_r12_semantic_verify_v2",
@@ -3342,6 +3366,7 @@
     "cow_angelic_zygote_v1",
     "cow_impact_repair_engine_v1",
     "cow_lens_fuzz_and_negative_space_v1",
+    "creature_runtime_v1",
     "cross_document_effect_semantic_lattice_verify_v1",
     "cross_document_residual_effect_frontier_v1",
     "cross_document_residual_effect_frontier_verify_v1",
@@ -3492,6 +3517,7 @@
     "recursive_self_architect_v1",
     "regcap_local_appositive_identity_v1",
     "regression_sweep_v1",
+    "relational_guard_addition_symbolic_repair_v1",
     "rename_local_variable_v1",
     "renewable_action_v1",
     "reserve_bare_nonidentifiability_v1",
@@ -3587,28 +3613,48 @@
     "work_unit_validity_guard_v2",
     "worker_syscall_allowlist_v1"
    ],
-   "candidates": 323,
+   "candidates": 329,
    "frontier_function": "know when you do not know, and prove what you did",
-   "harvested_all": 53,
-   "harvested_executable_top": 7,
-   "hidden_share_all": 0.04,
+   "harvested_all": 57,
+   "harvested_executable_top": 6,
+   "hidden_share_all": 0.027,
    "hidden_top": [
     "canonical/runtime/escape_progress_shared_gap_audit_v1.py",
     "canonical/runtime/escape_progress_shared_gap_audit_v2.py",
     "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
-    "canonical/tools/isolated_effect_receipt_verifier_v1.py",
-    "canonical/capabilities/true/oracles/scheduler_oracles_v1.py",
-    "canonical/tools/isolated_worktree_fixture_collector_v1.py",
     "canonical/runtime/structured_method_universal_correctness_certificate_v1.py",
-    "canonical/tools/isolated_effect_collector_v1.py"
+    "canonical/runtime/finite_probe_nonidentifiability_certificate_v1.py",
+    "canonical/runtime/tool_discovery_universal_scope_certificate_v1.py",
+    "canonical/runtime/livebench_legacy15_composition_partition_v1.py",
+    "canonical/runtime/coding_static_verified_capability_route_theorem_v1.py"
    ],
-   "in_source_index_top": 22,
-   "indexed_all": 261,
-   "invisible_share": 0.04,
-   "invisible_to_model": 13,
+   "in_source_index_top": 24,
+   "indexed_all": 294,
+   "invisible_share": 0.027,
+   "invisible_to_model": 9,
    "top": [
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
+     "anchored": 12.75,
+     "harvested": false,
+     "matched": [
+      "witness@doc",
+      "falsif@symbol",
+      "prove@symbol",
+      "witness@symbol",
+      "audit@doc",
+      "certif@doc",
+      "admission@symbol",
+      "audit@symbol"
+     ],
+     "path": "canonical/swe_kernel/canonical_oracle_vericoding_spine_v1.py",
+     "score": 28.25,
+     "sha256": "f6dd48ac889f4f2e",
+     "source_index": true,
+     "summary": "Canonical Dual-Channel Witness Inversion, Goal-Negation Oracle & Formal Vericoding Spine (`0H`)."
+    },
+    {
+     "adapter_module_match": true,
      "anchored": 6.75,
      "harvested": true,
      "matched": [
@@ -3626,26 +3672,6 @@
      "sha256": "bf5869117b63986d",
      "source_index": true,
      "summary": "Compose only what is proved \u2014 a composition rule with premise survival, per-step"
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 6.0,
-     "harvested": false,
-     "matched": [
-      "witness@doc",
-      "witness@symbol",
-      "audit@doc",
-      "certif@doc",
-      "audit@symbol",
-      "certif@symbol",
-      "gate@doc",
-      "proof@doc"
-     ],
-     "path": "canonical/swe_kernel/canonical_oracle_vericoding_spine_v1.py",
-     "score": 21.5,
-     "sha256": "0476e8e7c7088b9f",
-     "source_index": true,
-     "summary": "Canonical Dual-Channel Witness Inversion, Goal-Negation Oracle & Formal Vericoding Spine (`0H`)."
     },
     {
      "adapter_module_match": false,
@@ -3704,7 +3730,7 @@
      "path": "canonical/tools/a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1.py",
      "score": 18.5,
      "sha256": "d0a415dc354e57c2",
-     "source_index": false,
+     "source_index": true,
      "summary": "A check that nobody runs is a check that cannot be wrong: the guide cites a read-only"
     },
     {
@@ -3887,6 +3913,26 @@
     },
     {
      "adapter_module_match": false,
+     "anchored": 6.75,
+     "harvested": true,
+     "matched": [
+      "prove@doc",
+      "prove@symbol",
+      "admission@symbol",
+      "admit@symbol",
+      "refus@doc",
+      "admit@doc",
+      "independent@doc",
+      "gate@symbol"
+     ],
+     "path": "canonical/runtime/creature_runtime_v1.py",
+     "score": 15.25,
+     "sha256": "d03ea5f6f55680bf",
+     "source_index": true,
+     "summary": "Seven organs, finally in one body."
+    },
+    {
+     "adapter_module_match": false,
      "anchored": 4.5,
      "harvested": false,
      "matched": [
@@ -3943,7 +3989,7 @@
      "summary": "Consistency is evidence; equivalence is the goal. No model, no network."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 2.25,
      "harvested": false,
      "matched": [
@@ -3983,6 +4029,25 @@
      "summary": "Strict proof-carrying information-theoretic externality gate."
     },
     {
+     "adapter_module_match": true,
+     "anchored": 4.5,
+     "harvested": true,
+     "matched": [
+      "witness@doc",
+      "admit@doc",
+      "witness@symbol",
+      "audit@symbol",
+      "audit@doc",
+      "gate@doc",
+      "verify@symbol"
+     ],
+     "path": "canonical/runtime/relational_guard_addition_symbolic_repair_v1.py",
+     "score": 14.0,
+     "sha256": "1c135097c7ea1c2a",
+     "source_index": true,
+     "summary": "Play C \u2014 Relational AST Guard/Addition Synthesizer & Symbolic Witness Mutation Gate (`K3 = 0`)."
+    },
+    {
      "adapter_module_match": false,
      "anchored": 3.75,
      "harvested": false,
@@ -4003,6 +4068,25 @@
     },
     {
      "adapter_module_match": false,
+     "anchored": 6.75,
+     "harvested": false,
+     "matched": [
+      "abstain@symbol",
+      "prove@doc",
+      "counterexample@symbol",
+      "audit@symbol",
+      "refus@doc",
+      "witness@doc",
+      "invariant@doc"
+     ],
+     "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+     "score": 13.75,
+     "sha256": "e522b9ea243516bb",
+     "source_index": true,
+     "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
+    },
+    {
+     "adapter_module_match": false,
      "anchored": 2.25,
      "harvested": true,
      "matched": [
@@ -4015,7 +4099,7 @@
      "path": "canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py",
      "score": 13.75,
      "sha256": "c1cf8f16ef553eb7",
-     "source_index": false,
+     "source_index": true,
      "summary": "A type you wrote is a type you guess: on a room of kinds this tree never named, the"
     },
     {
@@ -4037,62 +4121,6 @@
      "sha256": "4dd144d787ef4981",
      "source_index": true,
      "summary": "Fail-closed deterministic aggregator for critical composition invariants."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 7.5,
-     "harvested": true,
-     "matched": [
-      "prove@doc",
-      "admit@symbol",
-      "attest@symbol",
-      "audit@symbol",
-      "counterexample@doc",
-      "tamper@symbol",
-      "gate@symbol",
-      "receipt@symbol"
-     ],
-     "path": "canonical/runtime/verifier_falsification_v1.py",
-     "score": 13.5,
-     "sha256": "eb08b91ba9fd3b88",
-     "source_index": true,
-     "summary": "Prove that each verifier can say no."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 3.0,
-     "harvested": true,
-     "matched": [
-      "prove@doc",
-      "prove@symbol",
-      "falsif@doc",
-      "proof@doc",
-      "receipt@doc",
-      "verify@doc",
-      "verify@symbol"
-     ],
-     "path": "canonical/runtime/verify_bound_capability_provenance_v1.py",
-     "score": 13.5,
-     "sha256": "3db3242a054dfa3f",
-     "source_index": true,
-     "summary": "Provenance for bound capability rows -- re-derivable, not asserted."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 2.25,
-     "harvested": true,
-     "matched": [
-      "prove@doc",
-      "admit@doc",
-      "refus@doc",
-      "refus@symbol",
-      "receipt@doc"
-     ],
-     "path": "canonical/runtime/capability_forge_v1.py",
-     "score": 13.25,
-     "sha256": "ce0894f9d70a21f4",
-     "source_index": true,
-     "summary": "Admit a dormant module as a capability -- only if it can be killed first."
     }
    ],
    "vendored_donors_excluded": 0
@@ -4111,7 +4139,10 @@
     "brain_unified_model_v1",
     "browser_state_information_safe_proof",
     "c_asan_cegis_repair_v1",
+    "canonical_boundary_router_v1",
+    "canonical_env_discovery_spine_v1",
     "canonical_memory_crystallizer_v1",
+    "canonical_swe_spine_v1",
     "capability_planner",
     "capability_selection_retrieval_v1",
     "causal_candidate_generator",
@@ -4120,11 +4151,14 @@
     "causal_residual_ranker",
     "causal_swe_repair_v1",
     "causal_trace_to_skill_compiler_v1",
+    "compile_brain_unified_model_v1",
     "compose_measured_effects_v1",
     "computer_use_agent_v1",
     "consequence_table_v1",
+    "counterfactual_discr_tree_skill_router_v1",
     "coverage_is_the_bottleneck_not_hypotheses_v1",
     "cow_angelic_zygote_v1",
+    "creature_runtime_v1",
     "creature_stakes_and_initiative_v1",
     "credit_assignment_v1",
     "cross_document_effect_hypothesis_worldset_v1",
@@ -4222,25 +4256,21 @@
     "what_the_vocabulary_cannot_say_v1",
     "what_transfers_to_a_second_host_v1"
    ],
-   "candidates": 123,
+   "candidates": 129,
    "frontier_function": "predict what an action does before doing it",
-   "harvested_all": 37,
+   "harvested_all": 40,
    "harvested_executable_top": 9,
-   "hidden_share_all": 0.041,
+   "hidden_share_all": 0.008,
    "hidden_top": [
-    "canonical/capabilities/true/oracles/docx_span_edit_oracles_v1.py",
-    "canonical/capabilities/true/oracles/same_identity_supervisor_oracles_v1.py",
-    "canonical/capabilities/true/oracles/vendor/baselkit_sa_ccr_52293ef9.py",
-    "canonical/capabilities/true/oracles/docx_exact_text_edit_oracles_v1.py",
     "canonical/runtime/terminal_causal_depth_controller_v1.py"
    ],
-   "in_source_index_top": 19,
-   "indexed_all": 98,
-   "invisible_share": 0.041,
-   "invisible_to_model": 5,
+   "in_source_index_top": 24,
+   "indexed_all": 126,
+   "invisible_share": 0.008,
+   "invisible_to_model": 1,
    "top": [
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 11.25,
      "harvested": false,
      "matched": [
@@ -4314,12 +4344,12 @@
      ],
      "path": "canonical/swe_kernel/sentient_cognitive_core_v1.py",
      "score": 20.75,
-     "sha256": "d07b84327f2bfac0",
+     "sha256": "d32a7badda8dc0bf",
      "source_index": true,
      "summary": "Sentient Cognitive Core V1 (`sentient_cognitive_core_v1`, `K3 = 0`)."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 8.25,
      "harvested": false,
      "matched": [
@@ -4339,7 +4369,7 @@
      "summary": "Reverse-Execution Synthesis, Differential State Tomography, Algebraic Skill Composition,"
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 8.25,
      "harvested": false,
      "matched": [
@@ -4375,7 +4405,7 @@
      "path": "canonical/tools/compose_measured_effects_v1.py",
      "score": 18.5,
      "sha256": "5b872e50b6b28bb8",
-     "source_index": false,
+     "source_index": true,
      "summary": "Compose measured effects: solve what a machine can express, PROVE what it cannot."
     },
     {
@@ -4395,7 +4425,7 @@
      "path": "canonical/tools/the_vocabulary_must_be_computed_not_written_v1.py",
      "score": 17.75,
      "sha256": "eca1492bfdd3cb47",
-     "source_index": false,
+     "source_index": true,
      "summary": "The vocabulary must be computed, not written: a hand-named effect merges transitions the world tells apart."
     },
     {
@@ -4439,7 +4469,7 @@
      "summary": "Play 1 \u2014 State-as-Contract World Model (`state_contract_world_model_v1`)."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 10.5,
      "harvested": false,
      "matched": [
@@ -4454,7 +4484,7 @@
      ],
      "path": "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
      "score": 15.5,
-     "sha256": "6ed969077cd88e7b",
+     "sha256": "9cc5c9de62033c2c",
      "source_index": true,
      "summary": "Meta-Circular Reflective Program Graph (`K3 = 0`, `$0` spend)."
     },
@@ -4495,11 +4525,11 @@
      "path": "canonical/tools/one_experience_every_consequence_v1.py",
      "score": 15.0,
      "sha256": "48100871ec4bb76d",
-     "source_index": false,
+     "source_index": true,
      "summary": "One action in, every consequence out: what one experience buys, and where it stops."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 6.75,
      "harvested": false,
      "matched": [
@@ -4534,7 +4564,7 @@
      "path": "canonical/tools/what_the_vocabulary_cannot_say_v1.py",
      "score": 14.25,
      "sha256": "3c1adfc91fc390c0",
-     "source_index": false,
+     "source_index": true,
      "summary": "What the vocabulary cannot say, computed rather than lamented."
     },
     {
@@ -4612,7 +4642,7 @@
      "summary": "Does the system's model of itself predict anything?"
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 5.25,
      "harvested": false,
      "matched": [
@@ -4666,11 +4696,11 @@
      "path": "canonical/tools/an_actions_effect_is_a_provenance_map_v1.py",
      "score": 12.25,
      "sha256": "31d9db3c0afb03d2",
-     "source_index": false,
+     "source_index": true,
      "summary": "An action's effect is a provenance map, and one execution identifies it."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 4.5,
      "harvested": false,
      "matched": [
@@ -4689,7 +4719,7 @@
      "summary": "Perfect Algorithm V1 \u2014 the model itself."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 6.0,
      "harvested": false,
      "matched": [
@@ -4708,7 +4738,7 @@
      "summary": "Universal Computer-Use Agent: Zero-Model, Zero-Knowledge-House Causal Engine (v1)."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 3.75,
      "harvested": true,
      "matched": [
@@ -4731,13 +4761,13 @@
  "method": "weighted lexical evidence over module stem, docstring and symbol names; frontier vocabulary and this repository's own vocabulary in one table",
  "min_score": 3.0,
  "model_calls": 0,
- "modules_scanned": 3303,
+ "modules_scanned": 3317,
  "network_calls": 0,
  "per_domain": 25,
  "reachability": {
   "coding_agents": {
-   "chance_route_recall": 0.0411,
-   "chance_source_recall": 0.1292,
+   "chance_route_recall": 0.1113,
+   "chance_source_recall": 0.1313,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -4801,8 +4831,8 @@
      ],
      "routed_top": [
       "code.patch.tree_sitter.verify.v1",
-      "python.tests.mutation_score.v1",
-      "python.source.change_impact.testselect.v1"
+      "python.source.change_impact.testselect.v1",
+      "python.tests.mutation_score.v1"
      ],
      "source_hit": true,
      "source_top": [
@@ -4820,7 +4850,7 @@
      "routed_hit": [
       "python.repository.acceptance.measure.v1",
       "software.repair.choreograph.crossfile.v1",
-      "python.software.repair.apply.verified.v1"
+      "python.patch.search.test_guided.ast.v1"
      ],
      "routed_top": [
       "python.repository.acceptance.measure.v1",
@@ -4883,11 +4913,11 @@
    ]
   },
   "computer_use": {
-   "chance_route_recall": 0.0152,
-   "chance_source_recall": 0.0648,
-   "frontier_route_hit_recall": 0.0,
+   "chance_route_recall": 0.0523,
+   "chance_source_recall": 0.0659,
+   "frontier_route_hit_recall": 0.667,
    "frontier_source_hit_recall": 0.667,
-   "native_route_hit_recall": 0.667,
+   "native_route_hit_recall": 1.0,
    "native_source_hit_recall": 1.0,
    "rows": [
     {
@@ -4895,8 +4925,10 @@
      "hit": true,
      "kind": "frontier",
      "query": "operate a browser page by clicking elements on screen",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:OSWORLD_BROWSER_OPS"
+     ],
      "routed_top": [
       "web.browser.rendered.capture.chromedriver",
       "git.repository.operate.v1",
@@ -4910,14 +4942,18 @@
      ]
     },
     {
-     "coverage": 0.166667,
+     "coverage": 0.333333,
      "hit": true,
      "kind": "frontier",
      "query": "drive an unfamiliar desktop application through its GUI",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:INTERFACE_ACTION_GRAMMAR",
+      "engine:STATE_CONTRACT_WORLD_MODEL"
+     ],
      "routed_top": [
-      "engine:INTERFACE_ACTION_GRAMMAR"
+      "engine:INTERFACE_ACTION_GRAMMAR",
+      "engine:STATE_CONTRACT_WORLD_MODEL"
      ],
      "source_hit": true,
      "source_top": [
@@ -4946,16 +4982,19 @@
      ]
     },
     {
-     "coverage": 0.428571,
+     "coverage": 0.571429,
      "hit": true,
      "kind": "native",
      "query": "drive the OSWorld guest through CDP browser ops",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:OSWORLD_BROWSER_OPS",
+      "engine:VERIFIED_ZERO_SCREENSHOT_ACTION_CACHE"
+     ],
      "routed_top": [
       "engine:OSWORLD_BROWSER_OPS",
       "web.browser.rendered.capture.chromedriver",
-      "python.issue.natural_language.parse_edit_intent.v1"
+      "engine:VERIFIED_ZERO_SCREENSHOT_ACTION_CACHE"
      ],
      "source_hit": true,
      "source_top": [
@@ -4993,7 +5032,9 @@
      "query": "bind a sensor request into guest state ops",
      "route_hit": true,
      "routed_hit": [
-      "canonical.runtime.state_contract_world_model_v1.hidden.v1"
+      "engine:OSWORLD_BROWSER_OPS",
+      "engine:DOM_STATE_ENVIRONMENT",
+      "engine:STATE_CONTRACT_WORLD_MODEL"
      ],
      "routed_top": [
       "evidence.claim_spec.bind.explicit_comparison.stdlib",
@@ -5010,11 +5051,11 @@
    ]
   },
   "continual_learning": {
-   "chance_route_recall": 0.0087,
-   "chance_source_recall": 0.013,
-   "frontier_route_hit_recall": 0.0,
+   "chance_route_recall": 0.0202,
+   "chance_source_recall": 0.0147,
+   "frontier_route_hit_recall": 0.333,
    "frontier_source_hit_recall": 0.333,
-   "native_route_hit_recall": 0.333,
+   "native_route_hit_recall": 0.667,
    "native_source_hit_recall": 0.333,
    "rows": [
     {
@@ -5036,16 +5077,18 @@
      ]
     },
     {
-     "coverage": 0.375,
-     "hit": false,
+     "coverage": 0.5,
+     "hit": true,
      "kind": "frontier",
      "query": "expire rules that no longer hold and keep the store current",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:RULE_EXPIRY_WORLD_FINGERPRINT"
+     ],
      "routed_top": [
-      "engine:STRUCTURAL_REWRITE_INDUCTION",
+      "engine:RULE_EXPIRY_WORLD_FINGERPRINT",
       "python.vcs.merge_conflict.resolve.v1",
-      "canonical.runtime.binding_pin_is_current_v1.hidden.v1"
+      "engine:STRUCTURAL_REWRITE_INDUCTION"
      ],
      "source_hit": false,
      "source_top": [
@@ -5074,16 +5117,19 @@
      ]
     },
     {
-     "coverage": 0.285714,
+     "coverage": 0.428571,
      "hit": true,
      "kind": "native",
      "query": "expire a rule whose scope no longer holds",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:RULE_EXPIRY_WORLD_FINGERPRINT",
+      "engine:VERIFIED_SKILL_CRYSTALLIZER"
+     ],
      "routed_top": [
+      "engine:RULE_EXPIRY_WORLD_FINGERPRINT",
       "engine:CONTRASTIVE_ORACLE_BOOTSTRAP",
-      "engine:VERIFIED_SKILL_CRYSTALLIZER",
-      "engine:SUBCOMMAND_SCOPE_PROBER"
+      "engine:VERIFIED_SKILL_CRYSTALLIZER"
      ],
      "source_hit": true,
      "source_top": [
@@ -5136,8 +5182,8 @@
    ]
   },
   "instant_learning": {
-   "chance_route_recall": 0.0043,
-   "chance_source_recall": 0.0773,
+   "chance_route_recall": 0.1012,
+   "chance_source_recall": 0.0797,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -5171,6 +5217,8 @@
      "query": "infer a program from one example and prove it works",
      "route_hit": true,
      "routed_hit": [
+      "engine:EDIT_BY_EXAMPLE_PROSE",
+      "engine:INSTANT_ONE_SHOT_LEARNER",
       "meta:ONE_SHOT_REALITY_CLOSURE"
      ],
      "routed_top": [
@@ -5193,12 +5241,13 @@
      "route_hit": true,
      "routed_hit": [
       "engine:LEARNING_EPISODE",
-      "meta:ONE_SHOT_REALITY_CLOSURE"
+      "engine:VERIFIED_SKILL_CRYSTALLIZER",
+      "engine:INSTANT_ONE_SHOT_LEARNER"
      ],
      "routed_top": [
+      "engine:LEARNING_EPISODE",
       "engine:CONTRASTIVE_ORACLE_BOOTSTRAP",
-      "engine:VERIFIED_SKILL_CRYSTALLIZER",
-      "engine:LEARNING_EPISODE"
+      "engine:RULE_EXPIRY_WORLD_FINGERPRINT"
      ],
      "source_hit": true,
      "source_top": [
@@ -5236,12 +5285,14 @@
      "query": "anti-unify two examples into one rule",
      "route_hit": true,
      "routed_hit": [
+      "engine:VERIFIED_SKILL_CRYSTALLIZER",
+      "engine:INSTANT_ONE_SHOT_LEARNER",
       "meta:ONE_SHOT_REALITY_CLOSURE"
      ],
      "routed_top": [
       "engine:CROSS_MODAL_TOMOGRAPHY_PETRI",
       "engine:CONTRASTIVE_ORACLE_BOOTSTRAP",
-      "engine:VERIFIED_SKILL_CRYSTALLIZER"
+      "engine:RULE_EXPIRY_WORLD_FINGERPRINT"
      ],
      "source_hit": true,
      "source_top": [
@@ -5257,6 +5308,8 @@
      "query": "teach a lesson from one trace",
      "route_hit": true,
      "routed_hit": [
+      "engine:LESSON_ADMISSION_GATE",
+      "engine:INSTANT_ONE_SHOT_LEARNER",
       "meta:ONE_SHOT_REALITY_CLOSURE"
      ],
      "routed_top": [
@@ -5274,9 +5327,9 @@
    ]
   },
   "memory": {
-   "chance_route_recall": 0.013,
-   "chance_source_recall": 0.0836,
-   "frontier_route_hit_recall": 0.0,
+   "chance_route_recall": 0.059,
+   "chance_source_recall": 0.0837,
+   "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 0.333,
    "native_source_hit_recall": 1.0,
@@ -5286,8 +5339,10 @@
      "hit": true,
      "kind": "frontier",
      "query": "recall the right prior episode as context when the window is nearly full",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:PROSE_CLAIM_EXPERIMENT"
+     ],
      "routed_top": [
       "engine:PROSE_CLAIM_EXPERIMENT",
       "engine:LEARNING_EPISODE",
@@ -5305,11 +5360,15 @@
      "hit": true,
      "kind": "frontier",
      "query": "keep a durable memory of prior runs that stays correct as it grows",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:ASSOCIATIVE_EPISODIC_MEMORY",
+      "engine:PROCEDURE_TRAJECTORY_MEMORY"
+     ],
      "routed_top": [
-      "python.swe.transform_and_synthesize.v1",
-      "python.vcs.merge_conflict.resolve.v1"
+      "python.vcs.merge_conflict.resolve.v1",
+      "engine:ASSOCIATIVE_EPISODIC_MEMORY",
+      "engine:PROCEDURE_TRAJECTORY_MEMORY"
      ],
      "source_hit": true,
      "source_top": [
@@ -5319,13 +5378,17 @@
      ]
     },
     {
-     "coverage": 0.166667,
-     "hit": false,
+     "coverage": 0.333333,
+     "hit": true,
      "kind": "frontier",
      "query": "compress a long trajectory without losing the facts it carried",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:PROCEDURE_TRAJECTORY_MEMORY",
+      "engine:UNIVERSAL_COMPUTER_PETRI_AGENT"
+     ],
      "routed_top": [
+      "engine:PROCEDURE_TRAJECTORY_MEMORY",
       "engine:UNIVERSAL_COMPUTER_PETRI_AGENT",
       "canonical/verification/run_long_horizon_continuity_v1.py.auto.v1"
      ],
@@ -5396,9 +5459,9 @@
    ]
   },
   "verification_abstention": {
-   "chance_route_recall": 0.0779,
-   "chance_source_recall": 0.1444,
-   "frontier_route_hit_recall": 0.333,
+   "chance_route_recall": 0.1231,
+   "chance_source_recall": 0.1465,
+   "frontier_route_hit_recall": 0.667,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 0.333,
    "native_source_hit_recall": 0.667,
@@ -5410,6 +5473,7 @@
      "query": "refuse when the evidence does not establish the claim",
      "route_hit": true,
      "routed_hit": [
+      "engine:PROSE_CLAIM_EXPERIMENT",
       "canonical/runtime/p3_required_claim_grounded_realization_cell_v1.py.auto.v1"
      ],
      "routed_top": [
@@ -5429,12 +5493,15 @@
      "hit": true,
      "kind": "frontier",
      "query": "prove the result with an independent witness",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:COUNTERFACTUAL_DISCR_TREE_SKILL_ROUTER",
+      "engine:FRONTIER_FST_LENS_SYNTHESIS"
+     ],
      "routed_top": [
       "shell.command.run",
-      "engine:FRONTIER_FST_LENS_SYNTHESIS",
-      "engine:LIVEBENCH_IF_CONSTRAINT_SOLVER"
+      "decision.synthesis.verify.stdlib",
+      "docx.document.verify.intent_ooxml"
      ],
      "source_hit": true,
      "source_top": [
@@ -5523,11 +5590,11 @@
    ]
   },
   "world_model": {
-   "chance_route_recall": 0.0065,
-   "chance_source_recall": 0.0545,
-   "frontier_route_hit_recall": 0.333,
+   "chance_route_recall": 0.0422,
+   "chance_source_recall": 0.057,
+   "frontier_route_hit_recall": 0.667,
    "frontier_source_hit_recall": 1.0,
-   "native_route_hit_recall": 0.333,
+   "native_route_hit_recall": 0.667,
    "native_source_hit_recall": 1.0,
    "rows": [
     {
@@ -5537,12 +5604,13 @@
      "query": "predict the next screen state before taking the action",
      "route_hit": true,
      "routed_hit": [
+      "engine:STATE_CONTRACT_WORLD_MODEL",
       "canonical.runtime.state_contract_world_model_v1.hidden.v1"
      ],
      "routed_top": [
       "engine:INTERFACE_ACTION_GRAMMAR",
-      "canonical/runtime/root3_minimum_action_cut_v1.py.auto.v1",
-      "engine:DOM_STATE_ENVIRONMENT"
+      "engine:VERIFIED_ZERO_SCREENSHOT_ACTION_CACHE",
+      "canonical/runtime/root3_minimum_action_cut_v1.py.auto.v1"
      ],
      "source_hit": true,
      "source_top": [
@@ -5556,8 +5624,11 @@
      "hit": true,
      "kind": "frontier",
      "query": "simulate the consequence of a patch before applying it",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:C_ASAN_CEGIS_REPAIR",
+      "engine:JS_CAUSAL_CEGIS_REPAIR"
+     ],
      "routed_top": [
       "code.patch.tree_sitter.verify.v1",
       "python.fault.patch.supercomposer.v1",
@@ -5594,12 +5665,13 @@
      "query": "project the state delta of an action before doing it",
      "route_hit": true,
      "routed_hit": [
+      "engine:STATE_CONTRACT_WORLD_MODEL",
       "canonical.runtime.state_contract_world_model_v1.hidden.v1"
      ],
      "routed_top": [
+      "engine:STATE_CONTRACT_WORLD_MODEL",
       "engine:FINANCE_QUANTITATIVE_ALGEBRA",
-      "engine:INTERFACE_ACTION_GRAMMAR",
-      "canonical/runtime/root3_minimum_action_cut_v1.py.auto.v1"
+      "engine:INTERFACE_ACTION_GRAMMAR"
      ],
      "source_hit": true,
      "source_top": [
@@ -5613,12 +5685,16 @@
      "hit": true,
      "kind": "native",
      "query": "rank residual causes for an observed effect",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:STATE_CONTRACT_WORLD_MODEL",
+      "engine:ANGELIC_LENS_COW_REPAIR",
+      "engine:REVERSE_TOMOGRAPHY_ALGEBRA"
+     ],
      "routed_top": [
       "source.objective_relevance.rank.bm25",
-      "auto.apt.zint",
-      "canonical/runtime/root3_current_credited_zero_effect_reconciliation_verifier_v1.py.auto.v1"
+      "engine:STATE_CONTRACT_WORLD_MODEL",
+      "auto.apt.zint"
      ],
      "source_hit": true,
      "source_top": [
