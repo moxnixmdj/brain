@@ -55,6 +55,10 @@ import warnings
 from pathlib import Path
 from typing import Any, Iterable, Mapping
 
+_COMPILER_REPO_ROOT = str(Path(__file__).resolve().parents[2])
+if _COMPILER_REPO_ROOT not in sys.path:
+    sys.path.insert(0, _COMPILER_REPO_ROOT)
+
 _DBSP_CACHE_VERSION = 3
 
 
@@ -264,6 +268,7 @@ MODEL_ID = "BRAIN-UNIFIED-MODEL-V1"
 MODEL_VERSION = 1
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_OUTPUT = "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+DEFAULT_CORE_OUTPUT = "canonical/unified_model/BRAIN_UNIFIED_CORE_V1.json"
 FABRIC_PATH = "canonical/runtime/unified_cognitive_fabric_v1.py"
 REGISTRY_PATH = "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
 
@@ -2312,6 +2317,21 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
     return model
 
 
+def _build_hot_core_payload(model: Mapping[str, Any], raw_bytes: bytes) -> dict[str, Any]:
+    """Extract the compact hot executable core (`<700 KB`) with `os.pread` verification offsets."""
+    from canonical.runtime.brain_unified_model_v1 import _extract_routing_core
+
+    raw_sha = hashlib.sha256(raw_bytes).hexdigest()
+    core = _extract_routing_core(model, raw_sha)
+    digest_val = str((model.get("digest") or {}).get("value") or "")
+    needle = f'"value": "{digest_val}"'.encode("ascii")
+    schema_needle = f'"schema": "{SCHEMA}"'.encode("ascii")
+    core["artifact_bytes"] = len(raw_bytes)
+    core["digest_needle_offset"] = raw_bytes.find(needle)
+    core["schema_needle_offset"] = raw_bytes.find(schema_needle)
+    return core
+
+
 def write_model(
     model: Mapping[str, Any],
     path: str | Path | None = None,
@@ -2324,11 +2344,17 @@ def write_model(
         target = base / target
     target.parent.mkdir(parents=True, exist_ok=True)
     text = json.dumps(model, indent=1, sort_keys=True, ensure_ascii=False) + "\n"
-    target.write_text(text, encoding="utf-8")
-    if target.resolve() == (ROOT / DEFAULT_OUTPUT).resolve():
-        from canonical.runtime.brain_unified_model_v1 import prewarm_sidecar_caches
+    raw_bytes = text.encode("utf-8")
+    target.write_bytes(raw_bytes)
+    if target.resolve() == (base / DEFAULT_OUTPUT).resolve():
+        core_path = base / DEFAULT_CORE_OUTPUT
+        core_payload = _build_hot_core_payload(model, raw_bytes)
+        core_json = json.dumps(core_payload, separators=(",", ":"), sort_keys=True, ensure_ascii=False) + "\n"
+        core_path.write_text(core_json, encoding="utf-8")
+        if target.resolve() == (ROOT / DEFAULT_OUTPUT).resolve():
+            from canonical.runtime.brain_unified_model_v1 import prewarm_sidecar_caches
 
-        prewarm_sidecar_caches(model, target)
+            prewarm_sidecar_caches(model, target)
     return target
 
 
