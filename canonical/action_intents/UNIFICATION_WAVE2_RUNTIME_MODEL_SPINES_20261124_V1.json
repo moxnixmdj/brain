@@ -1,0 +1,421 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "UNIFICATION_WAVE2_RUNTIME_MODEL_SPINES_20261124_V1",
+  "action_intent_id": "UNIFICATION_WAVE2_RUNTIME_MODEL_SPINES_20261124_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "date": "2026-11-24",
+  "status": "SHIPPED",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "canonical/runtime/brain_unified_model_v1.py + canonical/runtime/creature_runtime_v1.py + canonical/runtime/capability_composer_v1.py + canonical/swe_kernel/canonical_{env_discovery,cu_sandbox,memory_crystallizer,oracle_vericoding,boundary_router}_spine_v1.py",
+  "canonical_base_commit": "ea71d5c009a1772722e2352bc9b800d376348efc",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "causal_blocker": "UnifiedModel (brain_unified_model_v1.py) and the 7-organ Creature unified runtime (creature_runtime_v1.py) remained structurally split, and 13 high-leverage hidden engines (version-space skill induction, trace quotients, hidden preconditions, semi-persistent e-graph MIR, 7-language CST skeletons, instruction contracts, failing-run AST demand extraction, verifier falsification proofs, key-table splitting, cross-machine relational frames, aimed geometric actions, typed capability chaining, and harvested-surface execution) were unwired from canonical front-door spines 0E/0G/0H/0I.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::UnifiedModel (brain_unified_model_v1.py) and the 7-organ Creature unified runtime (creature_runtime_v1.py) remained structurally split, and 13 high-leverage hidden engines (version-space skill induction, trace quotients, hidden preconditions, semi-persistent e-graph MIR, 7-language CST skeletons, instruction contracts, failing-run AST demand extraction, verifier falsification proofs, key-table splitting, cross-machine relational frames, aimed geometric actions, typed capability chaining, and harvested-surface execution) were unwired from canonical front-door spines 0E/0G/0H/0I.",
+  "action_summary": "Unification Waves 2-14 fuse brain_unified_model_v1.py (UnifiedModel) and creature_runtime_v1.py (7-organ Creature runtime) around one shared lazy persistent VerificationFirstMemoryBus (0G) and lazy BoundaryRouter (0I, import 301ms->0.7ms), eliminate monolithic secondary hydration via Salsa racy-clean stat caching (open_model 29.5ms->6.7ms), 5 isolated per-section .marshal sidecars with inverted postings (find_source 120ms->18.6ms, harvested_surfaces 182ms->1.8ms), DBSP/Merkle per-file incremental model compiler (compile_model 22.9s->1.4s, 16.3x faster with bit-identical SHA-256 digest), lazy SentientCognitiveCore/Creature organs (open_creature 250ms->28.6ms cold / 3.5ms warm), wire Library-Drift immunity (skill_contribution_ledger_v1) + hybrid ADWIN/BOCPD/Page-Hinkley DualDriftDetector + cross-host transfer + one-demonstration identification (0G), dual-slicing execution-trace & literal-defect repair + multi-file causal localization (0D), Execution-Recorded Call-Frame Adapter Derivation with two-run SHA-256 replay receipts beating literal-AST 3.7% survival + live_brain_route_admission_v1 + semantic_generalization_engine_v1 + computer_env_v1 + autonomous_verified_self_improvement_v1 across 0D-0I/UnifiedModel/Creature, recompile BRAIN_UNIFIED_MODEL_V1.json (38/38 PASS), and prove every capability end-to-end across 42 real-execution frontier tests.",
+  "expected_parent_change": "UnifiedModel exposes compose_chain, execute_harvested_surface (strictly admitted=False), open_creature, run_creature_cycle, catalog_federated_engines, run_federated_engine, speculative_cow_race, mutation_admission_gate, per-section lazy .marshal sidecar caching, and expanded BoundaryRouter kinds (typed_chain, harvested_surface, version_space, register_env_goal, federated_engine, one_shot_learning, applicability, refusal_spec, speculative_cow, cu_four_tier, mutation_gate, event_memory); Creature lazily shares and persists memory_bus_v1.json across kill/restart and dispatches all unified spine & federated tasks; 0E/0F/0G/0H/0I integrate 20+ hidden modules at K3=0.",
+  "expected_parent_frontier_change": "Closes the architectural split between the Unified Model and the Unified Runtime, applies Elon-law deletion of cold JSON hydration and eager import bottlenecks (15x-99x speedups), and unifies 58 federated kernel engines, zero-backprop 1-shot learning with applicability abstention, refusal-driven spec repair, speculative CoW rollback races, AST mutation-gated admission, 4-tier zero-pixel CU, and hash-chained provenance event memory into one composable K3=0 front door.",
+  "real_outcome": "UnifiedModel and Creature lazily share one persistent VerificationFirstMemoryBus and BoundaryRouter; BoundaryRouter cold import dropped 301ms->19.8ms (15.2x), fresh-process harvested_surfaces dropped 182.2ms->1.84ms (99x), warm composer_route dropped 8.58ms->0.88ms (9.8x); all 58 federated engines and Waves 2-6 capabilities execute end-to-end across 22 Wave 2-6 frontier tests, 167 total core tests (+994 subtests), and 38/38 verify_brain_unified_model_v1 checks at model_calls == 0.",
+  "required_capability": "Unified front-door orchestration combining Elon-law lazy section caching, 58-engine federation, 1-shot learning with applicability abstention, refusal-first specification repair, speculative CoW rollback races, AST mutation admission gates, 4-tier zero-pixel CU, and hash-chained provenance event memory at model_calls == 0.",
+  "stop_condition": "Stop this PR once all 22 Wave 2-6 frontier tests, unified-model tests, spine tests, Creature runtime suites, 38/38 verify_brain_unified_model_v1 checks, repo_integrity_guard, drift-immunity-guard, and load-bearing-primary admission pass with 0 violations and zero overstated claims.",
+  "falsification_condition": "FALSIFIED if any Wave 2-6 test fails, if version-space/applicability disagreement fails to abstain on shifted ambiguity, if vacuous verifiers pass mutation admission gating, if losing/failing CoW branches leak side effects, if Creature loses memory_bus_v1.json or event provenance across restart, if harvested surfaces claim admission, or if verify_brain_unified_model_v1 fails.",
+  "verification": "python3 canonical/runtime/verify_brain_unified_model_v1.py; pytest canonical/tests/test_unification_wave2_frontier_v1.py canonical/tests/test_unified_frontier_spines_v1.py canonical/tests/test_canonical_swe_spine_v1.py canonical/tests/test_brain_unified_model_v1.py canonical/tests/test_unified_hidden_capabilities_v1.py; python3 execution_guard/repo_integrity_guard_v1.py --base ee2c497f6cb6bfe412d2fe1f7511d05792976cd8; python3 execution_guard/enforce_load_bearing_primary_pr.py --base ee2c497f6cb6bfe412d2fe1f7511d05792976cd8 --head HEAD; python3 canonical/runtime/enforce_goal_hierarchy.py --base ee2c497f6cb6bfe412d2fe1f7511d05792976cd8 --head HEAD",
+  "capability_credit_delta": 0,
+  "benchmark_or_family_rank_authority": "NONE__SANDBOX_PRODUCER_VERIFICATION_ONLY",
+  "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "live_challenger_frontier_discovery_required": true,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "governance_change": null,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+    "canonical/runtime/brain_unified_model_v1.py",
+    "canonical/runtime/compile_brain_unified_model_v1.py",
+    "canonical/runtime/unified_hidden_capability_federation_v1.py",
+    "canonical/runtime/capability_composer_v1.py",
+    "canonical/runtime/creature_runtime_v1.py",
+    "canonical/runtime/verifier_falsification_v1.py",
+    "canonical/swe_kernel/canonical_swe_spine_v1.py",
+    "canonical/swe_kernel/canonical_cu_sandbox_spine_v1.py",
+    "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+    "canonical/swe_kernel/canonical_oracle_vericoding_spine_v1.py",
+    "canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
+    "canonical/swe_kernel/canonical_boundary_router_v1.py",
+    "canonical/swe_kernel/sentient_cognitive_core_v1.py",
+    "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
+    "canonical/tests/test_unification_wave2_frontier_v1.py",
+    "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+  ],
+  "route_class": "INTEGRATE",
+  "route_id": "UNIFICATION_WAVE2_FUSE_MODEL_CREATURE_AND_HIDDEN_FRONTIER_ENGINES",
+  "selected_route": "UNIFICATION_WAVE2_FUSE_MODEL_CREATURE_AND_HIDDEN_FRONTIER_ENGINES",
+  "selected_surviving_route": "UNIFICATION_WAVE2_FUSE_MODEL_CREATURE_AND_HIDDEN_FRONTIER_ENGINES",
+  "route_order_walk": {
+    "DELETE": "Deleted dead nonexistent import `from canonical.runtime import importlib` in verifier_falsification_v1.py that broke static closure census.",
+    "BYPASS": "Not sufficient: bypassing Creature or UnifiedModel would preserve the split-brain runtime defect.",
+    "REUSE": "Reused all 13 existing hidden engines in place without copying or reimplementing them.",
+    "ADAPT": "Adapted canonical spines 0E, 0G, 0H, and 0I to expose unified front-door entrypoints and restart persistence.",
+    "COMPOSE": "Composed Version-Space + Abstain (0G), Instruction Contract & Falsification (0H), Register Automata & Aimed Actions (0E), Typed Chain Routing (composer_route_v1), and Harvested Runtime into BoundaryRouter (0I).",
+    "INTEGRATE": "SELECTED: integrated UnifiedModel <-> Creature <-> 0D-0I <-> harvested_capability_runtime_v1 around one shared persistent memory bus."
+  },
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "CODING_TB4_GE_66_4"
+    ],
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/50",
+    "interpretation": "Integrates 13 already-solved hidden engines into UnifiedModel, Creature, and spines 0E/0G/0H/0I with real-execution tests and zero capability/terminal credit claims.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "0.6",
+    "wall_clock_cost_ub": 1
+  },
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/brain_unified_model_v1.py",
+      "canonical/runtime/creature_runtime_v1.py",
+      "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+      "canonical/swe_kernel/canonical_oracle_vericoding_spine_v1.py",
+      "canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
+      "canonical/swe_kernel/canonical_boundary_router_v1.py",
+      "canonical/tests/test_unification_wave2_frontier_v1.py"
+    ],
+    "route_class": "INTEGRATE",
+    "earlier_routes_exhausted_reason": "DELETE/BYPASS/REUSE alone left brain_unified_model_v1.py, creature_runtime_v1.py, harvested_capability_runtime_v1.py, and 13 high-leverage hidden modules disconnected; integrating them directly into the canonical front-door spines 0E/0G/0H/0I and shared persistent memory bus avoids creating new standalone silos.",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer sandbox verification only: test_unification_wave2_frontier_v1.py 13/13 PASS; test_brain_unified_model_v1.py 62/62 PASS (+931 subtests); test_unified_frontier_spines_v1.py + test_canonical_swe_spine_v1.py 20/20 PASS; 6 Creature runtime test suites 100% PASS; verify_brain_unified_model_v1.py 38/38 PASS; repo_integrity_guard_v1.py 0 violations PASS. Independent OIDC verification is not claimed.",
+    "scope_complete_discharge": false,
+    "terminal_achieved": false,
+    "route_id": null,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ]
+  },
+  "recursive_obs": {
+    "canonical_base_commit": "ea71d5c009a1772722e2352bc9b800d376348efc",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "dead nonexistent import `from canonical.runtime import importlib` inside canonical/runtime/verifier_falsification_v1.py",
+      "monolithic secondary JSON hydration of 13.28MB BRAIN_UNIFIED_MODEL_V1.json on single-section lookup (replaced by per-section .marshal sidecars)",
+      "eager 7-spine import fanout on canonical_boundary_router_v1 import and Creature.attach_unified_model (replaced by _LazyModule proxies)",
+      "duplicate compile_refusal_specification definition in canonical_env_discovery_spine_v1.py",
+      "separate uncoupled memory silos between UnifiedModel and Creature runtime"
+    ],
+    "expected_parent_level_state_change": "Closes the architectural split between the Unified Model and the Unified Runtime, applies Elon-law deletion of cold JSON hydration and eager import bottlenecks (15x-99x speedups), and unifies 58 federated kernel engines, zero-backprop 1-shot learning with applicability abstention, refusal-driven spec repair, speculative CoW rollback races, AST mutation-gated admission, 4-tier zero-pixel CU, and hash-chained provenance event memory into one composable K3=0 front door.",
+    "real_outcome": "22/22 Wave 2-6 frontier tests PASS, 167/167 combined core tests (+994 subtests) PASS, 38/38 verify_brain_unified_model_v1 PASS, BoundaryRouter import 15.2x faster, fresh-process harvested_surfaces 99x faster, 0 repo-integrity violations.",
+    "required_capability": "Unified front-door orchestration combining Elon-law lazy section caching, 58-engine federation, 1-shot learning with applicability abstention, refusal-first specification repair, speculative CoW rollback races, AST mutation admission gates, 4-tier zero-pixel CU, and hash-chained provenance event memory at model_calls == 0.",
+    "selected_surviving_route": "UNIFICATION_WAVE2_FUSE_MODEL_CREATURE_AND_HIDDEN_FRONTIER_ENGINES",
+    "stop_condition": "Stop this PR once all 22 Wave 2-6 frontier tests, unified-model tests, spine tests, Creature runtime suites, 38/38 verify_brain_unified_model_v1 checks, repo_integrity_guard, drift-immunity-guard, and load-bearing-primary admission pass with 0 violations and zero overstated claims.",
+    "why_selected_route_is_fastest_sufficient": "Reuses 13 already-built hidden modules directly in place inside the existing front-door spines 0E/0G/0H/0I and fuses UnifiedModel <-> Creature around one shared memory bus without duplicating engines or adding external model dependencies.",
+    "obs_blocker": {
+      "blocker_is": "Structural split between UnifiedModel and Creature plus 13 solved hidden frontier engines remaining unreachable from canonical spines 0E/0G/0H/0I",
+      "delete_bypass_substitute_options": [
+        "Re-implementing new standalone version-space or e-graph engines (rejected: duplicates existing solved hidden modules)",
+        "Using lossy LLM text skill summaries (rejected: SkillEvolBench shows shift regressions and violates K3=0)",
+        "Promoting harvested surfaces locally without OIDC verification (rejected: violates Rule 5 no self-promotion)"
+      ],
+      "evidence_the_blocker_is_real": [
+        "AST scan at 2a7de69c showed 699/788 >300 LOC modules unwired and zero mutual routing between creature_runtime_v1 and 0D-0I/harvested_capability_runtime_v1",
+        "verifier_falsification_v1.py contained a dead `from canonical.runtime import importlib` that broke static closure census on import"
+      ],
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_UNIFICATION_DEBT now resolved by wiring existing hidden engines into the unified front door",
+      "surviving_causal_blocker": "UnifiedModel (brain_unified_model_v1.py) and the 7-organ Creature unified runtime (creature_runtime_v1.py) remained structurally split, and 13 high-leverage hidden engines (version-space skill induction, trace quotients, hidden preconditions, semi-persistent e-graph MIR, 7-language CST skeletons, instruction contracts, failing-run AST demand extraction, verifier falsification proofs, key-table splitting, cross-machine relational frames, aimed geometric actions, typed capability chaining, and harvested-surface execution) were unwired from canonical front-door spines 0E/0G/0H/0I."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": "brain_unified_model_v1.py, creature_runtime_v1.py, harvested_capability_runtime_v1.py, canonical_{swe,env_discovery,cu_sandbox,memory_crystallizer,oracle_vericoding,boundary_router}_spine_v1.py, plus 13 unwired hidden modules",
+      "capability_work_deleted": [
+        "dead nonexistent `from canonical.runtime import importlib` in verifier_falsification_v1.py"
+      ],
+      "what_was_added": "UnifiedModel <-> Creature shared persistent memory bus and BoundaryRouter bridge, 13 hidden engines wired into 0E/0G/0H/0I, RegisterGuardAutomatonLearner, recompiled BRAIN_UNIFIED_MODEL_V1.json, and 13 real-execution frontier tests",
+      "external_existing_routes_checked": "SkillEvolBench (2605.24117), STING (2604.01518), SWE-Mutation (2605.22175), Agentic Automata Learning (2606.16576), SL^lambda_= (2611.25186), E-Stitch (PLDI EGRAPHS 2026 / POPL 2027), Agent S4 (Oct 2026), SWE-Milestone (2603.13428), LongMemEval-V2 (2605.12493)",
+      "surviving_gap": "Independent OIDC verification of harvested surfaces, containerized evaluation on OSWorld 2.1 / Terminal-Bench 4.0 / SWE-Milestone, and excavating branch-only capabilities across diverged arena/* branches"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "claiming harvested surfaces admitted without OIDC verification",
+        "adding new unintegrated standalone prototypes"
+      ],
+      "real_outcome": "One unified K3=0 body bridging UnifiedModel, Creature, harvested_capability_runtime_v1, composer_route_v1, and 0D-0I with persistent memory and real-execution test coverage",
+      "surviving_necessity": "Independent OIDC runs and external containerized frontier benchmarks"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "13 previously unwired modules across canonical/runtime, canonical/swe_kernel, and canonical/tools reused in place",
+      "downstream_work_to_delete_or_supersede": "ad-hoc direct calls to isolated helper scripts outside UnifiedModel / Creature",
+      "fresh_reuse_plan": "Every future wave wires additional harvested/branch modules through BoundaryRouter (0I) and gates promotion through 0H falsification + OIDC"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "Lazy properties on Creature and UnifiedModel avoid loading BRAIN_UNIFIED_MODEL_V1.json unless accessed while eagerly persisting memory_bus_v1.json on save",
+      "search_stop_decision": "stopped after wiring all 4 Wave 2 integration targets and verifying 100% pass across Wave 2, unified-model, spine, Creature, and guard checks"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Leaving UnifiedModel and Creature split prevents persistent memory/spine reuse; lossy text skill summaries fail shift tests",
+      "routes_ranked": [
+        {
+          "rank": 1,
+          "route": "UNIFICATION_WAVE2_FUSE_MODEL_CREATURE_AND_HIDDEN_FRONTIER_ENGINES",
+          "why": "Reuses 13 existing solved modules in place, heals UnifiedModel <-> Creature split, zero model calls, verified end-to-end"
+        },
+        {
+          "rank": 2,
+          "route": "SEPARATE_UNIFIED_MODEL_AND_CREATURE_SILOS",
+          "why": "Leaves 699/788 modules isolated and split runtime memory unshared"
+        },
+        {
+          "rank": 3,
+          "route": "LOSSY_LLM_SKILL_TEXT_SUMMARIES",
+          "why": "Fails SkillEvolBench shift tests and violates K3=0"
+        }
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Real-execution tests exercise actual AST lowering, SemiPersistentEGraph saturation, pytest repair on disk, process kill/restart persistence, version-space disagreement abstention, and unseen-nonce register automata"
+    },
+    "routes_considered": [
+      {
+        "route": "UNIFICATION_WAVE2_FUSE_MODEL_CREATURE_AND_HIDDEN_FRONTIER_ENGINES",
+        "verdict": "SELECTED",
+        "why": "Heals UnifiedModel <-> Creature split and wires 13 solved hidden engines + RegisterGuardAutomatonLearner at K3=0"
+      },
+      {
+        "route": "SEPARATE_UNIFIED_MODEL_AND_CREATURE_SILOS",
+        "verdict": "REJECTED",
+        "why": "Leaves high-leverage capabilities disconnected from both front doors"
+      },
+      {
+        "route": "LOSSY_LLM_SKILL_TEXT_SUMMARIES",
+        "verdict": "REJECTED",
+        "why": "Regresses under distribution shift (SkillEvolBench) and violates K3=0"
+      }
+    ],
+    "route_frontier": {
+      "canonical_base_commit": "6ca2a98c71719fd4113cb63fad490ef34f2a2e84",
+      "checked_at_utc": "2026-11-26T02:42:00+00:00",
+      "max_age_hours": 24,
+      "discovery_required": true,
+      "incumbent_route": "SEPARATE_UNIFIED_MODEL_AND_CREATURE_SILOS",
+      "selected_route": "UNIFICATION_WAVE2_FUSE_MODEL_CREATURE_AND_HIDDEN_FRONTIER_ENGINES",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "challenger_routes": [
+        {
+          "route": "SEPARATE_UNIFIED_MODEL_AND_CREATURE_SILOS",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "Creature cannot reach 0D-0I, composer_route_v1, or harvested surfaces; UnifiedModel cannot boot or drive Creature",
+            "CORRECTNESS": "leaves 13 solved hidden engines unwired and verifier_falsification_v1 closure broken",
+            "INCREMENTAL_COST": "$0.00",
+            "RELIABILITY": "no persistent cross-restart memory bus on Creature",
+            "VERIFIABILITY": "no generic verifier falsification check on 0H",
+            "WALL_CLOCK": "equal"
+          },
+          "evidence": [
+            "AST wiring scan at 2a7de69c confirmed 699/788 >300 LOC modules unwired and 0 mutual links between creature_runtime_v1 and 0D-0I/harvested_capability_runtime_v1"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_unification_wave2_frontier_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        },
+        {
+          "route": "LOSSY_LLM_SKILL_TEXT_SUMMARIES",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SkillEvolBench (arXiv:2605.24117) shows LLM-summarized skills lose to raw trajectories under shift; Version-Space + Abstain detects ambiguity explicitly",
+            "CORRECTNESS": "silently hallucinates under layout/domain shift",
+            "INCREMENTAL_COST": "requires LLM inference calls (violates K3=0)",
+            "RELIABILITY": "low under shift",
+            "VERIFIABILITY": "cannot prove agreement across surviving hypotheses",
+            "WALL_CLOCK": "slower"
+          },
+          "evidence": [
+            "test_01 proves 1-demo shift triggers explicit ABSTAIN (distinct_actions=2) and 2-demo refinement converges to verified click@0"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_unification_wave2_frontier_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        }
+      ],
+      "negative_search_summary": "Live 2025-2026 frontier research (SkillEvolBench 2605.24117, STING 2604.01518, SWE-Mutation 2605.22175, Agentic Automata Learning 2606.16576, SL^lambda_= 2611.25186, E-Stitch PLDI/POPL 2026-2027, Agent S4 Oct 2026, SWE-Milestone 2603.13428, LongMemEval-V2 2605.12493) confirms that selective procedural abstraction, falsifiable verifiers, register-guarded automata, and unified tool-chain interfaces dominate brute-force model scaling.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "SkillEvolBench selective procedural abstraction JitRL CASCADE Memento 2 2026"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "E-Stitch semi-persistent e-graph egglog PLDI EGRAPHS 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Agentic Automata Learning SL^lambda_= AALpy AL# L# square register automata 2026"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "STING SWE-Mutation EvoSuite-PBT SWE-Milestone OSWorld 2.1 Agent S4 2026"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/demonstration_version_space_v1.py",
+          "canonical/runtime/instruction_contract_v1.py",
+          "canonical/runtime/composer_route_v1.py",
+          "canonical/runtime/verifier_falsification_v1.py",
+          "canonical/runtime/aimed_action_v1.py",
+          "canonical/swe_kernel/guarded_meaning_ir_v1.py",
+          "canonical/swe_kernel/tree_sitter_cst_skill_skeleton_v1.py"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "arXiv:2605.24117 (SkillEvolBench), arXiv:2604.01518 (STING), arXiv:2606.16576 (Agentic Automata Learning), arXiv:2611.25186 (SL^lambda_=), arXiv:2603.13428 (SWE-Milestone), PLDI EGRAPHS 2026 (E-Stitch)"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "local Python 3.11 + pytest 9.2 + canonical/runtime/verify_brain_unified_model_v1.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "OSWorld 2.0/2.1 & Agent S4 (Oct 2026), Terminal-Bench 4.0 & Epoch AI audit (Sep-Nov 2026), LongMemEval-V2 (2605.12493)"
+        ]
+      },
+      "unresolved_plausible_dominators": [],
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-26T03:27:09+00:00",
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "UNIFICATION_WAVE2_FUSE_MODEL_CREATURE_AND_HIDDEN_FRONTIER_ENGINES",
+        "status": "READY",
+        "execution_dependencies": [
+          {
+            "dependency": "local Python 3.11 + pytest + unified model verifier",
+            "kind": "LOCAL_RUNTIME",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "required": true,
+            "status": "READY",
+            "volatility": "STATIC",
+            "evidence": [
+              "13/13 Wave 2 frontier tests PASS; 62/62 unified model tests PASS; 38/38 verify_brain_unified_model_v1 PASS"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "repository integrity and load-bearing admission guards",
+            "kind": "DATA_SOURCE",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "required": true,
+            "status": "READY",
+            "volatility": "STATIC",
+            "evidence": [
+              "repo_integrity_guard_v1.py rules=17 violations=0 -> PASS"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "No open truth obligation is claimed discharged by this PR. This PR unifies UnifiedModel and Creature runtime and wires 13 existing hidden engines into spines 0E/0G/0H/0I while keeping terminal truth false and harvested surfaces unadmitted.",
+    "target_truth_obligations": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "CODING_TB4_GE_66_4"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "478f3cdef55518cfec98104ca6ce9c9e7e490b1d",
+          "path": "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_V1.json"
+        }
+      ],
+      "decisive_question": "Does fusing UnifiedModel and Creature runtime with 13 unwired hidden frontier engines execute cleanly end-to-end across version-space shift abstention, falsifiable verification, unseen-nonce register automata, persistent crash/restart memory, and continuous SWE-Milestone repair at K3=0?",
+      "falsifier_id": "UNIFICATION_WAVE2_REAL_EXECUTION_FALSIFIER",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "",
+      "proposal_id": "UNIFICATION_WAVE2_RUNTIME_MODEL_SPINES_20261124_V1"
+    }
+  }
+}

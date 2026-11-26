@@ -387,3 +387,356 @@ def execute_speculative_computer_task(
     report["status"] = "FAIL_CLOSED__CU_SANDBOX_UNSOLVED"
     report["reason"] = "NO_CANDIDATE_OR_ROUTE_VERIFIED"
     return report
+
+
+def _cow_clone_tree(src: Path, dst: Path) -> str:
+    """Zero-copy reflink CoW clone when filesystem supports it (`DeltaFS`/Btrfs/XFS), falling back to `shutil.copytree`."""
+    cp_bin = shutil.which("cp")
+    if cp_bin:
+        try:
+            proc = subprocess.run(
+                [cp_bin, "-a", "--reflink=auto", str(src), str(dst)],
+                capture_output=True,
+                timeout=10.0,
+                check=False,
+            )
+            if proc.returncode == 0 and dst.is_dir():
+                return "REFLINK_AUTO"
+        except Exception:
+            pass
+        if dst.exists():
+            shutil.rmtree(dst, ignore_errors=True)
+    shutil.copytree(src, dst, symlinks=True)
+    return "COPYTREE_FALLBACK"
+
+
+def durable_transactional_commit(
+    workspace_root: str | Path,
+    file_writes: Mapping[str, bytes | str],
+    *,
+    crash_at: str | None = None,
+    recover_after_crash: bool = False,
+) -> dict[str, Any]:
+    """Crash-safe multi-path journaled commit (`the_record_is_the_commit_v1` × STRATUS TNR).
+
+    Every multi-file commit stages its files, computes idempotent SHA-256 content-addressed
+    operations (`operations(world)`), and writes a durable journal first (`before_journal` ->
+    `after_journal` -> `after_op:<path>` -> `after_committed` -> `after_cleanup`), so a crash
+    at ANY boundary can be deterministically recovered via `the_record_is_the_commit_v1.recover`.
+    """
+    from canonical.tools import the_record_is_the_commit_v1 as rec_commit
+
+    root = Path(workspace_root).resolve()
+    root.mkdir(parents=True, exist_ok=True)
+    journal_root = root / ".brain_commit_journal"
+    stage_dir = journal_root / "stage"
+    if stage_dir.exists():
+        shutil.rmtree(stage_dir)
+    stage_dir.mkdir(parents=True, exist_ok=True)
+
+    # Copy existing live files (excluding journal dir) into stage, then apply requested writes
+    for live_f in root.rglob("*"):
+        if not live_f.is_file():
+            continue
+        rel = live_f.relative_to(root)
+        if rel.parts and rel.parts[0] == ".brain_commit_journal":
+            continue
+        dst_s = stage_dir / rel
+        dst_s.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(live_f, dst_s)
+
+    expected_shas: dict[str, str] = {}
+    for rel, raw in sorted(file_writes.items()):
+        rel_s = str(rel).lstrip("/")
+        p_live = (root / rel_s).resolve()
+        p_live.relative_to(root)
+        p_live.parent.mkdir(parents=True, exist_ok=True)
+        p_stage = (stage_dir / rel_s).resolve()
+        p_stage.relative_to(stage_dir)
+        p_stage.parent.mkdir(parents=True, exist_ok=True)
+        data = raw if isinstance(raw, bytes) else str(raw).encode("utf-8")
+        p_stage.write_bytes(data)
+        expected_shas[rel_s] = hashlib.sha256(data).hexdigest()
+
+    world = {"live": root, "stage": stage_dir}
+    # Ignore files inside .brain_commit_journal when computing diff operations
+    ops = [
+        op
+        for op in rec_commit.operations(world)
+        if not str(op.get("path") or "").startswith(".brain_commit_journal")
+    ]
+    trace: list[str] = []
+    if crash_at is None:
+        commit_res = rec_commit.run_commit(journal_root, world, ops, None, trace, with_record=True)
+    else:
+        import json as _json
+        import sys as _sys
+
+        # Run crash-injected commit in a real isolated child process because `run_commit` calls `os._exit(9)`!
+        child_code = (
+            "import json, pathlib, sys; "
+            "from canonical.tools import the_record_is_the_commit_v1 as rc; "
+            "j = pathlib.Path(sys.argv[1]); live = pathlib.Path(sys.argv[2]); stage = pathlib.Path(sys.argv[3]); "
+            "ops = json.loads(sys.argv[4]); crash_at = sys.argv[5]; "
+            "res = rc.run_commit(j, {'live': live, 'stage': stage}, ops, crash_at, [], with_record=True); "
+            "print(json.dumps(res))"
+        )
+        proc = subprocess.run(
+            [
+                _sys.executable,
+                "-c",
+                child_code,
+                str(journal_root),
+                str(root),
+                str(stage_dir),
+                _json.dumps(ops),
+                str(crash_at),
+            ],
+            capture_output=True,
+            text=True,
+            timeout=15.0,
+            check=False,
+        )
+        commit_res = {
+            "completed": proc.returncode == 0,
+            "crashed": ("CRASH_AT:" in proc.stderr) or (proc.returncode == 9),
+            "returncode": proc.returncode,
+            "stderr": proc.stderr.strip(),
+        }
+    recovery_res = None
+    if crash_at is not None and recover_after_crash:
+        recovery_res = rec_commit.recover(journal_root, world, trace)
+    final_shas = {rel: rec_commit.sha_of(root / rel) for rel in expected_shas}
+    all_committed = all(final_shas.get(k) == v for k, v in expected_shas.items())
+    # Clean up staging/journal directory after full clean completion or recovery
+    if all_committed:
+        shutil.rmtree(journal_root, ignore_errors=True)
+    passed = all_committed if (crash_at is None or recover_after_crash) else bool(commit_res.get("crashed"))
+    return {
+        "schema": SCHEMA,
+        "pass": passed,
+        "status": (
+            "PASS__DURABLE_COMMIT_VERIFIED"
+            if all_committed
+            else ("PASS__CRASH_INJECTED_RECORDED" if commit_res.get("crashed") else "FAIL_CLOSED__COMMIT_INCOMPLETE")
+        ),
+        "all_committed": all_committed,
+        "operation_count": len(ops),
+        "commit_result": commit_res,
+        "recovery_result": recovery_res,
+        "final_shas": final_shas,
+        "trace": trace,
+        "model_calls": 0,
+    }
+
+
+def speculative_cow_race(
+    workspace_root: str | Path,
+    branches: Sequence[Mapping[str, Any]],
+    oracle_fn: Callable[[Path], bool],
+    *,
+    commit_winner: bool = True,
+    durable_commit: bool = False,
+) -> dict[str, Any]:
+    """Speculative side-effect-free CoW multi-future race (`0F` × DeltaBox/BunshinFork rollback).
+
+    Each branch in ``branches`` supplies:
+      - ``branch_id``: str
+      - ``apply_fn``: Callable[[Path], Any]  (mutates an isolated CoW copy of ``workspace_root``)
+
+    If a branch satisfies ``oracle_fn(branch_dir)``, ONLY that winning branch's file changes are
+    committed back to ``workspace_root`` (when ``commit_winner=True``); losing branches and failed
+    races are discarded with zero side-effect leakage onto the real workspace.
+    """
+    import filecmp
+    import shutil
+    import tempfile
+
+    t0 = time.perf_counter()
+    root = Path(workspace_root).resolve()
+    branch_results: list[dict[str, Any]] = []
+    winner: dict[str, Any] | None = None
+    committed_files: list[str] = []
+    clone_modes: list[str] = []
+    durable_receipt: dict[str, Any] | None = None
+
+    with tempfile.TemporaryDirectory(prefix="brain_cow_race_") as tmp_base:
+        tmp_path = Path(tmp_base)
+        for idx, br in enumerate(branches):
+            bid = str(br.get("branch_id") or f"branch_{idx}")
+            apply_fn = br.get("apply_fn")
+            if not callable(apply_fn):
+                branch_results.append({"branch_id": bid, "passed": False, "error": "APPLY_FN_NOT_CALLABLE"})
+                continue
+            bdir = tmp_path / f"b_{idx}"
+            clone_modes.append(_cow_clone_tree(root, bdir))
+            b_t0 = time.perf_counter()
+            err = None
+            passed = False
+            try:
+                apply_fn(bdir)
+                passed = bool(oracle_fn(bdir))
+            except Exception as exc:
+                err = f"{type(exc).__name__}: {exc}"
+                passed = False
+            b_ms = round((time.perf_counter() - b_t0) * 1000.0, 3)
+            branch_results.append({"branch_id": bid, "passed": passed, "elapsed_ms": b_ms, "error": err})
+            if passed and winner is None:
+                winner = {"branch_id": bid, "dir": bdir}
+                if commit_winner:
+                    # Commit only changed/added files from winning branch; remove deleted files
+                    win_files = {p.relative_to(bdir) for p in bdir.rglob("*") if p.is_file()}
+                    orig_files = {p.relative_to(root) for p in root.rglob("*") if p.is_file()}
+                    to_write: dict[str, bytes] = {}
+                    for rel in sorted(win_files):
+                        src = bdir / rel
+                        dst = root / rel
+                        if not dst.exists() or not filecmp.cmp(src, dst, shallow=False):
+                            to_write[str(rel)] = src.read_bytes()
+                            committed_files.append(str(rel))
+                    if durable_commit and to_write:
+                        durable_receipt = durable_transactional_commit(root, to_write)
+                    else:
+                        for rel_s, data in to_write.items():
+                            dst = root / rel_s
+                            dst.parent.mkdir(parents=True, exist_ok=True)
+                            dst.write_bytes(data)
+                    for rel in sorted(orig_files - win_files):
+                        (root / rel).unlink(missing_ok=True)
+                        committed_files.append(f"-{rel}")
+                break
+
+    elapsed_ms = round((time.perf_counter() - t0) * 1000.0, 3)
+    return {
+        "schema": SCHEMA,
+        "pass": winner is not None,
+        "status": "PASS__SPECULATIVE_COW_WINNER_COMMITTED" if winner is not None else "FAIL_CLOSED__ALL_COW_BRANCHES_ROLLED_BACK",
+        "winner_branch_id": winner["branch_id"] if winner is not None else None,
+        "committed": bool(winner is not None and commit_winner),
+        "committed_files": committed_files,
+        "clone_mode": clone_modes[0] if clone_modes else None,
+        "durable_commit_receipt": durable_receipt,
+        "branches_evaluated": len(branch_results),
+        "branch_results": branch_results,
+        "elapsed_ms": elapsed_ms,
+        "model_calls": 0,
+    }
+
+
+def inspect_repo_environment_broker(repo_root: str | Path) -> dict[str, Any]:
+    """Zero-model environment broker inspection (`the_environment_broker_v1` + `causal_computer_use_agent_v1`)."""
+    from canonical.runtime import causal_computer_use_agent_v1 as causal_cu
+    from canonical.swe_kernel import the_environment_broker_v1 as broker_mod
+
+    root = Path(repo_root).resolve()
+    layout = broker_mod.detect_layout(root)
+    pyproject = (root / "pyproject.toml") if (root / "pyproject.toml").is_file() else None
+    decls = broker_mod.read_declarations(root, pyproject)
+    test_cmds = broker_mod.declared_test_commands(root, pyproject)
+    runners = broker_mod.runner_candidates(root, pyproject)
+    return {
+        "schema": SCHEMA,
+        "pass": True,
+        "status": "PASS__ENVIRONMENT_BROKER_INSPECTED",
+        "repo_root": str(root),
+        "layout": layout,
+        "declarations": decls,
+        "declared_test_commands": test_cmds,
+        "runner_candidates": runners,
+        "causal_cu_agent_wired": hasattr(causal_cu, "GoalDirectedAgent"),
+        "model_calls": 0,
+    }
+
+
+def compile_four_tier_cu_action(
+    *,
+    direct_command: Sequence[str] | None = None,
+    webmcp_tool: Mapping[str, Any] | None = None,
+    typed_action: Mapping[str, Any] | None = None,
+    osworld_v21_state: Mapping[str, Any] | None = None,
+    aimed_observation: Mapping[str, Any] | None = None,
+    screen_width: int = 1920,
+    screen_height: int = 1080,
+) -> dict[str, Any]:
+    """Enforce the Zero-Pixel-First Computer-Use escalation ladder:
+      Tier 0:   direct CLI / programmatic command (0 pixels, <1ms)
+      Tier 0.5: WebMCP / CDP typed browser tool (`document.modelContext`, 0 pixels)
+      Tier 1:   typed OSWorld surface / a11y action (`osworld_computer_surface_v1`)
+      Tier 1.5: OSWorld v2.1 zero-model a11y/tomography policy (`osworld_v21_zero_model_policy_v1`)
+      Tier 2:   geometric aimed action (`aimed_action_v1`, zero VLM)
+      Tier 3:   fail-closed visual fallback witness (never hallucinates coordinates)
+    """
+    if direct_command:
+        return {
+            "schema": SCHEMA,
+            "pass": True,
+            "tier": "TIER_0_DIRECT_PROGRAMMATIC",
+            "pixels_used": 0,
+            "argv": [str(x) for x in direct_command],
+            "model_calls": 0,
+        }
+    if isinstance(webmcp_tool, Mapping) and webmcp_tool.get("name"):
+        return {
+            "schema": SCHEMA,
+            "pass": True,
+            "tier": "TIER_0_5_WEBMCP_TYPED_TOOL",
+            "pixels_used": 0,
+            "tool_name": str(webmcp_tool["name"]),
+            "arguments": dict(webmcp_tool.get("arguments") or {}),
+            "origin": str(webmcp_tool.get("origin") or ""),
+            "model_calls": 0,
+        }
+    if typed_action is not None:
+        from canonical.runtime import osworld_computer_surface_v1 as osw
+
+        sc = osw.Screen(int(screen_width), int(screen_height))
+        code = osw.compile_osworld_pyautogui(typed_action, sc)
+        return {
+            "schema": SCHEMA,
+            "pass": True,
+            "tier": "TIER_1_TYPED_SURFACE_ACTION",
+            "pixels_used": 0,
+            "compiled_code": code,
+            "model_calls": 0,
+        }
+    if osworld_v21_state is not None:
+        from canonical.runtime import osworld_v21_zero_model_policy_v1 as osw21
+
+        st_norm = dict(osworld_v21_state)
+        if "a11y_tree" not in st_norm and "accessibility_tree" in st_norm:
+            st_norm["a11y_tree"] = st_norm["accessibility_tree"]
+        policy = osw21.ZeroModelOSWorldPolicy()
+        decision = dict(policy(st_norm))
+        actions = list(decision.get("actions") or ())
+        non_wait = [a for a in actions if str((a or {}).get("type") or "").upper() != "WAIT"]
+        ok = bool(non_wait or decision.get("action") is not None or decision.get("done") is True)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "tier": "TIER_1_5_OSWORLD_V21_ZERO_MODEL_POLICY",
+            "pixels_used": 0,
+            "decision": decision,
+            "model_calls": 0,
+        }
+    if aimed_observation is not None:
+        from canonical.runtime import aimed_action_v1 as aimed
+
+        rows = aimed.aimed_rows(dict(aimed_observation))
+        if rows:
+            return {
+                "schema": SCHEMA,
+                "pass": True,
+                "tier": "TIER_2_GEOMETRIC_AIMED_ACTION",
+                "pixels_used": 0,
+                "actions": rows,
+                "model_calls": 0,
+            }
+    return {
+        "schema": SCHEMA,
+        "pass": False,
+        "tier": "TIER_3_VISUAL_FALLBACK_REQUIRED",
+        "status": "FAIL_CLOSED__LOWER_TIERS_INSUFFICIENT",
+        "insufficiency_witness": "NO_TIER0_CMD_NO_WEBMCP_NO_TIER1_SURFACE_NO_TIER2_GEOMETRY",
+        "model_calls": 0,
+    }
+
