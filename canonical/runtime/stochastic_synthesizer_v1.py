@@ -209,6 +209,7 @@ def _level2c_exhaustive(
 
     # Level 1..2 with signature dedup
     inner: dict[tuple, OE.Expr] = {}
+    pool: dict[tuple, OE.Expr] = {}
     for v in var_names:
         base = [_leaf(v, None)] + [OE.Expr(u, (_leaf(v, None),), 2) for u in ("neg", "abs")]
         for b in base:
@@ -221,6 +222,7 @@ def _level2c_exhaustive(
                             continue
                         if s == target_sig:
                             return [{"code": OE.emit_expr(e, lang), "expr": e, "size": e.size}]
+                        pool.setdefault(s, e)
                         inner.setdefault(s, e)
     # Level 3 over deduplicated signatures
     for _s, l2 in inner.items():
@@ -228,8 +230,43 @@ def _level2c_exhaustive(
             for c in consts:
                 for e in (OE.Expr(op2, (l2, _leaf(None, c)), l2.size + 2),
                           OE.Expr(op2, (_leaf(None, c), l2), l2.size + 2)):
-                    if _sig(e) == target_sig:
+                    s3 = _sig(e)
+                    if s3 is None:
+                        continue
+                    if s3 == target_sig:
                         return [{"code": OE.emit_expr(e, lang), "expr": e, "size": e.size}]
+                    # keep the whole 2c pool (signature-deduped) so the ITE
+                    # composition can use DEEP branches, not only OE's level-2
+                    # pool: the exact TACAS'17 / EUSolver pattern — terms and
+                    # conditionals are separate grammars combined by if-then-else.
+                    pool.setdefault(s3, e)
+    # --- ITE composition over the 2c pool (same coverage+guard pattern OE
+    # uses at its level 3, run on the deeper pool; miss-path only).
+    n = len(envs)
+    parts: list[tuple[int, Any, set]] = []
+    for s, e in pool.items():
+        cov = {i for i, (vv, tv) in enumerate(zip(s, target_sig)) if vv == tv}
+        if 0 < len(cov) < n:
+            parts.append((len(cov), e, cov))
+    parts.sort(key=lambda x: (-x[0], x[1].size))
+    for _c1, ex_then, cov_then in parts[:6]:
+        rem = set(range(n)) - cov_then
+        ex_else = next((e2 for _c2, e2, cov2 in parts if rem <= cov2), None)
+        if ex_else is None:
+            continue
+        f_sub = [envs[i] for i in sorted(cov_then)]
+        p_sub = [envs[i] for i in sorted(rem)]
+        try:
+            guards = OE.synthesize_separating_predicates(
+                f_sub, p_sub, lang=lang, extra_consts=consts, max_results=2
+            )
+        except Exception:
+            guards = []
+        for g in guards:
+            ite = OE.Expr("ite", (g["expr"], ex_then, ex_else),
+                          g["expr"].size + ex_then.size + ex_else.size + 1, 0)
+            if _sig(ite) == target_sig:
+                return [{"code": OE.emit_expr(ite, lang), "expr": ite, "size": ite.size}]
     return []
 
 

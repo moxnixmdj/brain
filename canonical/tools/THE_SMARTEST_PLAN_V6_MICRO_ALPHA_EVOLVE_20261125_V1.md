@@ -160,3 +160,39 @@ broad excepts deserve witnesses). Constants pool widened to include env values (
 Remaining 3/10 are all the ITE-with-deep-branches class (`(x±b)*a if…else…`): needs 2c-sized
 bodies UNDER both ITE branches — touches the promoted OE module's Level-3 composition. NOT
 done this round (scope discipline); recorded as the next known lever with its own gate.
+
+## §8 The last class closed — ITE over the 2c pool (next "go" round)
+
+Web + repo converged on the same pattern under three names: Alur's TACAS'17
+"divide and conquer" (terms grammar × conditionals grammar combined by ITE),
+the EUSolver pattern already INSIDE the promoted OE module at its Level 3 —
+and the reason the class was missed: Level 3 composes only OE's DEPTH-2 pool.
+The fix stayed inside `stochastic_synthesizer_v1` (the OE module untouched):
+the 2c enumeration now also fills a signature-deduped pool, and the same
+coverage+separating-guard composition runs on the DEEPER pool. ~40 lines.
+
+Measured, same fixed family (seed 65, steps=6, points=6): **7/10 → 10/10 @ 927 ms,
+0 LLM samples, 0 tokens**; nested-conditional unit examples recover the exact
+program and generalize over ±16 points. Saturated families are worthless as
+evidence (own falsifier #1 inverted), so the verdict number is on THREE untuned
+seeds (99, 7, 2026): **29/30 (96.7%) @ ~890 ms mean.**
+
+The single residual miss (`x if x > 3 else 4` — a shape solved on other seeds) is
+a branch-pairing cap (parts[:6] in the composition), not a grammar gap; recorded,
+not chased. Two knobs of the class remain in principle (pool cap, guard
+max_results) — each needs its own falsifier before adoption, per house law.
+
+Web corroboration this round (direct, fresh): "Can LLMs Perform Synthesis?"
+(arXiv 2603.20264, 2026) compares LLM toolchains against Cataclyst-style
+enumerative CEGIS and finds enumerative engines NEVER repeat a candidate while
+LLM toolchains "often repeat the same incorrect proposal many times" — the
+sampling tax the frontier pays is measured, not asserted. Our position inherits
+it: OE enumeration + stochastic fill-in + exhaustive 2c completion is one
+gradient-free, zero-token ladder over the same space.
+
+**Frontier-relative claim, bounded:** on this home family the loop fixes ~97% of
+broken functions at ~0.9 s and zero LLM calls per verified patch. The family is
+1-var conditional/arithmetic programs, self-generated, verifier = visible tests;
+this is NOT SWE-bench, NOT GUI, NOT long-horizon. Reach on certified HARD-51:
+still 0 — unchanged by everything above; the axis improved is candidate reach
+per millisecond, which is what the loop actually gates on.
