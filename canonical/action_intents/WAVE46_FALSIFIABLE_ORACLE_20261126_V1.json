@@ -252,13 +252,14 @@
    ],
    "selected_route": "WAVE46_FALSIFIABLE_ORACLE_V1",
    "selected_route_preflight": {
-    "all_required_dependencies_ready": false,
-    "checked_at_utc": "2026-11-26T22:43:11+00:00",
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-26T22:44:15+00:00",
     "execution_dependencies": [
      {
       "dependency": "Python 3.11 stdlib (ast, compile, eval, exec, unittest)",
       "evidence": [
-       "Re-verified 2026-11-26T22:43:11+00:00: test_wave46_falsifiable_oracle_and_admission_v1 -> FAILED (failures=1); the oracle tests exercise compile/eval/exec semantics directly."
+       "Re-probed 2026-11-26T22:44:15+00:00: test_wave46_falsifiable_oracle_and_admission_v1 -> OK. The oracle tests drive compile/eval/exec semantics directly, so the stdlib behaviour they depend on is measured, not assumed.",
+       "The first recording of this dependency said FAILED, and that was true: the suite caught the stale unified-model artefact caused by editing this very intent, because canonical/action_intents is an indexed research root. The artefact was regenerated and this dependency re-probed afterwards."
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -267,7 +268,7 @@
       "kind": "LOCAL_RUNTIME",
       "required": true,
       "scope": "LOCAL",
-      "status": "FAILED",
+      "status": "READY",
       "volatility": "STATIC"
      },
      {
