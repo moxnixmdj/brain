@@ -304,6 +304,8 @@
     "verify_brain_unified_model_v1",
     "version_space_selection_measure_v1",
     "wave39_leapfrog_unification_v1",
+    "wave40_dark_matter_frontier_kernel_v1",
+    "wave41_rung3_proposer_jitrl_continual_flywheel_v1",
     "what_a_real_fix_needs_from_the_site_v1",
     "what_an_experience_can_own_v1",
     "what_is_knowable_here_v1",
@@ -312,14 +314,14 @@
     "witness_inversion_v1",
     "zygote_worker_pool_v1"
    ],
-   "candidates": 308,
+   "candidates": 310,
    "frontier_function": "resolve a repository issue from a text description",
    "harvested_all": 111,
-   "harvested_executable_top": 9,
+   "harvested_executable_top": 8,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 25,
-   "indexed_all": 289,
+   "indexed_all": 291,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -624,6 +626,26 @@
      "summary": "Closed-Loop Execution-Trace Abduction, Dynamic Vocabulary Induction &"
     },
     {
+     "adapter_module_match": true,
+     "anchored": 6.75,
+     "harvested": false,
+     "matched": [
+      "repair@doc",
+      "swe@doc",
+      "synthes@doc",
+      "swe@symbol",
+      "fault@doc",
+      "ast@symbol",
+      "compile@doc",
+      "synthes@symbol"
+     ],
+     "path": "canonical/runtime/wave41_rung3_proposer_jitrl_continual_flywheel_v1.py",
+     "score": 26.25,
+     "sha256": "b22c755fe0ad8c0d",
+     "source_index": true,
+     "summary": "Wave 41 & Wave 42: Pluggable Rung-3 Proposer + Live JitRL + TTPO/OPSD"
+    },
+    {
      "adapter_module_match": false,
      "anchored": 4.5,
      "harvested": true,
@@ -682,6 +704,26 @@
      "sha256": "bcdcf8536c558b50",
      "source_index": true,
      "summary": "Residual-wall closers: the thirteen laws a trace-literal engine cannot reach."
+    },
+    {
+     "adapter_module_match": true,
+     "anchored": 10.5,
+     "harvested": false,
+     "matched": [
+      "swe@doc",
+      "ast@doc",
+      "repair@symbol",
+      "swe@symbol",
+      "synthes@doc",
+      "ast@symbol",
+      "bug@symbol",
+      "diff@symbol"
+     ],
+     "path": "canonical/runtime/wave40_dark_matter_frontier_kernel_v1.py",
+     "score": 24.5,
+     "sha256": "4bd50f721dfd5452",
+     "source_index": true,
+     "summary": "Wave 40 Dark-Matter Frontier Kernel (K3=0, $0 spend)."
     },
     {
      "adapter_module_match": true,
@@ -782,46 +824,6 @@
      "sha256": "b40387183c81fd89",
      "source_index": true,
      "summary": "Unified Unfamiliar-Name Frontier Leapfrog Engine (`K3 = 0`, `$0` spend, Elon's First Law)."
-    },
-    {
-     "adapter_module_match": true,
-     "anchored": 10.5,
-     "harvested": false,
-     "matched": [
-      "repair@doc",
-      "swe@doc",
-      "patch@symbol",
-      "repair@symbol",
-      "swe@symbol",
-      "metamorphic@doc",
-      "ast@symbol",
-      "mutant@symbol"
-     ],
-     "path": "canonical/runtime/asymmetric_frontier_leapfrog_v1.py",
-     "score": 23.0,
-     "sha256": "f939aa2107e2304a",
-     "source_index": true,
-     "summary": "Asymmetric Frontier-Leapfrog Unification Spine \u2014 v1."
-    },
-    {
-     "adapter_module_match": true,
-     "anchored": 7.5,
-     "harvested": true,
-     "matched": [
-      "patch@doc",
-      "mutation@doc",
-      "oracle@doc",
-      "patch@symbol",
-      "bug@doc",
-      "diff@symbol",
-      "mutant@symbol",
-      "mutation@symbol"
-     ],
-     "path": "canonical/runtime/byte_effect_oracle_v1.py",
-     "score": 23.0,
-     "sha256": "7fd8fdc00c19cf0b",
-     "source_index": true,
-     "summary": "Ring-0 Byte-Level Effect Oracle, DRA Delta-Debugging Hunk Minimizer & Mutation Gate (`K3 = 0`)."
     }
    ],
    "vendored_donors_excluded": 2
@@ -1520,16 +1522,17 @@
     "transfer_learning_v1",
     "unified_five_pillar_frontier_kernel_v1",
     "universal_computer_agent_v1",
-    "verified_skill_crystallizer_v1"
+    "verified_skill_crystallizer_v1",
+    "wave40_dark_matter_frontier_kernel_v1"
    ],
-   "candidates": 38,
+   "candidates": 39,
    "frontier_function": "keep improving without forgetting or drifting",
    "harvested_all": 14,
-   "harvested_executable_top": 11,
+   "harvested_executable_top": 10,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 23,
-   "indexed_all": 33,
+   "indexed_all": 34,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -1714,7 +1717,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 6.75,
-     "sha256": "20c37363184b1299",
+     "sha256": "93c79f7b439f15b2",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -1748,6 +1751,22 @@
      "sha256": "912489810b1f7b82",
      "source_index": true,
      "summary": "Universal Computer-Use Agent: Zero-Model, Zero-Knowledge-House Causal Engine (v1)."
+    },
+    {
+     "adapter_module_match": true,
+     "anchored": 2.25,
+     "harvested": false,
+     "matched": [
+      "consolidat@symbol",
+      "consolidat@doc",
+      "drift@doc",
+      "curriculum@doc"
+     ],
+     "path": "canonical/runtime/wave40_dark_matter_frontier_kernel_v1.py",
+     "score": 6.25,
+     "sha256": "4bd50f721dfd5452",
+     "source_index": true,
+     "summary": "Wave 40 Dark-Matter Frontier Kernel (K3=0, $0 spend)."
     },
     {
      "adapter_module_match": true,
@@ -1852,7 +1871,7 @@
      ],
      "path": "canonical/runtime/creature_runtime_v1.py",
      "score": 4.5,
-     "sha256": "3ab7faa6f5d70f0d",
+     "sha256": "5ad7cc12dc56eafc",
      "source_index": true,
      "summary": "Seven organs, finally in one body."
     },
@@ -1913,20 +1932,6 @@
      "sha256": "dc39e0d7028a0a5c",
      "source_index": true,
      "summary": "Experience carries over. An environment is not the first one ever seen."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 2.25,
-     "harvested": true,
-     "matched": [
-      "consolidat@symbol",
-      "consolidat@doc"
-     ],
-     "path": "canonical/tools/inert_action_prior_measure_v1.py",
-     "score": 3.75,
-     "sha256": "9539583dfa25205f",
-     "source_index": true,
-     "summary": "Does knowing which actions are inert make a never-solved page solvable in fewer actions?"
     }
    ],
    "vendored_donors_excluded": 0
@@ -2117,22 +2122,44 @@
     "verify_pending_cli_binding",
     "vocabulary_induction_v1",
     "wave39_leapfrog_unification_v1",
+    "wave40_dark_matter_frontier_kernel_v1",
+    "wave41_rung3_proposer_jitrl_continual_flywheel_v1",
     "what_transfers_to_a_second_host_v1",
     "what_transfers_v1",
     "witness_inversion_v1",
     "world_binding_v1"
    ],
-   "candidates": 189,
+   "candidates": 191,
    "frontier_function": "adapt from one episode without touching weights",
    "harvested_all": 70,
-   "harvested_executable_top": 12,
+   "harvested_executable_top": 11,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 24,
-   "indexed_all": 186,
+   "indexed_all": 188,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
+    {
+     "adapter_module_match": true,
+     "anchored": 9.75,
+     "harvested": false,
+     "matched": [
+      "anti_unif@symbol",
+      "induc@doc",
+      "transfer@symbol",
+      "anti_unif@doc",
+      "hypothes@doc",
+      "learn@doc",
+      "synthes@doc",
+      "acquisition@doc"
+     ],
+     "path": "canonical/runtime/wave40_dark_matter_frontier_kernel_v1.py",
+     "score": 30.75,
+     "sha256": "4bd50f721dfd5452",
+     "source_index": true,
+     "summary": "Wave 40 Dark-Matter Frontier Kernel (K3=0, $0 spend)."
+    },
     {
      "adapter_module_match": true,
      "anchored": 14.25,
@@ -2192,6 +2219,26 @@
      "sha256": "365a2822b898e2b9",
      "source_index": true,
      "summary": "Causal Demonstration-to-Program Compiler \u2014 Watch/Explore Once -> <5ms Permanent Skill."
+    },
+    {
+     "adapter_module_match": true,
+     "anchored": 6.0,
+     "harvested": false,
+     "matched": [
+      "abduct@doc",
+      "generaliz@doc",
+      "learn@doc",
+      "synthes@doc",
+      "abduct@symbol",
+      "skill@doc",
+      "demo@doc",
+      "demonstration@doc"
+     ],
+     "path": "canonical/runtime/wave41_rung3_proposer_jitrl_continual_flywheel_v1.py",
+     "score": 27.0,
+     "sha256": "b22c755fe0ad8c0d",
+     "source_index": true,
+     "summary": "Wave 41 & Wave 42: Pluggable Rung-3 Proposer + Live JitRL + TTPO/OPSD"
     },
     {
      "adapter_module_match": false,
@@ -2309,7 +2356,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 22.25,
-     "sha256": "20c37363184b1299",
+     "sha256": "93c79f7b439f15b2",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -2592,46 +2639,6 @@
      "sha256": "5a617d8d3c9a33ce",
      "source_index": true,
      "summary": "Bridge Universal Verified Adaptive Solver V3 traces into skill induction."
-    },
-    {
-     "adapter_module_match": true,
-     "anchored": 6.0,
-     "harvested": false,
-     "matched": [
-      "demonstration@doc",
-      "induc@symbol",
-      "induce@symbol",
-      "abstract@symbol",
-      "demo@doc",
-      "generaliz@doc",
-      "learn@doc",
-      "lesson@doc"
-     ],
-     "path": "canonical/swe_kernel/induced_edit_basis_v1.py",
-     "score": 18.0,
-     "sha256": "806c7517c7b1feb9",
-     "source_index": true,
-     "summary": "Where an edit comes from, and why that decides whether one experience can ever be enough."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 3.0,
-     "harvested": true,
-     "matched": [
-      "generaliz@doc",
-      "lesson@doc",
-      "skill@doc",
-      "generaliz@symbol",
-      "general@doc",
-      "learn@doc",
-      "teach@doc",
-      "general@symbol"
-     ],
-     "path": "canonical/swe_kernel/operator_semantics_v1.py",
-     "score": 18.0,
-     "sha256": "4358e083551a30c2",
-     "source_index": true,
-     "summary": "What an operator MEANS is a computation, not a membership test."
     }
    ],
    "vendored_donors_excluded": 0
@@ -2829,6 +2836,8 @@
     "verify_file_facts_provenance_v1",
     "verify_taught_words_provenance_v1",
     "wave39_leapfrog_unification_v1",
+    "wave40_dark_matter_frontier_kernel_v1",
+    "wave41_rung3_proposer_jitrl_continual_flywheel_v1",
     "weight_space_fuel_v1",
     "weights_from_scratch_v1",
     "what_an_experience_can_own_v1",
@@ -2836,14 +2845,14 @@
     "whitebox_introspector_and_trace_synthesizer_v1",
     "workflow_goal_generalization_v1"
    ],
-   "candidates": 199,
+   "candidates": 201,
    "frontier_function": "context that stays correct as it fills",
    "harvested_all": 53,
    "harvested_executable_top": 10,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 25,
-   "indexed_all": 193,
+   "indexed_all": 195,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -3019,7 +3028,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 15.5,
-     "sha256": "20c37363184b1299",
+     "sha256": "93c79f7b439f15b2",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -3297,6 +3306,26 @@
     },
     {
      "adapter_module_match": false,
+     "anchored": 11.25,
+     "harvested": true,
+     "matched": [
+      "recall@symbol",
+      "history@symbol",
+      "ledger@symbol",
+      "memory@symbol",
+      "receipt@symbol",
+      "trace@symbol",
+      "record@symbol",
+      "store@symbol"
+     ],
+     "path": "canonical/runtime/creature_runtime_v1.py",
+     "score": 11.75,
+     "sha256": "5ad7cc12dc56eafc",
+     "source_index": true,
+     "summary": "Seven organs, finally in one body."
+    },
+    {
+     "adapter_module_match": false,
      "anchored": 3.75,
      "harvested": false,
      "matched": [
@@ -3312,24 +3341,6 @@
      "sha256": "451c50a28bd5da75",
      "source_index": true,
      "summary": "Independent evidence-recomputation worker for R3 learning promotion."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 2.25,
-     "harvested": true,
-     "matched": [
-      "retriev@doc",
-      "retriev@symbol",
-      "memory@doc",
-      "projec@doc",
-      "record@doc",
-      "store@doc"
-     ],
-     "path": "canonical/tools/what_transfers_v1.py",
-     "score": 11.75,
-     "sha256": "38ac208c1a619269",
-     "source_index": true,
-     "summary": "Does \"instant learning\" generalise to arbitrary environments, or only to the one it was shown in?"
     }
    ],
    "vendored_donors_excluded": 2
@@ -3672,18 +3683,20 @@
     "verify_file_facts_provenance_v1",
     "verify_professional_artifact_internal_prewave_v1",
     "wave39_leapfrog_unification_v1",
+    "wave40_dark_matter_frontier_kernel_v1",
+    "wave41_rung3_proposer_jitrl_continual_flywheel_v1",
     "weights_from_scratch_v1",
     "work_unit_validity_guard_v2",
     "worker_syscall_allowlist_v1"
    ],
-   "candidates": 339,
+   "candidates": 341,
    "frontier_function": "know when you do not know, and prove what you did",
    "harvested_all": 63,
    "harvested_executable_top": 4,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 24,
-   "indexed_all": 303,
+   "indexed_all": 305,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -4061,7 +4074,7 @@
      ],
      "path": "canonical/runtime/creature_runtime_v1.py",
      "score": 15.25,
-     "sha256": "3ab7faa6f5d70f0d",
+     "sha256": "5ad7cc12dc56eafc",
      "source_index": true,
      "summary": "Seven organs, finally in one body."
     },
@@ -4322,17 +4335,19 @@
     "universal_verified_adaptive_solver_v5",
     "unknown_domain_direct_candidate_v1",
     "verifier_falsification_v1",
+    "wave40_dark_matter_frontier_kernel_v1",
+    "wave41_rung3_proposer_jitrl_continual_flywheel_v1",
     "what_the_vocabulary_cannot_say_v1",
     "what_transfers_to_a_second_host_v1"
    ],
-   "candidates": 138,
+   "candidates": 140,
    "frontier_function": "predict what an action does before doing it",
    "harvested_all": 43,
    "harvested_executable_top": 9,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 24,
-   "indexed_all": 134,
+   "indexed_all": 136,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -4537,6 +4552,26 @@
     },
     {
      "adapter_module_match": true,
+     "anchored": 4.5,
+     "harvested": false,
+     "matched": [
+      "counterfactual@doc",
+      "causal@doc",
+      "rollout@symbol",
+      "delta@symbol",
+      "rollout@doc",
+      "effect@doc",
+      "residual@doc",
+      "model@symbol"
+     ],
+     "path": "canonical/runtime/wave41_rung3_proposer_jitrl_continual_flywheel_v1.py",
+     "score": 16.0,
+     "sha256": "b22c755fe0ad8c0d",
+     "source_index": true,
+     "summary": "Wave 41 & Wave 42: Pluggable Rung-3 Proposer + Live JitRL + TTPO/OPSD"
+    },
+    {
+     "adapter_module_match": true,
      "anchored": 10.5,
      "harvested": false,
      "matched": [
@@ -4670,7 +4705,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 13.25,
-     "sha256": "20c37363184b1299",
+     "sha256": "93c79f7b439f15b2",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -4804,25 +4839,6 @@
      "sha256": "31d9db3c0afb03d2",
      "source_index": true,
      "summary": "An action's effect is a provenance map, and one execution identifies it."
-    },
-    {
-     "adapter_module_match": true,
-     "anchored": 4.5,
-     "harvested": false,
-     "matched": [
-      "causal@doc",
-      "causal@symbol",
-      "effect@symbol",
-      "model@doc",
-      "effect@doc",
-      "search@symbol",
-      "plan@doc"
-     ],
-     "path": "canonical/runtime/perfect_algorithm_v1.py",
-     "score": 12.0,
-     "sha256": "071d364d82c71ae0",
-     "source_index": true,
-     "summary": "Perfect Algorithm V1 \u2014 the model itself."
     }
    ],
    "vendored_donors_excluded": 1
@@ -4831,13 +4847,13 @@
  "method": "weighted lexical evidence over module stem, docstring and symbol names; frontier vocabulary and this repository's own vocabulary in one table",
  "min_score": 3.0,
  "model_calls": 0,
- "modules_scanned": 3334,
+ "modules_scanned": 3336,
  "network_calls": 0,
  "per_domain": 25,
  "reachability": {
   "coding_agents": {
-   "chance_route_recall": 0.1848,
-   "chance_source_recall": 0.1358,
+   "chance_route_recall": 0.1988,
+   "chance_source_recall": 0.1366,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -4984,8 +5000,8 @@
    ]
   },
   "computer_use": {
-   "chance_route_recall": 0.0645,
-   "chance_source_recall": 0.0677,
+   "chance_route_recall": 0.0634,
+   "chance_source_recall": 0.0676,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -5129,8 +5145,8 @@
    ]
   },
   "continual_learning": {
-   "chance_route_recall": 0.0469,
-   "chance_source_recall": 0.0168,
+   "chance_route_recall": 0.0562,
+   "chance_source_recall": 0.0172,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.333,
    "native_route_hit_recall": 1.0,
@@ -5276,8 +5292,8 @@
    ]
   },
   "instant_learning": {
-   "chance_route_recall": 0.1554,
-   "chance_source_recall": 0.0832,
+   "chance_route_recall": 0.17,
+   "chance_source_recall": 0.084,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -5292,12 +5308,12 @@
      "routed_hit": [
       "engine:INSTANT_ONE_SHOT_LEARNER",
       "engine:CAUSAL_TRACE_SKILL_COMPILER",
-      "engine:LEAPFROG_W39_LIFTED_GENERALIZER"
+      "engine:VERIFIED_SKILL_CRYSTALLIZER"
      ],
      "routed_top": [
       "engine:INSTANT_ONE_SHOT_LEARNER",
       "engine:CAUSAL_TRACE_SKILL_COMPILER",
-      "engine:LEAPFROG_W39_LIFTED_GENERALIZER"
+      "engine:VERIFIED_SKILL_CRYSTALLIZER"
      ],
      "source_hit": true,
      "source_top": [
@@ -5337,13 +5353,13 @@
      "route_hit": true,
      "routed_hit": [
       "engine:INSTANT_ONE_SHOT_LEARNER",
-      "engine:VERIFIED_SKILL_CRYSTALLIZER",
-      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS"
+      "engine:LEAPFROG_W42_ONE_DEMO_TRUST_AND_RUNG_CALIBRATOR",
+      "engine:VERIFIED_SKILL_CRYSTALLIZER"
      ],
      "routed_top": [
       "engine:INSTANT_ONE_SHOT_LEARNER",
       "engine:WAKE_SLEEP_CONSOLIDATION",
-      "engine:CONTRASTIVE_ORACLE_BOOTSTRAP"
+      "engine:LEAPFROG_W42_ONE_DEMO_TRUST_AND_RUNG_CALIBRATOR"
      ],
      "source_hit": true,
      "source_top": [
@@ -5382,14 +5398,14 @@
      "query": "anti-unify two examples into one rule",
      "route_hit": true,
      "routed_hit": [
+      "engine:LEAPFROG_W42_ONE_DEMO_TRUST_AND_RUNG_CALIBRATOR",
       "engine:VERIFIED_SKILL_CRYSTALLIZER",
-      "engine:LEAPFROG_W24_FORWARD_PUSH_BITEMPORAL_PPR",
-      "engine:INSTANT_ONE_SHOT_LEARNER"
+      "engine:LEAPFROG_W24_FORWARD_PUSH_BITEMPORAL_PPR"
      ],
      "routed_top": [
       "engine:WAKE_SLEEP_CONSOLIDATION",
-      "engine:CROSS_MODAL_TOMOGRAPHY_PETRI",
-      "engine:CONTRASTIVE_ORACLE_BOOTSTRAP"
+      "engine:LEAPFROG_W42_ONE_DEMO_TRUST_AND_RUNG_CALIBRATOR",
+      "engine:CROSS_MODAL_TOMOGRAPHY_PETRI"
      ],
      "source_hit": true,
      "source_top": [
@@ -5405,14 +5421,14 @@
      "query": "teach a lesson from one trace",
      "route_hit": true,
      "routed_hit": [
+      "engine:LEAPFROG_W42_ONE_DEMO_TRUST_AND_RUNG_CALIBRATOR",
       "engine:LESSON_ADMISSION_GATE",
-      "engine:INSTANT_ONE_SHOT_LEARNER",
-      "engine:LEAPFROG_W39_LIFTED_GENERALIZER"
+      "engine:INSTANT_ONE_SHOT_LEARNER"
      ],
      "routed_top": [
+      "engine:LEAPFROG_W42_ONE_DEMO_TRUST_AND_RUNG_CALIBRATOR",
       "engine:LESSON_ADMISSION_GATE",
-      "engine:INSTANT_ONE_SHOT_LEARNER",
-      "engine:LEAPFROG_W39_LIFTED_GENERALIZER"
+      "engine:INSTANT_ONE_SHOT_LEARNER"
      ],
      "source_hit": true,
      "source_top": [
@@ -5424,8 +5440,8 @@
    ]
   },
   "memory": {
-   "chance_route_recall": 0.1217,
-   "chance_source_recall": 0.0872,
+   "chance_route_recall": 0.1369,
+   "chance_source_recall": 0.088,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 1.0,
@@ -5484,14 +5500,14 @@
      "query": "compress a long trajectory without losing the facts it carried",
      "route_hit": true,
      "routed_hit": [
+      "engine:LEAPFROG_W40_SELFPLAY_STEER_HORIZON_COMMIT",
       "engine:PROCEDURE_TRAJECTORY_MEMORY",
-      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
-      "engine:LEAPFROG_W39_LENS_STANDING_FACT_CU"
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS"
      ],
      "routed_top": [
+      "engine:LEAPFROG_W40_SELFPLAY_STEER_HORIZON_COMMIT",
       "engine:PROCEDURE_TRAJECTORY_MEMORY",
-      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
-      "engine:LEAPFROG_W39_LENS_STANDING_FACT_CU"
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS"
      ],
      "source_hit": false,
      "source_top": [
@@ -5572,8 +5588,8 @@
    ]
   },
   "verification_abstention": {
-   "chance_route_recall": 0.1848,
-   "chance_source_recall": 0.15,
+   "chance_route_recall": 0.1988,
+   "chance_source_recall": 0.1508,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 1.0,
@@ -5718,8 +5734,8 @@
    ]
   },
   "world_model": {
-   "chance_route_recall": 0.0997,
-   "chance_source_recall": 0.0606,
+   "chance_route_recall": 0.1153,
+   "chance_source_recall": 0.0615,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -5822,8 +5838,7 @@
      "query": "rank residual causes for an observed effect",
      "route_hit": true,
      "routed_hit": [
-      "engine:STATE_CONTRACT_WORLD_MODEL",
-      "engine:UNFAMILIAR_M2_PROTOCOL_LIFT_EFFECT_ORACLE"
+      "engine:ANGELIC_LENS_COW_REPAIR"
      ],
      "routed_top": [
       "source.objective_relevance.rank.bm25",
@@ -5846,7 +5861,7 @@
      "routed_hit": [
       "engine:LEAPFROG_W38_SAFE_ACTION_WORLD_MODEL",
       "engine:LEAPFROG_W40_FRONTIER_BENCH_HARNESS",
-      "engine:AUTONOMOUS_AWAKE_LOOP"
+      "engine:LEAPFROG_W40_ONESHOT_VERSION_SPACE_LEARNER"
      ],
      "routed_top": [
       "engine:LEAPFROG_W38_SAFE_ACTION_WORLD_MODEL",

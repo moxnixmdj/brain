@@ -597,7 +597,12 @@ def _extract_secondary_indexes(full: Mapping[str, Any], raw_sha: str) -> dict[st
 # --------------------------------------------------------------------------- model
 
 
-class UnifiedModel:
+from canonical.runtime.wave41_rung3_proposer_jitrl_continual_flywheel_v1 import (
+    Wave40To42UnifiedModelMixin as _Wave40To42UnifiedModelMixin,
+)
+
+
+class UnifiedModel(_Wave40To42UnifiedModelMixin):
     """A loaded, digest-verified unified model."""
 
     def __init__(
