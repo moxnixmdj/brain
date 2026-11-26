@@ -67,14 +67,23 @@ NON_CLAIMS = (
 class BoundaryRouter:
     """Tier-0 -> Tier-1 -> Tier-2 compounding router backed by ``VerificationFirstMemoryBus``."""
 
-    def __init__(self, memory_bus: Any = None) -> None:
+    def __init__(
+        self,
+        memory_bus: Any = None,
+        *,
+        memory_bus_factory: Callable[[], Any] | None = None,
+    ) -> None:
         self._memory_bus: Any = memory_bus
+        self._memory_bus_factory: Callable[[], Any] | None = memory_bus_factory
         self.cluster_stats: dict[str, dict[str, int]] = {}
 
     @property
     def memory_bus(self) -> Any:
         if self._memory_bus is None:
-            self._memory_bus = mem_spine.VerificationFirstMemoryBus()
+            if self._memory_bus_factory is not None:
+                self._memory_bus = self._memory_bus_factory()
+            else:
+                self._memory_bus = mem_spine.VerificationFirstMemoryBus()
         return self._memory_bus
 
     @memory_bus.setter
@@ -1854,6 +1863,193 @@ class BoundaryRouter:
         res = oracle_spine.generate_csp_hard_negatives(**kwargs)
         ok = bool(res.get("pass"))
         self._record_cluster(cluster, tier="TIER_0_CSP_PERTURBATION", passed=ok)
+        return res
+
+    # ------------------------------------------------- Waves 22-25 Frontier Leapfrog Routes
+
+    def route_universal_capability_bridge(
+        self,
+        goal: str,
+        *,
+        registry: Mapping[str, Mapping[str, Any]] | None = None,
+        contract_text: str | None = None,
+        repo_nav_root: str | Path | None = None,
+        repo_nav_kind: str = "find_symbol",
+        repo_nav_target: str = "",
+        compose_type_chain: bool = False,
+        top_k: int = 8,
+    ) -> dict[str, Any]:
+        """Wave 22 route: Universal Reachability Bridge (`verified_capability_bridge_index_v1`
+        × `source_contract_compiler` × `learned_skill_verdict_v1`, zero LLM, zero self-promotion)."""
+        from canonical.runtime import source_contract_compiler as scc
+        from canonical.swe_kernel import learned_skill_verdict_v1 as lsv
+        from canonical.swe_kernel import verified_capability_bridge_index_v1 as vcb
+
+        t0 = time.perf_counter()
+        roles = vcb.induce_zero_weight_semantic_roles(str(goal))
+        reg_map: Mapping[str, Mapping[str, Any]] = registry or {}
+        phrase_matches = (
+            vcb.find_phrase_matched_capabilities(str(goal), reg_map)[: int(top_k)]
+            if reg_map
+            else []
+        )
+
+        # Match against compiled learned skills without executing unverified mutations
+        matched_skills: list[dict[str, Any]] = []
+        try:
+            for sk in lsv.load_skills():
+                req = lsv.request_from_goal(sk, str(goal))
+                if req is not None:
+                    matched_skills.append({"skill_id": sk.get("skill_id") or sk.get("id"), "request": req})
+                    if len(matched_skills) >= int(top_k):
+                        break
+        except Exception:
+            pass
+
+        contract_report: dict[str, Any] | None = None
+        if contract_text is not None:
+            atoms = scc.atomize_source(str(contract_text), "inline_goal_contract")
+            contract_report = {
+                "atom_count": len(atoms),
+                "normative_atoms": sum(1 for a in atoms if a.normative),
+                "high_risk_atoms": sum(1 for a in atoms if a.high_risk),
+                "obligation_lower_bound": scc.obligation_lower_bound(str(contract_text)),
+                "roundtrip_exact": scc.reconstruct_source(atoms) == str(contract_text),
+            }
+
+        repo_nav_report: dict[str, Any] | None = None
+        if repo_nav_root is not None and repo_nav_target:
+            repo_nav_report = vcb.query_semantic_repo_navigation(
+                Path(repo_nav_root).resolve(),
+                str(repo_nav_kind),
+                str(repo_nav_target),
+            )
+
+        type_chain_report: dict[str, Any] | None = None
+        if compose_type_chain:
+            type_chain_report = vcb.get_cached_type_level_graph(reg_map or None, max_len=2)
+
+        ok = bool(roles or phrase_matches or matched_skills or contract_report or repo_nav_report)
+        self._record_cluster("universal_capability_bridge", tier="TIER_0_UNIVERSAL_BRIDGE", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": "PASS__UNIVERSAL_BRIDGE_RESOLVED" if ok else "FAIL_CLOSED__NO_BRIDGE_MATCH",
+            "goal": str(goal),
+            "semantic_roles": roles,
+            "phrase_matches": phrase_matches,
+            "matched_learned_skills": matched_skills,
+            "source_contract": contract_report,
+            "repo_navigation": repo_nav_report,
+            "type_level_graph_summary": (
+                {"edge_count": len(type_chain_report.get("edges") or ()), "keys": sorted(type_chain_report.keys())[:10]}
+                if isinstance(type_chain_report, Mapping)
+                else None
+            ),
+            "model_calls": 0,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+    def route_swe_repo_native_multifile(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 23 route: Repo-Native Multi-File SWE Engine (`0D` × 7 hidden SWE superweapons)."""
+        from canonical.swe_kernel import canonical_swe_spine_v1 as swe_spine
+
+        res = swe_spine.solve_swe_repo_native_multifile(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster("swe_repo_native_multifile", tier=str(res.get("tier") or "UNSOLVED"), passed=ok)
+        return res
+
+    def route_bitemporal_skill_bank(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 24 route: Bitemporal Memory + Counterfactual Credit + Hierarchical SkillBank (`0G`)."""
+        res = self.memory_bus.bitemporal_credit_and_skill_bank(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster("bitemporal_skill_bank", tier="TIER_0_BITEMPORAL_SKILL_BANK", passed=ok)
+        return res
+
+    def route_verify_effect_chain(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 24 route: Formal Effect-Contract Composition & Verification (`0G`)."""
+        res = self.memory_bus.verify_effect_contract_chain(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster("effect_contract_chain", tier="TIER_0_EFFECT_CHAIN", passed=ok)
+        return res
+
+    def route_red_queen_coevolution(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 24 route: Red Queen Evaluator Co-Evolution (`0H`, intra-epoch frozen judge)."""
+        from canonical.swe_kernel import canonical_oracle_vericoding_spine_v1 as oracle_spine
+
+        res = oracle_spine.run_red_queen_evaluator_coevolution(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster("red_queen_coevolution", tier="TIER_0_RED_QUEEN_EPOCH", passed=ok)
+        return res
+
+    def route_safe_exploration(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 25 route: Systematic Exploration + Safe Action Model + Demonstration Sufficiency (`0E`)."""
+        from canonical.swe_kernel import canonical_env_discovery_spine_v1 as env_spine
+
+        res = env_spine.explore_and_induce_safe_action_model(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster("safe_exploration", tier="TIER_1_SAFE_EXPLORATION", passed=ok)
+        return res
+
+    def route_decision_quotient(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 25 route: K6 Target-Relative Decision Quotient & Deadline Refinement Compiler (`0E`)."""
+        from canonical.swe_kernel import canonical_env_discovery_spine_v1 as env_spine
+
+        res = env_spine.compile_decision_quotient_and_refinement(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster("decision_quotient", tier="TIER_0_DECISION_QUOTIENT", passed=ok)
+        return res
+
+    def route_horizon_zero_screenshot_cu(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 25 route: Horizon-Bounded CU + Zero-Screenshot DOM Cache + Vocabulary Growth (`0F`)."""
+        from canonical.swe_kernel import canonical_cu_sandbox_spine_v1 as cu_spine
+
+        res = cu_spine.execute_horizon_bounded_zero_screenshot_cu(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster("horizon_zero_screenshot_cu", tier="TIER_0_ZERO_SCREENSHOT_CU", passed=ok)
+        return res
+
+    # ----------------------------------------------------- Waves 27-30 Frontier Leapfrog Routes
+    def route_contrast_memory_laws(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 27 route: Contrast-Carrying Laws & O(1) Anti-Catastrophic-Remembering Pruning (`0G`)."""
+        res = self.memory_bus.store_and_prune_contrast_laws(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster("contrast_memory_laws", tier="TIER_0_CONTRAST_MEMORY", passed=ok)
+        return res
+
+    def route_filing_key_hindsight_jitrl(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 27 route: Filing-Key Audit + Alpha-Safe Unwelding + AgentHER Hindsight + JitRL (`0G`)."""
+        res = self.memory_bus.filing_key_hindsight_and_jitrl(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster("filing_key_hindsight_jitrl", tier="TIER_0_HINDSIGHT_JITRL", passed=ok)
+        return res
+
+    def route_producer_lineage_holes(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 28 route: Producer-Lineage Tracing & Typed Hole Inversion SWE Engine (`0D`)."""
+        res = swe_spine.solve_producer_lineage_hole_inversion(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster("producer_lineage_holes", tier="TIER_1_PRODUCER_HOLE_INVERSION", passed=ok)
+        return res
+
+    def route_verifier_pinning_oracles(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 29 route: Verifier Hunk-Pinning Audit & Autonomous Docstring/Green-Suite Oracles (`0H`)."""
+        res = oracle_spine.audit_verifier_pinning_and_synthesize_oracles(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster("verifier_pinning_oracles", tier="TIER_0_VERIFIER_PINNING", passed=ok)
+        return res
+
+    def route_purpose_gate_arbitrage(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 30 route: Purpose-Gated Active Inference & Economic Decision Arbitrage (`0E`)."""
+        res = env_spine.purpose_gated_active_inference_and_cost_arbitrage(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster("purpose_gate_arbitrage", tier="TIER_0_PURPOSE_GATE_ARBITRAGE", passed=ok)
+        return res
+
+    def route_two_move_horizon_cu(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 30 route: Class-Level Two-Move Planning + Horizon Bridge + Goal DAG + OSWorld v2.1 (`0F`)."""
+        res = cu_spine.plan_two_move_and_horizon_bridge(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster("two_move_horizon_cu", tier="TIER_0_TWO_MOVE_HORIZON_CU", passed=ok)
         return res
 
     def status_summary(self) -> dict[str, Any]:

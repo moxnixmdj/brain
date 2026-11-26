@@ -22,6 +22,7 @@ import importlib
 import importlib.util
 import json
 import math
+import os
 import re
 import warnings
 from pathlib import Path
@@ -50,6 +51,7 @@ _EXTENDED_SOURCE_TREES: tuple[str, ...] = (
     "canonical/capabilities",
     "canonical/research",
     "canonical/integrations",
+    "intake",
 )
 
 STOPWORDS: frozenset[str] = frozenset(
@@ -2881,6 +2883,54 @@ def catalog_federated_engines(*, domain: str | None = None) -> dict[str, Any]:
     }
 
 
+def _fast_scandir_py(
+    root_str: str,
+    rel_root: str,
+    *,
+    skip_dirs: frozenset[str],
+    skip_rel_prefixes: tuple[str, ...] = (),
+) -> list[tuple[str, str, os.stat_result]]:
+    """Wave 21 fast `os.scandir` `.py` walker sorted identically to `Path`."""
+    start = os.path.join(root_str, rel_root) if rel_root else root_str
+    if not os.path.isdir(start):
+        return []
+    out: list[tuple[str, str, os.stat_result]] = []
+    stack: list[tuple[str, str]] = [(start, rel_root.strip("/"))]
+    while stack:
+        cur_dir, cur_rel = stack.pop()
+        try:
+            with os.scandir(cur_dir) as it:
+                for entry in it:
+                    name = entry.name
+                    rel = f"{cur_rel}/{name}" if cur_rel else name
+                    try:
+                        is_dir = entry.is_dir(follow_symlinks=True)
+                    except OSError:
+                        continue
+                    if is_dir:
+                        if name in skip_dirs:
+                            continue
+                        if skip_rel_prefixes and any(rel == p or rel.startswith(p + "/") for p in skip_rel_prefixes):
+                            continue
+                        stack.append((entry.path, rel))
+                        continue
+                    if not name.endswith(".py"):
+                        continue
+                    if skip_rel_prefixes and any(rel == p or rel.startswith(p + "/") for p in skip_rel_prefixes):
+                        continue
+                    try:
+                        if not entry.is_file(follow_symlinks=True):
+                            continue
+                        st = entry.stat(follow_symlinks=True)
+                    except OSError:
+                        continue
+                    out.append((entry.path, rel, st))
+        except OSError:
+            continue
+    out.sort(key=lambda item: item[1].split("/"))
+    return out
+
+
 def compile_extended_source_index_rows(
     root: Path,
     covered: set[str],
@@ -2893,65 +2943,53 @@ def compile_extended_source_index_rows(
     exposing `canonical/swe_kernel/`, `canonical/tools/`, `canonical/capabilities/`,
     `canonical/research/`, and `canonical/integrations/` to cross-repository discovery.
     """
-    astra_tmp = root / "canonical" / "astra_runtime" / "tmp"
+    root_str = str(root)
+    skip_dirs = frozenset(_NON_SOURCE_DIRS)
     importers: dict[str, set[str]] = {}
-    all_py: list[Path] = []
-    for sub in ("canonical", "tests"):
-        base = root / sub
-        if base.is_dir():
-            for p in sorted(base.rglob("*.py")):
-                if any(part in _NON_SOURCE_DIRS for part in p.parts) or p.is_relative_to(astra_tmp):
-                    continue
-                all_py.append(p)
+    all_py: list[tuple[str, str, os.stat_result]] = []
+    for sub in ("canonical", "intake", "tests"):
+        all_py.extend(
+            _fast_scandir_py(
+                root_str,
+                sub,
+                skip_dirs=skip_dirs,
+                skip_rel_prefixes=("canonical/astra_runtime/tmp",),
+            )
+        )
     use_cache = cache is not None and getattr(cache, "enabled", False)
-    for p in all_py:
-        rel_p = p.relative_to(root).as_posix()
-        st_p = None
+    for abs_p, rel_p, st_p in all_py:
         mods: tuple[str, ...] | None = None
         if use_cache:
-            try:
-                st_p = p.stat()
-                hit, cached_mods = cache.get("ext_imports", rel_p, st_p)
-                if hit:
-                    mods = cached_mods
-            except OSError:
-                continue
+            hit, cached_mods = cache.get("ext_imports", rel_p, st_p)
+            if hit:
+                mods = cached_mods
         if mods is None:
             try:
-                txt = p.read_text(encoding="utf-8", errors="replace")
+                with open(abs_p, "r", encoding="utf-8", errors="replace") as fh:
+                    txt = fh.read()
             except OSError:
                 continue
             mods = tuple({m.split(".")[-1] for m in _IMPORT_RE.findall(txt)})
-            if use_cache and st_p is not None:
+            if use_cache:
                 cache.put("ext_imports", rel_p, st_p, mods)
         for mod_leaf in mods:
             importers.setdefault(mod_leaf, set()).add(rel_p)
 
     rows: list[dict[str, Any]] = []
     for tree_rel in _EXTENDED_SOURCE_TREES:
-        tree_dir = root / tree_rel
-        if not tree_dir.is_dir():
-            continue
-        for path in sorted(tree_dir.rglob("*.py")):
-            if any(part in _NON_SOURCE_DIRS for part in path.parts):
-                continue
-            rel = path.relative_to(root).as_posix()
+        for abs_path, rel, st_ext in _fast_scandir_py(root_str, tree_rel, skip_dirs=skip_dirs):
             if rel in covered:
                 continue
-            stem = path.stem
+            stem = os.path.splitext(os.path.basename(abs_path))[0]
             cached_ext: dict[str, Any] | None = None
-            st_ext = None
             if use_cache:
-                try:
-                    st_ext = path.stat()
-                    hit, val = cache.get("ext_source", rel, st_ext)
-                    if hit:
-                        cached_ext = val
-                except OSError:
-                    continue
+                hit, val = cache.get("ext_source", rel, st_ext)
+                if hit:
+                    cached_ext = val
             if cached_ext is None:
                 try:
-                    raw = path.read_bytes()
+                    with open(abs_path, "rb") as fh:
+                        raw = fh.read()
                 except OSError:
                     continue
                 text = raw.decode("utf-8", errors="replace")

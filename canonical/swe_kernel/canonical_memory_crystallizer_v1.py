@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import ast
 import hashlib
+import importlib
 import json
 import math
 import tempfile
@@ -34,17 +35,33 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
-from canonical.runtime import demonstration_version_space_v1 as demo_vs
-from canonical.swe_kernel import concept_library_v1 as concept_lib
-from canonical.swe_kernel import egraph_and_deductive_synthesizer_v1 as egraph_synth
-from canonical.swe_kernel import guarded_meaning_ir_v1 as meaning_ir
-from canonical.swe_kernel import structural_rewrite_induction_v1 as rewrite_ind
-from canonical.swe_kernel import tree_sitter_cst_skill_skeleton_v1 as cst_skeleton
-from canonical.swe_kernel import verified_skill_crystallizer_v1 as skill_cryst
-from canonical.swe_kernel import witness_inversion_v1 as witness_inv
-from canonical.tools import an_actions_effect_is_a_provenance_map_v1 as prov_map
-from canonical.tools import the_goal_is_a_quotient_of_the_trace_v1 as trace_quotient
-from canonical.tools import the_precondition_is_not_in_the_trace_v1 as precond_ind
+
+class _LazyModule:
+    __slots__ = ("_mod_name", "_loaded")
+
+    def __init__(self, mod_name: str) -> None:
+        object.__setattr__(self, "_mod_name", mod_name)
+        object.__setattr__(self, "_loaded", None)
+
+    def __getattr__(self, item: str) -> Any:
+        mod = object.__getattribute__(self, "_loaded")
+        if mod is None:
+            mod = importlib.import_module(object.__getattribute__(self, "_mod_name"))
+            object.__setattr__(self, "_loaded", mod)
+        return getattr(mod, item)
+
+
+demo_vs = _LazyModule("canonical.runtime.demonstration_version_space_v1")
+concept_lib = _LazyModule("canonical.swe_kernel.concept_library_v1")
+egraph_synth = _LazyModule("canonical.swe_kernel.egraph_and_deductive_synthesizer_v1")
+meaning_ir = _LazyModule("canonical.swe_kernel.guarded_meaning_ir_v1")
+rewrite_ind = _LazyModule("canonical.swe_kernel.structural_rewrite_induction_v1")
+cst_skeleton = _LazyModule("canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1")
+skill_cryst = _LazyModule("canonical.swe_kernel.verified_skill_crystallizer_v1")
+witness_inv = _LazyModule("canonical.swe_kernel.witness_inversion_v1")
+prov_map = _LazyModule("canonical.tools.an_actions_effect_is_a_provenance_map_v1")
+trace_quotient = _LazyModule("canonical.tools.the_goal_is_a_quotient_of_the_trace_v1")
+precond_ind = _LazyModule("canonical.tools.the_precondition_is_not_in_the_trace_v1")
 
 SCHEMA = "PROJECT_BRAIN_CANONICAL_MEMORY_CRYSTALLIZER_V1"
 NON_CLAIMS = (
@@ -355,6 +372,10 @@ class VerificationFirstMemoryBus:
         # Wave 3-6: exact applicability boundaries & anti-authority-collapse verified event log
         self._applicability_boundaries: dict[str, dict[str, Any]] = {}
         self._verified_event_log: list[dict[str, Any]] = []
+        # Wave 27: contrast-carrying laws (O(1) anti-Catastrophic-Remembering) + hindsight/JitRL tables
+        self._justified_contrast_laws: dict[str, list[Any]] = {}
+        self._hindsight_filing_skills: dict[str, dict[str, Any]] = {}
+        self._jitrl_episodes: dict[str, list[dict[str, Any]]] = {}
         self._verified_event_last_hash: str = "0" * 64
         # Wave 11: Library-drift immunity (skill_contribution_ledger_v1) + DualDriftDetector
         self._drift_detector = DualDriftDetector()
@@ -2078,7 +2099,541 @@ class VerificationFirstMemoryBus:
             for k, v in (raw.get("anti_skills") or {}).items()
             if isinstance(v, Mapping)
         }
+        self._bitemporal_facts = [
+            dict(f) for f in (raw.get("bitemporal_facts") or ()) if isinstance(f, Mapping)
+        ]
         self._fts5_watermark = (-1, -1, -1, -1)
+
+    # ----------------------------------------------------- Wave 24: Bitemporal Memory + Credit + SkillBank + Effect Chains
+
+    def record_bitemporal_fact(
+        self,
+        *,
+        entity: str,
+        attribute: str,
+        value: Any,
+        valid_from: float,
+        tx_time: float | None = None,
+        valid_until: float | None = None,
+        provenance: str = "verified_observation",
+        supersede_active: bool = True,
+    ) -> dict[str, Any]:
+        """Wave 24 Graphiti-style zero-LLM bitemporal fact assertion with automatic invalidation."""
+        if not hasattr(self, "_bitemporal_facts"):
+            self._bitemporal_facts: list[dict[str, Any]] = []
+        tx = float(tx_time if tx_time is not None else time.time())
+        vf = float(valid_from)
+        vu = float(valid_until) if valid_until is not None else None
+        ent = str(entity)
+        attr = str(attribute)
+        fact_id = f"btf_{_sha16([ent, attr, repr(value), str(vf), str(tx), str(len(self._bitemporal_facts))])}"
+        superseded_ids: list[str] = []
+        if supersede_active:
+            for prev in self._bitemporal_facts:
+                if (
+                    prev.get("entity") == ent
+                    and prev.get("attribute") == attr
+                    and prev.get("valid_until") is None
+                    and prev.get("fact_id") != fact_id
+                ):
+                    prev["valid_until"] = vf
+                    prev["superseded_by"] = fact_id
+                    superseded_ids.append(str(prev["fact_id"]))
+        rec = {
+            "fact_id": fact_id,
+            "entity": ent,
+            "attribute": attr,
+            "value": value,
+            "valid_from": vf,
+            "valid_until": vu,
+            "tx_time": tx,
+            "provenance": str(provenance),
+            "superseded_by": None,
+        }
+        self._bitemporal_facts.append(rec)
+        return {
+            "pass": True,
+            "status": "PASS__BITEMPORAL_FACT_RECORDED",
+            "fact": dict(rec),
+            "superseded_ids": superseded_ids,
+            "total_bitemporal_facts": len(self._bitemporal_facts),
+            "model_calls": 0,
+        }
+
+    def query_bitemporal_facts(
+        self,
+        *,
+        entity: str | None = None,
+        attribute: str | None = None,
+        as_of_valid: float | None = None,
+        as_of_tx: float | None = None,
+        include_superseded: bool = False,
+    ) -> dict[str, Any]:
+        """Wave 24 point-in-time bitemporal query (`valid_time` × `transaction_time`, zero LLM)."""
+        facts = list(getattr(self, "_bitemporal_facts", ()))
+        hits: list[dict[str, Any]] = []
+        for f in facts:
+            if entity is not None and f.get("entity") != str(entity):
+                continue
+            if attribute is not None and f.get("attribute") != str(attribute):
+                continue
+            if as_of_tx is not None and float(f.get("tx_time", 0.0)) > float(as_of_tx):
+                continue
+            if as_of_valid is not None:
+                t_val = float(as_of_valid)
+                if float(f.get("valid_from", 0.0)) > t_val:
+                    continue
+                vu = f.get("valid_until")
+                if vu is not None and t_val >= float(vu):
+                    continue
+            elif not include_superseded and f.get("superseded_by") is not None:
+                continue
+            hits.append(dict(f))
+        return {
+            "pass": len(hits) > 0,
+            "status": "PASS__BITEMPORAL_FACTS_FOUND" if hits else "PASS__BITEMPORAL_EMPTY",
+            "count": len(hits),
+            "facts": hits,
+            "model_calls": 0,
+        }
+
+    def bitemporal_credit_and_skill_bank(
+        self,
+        *,
+        skill_name: str,
+        skill_type: str = "pattern",
+        pattern: str = "",
+        preconditions: Sequence[str] = (),
+        operations: Sequence[str] = (),
+        success_criteria: str = "",
+        succeeded: bool = True,
+        failure_lesson: str | None = None,
+        valid_from: float = 0.0,
+        credit_root: str | Path | None = None,
+        trace_steps: Sequence[tuple[str, str]] = (),
+        terminal_outcome: int = 0,
+        wrong_actions: Sequence[Sequence[tuple[str, str]]] = (),
+        min_credit_threshold: float = 0.0,
+    ) -> dict[str, Any]:
+        """Wave 24: Fuse Counterfactual Credit Assignment (`credit_assignment_v1`), SkillRL
+        Hierarchical SkillBank (`hierarchical_skill_library_v1`), and Bitemporal Facts."""
+        from canonical.swe_kernel import credit_assignment_v1 as ca
+        from canonical.swe_kernel import hierarchical_skill_library_v1 as hsl
+
+        t0 = time.perf_counter()
+        credit_report: dict[str, Any] | None = None
+        causal_step_indices: list[int] = []
+        if credit_root is not None and trace_steps:
+            c_root = Path(credit_root).resolve()
+            sensed = ca.sense_trace(c_root, [(str(a), str(b)) for a, b in trace_steps], int(terminal_outcome))
+            trace_obj = sensed.get("trace")
+            if trace_obj is not None and wrong_actions:
+                contrast = ca.generate_counterfactuals(
+                    c_root,
+                    trace_obj,
+                    [[(str(a), str(b)) for a, b in seq] for seq in wrong_actions],
+                )
+                ident = ca.identify_credit(contrast, min_credit_threshold=float(min_credit_threshold))
+                step_credits = ident.get("step_credits") or ()
+                causal_step_indices = [
+                    int(getattr(sc, "step_index", sc.get("step_index") if isinstance(sc, Mapping) else -1))
+                    for sc in step_credits
+                    if bool(getattr(sc, "is_causal", sc.get("is_causal") if isinstance(sc, Mapping) else False))
+                ]
+                credit_report = {
+                    "verdict": str(ident.get("verdict") or contrast.get("verdict") or ""),
+                    "causal_steps": causal_step_indices,
+                    "step_credit_count": len(step_credits),
+                }
+            else:
+                credit_report = {"verdict": str(sensed.get("verdict") or "SENSED"), "causal_steps": []}
+
+        # Maintain an instance-scoped HierarchicalSkillLibrary (`SkillBank` for successes + failure lessons)
+        if not hasattr(self, "_hierarchical_skill_bank"):
+            self._hierarchical_skill_bank = hsl.HierarchicalSkillLibrary()
+        bank = self._hierarchical_skill_bank
+        skill_obj = hsl.Skill(
+            name=str(skill_name),
+            skill_type=str(skill_type),
+            pattern=str(pattern or skill_name),
+            preconditions=[str(p) for p in preconditions],
+            operations=[str(o) for o in operations],
+            parameters=[],
+            success_criteria=str(success_criteria or "verified"),
+            failure_lessons=[str(failure_lesson)] if (failure_lesson and not succeeded) else [],
+            applications=1,
+            successes=1 if succeeded else 0,
+            failures=0 if succeeded else 1,
+        )
+        existing = bank.skills.get(skill_obj.name) if hasattr(bank, "skills") else None
+        if existing is not None:
+            existing.applications += 1
+            if succeeded:
+                existing.successes += 1
+            else:
+                existing.failures += 1
+                if failure_lesson and str(failure_lesson) not in existing.failure_lessons:
+                    existing.failure_lessons.append(str(failure_lesson))
+            active_skill = existing
+        else:
+            if hasattr(bank, "add_skill"):
+                bank.add_skill(skill_obj)
+            elif hasattr(bank, "skills"):
+                bank.skills[skill_obj.name] = skill_obj
+            active_skill = skill_obj
+
+        # Also assert a bitemporal fact capturing current skill standing & causal steps
+        bt_res = self.record_bitemporal_fact(
+            entity=f"skill:{skill_name}",
+            attribute="standing",
+            value={
+                "succeeded": bool(succeeded),
+                "applications": int(active_skill.applications),
+                "successes": int(active_skill.successes),
+                "failures": int(active_skill.failures),
+                "failure_lessons": list(active_skill.failure_lessons),
+                "causal_steps": causal_step_indices,
+            },
+            valid_from=float(valid_from),
+            provenance="wave24_bitemporal_credit_skill_bank",
+        )
+        return {
+            "pass": True,
+            "status": "PASS__BITEMPORAL_SKILL_BANK_UPDATED",
+            "skill_name": str(skill_name),
+            "applications": int(active_skill.applications),
+            "successes": int(active_skill.successes),
+            "failures": int(active_skill.failures),
+            "failure_lessons": list(active_skill.failure_lessons),
+            "bank_size": len(getattr(bank, "skills", {})),
+            "credit_assignment": credit_report,
+            "bitemporal_fact": bt_res["fact"],
+            "model_calls": 0,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+    def verify_effect_contract_chain(
+        self,
+        contracts_spec: Sequence[Mapping[str, Any]],
+        *,
+        intended_goal: Sequence[str] = (),
+    ) -> dict[str, Any]:
+        """Wave 24: Formal Effect-Contract Composition & Verification
+        (`effect_contract_composition_v1` × `composition_verification_v1`, zero LLM)."""
+        from canonical.swe_kernel import composition_verification_v1 as comp_v
+        from canonical.swe_kernel import effect_contract_composition_v1 as ecc
+
+        t0 = time.perf_counter()
+        contracts: list[ecc.EffectContract] = []
+        chain_steps: list[tuple[ecc.EffectContract, frozenset[str]]] = []
+        for idx, spec in enumerate(contracts_spec):
+            effs = tuple(
+                ecc.Effect(kind=str(e.get("kind") or "create"), subject=str(e.get("subject") or ""))
+                for e in (spec.get("effects") or ())
+                if isinstance(e, Mapping)
+            )
+            c = ecc.EffectContract(
+                skill_id=str(spec.get("skill_id") or f"skill_{idx}"),
+                preconditions=tuple(str(p) for p in (spec.get("preconditions") or ())),
+                observables=tuple(str(o) for o in (spec.get("observables") or ())),
+                actions=tuple(str(a) for a in (spec.get("actions") or ())),
+                verdict=str(spec.get("verdict") or "PASS"),
+                effects=effs,
+            )
+            contracts.append(c)
+            net_eff = frozenset(
+                str(x) for x in (spec.get("intended_net_effect") or [f"{e.kind}:{e.subject}" for e in effs])
+            )
+            chain_steps.append((c, net_eff))
+
+        if len(contracts) < 2:
+            return {
+                "pass": False,
+                "status": "FAIL_CLOSED__NEED_AT_LEAST_TWO_CONTRACTS",
+                "contract_count": len(contracts),
+                "model_calls": 0,
+                "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            }
+
+        composed = ecc.compose_chain(contracts)
+        goal_set = frozenset(str(g) for g in intended_goal) if intended_goal else frozenset().union(*(s[1] for s in chain_steps))
+        sensed = comp_v.sense_chain(chain_steps, goal_set)
+        contrasted = comp_v.generate_compositions(sensed)
+        identified = comp_v.identify_composition(contrasted)
+        comp_ok = bool(composed.get("ok") or composed.get("verdict") == "PASS" or composed.get("status") == "PASS")
+        ident_verdict = str(identified.get("verdict") or "")
+        verified = comp_ok and ident_verdict in {"IDENTIFIED", "PASS", "ADMITTED", "VALID"}
+        return {
+            "pass": verified,
+            "status": "PASS__EFFECT_CHAIN_VERIFIED" if verified else f"FAIL_CLOSED__EFFECT_CHAIN_{ident_verdict or 'REJECTED'}",
+            "contract_count": len(contracts),
+            "compose_chain": composed,
+            "composition_verdict": ident_verdict,
+            "identified": {
+                k: v for k, v in identified.items()
+                if isinstance(v, (str, int, float, bool, list, dict)) or v is None
+            },
+            "model_calls": 0,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+    # ------------------------------------------------------------ Wave 27: Contrast-Carrying Memory + Filing-Key Hindsight + JitRL
+    def store_and_prune_contrast_laws(
+        self,
+        observations: Sequence[Any],
+        *,
+        domain: str = "default",
+        student_observations: Sequence[Any] | None = None,
+        repro_mode: str = "contrast",
+        query_atom: str | None = None,
+        query_state: Sequence[Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 27 (`0G` × `a_law_carries_its_reason_v1` × `the_width_of_a_guard_v1`, `K3=0`).
+
+        Solves Catastrophic Remembering in O(1) per law:
+          1. Learns widest consistent guard laws via `the_width_of_a_guard_v1.learn_laws`.
+          2. Attaches each law's minimal distinguishing `contrast` set via
+             `a_law_carries_its_reason_v1.justify` (rejecting zero-contrast sample descriptions).
+          3. On a shifted/new environment (`student_observations`), re-verifies each law's
+             contrast witness in O(1) via `reproducible(law, student_obs, modes=repro_mode)`
+             and automatically prunes laws whose reason no longer holds!
+          4. Optionally predicts the effect of `(query_atom, query_state)` using only surviving
+             justified laws (failing closed on disagreement or no admitting law).
+        """
+        t0 = time.perf_counter()
+        from canonical.swe_kernel import safe_action_model_v1 as sam
+        from canonical.tools import a_law_carries_its_reason_v1 as lcr
+        from canonical.tools import the_width_of_a_guard_v1 as wguard
+
+        def _norm_state(rows: Sequence[Any]) -> tuple[tuple[Any, ...], ...]:
+            out = []
+            for r in rows:
+                if isinstance(r, (list, tuple)):
+                    out.append(tuple(r))
+                else:
+                    out.append((r,))
+            return tuple(out)
+
+        def _to_obs(seq: Sequence[Any]) -> list[Any]:
+            res_obs: list[Any] = []
+            for item in seq:
+                if isinstance(item, sam.Observation):
+                    res_obs.append(item)
+                elif isinstance(item, Mapping):
+                    bef = _norm_state(item.get("before") or ())
+                    aft = _norm_state(item.get("after") or ())
+                    add_raw = item.get("added") or ()
+                    del_raw = item.get("deleted") or ()
+                    added = frozenset(tuple(x) if isinstance(x, (list, tuple)) else (x,) for x in add_raw)
+                    deleted = frozenset(tuple(x) if isinstance(x, (list, tuple)) else (x,) for x in del_raw)
+                    res_obs.append(sam.Observation(str(item.get("atom") or ""), bef, aft, added, deleted))
+            return res_obs
+
+        obs_list = _to_obs(observations)
+        if not obs_list:
+            return {
+                "pass": False,
+                "status": "FAIL_CLOSED__NO_OBSERVATIONS",
+                "domain": str(domain),
+                "model_calls": 0,
+                "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            }
+
+        raw_justified = lcr.justify(obs_list)
+        # Refuse zero-contrast sample descriptions (cannot be safely maintained or pruned!)
+        admitted_laws = [jl for jl in raw_justified if len(jl.contrast) > 0]
+        rejected_empty_contrast = len(raw_justified) - len(admitted_laws)
+
+        pruned_laws: list[dict[str, Any]] = []
+        surviving = list(admitted_laws)
+        if student_observations is not None:
+            stud_list = _to_obs(student_observations)
+            kept: list[Any] = []
+            for jl in admitted_laws:
+                if lcr.reproducible(jl, stud_list, modes=str(repro_mode)):
+                    kept.append(jl)
+                else:
+                    pruned_laws.append({**jl.to_dict(), "pruned_reason": f"CONTRAST_NOT_REPRODUCIBLE:{repro_mode}"})
+                    self.forgetting_ledger.append({
+                        "kind": "contrast_law_pruned",
+                        "domain": str(domain),
+                        "atom": jl.law.atom,
+                        "projection": jl.law.projection,
+                        "reason": f"CONTRAST_NOT_REPRODUCIBLE:{repro_mode}",
+                        "ts": time.time(),
+                    })
+            surviving = kept
+
+        self._justified_contrast_laws[str(domain)] = surviving
+
+        prediction = None
+        if query_atom is not None and query_state is not None:
+            q_st = _norm_state(query_state)
+            raw_pred = wguard.predict([jl.law for jl in surviving], str(query_atom), q_st)
+            prediction = {
+                "status": str(raw_pred.get("status") or "REFUSED"),
+                "by": raw_pred.get("by"),
+                "laws": raw_pred.get("laws"),
+                "effect": (
+                    {
+                        "added": sorted(map(list, raw_pred["effect"][0])),
+                        "deleted": sorted(map(list, raw_pred["effect"][1])),
+                    }
+                    if "effect" in raw_pred and raw_pred["effect"] is not None
+                    else None
+                ),
+            }
+
+        ok = len(admitted_laws) > 0
+        return {
+            "pass": ok,
+            "status": "PASS__CONTRAST_LAWS_VERIFIED" if ok else "FAIL_CLOSED__NO_CONTRAST_JUSTIFIED_LAWS",
+            "domain": str(domain),
+            "observations_count": len(obs_list),
+            "justified_count": len(admitted_laws),
+            "rejected_empty_contrast_count": rejected_empty_contrast,
+            "surviving_count": len(surviving),
+            "pruned_count": len(pruned_laws),
+            "surviving_laws": [jl.to_dict() for jl in surviving[:24]],
+            "pruned_laws": pruned_laws[:24],
+            "prediction": prediction,
+            "model_calls": 0,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+    def filing_key_hindsight_and_jitrl(
+        self,
+        *,
+        feature_keys: Mapping[str, str] | None = None,
+        winners_by_kind: Mapping[str, Sequence[str]] | None = None,
+        alpha_example_before: str | None = None,
+        alpha_example_after: str | None = None,
+        alpha_target: str | None = None,
+        one_showing_candidate: Mapping[str, Any] | None = None,
+        failed_trace: Sequence[Mapping[str, Any]] | None = None,
+        failed_plan: Sequence[Any] | None = None,
+        nominal_goal: str = "",
+        achieved_goal: str = "",
+        env_kind: str = "generic",
+        jitrl_filing_key: str | None = None,
+        jitrl_observations: Sequence[Mapping[str, Any]] = (),
+        jitrl_beta: float = 2.0,
+    ) -> dict[str, Any]:
+        """Wave 27 (`0G` × `the_index_is_the_bottleneck_v1` × `what_the_operand_names_cost_v1`
+        × `when_one_showing_should_be_trusted_20261112_v1` × `perfect_algorithm_lifted_generalization_v1`
+        + AgentHER hindsight relabeling + JitRL closed-form advantage, `K3=0`)."""
+        t0 = time.perf_counter()
+        out: dict[str, Any] = {
+            "filing_key_audit": None,
+            "alpha_unwelded_rewrite": None,
+            "one_showing_trust": None,
+            "hindsight_lifted_skill": None,
+            "jitrl_policy": None,
+        }
+
+        # 1. Filing-key collision & answerability audit (`the_index_is_the_bottleneck_v1`)
+        if feature_keys and winners_by_kind:
+            from canonical.tools import the_index_is_the_bottleneck_v1 as idx_btl
+
+            w_sets = {str(k): {str(v) for v in vs} for k, vs in winners_by_kind.items()}
+            fk_map = {str(k): str(v) for k, v in feature_keys.items()}
+            out["filing_key_audit"] = idx_btl.score_key(fk_map, w_sets)
+
+        # 2. Operand-unwelded alpha-safe transfer (`what_the_operand_names_cost_v1`)
+        if alpha_example_before is not None and alpha_example_after is not None and alpha_target is not None:
+            from canonical.tools import what_the_operand_names_cost_v1 as op_cost
+
+            rewritten = op_cost.alpha_safe_rewrite(
+                str(alpha_example_before),
+                str(alpha_example_after),
+                str(alpha_target),
+            )
+            out["alpha_unwelded_rewrite"] = {
+                "transferred": rewritten is not None and rewritten != str(alpha_target),
+                "rewritten_source": rewritten,
+            }
+
+        # 3. Trustworthiness gate for 1-showing transfer (`when_one_showing_should_be_trusted_20261112_v1`)
+        if one_showing_candidate is not None:
+            from canonical.tools import when_one_showing_should_be_trusted_20261112_v1 as one_show
+
+            out["one_showing_trust"] = {
+                "learnable_from_one_showing": bool(one_show.is_learnable(one_showing_candidate)),
+            }
+
+        # 4. AgentHER Hindsight Trajectory Relabeling + Lifted Generalization (`perfect_algorithm_lifted_generalization_v1`)
+        if failed_trace and failed_plan and achieved_goal:
+            from canonical.swe_kernel import perfect_algorithm_lifted_generalization_v1 as lifted_gen
+
+            relabelled_goal = str(achieved_goal).strip()
+            lifted = lifted_gen.generalize_lifted(
+                list(failed_trace),
+                list(failed_plan),
+                relabelled_goal,
+                goal_family=relabelled_goal,
+                env_kind=str(env_kind),
+            )
+            filing_sig = _sha16({"env_kind": str(env_kind), "achieved_goal": relabelled_goal, "sketch": lifted.get("plan_sketch")})
+            entry = {
+                "filing_key": f"her:{env_kind}:{filing_sig}",
+                "nominal_goal": str(nominal_goal),
+                "relabelled_achieved_goal": relabelled_goal,
+                "lifted_rule": lifted,
+            }
+            self._hindsight_filing_skills[entry["filing_key"]] = entry
+            if all(isinstance(a, str) for a in failed_plan):
+                self.crystallize_action_macro(
+                    trigger_key=entry["filing_key"],
+                    actions=[str(a) for a in failed_plan],
+                    provenance_episode_id=f"agenther:{filing_sig}",
+                )
+            out["hindsight_lifted_skill"] = entry
+
+        # 5. JitRL Closed-Form Non-Parametric Advantage Scoring (`z' = z + beta * A_hat`, arXiv:2601.18510)
+        if jitrl_filing_key is not None:
+            fk = str(jitrl_filing_key)
+            bucket = self._jitrl_episodes.setdefault(fk, [])
+            for obs in jitrl_observations:
+                if isinstance(obs, Mapping) and obs.get("action") is not None:
+                    bucket.append({
+                        "action": str(obs["action"]),
+                        "reward": float(obs.get("reward", 0.0)),
+                    })
+            if bucket:
+                baseline_r = sum(e["reward"] for e in bucket) / len(bucket)
+                by_act: dict[str, list[float]] = {}
+                for e in bucket:
+                    by_act.setdefault(e["action"], []).append(e["reward"])
+                scored_actions: list[dict[str, Any]] = []
+                beta = float(jitrl_beta)
+                for act, rs in sorted(by_act.items()):
+                    mean_r = sum(rs) / len(rs)
+                    adv = mean_r - baseline_r
+                    scored_actions.append({
+                        "action": act,
+                        "count": len(rs),
+                        "mean_reward": round(mean_r, 6),
+                        "advantage": round(adv, 6),
+                        "logit_shift": round(beta * adv, 6),
+                    })
+                scored_actions.sort(key=lambda r: (-r["logit_shift"], r["action"]))
+                out["jitrl_policy"] = {
+                    "filing_key": fk,
+                    "episode_count": len(bucket),
+                    "baseline_reward": round(baseline_r, 6),
+                    "beta": beta,
+                    "best_action": scored_actions[0]["action"],
+                    "action_advantages": scored_actions,
+                }
+
+        any_active = any(v is not None for v in out.values())
+        return {
+            "pass": any_active,
+            "status": "PASS__FILING_KEY_HINDSIGHT_JITRL" if any_active else "FAIL_CLOSED__NO_INPUTS_PROVIDED",
+            **out,
+            "model_calls": 0,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
 
 
 def execute_memory_operation(
@@ -2258,6 +2813,24 @@ def execute_memory_operation(
         return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
     if op == "FTS5_RECALL":
         res = bus.fts5_recall(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "RECORD_BITEMPORAL_FACT":
+        res = bus.record_bitemporal_fact(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "QUERY_BITEMPORAL_FACTS":
+        res = bus.query_bitemporal_facts(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "BITEMPORAL_CREDIT_SKILL_BANK":
+        res = bus.bitemporal_credit_and_skill_bank(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "VERIFY_EFFECT_CHAIN":
+        res = bus.verify_effect_contract_chain(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "CONTRAST_MEMORY_LAWS":
+        res = bus.store_and_prune_contrast_laws(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "FILING_KEY_HINDSIGHT_JITRL":
+        res = bus.filing_key_hindsight_and_jitrl(**data)
         return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
     if op == "STATS":
         return {"schema": SCHEMA, "pass": True, "status": "PASS__MEMORY_STATS", "stats": bus.stats()}
