@@ -33046,7 +33046,7 @@
   "promotion_callable": 31,
   "promotion_candidates": 849,
   "receipt_backed_capabilities": 309,
-  "research_index_records": 7433,
+  "research_index_records": 7434,
   "routing_tokens": 3466,
   "skills": 18,
   "source_index_entry_points": 566,
@@ -33055,7 +33055,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "10c8749af18d5b26e27bdb0b1896930ea0cacf41da613b35e9127b0292017429"
+  "value": "3263a9760686e5a70714f49ed0b6066798ce4f7d5d084c788009ccd402755fc7"
  },
  "engines": [
   {
@@ -336622,6 +336622,51 @@
     "wake": 1,
     "wake_replay_of_admitted_abstractions_20261112_v1": 1,
     "wake_replay_of_admitted_abstractions_closes_the_library_loop": 1
+   }
+  },
+  {
+   "action_id": "WAVE38_FRONTIER_LEAPFROG_UNIFICATION_20261126_V1",
+   "capability": false,
+   "date": "2026-11-26",
+   "id": "research:canonical/action_intents/WAVE38_FRONTIER_LEAPFROG_UNIFICATION_20261126_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WAVE38_FRONTIER_LEAPFROG_UNIFICATION_20261126_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "fa3c52a3c10dbbda590c6f88ca98a808f3bda1e3ec37e086eac58394e6212b9a",
+   "status": "SHIPPED",
+   "terms": {
+    "20261126": 1,
+    "96": 1,
+    "a-tma": 1,
+    "across": 1,
+    "anti-correlation": 1,
+    "anti-ghost-memory": 1,
+    "anti-vacuous": 1,
+    "atlas": 1,
+    "bicameral": 1,
+    "binding": 1,
+    "blind": 1,
+    "bpf": 1,
+    "cap": 1,
+    "classic": 1,
+    "closes": 1,
+    "compilation": 1,
+    "confinedhybridcomputeruseexecutor": 1,
+    "confinement": 1,
+    "consolidation": 1,
+    "contrast": 1,
+    "correlated-promotion": 1,
+    "counterfactual": 1,
+    "creature": 1,
+    "custom-exception": 1,
+    "domain": 1,
+    "domain_atlas_v1": 1,
+    "enforcement": 1,
+    "failure": 1,
+    "frontier": 2,
+    "gaps": 1,
+    "gating": 2,
+    "lacked": 4
    }
   },
   {

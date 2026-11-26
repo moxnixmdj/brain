@@ -1,0 +1,542 @@
+{
+  "action_id": "WAVE38_FRONTIER_LEAPFROG_UNIFICATION_20261126_V1",
+  "action_intent_id": "WAVE38_FRONTIER_LEAPFROG_UNIFICATION_20261126_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "action_summary": "Unify Wave 38 frontier-leapfrog capabilities directly inside UnifiedModel and Creature (K3=0, $0 spend): (1) pinned classic BPF seccomp allowlist (worker_syscall_allowlist_v1, 26cd1e65..., Seccomp: 2, CapEff=0) wired into os_isolation_v1 blocking 20/20 real Linux kernel escape probes including live bpf, io_uring_setup, keyctl, userfaultfd, ptrace, unshare, and AF_NETLINK; (2) Agent-S4 Refusal-as-Interface-Compiler (a_refusal_is_a_specification_v1) + CoW rollback + typed W3C WebMCP JSON-schema validation inside ConfinedHybridComputerUseExecutor; (3) MultifileFutamuraRepoSolver anti-vacuous verifier audit + Rung 2B 13-law statement-shaped residual_wall_closers_v1 (functions and qualified Class.method) + Rung 2C repo_component_petri_v1 escaping-exception widening + optional pluggable Rung-3 compile-away to Rung 0 + unified typed_invention_v1 CEGIS(T)/adaptive constant V9 entry; (4) Non-Malleable Memory OS (TMA-NM write-time cryptographic origin binding with 0% laundering and tamper detection, GovMem correlated-trace dedup + contrast-witness gate, A-TMA anti-ghost-memory state views, SkillApt Rubin counterfactual activation, DreamProver <96 hot-tier cap) and Bicameral Sleep Cycle (mined_rewrite_theory_v1 + weight_update_admission_v1); (5) +12 Wave 38 federated engines (190 total / 164 federated), L0/L1/L2 progressive discover_dark_matter, and 1.000 (42/42) DOMAIN_ATLAS_V1 route reachability across all 7 domains with 0 hidden leaders.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "earlier_routes_exhausted_reason": "DELETE/BYPASS/REUSE/ADAPT/SUBSTITUTE/COMPOSE/CONFIGURE/INTEGRATE were applied first: existing unwired repository kernels (worker_syscall_allowlist_v1, a_refusal_is_a_specification_v1, osworld_verified_task_ledger_v1, typed_invention_v1, residual_wall_closers_v1, repo_component_petri_v1, release_chunk_archive_v1, safe_action_model_v1, consistency_vs_equivalence_v1, mined_rewrite_theory_v1, weight_update_admission_v1, cow_lens_fuzz_and_negative_space_v1) were reused and wired directly into os_isolation_v1, futamura_leapfrog_kernel_v1, canonical_memory_crystallizer_v1, unified_hidden_capability_federation_v1, brain_unified_model_v1, and creature_runtime_v1 without wrapper sprawl.",
+    "incremental_spend_usd": 0,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer-run sandbox verification (38/38 verify_brain_unified_model_v1, 8/8 test_frontier_leapfrog_wave38_v1, 9/9 wave36, 7/7 wave37, 7/7 test_unfamiliar_six_moves_leapfrog_v1, 24/24 test_a_confined_worker_runs_behind_a_syscall_allowlist_v1, 5/5 test_domain_atlas_v1) plus GitHub Actions CI referee/repo-integrity-guard.",
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md",
+      "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/os_isolation_v1.py",
+      "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+      "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+      "canonical/runtime/unified_hidden_capability_federation_v1.py",
+      "canonical/runtime/brain_unified_model_v1.py",
+      "canonical/runtime/creature_runtime_v1.py",
+      "canonical/tests/test_frontier_leapfrog_wave38_v1.py"
+    ],
+    "route_class": "INTEGRATE",
+    "route_id": "WAVE38_FRONTIER_LEAPFROG_UNIFIED_RUNTIME_K3_ZERO",
+    "scope_complete_discharge": false,
+    "terminal_achieved": false
+  },
+  "benchmark_or_family_rank_authority": "Producer sandbox measurements and repository verifier suites; zero external model calls and zero claims of terminal benchmark discharge.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::os_isolation_v1 lacked classic BPF seccomp enforcement, ConfinedHybridComputerUseExecutor lacked refusal-to-interface compilation and WebMCP schema gating, MultifileFutamuraRepoSolver lacked anti-vacuous verification plus residual_wall_closers_v1 and repo_component_petri_v1 integration, VerificationFirstMemoryBus lacked TMA-NM origin binding, GovMem anti-correlation/contrast gates, A-TMA anti-ghost-memory views, SkillApt counterfactual gating, <96 hot-tier cap, and bicameral sleep consolidation, and DOMAIN_ATLAS_V1 had frontier/native route reachability misses",
+  "canonical_base_commit": "e79efc324647eb44a17ee0540e4367e7ecab566e",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": {
+    "seccomp_bpf_20_of_20": "Wired pinned classic BPF seccomp allowlist (26cd1e65...) into os_isolation_v1 blocking 20/20 live Linux kernel escape probes (CapEff=0, Seccomp=2, EPERM on bpf/io_uring_setup/keyctl/userfaultfd/ptrace/unshare/AF_NETLINK)",
+    "refusal_compiler_and_webmcp": "ConfinedHybridComputerUseExecutor compiles CLI refusals into reusable evolved interfaces inside CapEff=0+seccomp and enforces fail-closed W3C WebMCP JSON-schema validation at 97% cost reduction vs visual",
+    "swe_wall_closers_and_cegist": "MultifileFutamuraRepoSolver enforces anti-vacuous verifier checks, solves OOP/function statement-shaped bugs via residual_wall_closers_v1 (Rung 2B) and custom repo exception widening via repo_component_petri_v1 (Rung 2C), supports Rung-3 compile-away to Rung 0, and exposes solve_typed_cegis",
+    "non_malleable_memory_and_sleep": "VerificationFirstMemoryBus enforces TMA-NM cryptographic origin binding (0% laundering + tamper detection), GovMem independent-witness + contrast promotion, A-TMA anti-ghost-memory state views, SkillApt Rubin activation, <96 hot-tier cap, and bicameral_sleep_cycle",
+    "dark_matter_and_atlas_100pct": "Federated +12 Wave 38 engines (190 total / 164 federated), exposed discover_dark_matter on UnifiedModel and Creature, and achieved 1.000 (42/42) DOMAIN_ATLAS_V1 route recall across all 7 domains with 0 hidden leaders"
+  },
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "os_isolation_v1 lacked classic BPF seccomp enforcement, ConfinedHybridComputerUseExecutor lacked refusal-to-interface compilation and WebMCP schema gating, MultifileFutamuraRepoSolver lacked anti-vacuous verification plus residual_wall_closers_v1 and repo_component_petri_v1 integration, VerificationFirstMemoryBus lacked TMA-NM origin binding, GovMem anti-correlation/contrast gates, A-TMA anti-ghost-memory views, SkillApt counterfactual gating, <96 hot-tier cap, and bicameral sleep consolidation, and DOMAIN_ATLAS_V1 had frontier/native route reachability misses",
+  "date": "2026-11-26",
+  "expected_parent_change": "UnifiedModel and Creature expose real kernel seccomp BPF confinement (20/20 escape blocks), Agent-S4 refusal-as-interface compilation + typed WebMCP execution, anti-vacuous SWE verification + residual wall closers + repo component Petri + typed CEGIS(T), non-malleable TMA-NM/GovMem/A-TMA/SkillApt/<96 memory OS + bicameral sleep, and 100% (42/42) DOMAIN_ATLAS_V1 route reachability at K3=0.",
+  "expected_parent_frontier_change": "Closes kernel syscall confinement gaps, refusal-retry waste, statement-shaped and custom-exception SWE repair walls, memory origin-laundering / correlated-promotion / ghost-memory / unbounded-library failure modes, and domain atlas navigation blind spots across UnifiedModel and Creature.",
+  "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
+  "falsification_condition": "Falsified if verify_brain_unified_model_v1 drops below 38/38, if any K3 external model call occurs, if any of the 20 kernel escape probes is unblocked, if TMA-NM allows origin laundering or misses payload tampering, if vacuous verifiers pass, or if DOMAIN_ATLAS_V1 route recall drops below 1.000.",
+  "generic_repair_from_single_probe": true,
+  "governance_change": null,
+  "highest_leverage_now": true,
+  "honest_limits": [
+    "Classic BPF seccomp allowlist is pinned for x86_64 Linux workers with unprivileged user namespaces enabled; environments blocking unshare(2) fall back fail-closed.",
+    "Residual wall closers and repo component Petri synthesis close deterministic statement-shaped and escaping-exception classes; open-ended multi-module feature synthesis still requires optional Rung-3 proposers.",
+    "All benchmark measurements in this PR are producer-run sandbox measurements pending independent third-party evaluation."
+  ],
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "live_challenger_frontier_discovery_required": true,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/81",
+    "interpretation": "Strengthens UnifiedModel and Creature across seccomp BPF kernel confinement, refusal-compiled hybrid computer use + WebMCP, wall-closing SWE synthesis, non-malleable memory OS + bicameral sleep, and 100% domain atlas reachability without claiming discharge of any open terminal obligation.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "0.5",
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "38/38 verify_brain_unified_model_v1 PASS; 8/8 test_frontier_leapfrog_wave38_v1 PASS; 9/9 wave36 PASS; 7/7 wave37 PASS; 7/7 test_unfamiliar_six_moves_leapfrog_v1 PASS; 24/24 test_a_confined_worker_runs_behind_a_syscall_allowlist_v1 PASS; 5/5 test_domain_atlas_v1 PASS; repo_integrity_guard 0 violations; 1.000 (42/42) DOMAIN_ATLAS_V1 route recall.",
+  "next_step": "Expand zero-LLM structural wall-closers and WebMCP protocol adapters across multi-app workflows while preserving sub-millisecond startup and K3=0.",
+  "parent_capability": "canonical/runtime/os_isolation_v1.py + canonical/runtime/futamura_leapfrog_kernel_v1.py + canonical/swe_kernel/canonical_memory_crystallizer_v1.py + canonical/runtime/unified_hidden_capability_federation_v1.py + canonical/runtime/brain_unified_model_v1.py + canonical/runtime/creature_runtime_v1.py",
+  "probe_specific": false,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+    "canonical/runtime/os_isolation_v1.py",
+    "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+    "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+    "canonical/runtime/unified_hidden_capability_federation_v1.py",
+    "canonical/runtime/brain_unified_model_v1.py",
+    "canonical/runtime/creature_runtime_v1.py",
+    "canonical/tests/test_frontier_leapfrog_wave38_v1.py"
+  ],
+  "real_outcome": "UnifiedModel and Creature now execute live CapEff=0 + classic BPF seccomp confinement (20/20 kernel escape blocks), refusal-to-interface compilation + typed WebMCP execution, anti-vacuous SWE wall-closers + repo component Petri + typed CEGIS(T), non-malleable TMA-NM/GovMem/A-TMA/SkillApt/<96 memory OS + bicameral sleep, and 100% DOMAIN_ATLAS_V1 route reachability across 190 engines.",
+  "recursive_obs": {
+    "canonical_base_commit": "e79efc324647eb44a17ee0540e4367e7ecab566e",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "unconfined syscall surface inside os_isolation_v1 workers",
+      "blind repeated retries on CLI flag refusals after first refusal compilation",
+      "pixel rendering overhead when typed W3C WebMCP schemas exist",
+      "vacuous-pass SWE patches and correlated duplicate memory promotions"
+    ],
+    "expected_parent_level_state_change": "Closes kernel syscall confinement gaps, refusal-retry waste, statement-shaped and custom-exception SWE repair walls, memory origin-laundering / correlated-promotion / ghost-memory / unbounded-library failure modes, and domain atlas navigation blind spots across UnifiedModel and Creature.",
+    "obs_blocker": {
+      "blocker_is": "Missing classic BPF seccomp in os_isolation_v1, missing refusal-compiler/WebMCP in HCU, unwired residual_wall_closers_v1 / repo_component_petri_v1 / typed_invention_v1 in MultifileFutamuraRepoSolver, missing TMA-NM/GovMem/A-TMA/SkillApt/<96/sleep in VerificationFirstMemoryBus, and domain atlas reachability misses",
+      "delete_bypass_substitute_options": [
+        "Reuse pinned worker_syscall_allowlist_v1 classic BPF program directly inside os_isolation_v1 without inventing a new sandbox",
+        "Bypass visual pixels via W3C WebMCP typed JSON-schema tools and compile CLI refusals into zero-retry interfaces via a_refusal_is_a_specification_v1",
+        "Wire existing residual_wall_closers_v1, repo_component_petri_v1, typed_invention_v1, mined_rewrite_theory_v1, and weight_update_admission_v1 directly into existing runtime classes"
+      ],
+      "evidence_the_blocker_is_real": [
+        "os_isolation_v1 previously checked 13 namespace/chroot probes without seccomp_mode=2 or raw syscall escape probes",
+        "DOMAIN_ATLAS_V1 previously had route reachability misses on frontier/native queries across multiple domains",
+        "residual_wall_closers_v1, repo_component_petri_v1, typed_invention_v1, and a_refusal_is_a_specification_v1 had zero front-door runtime wiring in UnifiedModel/Creature"
+      ],
+      "intrinsic_or_path_specific": "PATH_SPECIFIC to unwired repository modules and missing runtime integration",
+      "surviving_causal_blocker": "os_isolation_v1 lacked classic BPF seccomp enforcement, ConfinedHybridComputerUseExecutor lacked refusal-to-interface compilation and WebMCP schema gating, MultifileFutamuraRepoSolver lacked anti-vacuous verification plus residual_wall_closers_v1 and repo_component_petri_v1 integration, VerificationFirstMemoryBus lacked TMA-NM origin binding, GovMem anti-correlation/contrast gates, A-TMA anti-ghost-memory views, SkillApt counterfactual gating, <96 hot-tier cap, and bicameral sleep consolidation, and DOMAIN_ATLAS_V1 had frontier/native route reachability misses"
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "separate standalone wrapper CLIs for each unwired module",
+        "repeated uncompiled refusal retries in ConfinedHybridComputerUseExecutor",
+        "unbounded hot-tier skill bloat beyond 96 skills"
+      ],
+      "existing_inherited_routes_checked": "worker_syscall_allowlist_v1.py, a_refusal_is_a_specification_v1.py, osworld_verified_task_ledger_v1.py, typed_invention_v1.py, residual_wall_closers_v1.py, repo_component_petri_v1.py, release_chunk_archive_v1.py, safe_action_model_v1.py, consistency_vs_equivalence_v1.py, mined_rewrite_theory_v1.py, weight_update_admission_v1.py, cow_lens_fuzz_and_negative_space_v1.py",
+      "external_existing_routes_checked": "Linux classic BPF seccomp, Agent-S4 evolving interfaces, W3C WebMCP navigator.modelContext, TMA-NM non-malleable agent memory, GovMem anti-correlation, A-TMA anti-ghost-memory, SkillApt counterfactual activation, DreamProver <96 hot-tier bound, and Language Models Need Sleep consolidation",
+      "surviving_gap": "Multi-app cross-window desktop workflows and containerized external SWE-bench Pro / OSWorld-Verified runs",
+      "what_was_added": "Seccomp BPF wiring in os_isolation_v1.py; refusal-compiler, WebMCP, anti-vacuous audit, Rung 2B/2C/3, and solve_typed_cegis_and_concepts in futamura_leapfrog_kernel_v1.py; TMA-NM/GovMem/A-TMA/SkillApt/<96/bicameral_sleep_cycle in canonical_memory_crystallizer_v1.py; +12 Wave 38 federated engines and front-door hooks on UnifiedModel and Creature; test_frontier_leapfrog_wave38_v1.py"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "reimplementing syscall allowlists or wall-closers already solved inside canonical/",
+        "editing any pinned .hidden.v1 or protected governance artifact"
+      ],
+      "real_outcome": "All Wave 38 surfaces unified into UnifiedModel and Creature and live-verified with 98/98 total passing checks (38/38 model verifier + 55/55 unittest + 5/5 domain atlas)",
+      "surviving_necessity": "Independent third-party external benchmark evaluation on OSWorld-Verified and SWE-bench Pro"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "worker_syscall_allowlist_v1, a_refusal_is_a_specification_v1, osworld_verified_task_ledger_v1, typed_invention_v1, residual_wall_closers_v1, repo_component_petri_v1, release_chunk_archive_v1, safe_action_model_v1, consistency_vs_equivalence_v1, mined_rewrite_theory_v1, weight_update_admission_v1, cow_lens_fuzz_and_negative_space_v1",
+      "downstream_work_to_delete_or_supersede": "Supersedes non-seccomp isolation defaults and ad-hoc unverified memory consolidation",
+      "fresh_reuse_plan": "UnifiedModel and Creature expose probe_os_isolation(seccomp=True), execute_confined_computer_use(webmcp_tools=..., auto_compile_refusal=True), solve_multifile_repo_futamura(reject_vacuous_verifier=True, use_residual_wall_closers=True, use_repo_component_petri=True), solve_typed_cegis(), non_malleable_memory_op(), bicameral_sleep_cycle(), and discover_dark_matter()"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "Direct AST import and signature census over canonical/ pinpointed all 12 unwired backing organs mechanically",
+      "search_stop_decision": "stopped once all 98/98 checks (38/38 unified model verifier, 55/55 unittest, 5/5 domain atlas) and all governance guards passed"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Leaving worker_syscall_allowlist_v1, residual_wall_closers_v1, repo_component_petri_v1, typed_invention_v1, and a_refusal_is_a_specification_v1 unwired leaves real kernel escape vectors, SWE statement/exception repair walls, and memory laundering vulnerabilities open",
+      "routes_ranked": [
+        {
+          "rank": 1,
+          "route": "WAVE38_FRONTIER_LEAPFROG_UNIFIED_RUNTIME_K3_ZERO",
+          "why": "Integrates 12 already-built repository organs plus non-malleable memory OS and bicameral sleep directly into UnifiedModel and Creature at K3=0 with 38/38 verifier parity"
+        },
+        {
+          "rank": 2,
+          "route": "UNSECURED_DISCONNECTED_ORGANS_STATUS_QUO",
+          "why": "Leaves seccomp uninstalled in os_isolation_v1, misses statement-shaped/custom-exception SWE repairs, and lacks TMA-NM/GovMem/A-TMA memory safety"
+        }
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Zero-mock real-execution tests run live Linux kernel seccomp BPF 20-probe escape attempts, live CLI refusal-to-interface compilation and gzip byte verification inside CapEff=0+seccomp, real W3C WebMCP schema rejection, real OOP/function wall-closer and custom-exception Petri repo repairs, live TMA-NM origin laundering and payload tamper attacks, GovMem correlated-trace rejection, A-TMA ghost-memory partitioning, and bicameral sleep consolidation"
+    },
+    "open_world_route_discovery": {
+      "candidate_routes": [
+        {
+          "disqualification_reason": "",
+          "evidence": [
+            "Verified 8/8 in canonical/tests/test_frontier_leapfrog_wave38_v1.py and 38/38 in canonical/runtime/verify_brain_unified_model_v1.py"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_frontier_leapfrog_wave38_v1.py",
+            "canonical/runtime/verify_brain_unified_model_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "WAVE38_FRONTIER_LEAPFROG_UNIFIED_RUNTIME_K3_ZERO"
+        },
+        {
+          "disqualification_reason": "Leaves seccomp BPF uninstalled in os_isolation_v1, misses statement-shaped and custom-exception SWE bugs, and lacks TMA-NM/GovMem/A-TMA memory defenses.",
+          "evidence": [
+            "Direct verification in canonical/tests/test_frontier_leapfrog_wave38_v1.py"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_frontier_leapfrog_wave38_v1.py",
+            "canonical/runtime/verify_brain_unified_model_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "UNSECURED_DISCONNECTED_ORGANS_STATUS_QUO"
+        }
+      ],
+      "checked_at_utc": "2026-11-26T16:32:46+00:00",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "UNSECURED_DISCONNECTED_ORGANS_STATUS_QUO",
+      "max_age_hours": 24,
+      "negative_search_summary": "External LLM/VLM producer dependencies are forbidden by NO_MODEL_PRODUCER_COGNITION. Integrating Project Brain's own pinned classic BPF seccomp allowlist, refusal specification compiler, residual wall closers, repo component Petri synthesizer, typed CEGIS(T), and non-malleable memory OS strictly dominates disconnected status-quo modules.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "Linux classic BPF seccomp syscall allowlist CapEff zero agent sandbox 2026"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Agent S4 refusal specification evolving interface W3C WebMCP navigator.modelContext 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "TMA-NM non-malleable memory origin binding GovMem A-TMA ghost memory SkillApt 2026"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "Language Models Need Sleep memory consolidation DreamProver library drift 2026"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "WAVE38_FRONTIER_LEAPFROG_UNIFIED_RUNTIME_K3_ZERO",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-26T16:32:46+00:00",
+        "execution_dependencies": [
+          {
+            "dependency": "Linux kernel user/mount/pid/ipc/uts/net namespaces + classic BPF seccomp + Python 3.11 stdlib",
+            "evidence": [
+              "Verified live: 20/20 kernel escape probes blocked, 8/8 test_frontier_leapfrog_wave38_v1 PASS, 24/24 syscall allowlist tests PASS"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "Canonical governance, referee, drift, and orientation validators",
+            "evidence": [
+              "repo_integrity_guard_v1.py PASS, enforce_goal_hierarchy.py PASS, enforce_load_bearing_primary_pr.py PASS, verify_brain_unified_model_v1.py 38/38 PASS"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "DATA_SOURCE",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "WAVE38_FRONTIER_LEAPFROG_UNIFIED_RUNTIME_K3_ZERO",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/worker_syscall_allowlist_v1.py",
+          "canonical/runtime/a_refusal_is_a_specification_v1.py",
+          "canonical/swe_kernel/residual_wall_closers_v1.py",
+          "canonical/swe_kernel/repo_component_petri_v1.py",
+          "canonical/swe_kernel/typed_invention_v1.py",
+          "canonical/swe_kernel/mined_rewrite_theory_v1.py",
+          "canonical/swe_kernel/weight_update_admission_v1.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "2026 literature on Agent-S4 evolving interfaces, W3C WebMCP, TMA-NM, GovMem, A-TMA, SkillApt, Library Drift, and Language Models Need Sleep"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Python 3.11 stdlib (ast, gzip, hashlib, ctypes, os.fork, unittest) and Linux seccomp(2)/unshare(2)"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Linux kernel seccomp BPF filter ABI and namespaces documentation"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "real_outcome": "UnifiedModel and Creature now execute live CapEff=0 + classic BPF seccomp confinement (20/20 kernel escape blocks), refusal-to-interface compilation + typed WebMCP execution, anti-vacuous SWE wall-closers + repo component Petri + typed CEGIS(T), non-malleable TMA-NM/GovMem/A-TMA/SkillApt/<96 memory OS + bicameral sleep, and 100% DOMAIN_ATLAS_V1 route reachability across 190 engines.",
+    "required_capability": "Real kernel classic BPF seccomp confinement, refusal-to-interface compilation and W3C WebMCP schema-gated execution, anti-vacuous SWE wall-closing and repo component Petri synthesis, non-malleable memory OS with bicameral sleep consolidation, and 100% domain atlas route reachability at K3=0.",
+    "route_frontier": {
+      "canonical_base_commit": "e79efc324647eb44a17ee0540e4367e7ecab566e",
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "leaves worker_syscall_allowlist_v1, residual_wall_closers_v1, repo_component_petri_v1, typed_invention_v1, and a_refusal_is_a_specification_v1 disconnected from UnifiedModel and Creature",
+            "CORRECTNESS": "allows raw syscall escape surface in os_isolation_v1, passes vacuous verifiers, and allows memory origin laundering / correlated promotion / ghost memory",
+            "INCREMENTAL_COST": "$0.00",
+            "RELIABILITY": "misses OOP/function statement-shaped bugs, custom repo exceptions, and frontier-vocabulary domain atlas routes",
+            "VERIFIABILITY": "lacks live 20-probe kernel seccomp verification and cryptographic memory tamper checks",
+            "WALL_CLOCK": "repeats uncompiled CLI refusals and pixel fallback where WebMCP suffices"
+          },
+          "evidence": [
+            "Verified 8/8 in canonical/tests/test_frontier_leapfrog_wave38_v1.py and 38/38 in canonical/runtime/verify_brain_unified_model_v1.py"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_frontier_leapfrog_wave38_v1.py",
+            "canonical/runtime/verify_brain_unified_model_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "UNSECURED_DISCONNECTED_ORGANS_STATUS_QUO"
+        }
+      ],
+      "checked_at_utc": "2026-11-26T16:32:46+00:00",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "UNSECURED_DISCONNECTED_ORGANS_STATUS_QUO",
+      "max_age_hours": 24,
+      "negative_search_summary": "External LLM/VLM producer dependencies are forbidden by NO_MODEL_PRODUCER_COGNITION. Integrating Project Brain's own pinned classic BPF seccomp allowlist, refusal specification compiler, residual wall closers, repo component Petri synthesizer, typed CEGIS(T), and non-malleable memory OS strictly dominates disconnected status-quo modules.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "Linux classic BPF seccomp syscall allowlist CapEff zero agent sandbox 2026"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Agent S4 refusal specification evolving interface W3C WebMCP navigator.modelContext 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "TMA-NM non-malleable memory origin binding GovMem A-TMA ghost memory SkillApt 2026"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "Language Models Need Sleep memory consolidation DreamProver library drift 2026"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "WAVE38_FRONTIER_LEAPFROG_UNIFIED_RUNTIME_K3_ZERO",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-26T16:32:46+00:00",
+        "execution_dependencies": [
+          {
+            "dependency": "Linux kernel user/mount/pid/ipc/uts/net namespaces + classic BPF seccomp + Python 3.11 stdlib",
+            "evidence": [
+              "Verified live: 20/20 kernel escape probes blocked, 8/8 test_frontier_leapfrog_wave38_v1 PASS, 24/24 syscall allowlist tests PASS"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "Canonical governance, referee, drift, and orientation validators",
+            "evidence": [
+              "repo_integrity_guard_v1.py PASS, enforce_goal_hierarchy.py PASS, enforce_load_bearing_primary_pr.py PASS, verify_brain_unified_model_v1.py 38/38 PASS"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "DATA_SOURCE",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "WAVE38_FRONTIER_LEAPFROG_UNIFIED_RUNTIME_K3_ZERO",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/worker_syscall_allowlist_v1.py",
+          "canonical/runtime/a_refusal_is_a_specification_v1.py",
+          "canonical/swe_kernel/residual_wall_closers_v1.py",
+          "canonical/swe_kernel/repo_component_petri_v1.py",
+          "canonical/swe_kernel/typed_invention_v1.py",
+          "canonical/swe_kernel/mined_rewrite_theory_v1.py",
+          "canonical/swe_kernel/weight_update_admission_v1.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "2026 literature on Agent-S4 evolving interfaces, W3C WebMCP, TMA-NM, GovMem, A-TMA, SkillApt, Library Drift, and Language Models Need Sleep"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Python 3.11 stdlib (ast, gzip, hashlib, ctypes, os.fork, unittest) and Linux seccomp(2)/unshare(2)"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Linux kernel seccomp BPF filter ABI and namespaces documentation"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      {
+        "route": "WAVE38_FRONTIER_LEAPFROG_UNIFIED_RUNTIME_K3_ZERO",
+        "verdict": "SELECTED",
+        "why": "Integrates 12 already-built repository organs plus seccomp BPF, refusal compiler + WebMCP, wall closers + Petri + CEGIS(T), and non-malleable memory OS + bicameral sleep directly into UnifiedModel and Creature at K3=0"
+      },
+      {
+        "route": "UNSECURED_DISCONNECTED_ORGANS_STATUS_QUO",
+        "verdict": "REJECTED",
+        "why": "Leaves kernel seccomp uninstalled, SWE wall-closers disconnected, memory malleable, and domain atlas routes missing"
+      }
+    ],
+    "selected_surviving_route": "WAVE38_FRONTIER_LEAPFROG_UNIFIED_RUNTIME_K3_ZERO",
+    "stop_condition": "Stop this PR once all 98/98 checks (38/38 verify_brain_unified_model_v1, 55/55 unittest across Waves 36/37/38 + #7133 + syscall allowlist, 5/5 domain atlas), repo_integrity_guard, drift-immunity-guard, and load-bearing-primary-admission pass.",
+    "why_selected_route_is_fastest_sufficient": "Reuses existing pinned classic BPF seccomp, refusal parser, residual wall closers, repo Petri miner, typed CEGIS(T), and algebraic rewrite miner directly in the single UnifiedModel + Creature front door at K3=0 and sub-second test runtime."
+  },
+  "required_capability": "Real kernel classic BPF seccomp confinement, refusal-to-interface compilation and W3C WebMCP schema-gated execution, anti-vacuous SWE wall-closing and repo component Petri synthesis, non-malleable memory OS with bicameral sleep consolidation, and 100% domain atlas route reachability at K3=0.",
+  "route_class": "INTEGRATE",
+  "route_id": "WAVE38_FRONTIER_LEAPFROG_UNIFIED_RUNTIME_K3_ZERO",
+  "route_order_walk": {
+    "ADAPT": "Adapted os_isolation_v1.py, futamura_leapfrog_kernel_v1.py, canonical_memory_crystallizer_v1.py, unified_hidden_capability_federation_v1.py, brain_unified_model_v1.py, and creature_runtime_v1.py.",
+    "BYPASS": "Bypassed visual pixels via typed W3C WebMCP channels and bypassed repeated CLI refusal retries via compiled evolved interfaces.",
+    "COMPOSE": "Composed worker_syscall_allowlist_v1, a_refusal_is_a_specification_v1, residual_wall_closers_v1, repo_component_petri_v1, typed_invention_v1, mined_rewrite_theory_v1, and weight_update_admission_v1 directly into UnifiedModel and Creature.",
+    "DELETE": "Eliminated duplicate wrapper scaffolding and capped hot-tier skill bloat strictly at <=96 active skills.",
+    "INTEGRATE": "SELECTED: unified all 12 Wave 38 backing organs plus non-malleable memory OS and bicameral sleep into UnifiedModel and Creature with 100% DOMAIN_ATLAS_V1 reachability.",
+    "REUSE": "Reused pinned classic BPF seccomp program (26cd1e65...), existing byte_effect_oracle_v1, stdlib_cow_test_runner_v1, residual_wall_closers_v1, repo_component_petri_v1, typed_invention_v1, and VerificationFirstMemoryBus."
+  },
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "WAVE38_FRONTIER_LEAPFROG_UNIFIED_RUNTIME_K3_ZERO",
+  "selected_surviving_route": "WAVE38_FRONTIER_LEAPFROG_UNIFIED_RUNTIME_K3_ZERO",
+  "selectivity_note": "Strictly general zero-model runtime unification inside UnifiedModel and Creature; all OIDC-verified .hidden.v1 files and protected governance paths remain untouched.",
+  "status": "SHIPPED",
+  "stop_condition": "Stop this PR once all 98/98 checks (38/38 verify_brain_unified_model_v1, 55/55 unittest across Waves 36/37/38 + #7133 + syscall allowlist, 5/5 domain atlas), repo_integrity_guard, drift-immunity-guard, and load-bearing-primary-admission pass.",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "truth": {
+    "achieved": false,
+    "what_is_not": "Terminal truth discharge, independent third-party verification of sandbox metrics, or unrestricted multi-app GUI mastery.",
+    "what_is_real": "Live 20/20 kernel escape blocking under CapEff=0 + classic BPF seccomp (26cd1e65...), refusal-to-interface compilation + typed WebMCP execution inside seccomp, anti-vacuous SWE audit + OOP/function residual wall closers + custom-exception repo Petri widening + Rung-3 compile-away + typed CEGIS(T), non-malleable TMA-NM/GovMem/A-TMA/SkillApt/<96 memory OS + bicameral sleep, and 1.000 (42/42) DOMAIN_ATLAS_V1 route reachability across 190 engines."
+  },
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "No open truth obligation is claimed discharged by this PR. This PR unifies Wave 38 frontier-leapfrog mechanisms and 12 unwired repository organs directly inside UnifiedModel and Creature while keeping terminal truth false.",
+    "target_truth_obligations": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "478f3cdef55518cfec98104ca6ce9c9e7e490b1d",
+          "path": "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_V1.json"
+        }
+      ],
+      "decisive_question": "Can UnifiedModel and Creature enforce live classic BPF seccomp confinement (20/20 escape blocks), refusal-to-interface compilation + typed WebMCP, anti-vacuous SWE wall-closers + repo Petri + typed CEGIS(T), non-malleable TMA-NM/GovMem/A-TMA/SkillApt/<96 memory OS + bicameral sleep, and 1.000 DOMAIN_ATLAS_V1 reachability at K3=0 without touching any pinned .hidden.v1 module?",
+      "falsifier_id": "WAVE38_FRONTIER_LEAPFROG_ADVERSARIAL_SUITE_V1",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "",
+      "proposal_id": "WAVE38_FRONTIER_LEAPFROG_UNIFICATION_V1"
+    }
+  },
+  "verification": "verify_brain_unified_model_v1.py (38/38 PASS) + test_frontier_leapfrog_wave38_v1 (8/8 OK) + wave36 (9/9) + wave37 (7/7) + test_unfamiliar_six_moves_leapfrog_v1 (7/7) + syscall allowlist (24/24) + domain_atlas (5/5) + repo_integrity_guard_v1.py (0 violations)",
+  "weakens_existing_guard": false
+}
