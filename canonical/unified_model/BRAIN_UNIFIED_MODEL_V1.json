@@ -33055,7 +33055,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "57a837b4929bf11ab869a623cbb66d417c222a88fd626e511b0c5c7b2a3187eb"
+  "value": "bcba87eb27b481ebce029c0dbf94abb1e7a2827e4a85784d2e4cff02ff5ce841"
  },
  "engines": [
   {
@@ -328675,7 +328675,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/UNIFIED_96_ORGAN_EPISTEMIC_PORTFOLIO_20261126_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "03cedcce52b335e8eab72512f0f011f0bd20dc2c54138940dff4f2e0a808aacc",
+   "sha256": "f23317fdfda60526610b8e05328e612a73ca76e19320aac4a8a3353985dcf650",
    "status": "SHIPPED",
    "terms": {
     "0.47": 1,
