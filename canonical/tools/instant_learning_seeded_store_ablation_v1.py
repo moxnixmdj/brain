@@ -128,6 +128,29 @@ def materialize_task(repo: pathlib.Path, sha: str, test_target: str, work: pathl
     }
 
 
+def discover_demands(work: pathlib.Path, python: str | None, tests_dir: str = "tests",
+                     max_files: int = 6, timeout_s: float = 240.0) -> dict[str, Any]:
+    """Read the demand from the run: run the repo's own suite once and return the files that fail.
+
+    Why this exists: a task description names one test file, and an engine handed only that file
+    abstains in 0.2s whenever the assertion that actually distinguishes broken from fixed lives
+    elsewhere -- `tests/test_options.py`, a doctest, a neighbouring module. That abstention is a
+    property of our input, not of the engine, and it would be reported as a capability failure.
+    So the failing set is discovered by execution rather than quoted from a task card; the engine
+    still has to do the synthesis, and the reference patch still has to close the same set.
+    """
+    st = _pytest_state(work, tests_dir, python, timeout_s)
+    if not st.get("ran"):
+        return {"ok": False, "targets": [], "reason": f"SUITE_DID_NOT_RUN:{st.get('summary','')[:80]}"}
+    per_file: dict[str, int] = {}
+    for nid in st["failing"]:
+        f = nid.split("::")[0]
+        per_file[f] = per_file.get(f, 0) + 1
+    ordered = sorted(per_file, key=lambda k: (-per_file[k], k))[:max_files]
+    return {"ok": True, "targets": ordered, "failing_total": len(st["failing"]),
+            "collected_total": len(st.get("ids", [])), "per_file": per_file, "summary": st["summary"]}
+
+
 def _source_env(work: pathlib.Path) -> dict[str, str]:
     """PYTHONPATH that makes `import <pkg>` resolve to the mutated work tree, not an installed copy."""
     src = work / "src"
@@ -309,14 +332,15 @@ def seed_store(repo: pathlib.Path, train: Mapping[str, Any], work: pathlib.Path,
     return {"store": store, "seeded": True, "entry_id": entry_id, "rebuild_index": store.rebuild_structural_index()}
 
 
-def solve_arm(store_obj: Any, work: pathlib.Path, test_target: str, timeout_s: float) -> dict[str, Any]:
+def solve_arm(store_obj: Any, work: pathlib.Path, targets: Sequence[str], timeout_s: float) -> dict[str, Any]:
     from canonical.swe_kernel import cross_modal_tomography_petri_v1 as CMTP
 
-    goal = f"Make the failing tests in {test_target} pass without breaking anything else."
+    goal = ("Make these failing tests pass without breaking anything else: "
+            + ", ".join(f"{t} (file)" for t in targets))
     t0 = time.perf_counter()
     try:
         res = CMTP.solve_epistemic_workspace_cow(
-            workspace_dir=work, goal_text=goal, store=store_obj, pytest_targets=[test_target],
+            workspace_dir=work, goal_text=goal, store=store_obj, pytest_targets=list(targets),
             timeout_s=timeout_s,
         )
     except Exception as exc:
@@ -337,7 +361,8 @@ def solve_arm(store_obj: Any, work: pathlib.Path, test_target: str, timeout_s: f
 
 
 def evaluate(repos_dir: pathlib.Path, tasks: list[dict[str, Any]], *, arms: tuple[str, ...],
-             solve_timeout_s: float, keep: bool) -> dict[str, Any]:
+             solve_timeout_s: float, keep: bool, discover: bool = False,
+             partial_out: pathlib.Path | None = None) -> dict[str, Any]:
     scratch = pathlib.Path("/tmp/ilsa")
     scratch.mkdir(parents=True, exist_ok=True)
     rows: list[dict[str, Any]] = []
@@ -380,6 +405,13 @@ def evaluate(repos_dir: pathlib.Path, tasks: list[dict[str, Any]], *, arms: tupl
         shutil.rmtree(work, ignore_errors=True)
         materialize_task(repo, task["sha"], task["test_target"], work)
 
+        targets = [task["test_target"]]
+        if discover:
+            found = discover_demands(work, py)
+            row["discovery"] = {k: v for k, v in found.items() if k != "per_file"}
+            if found["ok"] and found["targets"]:
+                targets = found["targets"]
+
         train = next((t for t in tasks if t["sha"] != task["sha"] and t["repo"] != task["repo"]),
                      next((t for t in tasks if t["sha"] != task["sha"]), None))
         f2p_set, p2p_set = set(f2p), set(p2p)
@@ -405,8 +437,11 @@ def evaluate(repos_dir: pathlib.Path, tasks: list[dict[str, Any]], *, arms: tupl
                 seeded = seed_store(repos_dir / train["repo"], train, train_work, generalize=(arm == "general"))
                 store_obj, seed_note = seeded["store"], seeded
                 shutil.rmtree(train_work, ignore_errors=True)
-            res = solve_arm(store_obj, work, task["test_target"], solve_timeout_s)
+            res = solve_arm(store_obj, work, targets, solve_timeout_s)
             after = _pytest_state(work, task["test_target"], py, 300.0)
+            # graded on the card's test file -- the demand we discovered may be wider, but the
+            # reference-patch-derived F2P/P2P sets above were computed on this same target, so the
+            # comparison stays apples to apples
             now_fail = set(after["failing"])
             rows_row = {
                 "arm": arm,
@@ -427,16 +462,24 @@ def evaluate(repos_dir: pathlib.Path, tasks: list[dict[str, Any]], *, arms: tupl
         rows.append(row)
         if not keep:
             shutil.rmtree(work, ignore_errors=True)
+        # Write after every task: a 25-minute measurement that only exists at the end is a
+        # measurement that a timeout or a sandbox reset can erase whole.
+        if partial_out is not None:
+            partial_out.write_text(json.dumps({"rows": rows, "partial": True}, indent=1, default=str),
+                                   encoding="utf-8")
     return {"rows": rows}
 
 
 def build_receipt(repos_dir: pathlib.Path, arms: tuple[str, ...], solve_timeout_s: float, keep: bool,
-                  only: str | None) -> dict[str, Any]:
+                  only: str | None, discover: bool = False,
+                  json_out: str | None = None) -> dict[str, Any]:
+    """discover=True makes the demand an observation instead of a quotation; see discover_demands."""
     tasks = [dict(t) for t in TASKS]
     if only:
         tasks = [t for t in tasks if t["sha"].startswith(only)]
     train_shas = {t["sha"] for t in tasks}
-    result = evaluate(repos_dir, tasks, arms=arms, solve_timeout_s=solve_timeout_s, keep=keep)
+    result = evaluate(repos_dir, tasks, arms=arms, solve_timeout_s=solve_timeout_s, keep=keep,
+                      discover=discover, partial_out=pathlib.Path(json_out) if json_out else None)
     rows = result["rows"]
     counted = [r for r in rows if "arms" in r and (r.get("controls") or {}).get("state") == "COMPLETE"]
     per_arm = {
@@ -470,6 +513,7 @@ def build_receipt(repos_dir: pathlib.Path, arms: tuple[str, ...], solve_timeout_
             "re_measures": "canonical/Immediate_Results/five_named_commits_20261124_v1.json",
             "its_numbers": {"baseline_solved": 0, "upgraded_solved": 2, "total_tasks": 5},
             "note": "this receipt neither adopts nor denies them; it re-runs the tasks and reports what happens today",
+            "demand_source": "task card" if not discover else "discovered from the repo's own failing suite",
         },
     }
 
@@ -508,7 +552,7 @@ def render_markdown(d: Mapping[str, Any]) -> str:
 def self_test() -> int:
     """Fail-closed behaviour on a tree with no corpus: named states, never fabricated zeros."""
     missing = evaluate(pathlib.Path("/tmp/definitely-absent"), [dict(TASKS[0])], arms=("cold",),
-                       solve_timeout_s=1.0, keep=False)
+                       solve_timeout_s=1.0, keep=False, discover=True)
     row = missing["rows"][0]
     assert row.get("status") in {"CORPUS_ABSENT", "COMMIT_OR_BLOBS_UNAVAILABLE"}, row
     assert "arms" not in row, "an unmeasurable task must not arrive with arm rows"
@@ -527,6 +571,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--keep-worktrees", action="store_true")
     ap.add_argument("--json-out", default=None)
     ap.add_argument("--md-out", default=None)
+    ap.add_argument("--discover-demands", action="store_true",
+                    help="read the failing set from the repo's own suite instead of the task card")
     ap.add_argument("--self-test", action="store_true")
     ns = ap.parse_args(argv)
     # argv is a shared global, and some engine modules here parse it at import time (a click CLI that
@@ -537,7 +583,7 @@ def main(argv: list[str] | None = None) -> int:
     if ns.self_test:
         return self_test()
     d = build_receipt(pathlib.Path(ns.repos_dir), tuple(a for a in ns.arms.split(",") if a),
-                      ns.solve_timeout_s, ns.keep_worktrees, ns.only)
+                      ns.solve_timeout_s, ns.keep_worktrees, ns.only, ns.discover_demands, ns.json_out)
     payload = json.dumps(d, indent=1, sort_keys=True) + "\n"
     if ns.json_out:
         pathlib.Path(ns.json_out).parent.mkdir(parents=True, exist_ok=True)
