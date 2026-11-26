@@ -704,7 +704,455 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "required_inputs": ["payload"],
         "declared_dependencies": [],
     },
+    # --- 9. NON-OBVIOUS KOAN / APHORISTIC KERNELS & CROSS-DISCIPLINARY ENGINES ---
+    "INSTANT_ONE_SHOT_LEARNER": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/instant_one_shot_learning_v1.py",
+        "entrypoint": "classify_applicability",
+        "summary": "Instant one-shot rule induction, causal credit attribution, Hoare effect-contract extraction, and applicability boundary classification.",
+        "triggers": ["instant_one_shot_learning", "extract_contract applicability", "one shot causal credit"],
+        "required_inputs": ["skill_id", "preconditions", "actions"],
+        "declared_dependencies": [],
+    },
+    "PREDICTIVE_HOARE_CONTRACT": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/predictive_contract_v1.py",
+        "entrypoint": "derive_clauses",
+        "summary": "World-model-as-Hoare-contract engine ('a contract, not a trajectory'): induces deterministic pre/post-state byte clauses from a single trial.",
+        "triggers": ["predictive_contract", "hoare byte clauses", "world model contract derive_clauses"],
+        "required_inputs": ["src", "dst"],
+        "declared_dependencies": [],
+    },
+    "EDIT_BY_EXAMPLE_PROSE": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+        "entrypoint": "edit_by_example",
+        "summary": "PROSE/FlashEdit-style AST anti-unification edit-by-example engine: generalizes only across two agreeing structural variations and fails closed otherwise.",
+        "triggers": ["edit_by_example", "prose flashmeta ast edit", "structural example edit"],
+        "required_inputs": ["target_text", "before_text", "after_text"],
+        "declared_dependencies": [],
+    },
+    "CONCEPT_LIBRARY_EGRAPH_LGG": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/concept_library_v1.py",
+        "entrypoint": "canonicalize_ast_via_egraph",
+        "summary": "E-graph AST equality-saturation canonicalizer and higher-order Plotkin least-general-generalization (LGG) compounding concept library.",
+        "triggers": ["canonicalize_ast_via_egraph", "higher_order_plotkin_lgg", "egraph concept library"],
+        "required_inputs": ["source"],
+        "declared_dependencies": [],
+    },
+    "COMPRESSION_GAIN_MDL": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/compression_gain_v1.py",
+        "entrypoint": "compress_corpus",
+        "summary": "Solomonoff/Stitch MDL description-length compression-gain gate for admitting reusable procedural abstractions across a code corpus.",
+        "triggers": ["compression_gain_mdl", "stitch mdl corpus abstraction", "admit_corpus_abstraction"],
+        "required_inputs": ["sources"],
+        "declared_dependencies": [],
+    },
+    "PROVED_COMPOSITION_SURVIVAL": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/proved_composition_v1.py",
+        "entrypoint": "compose",
+        "summary": "Compositional Hoare survival verifier ('compose only what is proved'): re-verifies every prior postcondition after each sequential program transform.",
+        "triggers": ["proved_composition", "structural_survival hoare", "non-interfering edit composition"],
+        "required_inputs": ["source", "pattern_core", "replacement_core"],
+        "declared_dependencies": [],
+    },
+    "LESSON_ADMISSION_GATE": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/lesson_admission_gate_v1.py",
+        "entrypoint": "evaluate",
+        "summary": "Selective skill-abstention & non-regression victim gate ('a lesson is admitted by what it does to programs it was never taught on').",
+        "triggers": ["lesson_admission_gate", "untaught victim non-regression", "selective skill abstention gate"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "CONTRASTIVE_ORACLE_BOOTSTRAP": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/contrastive_oracle_bootstrap_v1.py",
+        "entrypoint": "identify_rule",
+        "summary": "Contrastive intervention-pair negative-space rule identifier that separates minimal deciding preconditions from coincidental trace state.",
+        "triggers": ["contrastive_oracle_bootstrap", "intervention pair rule induction"],
+        "required_inputs": ["before_snippet", "after_snippet"],
+        "declared_dependencies": [],
+    },
+    "PAIRED_TRANSFER_EVALUATOR": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/paired_transfer_evaluation_v1.py",
+        "entrypoint": "extract_contract",
+        "summary": "Paired source-to-target frozen transfer contract extractor and out-of-distribution applicability verifier.",
+        "triggers": ["paired_transfer_evaluation", "frozen deployment skill transfer"],
+        "required_inputs": ["before_snippet", "after_snippet"],
+        "declared_dependencies": [],
+    },
+    "ZYGOTE_COW_FORK_POOL": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/swe_kernel/zygote_worker_pool_v1.py",
+        "entrypoint": "screen_python_candidates_cow",
+        "summary": "Sub-millisecond POSIX os.fork() Copy-On-Write prewarmed Zygote sandbox pool for parallel zero-import-overhead candidate screening.",
+        "triggers": ["zygote_worker_pool", "screen_python_candidates_cow", "cow os fork sandbox"],
+        "required_inputs": ["project_root", "target_path", "test_paths", "candidates"],
+        "declared_dependencies": [],
+    },
+    "INTERFACE_ACTION_GRAMMAR": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/swe_kernel/interface_action_grammar_v1.py",
+        "entrypoint": "solve_gui_goal",
+        "summary": "Zero-screenshot unified CLI repertoire and structured Accessibility-Tree (A11yNode) GUI goal parser & action-grammar solver.",
+        "triggers": ["interface_action_grammar", "a11y action grammar", "zero screenshot gui solver"],
+        "required_inputs": ["instruction"],
+        "declared_dependencies": [],
+    },
+    "ENVIRONMENT_BROKER": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/swe_kernel/the_environment_broker_v1.py",
+        "entrypoint": "detect_layout",
+        "summary": "Zero-knowledge environment broker: inspects arbitrary repository layouts, pyproject/TOML build backends, and declared test harnesses.",
+        "triggers": ["the_environment_broker", "detect_layout declared_test_commands"],
+        "required_inputs": ["tree"],
+        "declared_dependencies": [],
+    },
+    "PREMISE_MINIMAL_SENSE": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/swe_kernel/the_premise_is_the_sense_v1.py",
+        "entrypoint": "brute_force_minimum",
+        "summary": "Minimum-cost sufficient observation partition solver ('what the plan's premise costs to SEE'): deletes unnecessary sensors/screenshots.",
+        "triggers": ["the_premise_is_the_sense", "minimum sufficient observation partition", "decision_consistent sense"],
+        "required_inputs": ["probes", "actions_by_state", "fact_costs"],
+        "declared_dependencies": [],
+    },
+    "METAMORPHIC_CLI_COMPILER": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/swe_kernel/metamorphic_cli_compiler_v1.py",
+        "entrypoint": "build_metamorphic_tuple",
+        "summary": "Active black-box CLI behavioral fingerprinter: classifies unknown command-line binaries by algebraic/metamorphic input-perturbation tuples.",
+        "triggers": ["metamorphic_cli_compiler", "build_metamorphic_tuple", "cli behavioral signature"],
+        "required_inputs": ["real_bytes"],
+        "declared_dependencies": [],
+    },
+    "WITNESS_INVERSION_LENS": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/witness_inversion_v1.py",
+        "entrypoint": "synthesize_bidirectional_lens",
+        "summary": "Bidirectional lens synthesizer and angelic-perturbation fault localizer ('invert the failing assertion at the site it fails').",
+        "triggers": ["witness_inversion", "synthesize_bidirectional_lens", "localize_by_angelic_perturbation"],
+        "required_inputs": ["pairs"],
+        "declared_dependencies": [],
+    },
+    "CONDITION_DEMAND_HARVESTER": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/what_the_condition_wants_v1.py",
+        "entrypoint": "what_the_condition_wants",
+        "summary": "Dynamic branch-operand harvester ('what the condition wants'): extracts exact threshold/guard values demanded by mutated conditions.",
+        "triggers": ["what_the_condition_wants", "condition operand demand harvest"],
+        "required_inputs": ["report"],
+        "declared_dependencies": [],
+    },
+    "RUNTIME_VALUE_WITNESS": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/a_name_gets_its_value_from_the_run_v1.py",
+        "entrypoint": "blocked_sites",
+        "summary": "Runtime value-binding witness extractor ('a name gets its value from the run'): locates blocked/unbound AST sites and synthesizes bindings.",
+        "triggers": ["a_name_gets_its_value_from_the_run", "blocked_sites runtime witness"],
+        "required_inputs": ["tree"],
+        "declared_dependencies": [],
+    },
+    "METAMORPHIC_API_LAWS": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/metamorphic_laws_v1.py",
+        "entrypoint": "static_assert_validation",
+        "summary": "Self-manufacturing API oracle: checks round-trip, idempotence, canonicality, iterable retyping, and static assertion laws without existing tests.",
+        "triggers": ["metamorphic_laws", "check_round_trip check_idempotence", "self manufacturing api oracle"],
+        "required_inputs": ["source"],
+        "declared_dependencies": [],
+    },
+    "STRUCTURAL_SPEC_DERIVER": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/specification_from_structure_v1.py",
+        "entrypoint": "derive",
+        "summary": "Zero-model vericoding specification synthesizer ('a specification is read off the code's own structure'): derives executable invariants from AST types & guards.",
+        "triggers": ["specification_from_structure", "zero model vericoding spec derive"],
+        "required_inputs": ["module_source"],
+        "declared_dependencies": [],
+    },
+    "UNIVERSAL_SEMANTIC_IR": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/universal_semantic_ir_v1.py",
+        "entrypoint": "lower_source_to_uir",
+        "summary": "Cross-language Universal Semantic IR (U-IR) lowerer and interprocedural causal cut-site graph compiler.",
+        "triggers": ["universal_semantic_ir", "lower_source_to_uir", "interprocedural causal cut site"],
+        "required_inputs": ["source", "language"],
+        "declared_dependencies": [],
+    },
+    "FAST_ABSTRACT_SIMULATOR": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/executable_simulator_mental_model_v1.py",
+        "entrypoint": "simulate_python_fast",
+        "summary": "In-RAM step-bounded Python fast simulator and forward-backward abstract domain candidate pruner (zero subprocess spawn).",
+        "triggers": ["simulate_python_fast", "executable_simulator_mental_model", "forward_backward_prunes_candidate"],
+        "required_inputs": ["source", "entry_func", "args"],
+        "declared_dependencies": [],
+    },
+    "PERF_RACE_OVERFLOW_AUDITOR": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/diagnostics_perf_and_design_engine_v1.py",
+        "entrypoint": "security_audit_package",
+        "summary": "Deterministic performance hotspot profiler, concurrency race-condition detector, integer-overflow fuzzer, and static security auditor.",
+        "triggers": ["diagnostics_perf_and_design", "detect_race_conditions", "fuzz_integer_overflow"],
+        "required_inputs": ["target"],
+        "declared_dependencies": [],
+    },
+    "GLOBAL_MINIMAX_EXTRAPOLATOR": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/swe_kernel/global_extrapolation_chase_spine_v1.py",
+        "entrypoint": "solve_minimax_interval_probe_policy",
+        "summary": "Global anti-blind-spot minimal-action chase spine: minimax interval-bisection probe policy, active mechanism discovery, and ARC grid-delta rule inducer.",
+        "triggers": ["global_extrapolation_chase_spine", "solve_minimax_interval_probe_policy", "induce_and_predict_grid_delta_rule"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "PITMAN_YOR_OPEN_WORLD": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/runtime/global_open_world_extrapolator_v1.py",
+        "entrypoint": "estimate_unseen_opportunity_space",
+        "summary": "Pitman-Yor / Good-Turing nonparametric Bayesian unseen-channel opportunity estimator for open-world search stopping vs exploration.",
+        "triggers": ["global_open_world_extrapolator", "pitman_yor unseen opportunity", "estimate_unseen_opportunity_space"],
+        "required_inputs": ["channels"],
+        "declared_dependencies": [],
+    },
+    "WORLD_BINDING_SLOT_COMPLETER": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/runtime/world_binding_v1.py",
+        "entrypoint": "named_destination",
+        "summary": "Deterministic live-workspace slot binder: synthesizes missing capability input arguments and output paths directly from goal phrasing and disk state.",
+        "triggers": ["world_binding_slot_completer", "complete_inputs workspace binding"],
+        "required_inputs": ["goal"],
+        "declared_dependencies": [],
+    },
+    "REFUSAL_ARTIFACT_MANUFACTURER": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/runtime/manufacture_what_the_refusal_asks_for_v1.py",
+        "entrypoint": "producer_for",
+        "summary": "Refusal-driven prerequisite manufacturer ('an artefact a refusal asks for is manufactured, never faked'): synthesizes real producer argv from CLI flag contracts.",
+        "triggers": ["manufacture_what_the_refusal_asks_for", "refusal prerequisite producer_for"],
+        "required_inputs": ["kind", "program", "flags"],
+        "declared_dependencies": [],
+    },
+    "SUBCOMMAND_SCOPE_PROBER": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/runtime/ask_the_subcommand_before_you_call_it_unbound_v1.py",
+        "entrypoint": "what_to_ask",
+        "summary": "Active CLI subcommand scope prober ('ask the subcommand before you call it unbound'): classifies side-effect ignorance before invoking unknown flags.",
+        "triggers": ["ask_the_subcommand_before_you_call_it_unbound", "subcommand scope ignorance probe"],
+        "required_inputs": ["prog"],
+        "declared_dependencies": [],
+    },
+    "KOAN_REFUSAL_CURRICULUM": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/tools/the_refusal_is_the_curriculum_v1.py",
+        "entrypoint": "read_demand",
+        "summary": "Grammar induction from stderr/manpage refusals ('the refusal is the curriculum: one visit writes the adapter').",
+        "triggers": ["the_refusal_is_the_curriculum", "stderr refusal grammar adapter"],
+        "required_inputs": ["line"],
+        "declared_dependencies": [],
+    },
+    "KOAN_FORCE_VALUE_ANGELIC": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/tools/force_the_value_and_see_v1.py",
+        "entrypoint": "instrumented_source",
+        "summary": "Angelic execution value forcing ('force the value at a site, see whether the failing case passes, then write the expression that owes it').",
+        "triggers": ["force_the_value_and_see", "angelic site value forcing"],
+        "required_inputs": ["source", "function_name"],
+        "declared_dependencies": [],
+    },
+    "KOAN_AIMED_PROGRAM_EDITS": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/tools/aimed_edits_from_the_program_and_the_failure_v1.py",
+        "entrypoint": "forms_of",
+        "summary": "Program-intrinsic edit-space compiler ('the space is what this program can already build, not a list of fixes someone imagined').",
+        "triggers": ["aimed_edits_from_the_program", "program intrinsic edit vocabulary"],
+        "required_inputs": ["source"],
+        "declared_dependencies": [],
+    },
+    "KOAN_DEFERRED_REENTRANT_FORM": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/tools/deferred_definition_form_v1.py",
+        "entrypoint": "emit_for_traceback",
+        "summary": "Re-entrant / circular-import deferred-definition AST repair synthesizer driven directly by Python tracebacks.",
+        "triggers": ["deferred_definition_form", "reentrant_self_failure circular ast"],
+        "required_inputs": ["traceback_text", "source_text"],
+        "declared_dependencies": [],
+    },
+    "KOAN_ASSERTION_DEMAND": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/tools/the_assertion_is_the_demand_v1.py",
+        "entrypoint": "conditional_productions",
+        "summary": "Assertion-to-specification synthesizer ('the failing assertion IS the specification: read the demand out of it, then filter by value').",
+        "triggers": ["the_assertion_is_the_demand", "failing assertion demand specification"],
+        "required_inputs": ["source", "line", "site_text"],
+        "declared_dependencies": [],
+    },
 }
+
+
+# ---------------------------------------------------------------------------
+# Cross-Disciplinary Unfamiliar-Name & Koan Discrimination Bridge (<15 us)
+# ---------------------------------------------------------------------------
+
+CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
+    "equality_saturation_egraph_library_learning": {
+        "external_names": ["equality saturation", "e-graph", "egglog", "e-stitch", "babble", "stitch", "ast canonicalization", "library learning"],
+        "engines": ["engine:CONCEPT_LIBRARY_EGRAPH_LGG", "engine:EGRAPH_DEDUCTIVE_SYNTHESIZER", "engine:COMPRESSION_GAIN_MDL"],
+        "koan_modules": [
+            "canonical/swe_kernel/concept_library_v1.py",
+            "canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py",
+            "canonical/swe_kernel/compression_gain_v1.py",
+        ],
+    },
+    "version_space_algebra_programming_by_example": {
+        "external_names": ["version space algebra", "flashmeta", "prose", "flashedit", "plotkin anti-unification", "edit by example", "least general generalization"],
+        "engines": ["engine:EDIT_BY_EXAMPLE_PROSE", "engine:CONCEPT_LIBRARY_EGRAPH_LGG", "engine:STRUCTURAL_REWRITE_INDUCER"],
+        "koan_modules": [
+            "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+            "canonical/swe_kernel/tree_sitter_cst_skill_skeleton_v1.py",
+            "canonical/runtime/taught_words_v1.py",
+        ],
+    },
+    "hoare_contract_world_model_one_shot": {
+        "external_names": ["instant learning", "one-shot learning", "hoare logic", "world model contract", "predictive contract", "precondition induction"],
+        "engines": ["engine:INSTANT_ONE_SHOT_LEARNER", "engine:PREDICTIVE_HOARE_CONTRACT", "engine:INSTRUCTION_CONTRACT_COMPILER"],
+        "koan_modules": [
+            "canonical/swe_kernel/predictive_contract_v1.py",
+            "canonical/swe_kernel/instant_one_shot_learning_v1.py",
+            "canonical/tools/the_precondition_is_not_in_the_trace_v1.py",
+            "canonical/tools/instant_learning_in_a_new_environment_v1.py",
+        ],
+    },
+    "active_automata_learning_unknown_machine": {
+        "external_names": ["active automata learning", "angluin l*", "ttt algorithm", "learnlib", "discrimination tree", "unknown cli discovery", "action grammar"],
+        "engines": ["engine:METAMORPHIC_CLI_COMPILER", "engine:SUBCOMMAND_SCOPE_PROBER", "engine:KOAN_REFUSAL_CURRICULUM", "engine:ENVIRONMENT_BROKER"],
+        "koan_modules": [
+            "canonical/tools/the_guide_is_a_key_table_v1.py",
+            "canonical/tools/the_guide_is_an_action_grammar_v1.py",
+            "canonical/tools/the_repertoire_is_a_query_v1.py",
+            "canonical/tools/the_machine_is_the_definition_v1.py",
+            "canonical/tools/the_refusal_is_the_curriculum_v1.py",
+        ],
+    },
+    "zero_screenshot_computer_use_minimal_sense": {
+        "external_names": ["computer use", "cua", "cdp", "at-spi", "accessibility tree", "a11y", "zero screenshot", "minimum observation cost", "osworld"],
+        "engines": ["engine:INTERFACE_ACTION_GRAMMAR", "engine:PREMISE_MINIMAL_SENSE", "engine:UNIVERSAL_COMPUTER_AGENT", "engine:PROSE_EXPERIMENT_CLI_DISCOVERY"],
+        "koan_modules": [
+            "canonical/swe_kernel/interface_action_grammar_v1.py",
+            "canonical/swe_kernel/the_premise_is_the_sense_v1.py",
+            "canonical/swe_kernel/universal_computer_agent_v1.py",
+            "canonical/swe_kernel/cross_modal_tomography_petri_v1.py",
+        ],
+    },
+    "cow_zygote_speculative_sandbox_fork": {
+        "external_names": ["copy on write", "cow fork", "zygote", "sandlock", "zeroboot", "firecracker forkd", "speculative execution", "free undo"],
+        "engines": ["engine:ZYGOTE_COW_FORK_POOL", "engine:ANGELIC_LENS_COW_REPAIR", "engine:CROSS_MODAL_PETRI_TOMOGRAPHY"],
+        "koan_modules": [
+            "canonical/swe_kernel/zygote_worker_pool_v1.py",
+            "canonical/swe_kernel/cow_angelic_zygote_v1.py",
+            "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
+            "canonical/tools/the_failed_attempt_is_free_v1.py",
+        ],
+    },
+    "concolic_angelic_witness_inversion_swe": {
+        "external_names": ["concolic", "symbolic execution", "crosshair", "angelic execution", "witness inversion", "cegis", "program splicing", "fault localization"],
+        "engines": ["engine:WITNESS_INVERSION_LENS", "engine:KOAN_FORCE_VALUE_ANGELIC", "engine:KOAN_ASSERTION_DEMAND", "engine:CONDITION_DEMAND_HARVESTER", "engine:DUAL_PROGRAM_SPLICING"],
+        "koan_modules": [
+            "canonical/swe_kernel/witness_inversion_v1.py",
+            "canonical/tools/the_relation_is_read_from_the_failing_run_v1.py",
+            "canonical/tools/the_assertion_is_the_demand_v1.py",
+            "canonical/tools/force_the_value_and_see_v1.py",
+            "canonical/swe_kernel/what_the_condition_wants_v1.py",
+        ],
+    },
+    "vericoding_metamorphic_self_oracle": {
+        "external_names": ["vericoding", "dafny", "verus", "lean", "leetproof", "metamorphic testing", "property based testing", "specification synthesis"],
+        "engines": ["engine:STRUCTURAL_SPEC_DERIVER", "engine:METAMORPHIC_API_LAWS", "engine:SPEC_CONTRACT_SYNTHESIZER", "engine:PROVED_COMPOSITION_SURVIVAL"],
+        "koan_modules": [
+            "canonical/swe_kernel/specification_from_structure_v1.py",
+            "canonical/swe_kernel/metamorphic_laws_v1.py",
+            "canonical/swe_kernel/proved_composition_v1.py",
+            "canonical/swe_kernel/metamorphic_oracle_v1.py",
+        ],
+    },
+    "selective_abstention_continual_memory": {
+        "external_names": ["continual learning", "catastrophic forgetting", "skillapt", "selskill", "conformal abstention", "rubin counterfactual", "agent memory", "sleep consolidation"],
+        "engines": ["engine:LESSON_ADMISSION_GATE", "engine:CONTRASTIVE_ORACLE_BOOTSTRAP", "engine:PAIRED_TRANSFER_EVALUATOR", "engine:VERIFIED_SKILL_CRYSTALLIZER", "engine:EPISTEMIC_SELF_PLAY_ADMISSION"],
+        "koan_modules": [
+            "canonical/swe_kernel/lesson_admission_gate_v1.py",
+            "canonical/swe_kernel/contrastive_oracle_bootstrap_v1.py",
+            "canonical/swe_kernel/paired_transfer_evaluation_v1.py",
+            "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+        ],
+    },
+    "incremental_dataflow_code_graph": {
+        "external_names": ["incremental computation", "salsa", "dbsp", "differential dataflow", "scip", "tree-sitter", "code graph", "fast simulator"],
+        "engines": ["engine:INCREMENTAL_SEMANTIC_CODE_GRAPH", "engine:UNIVERSAL_SEMANTIC_IR", "engine:FAST_ABSTRACT_SIMULATOR"],
+        "koan_modules": [
+            "canonical/swe_kernel/incremental_semantic_graph_v1.py",
+            "canonical/swe_kernel/universal_semantic_ir_v1.py",
+            "canonical/swe_kernel/executable_simulator_mental_model_v1.py",
+        ],
+    },
+    "pitman_yor_minimax_open_world_discovery": {
+        "external_names": ["open world", "good-turing", "pitman-yor", "unseen species", "minimax bisection", "active query learning", "extrapolation"],
+        "engines": ["engine:PITMAN_YOR_OPEN_WORLD", "engine:GLOBAL_MINIMAX_EXTRAPOLATOR"],
+        "koan_modules": [
+            "canonical/runtime/global_open_world_extrapolator_v1.py",
+            "canonical/swe_kernel/global_extrapolation_chase_spine_v1.py",
+            "canonical/tools/the_goal_is_a_discriminator_v1.py",
+            "canonical/tools/what_is_knowable_here_v1.py",
+        ],
+    },
+}
+
+_CONCEPT_INVERTED_INDEX: dict[str, list[tuple[str, float]]] = {}
+for _ckey, _crow in CROSS_DISCIPLINARY_CONCEPT_MAP.items():
+    for _phrase in [_ckey.replace("_", " "), *(_crow.get("external_names") or [])]:
+        for _tok in set(_WORD_RE.findall(_phrase.lower())):
+            if len(_tok) >= 2 and _tok not in STOPWORDS:
+                _CONCEPT_INVERTED_INDEX.setdefault(_tok, []).append((_ckey, 2.5 if " " in _phrase else 1.5))
+
+
+def resolve_cross_disciplinary_concept(query: str, *, top_k: int = 5) -> dict[str, Any]:
+    """Sub-20-microsecond lookup mapping unfamiliar CS / frontier terms to Brain's koan & federated engines."""
+    q_low = (query or "").lower()
+    q_toks = [t for t in _WORD_RE.findall(q_low) if t not in STOPWORDS]
+    scores: dict[str, float] = {}
+    for tok in set(q_toks):
+        for ckey, w in _CONCEPT_INVERTED_INDEX.get(tok, ()):
+            scores[ckey] = scores.get(ckey, 0.0) + w
+    for ckey, crow in CROSS_DISCIPLINARY_CONCEPT_MAP.items():
+        for phrase in crow["external_names"]:
+            if phrase in q_low:
+                scores[ckey] = scores.get(ckey, 0.0) + 6.0
+    ranked = sorted(scores.items(), key=lambda kv: (-kv[1], kv[0]))[: max(1, int(top_k))]
+    matches: list[dict[str, Any]] = []
+    for ckey, sc in ranked:
+        crow = CROSS_DISCIPLINARY_CONCEPT_MAP[ckey]
+        matches.append(
+            {
+                "concept_family": ckey,
+                "score": round(sc, 4),
+                "external_names": list(crow["external_names"]),
+                "engines": list(crow["engines"]),
+                "koan_modules": list(crow["koan_modules"]),
+            }
+        )
+    return {
+        "schema": SCHEMA,
+        "query": query,
+        "matched_families": matches,
+        "best": matches[0] if matches else None,
+        "model_calls": 0,
+        "incremental_spend_usd": 0,
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -1589,6 +2037,379 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
 
     if mode == "ADMITTED_BRAIN_MODULE_SOLVER":
         return _run_admitted_module_solver(mode, inputs, goal)
+
+    # 9. NON-OBVIOUS KOAN / APHORISTIC KERNELS & CROSS-DISCIPLINARY ENGINES
+    if mode == "INSTANT_ONE_SHOT_LEARNER":
+        from canonical.swe_kernel import instant_one_shot_learning_v1 as m
+
+        identify_res = dict(inputs.get("identify_result") or {"identified": True, "rule_key": str(inputs["skill_id"])})
+        effects = [tuple(e) for e in (inputs.get("effects") or [("post_state", "READY")])]
+        contract_res = m.extract_contract(
+            identify_res,
+            str(inputs["skill_id"]),
+            list(inputs["preconditions"]),
+            list(inputs.get("observables") or inputs["preconditions"]),
+            list(inputs["actions"]),
+            str(inputs.get("verdict") or "PASS"),
+            effects,
+        )
+        app_res = m.classify_applicability(
+            contract_res,
+            list(inputs.get("success_states") or [list(inputs["preconditions"])]),
+            list(inputs.get("failure_states") or [[]]),
+        )
+        return _ok(mode, "ONE_SHOT_CONTRACT_AND_APPLICABILITY_EXTRACTED", {"contract": contract_res, "applicability": app_res})
+
+    if mode == "PREDICTIVE_HOARE_CONTRACT":
+        from canonical.swe_kernel import predictive_contract_v1 as m
+
+        src_b = inputs["src"] if isinstance(inputs["src"], bytes) else str(inputs["src"]).encode("utf-8")
+        dst_b = inputs["dst"] if isinstance(inputs["dst"], bytes) else str(inputs["dst"]).encode("utf-8")
+        clauses = m.derive_clauses(src_b, dst_b)
+        if not clauses:
+            return _fail(mode, "NO_PREDICTIVE_CLAUSES_DERIVED")
+        verified = [bool(m.holds(c, src_b, {"dst": dst_b}, dst_b)) for c in clauses]
+        return _ok(mode, "PREDICTIVE_HOARE_CLAUSES_DERIVED", {"clauses": clauses, "clause_count": len(clauses), "all_hold_on_trial": all(verified)})
+
+    if mode == "EDIT_BY_EXAMPLE_PROSE":
+        from canonical.swe_kernel.taught_actions import edit_by_example_v1 as m
+
+        try:
+            edited = m.edit_by_example(
+                str(inputs["target_text"]),
+                str(inputs["before_text"]),
+                str(inputs["after_text"]),
+            )
+        except m.Refused as exc:
+            return _fail(mode, f"EDIT_BY_EXAMPLE_REFUSED:{exc}")
+        return _ok(mode, "EDIT_BY_EXAMPLE_APPLIED", {"edited_text": edited})
+
+    if mode == "CONCEPT_LIBRARY_EGRAPH_LGG":
+        from canonical.swe_kernel import concept_library_v1 as m
+
+        mod_ast = ast.parse(str(inputs["source"]))
+        canon_mod = m.canonicalize_ast_via_egraph(mod_ast)
+        canon_src = ast.unparse(canon_mod)
+        out_payload: dict[str, Any] = {
+            "canonical_source": canon_src,
+            "ast_bytes_before": m.executable_ast_bytes(str(inputs["source"])),
+            "ast_bytes_after": m.executable_ast_bytes(canon_src),
+        }
+        if "second_source" in inputs:
+            mod2 = ast.parse(str(inputs["second_source"]))
+            fns1 = [n for n in canon_mod.body if isinstance(n, ast.FunctionDef)]
+            fns2 = [n for n in mod2.body if isinstance(n, ast.FunctionDef)]
+            if fns1 and fns2:
+                out_payload["plotkin_lgg"] = m.higher_order_plotkin_lgg(fns1[0], fns2[0])
+        return _ok(mode, "EGRAPH_CANONICALIZED_AND_LGG_ANALYZED", out_payload)
+
+    if mode == "COMPRESSION_GAIN_MDL":
+        from canonical.swe_kernel import compression_gain_v1 as m
+
+        sources = [str(s) for s in inputs["sources"]]
+        comp = m.compress_corpus(sources, entrypoints=inputs.get("entrypoints"), probes=inputs.get("probes"))
+        shapes = [m.lift_shape(s) for s in sources[:4]]
+        return _ok(mode, "MDL_CORPUS_COMPRESSION_EVALUATED", {"compression": comp, "lifted_shapes_count": sum(1 for x in shapes if x is not None)})
+
+    if mode == "PROVED_COMPOSITION_SURVIVAL":
+        from canonical.swe_kernel import proved_composition_v1 as m
+
+        pat = str(inputs["pattern_core"])
+        rep = str(inputs["replacement_core"])
+        op = m.ProvedOperation(
+            str(inputs.get("op_id") or "op_1"),
+            m.substring_premise(pat),
+            lambda s, p=pat, r=rep: s.replace(p, r),
+            m.structural_proof(pat, rep),
+            m.structural_survival(rep),
+        )
+        res = m.compose(str(inputs["source"]), [op])
+        if res.get("verdict") != "PASS":
+            return _fail(mode, str(res.get("reason") or "PROVED_COMPOSITION_FAILED"), details=res)
+        return _ok(mode, "PROVED_COMPOSITION_VERIFIED", res)
+
+    if mode == "LESSON_ADMISSION_GATE":
+        from canonical.swe_kernel import lesson_admission_gate_v1 as m
+
+        if "before_snippet" in inputs and "after_snippet" in inputs and "victims" in inputs:
+            victims = [
+                 v if isinstance(v, m.Victim) else m.Victim(str(v["victim_id"]), str(v["source"]), m.strict_spec, tuple(v.get("probes") or ()))
+                for v in inputs["victims"]
+            ]
+            res = m.evaluate(str(inputs["before_snippet"]), str(inputs["after_snippet"]), victims=victims)
+            return _ok(mode, "LESSON_ADMISSION_VICTIMS_EVALUATED", res)
+        demo = m.demonstration()
+        return _ok(mode, "LESSON_ADMISSION_GATE_DEMONSTRATED", demo)
+
+    if mode == "CONTRASTIVE_ORACLE_BOOTSTRAP":
+        from canonical.swe_kernel import contrastive_oracle_bootstrap_v1 as m
+
+        res = m.identify_rule(
+            str(inputs["before_snippet"]),
+            str(inputs["after_snippet"]),
+            list(inputs.get("probes") or [0, 1, 2, -1]),
+            list(inputs.get("contrast_pairs") or []),
+        )
+        return _ok(mode, "CONTRASTIVE_RULE_IDENTIFIED", res)
+
+    if mode == "PAIRED_TRANSFER_EVALUATOR":
+        from canonical.swe_kernel import paired_transfer_evaluation_v1 as m
+
+        src_root = Path(inputs.get("source_root") or ROOT)
+        learned = m.learn_rule_on_source(
+            str(inputs["before_snippet"]),
+            str(inputs["after_snippet"]),
+            list(inputs.get("probes") or [0, 1, 2]),
+            src_root,
+        )
+        contract = m.extract_contract(learned, str(inputs["before_snippet"]), str(inputs["after_snippet"]))
+        return _ok(mode, "PAIRED_TRANSFER_CONTRACT_EXTRACTED", {"learned": learned, "contract": contract})
+
+    if mode == "ZYGOTE_COW_FORK_POOL":
+        from canonical.swe_kernel import zygote_worker_pool_v1 as m
+
+        res = m.screen_python_candidates_cow(
+            inputs["project_root"],
+            str(inputs["target_path"]),
+            list(inputs["test_paths"]),
+            list(inputs["candidates"]),
+            stop_on_first_pass=bool(inputs.get("stop_on_first_pass", True)),
+            timeout_s=float(inputs.get("timeout_s", 8.0)),
+            per_candidate_timeout_s=float(inputs.get("per_candidate_timeout_s", 1.5)),
+        )
+        return _ok(mode, "COW_ZYGOTE_CANDIDATES_SCREENED", res)
+
+    if mode == "INTERFACE_ACTION_GRAMMAR":
+        from canonical.swe_kernel import interface_action_grammar_v1 as m
+
+        parsed = m.parse_gui_goal(str(inputs["instruction"]))
+        if "nodes" in inputs:
+            nodes = [
+                n if isinstance(n, m.A11yNode) else m.A11yNode(**dict(n))
+                for n in inputs["nodes"]
+            ]
+            env = m.A11yEnvironment(nodes)
+            solved = m.solve_gui_goal(env, str(inputs["instruction"]), inputs.get("goal_check") or (lambda _e: True))
+            return _ok(mode, "A11Y_GUI_GOAL_SOLVED", {"parsed": parsed, "solved": solved})
+        return _ok(mode, "A11Y_GUI_GOAL_PARSED", {"parsed": parsed})
+
+    if mode == "ENVIRONMENT_BROKER":
+        from canonical.swe_kernel import the_environment_broker_v1 as m
+
+        tree_p = Path(str(inputs["tree"]))
+        if not tree_p.exists():
+            return _fail(mode, f"ENVIRONMENT_TREE_MISSING:{tree_p}")
+        layout = m.detect_layout(tree_p)
+        cmds = m.declared_test_commands(tree_p)
+        return _ok(mode, "ENVIRONMENT_LAYOUT_BROKERED", {"layout": layout, "declared_test_commands": cmds})
+
+    if mode == "PREMISE_MINIMAL_SENSE":
+        from canonical.swe_kernel import the_premise_is_the_sense_v1 as m
+
+        probes_map: Mapping[str, Mapping[str, Any]] = dict(inputs["probes"])
+        actions_by_state: Mapping[str, Sequence[str]] = dict(inputs["actions_by_state"])
+        fact_costs: Mapping[str, float] = {str(k): float(v) for k, v in dict(inputs["fact_costs"]).items()}
+        worlds = list(probes_map.keys())
+        saved_table = dict(m._PROBE_TABLE)
+        try:
+            for st_name, probe_row in probes_map.items():
+                m._PROBE_TABLE[st_name] = lambda f_seq, pr=probe_row: m.observations(pr, f_seq)
+            res = m.brute_force_minimum(worlds, actions_by_state, fact_costs)
+        finally:
+            m._PROBE_TABLE.clear()
+            m._PROBE_TABLE.update(saved_table)
+        if res.get("status") != "SUFFICIENT_DECISION_PARTITION_FOUND":
+            return _fail(mode, str(res.get("status") or "INSUFFICIENT_OBSERVATION_SPACE"), details=res)
+        return _ok(mode, "MINIMAL_SUFFICIENT_SENSE_DERIVED", res)
+
+    if mode == "METAMORPHIC_CLI_COMPILER":
+        from canonical.swe_kernel import metamorphic_cli_compiler_v1 as m
+
+        rb = inputs["real_bytes"] if isinstance(inputs["real_bytes"], bytes) else str(inputs["real_bytes"]).encode("utf-8")
+        tup = m.build_metamorphic_tuple(rb, k=int(inputs.get("k", 5)))
+        if tup is None:
+            return _fail(mode, "METAMORPHIC_TUPLE_REQUIRES_AT_LEAST_K_LINES")
+        summary_keys = {k: (len(v) if isinstance(v, (bytes, list, dict)) else v) for k, v in tup.items()}
+        return _ok(mode, "METAMORPHIC_CLI_TUPLE_BUILT", {"tuple_summary": summary_keys})
+
+    if mode == "WITNESS_INVERSION_LENS":
+        from canonical.swe_kernel import witness_inversion_v1 as m
+
+        pairs = [(a, b) for a, b in inputs["pairs"]]
+        lens = m.synthesize_bidirectional_lens(pairs, input_var=str(inputs.get("input_var") or "data"))
+        if lens is None:
+            return _fail(mode, "NO_BIDIRECTIONAL_LENS_FOUND")
+        return _ok(mode, "BIDIRECTIONAL_WITNESS_LENS_SYNTHESIZED", lens)
+
+    if mode == "CONDITION_DEMAND_HARVESTER":
+        from canonical.swe_kernel import what_the_condition_wants_v1 as m
+
+        rep = dict(inputs["report"])
+        return _ok(mode, "CONDITION_DEMAND_SUMMARIZED", {"headline": m.headline(rep), "report_keys": sorted(rep.keys())})
+
+    if mode == "RUNTIME_VALUE_WITNESS":
+        from canonical.swe_kernel import a_name_gets_its_value_from_the_run_v1 as m
+
+        tree_p = Path(str(inputs["tree"]))
+        if not tree_p.exists():
+            return _fail(mode, f"TARGET_TREE_MISSING:{tree_p}")
+        sites = m.blocked_sites(tree_p)
+        return _ok(mode, "RUNTIME_BLOCKED_SITES_EXTRACTED", {"blocked_site_count": len(sites), "sites": sites[:20]})
+
+    if mode == "METAMORPHIC_API_LAWS":
+        from canonical.swe_kernel import metamorphic_laws_v1 as m
+
+        violations = m.static_assert_validation(str(inputs["source"]), str(inputs.get("module_name") or ""))
+        muts = m.mutations_for(list(inputs.get("sample_args") or [1, "x"]))
+        return _ok(
+            mode,
+            "METAMORPHIC_STATIC_AND_MUTATION_PROBES_BUILT",
+            {
+                "violation_count": len(violations),
+                "violations": [str(v) for v in violations],
+                "generated_argument_mutations": len(muts),
+            },
+        )
+
+    if mode == "STRUCTURAL_SPEC_DERIVER":
+        from canonical.swe_kernel import specification_from_structure_v1 as m
+
+        derived = m.derive(str(inputs["module_source"]), str(inputs.get("module_name") or "target_mod"))
+        pub_fns, declined = m.public_functions(str(inputs["module_source"]))
+        return _ok(
+            mode,
+            "STRUCTURAL_SPECIFICATION_DERIVED",
+            {"derived": derived, "public_function_count": len(pub_fns), "declined_count": len(declined)},
+        )
+
+    if mode == "UNIVERSAL_SEMANTIC_IR":
+        from canonical.swe_kernel import universal_semantic_ir_v1 as m
+
+        src_b = inputs["source"] if isinstance(inputs["source"], bytes) else str(inputs["source"]).encode("utf-8")
+        funcs = m.lower_source_to_uir(src_b, str(inputs["language"]), rel_path=str(inputs.get("rel_path") or "<memory>"))
+        return _ok(
+            mode,
+            "SOURCE_LOWERED_TO_UNIVERSAL_SEMANTIC_IR",
+            {
+                "function_count": len(funcs),
+                "functions": [
+                    {"name": f.name, "language": f.language, "params": f.params, "node_count": len(f.nodes), "fingerprint": f.semantic_fingerprint}
+                    for f in funcs
+                ],
+            },
+        )
+
+    if mode == "FAST_ABSTRACT_SIMULATOR":
+        from canonical.swe_kernel import executable_simulator_mental_model_v1 as m
+
+        sim = m.simulate_python_fast(
+            str(inputs["source"]),
+            str(inputs["entry_func"]),
+            list(inputs["args"]),
+            step_quota=int(inputs.get("step_quota", 5000)),
+        )
+        sim_clean = {k: (sorted(v) if isinstance(v, set) else v) for k, v in sim.items()}
+        if sim_clean.get("status") != "OK":
+            return _fail(mode, f"FAST_SIMULATION_FAULT:{sim_clean.get('status')}", simulation=sim_clean)
+        return _ok(mode, "PYTHON_SIMULATED_IN_RAM", sim_clean)
+
+    if mode == "PERF_RACE_OVERFLOW_AUDITOR":
+        from canonical.swe_kernel import diagnostics_perf_and_design_engine_v1 as m
+
+        target_p = Path(str(inputs["target"]))
+        if not target_p.exists():
+            return _fail(mode, f"AUDIT_TARGET_MISSING:{target_p}")
+        sec = m.security_audit_package(target_p)
+        races = m.detect_race_conditions(target_p) if target_p.is_file() else {}
+        return _ok(mode, "PERF_RACE_SECURITY_AUDIT_COMPLETED", {"security": sec, "races": races})
+
+    if mode == "GLOBAL_MINIMAX_EXTRAPOLATOR":
+        from canonical.swe_kernel import global_extrapolation_chase_spine_v1 as m
+
+        if "training_pairs" in inputs:
+            grid_res = m.induce_and_predict_grid_delta_rule(list(inputs["training_pairs"]), test_grids=inputs.get("test_grids"))
+            return _ok(mode, "GRID_DELTA_EXTRAPOLATION_INDUCED", grid_res)
+        if "options" in inputs:
+            ranked = m.rank_global_minimal_action_routes(list(inputs["options"]), goal=goal)
+            return _ok(mode, "GLOBAL_MINIMAL_ACTION_ROUTES_RANKED", {"ranked_routes": ranked})
+        prob = dict(inputs.get("problem") or {"low": 0, "high": 7, "hypothesis_cover_complete": True, "hypotheses": [0, 1, 2, 3, 4, 5, 6, 7]})
+        res = m.solve_minimax_interval_probe_policy(prob)
+        return _ok(mode, "MINIMAX_PROBE_POLICY_EVALUATED", res)
+
+    if mode == "PITMAN_YOR_OPEN_WORLD":
+        from canonical.runtime import global_open_world_extrapolator_v1 as m
+
+        obs_list = [
+            ch if isinstance(ch, m.ChannelObservation) else m.ChannelObservation(**dict(ch))
+            for ch in inputs["channels"]
+        ]
+        if not obs_list:
+            return _fail(mode, "EMPTY_CHANNEL_OBSERVATIONS")
+        est = m.estimate_unseen_opportunity_space(
+            obs_list,
+            goal=str(inputs.get("goal") or goal),
+            remaining_budget=float(inputs.get("remaining_budget", 10.0)),
+        )
+        return _ok(mode, "PITMAN_YOR_UNSEEN_SPACE_ESTIMATED", est)
+
+    if mode == "WORLD_BINDING_SLOT_COMPLETER":
+        from canonical.runtime import world_binding_v1 as m
+
+        dest = m.named_destination(str(inputs["goal"]))
+        phs = m.placeholders(dict(inputs.get("entry") or {}))
+        return _ok(mode, "WORLD_BINDING_SLOTS_ANALYZED", {"named_destination": dest, "placeholders": sorted(phs)})
+
+    if mode == "REFUSAL_ARTIFACT_MANUFACTURER":
+        from canonical.runtime import manufacture_what_the_refusal_asks_for_v1 as m
+
+        prod = m.producer_for(str(inputs["kind"]), program=str(inputs["program"]), flags=list(inputs["flags"]))
+        return _ok(mode, "REFUSAL_PRODUCER_RESOLVED", {"kind": inputs["kind"], "producer_argv": prod})
+
+    if mode == "SUBCOMMAND_SCOPE_PROBER":
+        from canonical.runtime import ask_the_subcommand_before_you_call_it_unbound_v1 as m
+
+        questions = m.what_to_ask(str(inputs["prog"]), list(inputs.get("subcommands") or ()))
+        return _ok(mode, "SUBCOMMAND_SCOPE_QUESTIONS_DERIVED", {"program": inputs["prog"], "questions": questions})
+
+    if mode == "KOAN_REFUSAL_CURRICULUM":
+        from canonical.tools import the_refusal_is_the_curriculum_v1 as m
+
+        demand = m.read_demand(str(inputs["line"]))
+        rows = m.parse_rows(str(inputs.get("page_text") or inputs["line"]))
+        return _ok(mode, "REFUSAL_CURRICULUM_DEMAND_PARSED", {"demand": demand, "parsed_row_count": len(rows)})
+
+    if mode == "KOAN_FORCE_VALUE_ANGELIC":
+        from canonical.tools import force_the_value_and_see_v1 as m
+
+        inst_src, sites = m.instrumented_source(str(inputs["source"]), str(inputs["function_name"]))
+        return _ok(mode, "ANGELIC_FORCE_SITES_INSTRUMENTED", {"site_count": len(sites), "sites": sites, "instrumented_source": inst_src})
+
+    if mode == "KOAN_AIMED_PROGRAM_EDITS":
+        from canonical.tools import aimed_edits_from_the_program_and_the_failure_v1 as m
+
+        tree = ast.parse(str(inputs["source"]))
+        return _ok(
+            mode,
+            "PROGRAM_INTRINSIC_EDIT_VOCABULARY_EXTRACTED",
+            {
+                "forms": m.forms_of(tree),
+                "attributes": m.attributes_of(tree),
+                "callables": m.callables_of(tree),
+                "commuted_count": len(m.commuted(tree)),
+            },
+        )
+
+    if mode == "KOAN_DEFERRED_REENTRANT_FORM":
+        from canonical.tools import deferred_definition_form_v1 as m
+
+        emitted = m.emit_for_traceback(str(inputs["traceback_text"]), str(inputs["source_text"]))
+        return _ok(mode, "DEFERRED_DEFINITION_CANDIDATES_EMITTED", emitted)
+
+    if mode == "KOAN_ASSERTION_DEMAND":
+        from canonical.tools import the_assertion_is_the_demand_v1 as m
+
+        prods = m.conditional_productions(str(inputs["source"]), int(inputs["line"]), str(inputs["site_text"]))
+        return _ok(mode, "ASSERTION_DEMAND_PRODUCTIONS_SYNTHESIZED", {"productions": prods[:25], "count": len(prods)})
 
     return _fail(mode, f"UNKNOWN_FEDERATED_ENGINE_MODE:{mode}")
 
