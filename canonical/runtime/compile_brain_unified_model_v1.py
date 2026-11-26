@@ -2576,7 +2576,7 @@ def delta_compile_model(
             ext_files.append((rel, st.st_size, st.st_mtime_ns))
 
     new_ext_cache: dict[str, tuple[int, int, dict[str, Any]]] = {}
-    if ext_files and len(ext_files) == len(ext_cache) and all(
+    if py_bundle_cache.get("sig") == py_state_sig and ext_files and len(ext_files) == len(ext_cache) and all(
         rel in ext_cache and ext_cache[rel][0] == sz and ext_cache[rel][1] == mt
         for rel, sz, mt in ext_files
     ):

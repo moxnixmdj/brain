@@ -33039,23 +33039,23 @@
   "extended_source_index_modules": 675,
   "federated_kernel_engines": 130,
   "harvested_admitted": 0,
-  "harvested_capabilities": 652,
+  "harvested_capabilities": 653,
   "harvested_contract_surfaces": 42,
-  "harvested_program_surfaces": 610,
+  "harvested_program_surfaces": 611,
   "knowledge_documents": 754,
   "promotion_callable": 31,
   "promotion_candidates": 849,
   "receipt_backed_capabilities": 309,
-  "research_index_records": 7430,
+  "research_index_records": 7431,
   "routing_tokens": 3243,
   "skills": 18,
-  "source_index_entry_points": 564,
-  "source_index_modules": 2250
+  "source_index_entry_points": 565,
+  "source_index_modules": 2251
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "10723cc31539458d94c740821830570310adf78ec5651af48c56860d52f5e623"
+  "value": "7c7d083141613fb44490ba5d2c9fb10f5799758a18da50d57fd6a807a8cb61b1"
  },
  "engines": [
   {
@@ -33650,7 +33650,7 @@
     "carrier_sha256": "d66078d4a3b6e6df516fd2cb60c759af962c239bd2b4dea114b84696f8290aa3",
     "entrypoint": "synthesize_bidirectional_lens",
     "source_path": "canonical/swe_kernel/angelic_lens_cow_repair_v1.py",
-    "source_sha256": "8da6b19c5845543ccc9aedecb9945ba8436185ba5e6733445d9152dd5d89f4f6"
+    "source_sha256": "c6d647277e499d82b10ca16634f9078e238817f8774f3695d5d0caedd3872f4b"
    },
    "summary": "Angelic causal nexus localization, backward output-residual propagation, and separating guard synthesis.",
    "triggers": [
@@ -34351,7 +34351,7 @@
     "carrier_sha256": "d66078d4a3b6e6df516fd2cb60c759af962c239bd2b4dea114b84696f8290aa3",
     "entrypoint": "capture_multilayer_state",
     "source_path": "canonical/swe_kernel/cross_modal_tomography_petri_v1.py",
-    "source_sha256": "f9cf1508b4f689b7a89409ab84811c18e9820a751915acc10142aa692c9b601b"
+    "source_sha256": "946e3654115aedacfbe2c84aa30422fb27ed414e2a521cadfe92ced616e73b59"
    },
    "summary": "Captures and diffs cross-modal accessibility/DOM/canvas/SQLite/filesystem state snapshots and extracts executable doc examples.",
    "triggers": [
@@ -35912,7 +35912,7 @@
     "carrier_sha256": "d66078d4a3b6e6df516fd2cb60c759af962c239bd2b4dea114b84696f8290aa3",
     "entrypoint": "derive_verified_module_adapter",
     "source_path": "canonical/runtime/execution_traced_callable_compiler_v1.py",
-    "source_sha256": "88cb9ca090091e708629a81b9c480316dc362c5cb2ea9cb169d9d5c64fb504e4"
+    "source_sha256": "bfac79c7aa2278c4287caf080ac8b04f90125bace0c06257e123824298168ba1"
    },
    "summary": "PEP 669 sys.monitoring / C-level setprofile execution-traced callable compiler verifying 260/406 (64.04%, 17.36x over AST literal baseline) SOURCE_ONLY modules with 2-run scratch determinism and SHA256 non-destructiveness.",
    "triggers": [
@@ -57212,7 +57212,7 @@
    "classification": "INTERNAL_HELPER",
    "executable_entry_point": false,
    "id": "ext_source:canonical/capabilities/internalized/causal_falsification/agent_replay_v1/agent_replay/types.py",
-   "imported_by_count": 52,
+   "imported_by_count": 53,
    "kind": "EXTENDED_SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/capabilities/internalized/causal_falsification/agent_replay_v1/agent_replay/types.py",
    "sha256": "99c1af45663cde80493fe13923e04b5d369065c7537e67606634a35c5ee511d6",
@@ -60266,7 +60266,7 @@
    "classification": "ENTRY_POINT",
    "executable_entry_point": true,
    "id": "ext_source:canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6/vendored/src/minisweagent/run/utilities/config.py",
-   "imported_by_count": 7,
+   "imported_by_count": 8,
    "kind": "EXTENDED_SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6/vendored/src/minisweagent/run/utilities/config.py",
    "sha256": "c9a6955ca3f6de180ddc4bc5a54d7c7d49e96d996c9b80e2d146630230aaf954",
@@ -85058,7 +85058,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "e5c08f3507d4f0da8c1728af8340e75e7b97c0c9b5d3038853e8f4c263819925",
+   "sha256": "6a11fc5cc0ce485a37ec93b78d59dce165443d539b6fcc717a6c6eb797eda827",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "triggers": [
     "brain",
@@ -85208,7 +85208,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/compile_brain_unified_model_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "f253b9addcdfb867d987007f44a06cb9d2795840e6576567645cb2c5b3841e95",
+   "sha256": "d392451f20f05671837f56bc0aac297e04ce13ebc1cf2bd3f1f0ef9eeaf39ac0",
    "summary": "Compile the whole live Brain into one content-addressed model artifact.",
    "triggers": [
     "compile",
@@ -85637,7 +85637,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/execution_traced_callable_compiler_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "88cb9ca090091e708629a81b9c480316dc362c5cb2ea9cb169d9d5c64fb504e4",
+   "sha256": "bfac79c7aa2278c4287caf080ac8b04f90125bace0c06257e123824298168ba1",
    "summary": "Execution-Traced Mass Adapter & Capsule Compiler (`K3 = 0`).",
    "triggers": [
     "execution",
@@ -87007,6 +87007,28 @@
    "triggers": [
     "demonstration",
     "sufficiency"
+   ]
+  },
+  {
+   "admission_state": "DISCOVERED_NOT_ADMITTED",
+   "admitted": false,
+   "also_in_source_index": true,
+   "capability": false,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "entrypoint": "main",
+   "id": "canonical.swe_kernel.differential_witness_inversion_v1.hidden.v1",
+   "invocation": "cli",
+   "kind": "HARVESTED_EXECUTABLE_SURFACE",
+   "path": "canonical/swe_kernel/differential_witness_inversion_v1.py",
+   "route": "canonical/runtime/harvested_capability_runtime_v1.py",
+   "sha256": "9bc3d0f889cecc6c6671232fca37910cca1d0c98fda385d2016345d83901b446",
+   "summary": "Generalized Live-Frame Differential Witness Inversion (Zero Model Calls, Zero Weights).",
+   "triggers": [
+    "differential",
+    "witness",
+    "inversion"
    ]
   },
   {
@@ -157757,14 +157779,14 @@
  },
  "provenance": {
   "compiler": "canonical/runtime/compile_brain_unified_model_v1.py",
-  "compiler_sha256": "f253b9addcdfb867d987007f44a06cb9d2795840e6576567645cb2c5b3841e95",
+  "compiler_sha256": "d392451f20f05671837f56bc0aac297e04ce13ebc1cf2bd3f1f0ef9eeaf39ac0",
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 2369,
+  "included_source_count": 2370,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "b9f3a04592cd8b3d94dc2b9b5512c314a395a75b40243a7be33a96f01909f6f5"
+  "source_tree_digest": "d95de588c1ab648d4a10167bd2b92f029bca3d0011fd44d85713237b7d3615b8"
  },
  "research_index": [
   {
@@ -326157,7 +326179,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/SIX_MOVES_K3_ZERO_LEAPFROG_UNIFIED_MODEL_20261126_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "8e304f27dcc62257aa9353987799e88c1fb900666e4fba5109546f88acd52821",
+   "sha256": "f898a261b970edab47e22f058f2f634c550e891dbd5b5337ffc9517263a9aa89",
    "status": "SHIPPED",
    "terms": {
     "11.48": 1,
@@ -333132,6 +333154,51 @@
     "spines": 2,
     "split": 2,
     "unified": 3
+   }
+  },
+  {
+   "action_id": "UNIFIED_96_ORGAN_EPISTEMIC_PORTFOLIO_20261126_V1",
+   "capability": false,
+   "date": "2026-11-26",
+   "id": "research:canonical/action_intents/UNIFIED_96_ORGAN_EPISTEMIC_PORTFOLIO_20261126_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/UNIFIED_96_ORGAN_EPISTEMIC_PORTFOLIO_20261126_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "fe706c4d9e813bd859c27cf582a5c0a8b46c968e03023cda510559b631533807",
+   "status": "SHIPPED",
+   "terms": {
+    "0.47": 1,
+    "1-shot": 1,
+    "100": 1,
+    "13": 1,
+    "20261126": 1,
+    "22.5": 1,
+    "230.2": 1,
+    "28": 2,
+    "41af70625a9ddaef45aaea29299ca99ce716a18f": 1,
+    "43.7-51.5": 1,
+    "46.4": 1,
+    "7-language": 2,
+    "96": 4,
+    "across": 1,
+    "action": 1,
+    "ast": 1,
+    "bidirectional": 1,
+    "binding": 1,
+    "blind": 1,
+    "bytecode": 1,
+    "calls": 1,
+    "canonical": 3,
+    "codec": 1,
+    "cst": 2,
+    "meaning-ir": 2,
+    "ms": 2,
+    "organs": 2,
+    "portfolio": 2,
+    "pre-sieving": 2,
+    "transfer": 2,
+    "us": 2,
+    "vsa+woodbury+ppr": 2
    }
   },
   {
@@ -345537,7 +345604,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "e5c08f3507d4f0da8c1728af8340e75e7b97c0c9b5d3038853e8f4c263819925",
+   "sha256": "6a11fc5cc0ce485a37ec93b78d59dce165443d539b6fcc717a6c6eb797eda827",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 30,
    "symbols": [
@@ -351615,7 +351682,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/compile_brain_unified_model_v1.py",
-   "sha256": "f253b9addcdfb867d987007f44a06cb9d2795840e6576567645cb2c5b3841e95",
+   "sha256": "d392451f20f05671837f56bc0aac297e04ce13ebc1cf2bd3f1f0ef9eeaf39ac0",
    "summary": "Compile the whole live Brain into one content-addressed model artifact.",
    "symbol_count": 47,
    "symbols": [
@@ -360174,7 +360241,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/execution_traced_callable_compiler_v1.py",
-   "sha256": "88cb9ca090091e708629a81b9c480316dc362c5cb2ea9cb169d9d5c64fb504e4",
+   "sha256": "bfac79c7aa2278c4287caf080ac8b04f90125bace0c06257e123824298168ba1",
    "summary": "Execution-Traced Mass Adapter & Capsule Compiler (`K3 = 0`).",
    "symbol_count": 10,
    "symbols": [
@@ -414993,7 +415060,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/angelic_lens_cow_repair_v1.py",
-   "sha256": "8da6b19c5845543ccc9aedecb9945ba8436185ba5e6733445d9152dd5d89f4f6",
+   "sha256": "c6d647277e499d82b10ca16634f9078e238817f8774f3695d5d0caedd3872f4b",
    "summary": "1ms CoW Angelic Causal Fault Localization, Repo-Native Component Mining,",
    "symbol_count": 31,
    "symbols": [
@@ -416416,7 +416483,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/closed_loop_autonomous_controller_v1.py",
-   "sha256": "fdf68f4043262cbada28cea457679b39df11bca5e6ddeb7d2ea85b1afea0c97e",
+   "sha256": "b0b4c25bcf5ab24065d170111e218e861681494936650d32490d99856483bdf9",
    "summary": "Unified Closed-Loop Autonomous Controller (`solve_or_learn`) — v1.",
    "symbol_count": 20,
    "symbols": [
@@ -417303,7 +417370,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/cross_modal_tomography_petri_v1.py",
-   "sha256": "f9cf1508b4f689b7a89409ab84811c18e9820a751915acc10142aa692c9b601b",
+   "sha256": "946e3654115aedacfbe2c84aa30422fb27ed414e2a521cadfe92ced616e73b59",
    "summary": "Multi-Layer Differential State Tomography, Zero-Weight Pure-Canvas Layout",
    "symbol_count": 15,
    "symbols": [
@@ -417602,18 +417669,19 @@
   },
   {
    "capability": false,
-   "classification": "ORPHAN",
-   "executable_entry_point": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
    "id": "source:canonical/swe_kernel/differential_witness_inversion_v1.py",
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/differential_witness_inversion_v1.py",
-   "sha256": "b3f316d0dc6500cfab2106b41fa623203faf5587714b3558762db76d7054518d",
+   "sha256": "9bc3d0f889cecc6c6671232fca37910cca1d0c98fda385d2016345d83901b446",
    "summary": "Generalized Live-Frame Differential Witness Inversion (Zero Model Calls, Zero Weights).",
-   "symbol_count": 2,
+   "symbol_count": 3,
    "symbols": [
     "_select_sibling_passing_tests",
-    "synthesize_live_differential_witness_repairs"
+    "synthesize_live_differential_witness_repairs",
+    "synthesize_live_differential_witness_repairs_in_ram"
    ],
    "terms": {
     "calls": 1,
@@ -417624,6 +417692,7 @@
     "model": 1,
     "select_sibling_passing_tests": 1,
     "synthesize_live_differential_witness_repairs": 1,
+    "synthesize_live_differential_witness_repairs_in_ram": 1,
     "v1": 1,
     "weights": 1,
     "witness": 2,
@@ -425040,6 +425109,78 @@
     "v1": 1,
     "via": 1,
     "vocabulary": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/swe_kernel/unified_epistemic_portfolio_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/swe_kernel/unified_epistemic_portfolio_v1.py",
+   "sha256": "320cb20222a273a00b9b7918257d5be96d6a9fad042cc1f0a8afa204ff6f1d85",
+   "summary": "Unified Epistemic Portfolio & Multi-Organ Runtime Spine (`K3 = 0`) — v1.",
+   "symbol_count": 46,
+   "symbols": [
+    "ActiveSymbolicMealyLearner",
+    "CandidatePatch",
+    "CausalFaultSpectrum",
+    "CodePlanObligationZipper",
+    "EStitchSemanticSkillStore",
+    "FirstPrinciplesMorphismSynthesizer",
+    "InMemoryRelationAndHabitationAbducer",
+    "MultiSignalCausalLocalizer",
+    "SemanticRepairMotif",
+    "VSAWoodburyFastMemory",
+    "WarmCoWForkScreener",
+    "WholeSliceMutantKillingGate",
+    "ZeroOverheadLineMonitor",
+    "_AlphaNormalizer",
+    "_InMemoryModuleOverrideFinder",
+    "_InMemoryModuleOverrideLoader",
+    "_UniversalExplorationEnvAdapter",
+    "_evict_repo_and_test_modules",
+    "_extract_declarative_webmcp_tools_from_html",
+    "_fork_pipe_write_all",
+    "_fork_wait_and_drain",
+    "_hardlink_or_copy",
+    "_has_pytest",
+    "_mdl_bytes"
+   ],
+   "terms": {
+    "build_rel_to_module_map": 1,
+    "candidatepatch": 1,
+    "causalfaultspectrum": 1,
+    "codeplanobligationzipper": 1,
+    "create_hardlinked_overlay": 1,
+    "enclosing_test_files": 1,
+    "epistemic": 2,
+    "evict_repo_and_test_modules": 1,
+    "fork_pipe_write_all": 1,
+    "fork_wait_and_drain": 1,
+    "hardlink_or_copy": 1,
+    "has_pytest": 1,
+    "inmemorymoduleoverridefinder": 1,
+    "inmemorymoduleoverrideloader": 1,
+    "k3": 1,
+    "mdl_bytes": 1,
+    "multi-organ": 1,
+    "multisignalcausallocalizer": 1,
+    "organ_portfolio_status": 1,
+    "portfolio": 2,
+    "pre_sieve_and_simulate_meaning_ir": 1,
+    "pythonpath_for_repo": 1,
+    "replace_node_segment": 1,
+    "run_test_targets_fast": 1,
+    "run_test_targets_subprocess": 1,
+    "runtime": 1,
+    "spine": 1,
+    "unified": 2,
+    "v1": 2,
+    "warmcowforkscreener": 1,
+    "write_unlinked_patch": 1,
+    "zerooverheadlinemonitor": 1
    }
   },
   {
