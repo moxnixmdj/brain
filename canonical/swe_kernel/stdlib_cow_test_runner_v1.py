@@ -303,6 +303,7 @@ def _execute_suite_in_current_process(
 
     specs = _discover_test_targets(repo_root, targets)
     passed = 0
+    passed_nodeids: list[str] = []
     failed_nodeids: list[str] = []
     blocks: list[str] = []
     failure_frames: dict[str, list[dict[str, Any]]] = {}
@@ -368,6 +369,7 @@ def _execute_suite_in_current_process(
                             if "tmp_path" in sig.parameters:
                                 kw["tmp_path"] = pathlib.Path(td)
                             obj(**kw)
+                        passed_nodeids.append(nid)
                         passed += 1
                     except BaseException as exc:  # noqa: BLE001
                         failed_nodeids.append(nid)
@@ -400,6 +402,7 @@ def _execute_suite_in_current_process(
                                     blocks.append(f"____ {nid} ____\n{tb_str}\nFAILED {nid}")
                                     failed_nodeids.append(nid)
                                 else:
+                                    passed_nodeids.append(nid)
                                     passed += 1
                             else:
                                 inst = obj()
@@ -411,6 +414,7 @@ def _execute_suite_in_current_process(
                                     with tempfile.TemporaryDirectory(prefix="pb_tmp_path_") as td:
                                         kw = {"tmp_path": pathlib.Path(td)} if "tmp_path" in sig.parameters else {}
                                         m_fn(**kw)
+                                    passed_nodeids.append(nid)
                                     passed += 1
                                 finally:
                                     if hasattr(inst, "teardown_method"):
@@ -440,6 +444,7 @@ def _execute_suite_in_current_process(
         "ok": rc == 0,
         "rc": rc,
         "passed": passed,
+        "passed_nodeids": passed_nodeids,
         "failed_nodeids": failed_nodeids,
         "output": "\n".join(blocks),
         "failure_frames": failure_frames,
