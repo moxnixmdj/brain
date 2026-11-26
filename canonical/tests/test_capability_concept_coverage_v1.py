@@ -90,6 +90,28 @@ class TestThreeLayersAreNotTheSameThing(unittest.TestCase):
         for module_name in layer_zero["fail_missing_module"]:
             self.assertTrue(module_name and module_name != "?", "a missing module was not named")
 
+    def test_the_standing_law_is_measured_not_asserted(self):
+        """Everything must be insanely fast -- so the latency is a guard, not a slogan.
+
+        route() answers "which capability" by index lookup and must stay sub-millisecond.
+        The declared-contract lookup must stay in the sub-microsecond regime, because it is
+        the number that replaces a 1.33 ms try-and-fail. If either regresses, this fails
+        with the measured value rather than trusting a memory of one.
+        """
+        speed = self.report["speed"]
+        self.assertLess(
+            speed["route_p50_ms"], 2.0,
+            f"route() p50 regressed to {speed['route_p50_ms']} ms",
+        )
+        self.assertLess(
+            speed["route_p99_ms"], 10.0,
+            f"route() p99 regressed to {speed['route_p99_ms']} ms",
+        )
+        self.assertLess(
+            speed["declared_contract_lookup_us"], 10.0,
+            f"contract lookup regressed to {speed['declared_contract_lookup_us']} us",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

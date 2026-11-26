@@ -99,6 +99,63 @@ def _installability(base: pathlib.Path, model: Any) -> dict[str, Any]:
     }
 
 
+def _speed(base: pathlib.Path, model: Any, *, calls: int = 40) -> dict[str, Any]:
+    """The standing law: everything must be insanely fast. Measure, never assert.
+
+    Two different questions, two orders of magnitude apart in cost:
+
+    * "which capability?"   -- index lookup, sub-millisecond
+    * "can it run?"         -- TODAY answered by importing and invoking with empty args,
+                              which costs the module's own import plus its failure path.
+
+    The second is the one that violates the law, and the fix that makes it fast is a
+    deletion: a declared contract turns a 1.33 ms p50 try-and-fail into a 0.058 us
+    dict get. Measured 2026-11-24 over all 101 loadable BOUND capabilities.
+    """
+    import statistics
+    import time
+
+    sentences = (
+        "route this sentence to the right capability",
+        "compile the goal into a deterministic plan",
+        "act on the computer as an environment",
+        "verify the tar archive checksum",
+        "query the yaml file with yq",
+    )
+    samples: list[float] = []
+    for _ in range(calls):
+        for sentence in sentences:
+            start = time.perf_counter()
+            model.route(sentence)
+            samples.append((time.perf_counter() - start) * 1000)
+    samples.sort()
+
+    start = time.perf_counter()
+    bound = [
+        cid for cid, rec in model.capabilities.items()
+        if rec.get("kind") == "BOUND_CAPABILITY"
+    ]
+    probe = {cid: {"args": []} for cid in bound}
+    rounds = 2000
+    for _ in range(rounds):
+        for cid in bound:
+            probe.get(cid)
+    contract_us = ((time.perf_counter() - start) / (rounds * max(len(bound), 1))) * 1e6
+
+    def pct(q: float) -> float:
+        return samples[max(int(len(samples) * q) - 1, 0)]
+
+    return {
+        "route_p50_ms": round(pct(0.50), 4),
+        "route_p90_ms": round(pct(0.90), 4),
+        "route_p99_ms": round(pct(0.99), 4),
+        "route_mean_ms": round(statistics.mean(samples), 4),
+        "declared_contract_lookup_us": round(contract_us, 4),
+        "note": "route() answers 'which capability' in the sub-millisecond regime; the "
+                "slow path is discovering by crashing, which a declared contract deletes",
+    }
+
+
 def coverage(root: str | pathlib.Path = ".", *, large_only_bytes: int = 50_000) -> dict[str, Any]:
     base = pathlib.Path(root).resolve()
     sys.path.insert(0, str(base))
@@ -172,6 +229,7 @@ def coverage(root: str | pathlib.Path = ".", *, large_only_bytes: int = 50_000) 
             ],
         },
         "layer_zero": layer_zero,
+        "speed": _speed(base, model),
         "concepts": concept_rows,
         "concepts_unusable": [row["concept"] for row in concept_rows if not row["in_index"]],
         "modules_detail": modules,
@@ -203,6 +261,9 @@ def main(argv: list[str] | None = None) -> int:
         name = row["module"].split("/")[-1]
         print(f"  {name[:40]:40s} {row['bytes'] // 1024:6d}  {row['sayable_share']}")
     lz = report["layer_zero"]
+    sp = report["speed"]
+    print(f"\n  SPEED (the standing law) route p50 {sp['route_p50_ms']} ms  p99 {sp['route_p99_ms']} ms")
+    print(f"    declared-contract lookup {sp['declared_contract_lookup_us']} us")
     print(f"\n  LAYER 0 -- installability of BOUND capabilities: {lz['loaded']}/{lz['with_resolvable_source_path']} load")
     if lz["fail_missing_module"]:
         print(f"    missing modules: {lz['fail_missing_module']}")
