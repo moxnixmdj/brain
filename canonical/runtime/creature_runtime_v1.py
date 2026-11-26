@@ -1612,8 +1612,24 @@ class Creature:
         kwargs.setdefault("repair_store", self.root / "repair.sqlite")
         return self._ensure_unified_model().solve_swe_repo_native(repo_root, **kwargs)
 
-    def explore_screen(self, port: Any, **kwargs: Any) -> dict[str, Any]:
-        return self._ensure_unified_model().explore_unknown_environment(port, (), surface='indexed_screen', **kwargs)
+    def remember_screen(self, raw_experience: Mapping[str, Any], **kwargs: Any) -> dict[str, Any]:
+        from canonical.runtime.frame_program_v1 import file_experience
+        return file_experience(self.root / 'screen.sqlite', raw_experience, **kwargs)
+
+    def explore_screen(self, port: Any, *, recall: bool = False, **kwargs: Any) -> dict[str, Any]:
+        retrieval = None
+        if recall:
+            from canonical.swe_kernel.witnessed_revision_store_v1 import RevisionStore
+            if 'program' in kwargs:
+                raise ValueError('choose disk recall or a supplied program')
+            path = self.root / 'screen.sqlite'
+            query = RevisionStore(path, read_only=True).query('screen.program') if path.is_file() else {}
+            kwargs['program'] = query.get('value')
+            retrieval = {'status':query.get('status','EMPTY_STORE'), 'support':query.get('support',[])}
+        result = self._ensure_unified_model().explore_unknown_environment(port, (), surface='indexed_screen', **kwargs)
+        if recall:
+            result['retrieval'] = retrieval
+        return result
 
     def live_browser_episode(self, goal: str, **kwargs: Any) -> dict[str, Any]:
         return self._ensure_unified_model().live_browser_episode(goal, **kwargs)

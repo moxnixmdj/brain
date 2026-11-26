@@ -43,5 +43,5 @@ if __name__ == '__main__':
     p = Port()
     start = read()
     p.accept(start.pop('observation'))
-    c = Creature(identity='screen-observer', root=Path('/tmp'), life_grant=1.)
+    c = Creature(identity='screen-observer', root=Path('/src'), life_grant=1.)
     send({'result': c.explore_screen(p, **start)})

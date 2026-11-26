@@ -77,3 +77,30 @@ def test_data_only_version_budget_and_feedback_are_gates():
     r=explore_screen(p,program=e['lifted'],budget=2)
     assert not r['advanced'] and r['replay']['confirmed_transitions']==1 and r['replay']['reason']=='PREDICTION_REFUTED'
     assert explore_screen(task(),budget=1,program=e['lifted'])['spent']==1
+
+
+def test_shortening_invisible_steps_is_refutable_and_retractable(tmp_path):
+    from canonical.runtime.creature_runtime_v1 import Creature
+    from canonical.swe_kernel.witnessed_revision_store_v1 import RevisionStore
+    screens = [Screen(bytes(4), ('prime','confirm'))]*2 + [Screen(bytes([0,1,2,3]), (), True)]
+    def port():return Port(screens,['prime','confirm'])
+    def owner():return Creature(identity='unit',root=tmp_path,life_grant=1.)
+    raw = owner().explore_screen(port(),budget=4,record=True)['experience']['raw']
+    stored = owner().remember_screen(raw,representation='shortened',valid_from=1,source='real port')
+    assert (stored['planned_actions'],stored['observed_actions']) == (1,2)
+    world = port(); r = owner().explore_screen(world,budget=4,recall=True)
+    assert world.moves == ['confirm','reset','prime','confirm']
+    assert r['replay']['reason']=='PREDICTION_REFUTED' and r['spent']==4 and r['advanced']
+    assert r['retrieval']['support'][0]['parents']==[stored['root_id']]
+    RevisionStore(tmp_path/'screen.sqlite').append('delete','screen.teacher',valid_from=2,source='test',witness='withdraw')
+    r=owner().explore_screen(port(),budget=4,recall=True)
+    assert r['retrieval']['status']=='UNKNOWN_LOST_SUPPORT' and r['replay']['actions']==0 and r['spent']==2
+
+
+def test_contradictory_picture_action_edges_are_not_a_deterministic_shortcut(tmp_path):
+    from canonical.runtime.frame_program_v1 import file_experience
+    s=Screen(bytes(4),('tick',)); end=Screen(bytes(4),(),True)
+    raw=compile_experience([s,s,end],['tick','tick'])['raw']
+    with pytest.raises(ValueError,match='contradictory witnessed edge'):
+        file_experience(tmp_path/'memory.sqlite',raw,representation='shortened',valid_from=1,source='test')
+    assert not (tmp_path/'memory.sqlite').exists()

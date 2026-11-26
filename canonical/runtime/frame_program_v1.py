@@ -103,6 +103,62 @@ def compile_experience(screens, actions):
             'raw': raw, 'lifted': compiled}
 
 
+def _unpack_frames(program):
+    n, count = program['side'], len(program['actions'])
+    expected = (count + 1) * n**2
+    if not (type(n) is int and 0 < n <= 256 and count > 0 and expected <= 64 * 1024**2):
+        raise ValueError('invalid or oversized screen recording')
+    stream = zlib.decompressobj()
+    raw = stream.decompress(base64.b64decode(program['zlib_frames'], validate=True), expected + 1)
+    if not stream.eof or stream.unused_data or len(raw) != expected:
+        raise ValueError('invalid packed demonstration')
+    return raw
+
+
+def file_experience(store_path, raw, *, representation, valid_from, source):
+    """File a reinstantiable proposal supported by one exact witness in external memory.
+
+    Shortest here means on the observed *picture* graph. Repeated pictures
+    need not be the same hidden state. The receiver still has to try the plan.
+    A witnessed nondeterministic edge disqualifies this shortcut.
+    """
+    from contextlib import closing
+    from canonical.runtime.environment_learning_v1 import shortest_plan
+    from canonical.swe_kernel.witnessed_revision_store_v1 import RevisionStore
+    if raw.get('version') != VERSION or raw.get('mode') != 'raw' or representation not in ('raw','lifted','shortened'):
+        raise ValueError('expected current single-exposure record and supported representation')
+    pixels = _unpack_frames(raw)
+    actions = list(raw['actions'])
+    size = raw['side']**2
+    frames = [pixels[i:i+size] for i in range(0,len(pixels),size)]
+    # Do not conflate a goal with an identical nonterminal picture.
+    keys = [_sha(b) for b in frames[:-1]] + ['advanced:' + _sha(frames[-1])]
+    model, by_key = {}, dict(zip(keys, frames))
+    for i, a in enumerate(actions):
+        if representation == 'shortened' and model.setdefault(keys[i], {}).setdefault(a, keys[i+1]) != keys[i+1]:
+            raise ValueError('contradictory witnessed edge under the picture key')
+    chosen = actions
+    if representation == 'shortened':
+        chosen = shortest_plan({'model':model, 'root':keys[0]}, lambda k: k == keys[-1])
+        if not chosen:
+            raise ValueError('no observed path to terminal')
+        k = keys[0]; frames = [by_key[k]]
+        for a in chosen:
+            k = model[k][a]; frames.append(by_key[k])
+    screens = [Screen(b, (a,), False) for b, a in zip(frames,chosen)] + [Screen(frames[-1], (), True)]
+    program = raw if representation == 'raw' else compile_experience(screens,chosen)['lifted']
+    witness = _sha(json.dumps(raw,separators=(',', ':'),sort_keys=True).encode())
+    store = RevisionStore(store_path)
+    with closing(store._connect()) as db, db:
+        db.execute('BEGIN IMMEDIATE')
+        def add(op, key, value, **kw):
+            return store.append_tx(db,op,key,valid_from=valid_from,source=source,witness=witness,value=value,**kw)
+        root = add('set','screen.teacher',witness)
+        child = add('revise','screen.program',program,parents=[root['id']])
+    return {'teacher':witness,'root_id':root['id'],'program_id':child['id'],'observed_actions':len(actions),
+            'planned_actions':len(chosen),'program_bytes':len(json.dumps(program,separators=(',',':')).encode())}
+
+
 class _Replay:
     def __init__(self, program, side, budget):
         self.p = program
@@ -113,11 +169,7 @@ class _Replay:
                 not 0 < count <= budget):
             raise ValueError('version, display size or remaining budget mismatch')
         if program['mode'] == 'raw':
-            expected = (count + 1) * side**2
-            stream = zlib.decompressobj()
-            self.raw = stream.decompress(base64.b64decode(program['zlib_frames'], validate=True), expected + 1)
-            if not stream.eof or stream.unused_data or len(self.raw) != expected:
-                raise ValueError('invalid packed demonstration')
+            self.raw = _unpack_frames(program)
         elif program['mode'] != 'lifted' or len(program['signatures']) != count + 1:
             raise ValueError('unknown or incomplete program')
 
