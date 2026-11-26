@@ -24,6 +24,8 @@ Covers the exact 2026 frontier failure modes:
 """
 from __future__ import annotations
 
+import time
+
 import pathlib
 from typing import Any
 
@@ -529,3 +531,363 @@ def test_13_ast_wiring_verification_unified_model_and_creature_runtime() -> None
     assert "canonical_swe_spine_v1" in cr_src
     assert "harvested_capability_runtime_v1" in cr_src
     assert "composer_route_v1" in (ROOT / "canonical/swe_kernel/canonical_boundary_router_v1.py").read_text(encoding="utf-8")
+
+
+# ---------------------------------------------------------------------------
+# Wave 3-6 Real-Execution Tests: Speed Deletion, 58-Engine Federation,
+# Applicability Abstention, Refusal Spec, Speculative CoW Race,
+# Mutation Admission Gate, 4-Tier Zero-Pixel CU, Anti-Authority-Collapse Log
+# ---------------------------------------------------------------------------
+
+
+def test_14_federated_58_engines_live_from_both_unified_model_and_creature(tmp_path: Path) -> None:
+    """All 58 federated hidden kernel engines are callable from BOTH UnifiedModel and Creature at K3=0."""
+    model = bum.open_model()
+    cat = model.catalog_federated_engines()
+    assert int(cat["count"]) >= 58
+
+    # Run DISTINCTION_GUARD_SYNTHESIS through UnifiedModel
+    m_res = model.run_federated_engine(
+        "DISTINCTION_GUARD_SYNTHESIS",
+        {
+            "positives": [{"x": 5, "ok": True}, {"x": 10, "ok": True}],
+            "negatives": [{"x": -2, "ok": False}, {"x": 0, "ok": False}],
+        },
+    )
+    assert m_res["pass"] is True
+    assert m_res["federated_execution"]["model_calls"] == 0
+    assert m_res["federated_execution"]["result"]["holds_on_positives"] == 2
+    assert m_res["federated_execution"]["result"]["rejects_negatives"] == 2
+
+    # Run INSTRUCTION_CONTRACT_COMPILER through Creature sharing the same front door
+    c = model.open_creature(tmp_path / "creature_fed")
+    c_res = c.run_federated_engine(
+        "INSTRUCTION_CONTRACT_COMPILER",
+        {
+            "utterance": "click submit",
+            "observation": {
+                "elements": [
+                    {"index": 0, "tag": "button", "text": "Cancel", "can_click": True, "parent": -1},
+                    {"index": 1, "tag": "button", "text": "Submit", "can_click": True, "parent": -1},
+                ]
+            },
+        },
+    )
+    assert c_res["pass"] is True
+    assert c_res["model_calls"] == 0
+    assert c_res["result"]["contract"]["clauses"][0]["name"] == "submit"
+
+
+def test_15_applicability_boundary_abstain_under_shift_and_vocabulary_gap() -> None:
+    """Exact applicability boundary (`applicability_v1`): APPLY/REJECT on consensus, ABSTAIN on shift, witness on gap."""
+    model = bum.open_model()
+    evidence = [
+        (["door_closed", "has_key"], True),
+        (["door_closed"], False),
+    ]
+    learn_res = model.route_with_boundary(
+        "applicability",
+        skill_id="unlock_door",
+        evidence=evidence,
+    )
+    assert learn_res["pass"] is True
+    b = learn_res["boundary_route"]["learned"]["boundary"]
+    assert b["survivor_count"] == 2
+    assert b["most_general"] == ["has_key"]
+
+    # Consensus APPLY when all survivors satisfied
+    chk_apply = model.route_with_boundary(
+        "applicability",
+        skill_id="unlock_door",
+        state_facts=["door_closed", "has_key"],
+    )
+    assert chk_apply["boundary_route"]["check"]["decision"] == "APPLY"
+
+    # Consensus REJECT when no survivor satisfied
+    chk_reject = model.route_with_boundary(
+        "applicability",
+        skill_id="unlock_door",
+        state_facts=["door_closed"],
+    )
+    assert chk_reject["boundary_route"]["check"]["decision"] == "REJECT"
+
+    # Shifted ambiguous state (`has_key` without `door_closed`) -> explicit ABSTAIN naming `door_closed`
+    chk_shift = model.route_with_boundary(
+        "applicability",
+        skill_id="unlock_door",
+        state_facts=["has_key"],
+    )
+    assert chk_shift["boundary_route"]["check"]["decision"] == "ABSTAIN"
+    assert "door_closed" in chk_shift["boundary_route"]["check"]["distinguishing_facts"]
+
+    # Contradictory identical states -> vocabulary gap witness
+    gap_res = model.memory_bus.learn_applicability_boundary(
+        "unobservable_skill",
+        [(["room_a"], True), (["room_a"], False)],
+    )
+    assert gap_res["boundary"]["vocabulary_gap"] is not None
+    assert model.memory_bus.check_skill_applicability("unobservable_skill", ["room_a"])["decision"] == "ABSTAIN"
+
+
+def test_16_refusal_first_specification_compiler_zero_llm_repair(tmp_path: Path) -> None:
+    """`0E` compiles real CLI/OS refusals directly into typed Clauses and repaired argvs at K3=0."""
+    model = bum.open_model()
+    c = model.open_creature(tmp_path / "creature_refusal")
+
+    r_world = model.route_with_boundary(
+        "refusal_spec",
+        refusal_text="fatal: not a git repository (or any of the parent directories): .git",
+    )
+    assert r_world["pass"] is True
+    assert r_world["boundary_route"]["specification"]["clause"]["form"] == "WORLD"
+    assert r_world["boundary_route"]["specification"]["clause"]["token"] == "git"
+
+    r_conflict = c.route_goal_via_spine(
+        "refusal_spec",
+        refusal_text="tar: You may not specify more than one '-Acdtrux' option",
+        base_argv=["tar", "-c", "-x", "archive.tar"],
+    )
+    assert r_conflict["pass"] is True
+    assert r_conflict["specification"]["clause"]["form"] == "CONFLICT"
+
+    r_offered = model.route_with_boundary(
+        "refusal_spec",
+        refusal_text="error: missing flag; try using -f to specify file",
+        base_argv=["tool", "run"],
+        declared_flags=["-f"],
+    )
+    assert r_offered["pass"] is True
+    assert r_offered["boundary_route"]["specification"]["clause"]["form"] == "OFFERED"
+    assert "-f" in (r_offered["boundary_route"]["specification"]["repaired_argv"] or [])
+
+
+def test_17_speculative_cow_race_commits_only_winner_and_rolls_back_all_failures(tmp_path: Path) -> None:
+    """Solves PASTE's side-effect rollback bottleneck: winning CoW branch commits, losers & failures leak 0 bytes."""
+    model = bum.open_model()
+    ws = tmp_path / "workspace_win"
+    ws.mkdir()
+    (ws / "config.txt").write_text("mode=broken\n", encoding="utf-8")
+    (ws / "keep.txt").write_text("untouched\n", encoding="utf-8")
+
+    def branch_corrupt(root: Path) -> None:
+        (root / "keep.txt").unlink()
+        (root / "config.txt").write_text("mode=corrupted\n", encoding="utf-8")
+        (root / "garbage.tmp").write_text("leaked\n", encoding="utf-8")
+
+    def branch_valid(root: Path) -> None:
+        (root / "config.txt").write_text("mode=verified_ok\n", encoding="utf-8")
+
+    def oracle(root: Path) -> bool:
+        return (
+            (root / "keep.txt").exists()
+            and (root / "config.txt").read_text(encoding="utf-8").strip() == "mode=verified_ok"
+        )
+
+    win = model.speculative_cow_race(
+        ws,
+        [
+            {"branch_id": "corrupt_first", "apply_fn": branch_corrupt},
+            {"branch_id": "clean_winner", "apply_fn": branch_valid},
+        ],
+        oracle,
+        commit_winner=True,
+    )
+    assert win["pass"] is True
+    assert win["cow_race"]["race"]["winner_branch_id"] == "clean_winner"
+    assert (ws / "config.txt").read_text(encoding="utf-8").strip() == "mode=verified_ok"
+    assert (ws / "keep.txt").read_text(encoding="utf-8").strip() == "untouched"
+    assert not (ws / "garbage.tmp").exists()
+
+    # All-failing race must roll back with ZERO side-effect leakage onto workspace
+    ws_fail = tmp_path / "workspace_fail"
+    ws_fail.mkdir()
+    (ws_fail / "state.txt").write_text("original_bytes\n", encoding="utf-8")
+
+    fail = model.speculative_cow_race(
+        ws_fail,
+        [{"branch_id": "destructive_loser", "apply_fn": lambda r: (r / "state.txt").write_text("MUTATED\n", encoding="utf-8")}],
+        lambda r: False,
+        commit_winner=True,
+    )
+    assert fail["pass"] is False
+    assert (ws_fail / "state.txt").read_text(encoding="utf-8") == "original_bytes\n"
+
+
+def test_18_mutation_admission_gate_rejects_weak_verifier_and_admits_strong_verifier(tmp_path: Path) -> None:
+    """`0H` Mutation-as-Admission Gate (`mutation_admission_probe_v1`, STING defense) through UnifiedModel & Creature."""
+    model = bum.open_model()
+    c = model.open_creature(tmp_path / "creature_mut")
+    src = (
+        "def classify_score(score, bonus):\n"
+        "    total = score + bonus\n"
+        "    if total >= 90:\n"
+        "        return 'A'\n"
+        "    if total >= 60:\n"
+        "        return 'PASS'\n"
+        "    return 'FAIL'\n"
+    )
+    # Weak vacuous verifier lets AST mutants survive -> MUST REJECT
+    weak = model.mutation_admission_gate(
+        src,
+        lambda ns: callable(ns.get("classify_score")),
+        limit=6,
+        seed=7,
+        min_kill_rate=0.5,
+    )
+    assert weak["pass"] is False
+    assert weak["mutation_gate"]["gate"]["kill_rate"] == 0.0
+
+    # Strong behavioral verifier tests exact boundary values & arithmetic -> kills AST mutants -> MUST ADMIT
+    strong = c.mutation_admission_gate(
+        src,
+        lambda ns: (
+            ns["classify_score"](85, 5) == "A"
+            and ns["classify_score"](55, 5) == "PASS"
+            and ns["classify_score"](50, 5) == "FAIL"
+            and ns["classify_score"](89, 0) == "PASS"
+        ),
+        limit=6,
+        seed=7,
+        min_kill_rate=0.5,
+    )
+    assert strong["pass"] is True
+    assert strong["gate"]["mutants_tested"] > 0
+    assert strong["gate"]["kill_rate"] >= 0.5
+
+    # Also prove guard demand-site instrumentation (`the_demand_is_learned_from_the_run_v1`)
+    gd = oracle_spine.extract_guard_demand_sites(src)
+    assert gd["pass"] is True
+    assert gd["site_count"] >= 2
+    assert gd["instrumented_ready"] is True
+
+
+def test_19_four_tier_zero_pixel_first_cu_ladder_and_insufficiency_witness() -> None:
+    """`0F` enforces strict zero-pixel-first escalation: Tier 0 CLI -> Tier 1 typed surface -> Tier 2 geometry -> Tier 3 witness."""
+    model = bum.open_model()
+
+    t0 = model.route_with_boundary("cu_four_tier", direct_command=["git", "status", "-sb"])
+    assert t0["pass"] is True
+    assert t0["boundary_route"]["cu_plan"]["tier"] == "TIER_0_DIRECT_PROGRAMMATIC"
+    assert t0["boundary_route"]["cu_plan"]["pixels_used"] == 0
+
+    t1 = model.route_with_boundary("cu_four_tier", typed_action={"type": "click", "x": 120, "y": 240})
+    assert t1["pass"] is True
+    assert t1["boundary_route"]["cu_plan"]["tier"] == "TIER_1_TYPED_SURFACE_ACTION"
+    assert "pyautogui.click" in t1["boundary_route"]["cu_plan"]["compiled_code"]
+
+    t2 = model.route_with_boundary(
+        "cu_four_tier",
+        aimed_observation={
+            "utterance": "click on the mid-point between the two points",
+            "elements": [
+                {"index": 0, "tag": "circle", "box": [10, 20, 10, 10]},
+                {"index": 1, "tag": "circle", "box": [110, 20, 10, 10]},
+            ],
+        },
+    )
+    assert t2["pass"] is True
+    assert t2["boundary_route"]["cu_plan"]["tier"] == "TIER_2_GEOMETRIC_AIMED_ACTION"
+    assert t2["boundary_route"]["cu_plan"]["actions"][0]["action"] == "pressat@65.0,25.0"
+
+    t3 = model.route_with_boundary("cu_four_tier")
+    assert t3["pass"] is False
+    assert t3["boundary_route"]["cu_plan"]["tier"] == "TIER_3_VISUAL_FALLBACK_REQUIRED"
+    assert t3["boundary_route"]["cu_plan"]["insufficiency_witness"]
+
+
+def test_20_anti_authority_collapse_event_sourced_memory_survives_restart(tmp_path: Path) -> None:
+    """Hash-chained provenance events (`h100_zero_learned_event_memory_v1`) survive Creature restart without authority collapse."""
+    c_root = tmp_path / "creature_evmem"
+    model = bum.open_model()
+    c1 = model.open_creature(c_root)
+    a1 = c1.route_goal_via_spine(
+        "event_memory",
+        action="APPEND",
+        op="SET",
+        key="policy:timeout_ms",
+        value=250,
+        source_commit="682663898f",
+        precondition_guard=["env:sandbox", "k3:0"],
+        validity_window={"from": "2026-11-24", "to": "2027-11-24"},
+    )
+    assert a1["pass"] is True
+    assert a1["seq"] == 1
+    assert (c_root / "memory_bus_v1.json").is_file()
+
+    # Reboot brand-new Creature from disk and cryptographically replay + verify snapshot
+    c2 = creature_rt.Creature(identity="creature", root=c_root, life_grant=40.0)
+    c2.boot()
+    rep = c2.route_goal_via_spine("event_memory", action="REPLAY")
+    assert rep["pass"] is True
+    assert rep["event_count"] == 1
+    entry = rep["state"]["policy:timeout_ms"]
+    assert entry["payload"] == 250
+    assert entry["provenance"]["source_commit"] == "682663898f"
+    assert entry["provenance"]["precondition_guard"] == ["env:sandbox", "k3:0"]
+
+
+def test_21_elon_law_lazy_section_isolation_and_sub_millisecond_composer_cache(tmp_path: Path) -> None:
+    """Elon's Law proof: per-section hydration avoids deserializing 5.96MB research_index & composer graph caches cleanly."""
+    # Construct a fresh core-only model instance (bypassing in-process singleton) to verify strict section isolation
+    art_path = ROOT / bum.DEFAULT_ARTIFACT
+    raw_bytes = art_path.read_bytes()
+    raw_sha = bum.hashlib.sha256(raw_bytes).hexdigest()
+    core_cache = bum._core_cache_dir() / f"unified_model_core_{raw_sha[:32]}.marshal"
+    if not core_cache.is_file():
+        bum.open_model()
+    core = bum.marshal.loads(core_cache.read_bytes())
+    fresh = bum.UnifiedModel(core, _raw_bytes=raw_bytes, _core_only=True)
+
+    # Touching harvested surfaces must NOT deserialize the 5.96MB research_index!
+    assert fresh._research_index_cache is None
+    h = fresh.find_harvested("canonical.runtime.bound_capabilities.code_multilanguage_tree_sitter_v1.hidden.v1")
+    assert h is not None
+    assert fresh._harvested_cache is not None
+    assert fresh._research_index_cache is None
+    assert fresh._source_index_cache is None
+
+    # Warm composer_route call uses cached registry + graph (blazing fast)
+    from canonical.runtime import composer_route_v1 as cmpr
+
+    _ = cmpr.route("count lines in README.md")
+    t0 = time.perf_counter()
+    r = cmpr.route("count lines in README.md")
+    elapsed_ms = (time.perf_counter() - t0) * 1000.0
+    assert r["status"] == "PASS__COMPOSER_ROUTE_FOUND"
+    assert elapsed_ms < 25.0
+
+    # Creature attachment stays lazy (never eagerly forces secondary JSON hydration)
+    c = fresh.open_creature(tmp_path / "creature_fast")
+    assert fresh._research_index_cache is None
+    assert c.memory_bus is fresh.memory_bus
+
+
+def test_22_one_shot_instant_learning_crystallizes_skill_and_boundary(tmp_path: Path) -> None:
+    """Zero-backprop 1-shot learning (`instant_one_shot_learning_v1` + `weights_from_scratch_v1` + `applicability_v1`)."""
+    env_dir = tmp_path / "env_1shot"
+    env_dir.mkdir()
+    (env_dir / "target.txt").write_text("hello world\n", encoding="utf-8")
+
+    model = bum.open_model()
+    res = model.route_with_boundary(
+        "one_shot_learning",
+        environment_root=env_dir,
+        task_id="task_one_shot_1",
+        steps=[("ls", "target.txt"), ("cat target.txt", "hello world\n")],
+        terminal_outcome=0,
+        wrong_actions=[[("cat missing.txt", "No such file")]],
+        right_command="cat target.txt",
+        skill_id="read_target_skill_v22",
+        success_states=[["file_present", "readable"]],
+        failure_states=[["file_missing"]],
+    )
+    assert res["pass"] is True
+    assert res["boundary_route"]["model_calls"] == 0
+    assert res["boundary_route"]["induction"]["skill_id"].startswith("sk_macro_")
+    # Tier-0 crystallized skill + exact applicability boundary are both immediately live
+    chk_ok = model.memory_bus.check_skill_applicability("read_target_skill_v22", ["file_present", "readable"])
+    chk_no = model.memory_bus.check_skill_applicability("read_target_skill_v22", ["file_missing"])
+    assert chk_ok["decision"] == "APPLY"
+    assert chk_no["decision"] == "REJECT"
+
+

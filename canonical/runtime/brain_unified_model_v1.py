@@ -337,22 +337,162 @@ class UnifiedModel:
         self._avg_length_cache: float | None = None
         self._memory_bus: Any = None
         self._boundary_router: Any = None
+        self._raw_sha256: str = str(self._core_meta.get("raw_sha256") or "")
 
         self.min_score = float(confidence.get("minimum_best_score", 1.0))
         self.min_coverage = float(confidence.get("minimum_coverage", 0.34))
         if not _core_only:
             self._hydrate_secondary_indexes()
 
+    def _section_cache_path(self, section: str) -> Path | None:
+        if not self._raw_sha256:
+            return None
+        return _core_cache_dir() / f"unified_model_sec_{section}_{self._raw_sha256[:32]}.marshal"
+
+    def _read_section_cache(self, section: str) -> Any | None:
+        p = self._section_cache_path(section)
+        if p is None or not p.is_file():
+            return None
+        try:
+            blob = marshal.loads(p.read_bytes())
+            if isinstance(blob, dict) and blob.get("raw_sha256") == self._raw_sha256 and blob.get("v") == 1:
+                return blob.get("data")
+        except Exception:
+            return None
+        return None
+
+    def _write_section_cache(self, section: str, data: Any) -> None:
+        p = self._section_cache_path(section)
+        if p is None:
+            return
+        try:
+            p.parent.mkdir(parents=True, exist_ok=True)
+            tmp_f = p.with_name(f".{p.name}.{os.getpid()}.tmp")
+            tmp_f.write_bytes(marshal.dumps({"v": 1, "raw_sha256": self._raw_sha256, "data": data}))
+            tmp_f.replace(p)
+        except Exception:
+            pass
+
+    def _ensure_harvested(self) -> None:
+        if self._harvested_cache is not None:
+            return
+        cached = self._read_section_cache("harvested")
+        if isinstance(cached, dict):
+            self._harvested_cache = cached
+            return
+        full = self._ensure_full_model()
+        self._harvested_cache = {
+            str(row["id"]): dict(row)
+            for row in full.get("harvested_capabilities") or []
+            if isinstance(row, Mapping) and row.get("id")
+        }
+        self._write_section_cache("harvested", self._harvested_cache)
+
+    def _ensure_source_index(self) -> None:
+        if self._source_index_cache is not None:
+            return
+        cached = self._read_section_cache("source_index")
+        if isinstance(cached, dict) and "rows" in cached and "df" in cached:
+            self._source_index_cache = cached["rows"]
+            self._source_df_cache = cached["df"]
+            return
+        full = self._ensure_full_model()
+        rows = {
+            str(row["path"]): dict(row)
+            for row in full.get("source_index") or []
+            if isinstance(row, Mapping) and row.get("path")
+        }
+        df: dict[str, int] = {}
+        for row in rows.values():
+            terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
+            for term in terms:
+                df[str(term)] = df.get(str(term), 0) + 1
+        self._source_index_cache = rows
+        self._source_df_cache = df
+        self._write_section_cache("source_index", {"rows": rows, "df": df})
+
+    def _ensure_extended_source_index(self) -> None:
+        if self._extended_source_index_cache is not None:
+            return
+        cached = self._read_section_cache("extended_source_index")
+        if isinstance(cached, dict) and "rows" in cached and "df" in cached:
+            self._extended_source_index_cache = cached["rows"]
+            self._extended_source_df_cache = cached["df"]
+            return
+        full = self._ensure_full_model()
+        rows = {
+            str(row["path"]): dict(row)
+            for row in full.get("extended_source_index") or []
+            if isinstance(row, Mapping) and row.get("path")
+        }
+        df: dict[str, int] = {}
+        for row in rows.values():
+            terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
+            for term in terms:
+                df[str(term)] = df.get(str(term), 0) + 1
+        self._extended_source_index_cache = rows
+        self._extended_source_df_cache = df
+        self._write_section_cache("extended_source_index", {"rows": rows, "df": df})
+
+    def _ensure_research_index(self) -> None:
+        if self._research_index_cache is not None:
+            return
+        cached = self._read_section_cache("research_index")
+        if isinstance(cached, dict) and "rows" in cached and "df" in cached:
+            self._research_index_cache = cached["rows"]
+            self._research_df_cache = cached["df"]
+            return
+        full = self._ensure_full_model()
+        rows = {
+            str(row["path"]): dict(row)
+            for row in full.get("research_index") or []
+            if isinstance(row, Mapping) and row.get("path")
+        }
+        df: dict[str, int] = {}
+        for row in rows.values():
+            terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
+            for term in terms:
+                df[str(term)] = df.get(str(term), 0) + 1
+        self._research_index_cache = rows
+        self._research_df_cache = df
+        self._write_section_cache("research_index", {"rows": rows, "df": df})
+
+    def _ensure_knowledge(self) -> None:
+        if self._knowledge_cache is not None:
+            return
+        cached = self._read_section_cache("knowledge")
+        if isinstance(cached, dict) and "rows" in cached and "df" in cached:
+            self._knowledge_cache = cached["rows"]
+            self._knowledge_df_cache = cached["df"]
+            self._knowledge_lengths_cache = cached["lengths"]
+            self._avg_length_cache = float(cached["avg_len"])
+            return
+        full = self._ensure_full_model()
+        rows = [
+            dict(row) for row in (full.get("knowledge") or []) if isinstance(row, Mapping)
+        ]
+        df: dict[str, int] = {}
+        lengths: list[int] = []
+        for row in rows:
+            terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
+            lengths.append(sum(int(v) for v in terms.values()))
+            for term in terms:
+                df[str(term)] = df.get(str(term), 0) + 1
+        avg_len = (sum(lengths) / len(lengths) if lengths else 1.0) or 1.0
+        self._knowledge_cache = rows
+        self._knowledge_df_cache = df
+        self._knowledge_lengths_cache = lengths
+        self._avg_length_cache = avg_len
+        self._write_section_cache("knowledge", {"rows": rows, "df": df, "lengths": lengths, "avg_len": avg_len})
+
     def harvested_surfaces(self) -> list[dict[str, Any]]:
         """Every discovered surface the tree carries but no registry declares."""
-        if self._harvested_cache is None:
-            self._hydrate_secondary_indexes()
+        self._ensure_harvested()
         return [dict(row) for row in (self._harvested_cache or {}).values()]
 
     def find_harvested(self, capability_id: str) -> dict[str, Any] | None:
         """One discovered surface by id, or None. Never returns a capability."""
-        if self._harvested_cache is None:
-            self._hydrate_secondary_indexes()
+        self._ensure_harvested()
         row = (self._harvested_cache or {}).get(str(capability_id))
         return dict(row) if row else None
 
@@ -364,67 +504,11 @@ class UnifiedModel:
         return self._model_loaded
 
     def _hydrate_secondary_indexes(self) -> None:
-        if self._source_index_cache is not None:
-            return
-        full = self._ensure_full_model()
-        self._source_index_cache = {
-            str(row["path"]): dict(row)
-            for row in full.get("source_index") or []
-            if isinstance(row, Mapping) and row.get("path")
-        }
-        src_df: dict[str, int] = {}
-        for row in self._source_index_cache.values():
-            terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
-            for term in terms:
-                src_df[str(term)] = src_df.get(str(term), 0) + 1
-        self._source_df_cache = src_df
-
-        self._extended_source_index_cache = {
-            str(row["path"]): dict(row)
-            for row in full.get("extended_source_index") or []
-            if isinstance(row, Mapping) and row.get("path")
-        }
-        ext_df: dict[str, int] = {}
-        for row in self._extended_source_index_cache.values():
-            terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
-            for term in terms:
-                ext_df[str(term)] = ext_df.get(str(term), 0) + 1
-        self._extended_source_df_cache = ext_df
-
-        # Discovered executable surfaces.  Listed, never routed: `route()` and
-        # `solve()` stay on admitted capability, and calling one is an explicit
-        # request through harvested_capability_runtime_v1, which issues evidence
-        # and promotes nothing.
-        self._harvested_cache = {
-            str(row["id"]): dict(row)
-            for row in full.get("harvested_capabilities") or []
-            if isinstance(row, Mapping) and row.get("id")
-        }
-        self._research_index_cache = {
-            str(row["path"]): dict(row)
-            for row in full.get("research_index") or []
-            if isinstance(row, Mapping) and row.get("path")
-        }
-        res_df: dict[str, int] = {}
-        for row in self._research_index_cache.values():
-            terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
-            for term in terms:
-                res_df[str(term)] = res_df.get(str(term), 0) + 1
-        self._research_df_cache = res_df
-
-        self._knowledge_cache = [
-            dict(row) for row in (full.get("knowledge") or []) if isinstance(row, Mapping)
-        ]
-        knw_df: dict[str, int] = {}
-        knw_len: list[int] = []
-        for row in self._knowledge_cache:
-            terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
-            knw_len.append(sum(int(v) for v in terms.values()))
-            for term in terms:
-                knw_df[str(term)] = knw_df.get(str(term), 0) + 1
-        self._knowledge_df_cache = knw_df
-        self._knowledge_lengths_cache = knw_len
-        self._avg_length_cache = (sum(knw_len) / len(knw_len) if knw_len else 1.0) or 1.0
+        self._ensure_source_index()
+        self._ensure_extended_source_index()
+        self._ensure_harvested()
+        self._ensure_research_index()
+        self._ensure_knowledge()
 
     @property
     def model(self) -> dict[str, Any]:
@@ -432,52 +516,52 @@ class UnifiedModel:
 
     @property
     def source_index(self) -> dict[str, dict[str, Any]]:
-        self._hydrate_secondary_indexes()
+        self._ensure_source_index()
         return self._source_index_cache  # type: ignore[return-value]
 
     @property
     def _source_df(self) -> dict[str, int]:
-        self._hydrate_secondary_indexes()
+        self._ensure_source_index()
         return self._source_df_cache  # type: ignore[return-value]
 
     @property
     def extended_source_index(self) -> dict[str, dict[str, Any]]:
-        self._hydrate_secondary_indexes()
+        self._ensure_extended_source_index()
         return self._extended_source_index_cache  # type: ignore[return-value]
 
     @property
     def _extended_source_df(self) -> dict[str, int]:
-        self._hydrate_secondary_indexes()
+        self._ensure_extended_source_index()
         return self._extended_source_df_cache  # type: ignore[return-value]
 
     @property
     def research_index(self) -> dict[str, dict[str, Any]]:
-        self._hydrate_secondary_indexes()
+        self._ensure_research_index()
         return self._research_index_cache  # type: ignore[return-value]
 
     @property
     def _research_df(self) -> dict[str, int]:
-        self._hydrate_secondary_indexes()
+        self._ensure_research_index()
         return self._research_df_cache  # type: ignore[return-value]
 
     @property
     def knowledge(self) -> list[dict[str, Any]]:
-        self._hydrate_secondary_indexes()
+        self._ensure_knowledge()
         return self._knowledge_cache  # type: ignore[return-value]
 
     @property
     def _knowledge_df(self) -> dict[str, int]:
-        self._hydrate_secondary_indexes()
+        self._ensure_knowledge()
         return self._knowledge_df_cache  # type: ignore[return-value]
 
     @property
     def _knowledge_lengths(self) -> list[int]:
-        self._hydrate_secondary_indexes()
+        self._ensure_knowledge()
         return self._knowledge_lengths_cache  # type: ignore[return-value]
 
     @property
     def _avg_length(self) -> float:
-        self._hydrate_secondary_indexes()
+        self._ensure_knowledge()
         return self._avg_length_cache  # type: ignore[return-value]
 
     # ------------------------------------------------------------------ status
@@ -1964,6 +2048,22 @@ class UnifiedModel:
             res = self.boundary_router.route_version_space_task(**kwargs)
         elif k == "register_env_goal":
             res = self.boundary_router.route_register_env_goal(**kwargs)
+        elif k == "federated_engine":
+            res = self.boundary_router.route_federated_engine(**kwargs)
+        elif k == "one_shot_learning":
+            res = self.boundary_router.route_one_shot_learning(**kwargs)
+        elif k == "applicability":
+            res = self.boundary_router.route_applicability_check(**kwargs)
+        elif k == "refusal_spec":
+            res = self.boundary_router.route_refusal_specification(**kwargs)
+        elif k == "speculative_cow":
+            res = self.boundary_router.route_speculative_cow_race(**kwargs)
+        elif k == "cu_four_tier":
+            res = self.boundary_router.route_four_tier_cu(**kwargs)
+        elif k == "mutation_gate":
+            res = self.boundary_router.route_mutation_admission_gate(**kwargs)
+        elif k == "event_memory":
+            res = self.boundary_router.route_verified_event_memory(**kwargs)
         elif k == "status":
             res = {"pass": True, "status": "PASS__BOUNDARY_STATUS", **self.boundary_router.status_summary()}
         else:
@@ -1976,6 +2076,83 @@ class UnifiedModel:
             **{"pass": passed},
             reason=None if passed else str(res.get("reason") or "BOUNDARY_ROUTE_FAILED"),
             boundary_route=res,
+        )
+
+    def catalog_federated_engines(self, *, domain: str | None = None) -> dict[str, Any]:
+        """List all 58 federated hidden kernel engines exposed through this UnifiedModel."""
+        return self.boundary_router.catalog_federated_engines(domain=domain)
+
+    def run_federated_engine(
+        self,
+        mode: str,
+        inputs: Mapping[str, Any] | None = None,
+        *,
+        goal: str = "",
+    ) -> dict[str, Any]:
+        """Run any of the 58 federated hidden kernel engines directly through UnifiedModel (`0I`)."""
+        res = self.boundary_router.route_federated_engine(mode, inputs, goal=goal)
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="RUN_FEDERATED_ENGINE",
+            goal=goal or f"federated:{mode}",
+            status=str(res.get("status") or ("PASS__FEDERATED_ENGINE_EXECUTED" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("status") or "FEDERATED_ENGINE_FAILED"),
+            federated_execution=res,
+        )
+
+    def speculative_cow_race(
+        self,
+        workspace_root: str | Path,
+        branches: Sequence[Mapping[str, Any]],
+        oracle_fn: Callable[[Path], bool],
+        *,
+        commit_winner: bool = True,
+        goal: str = "",
+    ) -> dict[str, Any]:
+        """Run N side-effecting candidate branches in isolated CoW sandboxes (`0F`), committing ONLY a verified winner."""
+        res = self.boundary_router.route_speculative_cow_race(
+            workspace_root,
+            branches,
+            oracle_fn,
+            commit_winner=commit_winner,
+        )
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="SPECULATIVE_COW_RACE",
+            goal=goal or f"cow_race:{len(branches)}_branches",
+            status=str(res.get("status") or ("PASS__SPECULATIVE_COW_WINNER_COMMITTED" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else "ALL_COW_BRANCHES_ROLLED_BACK",
+            cow_race=res,
+        )
+
+    def mutation_admission_gate(
+        self,
+        source_text: str,
+        verifier_fn: Callable[[Mapping[str, Any]], bool],
+        *,
+        limit: int = 8,
+        seed: int = 7,
+        min_kill_rate: float = 0.5,
+        goal: str = "",
+    ) -> dict[str, Any]:
+        """Gate any skill/module promotion with real AST mutation killing (`0H` × `mutation_admission_probe_v1`)."""
+        res = self.boundary_router.route_mutation_admission_gate(
+            source_text,
+            verifier_fn,
+            limit=limit,
+            seed=seed,
+            min_kill_rate=min_kill_rate,
+        )
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="MUTATION_ADMISSION_GATE",
+            goal=goal or "mutation_admission_gate",
+            status=str(res.get("status") or ("PASS__MUTATION_ADMISSION_GATE" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("status") or "MUTATION_GATE_FAILED"),
+            mutation_gate=res,
         )
 
     def compose_chain(

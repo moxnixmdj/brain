@@ -853,11 +853,17 @@ class Creature:
     # ------------------------------------------ unified model & frontier spines bridge
 
     def attach_unified_model(self, model: Any) -> None:
-        """Bind a `UnifiedModel` directly to this Creature so both share one memory bus & router."""
+        """Bind a `UnifiedModel` directly to this Creature so both share one memory bus & router lazily."""
         self._unified_model = model
         if model is not None:
-            self._memory_bus = model.memory_bus
-            self._boundary_router = model.boundary_router
+            if getattr(model, "_memory_bus", None) is not None:
+                self._memory_bus = model._memory_bus
+            elif self._memory_bus is not None:
+                model._memory_bus = self._memory_bus
+            if getattr(model, "_boundary_router", None) is not None:
+                self._boundary_router = model._boundary_router
+            elif self._boundary_router is not None:
+                model._boundary_router = self._boundary_router
 
     def _load_memory_bus_if_present(self) -> None:
         bus_fp = self.root / "memory_bus_v1.json"
@@ -869,6 +875,8 @@ class Creature:
                     self._memory_bus = mem_spine.VerificationFirstMemoryBus(state_path=bus_fp)
                 else:
                     self._memory_bus.load(bus_fp)
+                if self._unified_model is not None:
+                    self._unified_model._memory_bus = self._memory_bus
             except Exception:
                 pass
 
@@ -876,23 +884,31 @@ class Creature:
     def memory_bus(self) -> Any:
         """Persistent 5-timescale verification-first memory bus (`0G`) backed by `self.root/memory_bus_v1.json`."""
         if self._memory_bus is None:
-            from canonical.swe_kernel import canonical_memory_crystallizer_v1 as mem_spine
+            if self._unified_model is not None and getattr(self._unified_model, "_memory_bus", None) is not None:
+                self._memory_bus = self._unified_model._memory_bus
+            else:
+                from canonical.swe_kernel import canonical_memory_crystallizer_v1 as mem_spine
 
-            bus_fp = self.root / "memory_bus_v1.json"
-            self._memory_bus = mem_spine.VerificationFirstMemoryBus(state_path=bus_fp)
-            if self._unified_model is not None:
-                self._unified_model._memory_bus = self._memory_bus
+                bus_fp = self.root / "memory_bus_v1.json"
+                self._memory_bus = mem_spine.VerificationFirstMemoryBus(state_path=bus_fp)
+                if self._unified_model is not None:
+                    self._unified_model._memory_bus = self._memory_bus
         return self._memory_bus
 
     @property
     def boundary_router(self) -> Any:
         """Compounding Tier-0 -> Tier-1 -> Tier-2 BoundaryRouter (`0I`) sharing `self.memory_bus`."""
         if self._boundary_router is None:
-            from canonical.swe_kernel import canonical_boundary_router_v1 as br_spine
+            if self._unified_model is not None and getattr(self._unified_model, "_boundary_router", None) is not None:
+                self._boundary_router = self._unified_model._boundary_router
+                if self._memory_bus is not None:
+                    self._boundary_router.memory_bus = self._memory_bus
+            else:
+                from canonical.swe_kernel import canonical_boundary_router_v1 as br_spine
 
-            self._boundary_router = br_spine.BoundaryRouter(memory_bus=self.memory_bus)
-            if self._unified_model is not None:
-                self._unified_model._boundary_router = self._boundary_router
+                self._boundary_router = br_spine.BoundaryRouter(memory_bus=self.memory_bus)
+                if self._unified_model is not None:
+                    self._unified_model._boundary_router = self._boundary_router
         return self._boundary_router
 
     @property
@@ -931,6 +947,22 @@ class Creature:
             res = br.route_version_space_task(**kwargs)
         elif k == "register_env_goal":
             res = br.route_register_env_goal(**kwargs)
+        elif k == "federated_engine":
+            res = br.route_federated_engine(**kwargs)
+        elif k == "one_shot_learning":
+            res = br.route_one_shot_learning(**kwargs)
+        elif k == "applicability":
+            res = br.route_applicability_check(**kwargs)
+        elif k == "refusal_spec":
+            res = br.route_refusal_specification(**kwargs)
+        elif k == "speculative_cow":
+            res = br.route_speculative_cow_race(**kwargs)
+        elif k == "cu_four_tier":
+            res = br.route_four_tier_cu(**kwargs)
+        elif k == "mutation_gate":
+            res = br.route_mutation_admission_gate(**kwargs)
+        elif k == "event_memory":
+            res = br.route_verified_event_memory(**kwargs)
         elif k == "oracle_audit":
             from canonical.swe_kernel import canonical_oracle_vericoding_spine_v1 as ov_spine
 
@@ -944,6 +976,52 @@ class Creature:
             res = {"pass": False, "status": "FAIL_CLOSED__UNKNOWN_SPINE_KIND", "reason": f"UNKNOWN_KIND:{k}"}
         self._save()
         return res
+
+    def run_federated_engine(
+        self,
+        mode: str,
+        inputs: Mapping[str, Any] | None = None,
+        *,
+        goal: str = "",
+    ) -> dict[str, Any]:
+        """Run any of the 58 federated hidden kernel engines directly from Creature (`0I`)."""
+        return self.route_goal_via_spine("federated_engine", mode=mode, inputs=inputs, goal=goal)
+
+    def speculative_cow_race(
+        self,
+        workspace_root: str | pathlib.Path,
+        branches: Sequence[Mapping[str, Any]],
+        oracle_fn: Any,
+        *,
+        commit_winner: bool = True,
+    ) -> dict[str, Any]:
+        """Execute speculative parallel-safe CoW futures (`0F`) directly from Creature."""
+        return self.route_goal_via_spine(
+            "speculative_cow",
+            workspace_root=workspace_root,
+            branches=branches,
+            oracle_fn=oracle_fn,
+            commit_winner=commit_winner,
+        )
+
+    def mutation_admission_gate(
+        self,
+        source_text: str,
+        verifier_fn: Any,
+        *,
+        limit: int = 8,
+        seed: int = 7,
+        min_kill_rate: float = 0.5,
+    ) -> dict[str, Any]:
+        """Gate skill/module promotion with real AST mutation killing (`0H`) directly from Creature."""
+        return self.route_goal_via_spine(
+            "mutation_gate",
+            source_text=source_text,
+            verifier_fn=verifier_fn,
+            limit=limit,
+            seed=seed,
+            min_kill_rate=min_kill_rate,
+        )
 
     def compose_typed_chain(
         self,

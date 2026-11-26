@@ -28,6 +28,7 @@ under one front-door verification spine wired into ``brain_unified_model_v1``:
 from __future__ import annotations
 
 import ast
+import time
 import copy
 import re
 import shutil
@@ -628,3 +629,100 @@ def audit_oracle_and_vericoding(
     report["status"] = "PASS__ORACLE_AND_VERICODING_VERIFIED" if passed else "FAIL_CLOSED__ORACLE_VERICODING_REJECTED"
     report["reason"] = None if passed else "SUBCHECK_FAILED_OR_EMPTY_REQUEST"
     return report
+
+
+def mutation_admission_gate(
+    source_text: str,
+    verifier_fn: Callable[[Mapping[str, Any]], bool],
+    *,
+    limit: int = 8,
+    seed: int = 7,
+    min_kill_rate: float = 0.5,
+) -> dict[str, Any]:
+    """Mutation-as-Admission Gate (`mutation_admission_probe_v1`, Play 6 × STING defense).
+
+    Executes ``verifier_fn(ns)`` first on the original compiled module namespace, then against
+    real AST mutants synthesized by ``mutation_admission_probe_v1.mutants(...)``. Rejects any
+    candidate/skill whose verifier fails on the original OR allows too many mutants to survive
+    (kill_rate < min_kill_rate).
+    """
+    from canonical.tools import mutation_admission_probe_v1 as mut_probe
+
+    t0 = time.perf_counter()
+    orig_ns: dict[str, Any] = {}
+    try:
+        exec(compile(source_text, "<original_skill>", "exec"), orig_ns)
+        orig_pass = bool(verifier_fn(orig_ns))
+    except Exception as exc:
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__ORIGINAL_FAILED_VERIFIER",
+            "error": f"{type(exc).__name__}: {exc}",
+            "mutants_tested": 0,
+            "mutants_killed": 0,
+            "kill_rate": 0.0,
+        }
+    if not orig_pass:
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__ORIGINAL_REJECTED_BY_VERIFIER",
+            "mutants_tested": 0,
+            "mutants_killed": 0,
+            "kill_rate": 0.0,
+        }
+
+    generated = mut_probe.mutants(source_text, limit=int(limit), seed=int(seed))
+    killed = 0
+    survivors: list[dict[str, Any]] = []
+    for m in generated:
+        m_ns: dict[str, Any] = {}
+        try:
+            exec(compile(str(m["text"]), "<mutant_skill>", "exec"), m_ns)
+            m_passed = bool(verifier_fn(m_ns))
+        except Exception:
+            m_passed = False
+        if not m_passed:
+            killed += 1
+        else:
+            survivors.append(
+                {
+                    "mutator": m.get("mutator"),
+                    "line": m.get("line"),
+                    "before": m.get("before"),
+                    "after": m.get("after"),
+                }
+            )
+    total = len(generated)
+    kill_rate = round(killed / total, 4) if total > 0 else 0.0
+    admitted = total > 0 and kill_rate >= float(min_kill_rate)
+    return {
+        "schema": SCHEMA,
+        "pass": admitted,
+        "status": "PASS__MUTATION_ADMISSION_GATE" if admitted else "FAIL_CLOSED__VERIFIER_WEAK_MUTANTS_SURVIVED",
+        "mutants_tested": total,
+        "mutants_killed": killed,
+        "kill_rate": kill_rate,
+        "min_kill_rate": float(min_kill_rate),
+        "surviving_mutants": survivors,
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        "model_calls": 0,
+    }
+
+
+def extract_guard_demand_sites(source_text: str) -> dict[str, Any]:
+    """Extract and instrument guard sites from Python source via ``the_demand_is_learned_from_the_run_v1``."""
+    from canonical.tools import the_demand_is_learned_from_the_run_v1 as demand_mod
+
+    sites = demand_mod.guard_sites(source_text)
+    instrumented = demand_mod.instrument_guards(source_text, sites) if sites else None
+    return {
+        "schema": SCHEMA,
+        "pass": len(sites) > 0,
+        "site_count": len(sites),
+        "sites": sites,
+        "instrumented_ready": isinstance(instrumented, str) and len(instrumented) > 0,
+        "model_calls": 0,
+    }
+

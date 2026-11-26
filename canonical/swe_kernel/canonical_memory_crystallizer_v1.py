@@ -186,6 +186,10 @@ class VerificationFirstMemoryBus:
         self.external_adapters: dict[str, dict[str, Any]] = {}
         # Immutable selective-forgetting provenance log
         self.forgetting_ledger: list[dict[str, Any]] = []
+        # Wave 3-6: exact applicability boundaries & anti-authority-collapse verified event log
+        self._applicability_boundaries: dict[str, dict[str, Any]] = {}
+        self._verified_event_log: list[dict[str, Any]] = []
+        self._verified_event_last_hash: str = "0" * 64
         self._clock: float = 0.0
 
         if self.state_path is not None and self.state_path.exists():
@@ -914,6 +918,240 @@ class VerificationFirstMemoryBus:
             "changed": sorted(k for k in (before_files & after_files) if root_before_snap[k] != after_snap[k]),
         }
 
+    # ------------------------------------------ Wave 3-6: Applicability, 1-Shot & Verified Event Log
+    def learn_applicability_boundary(
+        self,
+        skill_id: str,
+        evidence: Sequence[tuple[Sequence[str], bool]],
+        *,
+        max_candidate_facts: int = 12,
+    ) -> dict[str, Any]:
+        """Learn exact WHEN a remembered skill applies (`canonical.runtime.applicability_v1`).
+
+        Retains the full surviving version space of conjunctions (`most_general`, `most_specific`,
+        `survivors`) and detects `vocabulary_gap` / `insufficiency_witness` when the current
+        observable vocabulary cannot separate successes from failures.
+        """
+        from canonical.runtime import applicability_v1 as app_mod
+
+        norm_ev = [(tuple(sorted(str(f) for f in facts)), bool(ok)) for facts, ok in evidence]
+        boundary = app_mod.learn(norm_ev, max_candidate_facts=int(max_candidate_facts))
+        gap = app_mod.vocabulary_gap(norm_ev)
+        witness = app_mod.insufficiency_witness(norm_ev)
+        rec = {
+            "schema": boundary.schema,
+            "skill_id": str(skill_id),
+            "status": str(boundary.status),
+            "required": list(boundary.required) if boundary.required is not None else None,
+            "most_general": list(boundary.most_general),
+            "most_specific": list(boundary.most_specific),
+            "survivor_count": int(boundary.survivor_count),
+            "survivors": [list(s) for s in boundary.survivors],
+            "successes": int(boundary.successes),
+            "failures": int(boundary.failures),
+            "candidate_facts": list(boundary.candidate_facts),
+            "reason": str(boundary.reason),
+            "vocabulary_gap": gap,
+            "insufficiency_witness": witness,
+        }
+        self._applicability_boundaries[str(skill_id)] = rec
+        return {
+            "schema": SCHEMA,
+            "pass": rec["status"] in ("IDENTIFIED", "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS"),
+            "boundary": rec,
+        }
+
+    def check_skill_applicability(
+        self,
+        skill_id: str,
+        state_facts: Sequence[str],
+    ) -> dict[str, Any]:
+        """Decide APPLY / REJECT / ABSTAIN for ``skill_id`` under its learned applicability boundary.
+
+        If all surviving conjunctions agree on ``state_facts``, returns APPLY or REJECT;
+        if survivors disagree (distribution shift / ambiguous state), explicitly returns ABSTAIN
+        with the exact missing distinguishing facts.
+        """
+        rec = self._applicability_boundaries.get(str(skill_id))
+        if rec is None:
+            return {
+                "schema": SCHEMA,
+                "decision": "ABSTAIN",
+                "reason": "NO_APPLICABILITY_BOUNDARY",
+                "skill_id": str(skill_id),
+            }
+        facts = set(str(f) for f in state_facts)
+        if rec.get("vocabulary_gap") is not None or int(rec.get("survivor_count") or 0) == 0:
+            return {
+                "schema": SCHEMA,
+                "decision": "ABSTAIN",
+                "reason": str(rec.get("reason") or "VOCABULARY_GAP"),
+                "skill_id": str(skill_id),
+                "vocabulary_gap": rec.get("vocabulary_gap"),
+            }
+        survivors = [set(s) for s in (rec.get("survivors") or ())]
+        votes = [s.issubset(facts) for s in survivors]
+        if all(votes):
+            return {
+                "schema": SCHEMA,
+                "decision": "APPLY",
+                "reason": "ALL_SURVIVORS_ADMIT",
+                "skill_id": str(skill_id),
+                "survivor_count": len(survivors),
+            }
+        if not any(votes):
+            return {
+                "schema": SCHEMA,
+                "decision": "REJECT",
+                "reason": "ALL_SURVIVORS_REJECT",
+                "skill_id": str(skill_id),
+                "survivor_count": len(survivors),
+            }
+        # Disagreement across surviving hypotheses -> ABSTAIN and name the exact distinguishing facts
+        admitted_req = set().union(*(s for s, v in zip(survivors, votes) if not v))
+        distinguishing = sorted(admitted_req - facts)
+        return {
+            "schema": SCHEMA,
+            "decision": "ABSTAIN",
+            "reason": "SURVIVOR_DISAGREEMENT_UNDER_SHIFT",
+            "skill_id": str(skill_id),
+            "survivor_count": len(survivors),
+            "admit_votes": sum(1 for v in votes if v),
+            "reject_votes": sum(1 for v in votes if not v),
+            "distinguishing_facts": distinguishing,
+        }
+
+    def one_shot_induce_skill(
+        self,
+        environment_root: str | Path,
+        *,
+        task_id: str,
+        steps: Sequence[tuple[str, str]],
+        terminal_outcome: int,
+        wrong_actions: Sequence[Sequence[tuple[str, str]]],
+        right_command: str,
+        skill_id: str | None = None,
+        success_states: Sequence[Sequence[str]] = (),
+        failure_states: Sequence[Sequence[str]] = (),
+    ) -> dict[str, Any]:
+        """Instant 1-shot skill induction via ``instant_one_shot_learning_v1`` + ``weights_from_scratch_v1``.
+
+        Extracts causal credit, calculated state-key, contract, and applicability classifier from a
+        single observed task + negative probes at K3=0, then crystallizes into Tier 0.
+        """
+        from canonical.swe_kernel import instant_one_shot_learning_v1 as iol
+        from canonical.swe_kernel import weights_from_scratch_v1 as wfs
+
+        root = Path(environment_root).resolve()
+        obs = iol.observe_task(root, str(task_id), list(steps), int(terminal_outcome))
+        credit = iol.attribute_credit(root, obs, [list(w) for w in wrong_actions])
+        flat_wrong = [pair for seq in wrong_actions for pair in seq]
+        ident = iol.identify_rule(root, credit, str(right_command), flat_wrong)
+        state_key = wfs.calculate_state_key(root, str(right_command), flat_wrong)
+        sid = str(skill_id or f"sk_1shot_{_sha16([task_id, right_command])}")
+        contract = iol.extract_contract(
+            ident,
+            sid,
+            preconditions=list(ident.get("preconditions") or ()),
+            observables=list(ident.get("observables") or ()),
+            actions=[str(right_command)],
+            verdict="PASS" if int(terminal_outcome) == 0 else "FAIL",
+            effects=[(str(k), str(v)) for k, v in (ident.get("effects") or ())],
+        )
+        app_res = None
+        if success_states or failure_states:
+            app_res = iol.classify_applicability(
+                contract,
+                [list(s) for s in success_states],
+                [list(f) for f in failure_states],
+            )
+            ev = [(s, True) for s in success_states] + [(f, False) for f in failure_states]
+            self.learn_applicability_boundary(sid, ev)
+        sk = self.crystallize_action_macro(
+            trigger_key=f"1shot:{task_id}",
+            actions=[{"command": str(right_command), "state_key": state_key.get("state_key")}],
+            provenance_episode_id=f"ep_1shot_{task_id}",
+            preconditions={"facts": list(ident.get("preconditions") or ()), "state_key": state_key.get("state_key")},
+        )
+        return {
+            "schema": SCHEMA,
+            "pass": True,
+            "task_id": str(task_id),
+            "skill_id": sk.skill_id,
+            "observe": obs,
+            "credit": credit,
+            "identify": ident,
+            "state_key": state_key,
+            "contract": contract,
+            "applicability": app_res,
+        }
+
+    def append_verified_event(
+        self,
+        *,
+        op: str,
+        key: str,
+        value: Any,
+        source_commit: str = "",
+        precondition_guard: Sequence[str] = (),
+        validity_window: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Append a SHA-256 hash-chained event (`h100_zero_learned_event_memory_v1`) that binds
+        every memory claim to its immutable provenance & validity guard (anti-authority-collapse).
+        """
+        from canonical.runtime import h100_zero_learned_event_memory_v1 as evm
+
+        seq = len(self._verified_event_log) + 1
+        envelope = {
+            "payload": value,
+            "provenance": {
+                "source_commit": str(source_commit),
+                "precondition_guard": [str(g) for g in precondition_guard],
+                "validity_window": dict(validity_window) if isinstance(validity_window, Mapping) else None,
+                "recorded_at": self._tick(),
+            },
+        }
+        ev = evm.make_event(
+            seq=seq,
+            op=str(op).upper(),
+            key=str(key),
+            value=envelope,
+            prev_hash=self._verified_event_last_hash,
+        )
+        evm.verify_event(ev, expected_seq=seq, expected_prev_hash=self._verified_event_last_hash)
+        self._verified_event_log.append(ev)
+        self._verified_event_last_hash = str(ev["event_hash"])
+        return {
+            "schema": SCHEMA,
+            "pass": True,
+            "seq": seq,
+            "event": ev,
+            "event_hash": self._verified_event_last_hash,
+        }
+
+    def replay_verified_events(self) -> dict[str, Any]:
+        """Cryptographically verify and replay the hash-chained provenance event log."""
+        from canonical.runtime import h100_zero_learned_event_memory_v1 as evm
+
+        if not self._verified_event_log:
+            return {
+                "schema": SCHEMA,
+                "pass": True,
+                "event_count": 0,
+                "last_seq": 0,
+                "last_event_hash": self._verified_event_last_hash,
+                "state": {},
+                "snapshot": None,
+            }
+        replayed = evm.replay(self._verified_event_log)
+        evm.verify_snapshot(replayed["snapshot"])
+        return {
+            "schema": SCHEMA,
+            "pass": True,
+            "event_count": len(self._verified_event_log),
+            **replayed,
+        }
+
     def stats(self) -> dict[str, Any]:
         return {
             "schema": SCHEMA,
@@ -924,6 +1162,8 @@ class VerificationFirstMemoryBus:
             "t3_active_skills": sum(1 for s in self.skills.values() if not s.forgotten),
             "t3_forgotten_skills": sum(1 for s in self.skills.values() if s.forgotten),
             "t3_version_space_tasks": len(self._version_spaces),
+            "t3_applicability_boundaries": len(self._applicability_boundaries),
+            "t3_verified_events": len(self._verified_event_log),
             "t4_external_adapters": len(self.external_adapters),
             "forgetting_events": len(self.forgetting_ledger),
         }
@@ -943,6 +1183,9 @@ class VerificationFirstMemoryBus:
                 tid: [[[obs, act] for obs, act in tr] for tr in traces]
                 for tid, traces in self._version_space_traces.items()
             },
+            "applicability_boundaries": dict(self._applicability_boundaries),
+            "verified_event_log": list(self._verified_event_log),
+            "verified_event_last_hash": self._verified_event_last_hash,
             "external_adapters": dict(self.external_adapters),
             "forgetting_ledger": list(self.forgetting_ledger),
         }
@@ -993,6 +1236,18 @@ class VerificationFirstMemoryBus:
                 self._version_space_traces[str(tid)] = norm_list
                 self._version_space_library.add(str(tid), ss)
 
+        self._applicability_boundaries = {
+            str(k): dict(v)
+            for k, v in (raw.get("applicability_boundaries") or {}).items()
+            if isinstance(v, Mapping)
+        }
+        self._verified_event_log = [
+            dict(ev) for ev in (raw.get("verified_event_log") or ()) if isinstance(ev, Mapping)
+        ]
+        self._verified_event_last_hash = str(
+            raw.get("verified_event_last_hash")
+            or (self._verified_event_log[-1]["event_hash"] if self._verified_event_log else "0" * 64)
+        )
         self.external_adapters = dict(raw.get("external_adapters", {}))
         self.forgetting_ledger = list(raw.get("forgetting_ledger", []))
 
@@ -1107,6 +1362,32 @@ def execute_memory_operation(
             "status": "PASS__CST_SKILLS_APPLIED" if res.get("pass") else "FAIL_CLOSED__NO_CST_CANDIDATE",
             **res,
         }
+    if op == "LEARN_APPLICABILITY":
+        res = bus.learn_applicability_boundary(**data)
+        return {
+            "schema": SCHEMA,
+            "pass": bool(res.get("pass")),
+            "status": "PASS__APPLICABILITY_LEARNED" if res.get("pass") else "FAIL_CLOSED__APPLICABILITY_VOCABULARY_GAP",
+            **res,
+        }
+    if op == "CHECK_APPLICABILITY":
+        res = bus.check_skill_applicability(**data)
+        dec = str(res.get("decision") or "ABSTAIN")
+        return {
+            "schema": SCHEMA,
+            "pass": dec == "APPLY",
+            "status": f"PASS__{dec}_DECISION" if dec != "ABSTAIN" else "PASS_ABSTAIN__APPLICABILITY_AMBIGUOUS",
+            **res,
+        }
+    if op == "ONE_SHOT_INDUCE":
+        res = bus.one_shot_induce_skill(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": "PASS__ONE_SHOT_INDUCED", **res}
+    if op == "APPEND_VERIFIED_EVENT":
+        res = bus.append_verified_event(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": "PASS__VERIFIED_EVENT_APPENDED", **res}
+    if op == "REPLAY_VERIFIED_EVENTS":
+        res = bus.replay_verified_events()
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": "PASS__VERIFIED_EVENTS_REPLAYED", **res}
     if op == "STATS":
         return {"schema": SCHEMA, "pass": True, "status": "PASS__MEMORY_STATS", "stats": bus.stats()}
     return {

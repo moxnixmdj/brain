@@ -31373,7 +31373,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "232c5f740e15fc57883fa1dc391c0303b207ba5a8e8191b6ee55f268d738ee85"
+  "value": "933a0286a7c616cbc502c371280a2277cb595879d94980cb1ed4e9ff050fbc38"
  },
  "engines": [
   {
@@ -75028,7 +75028,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "5ddc7198c334b5e74f979df7e2cd33f641baceee0518f19bfa3f7f6df926684f",
+   "sha256": "7f0e17453c887ab76a59998fc81607dab5761bfc6af281ff24e71cb39f7f1aec",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "triggers": [
     "brain",
@@ -75093,7 +75093,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/capability_composer_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "5fd31419400bd6e123eb18eac6dff5b382f4bae592561e2a79b5925bee0cd6b7",
+   "sha256": "8520fdaeacebcbfde0ce2584afd89e87f94d588fee3ce3ef359c5bf3684a6174",
    "summary": "PROJECT_BRAIN_CAPABILITY_COMPOSER_V1 -- connect the 67 bound capabilities.",
    "triggers": [
     "capability",
@@ -75265,7 +75265,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/creature_runtime_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "6bfc6fcb80a3c28ef9ec9d4f57690ae4f2e49b741ce4e0e1a11fbb6d807feafb",
+   "sha256": "d6036ecbe0536cb6a75f20e62af00ceaca71aacba353bd43a590e46cef342f91",
    "summary": "Seven organs, finally in one body.",
    "triggers": [
     "creature",
@@ -145696,7 +145696,7 @@
   "included_source_count": 2232,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "a61d3d75c34a17aee00a1469dd9d012a7c7f34c8364c852a2ea4adf6b9c3dc31"
+  "source_tree_digest": "9db4902e03046650a88841169b21337410b652f86628f5291e8c0e9b6b334227"
  },
  "research_index": [
   {
@@ -332725,7 +332725,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "5ddc7198c334b5e74f979df7e2cd33f641baceee0518f19bfa3f7f6df926684f",
+   "sha256": "7f0e17453c887ab76a59998fc81607dab5761bfc6af281ff24e71cb39f7f1aec",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 21,
    "symbols": [
@@ -335942,10 +335942,11 @@
    "imported_by_count": 6,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/capability_composer_v1.py",
-   "sha256": "5fd31419400bd6e123eb18eac6dff5b382f4bae592561e2a79b5925bee0cd6b7",
+   "sha256": "8520fdaeacebcbfde0ce2584afd89e87f94d588fee3ce3ef359c5bf3684a6174",
    "summary": "PROJECT_BRAIN_CAPABILITY_COMPOSER_V1 -- connect the 67 bound capabilities.",
-   "symbol_count": 15,
+   "symbol_count": 16,
    "symbols": [
+    "_stat_sig",
     "blockers",
     "call_errors",
     "consumers",
@@ -335983,6 +335984,7 @@
     "project_brain_capability_composer_v1": 1,
     "report": 1,
     "signature": 1,
+    "stat_sig": 1,
     "unreachable": 1,
     "v1": 1,
     "verified_emits_report": 1
@@ -341263,7 +341265,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/creature_runtime_v1.py",
-   "sha256": "6bfc6fcb80a3c28ef9ec9d4f57690ae4f2e49b741ce4e0e1a11fbb6d807feafb",
+   "sha256": "d6036ecbe0536cb6a75f20e62af00ceaca71aacba353bd43a590e46cef342f91",
    "summary": "Seven organs, finally in one body.",
    "symbol_count": 16,
    "symbols": [
@@ -401990,11 +401992,12 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/canonical_boundary_router_v1.py",
-   "sha256": "17a1f2c4dd9287b6421f7ebab65bedb5775c02be4c2a1ed33dd416aadd3126d1",
+   "sha256": "a7c82a9ae8fc9a4ff6cd59d8468aecf1d301949cdc945dfdcf1ee0aa1ee93522",
    "summary": "Canonical BoundaryRouter & Compounding Closed-Loop Orchestrator (`0I`).",
-   "symbol_count": 1,
+   "symbol_count": 2,
    "symbols": [
-    "BoundaryRouter"
+    "BoundaryRouter",
+    "_LazyModule"
    ],
    "terms": {
     "0i": 1,
@@ -402003,6 +402006,7 @@
     "canonical": 2,
     "closed-loop": 1,
     "compounding": 1,
+    "lazymodule": 1,
     "orchestrator": 1,
     "router": 1,
     "v1": 1
@@ -402016,20 +402020,23 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/canonical_cu_sandbox_spine_v1.py",
-   "sha256": "4c4a99d5348bb995925497c05c21df802d75e6fb0adebc10c780bda69b3a3918",
+   "sha256": "472f0fed2286f1f6735b7523ab3adb629e6c96a0fd6b8656a6a8367980d83e2e",
    "summary": "Canonical Speculative CoW Rollback & Code-over-GUI Computer-Use Spine (`0F`).",
-   "symbol_count": 5,
+   "symbol_count": 7,
    "symbols": [
     "SpeculativeProbeResult",
     "SpeculativeSandbox",
+    "compile_four_tier_cu_action",
     "diff_file_hashes",
     "execute_speculative_computer_task",
+    "speculative_cow_race",
     "workspace_tree_digest"
    ],
    "terms": {
     "0f": 1,
     "canonical": 2,
     "code-over-gui": 1,
+    "compile_four_tier_cu_action": 1,
     "computer-use": 1,
     "cow": 1,
     "cu": 1,
@@ -402038,6 +402045,7 @@
     "rollback": 1,
     "sandbox": 1,
     "speculative": 1,
+    "speculative_cow_race": 1,
     "speculativeproberesult": 1,
     "speculativesandbox": 1,
     "spine": 2,
@@ -402053,7 +402061,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
-   "sha256": "f6a554c65b96f691f3fb40f4562d66af3403ce11113afce0beb653968c15a8e0",
+   "sha256": "50a265eeecdc565a6aaa70e2dd33c656ae0049fe78fc4e877e3e1b458afc1bb7",
    "summary": "Canonical Environment Discovery & Conflict-Aware Active Automata Spine (`0E`).",
    "symbol_count": 14,
    "symbols": [
@@ -402168,7 +402176,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
-   "sha256": "e3c4b4717f8e6dabf42ab61b36af459c5672b447d3e82cb1b21ee4999a72b995",
+   "sha256": "2c9f3f9946c476c1ed1786aed6dae8c29b950cb460ab6298f4a1f4e7b85efdec",
    "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`).",
    "symbol_count": 7,
    "symbols": [
@@ -402207,9 +402215,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/canonical_oracle_vericoding_spine_v1.py",
-   "sha256": "454fa0e23417448c87b267a912b6d68b985c5732d1d560e4d302b96ebed131f7",
+   "sha256": "9ac4102d4b5189c7dbbe6ca55633e525a39879020c9ff99a80ca0c7d414961f7",
    "summary": "Canonical Dual-Channel Witness Inversion, Goal-Negation Oracle & Formal Vericoding Spine (`0H`).",
-   "symbol_count": 10,
+   "symbol_count": 12,
    "symbols": [
     "_generate_goal_negation_mutants",
     "_run_witness_in_clone",
@@ -402219,6 +402227,8 @@
     "compile_and_check_instruction_contract",
     "extract_assertion_demands",
     "extract_failing_run_demands",
+    "extract_guard_demand_sites",
+    "mutation_admission_gate",
     "prove_verifier_can_say_no",
     "verify_coq_certificate_bundle"
    ],
@@ -402232,10 +402242,12 @@
     "dual-channel": 1,
     "extract_assertion_demands": 1,
     "extract_failing_run_demands": 1,
+    "extract_guard_demand_sites": 1,
     "formal": 1,
     "generate_goal_negation_mutants": 1,
     "goal-negation": 1,
     "inversion": 1,
+    "mutation_admission_gate": 1,
     "oracle": 2,
     "prove_verifier_can_say_no": 1,
     "run_witness_in_clone": 1,

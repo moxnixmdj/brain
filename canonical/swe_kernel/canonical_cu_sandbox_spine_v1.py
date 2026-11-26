@@ -387,3 +387,144 @@ def execute_speculative_computer_task(
     report["status"] = "FAIL_CLOSED__CU_SANDBOX_UNSOLVED"
     report["reason"] = "NO_CANDIDATE_OR_ROUTE_VERIFIED"
     return report
+
+
+def speculative_cow_race(
+    workspace_root: str | Path,
+    branches: Sequence[Mapping[str, Any]],
+    oracle_fn: Callable[[Path], bool],
+    *,
+    commit_winner: bool = True,
+) -> dict[str, Any]:
+    """Speculative side-effect-free CoW multi-future race (`0F` × PASTE rollback solution).
+
+    Each branch in ``branches`` supplies:
+      - ``branch_id``: str
+      - ``apply_fn``: Callable[[Path], Any]  (mutates an isolated CoW copy of ``workspace_root``)
+
+    If a branch satisfies ``oracle_fn(branch_dir)``, ONLY that winning branch's file changes are
+    committed back to ``workspace_root`` (when ``commit_winner=True``); losing branches and failed
+    races are discarded with zero side-effect leakage onto the real workspace.
+    """
+    import filecmp
+    import shutil
+    import tempfile
+
+    t0 = time.perf_counter()
+    root = Path(workspace_root).resolve()
+    branch_results: list[dict[str, Any]] = []
+    winner: dict[str, Any] | None = None
+    committed_files: list[str] = []
+
+    with tempfile.TemporaryDirectory(prefix="brain_cow_race_") as tmp_base:
+        tmp_path = Path(tmp_base)
+        for idx, br in enumerate(branches):
+            bid = str(br.get("branch_id") or f"branch_{idx}")
+            apply_fn = br.get("apply_fn")
+            if not callable(apply_fn):
+                branch_results.append({"branch_id": bid, "passed": False, "error": "APPLY_FN_NOT_CALLABLE"})
+                continue
+            bdir = tmp_path / f"b_{idx}"
+            shutil.copytree(root, bdir, symlinks=True)
+            b_t0 = time.perf_counter()
+            err = None
+            passed = False
+            try:
+                apply_fn(bdir)
+                passed = bool(oracle_fn(bdir))
+            except Exception as exc:
+                err = f"{type(exc).__name__}: {exc}"
+                passed = False
+            b_ms = round((time.perf_counter() - b_t0) * 1000.0, 3)
+            branch_results.append({"branch_id": bid, "passed": passed, "elapsed_ms": b_ms, "error": err})
+            if passed and winner is None:
+                winner = {"branch_id": bid, "dir": bdir}
+                if commit_winner:
+                    # Commit only changed/added files from winning branch; remove deleted files
+                    win_files = {p.relative_to(bdir) for p in bdir.rglob("*") if p.is_file()}
+                    orig_files = {p.relative_to(root) for p in root.rglob("*") if p.is_file()}
+                    for rel in sorted(win_files):
+                        src = bdir / rel
+                        dst = root / rel
+                        if not dst.exists() or not filecmp.cmp(src, dst, shallow=False):
+                            dst.parent.mkdir(parents=True, exist_ok=True)
+                            shutil.copy2(src, dst)
+                            committed_files.append(str(rel))
+                    for rel in sorted(orig_files - win_files):
+                        (root / rel).unlink(missing_ok=True)
+                        committed_files.append(f"-{rel}")
+                break
+
+    elapsed_ms = round((time.perf_counter() - t0) * 1000.0, 3)
+    return {
+        "schema": SCHEMA,
+        "pass": winner is not None,
+        "status": "PASS__SPECULATIVE_COW_WINNER_COMMITTED" if winner is not None else "FAIL_CLOSED__ALL_COW_BRANCHES_ROLLED_BACK",
+        "winner_branch_id": winner["branch_id"] if winner is not None else None,
+        "committed": bool(winner is not None and commit_winner),
+        "committed_files": committed_files,
+        "branches_evaluated": len(branch_results),
+        "branch_results": branch_results,
+        "elapsed_ms": elapsed_ms,
+        "model_calls": 0,
+    }
+
+
+def compile_four_tier_cu_action(
+    *,
+    direct_command: Sequence[str] | None = None,
+    typed_action: Mapping[str, Any] | None = None,
+    aimed_observation: Mapping[str, Any] | None = None,
+    screen_width: int = 1920,
+    screen_height: int = 1080,
+) -> dict[str, Any]:
+    """Enforce the 4-tier Zero-Pixel-First Computer-Use escalation ladder:
+      Tier 0: direct CLI / programmatic command (0 pixels, <1ms)
+      Tier 1: typed OSWorld surface / a11y action (`osworld_computer_surface_v1`)
+      Tier 2: geometric aimed action (`aimed_action_v1`, zero VLM)
+      Tier 3: fail-closed visual fallback witness (never hallucinates coordinates)
+    """
+    if direct_command:
+        return {
+            "schema": SCHEMA,
+            "pass": True,
+            "tier": "TIER_0_DIRECT_PROGRAMMATIC",
+            "pixels_used": 0,
+            "argv": [str(x) for x in direct_command],
+            "model_calls": 0,
+        }
+    if typed_action is not None:
+        from canonical.runtime import osworld_computer_surface_v1 as osw
+
+        sc = osw.Screen(int(screen_width), int(screen_height))
+        code = osw.compile_osworld_pyautogui(typed_action, sc)
+        return {
+            "schema": SCHEMA,
+            "pass": True,
+            "tier": "TIER_1_TYPED_SURFACE_ACTION",
+            "pixels_used": 0,
+            "compiled_code": code,
+            "model_calls": 0,
+        }
+    if aimed_observation is not None:
+        from canonical.runtime import aimed_action_v1 as aimed
+
+        rows = aimed.aimed_rows(dict(aimed_observation))
+        if rows:
+            return {
+                "schema": SCHEMA,
+                "pass": True,
+                "tier": "TIER_2_GEOMETRIC_AIMED_ACTION",
+                "pixels_used": 0,
+                "actions": rows,
+                "model_calls": 0,
+            }
+    return {
+        "schema": SCHEMA,
+        "pass": False,
+        "tier": "TIER_3_VISUAL_FALLBACK_REQUIRED",
+        "status": "FAIL_CLOSED__LOWER_TIERS_INSUFFICIENT",
+        "insufficiency_witness": "NO_TIER0_CMD_NO_TIER1_SURFACE_NO_TIER2_GEOMETRY",
+        "model_calls": 0,
+    }
+

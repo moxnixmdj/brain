@@ -125,25 +125,55 @@ class LearnedAutomaton:
         }
 
 
-def compile_refusal_specification(refusal_text: str) -> dict[str, Any]:
-    """Compile a raw refusal/error string via both refusal-spec & refusal-curriculum modules."""
+def compile_refusal_specification(
+    refusal_text: str,
+    *,
+    base_argv: Sequence[str] = (),
+    files: Sequence[str] = (),
+    declared_flags: Sequence[str] = (),
+    numeric_flags: Sequence[str] = (),
+    paths: Mapping[str, str] | None = None,
+) -> dict[str, Any]:
+    """Compile a raw refusal/error string via both refusal-spec & refusal-curriculum modules,
+    optionally synthesizing a repaired argv at K3=0 via ``apply_clause``.
+    """
     text = str(refusal_text or "").strip()
     clause_obj = refusal_spec.read_refusal(text)
     clause_dict: dict[str, Any] | None = None
+    repaired_argv: list[str] | None = None
     if clause_obj is not None:
         clause_dict = {
-            "kind": getattr(clause_obj, "kind", None),
-            "wanted": getattr(clause_obj, "wanted", None),
+            "form": getattr(clause_obj, "form", None),
+            "token": getattr(clause_obj, "token", None),
+            "candidate": getattr(clause_obj, "candidate", None),
+            "sentence": getattr(clause_obj, "sentence", None),
+            "kind": getattr(clause_obj, "kind", getattr(clause_obj, "form", None)),
+            "wanted": getattr(clause_obj, "wanted", getattr(clause_obj, "candidate", None)),
             "raw": getattr(clause_obj, "raw", text),
         }
+        if base_argv:
+            repaired = refusal_spec.apply_clause(
+                list(base_argv),
+                clause_obj,
+                files=tuple(files),
+                numeric_flags=tuple(numeric_flags),
+                declared_flags=tuple(declared_flags),
+                paths=dict(paths) if paths else None,
+            )
+            repaired_argv = list(repaired) if repaired is not None else None
     demand = refusal_curriculum.read_demand(text)
     normalised = refusal_curriculum.normalise(text.encode("utf-8"))
+    actionable = bool(clause_dict is not None or (isinstance(demand, Mapping) and bool(demand)))
     return {
+        "schema": SCHEMA,
+        "pass": bool(clause_dict is not None),
+        "status": "PASS__REFUSAL_COMPILED_TO_SPEC" if clause_dict is not None else "FAIL_CLOSED__REFUSAL_UNREAD",
         "raw": text,
         "normalised": normalised,
         "clause": clause_dict,
+        "repaired_argv": repaired_argv,
         "demand": demand,
-        "actionable": bool(clause_dict is not None or (isinstance(demand, Mapping) and bool(demand))),
+        "actionable": actionable,
     }
 
 
@@ -771,6 +801,7 @@ def discover_environment(
     aimed_observation: Mapping[str, Any] | None = None,
     key_table_readings: Mapping[str, Any] | None = None,
     cross_machine_spec: Mapping[str, Any] | None = None,
+    refusal_spec: Mapping[str, Any] | None = None,
     max_states: int = 48,
     max_depth: int = 8,
     max_queries: int = 400,
@@ -900,6 +931,19 @@ def discover_environment(
         )
         report["cross_machine_frame"] = cm_out
         sub_passes.append(bool(cm_out.get("pass")))
+
+    if refusal_spec is not None:
+        report["modules_invoked"].append("canonical.runtime.a_refusal_is_a_specification_v1")
+        rs_out = compile_refusal_specification(
+            str(refusal_spec.get("refusal_text") or ""),
+            base_argv=list(refusal_spec.get("base_argv") or ()),
+            files=list(refusal_spec.get("files") or ()),
+            declared_flags=list(refusal_spec.get("declared_flags") or ()),
+            numeric_flags=list(refusal_spec.get("numeric_flags") or ()),
+            paths=refusal_spec.get("paths"),
+        )
+        report["refusal_specification"] = rs_out
+        sub_passes.append(bool(rs_out.get("pass")))
 
     passed = bool(sub_passes) and all(sub_passes)
     report["pass"] = passed

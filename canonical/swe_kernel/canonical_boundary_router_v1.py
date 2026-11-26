@@ -20,17 +20,40 @@ execution loop wired into ``brain_unified_model_v1``:
 """
 from __future__ import annotations
 
+import importlib
 import time
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
-from canonical.runtime import composer_route_v1 as composer_route
-from canonical.runtime import harvested_capability_runtime_v1 as harvested_rt
-from canonical.swe_kernel import canonical_cu_sandbox_spine_v1 as cu_spine
-from canonical.swe_kernel import canonical_env_discovery_spine_v1 as env_spine
-from canonical.swe_kernel import canonical_memory_crystallizer_v1 as mem_spine
-from canonical.swe_kernel import canonical_oracle_vericoding_spine_v1 as oracle_spine
-from canonical.swe_kernel import canonical_swe_spine_v1 as swe_spine
+
+class _LazyModule:
+    """Zero-overhead lazy module proxy (Elon's Law: delete cold-start import tax)."""
+
+    __slots__ = ("_mod_name", "_loaded")
+
+    def __init__(self, mod_name: str) -> None:
+        object.__setattr__(self, "_mod_name", mod_name)
+        object.__setattr__(self, "_loaded", None)
+
+    def _resolve(self) -> Any:
+        mod = object.__getattribute__(self, "_loaded")
+        if mod is None:
+            mod = importlib.import_module(object.__getattribute__(self, "_mod_name"))
+            object.__setattr__(self, "_loaded", mod)
+        return mod
+
+    def __getattr__(self, item: str) -> Any:
+        return getattr(self._resolve(), item)
+
+
+composer_route = _LazyModule("canonical.runtime.composer_route_v1")
+harvested_rt = _LazyModule("canonical.runtime.harvested_capability_runtime_v1")
+federated_rt = _LazyModule("canonical.runtime.unified_hidden_capability_federation_v1")
+cu_spine = _LazyModule("canonical.swe_kernel.canonical_cu_sandbox_spine_v1")
+env_spine = _LazyModule("canonical.swe_kernel.canonical_env_discovery_spine_v1")
+mem_spine = _LazyModule("canonical.swe_kernel.canonical_memory_crystallizer_v1")
+oracle_spine = _LazyModule("canonical.swe_kernel.canonical_oracle_vericoding_spine_v1")
+swe_spine = _LazyModule("canonical.swe_kernel.canonical_swe_spine_v1")
 
 SCHEMA = "PROJECT_BRAIN_CANONICAL_BOUNDARY_ROUTER_V1"
 NON_CLAIMS = (
@@ -44,9 +67,19 @@ NON_CLAIMS = (
 class BoundaryRouter:
     """Tier-0 -> Tier-1 -> Tier-2 compounding router backed by ``VerificationFirstMemoryBus``."""
 
-    def __init__(self, memory_bus: mem_spine.VerificationFirstMemoryBus | None = None) -> None:
-        self.memory_bus = memory_bus if memory_bus is not None else mem_spine.VerificationFirstMemoryBus()
+    def __init__(self, memory_bus: Any = None) -> None:
+        self._memory_bus: Any = memory_bus
         self.cluster_stats: dict[str, dict[str, int]] = {}
+
+    @property
+    def memory_bus(self) -> Any:
+        if self._memory_bus is None:
+            self._memory_bus = mem_spine.VerificationFirstMemoryBus()
+        return self._memory_bus
+
+    @memory_bus.setter
+    def memory_bus(self, bus: Any) -> None:
+        self._memory_bus = bus
 
     def _record_cluster(self, cluster: str, *, tier: str, passed: bool) -> None:
         row = self.cluster_stats.setdefault(
@@ -636,6 +669,252 @@ class BoundaryRouter:
             "discovery": disc,
             "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
         }
+
+    def catalog_federated_engines(self, *, domain: str | None = None) -> dict[str, Any]:
+        """Return the catalog of all 58 federated kernel engines (`unified_hidden_capability_federation_v1`)."""
+        return federated_rt.catalog_federated_engines(domain=domain)
+
+    def route_federated_engine(
+        self,
+        mode: str,
+        inputs: Mapping[str, Any] | None = None,
+        *,
+        goal: str = "",
+        cluster: str = "federated_engine",
+    ) -> dict[str, Any]:
+        """Dispatch directly into any of the 58 federated hidden kernel engines at K3=0."""
+        t0 = time.perf_counter()
+        res = federated_rt.run_federated_engine(str(mode), inputs, goal=str(goal))
+        status_str = str(res.get("status") or "")
+        passed = bool(res.get("pass")) or status_str.startswith("PASS")
+        self._record_cluster(cluster, tier="TIER_1_FEDERATED_KERNEL_ENGINE" if passed else "UNSOLVED", passed=passed)
+        return {
+            "schema": SCHEMA,
+            "pass": passed,
+            "status": "PASS__FEDERATED_ENGINE_EXECUTED" if passed else (status_str or "FAIL_CLOSED__FEDERATED_ENGINE_FAILED"),
+            "tier_used": "TIER_1_FEDERATED_KERNEL_ENGINE" if passed else "NONE",
+            "mode": str(mode),
+            "result": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_one_shot_learning(
+        self,
+        environment_root: str | Path,
+        *,
+        task_id: str,
+        steps: Sequence[tuple[str, str]],
+        terminal_outcome: int,
+        wrong_actions: Sequence[Sequence[tuple[str, str]]],
+        right_command: str,
+        skill_id: str | None = None,
+        success_states: Sequence[Sequence[str]] = (),
+        failure_states: Sequence[Sequence[str]] = (),
+        cluster: str = "one_shot_learning",
+    ) -> dict[str, Any]:
+        """Instant 1-shot learning (`instant_one_shot_learning_v1` + `weights_from_scratch_v1` + `applicability_v1`) via `0G`."""
+        t0 = time.perf_counter()
+        out = self.memory_bus.one_shot_induce_skill(
+            environment_root,
+            task_id=task_id,
+            steps=steps,
+            terminal_outcome=terminal_outcome,
+            wrong_actions=wrong_actions,
+            right_command=right_command,
+            skill_id=skill_id,
+            success_states=success_states,
+            failure_states=failure_states,
+        )
+        ok = bool(out.get("pass"))
+        self._record_cluster(cluster, tier="TIER_1_ONE_SHOT_INDUCTION" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": "PASS__ONE_SHOT_SKILL_CRYSTALLIZED" if ok else "FAIL_CLOSED__ONE_SHOT_FAILED",
+            "tier_used": "TIER_1_ONE_SHOT_INDUCTION" if ok else "NONE",
+            "induction": out,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_applicability_check(
+        self,
+        skill_id: str,
+        *,
+        evidence: Sequence[tuple[Sequence[str], bool]] | None = None,
+        state_facts: Sequence[str] | None = None,
+        cluster: str = "applicability_boundary",
+    ) -> dict[str, Any]:
+        """Learn and/or query exact applicability boundaries (`applicability_v1`) with explicit OOD abstention."""
+        t0 = time.perf_counter()
+        learned = None
+        if evidence is not None:
+            learned = self.memory_bus.learn_applicability_boundary(skill_id, evidence)
+        decision_res = None
+        if state_facts is not None:
+            decision_res = self.memory_bus.check_skill_applicability(skill_id, state_facts)
+        passed = bool((learned and learned.get("pass")) or (decision_res and decision_res.get("decision") == "APPLY"))
+        self._record_cluster(cluster, tier="TIER_0_CRYSTALLIZED_REFLEX" if passed else "UNSOLVED", passed=passed)
+        return {
+            "schema": SCHEMA,
+            "pass": passed,
+            "status": (
+                f"PASS__{decision_res['decision']}"
+                if decision_res is not None
+                else ("PASS__APPLICABILITY_LEARNED" if learned and learned.get("pass") else "FAIL_CLOSED__APPLICABILITY_GAP")
+            ),
+            "learned": learned,
+            "check": decision_res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_refusal_specification(
+        self,
+        refusal_text: str,
+        *,
+        base_argv: Sequence[str] = (),
+        files: Sequence[str] = (),
+        declared_flags: Sequence[str] = (),
+        numeric_flags: Sequence[str] = (),
+        paths: Mapping[str, str] | None = None,
+        cluster: str = "refusal_spec",
+    ) -> dict[str, Any]:
+        """Compile a raw tool/OS refusal directly into a typed spec + repaired argv (`0E` × `a_refusal_is_a_specification_v1`)."""
+        t0 = time.perf_counter()
+        res = env_spine.compile_refusal_specification(
+            refusal_text,
+            base_argv=base_argv,
+            files=files,
+            declared_flags=declared_flags,
+            numeric_flags=numeric_flags,
+            paths=paths,
+        )
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_1_REFUSAL_SPEC" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": res.get("status"),
+            "tier_used": "TIER_1_REFUSAL_SPEC" if ok else "NONE",
+            "specification": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_speculative_cow_race(
+        self,
+        workspace_root: str | Path,
+        branches: Sequence[Mapping[str, Any]],
+        oracle_fn: Callable[[Path], bool],
+        *,
+        commit_winner: bool = True,
+        cluster: str = "speculative_cow",
+    ) -> dict[str, Any]:
+        """Run N side-effecting candidate futures in isolated CoW sandboxes (`0F`), committing ONLY a verified winner."""
+        t0 = time.perf_counter()
+        res = cu_spine.speculative_cow_race(
+            workspace_root,
+            branches,
+            oracle_fn,
+            commit_winner=commit_winner,
+        )
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_1_SPECULATIVE_COW" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": res.get("status"),
+            "tier_used": "TIER_1_SPECULATIVE_COW" if ok else "NONE",
+            "race": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_four_tier_cu(
+        self,
+        *,
+        direct_command: Sequence[str] | None = None,
+        typed_action: Mapping[str, Any] | None = None,
+        aimed_observation: Mapping[str, Any] | None = None,
+        screen_width: int = 1920,
+        screen_height: int = 1080,
+        cluster: str = "cu_four_tier",
+    ) -> dict[str, Any]:
+        """Zero-Pixel-First 4-tier computer-use ladder (`0F`)."""
+        t0 = time.perf_counter()
+        res = cu_spine.compile_four_tier_cu_action(
+            direct_command=direct_command,
+            typed_action=typed_action,
+            aimed_observation=aimed_observation,
+            screen_width=screen_width,
+            screen_height=screen_height,
+        )
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier=str(res.get("tier") or "UNSOLVED"), passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": "PASS__CU_TIER_COMPILED" if ok else res.get("status"),
+            "cu_plan": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_mutation_admission_gate(
+        self,
+        source_text: str,
+        verifier_fn: Callable[[Mapping[str, Any]], bool],
+        *,
+        limit: int = 8,
+        seed: int = 7,
+        min_kill_rate: float = 0.5,
+        cluster: str = "mutation_gate",
+    ) -> dict[str, Any]:
+        """Mutation-as-Admission Gate (`0H` × `mutation_admission_probe_v1`) before skill promotion."""
+        t0 = time.perf_counter()
+        res = oracle_spine.mutation_admission_gate(
+            source_text,
+            verifier_fn,
+            limit=limit,
+            seed=seed,
+            min_kill_rate=min_kill_rate,
+        )
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_1_MUTATION_GATE" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": res.get("status"),
+            "gate": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_verified_event_memory(
+        self,
+        *,
+        action: str = "REPLAY",
+        op: str = "SET",
+        key: str = "",
+        value: Any = None,
+        source_commit: str = "",
+        precondition_guard: Sequence[str] = (),
+        validity_window: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Anti-authority-collapse SHA-256 event-sourced memory log (`0G` × `h100_zero_learned_event_memory_v1`)."""
+        act = str(action or "REPLAY").upper()
+        if act == "APPEND":
+            return self.memory_bus.append_verified_event(
+                op=op,
+                key=key,
+                value=value,
+                source_commit=source_commit,
+                precondition_guard=precondition_guard,
+                validity_window=validity_window,
+            )
+        return self.memory_bus.replay_verified_events()
 
     def status_summary(self) -> dict[str, Any]:
         return {
