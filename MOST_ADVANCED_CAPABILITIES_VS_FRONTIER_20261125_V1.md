@@ -586,3 +586,15 @@ the two adapters, their fixtures and the registry rows are all inside sensitive 
 `verify 38/38`. And the intent had to be regenerated once more, because Wave 46 moved the base commit
 it pins: `RECURSIVE_OBS_STALE_BASE_COMMIT` is the guard correctly refusing an intent whose base is
 history. Generating rather than hand-editing is what made that a 40-second fix instead of an afternoon.
+
+**The order the artifacts force, measured three times today.** `compile_brain_unified_model_v1.py`
+builds `research_index` over `_RESEARCH_ROOTS = ("canonical/governance", "canonical/verification",
+"canonical/action_intents")`, so a governance commit — including the action intent itself — invalidates
+the compiled model artifact exactly like a runtime commit does. Every lap therefore ends
+`re-pin intent → recompile artifact → verify 38/38`, and the reverse order returns
+`recompilation_is_byte_identical` FAIL on a byte-for-byte unchanged engine. The compiler already excludes
+its own generated outputs to break a different digest cycle (`# Outputs this toolchain writes, and which
+embed the artifact digest. Indexing one of them inside the artifact is a cycle`), so the hazard is
+understood here; what is not documented, and what this lap added, is that the *governance* tree is part
+of the hash input. A repo where a policy JSON and a compiled model are coupled in one digest needs the
+ordering written where the reader will hit it, not in a commit message.
