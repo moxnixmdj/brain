@@ -544,3 +544,50 @@ planner suite 62/62 + 927 subtests, carrier recompiled through the repo's own
 compiler; integrity guard clean; 0 LLM samples and 0 tokens for the entire
 session; certified HARD-51 reach 0/51, now explicitly labelled a policy wall
 rather than a capability claim.
+
+---
+
+## §15 — Merging main: what the repo's own gates actually require (2026-11-26)
+
+The merge itself was one conflict. `git merge-tree` said so before I touched
+anything: `canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json` only, because
+main carries 1,566 commits on that generated carrier since the base. A conflict
+in compiled output is not hand-merged — it is regenerated with
+`canonical/runtime/compile_brain_unified_model_v1.py`, and
+`test_brain_unified_model_v1.py::test_compilation_is_a_fixed_point` is the
+check that proves nobody faked it.
+
+The expensive part was not git. Four CI gates (`guard`, `verify` x3, `verify-r3`,
+`Load-bearing primary admission`) went red on the merged head, and PR #7119 had
+zero failing checks, so red meant *mine* until proven otherwise. Two lessons,
+both cheaper to write down than to re-learn:
+
+1. **Any branch that touches a compiled module owes an action intent.**
+   `enforce_load_bearing_primary_pr.py` demands *exactly one*
+   `canonical/action_intents/*.json` added by the PR diff, and
+   `enforce_goal_hierarchy.py` demands the full 18-key `recursive_obs` receipt
+   (canonical 8-step deletion order, per-layer required keys,
+   `expected_parent_level_state_change` byte-equal to
+   `expected_parent_frontier_change`) plus the v22 preflight/tournament block.
+   Don't hand-write it blind: `canonical/tools/rebind_intent_and_verify_gates_v1.py`
+   runs rebind -> recompile -> all four gates in the one order that works, and
+   `intent_added_by_this_branch` explains why rebinding an already-merged intent
+   fails both referees at once (`MULTIPLE_ACTION_INTENTS_IN_ONE_PR`).
+2. **The base is `origin/main`'s tip, not the merge base.** The drift guard
+   compares `recursive_obs.canonical_base_commit` against
+   `github.event.pull_request.base.sha`. On a repo moving 23,992 commits per
+   merge window, a local rebind to `git merge-base` passes at home and fails in
+   CI every single time.
+
+Honest accounting of the four reds after the fixes: `admission`, `integrity` and
+`unified_model` (38/38) pass locally, and `guard` passes once the receipt is
+complete. The remaining red — the R1 architecture-closure `verify` job and the
+two fabric modules in `verify-r3` — is **main's, not this branch's**, proven by
+re-running the identical commands in a clean `git worktree` of `origin/main`
+(`git worktree add /tmp/mainwt2 origin/main`): same 5 `*_BLOB_DRIFT` codes,
+same 3 failures. Fabric pins drift because governance and runtime move at
+different speeds; this branch touches neither fabric nor its pins, so it does
+not fix them and does not claim to.
+
+No capability claim in this section: it is plumbing that made the shipped §7-§14
+work mergeable, and the loop's numbers are unchanged by it.
