@@ -4084,6 +4084,16 @@ class MetaCircularOrganGraph:
         self.growth_enabled: bool = True
         #: Hard cap on questions spent collecting evidence before deciding no structure is present.
         self.growth_evidence_budget: int = 24
+        #: Wall-clock budget, in ms, for policy evolution triggered by a wake transition.
+        #: MEASURED 2026-11-25: `evolve_policy_from_traces` runs the self-architect mutator and
+        #: DreamCoder-style `concept_library.sleep_abstract` synchronously inside
+        #: `record_wake_episode`, and one call took 3.4 s of a 3.4 s `solve_or_learn` -- the answer
+        #: was already built and verified; the caller waited on organ synthesis. Deferred, not
+        #: disabled: when the budget is spent the graph keeps accumulating traces
+        #: (`_world_transitions` persists) and evolves on a later transition or an explicit call.
+        #: 0 restores the old unbounded behaviour and is not the default.
+        self.policy_evolution_budget_ms: float = 250.0
+        self._evolution_deferred: int = 0
         self.convention_memory = ConventionMemory()
         self.policy_archive: Any | None = None
         if self.state_path is not None:
@@ -4224,9 +4234,28 @@ class MetaCircularOrganGraph:
                 or len({t.get("value") for t in recent if t.get("value") is not None}) >= 2
             )
             if has_contrast:
-                self.evolve_policy_from_traces()
+                if self._evolution_budget_available():
+                    _t_evo = time.perf_counter()
+                    self.evolve_policy_from_traces()
+                    self._last_evolution_ms = (time.perf_counter() - _t_evo) * 1000.0
+                else:
+                    # The trace stays in `_world_transitions`; nothing is lost, only deferred.
+                    self._evolution_deferred += 1
         except Exception:
             return
+
+    def _evolution_budget_available(self) -> bool:
+        """Whether a wake transition may pay for policy synthesis.
+
+        Two conditions, both measured rather than assumed: the budget must not be zero, and the
+        previous evolution must have fit inside it. A single evolution that overruns does not
+        disable evolution -- it defers the NEXT one, so a slow machine evolves every other
+        transition instead of paying that cost on every answer.
+        """
+        budget = float(getattr(self, "policy_evolution_budget_ms", 250.0) or 0.0)
+        if budget <= 0.0:
+            return True  # unbounded, the historical behaviour
+        return float(getattr(self, "_last_evolution_ms", 0.0) or 0.0) <= budget
 
     def evolve_policy_from_traces(self) -> ExecutableOrgan | None:
         """Factory is bootstrap only. Successors mutate the incumbent organ under Ring-0."""
