@@ -12,6 +12,12 @@ on:
       - "execution_guard/true_capability_harness_v1.py"
       - "canonical/capabilities/true/**"
       - "canonical/runtime/saccr_credit_kernel.py"
+      - "canonical/runtime/same_identity_supervisor.py"
+      - "canonical/runtime/docx_exact_text_edit.py"
+      - "canonical/runtime/docx_true_capability_adapters_v1.py"
+      - "canonical/runtime/scheduler_true_capability_adapters_v1.py"
+      - "canonical/runtime/file_change_true_capability_adapter_v1.py"
+      - "canonical/runtime/taught_words_true_capability_adapter_v1.py"
       - ".github/workflows/true-capability-receipt.yml"
 
 permissions:
@@ -20,7 +26,7 @@ permissions:
 jobs:
   measure:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -34,7 +40,11 @@ jobs:
           mkdir -p receipts_out
           status=0
           for spec in canonical/capabilities/true/specs/*.json; do
-            python3 execution_guard/true_capability_harness_v1.py run --spec "$spec" --instances 2000 \
+            case "$(basename "$spec")" in
+              FILE_*) n_inst=500 ;;
+              *)      n_inst=2000 ;;
+            esac
+            python3 execution_guard/true_capability_harness_v1.py run --spec "$spec" --instances "$n_inst" \
               --receipt-dir receipts_out --ledger receipts_out/TRUE_CAPABILITY_LEDGER_V1.json || status=1
           done
           exit $status

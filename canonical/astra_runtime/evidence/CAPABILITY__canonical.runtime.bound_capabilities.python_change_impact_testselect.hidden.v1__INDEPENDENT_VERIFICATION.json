@@ -1,0 +1,31 @@
+{
+ "capability_id": "canonical.runtime.bound_capabilities.python_change_impact_testselect.hidden.v1",
+ "elapsed_ms": 228.149,
+ "independent_run_reference": {
+  "github_run_id": 45736936089,
+  "oidc_claims": {
+   "actor": "brain-automation[bot]",
+   "aud": "https://github.com/moxnixmdj/brain",
+   "event_name": "push",
+   "head_ref": "",
+   "iss": "https://token.actions.githubusercontent.com",
+   "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
+   "jti": "c462b2a4-35d7-48fe-9b79-79da75481978",
+   "repository": "moxnixmdj/brain",
+   "repository_id": "1364778274",
+   "run_attempt": "1",
+   "run_id": "45736936089",
+   "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
+  }
+ },
+ "independent_verifier": "github-actions:moxnixmdj/brain",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bound_capabilities/python_change_impact_testselect.py",
+ "module_sha256": "ac8493c4fc864b7e088448c642593d2400fb086c514e4b3c887fd5eb50f519ed",
+ "producer_ran_by": "harvest-local-session",
+ "producer_receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.bound_capabilities.python_change_impact_testselect.hidden.v1__EXECUTION_RECEIPT.json",
+ "producer_result_sha256": "67d082ba6fdca1e79e67548499682c3e268f3ed8327248a04a289646080496c6",
+ "reproduced": true,
+ "schema": "PROJECT_BRAIN_CAPABILITY_INDEPENDENT_VERIFICATION_V1",
+ "verifier_result_sha256": "67d082ba6fdca1e79e67548499682c3e268f3ed8327248a04a289646080496c6"
+}

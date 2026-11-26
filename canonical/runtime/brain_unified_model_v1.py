@@ -73,6 +73,9 @@ NON_CLAIMS = (
 )
 
 
+ANATOMY_SCHEMA = "PROJECT_BRAIN_ANATOMY_V1"
+
+
 class UnifiedModelError(ValueError):
     """The artifact or the request violated the model contract."""
 
@@ -331,6 +334,8 @@ class UnifiedModel:
         self._knowledge_df_cache: dict[str, int] | None = None
         self._knowledge_lengths_cache: list[int] | None = None
         self._avg_length_cache: float | None = None
+        self._memory_bus: Any = None
+        self._boundary_router: Any = None
 
         self.min_score = float(confidence.get("minimum_best_score", 1.0))
         self.min_coverage = float(confidence.get("minimum_coverage", 0.34))
@@ -499,6 +504,8 @@ class UnifiedModel:
                 "source_index_entry_points": src_ep,
                 "research_index_records": res_len,
                 "routing_tokens": len(self.index),
+                "harvested_capabilities": declared.get("harvested_capabilities"),
+                "frontier_leapfrog_organs": 17,
             },
             "source_index_is_addressable_not_executable": True,
             "declared_dependencies_present": present,
@@ -511,6 +518,80 @@ class UnifiedModel:
                 "terminal_credit_delta": 0,
             },
         }
+
+    # --------------------------------------------------------- frontier organs
+
+    def frontier_organs(self) -> dict[str, Any]:
+        """Enumerate the 13 `swe_kernel` organs and 4 Frontier Leapfrog Plays wired into the Unified Runtime."""
+        from canonical.runtime import swe_kernel_organ_bridge_v1 as bridge
+
+        swe_organs = bridge.list_organs()
+        plays = [
+            {
+                "organ_id": "play_1_contract_world_model",
+                "module_path": "canonical/runtime/state_contract_world_model_v1.py",
+                "frontier_domain": "computer_use",
+                "capability_role": "State-as-contract desktop effect-delta world model with volatile canonicalization",
+            },
+            {
+                "organ_id": "play_2_law_consolidation",
+                "module_path": "canonical/runtime/gradient_free_law_consolidation_v1.py",
+                "frontier_domain": "continual_learning",
+                "capability_role": "Gradient-free episodic law consolidation over the 45-commit real OSS corpus",
+            },
+            {
+                "organ_id": "play_3_abstain_skill_induction",
+                "module_path": "canonical/runtime/abstain_gated_skill_induction_v1.py",
+                "frontier_domain": "instant_learning",
+                "capability_role": "Abstain-gated structural AST skill induction over 40 real-commit episodes",
+            },
+            {
+                "organ_id": "play_6_mutation_admission_gate",
+                "module_path": "canonical/runtime/adversarial_mutation_admission_gate_v1.py",
+                "frontier_domain": "coding_agents",
+                "capability_role": "Adversarial AST mutation admission gate over harvested capability receipts",
+            },
+        ]
+        return {
+            "schema": SOLUTION_SCHEMA,
+            "operation": "FRONTIER_ORGANS",
+            "swe_kernel_organs_count": len(swe_organs),
+            "leapfrog_plays_count": len(plays),
+            "total_organs": len(swe_organs) + len(plays),
+            "swe_kernel_organs": swe_organs,
+            "leapfrog_plays": plays,
+            "model_dependency_count": 0,
+        }
+
+    def invoke_frontier_organ(
+        self,
+        organ_id: str,
+        payload: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Execute a wired `swe_kernel` organ or Frontier Leapfrog Play through the Unified Runtime."""
+        req = dict(payload or {})
+        if organ_id == "play_1_contract_world_model":
+            from canonical.runtime import state_contract_world_model_v1 as p1
+
+            return p1.run(req, ROOT)
+        if organ_id == "play_2_law_consolidation":
+            from canonical.runtime import gradient_free_law_consolidation_v1 as p2
+
+            return p2.run(req, ROOT)
+        if organ_id == "play_3_abstain_skill_induction":
+            from canonical.runtime import abstain_gated_skill_induction_v1 as p3
+
+            return p3.run(req, ROOT)
+        if organ_id == "play_6_mutation_admission_gate":
+            from canonical.runtime import adversarial_mutation_admission_gate_v1 as p6
+
+            return p6.run(req, ROOT)
+
+        from canonical.runtime import swe_kernel_organ_bridge_v1 as bridge
+
+        if organ_id == "probe_all_swe_kernel_organs":
+            return bridge.probe_all_organs(ROOT)
+        return bridge.invoke_organ(organ_id, req, ROOT)
 
     # ------------------------------------------------------------------- route
 
@@ -776,6 +857,142 @@ class UnifiedModel:
             "candidates": rows,
             "best": rows[0] if rows else None,
             "indexed_modules": len(self.source_index),
+            "reason": (
+                "SOURCE_LOCATED__NOT_EXECUTABLE__NO_RECEIPT_OR_BOUND_ADAPTER"
+                if rows
+                else "NO_INDEXED_SOURCE_MATCHED"
+            ),
+        }
+
+    # ----------------------------------------------------------------- anatomy
+
+    def anatomy(self, domain: str | None = None, *, top_k: int = 8) -> dict[str, Any]:
+        """Where this repository implements each frontier function, by its own words.
+
+        The routing index answers "which capability matches this goal". It does not answer
+        the question a solver actually has first: *does this machine own the function at
+        all, and where is it?* Measured with the atlas: asked for instant learning, the
+        model located the machinery (``find_source`` recall 1.00, 13x chance) and routed
+        to none of it (``route`` recall 0.00). The modules were present and reachable; the
+        function-first view was not.
+
+        Every row repeats ``capability: False``. This is navigation, not admission: a
+        module that scores as "this is the memory subsystem" has not been executed, and
+        ``solve()`` never calls this.
+        """
+        block = (self._model_loaded or {}).get("anatomy") if self._model_loaded else None
+        if not block:
+            return {
+                "schema": ANATOMY_SCHEMA,
+                "operation": "ANATOMY",
+                "reason": "MODEL_HAS_NO_ANATOMY_BLOCK__RECOMPILE_WITH_DOMAIN_ATLAS",
+                "domains": {},
+                "capability": False,
+                "executable": False,
+            }
+        domains = block.get("domains") or {}
+        if domain is not None:
+            row = domains.get(domain)
+            if row is None:
+                return {
+                    "schema": ANATOMY_SCHEMA,
+                    "operation": "ANATOMY",
+                    "query": domain,
+                    "reason": "UNKNOWN_DOMAIN__KNOWN: " + ", ".join(sorted(domains)),
+                    "domains": {},
+                    "capability": False,
+                    "executable": False,
+                }
+            rows = list(row.get("top") or [])[: max(1, int(top_k))]
+            return {
+                "schema": ANATOMY_SCHEMA,
+                "operation": "ANATOMY",
+                "query": domain,
+                "frontier_function": row.get("frontier_function"),
+                "counts": {
+                    "candidates": row.get("candidates"),
+                    "indexed_all": row.get("indexed_all"),
+                    "harvested_all": row.get("harvested_all"),
+                    "hidden_share_all": row.get("hidden_share_all"),
+                },
+                "modules": rows,
+                "reachability": (block.get("reachability") or {}).get(domain),
+                "capability": False,
+                "executable": False,
+                "reason": "ANATOMY_NAVIGATION__NOT_ADMISSION",
+            }
+        return {
+            "schema": ANATOMY_SCHEMA,
+            "operation": "ANATOMY",
+            "domains": {
+                name: {
+                    "frontier_function": row.get("frontier_function"),
+                    "candidates": row.get("candidates"),
+                    "top_module": ((row.get("top") or [{}])[0]).get("path"),
+                }
+                for name, row in sorted(domains.items())
+            },
+            "reachability": block.get("reachability") or {},
+            "claim_limit": block.get("claim_limit"),
+            "capability": False,
+            "executable": False,
+            "reason": "ANATOMY_NAVIGATION__NOT_ADMISSION",
+        }
+
+    def find_any_source(self, query: str, *, top_k: int = 5) -> dict[str, Any]:
+        """Locate source modules across ALL repository trees (`runtime`, `swe_kernel`, `tools`, `capabilities`, `research`, `integrations`)."""
+        terms = tokenize(query)
+        if not terms:
+            raise UnifiedModelError("FIND_SOURCE_QUERY_EMPTY")
+        wanted = set(terms)
+        combined: dict[str, dict[str, Any]] = {}
+        combined.update(self.source_index)
+        combined.update(self.extended_source_index)
+        total_docs = max(1, len(combined))
+        scored: list[tuple[float, str, dict[str, Any]]] = []
+        for path, row in combined.items():
+            counts = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
+            if not counts:
+                continue
+            score = 0.0
+            for term in wanted:
+                tf = int(counts.get(term, 0) or 0)
+                if tf <= 0:
+                    continue
+                df = max(1, self._source_df.get(term, 0) + self._extended_source_df.get(term, 0))
+                score += math.log(1.0 + (total_docs - df + 0.5) / (df + 0.5)) * (1.0 + math.log(tf))
+            if score <= 0.0:
+                continue
+            if path.casefold() in query.casefold():
+                score += 8.0
+            scored.append((score, path, row))
+        scored.sort(key=lambda item: (-item[0], item[1]))
+        rows: list[dict[str, Any]] = []
+        for score, path, row in scored[: max(1, int(top_k))]:
+            rows.append(
+                {
+                    "path": path,
+                    "id": row.get("id"),
+                    "tree": row.get("tree") or "canonical/runtime",
+                    "classification": row.get("classification"),
+                    "sha256": row.get("sha256"),
+                    "summary": row.get("summary") or "",
+                    "symbol_count": int(row.get("symbol_count") or 0),
+                    "matched_terms": sorted(wanted & set(row.get("terms") or ())),
+                    "score": round(float(score), 6),
+                    "capability": False,
+                    "executable": False,
+                }
+            )
+        return {
+            "schema": SOLUTION_SCHEMA,
+            "operation": "FIND_ANY_SOURCE",
+            "model_digest": self.digest,
+            "query": query,
+            "query_terms": terms,
+            "candidates": rows,
+            "best": rows[0] if rows else None,
+            "indexed_modules": len(combined),
             "reason": (
                 "SOURCE_LOCATED__NOT_EXECUTABLE__NO_RECEIPT_OR_BOUND_ADAPTER"
                 if rows
@@ -1220,6 +1437,44 @@ class UnifiedModel:
                 attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
             )
 
+        # 0D. Canonical Unified Polyglot SWE Spine (`canonical_swe_spine_v1.solve_repository_task`)
+        if isinstance(inputs, Mapping) and isinstance(inputs.get("swe_repo_task"), Mapping):
+            swe_spec = dict(inputs["swe_repo_task"])
+            repo_target = swe_spec.pop("repo_root", cwd or ROOT)
+            return self.solve_swe_repo(
+                repo_target,
+                goal=goal,
+                **swe_spec,
+            )
+
+        # 0E. Canonical Environment Discovery & Conflict-Aware Automata Spine (`canonical_env_discovery_spine_v1`)
+        if isinstance(inputs, Mapping) and isinstance(inputs.get("env_discovery_task"), Mapping):
+            env_spec = dict(inputs["env_discovery_task"])
+            return self.discover_environment(goal=goal, **env_spec)
+
+        # 0F. Canonical Speculative CoW Rollback & Code-over-GUI Spine (`canonical_cu_sandbox_spine_v1`)
+        if isinstance(inputs, Mapping) and isinstance(inputs.get("cu_sandbox_task"), Mapping):
+            cu_spec = dict(inputs["cu_sandbox_task"])
+            return self.execute_speculative(goal=goal, **cu_spec)
+
+        # 0G. Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`canonical_memory_crystallizer_v1`)
+        if isinstance(inputs, Mapping) and isinstance(inputs.get("memory_bus_op"), Mapping):
+            mem_spec = dict(inputs["memory_bus_op"])
+            op_name = str(mem_spec.pop("operation", "STATS"))
+            payload = mem_spec.pop("payload", mem_spec)
+            return self.memory_operation(op_name, payload=payload, goal=goal)
+
+        # 0H. Canonical Dual-Channel Witness Inversion, Goal-Negation Oracle & Formal Vericoding (`canonical_oracle_vericoding_spine_v1`)
+        if isinstance(inputs, Mapping) and isinstance(inputs.get("oracle_vericoding_task"), Mapping):
+            ov_spec = dict(inputs["oracle_vericoding_task"])
+            return self.audit_oracle_and_vericoding(goal=goal, **ov_spec)
+
+        # 0I. Canonical BoundaryRouter (Tier-0 Reflex -> Tier-1 Zero-Model Spines -> Tier-2 Gated Proposer)
+        if isinstance(inputs, Mapping) and isinstance(inputs.get("boundary_route_task"), Mapping):
+            br_spec = dict(inputs["boundary_route_task"])
+            kind = str(br_spec.pop("kind", "swe_repair"))
+            return self.route_with_boundary(kind, goal=goal, **br_spec)
+
         # 1. SYSTEM-1 REFLEX: REUSE_EXISTING_CAPABILITY via compiled UnifiedModel when confident & epistemically trusted
         is_forged_cid = bool(capability_id and str(capability_id).startswith("forged."))
         if not is_forged_cid and (regime_info["regime"] == "SYSTEM_1_REFLEX" or capability_id is not None):
@@ -1591,6 +1846,153 @@ class UnifiedModel:
             engine_id=eid,
             engine_mode=mode,
             result=dict(out),
+        )
+
+    def solve_swe_repo(
+        self,
+        repo_root: str | Path,
+        *,
+        goal: str = "",
+        test_file: str | None = None,
+        c_sources: Sequence[str] | None = None,
+        regression_tests: Sequence[str] = (),
+        issue_text: str = "",
+        language: str | None = None,
+        timeout_s: float = 35.0,
+        proposer: Any = None,
+        law_store: Any = None,
+        keep_patch_applied: bool = True,
+    ) -> dict[str, Any]:
+        """Run the consolidated polyglot SWE repair & verification spine directly from the front door."""
+        from canonical.swe_kernel import canonical_swe_spine_v1 as spine
+
+        res = spine.solve_repository_task(
+            repo_root,
+            test_file=test_file,
+            c_sources=c_sources,
+            regression_tests=regression_tests,
+            issue_text=issue_text or goal,
+            language=language,
+            timeout_s=timeout_s,
+            proposer=proposer,
+            law_store=law_store,
+            keep_patch_applied=keep_patch_applied,
+        )
+        passed = bool(res.get("solved") is True)
+        return self._envelope(
+            operation="SOLVE_SWE_REPO",
+            goal=goal or issue_text or f"repair {repo_root}",
+            status=str(res.get("status") or ("PASS_VERIFIED_ON_DISK" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("reason") or "SWE_SPINE_UNSOLVED"),
+            canonical_swe_spine=res,
+        )
+
+    @property
+    def memory_bus(self) -> Any:
+        """Lazy 5-timescale verification-first memory bus (`0G`) attached to this UnifiedModel."""
+        if self._memory_bus is None:
+            from canonical.swe_kernel import canonical_memory_crystallizer_v1 as mem_spine
+
+            self._memory_bus = mem_spine.VerificationFirstMemoryBus()
+        return self._memory_bus
+
+    @property
+    def boundary_router(self) -> Any:
+        """Lazy Tier-0 -> Tier-1 -> Tier-2 compounding BoundaryRouter (`0I`) sharing ``self.memory_bus``."""
+        if self._boundary_router is None:
+            from canonical.swe_kernel import canonical_boundary_router_v1 as br_spine
+
+            self._boundary_router = br_spine.BoundaryRouter(memory_bus=self.memory_bus)
+        return self._boundary_router
+
+    def discover_environment(self, *, goal: str = "", **kwargs: Any) -> dict[str, Any]:
+        """Run the consolidated zero-shot environment discovery & C3AL automata spine (`0E`)."""
+        from canonical.swe_kernel import canonical_env_discovery_spine_v1 as env_spine
+
+        res = env_spine.discover_environment(**kwargs)
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="DISCOVER_ENVIRONMENT",
+            goal=goal or "discover_environment",
+            status=str(res.get("status") or ("PASS__ENVIRONMENT_DISCOVERED" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("reason") or "ENV_DISCOVERY_INCOMPLETE"),
+            env_discovery=res,
+        )
+
+    def execute_speculative(self, *, goal: str = "", **kwargs: Any) -> dict[str, Any]:
+        """Run the consolidated CoW rollback sandbox & Code-over-GUI spine (`0F`)."""
+        from canonical.swe_kernel import canonical_cu_sandbox_spine_v1 as cu_spine
+
+        res = cu_spine.execute_speculative_computer_task(**kwargs)
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="EXECUTE_SPECULATIVE_CU",
+            goal=goal or "execute_speculative_cu",
+            status=str(res.get("status") or ("PASS__SPECULATIVE_COW_VERIFIED" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("reason") or "CU_SANDBOX_UNSOLVED"),
+            cu_sandbox=res,
+        )
+
+    def memory_operation(
+        self,
+        operation: str,
+        *,
+        payload: Mapping[str, Any] | None = None,
+        goal: str = "",
+    ) -> dict[str, Any]:
+        """Execute a verified memory, crystallization, sleep-consolidation, or O(1) forgetting op (`0G`)."""
+        from canonical.swe_kernel import canonical_memory_crystallizer_v1 as mem_spine
+
+        res = mem_spine.execute_memory_operation(self.memory_bus, operation, payload)
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="MEMORY_BUS_OP",
+            goal=goal or f"memory:{operation}",
+            status=str(res.get("status") or ("PASS__MEMORY_OP" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("reason") or "MEMORY_OP_FAILED"),
+            memory_result=res,
+        )
+
+    def audit_oracle_and_vericoding(self, *, goal: str = "", **kwargs: Any) -> dict[str, Any]:
+        """Run dual-channel goal-negation oracle auditing & Coq formal certificate verification (`0H`)."""
+        from canonical.swe_kernel import canonical_oracle_vericoding_spine_v1 as ov_spine
+
+        res = ov_spine.audit_oracle_and_vericoding(**kwargs)
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="AUDIT_ORACLE_AND_VERICODING",
+            goal=goal or "audit_oracle_and_vericoding",
+            status=str(res.get("status") or ("PASS__ORACLE_AND_VERICODING_VERIFIED" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("reason") or "ORACLE_VERICODING_REJECTED"),
+            oracle_vericoding=res,
+        )
+
+    def route_with_boundary(self, kind: str, *, goal: str = "", **kwargs: Any) -> dict[str, Any]:
+        """Run the compounding Tier-0 -> Tier-1 -> Tier-2 BoundaryRouter (`0I`)."""
+        k = str(kind or "swe_repair").lower().strip()
+        if k == "swe_repair":
+            res = self.boundary_router.route_swe_repair(**kwargs)
+        elif k == "env_goal":
+            res = self.boundary_router.route_env_goal(**kwargs)
+        elif k == "cu_task":
+            res = self.boundary_router.route_cu_task(**kwargs)
+        elif k == "status":
+            res = {"pass": True, "status": "PASS__BOUNDARY_STATUS", **self.boundary_router.status_summary()}
+        else:
+            res = {"pass": False, "status": "FAIL_CLOSED__UNKNOWN_BOUNDARY_KIND", "reason": f"UNKNOWN_KIND:{k}"}
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="BOUNDARY_ROUTER",
+            goal=goal or f"boundary:{k}",
+            status=str(res.get("status") or ("PASS__BOUNDARY_ROUTED" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("reason") or "BOUNDARY_ROUTE_FAILED"),
+            boundary_route=res,
         )
 
 
@@ -2736,6 +3138,9 @@ def main(argv: list[str] | None = None) -> int:
     recall_p = sub.add_parser("recall", help="just-in-time knowledge retrieval")
     recall_p.add_argument("query")
     recall_p.add_argument("--top-k", type=int, default=5)
+    organs_p = sub.add_parser("organs", help="list or invoke unified swe_kernel organs and leapfrog plays")
+    organs_p.add_argument("--invoke", default="", help="organ_id or play_id to execute")
+    organs_p.add_argument("--inputs", default="{}", help="JSON object of organ arguments")
     solve_p = sub.add_parser("solve", help="route and execute")
     solve_p.add_argument("goal")
     solve_p.add_argument("--inputs", default="{}", help="JSON object of inputs")
@@ -2754,6 +3159,21 @@ def main(argv: list[str] | None = None) -> int:
     if ns.command == "recall":
         _print(model.recall(ns.query, top_k=ns.top_k))
         return 0
+    if ns.command == "organs":
+        if not ns.invoke:
+            _print(model.frontier_organs())
+            return 0
+        try:
+            organ_inputs = json.loads(ns.inputs)
+        except json.JSONDecodeError:
+            _print({"status": "FAIL_CLOSED", "reason": "INPUTS_NOT_JSON"})
+            return 2
+        if not isinstance(organ_inputs, dict):
+            _print({"status": "FAIL_CLOSED", "reason": "INPUTS_NOT_OBJECT"})
+            return 2
+        res = model.invoke_frontier_organ(ns.invoke, organ_inputs)
+        _print(res)
+        return 0 if res.get("status") not in ("UNKNOWN_ORGAN", "FAIL_CLOSED", "ERROR") else 1
     try:
         inputs = json.loads(ns.inputs)
     except json.JSONDecodeError:

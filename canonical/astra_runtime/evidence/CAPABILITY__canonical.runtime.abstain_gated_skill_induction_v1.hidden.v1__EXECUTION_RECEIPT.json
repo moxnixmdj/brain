@@ -1,0 +1,28 @@
+{
+ "capability_id": "canonical.runtime.abstain_gated_skill_induction_v1.hidden.v1",
+ "elapsed_ms": 121.367,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "kind": "contract",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/abstain_gated_skill_induction_v1.py",
+ "module_sha256": "371a30019dc2a956e064218cd64e92244b7d64009a8d30f0d06d9d126cb85583",
+ "observed": {
+  "output_verified": true,
+  "status": "ESTABLISHED_ON_40_EPISODE_REAL_COMMIT_SET"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "harvest-local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.abstain_gated_skill_induction_v1.hidden.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 23,
+ "result_sha256": "670d9edc6f4b7658ef349891ca29f2e3462abab98726296fdbaf79dfef975ef3",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
