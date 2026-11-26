@@ -1,0 +1,542 @@
+{
+  "action_id": "WAVE39_DARK_ORGANS_MENDEL_CLM_JITRL_UNIFICATION_20261126_V1",
+  "action_intent_id": "WAVE39_DARK_ORGANS_MENDEL_CLM_JITRL_UNIFICATION_20261126_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "action_summary": "UnifiedModel and Creature now unify 10 newly federated Wave 39 dark-organ and frontier engines (200 total engines / 174 federated, K3=0, $0 spend): Mendel comparative dual splicing + ALBI semantic anonymization + Anti-Slop/No-Phantom-Guardrails/Symbol-Ownership gating; Red Queen live stdlib/CLI earned-judge discovery + --check/--dry-run refusal & witness-type lifting; typed (P,O,A,V,F) effect-contract composition + Sussman-anomaly partial-order planning + lifted sketch generalization + observation refutation + AST provenance; decision-theoretic version-space agreement CoW gate (0 forks on agreement, real POSIX os.fork() isolation on disagreement); verbatim-first 4-way RRF budgeted memory + Nemori surprise gating + TMA-NM tamper exclusion + CLM file-mirrored working context; closed-form KL-RL JitRL logit modulation + SkillTTA + intra-task Partial Routing + live offline harvested-surface self-verifier; and 1.000 (42/42) DOMAIN_ATLAS_V1 route recall across all 7 domains.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "earlier_routes_exhausted_reason": "DELETE/BYPASS/REUSE/ADAPT/SUBSTITUTE/COMPOSE/CONFIGURE/INTEGRATE applied first: 13 already-built DARK organs on main were wired directly through one unified module (wave39_leapfrog_unification_v1.py) into UnifiedModel, Creature, and unified_hidden_capability_federation_v1 without wrapper sprawl, adding only load-bearing Mendel/ALBI/Anti-Slop, CLM+4-way-RRF+Nemori, and JitRL+SkillTTA+Partial-Routing glue at K3=0.",
+    "incremental_spend_usd": 0,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer-run sandbox verification (verify_brain_unified_model_v1 38/38, test_frontier_leapfrog_wave39_v1 8/8, test_frontier_leapfrog_wave38_v1 8/8, test_brain_unified_model_v1, test_domain_atlas_v1 5/5, repo_integrity_guard_v1, enforce_goal_hierarchy, enforce_load_bearing_primary_pr) plus GitHub Actions CI.",
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md",
+      "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/wave39_leapfrog_unification_v1.py",
+      "canonical/runtime/unified_hidden_capability_federation_v1.py",
+      "canonical/runtime/brain_unified_model_v1.py",
+      "canonical/runtime/creature_runtime_v1.py",
+      "canonical/tests/test_frontier_leapfrog_wave39_v1.py"
+    ],
+    "route_class": "INTEGRATE",
+    "route_id": "WAVE39_DARK_ORGANS_MENDEL_CLM_JITRL_UNIFIED_RUNTIME_K3_ZERO",
+    "scope_complete_discharge": false,
+    "terminal_achieved": false
+  },
+  "benchmark_or_family_rank_authority": "Producer sandbox measurements and repository verifier suites; zero external model calls and zero claims of terminal benchmark discharge.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::High-leverage DARK organs on main (auto_judge_discovery_v1, earn_a_judge_v1, effect_contract_composition_v1, composition_verification_v1, partial_order_planner_v1, perfect_algorithm_lifted_generalization_v1, dual_program_splicing_v1, observation_refutation_v1, the_check_mode_is_the_oracle_v1, an_actions_vocabulary_is_its_refusal_surface_v1, a_type_you_wrote_is_a_type_you_guess_v1, what_a_decision_costs_v1, provenance_not_shape_v1) remained unwired from UnifiedModel and Creature, and the unified runtime lacked Mendel dual-splicing + ALBI semantic-anonymization + Anti-Slop/No-Phantom-Guardrails admission, verbatim 4-way RRF + Nemori surprise + CLM file-mirrored working context, and closed-form JitRL + SkillTTA + intra-task Partial Routing + live harvested-surface self-verification",
+  "canonical_base_commit": "197373269a9f53dd15446a9fc84a65e3455e6830",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": {
+    "clm_4way_rrf_nemori_memory": "Unified verbatim-first 4-way RRF budgeted retrieval + Nemori free-energy surprise gating + TMA-NM tamper exclusion + CLM SHA-256 file-mirrored working-context offload/grep-restore on VerificationFirstMemoryBus",
+    "contracts_sussman_pop_and_provenance": "Wired (P,O,A,V,F) effect_contract_composition_v1 + composition_verification_v1 + partial_order_planner_v1 (solving Sussman's anomaly with causal-link threat resolution) + lifted sketches + observation_refutation_v1 + provenance_not_shape_v1",
+    "decision_cost_cow_gate": "Wired what_a_decision_costs_v1.decisive() skipping forks at 0 ms when surviving hypotheses agree and forking real POSIX os.fork() CoW trials with zero parent-RAM mutation only on disagreement",
+    "earned_judges_and_check_oracle": "Wired auto_judge_discovery_v1 + earn_a_judge_v1 real subprocess judge earning (json/xml against decoys & cross-kind bytes) plus the_check_mode_is_the_oracle_v1 / refusal-surface / witness-type-collapse lifting",
+    "jitrl_skilltta_partial_routing_and_self_verifier": "Added exact closed-form KL-RL JitRL logit modulation, SkillTTA ephemeral task-contract skill synthesis, intra-task Partial Routing (75% zero-LLM local offload), live offline self_verify_harvested_surfaces, +10 LEAPFROG_W39_* federated engines (200 total / 174 federated), and 1.000 DOMAIN_ATLAS_V1 recall",
+    "mendel_red_queen_anti_slop": "Wired dual_program_splicing_v1 comparative hybridization solving 2-bug targets beyond either parent lineage, gated by ALBI AST alpha-anonymization, Anti-Slop bloat/branch caps, No-Phantom-Guardrails counterfactual witness checks, and Symbol-Ownership scoping"
+  },
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "High-leverage DARK organs on main (auto_judge_discovery_v1, earn_a_judge_v1, effect_contract_composition_v1, composition_verification_v1, partial_order_planner_v1, perfect_algorithm_lifted_generalization_v1, dual_program_splicing_v1, observation_refutation_v1, the_check_mode_is_the_oracle_v1, an_actions_vocabulary_is_its_refusal_surface_v1, a_type_you_wrote_is_a_type_you_guess_v1, what_a_decision_costs_v1, provenance_not_shape_v1) remained unwired from UnifiedModel and Creature, and the unified runtime lacked Mendel dual-splicing + ALBI semantic-anonymization + Anti-Slop/No-Phantom-Guardrails admission, verbatim 4-way RRF + Nemori surprise + CLM file-mirrored working context, and closed-form JitRL + SkillTTA + intra-task Partial Routing + live harvested-surface self-verification",
+  "date": "2026-11-26",
+  "expected_parent_change": "UnifiedModel and Creature now unify 10 newly federated Wave 39 dark-organ and frontier engines (200 total engines / 174 federated, K3=0, $0 spend): Mendel comparative dual splicing + ALBI semantic anonymization + Anti-Slop/No-Phantom-Guardrails/Symbol-Ownership gating; Red Queen live stdlib/CLI earned-judge discovery + --check/--dry-run refusal & witness-type lifting; typed (P,O,A,V,F) effect-contract composition + Sussman-anomaly partial-order planning + lifted sketch generalization + observation refutation + AST provenance; decision-theoretic version-space agreement CoW gate (0 forks on agreement, real POSIX os.fork() isolation on disagreement); verbatim-first 4-way RRF budgeted memory + Nemori surprise gating + TMA-NM tamper exclusion + CLM file-mirrored working context; closed-form KL-RL JitRL logit modulation + SkillTTA + intra-task Partial Routing + live offline harvested-surface self-verifier; and 1.000 (42/42) DOMAIN_ATLAS_V1 route recall across all 7 domains.",
+  "expected_parent_frontier_change": "Activates 13 high-leverage DARK organs inside UnifiedModel and Creature and adds Mendel/ALBI/Anti-Slop co-evolution, CLM+4-way-RRF+Nemori memory, decision-cost CoW gating, and JitRL+SkillTTA+Partial-Routing at K3=0.",
+  "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
+  "falsification_condition": "Falsified if verify_brain_unified_model_v1 drops below 38/38, if any K3 external model call occurs, if Mendel fails to solve beyond single lineages, if bloated or unwitnessed phantom-guardrail patches are admitted, if CoW fork mutates parent RAM, if tampered CLM/TMA-NM records are returned, or if DOMAIN_ATLAS_V1 recall < 1.000.",
+  "generic_repair_from_single_probe": true,
+  "governance_change": null,
+  "highest_leverage_now": true,
+  "honest_limits": [
+    "All Wave 39 tests are producer-run sandbox measurements pending independent third-party benchmark evaluation.",
+    "Partial Routing supports a pluggable Rung-3 proposer for open-ended hard slices while defaulting to K3=0 locally.",
+    "POSIX os.fork() CoW speculation requires a POSIX host; non-POSIX hosts fall back safely to in-process execution."
+  ],
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "live_challenger_frontier_discovery_required": true,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/81",
+    "interpretation": "Unifies 13 unwired DARK organs and late-2026 Mendel/Red-Queen/CLM/RRF/JitRL/Partial-Routing capabilities directly into UnifiedModel and Creature at K3=0 without claiming discharge of any open terminal obligation.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "0.5",
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "38/38 verify_brain_unified_model_v1 PASS; 8/8 test_frontier_leapfrog_wave39_v1 PASS; 8/8 test_frontier_leapfrog_wave38_v1 PASS; 5/5 test_domain_atlas_v1 PASS; 200 engines (174 federated), 1.000 (42/42) DOMAIN_ATLAS_V1 route recall; repo_integrity_guard 0 violations.",
+  "next_step": "Wire Dockerized SWE-bench Pro V2 / OSWorld-Verified external evaluation harnesses and pluggable local open-weight Rung-3 proposers behind Partial Routing + JitRL.",
+  "parent_capability": "canonical/runtime/wave39_leapfrog_unification_v1.py + canonical/runtime/unified_hidden_capability_federation_v1.py + canonical/runtime/brain_unified_model_v1.py + canonical/runtime/creature_runtime_v1.py",
+  "probe_specific": false,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+    "canonical/runtime/wave39_leapfrog_unification_v1.py",
+    "canonical/runtime/unified_hidden_capability_federation_v1.py",
+    "canonical/runtime/brain_unified_model_v1.py",
+    "canonical/runtime/creature_runtime_v1.py",
+    "canonical/tests/test_frontier_leapfrog_wave39_v1.py"
+  ],
+  "real_outcome": "UnifiedModel and Creature now unify 10 newly federated Wave 39 dark-organ and frontier engines (200 total engines / 174 federated, K3=0, $0 spend): Mendel comparative dual splicing + ALBI semantic anonymization + Anti-Slop/No-Phantom-Guardrails/Symbol-Ownership gating; Red Queen live stdlib/CLI earned-judge discovery + --check/--dry-run refusal & witness-type lifting; typed (P,O,A,V,F) effect-contract composition + Sussman-anomaly partial-order planning + lifted sketch generalization + observation refutation + AST provenance; decision-theoretic version-space agreement CoW gate (0 forks on agreement, real POSIX os.fork() isolation on disagreement); verbatim-first 4-way RRF budgeted memory + Nemori surprise gating + TMA-NM tamper exclusion + CLM file-mirrored working context; closed-form KL-RL JitRL logit modulation + SkillTTA + intra-task Partial Routing + live offline harvested-surface self-verifier; and 1.000 (42/42) DOMAIN_ATLAS_V1 route recall across all 7 domains.",
+  "recursive_obs": {
+    "canonical_base_commit": "197373269a9f53dd15446a9fc84a65e3455e6830",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "disconnected standalone execution scripts for 13 DARK organs",
+      "unnecessary CoW fork trials when surviving version-space hypotheses already agree",
+      "lossy summary-only memory writes and unbounded context growth (replaced by verbatim 4-way RRF + CLM file offload)",
+      "full-task expensive delegation (replaced by intra-task Partial Routing offloading easy/medium slices locally)"
+    ],
+    "expected_parent_level_state_change": "Activates 13 high-leverage DARK organs inside UnifiedModel and Creature and adds Mendel/ALBI/Anti-Slop co-evolution, CLM+4-way-RRF+Nemori memory, decision-cost CoW gating, and JitRL+SkillTTA+Partial-Routing at K3=0.",
+    "obs_blocker": {
+      "blocker_is": "High-leverage DARK organs on main (auto_judge_discovery_v1, earn_a_judge_v1, effect_contract_composition_v1, composition_verification_v1, partial_order_planner_v1, perfect_algorithm_lifted_generalization_v1, dual_program_splicing_v1, observation_refutation_v1, the_check_mode_is_the_oracle_v1, an_actions_vocabulary_is_its_refusal_surface_v1, a_type_you_wrote_is_a_type_you_guess_v1, what_a_decision_costs_v1, provenance_not_shape_v1) remained unwired from UnifiedModel and Creature, and the unified runtime lacked Mendel dual-splicing + ALBI semantic-anonymization + Anti-Slop/No-Phantom-Guardrails admission, verbatim 4-way RRF + Nemori surprise + CLM file-mirrored working context, and closed-form JitRL + SkillTTA + intra-task Partial Routing + live harvested-surface self-verification",
+      "delete_bypass_substitute_options": [
+        "Wire 13 existing DARK organs directly instead of re-implementing judges, planners, lifters, or splicers",
+        "Bypass CoW forks via what_a_decision_costs_v1.decisive() whenever all surviving hypotheses agree",
+        "Offload large working contexts to SHA-256 CLM workspace files instead of paying context-rot overhead"
+      ],
+      "evidence_the_blocker_is_real": [
+        "AST/model cross-audit confirmed 102/146 koan modules and 121/205 swe_kernel modules were dark from UnifiedModel/Creature",
+        "CROSS_DISCIPLINARY_CONCEPT_MAP lacked late-2026 terms (Mendel GM, Red Queen, ALBI, SlopCodeBench, CLM, Hindsight, Nemori, JitRL, SkillTTA, Partial Routing, DeltaBox, Sandlock)"
+      ],
+      "intrinsic_or_path_specific": "PATH_SPECIFIC to unwired repository organs and missing front-door runtime composition",
+      "surviving_causal_blocker": "High-leverage DARK organs on main (auto_judge_discovery_v1, earn_a_judge_v1, effect_contract_composition_v1, composition_verification_v1, partial_order_planner_v1, perfect_algorithm_lifted_generalization_v1, dual_program_splicing_v1, observation_refutation_v1, the_check_mode_is_the_oracle_v1, an_actions_vocabulary_is_its_refusal_surface_v1, a_type_you_wrote_is_a_type_you_guess_v1, what_a_decision_costs_v1, provenance_not_shape_v1) remained unwired from UnifiedModel and Creature, and the unified runtime lacked Mendel dual-splicing + ALBI semantic-anonymization + Anti-Slop/No-Phantom-Guardrails admission, verbatim 4-way RRF + Nemori surprise + CLM file-mirrored working context, and closed-form JitRL + SkillTTA + intra-task Partial Routing + live harvested-surface self-verification"
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "bespoke per-organ wrapper scripts",
+        "redundant CoW forks on hypothesis-agreed states",
+        "redundant low-surprise duplicate memory writes"
+      ],
+      "existing_inherited_routes_checked": "auto_judge_discovery_v1, earn_a_judge_v1, effect_contract_composition_v1, composition_verification_v1, partial_order_planner_v1, perfect_algorithm_lifted_generalization_v1, dual_program_splicing_v1, observation_refutation_v1, the_check_mode_is_the_oracle_v1, an_actions_vocabulary_is_its_refusal_surface_v1, a_type_you_wrote_is_a_type_you_guess_v1, what_a_decision_costs_v1, provenance_not_shape_v1",
+      "external_existing_routes_checked": "Mendel G\u00f6del Machine (2608.07645), Red Queen GM (2606.26294), ALBI (2611.05039), SlopCodeBench (2603.24755), Phantom Guardrails (2607.13083), DeltaBox (2605.22781), Sandlock (2605.26298), CLM (2609.37725), Beyond Memory Leaderboards (2607.16848), Hindsight BEAM-10M, Nemori, JitRL (2601.18510), SkillTTA (2605.16986), Partial Routing",
+      "surviving_gap": "Containerized external benchmark evaluation (SWE-bench Pro / OSWorld-Verified) and optional local open-weight Rung-3 proposer integration.",
+      "what_was_added": "wave39_leapfrog_unification_v1.py + 10 LEAPFROG_W39_* federated engines + 4 late-2026 unfamiliar-names concept clusters in unified_hidden_capability_federation_v1.py + Wave 39 front-door methods on UnifiedModel & Creature + test_frontier_leapfrog_wave39_v1.py"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "rewriting already-built DARK modules from scratch",
+        "claiming external benchmark discharge from producer sandbox runs"
+      ],
+      "real_outcome": "UnifiedModel and Creature now unify 10 newly federated Wave 39 dark-organ and frontier engines (200 total engines / 174 federated, K3=0, $0 spend): Mendel comparative dual splicing + ALBI semantic anonymization + Anti-Slop/No-Phantom-Guardrails/Symbol-Ownership gating; Red Queen live stdlib/CLI earned-judge discovery + --check/--dry-run refusal & witness-type lifting; typed (P,O,A,V,F) effect-contract composition + Sussman-anomaly partial-order planning + lifted sketch generalization + observation refutation + AST provenance; decision-theoretic version-space agreement CoW gate (0 forks on agreement, real POSIX os.fork() isolation on disagreement); verbatim-first 4-way RRF budgeted memory + Nemori surprise gating + TMA-NM tamper exclusion + CLM file-mirrored working context; closed-form KL-RL JitRL logit modulation + SkillTTA + intra-task Partial Routing + live offline harvested-surface self-verifier; and 1.000 (42/42) DOMAIN_ATLAS_V1 route recall across all 7 domains.",
+      "surviving_necessity": "Independent third-party evaluation on external SWE-bench Pro and OSWorld-Verified containers."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "auto_judge_discovery_v1, earn_a_judge_v1, effect_contract_composition_v1, composition_verification_v1, partial_order_planner_v1, perfect_algorithm_lifted_generalization_v1, dual_program_splicing_v1, observation_refutation_v1, the_check_mode_is_the_oracle_v1, an_actions_vocabulary_is_its_refusal_surface_v1, a_type_you_wrote_is_a_type_you_guess_v1, what_a_decision_costs_v1, provenance_not_shape_v1",
+      "downstream_work_to_delete_or_supersede": "Supersedes ad-hoc unverified patch admission, blind CoW trials, and unbudgeted context retrieval.",
+      "fresh_reuse_plan": "UnifiedModel and Creature expose mendel_red_queen_evolve, audit_anti_slop_patch, discover_and_earn_judges, lift_refusal_and_check_oracle, compose_and_plan_contracts, speculative_cow_decide, clm_rrf_memory_op, partial_route_with_jitrl, and self_verify_harvested_surfaces."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "Automated AST public-API census pinpointed exact signatures across 23 DARK modules.",
+      "search_stop_decision": "Stopped once Wave 39 real-execution tests, Wave 38 regression, 38/38 model verifier, and all governance guards passed."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Leaving 13 DARK organs disconnected from UnifiedModel/Creature forfeits earned judges, Sussman planning, Mendel hybridization, CLM/RRF memory, and JitRL routing.",
+      "routes_ranked": [
+        {
+          "rank": 1,
+          "route": "WAVE39_DARK_ORGANS_MENDEL_CLM_JITRL_UNIFIED_RUNTIME_K3_ZERO",
+          "why": "Unifies 13 existing DARK organs plus Mendel/ALBI/Anti-Slop, CLM+4-way-RRF+Nemori, CoW decision gate, and JitRL+SkillTTA+Partial-Routing directly inside UnifiedModel and Creature at K3=0."
+        },
+        {
+          "rank": 2,
+          "route": "DISCONNECTED_DARK_ORGANS_STATUS_QUO",
+          "why": "Leaves high-leverage judges, planners, lifters, and splicers unreachable from UnifiedModel and Creature."
+        }
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Zero-mock live tests run real Mendel splicing beyond parents, real ALBI alpha-renaming, real Anti-Slop & Phantom-Guardrail rejections, live stdlib subprocess judge earning, Sussman partial-order planning, real POSIX os.fork() CoW isolation verifying zero parent-RAM mutation, TMA-NM & CLM tamper detection, exact JitRL KL logit flips, Partial Routing offload, and live harvested-surface AST/SHA verification."
+    },
+    "open_world_route_discovery": {
+      "candidate_routes": [
+        {
+          "disqualification_reason": "",
+          "evidence": [
+            "Verified 8/8 in canonical/tests/test_frontier_leapfrog_wave39_v1.py and 38/38 in canonical/runtime/verify_brain_unified_model_v1.py"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_frontier_leapfrog_wave39_v1.py",
+            "canonical/runtime/verify_brain_unified_model_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "WAVE39_DARK_ORGANS_MENDEL_CLM_JITRL_UNIFIED_RUNTIME_K3_ZERO"
+        },
+        {
+          "disqualification_reason": "Leaves 13 DARK organs unreachable and lacks Mendel/ALBI/Anti-Slop, CLM+RRF, decision-cost CoW gating, and JitRL+Partial-Routing.",
+          "evidence": [
+            "Direct AST census and test_frontier_leapfrog_wave39_v1.py"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_frontier_leapfrog_wave39_v1.py",
+            "canonical/runtime/verify_brain_unified_model_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "DISCONNECTED_DARK_ORGANS_STATUS_QUO"
+        }
+      ],
+      "checked_at_utc": "2026-11-26T17:28:38+00:00",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "DISCONNECTED_DARK_ORGANS_STATUS_QUO",
+      "max_age_hours": 24,
+      "negative_search_summary": "External LLM producer dependencies are forbidden by NO_MODEL_PRODUCER_COGNITION. Unifying Brain's 13 DARK organs with Mendel/ALBI/Anti-Slop, CLM+4-way-RRF+Nemori, CoW decision-cost gating, and closed-form JitRL+SkillTTA+Partial-Routing strictly dominates disconnected status-quo modules at K3=0.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "Mendel Godel Machine Red Queen ALBI semantic anonymization SlopCodeBench Phantom Guardrails 2026"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "DeltaBox DeltaFS Sandlock CoW sandbox CLI-Anything check mode oracle 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Context Language Models CLM Hindsight BEAM-10M Beyond Memory Leaderboards Nemori 2026"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "JitRL SkillTTA Partial Routing Schema Tycho weight-space programming 2026"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "WAVE39_DARK_ORGANS_MENDEL_CLM_JITRL_UNIFIED_RUNTIME_K3_ZERO",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-26T17:28:38+00:00",
+        "execution_dependencies": [
+          {
+            "dependency": "Python 3.11 stdlib (ast, hashlib, os.fork, subprocess, unittest) + 13 existing DARK repo organs",
+            "evidence": [
+              "Verified live: 8/8 test_frontier_leapfrog_wave39_v1 PASS, 8/8 wave38 PASS"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "Canonical governance, referee, drift, and orientation validators",
+            "evidence": [
+              "repo_integrity_guard_v1.py PASS, enforce_goal_hierarchy.py PASS, enforce_load_bearing_primary_pr.py PASS, verify_brain_unified_model_v1.py 38/38 PASS"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "DATA_SOURCE",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "WAVE39_DARK_ORGANS_MENDEL_CLM_JITRL_UNIFIED_RUNTIME_K3_ZERO",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/swe_kernel/dual_program_splicing_v1.py",
+          "canonical/swe_kernel/auto_judge_discovery_v1.py",
+          "canonical/runtime/earn_a_judge_v1.py",
+          "canonical/swe_kernel/effect_contract_composition_v1.py",
+          "canonical/swe_kernel/partial_order_planner_v1.py",
+          "canonical/swe_kernel/perfect_algorithm_lifted_generalization_v1.py",
+          "canonical/tools/what_a_decision_costs_v1.py",
+          "canonical/tools/the_check_mode_is_the_oracle_v1.py",
+          "canonical/tools/provenance_not_shape_v1.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Late-2026 papers: Mendel GM, Red Queen GM, ALBI, SlopCodeBench, Phantom Guardrails, DeltaBox, Sandlock, CLM, Hindsight, Beyond Memory Leaderboards, Nemori, JitRL, SkillTTA, Partial Routing"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Python 3.11 stdlib (ast, hashlib, os.fork, subprocess, unittest)"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "POSIX fork(2)/pipe(2) Copy-on-Write semantics and Python AST/stdlib specification"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "real_outcome": "UnifiedModel and Creature now unify 10 newly federated Wave 39 dark-organ and frontier engines (200 total engines / 174 federated, K3=0, $0 spend): Mendel comparative dual splicing + ALBI semantic anonymization + Anti-Slop/No-Phantom-Guardrails/Symbol-Ownership gating; Red Queen live stdlib/CLI earned-judge discovery + --check/--dry-run refusal & witness-type lifting; typed (P,O,A,V,F) effect-contract composition + Sussman-anomaly partial-order planning + lifted sketch generalization + observation refutation + AST provenance; decision-theoretic version-space agreement CoW gate (0 forks on agreement, real POSIX os.fork() isolation on disagreement); verbatim-first 4-way RRF budgeted memory + Nemori surprise gating + TMA-NM tamper exclusion + CLM file-mirrored working context; closed-form KL-RL JitRL logit modulation + SkillTTA + intra-task Partial Routing + live offline harvested-surface self-verifier; and 1.000 (42/42) DOMAIN_ATLAS_V1 route recall across all 7 domains.",
+    "required_capability": "Unified DARK-organ execution, Mendel/ALBI/Anti-Slop co-evolution, Red Queen earned judges, Sussman partial-order contract planning, decision-cost CoW gating, CLM+4-way-RRF+Nemori verbatim memory, and JitRL+SkillTTA+Partial-Routing inside UnifiedModel and Creature at K3=0.",
+    "route_frontier": {
+      "canonical_base_commit": "197373269a9f53dd15446a9fc84a65e3455e6830",
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "leaves 13 DARK organs unwired and lacks Mendel/ALBI/Anti-Slop, CLM+RRF, and JitRL+Partial-Routing",
+            "CORRECTNESS": "allows AST-bloated slop, unwitnessed phantom guardrails, and unbudgeted context retrieval",
+            "INCREMENTAL_COST": "$0.00",
+            "RELIABILITY": "misses 2-bug hybrid patches, earned stdlib judges, and Sussman threat resolution",
+            "VERIFIABILITY": "lacks live CoW fork isolation, CLM disk-tamper checks, and offline harvested-surface verification",
+            "WALL_CLOCK": "pays unnecessary forks on hypothesis-agreed states and full-task external delegation"
+          },
+          "evidence": [
+            "Verified in test_frontier_leapfrog_wave39_v1.py and verify_brain_unified_model_v1.py"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_frontier_leapfrog_wave39_v1.py",
+            "canonical/runtime/verify_brain_unified_model_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "DISCONNECTED_DARK_ORGANS_STATUS_QUO"
+        }
+      ],
+      "checked_at_utc": "2026-11-26T17:28:38+00:00",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "DISCONNECTED_DARK_ORGANS_STATUS_QUO",
+      "max_age_hours": 24,
+      "negative_search_summary": "External LLM producer dependencies are forbidden by NO_MODEL_PRODUCER_COGNITION. Unifying Brain's 13 DARK organs with Mendel/ALBI/Anti-Slop, CLM+4-way-RRF+Nemori, CoW decision-cost gating, and closed-form JitRL+SkillTTA+Partial-Routing strictly dominates disconnected status-quo modules at K3=0.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "Mendel Godel Machine Red Queen ALBI semantic anonymization SlopCodeBench Phantom Guardrails 2026"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "DeltaBox DeltaFS Sandlock CoW sandbox CLI-Anything check mode oracle 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Context Language Models CLM Hindsight BEAM-10M Beyond Memory Leaderboards Nemori 2026"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "JitRL SkillTTA Partial Routing Schema Tycho weight-space programming 2026"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "WAVE39_DARK_ORGANS_MENDEL_CLM_JITRL_UNIFIED_RUNTIME_K3_ZERO",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-26T17:28:38+00:00",
+        "execution_dependencies": [
+          {
+            "dependency": "Python 3.11 stdlib (ast, hashlib, os.fork, subprocess, unittest) + 13 existing DARK repo organs",
+            "evidence": [
+              "Verified live: 8/8 test_frontier_leapfrog_wave39_v1 PASS, 8/8 wave38 PASS"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "Canonical governance, referee, drift, and orientation validators",
+            "evidence": [
+              "repo_integrity_guard_v1.py PASS, enforce_goal_hierarchy.py PASS, enforce_load_bearing_primary_pr.py PASS, verify_brain_unified_model_v1.py 38/38 PASS"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "DATA_SOURCE",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "WAVE39_DARK_ORGANS_MENDEL_CLM_JITRL_UNIFIED_RUNTIME_K3_ZERO",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/swe_kernel/dual_program_splicing_v1.py",
+          "canonical/swe_kernel/auto_judge_discovery_v1.py",
+          "canonical/runtime/earn_a_judge_v1.py",
+          "canonical/swe_kernel/effect_contract_composition_v1.py",
+          "canonical/swe_kernel/partial_order_planner_v1.py",
+          "canonical/swe_kernel/perfect_algorithm_lifted_generalization_v1.py",
+          "canonical/tools/what_a_decision_costs_v1.py",
+          "canonical/tools/the_check_mode_is_the_oracle_v1.py",
+          "canonical/tools/provenance_not_shape_v1.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Late-2026 papers: Mendel GM, Red Queen GM, ALBI, SlopCodeBench, Phantom Guardrails, DeltaBox, Sandlock, CLM, Hindsight, Beyond Memory Leaderboards, Nemori, JitRL, SkillTTA, Partial Routing"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Python 3.11 stdlib (ast, hashlib, os.fork, subprocess, unittest)"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "POSIX fork(2)/pipe(2) Copy-on-Write semantics and Python AST/stdlib specification"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      {
+        "route": "WAVE39_DARK_ORGANS_MENDEL_CLM_JITRL_UNIFIED_RUNTIME_K3_ZERO",
+        "verdict": "SELECTED",
+        "why": "Unifies 13 existing DARK organs plus Mendel/ALBI/Anti-Slop, CLM+RRF+Nemori, CoW decision gating, and JitRL+SkillTTA+Partial-Routing inside UnifiedModel and Creature at K3=0."
+      },
+      {
+        "route": "DISCONNECTED_DARK_ORGANS_STATUS_QUO",
+        "verdict": "REJECTED",
+        "why": "Leaves high-leverage judges, planners, lifters, and splicers unreachable from UnifiedModel and Creature."
+      }
+    ],
+    "selected_surviving_route": "WAVE39_DARK_ORGANS_MENDEL_CLM_JITRL_UNIFIED_RUNTIME_K3_ZERO",
+    "stop_condition": "Stop once verify_brain_unified_model_v1 (38/38), test_frontier_leapfrog_wave39_v1 (8/8), test_frontier_leapfrog_wave38_v1 (8/8), test_brain_unified_model_v1, test_domain_atlas_v1 (5/5), repo_integrity_guard, drift-immunity-guard, and load-bearing-primary-admission all pass.",
+    "why_selected_route_is_fastest_sufficient": "Reuses 13 battle-tested DARK modules directly inside UnifiedModel and Creature with zero wrapper sprawl, zero external model calls, and sub-second execution."
+  },
+  "required_capability": "Unified DARK-organ execution, Mendel/ALBI/Anti-Slop co-evolution, Red Queen earned judges, Sussman partial-order contract planning, decision-cost CoW gating, CLM+4-way-RRF+Nemori verbatim memory, and JitRL+SkillTTA+Partial-Routing inside UnifiedModel and Creature at K3=0.",
+  "route_class": "INTEGRATE",
+  "route_id": "WAVE39_DARK_ORGANS_MENDEL_CLM_JITRL_UNIFIED_RUNTIME_K3_ZERO",
+  "route_order_walk": {
+    "ADAPT": "Adapted unified_hidden_capability_federation_v1.py, brain_unified_model_v1.py, and creature_runtime_v1.py.",
+    "BYPASS": "Bypassed CoW forks via what_a_decision_costs_v1.decisive() when surviving hypotheses agree, and bypassed redundant writes via Nemori surprise gating.",
+    "COMPOSE": "Composed 13 DARK organs with Mendel/ALBI/Anti-Slop, CLM+4-way-RRF, and JitRL+SkillTTA+Partial-Routing into one unified module.",
+    "DELETE": "Avoided per-organ standalone wrappers and filtered low-surprise duplicate writes & bloated slop patches.",
+    "INTEGRATE": "SELECTED: unified +10 Wave 39 engines (200 total / 174 federated) directly into UnifiedModel and Creature with 1.000 DOMAIN_ATLAS_V1 recall.",
+    "REUSE": "Reused dual_program_splicing_v1, auto_judge_discovery_v1, earn_a_judge_v1, effect_contract_composition_v1, composition_verification_v1, partial_order_planner_v1, perfect_algorithm_lifted_generalization_v1, observation_refutation_v1, what_a_decision_costs_v1, the_check_mode_is_the_oracle_v1, an_actions_vocabulary_is_its_refusal_surface_v1, a_type_you_wrote_is_a_type_you_guess_v1, provenance_not_shape_v1, and VerificationFirstMemoryBus."
+  },
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "WAVE39_DARK_ORGANS_MENDEL_CLM_JITRL_UNIFIED_RUNTIME_K3_ZERO",
+  "selected_surviving_route": "WAVE39_DARK_ORGANS_MENDEL_CLM_JITRL_UNIFIED_RUNTIME_K3_ZERO",
+  "selectivity_note": "Strictly general zero-model runtime unification inside UnifiedModel and Creature; all OIDC-verified .hidden.v1 files and protected governance paths remain untouched.",
+  "status": "SHIPPED",
+  "stop_condition": "Stop once verify_brain_unified_model_v1 (38/38), test_frontier_leapfrog_wave39_v1 (8/8), test_frontier_leapfrog_wave38_v1 (8/8), test_brain_unified_model_v1, test_domain_atlas_v1 (5/5), repo_integrity_guard, drift-immunity-guard, and load-bearing-primary-admission all pass.",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "truth": {
+    "achieved": false,
+    "what_is_not": "Terminal truth discharge, independent third-party benchmark certification, or open-world GUI mastery.",
+    "what_is_real": "UnifiedModel and Creature now unify 10 newly federated Wave 39 dark-organ and frontier engines (200 total engines / 174 federated, K3=0, $0 spend): Mendel comparative dual splicing + ALBI semantic anonymization + Anti-Slop/No-Phantom-Guardrails/Symbol-Ownership gating; Red Queen live stdlib/CLI earned-judge discovery + --check/--dry-run refusal & witness-type lifting; typed (P,O,A,V,F) effect-contract composition + Sussman-anomaly partial-order planning + lifted sketch generalization + observation refutation + AST provenance; decision-theoretic version-space agreement CoW gate (0 forks on agreement, real POSIX os.fork() isolation on disagreement); verbatim-first 4-way RRF budgeted memory + Nemori surprise gating + TMA-NM tamper exclusion + CLM file-mirrored working context; closed-form KL-RL JitRL logit modulation + SkillTTA + intra-task Partial Routing + live offline harvested-surface self-verifier; and 1.000 (42/42) DOMAIN_ATLAS_V1 route recall across all 7 domains."
+  },
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "No open truth obligation is claimed discharged by this PR. This PR unifies 13 DARK organs and Wave 39 Mendel/Red-Queen/CLM+RRF/CoW-Decision/JitRL+Partial-Routing engines inside UnifiedModel and Creature while keeping terminal truth false.",
+    "target_truth_obligations": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "478f3cdef55518cfec98104ca6ce9c9e7e490b1d",
+          "path": "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_V1.json"
+        }
+      ],
+      "decisive_question": "Can UnifiedModel and Creature execute 13 newly wired DARK organs plus Mendel/ALBI/Anti-Slop co-evolution, earned subprocess judges, Sussman partial-order planning, decision-cost CoW fork isolation, CLM+4-way-RRF+Nemori tamper-proof memory, and closed-form JitRL+SkillTTA+Partial-Routing at K3=0 with 38/38 model verifier and 1.000 DOMAIN_ATLAS_V1 recall without touching any pinned .hidden.v1 module?",
+      "falsifier_id": "WAVE39_DARK_ORGANS_MENDEL_CLM_JITRL_ADVERSARIAL_SUITE_V1",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "",
+      "proposal_id": "WAVE39_DARK_ORGANS_MENDEL_CLM_JITRL_UNIFICATION_V1"
+    }
+  },
+  "verification": "verify_brain_unified_model_v1.py (38/38 PASS) + test_frontier_leapfrog_wave39_v1 (8/8 OK) + test_frontier_leapfrog_wave38_v1 (8/8 OK) + test_brain_unified_model_v1 + test_domain_atlas_v1 (5/5) + repo_integrity_guard_v1.py (0 violations) + enforce_goal_hierarchy.py + enforce_load_bearing_primary_pr.py",
+  "weakens_existing_guard": false
+}
