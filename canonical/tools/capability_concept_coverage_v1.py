@@ -28,9 +28,10 @@ import sys
 from typing import Any
 
 CLAUSE = (
-    "A capability is present only if it is reachable, sayable, and routable -- in that order. "
-    "Counting reachable modules measures the import graph; counting sayable ones measures what a "
-    "person can ask for; only the third is a capability."
+    "A capability is present only if it is installable, reachable, sayable, and routable -- in that "
+    "order. Layer 0 is the environment: a capability whose source cannot import is not a capability. "
+    "Layer 1 is the import graph, layer 2 is the vocabulary a person can ask in, layer 3 is whether a "
+    "sentence lands. Only the fourth is a capability."
 )
 
 # Concepts the mechanisms in this repository actually implement, in the words their own authors
@@ -52,6 +53,50 @@ def _first_sentence(path: pathlib.Path) -> str:
         return ""
     flat = " ".join(doc.split())
     return " ".join(flat.split(". ")[0].split())
+
+
+def _installability(base: pathlib.Path, model: Any) -> dict[str, Any]:
+    """Layer 0: can a BOUND capability's own source file import at all in this environment?
+
+    This is separate from reachability on purpose. A module can sit in the unified model's import
+    closure -- byte-current, pinned, indexed -- and still fail to load because one third-party
+    package is absent. Measured 2026-11-24: 153 bound capabilities, 101 with a resolvable
+    source_path, 92 load, and the 9 failures are all `ModuleNotFoundError: PIL`. Pillow was in
+    neither requirements manifest. The lesson is the layer, not the package: a capability that
+    cannot import is not a capability, and nothing in the model's index knew that.
+    """
+    import collections
+    import importlib.util
+
+    bound = {
+        cid: rec for cid, rec in model.capabilities.items()
+        if rec.get("kind") == "BOUND_CAPABILITY"
+    }
+    missing: collections.Counter[str] = collections.Counter()
+    other: collections.Counter[str] = collections.Counter()
+    with_path = loaded = 0
+    for cid, record in bound.items():
+        path = (record.get("provenance") or {}).get("source_path")
+        if not path or not (base / path).is_file():
+            continue
+        with_path += 1
+        try:
+            spec = importlib.util.spec_from_file_location("coverage_probe", base / path)
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)  # type: ignore[union-attr]
+            loaded += 1
+        except ModuleNotFoundError as exc:
+            missing[(exc.name or "?").split(".")[0]] += 1
+        except BaseException as exc:  # noqa: BLE001 - report, never crash the report
+            other[type(exc).__name__] += 1
+    return {
+        "bound": len(bound),
+        "with_resolvable_source_path": with_path,
+        "loaded": loaded,
+        "fail_missing_module": dict(missing.most_common()),
+        "fail_other": dict(other.most_common()),
+        "unresolvable_source_path": len(bound) - with_path,
+    }
 
 
 def coverage(root: str | pathlib.Path = ".", *, large_only_bytes: int = 50_000) -> dict[str, Any]:
@@ -102,6 +147,8 @@ def coverage(root: str | pathlib.Path = ".", *, large_only_bytes: int = 50_000) 
             "postings": len(model.index.get(concept) or {}),
         })
 
+    layer_zero = _installability(base, model)
+
     total_bytes = sum(row["bytes"] for row in modules)
     return {
         "schema": "PROJECT_BRAIN_CAPABILITY_CONCEPT_COVERAGE_V1",
@@ -124,6 +171,7 @@ def coverage(root: str | pathlib.Path = ".", *, large_only_bytes: int = 50_000) 
                 for row in sorted(mechanisms, key=lambda r: -r["bytes"])
             ],
         },
+        "layer_zero": layer_zero,
         "concepts": concept_rows,
         "concepts_unusable": [row["concept"] for row in concept_rows if not row["in_index"]],
         "modules_detail": modules,
@@ -154,6 +202,11 @@ def main(argv: list[str] | None = None) -> int:
     for row in mech["rows"][:10]:
         name = row["module"].split("/")[-1]
         print(f"  {name[:40]:40s} {row['bytes'] // 1024:6d}  {row['sayable_share']}")
+    lz = report["layer_zero"]
+    print(f"\n  LAYER 0 -- installability of BOUND capabilities: {lz['loaded']}/{lz['with_resolvable_source_path']} load")
+    if lz["fail_missing_module"]:
+        print(f"    missing modules: {lz['fail_missing_module']}")
+    print(f"    no resolvable source_path: {lz['unresolvable_source_path']} of {lz['bound']}")
     print(f"\n  concepts a request cannot use (no posting in the router index):")
     print(f"    {', '.join(report['concepts_unusable']) or '(none)'}")
     return 0

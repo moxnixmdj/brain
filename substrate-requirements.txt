@@ -22,3 +22,12 @@ mypy==2.4.1
 ruff==0.17.3
 bandit==1.9.4
 coverage==7.17.0
+
+# Pillow is the substrate for nine BOUND capabilities that fail to import without it:
+#   chart.raster.axis_title_unit_binding.v1, chart.raster.curve_value_query.v1,
+#   chart.raster.curve_x_at_y_query.v1, chart.raster.direct_curve_label_family.v1,
+#   chart.raster.legend_style_binding.v1, chart.raster.scene_graph.v1, and three more.
+# Measured 2026-11-24: of 153 bound capabilities, 101 carry a resolvable source_path, 92 load, and
+# all 9 that fail do so with `ModuleNotFoundError: PIL` -- the only missing module, and absent from
+# both this file and the kernel manifest.  A capability that cannot import is not a capability.
+Pillow==12.0.0

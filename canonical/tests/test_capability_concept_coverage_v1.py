@@ -70,6 +70,26 @@ class TestThreeLayersAreNotTheSameThing(unittest.TestCase):
         if target is not None:
             self.assertIsNone(target["sayable_share"])
 
+    def test_layer_zero_is_reported_separately_from_reachability(self):
+        """A capability whose source cannot import is not a capability.
+
+        Measured 2026-11-24: 153 bound capabilities, 101 with a resolvable source_path, 92 load,
+        9 fail, and every failure is the same missing module. The guard asserts the layers stay
+        distinct: layer 0 is the environment, not the index.
+        """
+        layer_zero = self.report["layer_zero"]
+        self.assertGreater(layer_zero["bound"], 100)
+        self.assertLessEqual(layer_zero["loaded"], layer_zero["with_resolvable_source_path"])
+        self.assertGreater(
+            layer_zero["unresolvable_source_path"], 0,
+            "every bound capability now resolves to a file -- the provenance join was fixed; "
+            "re-measure before relaxing this guard",
+        )
+        # Whatever is missing, it must be named. A silent layer-0 failure is the defect this
+        # measurement exists to prevent.
+        for module_name in layer_zero["fail_missing_module"]:
+            self.assertTrue(module_name and module_name != "?", "a missing module was not named")
+
 
 if __name__ == "__main__":
     unittest.main()
