@@ -5,15 +5,36 @@
  "action_summary": "Tested the flagship instead of reading it, and found the K3=0 Futamura kernel could not fail a candidate: test cases ran via compile(..., 'exec'), where a bare expression is evaluated and discarded, so the kernel returned SOLVED_AT_RUNG2 with pass=True on source satisfying nothing. Three evaluators shared the defect, so every Rung 1/2/3 receipt descended from it. Repaired: one shared falsifiable runner (eval-mode truthiness, assert-style fallback); admission no longer counts f-string scaffolding as test data (it was refusing correct formatting repairs as TEST_LITERAL_LEAK); Rung 0 replays to a verified fixpoint (bounded BFS over rewrite sequences, verified at sequence end, plus a coarse bucket index and widened __V binding so a law can fire on a compound operand); compiled laws now persist across processes and retire on evidence. Also removed six provably unreachable members to get brain_unified_model_v1.py from 7571 back under its 7534-line cap, and added a test that fails when the committed model artifact is stale. Measured after: one taught experience transfers to 5/5 genuinely held-out failing tasks at Rung 0 with zero synthesis in 0.16-0.50 ms. Then found and guarded the door certifying an unwritten stated output. Four of my own green results were shown unfalsifiable during this wave and two were corrected or retracted in writing.",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
   "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "",
   "incremental_spend_usd": 0,
   "independent_verification_completed": false,
-  "independent_verification_note": "Producer-run sandbox verification plus GitHub Actions referee. Not independent verification.",
+  "independent_verification_note": "Producer-run sandbox verification only: wave46 37/37, plus nine further wave suites green on the merged tree, the unified-model artefact proven a byte-identical fixed point across a recompile, and the local drift guard PASS against the same base SHA CI uses. The GitHub Actions referee is the only external check and it is not independent of this repository's own guards.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
   "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "producer_cognition_model_dependency_count": 0,
-  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
-  "route_class": "INTEGRATE",
-  "route_id": "WAVE46_FALSIFIABLE_ORACLE_V1",
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "WAVE46_FALSIFIABLE_ORACLE_20261126_V1.md",
+   "canonical/tests/test_wave46_falsifiable_oracle_and_admission_v1.py",
+   "canonical/runtime/futamura_leapfrog_kernel_v1.py"
+  ],
+  "route_class": "REUSE",
   "scope_complete_discharge": false,
   "terminal_achieved": false
  },
@@ -51,6 +72,18 @@
  "incremental_spend_usd": 0,
  "intentional_route_race": false,
  "live_challenger_frontier_discovery_required": true,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "constructive_gap_reason": "No benchmark movement is claimed and none is measurable here (docker absent, so Terminal-Bench 4.0, SWE-bench Pro V2 and OSWorld 2.1 cannot run). The gap is constructive rather than direct: CODING_TB4_GE_66_4 is scored by a harness that trusts its own test process, and this wave repaired the model-free verifier in this repository that the same class of harness depends on. A verifier that could not return false, and a door that certified a file it never wrote, were both removed. That narrows what a pass can mean; it does not raise any measured score.",
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/10",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": "1"
+ },
  "measured_effect": "taught 3 verified-failing experiences -> 3 laws; 5/5 held-out tasks verified at Rung 0, zero synthesis, 0.16-0.50 ms; existing fixed selection benchmark 19/23 selection and 21/23 compile (base 9554215: 0/23, 5/23); door certifying an absent r.json now returns FAIL_CLOSED__STATED_OUTPUT_PATH_NOT_WRITTEN.",
  "next_step": "Implement a decidable ownership predicate for capability selection: the front compiler's F24 displacement hands selection to a row scoring below the displaced runner-up, which is how a mutation-score request reaches a BM25 ranker.",
  "parent_capability": "canonical/runtime/futamura_leapfrog_kernel_v1.py + canonical/swe_kernel/repair_admission_v1.py + canonical/runtime/live_integrated_brain_v1.py",
