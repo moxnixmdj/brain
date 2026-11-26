@@ -119,9 +119,9 @@ def build_ast_phrase_index(artifact_path: str | pathlib.Path | None = None) -> d
     if cached is not None:
         return cached
 
-    core_meta = getattr(model, "_core_meta", None) or {}
-    ast_idx = core_meta.get("adapter_ast_index") or ((model.model.get("grammar") or {}).get("adapter_ast_index") or {})
-    caps_map = core_meta.get("capabilities_map") or {str(c.get("id")): c for c in model.capabilities}
+    ast_idx = bum.adapter_ast_index_map(artifact_path)
+    caps_raw = model.capabilities
+    caps_map = caps_raw if isinstance(caps_raw, Mapping) else {str(c.get("id")): c for c in caps_raw}
 
     # Map adapter stem -> capability_ids
     stem_to_cids: dict[str, list[str]] = {}

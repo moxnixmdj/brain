@@ -2443,7 +2443,15 @@ class SpecificityBipartitePPRRouter:
             mod_path = str(eroute.get("source_path") or eroute.get("carrier_path") or "")
             stem = pathlib.PurePosixPath(mod_path).stem if mod_path.endswith(".py") else eid
             doms = list(stem_to_domains.get(stem, ()))
-            for fdom in fed_domain_map.get(str(erow.get("domain") or ""), ()):
+            raw_dom = str(erow.get("domain") or "")
+            if raw_dom in domain_vocab_phrases and raw_dom not in doms:
+                doms.append(raw_dom)
+            raw_up = raw_dom.upper()
+            if "COMPUTER_USE" in raw_up and "computer_use" not in doms:
+                doms.append("computer_use")
+            if ("MEALY" in raw_up or "INSTANT" in raw_up) and "instant_learning" not in doms:
+                doms.append("instant_learning")
+            for fdom in fed_domain_map.get(raw_dom, ()):
                 if fdom not in doms:
                     doms.append(fdom)
             if stem == "isolated_effect_receipt_verifier_v1":

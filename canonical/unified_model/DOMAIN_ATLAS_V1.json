@@ -136,6 +136,7 @@
     "harbor_science_agent_v12",
     "harbor_science_agent_v13",
     "harbor_swe_zero_model_agent_v1",
+    "hidden_arsenal_unifier_v1",
     "history_induced_edit_grammar_v1",
     "hle_evidence_candidate_synthesis_v1",
     "hle_evidence_candidate_synthesis_v2",
@@ -249,6 +250,7 @@
     "small_passing_patch_place_measure_v1",
     "software_patch_cegis_z3_v1",
     "software_repair_crossfile_choreograph_v1",
+    "sovereign_zero_llm_planner_v1",
     "spec_contract_synthesis_v1",
     "speculative_cow_petri_agent_v1",
     "stochastic_synthesizer_v1",
@@ -307,14 +309,14 @@
     "witness_inversion_v1",
     "zygote_worker_pool_v1"
    ],
-   "candidates": 303,
+   "candidates": 305,
    "frontier_function": "resolve a repository issue from a text description",
    "harvested_all": 110,
    "harvested_executable_top": 10,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 25,
-   "indexed_all": 285,
+   "indexed_all": 287,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -1611,7 +1613,7 @@
      ],
      "path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
      "score": 9.0,
-     "sha256": "3f6922642c163d7c",
+     "sha256": "822b5a9c9960dfd7",
      "source_index": true,
      "summary": "Frontier Seven-Move Unified Runtime Substrate (`K3 = 0`, `$0` spend, Elon-Law Minimalism)."
     },
@@ -1708,7 +1710,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 6.75,
-     "sha256": "60e6c79e927a0677",
+     "sha256": "5a5ccd144a4dcb35",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -1846,7 +1848,7 @@
      ],
      "path": "canonical/runtime/creature_runtime_v1.py",
      "score": 4.5,
-     "sha256": "a2c445ff3ae767d6",
+     "sha256": "f363d561c1034f77",
      "source_index": true,
      "summary": "Seven organs, finally in one body."
     },
@@ -2061,6 +2063,7 @@
     "settlement_v1",
     "skill_scope_acquisition_probe_v1",
     "skill_scope_acquisition_v1",
+    "sovereign_zero_llm_planner_v1",
     "speculative_cow_petri_agent_v1",
     "structural_rewrite_induction_v1",
     "swe_self_improvement_bridge_v1",
@@ -2112,14 +2115,14 @@
     "witness_inversion_v1",
     "world_binding_v1"
    ],
-   "candidates": 185,
+   "candidates": 186,
    "frontier_function": "adapt from one episode without touching weights",
    "harvested_all": 69,
    "harvested_executable_top": 12,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 24,
-   "indexed_all": 183,
+   "indexed_all": 184,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -2379,7 +2382,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 20.0,
-     "sha256": "60e6c79e927a0677",
+     "sha256": "5a5ccd144a4dcb35",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -2855,26 +2858,6 @@
      "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
     },
     {
-     "adapter_module_match": false,
-     "anchored": 12.75,
-     "harvested": true,
-     "matched": [
-      "episod@symbol",
-      "recall@symbol",
-      "context@symbol",
-      "memory@symbol",
-      "recall@doc",
-      "receipt@symbol",
-      "retriev@doc",
-      "trace@symbol"
-     ],
-     "path": "canonical/runtime/brain_unified_model_v1.py",
-     "score": 17.75,
-     "sha256": "60e6c79e927a0677",
-     "source_index": true,
-     "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
-    },
-    {
      "adapter_module_match": true,
      "anchored": 4.5,
      "harvested": false,
@@ -2908,7 +2891,7 @@
      ],
      "path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
      "score": 16.25,
-     "sha256": "3f6922642c163d7c",
+     "sha256": "822b5a9c9960dfd7",
      "source_index": true,
      "summary": "Frontier Seven-Move Unified Runtime Substrate (`K3 = 0`, `$0` spend, Elon-Law Minimalism)."
     },
@@ -3009,6 +2992,26 @@
      "sha256": "08b60fb6c239ff69",
      "source_index": true,
      "summary": "Scan a host, retrieve what is already known, fetch only what is not."
+    },
+    {
+     "adapter_module_match": false,
+     "anchored": 10.5,
+     "harvested": true,
+     "matched": [
+      "recall@symbol",
+      "context@symbol",
+      "memory@symbol",
+      "recall@doc",
+      "receipt@symbol",
+      "retriev@doc",
+      "trace@symbol",
+      "index@doc"
+     ],
+     "path": "canonical/runtime/brain_unified_model_v1.py",
+     "score": 15.5,
+     "sha256": "5a5ccd144a4dcb35",
+     "source_index": true,
+     "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
     {
      "adapter_module_match": true,
@@ -4004,7 +4007,7 @@
      ],
      "path": "canonical/runtime/creature_runtime_v1.py",
      "score": 15.25,
-     "sha256": "a2c445ff3ae767d6",
+     "sha256": "f363d561c1034f77",
      "source_index": true,
      "summary": "Seven organs, finally in one body."
     },
@@ -4230,6 +4233,7 @@
     "harbor_science_planner_v5",
     "harbor_science_planner_v6",
     "harbor_science_planner_v7",
+    "hidden_arsenal_unifier_v1",
     "hle_strict_reference_scorer",
     "horizon_bounded_execution_v1",
     "humanevalfix_recorded_proposals_measure_v1",
@@ -4275,6 +4279,7 @@
     "sentient_cognitive_core_v1",
     "settlement_v1",
     "site_by_intervention_v1",
+    "sovereign_zero_llm_planner_v1",
     "speculative_cow_petri_agent_v1",
     "state_contract_world_model_v1",
     "swe_typed_plan_v1",
@@ -4302,14 +4307,14 @@
     "what_the_vocabulary_cannot_say_v1",
     "what_transfers_to_a_second_host_v1"
    ],
-   "candidates": 134,
+   "candidates": 136,
    "frontier_function": "predict what an action does before doing it",
    "harvested_all": 42,
    "harvested_executable_top": 9,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 24,
-   "indexed_all": 131,
+   "indexed_all": 133,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -4647,7 +4652,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 13.25,
-     "sha256": "60e6c79e927a0677",
+     "sha256": "5a5ccd144a4dcb35",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -4808,13 +4813,13 @@
  "method": "weighted lexical evidence over module stem, docstring and symbol names; frontier vocabulary and this repository's own vocabulary in one table",
  "min_score": 3.0,
  "model_calls": 0,
- "modules_scanned": 3329,
+ "modules_scanned": 3331,
  "network_calls": 0,
  "per_domain": 25,
  "reachability": {
   "coding_agents": {
-   "chance_route_recall": 0.1687,
-   "chance_source_recall": 0.1339,
+   "chance_route_recall": 0.1732,
+   "chance_source_recall": 0.1346,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -4961,7 +4966,7 @@
    ]
   },
   "computer_use": {
-   "chance_route_recall": 0.0653,
+   "chance_route_recall": 0.0663,
    "chance_source_recall": 0.0678,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
@@ -5106,7 +5111,7 @@
    ]
   },
   "continual_learning": {
-   "chance_route_recall": 0.0471,
+   "chance_route_recall": 0.0467,
    "chance_source_recall": 0.0164,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.333,
@@ -5253,8 +5258,8 @@
    ]
   },
   "instant_learning": {
-   "chance_route_recall": 0.1368,
-   "chance_source_recall": 0.0816,
+   "chance_route_recall": 0.1401,
+   "chance_source_recall": 0.0819,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -5400,8 +5405,8 @@
    ]
   },
   "memory": {
-   "chance_route_recall": 0.1064,
-   "chance_source_recall": 0.086,
+   "chance_route_recall": 0.1069,
+   "chance_source_recall": 0.0859,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 1.0,
@@ -5549,7 +5554,7 @@
   },
   "verification_abstention": {
    "chance_route_recall": 0.1717,
-   "chance_source_recall": 0.1489,
+   "chance_source_recall": 0.1488,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 1.0,
@@ -5637,7 +5642,7 @@
      "routed_top": [
       "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
       "canonical.runtime.binding_pin_is_current_v1.hidden.v1",
-      "engine:CHECKABILITY_DIFFERENTIAL_PIN"
+      "orchestration.verify.bridge_enumeration.v1"
      ],
      "source_hit": false,
      "source_top": [
@@ -5694,8 +5699,8 @@
    ]
   },
   "world_model": {
-   "chance_route_recall": 0.0881,
-   "chance_source_recall": 0.059,
+   "chance_route_recall": 0.0873,
+   "chance_source_recall": 0.0598,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
