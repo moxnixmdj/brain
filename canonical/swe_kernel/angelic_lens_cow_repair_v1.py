@@ -4523,3 +4523,69 @@ def probe_binary_byte_jacobian_cow(
     }
 
 
+def self_check() -> dict[str, Any]:
+    """Falsifiable behavioral contract for bidirectional lens synthesis & separating guard induction.
+
+    Proves:
+    1. AST site extraction locates expression sites and span replacement preserves valid Python AST.
+    2. Bidirectional lens synthesis learns a reversible framing transformation (`x -> [x]`) that
+       round-trips on unseen held-out strings (`put(get(s)) == s`).
+    3. Separating guard induction finds a boolean predicate that holds on all positive environments
+       and fails on all negative environments, and returns None on contradictory identical envs.
+    """
+    failures: list[str] = []
+
+    def check(label: str, ok: bool) -> None:
+        if not ok:
+            failures.append(label)
+
+    src = "def inc(x):\n    return x + 1\n"
+    sites = extract_ast_sites("sample.py", src)
+    check("extracts AST sites from function", len(sites) >= 1)
+    if sites:
+        replaced = replace_site_span(src, sites[0], "x + 2")
+        try:
+            ast.parse(replaced)
+            valid_ast = replaced != src
+        except SyntaxError:
+            valid_ast = False
+        check("site span replacement yields valid modified AST", valid_ast)
+    else:
+        check("site span replacement yields valid modified AST", False)
+
+    lens = synthesize_bidirectional_lens(
+        [("hello world", "hello_world"), ("a b c", "a_b_c")],
+        preserved_samples=("xyz", "token"),
+    )
+    check("synthesizes bidirectional lens", lens is not None and bool(lens.roundtrip_verified))
+    if lens is not None:
+        unseen = "unseen foo bar"
+        fwd = lens.forward_fn(unseen)
+        inv = lens.inverse_fn(fwd)
+        check("lens forward and inverse round-trip on unseen input", fwd == "unseen_foo_bar" and inv == unseen)
+    else:
+        check("lens forward and inverse round-trip on unseen input", False)
+
+    guard = synthesize_separating_guard([{"x": 5}, {"x": 10}], [{"x": -1}, {"x": 0}])
+    check("synthesizes separating guard", isinstance(guard, str) and len(guard) > 0)
+    if guard:
+        pos_ok = all(bool(eval(guard, {"__builtins__": {}}, env)) for env in ({"x": 5}, {"x": 10}))
+        neg_ok = all(not bool(eval(guard, {"__builtins__": {}}, env)) for env in ({"x": -1}, {"x": 0}))
+        check("guard separates positive from negative envs", pos_ok and neg_ok)
+    else:
+        check("guard separates positive from negative envs", False)
+
+    # Negative control: identical positive & negative env is inseparable
+    insep = synthesize_separating_guard([{"x": 5}], [{"x": 5}])
+    check("negative control: inseparable envs yield None guard", insep is None)
+
+    total = 7
+    return {
+        "schema": "BRAIN_ANGELIC_LENS_COW_REPAIR_V1_SELF_CHECK",
+        "checks": total,
+        "passed": total - len(failures),
+        "failures": failures,
+        "verdict": "SELF_CHECK_PASS" if not failures else "SELF_CHECK_FAIL",
+    }
+
+

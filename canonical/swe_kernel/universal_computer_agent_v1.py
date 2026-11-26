@@ -4394,6 +4394,70 @@ def repair_workspace_script_or_config_cow(
     return {"solved": False, "reason": "NO_REPAIRABLE_SCRIPT_OR_CONFIG", "elapsed_ms": int((time.monotonic() - t0) * 1000), "model_calls": 0}
 
 
+def self_check() -> dict[str, Any]:
+    """Falsifiable behavioral contract for template anti-unification, dominator cut-vertices & negative-effect oracle.
+
+    Proves:
+    1. Template anti-unification preserves shared tokens and generalizes only differing slots,
+       while returning None on structurally incompatible sequence lengths.
+    2. Petri dominator cut-vertex computation finds exact mandatory choke points on a diamond DAG
+       (excluding parallel bypass branches).
+    3. Negative effect oracle approves authorized edits and rejects unauthorized protected-file edits.
+    """
+    failures: list[str] = []
+
+    def check(label: str, ok: bool) -> None:
+        if not ok:
+            failures.append(label)
+
+    au = anti_unify_templates(["git", "checkout", "feat-a"], ["git", "checkout", "feat-b"])
+    check(
+        "anti-unifies differing argument into single slot",
+        au is not None and au[0][:2] == ["git", "checkout"] and len(au[1]) == 1,
+    )
+    bad_au = anti_unify_templates(["git", "status"], ["git", "checkout", "main"])
+    check("negative control: mismatched sequence lengths return None", bad_au is None)
+
+    cuts = compute_petri_dominator_cut_vertices(
+        [("s", "a"), ("a", "b"), ("a", "c"), ("b", "d"), ("c", "d"), ("d", "g")],
+        "s",
+        "g",
+    )
+    check(
+        "finds exact diamond dominator cut vertices ['a', 'd'] excluding parallel b/c",
+        bool(cuts.get("reachable")) and cuts.get("cut_vertices") == ["a", "d"],
+    )
+
+    unreach = compute_petri_dominator_cut_vertices([("s", "a"), ("b", "g")], "s", "g")
+    check("negative control: disconnected graph reports unreachable", not bool(unreach.get("reachable")))
+
+    ok_eff = evaluate_negative_effect_oracle(
+        {"a.txt": ("h1", 10), "sec.txt": ("s1", 5)},
+        {"a.txt": ("h2", 12), "sec.txt": ("s1", 5)},
+        allowed_write_paths=["a.txt"],
+    )
+    check("approves authorized file modification", bool(ok_eff.get("safe")) and not ok_eff.get("violations"))
+
+    bad_eff = evaluate_negative_effect_oracle(
+        {"a.txt": ("h1", 10), "sec.txt": ("s1", 5)},
+        {"a.txt": ("h2", 12), "sec.txt": ("s2", 6)},
+        allowed_write_paths=["a.txt"],
+    )
+    check(
+        "negative control: catches unauthorized protected file modification",
+        not bool(bad_eff.get("safe")) and "sec.txt" in (bad_eff.get("modified_protected") or []),
+    )
+
+    total = 6
+    return {
+        "schema": "BRAIN_UNIVERSAL_COMPUTER_AGENT_V1_SELF_CHECK",
+        "checks": total,
+        "passed": total - len(failures),
+        "failures": failures,
+        "verdict": "SELF_CHECK_PASS" if not failures else "SELF_CHECK_FAIL",
+    }
+
+
 
 
 

@@ -3208,3 +3208,56 @@ class BidirectionalFSTLensSynthesizer:
                         pass
 
         return out
+
+
+def self_check() -> dict[str, Any]:
+    """Falsifiable behavioral contract for alpha-invariant structural fingerprinting & scope checks.
+
+    Proves:
+    1. Alpha-equivalent functions (renamed variables/function names, same AST structure) produce
+       identical structural fingerprints.
+    2. Negative control: structurally different functions produce distinct fingerprints.
+    3. Foreign-identifier check catches unbound variables introduced on a rewrite RHS while
+       allowing module symbols declared in scope.
+    """
+    failures: list[str] = []
+
+    def check(label: str, ok: bool) -> None:
+        if not ok:
+            failures.append(label)
+
+    fp_a = compute_structural_fp64("if x:\n    return a\n")
+    fp_b = compute_structural_fp64("if y:\n    return b\n")
+    fp_c = compute_structural_fp64("return a\n")
+    check("alpha-equivalent statement blocks share identical structural fp64", fp_a == fp_b)
+    check("negative control: distinct statement skeletons get distinct fp64", fp_a != fp_c)
+
+    unbound = check_foreign_ident_unbound("x + 1", "x + secret_var", allowed_module_symbols=("math",))
+    check("detects unbound foreign identifier on rewrite RHS", "secret_var" in unbound)
+
+    bound = check_foreign_ident_unbound("x + 1", "x + math.floor(x)", allowed_module_symbols=("math",))
+    check("allows declared module symbol on rewrite RHS", bound == [])
+
+    # Effect-contract bridge check on PetriTransition
+    tr = PetriTransition(
+        transition_id="t_strip",
+        surface="str",
+        owner_type="str",
+        name="strip",
+        param_names=(),
+        input_places=("str",),
+        output_place="str",
+        template_py="{0}.strip()",
+        mdl_cost=1,
+    )
+    ec = tr.to_effect_contract()
+    check("PetriTransition lowers to an EffectContract", ec is not None)
+
+    total = 5
+    return {
+        "schema": "BRAIN_PETRI_COW_SPLICING_ENGINE_V1_SELF_CHECK",
+        "checks": total,
+        "passed": total - len(failures),
+        "failures": failures,
+        "verdict": "SELF_CHECK_PASS" if not failures else "SELF_CHECK_FAIL",
+    }

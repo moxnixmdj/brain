@@ -2395,6 +2395,86 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "required_inputs": ["op"],
         "declared_dependencies": [],
     },
+    "LEAPFROG_W49_TRACEBACK_SIGNATURE_ZERO_LINE_LOCALIZER": {
+        "domain": "SWE_LOCALIZATION_AND_REPAIR",
+        "source_path": "canonical/runtime/wave49_50_structural_ast_repair_and_titan_adjudication_v1.py",
+        "entrypoint": "TracebackSignatureZeroLineLocalizerKernel",
+        "summary": "Wave 49 zero-executed-line traceback & AST symbol localizer breaking NO_EXECUTED_REPO_LINES on TypeError/AttributeError/ImportError/dunder/module-reexport failures with fail-closed checkout-import provenance verification.",
+        "triggers": [
+            "zero line traceback localizer unexpected keyword argument",
+            "checkout import provenance site packages shadow guard",
+            "dunder comparison typeerror reflexive assertion localization",
+            "no executed repo lines static ast symbol localizer",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W49_STRUCTURAL_AST_MULTI_HUNK_SYNTHESIZER": {
+        "domain": "SWE_LOCALIZATION_AND_REPAIR",
+        "source_path": "canonical/runtime/wave49_50_structural_ast_repair_and_titan_adjudication_v1.py",
+        "entrypoint": "StructuralASTMultiHunkSynthesizerKernel",
+        "summary": "Wave 49 structural AST multi-hunk synthesizer breaking the value-substitution wall: kwarg addition & context/converter threading, dunder self-comparison guards, __module__ re-export normalization, !r/repr f-string repairs, recursive seen-set cycle guards, version split repairs, and symbol-ownership-bounded multi-site expression transfer.",
+        "triggers": [
+            "structural ast multi hunk repair parameter addition threading",
+            "dunder reflexive isinstance guard module reexport normalization",
+            "fstring repr redundant quotes recursive seen set cycle guard",
+            "bounded site general expression synthesis symbol ownership transfer",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W49_MINIMAX_INTERROGATION_CONTRASTIVE_ORACLE": {
+        "domain": "INSTANT_LEARNING_AND_SYNTHESIS",
+        "source_path": "canonical/runtime/wave49_50_structural_ast_repair_and_titan_adjudication_v1.py",
+        "entrypoint": "MinimaxInterrogationContrastiveOracleKernel",
+        "summary": "Wave 49 exact-minimax version-space interrogation loop (witness computed, not remembered) paired with contrastive mutant-killing oracle bootstrap and McNemar paired transfer delta.",
+        "triggers": [
+            "exact minimax interrogation witness computed version space",
+            "contrastive oracle bootstrap mutant kill paired transfer",
+            "mcnemar discordant pairs rubber stamp verifier rejection",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W50_KERNEL_BOUNDARY_DUAL_CHANNEL_EFFECT_HCU": {
+        "domain": "COMPUTER_USE_AND_SANDBOX",
+        "source_path": "canonical/runtime/wave49_50_structural_ast_repair_and_titan_adjudication_v1.py",
+        "entrypoint": "KernelBoundaryDualChannelEffectHCUKernel",
+        "summary": "Wave 50 fail-closed kernel boundary + cryptographic pre/post SHA-256 byte-effect oracle + CoAct-1 / Agent S4 dual-channel structured-CLI vs GUI action-grammar router.",
+        "triggers": [
+            "kernel boundary effect oracle sha256 manifest cannot lie",
+            "dual channel hcu router coact1 cli sqlite gui a11y",
+            "unauthorized protected file modification detection",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W50_CRASH_RESUMABLE_SELF_VERIFYING_LIFE_LOOP": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/wave49_50_structural_ast_repair_and_titan_adjudication_v1.py",
+        "entrypoint": "CrashResumableSelfVerifyingLifeLoopKernel",
+        "summary": "Wave 50 resident crash-resumable hash-chained WAL creature life-loop ticks + self-verifying execution enrollment of never-run capabilities with adversarial negative controls.",
+        "triggers": [
+            "crash resumable continuous creature life loop wal replay",
+            "self verifying capability enrollment by execution",
+            "hash chained append only tick journal zero duplication",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W50_TITAN_BEHAVIORAL_PROOF_ADJUDICATOR": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/wave49_50_structural_ast_repair_and_titan_adjudication_v1.py",
+        "entrypoint": "TitanBehavioralProofAdjudicatorKernel",
+        "summary": "Wave 50 subprocess-isolated behavioral proof adjudicator verifying 19+ flagship titans (69,000+ PROVEN LOC) with falsifiable adversarial self_check() contracts and static K3=0 endpoint audits.",
+        "triggers": [
+            "titan behavioral proof adjudicator subprocess proven loc",
+            "falsifiable self check adversarial negative control audit",
+            "dark matter adjudicator titan suite k3 zero verification",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
     "METAMORPHIC_HABITATION_ZIPPER": {
         "domain": "SWE_LOCALIZATION_AND_REPAIR",
         "source_path": "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
@@ -3728,6 +3808,79 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
             "canonical/tools/the_right_question_is_an_experiment_v1.py",
             "canonical/tools/dark_matter_adjudicator_v1.py",
             "canonical/tools/model_call_surface_audit_v1.py",
+        ],
+    },
+    "STRUCTURAL_AST_MULTI_HUNK_ZERO_LINE_SWE_REPAIR": {
+        "external_names": [
+            "structural ast repair",
+            "multi hunk patch synthesis",
+            "parameter addition threading",
+            "zero executed repo lines",
+            "checkout import provenance",
+            "site packages shadowing",
+            "dunder reflexive comparison guard",
+            "module reexport normalization",
+            "fstring repr redundant quotes",
+            "recursive seen set cycle guard",
+            "site general expression synthesis",
+            "symbol ownership blast radius",
+            "featurebench",
+            "swe polybench",
+            "commit 0",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W49_TRACEBACK_SIGNATURE_ZERO_LINE_LOCALIZER",
+            "engine:LEAPFROG_W49_STRUCTURAL_AST_MULTI_HUNK_SYNTHESIZER",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave49_50_structural_ast_repair_and_titan_adjudication_v1.py",
+            "canonical/tools/honest_per_task_baseline_v1.py",
+            "canonical/tools/grammar_closed_repair_v1.py",
+            "canonical/tools/real_fix_minimal_repair_census_v1.py",
+        ],
+    },
+    "MINIMAX_INTERROGATION_CONTRASTIVE_KERNEL_EFFECT_ORACLE": {
+        "external_names": [
+            "exact minimax interrogation",
+            "witness is computed not remembered",
+            "version space optimal query",
+            "contrastive oracle bootstrap",
+            "paired transfer evaluation",
+            "mcnemar discordant pairs",
+            "kernel boundary effect oracle",
+            "coact 1 dual channel",
+            "osworld v2",
+            "verigui",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W49_MINIMAX_INTERROGATION_CONTRASTIVE_ORACLE",
+            "engine:LEAPFROG_W50_KERNEL_BOUNDARY_DUAL_CHANNEL_EFFECT_HCU",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave49_50_structural_ast_repair_and_titan_adjudication_v1.py",
+            "canonical/tools/version_space_selection_measure_v1.py",
+            "canonical/runtime/verify_file_facts_provenance_v1.py",
+        ],
+    },
+    "CRASH_RESUMABLE_LIFE_LOOP_AND_TITAN_BEHAVIORAL_ADJUDICATION": {
+        "external_names": [
+            "crash resumable continuous life loop",
+            "wal tick replay",
+            "self verifying capability enrollment",
+            "titan behavioral proof adjudicator",
+            "proven loc falsifiable self check",
+            "adversarial negative control contract",
+            "sleep time compute",
+            "zero forgetting continual",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W50_CRASH_RESUMABLE_SELF_VERIFYING_LIFE_LOOP",
+            "engine:LEAPFROG_W50_TITAN_BEHAVIORAL_PROOF_ADJUDICATOR",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave49_50_structural_ast_repair_and_titan_adjudication_v1.py",
+            "canonical/tools/dark_matter_adjudicator_v1.py",
+            "canonical/runtime/current_state_obs_reducer.py",
         ],
     },
 }
@@ -6610,6 +6763,54 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
         eng = inputs.get("engine") or MetaCircularConceptRefusalAdjudicatorKernel()
         res = eng.run(inputs)
         return _ok(mode, "W48_META_CIRCULAR_REFUSAL_ADJUDICATOR", res) if res.get("pass") else _fail(mode, "W48_META_CIRCULAR_REFUSAL_ADJUDICATOR_FAILED", res)
+
+    if mode == "LEAPFROG_W49_TRACEBACK_SIGNATURE_ZERO_LINE_LOCALIZER":
+        from canonical.runtime.wave49_50_structural_ast_repair_and_titan_adjudication_v1 import Wave49To50UnifiedModelMixin
+
+        op = str(inputs.get("operation", inputs.get("op", "localize")))
+        kw = {k: v for k, v in inputs.items() if k not in ("operation", "op")}
+        res = Wave49To50UnifiedModelMixin().traceback_zero_line_localize_op(op, **kw)
+        return _ok(mode, "W49_TRACEBACK_ZERO_LINE_LOCALIZER", res) if res.get("pass") else _fail(mode, "W49_TRACEBACK_ZERO_LINE_LOCALIZER_FAILED", res)
+
+    if mode == "LEAPFROG_W49_STRUCTURAL_AST_MULTI_HUNK_SYNTHESIZER":
+        from canonical.runtime.wave49_50_structural_ast_repair_and_titan_adjudication_v1 import Wave49To50UnifiedModelMixin
+
+        op = str(inputs.get("operation", inputs.get("op", "repair_workspace")))
+        kw = {k: v for k, v in inputs.items() if k not in ("operation", "op")}
+        res = Wave49To50UnifiedModelMixin().structural_ast_multi_hunk_synth_op(op, **kw)
+        return _ok(mode, "W49_STRUCTURAL_AST_MULTI_HUNK_SYNTH", res) if res.get("pass") else _fail(mode, "W49_STRUCTURAL_AST_MULTI_HUNK_SYNTH_FAILED", res)
+
+    if mode == "LEAPFROG_W49_MINIMAX_INTERROGATION_CONTRASTIVE_ORACLE":
+        from canonical.runtime.wave49_50_structural_ast_repair_and_titan_adjudication_v1 import Wave49To50UnifiedModelMixin
+
+        op = str(inputs.get("operation", inputs.get("op", "minimax_query")))
+        kw = {k: v for k, v in inputs.items() if k not in ("operation", "op")}
+        res = Wave49To50UnifiedModelMixin().minimax_interrogation_contrastive_op(op, **kw)
+        return _ok(mode, "W49_MINIMAX_CONTRASTIVE_ORACLE", res) if res.get("pass") else _fail(mode, "W49_MINIMAX_CONTRASTIVE_ORACLE_FAILED", res)
+
+    if mode == "LEAPFROG_W50_KERNEL_BOUNDARY_DUAL_CHANNEL_EFFECT_HCU":
+        from canonical.runtime.wave49_50_structural_ast_repair_and_titan_adjudication_v1 import Wave49To50UnifiedModelMixin
+
+        op = str(inputs.get("operation", inputs.get("op", "route_dual_channel")))
+        kw = {k: v for k, v in inputs.items() if k not in ("operation", "op")}
+        res = Wave49To50UnifiedModelMixin().kernel_boundary_effect_hcu_op(op, **kw)
+        return _ok(mode, "W50_KERNEL_BOUNDARY_EFFECT_HCU", res) if res.get("pass") else _fail(mode, "W50_KERNEL_BOUNDARY_EFFECT_HCU_FAILED", res)
+
+    if mode == "LEAPFROG_W50_CRASH_RESUMABLE_SELF_VERIFYING_LIFE_LOOP":
+        from canonical.runtime.wave49_50_structural_ast_repair_and_titan_adjudication_v1 import Wave49To50UnifiedModelMixin
+
+        op = str(inputs.get("operation", inputs.get("op", "wal_tick")))
+        kw = {k: v for k, v in inputs.items() if k not in ("operation", "op")}
+        res = Wave49To50UnifiedModelMixin().crash_resumable_life_loop_op(op, **kw)
+        return _ok(mode, "W50_CRASH_RESUMABLE_LIFE_LOOP", res) if res.get("pass") else _fail(mode, "W50_CRASH_RESUMABLE_LIFE_LOOP_FAILED", res)
+
+    if mode == "LEAPFROG_W50_TITAN_BEHAVIORAL_PROOF_ADJUDICATOR":
+        from canonical.runtime.wave49_50_structural_ast_repair_and_titan_adjudication_v1 import Wave49To50UnifiedModelMixin
+
+        op = str(inputs.get("operation", inputs.get("op", "adjudicate")))
+        kw = {k: v for k, v in inputs.items() if k not in ("operation", "op")}
+        res = Wave49To50UnifiedModelMixin().titan_behavioral_adjudicator_op(op, **kw)
+        return _ok(mode, "W50_TITAN_BEHAVIORAL_ADJUDICATOR", res) if res.get("pass") else _fail(mode, "W50_TITAN_BEHAVIORAL_ADJUDICATOR_FAILED", res)
 
     if mode == "METAMORPHIC_HABITATION_ZIPPER":
         from canonical.swe_kernel import metamorphic_habitation_zipper_v1 as m

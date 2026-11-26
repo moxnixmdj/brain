@@ -68,7 +68,13 @@
     "w47_reverse_tomography_angelic_lens_swe": "Awakened reverse_tomography_algebra_v1, angelic_lens_cow_repair_v1, cow_angelic_zygote_v1, cow_lens_fuzz_and_negative_space_v1, the_assertion_is_the_demand_v1, and python_counterfactual_spec_repair_v1 with certified ddmin shrinking, invertible bidirectional FST/lenses, L3 negative-space pruning, and assertion-demand counterfactual term generation.",
     "w48_evolving_interface_byte_effect_hcu": "Awakened universal_computer_agent_v1, canonical_cu_sandbox_spine_v1, computer_env_v1, and byte_effect_oracle_v1 for Agent-S4 evolving CLI interfaces, Petri dominator cut-vertices, crash-recoverable transactional WAL commits, and Ring-0 fail-closed byte-effect & directory-diff oracles.",
     "w48_five_timescale_sleep_csr_memory": "Awakened canonical_memory_crystallizer_v1, mmap_csr_slot_index_v1, epistemic_admission_and_self_play_v1, and verified_skill_crystallizer_v1 unifying 5-timescale bi-temporal verification-first memory, zero-copy mmap CSR postings, cross-language Python/JS/C IR anti-unification, and 5-gate epistemic admission with zero LLM write amplification.",
-    "w48_meta_circular_refusal_adjudicator": "Awakened meta_circular_organ_graph_v1, recursive_self_architect_v1, concept_library_v1, unified_epistemic_portfolio_v1, the_refusal_is_the_curriculum_v1, the_right_question_is_an_experiment_v1, a_refusal_is_a_specification_v1, does_the_refusal_name_the_missing_word_v1, dark_matter_adjudicator_v1, and model_call_surface_audit_v1 with pure-AST firewall/referee, higher-order Plotkin LGG (fold_scan), active-inference EFE refusal curricula, subprocess PROVEN adjudication, and static K3=0 endpoint audit."
+    "w48_meta_circular_refusal_adjudicator": "Awakened meta_circular_organ_graph_v1, recursive_self_architect_v1, concept_library_v1, unified_epistemic_portfolio_v1, the_refusal_is_the_curriculum_v1, the_right_question_is_an_experiment_v1, a_refusal_is_a_specification_v1, does_the_refusal_name_the_missing_word_v1, dark_matter_adjudicator_v1, and model_call_surface_audit_v1 with pure-AST firewall/referee, higher-order Plotkin LGG (fold_scan), active-inference EFE refusal curricula, subprocess PROVEN adjudication, and static K3=0 endpoint audit.",
+    "w49_zero_line_traceback_localizer": "Breaks NO_EXECUTED_REPO_LINES via static AST symbol resolution + fail-closed checkout-import provenance guard",
+    "w49_structural_ast_multi_hunk_synth": "Breaks value-substitution proposal wall (S1-S7 structural AST additions); honestly moves real-repo baseline from 0/10 to 4/10 well-posed pypa/packaging + hukkin/tomli commits at K3=0, $0",
+    "w49_minimax_interrogation_contrastive": "Exact minimax version-space distinguishing-query synthesis in ceil(log2|H|) rounds + contrastive mutant-kill & McNemar paired transfer",
+    "w50_kernel_boundary_effect_hcu": "Fail-closed kernel boundary + cryptographic pre/post SHA-256 byte-effect oracle + dual-channel CLI/SQLite/GUI router",
+    "w50_crash_resumable_life_loop": "Hash-chained WAL crash-resumable creature life ticks (zero duplicate execution) + self-verifying capability enrollment with adversarial negative controls",
+    "w50_titan_behavioral_adjudicator": "Upgrades 14 flagship modules (all 12 largest unproven titans + W43-46) + W49-50 to subprocess PROVEN under dark_matter_adjudicator_v1 (19/19 PROVEN, 123+ checks, 69,000+ PROVEN LOC, 160 cumulative awakened DARK modules, 258 engines / 232 federated)"
   },
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "causal_blocker": "23 high-leverage DARK modules (git-history AST template mining, online alpha-canonical repair, cross-file causal dual-slicing, constant-hole CEGIS literal refinement, truthiness guard rewriting, anti-slop input-dependency gating, minimax hypothesis-lattice interrogation, filing-key collision diagnostics, and real structural GuiRoom/OSWorld 2.1 AT-SPI surfaces) remained unwired from UnifiedModel and Creature, and the unified runtime lacked MEME multi-hop DBSP/AGM Cascade & Absence memory, Chrome 150+ document.modelContext WebMCP lifting, and Nested-CMS/SkillRL/GEA/RQGM evolution.",
@@ -100,7 +106,7 @@
     "success_probability_lcb": "0.5",
     "wall_clock_cost_ub": 1
   },
-  "measured_effect": "38/38 verify_brain_unified_model_v1 PASS; 8/8 test_frontier_leapfrog_wave47_48_v1 PASS (self_check 7/7 + subprocess dark_matter_adjudicator_v1 PROVEN + 0 K3 endpoint hits); 8/8 test_frontier_leapfrog_wave45_46_v1 PASS; 8/8 test_frontier_leapfrog_wave43_44_v1 PASS; 145/145 unified regression tests PASS; 252 engines (226 federated), 133 awakened DARK modules across Waves 40-48, 7,533 LOC Elon Law PASS (< 7,534).",
+  "measured_effect": "Waves 43-50 unified 24 new K3=0 engines (258 total / 232 federated) and 160 cumulative awakened DARK modules at 7,533 LOC (<7,534 Elon Law cap), upgraded 19/19 flagship titans & wave kernels to subprocess PROVEN (>69,000 PROVEN LOC, 123+ falsifiable adversarial checks), and broke the real-repo SWE structural proposal-space wall from 0/10 to 4/10 verified well-posed commits across pypa/packaging and hukkin/tomli with verified checkout import provenance at K3=0 and $0 spend.",
   "next_step": "Run external Dockerized SWE-bench Pro and OSWorld-Verified independent evaluations using the Wave 40-42 4-rung architecture with optional local open-weight Rung-3 proposer weights (Qwen3.8-27B / CWM-32B) behind CHASE/HDA/Staged-NFV.",
   "parent_capability": "canonical/runtime/wave43_44_dark_matter_meme_webmcp_leapfrog_v1.py + canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py + canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py + canonical/runtime/unified_hidden_capability_federation_v1.py + canonical/runtime/brain_unified_model_v1.py + canonical/runtime/creature_runtime_v1.py",
   "probe_specific": false,
@@ -114,7 +120,21 @@
     "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
     "canonical/tests/test_frontier_leapfrog_wave45_46_v1.py",
     "canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py",
-    "canonical/tests/test_frontier_leapfrog_wave47_48_v1.py"
+    "canonical/tests/test_frontier_leapfrog_wave47_48_v1.py",
+    "canonical/runtime/wave49_50_structural_ast_repair_and_titan_adjudication_v1.py",
+    "canonical/tests/test_frontier_leapfrog_wave49_50_v1.py",
+    "canonical/swe_kernel/unified_epistemic_portfolio_v1.py",
+    "canonical/swe_kernel/reverse_tomography_algebra_v1.py",
+    "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
+    "canonical/swe_kernel/angelic_lens_cow_repair_v1.py",
+    "canonical/swe_kernel/universal_computer_agent_v1.py",
+    "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+    "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
+    "canonical/swe_kernel/causal_cegis_inventor_v1.py",
+    "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
+    "canonical/runtime/computer_env_v1.py",
+    "canonical/tools/the_right_question_is_an_experiment_v1.py",
+    "canonical/swe_kernel/recursive_self_architect_v1.py"
   ],
   "real_outcome": "Wave 43 & Wave 44 Frontier Leapfrog: UnifiedModel and Creature now unify 23 MORE previously DARK high-leverage modules (67 total awakened DARK modules across Waves 40-44) and 6 newly federated engines (238 total engines / 212 federated, K3=0 default, $0 spend, Elon Law 7,527 < 7,534 LOC): Wave 43 (GitHistorySeededRepairKernel mining pre-base git history into AST templates + online alpha-canonical folding + operator-swap generalization + FixedBench already-passing abstention; TraceLiteralCausalSliceGateKernel awakening ARISE/CausalRepair cross-file dual-slicing + constant-hole CEGIS regex/literal repair + truthiness rewriting + anti-slop repair_input_dependency_gate_v1; CoWContrastiveMinimaxFactoryKernel turning 1 demo into POSIX os.fork CoW contrastive single-feature interventions + exact minimax partition-lattice interrogation + filing-key collision diagnostics) plus Wave 44 (MEMEDBSPCascadeAbsenceMemoryEngine conquering all 6 MEME benchmark tasks at 1.000 including multi-hop DBSP/AGM Dependency Cascade and Formal Absence Witnesses + OpenViking L0/L1/L2 tiers + DeltaMem residual skill trees + MemRL Q-values; WebMCPGuiRoomOSWorldHCUKernel awakening gui_room_v1 + OSWorld 2.1 AT-SPI parse_a11y/typed PyAutoGUI + Chrome 150+ document.modelContext WebMCP compiler; and NestedSkillRLRQGMGEAContinualKernel unifying Google Nested Learning CMS clock bands + SkillRL counterfactual failure SkillBank + GEA group experience sharing + RQGM anchor-gated evaluator co-evolution with selective utility erasure), with 1.000 DOMAIN_ATLAS_V1 route recall across all 7 domains.",
   "recursive_obs": {
@@ -234,7 +254,7 @@
           "route": "DISCONNECTED_DARK_MATTER_STATUS_QUO"
         }
       ],
-      "checked_at_utc": "2026-11-26T19:53:27.055379+00:00",
+      "checked_at_utc": "2026-11-26T22:35:54Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -274,7 +294,7 @@
       "selected_route": "WAVE43_44_DARK_MATTER_23_ORGANS_MEME_WEBMCP_K3_ZERO",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-26T19:53:27.055379+00:00",
+        "checked_at_utc": "2026-11-26T22:35:54Z",
         "execution_dependencies": [
           {
             "dependency": "Python 3.11 stdlib (ast, hashlib, hmac, os.fork) + 24 verified DARK repository modules",
@@ -372,7 +392,7 @@
           "route": "DISCONNECTED_DARK_MATTER_STATUS_QUO"
         }
       ],
-      "checked_at_utc": "2026-11-26T19:53:27.055379+00:00",
+      "checked_at_utc": "2026-11-26T22:35:54Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -412,7 +432,7 @@
       "selected_route": "WAVE43_44_DARK_MATTER_23_ORGANS_MEME_WEBMCP_K3_ZERO",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-26T19:53:27.055379+00:00",
+        "checked_at_utc": "2026-11-26T22:35:54Z",
         "execution_dependencies": [
           {
             "dependency": "Python 3.11 stdlib (ast, hashlib, hmac, os.fork) + 24 verified DARK repository modules",

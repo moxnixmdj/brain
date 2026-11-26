@@ -1936,6 +1936,32 @@ class Creature:
         """Wave 48: Creature meta-circular AST organs + Plotkin LGG + active-inference refusal curriculum + subprocess dark-matter adjudication."""
         return self._ensure_unified_model().meta_circular_refusal_adjudicator_op(payload)
 
+    def traceback_zero_line_localize_op(self, operation: str = "localize", **kwargs: Any) -> dict[str, Any]:
+        """Wave 49: Creature zero-executed-line traceback+AST localizer & checkout-import provenance guard."""
+        return self._ensure_unified_model().traceback_zero_line_localize_op(operation, **kwargs)
+
+    def structural_ast_multi_hunk_synth_op(self, operation: str = "repair_workspace", **kwargs: Any) -> dict[str, Any]:
+        """Wave 49: Creature structural AST multi-hunk synthesizer (kwarg+context threading, dunder guards, __module__ re-export, !r repr, recursive guards, owned site transfer)."""
+        return self._ensure_unified_model().structural_ast_multi_hunk_synth_op(operation, **kwargs)
+
+    def minimax_interrogation_contrastive_op(self, operation: str = "minimax_query", **kwargs: Any) -> dict[str, Any]:
+        """Wave 49: Creature exact-minimax version-space interrogation + contrastive mutant-kill oracle & paired transfer."""
+        return self._ensure_unified_model().minimax_interrogation_contrastive_op(operation, **kwargs)
+
+    def kernel_boundary_effect_hcu_op(self, operation: str = "effect_oracle", **kwargs: Any) -> dict[str, Any]:
+        """Wave 50: Creature fail-closed kernel-boundary SHA-256 byte-effect oracle & dual-channel code/GUI router."""
+        return self._ensure_unified_model().kernel_boundary_effect_hcu_op(operation, **kwargs)
+
+    def crash_resumable_life_loop_op(self, operation: str = "wal_tick", **kwargs: Any) -> dict[str, Any]:
+        """Wave 50: Creature hash-chained WAL crash-resumable life ticks & self-verifying capability enrollment."""
+        res = self._ensure_unified_model().crash_resumable_life_loop_op(operation, **kwargs)
+        self._save()
+        return res
+
+    def titan_behavioral_adjudicator_op(self, operation: str = "adjudicate", **kwargs: Any) -> dict[str, Any]:
+        """Wave 50: Creature subprocess-isolated behavioral proof adjudication across flagship titans + K3=0 audit."""
+        return self._ensure_unified_model().titan_behavioral_adjudicator_op(operation, **kwargs)
+
     def sleep_evolve_organs_gea(
         self,
         *,

@@ -1982,3 +1982,74 @@ class Wave43To44UnifiedModelMixin(Wave40To42UnifiedModelMixin):
 
     def wave43_44_awakened_inventory(self) -> dict[str, Any]:
         return wave43_44_awakened_inventory()
+
+
+def self_check() -> dict[str, Any]:
+    """Falsifiable behavioral contract for Wave 43-44 dark-matter MEME/WebMCP leapfrog kernels.
+
+    Proves:
+    1. All 23 Wave 43-44 DARK modules load cleanly in the awakened inventory.
+    2. TraceLiteralCausalSliceGateKernel anti-slop gate admits an input-dependent repair and
+       rejects a constant/hardcoded slop patch.
+    3. MEMEDBSPCascadeAbsenceMemoryEngine tracks active facts, deletes/retracts cleanly,
+       and proves absence on retracted entities while keeping live facts intact.
+    4. WebMCPGuiRoomOSWorldHCUKernel compiles real HTML forms into typed tool contracts.
+    """
+    failures: list[str] = []
+
+    def check(label: str, ok: bool) -> None:
+        if not ok:
+            failures.append(label)
+
+    inv = wave43_44_awakened_inventory()
+    check(
+        "inventory registers all 23 Wave 43-44 modules",
+        int(inv.get("wave43_44_declared", 0)) == 23 and bool(inv.get("all_present")),
+    )
+
+    slice_k = TraceLiteralCausalSliceGateKernel()
+    good = slice_k.anti_slop_input_dependency_gate(
+        before_source="def f(x):\n    return x - 1\n",
+        after_source="def f(x):\n    return x + 1\n",
+        function_name="f",
+        probe_pairs=[((1,), (2,)), ((5,), (6,))],
+    )
+    slop = slice_k.anti_slop_input_dependency_gate(
+        before_source="def f(x):\n    return x - 1\n",
+        after_source="def f(x):\n    return 2\n",
+        function_name="f",
+        probe_pairs=[((1,), (2,)), ((5,), (6,))],
+    )
+    check(
+        "anti-slop gate admits input-dependent repair",
+        bool(good.get("admitted")) and good.get("structural_gate", {}).get("status") == "PASS",
+    )
+    check(
+        "negative control: anti-slop gate rejects hardcoded constant return",
+        not bool(slop.get("admitted")) and slop.get("structural_gate", {}).get("status") == "REFUSED",
+    )
+
+    mem_k = MEMEDBSPCascadeAbsenceMemoryEngine()
+    mem_k.assert_fact("pkg.ver", "1.0")
+    mem_k.assert_fact("pkg.os", "linux")
+    mem_k.delete_fact("pkg.ver")
+    q_del = mem_k.query_entity("pkg.ver")
+    q_live = mem_k.query_entity("pkg.os")
+    check(
+        "MEME DBSP deletion removes retracted entity while preserving siblings",
+        q_del.get("status") == "DELETED" and q_live.get("status") == "ACTIVE" and q_live.get("value") == "linux",
+    )
+
+    hcu_k = WebMCPGuiRoomOSWorldHCUKernel()
+    html = '<form id="login" action="/auth"><input name="user" type="text"/><button type="submit">Go</button></form>'
+    form_res = hcu_k.compile_webmcp_document_model_context(html_source=html)
+    check("compiles HTML form into WebMCP tool schema", len(form_res.get("tools") or []) >= 1)
+
+    total = 5
+    return {
+        "schema": "BRAIN_WAVE43_44_DARK_MATTER_MEME_WEBMCP_SELF_CHECK",
+        "checks": total,
+        "passed": total - len(failures),
+        "failures": failures,
+        "verdict": "SELF_CHECK_PASS" if not failures else "SELF_CHECK_FAIL",
+    }
