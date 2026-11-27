@@ -50,7 +50,14 @@
       "help",
       "all_other_word_list_values"
     ],
-    "note": "THE_320_BOUND_IS_A_SAFE_SCHEDULING_UPPER_BOUND_NOT_A_CLAIM_OF_320_REACHABLE_DISTINCT_SIGNATURES"
+    "note": "THE_320_BOUND_IS_A_SAFE_SCHEDULING_UPPER_BOUND_NOT_A_CLAIM_OF_320_REACHABLE_DISTINCT_SIGNATURES",
+    "section_boundary_neutralization": {
+      "splitter_value": "Section_or_SECTION",
+      "exact_checker_shape": "OPTIONAL_WHITESPACE__SPLITTER__OPTIONAL_WHITESPACE__DIGITS__OPTIONAL_WHITESPACE",
+      "constructive_representative": "Section1",
+      "regex_word_boundary_fact": "ASCII_LETTERS_AND_DIGITS_ARE_BOTH_WORD_CHARACTERS__SO_NO_WORD_BOUNDARY_EXISTS_BETWEEN_n_AND_1",
+      "consequence": "FORBIDDEN_WORD_section_DOES_NOT_CREATE_AN_UNSAT_COLLISION_AND_REQUIRES_NO_EXTRA_COLLISION_SIGNATURE_BIT"
+    }
   },
   "exact_probability_diagnostics": {
     "nth_plus_forbidden_collision_conditional_on_pair": 0.003278688524590164,
@@ -65,7 +72,7 @@
     "FOR_EACH_SIGNATURE_REQUIRE_EITHER_AN_EXACT_PINNED_CHECKER_POSTVALIDATED_WITNESS_OR_A_CHECKER_SEMANTICS_UNSAT_CERTIFICATE",
     "KEEP_ZERO_CREDIT_UNTIL_INDEPENDENT_PUBLIC_RUNNER_EXACT_BYTE_VERIFICATION"
   ],
-  "next_action": "IMPLEMENT_THE_COLLISION_SIGNATURE_ENUMERATOR_AND_COMPOSE_IT_WITH_THE_EXISTING_SEVEN_ARCHETYPE_CONSTRUCTORS_AND_EXACT_PINNED_CHECKER_POSTVALIDATOR",
+  "next_action": "RUN_THE_EXACT_PINNED_POINTWISE_SEARCH_BRIDGE_OVER_THE_320_LEXICAL_SIGNATURE_BOUND_PLUS_REDUCED_NUMERIC_STRUCTURAL_CLASSES__COLLECT_ONLY_FAIL_CLOSED_RESIDUALS",
   "hard_nonclaims": [
     "NO_TERMINAL_ROW_CONTENT_READ",
     "NO_TERMINAL_CASE_FREQUENCY_INFERRED",
@@ -87,5 +94,26 @@
     "promotion": false,
     "fresh_reality": false,
     "acceptance_credit": false
+  },
+  "constructor_literal_audit": {
+    "exact_word_list_entry_count": 1525,
+    "unsafe_old_json_key_in_word_list": "response",
+    "repaired_json_surface": "TOP_LEVEL_JSON_STRING",
+    "safe_general_fillers_absent_from_word_list": [
+      "zxqv",
+      "brnt",
+      "clmp",
+      "dgfk",
+      "hjwy",
+      "vvzz"
+    ],
+    "two_response_literals_absent_from_word_list": [
+      "alpha",
+      "beta"
+    ],
+    "title_literal_x_absent_from_word_list": true,
+    "repeat_literal_answer_is_in_word_list_but_forbidden_words_conflicts_with_repeat_prompt": true,
+    "postscript_single_letter_tokens_p_s_absent_from_word_list": true,
+    "section_is_in_word_list_but_digit_adjacency_removes_whole_word_boundary": true
   }
 }
