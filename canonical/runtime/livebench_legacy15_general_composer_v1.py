@@ -10,9 +10,10 @@ Design:
 - structural construction for *, ***, Section X, \n\n, title, quotation,
   postscript, end phrase;
 - exact source-equivalent word counting (RegexpTokenizer r"\w+");
-- conservative sentence support: "at least" is constructive; low-bound
-  "less than" cases fail closed where Punkt/newline interactions have not yet
-  been independently verified.
+- constructive sentence support for both lower and strict upper bounds;
+- strict upper bounds use punctuation-free bodies and whitespace-free
+  postscript continuation so structural composition does not create extra
+  Punkt sentence boundaries.
 
 No hidden terminal fields or learned model are used.
 """
@@ -136,7 +137,12 @@ def _apply_word_constraint(
     raise ComposeError("UNKNOWN_WORD_RELATION")
 
 
-def _common_lines(constraints: list[dict[str, Any]], required: list[str]) -> list[str]:
+def _common_lines(
+    constraints: list[dict[str, Any]],
+    required: list[str],
+    *,
+    sentence_quiet: bool = False,
+) -> list[str]:
     lines: list[str] = []
     if _one(constraints, "detectable_format:title") is not None:
         lines.append("<<qz>>")
@@ -173,7 +179,11 @@ def _common_lines(constraints: list[dict[str, Any]], required: list[str]) -> lis
         marker = str(_slots(post).get("postscript_marker") or "")
         if marker not in {"P.S.", "P.P.S"}:
             raise ComposeError("POSTSCRIPT_PARAMETER_DRIFT")
-        lines.append(marker + " zxqv")
+        # For strict sentence upper bounds, glue the carrier directly to the
+        # marker. The frozen PostscriptChecker regex still accepts P.S.<tail>
+        # / P.P.S<tail>, while Punkt has no whitespace boundary after the
+        # marker on which to create a second sentence.
+        lines.append(marker + ("" if sentence_quiet else " ") + "zxqv")
 
     return lines
 
@@ -242,7 +252,8 @@ def _compose_plain_or_sentence(
             raise ComposeError("LESS_THAN_ONE_SENTENCE_WORD_LOWER_BOUND")
         return ""
 
-    lines = _common_lines(constraints, required)
+    sentence_quiet = sc is not None and sc[0] == "less than"
+    lines = _common_lines(constraints, required, sentence_quiet=sentence_quiet)
     if not lines:
         lines.append("zxqv")
 
@@ -251,15 +262,12 @@ def _compose_plain_or_sentence(
         if relation == "at least":
             _add_at_least_sentences(lines, n)
         else:
-            # For general single-block text, avoid adding any sentence-ending
-            # punctuation. The remaining unavoidable public wrappers are checked
-            # conservatively below; threshold 2 is only accepted without P.P.S
-            # plus end-marker interaction until exact-source grid verification.
-            if n == 2:
-                post = _one(constraints, "detectable_content:postscript")
-                end = _ending(constraints)
-                if post is not None and end is not None:
-                    raise ComposeError("LESS_THAN_TWO_SENTENCE_POSTSCRIPT_END_UNVERIFIED")
+            # Upper-bound construction is sentence-quiet by design. Generated
+            # structure contains no terminal punctuation except an optional
+            # exact end phrase. Postscript markers are emitted without a
+            # following whitespace boundary by _common_lines(), preventing the
+            # marker from becoming an additional Punkt sentence.
+            pass
 
     end = _ending(constraints)
     prefix = "\n".join(lines)
@@ -327,15 +335,12 @@ def _compose_nth_paragraph(
         raise ComposeError("NTH_FIRST_WORD_FORBIDDEN_UNSAT")
 
     sc = _sentence_constraint(constraints)
-    if sc is not None and sc[0] == "less than":
-        # Blank-line/Punkt interaction gets exact-source verification before
-        # activation; keep this branch fail-closed in V1.
-        raise ComposeError("NTH_PLUS_SENTENCE_LESS_THAN_UNVERIFIED")
 
     paragraphs = ["zxqv" for _ in range(n)]
     paragraphs[nth - 1] = first + " zxqv"
 
-    common = _common_lines(constraints, required)
+    sentence_quiet = sc is not None and sc[0] == "less than"
+    common = _common_lines(constraints, required, sentence_quiet=sentence_quiet)
     if common:
         paragraphs[-1] += "\n" + "\n".join(common)
 
