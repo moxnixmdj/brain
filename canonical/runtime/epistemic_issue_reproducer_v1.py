@@ -1514,13 +1514,25 @@ def _compile_metamorphic_witness_clones(
                 elif isinstance(arg, ast.List) and arg.elts and all(isinstance(e, ast.Constant) and isinstance(e.value, (int, float)) for e in arg.elts):
                     _mutate_arg(idx, is_kw, "[0]", "zero_list")
             if cues["whitespace_case"]:
-                if isinstance(arg, ast.Constant) and isinstance(arg.value, str) and arg.value:
-                    if not arg.value.startswith(" ") and not arg.value.endswith(" "):
-                        _mutate_arg(idx, is_kw, repr(f"  {arg.value}  "), "pad_whitespace")
-                    if cues["want_unicode"]:
-                        _mutate_arg(idx, is_kw, repr(arg.value + "\u00e9"), "unicode_str")
-                    if cues["want_case"] and arg.value.lower() == arg.value:
-                        _mutate_arg(idx, is_kw, repr(arg.value.upper()), "upper_case")
+                if isinstance(arg, ast.Constant) and isinstance(arg.value, str):
+                    _iss_l = (issue_text or "").lower()
+                    _wants_ws_input = (
+                        "whitespace" in _iss_l
+                        or "strip" in _iss_l
+                        or "trim" in _iss_l
+                        or (not cues["forbid_trailing_space"] and not cues["forbid_leading_space"])
+                    )
+                    if arg.value == "" and _wants_ws_input:
+                        _mutate_arg(idx, is_kw, repr("   "), "whitespace_only")
+                    elif arg.value:
+                        if _wants_ws_input and not arg.value.startswith(" ") and not arg.value.endswith(" "):
+                            _mutate_arg(idx, is_kw, repr(f"  {arg.value}  "), "pad_whitespace")
+                        if _wants_ws_input and (cues["empty"] or "whitespace" in _iss_l):
+                            _mutate_arg(idx, is_kw, repr("   "), "whitespace_only")
+                        if cues["want_unicode"]:
+                            _mutate_arg(idx, is_kw, repr(arg.value + "\u00e9"), "unicode_str")
+                        if cues["want_case"] and arg.value.lower() == arg.value:
+                            _mutate_arg(idx, is_kw, repr(arg.value.upper()), "upper_case")
             if cues["duplicate_order"]:
                 if isinstance(arg, ast.List) and len(arg.elts) >= 2:
                     dup_src = "[" + ", ".join(ast.unparse(e) for e in list(arg.elts) + [arg.elts[0]]) + "]"
@@ -1529,7 +1541,22 @@ def _compile_metamorphic_witness_clones(
                     _mutate_arg(idx, is_kw, rev_src, "rev_list")
         return variants[:6]
 
-    def _build_check_lines(call_expr: str) -> list[str]:
+    def _enclosing_assert_expected(st_node: ast.stmt, call_node: ast.Call) -> str | None:
+        if (
+            isinstance(st_node, ast.Assert)
+            and isinstance(st_node.test, ast.Compare)
+            and len(st_node.test.ops) == 1
+            and isinstance(st_node.test.ops[0], ast.Eq)
+            and len(st_node.test.comparators) == 1
+        ):
+            c_src = ast.unparse(call_node)
+            if ast.unparse(st_node.test.left) == c_src:
+                return ast.unparse(st_node.test.comparators[0])
+            if ast.unparse(st_node.test.comparators[0]) == c_src:
+                return ast.unparse(st_node.test.left)
+        return None
+
+    def _build_check_lines(call_expr: str, *, label: str = "", orig_expected: str | None = None) -> list[str]:
         if exp_exc:
             return [
                 "    _raised = False",
@@ -1540,8 +1567,16 @@ def _compile_metamorphic_witness_clones(
                 f"    assert _raised, 'Expected {exp_exc} to be raised'",
             ]
         lines = [f"    _res = {call_expr}"]
-        if exp_lit is not None:
+        _issue_lo = (issue_text or "").lower()
+        _targets_blank = cues["empty"] or "whitespace-only" in _issue_lo or "whitespace only" in _issue_lo
+        if label == "pad_whitespace" and orig_expected is not None:
+            lines.append(f"    assert _res == ({orig_expected}), f'Unexpected result: {{_res!r}}'")
+        elif label == "pad_whitespace" and _targets_blank:
+            pass
+        elif exp_lit is not None:
             lines.append(f"    assert _res == ({exp_lit}), f'Unexpected result: {{_res!r}}'")
+        elif label == "whitespace_only" and orig_expected is not None:
+            lines.append(f"    assert _res == ({orig_expected}), f'Unexpected result: {{_res!r}}'")
         if cues["forbid_trailing_space"]:
             lines.append("    assert not (isinstance(_res, str) and _res.endswith(' ')), f'Trailing space in {_res!r}'")
         if cues["forbid_leading_space"]:
@@ -1653,6 +1688,7 @@ def _compile_metamorphic_witness_clones(
                             tf_rel,
                             test_subdir,
                         )
+                    _orig_exp = _enclosing_assert_expected(st, sub)
                     for label, mut_call in variants:
                         if len(specs) >= 24:
                             break
@@ -1666,7 +1702,7 @@ def _compile_metamorphic_witness_clones(
                                 if len(specs) >= 24 or not _method_accepts_zero_args(call_nm, m_nm):
                                     continue
                                 target_call = f"({mut_call}).{m_nm}()"
-                                body_lines = setup_lines + _build_check_lines(target_call)
+                                body_lines = setup_lines + _build_check_lines(target_call, label=label, orig_expected=_orig_exp)
                                 _emit_spec(
                                     header_txt,
                                     f"test_epistemic_metamorphic_{label}_{m_nm}_{fn.name}_{len(specs)}",
@@ -1676,7 +1712,7 @@ def _compile_metamorphic_witness_clones(
                                     test_subdir,
                                 )
                         else:
-                            body_lines = setup_lines + _build_check_lines(mut_call)
+                            body_lines = setup_lines + _build_check_lines(mut_call, label=label, orig_expected=_orig_exp)
                             _emit_spec(
                                 header_txt,
                                 f"test_epistemic_metamorphic_{label}_{fn.name}_{len(specs)}",
@@ -1710,7 +1746,7 @@ def _compile_metamorphic_witness_clones(
                                         if k != p_idx and isinstance(fn.body[k], (ast.Assign, ast.AnnAssign)) and "self." not in ast.unparse(fn.body[k])
                                     ]
                                     pre_s.append(f"    {recv_var} = {mut_ctor}")
-                                    body_lines = pre_s + _build_check_lines(ast.unparse(sub))
+                                    body_lines = pre_s + _build_check_lines(ast.unparse(sub), label=label)
                                     _emit_spec(
                                         header_txt,
                                         f"test_epistemic_metamorphic_ctor_{label}_{fn.name}_{len(specs)}",

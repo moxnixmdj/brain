@@ -1075,7 +1075,7 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
     "WAKE_SLEEP_CONSOLIDATION": {
         "domain": "CONTINUAL_LEARNING_AND_ORGANS",
         "source_path": "canonical/swe_kernel/sentient_cognitive_core_v1.py",
-        "entrypoint": "run_wake_sleep_operation",
+        "entrypoint": "WakeSleepConsolidationEngine",
         "summary": (
             "Wake-sleep consolidation over verified repair episodes: two-witness "
             "non-constant permanence gate, [G_-, B_+] version-space rule induction, "

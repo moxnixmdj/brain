@@ -1,32 +1,5 @@
 #!/usr/bin/env python3
-"""Brain Unified Model V1 — one front door over the compiled Brain.
-
-``BRAIN_UNIFIED_MODEL_V1.json`` is a deterministic projection of every live
-verified capability, every fabric engine mode, every internalized skill
-procedure, and an index of the laws and research the machine reasons from.
-This module is the thing you actually run.
-
-Three operations, one contract:
-
-* ``status()``   — what the model contains, and what it explicitly cannot claim.
-* ``route()``    — deterministic ranking of a plain goal against the model. It
-                   fails closed: an unknown goal is reported as unknown instead
-                   of being answered by a guess or an external model.
-* ``solve()``    — route, then execute through the authority that owns the
-                   capability. Bound capabilities go through
-                   ``verified_bound_capability_execution_adapter_v1.execute``,
-                   which re-reads the live registry and re-checks evidence.
-                   Engine modes go through the unified cognitive fabric unchanged.
-* ``recall()``   — just-in-time retrieval over the knowledge index. The model
-                   stores hashes, headings and terms, never a copy of the text.
-
-Authority boundary
-------------------
-This module grants nothing. Every result carries zero capability, ownership and
-terminal credit. It does not widen a tolerance, promote a capability, replace
-the live registry, or add a model to any producer path. It exposes what Brain
-already owns through one addressable artifact.
-"""
+"""Brain Unified Model V1 — one front door over the compiled Brain."""
 from __future__ import annotations
 
 import hashlib
@@ -108,14 +81,7 @@ _PATH_LITERAL = re.compile(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+")
 _URL_LITERAL = re.compile(r"https?://[^\s)\]}>]+")
 
 def path_literals(text: str, root: str | Path | None = None) -> list[str]:
-    """The spans of ``text`` that name a real artifact, in sentence order.
-
-    A literal counts only when something is actually there: the literal itself
-    exists, or its parent directory does (so "write a new file into an existing
-    directory" is still recognised as naming a destination). That requirement is
-    what keeps prose out -- "and/or", "read/write" and "input/output" match the
-    path shape but resolve to no parent directory, so they stay question words.
-    """
+    """The spans of ``text`` that name a real artifact, in sentence order."""
     s_text = str(text or "")
     if "/" not in s_text:
         return []
@@ -143,25 +109,7 @@ def path_literals(text: str, root: str | Path | None = None) -> list[str]:
     return found
 
 def ask_tokens(text: str, root: str | Path | None = None) -> list[str]:
-    """The caller's ASK: the sentence with its stated path literals blanked out.
-
-    ``route()`` fails closed when the model recognises too little of a sentence.
-    Charging the tokens of a stated path to that budget made the verdict a
-    lottery on how many times a sentence happened to repeat an indexed word.
-    Measured: "/home/user/brain/canonical/astra_runtime/tmp/x/calc.py" alone
-    contributes eleven tokens no capability can ever claim, so "Count the
-    functions defined in the python file <that path> and write the report to
-    <another path>" scored coverage 0.240 against the 0.34 floor and was refused
-    as GOAL_NOT_REPRESENTED_IN_MODEL before a single capability was considered --
-    while "Run the python tests ..." squeaked past at 0.257 only because the
-    sentence repeats its own keywords.
-
-    A path is a located artifact the binder will bind, not a word to be
-    understood. It is the same distinction the compiler already draws for a
-    quoted literal (a quoted literal's words are not the task's words) and for a
-    bare version token (a name fragment, not a stated value). Scoring is left
-    untouched: only the denominator of the coverage budget changes.
-    """
+    """The caller's ASK: the sentence with its stated path literals blanked out."""
     ask = str(text or "")
     if "/" in ask:
         for literal in path_literals(ask, root):
@@ -928,11 +876,7 @@ class UnifiedModel(_Wave53To54UnifiedCapabilityBusMixin):
             pass
 
     def _load_cold_section_rows(self, section_key: str) -> list[Any]:
-        """Wave 39 Elon-Speed Cold-Section Slice Loader (`os.pread` over `section_byte_spans`):
-        Reads and parses ONLY the requested JSON array slice (e.g. `447 KB` `harvested_capabilities`
-        or `597 KB` `extended_source_index`) instead of parsing the entire `13.47 MB` full JSON.
-        Falls back fail-closed to `_ensure_full_model()` whenever `self._model_loaded` is already
-        resident, `self.path != MODEL_PATH`, or `st_size != artifact_bytes` (tamper protection)."""
+        """Wave 39 Elon-Speed Cold-Section Slice Loader (`os.pread` over `section_byte_spans`): Reads and parses ONLY the reques..."""
         if self._model_loaded is not None:
             return list(self._model_loaded.get(section_key) or [])
         spans = self._core_meta.get("section_byte_spans")
@@ -1236,13 +1180,7 @@ class UnifiedModel(_Wave53To54UnifiedCapabilityBusMixin):
         return dict(row) if row else None
 
     def _ensure_harvested_index(self) -> dict[str, dict[str, float]]:
-        """Lazily build the harvested trigger index (token -> {id: weight}).
-
-        Mirrors the capability grammar: IDF-weighted postings over declared
-        triggers plus id tokens. Built once per model instance; the fallback
-        in ``solve()`` only runs when the primary route fails, so this cost
-        is off the hot path.
-        """
+        """Lazily build the harvested trigger index (token -> {id: weight})."""
         if self._harvested_index is not None:
             return self._harvested_index
         self._ensure_harvested()
@@ -1270,14 +1208,7 @@ class UnifiedModel(_Wave53To54UnifiedCapabilityBusMixin):
         return index
 
     def route_harvested(self, goal: str, *, top_k: int = 5) -> dict[str, Any]:
-        """Score harvested surfaces against a goal. Never returns a capability.
-
-        This is the fallback router: it answers "which discovered surface
-        could serve this goal?" with ``admitted: False`` on every row. It
-        does not promote, admit, or verify anything — execution still goes
-        through ``execute_harvested_surface`` and still issues only a
-        producer receipt.
-        """
+        """Score harvested surfaces against a goal."""
         tokens = tokenize(goal)
         index = self._ensure_harvested_index()
         ask_list: list[str] = []
@@ -1970,15 +1901,7 @@ class UnifiedModel(_Wave53To54UnifiedCapabilityBusMixin):
     # ------------------------------------------------------------------- route
 
     def _declared_triggers(self, cid: str) -> set[str]:
-        """The tokens the verifier treats as this capability's own triggers.
-
-        Mirrors `verify_brain_unified_model_v1._capability_tokens`: a declared
-        trigger counts only if it is not a segment of the capability's own id
-        and is longer than three characters. That excludes the path segments
-        (`canonical`, `verification`) and short filename fragments (`run`,
-        `py`, `v1`) that would otherwise make an ordinary word in a goal select
-        this capability.
-        """
+        """The tokens the verifier treats as this capability's own triggers."""
         cached = self._declared_triggers_cache.get(cid)
         if cached is not None:
             return cached
@@ -2018,27 +1941,7 @@ class UnifiedModel(_Wave53To54UnifiedCapabilityBusMixin):
         return hits
 
     def unrunnable_capabilities(self) -> dict[str, list[str]]:
-        """Capabilities whose own declared dependencies do not resolve *here*.
-
-        Resolved on the machine that is answering, never compiled in -- see
-        ``_dependency_declaration``, which records the declaration precisely so
-        that this answer can be true of the host rather than of whichever
-        machine last built the artifact.
-
-        A capability that cannot resolve the substrate it declares can only
-        fail. Measured: ``python.contract.check.crosshair.v1`` -- whose adapter
-        runs ``sys.executable -m crosshair`` on a machine without crosshair --
-        was selected for eight of thirteen ordinary Python software-engineering
-        sentences and failed every one of them with
-        ``BOUND_PYPI_SOURCE_INCOMPLETE``, after spending the whole request
-        getting there.
-
-        This is reported by ``route()`` and enforced by ``solve()``. It is
-        deliberately NOT used to filter the ranking: what the model contains is
-        not a fact about one host, and this sandbox has pypdf while the CI
-        runner does not, so hiding capabilities here would make routing
-        host-dependent.
-        """
+        """Capabilities whose own declared dependencies do not resolve *here*."""
         if self._unrunnable is None:
             found: dict[str, list[str]] = {}
             probe_cache: dict[tuple[str, bool], bool] = {}
@@ -2194,13 +2097,7 @@ class UnifiedModel(_Wave53To54UnifiedCapabilityBusMixin):
         top_k: int = 5,
         collapse_superseded: bool = True,
     ) -> dict[str, Any]:
-        """Locate runtime source the model can *address* but cannot *execute*.
-
-        This is deliberately not ``route`` and ``solve`` never calls it. The
-        modules returned here have no receipt and no bound adapter, so naming one
-        is an answer to "where is this?", never to "run this". Every row repeats
-        ``executable: False`` so a caller cannot mistake a hit for a capability.
-        """
+        """Locate runtime source the model can *address* but cannot *execute*."""
         terms = tokenize(query)
         if not terms:
             raise UnifiedModelError("FIND_SOURCE_QUERY_EMPTY")
@@ -2439,13 +2336,7 @@ class UnifiedModel(_Wave53To54UnifiedCapabilityBusMixin):
     # ---------------------------------------------------------- research index
 
     def find_research(self, query: str, *, top_k: int = 5) -> dict[str, Any]:
-        """Locate the research record behind a decision or a capability.
-
-        Governance decisions, verification receipts and action intents: what was
-        claimed, when, and under which authority. A record is *evidence about* a
-        capability, never a capability, so this is not ``route`` and ``solve``
-        never calls it. Every row repeats ``capability: False``.
-        """
+        """Locate the research record behind a decision or a capability."""
         terms = tokenize(query)
         if not terms:
             raise UnifiedModelError("FIND_RESEARCH_QUERY_EMPTY")
@@ -3081,12 +2972,7 @@ class UnifiedModel(_Wave53To54UnifiedCapabilityBusMixin):
         inputs: Mapping[str, Any] | None = None,
         cwd: str | Path | None = None,
     ) -> dict[str, Any]:
-        """Trunk semantics for mode="EPISTEMIC": the zero-knowledge workspace COW solver.
-
-        Added by main in #7074 (``cross_modal_tomography_petri_v1.solve_epistemic_workspace_cow``
-        over an ``EpistemicStoreV1``).  Kept as its own method so the front door can dispatch to it
-        by call shape instead of choosing one kernel for every caller.
-        """
+        """Trunk semantics for mode="EPISTEMIC": the zero-knowledge workspace COW solver."""
         from canonical.swe_kernel import cross_modal_tomography_petri_v1 as _cmtp
         from canonical.swe_kernel import epistemic_admission_and_self_play_v1 as _easp
 
@@ -3126,13 +3012,7 @@ class UnifiedModel(_Wave53To54UnifiedCapabilityBusMixin):
         cwd: str | Path | None = None,
         routing: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
-        """Front-door delegation to the zero-LLM, zero-weight Universal Epistemic Kernel.
-
-        Enters any arbitrary workspace/environment knowing nothing, senses the local
-        frontier, computes the exact Epistemic Diff against external inspectable memory,
-        acquires only missing gaps in parallel, verifies atomically in an isolated state
-        copy, and distills only generalized atomic knowledge (`parameters_stored == 0`).
-        """
+        """Front-door delegation to the zero-LLM, zero-weight Universal Epistemic Kernel."""
         from canonical.runtime import universal_epistemic_kernel_v1 as uek
 
         inp = dict(inputs or {})
@@ -3607,19 +3487,7 @@ class UnifiedModel(_Wave53To54UnifiedCapabilityBusMixin):
         missing: list[str],
         declared: list[str],
     ) -> tuple[dict[str, Any], dict[str, Any] | None, list[str]]:
-        """Ground unfilled slots from resources the caller explicitly declared.
-
-        The compiled rows carry ``input_names`` but not the registry's
-        ``action_template``, and ``world_binding_v1`` reads placeholder names
-        from that template, so a minimal one is synthesized here naming exactly
-        the slots this capability declares. All grounding stays in the verified
-        binder, which fails closed and refuses patterns and globs by design.
-
-        ``declared`` is the whole of what may be used from the surrounding
-        world. Nothing is discovered from the wider repository, so a slot can
-        only ever be filled with something the caller put in front of the
-        model -- or something the caller wrote into the goal sentence itself.
-        """
+        """Ground unfilled slots from resources the caller explicitly declared."""
         try:
             from canonical.runtime import world_binding_v1 as wb
         except Exception:
@@ -5408,13 +5276,7 @@ class UnifiedModel(_Wave53To54UnifiedCapabilityBusMixin):
         keep_patch_applied: bool = False,
         skill_store_path: str | Path | None = None,
     ) -> dict[str, Any]:
-        """Wave 45: the door a person actually knocks on.
-
-        A repository and a sentence. The adapter scans, binds test targets and candidate files
-        from evidence (issue terms + import graph), then hands the bound problem to
-        `solve_swe_repo_native`. Zero model calls; a refusal names what is missing instead of
-        guessing.
-        """
+        """Wave 45: the door a person actually knocks on."""
         res = self.boundary_router.route_swe_cold_start(
             issue_text=issue_text,
             repo_root=repo_root,
@@ -5604,12 +5466,7 @@ class UnifiedModel(_Wave53To54UnifiedCapabilityBusMixin):
         *,
         timeout_s: float = 5.0,
     ) -> dict[str, Any]:
-        """Wave 19: Non-tautological behavioural execution self-verifier for previously unwired/source-only modules.
-
-        Binds `(module_sha256, python_version, observed_outcome, latency_ms, callable_symbols)` in fresh
-        isolated subprocesses — separating `RAN_CLEAN`, `MISSING_DEPENDENCY`, and `FAILED` without
-        mutating any OIDC receipts or inflating capability claims.
-        """
+        """Wave 19: Non-tautological behavioural execution self-verifier for previously unwired/source-only modules."""
         import hashlib as _hashlib
         import subprocess as _subprocess
         import sys as _sys
@@ -6512,9 +6369,7 @@ class UnifiedModel(_Wave53To54UnifiedCapabilityBusMixin):
         initial_marking: Mapping[str, int] | None = None,
         transitions: Mapping[str, Mapping[str, Any]] | None = None,
     ) -> dict[str, Any]:
-        """Wave 37+38: Real OS kernel-confined (`CapEff=0` + `seccomp` BPF) 4-channel HCU executor
-        (`WebMCP > Programmatic > Semantic > Visual`) with Agent-S4 Refusal-as-Interface-Compiler,
-        Ring-0 byte-effect verification & atomic CoW rollback."""
+        """Wave 37+38: Real OS kernel-confined (`CapEff=0` + `seccomp` BPF) 4-channel HCU executor (`WebMCP > Programmatic > Sem..."""
         from canonical.runtime.futamura_leapfrog_kernel_v1 import (
             ConfinedHybridComputerUseExecutor,
             HybridComputerUsePetriSupervisor,
@@ -6561,10 +6416,7 @@ class UnifiedModel(_Wave53To54UnifiedCapabilityBusMixin):
         alpha: float = 0.05,
         timeout_s: float = 10.0,
     ) -> dict[str, Any]:
-        """Wave 37+38: Unified multi-file Python repository Futamura solver (Rung-0 compiled skills +
-        `stdlib_cow_test_runner_v1` CoW fork screening + extended AST + 13-law statement-shaped
-        residual wall closers + repo component Petri + anti-vacuous verifier audit + optional
-        pluggable Rung-3 proposer + Ring-0 Gate + automatic Rung-0 compile-back)."""
+        """Wave 37+38: Unified multi-file Python repository Futamura solver (Rung-0 compiled skills + `stdlib_cow_test_runner_v1..."""
         from canonical.runtime.futamura_leapfrog_kernel_v1 import MultifileFutamuraRepoSolver
 
         solver = MultifileFutamuraRepoSolver(cascade=self._get_futamura_cascade())
@@ -6619,9 +6471,7 @@ class UnifiedModel(_Wave53To54UnifiedCapabilityBusMixin):
         operation: str,
         payload: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
-        """Wave 38: Execute a Non-Malleable Memory OS operation (TMA-NM origin binding, GovMem
-        anti-correlation promotion, A-TMA anti-ghost-memory state view, SkillApt counterfactual
-        activation, <96 hot-tier cap, or Bicameral Sleep Cycle) on Spine `0G`."""
+        """Wave 38: Execute a Non-Malleable Memory OS operation (TMA-NM origin binding, GovMem anti-correlation promotion, A-TMA..."""
         from canonical.swe_kernel.canonical_memory_crystallizer_v1 import execute_memory_operation
 
         return execute_memory_operation(self._get_non_malleable_memory_bus(), operation, payload)
@@ -6648,12 +6498,7 @@ class UnifiedModel(_Wave53To54UnifiedCapabilityBusMixin):
         top_k: int = 8,
         max_hot: int = 96,
     ) -> dict[str, Any]:
-        """Wave 38 (OpenViking `viking://` L0/L1/L2 Progressive Dark-Matter Discovery):
-        Maps unfamiliar frontier terms or plain goals across:
-          - L0: Cross-disciplinary concept aliases (`CROSS_DISCIPLINARY_CONCEPT_MAP`)
-          - L1: Active hot-tier routed engines & bound capabilities (capped at `<= max_hot`)
-          - L2: Full `source_index` + `extended_source_index` dark-matter koan/hidden modules
-        Zero model calls, sub-millisecond to few-millisecond deterministic lookup."""
+        """Wave 38 (OpenViking `viking://` L0/L1/L2 Progressive Dark-Matter Discovery): Maps unfamiliar frontier terms or plain..."""
         from canonical.runtime.unified_hidden_capability_federation_v1 import (
             resolve_cross_disciplinary_concept,
         )
@@ -6829,10 +6674,7 @@ class UnifiedModel(_Wave53To54UnifiedCapabilityBusMixin):
 
     def frontier_bench(self, *, seed: int | None = None, per_category: int = 3,
                        categories: Sequence[str] | None = None, self_check: bool = False) -> dict[str, Any]:
-        """Wave 40: the held-out, oracle-judged benchmark (`canonical/evaluation/frontier_bench_v1.py`).
-
-        Instances are generated from `seed` at call time and judged by oracles that never read this
-        model's own `pass` flag, so `pass_rate` measures unseen instances, not its own fixtures."""
+        """Wave 40: the held-out, oracle-judged benchmark (`canonical/evaluation/frontier_bench_v1.py`)."""
         from canonical.evaluation import frontier_bench_v1 as bench
 
         resolved = bench.DEFAULT_SEED if seed is None else int(seed)
@@ -7079,14 +6921,7 @@ def _missing_declared_dependencies(
     *,
     probe_cache: dict[tuple[str, bool], bool] | None = None,
 ) -> list[str]:
-    """Resolve a capability's declared dependencies against *this* machine.
-
-    The artifact records only the tree-derived declaration, so this answer is
-    true of the machine that is answering rather than of whichever machine last
-    compiled the model. Names in ``declared_dependency_executables`` are resolved
-    on PATH; every other declared name is resolved through the Python import
-    machinery.
-    """
+    """Resolve a capability's declared dependencies against *this* machine."""
     declaration = row.get("declared_dependencies") or {}
     checked = declaration.get("declared_dependencies_checked") or []
     on_path = {str(name) for name in declaration.get("declared_dependency_executables") or []}

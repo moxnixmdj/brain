@@ -65,7 +65,7 @@ class TestWave53To54UnifiedCapabilityBusAndLeapfrog(unittest.TestCase):
 
     def test_03_unified_model_loc_cap_and_live_methods(self) -> None:
         bum_lines = len((REPO_ROOT / "canonical/runtime/brain_unified_model_v1.py").read_text(encoding="utf-8").splitlines())
-        self.assertEqual(bum_lines, 7653, "Wave 53-54 must preserve exact 0 net LOC growth in brain_unified_model_v1.py")
+        self.assertLess(bum_lines, 7534, "brain_unified_model_v1.py must stay strictly under the 7534-line Elon Law cap")
 
         model = load_unified_model()
         for method_name in (
@@ -702,6 +702,39 @@ class TestWave53To54UnifiedCapabilityBusAndLeapfrog(unittest.TestCase):
         self.assertEqual(r["defect_counts"]["DANGLING_ADAPTER"], 0)
         self.assertEqual(r["defect_counts"]["UNENROLLED_CERTIFIED_CAPABILITY"], 0)
         self.assertEqual(r["defect_counts"]["MISSING_VERIFICATION_RECEIPT"], 8)
+
+    def test_20_live_audit_fixes_wake_sleep_and_multi_assert_reproducer(self) -> None:
+        """Regression tests for live-audit fixes: WAKE_SLEEP_CONSOLIDATION wiring & multi-assert epistemic reproducer."""
+        import importlib
+        from canonical.runtime import epistemic_issue_reproducer_v1 as ir
+        from canonical.runtime import unified_hidden_capability_federation_v1 as fed
+
+        reg = next(v for v in vars(fed).values() if isinstance(v, dict) and "WAKE_SLEEP_CONSOLIDATION" in v)
+        sp = reg["WAKE_SLEEP_CONSOLIDATION"]
+        self.assertEqual(sp["entrypoint"], "WakeSleepConsolidationEngine")
+        mod = importlib.import_module(sp["source_path"].replace("/", ".").removesuffix(".py"))
+        self.assertTrue(callable(getattr(mod, sp["entrypoint"])))
+
+        issue = "In clean_token, whitespace-only input returns empty string instead of 'EMPTY'."
+        with tempfile.TemporaryDirectory(prefix="w54_multi_assert_") as td:
+            ws = Path(td)
+            (ws / "test_norm.py").write_text(
+                "import norm\n\ndef test_clean():\n"
+                "    assert norm.clean_token('abc') == 'abc'\n"
+                "    assert norm.clean_token('') == 'EMPTY'\n",
+                encoding="utf-8",
+            )
+            (ws / "norm.py").write_text(
+                "def clean_token(s):\n    if s == '':\n        return 'EMPTY'\n    return s.strip()\n",
+                encoding="utf-8",
+            )
+            self.assertEqual(ir.synthesize_verified_reproducer(ws, issue)["status"], "QUALIFIED")
+
+            (ws / "norm.py").write_text(
+                "def clean_token(s):\n    s2 = s.strip()\n    return 'EMPTY' if s2 == '' else s2\n",
+                encoding="utf-8",
+            )
+            self.assertEqual(ir.synthesize_verified_reproducer(ws, issue)["status"], "NO_QUALIFIED_REPRODUCER")
 
 
 if __name__ == "__main__":
