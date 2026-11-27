@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_AUTHENTICATED_HIDDEN_EVALUATOR_FAMILY_RESOLVER_REMOTE_EXECUTION_V1",
+  "date": "2026-10-08",
+  "status": "FRESH_REMOTE_EXACT_BYTE_EXECUTION_PASS__10_OF_10__ZERO_TERMINAL_CREDIT",
+  "branch": "research/authenticated-evaluator-family-resolver-v1",
+  "source_bindings": {
+    "runtime": {
+      "path": "canonical/runtime/authenticated_hidden_evaluator_family_resolver_v1.py",
+      "git_blob_sha": "f09becba53ab50037294e95e27fc6b17cd446f6b"
+    },
+    "tests": {
+      "path": "canonical/tests/test_authenticated_hidden_evaluator_family_resolver_v1.py",
+      "git_blob_sha": "b68462f226871f1b87fd91d85c0d52f710b9aeb0"
+    },
+    "receipt_resolver": {
+      "path": "canonical/runtime/effect_broker_receipt_resolver_v2.py",
+      "git_blob_sha": "7f4eeeb19def420d0014631b99c5e2dc3a30592e"
+    },
+    "coupling_kernel": {
+      "path": "canonical/runtime/hidden_evaluator_monotone_coupling_v1.py",
+      "git_blob_sha": "bdc95dc750b3c25162f97181ac4c66a2eaf8d012"
+    }
+  },
+  "carrier": {
+    "provider": "Sprites",
+    "sprite_name": "brain-evaluator-family-v1-verify",
+    "sprite_id": "sprite-61c81061-88c8-46d9-bf90-19d48a607c29",
+    "fresh_for_this_verification": true
+  },
+  "execution": {
+    "harness": "DETERMINISTIC_IMPORT_AND_EXECUTE_ALL_TEST_PREFIX_FUNCTIONS",
+    "first_run": {
+      "pass_count": 8,
+      "fail_count": 2,
+      "interpretation": "CAUGHT_SUPPORT_FILTER_INTEGRATION_DEFECTS__NOT_ACCEPTED"
+    },
+    "second_run_after_first_fix": {
+      "pass_count": 9,
+      "fail_count": 1,
+      "interpretation": "CAUGHT_EMPTY_EDGE_EXACT_ZERO_FLOW_INTEGRATION_DEFECT__NOT_ACCEPTED"
+    },
+    "final_run": {
+      "test_count": 10,
+      "pass_count": 10,
+      "fail_count": 0,
+      "result": "PASS"
+    }
+  },
+  "verified_mechanics": [
+    "TARGET_FREE_TOP_SUPPORT_CAN_PROVE_UNIVERSAL_MONOTONE_NONINFERIORITY_WITHOUT_TARGET_DISTRIBUTION",
+    "NON_TOP_SUPPORT_RETURNS_EXACT_MISSING_CROSS_SUPPORT_RELATION",
+    "AUTHENTICATED_FULL_MASS_COUPLING_PASS",
+    "FAILED_COUPLING_RETURNS_UNMATCHED_TARGET_MASS_AND_SINGLE_RELATION_GAIN_WITNESS",
+    "ACTUAL_EVALUATOR_FAMILY_MEMBERSHIP_CANNOT_BE_SELF_ASSUMED",
+    "INCOMPLETE_BRAIN_SUPPORT_FAILS_CLOSED",
+    "EXACT_BYTE_DRIFT_FAILS_CLOSED",
+    "CYCLIC_MATERIAL_ORDER_FAILS_CLOSED",
+    "OUTCOME_OUTSIDE_AUTHENTICATED_BASIS_FAILS_CLOSED",
+    "SUCCESS_PRESERVES_ZERO_DB_U_AND_TERMINAL_AUTHORITY"
+  ],
+  "theorem_boundary": {
+    "proved_by_runtime_tests": "AUTHENTICATED_BINDING_AND_EXACT_FINITE_RESOLUTION_MECHANICS_RELATIVE_TO_SUPPLIED_INDEPENDENT_RECEIPTS",
+    "separately_independently_verified_existing_theorem": "DOMINANCE_PRESERVING_COUPLING_IMPLIES_NONINFERIORITY_FOR_ALL_BOUNDED_ORDER_MONOTONE_UTILITIES",
+    "not_proved": [
+      "GDPVAL_AA_OWNER_EVALUATOR_BELONGS_TO_THE_MONOTONE_FAMILY",
+      "AA_BRIEFCASE_FULL_PRIVATE_SCOPE_BELONGS_TO_THE_MONOTONE_FAMILY",
+      "ANY_CURRENT_BRAIN_PROFESSIONAL_OUTPUT_SUPPORT_IS_UNIVERSAL_TOP",
+      "ANY_CURRENT_TARGET_OR_BRAIN_DISTRIBUTION_BINDING",
+      "ANY_ACCEPTANCE_PREDICATE_CLOSURE",
+      "DB_ADMISSION",
+      "U_EMPTY",
+      "D_FINALITY",
+      "TERMINAL_SUCCESS"
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
