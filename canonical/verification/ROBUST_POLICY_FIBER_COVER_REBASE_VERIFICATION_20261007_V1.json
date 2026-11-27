@@ -1,0 +1,15 @@
+{
+  "schema": "PROJECT_BRAIN_ROBUST_POLICY_FIBER_COVER_REBASE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__ZERO_CREDIT",
+  "governance_sha": "87d022e64628650d766c0cfc9d42b4bbb6693976",
+  "runtime_sha": "e5846a626db51a6208c65b76cae40d9db2d83960",
+  "tests_sha": "7ffbb5edd40296181aff04dd141deefbed21fca2",
+  "runtime_blob_recomputed": "e5846a626db51a6208c65b76cae40d9db2d83960",
+  "tests_blob_recomputed": "7ffbb5edd40296181aff04dd141deefbed21fca2",
+  "direct_assertion_runs": [
+    "PASS_2_OF_2",
+    "PASS_3_OF_3"
+  ],
+  "terminal_credit_delta": 0
+}
