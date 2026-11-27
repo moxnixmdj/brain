@@ -72,6 +72,49 @@ def test_none_returns_empty():
     assert get_name(None) == ""
 '''
 
+_GUARDED_PKG = '''\
+def get_name(x):
+    if x is None:
+        return None
+    return x.strip()
+'''
+
+_GUARDED_TEST = '''\
+from pkg.names import get_name
+
+
+def test_none_returns_empty():
+    assert get_name(None) == ""
+'''
+
+_TWO_SITE_PKG = '''\
+def g(x):
+    if x is None:
+        return None
+    return x * 2
+'''
+
+_TWO_SITE_TEST = '''\
+from pkg.n import g
+
+
+def test_none_is_zero():
+    assert g(None) == 0
+'''
+
+_NONLITERAL_PKG = '''\
+def h(x):
+    return x + 1
+'''
+
+_NONLITERAL_TEST = '''\
+from pkg.q import h
+
+
+def test_h():
+    assert h(1) == len([1, 2, 3])
+'''
+
 _GREEN_PKG = '''\
 def add(a, b):
     return a + b
@@ -169,8 +212,12 @@ class SpineVerifiesWhatItCanRepair(unittest.TestCase):
         self.assertEqual(result["patched_files"], ["pkg/calc.py"])
         self.assertIn("a + b", result["patches"]["pkg/calc.py"])
 
-    def test_failing_baseline_invisible_to_unittest_is_not_certified(self) -> None:
-        """`python -m unittest <file>` reports 'Ran 0 tests ... OK' for this repo."""
+    def test_failing_baseline_invisible_to_unittest_is_never_called_green(self) -> None:
+        """`python -m unittest <file>` prints 'Ran 0 tests ... OK' for this repo.
+
+        The oracle must see the failure. What the search does next is reported
+        honestly: either a patch the oracle verifies, or a fail-closed status.
+        """
         root = _repo(self.tmp, _PLAIN_FAIL_PKG, _PLAIN_FAIL_TEST, name="pkg/names.py")
         result = solve(
             repo_root=str(root),
@@ -178,8 +225,60 @@ class SpineVerifiesWhatItCanRepair(unittest.TestCase):
             candidate_files=["pkg/names.py"],
             keep_patch_applied=False,
         )
+        self.assertNotEqual(result["status"], "PASS__BASELINE_ALREADY_GREEN")
+        self.assertEqual(result["model_calls"], 0)
+        if result["pass"]:
+            self.assertIn("ASSERTION_BACKWARD_OBLIGATION", result["status"])
+        else:
+            self.assertIn("FAIL_CLOSED", result["status"])
+
+    def test_backward_obligation_repairs_a_none_guard(self) -> None:
+        """The failing assertion states the goal: `get_name(None) == ""`.
+
+        Before this route, nothing in the search tried the value the test itself
+        published, because `oe_synthesized_exprs` is filled from witnesses and a
+        single failing assertion is not a witness. The obligation is read off the
+        failure and pushed backward to a return site; the CoW oracle still decides.
+        """
+        root = _repo(self.tmp, _GUARDED_PKG, _GUARDED_TEST, name="pkg/names.py")
+        result = solve(
+            repo_root=str(root),
+            test_targets=["tests/test_target.py"],
+            candidate_files=["pkg/names.py"],
+            keep_patch_applied=False,
+        )
+        self.assertTrue(result["pass"], result.get("status"))
+        self.assertIn("ASSERTION_BACKWARD_OBLIGATION", result["status"])
+        self.assertEqual(result["backward_obligation_source"], "''")
+        self.assertIn("return ''", result["patches"]["pkg/names.py"])
+        self.assertEqual(result["model_calls"], 0)
+
+    def test_backward_obligation_touches_only_the_guarded_return(self) -> None:
+        """Two return sites; only the one the failure implicates may change."""
+        root = _repo(self.tmp, _TWO_SITE_PKG, _TWO_SITE_TEST, name="pkg/n.py")
+        result = solve(
+            repo_root=str(root),
+            test_targets=["tests/test_target.py"],
+            candidate_files=["pkg/n.py"],
+            keep_patch_applied=False,
+        )
+        self.assertTrue(result["pass"], result.get("status"))
+        patched = result["patches"]["pkg/n.py"]
+        self.assertIn("return 0", patched)
+        self.assertIn("return x * 2", patched, "the correct site must be left alone")
+
+    def test_nonliteral_expectation_is_not_invented(self) -> None:
+        """`assert h(1) == len([1,2,3])` states no literal, so no duty is readable."""
+        root = _repo(self.tmp, _NONLITERAL_PKG, _NONLITERAL_TEST, name="pkg/q.py")
+        result = solve(
+            repo_root=str(root),
+            test_targets=["tests/test_target.py"],
+            candidate_files=["pkg/q.py"],
+            keep_patch_applied=False,
+        )
         self.assertFalse(result["pass"])
-        self.assertNotIn("PASS", str(result.get("status")))
+        self.assertIn("FAIL_CLOSED", result["status"])
+        self.assertIsNone(result.get("backward_obligation_source"))
         self.assertEqual(result["model_calls"], 0)
 
     def test_already_green_baseline_is_reported_as_such(self) -> None:
