@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_W1_W2_EXPANDED_FIRST_PARTY_SURFACE_CHECK_20261005_V1",
+  "date": "2026-10-05",
+  "status": "EXPANDED_FIRST_PARTY_SURFACE_CHECK__NO_W1__NO_W2__ZERO_CREDIT",
+  "objective": "Test newly inspected first-party Opus 5.5 documentation surfaces for a literal target-owner exhaustive useful-behavior specification (W1) or an implementation-level complete characterization (W2), without inferring global nonexistence from absence.",
+  "checked": [
+    {
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+      "observed": [
+        "Documents concrete interface/model fields including 1M context, 128K max output, adaptive thinking, text-and-image input, and release/platform availability.",
+        "Points readers to separate prompting, system-prompt, and system-card resources.",
+        "No explicit statement observed that these fields exhaust every useful observable behavior of Opus 5.5."
+      ],
+      "effect": "W1_UNDISCHARGED__W2_UNDISCHARGED"
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5",
+      "observed": [
+        "Uses the selective phrase 'The capabilities that matter most for prompting are' before describing capability areas.",
+        "A prompting-relevant subset is not an exhaustive useful-behavior specification."
+      ],
+      "effect": "NEW_FIRST_PARTY_NONEXHAUSTIVE_SCOPE_EVIDENCE__W1_UNDISCHARGED"
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/release-notes/system-prompts/overview",
+      "observed": [
+        "Documents Claude app system prompts as interface behavior that can be periodically updated.",
+        "States Claude 4.6-generation and later model IDs are fixed snapshots, but this does not expose exact weights, full serving semantics, or a complete executable characterization."
+      ],
+      "effect": "SYSTEM_PROMPT_SURFACE_NOT_W2"
+    },
+    {
+      "url": "https://www.anthropic.com/system-cards",
+      "observed": [
+        "Describes system cards as documenting capabilities, safety evaluations, and responsible deployment decisions.",
+        "No explicit exhaustive-all-useful-behavior attestation observed on the system-card index."
+      ],
+      "effect": "W1_UNDISCHARGED"
+    },
+    {
+      "url": "https://www.anthropic.com/claude/opus",
+      "observed": [
+        "Uses 'Key use cases include' before capability/use-case examples.",
+        "Selective use-case language is affirmative evidence against treating the page as an exhaustive useful-behavior specification."
+      ],
+      "effect": "W1_UNDISCHARGED"
+    }
+  ],
+  "result": {
+    "w1_target_owner_exhaustive_useful_behavior_specification_found": false,
+    "w2_implementation_level_complete_characterization_found": false,
+    "global_nonexistence_of_w1_or_w2_proved": false,
+    "literal_all_terminal_completeness_delta": false,
+    "scheduler_effect": "DO_NOT_REPEAT_THESE_SURFACES_WITHOUT_A_SOURCE_EPOCH_OR_CONTENT_CHANGE__KEEP_LITERAL_FINALITY_EVENT_DRIVEN"
+  },
+  "hard_nonclaims": [
+    "NOT_A_PROOF_NO_W1_OR_W2_EXISTS_ANYWHERE",
+    "NOT_A_CLAIM_TERMINAL_GOAL_IS_IMPOSSIBLE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
