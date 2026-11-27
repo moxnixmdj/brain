@@ -1,0 +1,21 @@
+name: Verify paired anytime Opus noninferiority
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/paired_anytime_noninferiority.py"
+      - "canonical/tests/test_paired_anytime_noninferiority.py"
+      - ".github/workflows/verify-paired-anytime-noninferiority.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: PYTHONPATH=. python -m unittest -v canonical.tests.test_paired_anytime_noninferiority
