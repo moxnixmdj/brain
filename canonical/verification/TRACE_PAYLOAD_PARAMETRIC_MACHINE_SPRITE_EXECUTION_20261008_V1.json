@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_TRACE_PAYLOAD_PARAMETRIC_MACHINE_REMOTE_EXECUTION_V1",
+  "date": "2026-10-08",
+  "status": "FRESH_REMOTE_EXACT_BYTE_EXECUTION_PASS__PARAMETRIC_ROUTE_MECHANICS_ONLY__ZERO_TERMINAL_CREDIT",
+  "branch": "research/trace-payload-parametric-machine-v1",
+  "source_bindings": {
+    "runtime": {
+      "path": "canonical/runtime/trace_payload_parametric_machine_v1.py",
+      "git_blob_sha": "d5e60c04216e5a1e190e2cc7a1b188cf749f45b4"
+    },
+    "tests": {
+      "path": "canonical/tests/test_trace_payload_parametric_machine_v1.py",
+      "git_blob_sha": "dcb1708aa0e57246213a0854aba9fede3be3b207"
+    },
+    "causal_trace_ir": {
+      "path": "canonical/runtime/opus55_causal_trace_ir_v1.py",
+      "git_blob_sha": "a348186187619141f9175191e0b81b9c8c65ca72"
+    },
+    "lossless_json_ir": {
+      "path": "canonical/runtime/opus55_lossless_json_ir_v1.py",
+      "git_blob_sha": "7e356efd46b97363b4002f46bcadd5fae4b144fd"
+    }
+  },
+  "carrier": {
+    "provider": "Sprites",
+    "sprite_name": "brain-trace-parametricity-v1-verify",
+    "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+    "fresh_for_this_verification": true
+  },
+  "execution": {
+    "pytest_available": false,
+    "fallback_harness": "DETERMINISTIC_IMPORT_AND_EXECUTE_ALL_TEST_PREFIX_FUNCTIONS",
+    "test_count": 11,
+    "pass_count": 11,
+    "fail_count": 0,
+    "result": "PASS"
+  },
+  "verified_properties": [
+    "VALID_MACHINE_EXHAUSTIVELY_TOTAL_AND_DETERMINISTIC_OVER_400_SYMBOL_STRUCTURAL_ALPHABET",
+    "ARBITRARY_VALID_PAYLOAD_SUBSTITUTION_WITH_IDENTICAL_STRUCTURAL_PROJECTION_PRESERVES_RUN",
+    "EMPTY_TRACE_BASE_CASE",
+    "PAYLOAD_FIELD_ACCESS_REJECTED",
+    "SCHEMA_PATH_ACCESS_REJECTED",
+    "RAW_WIRE_HASH_ACCESS_REJECTED",
+    "OVERLAPPING_TRANSITIONS_FAIL_CLOSED",
+    "INCOMPLETE_STRUCTURAL_ALPHABET_FAILS_CLOSED",
+    "STRUCTURAL_CHANNEL_CHANGE_MAY_CHANGE_POLICY",
+    "RAW_CONTENT_CHANGE_WITH_FIXED_PRESENCE_IS_ELIDED",
+    "ZERO_DB_U_AND_TERMINAL_AUTHORITY_PRESERVED"
+  ],
+  "theorem_boundary": {
+    "proved": "PAYLOAD_BLIND_ROUTE_BEHAVIOR_IS_INVARIANT_UNDER_PAYLOAD_SUBSTITUTION_FOR_ALL_FINITE_TRACE_LENGTHS_RELATIVE_TO_THE_BOUND_RUNTIME",
+    "not_proved": [
+      "ROUTE_ADEQUACY",
+      "TARGET_OCCUPANCY_OF_ANY_PARAMETRIC_REGION",
+      "LOAD_BEARING_EVALUATOR_PARAMETRICITY",
+      "SELECTED_COVER_COMPLETENESS",
+      "U_EMPTY",
+      "D_FINALITY",
+      "TERMINAL_SUCCESS"
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
