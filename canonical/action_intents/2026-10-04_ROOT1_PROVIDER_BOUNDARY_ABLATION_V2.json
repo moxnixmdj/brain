@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ROOT1-PROVIDER-BOUNDARY-ABLATION-20261004-V2",
+  "status": "PROPOSED__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "base_commit_sha": "94d6c7ffd8a5f78ebe523e65aec93e44b6c86701",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "blocker_id": "ROOT1_EXTERNAL_CAPABILITY_PROVIDER_AMBIGUITY",
+  "selected_route": "REUSE_CURRENT_CONTRASTIVE_SEMANTIC_GATE_AND_EXACT_SUBJECT_RUNNER__ADD_ONLY_PAIRED_MODEL_ALONE_VS_BRAIN_COMPOSED_CAUSAL_ABLATION",
+  "expected_terminal_delta": "MAKE_MINIMUM_SEMANTIC_SUBSTRATE_SELECTION_CAUSALLY_IDENTIFIABLE_WITHOUT_DUPLICATING_MEANING_SCORING_OR_CREDITING_A_MODEL_THAT_ALREADY_SUPPLIES_THE_BOUNDED_TARGET",
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
