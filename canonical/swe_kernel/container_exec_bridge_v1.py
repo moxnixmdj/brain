@@ -11,6 +11,9 @@ from __future__ import annotations
 
 import base64
 import contextlib
+import difflib
+import gzip
+import json
 import pathlib
 import shlex
 import threading
@@ -112,13 +115,55 @@ class ContainerExecBridge:
                 qparent = shlex.quote(str(pathlib.PurePosixPath(rel).parent))
                 qbak = shlex.quote(f"{bak_dir}/f_{idx}")
                 qex = shlex.quote(f"{bak_dir}/ex_{idx}")
-                b64 = base64.b64encode(content.encode("utf-8")).decode("ascii")
                 setup_lines.append(
                     f"if [ -f {qrel} ]; then cp -p {qrel} {qbak} && touch {qex}; fi"
                 )
                 if qparent != "'.'":
                     setup_lines.append(f"mkdir -p {qparent}")
-                setup_lines.append(f"printf %s {shlex.quote(b64)} | base64 -d > {qrel}")
+
+                # Avoid Linux MAX_ARG_STRLEN (128 KB) on large production source files (`click/core.py` etc.)!
+                # 1) When editing an existing large file (>24 KB) and python is available, send only changed hunks (~400 B).
+                # 2) Otherwise gzip+base64 compress (>24 KB -> ~5x smaller) or plain base64 for small files.
+                raw_bytes = content.encode("utf-8")
+                emitted = False
+                host_file = self.host_root / rel
+                py_exe = (self.toolchain.python_exe if self.toolchain else "") or ""
+                if len(raw_bytes) > 24_000 and host_file.is_file() and py_exe:
+                    try:
+                        orig_lines = host_file.read_text(encoding="utf-8", errors="replace").splitlines(keepends=True)
+                        new_lines = content.splitlines(keepends=True)
+                        sm = difflib.SequenceMatcher(None, orig_lines, new_lines)
+                        hunks = [
+                            [i1, i2, "".join(new_lines[j1:j2])]
+                            for tag, i1, i2, j1, j2 in sm.get_opcodes()
+                            if tag != "equal"
+                        ]
+                        patch_b64 = base64.b64encode(
+                            gzip.compress(json.dumps(hunks).encode("utf-8"), compresslevel=9)
+                        ).decode("ascii")
+                        if len(patch_b64) < 60_000:
+                            applier = (
+                                "import base64,gzip,json,sys;"
+                                "p=sys.argv[1];h=json.loads(gzip.decompress(base64.b64decode(sys.argv[2])).decode());"
+                                "ls=open(p,encoding='utf-8',errors='replace').read().splitlines(True);"
+                                "out=[];cur=0\n"
+                                "for i1,i2,rep in h:\n"
+                                " out.extend(ls[cur:i1]);out.append(rep);cur=i2\n"
+                                "out.extend(ls[cur:]);open(p,'w',encoding='utf-8').write(''.join(out))"
+                            )
+                            setup_lines.append(
+                                f"{shlex.quote(py_exe)} -c {shlex.quote(applier)} {qrel} {shlex.quote(patch_b64)}"
+                            )
+                            emitted = True
+                    except Exception:
+                        emitted = False
+                if not emitted:
+                    if len(raw_bytes) > 24_000:
+                        gz_b64 = base64.b64encode(gzip.compress(raw_bytes, compresslevel=9)).decode("ascii")
+                        setup_lines.append(f"printf %s {shlex.quote(gz_b64)} | base64 -d | gzip -dc > {qrel}")
+                    else:
+                        b64 = base64.b64encode(raw_bytes).decode("ascii")
+                        setup_lines.append(f"printf %s {shlex.quote(b64)} | base64 -d > {qrel}")
                 restore_lines.append(
                     f"if [ -f {qex} ]; then cp -p {qbak} {qrel}; else rm -f {qrel}; fi"
                 )

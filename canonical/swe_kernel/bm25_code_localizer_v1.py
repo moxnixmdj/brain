@@ -34,6 +34,7 @@ _SKIP_DIRS = frozenset({
     ".git", "node_modules", "vendor", ".venv", "venv", "dist", "build", "__pycache__",
     ".pytest_cache", ".mypy_cache", ".ruff_cache", "testdata", "fixtures", "migrations",
     "docs", "doc", "assets", "media", "static", "locales",
+    "examples", "example", "benchmarks", "samples", "demos",
 })
 
 _LANG_EXTS: dict[str, tuple[str, ...]] = {

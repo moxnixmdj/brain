@@ -1774,7 +1774,7 @@ def _compile_bm25_fixture_test_clones(
     if repo_index.language != "python":
         return []
     cues = _extract_metamorphic_cues(issue_text, repo_index)
-    if not cues["any_active"] or cues["expected_exc"]:
+    if cues["expected_exc"]:
         return []
 
     from canonical.swe_kernel import bm25_code_localizer_v1 as _bm25
@@ -1785,7 +1785,7 @@ def _compile_bm25_fixture_test_clones(
     if not ranked_tests:
         return []
 
-    # Build cue-justified literal replacements (string -> edge string, int -> 0/-1)
+    # Build cue-justified literal replacements (string -> edge string, int -> 0/-1, plus quoted literals from issue!)
     str_muts: list[tuple[str, str]] = []
     if cues["empty"]:
         str_muts.append(("empty_str", '""'))
@@ -1793,6 +1793,13 @@ def _compile_bm25_fixture_test_clones(
         str_muts.append(("ws_str", '"   "'))
     if cues["want_unicode"]:
         str_muts.append(("unicode_str", '"caf\\u00e9\\u2603"'))
+    # Also extract short backticked CLI flags / values from the issue prose (`--foo`, `a=b`, etc.)
+    for _m_lit in re.finditer(r"`([^`\n]{2,28})`", issue_text):
+        _tok = _m_lit.group(1).strip()
+        if _tok and any(ch in _tok for ch in ("-", "/", "=", ":", "%", "@", "*", "?")) and "'" not in _tok and '"' not in _tok:
+            str_muts.append((f"issue_lit_{len(str_muts)}", repr(_tok)))
+            if len(str_muts) >= 4:
+                break
     int_muts: list[tuple[str, str]] = []
     if cues["zero_neg"]:
         int_muts.append(("zero", "0"))
@@ -2364,6 +2371,9 @@ def solve_issue_from_description(
                 "language": repro["language"],
                 "reproducer": repro,
                 "solver_status": solve_res.get("status"),
+                "solver_exc_type": solve_res.get("exc_type"),
+                "solver_sites": (solve_res.get("sites_checked") or [])[:4],
+                "solver_tried": solve_res.get("candidates_tried"),
                 "elapsed_s": round(time.monotonic() - t0, 3),
                 "model_calls": 0,
                 "parameters_stored": 0,

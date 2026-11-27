@@ -5581,10 +5581,15 @@ def solve_arbitrary_environment(
                     "gaps_queried": [],
                 }
             else:
+                _rep = blind_py.get("reproducer") or {}
                 swe_res["blind_reproducer_diag"] = {
                     "status": blind_py.get("status"),
                     "candidates_compiled": blind_py.get("candidates_compiled"),
                     "solver_status": blind_py.get("solver_status"),
+                    "solver_exc_type": blind_py.get("solver_exc_type"),
+                    "solver_sites": blind_py.get("solver_sites"),
+                    "solver_tried": blind_py.get("solver_tried"),
+                    "repro_kind": _rep.get("kind") if isinstance(_rep, Mapping) else None,
                     "rejected_count": len(blind_py.get("rejected_reproducers") or []),
                 }
         if swe_res.get("mode") == "ALREADY_PASSING":
@@ -5674,18 +5679,26 @@ def solve_arbitrary_environment(
 
     # 3b. Multi-Language JavaScript / TypeScript SWE Environment
     if modality == "swe_js_codebase":
+        from canonical.swe_kernel import container_exec_bridge_v1 as _ce_bridge
+
         explicit_js_tests: list[str] = []
         for m_tf in re.finditer(r"([A-Za-z0-9_.\-/]+\.(?:js|mjs|cjs|ts))\b", instruction or ""):
             cand_tf = m_tf.group(1).lstrip("./")
             if (ws / cand_tf).is_file() and ML_SWE_ENGINE._is_test_path(cand_tf):
                 if cand_tf not in explicit_js_tests:
                     explicit_js_tests.append(cand_tf)
-        js_res = ML_SWE_ENGINE.solve_js_repository(
-            ws,
-            test_targets=explicit_js_tests or None,
-            memory=memory,
-            timeout_s=min(max(float(timeout_s), 20.0), 45.0),
-        )
+        _active_js_bridge = _ce_bridge.get_active_bridge()
+        # Skip host-only ML_SWE_ENGINE when live ContainerExecBridge is active & no explicit test file
+        # (host checkout excludes node_modules, so host node always misses deps & stalls giant monorepos!).
+        if _active_js_bridge is not None and not explicit_js_tests:
+            js_res = {"status": "SKIPPED_HOST_NO_NODE_MODULES", "verified": False}
+        else:
+            js_res = ML_SWE_ENGINE.solve_js_repository(
+                ws,
+                test_targets=explicit_js_tests or None,
+                memory=memory,
+                timeout_s=min(max(float(timeout_s), 20.0), 45.0),
+            )
         # Blind SWE-bench Pro JS fallback: when existing tests already pass on c_old,
         # synthesize & qualify a reproducer from the issue description and verify pass2pass.
         if js_res.get("status") != "VERIFIED" and instruction and len(instruction.strip()) >= 8:
@@ -5718,9 +5731,11 @@ def solve_arbitrary_environment(
                     "status": blind_js.get("status"),
                     "candidates_compiled": blind_js.get("candidates_compiled"),
                     "solver_status": blind_js.get("solver_status"),
+                    "solver_exc_type": blind_js.get("solver_exc_type"),
+                    "solver_sites": blind_js.get("solver_sites"),
                     "rejected_count": len(blind_js.get("rejected_reproducers") or []),
                 }
-                # Secondary prose-only JS/TS structural solver (handles pure-prose bugs with 0 parentheses)
+                # Secondary prose-only JS/TS structural solver (includes BM25 Jest/Vitest container cloner!)
                 from canonical.swe_kernel import go_and_jsts_causal_swe_engine_v1 as GO_JS_SWE
 
                 prose_js = GO_JS_SWE.solve_js_ts_from_prose(ws, instruction)

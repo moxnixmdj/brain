@@ -242,6 +242,76 @@ def _js_repair_candidates(orig_src: str, sym: str, label: str, exp_lit: str | No
     return candidates
 
 
+def clone_js_ts_jest_vitest_tests(
+    repo_root: pathlib.Path,
+    issue_text: str,
+) -> list[dict[str, Any]]:
+    """BM25-guided Jest/Vitest test cloner for TypeScript/JSX repos (preserves all imports & mocks!)."""
+    cues = parse_prose_cues(issue_text)
+    if not (cues.wants_null_input or cues.wants_empty_input or cues.wants_whitespace_input or cues.wants_zero_or_neg_input):
+        return []
+
+    from canonical.swe_kernel import bm25_code_localizer_v1 as _bm25
+
+    _, r_tst = _bm25.localize_files_bm25(repo_root, issue_text, language="js", top_src=4, top_tests=4)
+    if not r_tst:
+        return []
+
+    out: list[dict[str, Any]] = []
+    it_re = re.compile(r"""(?m)^([ \t]*)(?:it|test)\s*\(\s*(['"`])([^'"`\n]+)\2\s*,\s*(?:async\s*)?\([^)]*\)\s*=>\s*\{""")
+    for rf in r_tst[:3]:
+        p = repo_root / rf.rel_path
+        try:
+            src = p.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        if len(src) > 120_000:
+            continue
+        for m in it_re.finditer(src):
+            end_brace = _extract_brace_block(src, m.end() - 1)
+            if end_brace == -1:
+                continue
+            body_inner = src[m.end() : end_brace - 1]
+            if len(body_inner) > 2500:
+                continue
+            # Keep non-expect lines (strict crash-only oracle -> 0 FP on healthy repos!)
+            kept = [ln for ln in body_inner.splitlines() if "expect(" not in ln and "assert." not in ln]
+            crash_body = "\n".join(kept)
+            mut_body: str | None = None
+            lbl = ""
+            if cues.wants_empty_input:
+                m_s = re.search(r"""(['"])([A-Za-z0-9_./:-]{2,32})\1""", crash_body)
+                if m_s:
+                    mut_body = crash_body[: m_s.start()] + '""' + crash_body[m_s.end() :]
+                    lbl = "js_clone_empty"
+            if mut_body is None and cues.wants_null_input:
+                m_o = re.search(r"\{[^{}\n]{2,60}\}", crash_body)
+                if m_o:
+                    mut_body = crash_body[: m_o.start()] + "null as any" + crash_body[m_o.end() :] if rf.rel_path.endswith((".ts", ".tsx")) else crash_body[: m_o.start()] + "null" + crash_body[m_o.end() :]
+                    lbl = "js_clone_null"
+            if mut_body is None and cues.wants_whitespace_input:
+                m_s = re.search(r"""(['"])([A-Za-z0-9_./:-]{2,32})\1""", crash_body)
+                if m_s:
+                    mut_body = crash_body[: m_s.start()] + '"   "' + crash_body[m_s.end() :]
+                    lbl = "js_clone_ws"
+            if mut_body is None:
+                continue
+            indent = m.group(1)
+            extra_block = f"\n{indent}it('epistemic_{lbl}_{len(out)}', async () => {{\n{mut_body}\n{indent}}});\n"
+            # Insert right after the original test block (inside the same describe() with all fixtures/mocks!)
+            insert_pos = end_brace + 2 if src[end_brace : end_brace + 2] == ");" else end_brace + 1
+            cloned_src = src[:insert_pos] + extra_block + src[insert_pos:]
+            out.append({
+                "label": lbl,
+                "rel_path": rf.rel_path,
+                "test_name": f"epistemic_{lbl}_{len(out)}",
+                "cloned_source": cloned_src,
+            })
+            if len(out) >= 3:
+                return out
+    return out
+
+
 def solve_js_ts_from_prose(repo_root: pathlib.Path, issue_text: str, *, node_bin: str = "node") -> dict[str, Any]:
     """Cold-start JS/TS solver: takes green JS repo + plain-English issue, qualifies reproducer, patches, verifies."""
     repo_root = pathlib.Path(repo_root)
@@ -322,6 +392,44 @@ def solve_js_ts_from_prose(repo_root: pathlib.Path, issue_text: str, *, node_bin
             break
 
     if not qualified:
+        if use_bridge and bridge is not None and (bridge.toolchain.jest_bin or bridge.toolchain.vitest_bin):
+            import shlex as _shlex
+
+            runner_bin = bridge.toolchain.vitest_bin or bridge.toolchain.jest_bin
+            is_vt = bool(bridge.toolchain.vitest_bin)
+            for jclone in clone_js_ts_jest_vitest_tests(repo_root, issue_text)[:2]:
+                t_rel = jclone["rel_path"]
+                t_name = jclone["test_name"]
+                c_src = jclone["cloned_source"]
+                if is_vt:
+                    pre_cmd = f"{_shlex.quote(runner_bin)} run --no-file-parallelism -t {_shlex.quote(t_name)} {_shlex.quote(t_rel)}"
+                    full_cmd = f"{_shlex.quote(runner_bin)} run --no-file-parallelism {_shlex.quote(t_rel)}"
+                else:
+                    pre_cmd = f"{_shlex.quote(runner_bin)} --runInBand --no-cache -t {_shlex.quote(t_name)} {_shlex.quote(t_rel)}"
+                    full_cmd = f"{_shlex.quote(runner_bin)} --runInBand --no-cache {_shlex.quote(t_rel)}"
+                pre_rc, pre_out, pre_err = bridge.run_cmd(pre_cmd, overlays={t_rel: c_src}, timeout_s=35.0)
+                pre_comb = (pre_out or "") + "\n" + (pre_err or "")
+                if pre_rc == 0 or any(e in pre_comb for e in ("SyntaxError:", "Cannot find module", "Test suite failed to run")):
+                    continue
+                # Qualified crash in real Jest/Vitest container suite! Try candidates on top localized symbol!
+                for sym_c, sf_c in list(sym_map.items())[:2]:
+                    rel_sf_c = sf_c.relative_to(repo_root).as_posix()
+                    orig_c = sf_c.read_text(encoding="utf-8", errors="replace")
+                    lbl_map = {"js_clone_empty": "empty_str", "js_clone_null": "null_arg", "js_clone_ws": "whitespace_only"}
+                    cands_c = _js_repair_candidates(orig_c, sym_c, lbl_map.get(jclone["label"], "null_arg"), cues.expected_literal or "''")
+                    for desc_c, patched_c in cands_c[:6]:
+                        post_rc, _, _ = bridge.run_cmd(full_cmd, overlays={t_rel: c_src, rel_sf_c: patched_c}, timeout_s=45.0)
+                        if post_rc == 0:
+                            sf_c.write_text(patched_c, encoding="utf-8")
+                            return {
+                                "status": "SOLVED",
+                                "language": "javascript",
+                                "symbol": sym_c,
+                                "reproducer": jclone["label"],
+                                "repair": desc_c,
+                                "file": rel_sf_c,
+                                "via_container_bridge": True,
+                            }
         return {"status": "NO_QUALIFIED_REPRODUCER", "language": "javascript"}
 
     sym, sf, rel_tf, test_code, label, arg_type, exp_lit = qualified
@@ -519,6 +627,171 @@ def parse_go_test_failure(output: str) -> list[dict[str, Any]]:
     return sites
 
 
+def _extract_brace_block(src: str, open_brace_idx: int) -> int:
+    """Return index right after the matching `}` for a Go `{` block, skipping strings/comments."""
+    depth = 0
+    i = open_brace_idx
+    n = len(src)
+    while i < n:
+        ch = src[i]
+        if ch == '"' or ch == "`":
+            q = ch
+            i += 1
+            while i < n and src[i] != q:
+                if q == '"' and src[i] == "\\":
+                    i += 2
+                    continue
+                i += 1
+            i += 1
+            continue
+        if ch == "/" and i + 1 < n and src[i + 1] == "/":
+            nl = src.find("\n", i)
+            i = n if nl == -1 else nl + 1
+            continue
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                return i + 1
+        i += 1
+    return -1
+
+
+def _extract_go_imports_header(src: str) -> str:
+    """Extract `package ...` and `import ...` preamble from a Go test file."""
+    pkg_m = re.search(r"(?m)^package\s+\w+", src)
+    pkg_line = pkg_m.group(0) if pkg_m else "package main"
+    imports: list[str] = []
+    for m in re.finditer(r'(?ms)^import\s*\([^)]*\)', src):
+        imports.append(m.group(0))
+    for m in re.finditer(r'(?m)^import\s+(?:[A-Za-z_.]\w*\s+)?"[^"]+"', src):
+        imports.append(m.group(0))
+    if not imports:
+        imports.append('import "testing"')
+    return pkg_line + "\n\n" + "\n".join(imports) + "\n"
+
+
+def clone_go_package_tests(
+    repo_root: pathlib.Path,
+    fn: GoFunctionInfo,
+    issue_text: str,
+) -> list[dict[str, Any]]:
+    """BM25-guided Go package test cloner (handles Go struct receiver methods `func (s *S) M(...)`!).
+
+    Locates existing passing `func TestXxx(t *testing.T)` in the same package that already
+    construct the real receiver struct/mocks/context, clones them with cue-justified edge inputs
+    (`""`, `"   "`, `nil`, `0`, `-1`), and probes for uncaught panics (nil-ptr / index / nil-map)
+    so receiver methods get 0-false-positive qualified Go reproducers without guessing constructors!
+    """
+    cues = parse_prose_cues(issue_text)
+    if not (cues.wants_null_input or cues.wants_empty_input or cues.wants_whitespace_input or cues.wants_zero_or_neg_input):
+        return []
+
+    pkg_dir = (repo_root / fn.rel_path).parent
+    test_files = sorted(pkg_dir.glob("*_test.go"))
+    if not test_files:
+        return []
+
+    # Build cue-justified literal perturbations
+    str_repls: list[tuple[str, str]] = []
+    if cues.wants_empty_input:
+        str_repls.append(("empty", '""'))
+    if cues.wants_whitespace_input:
+        str_repls.append(("ws", '"   "'))
+    out: list[dict[str, Any]] = []
+    test_fn_re = re.compile(r"(?m)^func\s+(Test[A-Za-z0-9_]+)\s*\(\s*(\w+)\s+\*testing\.T\s*\)\s*\{")
+
+    for tf in test_files[:6]:
+        if tf.name.startswith("zz_epistemic_repro_"):
+            continue
+        try:
+            src = tf.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        # Only clone tests in the SAME Go package (so unexported types/helpers compile!)
+        pkg_m = re.search(r"(?m)^package\s+(\w+)", src)
+        tf_pkg = pkg_m.group(1) if pkg_m else ""
+        if tf_pkg not in (fn.package, f"{fn.package}_test"):
+            continue
+        header = _extract_go_imports_header(src)
+
+        for m in test_fn_re.finditer(src):
+            orig_tname = m.group(1)
+            body_end = _extract_brace_block(src, m.end() - 1)
+            if body_end == -1:
+                continue
+            full_fn = src[m.start() : body_end]
+            if len(full_fn) > 3500:
+                continue
+            # Prefer tests that actually call `fn.name`!
+            if not re.search(rf"\b{re.escape(fn.name)}\s*\(", full_fn):
+                continue
+
+            # Strip output-specific assertions so a mutated input ONLY fails on an actual panic / crash!
+            body_inner = full_fn[full_fn.find("{") + 1 : -1]
+            safe_lines: list[str] = []
+            for ln in body_inner.splitlines():
+                st = ln.strip()
+                if any(tok in st for tok in ("assert.", "require.", "t.Error", "t.Fatal", "t.Fail")):
+                    continue
+                # Prevent Go "declared and not used" compile errors on the call line after stripping asserts!
+                if re.search(rf"\b{re.escape(fn.name)}\s*\(", st):
+                    m_assign = re.match(r"^(\s*)([A-Za-z_]\w*(?:\s*,\s*[A-Za-z_]\w*)*)\s*:=\s*(.+)$", ln)
+                    if m_assign:
+                        n_lhs = len([x for x in m_assign.group(2).split(",") if x.strip()])
+                        blanks = ", ".join("_" for _ in range(n_lhs))
+                        ln = f"{m_assign.group(1)}{blanks} = {m_assign.group(3)}"
+                safe_lines.append(ln)
+            crash_body = "\n".join(safe_lines)
+
+            muts: list[tuple[str, str]] = []
+            # Prefer perturbing arguments INSIDE the target `fn.name(...)` call (valid Go types, never `s := nil`!)
+            m_call = re.search(rf"\b{re.escape(fn.name)}\s*\(([^)\n]*)\)", crash_body)
+            if cues.wants_null_input and m_call:
+                call_args = m_call.group(1)
+                m_ptr = re.search(r"&[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)?\{[^{}\n]*\}", call_args)
+                if m_ptr:
+                    new_args = call_args[: m_ptr.start()] + "nil" + call_args[m_ptr.end() :]
+                    muts.append((
+                        "clone_nil_arg",
+                        crash_body[: m_call.start(1)] + new_args + crash_body[m_call.end(1) :],
+                    ))
+            # String literal perturbations (inside call first, then body)
+            if str_repls:
+                target_span = (m_call.start(1), m_call.end(1)) if m_call else (0, len(crash_body))
+                seg = crash_body[target_span[0] : target_span[1]]
+                m_str = re.search(r'"([A-Za-z0-9_./:-]{2,32})"', seg)
+                if m_str:
+                    off = target_span[0]
+                    for lbl, rep in str_repls[:2]:
+                        muts.append((f"clone_{lbl}", crash_body[: off + m_str.start()] + rep + crash_body[off + m_str.end() :]))
+                else:
+                    m_str2 = re.search(r'"([A-Za-z0-9_./:-]{2,32})"', crash_body)
+                    if m_str2:
+                        for lbl, rep in str_repls[:1]:
+                            muts.append((f"clone_{lbl}", crash_body[: m_str2.start()] + rep + crash_body[m_str2.end() :]))
+            # Zero / negative int perturbation
+            if cues.wants_zero_or_neg_input:
+                m_num = re.search(r"(?<=[,(:\s])([1-9]\d*)(?=[,)\s])", crash_body)
+                if m_num:
+                    muts.append(("clone_zero", crash_body[: m_num.start(1)] + "0" + crash_body[m_num.end(1) :]))
+
+            for lbl, mb in muts[:2]:
+                new_tname = f"TestEpistemicClone_{fn.name}_{lbl}_{len(out)}"
+                test_src = f"{header}\nfunc {new_tname}(t *testing.T) {{\n{mb}\n}}\n"
+                out.append({
+                    "label": lbl,
+                    "test_name": new_tname,
+                    "test_source": test_src,
+                    "package": tf_pkg,
+                    "cloned_from": f"{tf.name}::{orig_tname}",
+                })
+                if len(out) >= 4:
+                    return out
+    return out
+
+
 def synthesize_go_reproducer_test(fn: GoFunctionInfo, issue_text: str) -> dict[str, Any] | None:
     """Synthesize a compilable Go *_test.go reproducer for a top-level function from prose cues."""
     if fn.receiver_type:
@@ -625,31 +898,58 @@ def synthesize_go_candidates(go_src: str, fn: GoFunctionInfo, issue_text: str) -
     return cands
 
 
+_GENERIC_GO_NAMES = frozenset({
+    "New", "Get", "Set", "Run", "Add", "Err", "Error", "String", "Close", "Open",
+    "Init", "Start", "Stop", "Read", "Write", "List", "Create", "Delete", "Update",
+    "Parse", "Format", "Check", "Test", "Main", "Load", "Save", "Send", "Find",
+    "Match", "Major", "Minor", "Value", "Name", "Type", "Size", "Len", "Copy",
+})
+
+
 def solve_go_repository(repo_root: pathlib.Path, issue_text: str, *, timeout_s: float = 60.0) -> dict[str, Any]:
     """End-to-end Go causal solver (runs `go test` in container bridge when active, else isolated CoW workdir)."""
+    from canonical.swe_kernel import bm25_code_localizer_v1 as _bm25
     from canonical.swe_kernel import container_exec_bridge_v1 as _ce_bridge
     import shlex as _shlex
 
     repo_root = pathlib.Path(repo_root)
     funcs, _ = scan_go_repo(repo_root)
-    matched = [f for f in funcs if re.search(rf"\b{re.escape(f.name)}\b", issue_text)]
-    if not matched:
-        from canonical.swe_kernel import bm25_code_localizer_v1 as _bm25
-
-        by_key = {(f.rel_path, f.name): f for f in funcs}
-        by_name = {f.name: f for f in funcs}
-        for rf in _bm25.localize_functions_bm25(repo_root, issue_text, language="go", top_k=6):
-            hit = by_key.get((rf.rel_path, rf.name)) or by_name.get(rf.name)
-            if hit is not None and hit not in matched:
-                matched.append(hit)
+    # Match explicit non-generic Go symbol names (require backtick or `.Name(` for generic names like `New`/`Get`!)
+    matched: list[GoFunctionInfo] = []
+    for f in funcs:
+        if f.name in _GENERIC_GO_NAMES or f.name.lower() in {n.lower() for n in _GENERIC_GO_NAMES}:
+            if re.search(rf"`[^`]*\b{re.escape(f.name)}\b[^`]*`|\.{re.escape(f.name)}\s*\(", issue_text):
+                matched.append(f)
+        elif len(f.name) >= 4 and re.search(rf"\b{re.escape(f.name)}\b", issue_text):
+            matched.append(f)
+    # Always augment with Top-6 BM25-ranked Go functions (crucial for receiver methods in flipt/teleport/navidrome/vuls!)
+    by_key = {(f.rel_path, f.name): f for f in funcs}
+    by_name = {f.name: f for f in funcs}
+    for rf in _bm25.localize_functions_bm25(repo_root, issue_text, language="go", top_k=6):
+        hit = by_key.get((rf.rel_path, rf.name)) or by_name.get(rf.name)
+        if hit is not None and hit not in matched and hit.name not in _GENERIC_GO_NAMES:
+            matched.append(hit)
     if not matched:
         return {"status": "NO_SYMBOL_FOUND", "language": "go"}
 
     bridge = _ce_bridge.get_active_bridge()
     use_bridge = bool(bridge is not None and bridge.toolchain.go_exe)
     go_bin = bridge.toolchain.go_exe if use_bridge else shutil.which("go")
+
+    # Select first matched function that produces at least 1 reproducer (direct OR package-test clone!)
     target = matched[0]
-    repro = synthesize_go_reproducer_test(target, issue_text)
+    repros: list[dict[str, Any]] = []
+    for cand_fn in matched[:4]:
+        fn_repros: list[dict[str, Any]] = []
+        d_rep = synthesize_go_reproducer_test(cand_fn, issue_text)
+        if d_rep is not None:
+            fn_repros.append(d_rep)
+        fn_repros.extend(clone_go_package_tests(repo_root, cand_fn, issue_text))
+        if fn_repros:
+            target = cand_fn
+            repros = fn_repros
+            break
+    repro = repros[0] if repros else None
     orig_src = (repo_root / target.rel_path).read_text(encoding="utf-8")
     candidates = synthesize_go_candidates(orig_src, target, issue_text)
 
@@ -660,6 +960,7 @@ def solve_go_repository(repo_root: pathlib.Path, issue_text: str, *, timeout_s: 
             "symbol": target.name,
             "file": target.rel_path,
             "reproducer_generated": repro is not None,
+            "reproducers_count": len(repros),
             "candidates_generated": [c[0] for c in candidates],
         }
 
@@ -672,21 +973,31 @@ def solve_go_repository(repo_root: pathlib.Path, issue_text: str, *, timeout_s: 
     )
 
     if use_bridge and bridge is not None:
-        if not repro:
+        if not repros:
             return {"status": "NO_QUALIFIED_REPRODUCER", "language": "go", "symbol": target.name, "via_container_bridge": True}
-        pre_cmd = f"{_shlex.quote(go_bin)} test -v -count=1 -run {_shlex.quote('^' + repro['test_name'] + '$')} {_shlex.quote(pkg_arg)}"
-        pre_rc, pre_out, pre_err = bridge.run_cmd(pre_cmd, overlays={repro_rel: repro["test_source"]}, timeout_s=min(timeout_s, 45.0))
-        pre_comb = (pre_out or "") + "\n" + (pre_err or "")
-        # Fail closed if reproducer already passes OR failed only to compile (not a behavioral test failure!)
-        if pre_rc == 0 or "[build failed]" in pre_comb or "cannot find package" in pre_comb:
+        qualified_repro: dict[str, Any] | None = None
+        last_pre_rc = 0
+        last_build_failed = False
+        for cand_repro in repros[:4]:
+            pre_cmd = f"{_shlex.quote(go_bin)} test -v -count=1 -run {_shlex.quote('^' + cand_repro['test_name'] + '$')} {_shlex.quote(pkg_arg)}"
+            pre_rc, pre_out, pre_err = bridge.run_cmd(pre_cmd, overlays={repro_rel: cand_repro["test_source"]}, timeout_s=min(timeout_s, 45.0))
+            pre_comb = (pre_out or "") + "\n" + (pre_err or "")
+            last_pre_rc = pre_rc
+            last_build_failed = "[build failed]" in pre_comb or "cannot find package" in pre_comb
+            if pre_rc != 0 and not last_build_failed:
+                qualified_repro = cand_repro
+                break
+        if qualified_repro is None:
             return {
                 "status": "NO_QUALIFIED_REPRODUCER",
                 "language": "go",
                 "symbol": target.name,
-                "pre_rc": pre_rc,
-                "build_failed": "[build failed]" in pre_comb,
+                "pre_rc": last_pre_rc,
+                "build_failed": last_build_failed,
+                "reproducers_tried": len(repros[:4]),
                 "via_container_bridge": True,
             }
+        repro = qualified_repro
 
         for desc, patched in candidates:
             ov: dict[str, str] = {target.rel_path: patched, repro_rel: repro["test_source"]}

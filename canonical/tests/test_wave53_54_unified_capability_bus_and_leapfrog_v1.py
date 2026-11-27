@@ -956,6 +956,96 @@ class TestWave53To54UnifiedCapabilityBusAndLeapfrog(unittest.TestCase):
             ir._copy_workspace(p, copied)
             self.assertTrue((copied / "pkg" / "opt.py").is_file())
 
+    def test_23_iter4_go_receiver_cloner_py_container_ops_and_jsts_cloner(self) -> None:
+        """Verify Iter 4 upgrades: Go receiver package cloner, 4 Python Stage-2 container ops, and JS/TS Jest/Vitest cloner."""
+        import subprocess as _sp
+        import sys as _sys
+        from canonical.swe_kernel import container_exec_bridge_v1 as ceb
+        from canonical.swe_kernel import container_swe_patch_solver_v1 as csolver
+        from canonical.swe_kernel import go_and_jsts_causal_swe_engine_v1 as gojs
+
+        with tempfile.TemporaryDirectory(prefix="w54_iter4_") as td:
+            root = Path(td)
+
+            # 1. Go struct-receiver package test cloner produces compilable `_ = s.Evaluate(nil)`!
+            g = root / "go_rcv"
+            (g / "internal" / "srv").mkdir(parents=True)
+            (g / "go.mod").write_text("module example.com/srv\n", encoding="utf-8")
+            (g / "internal" / "srv" / "eval.go").write_text(
+                'package srv\ntype Req struct { Key string }\ntype Server struct{}\n'
+                'func (s *Server) Evaluate(req *Req) string {\n\treturn req.Key\n}\n',
+                encoding="utf-8",
+            )
+            (g / "internal" / "srv" / "eval_test.go").write_text(
+                'package srv\nimport "testing"\nfunc TestEval(t *testing.T) {\n'
+                '\ts := &Server{}\n\tgot := s.Evaluate(&Req{Key: "k1"})\n\tif got != "k1" { t.Fatal(got) }\n}\n',
+                encoding="utf-8",
+            )
+            funcs, _ = gojs.scan_go_repo(g)
+            clones = gojs.clone_go_package_tests(g, funcs[0], "Evaluate panics when req is nil instead of empty string.")
+            self.assertTrue(clones and "_ = s.Evaluate(nil)" in clones[0]["test_source"])
+
+            # 2. JS/TS Jest/Vitest test cloner preserves imports/mocks & inserts crash-only clone
+            js = root / "ts_jest"
+            (js / "src").mkdir(parents=True)
+            (js / "package.json").write_text('{"name":"ts-demo"}\n', encoding="utf-8")
+            (js / "src" / "format.test.ts").write_text(
+                "import { formatRoom } from './format';\n"
+                "describe('formatRoom', () => {\n"
+                "  it('formats room name', () => {\n"
+                "    const out = formatRoom('general');\n"
+                "    expect(out).toBe('general');\n"
+                "  });\n"
+                "});\n",
+                encoding="utf-8",
+            )
+            js_clones = gojs.clone_js_ts_jest_vitest_tests(js, "formatRoom crashes on empty room name.")
+            self.assertTrue(js_clones and "epistemic_js_clone_empty" in js_clones[0]["cloned_source"])
+            self.assertIn("import { formatRoom } from './format';", js_clones[0]["cloned_source"])
+
+            # 3. All 4 Stage-2 Python ContainerExecBridge repair families
+            def _local_exec(cmd_shell: str, timeout_sec: float = 15.0) -> tuple[int, str, str]:
+                p = _sp.run(["bash", "-c", cmd_shell], capture_output=True, text=True, timeout=timeout_sec)
+                return p.returncode, p.stdout, p.stderr
+
+            for name, src, tst in (
+                ("none_guard", "def norm(x):\n    return x.strip()\n", "from m import norm\ndef test_n():\n    assert norm(None) == ''\n"),
+                ("safe_getattr", "def get_tag(obj):\n    return obj.tag\n", "from m import get_tag\ndef test_a():\n    assert get_tag(object()) is None\n"),
+                ("empty_index", "def first(xs):\n    return xs[0]\n", "from m import first\ndef test_i():\n    assert first([]) is None\n"),
+                ("rstrip_slash", "def clean(u):\n    return u\n", "from m import clean\ndef test_s():\n    assert clean('/v1/') == '/v1'\n"),
+                ("scalar_default", "def redirect(loc, code=302):\n    return code\n", "from m import redirect\ndef test_redirect():\n    assert redirect('/x') == 303\n"),
+                (
+                    "multihunk_class_unwrap",
+                    "def _(s): return 'TR:' + s\nclass Cmd:\n    def a(self, text): return f'{_(text)}!'\n    def b(self, text): return f'{_(text)}?'\n",
+                    "from m import Cmd\ndef test_cmd():\n    assert Cmd().a('hi') == 'hi!'\n    assert Cmd().b('hi') == 'hi?'\n",
+                ),
+            ):
+                d = root / name
+                d.mkdir()
+                (d / "m.py").write_text(src, encoding="utf-8")
+                (d / "test_m.py").write_text(tst, encoding="utf-8")
+                tc = ceb.ContainerToolchain(workdir=str(d), python_exe=_sys.executable, has_pytest=True)
+                br = ceb.ContainerExecBridge(workdir=str(d), host_root=d, exec_fn=_local_exec, toolchain=tc)
+                with ceb.activate_bridge(br):
+                    res = csolver.solve_python_with_container_bridge(d, ["test_m.py"], timeout_s=15.0)
+                self.assertTrue(res["verified"], f"{name} failed: {res}")
+
+            # 4. >180 KB large-file difflib+gzip hunk overlay transport (zero Linux MAX_ARG_STRLEN crash!)
+            big_d = root / "big_overlay"
+            big_d.mkdir()
+            big_src = "\n".join(f"x_{i} = {i}  # pad line exceeding 131072 byte MAX_ARG_STRLEN" for i in range(2800)) + "\ndef f(a):\n    return a\n"
+            self.assertGreater(len(big_src.encode()), 150_000)
+            (big_d / "big.py").write_text(big_src, encoding="utf-8")
+            tc_b = ceb.ContainerToolchain(workdir=str(big_d), python_exe=_sys.executable, has_pytest=False)
+            br_b = ceb.ContainerExecBridge(workdir=str(big_d), host_root=big_d, exec_fn=_local_exec, toolchain=tc_b)
+            rc_b, out_b, _ = br_b.run_cmd(
+                f"{_sys.executable} -c 'import big; assert big.f(7) == 8; print(\"OK\")'",
+                overlays={"big.py": big_src.replace("return a", "return a + 1")},
+            )
+            self.assertEqual(rc_b, 0)
+            self.assertIn("OK", out_b)
+            self.assertEqual((big_d / "big.py").read_text(encoding="utf-8"), big_src)
+
 
 if __name__ == "__main__":
     unittest.main()

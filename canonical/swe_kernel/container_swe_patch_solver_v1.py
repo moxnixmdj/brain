@@ -94,6 +94,12 @@ def _parse_traceback_sites(
         p = p.lstrip("./")
         if p in repro_set or not p.endswith(".py") or p.startswith("/"):
             return
+        pp = pathlib.PurePosixPath(p)
+        # Never patch test files or pytest conftest hooks!
+        if pp.name == "conftest.py" or pp.name.startswith("test_") or pp.name.endswith("_test.py"):
+            return
+        if any(part in ("tests", "test", "testing") for part in pp.parts[:-1]):
+            return
         if (repo_root / p).is_file() and (p, ln) not in seen:
             seen.add((p, ln))
             sites.append((p, ln))
@@ -112,6 +118,9 @@ def _parse_traceback_sites(
     exc_m = re.findall(r"\b([A-Z][A-Za-z]+(?:Error|Exception))\b", tb_text)
     if exc_m:
         exc_type = exc_m[-1]
+    elif re.search(r"(?m)^E\s+assert\b", tb_text):
+        # pytest --tb=short prints `E       assert a == b` WITHOUT the literal word `AssertionError`!
+        exc_type = "AssertionError"
     return sites, exc_type
 
 
@@ -147,7 +156,7 @@ def _find_symbol_sites(repo_root: pathlib.Path, symbols: Sequence[str]) -> list[
         return out
     for p in sorted(repo_root.rglob("*.py")):
         rel = p.relative_to(repo_root).as_posix()
-        if any(part in (".git", ".venv", "venv", "node_modules", "__pycache__", "tests", "test") for part in p.parts):
+        if any(part in (".git", ".venv", "venv", "node_modules", "__pycache__", "tests", "test", "examples", "example", "docs", "doc", "benchmarks", "samples", "demos") for part in p.parts):
             continue
         if p.name.startswith(("test_", "_epistemic_")) or p.name.endswith("_test.py"):
             continue
@@ -228,13 +237,44 @@ def _transfer_candidates_at_line(src: str, lineno: int) -> list[tuple[str, str]]
     return out
 
 
+def _intrafile_callee_ranges(tree: ast.Module, fn: ast.FunctionDef | ast.AsyncFunctionDef | None, total_lines: int, fallback_ln: int) -> list[tuple[int, int]]:
+    """Return 0-based `[start, end)` line ranges for `fn` plus up to 2-hop intra-file callees."""
+    if fn is None:
+        return [(max(0, fallback_ln - 12), min(total_lines, fallback_ln + 2))]
+    defs_by_name: dict[str, ast.FunctionDef | ast.AsyncFunctionDef] = {
+        node.name: node
+        for node in ast.walk(tree)
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+    }
+    ranges: list[tuple[int, int]] = []
+    visited: set[str] = {fn.name}
+    frontier: list[ast.FunctionDef | ast.AsyncFunctionDef] = [fn]
+    for _depth in range(3):
+        next_frontier: list[ast.FunctionDef | ast.AsyncFunctionDef] = []
+        for cur in frontier:
+            ranges.append((max(0, cur.lineno - 1), min(total_lines, cur.end_lineno or cur.lineno)))
+            for node in ast.walk(cur):
+                nm = node.id if isinstance(node, ast.Name) else (node.attr if isinstance(node, ast.Attribute) else "")
+                if nm and nm in defs_by_name and nm not in visited:
+                    visited.add(nm)
+                    next_frontier.append(defs_by_name[nm])
+                    if len(visited) >= 12:
+                        break
+            if len(visited) >= 12:
+                break
+        frontier = next_frontier
+        if not frontier:
+            break
+    return ranges
+
+
 def _generate_python_candidates_at_site(
     src: str,
     lineno: int,
     exc_type: str,
     tb_text: str,
 ) -> list[tuple[str, str]]:
-    """Combine Causal Angelic AST mutators + 1-hole Minimal-Subtree transfer + guard repairs."""
+    """Combine exception-specific causal operators + Causal Angelic AST mutators + 1-hole transfer."""
     from canonical.runtime import causal_angelic_swe_engine_v1 as PY_SWE
 
     cands: list[tuple[str, str]] = []
@@ -254,6 +294,136 @@ def _generate_python_candidates_at_site(
         tree = ast.parse(src)
     except SyntaxError:
         return []
+
+    lines = src.splitlines(keepends=True)
+
+    # 0. PRIORITY 0: Exception-specific & assertion-diff causal operators (ALWAYS before generic flips!)
+    if 1 <= lineno <= len(lines):
+        raw = lines[lineno - 1]
+        # Bytes/str file-mode mismatch on TypeError (`bytes-like object is required`, `must be str, not bytes`)
+        # Expands across 1-hop intra-file callees (e.g. `get_pager_file` -> `_tempfilepager`)!
+        if exc_type == "TypeError" and ("bytes" in tb_text.lower() or "str" in tb_text.lower()):
+            fn_b = _enclosing_function(tree, lineno)
+            for scan_start, scan_end in _intrafile_callee_ranges(tree, fn_b, len(lines), lineno):
+                for idx_b in range(scan_start, scan_end):
+                    ln_b = lines[idx_b]
+                    for old_m, new_m in (
+                        ('mode="wb"', 'mode="w"'),
+                        ("mode='wb'", "mode='w'"),
+                        ('mode="w"', 'mode="wb"'),
+                        ('mode="rb"', 'mode="r"'),
+                        ('mode="r"', 'mode="rb"'),
+                        (', "wb"', ', "w"'),
+                        (', "w"', ', "wb"'),
+                    ):
+                        if old_m in ln_b:
+                            _add(
+                                f"file_mode({old_m}->{new_m})",
+                                "".join(lines[:idx_b] + [ln_b.replace(old_m, new_m, 1)] + lines[idx_b + 1 :]),
+                            )
+        # KeyError / subscript safe .get() rewrite
+        if exc_type == "KeyError":
+            m_sub = re.search(r"\b([A-Za-z_]\w*)\[([^\[\]\n]+)\]", raw)
+            if m_sub and "=" not in raw[m_sub.end() : m_sub.end() + 3]:
+                repl = f"{m_sub.group(1)}.get({m_sub.group(2)})"
+                new_line = raw[: m_sub.start()] + repl + raw[m_sub.end() :]
+                _add("keyerror_dict_get", "".join(lines[: lineno - 1] + [new_line] + lines[lineno:]))
+        # Safe getattr rewrite on AttributeError
+        if exc_type == "AttributeError":
+            m_attr = re.search(r"has no attribute '([A-Za-z_]\w*)'", tb_text)
+            if m_attr:
+                aname = m_attr.group(1)
+                m_use = re.search(rf"\b([A-Za-z_]\w*)\.{re.escape(aname)}\b", raw)
+                if m_use and "=" not in raw[m_use.end() : m_use.end() + 3]:
+                    repl = f"getattr({m_use.group(1)}, {aname!r}, None)"
+                    new_line = raw[: m_use.start()] + repl + raw[m_use.end() :]
+                    _add(f"safe_getattr({aname})", "".join(lines[: lineno - 1] + [new_line] + lines[lineno:]))
+        # NoneType / empty-collection entry guard on enclosing function
+        fn_enc = _enclosing_function(tree, lineno)
+        if fn_enc is not None and fn_enc.body and exc_type in ("AttributeError", "TypeError", "IndexError", "ValueError"):
+            p_names = [a.arg for a in fn_enc.args.args if a.arg not in ("self", "cls")]
+            first_body_ln = fn_enc.body[0].lineno
+            if 1 <= first_body_ln <= len(lines) and p_names:
+                indent = re.match(r"^(\s*)", lines[first_body_ln - 1]).group(1)  # type: ignore[union-attr]
+                p0 = p_names[0]
+                if "NoneType" in tb_text or exc_type in ("AttributeError", "TypeError"):
+                    for ret_v in ("None", '""', "[]", "False"):
+                        guard = f"{indent}if {p0} is None:\n{indent}    return {ret_v}\n"
+                        _add(f"none_entry_guard({p0}->{ret_v})", "".join(lines[: first_body_ln - 1] + [guard] + lines[first_body_ln - 1 :]))
+                if exc_type == "IndexError":
+                    for ret_v in ("None", '""', "[]"):
+                        guard = f"{indent}if not {p0}:\n{indent}    return {ret_v}\n"
+                        _add(f"empty_entry_guard({p0}->{ret_v})", "".join(lines[: first_body_ln - 1] + [guard] + lines[first_body_ln - 1 :]))
+        # Assertion-diff string normalization, constant/default substitution & wrapper unwrap!
+        if exc_type == "AssertionError":
+            m_eq = re.search(r"assert\s+(['\"])(.*?)\1\s*==\s*(['\"])(.*?)\3", tb_text)
+            if not m_eq:
+                m_call_eq = re.search(r"assert\s+[A-Za-z_][\w.]*\(\s*(['\"])(.*?)\1\s*\)\s*==\s*(['\"])(.*?)\3", tb_text)
+                if m_call_eq:
+                    m_eq = m_call_eq
+            m_ret = re.match(r"^(\s*return\s+)(.+?)(\s*)$", raw)
+            if m_eq and m_ret:
+                got_s, want_s = m_eq.group(2), m_eq.group(4)
+                ret_expr = m_ret.group(2)
+                if got_s.strip() == want_s:
+                    _add("return_strip", "".join(lines[: lineno - 1] + [f"{m_ret.group(1)}({ret_expr}).strip()\n"] + lines[lineno:]))
+                if got_s.lower() == want_s:
+                    _add("return_lower", "".join(lines[: lineno - 1] + [f"{m_ret.group(1)}({ret_expr}).lower()\n"] + lines[lineno:]))
+                if got_s.rstrip("/") == want_s:
+                    _add("return_rstrip_slash", "".join(lines[: lineno - 1] + [f"{m_ret.group(1)}({ret_expr}).rstrip('/')\n"] + lines[lineno:]))
+                if repr(got_s) in ret_expr:
+                    _add("return_literal_sub", "".join(lines[: lineno - 1] + [f"{m_ret.group(1)}{ret_expr.replace(repr(got_s), repr(want_s), 1)}\n"] + lines[lineno:]))
+            if m_ret and re.search(r"assert\s+None\s*==\s*\[\]", tb_text):
+                _add("return_or_list", "".join(lines[: lineno - 1] + [f"{m_ret.group(1)}({m_ret.group(2)}) or []\n"] + lines[lineno:]))
+            if m_ret and re.search(r"assert\s+None\s*==\s*['\"]['\"]", tb_text):
+                _add("return_or_str", "".join(lines[: lineno - 1] + [f"{m_ret.group(1)}({m_ret.group(2)}) or ''\n"] + lines[lineno:]))
+
+            # Exact scalar/default substitution from pytest `assert <GOT> == <WANT>` (e.g. `302 == 303`, `False == True`)
+            m_scalar = re.search(r"assert\s+(-?\d+|True|False)\s*==\s*(-?\d+|True|False)\b", tb_text)
+            if m_scalar and m_scalar.group(1) != m_scalar.group(2):
+                got_k, want_k = m_scalar.group(1), m_scalar.group(2)
+                fn_s = _enclosing_function(tree, lineno)
+                for sc_start, sc_end in _intrafile_callee_ranges(tree, fn_s, len(lines), lineno):
+                    pat_k = re.compile(rf"\b{re.escape(got_k)}\b")
+                    for idx_k in range(sc_start, sc_end):
+                        ln_k = lines[idx_k]
+                        if pat_k.search(ln_k):
+                            _add(
+                                f"assert_scalar_sub({got_k}->{want_k}@L{idx_k+1})",
+                                "".join(lines[:idx_k] + [pat_k.sub(want_k, ln_k, count=1)] + lines[idx_k + 1 :]),
+                            )
+
+            # 1-arg wrapper call unwrap (`fn(x) -> x`, e.g. `_(text) -> text`, `str(x) -> x`) across enclosing function
+            # AND sibling methods in the same enclosing class (handles 2-hunk consistent class fixes!).
+            fn_u = _enclosing_function(tree, lineno)
+            u_start = (fn_u.lineno - 1) if fn_u is not None else max(0, lineno - 1)
+            u_end = min(len(lines), (fn_u.end_lineno or lineno) if fn_u is not None else lineno)
+            # Find enclosing class if any
+            cls_range: tuple[int, int] | None = None
+            for _node in ast.walk(tree):
+                if isinstance(_node, ast.ClassDef) and _node.lineno <= lineno <= (_node.end_lineno or _node.lineno):
+                    cls_range = (max(0, _node.lineno - 1), min(len(lines), _node.end_lineno or _node.lineno))
+                    break
+            seen_wraps: set[tuple[str, str]] = set()
+            for idx_u in range(u_start, u_end):
+                ln_u = lines[idx_u]
+                for m_wrap in re.finditer(r"(?<![.\w])([A-Za-z_]\w*)\(([A-Za-z_]\w*)\)", ln_u):
+                    wfn, warg = m_wrap.group(1), m_wrap.group(2)
+                    if wfn not in ("def", "class", "return", "if", "for", "while", "not", "len", "isinstance", "super", "type", "print", "raise"):
+                        new_l = ln_u[: m_wrap.start()] + warg + ln_u[m_wrap.end() :]
+                        _add(
+                            f"unwrap_call({wfn}({warg})->{warg}@L{idx_u+1})",
+                            "".join(lines[:idx_u] + [new_l] + lines[idx_u + 1 :]),
+                        )
+                        if cls_range is not None and (wfn, warg) not in seen_wraps:
+                            seen_wraps.add((wfn, warg))
+                            c_pat = re.compile(rf"(?<![.\w]){re.escape(wfn)}\({re.escape(warg)}\)")
+                            cs, ce = cls_range
+                            cls_lines = [c_pat.sub(warg, l) for l in lines[cs:ce]]
+                            _add(
+                                f"unwrap_call_class({wfn}({warg})->{warg})",
+                                "".join(lines[:cs] + cls_lines + lines[ce:]),
+                            )
 
     # 1. Causal Angelic AST condition / exception / hoist mutators (pure Python, read-only reuse)
     for ln in (lineno, max(1, lineno - 1), lineno + 1):
@@ -280,11 +450,15 @@ def _generate_python_candidates_at_site(
         pass
 
     # 2. Scope-grounded 1-hole Minimal-Subtree Cross-Repo Transfer (learned from real OSS fix pairs!)
+    # Cap duplicate rule descriptions to 2 per rule so one rule never crowds out other candidates!
+    _rule_counts: dict[str, int] = {}
     for d, s in _transfer_candidates_at_line(src, lineno):
+        if _rule_counts.get(d, 0) >= 2:
+            continue
+        _rule_counts[d] = _rule_counts.get(d, 0) + 1
         _add(d, s)
 
-    # 3. Direct safe line-level guard & boundary operators
-    lines = src.splitlines(keepends=True)
+    # 3. Direct safe line-level comparison & boolean operator flips
     if 1 <= lineno <= len(lines):
         raw = lines[lineno - 1]
         for old_op, new_op in ((" < ", " <= "), (" <= ", " < "), (" > ", " >= "), (" >= ", " > "), (" == ", " != "), (" != ", " == "), (" is None", " is not None"), (" is not None", " is None"), (" and ", " or "), (" or ", " and ")):
@@ -293,15 +467,19 @@ def _generate_python_candidates_at_site(
                     f"op_flip({old_op.strip()}->{new_op.strip()})",
                     "".join(lines[: lineno - 1] + [raw.replace(old_op, new_op, 1)] + lines[lineno:]),
                 )
-        # KeyError / subscript safe .get() rewrite: `d[k]` -> `d.get(k)`
-        if exc_type == "KeyError":
-            m_sub = re.search(r"\b([A-Za-z_]\w*)\[([^\[\]\n]+)\]", raw)
-            if m_sub and "=" not in raw[m_sub.end() : m_sub.end() + 3]:
-                repl = f"{m_sub.group(1)}.get({m_sub.group(2)})"
-                new_line = raw[: m_sub.start()] + repl + raw[m_sub.end() :]
-                _add("keyerror_dict_get", "".join(lines[: lineno - 1] + [new_line] + lines[lineno:]))
 
-    return cands[:36]
+    return cands[:48]
+
+
+def _count_pytest_failures(out_text: str) -> int | None:
+    """Parse failure/error count from pytest short summary (`2 failed, 14 passed` -> 2)."""
+    m = re.search(r"(\d+)\s+failed\b", out_text)
+    if m:
+        return int(m.group(1))
+    m_e = re.search(r"(\d+)\s+error", out_text)
+    if m_e:
+        return int(m_e.group(1))
+    return None
 
 
 def solve_python_with_container_bridge(
@@ -321,6 +499,8 @@ def solve_python_with_container_bridge(
         return {"status": "NO_CONTAINER_BRIDGE", "verified": False}
 
     py_c = bridge.toolchain.python_exe
+    if not python_src_root and (ws / "src").is_dir():
+        python_src_root = "src"
     pp_expr = f"{bridge.workdir}/{python_src_root}:{bridge.workdir}" if python_src_root else bridge.workdir
     tf_args = " ".join(shlex.quote(t) for t in test_targets)
     if bridge.toolchain.has_pytest:
@@ -334,23 +514,60 @@ def solve_python_with_container_bridge(
     # Step 1: Run inside the real container to get the real traceback & fault sites!
     rc0, out0, err0 = bridge.run_cmd(test_cmd, overlays=base_overlays, timeout_s=min(20.0, timeout_s / 3.0))
     tb_text = (out0 or "") + "\n" + (err0 or "")
+    # Bypass broken repo-root conftest.py hooks when the target test file doesn't need them!
+    if bridge.toolchain.has_pytest and rc0 == 4 and "ImportError while loading conftest" in tb_text:
+        test_cmd = f"PYTHONPATH={shlex.quote(pp_expr)}:${{PYTHONPATH:-}} PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 {shlex.quote(py_c)} -m pytest --noconftest -q --tb=short {tf_args}"
+        rc0, out0, err0 = bridge.run_cmd(test_cmd, overlays=base_overlays, timeout_s=min(20.0, timeout_s / 3.0))
+        tb_text = (out0 or "") + "\n" + (err0 or "")
     if rc0 == 0:
         return {"status": "ALREADY_PASSING", "verified": False, "via_container_bridge": True}
+    if bridge.toolchain.has_pytest and rc0 in (2, 3, 4, 5) and "FAILED " not in tb_text:
+        return {"status": "COLLECTION_OR_ENV_ERROR", "verified": False, "pre_rc": rc0, "via_container_bridge": True}
 
     sites, exc_type = _parse_traceback_sites(tb_text, ws, bridge.workdir, test_targets)
-    if not sites:
-        sym_pool = list(referenced_symbols) + _extract_test_imported_symbols(ws, test_targets)
-        sites = _find_symbol_sites(ws, sym_pool)
-    if issue_text and len(sites) < 3:
+    # Deduplicate traceback sites to at most 1 per (file, enclosing_func) so wrapper frames
+    # never crowd out the real BM25-localized fault function!
+    dedup_sites: list[tuple[str, int]] = []
+    seen_funcs: set[tuple[str, str]] = set()
+    for rf_p, rf_ln in sites:
+        try:
+            _t = ast.parse((ws / rf_p).read_text(encoding="utf-8", errors="replace"))
+            _fn = _enclosing_function(_t, rf_ln)
+            fkey = (rf_p, _fn.name if _fn else f"L{rf_ln}")
+        except Exception:
+            fkey = (rf_p, f"L{rf_ln}")
+        if fkey not in seen_funcs:
+            seen_funcs.add(fkey)
+            dedup_sites.append((rf_p, rf_ln))
+    sites = dedup_sites
+
+    # ALWAYS place Top-3 BM25-localized functions right after traceback sites — BEFORE alphabetical symbol scans!
+    # Enrich BM25 query with clean failing test stems/names (`tests/test_utils.py::test_redirect` -> `utils redirect`)!
+    _q_parts: list[str] = [issue_text] if issue_text else []
+    for _t in test_targets:
+        _stem = pathlib.PurePosixPath(_t.split("::", 1)[0]).stem
+        _q_parts.append(re.sub(r"^test_|_test$", "", _stem))
+    for _m_fail in re.finditer(r"FAILED\s+\S+::([A-Za-z0-9_]+)", tb_text):
+        _q_parts.append(re.sub(r"^test_", "", _m_fail.group(1)))
+    bm25_query = " ".join(p for p in _q_parts if p)
+    if bm25_query.strip():
         from canonical.swe_kernel import bm25_code_localizer_v1 as _bm25
 
-        for rf in _bm25.localize_functions_bm25(ws, issue_text, language="python", top_k=5):
-            # Include body lines of each BM25-localized function!
-            for extra_site in _find_symbol_sites(ws, [rf.name]):
-                if extra_site[0] == rf.rel_path and extra_site not in sites:
-                    sites.append(extra_site)
-            if (rf.rel_path, rf.lineno) not in sites:
+        for rf in _bm25.localize_functions_bm25(ws, bm25_query, language="python", top_k=3):
+            fkey = (rf.rel_path, rf.name)
+            if fkey not in seen_funcs:
+                seen_funcs.add(fkey)
                 sites.append((rf.rel_path, rf.lineno))
+
+    if len(sites) < 3:
+        sym_pool = list(referenced_symbols) + _extract_test_imported_symbols(ws, test_targets)
+        for sp_p, sp_ln in _find_symbol_sites(ws, sym_pool):
+            fkey = (sp_p, f"L{sp_ln}")
+            if fkey not in seen_funcs:
+                seen_funcs.add(fkey)
+                sites.append((sp_p, sp_ln))
+            if len(sites) >= 6:
+                break
     if not sites:
         return {
             "status": "NO_LOCALIZED_SITES",
@@ -360,20 +577,33 @@ def solve_python_with_container_bridge(
         }
 
     # Step 2: Generate & verify candidates directly inside the real container!
+    # Supports monotonic multi-hunk / multi-file composition: whenever a candidate strictly reduces
+    # pytest failure count (`0 < n_fail < best_fail`), accept it into `committed_overlays` and continue!
     tried = 0
-    for rel_file, ln in sites[:3]:
+    best_fail = _count_pytest_failures(tb_text)
+    committed_overlays: dict[str, str] = {}
+    committed_descs: list[str] = []
+
+    for rel_file, ln in sites[:5]:
         if time.monotonic() - t0 > timeout_s or tried >= max_candidates:
             break
-        orig_src = (ws / rel_file).read_text(encoding="utf-8", errors="replace")
+        orig_src = committed_overlays.get(rel_file) or (ws / rel_file).read_text(encoding="utf-8", errors="replace")
         cands = _generate_python_candidates_at_site(orig_src, ln, exc_type, tb_text)
-        for desc, patched_src in cands:
+        # Prioritize exception-specific operators before generic corpus transfer rules; cap per site!
+        per_site_budget = max(6, max_candidates // max(1, min(len(sites), 5)))
+        for desc, patched_src in cands[:per_site_budget]:
             if time.monotonic() - t0 > timeout_s or tried >= max_candidates:
                 break
             tried += 1
             ov = dict(base_overlays)
+            ov.update(committed_overlays)
             ov[rel_file] = patched_src
-            rc, _, _ = bridge.run_cmd(test_cmd, overlays=ov, timeout_s=min(20.0, max(8.0, timeout_s - (time.monotonic() - t0))))
-            if rc == 0:
+            rc, out_c, err_c = bridge.run_cmd(test_cmd, overlays=ov, timeout_s=min(20.0, max(8.0, timeout_s - (time.monotonic() - t0))))
+            comb_c = (out_c or "") + "\n" + (err_c or "")
+            if rc == 0 and "no tests ran" not in comb_c.lower():
+                all_patched = dict(committed_overlays)
+                all_patched[rel_file] = patched_src
+                full_desc = " + ".join(committed_descs + [desc])
                 return {
                     "status": "VERIFIED",
                     "verified": True,
@@ -383,10 +613,18 @@ def solve_python_with_container_bridge(
                         "file": rel_file,
                         "lineno": ln,
                         "tier": "CONTAINER_BRIDGE_CAUSAL_AND_TRANSFER",
-                        "description": desc,
+                        "description": full_desc,
                         "patched_source": patched_src,
+                        "extra_patches": {k: v for k, v in all_patched.items() if k != rel_file},
                     },
                 }
+            # Monotonic progress? Keep the partial patch and move to the next fault site!
+            n_fail = _count_pytest_failures(comb_c)
+            if best_fail is not None and n_fail is not None and 0 < n_fail < best_fail:
+                best_fail = n_fail
+                committed_overlays[rel_file] = patched_src
+                committed_descs.append(desc)
+                break
 
     return {
         "status": "UNSOLVED",

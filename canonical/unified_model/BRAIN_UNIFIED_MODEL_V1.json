@@ -33056,7 +33056,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0d31fd3427ddcc0adebf64fe9008825553199258f32913b175c7843619ffbeee"
+  "value": "f36fac1079ed8eeef890880f10dc6644a1612c68004a3ee7f6762539318b33dc"
  },
  "engines": [
   {
@@ -96223,7 +96223,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/universal_epistemic_kernel_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "bb9378df60db9fc447c6561de57998330ab9fea374845d66d4c13ab6c609053f",
+   "sha256": "6c57afaab9895fc4a102188f6e54bcca7330950d8f561939465c45f9fdb6539d",
    "summary": "Universal Epistemic Kernel v1 — ONE minimal, zero-LLM, zero-weight algorithm",
    "triggers": [
     "universal",
@@ -170886,7 +170886,7 @@
   "included_source_count": 2563,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "30e157408b4f87f54f45a3d724177569eef6b8f9010c1e31dde96d0be297addb"
+  "source_tree_digest": "7a1fc2a190800926cdccc62b1e40181e29cceef317a9acd3d9cfff177edf513e"
  },
  "research_index": [
   {
@@ -348656,7 +348656,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/WAVE53_54_UNIFIED_CAPABILITY_BUS_AND_LEAPFROG_20261124_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "9ef1a1b98e2dc8bd3f9df00e75225a8759619f592dcc270257fb5266183b5d6f",
+   "sha256": "ddc73b69e196f8934ab36f2bb33dca866167fb17bee08fb690d6df422b6042b0",
    "status": "SHIPPED",
    "terms": {
     "0.00": 1,
@@ -374988,7 +374988,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/epistemic_issue_reproducer_v1.py",
-   "sha256": "034a8b7aebd97ab80f6e57e0094820477ca68abf0727b08e6cb29f39e6265985",
+   "sha256": "3a78809c31bc6fa228bdff28e74ea5d15d4057cd7b8cab08188b3b49ead8423e",
    "summary": "Zero-LLM, Zero-Weight Polyglot Epistemic Issue-to-Reproducer & Blind SWE Resolver (v1).",
    "symbol_count": 31,
    "symbols": [
@@ -427571,7 +427571,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/universal_epistemic_kernel_v1.py",
-   "sha256": "bb9378df60db9fc447c6561de57998330ab9fea374845d66d4c13ab6c609053f",
+   "sha256": "6c57afaab9895fc4a102188f6e54bcca7330950d8f561939465c45f9fdb6539d",
    "summary": "Universal Epistemic Kernel v1 — ONE minimal, zero-LLM, zero-weight algorithm",
    "symbol_count": 63,
    "symbols": [
@@ -432779,7 +432779,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/bm25_code_localizer_v1.py",
-   "sha256": "63a8dfee47b0fab95a6c1b58c99046e988d7c6015f6723cfaad3f984fb389f4b",
+   "sha256": "7a940cfbeb9230cbd50e73ef86bfc408386ec0a621a4700f8453db29b60cb628",
    "summary": "Two-stage pure-stdlib BM25 code & test localizer for Python, Go, and JS/TS repositories.",
    "symbol_count": 10,
    "symbols": [
@@ -434523,7 +434523,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/container_exec_bridge_v1.py",
-   "sha256": "fbc03b2974b4eee531babe18a6019654a95da3a357ddeb274a139c51bfb24814",
+   "sha256": "45c42f9ee04783ef3abe0e370ab9819764dec09ea15728cd465e1bf20965b106",
    "summary": "Thread-local container-execution bridge for zero-LLM SWE verification inside Harbor containers.",
    "symbol_count": 5,
    "symbols": [
@@ -434561,15 +434561,17 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/container_swe_patch_solver_v1.py",
-   "sha256": "24f2d883abca0729066299ef21429094aa7d8abec09c608e2b195ca71d2f56f9",
+   "sha256": "9c2e9035d600a9f9e539b3d16f3daeb4886b8a1cc15d119b2cb7a2633e4aed43",
    "summary": "Container-native zero-LLM Python SWE patch solver backed by ContainerExecBridge.",
-   "symbol_count": 8,
+   "symbol_count": 10,
    "symbols": [
+    "_count_pytest_failures",
     "_enclosing_function",
     "_extract_test_imported_symbols",
     "_find_symbol_sites",
     "_generate_python_candidates_at_site",
     "_get_transfer_store",
+    "_intrafile_callee_ranges",
     "_parse_traceback_sites",
     "_transfer_candidates_at_line",
     "solve_python_with_container_bridge"
@@ -434579,11 +434581,13 @@
     "container": 1,
     "container-native": 1,
     "containerexecbridge": 1,
+    "count_pytest_failures": 1,
     "enclosing_function": 1,
     "extract_test_imported_symbols": 1,
     "find_symbol_sites": 1,
     "generate_python_candidates_at_site": 1,
     "get_transfer_store": 1,
+    "intrafile_callee_ranges": 1,
     "parse_traceback_sites": 1,
     "patch": 2,
     "python": 1,
@@ -436297,18 +436301,22 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/go_and_jsts_causal_swe_engine_v1.py",
-   "sha256": "5791e9e692377b2f58794aff8e308341b0e514806dda3fa7f7b878f58f596501",
+   "sha256": "ed7e80f9b62123baa8e6b8f74b0294b6fcdb67df99bd8ddc9300326fadc795cc",
    "summary": "Production Go + JavaScript/TypeScript Causal SWE Engine & Prose Reproducer (K3=0, $0.00).",
-   "symbol_count": 18,
+   "symbol_count": 22,
    "symbols": [
     "GoFunctionInfo",
     "ProseBugCues",
     "_build_js_probes",
     "_ensure_go_import",
+    "_extract_brace_block",
+    "_extract_go_imports_header",
     "_go_zero_value_return",
     "_is_js_test_file",
     "_js_repair_candidates",
     "_parse_go_first_param",
+    "clone_go_package_tests",
+    "clone_js_ts_jest_vitest_tests",
     "discover_js_ts_files",
     "infer_js_arg_type",
     "parse_go_test_failure",
@@ -436324,9 +436332,13 @@
     "0.00": 1,
     "build_js_probes": 1,
     "causal": 2,
+    "clone_go_package_tests": 1,
+    "clone_js_ts_jest_vitest_tests": 1,
     "discover_js_ts_files": 1,
     "engine": 2,
     "ensure_go_import": 1,
+    "extract_brace_block": 1,
+    "extract_go_imports_header": 1,
     "go": 2,
     "go_zero_value_return": 1,
     "gofunctioninfo": 1,
