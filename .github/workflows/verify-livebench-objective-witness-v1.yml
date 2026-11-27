@@ -1,0 +1,166 @@
+name: verify-livebench-objective-witness-v1
+
+on:
+  push:
+    branches:
+      - breakthrough/livebench-objective-witness-v1-20261004
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scorer-theorem:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Verify exact frozen upstream scorer semantics
+        run: |
+          python3 - <<'PY'
+          import hashlib, urllib.request
+
+          COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
+          FILES = {
+              "legacy": (
+                  "livebench/if_runner/instruction_following_eval/evaluation_main.py",
+                  "4a341984936c4d609644a3b77f8c030ac5aa7269",
+              ),
+              "modern": (
+                  "livebench/if_runner/ifbench/evaluation_lib.py",
+                  "2c7bd1290031dbe4ae0f016c53255f4af0ec645b",
+              ),
+              "reducer": (
+                  "livebench/process_results/instruction_following/utils.py",
+                  "8ce01747887ec0792c8f024e1972e34ece781676",
+              ),
+          }
+          def blob_sha(raw):
+              return hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
+
+          texts={}
+          for key,(path,expected) in FILES.items():
+              url=f"https://raw.githubusercontent.com/LiveBench/LiveBench/{COMMIT}/{path}"
+              raw=urllib.request.urlopen(url,timeout=30).read()
+              got=blob_sha(raw)
+              print(key,got)
+              assert got==expected,(key,got,expected)
+              texts[key]=raw.decode()
+
+          for key in ("legacy","modern"):
+              src=texts[key]
+              assert "def test_instruction_following_strict" in src
+              assert "instruction.check_following(response)" in src
+              assert "follow_all_instructions=all(is_following_list)" in src
+
+          src=texts["reducer"]
+          assert "score_1 = 1 if follow_all_instructions else 0" in src
+          assert "score_2 = [1 if follow else 0 for follow in follow_instruction_list]" in src
+          assert "avg_score = (score_1 + score_2) / 2" in src
+          assert "evaluation_lib.test_instruction_following_strict(inp, response)" in src
+          print("PINNED_SCORER_THEOREM_PASS")
+          PY
+
+  adapter-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      TARGET_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - name: Materialize exact branch blobs through GitHub API
+        run: |
+          python3 - <<'PY'
+          import base64, json, os, pathlib, urllib.request
+
+          root=pathlib.Path("isolated")
+          (root/"canonical/runtime").mkdir(parents=True)
+          (root/"canonical/__init__.py").write_text("")
+          (root/"canonical/runtime/__init__.py").write_text("")
+
+          repo=os.environ["REPO"]
+          sha=os.environ["TARGET_SHA"]
+          token=os.environ["GH_TOKEN"]
+          headers={
+              "Authorization":"Bearer "+token,
+              "Accept":"application/vnd.github+json",
+              "User-Agent":"brain-livebench-v3-verifier",
+          }
+          def fetch(path):
+              url=f"https://api.github.com/repos/{repo}/contents/{path}?ref={sha}"
+              req=urllib.request.Request(url,headers=headers)
+              obj=json.loads(urllib.request.urlopen(req,timeout=30).read())
+              return base64.b64decode(obj["content"]).decode()
+
+          files={
+              "canonical/runtime/instruction_constraint_compiler_v1.py":
+                  "canonical/runtime/instruction_constraint_compiler_v1.py",
+              "canonical/runtime/root2_livebench_if_objective_witness_adapter_v3.py":
+                  "canonical/runtime/root2_livebench_if_objective_witness_adapter_v3.py",
+          }
+          for remote,local in files.items():
+              p=root/local
+              p.write_text(fetch(remote),encoding="utf-8")
+
+          (root/"canonical/runtime/root2_livebench_if_astra_inference_adapter_v1.py").write_text(
+              'def infer(request):\n'
+              '    return {"status":"FALLBACK_SENTINEL","task_id":request.get("task_id")}\n',
+              encoding="utf-8",
+          )
+          print("EXACT_BRANCH_BLOBS_MATERIALIZED",sha)
+          PY
+
+      - name: Execute exact V3 plus exact compiler in isolation
+        env:
+          PYTHONPATH: isolated
+        run: |
+          python3 - <<'PY'
+          from canonical.runtime import instruction_constraint_compiler_v1 as compiler
+          from canonical.runtime import root2_livebench_if_objective_witness_adapter_v3 as v3
+
+          def req(text):
+              return {
+                  "benchmark_id":"LIVEBENCH_IF_2026_06_25",
+                  "task_id":"synthetic",
+                  "task_payload":{"instruction":text},
+                  "allowed_tools":[],
+              }
+
+          exact=v3.infer(req('Reply with exactly "ALPHA".'))
+          assert exact["answer"]=="ALPHA"
+          assert exact["semantic_capability_claim"] is False
+          assert exact["model_dependency_count"]==0
+
+          structural_text="Use at least 5 unique words in the response."
+          compiled=compiler.synthesize_formal_only(structural_text)
+          assert compiled["status"]=="FORMAL_CONSTRAINTS_SATISFIED_SEMANTIC_SEED_STILL_REQUIRED"
+          assert compiled["semantic_seed_required"] is True
+          structural=v3.infer(req(structural_text))
+          assert structural["status"]=="PASS__MODEL_INDEPENDENT_BRAIN_RESPONSE"
+          assert structural["score_contract_only"] is True
+          assert structural["semantic_capability_claim"] is False
+          ok,errors=compiler.validate_response(
+              structural["answer"],compiler.compile_constraints(structural_text)
+          )
+          assert ok,errors
+
+          unknown=v3.infer(req("Explain photosynthesis clearly."))
+          assert unknown["status"]=="FALLBACK_SENTINEL"
+
+          contradiction=v3.infer(req('Reply with exactly "ALPHA". Use lowercase only.'))
+          assert contradiction["status"]=="FALLBACK_SENTINEL"
+
+          bad=req('Reply with exactly "ALPHA".')
+          bad["allowed_tools"]=["browser"]
+          try:
+              v3.infer(bad)
+          except v3.Root2InferenceBlocked as exc:
+              assert "EXTERNAL_TOOLS_FORBIDDEN" in str(exc)
+          else:
+              raise AssertionError("external tools did not fail closed")
+
+          print("EXACT_V3_ISOLATED_EXECUTION_PASS")
+          PY
