@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_SUITE_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE_EXECUTABLE_GATE__FIRST_PARTY_BRAIN_TEST_UNIVERSE__ZERO_PROMOTION_CREDIT_UNTIL_PASS",
+  "base_main_commit": "6a485303239529d5ced4f20287c4108535c4b6cf",
+  "purpose": "Operationalize FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION as an exact first-party Brain test universe while excluding vendored upstream dependency suites.",
+  "included_test_surfaces": [
+    {
+      "path": "canonical/tests",
+      "pattern": "test_*.py",
+      "recursive": true,
+      "observed_file_count": 1749
+    },
+    {
+      "path": "canonical/runtime",
+      "pattern": "test_*.py",
+      "recursive": false,
+      "observed_file_count": 14
+    },
+    {
+      "path": "tests",
+      "pattern": "test_*.py",
+      "recursive": false,
+      "observed_file_count": 4
+    },
+    {
+      "path": "canonical/research/professional_quality_20261009/package/test_professional_quality_closure_normal_form_v1.py",
+      "pattern": "exact_file",
+      "recursive": false,
+      "observed_file_count": 1
+    }
+  ],
+  "observed_first_party_test_file_count": 1768,
+  "explicit_exclusions": [
+    {
+      "path_prefix": "canonical/capabilities/internalized/",
+      "reason": "INTERNALIZED_OR_VENDORED_THIRD_PARTY_PACKAGE_TESTS_ARE_NOT_PROJECT_BRAIN_SYSTEM_REGRESSION_AUTHORITY"
+    },
+    {
+      "path_fragment": "/upstream/",
+      "reason": "UPSTREAM_PACKAGE_TESTS_EXCLUDED"
+    },
+    {
+      "path_fragment": "/vendored/",
+      "reason": "VENDORED_PACKAGE_TESTS_EXCLUDED"
+    }
+  ],
+  "pass_condition": [
+    "ALL_INCLUDED_TEST_SURFACES_EXECUTE_IN_ONE_FRESH_CHECKOUT_OF_THE_EXACT_HEAD_COMMIT",
+    "PYTEST_RETURN_CODE_EQUALS_ZERO",
+    "TEST_UNIVERSE_ENUMERATION_SUCCEEDS",
+    "NO_EXCLUDED_VENDORED_OR_UPSTREAM_TEST_PATH_IS_ADMITTED"
+  ],
+  "fail_closed": [
+    "COLLECTION_ERROR_IS_FAILURE",
+    "IMPORT_ERROR_IS_FAILURE",
+    "TEST_FAILURE_IS_FAILURE",
+    "TIMEOUT_OR_CANCELLED_RUN_IS_NOT_PASS",
+    "RUNNER_STARTUP_FAILURE_IS_NOT_PASS",
+    "PARTIAL_SURFACE_EXECUTION_IS_NOT_PASS"
+  ],
+  "authority": {
+    "on_pass": "EVIDENCE_FOR_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION_GATE_ONLY",
+    "live_default_promotion": false,
+    "quality_authority": false,
+    "acceptance_authority": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0
+  },
+  "incremental_spend_usd": 0
+}
