@@ -166,6 +166,38 @@ class Tests(unittest.TestCase):
         self.assertEqual(by["FRONTIERCODE_FROZEN_BAR_SCOPE_COMPLETE_STRONGER_PROOF_INDEPENDENT_PASS"]["associated_target_predicates"],["CODING_FRONTIERCODE_GE_54_4"])
         self.assertEqual(by["ARTIFACT_AA_BRIEFCASE_FROZEN_BAR_SCOPE_COMPLETE_STRONGER_PROOF_INDEPENDENT_PASS"]["associated_target_predicates"],["ARTIFACT_AA_BRIEFCASE_GE_1822"])
 
+    def test_oversize_candidate_fails_closed_instead_of_disappearing(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            p=root/"canonical/verification/too-large.json"
+            p.parent.mkdir(parents=True)
+            from canonical.runtime import proof_atom_receipt_index_v2 as mod
+            old=mod.MAX_FILE_BYTES
+            try:
+                mod.MAX_FILE_BYTES=8
+                p.write_text('{"claim":"R1"}\n',encoding="utf-8")
+                out=build_index(frontier(),overlay(),root=root)
+            finally:
+                mod.MAX_FILE_BYTES=old
+            self.assertEqual(out["status"],"FAIL_CLOSED",out)
+            self.assertTrue(any(x.startswith("CANDIDATE_OVERSIZE:") for x in out["errors"]),out)
+            self.assertEqual(out["declared_candidate_file_count"],1)
+            self.assertEqual(out["scanned_file_count"],0)
+            self.assertEqual(out["unsearched_candidate_file_count"],1)
+
+    def test_non_utf8_candidate_fails_closed_instead_of_disappearing(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            p=root/"canonical/verification/binaryish.json"
+            p.parent.mkdir(parents=True)
+            p.write_bytes(b'{"claim":"R1"}\xff')
+            out=build_index(frontier(),overlay(),root=root)
+            self.assertEqual(out["status"],"FAIL_CLOSED",out)
+            self.assertTrue(any(x.startswith("CANDIDATE_NOT_UTF8:") for x in out["errors"]),out)
+            self.assertEqual(out["declared_candidate_file_count"],1)
+            self.assertEqual(out["scanned_file_count"],0)
+            self.assertEqual(out["unsearched_candidate_file_count"],1)
+
 
 if __name__=="__main__":
     unittest.main(verbosity=2)
