@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_GOAL_ACTION_RESOURCE_CONTRACT_ACTIVATION_V1",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__29_DIRECT_CONTRACTIBLE__19_FAIL_CLOSED_ON_COMPOSITION_PATH__DIRECT_REPOSITORY_DEPENDENCY_GUARD_ENFORCED__INDEPENDENT_REPLAY_PENDING__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Compile exact direct repository/network resource bindings from the frozen Astra action source and fail closed on branches whose ambient effects cannot yet be soundly reduced to explicit action arguments.",
+  "implementation": {
+    "compiler": {
+      "path": "canonical/runtime/goal_action_resource_contract_compiler_v1.py",
+      "git_blob_sha": "58aeca17caea12592115dcff7867e730a066a631"
+    },
+    "tests": {
+      "path": "canonical/tests/test_goal_action_resource_contract_compiler_v1.py",
+      "git_blob_sha": "60ec58196c045721ee9163ac34a2c8d039a4d18a"
+    },
+    "bound_runtime": {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha": "b7efc08e64a483e9a759c181a4f9a1cf29e47a9a"
+    }
+  },
+  "expected_partition": {
+    "action_count": 48,
+    "direct_contractible_count": 29,
+    "blocked_pending_gateway_count": 19,
+    "blocked_reason_classes": {
+      "DERIVED_OR_UNBOUND_REPO_PATH": 4,
+      "DIRECT_ROOT_ACCESS_OUTSIDE_SAFE_PATH_GATEWAY": 1,
+      "DIRECT_PROCESS_EFFECT": 1,
+      "EXTERNAL_ACCESS_WITHOUT_DIRECT_URL_ARGUMENT": 4,
+      "DYNAMIC_BOUND_CAPABILITY_EFFECT": 9,
+      "TRANSITIVE_HELPER_EFFECTS_NOT_PROVED_ABSENT": 3
+    },
+    "note": "COUNTS_OVERLAP_ACROSS_BLOCKED_ACTIONS"
+  },
+  "direct_contract_rule": [
+    "EVERY_DIRECT_SAFE_REPO_PATH_CALL_MUST_BIND_TO_AN_EXPLICIT_ACTION_ARGUMENT_FIELD",
+    "DIRECT_ROOT_ACCESS_OUTSIDE_THE_SAFE_PATH_GATEWAY_BLOCKS_THE_ACTION",
+    "DIRECT_PROCESS_EFFECT_BLOCKS_THE_ACTION_PENDING_EPHEMERAL_CONFINEMENT",
+    "DIRECT_NETWORK_ACCESS_WITHOUT_EXPLICIT_URL_ARGUMENT_BLOCKS_THE_ACTION",
+    "DYNAMIC_BOUND_CAPABILITY_INVOCATION_BLOCKS_PENDING_EFFECT_MANIFEST_OR_STRONGER_GATEWAY_PROOF",
+    "NO_OBVIOUS_DIRECT_PRIMITIVE_NEVER_IMPLIES_PURITY"
+  ],
+  "leverage": {
+    "old_shape": "48_ACTIONS_TREATED_AS_ONE_OPAQUE_AMBIENT_SURFACE",
+    "new_shape": "29_DIRECTLY_RESOURCE_CONTRACTIBLE_PLUS_19_WITH_EXACT_NAMED_GATEWAY_RESIDUALS",
+    "next_shared_roots": [
+      "RESOURCE_CONTENT_HASH_AND_TYPE_BINDING",
+      "INITIAL_RESOURCE_SNAPSHOT_BINDING",
+      "TRANSITIVE_HELPER_COMPLETENESS",
+      "EXTERNAL_INFORMATION_BROKER_SEMANTICS_FOR_ANY_FUTURE_ADMITTED_NETWORK_ACTION",
+      "DYNAMIC_CAPABILITY_AND_PROCESS_CONFINEMENT_FOR_ANY_FUTURE_ADMISSION"
+    ]
+  },
+  "execution_state": {
+    "exact_branch_test_execution_observed": false,
+    "independent_replay_observed": false,
+    "runtime_enforcement_proved": false,
+    "promotion_eligible": false,
+    "branch_runtime_enforcement_installed": true,
+    "enforced_scope": "COMPOSITION_CAPSULE_ENFORCED_MODEL_INDEPENDENT_GOAL_PATH_ONLY",
+    "direct_repository_dependency_guard_installed": true,
+    "blocked_pending_gateway_actions_denied": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_29_ACTIONS_ARE_CURRENTLY_ENFORCED_AT_RUNTIME",
+    "NO_CLAIM_DIRECT_RESOURCE_EXTRACTION_IS_TRANSITIVE_HELPER_COMPLETENESS",
+    "NO_CLAIM_THE_19_BLOCKED_ACTIONS_ARE_UNSOLVABLE",
+    "NO_NO_BYPASS_COMPOSITION_ACCEPTANCE_OR_TERMINAL_CREDIT",
+    "NO_CLAIM_RUNTIME_ENFORCEMENT_IS_INDEPENDENTLY_VERIFIED_BEFORE_EXACT_BRANCH_REPLAY",
+    "NO_CLAIM_DIRECT_REPOSITORY_DEPENDENCY_CHECK_PROVES_CONTENT_INTEGRITY_OR_INITIAL_STATE_IDENTITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "independent_verification_required": true
+}

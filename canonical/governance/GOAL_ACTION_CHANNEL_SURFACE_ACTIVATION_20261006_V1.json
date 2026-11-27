@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_GOAL_ACTION_CHANNEL_SURFACE_ACTIVATION_V1",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__48_OF_48_ACTION_HANDLER_SURFACE_BOUND__COMPOSITION_PATH_FAIL_CLOSED_RESOURCE_GATE_INSTALLED__TRANSITIVE_COMPLETENESS_OPEN__ZERO_CREDIT",
+  "target_claims": [
+    "C_EFFECT_BOUNDARY_CLOSURE_V2",
+    "COMPOSITION_P1_CROSS_ROLE_STATE_PRESERVATION",
+    "COMPOSITION_P2_LOAD_BEARING_PROVENANCE_COMPLETENESS"
+  ],
+  "objective": "Replace vague ambient-channel risk with a source-bound finite action surface for the exact Astra model-independent controller. This is a direct syntactic lower bound and never treats absence of a recognized primitive as purity.",
+  "implementation": {
+    "compiler": {
+      "path": "canonical/runtime/goal_action_channel_surface_compiler_v1.py",
+      "git_blob_sha": "fea7a78d3c53676b49c2a647e606b8a0179b5640"
+    },
+    "tests": {
+      "path": "canonical/tests/test_goal_action_channel_surface_compiler_v1.py",
+      "git_blob_sha": "6d7829b487efaf8dcc47272085f5c170cf885167"
+    },
+    "bound_runtime": {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha": "b7efc08e64a483e9a759c181a4f9a1cf29e47a9a"
+    }
+  },
+  "expected_compilation": {
+    "action_handler_count": 48,
+    "allowed_type_count": 48,
+    "allowlist_handler_exact_match": true,
+    "direct_channel_counts": {
+      "HOST_READ": 40,
+      "HOST_WRITE": 15,
+      "PROCESS": 1,
+      "BOUND_CAPABILITY_DYNAMIC": 9,
+      "NETWORK_OR_EXTERNAL": 6,
+      "NO_OBVIOUS_AMBIENT_PRIMITIVE": 3
+    },
+    "no_obvious_direct_primitive_actions": [
+      "verify_with_independent_pypi_codec",
+      "verify_with_independent_npm_codec",
+      "finish"
+    ],
+    "interpretation": "LOWER_BOUND_ONLY__INDIRECT_HELPER_OR_DYNAMIC_CAPABILITY_EFFECTS_MAY_ADD_CHANNELS__NO_OBVIOUS_AMBIENT_PRIMITIVE_DOES_NOT_MEAN_PURE"
+  },
+  "falsification_delta": {
+    "prior_assumption": "CAPSULE_MEDIATION_OF_DECLARED_RESULT_REFERENCES_MIGHT_BE_CLOSE_TO_CLOSED_WORLD_STATE_MEDIATION",
+    "result": "FALSE_AS_A_GENERAL_CLAIM__THE_CONTROLLER_HAS_A_LARGE_AMBIENT_HOST_RESOURCE_SURFACE",
+    "strongest_concrete_countermodel": "WRITE_JSON_RECORDS_TO_PERSISTENT_REPOSITORY_PATH_THEN_READ_FILE_FROM_SAME_PATH_WITH_NO_$RESULT_DEPENDENCY",
+    "countermodel_path": "canonical/governance/COMPOSITION_AMBIENT_FILE_BYPASS_COUNTERMODEL_20261006_V1.json"
+  },
+  "next_minimum_cut": [
+    "INDEPENDENTLY_REPLAY_EXACT_BRANCH_BYTES",
+    "PROVE_TRANSITIVE_HELPER_EFFECT_COMPLETENESS_OR_KEEP_AFFECTED_ACTIONS_BLOCKED",
+    "BIND_RESOURCE_CONTENT_HASH_TYPE_AND_INITIAL_SNAPSHOT_FOR_DIRECT_REPOSITORY_CHANNELS",
+    "PROVE_NO_UNMEDIATED_EXTERNAL_OR_DYNAMIC_EFFECT_FOR_ANY_ACTION_ADMITTED_BY_COMPOSITION_RESOURCE_GUARD",
+    "ONLY_AFTER_ALL_REACHABLE_CHANNELS_ARE_MEDIATED__RUN_DOMINATOR_NO_BYPASS_PROOF"
+  ],
+  "execution_state": {
+    "exact_branch_tests_observed": false,
+    "independent_replay_observed": false,
+    "promotion_eligible": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_DIRECT_SYNTACTIC_SCAN_IS_TRANSITIVE_CALL_GRAPH_COMPLETENESS",
+    "NO_CLAIM_THREE_NO_OBVIOUS_ACTIONS_ARE_PURE",
+    "NO_CLAIM_ANY_AMBIENT_CHANNEL_IS_CURRENTLY_MEDIATED",
+    "NO_NO_BYPASS_COMPOSITION_ACCEPTANCE_OR_TERMINAL_CREDIT",
+    "NO_CLAIM_SOURCE_DERIVED_DIRECT_CHANNEL_SURFACE_IS_TRANSITIVELY_COMPLETE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "independent_verification_required": true
+}

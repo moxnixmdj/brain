@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_EXISTING_MACROEDGE_REFINEMENT_AUDIT_V1",
+  "date": "2026-10-06",
+  "status": "CANDIDATE_ZERO_REALITY_AUDIT__TWO_STRONG_MACROEDGE_CANDIDATES__NO_REFINEMENT_CREDIT_PENDING_EXACT_CONTRACT_BINDINGS_AND_INDEPENDENT_VERIFICATION",
+  "target_claim": "C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1",
+  "objective": "Identify already-proved whole-scope Brain routes that may be lifted into state-conditioned relational macroedges without re-running target benchmarks or re-proving internal algorithms.",
+  "rule": "WHOLE_SCOPE_PERFORMANCE_PARITY_OR_CEILING_IS_NOT_A_MACROEDGE_BY_ITSELF__ENTRY_EXIT_STATE_AND_CROSS_ROLE_STATE_MUST_BE_EXPLICITLY_BOUND_TO_RELATION_R__NO_REFINEMENT_CREDIT_BEFORE_CONTENT_ADDRESSED_BINDING_AND_INDEPENDENT_VERIFICATION",
+  "candidates": [
+    {
+      "id": "MACROEDGE_TOOL_DISCOVERY_V1",
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "disposition": "STRONG_CANDIDATE__PERSISTENT_STATE_SEMANTICS_ALREADY_EXPLICIT__NEEDS_RELATIONAL_CONTRACT_BINDING",
+      "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+      "prestate": "FINITE_VISIBLE_TOOL_SET__FINITE_REQUIRED_CAPABILITIES__CURRENT_EPOCH_RECEIPTS__VISIBLE_COST_AVAILABILITY_AUTHORIZATION_AND_VERSION_EVENTS",
+      "macrostep": "INFORMATION_SAFE_PROBE_SEQUENCE_TO_LEAST_COST_SUFFICIENT_ROUTE_OR_CORRECT_NO_ROUTE_ESCALATION",
+      "poststate": "SELECTED_VALID_ROUTE_OR_CORRECT_ESCALATION__CURRENT_EPOCH_RECEIPTS_PRESERVED__CHANGED_TOOL_OLD_RECEIPTS_INVALIDATED__UNCHANGED_TOOL_EVIDENCE_REUSABLE",
+      "evidence": {
+        "relation": {
+          "path": "canonical/governance/TOOL_DISCOVERY_UNIVERSAL_SCOPE_RELATION_V1.json",
+          "git_blob_sha": "009ab8e14ee14b76d799a826de34d07586a69918"
+        },
+        "scope": {
+          "path": "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+          "git_blob_sha": "f44e2378cf00f86a59159cb9d8edb35f0a7c27f4"
+        },
+        "objective_ceiling": {
+          "path": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+          "git_blob_sha": "913d171b3c855000d322e183b142b3200eeaf0a9"
+        },
+        "ownership": {
+          "path": "canonical/verification/ACCEPTED_THREE_OWNERSHIP_PROMOTION_PROOF_20261003_V1.json",
+          "git_blob_sha": "4711fb5eed330990edea369725de6eaedfd3bc70"
+        }
+      },
+      "missing": [
+        "CONTENT_ADDRESSED_RELATIONAL_CONTRACT_BINDING_TO_SHARED_R",
+        "INDEPENDENT_VERIFICATION_THAT_DECLARED_POSTSTATE_IS_SUFFICIENT_FOR_ALL_DOWNSTREAM_COMPOSITION_CONSUMERS"
+      ]
+    },
+    {
+      "id": "MACROEDGE_DELEGATION_V1",
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "disposition": "STRONG_CANDIDATE__CUMULATIVE_HISTORY_STATE_SEMANTICS_ALREADY_EXPLICIT__NEEDS_RELATIONAL_CONTRACT_BINDING",
+      "target_predicate": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+      "prestate": "FINITE_EXPLICIT_TASK_GRAPH__DECLARED_CAPABILITIES_RESOURCES_EVIDENCE_RULES__ARBITRARY_FINITE_ORDERED_SUPPORTED_RECEIPT_HISTORY",
+      "macrostep": "REPLAY_COMPLETE_RECEIPT_HISTORY_FROM_IMMUTABLE_BASE__EXACT_SOLVE_MINIMUM_COST_SCHEDULABLE_ASSIGNMENT_AND_FANIN",
+      "poststate": "MINIMUM_COST_SCHEDULABLE_REQUIRED_WORK__CAPABILITY_COMPATIBLE_ASSIGNMENT__DEPENDENCY_FANIN_GRAPH__CUMULATIVE_DISABLE_REMOVAL_EFFECTS_PRESERVED__ORDERED_RESOURCE_STATE_UPDATED",
+      "evidence": {
+        "relation": {
+          "path": "canonical/governance/TASK_TO_DELEGATION_SCOPE_RELATION_V2.json",
+          "git_blob_sha": "8ffe02f3efe1ceebed30354404bc2f60f3bd6bbd"
+        },
+        "scope": {
+          "path": "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+          "git_blob_sha": "955ac8f4bd0db2527bfbb465fc8252df6d916156"
+        },
+        "objective_ceiling": {
+          "path": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+          "git_blob_sha": "d04f2a8c5594d261158835db1cae3822411b6b23"
+        },
+        "ownership": {
+          "path": "canonical/verification/ACCEPTED_THREE_OWNERSHIP_PROMOTION_PROOF_20261003_V1.json",
+          "git_blob_sha": "4711fb5eed330990edea369725de6eaedfd3bc70"
+        }
+      },
+      "missing": [
+        "CONTENT_ADDRESSED_RELATIONAL_CONTRACT_BINDING_TO_SHARED_R",
+        "INDEPENDENT_VERIFICATION_THAT_DECLARED_POSTSTATE_CARRIES_ALL_DOWNSTREAM_LOAD_BEARING_FANIN_PROVENANCE_AND_RESOURCE_STATE"
+      ]
+    }
+  ],
+  "held_back": [
+    {
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "reason": "SCOPE_COMPLETE_OBJECTIVE_CEILING_FLOOR_AND_OWNERSHIP_ARE_PROVED_BUT_CURRENT_EVIDENCE_DOES_NOT_YET_EXPOSE_AN_EQUALLY_EXPLICIT_COMPOSITION_POSTSTATE_INTERFACE__DO_NOT_INFER_ONE_FROM_TERMINAL_ACCEPTANCE"
+    }
+  ],
+  "compression_result": {
+    "benchmark_or_target_reexecution_required_for_two_candidates": false,
+    "fresh_reality_required_now": false,
+    "immediate_shared_missing_premise": "EXACT_CROSS_ROLE_STATE_INTERFACE_BINDING_TO_SHARED_RELATION_R",
+    "implication": "ATTACK_STATE_INTERFACE_BINDING_BEFORE_ANY_NEW_PERFORMANCE_EVALUATION_FOR_THESE_TWO_FAMILIES"
+  },
+  "hard_nonclaims": [
+    "NO_MACROEDGE_IS_PROMOTED_BY_THIS_AUDIT",
+    "NO_BENCHMARK_SCORE_IS_RELABELED_AS_LOCAL_REFINEMENT",
+    "NO_RECOVERY_MACROEDGE_CLAIM",
+    "NO_COMPOSITION_OR_UNIVERSAL_DOMINANCE_CREDIT",
+    "NO_FRESH_REALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

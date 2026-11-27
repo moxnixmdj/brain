@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_AMBIENT_FILE_BYPASS_COUNTERMODEL_V1",
+  "date": "2026-10-06",
+  "status": "COUNTERMODEL_REPAIRED_ON_CURRENT_PR_BRANCH_FOR_DIRECT_DECLARED_REPOSITORY_EDGE_CLASS__PRESERVED_AS_REGRESSION_CANARY__BROADER_NO_BYPASS_STILL_OPEN__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_claims": [
+    "C_EFFECT_BOUNDARY_CLOSURE_V2",
+    "C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1",
+    "COMPOSITION_P1_CROSS_ROLE_STATE_PRESERVATION"
+  ],
+  "exact_subject": {
+    "guard": {
+      "path": "canonical/runtime/composition_state_capsule_guard_v2.py",
+      "git_blob_sha": "693c61b87d13d1c5e462aff5777ae975232751ab"
+    },
+    "astra_runtime": {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha": "b7efc08e64a483e9a759c181a4f9a1cf29e47a9a"
+    },
+    "counterexample_test": {
+      "path": "canonical/tests/test_composition_ambient_file_bypass_counterexample_v1.py",
+      "git_blob_sha": "2233e774ea4864a57fffa6fde36135f88e45efbd"
+    }
+  },
+  "countermodel": {
+    "row0": {
+      "action": "write_json_records",
+      "ambient_effect": "WRITE canonical/tmp/ambient_bridge.json",
+      "declared_provides": [
+        "writer_done"
+      ]
+    },
+    "row1": {
+      "action": "read_file",
+      "ambient_effect": "READ canonical/tmp/ambient_bridge.json",
+      "declared_requires": [],
+      "result_reference_to_row0": false
+    },
+    "guard_behavior": "validate_plan only binds declared requires/provides and explicit $result references; the shared path is not represented in those channels.",
+    "world_difference": "Row1 can observe material state created by Row0 although no capsule-declared dependency connects them.",
+    "consequence": "CAPSULE_MEDIATION_OF_DECLARED_RESULT_REFERENCES_DOES_NOT_ENTAIL_CLOSED_WORLD_CROSS_ROLE_STATE_MEDIATION."
+  },
+  "why_this_is_load_bearing": [
+    "ASTRA_MODEL_INDEPENDENT_CONTROLLER_ALLOWLIST_CONTAINS_BOTH_WRITE_JSON_RECORDS_AND_READ_FILE",
+    "WRITE_JSON_RECORDS_PERSISTS_TO_REPOSITORY_PATH",
+    "READ_FILE_CAN_OBSERVE_REPOSITORY_PATH",
+    "PERSISTENT_REPOSITORY_FILES_SURVIVE_BETWEEN_CONTROLLER_ACTIONS",
+    "V2_GUARD_DOES_NOT_EXTRACT_OR_BIND_AMBIENT_RESOURCE_READ_WRITE_SETS"
+  ],
+  "repair_classes": [
+    "FRESH_EPHEMERAL_DOMAIN_PER_MACROSTEP_WITH_ONLY_CAPSULE_AND_BROKER_EGRESS",
+    "OR_EXACT_AMBIENT_RESOURCE_CONTRACT_WHERE_EVERY_LOAD_BEARING_READ_WRITE_IS_DECLARED_CONTENT_BOUND_AND_MEDIATED",
+    "OR_SCOPE_EXCLUDE_ACTION_CLASSES_WITH_UNMEDIATED_AMBIENT_CHANNELS"
+  ],
+  "immediate_tournament_effect": {
+    "falsified_overclaim": "CAPABILITY_PLANNED_PATH_IS_CLOSED_WORLD_MERELY_BECAUSE_$RESULT_REFERENCES_ARE_CAPSULE_MEDIATED",
+    "preserved_claim": "DECLARED_$RESULT_CROSS_CAPABILITY_REFERENCES_ARE_CAPSULE_MEDIATED_ON_THE_BOUND_PATH",
+    "next": "COMPILE_EXACT_ACTION_CHANNEL_SURFACE_AND_REQUIRE_MEDIATOR_BINDING_FOR_EVERY_AMBIENT_RESOURCE_CLASS"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_CAPSULE_KERNEL_ITSELF_IS_UNSOUND",
+    "NO_CLAIM_ALL_COMPOSITION_TASKS_USE_THIS_FILE_CHANNEL",
+    "NO_CLAIM_WHOLE_COMPOSITION_FAMILY_FAILS",
+    "NO_TERMINAL_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "independent_verification_required": true,
+  "repair_status": {
+    "branch": "relational-refinement-compiler-v1",
+    "runtime_git_blob_sha": "b7efc08e64a483e9a759c181a4f9a1cf29e47a9a",
+    "mechanism": "COMPOSITION_RESOURCE_DEPENDENCY_GUARD_V1_CALLED_BEFORE_CYCLE_ZERO",
+    "direct_countermodel_disposition": "EXPECTED_REJECT__UNDECLARED_AMBIENT_RESOURCE_DEPENDENCY",
+    "broader_residuals": [
+      "RESOURCE_CONTENT_HASH_AND_TYPE_BINDING",
+      "INITIAL_RESOURCE_SNAPSHOT_BINDING",
+      "TRANSITIVE_HELPER_EFFECT_COMPLETENESS",
+      "DYNAMIC_CAPABILITY_AND_PROCESS_CONFINEMENT",
+      "EXTERNAL_INFORMATION_BROKER_ENFORCEMENT",
+      "INDEPENDENT_EXACT_BYTE_REPLAY"
+    ]
+  }
+}
