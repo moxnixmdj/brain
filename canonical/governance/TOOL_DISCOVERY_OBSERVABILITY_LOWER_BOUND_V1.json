@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_OBSERVABILITY_LOWER_BOUND_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_INFORMATION_THEORETIC_LOWER_BOUND__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Prevent false universal closure of TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR by proving the minimum observability premise required in addition to identity completeness and safe-probe enforcement.",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "frozen_target_literals": {
+    "proof_mode": "MATCHED_HIDDEN_TOOL_ECOSYSTEM_TRANSFER",
+    "task_dimension": "route selection under incomplete evidence",
+    "required_action": "Discover candidate tools if needed, select the least-cost admissible route that can satisfy the subproblem, and update capability evidence from observed outcomes",
+    "scope": "Unknown/changing tool ecosystem to verified usable route"
+  },
+  "finding": {
+    "identity_completeness_is_not_sufficient": true,
+    "safe_probe_permission_alone_is_not_sufficient": true,
+    "counterexample": "Two target worlds expose identical allowed information. CHEAP costs 1 and cannot be probed for CAP_A; EXPENSIVE costs 2 and has current positive evidence. In W0 CHEAP lacks CAP_A, so validity requires EXPENSIVE. In W1 CHEAP has CAP_A, so global least-cost correctness requires CHEAP. Because the differing fact is not observable, no policy can guarantee both obligations in both worlds.",
+    "necessary_observability_condition": "Every hidden capability fact capable of changing the globally least-cost valid-route decision must be decidable before commitment from authorized public evidence or an allowed safe probe."
+  },
+  "impact_on_open_candidates": {
+    "dynamic_v3": "Already falsified independently by cheaper-undiscovered-route ordering.",
+    "dynamic_v4_safe_probe_gate": "Necessary soundness repair, but it cannot by itself establish universal actual-route least-cost noninferiority unless the observability condition is also discharged.",
+    "owned_identity_gateway": "Can discharge tool-identity enumeration only; it does not by itself make hidden capability truth observable.",
+    "complete_source_relation": "Can discharge identity discovery completeness only; it does not by itself discharge capability observability completeness."
+  },
+  "minimum_residual_after_program_side_repairs": [
+    "INDEPENDENT_VERIFY_DISCOVERY_FIRST_AND_SAFE_PROBE_PROGRAM_SIDE_SOUNDNESS",
+    "PROVE_OR_VERIFY_IDENTITY_COMPLETENESS_FOR_THE_OWNED_INVOCABLE_TOOL_UNIVERSE",
+    "PROVE_OR_VERIFY_CAPABILITY_OBSERVABILITY_COMPLETENESS_FOR_EVERY_DECISION_RELEVANT_HIDDEN_FACT"
+  ],
+  "target_weakening_forbidden": [
+    "DO_NOT_REDEFINE_UNOBSERVABLE_CHEAPER_SUFFICIENT_TOOLS_AS_NONEXISTENT",
+    "DO_NOT_CALL_A_ROUTE_GLOBALLY_LEAST_COST_MERELY_BECAUSE_CHEAPER_ROUTES_LACK_EVIDENCE",
+    "DO_NOT_TREAT_EXPLICIT_PROBE_DENIAL_AS_NEGATIVE_CAPABILITY_EVIDENCE"
+  ],
+  "candidate_runtime": "canonical/runtime/tool_discovery_observability_lower_bound_v1.py",
+  "candidate_tests": "canonical/tests/test_tool_discovery_observability_lower_bound_v1.py",
+  "next": "INDEPENDENTLY_VERIFY_THE_LOWER_BOUND__THEN_REQUIRE_EVERY_TOOL_DISCOVERY_UNIVERSAL_SCOPE_CANDIDATE_TO_DISCHARGE_OBSERVABILITY_COMPLETENESS_OR_FAIL_CLOSED",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
