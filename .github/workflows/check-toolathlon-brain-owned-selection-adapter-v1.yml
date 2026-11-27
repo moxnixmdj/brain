@@ -1,0 +1,33 @@
+name: Check Toolathlon Brain-owned selection adapter V1
+on:
+  push:
+    branches:
+      - "toolathlon-selection-adapter-v1-20261003"
+    paths:
+      - "canonical/runtime/toolathlon_brain_owned_selection_adapter_v1.py"
+      - "canonical/tests/test_toolathlon_brain_owned_selection_adapter_v1.py"
+      - "canonical/governance/TOOLATHLON_BRAIN_OWNED_SELECTION_ADAPTER_V1.json"
+      - ".github/workflows/check-toolathlon-brain-owned-selection-adapter-v1.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/toolathlon_brain_owned_selection_adapter_v1.py"
+      - "canonical/tests/test_toolathlon_brain_owned_selection_adapter_v1.py"
+      - "canonical/governance/TOOLATHLON_BRAIN_OWNED_SELECTION_ADAPTER_V1.json"
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile
+        run: |
+          python -m py_compile canonical/runtime/toolathlon_brain_owned_selection_adapter_v1.py
+          python -m py_compile canonical/tests/test_toolathlon_brain_owned_selection_adapter_v1.py
+      - name: Run adapter tests
+        run: |
+          python -m unittest canonical.tests.test_toolathlon_brain_owned_selection_adapter_v1 -v
