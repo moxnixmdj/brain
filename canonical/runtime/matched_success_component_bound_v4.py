@@ -141,7 +141,14 @@ def _edge(cid: str, i: int, raw: Any, left: Mapping[str, Any], right: Mapping[st
             "transported_semantic_sha256": _sha(rr.get("transported_semantic_sha256"), p + "_SEM"),
             "transported_shape_sha256": _sha(rr.get("transported_shape_sha256"), p + "_SHAPE"),
             "downstream_terminal_semantic_sha256": _sha(rr.get("downstream_terminal_semantic_sha256"), p + "_TERM"),
-            "downstream_case_payload_sha256": right["case_payload_sha256"],
+            "downstream_case_payload_sha256": _sha(
+                rr.get("downstream_case_payload_sha256"),
+                p + "_CASE",
+            ),
+            "downstream_case_template_sha256": _sha(
+                rr.get("downstream_case_template_sha256"),
+                p + "_CASE_TEMPLATE",
+            ),
             "downstream_scorer_path": right["scorer_path"],
             "downstream_scorer_git_blob_sha": right["scorer_git_blob_sha"],
             "base_scorer_pass": rr.get("base_scorer_pass"),
@@ -160,6 +167,18 @@ def _edge(cid: str, i: int, raw: Any, left: Mapping[str, Any], right: Mapping[st
         raise V4Error(p + "_ABLATION_NOT_DISTINCT")
     if not (t["transported_shape_sha256"] == a["transported_shape_sha256"] == r["transported_shape_sha256"]):
         raise V4Error(p + "_SHAPE_MISMATCH")
+    if not (
+        t["downstream_case_template_sha256"]
+        == a["downstream_case_template_sha256"]
+        == r["downstream_case_template_sha256"]
+    ):
+        raise V4Error(p + "_CASE_TEMPLATE_MISMATCH")
+    if t["downstream_case_payload_sha256"] != right["case_payload_sha256"]:
+        raise V4Error(p + "_TRUE_CASE_NOT_COMPONENT_CASE")
+    if r["downstream_case_payload_sha256"] != t["downstream_case_payload_sha256"]:
+        raise V4Error(p + "_RESCUE_CASE_NOT_RESTORED")
+    if a["downstream_case_payload_sha256"] == t["downstream_case_payload_sha256"]:
+        raise V4Error(p + "_ABLATION_CASE_NOT_DISTINCT")
     if not all(x["base_scorer_pass"] is True for x in (t, a, r)):
         raise V4Error(p + "_BASE_SCORER_NOT_RUN_OR_NOT_PASS")
     if (t["bridge_check_pass"], a["bridge_check_pass"], r["bridge_check_pass"]) != (True, False, True):
@@ -202,23 +221,6 @@ def compile_v4(doc: Mapping[str, Any]) -> dict[str, Any]:
                 raise V4Error(cid + "_EDGE_COUNT_MISMATCH")
             edges = [_edge(cid, i, edges_raw[i], comps[i], comps[i + 1]) for i in range(len(edges_raw))]
 
-            v3 = raw.get("v3_binding")
-            if not isinstance(v3, Mapping):
-                raise V4Error(cid + "_V3_BINDING_INVALID")
-            v3_binding = {
-                "class_id": cid,
-                "true_upstream_semantic_sha256": _sha(v3.get("true_upstream_semantic_sha256"), cid + "_V3_UP"),
-                "true_terminal_semantic_sha256": _sha(v3.get("true_terminal_semantic_sha256"), cid + "_V3_TERM"),
-                "true_run_semantics_sha256": _sha(v3.get("true_run_semantics_sha256"), cid + "_V3_TRUE"),
-                "ablated_run_semantics_sha256": _sha(v3.get("ablated_run_semantics_sha256"), cid + "_V3_ABL"),
-                "rescue_run_semantics_sha256": _sha(v3.get("rescue_run_semantics_sha256"), cid + "_V3_RESCUE"),
-            }
-            if v3_binding["true_upstream_semantic_sha256"] != comps[0]["semantic_projection_sha256"]:
-                raise V4Error(cid + "_V3_UPSTREAM_NOT_FIRST_COMPONENT")
-            if v3_binding["true_terminal_semantic_sha256"] != comps[-1]["semantic_projection_sha256"]:
-                raise V4Error(cid + "_V3_TERMINAL_NOT_LAST_COMPONENT")
-            _receipt(v3.get("receipt"), cid + "_V3_RECEIPT", v3_binding)
-
             bridges = raw.get("atom_bridges")
             if not isinstance(bridges, list):
                 raise V4Error(cid + "_ATOM_BRIDGES_INVALID")
@@ -226,9 +228,35 @@ def compile_v4(doc: Mapping[str, Any]) -> dict[str, Any]:
             if set(atom_map) != set(atoms) or len(atom_map) != len(bridges):
                 raise V4Error(cid + "_ATOM_SET_MISMATCH")
             class_digest = _digest({
-                "components": [c["semantic_projection_sha256"] for c in comps],
-                "edges": [e["edge_id"] for e in edges],
-                "v3": v3_binding,
+                "components": [
+                    {
+                        "component_id": c["component_id"],
+                        "kind": c["kind"],
+                        "semantic_projection_sha256":
+                            c["semantic_projection_sha256"],
+                        "scorer_result_sha256":
+                            c["scorer_result_sha256"],
+                    }
+                    for c in comps
+                ],
+                "edges": [
+                    {
+                        "edge_id": e["edge_id"],
+                        "true_transport": e["runs"]["true"][
+                            "transported_semantic_sha256"
+                        ],
+                        "ablated_transport": e["runs"]["ablated"][
+                            "transported_semantic_sha256"
+                        ],
+                        "true_terminal": e["runs"]["true"][
+                            "downstream_terminal_semantic_sha256"
+                        ],
+                        "ablated_terminal": e["runs"]["ablated"][
+                            "downstream_terminal_semantic_sha256"
+                        ],
+                    }
+                    for e in edges
+                ],
             })
             for atom in atoms:
                 bridge = atom_map[atom]
@@ -255,6 +283,8 @@ def compile_v4(doc: Mapping[str, Any]) -> dict[str, Any]:
             "covered_atoms": sorted(covered),
             "classes": summaries,
             "kills_v3_scalar_transducer_countermodel": True,
+            "synthetic_v3_binding_required": False,
+            "actual_component_chain_is_semantic_authority": True,
             "scope_credit_authorized": False,
             "execution_authority": False,
             "promotion_authority": False,

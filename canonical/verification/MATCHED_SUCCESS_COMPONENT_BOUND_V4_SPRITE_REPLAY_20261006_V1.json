@@ -1,64 +1,58 @@
 {
   "schema": "PROJECT_BRAIN_MATCHED_SUCCESS_COMPONENT_BOUND_V4_SPRITE_REPLAY_20261006_V1",
   "date": "2026-10-06",
-  "status": "INDEPENDENT_SPRITE_PASS_9_OF_9__COMPILER_CONTRACT_ONLY__ZERO_TERMINAL_CREDIT",
-  "runner": {
-    "provider": "Sprites",
-    "sprite_name": "brain-h100-independent-replay-v1",
-    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
-    "workspace": "/home/sprite/v4check",
-    "python": "3.13.7"
-  },
-  "exact_input_blobs": {
-    "runtime": {
-      "path": "canonical/runtime/matched_success_component_bound_v4.py",
-      "git_blob_sha": "0977b01f585b343b74125926fe0d40e1fb6c2323"
-    },
-    "tests": {
-      "path": "canonical/tests/test_matched_success_component_bound_v4.py",
-      "git_blob_sha": "e7eab26b2387d9383dc5876e96ba9daf8295cebc"
+  "status": "INDEPENDENT_SPRITE_EXACT_BRANCH_BYTE_REPLAY_PASS_10_OF_10__COMPILER_MECHANICS_ONLY__ZERO_SCOPE_CREDIT",
+  "source_brain": {
+    "pull_request": 2435,
+    "branch": "feature/matched-success-component-bound-v4-20261006",
+    "exact_blobs": {
+      "canonical/runtime/matched_success_component_bound_v4.py": "d2ff7fd2c0bff7ee6c9bff82af9cf06a2c273847",
+      "canonical/tests/test_matched_success_component_bound_v4.py": "fb34c39fb15a09c723377ee8a3032e038204c2bd"
     }
   },
-  "execution": {
-    "pytest_available": false,
-    "method": "DIRECT_IMPORT_AND_EXECUTION_OF_EVERY_CALLABLE_TEST_FUNCTION_WITH_NAME_PREFIX_TEST_",
-    "pass_count": 9,
-    "fail_count": 0,
-    "passed_tests": [
-      "test_valid_component_bound_bundle_passes_candidate_compiler",
-      "test_missing_actual_component_fails_closed",
-      "test_fake_component_scorer_identity_fails_closed",
-      "test_standalone_component_success_without_causal_flip_fails",
-      "test_same_semantic_ablation_fails_closed",
-      "test_v3_must_bind_actual_first_component_projection",
-      "test_missing_atom_specific_bridge_fails_closed",
-      "test_component_receipt_substitution_fails_closed",
-      "test_base_component_scorer_must_actually_pass"
-    ]
+  "independent_runner": {
+    "provider": "Sprites",
+    "sprite": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "isolated_workdir": "/home/sprite/v4replay",
+    "execution": "COPY_EXACT_BRANCH_BYTES__RECOMPUTE_GIT_BLOB_SHA1__DIRECT_STDLIB_TEST_FUNCTION_REPLAY_BECAUSE_PYTEST_MODULE_NOT_INSTALLED",
+    "runtime_blob_match": true,
+    "test_blob_match": true,
+    "result": "PASS_10_OF_10"
   },
   "verified": [
-    "THE_V4_COMPILER_ACCEPTS_THE_COMPLETE_SYNTHETIC_COMPONENT_BOUND_CONTRACT_FIXTURE",
-    "MISSING_REQUIRED_COMPONENT_FAILS_CLOSED",
-    "FAKE_SCORER_IDENTITY_FAILS_CLOSED",
+    "EXACT_CURRENT_BRANCH_RUNTIME_BYTES_REPLAYED",
+    "EXACT_CURRENT_BRANCH_TEST_BYTES_REPLAYED",
+    "VALID_COMPONENT_BOUND_BUNDLE_PASSES_CANDIDATE_COMPILER",
+    "MISSING_ACTUAL_COMPONENT_FAILS_CLOSED",
+    "FAKE_FROZEN_COMPONENT_SCORER_IDENTITY_FAILS_CLOSED",
     "STANDALONE_COMPONENT_SUCCESS_WITHOUT_CAUSAL_BRIDGE_FLIP_FAILS_CLOSED",
-    "NON_DISTINCT_ABLATION_FAILS_CLOSED",
-    "V3_ENDPOINT_MUST_BIND_ACTUAL_COMPONENT_PROJECTIONS",
+    "SAME_SEMANTIC_ABLATION_FAILS_CLOSED",
     "MISSING_ATOM_SPECIFIC_BRIDGE_FAILS_CLOSED",
     "COMPONENT_RECEIPT_SUBSTITUTION_FAILS_CLOSED",
-    "BASE_COMPONENT_SCORER_FAILURE_FAILS_CLOSED"
+    "BASE_COMPONENT_SCORER_FAILURE_FAILS_CLOSED",
+    "ABLATION_MUST_USE_A_DISTINCT_CASE_PAYLOAD_WITH_THE_SAME_CASE_TEMPLATE",
+    "TRUE_ABLATED_AND_RESCUE_CASE_TEMPLATES_MUST_MATCH"
   ],
+  "github_actions_note": "PR_2435_HOSTED_ACTION_RUN_37432707848_FAILED_WITH_NO_RETRIEVABLE_JOB_LOG_BLOB_AND_IS_TREATED_AS_INFRASTRUCTURE_NON_EVIDENCE",
   "hard_nonclaims": [
-    "NO_REAL_TERMINAL_CASES_EXECUTED",
-    "NO_SCOPE_CREDIT",
+    "NO_REAL_MATCHED_TERMINAL_CASES_EXECUTED",
+    "NO_CURRENT_COMPONENT_RECEIPT_BUNDLE_PROVES_THE_TEN_NONLEGACY_ATOMS",
+    "NO_SCOPE_COMPILER_CLOSURE",
+    "NO_REAL_HARNESS_ISOLATION_RECEIPTS",
+    "NO_ATOM_SPECIFIC_SEMANTIC_IMPLICATION_RECEIPTS_FROM_REAL_CASES",
     "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
-    "NO_CLAIM_CURRENT_BRAIN_RUNTIME_PASSES_THE_TEN_FUTURE_MATCHED_SUCCESS_ATOMS",
-    "NO_CLAIM_THE_V4_ATOM_IMPLICATION_RECEIPTS_ALREADY_EXIST",
     "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
   ],
-  "acceptance_credit_delta": 0,
-  "capability_credit_delta": 0,
-  "family_credit_delta": 0,
-  "ownership_credit_delta": 0,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false
