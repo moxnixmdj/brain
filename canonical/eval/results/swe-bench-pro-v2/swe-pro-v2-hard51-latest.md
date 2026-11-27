@@ -1,15 +1,15 @@
 # SWE-bench Pro V2 (HARD-51, 51 tasks) — engine eval (measured run)
 
-- upstream/eval commit recorded by CI: `ab47d3bdad35e7dbd492663393a320212a7d24a6`
+- upstream/eval commit recorded by CI: `358cf8bfac2a2b92c53b425f4cbc1da06733f603`
 - Resolve decisions come from each task's own verifier inside the official container image.
 - `nop` must resolve 0/N and `oracle` must resolve N/N or the causal number is not interpretable.
 
-- Measured under: `engine_timeout_s=240`, `eval_commit=ab47d3bdad35e7dbd492663393a320212a7d24a6`, `n_shards=6`
+- Measured under: `engine_timeout_s=240`, `eval_commit=358cf8bfac2a2b92c53b425f4cbc1da06733f603`, `n_shards=6`
 | arm | resolved | tasks | resolve % | model calls | cost USD | trial wall s (total) | engine s (total) | missing trials |
 |---|---|---|---|---|---|---|---|---|
-| causal | 0 | 51 | 0.0 | 0 | 0.0 | 7621.2 | 846.689 | 0 |
-| nop | 0 | 51 | 0.0 | 0 | 0.0 | 7250.73 | None | 0 |
-| oracle | 51 | 51 | 100.0 | 0 | 0.0 | 8043.92 | None | 0 |
+| causal | 0 | 51 | 0.0 | 0 | 0.0 | 8023.61 | 894.571 | 0 |
+| nop | 0 | 51 | 0.0 | 0 | 0.0 | 6967.79 | None | 0 |
+| oracle | 51 | 51 | 100.0 | 0 | 0.0 | 7614.16 | None | 0 |
 
 ## Harness gates
 
@@ -43,25 +43,25 @@
 
 | task | reward | resolved | agent status | engine status | engine pass | files | harness error |
 |---|---|---|---|---|---|---|---|
-| `instance_NodeBB__NodeBB-8168c6c40707478f71b8af60300830fe` | 0.0 | no | EDITS_UPLOADED | PASS | True | 1 |  |
+| `instance_NodeBB__NodeBB-8168c6c40707478f71b8af60300830fe` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_ansible__ansible-40ade1f84b8bb10a63576b0ac320c1` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_ansible__ansible-b748edea457a4576847a1027567812` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_ansible__ansible-c1f2df47538b884a43320f53e78719` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_ansible__ansible-d33bedc48fdd933b5abd65a77c0818` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_ansible__ansible-d62496fe416623e88b90139dc79170` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_ansible__ansible-d72025be751c894673ba85caa063d8` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
-| `instance_ansible__ansible-de5858f48dc9e1ce9117034e0d7e76` | 0.0 | no | HARNESS_ERROR | None | None | 0 | URLError: <urlopen error <urlopen error outbound |
+| `instance_ansible__ansible-de5858f48dc9e1ce9117034e0d7e76` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_ansible__ansible-e9e6001263f51103e96e58ad382660` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_element-hq__element-web-5dfde12c1c1c0b6e48f17e3` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_element-hq__element-web-66d0b318bc6fee0d17b54c1` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_element-hq__element-web-772df3021201d9c73835a62` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_element-hq__element-web-ecfd1736e5dd9808e87911f` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
-| `instance_flipt-io__flipt-2ca5dfb3513e4e786d2b037075617cc` | 0.0 | no | HARNESS_ERROR | None | None | 0 | URLError: <urlopen error <urlopen error outbound |
+| `instance_flipt-io__flipt-2ca5dfb3513e4e786d2b037075617cc` | 0.0 | no | HARNESS_ERROR | None | None | 0 | UnicodeError: label empty or too long |
 | `instance_flipt-io__flipt-3d5a345f94c2adc8a0eaa102c189c08` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_flipt-io__flipt-524f277313606f8cd29b299617d6565` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_flipt-io__flipt-c1728053367c753688f114ec26e703c` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_flipt-io__flipt-c188284ff0c094a4ee281afebebd849` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
-| `instance_flipt-io__flipt-cd18e54a0371fa222304742c6312e9a` | 0.0 | no | HARNESS_ERROR | None | None | 0 | URLError: <urlopen error <urlopen error outbound |
+| `instance_flipt-io__flipt-cd18e54a0371fa222304742c6312e9a` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_flipt-io__flipt-e2bd19dafa7166c96b082fb2a59eb54` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_future-architect__vuls-5af1a227339e46c7abf3f281` | 0.0 | no | NO_EDITS | PASS | True | 0 |  |
 | `instance_future-architect__vuls-ca3f6b1dbf2cd24d1537bfda` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
@@ -91,15 +91,17 @@
 | `instance_protonmail__webclients-e65cc5f33719e02e1c378146` | 0.0 | no | EDITS_UPLOADED | PASS | True | 1 |  |
 | `instance_qutebrowser__qutebrowser-3e21c8214a998cb1058def` | 0.0 | no | EDITS_UPLOADED | PASS | True | 1 |  |
 | `instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af57` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
-| `instance_qutebrowser__qutebrowser-deeb15d6f009b3ca0c3bd5` | 0.0 | no | HARNESS_ERROR | None | None | 0 | URLError: <urlopen error [Errno 111] Connection  |
+| `instance_qutebrowser__qutebrowser-deeb15d6f009b3ca0c3bd5` | 0.0 | no | NO_EDITS | NETWORK_REFUSED__NOT_A_CAPABILITY_RESULT | False | 0 |  |
 | `instance_qutebrowser__qutebrowser-e70f5b03187bdd40e8bf70` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_tutao__tutanota-f373ac3808deefce8183dad8d167298` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 
-**4 of 51 causal trials are not attributable to the engine** (harness error, blocked upload, or no trial read). The measured rate stays 0/51 as a benchmark number — a run counts what actually ran, failures included — but the engine-attributable denominator is 47, and that is the number to quote about the engine.
+**1 of 51 causal trials are not attributable to the engine** (harness error, blocked upload, or no trial read). The measured rate stays 0/51 as a benchmark number — a run counts what actually ran, failures included — but the engine-attributable denominator is 50, and that is the number to quote about the engine.
 
 ### Why the trials ended the way they did (engine's own account, not ours)
 
-`FAILED`×36, `CAUSAL_ANGELIC_JS_SWE`×4, `TIER1_FIRST_PRINCIPLES`×3, `MULTI_STEP_DOC_COMPILED_ACTIVE_INFERENCE`×2, `CU_SOLVED`×2. Gaps it went looking for: `introspect:nodebb --help`, `ansible`, `awk`, `base64`, `bzip2`, `cut`
+`FAILED`×37, `CAUSAL_ANGELIC_JS_SWE`×4, `TIER1_FIRST_PRINCIPLES`×3, `CU_SOLVED`×2, `NO_SAFE_FORM_FOUND`×1, `WEB_GET_FAILED`×1, `MULTI_STEP_DOC_COMPILED_ACTIVE_INFERENCE`×1. Gaps it went looking for: `awk`, `base64`, `ansible`, `bzip2`, `cut`, `cmp`
 
-What the engine did across the causal arm (behaviour, not a score): `EDITS_UPLOADED`×4, `HARNESS_ERROR`×4, `NO_EDITS`×43. Resolve rate is decided only by each task's own verifier.
+What the engine did across the causal arm (behaviour, not a score): `EDITS_UPLOADED`×3, `HARNESS_ERROR`×1, `NO_EDITS`×47. Resolve rate is decided only by each task's own verifier.
+
+Outbound network attempts refused by the harness during the causal arm: **1** (`allow_web` is enforced, not requested). A zero here is what 'this run needed no external knowledge' means operationally.
 

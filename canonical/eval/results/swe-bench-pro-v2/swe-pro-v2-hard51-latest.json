@@ -1,18 +1,18 @@
 {
   "arms": {
     "causal": {
-      "agent_wall_seconds_total": 846.689,
+      "agent_wall_seconds_total": 894.571,
       "arm": "causal",
       "conditions": {
         "engine_timeout_s": 240,
-        "eval_commit": "ab47d3bdad35e7dbd492663393a320212a7d24a6",
+        "eval_commit": "358cf8bfac2a2b92c53b425f4cbc1da06733f603",
         "n_shards": 6
       },
       "cost_usd_total": 0.0,
       "engine_statuses": {
-        "EDITS_UPLOADED": 4,
-        "HARNESS_ERROR": 4,
-        "NO_EDITS": 43
+        "EDITS_UPLOADED": 3,
+        "HARNESS_ERROR": 1,
+        "NO_EDITS": 47
       },
       "missing_trials": [],
       "model_calls_total": 0,
@@ -24,51 +24,56 @@
       "resolved": 0,
       "tasks": {
         "instance_NodeBB__NodeBB-8168c6c40707478f71b8af60300830fe554c778c-vf2cf3cbd463b7ad942381f1c6d077626485a1e9e": {
-          "agent_seconds": 19.56,
-          "agent_status": "EDITS_UPLOADED",
+          "agent_seconds": 20.228,
+          "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 16920.96,
+            "elapsed_ms": 17617.33,
             "gaps_queried": [
-              "introspect:nodebb --help",
-              "introspect:nodebb --help",
-              "introspect:nodebb start --help"
+              "awk",
+              "base64",
+              "comm",
+              "cut",
+              "fold",
+              "grep",
+              "join",
+              "look"
             ],
-            "modality": "epistemic_doc_compiler",
-            "mode": "MULTI_STEP_DOC_COMPILED_ACTIVE_INFERENCE",
-            "n_gaps_queried": 3,
+            "modality": "os_cli_computer_use",
+            "mode": "FAILED",
+            "n_gaps_queried": 15,
             "patch_files": 0,
-            "status": "VERIFIED"
+            "status": "FAILED"
           },
           "edits_applied_by": "tree-mutation",
           "engine_notes": [
             "store: STORE_FILE_ABSENT",
-            "engine said: PASS"
+            "engine said: FAIL_CLOSED"
           ],
-          "engine_pass": true,
-          "engine_status": "PASS",
+          "engine_pass": false,
+          "engine_status": "FAIL_CLOSED",
           "error": null,
           "exception": null,
           "model_calls": 0,
-          "n_files_changed": 1,
+          "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 81.012,
+          "seconds": 79.861,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_FILE_ABSENT",
           "store_saved": true,
-          "tree_changed": true,
-          "trial_dir": "instance_NodeBB__NodeBB-8168c6c4__ZGfsSLd"
+          "tree_changed": false,
+          "trial_dir": "instance_NodeBB__NodeBB-8168c6c4__mcG3W54"
         },
         "instance_ansible__ansible-40ade1f84b8bb10a63576b0ac320c13f57c87d34-v6382ea168a93d80a64aab1fbd8c4f02dc5ada5bf": {
-          "agent_seconds": 27.531,
+          "agent_seconds": 20.015,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 22089.25,
+            "elapsed_ms": 16950.99,
             "gaps_queried": [
               "ansible",
               "awk",
@@ -97,23 +102,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 101.785,
+          "seconds": 79.95,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_FILE_ABSENT",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_ansible__ansible-40ade1__YPkyGGT"
+          "trial_dir": "instance_ansible__ansible-40ade1__7EBbXYV"
         },
         "instance_ansible__ansible-b748edea457a4576847a10275678127895d2f02f-v1055803c3a812189a1133297f7f5468579283f86": {
-          "agent_seconds": 7.246,
+          "agent_seconds": 10.907,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 3386.52,
+            "elapsed_ms": 5491.53,
             "gaps_queried": [],
             "modality": "swe_codebase",
             "mode": "FAILED",
@@ -133,23 +138,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 80.127,
+          "seconds": 86.869,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_FILE_ABSENT",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_ansible__ansible-b748ed__KjijCHC"
+          "trial_dir": "instance_ansible__ansible-b748ed__b2zZpBD"
         },
         "instance_ansible__ansible-c1f2df47538b884a43320f53e787197793b105e8-v906c969b551b346ef54a2c0b41e04f632b7b73c2": {
-          "agent_seconds": 42.078,
+          "agent_seconds": 58.542,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 34467.7,
+            "elapsed_ms": 48411.13,
             "gaps_queried": [
               "ansible",
               "awk",
@@ -178,23 +183,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 172.935,
+          "seconds": 294.44,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_FILE_ABSENT",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_ansible__ansible-c1f2df__WzcH4jw"
+          "trial_dir": "instance_ansible__ansible-c1f2df__a2fW5To"
         },
         "instance_ansible__ansible-d33bedc48fdd933b5abd65a77c081876298e2f07-v0f01c69f1e2528b935359cfe578530722bca2c59": {
-          "agent_seconds": 15.951,
+          "agent_seconds": 24.027,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 12714.04,
+            "elapsed_ms": 18047.19,
             "gaps_queried": [
               "ansible",
               "base64",
@@ -223,23 +228,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 89.527,
+          "seconds": 106.843,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_FILE_ABSENT",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_ansible__ansible-d33bed__YkTtNjo"
+          "trial_dir": "instance_ansible__ansible-d33bed__Gx8UJBG"
         },
         "instance_ansible__ansible-d62496fe416623e88b90139dc7917080cb04ce70-v0f01c69f1e2528b935359cfe578530722bca2c59": {
-          "agent_seconds": 10.2,
+          "agent_seconds": 8.099,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 4534.86,
+            "elapsed_ms": 3970.64,
             "gaps_queried": [],
             "modality": "swe_codebase",
             "mode": "FAILED",
@@ -259,23 +264,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 84.81,
+          "seconds": 99.785,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_FILE_ABSENT",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_ansible__ansible-d62496__H7KJW5Y"
+          "trial_dir": "instance_ansible__ansible-d62496__AeeEWyh"
         },
         "instance_ansible__ansible-d72025be751c894673ba85caa063d835a0ad3a8c-v390e508d27db7a51eece36bb6d9698b63a5b638a": {
-          "agent_seconds": 16.032,
+          "agent_seconds": 15.939,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 7719.41,
+            "elapsed_ms": 7686.98,
             "gaps_queried": [],
             "modality": "os_cli_computer_use",
             "mode": "CU_SOLVED",
@@ -295,48 +300,57 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 190.365,
+          "seconds": 189.448,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_ansible__ansible-d72025__XRNNsZC"
+          "trial_dir": "instance_ansible__ansible-d72025__28bnoow"
         },
         "instance_ansible__ansible-de5858f48dc9e1ce9117034e0d7e76806f420ca8-v1055803c3a812189a1133297f7f5468579283f86": {
-          "agent_seconds": 3.833,
-          "agent_status": "HARNESS_ERROR",
-          "cost_usd": 0.0,
-          "diagnosis": {},
-          "edits_applied_by": null,
-          "engine_notes": [],
-          "engine_pass": null,
-          "engine_status": null,
-          "error": "URLError: <urlopen error <urlopen error outbound connect refused: harness set allow_web=False>>",
-          "exception": null,
-          "model_calls": 0,
-          "n_files_changed": 0,
-          "network_attempts": null,
-          "network_guard": null,
-          "resolved": false,
-          "reward": 0.0,
-          "seconds": 75.504,
-          "skills_newly_admissible": null,
-          "store_ablated": false,
-          "store_note": null,
-          "store_saved": null,
-          "tree_changed": null,
-          "trial_dir": "instance_ansible__ansible-de5858__Pw3B55G"
-        },
-        "instance_ansible__ansible-e9e6001263f51103e96e58ad382660df0f3d0e39-v30a923fb5c164d6cd18280c02422f75e611e8fb2": {
-          "agent_seconds": 6.651,
+          "agent_seconds": 2.51,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 3421.74,
+            "elapsed_ms": 154.08,
+            "modality": "live_http_web_ui",
+            "mode": "NO_SAFE_FORM_FOUND",
+            "patch_files": 0,
+            "status": "FAILED"
+          },
+          "edits_applied_by": "tree-mutation",
+          "engine_notes": [
+            "store: STORE_LOADED",
+            "engine said: FAIL_CLOSED"
+          ],
+          "engine_pass": false,
+          "engine_status": "FAIL_CLOSED",
+          "error": null,
+          "exception": null,
+          "model_calls": 0,
+          "n_files_changed": 0,
+          "network_attempts": 0,
+          "network_guard": "container-enforced__harness-classifies",
+          "resolved": false,
+          "reward": 0.0,
+          "seconds": 56.917,
+          "skills_newly_admissible": 0,
+          "store_ablated": false,
+          "store_note": "STORE_LOADED",
+          "store_saved": true,
+          "tree_changed": false,
+          "trial_dir": "instance_ansible__ansible-de5858__uNqk9RR"
+        },
+        "instance_ansible__ansible-e9e6001263f51103e96e58ad382660df0f3d0e39-v30a923fb5c164d6cd18280c02422f75e611e8fb2": {
+          "agent_seconds": 10.343,
+          "agent_status": "NO_EDITS",
+          "cost_usd": 0.0,
+          "diagnosis": {
+            "elapsed_ms": 5613.54,
             "gaps_queried": [],
             "modality": "swe_codebase",
             "mode": "FAILED",
@@ -356,23 +370,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 83.731,
+          "seconds": 88.648,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_ansible__ansible-e9e600__ViadL5K"
+          "trial_dir": "instance_ansible__ansible-e9e600__BNKdPe4"
         },
         "instance_element-hq__element-web-5dfde12c1c1c0b6e48f17e3405468593e39d9492-vnan": {
-          "agent_seconds": 49.185,
+          "agent_seconds": 64.536,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 47112.32,
+            "elapsed_ms": 62004.0,
             "gaps_queried": [],
             "modality": "swe_js_codebase",
             "mode": "CAUSAL_ANGELIC_JS_SWE",
@@ -392,23 +406,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 127.18,
+          "seconds": 176.016,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_element-hq__element-web__ak4t3NF"
+          "trial_dir": "instance_element-hq__element-web__U9bDgNm"
         },
         "instance_element-hq__element-web-66d0b318bc6fee0d17b54c1781d6ab5d5d323135-vnan": {
-          "agent_seconds": 41.412,
+          "agent_seconds": 61.521,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 39494.06,
+            "elapsed_ms": 58301.47,
             "gaps_queried": [],
             "modality": "swe_js_codebase",
             "mode": "CAUSAL_ANGELIC_JS_SWE",
@@ -428,23 +442,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 126.647,
+          "seconds": 155.751,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_element-hq__element-web__FwJAiUo"
+          "trial_dir": "instance_element-hq__element-web__hXLFtpm"
         },
         "instance_element-hq__element-web-772df3021201d9c73835a626df8dcb6334ad9a3e-vnan": {
-          "agent_seconds": 125.366,
+          "agent_seconds": 97.535,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 122305.66,
+            "elapsed_ms": 95182.9,
             "gaps_queried": [],
             "modality": "swe_js_codebase",
             "mode": "CAUSAL_ANGELIC_JS_SWE",
@@ -464,23 +478,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 226.372,
+          "seconds": 195.308,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_element-hq__element-web__Mw9MTfi"
+          "trial_dir": "instance_element-hq__element-web__XBThzTf"
         },
         "instance_element-hq__element-web-ecfd1736e5dd9808e87911fc264e6c816653e1a9-vnan": {
-          "agent_seconds": 45.991,
+          "agent_seconds": 45.073,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 43921.49,
+            "elapsed_ms": 43010.18,
             "gaps_queried": [],
             "modality": "swe_js_codebase",
             "mode": "CAUSAL_ANGELIC_JS_SWE",
@@ -500,19 +514,19 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 119.311,
+          "seconds": 109.442,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_element-hq__element-web__PXbiu5a"
+          "trial_dir": "instance_element-hq__element-web__VE6spgS"
         },
         "instance_flipt-io__flipt-2ca5dfb3513e4e786d2b037075617cccc286d5c3": {
-          "agent_seconds": 1.23,
+          "agent_seconds": 0.802,
           "agent_status": "HARNESS_ERROR",
           "cost_usd": 0.0,
           "diagnosis": {},
@@ -520,7 +534,7 @@
           "engine_notes": [],
           "engine_pass": null,
           "engine_status": null,
-          "error": "URLError: <urlopen error <urlopen error outbound connect refused: harness set allow_web=False>>",
+          "error": "UnicodeError: label empty or too long",
           "exception": null,
           "model_calls": 0,
           "n_files_changed": 0,
@@ -528,20 +542,20 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 322.972,
+          "seconds": 254.906,
           "skills_newly_admissible": null,
           "store_ablated": false,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_flipt-io__flipt-2ca5dfb__Y92C8dG"
+          "trial_dir": "instance_flipt-io__flipt-2ca5dfb__8YmB7QR"
         },
         "instance_flipt-io__flipt-3d5a345f94c2adc8a0eaa102c189c08ad4c0f8e8": {
-          "agent_seconds": 7.812,
+          "agent_seconds": 8.151,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 6797.93,
+            "elapsed_ms": 6824.4,
             "gaps_queried": [
               "awk",
               "bzip2",
@@ -570,23 +584,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 383.934,
+          "seconds": 465.628,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_flipt-io__flipt-3d5a345__sbXm6Zb"
+          "trial_dir": "instance_flipt-io__flipt-3d5a345__TCq7qWB"
         },
         "instance_flipt-io__flipt-524f277313606f8cd29b299617d6565c01642e15": {
-          "agent_seconds": 6.848,
+          "agent_seconds": 8.162,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 6071.51,
+            "elapsed_ms": 7219.27,
             "gaps_queried": [
               "awk",
               "cut",
@@ -615,23 +629,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 179.306,
+          "seconds": 237.393,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_flipt-io__flipt-524f277__f9mRtfS"
+          "trial_dir": "instance_flipt-io__flipt-524f277__VkdwBB5"
         },
         "instance_flipt-io__flipt-c1728053367c753688f114ec26e703c8fdeda125": {
-          "agent_seconds": 6.152,
+          "agent_seconds": 8.296,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 5561.45,
+            "elapsed_ms": 7306.81,
             "gaps_queried": [
               "awk",
               "cmp",
@@ -660,23 +674,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 100.541,
+          "seconds": 91.594,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_flipt-io__flipt-c172805__XyvXUFb"
+          "trial_dir": "instance_flipt-io__flipt-c172805__jr8uySB"
         },
         "instance_flipt-io__flipt-c188284ff0c094a4ee281afebebd849555ebee59": {
-          "agent_seconds": 12.645,
+          "agent_seconds": 10.768,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 11286.31,
+            "elapsed_ms": 9744.14,
             "gaps_queried": [
               "awk",
               "aws",
@@ -705,48 +719,57 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 256.015,
+          "seconds": 230.626,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_flipt-io__flipt-c188284__KYkuSG8"
+          "trial_dir": "instance_flipt-io__flipt-c188284__5cMA5Cq"
         },
         "instance_flipt-io__flipt-cd18e54a0371fa222304742c6312e9ac37ea86c1": {
-          "agent_seconds": 0.641,
-          "agent_status": "HARNESS_ERROR",
-          "cost_usd": 0.0,
-          "diagnosis": {},
-          "edits_applied_by": null,
-          "engine_notes": [],
-          "engine_pass": null,
-          "engine_status": null,
-          "error": "URLError: <urlopen error <urlopen error outbound connect refused: harness set allow_web=False>>",
-          "exception": null,
-          "model_calls": 0,
-          "n_files_changed": 0,
-          "network_attempts": null,
-          "network_guard": null,
-          "resolved": false,
-          "reward": 0.0,
-          "seconds": 138.128,
-          "skills_newly_admissible": null,
-          "store_ablated": false,
-          "store_note": null,
-          "store_saved": null,
-          "tree_changed": null,
-          "trial_dir": "instance_flipt-io__flipt-cd18e54__ni8b6Sr"
-        },
-        "instance_flipt-io__flipt-e2bd19dafa7166c96b082fb2a59eb54b4be0d778": {
-          "agent_seconds": 9.257,
+          "agent_seconds": 0.796,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 8043.32,
+            "elapsed_ms": 133.66,
+            "modality": "live_http_web_ui",
+            "mode": "WEB_GET_FAILED",
+            "patch_files": 0,
+            "status": "FAILED"
+          },
+          "edits_applied_by": "tree-mutation",
+          "engine_notes": [
+            "store: STORE_LOADED",
+            "engine said: FAIL_CLOSED"
+          ],
+          "engine_pass": false,
+          "engine_status": "FAIL_CLOSED",
+          "error": null,
+          "exception": null,
+          "model_calls": 0,
+          "n_files_changed": 0,
+          "network_attempts": 0,
+          "network_guard": "container-enforced__harness-classifies",
+          "resolved": false,
+          "reward": 0.0,
+          "seconds": 118.045,
+          "skills_newly_admissible": 0,
+          "store_ablated": false,
+          "store_note": "STORE_LOADED",
+          "store_saved": true,
+          "tree_changed": false,
+          "trial_dir": "instance_flipt-io__flipt-cd18e54__GMLsqfG"
+        },
+        "instance_flipt-io__flipt-e2bd19dafa7166c96b082fb2a59eb54b4be0d778": {
+          "agent_seconds": 6.739,
+          "agent_status": "NO_EDITS",
+          "cost_usd": 0.0,
+          "diagnosis": {
+            "elapsed_ms": 5938.73,
             "gaps_queried": [
               "base64",
               "comm",
@@ -775,23 +798,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 184.889,
+          "seconds": 153.544,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_flipt-io__flipt-e2bd19d__tYSLAGi"
+          "trial_dir": "instance_flipt-io__flipt-e2bd19d__TeoeMnK"
         },
         "instance_future-architect__vuls-5af1a227339e46c7abf3f2815e4c636a0c01098e": {
-          "agent_seconds": 3.537,
+          "agent_seconds": 4.333,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 3049.14,
+            "elapsed_ms": 3731.32,
             "gaps_queried": [
               "introspect:red --help",
               "introspect:perf --help",
@@ -817,23 +840,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 447.03,
+          "seconds": 558.621,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_future-architect__vuls__imvb5JH"
+          "trial_dir": "instance_future-architect__vuls__JxDNZbn"
         },
         "instance_future-architect__vuls-ca3f6b1dbf2cd24d1537bfda43e788443ce03a0c": {
-          "agent_seconds": 4.825,
+          "agent_seconds": 7.902,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 4474.66,
+            "elapsed_ms": 7441.92,
             "gaps_queried": [
               "awk",
               "base64",
@@ -862,23 +885,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 188.444,
+          "seconds": 239.939,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_future-architect__vuls__cqzwGaL"
+          "trial_dir": "instance_future-architect__vuls__sQqm2gh"
         },
         "instance_future-architect__vuls-e1fab805afcfc92a2a615371d0ec1e667503c254-v264a82e2f4818e30f5a25e4da53b27ba119f62b5": {
-          "agent_seconds": 4.174,
+          "agent_seconds": 10.335,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 3811.59,
+            "elapsed_ms": 9740.42,
             "gaps_queried": [
               "apt",
               "aws",
@@ -907,23 +930,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 162.186,
+          "seconds": 207.558,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_future-architect__vuls__mUamZiP"
+          "trial_dir": "instance_future-architect__vuls__4EYipnD"
         },
         "instance_future-architect__vuls-ef2be3d6ea4c0a13674aaab08b182eca4e2b9a17-v264a82e2f4818e30f5a25e4da53b27ba119f62b5": {
-          "agent_seconds": 6.209,
+          "agent_seconds": 5.309,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 5615.42,
+            "elapsed_ms": 4804.25,
             "gaps_queried": [
               "awk",
               "comm",
@@ -952,23 +975,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 102.199,
+          "seconds": 126.989,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_future-architect__vuls__phcj9f6"
+          "trial_dir": "instance_future-architect__vuls__rkQgMY2"
         },
         "instance_gravitational__teleport-1316e6728a3ee2fc124e2ea0cc6a02044c87a144-v626ec2a48416b10a88641359a169d99e935ff037": {
-          "agent_seconds": 4.057,
+          "agent_seconds": 4.032,
           "agent_status": "EDITS_UPLOADED",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 1784.15,
+            "elapsed_ms": 1790.49,
             "gaps_queried": [],
             "modality": "os_cli_computer_use",
             "mode": "TIER1_FIRST_PRINCIPLES",
@@ -988,23 +1011,23 @@
           "model_calls": 0,
           "n_files_changed": 1,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 112.22,
+          "seconds": 84.883,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": true,
-          "trial_dir": "instance_gravitational__teleport__JR2ovb7"
+          "trial_dir": "instance_gravitational__teleport__UHP86Ai"
         },
         "instance_gravitational__teleport-2b15263e49da5625922581569834eec4838a9257-vee9b09fb20c43af7e520f57e9239bbcf46b7113d": {
-          "agent_seconds": 20.282,
+          "agent_seconds": 12.811,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 7192.07,
+            "elapsed_ms": 3761.35,
             "gaps_queried": [
               "bzip2",
               "comm",
@@ -1033,23 +1056,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 624.917,
+          "seconds": 466.719,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_gravitational__teleport__uHBgMbc"
+          "trial_dir": "instance_gravitational__teleport__3PxxQyS"
         },
         "instance_gravitational__teleport-65438e6e44b6ce51458d09b7bb028a2797cfb0ea-vce94f93ad1030e3136852817f2423c1b3ac37bc4": {
-          "agent_seconds": 12.846,
+          "agent_seconds": 16.205,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 8511.24,
+            "elapsed_ms": 10793.97,
             "gaps_queried": [
               "awk",
               "cc",
@@ -1078,23 +1101,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 133.855,
+          "seconds": 136.043,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": true,
-          "trial_dir": "instance_gravitational__teleport__bRhpug8"
+          "trial_dir": "instance_gravitational__teleport__548pcdZ"
         },
         "instance_gravitational__teleport-7744f72c6eb631791434b648ba41083b5f6d2278-vce94f93ad1030e3136852817f2423c1b3ac37bc4": {
-          "agent_seconds": 51.686,
+          "agent_seconds": 55.724,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 46239.53,
+            "elapsed_ms": 49601.0,
             "gaps_queried": [
               "awk",
               "bzip2",
@@ -1123,23 +1146,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 120.245,
+          "seconds": 153.703,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_gravitational__teleport__3mFwxK7"
+          "trial_dir": "instance_gravitational__teleport__7J5VgHT"
         },
         "instance_gravitational__teleport-eda668c30d9d3b56d9c69197b120b01013611186": {
-          "agent_seconds": 8.499,
+          "agent_seconds": 12.835,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 6008.35,
+            "elapsed_ms": 8927.93,
             "gaps_queried": [
               "comm",
               "kubectl",
@@ -1168,23 +1191,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 145.381,
+          "seconds": 178.793,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_gravitational__teleport__k8pDWgn"
+          "trial_dir": "instance_gravitational__teleport__e7pK9ns"
         },
         "instance_gravitational__teleport-f432a71a13e698b6e1c4672a2e9e9c1f32d35c12": {
-          "agent_seconds": 9.856,
+          "agent_seconds": 7.9,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 6426.54,
+            "elapsed_ms": 5100.19,
             "gaps_queried": [
               "awk",
               "base64",
@@ -1213,23 +1236,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 108.607,
+          "seconds": 104.421,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_gravitational__teleport__5Yvxios"
+          "trial_dir": "instance_gravitational__teleport__FBoRGqh"
         },
         "instance_internetarchive__openlibrary-0dc5b20fa186f9714f8a838178597e69f549d026-v2d9a6c849c60ed19fd0858ce9e40b7cc8e097e59": {
-          "agent_seconds": 1.877,
+          "agent_seconds": 2.227,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 641.84,
+            "elapsed_ms": 1001.66,
             "gaps_queried": [],
             "modality": "swe_codebase",
             "mode": "FAILED",
@@ -1249,23 +1272,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 51.781,
+          "seconds": 38.884,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_internetarchive__openli__vywkBUi"
+          "trial_dir": "instance_internetarchive__openli__pHt84KU"
         },
         "instance_internetarchive__openlibrary-322d7a46cdc965bfabbf9500e98fde098c9d95b2-v13642507b4fc1f8d234172bf8129942da2c2ca26": {
-          "agent_seconds": 3.449,
+          "agent_seconds": 2.898,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 1260.26,
+            "elapsed_ms": 1434.95,
             "gaps_queried": [],
             "modality": "swe_codebase",
             "mode": "FAILED",
@@ -1285,23 +1308,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 57.594,
+          "seconds": 51.657,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_internetarchive__openli__d7zt6ZX"
+          "trial_dir": "instance_internetarchive__openli__ZfEfkgq"
         },
         "instance_internetarchive__openlibrary-53d376b148897466bb86d5accb51912bbbe9a8ed-v08d8e8889ec945ab821fb156c04c7d2e2810debb": {
-          "agent_seconds": 2.727,
+          "agent_seconds": 4.122,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 971.43,
+            "elapsed_ms": 1851.33,
             "gaps_queried": [],
             "modality": "swe_codebase",
             "mode": "FAILED",
@@ -1321,23 +1344,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 62.489,
+          "seconds": 62.544,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_internetarchive__openli__ydm8xAY"
+          "trial_dir": "instance_internetarchive__openli__bjm3kYY"
         },
         "instance_internetarchive__openlibrary-630221ab686c64e75a2ce253c893c033e4814b2e-v93c53c13d5f9b383ebb411ee7750b49dcd1a34c6": {
-          "agent_seconds": 2.293,
+          "agent_seconds": 4.179,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 784.15,
+            "elapsed_ms": 2299.53,
             "gaps_queried": [],
             "modality": "swe_codebase",
             "mode": "FAILED",
@@ -1357,23 +1380,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 39.629,
+          "seconds": 60.664,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_internetarchive__openli__aZwVEAi"
+          "trial_dir": "instance_internetarchive__openli__qqNswAT"
         },
         "instance_internetarchive__openlibrary-6e889f4a733c9f8ce9a9bd2ec6a934413adcedb9-ve8c8d62a2b60610a3c4631f5f23ed866bada9818": {
-          "agent_seconds": 1.902,
+          "agent_seconds": 3.683,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 714.88,
+            "elapsed_ms": 1682.83,
             "gaps_queried": [],
             "modality": "swe_codebase",
             "mode": "FAILED",
@@ -1393,23 +1416,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 45.967,
+          "seconds": 45.751,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_internetarchive__openli__2CHA4i7"
+          "trial_dir": "instance_internetarchive__openli__pvTB5cW"
         },
         "instance_internetarchive__openlibrary-7cbfb812ef0e1f9716e2d6e85d538a96fcb79d13-vfa6ff903cb27f336e17654595dd900fa943dcd91": {
-          "agent_seconds": 2.973,
+          "agent_seconds": 3.165,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 1307.58,
+            "elapsed_ms": 1755.42,
             "gaps_queried": [],
             "modality": "swe_codebase",
             "mode": "FAILED",
@@ -1429,23 +1452,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 47.013,
+          "seconds": 55.214,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_internetarchive__openli__inVRQHY"
+          "trial_dir": "instance_internetarchive__openli__pzLHGXn"
         },
         "instance_internetarchive__openlibrary-a48fd6ba9482c527602bc081491d9e8ae6e8226c-vfa6ff903cb27f336e17654595dd900fa943dcd91": {
-          "agent_seconds": 1.781,
+          "agent_seconds": 2.112,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 644.89,
+            "elapsed_ms": 929.03,
             "gaps_queried": [],
             "modality": "swe_codebase",
             "mode": "FAILED",
@@ -1465,23 +1488,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 45.895,
+          "seconds": 41.882,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_internetarchive__openli__J6rknNa"
+          "trial_dir": "instance_internetarchive__openli__LHz6S5c"
         },
         "instance_internetarchive__openlibrary-b67138b316b1e9c11df8a4a8391fe5cc8e75ff9f-ve8c8d62a2b60610a3c4631f5f23ed866bada9818": {
-          "agent_seconds": 3.158,
+          "agent_seconds": 3.607,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 1154.59,
+            "elapsed_ms": 2313.84,
             "gaps_queried": [],
             "modality": "swe_codebase",
             "mode": "FAILED",
@@ -1501,23 +1524,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 40.274,
+          "seconds": 42.589,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_internetarchive__openli__tk4NzDo"
+          "trial_dir": "instance_internetarchive__openli__4K3QEFr"
         },
         "instance_navidrome__navidrome-69e0a266f48bae24a11312e9efbe495a337e4c84": {
-          "agent_seconds": 5.656,
+          "agent_seconds": 6.878,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 3263.51,
+            "elapsed_ms": 4030.33,
             "gaps_queried": [
               "cut",
               "fold",
@@ -1545,23 +1568,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 88.672,
+          "seconds": 97.797,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_navidrome__navidrome-69__pUBjDVJ"
+          "trial_dir": "instance_navidrome__navidrome-69__nz7jxii"
         },
         "instance_navidrome__navidrome-874b17b8f614056df0ef021b5d4f977341084185": {
-          "agent_seconds": 6.931,
+          "agent_seconds": 8.399,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 5055.12,
+            "elapsed_ms": 6334.53,
             "gaps_queried": [
               "awk",
               "comm",
@@ -1590,23 +1613,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 64.411,
+          "seconds": 92.604,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_navidrome__navidrome-87__e9SBZQE"
+          "trial_dir": "instance_navidrome__navidrome-87__Jv4Mh5u"
         },
         "instance_navidrome__navidrome-bf2bcb12799b21069f137749e0c331f761d1f693": {
-          "agent_seconds": 64.407,
+          "agent_seconds": 70.946,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 62331.4,
+            "elapsed_ms": 67972.81,
             "gaps_queried": [
               "awk",
               "browse",
@@ -1635,23 +1658,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 154.425,
+          "seconds": 172.092,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": true,
-          "trial_dir": "instance_navidrome__navidrome-bf__xwf6rxn"
+          "trial_dir": "instance_navidrome__navidrome-bf__Hv76J2T"
         },
         "instance_protonmail__webclients-08bb09914d0d37b0cd6376d4cab5b77728a43e7b": {
-          "agent_seconds": 34.845,
+          "agent_seconds": 27.695,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 18119.37,
+            "elapsed_ms": 13447.29,
             "gaps_queried": [
               "awk",
               "comm",
@@ -1680,23 +1703,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 247.757,
+          "seconds": 304.611,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_protonmail__webclients__3n5tUE6"
+          "trial_dir": "instance_protonmail__webclients__4NtHmQK"
         },
         "instance_protonmail__webclients-5f0745dd6993bb1430a951c62a49807c6635cd77": {
-          "agent_seconds": 24.157,
+          "agent_seconds": 24.013,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 10764.73,
+            "elapsed_ms": 10657.22,
             "gaps_queried": [
               "bzip2",
               "cmp",
@@ -1725,23 +1748,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 258.88,
+          "seconds": 212.092,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_protonmail__webclients__ESudKmV"
+          "trial_dir": "instance_protonmail__webclients__UoXgZKY"
         },
         "instance_protonmail__webclients-715dbd4e6999499cd2a576a532d8214f75189116": {
-          "agent_seconds": 34.772,
+          "agent_seconds": 22.272,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 19775.03,
+            "elapsed_ms": 11841.24,
             "gaps_queried": [
               "awk",
               "cmp",
@@ -1770,23 +1793,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 334.073,
+          "seconds": 264.504,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_protonmail__webclients__BheekPK"
+          "trial_dir": "instance_protonmail__webclients__JUqpfFM"
         },
         "instance_protonmail__webclients-c5a2089ca2bfe9aa1d85a664b8ad87ef843a1c9c": {
-          "agent_seconds": 27.451,
+          "agent_seconds": 36.236,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 14878.06,
+            "elapsed_ms": 20284.65,
             "gaps_queried": [
               "comm",
               "iconv",
@@ -1812,23 +1835,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 258.8,
+          "seconds": 301.408,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_protonmail__webclients__waA4Xzr"
+          "trial_dir": "instance_protonmail__webclients__2HaRnuT"
         },
         "instance_protonmail__webclients-e65cc5f33719e02e1c378146fb981d27bc24bdf4": {
-          "agent_seconds": 18.546,
+          "agent_seconds": 22.738,
           "agent_status": "EDITS_UPLOADED",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 7765.0,
+            "elapsed_ms": 10659.41,
             "gaps_queried": [],
             "modality": "os_cli_computer_use",
             "mode": "TIER1_FIRST_PRINCIPLES",
@@ -1848,23 +1871,23 @@
           "model_calls": 0,
           "n_files_changed": 1,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 184.779,
+          "seconds": 263.799,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": true,
-          "trial_dir": "instance_protonmail__webclients__CxYyNnH"
+          "trial_dir": "instance_protonmail__webclients__JzBsqhA"
         },
         "instance_qutebrowser__qutebrowser-3e21c8214a998cb1058defd15aabb24617a76402-v5fc38aaf22415ab0b70567368332beee7955b367": {
-          "agent_seconds": 1.648,
+          "agent_seconds": 2.887,
           "agent_status": "EDITS_UPLOADED",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 824.36,
+            "elapsed_ms": 1486.45,
             "gaps_queried": [],
             "modality": "os_cli_computer_use",
             "mode": "TIER1_FIRST_PRINCIPLES",
@@ -1884,23 +1907,23 @@
           "model_calls": 0,
           "n_files_changed": 1,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 64.81,
+          "seconds": 60.434,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": true,
-          "trial_dir": "instance_qutebrowser__qutebrowse__aMrFBpD"
+          "trial_dir": "instance_qutebrowser__qutebrowse__LL7oryy"
         },
         "instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171": {
-          "agent_seconds": 10.647,
+          "agent_seconds": 9.209,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 9282.55,
+            "elapsed_ms": 7916.25,
             "gaps_queried": [
               "bzip2",
               "cmp",
@@ -1929,48 +1952,56 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 58.313,
+          "seconds": 68.888,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_qutebrowser__qutebrowse__DS4sVRh"
+          "trial_dir": "instance_qutebrowser__qutebrowse__MNk2aNX"
         },
         "instance_qutebrowser__qutebrowser-deeb15d6f009b3ca0c3bd503a7cef07462bd16b4-v363c8a7e5ccdf6968fc7ab84a2053ac78036691d": {
-          "agent_seconds": 0.762,
-          "agent_status": "HARNESS_ERROR",
-          "cost_usd": 0.0,
-          "diagnosis": {},
-          "edits_applied_by": null,
-          "engine_notes": [],
-          "engine_pass": null,
-          "engine_status": null,
-          "error": "URLError: <urlopen error [Errno 111] Connection refused>",
-          "exception": null,
-          "model_calls": 0,
-          "n_files_changed": 0,
-          "network_attempts": null,
-          "network_guard": null,
-          "resolved": false,
-          "reward": 0.0,
-          "seconds": 47.421,
-          "skills_newly_admissible": null,
-          "store_ablated": false,
-          "store_note": null,
-          "store_saved": null,
-          "tree_changed": null,
-          "trial_dir": "instance_qutebrowser__qutebrowse__KKBbzfk"
-        },
-        "instance_qutebrowser__qutebrowser-e70f5b03187bdd40e8bf70f5f3ead840f52d1f42-v02ad04386d5238fe2d1a1be450df257370de4b6a": {
-          "agent_seconds": 3.236,
+          "agent_seconds": 0.788,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 1923.18,
+            "explanation": "<urlopen error outbound attempt refused by the environment while allow_web=False>",
+            "patch_files": 0,
+            "status": "NETWORK_REFUSED__NOT_A_CAPABILITY_RESULT"
+          },
+          "edits_applied_by": "tree-mutation",
+          "engine_notes": [
+            "store: STORE_LOADED",
+            "engine said: NETWORK_REFUSED__NOT_A_CAPABILITY_RESULT",
+            "<urlopen error outbound attempt refused by the environment while allow_web=False>"
+          ],
+          "engine_pass": false,
+          "engine_status": "NETWORK_REFUSED__NOT_A_CAPABILITY_RESULT",
+          "error": null,
+          "exception": null,
+          "model_calls": 0,
+          "n_files_changed": 0,
+          "network_attempts": 1,
+          "network_guard": "container-enforced__harness-classifies",
+          "resolved": false,
+          "reward": 0.0,
+          "seconds": 35.203,
+          "skills_newly_admissible": 0,
+          "store_ablated": false,
+          "store_note": "STORE_LOADED",
+          "store_saved": true,
+          "tree_changed": false,
+          "trial_dir": "instance_qutebrowser__qutebrowse__5EUWG9f"
+        },
+        "instance_qutebrowser__qutebrowser-e70f5b03187bdd40e8bf70f5f3ead840f52d1f42-v02ad04386d5238fe2d1a1be450df257370de4b6a": {
+          "agent_seconds": 1.936,
+          "agent_status": "NO_EDITS",
+          "cost_usd": 0.0,
+          "diagnosis": {
+            "elapsed_ms": 1085.19,
             "gaps_queried": [],
             "modality": "os_cli_computer_use",
             "mode": "CU_SOLVED",
@@ -1990,23 +2021,23 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 55.561,
+          "seconds": 57.016,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_qutebrowser__qutebrowse__kpYrGSE"
+          "trial_dir": "instance_qutebrowser__qutebrowse__eBsJfEh"
         },
         "instance_tutao__tutanota-f373ac3808deefce8183dad8d16729839cc330c1-v2939aa9f4356f0dc9f523ee5ce19d09e08ab979b": {
-          "agent_seconds": 7.879,
+          "agent_seconds": 10.206,
           "agent_status": "NO_EDITS",
           "cost_usd": 0.0,
           "diagnosis": {
-            "elapsed_ms": 4746.52,
+            "elapsed_ms": 6315.43,
             "gaps_queried": [
               "awk",
               "base64",
@@ -2035,28 +2066,28 @@
           "model_calls": 0,
           "n_files_changed": 0,
           "network_attempts": 0,
-          "network_guard": "enforced",
+          "network_guard": "container-enforced__harness-classifies",
           "resolved": false,
           "reward": 0.0,
-          "seconds": 142.485,
+          "seconds": 165.292,
           "skills_newly_admissible": 0,
           "store_ablated": false,
           "store_note": "STORE_LOADED",
           "store_saved": true,
           "tree_changed": false,
-          "trial_dir": "instance_tutao__tutanota-f373ac3__Zduetnj"
+          "trial_dir": "instance_tutao__tutanota-f373ac3__dKfdHG3"
         }
       },
       "unmatched_trial_keys": [],
-      "wall_seconds_mean": 149.44,
-      "wall_seconds_total": 7621.2
+      "wall_seconds_mean": 157.33,
+      "wall_seconds_total": 8023.61
     },
     "nop": {
       "agent_wall_seconds_total": null,
       "arm": "nop",
       "conditions": {
         "engine_timeout_s": 240,
-        "eval_commit": "ab47d3bdad35e7dbd492663393a320212a7d24a6",
+        "eval_commit": "358cf8bfac2a2b92c53b425f4cbc1da06733f603",
         "n_shards": 6
       },
       "cost_usd_total": 0.0,
@@ -2089,13 +2120,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 72.232,
+          "seconds": 69.588,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_NodeBB__NodeBB-8168c6c4__q2obN7j"
+          "trial_dir": "instance_NodeBB__NodeBB-8168c6c4__WrzK67h"
         },
         "instance_ansible__ansible-40ade1f84b8bb10a63576b0ac320c13f57c87d34-v6382ea168a93d80a64aab1fbd8c4f02dc5ada5bf": {
           "agent_seconds": null,
@@ -2114,13 +2145,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 75.423,
+          "seconds": 75.068,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_ansible__ansible-40ade1__Yat6iPg"
+          "trial_dir": "instance_ansible__ansible-40ade1__eXsNstu"
         },
         "instance_ansible__ansible-b748edea457a4576847a10275678127895d2f02f-v1055803c3a812189a1133297f7f5468579283f86": {
           "agent_seconds": null,
@@ -2139,13 +2170,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 78.675,
+          "seconds": 63.073,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_ansible__ansible-b748ed__u2jwEvU"
+          "trial_dir": "instance_ansible__ansible-b748ed__BzMYqGw"
         },
         "instance_ansible__ansible-c1f2df47538b884a43320f53e787197793b105e8-v906c969b551b346ef54a2c0b41e04f632b7b73c2": {
           "agent_seconds": null,
@@ -2164,13 +2195,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 146.938,
+          "seconds": 190.452,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_ansible__ansible-c1f2df__PSMAYhT"
+          "trial_dir": "instance_ansible__ansible-c1f2df__DXdmAJ2"
         },
         "instance_ansible__ansible-d33bedc48fdd933b5abd65a77c081876298e2f07-v0f01c69f1e2528b935359cfe578530722bca2c59": {
           "agent_seconds": null,
@@ -2189,13 +2220,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 77.516,
+          "seconds": 77.552,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_ansible__ansible-d33bed__465h7gD"
+          "trial_dir": "instance_ansible__ansible-d33bed__8bFSoYs"
         },
         "instance_ansible__ansible-d62496fe416623e88b90139dc7917080cb04ce70-v0f01c69f1e2528b935359cfe578530722bca2c59": {
           "agent_seconds": null,
@@ -2214,13 +2245,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 73.282,
+          "seconds": 73.354,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_ansible__ansible-d62496__SzxT8bu"
+          "trial_dir": "instance_ansible__ansible-d62496__durbMXE"
         },
         "instance_ansible__ansible-d72025be751c894673ba85caa063d835a0ad3a8c-v390e508d27db7a51eece36bb6d9698b63a5b638a": {
           "agent_seconds": null,
@@ -2239,13 +2270,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 262.177,
+          "seconds": 243.736,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_ansible__ansible-d72025__ooDSXFN"
+          "trial_dir": "instance_ansible__ansible-d72025__oSe4DYH"
         },
         "instance_ansible__ansible-de5858f48dc9e1ce9117034e0d7e76806f420ca8-v1055803c3a812189a1133297f7f5468579283f86": {
           "agent_seconds": null,
@@ -2264,13 +2295,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 68.048,
+          "seconds": 71.211,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_ansible__ansible-de5858__4gVspQM"
+          "trial_dir": "instance_ansible__ansible-de5858__kdJSHFX"
         },
         "instance_ansible__ansible-e9e6001263f51103e96e58ad382660df0f3d0e39-v30a923fb5c164d6cd18280c02422f75e611e8fb2": {
           "agent_seconds": null,
@@ -2289,13 +2320,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 83.633,
+          "seconds": 63.254,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_ansible__ansible-e9e600__NQUnrKm"
+          "trial_dir": "instance_ansible__ansible-e9e600__fiAvAgx"
         },
         "instance_element-hq__element-web-5dfde12c1c1c0b6e48f17e3405468593e39d9492-vnan": {
           "agent_seconds": null,
@@ -2314,13 +2345,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 87.998,
+          "seconds": 104.896,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_element-hq__element-web__SsC9vW9"
+          "trial_dir": "instance_element-hq__element-web__TJ2AY9c"
         },
         "instance_element-hq__element-web-66d0b318bc6fee0d17b54c1781d6ab5d5d323135-vnan": {
           "agent_seconds": null,
@@ -2339,13 +2370,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 87.861,
+          "seconds": 87.262,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_element-hq__element-web__CVZgYud"
+          "trial_dir": "instance_element-hq__element-web__hWXYN6x"
         },
         "instance_element-hq__element-web-772df3021201d9c73835a626df8dcb6334ad9a3e-vnan": {
           "agent_seconds": null,
@@ -2364,13 +2395,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 94.329,
+          "seconds": 98.348,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_element-hq__element-web__J6EZGqU"
+          "trial_dir": "instance_element-hq__element-web__nENvcGo"
         },
         "instance_element-hq__element-web-ecfd1736e5dd9808e87911fc264e6c816653e1a9-vnan": {
           "agent_seconds": null,
@@ -2389,13 +2420,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 87.703,
+          "seconds": 87.034,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_element-hq__element-web__fg5E6VE"
+          "trial_dir": "instance_element-hq__element-web__pSjmdhQ"
         },
         "instance_flipt-io__flipt-2ca5dfb3513e4e786d2b037075617cccc286d5c3": {
           "agent_seconds": null,
@@ -2414,13 +2445,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 283.277,
+          "seconds": 318.788,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_flipt-io__flipt-2ca5dfb__yroCgs7"
+          "trial_dir": "instance_flipt-io__flipt-2ca5dfb__3CjDKzM"
         },
         "instance_flipt-io__flipt-3d5a345f94c2adc8a0eaa102c189c08ad4c0f8e8": {
           "agent_seconds": null,
@@ -2439,13 +2470,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 477.881,
+          "seconds": 337.493,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_flipt-io__flipt-3d5a345__t8x8XLD"
+          "trial_dir": "instance_flipt-io__flipt-3d5a345__ytc8LTE"
         },
         "instance_flipt-io__flipt-524f277313606f8cd29b299617d6565c01642e15": {
           "agent_seconds": null,
@@ -2464,13 +2495,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 193.402,
+          "seconds": 244.036,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_flipt-io__flipt-524f277__bmUMof2"
+          "trial_dir": "instance_flipt-io__flipt-524f277__GSnqWDg"
         },
         "instance_flipt-io__flipt-c1728053367c753688f114ec26e703c8fdeda125": {
           "agent_seconds": null,
@@ -2489,13 +2520,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 74.558,
+          "seconds": 71.534,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_flipt-io__flipt-c172805__xSUyz79"
+          "trial_dir": "instance_flipt-io__flipt-c172805__UYPvV3r"
         },
         "instance_flipt-io__flipt-c188284ff0c094a4ee281afebebd849555ebee59": {
           "agent_seconds": null,
@@ -2514,13 +2545,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 202.565,
+          "seconds": 245.197,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_flipt-io__flipt-c188284__miuPMqm"
+          "trial_dir": "instance_flipt-io__flipt-c188284__Vwyxcjw"
         },
         "instance_flipt-io__flipt-cd18e54a0371fa222304742c6312e9ac37ea86c1": {
           "agent_seconds": null,
@@ -2539,13 +2570,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 168.642,
+          "seconds": 163.133,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_flipt-io__flipt-cd18e54__ppgWbHj"
+          "trial_dir": "instance_flipt-io__flipt-cd18e54__rHPtrsq"
         },
         "instance_flipt-io__flipt-e2bd19dafa7166c96b082fb2a59eb54b4be0d778": {
           "agent_seconds": null,
@@ -2564,13 +2595,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 166.059,
+          "seconds": 165.001,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_flipt-io__flipt-e2bd19d__rnGtGUR"
+          "trial_dir": "instance_flipt-io__flipt-e2bd19d__KSCiAc6"
         },
         "instance_future-architect__vuls-5af1a227339e46c7abf3f2815e4c636a0c01098e": {
           "agent_seconds": null,
@@ -2589,13 +2620,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 570.968,
+          "seconds": 374.788,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_future-architect__vuls__8G6XzPb"
+          "trial_dir": "instance_future-architect__vuls__UpNUdwB"
         },
         "instance_future-architect__vuls-ca3f6b1dbf2cd24d1537bfda43e788443ce03a0c": {
           "agent_seconds": null,
@@ -2614,13 +2645,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 197.19,
+          "seconds": 266.666,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_future-architect__vuls__aPooJzc"
+          "trial_dir": "instance_future-architect__vuls__ZjnKANh"
         },
         "instance_future-architect__vuls-e1fab805afcfc92a2a615371d0ec1e667503c254-v264a82e2f4818e30f5a25e4da53b27ba119f62b5": {
           "agent_seconds": null,
@@ -2639,13 +2670,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 175.941,
+          "seconds": 154.128,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_future-architect__vuls__NYWFvdg"
+          "trial_dir": "instance_future-architect__vuls__SRnaFgc"
         },
         "instance_future-architect__vuls-ef2be3d6ea4c0a13674aaab08b182eca4e2b9a17-v264a82e2f4818e30f5a25e4da53b27ba119f62b5": {
           "agent_seconds": null,
@@ -2664,13 +2695,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 93.728,
+          "seconds": 81.875,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_future-architect__vuls__cBd4BZE"
+          "trial_dir": "instance_future-architect__vuls__nYdWmDn"
         },
         "instance_gravitational__teleport-1316e6728a3ee2fc124e2ea0cc6a02044c87a144-v626ec2a48416b10a88641359a169d99e935ff037": {
           "agent_seconds": null,
@@ -2689,13 +2720,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 107.066,
+          "seconds": 100.675,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_gravitational__teleport__USA2pqK"
+          "trial_dir": "instance_gravitational__teleport__hc3Se6G"
         },
         "instance_gravitational__teleport-2b15263e49da5625922581569834eec4838a9257-vee9b09fb20c43af7e520f57e9239bbcf46b7113d": {
           "agent_seconds": null,
@@ -2714,13 +2745,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 511.348,
+          "seconds": 594.585,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_gravitational__teleport__9Ur4ZYf"
+          "trial_dir": "instance_gravitational__teleport__uS2D5mc"
         },
         "instance_gravitational__teleport-65438e6e44b6ce51458d09b7bb028a2797cfb0ea-vce94f93ad1030e3136852817f2423c1b3ac37bc4": {
           "agent_seconds": null,
@@ -2739,13 +2770,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 138.951,
+          "seconds": 114.123,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_gravitational__teleport__T3q4Bta"
+          "trial_dir": "instance_gravitational__teleport__GeVttA7"
         },
         "instance_gravitational__teleport-7744f72c6eb631791434b648ba41083b5f6d2278-vce94f93ad1030e3136852817f2423c1b3ac37bc4": {
           "agent_seconds": null,
@@ -2764,13 +2795,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 89.682,
+          "seconds": 75.431,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_gravitational__teleport__GHhJAVz"
+          "trial_dir": "instance_gravitational__teleport__ypLxJwJ"
         },
         "instance_gravitational__teleport-eda668c30d9d3b56d9c69197b120b01013611186": {
           "agent_seconds": null,
@@ -2789,13 +2820,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 151.174,
+          "seconds": 135.871,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_gravitational__teleport__PRC4a5e"
+          "trial_dir": "instance_gravitational__teleport__xsSuZVZ"
         },
         "instance_gravitational__teleport-f432a71a13e698b6e1c4672a2e9e9c1f32d35c12": {
           "agent_seconds": null,
@@ -2814,13 +2845,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 99.151,
+          "seconds": 103.833,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_gravitational__teleport__WavkC2L"
+          "trial_dir": "instance_gravitational__teleport__kJnNykd"
         },
         "instance_internetarchive__openlibrary-0dc5b20fa186f9714f8a838178597e69f549d026-v2d9a6c849c60ed19fd0858ce9e40b7cc8e097e59": {
           "agent_seconds": null,
@@ -2839,13 +2870,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 48.475,
+          "seconds": 42.659,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_internetarchive__openli__SUppYbP"
+          "trial_dir": "instance_internetarchive__openli__Rm4c4SF"
         },
         "instance_internetarchive__openlibrary-322d7a46cdc965bfabbf9500e98fde098c9d95b2-v13642507b4fc1f8d234172bf8129942da2c2ca26": {
           "agent_seconds": null,
@@ -2864,13 +2895,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 59.064,
+          "seconds": 56.253,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_internetarchive__openli__VXBePSt"
+          "trial_dir": "instance_internetarchive__openli__UhaxoeF"
         },
         "instance_internetarchive__openlibrary-53d376b148897466bb86d5accb51912bbbe9a8ed-v08d8e8889ec945ab821fb156c04c7d2e2810debb": {
           "agent_seconds": null,
@@ -2889,13 +2920,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 61.047,
+          "seconds": 48.985,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_internetarchive__openli__A4NBgkT"
+          "trial_dir": "instance_internetarchive__openli__mr6xpzr"
         },
         "instance_internetarchive__openlibrary-630221ab686c64e75a2ce253c893c033e4814b2e-v93c53c13d5f9b383ebb411ee7750b49dcd1a34c6": {
           "agent_seconds": null,
@@ -2914,13 +2945,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 47.147,
+          "seconds": 49.722,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_internetarchive__openli__wt4DDGx"
+          "trial_dir": "instance_internetarchive__openli__TCEe2NB"
         },
         "instance_internetarchive__openlibrary-6e889f4a733c9f8ce9a9bd2ec6a934413adcedb9-ve8c8d62a2b60610a3c4631f5f23ed866bada9818": {
           "agent_seconds": null,
@@ -2939,13 +2970,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 38.971,
+          "seconds": 42.569,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_internetarchive__openli__qaSqoSr"
+          "trial_dir": "instance_internetarchive__openli__BR6NYHu"
         },
         "instance_internetarchive__openlibrary-7cbfb812ef0e1f9716e2d6e85d538a96fcb79d13-vfa6ff903cb27f336e17654595dd900fa943dcd91": {
           "agent_seconds": null,
@@ -2964,13 +2995,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 48.416,
+          "seconds": 44.033,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_internetarchive__openli__JBR9LHH"
+          "trial_dir": "instance_internetarchive__openli__i55onxg"
         },
         "instance_internetarchive__openlibrary-a48fd6ba9482c527602bc081491d9e8ae6e8226c-vfa6ff903cb27f336e17654595dd900fa943dcd91": {
           "agent_seconds": null,
@@ -2989,13 +3020,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 51.865,
+          "seconds": 51.239,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_internetarchive__openli__VHa7vqS"
+          "trial_dir": "instance_internetarchive__openli__5GgvAAd"
         },
         "instance_internetarchive__openlibrary-b67138b316b1e9c11df8a4a8391fe5cc8e75ff9f-ve8c8d62a2b60610a3c4631f5f23ed866bada9818": {
           "agent_seconds": null,
@@ -3014,13 +3045,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 42.773,
+          "seconds": 37.225,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_internetarchive__openli__WWcpGYw"
+          "trial_dir": "instance_internetarchive__openli__9R2sErv"
         },
         "instance_navidrome__navidrome-69e0a266f48bae24a11312e9efbe495a337e4c84": {
           "agent_seconds": null,
@@ -3039,13 +3070,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 89.595,
+          "seconds": 58.712,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_navidrome__navidrome-69__fjBTAyc"
+          "trial_dir": "instance_navidrome__navidrome-69__uZhAP36"
         },
         "instance_navidrome__navidrome-874b17b8f614056df0ef021b5d4f977341084185": {
           "agent_seconds": null,
@@ -3064,13 +3095,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 71.734,
+          "seconds": 82.242,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_navidrome__navidrome-87__RwBYiP9"
+          "trial_dir": "instance_navidrome__navidrome-87__PNd8vjg"
         },
         "instance_navidrome__navidrome-bf2bcb12799b21069f137749e0c331f761d1f693": {
           "agent_seconds": null,
@@ -3089,13 +3120,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 84.823,
+          "seconds": 87.171,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_navidrome__navidrome-bf__pjWGe2g"
+          "trial_dir": "instance_navidrome__navidrome-bf__AUiV7Qj"
         },
         "instance_protonmail__webclients-08bb09914d0d37b0cd6376d4cab5b77728a43e7b": {
           "agent_seconds": null,
@@ -3114,13 +3145,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 228.061,
+          "seconds": 224.743,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_protonmail__webclients__2FAY6LG"
+          "trial_dir": "instance_protonmail__webclients__wwbN3by"
         },
         "instance_protonmail__webclients-5f0745dd6993bb1430a951c62a49807c6635cd77": {
           "agent_seconds": null,
@@ -3139,13 +3170,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 238.886,
+          "seconds": 246.003,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_protonmail__webclients__smgbE9a"
+          "trial_dir": "instance_protonmail__webclients__ExADyUM"
         },
         "instance_protonmail__webclients-715dbd4e6999499cd2a576a532d8214f75189116": {
           "agent_seconds": null,
@@ -3164,13 +3195,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 292.785,
+          "seconds": 285.011,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_protonmail__webclients__24XARNf"
+          "trial_dir": "instance_protonmail__webclients__qn22ARH"
         },
         "instance_protonmail__webclients-c5a2089ca2bfe9aa1d85a664b8ad87ef843a1c9c": {
           "agent_seconds": null,
@@ -3189,13 +3220,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 293.239,
+          "seconds": 238.349,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_protonmail__webclients__nzdyRZx"
+          "trial_dir": "instance_protonmail__webclients__4pJJLZo"
         },
         "instance_protonmail__webclients-e65cc5f33719e02e1c378146fb981d27bc24bdf4": {
           "agent_seconds": null,
@@ -3214,13 +3245,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 181.874,
+          "seconds": 201.611,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_protonmail__webclients__Qn9EF2r"
+          "trial_dir": "instance_protonmail__webclients__hBYpRAV"
         },
         "instance_qutebrowser__qutebrowser-3e21c8214a998cb1058defd15aabb24617a76402-v5fc38aaf22415ab0b70567368332beee7955b367": {
           "agent_seconds": null,
@@ -3239,13 +3270,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 53.827,
+          "seconds": 54.997,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_qutebrowser__qutebrowse__qwB8EFo"
+          "trial_dir": "instance_qutebrowser__qutebrowse__ibTHUNA"
         },
         "instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171": {
           "agent_seconds": null,
@@ -3264,13 +3295,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 53.401,
+          "seconds": 50.02,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_qutebrowser__qutebrowse__U9xCqie"
+          "trial_dir": "instance_qutebrowser__qutebrowse__aUqfCz2"
         },
         "instance_qutebrowser__qutebrowser-deeb15d6f009b3ca0c3bd503a7cef07462bd16b4-v363c8a7e5ccdf6968fc7ab84a2053ac78036691d": {
           "agent_seconds": null,
@@ -3289,13 +3320,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 48.212,
+          "seconds": 44.097,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_qutebrowser__qutebrowse__7qmrjoB"
+          "trial_dir": "instance_qutebrowser__qutebrowse__QRsTXCc"
         },
         "instance_qutebrowser__qutebrowser-e70f5b03187bdd40e8bf70f5f3ead840f52d1f42-v02ad04386d5238fe2d1a1be450df257370de4b6a": {
           "agent_seconds": null,
@@ -3314,13 +3345,13 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 61.979,
+          "seconds": 49.684,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_qutebrowser__qutebrowse__jwpdQgT"
+          "trial_dir": "instance_qutebrowser__qutebrowse__tGErmsF"
         },
         "instance_tutao__tutanota-f373ac3808deefce8183dad8d16729839cc330c1-v2939aa9f4356f0dc9f523ee5ce19d09e08ab979b": {
           "agent_seconds": null,
@@ -3339,25 +3370,25 @@
           "network_guard": null,
           "resolved": false,
           "reward": 0.0,
-          "seconds": 157.155,
+          "seconds": 120.48,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_tutao__tutanota-f373ac3__QnMwmaa"
+          "trial_dir": "instance_tutao__tutanota-f373ac3__t3Jfphz"
         }
       },
       "unmatched_trial_keys": [],
-      "wall_seconds_mean": 142.17,
-      "wall_seconds_total": 7250.73
+      "wall_seconds_mean": 136.62,
+      "wall_seconds_total": 6967.79
     },
     "oracle": {
       "agent_wall_seconds_total": null,
       "arm": "oracle",
       "conditions": {
         "engine_timeout_s": 240,
-        "eval_commit": "ab47d3bdad35e7dbd492663393a320212a7d24a6",
+        "eval_commit": "358cf8bfac2a2b92c53b425f4cbc1da06733f603",
         "n_shards": 6
       },
       "cost_usd_total": 0.0,
@@ -3390,13 +3421,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 71.086,
+          "seconds": 62.466,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_NodeBB__NodeBB-8168c6c4__tut7rmf"
+          "trial_dir": "instance_NodeBB__NodeBB-8168c6c4__bvu4XEP"
         },
         "instance_ansible__ansible-40ade1f84b8bb10a63576b0ac320c13f57c87d34-v6382ea168a93d80a64aab1fbd8c4f02dc5ada5bf": {
           "agent_seconds": null,
@@ -3415,13 +3446,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 81.725,
+          "seconds": 76.466,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_ansible__ansible-40ade1__jT6AQLj"
+          "trial_dir": "instance_ansible__ansible-40ade1__cU5FFfb"
         },
         "instance_ansible__ansible-b748edea457a4576847a10275678127895d2f02f-v1055803c3a812189a1133297f7f5468579283f86": {
           "agent_seconds": null,
@@ -3440,13 +3471,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 74.829,
+          "seconds": 82.25,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_ansible__ansible-b748ed__YsZv29W"
+          "trial_dir": "instance_ansible__ansible-b748ed__k73zTKF"
         },
         "instance_ansible__ansible-c1f2df47538b884a43320f53e787197793b105e8-v906c969b551b346ef54a2c0b41e04f632b7b73c2": {
           "agent_seconds": null,
@@ -3465,13 +3496,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 131.79,
+          "seconds": 186.797,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_ansible__ansible-c1f2df__Tby6mvQ"
+          "trial_dir": "instance_ansible__ansible-c1f2df__WPivqSk"
         },
         "instance_ansible__ansible-d33bedc48fdd933b5abd65a77c081876298e2f07-v0f01c69f1e2528b935359cfe578530722bca2c59": {
           "agent_seconds": null,
@@ -3490,13 +3521,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 81.785,
+          "seconds": 70.01,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_ansible__ansible-d33bed__VXhfGZf"
+          "trial_dir": "instance_ansible__ansible-d33bed__Yoh2TKs"
         },
         "instance_ansible__ansible-d62496fe416623e88b90139dc7917080cb04ce70-v0f01c69f1e2528b935359cfe578530722bca2c59": {
           "agent_seconds": null,
@@ -3515,13 +3546,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 54.036,
+          "seconds": 65.351,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_ansible__ansible-d62496__dyKGtTg"
+          "trial_dir": "instance_ansible__ansible-d62496__N3KtE7B"
         },
         "instance_ansible__ansible-d72025be751c894673ba85caa063d835a0ad3a8c-v390e508d27db7a51eece36bb6d9698b63a5b638a": {
           "agent_seconds": null,
@@ -3540,13 +3571,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 252.549,
+          "seconds": 172.501,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_ansible__ansible-d72025__ywgbvcK"
+          "trial_dir": "instance_ansible__ansible-d72025__bufKJxv"
         },
         "instance_ansible__ansible-de5858f48dc9e1ce9117034e0d7e76806f420ca8-v1055803c3a812189a1133297f7f5468579283f86": {
           "agent_seconds": null,
@@ -3565,13 +3596,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 73.781,
+          "seconds": 68.814,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_ansible__ansible-de5858__KwnZXLp"
+          "trial_dir": "instance_ansible__ansible-de5858__dEPnEST"
         },
         "instance_ansible__ansible-e9e6001263f51103e96e58ad382660df0f3d0e39-v30a923fb5c164d6cd18280c02422f75e611e8fb2": {
           "agent_seconds": null,
@@ -3590,13 +3621,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 76.08,
+          "seconds": 79.266,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_ansible__ansible-e9e600__Bg5py7m"
+          "trial_dir": "instance_ansible__ansible-e9e600__KzgTWFe"
         },
         "instance_element-hq__element-web-5dfde12c1c1c0b6e48f17e3405468593e39d9492-vnan": {
           "agent_seconds": null,
@@ -3615,13 +3646,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 73.122,
+          "seconds": 99.146,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_element-hq__element-web__po29mVy"
+          "trial_dir": "instance_element-hq__element-web__bAz78EA"
         },
         "instance_element-hq__element-web-66d0b318bc6fee0d17b54c1781d6ab5d5d323135-vnan": {
           "agent_seconds": null,
@@ -3640,13 +3671,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 93.051,
+          "seconds": 77.56,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_element-hq__element-web__zuMxS4Q"
+          "trial_dir": "instance_element-hq__element-web__5tJcfss"
         },
         "instance_element-hq__element-web-772df3021201d9c73835a626df8dcb6334ad9a3e-vnan": {
           "agent_seconds": null,
@@ -3665,13 +3696,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 76.73,
+          "seconds": 85.042,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_element-hq__element-web__Va2cVc5"
+          "trial_dir": "instance_element-hq__element-web__drjnyco"
         },
         "instance_element-hq__element-web-ecfd1736e5dd9808e87911fc264e6c816653e1a9-vnan": {
           "agent_seconds": null,
@@ -3690,13 +3721,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 89.068,
+          "seconds": 66.602,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_element-hq__element-web__snsCNYg"
+          "trial_dir": "instance_element-hq__element-web__DHRYYQZ"
         },
         "instance_flipt-io__flipt-2ca5dfb3513e4e786d2b037075617cccc286d5c3": {
           "agent_seconds": null,
@@ -3715,13 +3746,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 364.908,
+          "seconds": 333.36,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_flipt-io__flipt-2ca5dfb__k9btkmE"
+          "trial_dir": "instance_flipt-io__flipt-2ca5dfb__NoVWqMP"
         },
         "instance_flipt-io__flipt-3d5a345f94c2adc8a0eaa102c189c08ad4c0f8e8": {
           "agent_seconds": null,
@@ -3740,13 +3771,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 458.414,
+          "seconds": 379.483,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_flipt-io__flipt-3d5a345__Lpsf3Bz"
+          "trial_dir": "instance_flipt-io__flipt-3d5a345__SAjuPuD"
         },
         "instance_flipt-io__flipt-524f277313606f8cd29b299617d6565c01642e15": {
           "agent_seconds": null,
@@ -3765,13 +3796,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 192.067,
+          "seconds": 244.449,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_flipt-io__flipt-524f277__ScFJtRc"
+          "trial_dir": "instance_flipt-io__flipt-524f277__ubggrY9"
         },
         "instance_flipt-io__flipt-c1728053367c753688f114ec26e703c8fdeda125": {
           "agent_seconds": null,
@@ -3790,13 +3821,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 150.767,
+          "seconds": 122.822,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_flipt-io__flipt-c172805__Dq6AKSH"
+          "trial_dir": "instance_flipt-io__flipt-c172805__agr2MeY"
         },
         "instance_flipt-io__flipt-c188284ff0c094a4ee281afebebd849555ebee59": {
           "agent_seconds": null,
@@ -3815,13 +3846,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 186.127,
+          "seconds": 181.556,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_flipt-io__flipt-c188284__jLyRRE5"
+          "trial_dir": "instance_flipt-io__flipt-c188284__GMgJ3MK"
         },
         "instance_flipt-io__flipt-cd18e54a0371fa222304742c6312e9ac37ea86c1": {
           "agent_seconds": null,
@@ -3840,13 +3871,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 176.208,
+          "seconds": 147.883,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_flipt-io__flipt-cd18e54__wswz2Wu"
+          "trial_dir": "instance_flipt-io__flipt-cd18e54__X2Bf9gj"
         },
         "instance_flipt-io__flipt-e2bd19dafa7166c96b082fb2a59eb54b4be0d778": {
           "agent_seconds": null,
@@ -3865,13 +3896,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 194.187,
+          "seconds": 172.851,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_flipt-io__flipt-e2bd19d__ZUPWeiz"
+          "trial_dir": "instance_flipt-io__flipt-e2bd19d__9CmczGE"
         },
         "instance_future-architect__vuls-5af1a227339e46c7abf3f2815e4c636a0c01098e": {
           "agent_seconds": null,
@@ -3890,13 +3921,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 543.548,
+          "seconds": 443.589,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_future-architect__vuls__Wt7quyx"
+          "trial_dir": "instance_future-architect__vuls__TUdWKA7"
         },
         "instance_future-architect__vuls-ca3f6b1dbf2cd24d1537bfda43e788443ce03a0c": {
           "agent_seconds": null,
@@ -3915,13 +3946,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 199.623,
+          "seconds": 271.475,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_future-architect__vuls__FfR6w3a"
+          "trial_dir": "instance_future-architect__vuls__BMUwxfi"
         },
         "instance_future-architect__vuls-e1fab805afcfc92a2a615371d0ec1e667503c254-v264a82e2f4818e30f5a25e4da53b27ba119f62b5": {
           "agent_seconds": null,
@@ -3940,13 +3971,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 191.39,
+          "seconds": 155.792,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_future-architect__vuls__3kt8q6Y"
+          "trial_dir": "instance_future-architect__vuls__TyTmqua"
         },
         "instance_future-architect__vuls-ef2be3d6ea4c0a13674aaab08b182eca4e2b9a17-v264a82e2f4818e30f5a25e4da53b27ba119f62b5": {
           "agent_seconds": null,
@@ -3965,13 +3996,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 104.036,
+          "seconds": 124.737,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_future-architect__vuls__eonvWJ9"
+          "trial_dir": "instance_future-architect__vuls__V5PjzND"
         },
         "instance_gravitational__teleport-1316e6728a3ee2fc124e2ea0cc6a02044c87a144-v626ec2a48416b10a88641359a169d99e935ff037": {
           "agent_seconds": null,
@@ -3990,13 +4021,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 104.947,
+          "seconds": 104.413,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_gravitational__teleport__wubtZUe"
+          "trial_dir": "instance_gravitational__teleport__BkBXQkS"
         },
         "instance_gravitational__teleport-2b15263e49da5625922581569834eec4838a9257-vee9b09fb20c43af7e520f57e9239bbcf46b7113d": {
           "agent_seconds": null,
@@ -4015,13 +4046,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 646.094,
+          "seconds": 620.7,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_gravitational__teleport__Wz4kjcm"
+          "trial_dir": "instance_gravitational__teleport__49deZkP"
         },
         "instance_gravitational__teleport-65438e6e44b6ce51458d09b7bb028a2797cfb0ea-vce94f93ad1030e3136852817f2423c1b3ac37bc4": {
           "agent_seconds": null,
@@ -4040,13 +4071,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 139.719,
+          "seconds": 122.474,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_gravitational__teleport__x38Rn3d"
+          "trial_dir": "instance_gravitational__teleport__jua6V8h"
         },
         "instance_gravitational__teleport-7744f72c6eb631791434b648ba41083b5f6d2278-vce94f93ad1030e3136852817f2423c1b3ac37bc4": {
           "agent_seconds": null,
@@ -4065,13 +4096,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 94.083,
+          "seconds": 84.171,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_gravitational__teleport__eVpw9xT"
+          "trial_dir": "instance_gravitational__teleport__YfmKnV2"
         },
         "instance_gravitational__teleport-eda668c30d9d3b56d9c69197b120b01013611186": {
           "agent_seconds": null,
@@ -4090,13 +4121,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 149.25,
+          "seconds": 118.179,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_gravitational__teleport__kkSLGXS"
+          "trial_dir": "instance_gravitational__teleport__YfK7yfF"
         },
         "instance_gravitational__teleport-f432a71a13e698b6e1c4672a2e9e9c1f32d35c12": {
           "agent_seconds": null,
@@ -4115,13 +4146,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 80.67,
+          "seconds": 87.348,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_gravitational__teleport__VkrEvpA"
+          "trial_dir": "instance_gravitational__teleport__XLCiucd"
         },
         "instance_internetarchive__openlibrary-0dc5b20fa186f9714f8a838178597e69f549d026-v2d9a6c849c60ed19fd0858ce9e40b7cc8e097e59": {
           "agent_seconds": null,
@@ -4140,13 +4171,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 43.465,
+          "seconds": 47.831,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_internetarchive__openli__AoLmAqT"
+          "trial_dir": "instance_internetarchive__openli__pnk659Q"
         },
         "instance_internetarchive__openlibrary-322d7a46cdc965bfabbf9500e98fde098c9d95b2-v13642507b4fc1f8d234172bf8129942da2c2ca26": {
           "agent_seconds": null,
@@ -4165,13 +4196,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 64.548,
+          "seconds": 55.57,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_internetarchive__openli__F2jQSCh"
+          "trial_dir": "instance_internetarchive__openli__NLBUNik"
         },
         "instance_internetarchive__openlibrary-53d376b148897466bb86d5accb51912bbbe9a8ed-v08d8e8889ec945ab821fb156c04c7d2e2810debb": {
           "agent_seconds": null,
@@ -4190,13 +4221,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 55.01,
+          "seconds": 58.8,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_internetarchive__openli__FtUTWzp"
+          "trial_dir": "instance_internetarchive__openli__NvfZzD4"
         },
         "instance_internetarchive__openlibrary-630221ab686c64e75a2ce253c893c033e4814b2e-v93c53c13d5f9b383ebb411ee7750b49dcd1a34c6": {
           "agent_seconds": null,
@@ -4215,13 +4246,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 39.721,
+          "seconds": 49.894,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_internetarchive__openli__Bbdzu6T"
+          "trial_dir": "instance_internetarchive__openli__gQNCBFK"
         },
         "instance_internetarchive__openlibrary-6e889f4a733c9f8ce9a9bd2ec6a934413adcedb9-ve8c8d62a2b60610a3c4631f5f23ed866bada9818": {
           "agent_seconds": null,
@@ -4240,13 +4271,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 38.743,
+          "seconds": 41.704,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_internetarchive__openli__mkAdaQv"
+          "trial_dir": "instance_internetarchive__openli__PJ3U6yH"
         },
         "instance_internetarchive__openlibrary-7cbfb812ef0e1f9716e2d6e85d538a96fcb79d13-vfa6ff903cb27f336e17654595dd900fa943dcd91": {
           "agent_seconds": null,
@@ -4265,13 +4296,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 33.66,
+          "seconds": 43.028,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_internetarchive__openli__YTBehux"
+          "trial_dir": "instance_internetarchive__openli__d3MfAe2"
         },
         "instance_internetarchive__openlibrary-a48fd6ba9482c527602bc081491d9e8ae6e8226c-vfa6ff903cb27f336e17654595dd900fa943dcd91": {
           "agent_seconds": null,
@@ -4290,13 +4321,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 52.373,
+          "seconds": 40.718,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_internetarchive__openli__pHeDstG"
+          "trial_dir": "instance_internetarchive__openli__NEqNEry"
         },
         "instance_internetarchive__openlibrary-b67138b316b1e9c11df8a4a8391fe5cc8e75ff9f-ve8c8d62a2b60610a3c4631f5f23ed866bada9818": {
           "agent_seconds": null,
@@ -4315,13 +4346,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 42.78,
+          "seconds": 37.817,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_internetarchive__openli__MXqRysm"
+          "trial_dir": "instance_internetarchive__openli__TTNXWfh"
         },
         "instance_navidrome__navidrome-69e0a266f48bae24a11312e9efbe495a337e4c84": {
           "agent_seconds": null,
@@ -4340,13 +4371,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 75.905,
+          "seconds": 81.596,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_navidrome__navidrome-69__8yy2xMg"
+          "trial_dir": "instance_navidrome__navidrome-69__fFoMthS"
         },
         "instance_navidrome__navidrome-874b17b8f614056df0ef021b5d4f977341084185": {
           "agent_seconds": null,
@@ -4365,13 +4396,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 68.478,
+          "seconds": 85.862,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_navidrome__navidrome-87__v8dQg9K"
+          "trial_dir": "instance_navidrome__navidrome-87__suR4udH"
         },
         "instance_navidrome__navidrome-bf2bcb12799b21069f137749e0c331f761d1f693": {
           "agent_seconds": null,
@@ -4390,13 +4421,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 107.456,
+          "seconds": 81.694,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_navidrome__navidrome-bf__YAU5W5x"
+          "trial_dir": "instance_navidrome__navidrome-bf__8R9mHct"
         },
         "instance_protonmail__webclients-08bb09914d0d37b0cd6376d4cab5b77728a43e7b": {
           "agent_seconds": null,
@@ -4415,13 +4446,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 180.815,
+          "seconds": 201.845,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_protonmail__webclients__p3YFnmV"
+          "trial_dir": "instance_protonmail__webclients__7E8YLJD"
         },
         "instance_protonmail__webclients-5f0745dd6993bb1430a951c62a49807c6635cd77": {
           "agent_seconds": null,
@@ -4440,13 +4471,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 281.473,
+          "seconds": 224.162,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_protonmail__webclients__GzEKZaa"
+          "trial_dir": "instance_protonmail__webclients__zxZshiS"
         },
         "instance_protonmail__webclients-715dbd4e6999499cd2a576a532d8214f75189116": {
           "agent_seconds": null,
@@ -4465,13 +4496,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 327.316,
+          "seconds": 286.063,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_protonmail__webclients__qtFocCr"
+          "trial_dir": "instance_protonmail__webclients__eLbyy6j"
         },
         "instance_protonmail__webclients-c5a2089ca2bfe9aa1d85a664b8ad87ef843a1c9c": {
           "agent_seconds": null,
@@ -4490,13 +4521,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 883.316,
+          "seconds": 838.814,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_protonmail__webclients__qQbR4cn"
+          "trial_dir": "instance_protonmail__webclients__65i2mZ6"
         },
         "instance_protonmail__webclients-e65cc5f33719e02e1c378146fb981d27bc24bdf4": {
           "agent_seconds": null,
@@ -4515,13 +4546,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 194.424,
+          "seconds": 204.264,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_protonmail__webclients__Dvt3DDT"
+          "trial_dir": "instance_protonmail__webclients__APsymXw"
         },
         "instance_qutebrowser__qutebrowser-3e21c8214a998cb1058defd15aabb24617a76402-v5fc38aaf22415ab0b70567368332beee7955b367": {
           "agent_seconds": null,
@@ -4540,13 +4571,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 58.32,
+          "seconds": 58.57,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_qutebrowser__qutebrowse__kixijyD"
+          "trial_dir": "instance_qutebrowser__qutebrowse__ZuadZTM"
         },
         "instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171": {
           "agent_seconds": null,
@@ -4565,13 +4596,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 40.377,
+          "seconds": 46.402,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_qutebrowser__qutebrowse__m5WGjg6"
+          "trial_dir": "instance_qutebrowser__qutebrowse__KGpcxQQ"
         },
         "instance_qutebrowser__qutebrowser-deeb15d6f009b3ca0c3bd503a7cef07462bd16b4-v363c8a7e5ccdf6968fc7ab84a2053ac78036691d": {
           "agent_seconds": null,
@@ -4590,13 +4621,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 43.531,
+          "seconds": 38.98,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_qutebrowser__qutebrowse__rascS6e"
+          "trial_dir": "instance_qutebrowser__qutebrowse__txunamg"
         },
         "instance_qutebrowser__qutebrowser-e70f5b03187bdd40e8bf70f5f3ead840f52d1f42-v02ad04386d5238fe2d1a1be450df257370de4b6a": {
           "agent_seconds": null,
@@ -4615,13 +4646,13 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 57.4,
+          "seconds": 48.532,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_qutebrowser__qutebrowse__H6tx3Zm"
+          "trial_dir": "instance_qutebrowser__qutebrowse__fyTHwJN"
         },
         "instance_tutao__tutanota-f373ac3808deefce8183dad8d16729839cc330c1-v2939aa9f4356f0dc9f523ee5ce19d09e08ab979b": {
           "agent_seconds": null,
@@ -4640,25 +4671,25 @@
           "network_guard": null,
           "resolved": true,
           "reward": 1.0,
-          "seconds": 149.137,
+          "seconds": 134.462,
           "skills_newly_admissible": null,
           "store_ablated": null,
           "store_note": null,
           "store_saved": null,
           "tree_changed": null,
-          "trial_dir": "instance_tutao__tutanota-f373ac3__3hBsGk4"
+          "trial_dir": "instance_tutao__tutanota-f373ac3__SjafRiL"
         }
       },
       "unmatched_trial_keys": [],
-      "wall_seconds_mean": 157.72,
-      "wall_seconds_total": 8043.92
+      "wall_seconds_mean": 149.3,
+      "wall_seconds_total": 7614.16
     }
   },
   "benchmark": "SWE-bench Pro V2 (HARD-51, 51 tasks)",
-  "commit": "ab47d3bdad35e7dbd492663393a320212a7d24a6",
+  "commit": "358cf8bfac2a2b92c53b425f4cbc1da06733f603",
   "conditions": {
     "engine_timeout_s": 240,
-    "eval_commit": "ab47d3bdad35e7dbd492663393a320212a7d24a6",
+    "eval_commit": "358cf8bfac2a2b92c53b425f4cbc1da06733f603",
     "n_shards": 6
   },
   "gates": {
@@ -4685,7 +4716,7 @@
         "Tip: There are many benchmarks available in Harbor's registry.",
         "Run `harbor datasets list` to see all available datasets.",
         "",
-        "  9/9 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:17:26 0:00:00",
+        "  9/9 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:15:11 0:00:00",
         "",
         "adhoc \u2022 causal_engine",
         "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
@@ -4701,7 +4732,7 @@
         "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
         "",
         "Job Info",
-        "Total runtime: 17m 26s",
+        "Total runtime: 15m 11s",
         "Results written to ",
         "/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/result.jso",
         "n",
@@ -4720,7 +4751,7 @@
         "Tip: There are many benchmarks available in Harbor's registry.",
         "Run `harbor datasets list` to see all available datasets.",
         "",
-        "  9/9 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:29:58 0:00:00",
+        "  9/9 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:23:49 0:00:00",
         "",
         "adhoc \u2022 causal_engine",
         "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
@@ -4736,7 +4767,7 @@
         "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
         "",
         "Job Info",
-        "Total runtime: 29m 58s",
+        "Total runtime: 23m 49s",
         "Results written to ",
         "/home/runner/work/brain/brain/work-causal-1/jobs/swe-pro-v2-causal-s1/result.jso",
         "n",
@@ -4755,7 +4786,7 @@
         "Tip: There are many benchmarks available in Harbor's registry.",
         "Run `harbor datasets list` to see all available datasets.",
         "",
-        "  9/9 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:28:02 0:00:00",
+        "  9/9 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:32:43 0:00:00",
         "",
         "adhoc \u2022 causal_engine",
         "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
@@ -4771,7 +4802,7 @@
         "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
         "",
         "Job Info",
-        "Total runtime: 28m 2s",
+        "Total runtime: 32m 43s",
         "Results written to ",
         "/home/runner/work/brain/brain/work-causal-2/jobs/swe-pro-v2-causal-s2/result.jso",
         "n",
@@ -4790,7 +4821,7 @@
         "Tip: There are many benchmarks available in Harbor's registry.",
         "Run `harbor datasets list` to see all available datasets.",
         "",
-        "  8/8 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:17:58 0:00:00",
+        "  8/8 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:25:21 0:00:00",
         "",
         "adhoc \u2022 causal_engine",
         "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
@@ -4806,7 +4837,7 @@
         "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
         "",
         "Job Info",
-        "Total runtime: 17m 58s",
+        "Total runtime: 25m 21s",
         "Results written to ",
         "/home/runner/work/brain/brain/work-causal-3/jobs/swe-pro-v2-causal-s3/result.jso",
         "n",
@@ -4825,7 +4856,7 @@
         "Tip: There are many benchmarks available in Harbor's registry.",
         "Run `harbor datasets list` to see all available datasets.",
         "",
-        "  8/8 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:14:51 0:00:00",
+        "  8/8 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:17:00 0:00:00",
         "",
         "adhoc \u2022 causal_engine",
         "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
@@ -4841,7 +4872,7 @@
         "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
         "",
         "Job Info",
-        "Total runtime: 14m 51s",
+        "Total runtime: 17m 0s",
         "Results written to ",
         "/home/runner/work/brain/brain/work-causal-4/jobs/swe-pro-v2-causal-s4/result.jso",
         "n",
@@ -4922,7 +4953,7 @@
         "<unknown>:60: SyntaxWarning: invalid escape sequence '\\d'",
         "<unknown>:46: SyntaxWarning: invalid escape sequence '\\.'",
         "<unknown>:85: SyntaxWarning: invalid escape sequence '\\d'",
-        "  8/8 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:18:52 0:00:00",
+        "  8/8 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:19:48 0:00:00",
         "",
         "adhoc \u2022 causal_engine",
         "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
@@ -4938,7 +4969,7 @@
         "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
         "",
         "Job Info",
-        "Total runtime: 18m 52s",
+        "Total runtime: 19m 48s",
         "Results written to ",
         "/home/runner/work/brain/brain/work-causal-5/jobs/swe-pro-v2-causal-s5/result.jso",
         "n",
@@ -4957,7 +4988,7 @@
         "Tip: There are many benchmarks available in Harbor's registry.",
         "Run `harbor datasets list` to see all available datasets.",
         "",
-        "  9/9 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:18:06 0:00:00",
+        "  9/9 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:17:29 0:00:00",
         "",
         "adhoc \u2022 nop",
         "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
@@ -4973,7 +5004,7 @@
         "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
         "",
         "Job Info",
-        "Total runtime: 18m 7s",
+        "Total runtime: 17m 29s",
         "Results written to ",
         "/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/result.json",
         "Inspect results by running `harbor view ",
@@ -4991,7 +5022,7 @@
         "Tip: There are many benchmarks available in Harbor's registry.",
         "Run `harbor datasets list` to see all available datasets.",
         "",
-        "  9/9 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:26:02 0:00:00",
+        "  9/9 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:27:33 0:00:00",
         "",
         "adhoc \u2022 nop",
         "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
@@ -5007,7 +5038,7 @@
         "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
         "",
         "Job Info",
-        "Total runtime: 26m 2s",
+        "Total runtime: 27m 33s",
         "Results written to ",
         "/home/runner/work/brain/brain/work-nop-1/jobs/swe-pro-v2-nop-s1/result.json",
         "Inspect results by running `harbor view ",
@@ -5025,7 +5056,7 @@
         "Tip: There are many benchmarks available in Harbor's registry.",
         "Run `harbor datasets list` to see all available datasets.",
         "",
-        "  9/9 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:32:33 0:00:00",
+        "  9/9 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:23:41 0:00:00",
         "",
         "adhoc \u2022 nop",
         "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
@@ -5041,7 +5072,7 @@
         "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
         "",
         "Job Info",
-        "Total runtime: 32m 33s",
+        "Total runtime: 23m 41s",
         "Results written to ",
         "/home/runner/work/brain/brain/work-nop-2/jobs/swe-pro-v2-nop-s2/result.json",
         "Inspect results by running `harbor view ",
@@ -5059,7 +5090,7 @@
         "Tip: There are many benchmarks available in Harbor's registry.",
         "Run `harbor datasets list` to see all available datasets.",
         "",
-        "  8/8 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:16:57 0:00:00",
+        "  8/8 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:20:16 0:00:00",
         "",
         "adhoc \u2022 nop",
         "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
@@ -5075,7 +5106,7 @@
         "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
         "",
         "Job Info",
-        "Total runtime: 16m 57s",
+        "Total runtime: 20m 16s",
         "Results written to ",
         "/home/runner/work/brain/brain/work-nop-3/jobs/swe-pro-v2-nop-s3/result.json",
         "Inspect results by running `harbor view ",
@@ -5093,7 +5124,7 @@
         "Tip: There are many benchmarks available in Harbor's registry.",
         "Run `harbor datasets list` to see all available datasets.",
         "",
-        "  8/8 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:12:26 0:00:00",
+        "  8/8 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:11:52 0:00:00",
         "",
         "adhoc \u2022 nop",
         "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
@@ -5109,7 +5140,7 @@
         "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
         "",
         "Job Info",
-        "Total runtime: 12m 26s",
+        "Total runtime: 11m 52s",
         "Results written to ",
         "/home/runner/work/brain/brain/work-nop-4/jobs/swe-pro-v2-nop-s4/result.json",
         "Inspect results by running `harbor view ",
@@ -5127,7 +5158,7 @@
         "Tip: There are many benchmarks available in Harbor's registry.",
         "Run `harbor datasets list` to see all available datasets.",
         "",
-        "  8/8 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:14:54 0:00:00",
+        "  8/8 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:15:23 0:00:00",
         "",
         "adhoc \u2022 nop",
         "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
@@ -5143,7 +5174,7 @@
         "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
         "",
         "Job Info",
-        "Total runtime: 14m 54s",
+        "Total runtime: 15m 23s",
         "Results written to ",
         "/home/runner/work/brain/brain/work-nop-5/jobs/swe-pro-v2-nop-s5/result.json",
         "Inspect results by running `harbor view ",
@@ -5161,7 +5192,7 @@
         "Tip: There are many benchmarks available in Harbor's registry.",
         "Run `harbor datasets list` to see all available datasets.",
         "",
-        "  9/9 Mean: 1.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:18:36 0:00:00",
+        "  9/9 Mean: 1.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:15:07 0:00:00",
         "",
         "adhoc \u2022 oracle",
         "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
@@ -5177,7 +5208,7 @@
         "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
         "",
         "Job Info",
-        "Total runtime: 18m 36s",
+        "Total runtime: 15m 7s",
         "Results written to ",
         "/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/result.jso",
         "n",
@@ -5196,7 +5227,7 @@
         "Tip: There are many benchmarks available in Harbor's registry.",
         "Run `harbor datasets list` to see all available datasets.",
         "",
-        "  9/9 Mean: 1.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:30:54 0:00:00",
+        "  9/9 Mean: 1.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:28:21 0:00:00",
         "",
         "adhoc \u2022 oracle",
         "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
@@ -5212,7 +5243,7 @@
         "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
         "",
         "Job Info",
-        "Total runtime: 30m 54s",
+        "Total runtime: 28m 21s",
         "Results written to ",
         "/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/result.jso",
         "n",
@@ -5231,7 +5262,7 @@
         "Tip: There are many benchmarks available in Harbor's registry.",
         "Run `harbor datasets list` to see all available datasets.",
         "",
-        "  9/9 Mean: 1.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:40:57 0:00:00",
+        "  9/9 Mean: 1.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:37:02 0:00:00",
         "",
         "adhoc \u2022 oracle",
         "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
@@ -5247,7 +5278,7 @@
         "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
         "",
         "Job Info",
-        "Total runtime: 40m 57s",
+        "Total runtime: 37m 2s",
         "Results written to ",
         "/home/runner/work/brain/brain/work-oracle-2/jobs/swe-pro-v2-oracle-s2/result.jso",
         "n",
@@ -5266,7 +5297,7 @@
         "Tip: There are many benchmarks available in Harbor's registry.",
         "Run `harbor datasets list` to see all available datasets.",
         "",
-        "  8/8 Mean: 1.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:16:35 0:00:00",
+        "  8/8 Mean: 1.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:20:27 0:00:00",
         "",
         "adhoc \u2022 oracle",
         "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
@@ -5282,7 +5313,7 @@
         "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
         "",
         "Job Info",
-        "Total runtime: 16m 35s",
+        "Total runtime: 20m 27s",
         "Results written to ",
         "/home/runner/work/brain/brain/work-oracle-3/jobs/swe-pro-v2-oracle-s3/result.jso",
         "n",
@@ -5301,7 +5332,7 @@
         "Tip: There are many benchmarks available in Harbor's registry.",
         "Run `harbor datasets list` to see all available datasets.",
         "",
-        "  8/8 Mean: 1.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:14:32 0:00:00",
+        "  8/8 Mean: 1.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:12:07 0:00:00",
         "",
         "adhoc \u2022 oracle",
         "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
@@ -5317,7 +5348,7 @@
         "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
         "",
         "Job Info",
-        "Total runtime: 14m 32s",
+        "Total runtime: 12m 7s",
         "Results written to ",
         "/home/runner/work/brain/brain/work-oracle-4/jobs/swe-pro-v2-oracle-s4/result.jso",
         "n",
@@ -5336,7 +5367,7 @@
         "Tip: There are many benchmarks available in Harbor's registry.",
         "Run `harbor datasets list` to see all available datasets.",
         "",
-        "  8/8 Mean: 1.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:12:37 0:00:00",
+        "  8/8 Mean: 1.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:13:56 0:00:00",
         "",
         "adhoc \u2022 oracle",
         "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
@@ -5352,7 +5383,7 @@
         "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
         "",
         "Job Info",
-        "Total runtime: 12m 37s",
+        "Total runtime: 13m 56s",
         "Results written to ",
         "/home/runner/work/brain/brain/work-oracle-5/jobs/swe-pro-v2-oracle-s5/result.jso",
         "n",
