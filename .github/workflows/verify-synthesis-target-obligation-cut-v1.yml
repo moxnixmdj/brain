@@ -1,0 +1,20 @@
+name: Verify synthesis target-obligation cut V1
+on:
+  pull_request:
+    paths:
+      - canonical/governance/SYNTHESIS_WHOLE_LEAF_TARGET_OBLIGATION_CUT_20261005_V1.json
+      - canonical/runtime/synthesis_whole_leaf_target_obligation_cut_v1.py
+      - canonical/tests/test_synthesis_whole_leaf_target_obligation_cut_v1.py
+      - .github/workflows/verify-synthesis-target-obligation-cut-v1.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest -v canonical.tests.test_synthesis_whole_leaf_target_obligation_cut_v1
+      - run: python canonical/runtime/synthesis_whole_leaf_target_obligation_cut_v1.py
