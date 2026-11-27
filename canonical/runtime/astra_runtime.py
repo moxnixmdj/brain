@@ -77,6 +77,22 @@ def _admin_expected_prestate(p):
         return "ABSENT"
     return hashlib.sha256(p.read_bytes()).hexdigest()
 
+_ROOT3_ADMIN_DRIVER_ID="ASTRA_ADMIN_PERSISTENCE_V1"
+_ROOT3_ADMIN_DRIVER_CONTRACT_GIT_BLOB_SHA="51d28ddd3ebbe4dd1b213f5b7a27736d5aa85e0b"
+_ROOT3_ADMIN_DRIVER_IMPLEMENTATION_GIT_BLOB_SHA="b49e03915f05599831f3eedf047341c3f24f3bad"
+
+def _root3_broker_fd():
+    raw=str(os.environ.get("PROJECT_BRAIN_BROKER_FD") or "").strip()
+    if not raw:
+        return None
+    try:
+        fd=int(raw)
+    except ValueError as exc:
+        raise Blocker("ROOT3_BROKER_FD_INVALID") from exc
+    if fd<0:
+        raise Blocker("ROOT3_BROKER_FD_INVALID")
+    return fd
+
 def _typed_admin_commit(p,payload,destination_class,operation):
     p=pathlib.Path(p)
     raw=p if p.is_absolute() else ROOT/p
@@ -86,13 +102,30 @@ def _typed_admin_commit(p,payload,destination_class,operation):
         rel=lex.relative_to(root_lex).as_posix()
     except ValueError as exc:
         raise Blocker("TYPED_ADMIN_WRITE_PATH_OUTSIDE_ROOT") from exc
+    expected_pre=_admin_expected_prestate(lex)
+    broker_fd=_root3_broker_fd()
+    if broker_fd is not None:
+        mod=_load_runtime_helper("root3_broker_rpc_v1")
+        return mod.child_roundtrip(
+            broker_fd,
+            driver_id=_ROOT3_ADMIN_DRIVER_ID,
+            driver_contract_git_blob_sha=_ROOT3_ADMIN_DRIVER_CONTRACT_GIT_BLOB_SHA,
+            driver_implementation_git_blob_sha=_ROOT3_ADMIN_DRIVER_IMPLEMENTATION_GIT_BLOB_SHA,
+            typed_args={
+                "destination_class":destination_class,
+                "operation":operation,
+                "path":rel,
+                "expected_pre_sha256":expected_pre,
+                "payload_b64":base64.b64encode(payload).decode("ascii"),
+            },
+        )
     mod=_load_runtime_helper("root3_typed_durable_admin_write_v1")
     plan=mod.build_plan(
         operation=operation,
         destination_class=destination_class,
         path=rel,
         payload=payload,
-        expected_pre_sha256=_admin_expected_prestate(lex),
+        expected_pre_sha256=expected_pre,
     )
     return mod.commit(ROOT,plan,payload)
 
