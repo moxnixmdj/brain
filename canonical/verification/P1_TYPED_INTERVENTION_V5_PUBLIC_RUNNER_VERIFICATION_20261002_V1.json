@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_P1_TYPED_INTERVENTION_V5_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_4_BRAIN_BLOBS__192_TYPED_CASES__24_SCOPE_CASES__144_INTERVENTION_RESCUES__ZERO_CREDIT",
+  "objective": "Freeze the independent public-runner result for the exact Brain P1 V5 typed scope/intervention carrier without claiming transport to frozen terminal surfaces.",
+  "exact_brain_blobs": {
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py": "2a8613ddac7402c7e6d2f349f9d3c32d3fb95e1d",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v5.py": "3fc600a8176dac250219e3d98b92cf93d8fceef5",
+    "canonical/tests/test_trajectory_failure_typed_ir_v5.py": "abc87ada119e42b720af5fb0f472816df975bc25",
+    "canonical/governance/P1_TYPED_INTERVENTION_ENVELOPE_V5.json": "26cd9f4c626d4754200c64c3f298383580d67c14"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1036,
+    "pull_request_head": "dbe6c77dc270cac5efb2a1da50a20b9441be8791",
+    "merge_ref_execution_sha": "37ce109a76df3d16439070a1aaf40d5178b33308",
+    "workflow_name": "Verify P1 typed intervention envelope V5",
+    "workflow_run_id": 37039428204,
+    "workflow_job_id": 110945592690,
+    "conclusion": "success",
+    "merged": true
+  },
+  "verified": {
+    "typed_case_count": 192,
+    "explicit_scope_case_count": 24,
+    "identifiable_or_interaction_rescue_count": 144,
+    "drop_provenance_mutation_killed": true,
+    "unfalsifiable_output_injection_killed": true,
+    "hidden_intervention_state_candidate_visible": false,
+    "unit_tests_passed": 8
+  },
+  "limitations": [
+    "THIS_VERIFIES_THE_V5_CARRIER_MECHANICS_AND_INFORMATION_BOUNDARY_ONLY",
+    "IT_DOES_NOT_ESTABLISH_EXACT_OR_SUPERSET_SCOPE_RELATION_TO_FRONTIERCODE_CURSORBENCH_OR_RECOVERY_SCOPE_COMPOSITION",
+    "IT_DOES_NOT_CLEAR_P1_QUARANTINE_OR_GRANT_TERMINAL_ACCEPTANCE_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
