@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_RECOVERY_UNIVERSAL_ACCEPTANCE_INPUT_V2",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__INDEPENDENT_REDUCTION_REQUIRED__ZERO_CREDIT",
+  "protocols_path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+  "protocols_git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+  "transmuter_path": "canonical/runtime/acceptance_proof_transmuter_v1.py",
+  "transmuter_git_blob_sha": "39b5611e53485674b29e2a05da91b89801bc5aa6",
+  "independent_receipt_path": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+  "independent_receipt_git_blob_sha": "981c8ac9b66ee7fccf5b531525849e29df9be483",
+  "evidence": [
+    {
+      "id": "RECOVERY_P1_UNIVERSAL_STRONGER_PROOF_V2",
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "mode": "UNIVERSAL",
+      "verified": true,
+      "independent": true,
+      "contamination_clean": true,
+      "binds_frozen_protocol": true,
+      "scope_relation": "PROVEN_STRONGER",
+      "closes_entire_protocol": true,
+      "result": {
+        "all_admissible_inputs_proved": true,
+        "formal_completeness": true
+      },
+      "basis_receipt": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json"
+    }
+  ],
+  "expected": {
+    "newly_closed_family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+    "atomic_predicates": [
+      "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+      "RECOVERY_TERMINAL_NONINFERIOR",
+      "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES"
+    ]
+  },
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
