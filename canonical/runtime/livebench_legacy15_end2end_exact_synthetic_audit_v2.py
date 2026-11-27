@@ -28,6 +28,12 @@ FROZEN_LIVEBENCH_COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
 FROZEN_REGISTRY_BLOB = "903ed738398648c7cfac61d5ffa478c22f1f0891"
 FROZEN_INSTRUCTIONS_BLOB = "4997bab885a676d92545fd91a9a20b48d234a2b2"
 EXPECTED_SET_COUNT = 928
+BRAIN_SUBJECT_PATHS = (
+    "canonical/runtime/livebench_legacy15_end2end_exact_synthetic_audit_v2.py",
+    "canonical/runtime/livebench_legacy15_joint_witness_v1.py",
+    "canonical/runtime/livebench_legacy_visible_constraint_compiler_v4.py",
+    "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py",
+)
 REPEAT_MARKER = (
     "First repeat the request word for word without change,"
     " then give your answer (1. do not say any words or characters"
@@ -194,6 +200,21 @@ def audit(livebench_root: Path, max_failures: int) -> dict[str, Any]:
     assert git_blob_sha(registry_path) == FROZEN_REGISTRY_BLOB
     assert git_blob_sha(instructions_path) == FROZEN_INSTRUCTIONS_BLOB
 
+    # Bind the receipt to the exact Brain bytes that were executed.  A passing
+    # artifact without subject hashes is only an anecdote with better formatting.
+    repo_root = Path(__file__).resolve().parents[2]
+    subject_blobs = {
+        rel: git_blob_sha(repo_root / rel)
+        for rel in BRAIN_SUBJECT_PATHS
+    }
+
+    # Recompute the complete identity partition in the same verifier process,
+    # rather than trusting a separately produced count.
+    partition = archetypes.verify()
+    assert partition["compatible_set_count"] == EXPECTED_SET_COUNT
+    assert partition["archetype_count"] == 7
+    assert sum(partition["counts_by_archetype"].values()) == EXPECTED_SET_COUNT
+
     sys.path.insert(0, str(livebench_root / "livebench/if_runner"))
     from instruction_following_eval import instructions_registry as registry
 
@@ -289,10 +310,14 @@ def audit(livebench_root: Path, max_failures: int) -> dict[str, Any]:
             "instructions_blob": FROZEN_INSTRUCTIONS_BLOB,
             "witness_schema": witness.SCHEMA,
             "archetype_schema": archetypes.SCHEMA,
+            "brain_subject_git_blobs": subject_blobs,
+            "archetype_partition_status": partition["status"],
         },
         "scope": {
             "active_identity_count": len(archetypes.ACTIVE_IDS),
             "compatible_identity_sets": len(sets),
+            "archetype_count": partition["archetype_count"],
+            "counts_by_archetype": partition["counts_by_archetype"],
             "parameter_profiles": len(PROFILES),
             "orders_per_profile": 2,
             "synthetic_cases": total,
@@ -322,6 +347,7 @@ def audit(livebench_root: Path, max_failures: int) -> dict[str, Any]:
             "SYNTHETIC_PUBLIC_SOURCE_CONTRACT_EVIDENCE_ONLY",
             "NO_TERMINAL_CASE_CONTENT_READ",
             "NO_ACTIVE_TERMINAL_SCORE_CLAIM",
+            "FOUR_PARAMETER_PROFILES_ARE_STRESS_COVERAGE_NOT_A_UNIVERSAL_PARAMETER_DOMAIN_THEOREM",
             "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
         ],
     }
