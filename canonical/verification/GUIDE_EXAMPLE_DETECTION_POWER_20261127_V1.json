@@ -1,0 +1,3458 @@
+{
+ "modules": [
+  {
+   "branches": {
+    "guide_reached": {
+     "guide_kills": 23,
+     "separated": 26
+    },
+    "guide_untested": {
+     "guide_kills": 0,
+     "separated": 4
+    },
+    "outside_any_branch": {
+     "guide_kills": 36,
+     "separated": 44
+    }
+   },
+   "functions": [
+    "fmean",
+    "geometric_mean",
+    "harmonic_mean",
+    "mean",
+    "median",
+    "median_high",
+    "median_low",
+    "mode",
+    "multimode",
+    "pstdev",
+    "stdev"
+   ],
+   "guards": [
+    {
+     "branches": 1,
+     "examples": 5,
+     "function": "mean",
+     "reached": 0,
+     "untested": [
+      {
+       "branch": "then",
+       "line": 431
+      }
+     ],
+     "untested_found": 1,
+     "witnessed_guards": [
+      {
+       "branch": "then",
+       "input": "(([],), {})",
+       "line": 431
+      }
+     ]
+    },
+    {
+     "branches": 4,
+     "examples": 1,
+     "function": "fmean",
+     "reached": 1,
+     "untested": [
+      {
+       "branch": "then",
+       "line": 457
+      },
+      {
+       "branch": "then",
+       "line": 466
+      },
+      {
+       "branch": "then",
+       "line": 469
+      }
+     ],
+     "untested_found": 1,
+     "witnessed_guards": [
+      {
+       "branch": "then",
+       "input": "(([],), {})",
+       "line": 457
+      }
+     ]
+    },
+    {
+     "branches": 0,
+     "examples": 1,
+     "function": "geometric_mean",
+     "reached": 0,
+     "untested": [],
+     "untested_found": 0,
+     "witnessed_guards": []
+    },
+    {
+     "branches": 12,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "reached": 3,
+     "untested": [
+      {
+       "branch": "then",
+       "line": 516
+      },
+      {
+       "branch": "then",
+       "line": 520
+      },
+      {
+       "branch": "then",
+       "line": 522
+      },
+      {
+       "branch": "then",
+       "line": 524
+      },
+      {
+       "branch": "else",
+       "line": 524
+      },
+      {
+       "branch": "then",
+       "line": 525
+      },
+      {
+       "branch": "then",
+       "line": 534
+      },
+      {
+       "branch": "then",
+       "line": 536
+      },
+      {
+       "branch": "then",
+       "line": 544
+      }
+     ],
+     "untested_found": 6,
+     "witnessed_guards": [
+      {
+       "branch": "then",
+       "input": "(([-1, 1],), {'weights': [2, 2, -1, 6, 1]})",
+       "line": 536
+      },
+      {
+       "branch": "then",
+       "input": "(([],), {})",
+       "line": 520
+      },
+      {
+       "branch": "then",
+       "input": "(([2],), {})",
+       "line": 522
+      },
+      {
+       "branch": "then",
+       "input": "(([2],), {})",
+       "line": 524
+      },
+      {
+       "branch": "then",
+       "input": "(([-1],), {})",
+       "line": 525
+      },
+      {
+       "branch": "else",
+       "input": "(('a',), {})",
+       "line": 524
+      }
+     ]
+    },
+    {
+     "branches": 3,
+     "examples": 2,
+     "function": "median",
+     "reached": 2,
+     "untested": [
+      {
+       "branch": "then",
+       "line": 564
+      }
+     ],
+     "untested_found": 1,
+     "witnessed_guards": [
+      {
+       "branch": "then",
+       "input": "(([],), {})",
+       "line": 564
+      }
+     ]
+    },
+    {
+     "branches": 3,
+     "examples": 2,
+     "function": "median_low",
+     "reached": 2,
+     "untested": [
+      {
+       "branch": "then",
+       "line": 587
+      }
+     ],
+     "untested_found": 1,
+     "witnessed_guards": [
+      {
+       "branch": "then",
+       "input": "(([],), {})",
+       "line": 587
+      }
+     ]
+    },
+    {
+     "branches": 1,
+     "examples": 2,
+     "function": "median_high",
+     "reached": 0,
+     "untested": [
+      {
+       "branch": "then",
+       "line": 609
+      }
+     ],
+     "untested_found": 1,
+     "witnessed_guards": [
+      {
+       "branch": "then",
+       "input": "(([],), {})",
+       "line": 609
+      }
+     ]
+    },
+    {
+     "branches": 0,
+     "examples": 3,
+     "function": "mode",
+     "reached": 0,
+     "untested": [],
+     "untested_found": 0,
+     "witnessed_guards": []
+    },
+    {
+     "branches": 1,
+     "examples": 3,
+     "function": "multimode",
+     "reached": 1,
+     "untested": [],
+     "untested_found": 0,
+     "witnessed_guards": []
+    },
+    {
+     "branches": 2,
+     "examples": 1,
+     "function": "stdev",
+     "reached": 0,
+     "untested": [
+      {
+       "branch": "then",
+       "line": 917
+      },
+      {
+       "branch": "then",
+       "line": 920
+      }
+     ],
+     "untested_found": 1,
+     "witnessed_guards": [
+      {
+       "branch": "then",
+       "input": "(([-41.89],), {})",
+       "line": 917
+      }
+     ]
+    },
+    {
+     "branches": 2,
+     "examples": 1,
+     "function": "pstdev",
+     "reached": 0,
+     "untested": [
+      {
+       "branch": "then",
+       "line": 935
+      },
+      {
+       "branch": "then",
+       "line": 938
+      }
+     ],
+     "untested_found": 1,
+     "witnessed_guards": [
+      {
+       "branch": "then",
+       "input": "(([],), {})",
+       "line": 935
+      }
+     ]
+    }
+   ],
+   "guide_kills": 59,
+   "module": "statistics",
+   "mutants": 87,
+   "rows": [
+    {
+     "branch_reached_by_guide": false,
+     "examples": 5,
+     "function": "mean",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 431,
+     "module": "statistics",
+     "mutation": "compare:Lt->GtE",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "mean([2, -1, 2, 16, -1, 0, 0, 9])",
+      "expected": "('value', 3.375)",
+      "mutant": "('raise', 'StatisticsError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 5,
+     "function": "mean",
+     "guide_killed": false,
+     "in_branch": false,
+     "line": 431,
+     "module": "statistics",
+     "mutation": "const:1->2",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "mean([2])",
+      "expected": "('value', 2)",
+      "mutant": "('raise', 'StatisticsError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 5,
+     "function": "mean",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 433,
+     "module": "statistics",
+     "mutation": "binop:Div->Mult",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "mean([2, -1, 2, 16, -1, 0, 0, 9])",
+      "expected": "('value', 3.375)",
+      "mutant": "('value', 216)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 5,
+     "function": "mean",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 433,
+     "module": "statistics",
+     "mutation": "return:value->None",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "mean([2, -1, 2, 16, -1, 0, 0, 9])",
+      "expected": "('value', 3.375)",
+      "mutant": "('value', None)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 1,
+     "function": "fmean",
+     "guide_killed": false,
+     "in_branch": false,
+     "line": 449,
+     "module": "statistics",
+     "mutation": "const:0->1",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 1,
+     "function": "fmean",
+     "guide_killed": false,
+     "in_branch": false,
+     "line": 452,
+     "module": "statistics",
+     "mutation": "const:1->2",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 1,
+     "function": "fmean",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 455,
+     "module": "statistics",
+     "mutation": "compare:Is->IsNot",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "fmean([-26.686])",
+      "expected": "('value', -26.686)",
+      "mutant": "('raise', 'TypeError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 1,
+     "function": "fmean",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 457,
+     "module": "statistics",
+     "mutation": "unary:not->identity",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "fmean([-26.686])",
+      "expected": "('value', -26.686)",
+      "mutant": "('raise', 'StatisticsError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 1,
+     "function": "fmean",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 459,
+     "module": "statistics",
+     "mutation": "binop:Div->Mult",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "fmean([31.308, -1.5, 0.0, 11.092, 1000000.0])",
+      "expected": "('value', 200008.18)",
+      "mutant": "('value', 5000204.5)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 1,
+     "function": "fmean",
+     "guide_killed": false,
+     "in_branch": false,
+     "line": 466,
+     "module": "statistics",
+     "mutation": "compare:NotEq->Eq",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 1,
+     "function": "fmean",
+     "guide_killed": false,
+     "in_branch": false,
+     "line": 469,
+     "module": "statistics",
+     "mutation": "unary:not->identity",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 1,
+     "function": "fmean",
+     "guide_killed": false,
+     "in_branch": false,
+     "line": 471,
+     "module": "statistics",
+     "mutation": "binop:Div->Mult",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 1,
+     "function": "fmean",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 459,
+     "module": "statistics",
+     "mutation": "return:value->None",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "fmean([-26.686])",
+      "expected": "('value', -26.686)",
+      "mutant": "('value', None)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 1,
+     "function": "geometric_mean",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 487,
+     "module": "statistics",
+     "mutation": "return:value->None",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "geometric_mean([2, -1, -1])",
+      "expected": "('raise', 'StatisticsError')",
+      "mutant": "('value', None)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "guide_killed": false,
+     "in_branch": false,
+     "line": 516,
+     "module": "statistics",
+     "mutation": "compare:Is->IsNot",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "guide_killed": false,
+     "in_branch": false,
+     "line": 518,
+     "module": "statistics",
+     "mutation": "const:'harmonic mean does not support negative values'->'harmonic mean does not support negative valuesX'",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 520,
+     "module": "statistics",
+     "mutation": "compare:Lt->GtE",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "harmonic_mean([2])",
+      "expected": "('value', 2)",
+      "mutant": "('raise', 'StatisticsError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "guide_killed": false,
+     "in_branch": false,
+     "line": 520,
+     "module": "statistics",
+     "mutation": "const:1->2",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "harmonic_mean([2])",
+      "expected": "('value', 2)",
+      "mutant": "('raise', 'StatisticsError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 522,
+     "module": "statistics",
+     "mutation": "boolop:And->Or",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "harmonic_mean([2], weights=[-1, 1])",
+      "expected": "('raise', 'StatisticsError')",
+      "mutant": "('value', 2)"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 522,
+     "module": "statistics",
+     "mutation": "compare:Eq->NotEq",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "harmonic_mean([1, 3, 2])",
+      "expected": "('value', 1.6363636363636365)",
+      "mutant": "('value', 1)"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 522,
+     "module": "statistics",
+     "mutation": "const:1->2",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "harmonic_mean([1, 2])",
+      "expected": "('value', 1.3333333333333333)",
+      "mutant": "('value', 1)"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "guide_killed": false,
+     "in_branch": true,
+     "line": 522,
+     "module": "statistics",
+     "mutation": "compare:Is->IsNot",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "harmonic_mean([2], weights=[-1, 1])",
+      "expected": "('raise', 'StatisticsError')",
+      "mutant": "('value', 2)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "guide_killed": false,
+     "in_branch": true,
+     "line": 523,
+     "module": "statistics",
+     "mutation": "const:0->1",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "harmonic_mean([2])",
+      "expected": "('value', 2)",
+      "mutant": "('raise', 'IndexError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "guide_killed": false,
+     "in_branch": true,
+     "line": 525,
+     "module": "statistics",
+     "mutation": "compare:Lt->GtE",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "harmonic_mean([2])",
+      "expected": "('value', 2)",
+      "mutant": "('raise', 'StatisticsError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "guide_killed": false,
+     "in_branch": true,
+     "line": 525,
+     "module": "statistics",
+     "mutation": "const:0->1",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "harmonic_mean([0])",
+      "expected": "('value', 0)",
+      "mutant": "('raise', 'StatisticsError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 530,
+     "module": "statistics",
+     "mutation": "compare:Is->IsNot",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "harmonic_mean([3, 0, -1], weights=[-1, 1, 0, 0, 29])",
+      "expected": "('raise', 'StatisticsError')",
+      "mutant": "('value', 0)"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 531,
+     "module": "statistics",
+     "mutation": "const:1->2",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "harmonic_mean([1, 3, 2])",
+      "expected": "('value', 1.6363636363636365)",
+      "mutant": "('value', 0.8181818181818182)"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "guide_killed": false,
+     "in_branch": true,
+     "line": 534,
+     "module": "statistics",
+     "mutation": "compare:Is->IsNot",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 536,
+     "module": "statistics",
+     "mutation": "compare:NotEq->Eq",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "harmonic_mean([1, 1000000, -1, -1, 1], weights=[1000000])",
+      "expected": "('raise', 'StatisticsError')",
+      "mutant": "('value', 1.0)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 541,
+     "module": "statistics",
+     "mutation": "binop:Div->Mult",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "harmonic_mean([0, 2, 1])",
+      "expected": "('value', 0)",
+      "mutant": "('value', 1)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "guide_killed": false,
+     "in_branch": false,
+     "line": 541,
+     "module": "statistics",
+     "mutation": "const:0->1",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "guide_killed": false,
+     "in_branch": false,
+     "line": 543,
+     "module": "statistics",
+     "mutation": "const:0->1",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "harmonic_mean([0, 2, 1])",
+      "expected": "('value', 0)",
+      "mutant": "('value', 1)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 544,
+     "module": "statistics",
+     "mutation": "compare:LtE->Gt",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "harmonic_mean([1, 3, 2])",
+      "expected": "('value', 1.6363636363636365)",
+      "mutant": "('raise', 'StatisticsError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 544,
+     "module": "statistics",
+     "mutation": "const:0->1",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "harmonic_mean([1000000, 30, 1000000])",
+      "expected": "('value', 89.99460032398056)",
+      "mutant": "('raise', 'StatisticsError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 546,
+     "module": "statistics",
+     "mutation": "binop:Div->Mult",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "harmonic_mean([1, 3, 2])",
+      "expected": "('value', 1.6363636363636365)",
+      "mutant": "('value', 5.5)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "harmonic_mean",
+     "guide_killed": false,
+     "in_branch": true,
+     "line": 527,
+     "module": "statistics",
+     "mutation": "return:value->None",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "harmonic_mean([2])",
+      "expected": "('value', 2)",
+      "mutant": "('value', None)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "median",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 564,
+     "module": "statistics",
+     "mutation": "compare:Eq->NotEq",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median([2, 1000000, 17, 2, 9])",
+      "expected": "('value', 9)",
+      "mutant": "('raise', 'StatisticsError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "median",
+     "guide_killed": false,
+     "in_branch": false,
+     "line": 564,
+     "module": "statistics",
+     "mutation": "const:0->1",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median([-1])",
+      "expected": "('value', -1)",
+      "mutant": "('raise', 'StatisticsError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "median",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 566,
+     "module": "statistics",
+     "mutation": "compare:Eq->NotEq",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median([2, 1000000, 17, 2, 9])",
+      "expected": "('value', 9)",
+      "mutant": "('value', 5.5)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "median",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 566,
+     "module": "statistics",
+     "mutation": "binop:Mod->Div",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median([2, 1000000, 17, 2, 9])",
+      "expected": "('value', 9)",
+      "mutant": "('value', 5.5)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "median",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 566,
+     "module": "statistics",
+     "mutation": "const:2->3",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median([2, 1000000, 17, 2, 9])",
+      "expected": "('value', 9)",
+      "mutant": "('value', 5.5)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "median",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 566,
+     "module": "statistics",
+     "mutation": "const:1->2",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median([2, 1000000, 17, 2, 9])",
+      "expected": "('value', 9)",
+      "mutant": "('value', 5.5)"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "median",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 567,
+     "module": "statistics",
+     "mutation": "binop:FloorDiv->Mult",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median([2, 1000000, 17, 2, 9])",
+      "expected": "('value', 9)",
+      "mutant": "('raise', 'IndexError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "median",
+     "guide_killed": false,
+     "in_branch": true,
+     "line": 567,
+     "module": "statistics",
+     "mutation": "const:2->3",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median([2, 1000000, 17, 2, 9])",
+      "expected": "('value', 9)",
+      "mutant": "('value', 2)"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "median",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 569,
+     "module": "statistics",
+     "mutation": "binop:FloorDiv->Mult",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median([2, 1000000])",
+      "expected": "('value', 500001.0)",
+      "mutant": "('raise', 'IndexError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "median",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 569,
+     "module": "statistics",
+     "mutation": "const:2->3",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median([-1, -10, -1, 1, 1000000, 2, 0, 2])",
+      "expected": "('value', 0.5)",
+      "mutant": "('value', -1.0)"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "median",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 570,
+     "module": "statistics",
+     "mutation": "binop:Div->Mult",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median([2, 1000000])",
+      "expected": "('value', 500001.0)",
+      "mutant": "('value', 2000004)"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "median",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 570,
+     "module": "statistics",
+     "mutation": "binop:Add->Sub",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median([2, 1000000])",
+      "expected": "('value', 500001.0)",
+      "mutant": "('value', -499999.0)"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "median",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 570,
+     "module": "statistics",
+     "mutation": "binop:Sub->Add",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median([2, 1000000])",
+      "expected": "('value', 500001.0)",
+      "mutant": "('raise', 'IndexError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "median",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 570,
+     "module": "statistics",
+     "mutation": "const:1->2",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median([2, 1000000])",
+      "expected": "('value', 500001.0)",
+      "mutant": "('value', 1000000.0)"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "median",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 570,
+     "module": "statistics",
+     "mutation": "const:2->3",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median([2, 1000000])",
+      "expected": "('value', 500001.0)",
+      "mutant": "('value', 333334.0)"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "median",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 567,
+     "module": "statistics",
+     "mutation": "return:value->None",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median([2, 1000000, 17, 2, 9])",
+      "expected": "('value', 9)",
+      "mutant": "('value', None)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "median_low",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 587,
+     "module": "statistics",
+     "mutation": "compare:Eq->NotEq",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median_low([1000000, 1000000])",
+      "expected": "('value', 1000000)",
+      "mutant": "('raise', 'StatisticsError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "median_low",
+     "guide_killed": false,
+     "in_branch": false,
+     "line": 587,
+     "module": "statistics",
+     "mutation": "const:0->1",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median_low([])",
+      "expected": "('raise', 'StatisticsError')",
+      "mutant": "('raise', 'IndexError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "median_low",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 589,
+     "module": "statistics",
+     "mutation": "compare:Eq->NotEq",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median_low([-1, 1])",
+      "expected": "('value', -1)",
+      "mutant": "('value', 1)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "median_low",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 589,
+     "module": "statistics",
+     "mutation": "binop:Mod->Div",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median_low([-1, 1])",
+      "expected": "('value', -1)",
+      "mutant": "('value', 1)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "median_low",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 589,
+     "module": "statistics",
+     "mutation": "const:2->3",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median_low([1000000, 0, -1])",
+      "expected": "('value', 0)",
+      "mutant": "('value', -1)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "median_low",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 589,
+     "module": "statistics",
+     "mutation": "const:1->2",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median_low([1000000, 0, -1])",
+      "expected": "('value', 0)",
+      "mutant": "('value', -1)"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "median_low",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 590,
+     "module": "statistics",
+     "mutation": "binop:FloorDiv->Mult",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median_low([2, 0, -1, 0, 1000000])",
+      "expected": "('value', 0)",
+      "mutant": "('raise', 'IndexError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "median_low",
+     "guide_killed": false,
+     "in_branch": true,
+     "line": 590,
+     "module": "statistics",
+     "mutation": "const:2->3",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median_low([37, 37, 1, -14, -1])",
+      "expected": "('value', 1)",
+      "mutant": "('value', -1)"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "median_low",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 592,
+     "module": "statistics",
+     "mutation": "binop:Sub->Add",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median_low([1000000, 1000000])",
+      "expected": "('value', 1000000)",
+      "mutant": "('raise', 'IndexError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "median_low",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 592,
+     "module": "statistics",
+     "mutation": "binop:FloorDiv->Mult",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median_low([1000000, 1000000])",
+      "expected": "('value', 1000000)",
+      "mutant": "('raise', 'IndexError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "median_low",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 592,
+     "module": "statistics",
+     "mutation": "const:2->3",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median_low([-1, 1])",
+      "expected": "('value', -1)",
+      "mutant": "('value', 1)"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "median_low",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 592,
+     "module": "statistics",
+     "mutation": "const:1->2",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median_low([-1, 1])",
+      "expected": "('value', -1)",
+      "mutant": "('value', 1)"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "median_low",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 590,
+     "module": "statistics",
+     "mutation": "return:value->None",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median_low([2, 0, -1, 0, 1000000])",
+      "expected": "('value', 0)",
+      "mutant": "('value', None)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "median_high",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 609,
+     "module": "statistics",
+     "mutation": "compare:Eq->NotEq",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median_high([2, 0, -1, 1, 1000000, 0, 1, 0])",
+      "expected": "('value', 1)",
+      "mutant": "('raise', 'StatisticsError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "median_high",
+     "guide_killed": false,
+     "in_branch": false,
+     "line": 609,
+     "module": "statistics",
+     "mutation": "const:0->1",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median_high([1000000])",
+      "expected": "('value', 1000000)",
+      "mutant": "('raise', 'StatisticsError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "median_high",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 611,
+     "module": "statistics",
+     "mutation": "binop:FloorDiv->Mult",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median_high([2, 0, -1, 1, 1000000, 0, 1, 0])",
+      "expected": "('value', 1)",
+      "mutant": "('raise', 'IndexError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "median_high",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 611,
+     "module": "statistics",
+     "mutation": "const:2->3",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median_high([2, 0, -1, 1, 1000000, 0, 1, 0])",
+      "expected": "('value', 1)",
+      "mutant": "('value', 0)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "median_high",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 611,
+     "module": "statistics",
+     "mutation": "return:value->None",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "median_high([2, 0, -1, 1, 1000000, 0, 1, 0])",
+      "expected": "('value', 1)",
+      "mutant": "('value', None)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 3,
+     "function": "mode",
+     "guide_killed": false,
+     "in_branch": false,
+     "line": 709,
+     "module": "statistics",
+     "mutation": "const:1->2",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 3,
+     "function": "mode",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 711,
+     "module": "statistics",
+     "mutation": "const:0->1",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "mode(['_60Y5', 'Y ZacY86ccb5', ' 939b', '', '0314.22 '])",
+      "expected": "('value', '_60Y5')",
+      "mutant": "('raise', 'StatisticsError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 3,
+     "function": "mode",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 711,
+     "module": "statistics",
+     "mutation": "const:0->1",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "mode(['_60Y5', 'Y ZacY86ccb5', ' 939b', '', '0314.22 '])",
+      "expected": "('value', '_60Y5')",
+      "mutant": "('value', 1)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 3,
+     "function": "mode",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 711,
+     "module": "statistics",
+     "mutation": "return:value->None",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "mode(['_60Y5', 'Y ZacY86ccb5', ' 939b', '', '0314.22 '])",
+      "expected": "('value', '_60Y5')",
+      "mutant": "('value', None)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 3,
+     "function": "multimode",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 730,
+     "module": "statistics",
+     "mutation": "unary:not->identity",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "multimode('8_a-aY_97.96')",
+      "expected": "('value', ['_', 'a', '9'])",
+      "mutant": "('value', [])"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 3,
+     "function": "multimode",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 733,
+     "module": "statistics",
+     "mutation": "compare:Eq->NotEq",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "multimode('8_a-aY_97.96')",
+      "expected": "('value', ['_', 'a', '9'])",
+      "mutant": "('value', ['8', '-', 'Y', '7', '.', '6'])"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 3,
+     "function": "multimode",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 731,
+     "module": "statistics",
+     "mutation": "return:value->None",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 1,
+     "function": "stdev",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 917,
+     "module": "statistics",
+     "mutation": "compare:Lt->GtE",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "stdev([-41.89])",
+      "expected": "('raise', 'StatisticsError')",
+      "mutant": "('raise', 'ZeroDivisionError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 1,
+     "function": "stdev",
+     "guide_killed": false,
+     "in_branch": false,
+     "line": 917,
+     "module": "statistics",
+     "mutation": "const:2->3",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "stdev([0.0, 21.135])",
+      "expected": "('value', 14.944701820377682)",
+      "mutant": "('raise', 'StatisticsError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 1,
+     "function": "stdev",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 919,
+     "module": "statistics",
+     "mutation": "binop:Div->Mult",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "stdev([1000000.0, 0.0, 1000000.0, -46.099, -23.564])",
+      "expected": "('value', 547735.2764132033)",
+      "mutant": "('value', 2190941.1056528133)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 1,
+     "function": "stdev",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 919,
+     "module": "statistics",
+     "mutation": "binop:Sub->Add",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "stdev([0.0, 21.135])",
+      "expected": "('value', 14.944701820377682)",
+      "mutant": "('value', 8.628327618953746)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 1,
+     "function": "stdev",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 919,
+     "module": "statistics",
+     "mutation": "const:1->2",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "stdev([0.0, 21.135])",
+      "expected": "('value', 14.944701820377682)",
+      "mutant": "('raise', 'ZeroDivisionError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 1,
+     "function": "stdev",
+     "guide_killed": false,
+     "in_branch": true,
+     "line": 921,
+     "module": "statistics",
+     "mutation": "return:value->None",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 1,
+     "function": "pstdev",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 935,
+     "module": "statistics",
+     "mutation": "compare:Lt->GtE",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "pstdev([])",
+      "expected": "('raise', 'StatisticsError')",
+      "mutant": "('raise', 'ZeroDivisionError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 1,
+     "function": "pstdev",
+     "guide_killed": false,
+     "in_branch": false,
+     "line": 935,
+     "module": "statistics",
+     "mutation": "const:1->2",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "pstdev([-22.926])",
+      "expected": "('value', 0.0)",
+      "mutant": "('raise', 'StatisticsError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 1,
+     "function": "pstdev",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 937,
+     "module": "statistics",
+     "mutation": "binop:Div->Mult",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "pstdev([1.635, -11.354, 1000000.0])",
+      "expected": "('value', 471406.8116111251)",
+      "mutant": "('value', 1414220.434833375)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 1,
+     "function": "pstdev",
+     "guide_killed": false,
+     "in_branch": true,
+     "line": 939,
+     "module": "statistics",
+     "mutation": "return:value->None",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    }
+   ],
+   "sample_kills": {
+    "1": 39,
+    "10": 72,
+    "3": 50,
+    "40": 74
+   },
+   "separated": 74,
+   "skipped": [
+    {
+     "function": "median_grouped",
+     "why": "fewer than twelve drawable random inputs"
+    },
+    {
+     "function": "variance",
+     "why": "fewer than twelve drawable random inputs"
+    },
+    {
+     "function": "pvariance",
+     "why": "fewer than twelve drawable random inputs"
+    },
+    {
+     "function": "covariance",
+     "why": "fewer than twelve drawable random inputs"
+    },
+    {
+     "function": "correlation",
+     "why": "fewer than twelve drawable random inputs"
+    },
+    {
+     "function": "linear_regression",
+     "why": "fewer than twelve drawable random inputs"
+    }
+   ]
+  },
+  {
+   "branches": {
+    "guide_reached": {
+     "guide_kills": 0,
+     "separated": 0
+    },
+    "guide_untested": {
+     "guide_kills": 0,
+     "separated": 0
+    },
+    "outside_any_branch": {
+     "guide_kills": 15,
+     "separated": 15
+    }
+   },
+   "functions": [
+    "IS_CHARACTER_JUNK",
+    "IS_LINE_JUNK",
+    "get_close_matches"
+   ],
+   "guards": [
+    {
+     "branches": 3,
+     "examples": 5,
+     "function": "get_close_matches",
+     "reached": 1,
+     "untested": [
+      {
+       "branch": "then",
+       "line": 695
+      },
+      {
+       "branch": "then",
+       "line": 697
+      }
+     ],
+     "untested_found": 0,
+     "witnessed_guards": []
+    },
+    {
+     "branches": 0,
+     "examples": 3,
+     "function": "IS_LINE_JUNK",
+     "reached": 0,
+     "untested": [],
+     "untested_found": 0,
+     "witnessed_guards": []
+    },
+    {
+     "branches": 0,
+     "examples": 4,
+     "function": "IS_CHARACTER_JUNK",
+     "reached": 0,
+     "untested": [],
+     "untested_found": 0,
+     "witnessed_guards": []
+    }
+   ],
+   "guide_kills": 15,
+   "module": "difflib",
+   "mutants": 20,
+   "rows": [
+    {
+     "branch_reached_by_guide": false,
+     "examples": 5,
+     "function": "get_close_matches",
+     "guide_killed": false,
+     "in_branch": false,
+     "line": 666,
+     "module": "difflib",
+     "mutation": "const:3->4",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 5,
+     "function": "get_close_matches",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 695,
+     "module": "difflib",
+     "mutation": "unary:not->identity",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "get_close_matches('.X6247_7', [])",
+      "expected": "('value', [])",
+      "mutant": "('raise', 'ValueError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 5,
+     "function": "get_close_matches",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 695,
+     "module": "difflib",
+     "mutation": "compare:Gt->LtE",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "get_close_matches('.X6247_7', [])",
+      "expected": "('value', [])",
+      "mutant": "('raise', 'ValueError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 5,
+     "function": "get_close_matches",
+     "guide_killed": false,
+     "in_branch": false,
+     "line": 695,
+     "module": "difflib",
+     "mutation": "const:0->1",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 5,
+     "function": "get_close_matches",
+     "guide_killed": false,
+     "in_branch": true,
+     "line": 696,
+     "module": "difflib",
+     "mutation": "binop:Mod->Div",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 5,
+     "function": "get_close_matches",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 697,
+     "module": "difflib",
+     "mutation": "unary:not->identity",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "get_close_matches('.X6247_7', [])",
+      "expected": "('value', [])",
+      "mutant": "('raise', 'ValueError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 5,
+     "function": "get_close_matches",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 697,
+     "module": "difflib",
+     "mutation": "compare:LtE->Gt",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "get_close_matches('.X6247_7', [])",
+      "expected": "('value', [])",
+      "mutant": "('raise', 'ValueError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 5,
+     "function": "get_close_matches",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 697,
+     "module": "difflib",
+     "mutation": "compare:LtE->Gt",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "get_close_matches('.X6247_7', [])",
+      "expected": "('value', [])",
+      "mutant": "('raise', 'ValueError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 5,
+     "function": "get_close_matches",
+     "guide_killed": false,
+     "in_branch": true,
+     "line": 698,
+     "module": "difflib",
+     "mutation": "binop:Mod->Div",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 5,
+     "function": "get_close_matches",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 704,
+     "module": "difflib",
+     "mutation": "boolop:And->Or",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "get_close_matches('34.b6077Zb74', ['.ca_6 ccca09', 'c2c40084', 'Z'])",
+      "expected": "('value', [])",
+      "mutant": "('value', ['c2c40084', '.ca_6 ccca09'])"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 5,
+     "function": "get_close_matches",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 704,
+     "module": "difflib",
+     "mutation": "compare:GtE->Lt",
+     "sample_kills": {
+      "1": true,
+      "10": false,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "get_close_matches('', ['b 372', '95b', '_99a2bY.', '', '_4.4XX_-bZ5a', '94c', '-bb', '98'])",
+      "expected": "('value', [''])",
+      "mutant": "('value', [])"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 5,
+     "function": "get_close_matches",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 705,
+     "module": "difflib",
+     "mutation": "compare:GtE->Lt",
+     "sample_kills": {
+      "1": true,
+      "10": false,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "get_close_matches('', ['b 372', '95b', '_99a2bY.', '', '_4.4XX_-bZ5a', '94c', '-bb', '98'])",
+      "expected": "('value', [''])",
+      "mutant": "('value', [])"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 5,
+     "function": "get_close_matches",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 706,
+     "module": "difflib",
+     "mutation": "compare:GtE->Lt",
+     "sample_kills": {
+      "1": true,
+      "10": false,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "get_close_matches('', ['b 372', '95b', '_99a2bY.', '', '_4.4XX_-bZ5a', '94c', '-bb', '98'])",
+      "expected": "('value', [''])",
+      "mutant": "('value', [])"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 5,
+     "function": "get_close_matches",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 712,
+     "module": "difflib",
+     "mutation": "return:value->None",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "get_close_matches('.X6247_7', [])",
+      "expected": "('value', [])",
+      "mutant": "('value', None)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 3,
+     "function": "IS_LINE_JUNK",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 1045,
+     "module": "difflib",
+     "mutation": "const:'\\\\s*(?:#\\\\s*)?$'->'\\\\s*(?:#\\\\s*)?$X'",
+     "sample_kills": {
+      "1": true,
+      "10": false,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "IS_LINE_JUNK('')",
+      "expected": "('value', True)",
+      "mutant": "('value', False)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 3,
+     "function": "IS_LINE_JUNK",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 1059,
+     "module": "difflib",
+     "mutation": "compare:IsNot->Is",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "IS_LINE_JUNK('0')",
+      "expected": "('value', False)",
+      "mutant": "('value', True)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 3,
+     "function": "IS_LINE_JUNK",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 1059,
+     "module": "difflib",
+     "mutation": "return:value->None",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "IS_LINE_JUNK('0')",
+      "expected": "('value', False)",
+      "mutant": "('value', None)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 4,
+     "function": "IS_CHARACTER_JUNK",
+     "guide_killed": false,
+     "in_branch": false,
+     "line": 1061,
+     "module": "difflib",
+     "mutation": "const:' \\t'->' \\tX'",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 4,
+     "function": "IS_CHARACTER_JUNK",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 1077,
+     "module": "difflib",
+     "mutation": "compare:In->NotIn",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "IS_CHARACTER_JUNK('62 ')",
+      "expected": "('value', False)",
+      "mutant": "('value', True)"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 4,
+     "function": "IS_CHARACTER_JUNK",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 1077,
+     "module": "difflib",
+     "mutation": "return:value->None",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "IS_CHARACTER_JUNK('62 ')",
+      "expected": "('value', False)",
+      "mutant": "('value', None)"
+     }
+    }
+   ],
+   "sample_kills": {
+    "1": 15,
+    "10": 11,
+    "3": 11,
+    "40": 15
+   },
+   "separated": 15,
+   "skipped": [
+    {
+     "function": "unified_diff",
+     "why": "fewer than twelve drawable random inputs"
+    },
+    {
+     "function": "context_diff",
+     "why": "fewer than twelve drawable random inputs"
+    },
+    {
+     "function": "ndiff",
+     "why": "fewer than twelve drawable random inputs"
+    },
+    {
+     "function": "restore",
+     "why": "fewer than twelve drawable random inputs"
+    }
+   ]
+  },
+  {
+   "branches": {
+    "guide_reached": {
+     "guide_kills": 0,
+     "separated": 0
+    },
+    "guide_untested": {
+     "guide_kills": 0,
+     "separated": 0
+    },
+    "outside_any_branch": {
+     "guide_kills": 2,
+     "separated": 2
+    }
+   },
+   "functions": [
+    "shorten"
+   ],
+   "guards": [
+    {
+     "branches": 0,
+     "examples": 2,
+     "function": "shorten",
+     "reached": 0,
+     "untested": [],
+     "untested_found": 0,
+     "witnessed_guards": []
+    }
+   ],
+   "guide_kills": 2,
+   "module": "textwrap",
+   "mutants": 3,
+   "rows": [
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "shorten",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 410,
+     "module": "textwrap",
+     "mutation": "const:1->2",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "shorten",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 411,
+     "module": "textwrap",
+     "mutation": "const:' '->' X'",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "shorten('64.  119', width=1000000)",
+      "expected": "('value', '64. 119')",
+      "mutant": "('value', '64. X119')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "shorten",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 411,
+     "module": "textwrap",
+     "mutation": "return:value->None",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "shorten('.X6247_7', width=1000000)",
+      "expected": "('value', '.X6247_7')",
+      "mutant": "('value', None)"
+     }
+    }
+   ],
+   "sample_kills": {
+    "1": 1,
+    "10": 1,
+    "3": 1,
+    "40": 2
+   },
+   "separated": 2,
+   "skipped": []
+  },
+  {
+   "branches": {
+    "guide_reached": {
+     "guide_kills": 0,
+     "separated": 0
+    },
+    "guide_untested": {
+     "guide_kills": 0,
+     "separated": 0
+    },
+    "outside_any_branch": {
+     "guide_kills": 0,
+     "separated": 0
+    }
+   },
+   "functions": [],
+   "guards": [],
+   "guide_kills": 0,
+   "module": "fractions",
+   "mutants": 0,
+   "rows": [],
+   "sample_kills": {
+    "1": 0,
+    "10": 0,
+    "3": 0,
+    "40": 0
+   },
+   "separated": 0,
+   "skipped": []
+  },
+  {
+   "branches": {
+    "guide_reached": {
+     "guide_kills": 7,
+     "separated": 7
+    },
+    "guide_untested": {
+     "guide_kills": 0,
+     "separated": 0
+    },
+    "outside_any_branch": {
+     "guide_kills": 9,
+     "separated": 10
+    }
+   },
+   "functions": [
+    "bin"
+   ],
+   "guards": [
+    {
+     "branches": 4,
+     "examples": 2,
+     "function": "bin",
+     "reached": 2,
+     "untested": [
+      {
+       "branch": "then",
+       "line": 150
+      },
+      {
+       "branch": "then",
+       "line": 151
+      }
+     ],
+     "untested_found": 0,
+     "witnessed_guards": []
+    }
+   ],
+   "guide_kills": 16,
+   "module": "enum",
+   "mutants": 21,
+   "rows": [
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "bin",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 143,
+     "module": "enum",
+     "mutation": "binop:Pow->Mult",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "bin(16)",
+      "expected": "('value', '0b0 10000')",
+      "mutant": "('value', '0b0 1010')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "bin",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 143,
+     "module": "enum",
+     "mutation": "const:2->3",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "bin(2)",
+      "expected": "('value', '0b0 10')",
+      "mutant": "('value', '0b0 011')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "bin",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 144,
+     "module": "enum",
+     "mutation": "compare:GtE->Lt",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "bin(2)",
+      "expected": "('value', '0b0 10')",
+      "mutant": "('value', '-0b 110')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "bin",
+     "guide_killed": false,
+     "in_branch": false,
+     "line": 144,
+     "module": "enum",
+     "mutation": "const:0->1",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "bin(0)",
+      "expected": "('value', '0b0 ')",
+      "mutant": "('value', '-0b 10')"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "bin",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 145,
+     "module": "enum",
+     "mutation": "binop:Add->Sub",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "bin(2)",
+      "expected": "('value', '0b0 10')",
+      "mutant": "('value', '-0b 00')"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "bin",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 145,
+     "module": "enum",
+     "mutation": "const:'1'->'1X'",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "bin(2)",
+      "expected": "('value', '0b0 10')",
+      "mutant": "('value', '0b1 10')"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "bin",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 145,
+     "module": "enum",
+     "mutation": "const:'0'->'0X'",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "bin(2)",
+      "expected": "('value', '0b0 10')",
+      "mutant": "('value', '0b0 X10')"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "bin",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 145,
+     "module": "enum",
+     "mutation": "const:1->2",
+     "sample_kills": {
+      "1": false,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "bin(2)",
+      "expected": "('value', '0b0 10')",
+      "mutant": "('value', '0b0 00')"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "bin",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 147,
+     "module": "enum",
+     "mutation": "binop:Add->Sub",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "bin(-1)",
+      "expected": "('value', '0b1 1')",
+      "mutant": "('value', '-0b 1')"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "bin",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 147,
+     "module": "enum",
+     "mutation": "binop:Sub->Add",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "bin(-1)",
+      "expected": "('value', '0b1 1')",
+      "mutant": "('value', '0b1 01')"
+     }
+    },
+    {
+     "branch_reached_by_guide": true,
+     "examples": 2,
+     "function": "bin",
+     "guide_killed": true,
+     "in_branch": true,
+     "line": 147,
+     "module": "enum",
+     "mutation": "const:1->2",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "bin(-1)",
+      "expected": "('value', '0b1 1')",
+      "mutant": "('value', '0b1 0')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "bin",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 148,
+     "module": "enum",
+     "mutation": "const:3->4",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "bin(2)",
+      "expected": "('value', '0b0 10')",
+      "mutant": "('value', '0b01 10')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "bin",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 149,
+     "module": "enum",
+     "mutation": "const:3->4",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "bin(2)",
+      "expected": "('value', '0b0 10')",
+      "mutant": "('value', '0b0 0')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "bin",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 150,
+     "module": "enum",
+     "mutation": "compare:IsNot->Is",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "bin(2)",
+      "expected": "('value', '0b0 10')",
+      "mutant": "('raise', 'TypeError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "bin",
+     "guide_killed": false,
+     "in_branch": true,
+     "line": 151,
+     "module": "enum",
+     "mutation": "compare:Lt->GtE",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "bin",
+     "guide_killed": false,
+     "in_branch": true,
+     "line": 152,
+     "module": "enum",
+     "mutation": "binop:Add->Sub",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "bin",
+     "guide_killed": false,
+     "in_branch": true,
+     "line": 152,
+     "module": "enum",
+     "mutation": "binop:Mult->FloorDiv",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "bin",
+     "guide_killed": false,
+     "in_branch": true,
+     "line": 152,
+     "module": "enum",
+     "mutation": "const:1->2",
+     "sample_kills": {
+      "1": false,
+      "10": false,
+      "3": false,
+      "40": false
+     },
+     "separated": false
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "bin",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 153,
+     "module": "enum",
+     "mutation": "binop:Mod->Div",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "bin(2)",
+      "expected": "('value', '0b0 10')",
+      "mutant": "('raise', 'TypeError')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "bin",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 153,
+     "module": "enum",
+     "mutation": "const:'%s %s'->'%s %sX'",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "bin(2)",
+      "expected": "('value', '0b0 10')",
+      "mutant": "('value', '0b0 10X')"
+     }
+    },
+    {
+     "branch_reached_by_guide": false,
+     "examples": 2,
+     "function": "bin",
+     "guide_killed": true,
+     "in_branch": false,
+     "line": 153,
+     "module": "enum",
+     "mutation": "return:value->None",
+     "sample_kills": {
+      "1": true,
+      "10": true,
+      "3": true,
+      "40": true
+     },
+     "separated": true,
+     "witness": {
+      "call": "bin(2)",
+      "expected": "('value', '0b0 10')",
+      "mutant": "('value', None)"
+     }
+    }
+   ],
+   "sample_kills": {
+    "1": 12,
+    "10": 16,
+    "3": 16,
+    "40": 17
+   },
+   "separated": 17,
+   "skipped": []
+  },
+  {
+   "branches": {
+    "guide_reached": {
+     "guide_kills": 0,
+     "separated": 0
+    },
+    "guide_untested": {
+     "guide_kills": 0,
+     "separated": 0
+    },
+    "outside_any_branch": {
+     "guide_kills": 0,
+     "separated": 0
+    }
+   },
+   "functions": [],
+   "guards": [],
+   "guide_kills": 0,
+   "module": "calendar",
+   "mutants": 0,
+   "rows": [],
+   "sample_kills": {
+    "1": 0,
+    "10": 0,
+    "3": 0,
+    "40": 0
+   },
+   "separated": 0,
+   "skipped": []
+  },
+  {
+   "branches": {
+    "guide_reached": {
+     "guide_kills": 0,
+     "separated": 0
+    },
+    "guide_untested": {
+     "guide_kills": 0,
+     "separated": 0
+    },
+    "outside_any_branch": {
+     "guide_kills": 0,
+     "separated": 0
+    }
+   },
+   "functions": [],
+   "guards": [],
+   "guide_kills": 0,
+   "module": "string",
+   "mutants": 0,
+   "rows": [],
+   "sample_kills": {
+    "1": 0,
+    "10": 0,
+    "3": 0,
+    "40": 0
+   },
+   "separated": 0,
+   "skipped": []
+  },
+  {
+   "branches": {
+    "guide_reached": {
+     "guide_kills": 0,
+     "separated": 0
+    },
+    "guide_untested": {
+     "guide_kills": 0,
+     "separated": 0
+    },
+    "outside_any_branch": {
+     "guide_kills": 0,
+     "separated": 0
+    }
+   },
+   "error": "ValueError: json is a package; this audit mutates one source file",
+   "functions": [],
+   "guards": [],
+   "guide_kills": 0,
+   "module": "json",
+   "mutants": 0,
+   "rows": [],
+   "sample_kills": {
+    "1": 0,
+    "10": 0,
+    "3": 0,
+    "40": 0
+   },
+   "separated": 0,
+   "skipped": []
+  }
+ ],
+ "seconds": 6.316,
+ "seed": 0,
+ "tally": {
+  "branches": {
+   "guide_reached": {
+    "guide_detection_power": 0.9091,
+    "guide_kills": 30,
+    "separated": 33
+   },
+   "guide_untested": {
+    "guide_detection_power": 0.0,
+    "guide_kills": 0,
+    "separated": 4
+   },
+   "outside_any_branch": {
+    "guide_detection_power": 0.8732,
+    "guide_kills": 62,
+    "separated": 71
+   }
+  },
+  "guards": {
+   "branches": 36,
+   "functions": 16,
+   "reached": 12,
+   "unreached_share": 0.6667,
+   "untested": 24,
+   "witnessed": 13
+  },
+  "guide_detection_power": 0.8519,
+  "guide_kills": 92,
+  "mutants": 131,
+  "not_separated": 23,
+  "sample_detection_power": {
+   "1": 0.6204,
+   "10": 0.9259,
+   "3": 0.7222,
+   "40": 1.0
+  },
+  "sample_kills": {
+   "1": 67,
+   "10": 100,
+   "3": 78,
+   "40": 108
+  },
+  "separated": 108
+ },
+ "verdict": {
+  "P1_the_guide_example_can_refuse_a_mutant": true,
+  "P2_more_than_half_of_separated_faults_escape_the_example": false,
+  "P3_ten_cases_beat_the_single_documented_example": true,
+  "P4_some_faults_escape_the_whole_corpus": true,
+  "P5_faults_inside_branches_the_guide_never_enters_escape_more_often": true
+ }
+}
