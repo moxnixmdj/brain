@@ -155,7 +155,9 @@
         "The instant-learning receipt claimed 6/6 claims on 2026-11-24 and holds 1/6 today",
         "The comparison document dated 2026-11-26 cites 462 registry entries; the registry holds 145",
         "The unified gate set is 38/38 on the tree as found and 37/38 after one module is added"
-      ]
+      ],
+      "intrinsic_or_path_specific": "INTRINSIC: the blocker is that no sitting re-ran the instruments together and no instrument for an external board episode exists in this tree, both properties of the system rather than of one task path.",
+      "surviving_causal_blocker": "The absence of an external-board instrument and the fail-open goal binder survive this action; the action measures them and claims neither."
     },
     "routes_considered": [
       {
@@ -174,7 +176,131 @@
         "reason": "only where no instrument existed: live adapter invocations, fresh-bug held-out oracle, goal labels, substrate census"
       }
     ],
-    "acceptance": "the scorecard is reproducible from one command, every row names its oracle, and no row is a pass without one"
+    "acceptance": "the scorecard is reproducible from one command, every row names its oracle, and no row is a pass without one",
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "quoting a receipt written on another day as if it were this sitting's number",
+        "comparing our sandbox rates to vendor board rates without saying so"
+      ],
+      "real_outcome": "One scorecard, produced in one sitting, that says per capability what we measured, who judged it, and what we could not measure at all.",
+      "surviving_necessity": "An external board episode (no image, grader or browser exists on this machine) and a fix to the fail-open goal binder."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": "execution_guard/true_capability_harness_v1.py, canonical/evaluation/meme_protocol_bench_v1.py, canonical/tools/dark_matter_adjudicator_v1.py, canonical/runtime/verify_brain_unified_model_v1.py, canonical/runtime/bound_capabilities/* (145 registered adapters), canonical/runtime/goal_compiler.py",
+      "capability_work_deleted": [
+        "no new capability was built; the action deletes the practice of comparing against the frontier from receipts of different dates"
+      ],
+      "what_was_added": "one runtime (canonical/tools/advanced_capability_runtime_20261127_v1.py) and one contract test; new oracles only where none existed (live adapter invocations, fresh-bug held-out tests, goal labels, substrate census)",
+      "external_existing_routes_checked": "the published boards quoted in the report (SWE-bench Pro V2, Terminal-Bench 4.1, OSWorld 2.1, METR, GDPval-AA, MEME) are read, not run; none of their harnesses exists in this tree",
+      "surviving_gap": "No external-board instrument, no GUI substrate, and a goal binder that binds the wrong capability on 6 of 21 covered goals."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "reading the receipts is how the three claims went stale; building a new harness would duplicate existing instruments; an external board episode cannot run on this machine (no image, grader, browser, chromedriver)",
+      "routes_ranked": [
+        {
+          "rank": 1,
+          "route": "REUSE_EXISTING_INSTRUMENTS_IN_ONE_RUNTIME_AND_ADD_ORACLES_ONLY_WHERE_NONE_EXISTED",
+          "why": "458.5 s, $0.00, 0 model calls, 56 rows, and every existing instrument keeps its own oracle"
+        },
+        {
+          "rank": 2,
+          "route": "READ_THE_COMMITTED_RECEIPTS",
+          "why": "produced the three stale claims this action falsifies"
+        },
+        {
+          "rank": 3,
+          "route": "BUILD_A_NEW_BENCHMARK_HARNESS",
+          "why": "no new oracle, days of cost, same oracles"
+        }
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "the fresh-bug repair tier and the goal-binding tier are necessarily synthetic (10 generated repos, 24 labelled goals) because no real-task corpus with held-out tests exists in the tree; both are labelled AUTHOR_LABELLED"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "the true-capability harness, the MEME bench, the dark-matter adjudicator, the unified-model verifier and the repair loop are called, not copied",
+      "downstream_work_to_delete_or_supersede": "the dated prose comparisons (2026-11-25 / 2026-11-26) are superseded by this measured sitting",
+      "fresh_reuse_plan": "the same command is the re-measurement instrument for every future sitting, including the external-board episode once one exists"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "each existing instrument is invoked once per sitting; the true-capability sweep uses OS entropy seeds so no result is replayable-cached",
+      "search_stop_decision": "stopped after 56 rows covering every executable family; the four families with no instrument are named as forfeits rather than probed further"
+    },
+    "route_frontier": {
+      "canonical_base_commit": "7121e93c2a680eeebbbd2c8126338fbf4b919833",
+      "checked_at_utc": "2026-11-27T13:30:00+00:00",
+      "max_age_hours": 24,
+      "discovery_required": false,
+      "incumbent_route": "READ_THE_COMMITTED_RECEIPTS",
+      "selected_route": "REUSE_EXISTING_INSTRUMENTS_IN_ONE_RUNTIME_AND_ADD_ORACLES_ONLY_WHERE_NONE_EXISTED",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "challenger_routes": [
+        {
+          "route": "READ_THE_COMMITTED_RECEIPTS",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "three of the quoted claims no longer hold when re-run (instant-learning 1/6, 145 vs 462 registry entries, 37/38 under one added module)",
+            "CAPABILITY_STRENGTH": "reports what was true on another day",
+            "INCREMENTAL_COST": "$0.00",
+            "RELIABILITY": "fails silently as the tree changes",
+            "VERIFIABILITY": "none: a quote cannot be refuted by re-running it",
+            "WALL_CLOCK": "seconds"
+          },
+          "evidence": [
+            "canonical/verification/THE_GAP_CLOSES_THE_LOOP_20261124_V1.json claims 6/6; the fresh run holds 1/6"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/ADVANCED_CAPABILITY_RUNTIME_20261127_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        },
+        {
+          "route": "BUILD_A_NEW_BENCHMARK_HARNESS",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "equal or worse: it would need the same independent oracles",
+            "CAPABILITY_STRENGTH": "no new oracle",
+            "INCREMENTAL_COST": "$0.00 but days of wall clock",
+            "RELIABILITY": "duplicates rather than checks",
+            "VERIFIABILITY": "equal",
+            "WALL_CLOCK": "days vs 458.5 s"
+          },
+          "evidence": [
+            "eleven true-capability specs already exist and pass at 500/500 fresh instances"
+          ],
+          "qualification_evidence": [
+            "execution_guard/true_capability_harness_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        }
+      ],
+      "not_applicable_reason": "No route is selected to beat a frontier model: this action re-runs the tree's own instruments and quotes published boards with dates. The route race it does run (reading receipts vs building a new harness vs reusing the instruments) is recorded in this block with its comparison dimensions."
+    }
   },
   "v22_prewrite_admission": {
     "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
@@ -193,7 +319,7 @@
     },
     "fresh_reality_authority": false,
     "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
-    "mode": "CONTROL_PLANE_PREREQUISITE",
+    "mode": "ACTIVE_INTERFACE",
     "proof_state_reachability": "No open truth obligation is claimed discharged by this PR. It measures the distance to three of them and names the absent instrument.",
     "target_truth_obligations": [
       "CODING_TB4_GE_66_4",
@@ -214,5 +340,6 @@
       "no_known_counterexample_reason": "",
       "proposal_id": "ADVANCED_CAPABILITY_RUNTIME_V1"
     }
-  }
+  },
+  "live_challenger_frontier_exemption_reason": "No live frontier discovery is needed because no route is being selected to beat a frontier model: this action measures the tree with its own instruments and quotes published boards with dates. The route race it does run (reading receipts vs building a new harness vs reusing the instruments) is recorded in recursive_obs.route_frontier."
 }
