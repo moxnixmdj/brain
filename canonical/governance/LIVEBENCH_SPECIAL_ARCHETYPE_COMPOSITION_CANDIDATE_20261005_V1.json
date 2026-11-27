@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SPECIAL_ARCHETYPE_COMPOSITION_CANDIDATE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__THREE_SPECIAL_ARCHETYPES_CONSTRUCTIVELY_CLOSED_OVER_VISIBLE_GENERATOR_ADMITTED_LEXICAL_SLOTS__INDEPENDENT_EXACT_CHECKER_VERIFICATION_PENDING__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "superseding_context": "canonical/governance/LIVEBENCH_SLOT_FEASIBILITY_TRUTH_REPAIR_20261005_V1.json",
+  "breakthrough": {
+    "statement": "The JSON, REPEAT_PROMPT, and TWO_RESPONSES archetypes admit deterministic visible-contract witnesses without target-row dependence. Required/forbidden lexical collisions are handled constructively by extending required lexical fragments so the required regex still matches while the forbidden whole-word regex does not.",
+    "structural_scope": {
+      "JSON": 4,
+      "REPEAT_PROMPT": 4,
+      "TWO_RESPONSES": 8,
+      "total_special_sets": 16,
+      "total_conflict_compatible_sets": 928,
+      "remaining_non_special_sets": 912
+    },
+    "runtime_path": "canonical/runtime/livebench_legacy15_special_archetype_composer_v1.py",
+    "tests_path": "canonical/tests/test_livebench_legacy15_special_archetype_composer_v1.py"
+  },
+  "contamination_boundary": {
+    "terminal_rows_read": 0,
+    "hidden_kwargs_read": 0,
+    "hidden_instruction_ids_read": 0,
+    "target_scores_used": 0,
+    "prior_target_responses_used": 0,
+    "model_dependency_count": 0,
+    "runtime_network_dependency": false
+  },
+  "exact_semantics_bindings": {
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_git_blob_sha": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "registry_git_blob_sha": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "historical_generator_git_blob_sha": "6ff390d6885cf90f88d9d36959735cb327613edc"
+  },
+  "proof_obligations_remaining": [
+    "INDEPENDENT_PUBLIC_RUNNER_EXACT_BYTE_REPLAY_OF_THE_SPECIAL_COMPOSER_AGAINST_THE_PINNED_CHECKER_IMPLEMENTATIONS",
+    "COMPLETE_WITNESS_OR_UNSAT_COMPOSITION_FOR_NTH_PARAGRAPH_STAR_PARAGRAPH_SENTENCE_AND_PLAIN_ARCHETYPES",
+    "UNIVERSAL_OR_EXHAUSTIVE_PUBLIC_GENERATOR_DOMAIN_PROOF_FOR_THE_REMAINING_SLOT_INTERACTIONS",
+    "CONTAMINATION_SAFE_THRESHOLD_REDUCTION_AND_ACCEPTANCE_PROMOTION"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_928_STRUCTURAL_ID_SETS_ARE_SATISFIABLE",
+    "NO_CLAIM_THE_REMAINING_FOUR_ARCHETYPES_ARE_CLOSED",
+    "NO_TERMINAL_LIVEBENCH_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
