@@ -1,0 +1,1984 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "branch": "arena/cc6a2be3-brain",
+  "date": "2026-11-27",
+  "head": "7121e93c2a68",
+  "honest_limits": [
+    "Every number was produced on this one machine, in this one sitting, by the producer.",
+    "Independent oracles exist for the true-capability rows and the adapter rows; the goal labels and the held-out repair tests were written by the harness author, which is weaker.",
+    "Nothing here is a benchmark score on an external board, and no row is comparable to a published rate without a matched harness.",
+    "Rows marked NO_SUBSTRATE are capabilities that cannot run on this machine at all; they are forfeits, not passes.",
+    "Absence of a row is not evidence of absence: capabilities with no runnable instrument are listed in sections.inventory and in the report's forfeit table."
+  ],
+  "rows": [
+    {
+      "axis_id": "truecap:AUTHENTICATED_PARETO_SCHEDULE_V1",
+      "capability": "AUTHENTICATED_PARETO_SCHEDULE_V1",
+      "duration_ms": 412.63,
+      "instrument": "execution_guard/true_capability_harness_v1.py",
+      "metric": "fresh_pass_rate",
+      "model_calls": 0,
+      "n": 500,
+      "oracle": "REFERENCE_SCHEDULE; AUTHORITY_ENVELOPE; TAMPER_AFTER_RECEIPT_IS_REFUSED; PERMUTATION_INVARIANCE",
+      "oracle_class": "INDEPENDENT_FILE_ORACLES",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": 1.0,
+      "why_not_measured": null,
+      "witness": {
+        "first_line": "TRUE_CAPABILITY_PASS AUTHENTICATED_PARETO_SCHEDULE_V1 fresh_pass_rate=1.0000 (500/500) canaries=0/0 seed=bab3ae3c9711302f source=OS_URANDOM carrier=SANDBOX",
+        "oracle_lines": 4,
+        "spec_sha256": "fbc6ffa8328629bff7b874697a0a40bca2ec4836004a0642028037c0deb2ea51"
+      }
+    },
+    {
+      "axis_id": "truecap:CAPABILITY_FIRST_RANKING_V1",
+      "capability": "CAPABILITY_FIRST_RANKING_V1",
+      "duration_ms": 770.7,
+      "instrument": "execution_guard/true_capability_harness_v1.py",
+      "metric": "fresh_pass_rate",
+      "model_calls": 0,
+      "n": 500,
+      "oracle": "REFERENCE_RANKING; ORDER_INVARIANTS; PERMUTATION_INVARIANCE; UNIFORM_COST_SCALING_INVARIANCE; NO_AUTHORITY_GRANTED",
+      "oracle_class": "INDEPENDENT_FILE_ORACLES",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": 1.0,
+      "why_not_measured": null,
+      "witness": {
+        "first_line": "TRUE_CAPABILITY_PASS CAPABILITY_FIRST_RANKING_V1 fresh_pass_rate=1.0000 (500/500) canaries=0/0 seed=5ba4124098541648 source=OS_URANDOM carrier=SANDBOX",
+        "oracle_lines": 5,
+        "spec_sha256": "d24e195a94a0e1b1d40ddcf5306786a54f09281c31da7aebee3036112595b610"
+      }
+    },
+    {
+      "axis_id": "truecap:DOCX_EXACT_TEXT_EDIT_V1",
+      "capability": "DOCX_EXACT_TEXT_EDIT_V1",
+      "duration_ms": 2946.42,
+      "instrument": "execution_guard/true_capability_harness_v1.py",
+      "metric": "fresh_pass_rate",
+      "model_calls": 0,
+      "n": 500,
+      "oracle": "EXPECTED_OUTCOME; PACKAGE_INTEGRITY; INVERSE_EDIT_RESTORES",
+      "oracle_class": "INDEPENDENT_FILE_ORACLES",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": 1.0,
+      "why_not_measured": null,
+      "witness": {
+        "first_line": "TRUE_CAPABILITY_PASS DOCX_EXACT_TEXT_EDIT_V1 fresh_pass_rate=1.0000 (500/500) canaries=0/0 seed=5752ca130e7f36f6 source=OS_URANDOM carrier=SANDBOX",
+        "oracle_lines": 3,
+        "spec_sha256": "d2a47f71f9bf232ff39cf1502f6716bd30e494dbca841242f0fa9b8a0de596f0"
+      }
+    },
+    {
+      "axis_id": "truecap:DOCX_RUN_SPAN_REPLACE_V1",
+      "capability": "DOCX_RUN_SPAN_REPLACE_V1",
+      "duration_ms": 3389.94,
+      "instrument": "execution_guard/true_capability_harness_v1.py",
+      "metric": "fresh_pass_rate",
+      "model_calls": 0,
+      "n": 500,
+      "oracle": "EXPECTED_OUTCOME; PACKAGE_INTEGRITY; INVERSE_EDIT_RESTORES",
+      "oracle_class": "INDEPENDENT_FILE_ORACLES",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": 1.0,
+      "why_not_measured": null,
+      "witness": {
+        "first_line": "TRUE_CAPABILITY_PASS DOCX_RUN_SPAN_REPLACE_V1 fresh_pass_rate=1.0000 (500/500) canaries=0/0 seed=5539cc0a242d8038 source=OS_URANDOM carrier=SANDBOX",
+        "oracle_lines": 3,
+        "spec_sha256": "07b004560c1d4455bf59f254de8bf97d4d87a4f05c9ab3039e16b0e61ebd239b"
+      }
+    },
+    {
+      "axis_id": "truecap:DOCX_STORY_PART_REPLACE_V1",
+      "capability": "DOCX_STORY_PART_REPLACE_V1",
+      "duration_ms": 2547.19,
+      "instrument": "execution_guard/true_capability_harness_v1.py",
+      "metric": "fresh_pass_rate",
+      "model_calls": 0,
+      "n": 500,
+      "oracle": "EXPECTED_OUTCOME; PACKAGE_INTEGRITY; INVERSE_EDIT_RESTORES",
+      "oracle_class": "INDEPENDENT_FILE_ORACLES",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": 1.0,
+      "why_not_measured": null,
+      "witness": {
+        "first_line": "TRUE_CAPABILITY_PASS DOCX_STORY_PART_REPLACE_V1 fresh_pass_rate=1.0000 (500/500) canaries=0/0 seed=5725f9a88998b243 source=OS_URANDOM carrier=SANDBOX",
+        "oracle_lines": 3,
+        "spec_sha256": "143ca0c218795f2dec90763310f2b7921a6c4d9dcb4aa72d2d3c00a69f5c1f46"
+      }
+    },
+    {
+      "axis_id": "truecap:DOCX_TEXT_EDIT_TRANSACTION_V1",
+      "capability": "DOCX_TEXT_EDIT_TRANSACTION_V1",
+      "duration_ms": 2749.2,
+      "instrument": "execution_guard/true_capability_harness_v1.py",
+      "metric": "fresh_pass_rate",
+      "model_calls": 0,
+      "n": 500,
+      "oracle": "EXPECTED_OUTCOME; PACKAGE_INTEGRITY; ATOMICITY_AND_INVERSE",
+      "oracle_class": "INDEPENDENT_FILE_ORACLES",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": 1.0,
+      "why_not_measured": null,
+      "witness": {
+        "first_line": "TRUE_CAPABILITY_PASS DOCX_TEXT_EDIT_TRANSACTION_V1 fresh_pass_rate=1.0000 (500/500) canaries=0/0 seed=19faad4570a7d35e source=OS_URANDOM carrier=SANDBOX",
+        "oracle_lines": 3,
+        "spec_sha256": "c8960aa73a8fc7b375debe0cf2f94bcb3b1d29190eb7cc7236a8b97fab0ab98f"
+      }
+    },
+    {
+      "axis_id": "truecap:FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1",
+      "capability": "FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1",
+      "duration_ms": 290153.96,
+      "instrument": "execution_guard/true_capability_harness_v1.py",
+      "metric": "fresh_pass_rate",
+      "model_calls": 0,
+      "n": 500,
+      "oracle": "FOLDER_BY_CONSTRUCTION; ASKED_AGAIN_RELATION; UNTOUCHED_AND_BY_THE_ROW",
+      "oracle_class": "INDEPENDENT_FILE_ORACLES",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": 1.0,
+      "why_not_measured": null,
+      "witness": {
+        "first_line": "TRUE_CAPABILITY_PASS FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1 fresh_pass_rate=1.0000 (500/500) canaries=0/0 seed=84ab10e912a591cd source=OS_URANDOM carrier=SANDBOX",
+        "oracle_lines": 3,
+        "spec_sha256": "0fe0106f97df667b83b41c08109e78dc389caf7363acb1df24684b034add85e9"
+      }
+    },
+    {
+      "axis_id": "truecap:FILE_QUESTION_TAUGHT_WORDS_V1",
+      "capability": "FILE_QUESTION_TAUGHT_WORDS_V1",
+      "duration_ms": 61778.27,
+      "instrument": "execution_guard/true_capability_harness_v1.py",
+      "metric": "fresh_pass_rate",
+      "model_calls": 0,
+      "n": 500,
+      "oracle": "VALUE_BY_CONSTRUCTION; DOUBLED_FILE_RELATION; ANSWER_ENVELOPE",
+      "oracle_class": "INDEPENDENT_FILE_ORACLES",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": 1.0,
+      "why_not_measured": null,
+      "witness": {
+        "first_line": "TRUE_CAPABILITY_PASS FILE_QUESTION_TAUGHT_WORDS_V1 fresh_pass_rate=1.0000 (500/500) canaries=0/0 seed=6093fcfb00457c0f source=OS_URANDOM carrier=SANDBOX",
+        "oracle_lines": 3,
+        "spec_sha256": "cdc21424fee5c314805bada661639b927b81715b962df729b62436af0e24460d"
+      }
+    },
+    {
+      "axis_id": "truecap:PARETO_FRONTIER_UPDATE_V1",
+      "capability": "PARETO_FRONTIER_UPDATE_V1",
+      "duration_ms": 1620.54,
+      "instrument": "execution_guard/true_capability_harness_v1.py",
+      "metric": "fresh_pass_rate",
+      "model_calls": 0,
+      "n": 500,
+      "oracle": "REFERENCE_FOLD; FRONTIER_INVARIANTS; UNIFORM_SCALING_INVARIANCE",
+      "oracle_class": "INDEPENDENT_FILE_ORACLES",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": 1.0,
+      "why_not_measured": null,
+      "witness": {
+        "first_line": "TRUE_CAPABILITY_PASS PARETO_FRONTIER_UPDATE_V1 fresh_pass_rate=1.0000 (500/500) canaries=0/0 seed=33776bcf5f9b6f01 source=OS_URANDOM carrier=SANDBOX",
+        "oracle_lines": 3,
+        "spec_sha256": "b26b99b16f42b29023777cb5dda09df37989921e5090e6441292cbc566f91225"
+      }
+    },
+    {
+      "axis_id": "truecap:SACCR_CREDIT_ADDON_V1",
+      "capability": "SACCR_CREDIT_ADDON_V1",
+      "duration_ms": 286.2,
+      "instrument": "execution_guard/true_capability_harness_v1.py",
+      "metric": "fresh_pass_rate",
+      "model_calls": 0,
+      "n": 500,
+      "oracle": "DONOR_DIFFERENTIAL; CRE52_CLOSED_FORM; OFFSET_CANCELS; NOTIONAL_HOMOGENEITY; SINGLE_ENTITY_BOUNDS",
+      "oracle_class": "INDEPENDENT_FILE_ORACLES",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": 1.0,
+      "why_not_measured": null,
+      "witness": {
+        "first_line": "TRUE_CAPABILITY_PASS SACCR_CREDIT_ADDON_V1 fresh_pass_rate=1.0000 (500/500) canaries=1/1 seed=a3b0441014706811 source=OS_URANDOM carrier=SANDBOX",
+        "oracle_lines": 5,
+        "spec_sha256": "a9f12b2cabe4c7ed411793acc73c53b4d4453c6bc73ec2adeb573118bc366ed9"
+      }
+    },
+    {
+      "axis_id": "truecap:SAME_IDENTITY_SUPERVISOR_V1",
+      "capability": "SAME_IDENTITY_SUPERVISOR_V1",
+      "duration_ms": 6154.35,
+      "instrument": "execution_guard/true_capability_harness_v1.py",
+      "metric": "fresh_pass_rate",
+      "model_calls": 0,
+      "n": 500,
+      "oracle": "REFERENCE_MODEL_TRACE; LEASE_EXCLUSIVITY; NO_TERMINAL_REEXECUTION; EVENT_LOG_INTEGRITY; PRIORITY_SHIFT_INVARIANCE",
+      "oracle_class": "INDEPENDENT_FILE_ORACLES",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": 1.0,
+      "why_not_measured": null,
+      "witness": {
+        "first_line": "TRUE_CAPABILITY_PASS SAME_IDENTITY_SUPERVISOR_V1 fresh_pass_rate=1.0000 (500/500) canaries=0/0 seed=dd6ade8f9447ba2f source=OS_URANDOM carrier=SANDBOX",
+        "oracle_lines": 5,
+        "spec_sha256": "d1df4f9bfd4cf714a52932be7d9f4d429a911d2015459b8819ad2b412e599179"
+      }
+    },
+    {
+      "axis_id": "dependency_memory",
+      "capability": "dependency-correct memory (cascade, absence, aggregation, tracking, deletion, exact recall)",
+      "duration_ms": 4.63,
+      "instrument": "canonical/evaluation/meme_protocol_bench_v1.py",
+      "metric": "oracle_judged_pass_rate",
+      "model_calls": 0,
+      "n": 36,
+      "oracle": "reference_fixpoint (from-scratch semi-naive evaluator, no shared bookkeeping)",
+      "oracle_class": "INDEPENDENT_FIXPOINT_EVALUATOR",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": 1.0,
+      "why_not_measured": null,
+      "witness": {
+        "false_success_claims": 0,
+        "per_operation": {
+          "ABSENCE": {
+            "fail": 0,
+            "pass": 6,
+            "rate": 1.0
+          },
+          "AGGREGATION": {
+            "fail": 0,
+            "pass": 6,
+            "rate": 1.0
+          },
+          "CASCADE": {
+            "fail": 0,
+            "pass": 6,
+            "rate": 1.0
+          },
+          "DELETION": {
+            "fail": 0,
+            "pass": 6,
+            "rate": 1.0
+          },
+          "EXACT_RECALL": {
+            "fail": 0,
+            "pass": 6,
+            "rate": 1.0
+          },
+          "TRACKING": {
+            "fail": 0,
+            "pass": 6,
+            "rate": 1.0
+          }
+        }
+      }
+    },
+    {
+      "axis_id": "dependency_memory_control",
+      "capability": "flat retrieval control (does the instrument discriminate?)",
+      "duration_ms": 4.63,
+      "instrument": "same bench",
+      "metric": "oracle_judged_pass_rate",
+      "model_calls": 0,
+      "n": 36,
+      "oracle": "reference fixpoint",
+      "oracle_class": "CONTROL_ARM",
+      "spend_usd": 0.0,
+      "status": "CONTROL",
+      "value": 0.3333,
+      "why_not_measured": null,
+      "witness": {
+        "false_success_claims": 6,
+        "per_operation": {
+          "ABSENCE": {
+            "fail": 6,
+            "pass": 0,
+            "rate": 0.0
+          },
+          "AGGREGATION": {
+            "fail": 6,
+            "pass": 0,
+            "rate": 0.0
+          },
+          "CASCADE": {
+            "fail": 6,
+            "pass": 0,
+            "rate": 0.0
+          },
+          "DELETION": {
+            "fail": 0,
+            "pass": 6,
+            "rate": 1.0
+          },
+          "EXACT_RECALL": {
+            "fail": 0,
+            "pass": 6,
+            "rate": 1.0
+          },
+          "TRACKING": {
+            "fail": 6,
+            "pass": 0,
+            "rate": 0.0
+          }
+        }
+      }
+    },
+    {
+      "axis_id": "dependency_memory_instrument_selfcheck",
+      "capability": "the bench's own honesty (stub + liar arms)",
+      "duration_ms": 0.0,
+      "instrument": "same bench --self-check semantics",
+      "metric": "discrimination",
+      "model_calls": 0,
+      "n": 36,
+      "oracle": "stub_rate/liar_rate",
+      "oracle_class": "INSTRUMENT_SELF_CHECK",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": 0.8333,
+      "why_not_measured": null,
+      "witness": {
+        "discrimination": 0.8333,
+        "honest_rate": 1.0,
+        "liar_false_success_claims": 20,
+        "liar_rate": 0.1667,
+        "schema": "BRAIN_MEME_PROTOCOL_BENCH_V1_SELF_CHECK",
+        "stub_rate": 0.0,
+        "trustworthy": true,
+        "verdict": "SELF_CHECK_PASS"
+      }
+    },
+    {
+      "axis_id": "registry_liveness",
+      "capability": "bound capabilities that actually load and expose an entrypoint on this machine",
+      "duration_ms": 129.03,
+      "instrument": "import every registered adapter",
+      "metric": "live_fraction",
+      "model_calls": 0,
+      "n": 145,
+      "oracle": "python import + callable check",
+      "oracle_class": "STRUCTURAL",
+      "spend_usd": 0.0,
+      "status": "MEASURED",
+      "value": 0.5931,
+      "why_not_measured": null,
+      "witness": {
+        "import_error": 9,
+        "import_errors_sample": [
+          {
+            "capability": "chart.raster.axis_title_unit_binding.v1",
+            "detail": "No module named 'PIL'",
+            "error": "ModuleNotFoundError"
+          },
+          {
+            "capability": "chart.raster.curve_value_query.v1",
+            "detail": "No module named 'PIL'",
+            "error": "ModuleNotFoundError"
+          },
+          {
+            "capability": "chart.raster.curve_x_at_y_query.v1",
+            "detail": "No module named 'PIL'",
+            "error": "ModuleNotFoundError"
+          },
+          {
+            "capability": "chart.raster.direct_curve_label_family_rank.v1",
+            "detail": "No module named 'PIL'",
+            "error": "ModuleNotFoundError"
+          },
+          {
+            "capability": "chart.raster.legend_style_binding.v1",
+            "detail": "No module named 'PIL'",
+            "error": "ModuleNotFoundError"
+          },
+          {
+            "capability": "chart.raster.scene_graph.v1",
+            "detail": "No module named 'PIL'",
+            "error": "ModuleNotFoundError"
+          },
+          {
+            "capability": "chart.read.binary_phase_solvus.v1",
+            "detail": "No module named 'PIL'",
+            "error": "ModuleNotFoundError"
+          },
+          {
+            "capability": "chart.read.legend_linear_intersection.v1",
+            "detail": "No module named 'PIL'",
+            "error": "ModuleNotFoundError"
+          }
+        ],
+        "live": 86,
+        "missing_adapter_path": 50,
+        "no_entrypoint": 0
+      }
+    },
+    {
+      "axis_id": "bound:archive.create",
+      "capability": "create a tar.gz bundle from a manifest",
+      "duration_ms": 2.0,
+      "instrument": "bound_capabilities/archive_tarfile.py",
+      "metric": "members_byte_identical_after_GNU_tar_extract",
+      "model_calls": 0,
+      "n": 3,
+      "oracle": "GNU tar extraction + sha256 of each member vs the source bytes",
+      "oracle_class": "DIFFERENTIAL_EXTERNAL",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": true,
+      "why_not_measured": null,
+      "witness": {
+        "output_bytes": 324,
+        "output_sha256": "0630688e4a4a2761",
+        "tar_returncode": 0
+      }
+    },
+    {
+      "axis_id": "bound:archive.verify",
+      "capability": "verify an archive against source hashes",
+      "duration_ms": 4.96,
+      "instrument": "bound_capabilities/archive_verify_gnu_tar.py",
+      "metric": "verified",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "the adapter re-extracts with GNU tar and compares sha256",
+      "oracle_class": "DIFFERENTIAL_EXTERNAL",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": true,
+      "why_not_measured": null,
+      "witness": {
+        "verified": true
+      }
+    },
+    {
+      "axis_id": "bound:json.query.jq",
+      "capability": "structured JSON query (jq)",
+      "duration_ms": 22.22,
+      "instrument": "bound_capabilities/jq_query.py",
+      "metric": "rows_equal_python_oracle",
+      "model_calls": 0,
+      "n": 3,
+      "oracle": "python json.load + list comprehension",
+      "oracle_class": "DIFFERENTIAL_EXTERNAL",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": true,
+      "why_not_measured": null,
+      "witness": {
+        "adapter": "jq_query",
+        "got": [
+          "aa",
+          "bb",
+          "cc"
+        ],
+        "want": [
+          "aa",
+          "bb",
+          "cc"
+        ]
+      }
+    },
+    {
+      "axis_id": "bound:secret_scan",
+      "capability": "hard-coded credential scan (detects the planted key, silent on a clean tree)",
+      "duration_ms": 0.7,
+      "instrument": "bound_capabilities/python_source_secret_scan.py",
+      "metric": "detect_planted_AND_silent_on_clean",
+      "model_calls": 0,
+      "n": 2,
+      "oracle": "the author planted exactly one secret and then removed it",
+      "oracle_class": "AUTHOR_LABELLED",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": true,
+      "why_not_measured": null,
+      "witness": {
+        "clean": 0,
+        "redacted": [
+          "AKIA\u202620"
+        ],
+        "with_secret": 1
+      }
+    },
+    {
+      "axis_id": "bound:symbol_index",
+      "capability": "python source symbol index",
+      "duration_ms": 4.99,
+      "instrument": "bound_capabilities/python_source_symbol_index.py",
+      "metric": "every_ast_symbol_present",
+      "model_calls": 0,
+      "n": 4,
+      "oracle": "ast.walk over the same file",
+      "oracle_class": "DIFFERENTIAL_EXTERNAL",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": true,
+      "why_not_measured": null,
+      "witness": {
+        "index_keys": [
+          "adapter",
+          "output_path",
+          "output_sha256",
+          "output_verified",
+          "file_count",
+          "unparseable_count",
+          "unparseable_paths",
+          "symbol_count",
+          "reference_count",
+          "call_edge_count"
+        ],
+        "want": [
+          "Beta",
+          "alpha",
+          "delta",
+          "gamma"
+        ]
+      }
+    },
+    {
+      "axis_id": "bound:docx.create",
+      "capability": "create a Word document from a JSON record",
+      "duration_ms": 2.54,
+      "instrument": "bound_capabilities/docx_report_from_json.py",
+      "metric": "invocation_raised",
+      "model_calls": 0,
+      "n": 0,
+      "oracle": "zipfile + XML",
+      "oracle_class": "DIFFERENTIAL_EXTERNAL",
+      "spend_usd": 0.0,
+      "status": "NO_SUBSTRATE",
+      "value": null,
+      "why_not_measured": "third-party substrate missing on this machine (ModuleNotFoundError: No module named 'docx')",
+      "witness": {}
+    },
+    {
+      "axis_id": "bound:sqlite.create",
+      "capability": "materialize a sqlite table from JSON records",
+      "duration_ms": 7.31,
+      "instrument": "bound_capabilities/sqlite_table_stdlib.py",
+      "metric": "table_rows_equal_json_records",
+      "model_calls": 0,
+      "n": 3,
+      "oracle": "stdlib sqlite3 opens the produced file and selects the rows (TEXT columns compared as strings)",
+      "oracle_class": "DIFFERENTIAL_EXTERNAL",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": true,
+      "why_not_measured": null,
+      "witness": {
+        "got": [
+          [
+            "a",
+            "1"
+          ],
+          [
+            "b",
+            "2"
+          ],
+          [
+            "c",
+            "3"
+          ]
+        ],
+        "tables": [
+          "items"
+        ],
+        "want": [
+          [
+            "a",
+            "1"
+          ],
+          [
+            "b",
+            "2"
+          ],
+          [
+            "c",
+            "3"
+          ]
+        ]
+      }
+    },
+    {
+      "axis_id": "bound:dead_code",
+      "capability": "dead / never-executed function detection",
+      "duration_ms": 3.8,
+      "instrument": "bound_capabilities/python_source_dead_code.py",
+      "metric": "planted_dead_function_found",
+      "model_calls": 0,
+      "n": 2,
+      "oracle": "the author planted exactly one dead function",
+      "oracle_class": "AUTHOR_LABELLED",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": true,
+      "why_not_measured": null,
+      "witness": {
+        "keys": [
+          "adapter",
+          "source_root",
+          "answer",
+          "dead_symbols",
+          "symbol_count",
+          "considered_count",
+          "output_path",
+          "output_sha256",
+          "output_verified"
+        ]
+      }
+    },
+    {
+      "axis_id": "substrate:PIL",
+      "capability": "read values out of a rendered chart's pixels",
+      "duration_ms": 0.0,
+      "instrument": "import probe",
+      "metric": "substrate_present_on_this_machine",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "importlib.find_spec",
+      "oracle_class": "SUBSTRATE",
+      "spend_usd": 0.0,
+      "status": "NO_SUBSTRATE",
+      "value": false,
+      "why_not_measured": "PIL is not installed here: the capability cannot run on this machine at all",
+      "witness": {}
+    },
+    {
+      "axis_id": "substrate:sympy",
+      "capability": "exact symbolic / typed scalar numeric expression",
+      "duration_ms": 0.0,
+      "instrument": "import probe",
+      "metric": "substrate_present_on_this_machine",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "importlib.find_spec",
+      "oracle_class": "SUBSTRATE",
+      "spend_usd": 0.0,
+      "status": "NO_SUBSTRATE",
+      "value": false,
+      "why_not_measured": "sympy is not installed here: the capability cannot run on this machine at all",
+      "witness": {}
+    },
+    {
+      "axis_id": "substrate:yaml",
+      "capability": "YAML parsing in-process",
+      "duration_ms": 0.0,
+      "instrument": "import probe",
+      "metric": "substrate_present_on_this_machine",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "importlib.find_spec",
+      "oracle_class": "SUBSTRATE",
+      "spend_usd": 0.0,
+      "status": "NO_SUBSTRATE",
+      "value": false,
+      "why_not_measured": "yaml is not installed here: the capability cannot run on this machine at all",
+      "witness": {}
+    },
+    {
+      "axis_id": "substrate:tesseract",
+      "capability": "OCR text from images and scanned PDFs",
+      "duration_ms": 0.0,
+      "instrument": "PATH probe",
+      "metric": "executable_present_on_this_machine",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "shutil.which",
+      "oracle_class": "SUBSTRATE",
+      "spend_usd": 0.0,
+      "status": "NO_SUBSTRATE",
+      "value": false,
+      "why_not_measured": "tesseract is not on PATH: the capability cannot run here at all",
+      "witness": {}
+    },
+    {
+      "axis_id": "substrate:yq",
+      "capability": "YAML to JSON via yq",
+      "duration_ms": 0.0,
+      "instrument": "PATH probe",
+      "metric": "executable_present_on_this_machine",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "shutil.which",
+      "oracle_class": "SUBSTRATE",
+      "spend_usd": 0.0,
+      "status": "NO_SUBSTRATE",
+      "value": false,
+      "why_not_measured": "yq is not on PATH: the capability cannot run here at all",
+      "witness": {}
+    },
+    {
+      "axis_id": "substrate:pandoc",
+      "capability": "document conversion markdown -> pdf",
+      "duration_ms": 0.0,
+      "instrument": "PATH probe",
+      "metric": "executable_present_on_this_machine",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "shutil.which",
+      "oracle_class": "SUBSTRATE",
+      "spend_usd": 0.0,
+      "status": "NO_SUBSTRATE",
+      "value": false,
+      "why_not_measured": "pandoc is not on PATH: the capability cannot run here at all",
+      "witness": {}
+    },
+    {
+      "axis_id": "substrate:sqlite3_cli",
+      "capability": "sqlite verification via the CLI",
+      "duration_ms": 0.0,
+      "instrument": "PATH probe",
+      "metric": "executable_present_on_this_machine",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "shutil.which",
+      "oracle_class": "SUBSTRATE",
+      "spend_usd": 0.0,
+      "status": "NO_SUBSTRATE",
+      "value": false,
+      "why_not_measured": "sqlite3 is not on PATH: the capability cannot run here at all",
+      "witness": {}
+    },
+    {
+      "axis_id": "substrate:chromedriver",
+      "capability": "rendered browser capture / GUI computer use",
+      "duration_ms": 0.0,
+      "instrument": "PATH probe",
+      "metric": "executable_present_on_this_machine",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "shutil.which",
+      "oracle_class": "SUBSTRATE",
+      "spend_usd": 0.0,
+      "status": "NO_SUBSTRATE",
+      "value": false,
+      "why_not_measured": "chromedriver is not on PATH: the capability cannot run here at all",
+      "witness": {}
+    },
+    {
+      "axis_id": "substrate:libreoffice",
+      "capability": "office document format conversion",
+      "duration_ms": 0.0,
+      "instrument": "PATH probe",
+      "metric": "executable_present_on_this_machine",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "shutil.which",
+      "oracle_class": "SUBSTRATE",
+      "spend_usd": 0.0,
+      "status": "NO_SUBSTRATE",
+      "value": false,
+      "why_not_measured": "libreoffice is not on PATH: the capability cannot run here at all",
+      "witness": {}
+    },
+    {
+      "axis_id": "substrate:ffmpeg",
+      "capability": "audio/video media operations",
+      "duration_ms": 0.0,
+      "instrument": "PATH probe",
+      "metric": "executable_present_on_this_machine",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "shutil.which",
+      "oracle_class": "SUBSTRATE",
+      "spend_usd": 0.0,
+      "status": "NO_SUBSTRATE",
+      "value": false,
+      "why_not_measured": "ffmpeg is not on PATH: the capability cannot run here at all",
+      "witness": {}
+    },
+    {
+      "axis_id": "substrate:git",
+      "capability": "repository history operations",
+      "duration_ms": 0.0,
+      "instrument": "PATH probe",
+      "metric": "executable_present_on_this_machine",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "shutil.which",
+      "oracle_class": "SUBSTRATE",
+      "spend_usd": 0.0,
+      "status": "MEASURED",
+      "value": true,
+      "why_not_measured": null,
+      "witness": {}
+    },
+    {
+      "axis_id": "substrate:tar",
+      "capability": "archive creation/verification",
+      "duration_ms": 0.0,
+      "instrument": "PATH probe",
+      "metric": "executable_present_on_this_machine",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "shutil.which",
+      "oracle_class": "SUBSTRATE",
+      "spend_usd": 0.0,
+      "status": "MEASURED",
+      "value": true,
+      "why_not_measured": null,
+      "witness": {}
+    },
+    {
+      "axis_id": "external_board_episode",
+      "capability": "one scored episode on an external agent board (SWE-bench Pro V2 / Terminal-Bench / OSWorld)",
+      "duration_ms": 0.0,
+      "instrument": "none wired into this tree",
+      "metric": "episodes_scored",
+      "model_calls": 0,
+      "n": 0,
+      "oracle": "the board's own grader",
+      "oracle_class": "EXTERNAL_BOARD",
+      "spend_usd": 0.0,
+      "status": "NO_INSTRUMENT",
+      "value": null,
+      "why_not_measured": "no board task, image or grader is present in this tree; this axis is a forfeit, not a comparison",
+      "witness": {}
+    },
+    {
+      "axis_id": "repair_aggregate",
+      "capability": "model-free test-guided Python repair, fresh bugs",
+      "duration_ms": 6796.44,
+      "instrument": "same loop, 10 freshly generated single-bug repos",
+      "metric": "resolved_on_visible_suite",
+      "model_calls": 0,
+      "n": 10,
+      "oracle": "the loop's own visible suite",
+      "oracle_class": "SOLVER_OWNS_THE_SUITE",
+      "spend_usd": 0.0,
+      "status": "MEASURED",
+      "value": 0.4,
+      "why_not_measured": null,
+      "witness": {
+        "detail": [
+          {
+            "bug": "binop_swap",
+            "error": null,
+            "heldout": true,
+            "kind": "operator",
+            "known_in_family": true,
+            "resolved": true
+          },
+          {
+            "bug": "comparison_boundary",
+            "error": null,
+            "heldout": true,
+            "kind": "boundary",
+            "known_in_family": true,
+            "resolved": true
+          },
+          {
+            "bug": "off_by_one_range",
+            "error": null,
+            "heldout": false,
+            "kind": "boundary",
+            "known_in_family": true,
+            "resolved": false
+          },
+          {
+            "bug": "wrong_return_var",
+            "error": null,
+            "heldout": false,
+            "kind": "variable",
+            "known_in_family": true,
+            "resolved": false
+          },
+          {
+            "bug": "string_method",
+            "error": null,
+            "heldout": false,
+            "kind": "method",
+            "known_in_family": true,
+            "resolved": false
+          },
+          {
+            "bug": "boolean_swap",
+            "error": null,
+            "heldout": true,
+            "kind": "boolean",
+            "known_in_family": true,
+            "resolved": true
+          },
+          {
+            "bug": "numeric_constant",
+            "error": null,
+            "heldout": false,
+            "kind": "constant",
+            "known_in_family": true,
+            "resolved": false
+          },
+          {
+            "bug": "slice_bound",
+            "error": null,
+            "heldout": false,
+            "kind": "slice",
+            "known_in_family": true,
+            "resolved": false
+          },
+          {
+            "bug": "missing_guard",
+            "error": null,
+            "heldout": false,
+            "kind": "new_behaviour",
+            "known_in_family": false,
+            "resolved": false
+          },
+          {
+            "bug": "dict_key_rename",
+            "error": null,
+            "heldout": true,
+            "kind": "key",
+            "known_in_family": true,
+            "resolved": true
+          }
+        ]
+      }
+    },
+    {
+      "axis_id": "repair_generalization",
+      "capability": "...and the repair holds on tests the loop never saw",
+      "duration_ms": 0.0,
+      "instrument": "same loop + held-out oracle",
+      "metric": "heldout_pass_rate",
+      "model_calls": 0,
+      "n": 10,
+      "oracle": "held-out tests, author-written, never given to the loop",
+      "oracle_class": "AUTHOR_LABELLED_HELDOUT",
+      "spend_usd": 0.0,
+      "status": "MEASURED",
+      "value": 0.4,
+      "why_not_measured": null,
+      "witness": {
+        "detail": [
+          {
+            "bug": "binop_swap",
+            "error": null,
+            "heldout": true,
+            "kind": "operator",
+            "known_in_family": true,
+            "resolved": true
+          },
+          {
+            "bug": "comparison_boundary",
+            "error": null,
+            "heldout": true,
+            "kind": "boundary",
+            "known_in_family": true,
+            "resolved": true
+          },
+          {
+            "bug": "off_by_one_range",
+            "error": null,
+            "heldout": false,
+            "kind": "boundary",
+            "known_in_family": true,
+            "resolved": false
+          },
+          {
+            "bug": "wrong_return_var",
+            "error": null,
+            "heldout": false,
+            "kind": "variable",
+            "known_in_family": true,
+            "resolved": false
+          },
+          {
+            "bug": "string_method",
+            "error": null,
+            "heldout": false,
+            "kind": "method",
+            "known_in_family": true,
+            "resolved": false
+          },
+          {
+            "bug": "boolean_swap",
+            "error": null,
+            "heldout": true,
+            "kind": "boolean",
+            "known_in_family": true,
+            "resolved": true
+          },
+          {
+            "bug": "numeric_constant",
+            "error": null,
+            "heldout": false,
+            "kind": "constant",
+            "known_in_family": true,
+            "resolved": false
+          },
+          {
+            "bug": "slice_bound",
+            "error": null,
+            "heldout": false,
+            "kind": "slice",
+            "known_in_family": true,
+            "resolved": false
+          },
+          {
+            "bug": "missing_guard",
+            "error": null,
+            "heldout": false,
+            "kind": "new_behaviour",
+            "known_in_family": false,
+            "resolved": false
+          },
+          {
+            "bug": "dict_key_rename",
+            "error": null,
+            "heldout": true,
+            "kind": "key",
+            "known_in_family": true,
+            "resolved": true
+          }
+        ]
+      }
+    },
+    {
+      "axis_id": "repair:binop_swap",
+      "capability": "model-free test-guided repair -- operator bug",
+      "duration_ms": 662.78,
+      "instrument": "bound_capabilities/python_software_repair_loop_v1.py",
+      "metric": "resolved_on_visible_and_passed_heldout",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "held-out tests written by the harness author and never shown to the loop",
+      "oracle_class": "AUTHOR_LABELLED_HELDOUT",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": true,
+      "why_not_measured": null,
+      "witness": {
+        "candidates": 5,
+        "edits": 1,
+        "error": null,
+        "heldout_passed_after_patch": true,
+        "heldout_passed_before": false,
+        "heldout_stderr": "",
+        "loop_status": "PASS__VERIFIED_MULTI_EDIT_PATCH_FOUND",
+        "visible_suite_resolved": true
+      }
+    },
+    {
+      "axis_id": "repair:comparison_boundary",
+      "capability": "model-free test-guided repair -- boundary bug",
+      "duration_ms": 864.7,
+      "instrument": "bound_capabilities/python_software_repair_loop_v1.py",
+      "metric": "resolved_on_visible_and_passed_heldout",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "held-out tests written by the harness author and never shown to the loop",
+      "oracle_class": "AUTHOR_LABELLED_HELDOUT",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": true,
+      "why_not_measured": null,
+      "witness": {
+        "candidates": 10,
+        "edits": 1,
+        "error": null,
+        "heldout_passed_after_patch": true,
+        "heldout_passed_before": false,
+        "heldout_stderr": "",
+        "loop_status": "PASS__VERIFIED_MULTI_EDIT_PATCH_FOUND",
+        "visible_suite_resolved": true
+      }
+    },
+    {
+      "axis_id": "repair:off_by_one_range",
+      "capability": "model-free test-guided repair -- boundary bug",
+      "duration_ms": 560.78,
+      "instrument": "bound_capabilities/python_software_repair_loop_v1.py",
+      "metric": "resolved_on_visible_and_passed_heldout",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "held-out tests written by the harness author and never shown to the loop",
+      "oracle_class": "AUTHOR_LABELLED_HELDOUT",
+      "spend_usd": 0.0,
+      "status": "FAIL",
+      "value": false,
+      "why_not_measured": null,
+      "witness": {
+        "candidates": 8,
+        "edits": 0,
+        "error": null,
+        "heldout_passed_after_patch": false,
+        "heldout_passed_before": false,
+        "heldout_stderr": "patch not applied",
+        "loop_status": "OPEN__NO_VERIFIED_PATCH_IN_BOUNDED_LOOP",
+        "visible_suite_resolved": false
+      }
+    },
+    {
+      "axis_id": "repair:wrong_return_var",
+      "capability": "model-free test-guided repair -- variable bug",
+      "duration_ms": 390.13,
+      "instrument": "bound_capabilities/python_software_repair_loop_v1.py",
+      "metric": "resolved_on_visible_and_passed_heldout",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "held-out tests written by the harness author and never shown to the loop",
+      "oracle_class": "AUTHOR_LABELLED_HELDOUT",
+      "spend_usd": 0.0,
+      "status": "FAIL",
+      "value": false,
+      "why_not_measured": null,
+      "witness": {
+        "candidates": 4,
+        "edits": 0,
+        "error": null,
+        "heldout_passed_after_patch": false,
+        "heldout_passed_before": false,
+        "heldout_stderr": "patch not applied",
+        "loop_status": "OPEN__NO_VERIFIED_PATCH_IN_BOUNDED_LOOP",
+        "visible_suite_resolved": false
+      }
+    },
+    {
+      "axis_id": "repair:string_method",
+      "capability": "model-free test-guided repair -- method bug",
+      "duration_ms": 362.29,
+      "instrument": "bound_capabilities/python_software_repair_loop_v1.py",
+      "metric": "resolved_on_visible_and_passed_heldout",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "held-out tests written by the harness author and never shown to the loop",
+      "oracle_class": "AUTHOR_LABELLED_HELDOUT",
+      "spend_usd": 0.0,
+      "status": "FAIL",
+      "value": false,
+      "why_not_measured": null,
+      "witness": {
+        "candidates": 4,
+        "edits": 0,
+        "error": null,
+        "heldout_passed_after_patch": false,
+        "heldout_passed_before": false,
+        "heldout_stderr": "patch not applied",
+        "loop_status": "OPEN__NO_VERIFIED_PATCH_IN_BOUNDED_LOOP",
+        "visible_suite_resolved": false
+      }
+    },
+    {
+      "axis_id": "repair:boolean_swap",
+      "capability": "model-free test-guided repair -- boolean bug",
+      "duration_ms": 636.63,
+      "instrument": "bound_capabilities/python_software_repair_loop_v1.py",
+      "metric": "resolved_on_visible_and_passed_heldout",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "held-out tests written by the harness author and never shown to the loop",
+      "oracle_class": "AUTHOR_LABELLED_HELDOUT",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": true,
+      "why_not_measured": null,
+      "witness": {
+        "candidates": 5,
+        "edits": 1,
+        "error": null,
+        "heldout_passed_after_patch": true,
+        "heldout_passed_before": false,
+        "heldout_stderr": "",
+        "loop_status": "PASS__VERIFIED_MULTI_EDIT_PATCH_FOUND",
+        "visible_suite_resolved": true
+      }
+    },
+    {
+      "axis_id": "repair:numeric_constant",
+      "capability": "model-free test-guided repair -- constant bug",
+      "duration_ms": 1535.75,
+      "instrument": "bound_capabilities/python_software_repair_loop_v1.py",
+      "metric": "resolved_on_visible_and_passed_heldout",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "held-out tests written by the harness author and never shown to the loop",
+      "oracle_class": "AUTHOR_LABELLED_HELDOUT",
+      "spend_usd": 0.0,
+      "status": "FAIL",
+      "value": false,
+      "why_not_measured": null,
+      "witness": {
+        "candidates": 28,
+        "edits": 0,
+        "error": null,
+        "heldout_passed_after_patch": false,
+        "heldout_passed_before": false,
+        "heldout_stderr": "patch not applied",
+        "loop_status": "OPEN__NO_VERIFIED_PATCH_IN_BOUNDED_LOOP",
+        "visible_suite_resolved": false
+      }
+    },
+    {
+      "axis_id": "repair:slice_bound",
+      "capability": "model-free test-guided repair -- slice bug",
+      "duration_ms": 536.96,
+      "instrument": "bound_capabilities/python_software_repair_loop_v1.py",
+      "metric": "resolved_on_visible_and_passed_heldout",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "held-out tests written by the harness author and never shown to the loop",
+      "oracle_class": "AUTHOR_LABELLED_HELDOUT",
+      "spend_usd": 0.0,
+      "status": "FAIL",
+      "value": false,
+      "why_not_measured": null,
+      "witness": {
+        "candidates": 7,
+        "edits": 0,
+        "error": null,
+        "heldout_passed_after_patch": false,
+        "heldout_passed_before": false,
+        "heldout_stderr": "patch not applied",
+        "loop_status": "OPEN__NO_VERIFIED_PATCH_IN_BOUNDED_LOOP",
+        "visible_suite_resolved": false
+      }
+    },
+    {
+      "axis_id": "repair:missing_guard",
+      "capability": "model-free test-guided repair -- new_behaviour bug",
+      "duration_ms": 535.78,
+      "instrument": "bound_capabilities/python_software_repair_loop_v1.py",
+      "metric": "resolved_on_visible_and_passed_heldout",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "held-out tests written by the harness author and never shown to the loop",
+      "oracle_class": "AUTHOR_LABELLED_HELDOUT",
+      "spend_usd": 0.0,
+      "status": "FAIL",
+      "value": false,
+      "why_not_measured": null,
+      "witness": {
+        "candidates": 7,
+        "edits": 0,
+        "error": null,
+        "heldout_passed_after_patch": false,
+        "heldout_passed_before": false,
+        "heldout_stderr": "patch not applied",
+        "loop_status": "OPEN__NO_VERIFIED_PATCH_IN_BOUNDED_LOOP",
+        "visible_suite_resolved": false
+      }
+    },
+    {
+      "axis_id": "repair:dict_key_rename",
+      "capability": "model-free test-guided repair -- key bug",
+      "duration_ms": 710.64,
+      "instrument": "bound_capabilities/python_software_repair_loop_v1.py",
+      "metric": "resolved_on_visible_and_passed_heldout",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "held-out tests written by the harness author and never shown to the loop",
+      "oracle_class": "AUTHOR_LABELLED_HELDOUT",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": true,
+      "why_not_measured": null,
+      "witness": {
+        "candidates": 6,
+        "edits": 1,
+        "error": null,
+        "heldout_passed_after_patch": true,
+        "heldout_passed_before": false,
+        "heldout_stderr": "",
+        "loop_status": "PASS__VERIFIED_MULTI_EDIT_PATCH_FOUND",
+        "visible_suite_resolved": true
+      }
+    },
+    {
+      "axis_id": "goal_binding_precision",
+      "capability": "plain goal -> correct bound capability",
+      "duration_ms": 3542.53,
+      "instrument": "canonical/runtime/goal_compiler.py",
+      "metric": "correct_bindings_over_covered_goals",
+      "model_calls": 0,
+      "n": 21,
+      "oracle": "author-written labels (24 goals: 21 covered, 3 deliberately uncovered)",
+      "oracle_class": "AUTHOR_LABELLED",
+      "spend_usd": 0.0,
+      "status": "MEASURED",
+      "value": 0.5714,
+      "why_not_measured": null,
+      "witness": {
+        "correct": 12,
+        "detail": [
+          {
+            "goal": "create a tar.gz archive from the manifest at build/m.json",
+            "got": "archive.tar_gz.create_from_manifest",
+            "verdict": "CORRECT",
+            "want": "archive.tar_gz.create_from_manifest"
+          },
+          {
+            "goal": "verify that the archive out/bundle.tar.gz matches the manifest build/m.json",
+            "got": "archive.verify.tar_gz.gnu",
+            "verdict": "CORRECT",
+            "want": "archive.verify.tar_gz.gnu"
+          },
+          {
+            "goal": "query the json file data/x.json with the filter .items[].name",
+            "got": "GoalCompilationFailure: GOAL_COMPILATION_BEST_MATCH_UNBINDABLE:{\"substitute_binding\": \"UNJUSTIFIED_WORLD",
+            "verdict": "REFUSED_ON_A_COVERED_GOAL",
+            "want": "json.query.jq"
+          },
+          {
+            "goal": "convert the yaml file config/pipeline.yml into json",
+            "got": "yaml.to_json.yq",
+            "verdict": "CORRECT",
+            "want": "yaml.to_json.yq"
+          },
+          {
+            "goal": "index the python symbols under canonical/runtime",
+            "got": "python.source.symbols.index.ast",
+            "verdict": "CORRECT",
+            "want": "python.source.symbols.index.ast"
+          },
+          {
+            "goal": "scan the source tree canonical/runtime for hard-coded secrets",
+            "got": "python.source.secret_scan.v1",
+            "verdict": "CORRECT",
+            "want": "python.source.secret_scan.v1"
+          },
+          {
+            "goal": "count the function and class definitions in canonical/runtime/goal_compiler.py",
+            "got": "python.software.request.semantic_behavior.compile.v1",
+            "verdict": "WRONG_BINDING",
+            "want": "python.source.definition_count.v1"
+          },
+          {
+            "goal": "find the dead code in canonical/runtime",
+            "got": "python.source.dead_code.v1",
+            "verdict": "CORRECT",
+            "want": "python.source.dead_code.v1"
+          },
+          {
+            "goal": "repair the failing python tests in this repository with a test-guided patch search",
+            "got": "GoalCompilationFailure: GOAL_COMPILATION_BEST_MATCH_UNBINDABLE:{\"substitute_binding\": \"UNJUSTIFIED_WORLD",
+            "verdict": "REFUSED_ON_A_COVERED_GOAL",
+            "want": "python.patch.search.test_guided.ast.v1"
+          },
+          {
+            "goal": "localize the python fault with dynamic dataflow traces",
+            "got": "python.fault.localize.dynamic.dataflow.v1",
+            "verdict": "CORRECT",
+            "want": "python.fault.localize.dynamic.dataflow.v1"
+          },
+          {
+            "goal": "rename the python parameter in the source file",
+            "got": "source.objective_relevance.rank.bm25",
+            "verdict": "WRONG_BINDING",
+            "want": "python.refactor.rename_parameter.v1"
+          },
+          {
+            "goal": "resolve python symbol references across files",
+            "got": "python.vcs.merge_conflict.resolve.v1",
+            "verdict": "WRONG_BINDING",
+            "want": "python.symbol.resolve.standalone.v1"
+          },
+          {
+            "goal": "compute the absolute difference between 12 and 30 and say whether it is within 20",
+            "got": "finance.saccr.credit.addon.v1",
+            "verdict": "WRONG_BINDING",
+            "want": "REFUSE"
+          },
+          {
+            "goal": "rank the retrieved sources by relevance to the research objective",
+            "got": "source.objective_relevance.rank.bm25",
+            "verdict": "CORRECT",
+            "want": "source.objective_relevance.rank.bm25"
+          },
+          {
+            "goal": "decide the terminal answer from typed evidence items with provenance",
+            "got": "decision.synthesis.typed.stdlib",
+            "verdict": "CORRECT",
+            "want": "decision.synthesis.typed.stdlib"
+          },
+          {
+            "goal": "create a docx report from the json record",
+            "got": "docx.document.create_from_json_record",
+            "verdict": "CORRECT",
+            "want": "docx.document.create_from_json_record"
+          },
+          {
+            "goal": "verify that out/report.docx is a valid ooxml package",
+            "got": "docx.document.verify.intent_ooxml",
+            "verdict": "CORRECT",
+            "want": "docx.document.verify"
+          },
+          {
+            "goal": "create a sqlite table from the json records",
+            "got": "auto.pypi.msgpack",
+            "verdict": "WRONG_BINDING",
+            "want": "sqlite.table.create_from_json_records"
+          },
+          {
+            "goal": "create an xlsx workbook from the json records",
+            "got": "auto.pypi.msgpack",
+            "verdict": "WRONG_BINDING",
+            "want": "xlsx.table.create_from_json_records"
+          },
+          {
+            "goal": "run the shell command that lists the working directory",
+            "got": "python.repository.acceptance.measure.v1",
+            "verdict": "WRONG_BINDING",
+            "want": "shell.command.run"
+          },
+          {
+            "goal": "write the text hello into out/note.txt",
+            "got": "GoalCompilationFailure: GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+            "verdict": "REFUSED_ON_A_COVERED_GOAL",
+            "want": "text.file.write"
+          },
+          {
+            "goal": "compute the SA-CCR credit addon for the trades in trades.json",
+            "got": "finance.saccr.credit.addon.v1",
+            "verdict": "CORRECT",
+            "want": "finance.saccr.credit.addon.v1"
+          },
+          {
+            "goal": "translate this paragraph into French with the right register",
+            "got": "docx.document.create.python_docx",
+            "verdict": "WRONG_BINDING",
+            "want": "REFUSE"
+          },
+          {
+            "goal": "diagnose whether this patient's symptoms indicate pneumonia",
+            "got": "GoalCompilationFailure: GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+            "verdict": "CORRECT",
+            "want": "REFUSE"
+          }
+        ],
+        "refused": 3,
+        "wrong": 6
+      }
+    },
+    {
+      "axis_id": "goal_binding_wrong_binding_rate",
+      "capability": "...and how often it binds the WRONG capability (the dangerous class)",
+      "duration_ms": 0.0,
+      "instrument": "same",
+      "metric": "wrong_binding_rate",
+      "model_calls": 0,
+      "n": 21,
+      "oracle": "author-written labels",
+      "oracle_class": "AUTHOR_LABELLED",
+      "spend_usd": 0.0,
+      "status": "MEASURED",
+      "value": 0.2857,
+      "why_not_measured": null,
+      "witness": {
+        "wrong": 6,
+        "wrong_examples": [
+          {
+            "goal": "count the function and class definitions in canonical/runtime/goal_compiler.py",
+            "got": "python.software.request.semantic_behavior.compile.v1",
+            "verdict": "WRONG_BINDING",
+            "want": "python.source.definition_count.v1"
+          },
+          {
+            "goal": "rename the python parameter in the source file",
+            "got": "source.objective_relevance.rank.bm25",
+            "verdict": "WRONG_BINDING",
+            "want": "python.refactor.rename_parameter.v1"
+          },
+          {
+            "goal": "resolve python symbol references across files",
+            "got": "python.vcs.merge_conflict.resolve.v1",
+            "verdict": "WRONG_BINDING",
+            "want": "python.symbol.resolve.standalone.v1"
+          },
+          {
+            "goal": "compute the absolute difference between 12 and 30 and say whether it is within 20",
+            "got": "finance.saccr.credit.addon.v1",
+            "verdict": "WRONG_BINDING",
+            "want": "REFUSE"
+          },
+          {
+            "goal": "create a sqlite table from the json records",
+            "got": "auto.pypi.msgpack",
+            "verdict": "WRONG_BINDING",
+            "want": "sqlite.table.create_from_json_records"
+          }
+        ]
+      }
+    },
+    {
+      "axis_id": "goal_refusal_on_uncovered",
+      "capability": "refuses a goal no bound capability covers (fail-closed)",
+      "duration_ms": 0.0,
+      "instrument": "same",
+      "metric": "correct_refusals_over_uncovered_goals",
+      "model_calls": 0,
+      "n": 3,
+      "oracle": "author-written labels",
+      "oracle_class": "AUTHOR_LABELLED",
+      "spend_usd": 0.0,
+      "status": "MEASURED",
+      "value": 0.3333,
+      "why_not_measured": null,
+      "witness": {
+        "n": 3,
+        "refused_ok": 1
+      }
+    },
+    {
+      "axis_id": "instant_learning",
+      "capability": "one document -> verified mechanism -> instant recall (the closed loop)",
+      "duration_ms": 152.71,
+      "instrument": "canonical/tools/the_gap_closes_the_loop_v1.py",
+      "metric": "claims_holding",
+      "model_calls": 0,
+      "n": 6,
+      "oracle": "the script's own six claims (each one is a check, not prose)",
+      "oracle_class": "SELF_DECLARED_CHECKS",
+      "spend_usd": 0.0,
+      "status": "FAIL",
+      "value": "1/6",
+      "why_not_measured": null,
+      "witness": {
+        "claims": {
+          "admitted_on_two_unseen_instances": false,
+          "goal_value_matches_stdlib": false,
+          "learn_reaches_goal_and_observes_it": false,
+          "mechanism_saved_not_data": false,
+          "prose_only_guide_refused": true,
+          "recall_needs_no_scan_and_still_verifies": false
+        },
+        "learn_duration_s": 0.054,
+        "recall_duration_s": 0.0457,
+        "stored_rule_count": 0
+      }
+    },
+    {
+      "axis_id": "unified_model_gates",
+      "capability": "the tree's own unified-model gate set (tree as found)",
+      "duration_ms": 3839.45,
+      "instrument": "canonical/runtime/verify_brain_unified_model_v1.py",
+      "metric": "gates_passing",
+      "model_calls": 0,
+      "n": 38,
+      "oracle": "the verifier's own independent checks",
+      "oracle_class": "TREE_INSTRUMENT",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": "38/38",
+      "why_not_measured": null,
+      "witness": {
+        "checks": "38/38",
+        "note": "this sitting's own new module was set aside so the artifact hash covers the tree as found",
+        "tail": [
+          "TOTAL 38/38 PASS",
+          "WROTE canonical/astra_runtime/tmp/adv_runtime_unified_20261127.json",
+          "AUTHORITY NONE -- SANDBOX MEASUREMENT, NOT INDEPENDENT VERIFICATION"
+        ]
+      }
+    },
+    {
+      "axis_id": "unified_model_artifact_stability",
+      "capability": "is the compiled unified artifact stable when one module is added?",
+      "duration_ms": 4051.66,
+      "instrument": "same verifier, run again with this sitting's module present",
+      "metric": "gates_passing_after_adding_one_module",
+      "model_calls": 0,
+      "n": 38,
+      "oracle": "recompilation_is_byte_identical",
+      "oracle_class": "TREE_INSTRUMENT",
+      "spend_usd": 0.0,
+      "status": "FAIL",
+      "value": "37/38",
+      "why_not_measured": null,
+      "witness": {
+        "boom_check": [
+          "FAILED recompilation_is_byte_identical {\"recompiled_digest\": \"c8adad8552fe447484fbbfed7897ffbf9116925a0a8aef276485a38e72af8b10\"}"
+        ],
+        "meaning": "the artifact is a snapshot of a file set, not a property of the code: any added module makes recompilation differ until the artifact is regenerated"
+      }
+    },
+    {
+      "axis_id": "module_proven_census",
+      "capability": "substantial modules that can prove they execute",
+      "duration_ms": 66771.8,
+      "instrument": "canonical/tools/dark_matter_adjudicator_v1.py --all-modules --min-loc 140",
+      "metric": "proven_over_candidates",
+      "model_calls": 0,
+      "n": 2228,
+      "oracle": "each module is imported and its own executable self-check must run",
+      "oracle_class": "TREE_INSTRUMENT",
+      "spend_usd": 0.0,
+      "status": "MEASURED",
+      "value": 0.0247,
+      "why_not_measured": null,
+      "witness": {
+        "counts": {
+          "BROKEN": 6,
+          "IMPORTS_ONLY": 2088,
+          "MISSING_SUBSTRATE": 79,
+          "PROVEN": 55
+        },
+        "digest": "d57960168bcdb09967fb2cee31774094f9a92c5fb8402865d352f4c5b7eba63e"
+      }
+    },
+    {
+      "axis_id": "orientation_contract",
+      "capability": "the orientation contract, README and laws agree byte-for-byte",
+      "duration_ms": 60.86,
+      "instrument": "execution_guard/agent_orientation_check_v1.py verify",
+      "metric": "contract_consistent",
+      "model_calls": 0,
+      "n": 1,
+      "oracle": "sha256 comparison against the contract",
+      "oracle_class": "TREE_INSTRUMENT",
+      "spend_usd": 0.0,
+      "status": "PASS",
+      "value": true,
+      "why_not_measured": null,
+      "witness": {
+        "tail": [
+          "  \"ok\": true,",
+          "  \"errors\": []",
+          "}"
+        ]
+      }
+    }
+  ],
+  "schema": "BRAIN_ADVANCED_CAPABILITY_RUNTIME_20261127_V1",
+  "sections": {
+    "adapters": {
+      "no_substrate": 11,
+      "rows": 21
+    },
+    "goal_binding": {
+      "correct": 12,
+      "detail": [
+        {
+          "goal": "create a tar.gz archive from the manifest at build/m.json",
+          "got": "archive.tar_gz.create_from_manifest",
+          "verdict": "CORRECT",
+          "want": "archive.tar_gz.create_from_manifest"
+        },
+        {
+          "goal": "verify that the archive out/bundle.tar.gz matches the manifest build/m.json",
+          "got": "archive.verify.tar_gz.gnu",
+          "verdict": "CORRECT",
+          "want": "archive.verify.tar_gz.gnu"
+        },
+        {
+          "goal": "query the json file data/x.json with the filter .items[].name",
+          "got": "GoalCompilationFailure: GOAL_COMPILATION_BEST_MATCH_UNBINDABLE:{\"substitute_binding\": \"UNJUSTIFIED_WORLD",
+          "verdict": "REFUSED_ON_A_COVERED_GOAL",
+          "want": "json.query.jq"
+        },
+        {
+          "goal": "convert the yaml file config/pipeline.yml into json",
+          "got": "yaml.to_json.yq",
+          "verdict": "CORRECT",
+          "want": "yaml.to_json.yq"
+        },
+        {
+          "goal": "index the python symbols under canonical/runtime",
+          "got": "python.source.symbols.index.ast",
+          "verdict": "CORRECT",
+          "want": "python.source.symbols.index.ast"
+        },
+        {
+          "goal": "scan the source tree canonical/runtime for hard-coded secrets",
+          "got": "python.source.secret_scan.v1",
+          "verdict": "CORRECT",
+          "want": "python.source.secret_scan.v1"
+        },
+        {
+          "goal": "count the function and class definitions in canonical/runtime/goal_compiler.py",
+          "got": "python.software.request.semantic_behavior.compile.v1",
+          "verdict": "WRONG_BINDING",
+          "want": "python.source.definition_count.v1"
+        },
+        {
+          "goal": "find the dead code in canonical/runtime",
+          "got": "python.source.dead_code.v1",
+          "verdict": "CORRECT",
+          "want": "python.source.dead_code.v1"
+        },
+        {
+          "goal": "repair the failing python tests in this repository with a test-guided patch search",
+          "got": "GoalCompilationFailure: GOAL_COMPILATION_BEST_MATCH_UNBINDABLE:{\"substitute_binding\": \"UNJUSTIFIED_WORLD",
+          "verdict": "REFUSED_ON_A_COVERED_GOAL",
+          "want": "python.patch.search.test_guided.ast.v1"
+        },
+        {
+          "goal": "localize the python fault with dynamic dataflow traces",
+          "got": "python.fault.localize.dynamic.dataflow.v1",
+          "verdict": "CORRECT",
+          "want": "python.fault.localize.dynamic.dataflow.v1"
+        },
+        {
+          "goal": "rename the python parameter in the source file",
+          "got": "source.objective_relevance.rank.bm25",
+          "verdict": "WRONG_BINDING",
+          "want": "python.refactor.rename_parameter.v1"
+        },
+        {
+          "goal": "resolve python symbol references across files",
+          "got": "python.vcs.merge_conflict.resolve.v1",
+          "verdict": "WRONG_BINDING",
+          "want": "python.symbol.resolve.standalone.v1"
+        },
+        {
+          "goal": "compute the absolute difference between 12 and 30 and say whether it is within 20",
+          "got": "finance.saccr.credit.addon.v1",
+          "verdict": "WRONG_BINDING",
+          "want": "REFUSE"
+        },
+        {
+          "goal": "rank the retrieved sources by relevance to the research objective",
+          "got": "source.objective_relevance.rank.bm25",
+          "verdict": "CORRECT",
+          "want": "source.objective_relevance.rank.bm25"
+        },
+        {
+          "goal": "decide the terminal answer from typed evidence items with provenance",
+          "got": "decision.synthesis.typed.stdlib",
+          "verdict": "CORRECT",
+          "want": "decision.synthesis.typed.stdlib"
+        },
+        {
+          "goal": "create a docx report from the json record",
+          "got": "docx.document.create_from_json_record",
+          "verdict": "CORRECT",
+          "want": "docx.document.create_from_json_record"
+        },
+        {
+          "goal": "verify that out/report.docx is a valid ooxml package",
+          "got": "docx.document.verify.intent_ooxml",
+          "verdict": "CORRECT",
+          "want": "docx.document.verify"
+        },
+        {
+          "goal": "create a sqlite table from the json records",
+          "got": "auto.pypi.msgpack",
+          "verdict": "WRONG_BINDING",
+          "want": "sqlite.table.create_from_json_records"
+        },
+        {
+          "goal": "create an xlsx workbook from the json records",
+          "got": "auto.pypi.msgpack",
+          "verdict": "WRONG_BINDING",
+          "want": "xlsx.table.create_from_json_records"
+        },
+        {
+          "goal": "run the shell command that lists the working directory",
+          "got": "python.repository.acceptance.measure.v1",
+          "verdict": "WRONG_BINDING",
+          "want": "shell.command.run"
+        },
+        {
+          "goal": "write the text hello into out/note.txt",
+          "got": "GoalCompilationFailure: GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+          "verdict": "REFUSED_ON_A_COVERED_GOAL",
+          "want": "text.file.write"
+        },
+        {
+          "goal": "compute the SA-CCR credit addon for the trades in trades.json",
+          "got": "finance.saccr.credit.addon.v1",
+          "verdict": "CORRECT",
+          "want": "finance.saccr.credit.addon.v1"
+        },
+        {
+          "goal": "translate this paragraph into French with the right register",
+          "got": "docx.document.create.python_docx",
+          "verdict": "WRONG_BINDING",
+          "want": "REFUSE"
+        },
+        {
+          "goal": "diagnose whether this patient's symptoms indicate pneumonia",
+          "got": "GoalCompilationFailure: GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+          "verdict": "CORRECT",
+          "want": "REFUSE"
+        }
+      ],
+      "n_covered": 21,
+      "n_uncovered": 3,
+      "refusals_on_uncovered": 1,
+      "refused": 3,
+      "wrong": 6
+    },
+    "instant_learning": {
+      "claims": {
+        "admitted_on_two_unseen_instances": false,
+        "goal_value_matches_stdlib": false,
+        "learn_reaches_goal_and_observes_it": false,
+        "mechanism_saved_not_data": false,
+        "prose_only_guide_refused": true,
+        "recall_needs_no_scan_and_still_verifies": false
+      },
+      "held": 1,
+      "returncode": 1
+    },
+    "inventory": {
+      "bound_registry_entries": 145,
+      "bound_registry_statuses": {
+        "VERIFIED_BOUND_CAPABILITY": 145
+      },
+      "certified_fabric_capabilities": 18,
+      "entries_with_existing_adapter_file": 95,
+      "entries_without_adapter_file": 50,
+      "entries_without_adapter_file_sample": [
+        "auto.apt.zint",
+        "auto.npm.dfinity-cbor",
+        "auto.npm.msgpack-msgpack",
+        "auto.npm.shelacek-ubjson",
+        "auto.pypi.bson-modern",
+        "auto.pypi.msgpack",
+        "code.multilanguage.parse.tree_sitter.v1",
+        "document.convert.markdown_pdf.pandoc_weasyprint",
+        "docx.document.create.python_docx",
+        "docx.document.create_from_json_record",
+        "docx.document.verify.intent_ooxml",
+        "docx.document.verify.ooxml"
+      ],
+      "extended_autonomous_registry_entries": 2321,
+      "extended_registry_statuses": {
+        "AWAITING_RECEIPT_AND_INDEPENDENT_VERIFICATION": 12,
+        "UNVERIFIED_INVENTORY": 2309
+      },
+      "fabric_admission_coverage_ratio": 0.005269,
+      "hidden_capability_census_entries": 628,
+      "python": "3.11.2",
+      "runtime_modules": 2307,
+      "swe_kernel_modules": 221
+    },
+    "meme": {
+      "seed": 20261126,
+      "verdict": "BENCH_COMPLETE__DEPENDENCY_MEMORY_AHEAD"
+    },
+    "registry": {
+      "import_error": 9,
+      "live": 86,
+      "missing_adapter_path": 50,
+      "no_entrypoint": 0
+    },
+    "repair": {
+      "detail": [
+        {
+          "bug": "binop_swap",
+          "error": null,
+          "heldout": true,
+          "kind": "operator",
+          "known_in_family": true,
+          "resolved": true
+        },
+        {
+          "bug": "comparison_boundary",
+          "error": null,
+          "heldout": true,
+          "kind": "boundary",
+          "known_in_family": true,
+          "resolved": true
+        },
+        {
+          "bug": "off_by_one_range",
+          "error": null,
+          "heldout": false,
+          "kind": "boundary",
+          "known_in_family": true,
+          "resolved": false
+        },
+        {
+          "bug": "wrong_return_var",
+          "error": null,
+          "heldout": false,
+          "kind": "variable",
+          "known_in_family": true,
+          "resolved": false
+        },
+        {
+          "bug": "string_method",
+          "error": null,
+          "heldout": false,
+          "kind": "method",
+          "known_in_family": true,
+          "resolved": false
+        },
+        {
+          "bug": "boolean_swap",
+          "error": null,
+          "heldout": true,
+          "kind": "boolean",
+          "known_in_family": true,
+          "resolved": true
+        },
+        {
+          "bug": "numeric_constant",
+          "error": null,
+          "heldout": false,
+          "kind": "constant",
+          "known_in_family": true,
+          "resolved": false
+        },
+        {
+          "bug": "slice_bound",
+          "error": null,
+          "heldout": false,
+          "kind": "slice",
+          "known_in_family": true,
+          "resolved": false
+        },
+        {
+          "bug": "missing_guard",
+          "error": null,
+          "heldout": false,
+          "kind": "new_behaviour",
+          "known_in_family": false,
+          "resolved": false
+        },
+        {
+          "bug": "dict_key_rename",
+          "error": null,
+          "heldout": true,
+          "kind": "key",
+          "known_in_family": true,
+          "resolved": true
+        }
+      ],
+      "n": 10,
+      "passed_heldout": 0.4,
+      "resolved_on_visible": 0.4
+    },
+    "tree": {
+      "candidates": 2228,
+      "dark_matter_counts": {
+        "BROKEN": 6,
+        "IMPORTS_ONLY": 2088,
+        "MISSING_SUBSTRATE": 79,
+        "PROVEN": 55
+      },
+      "orientation": true,
+      "proven": 55,
+      "unified_gates": true
+    },
+    "truecap": {
+      "duration_ms": 372809.4,
+      "failed": 0,
+      "fresh_instances_total": 5500,
+      "instances_per_spec": 500,
+      "passed": 11,
+      "specs": 11
+    }
+  },
+  "totals": {
+    "failing_rows": 8,
+    "fresh_instances_executed": 5500,
+    "incremental_spend_usd": 0.0,
+    "measured_rows": 44,
+    "model_calls": 0,
+    "network_calls": 0,
+    "no_instrument_or_substrate_rows": 11,
+    "passing_rows": 26,
+    "rows": 56,
+    "scorecard_sha256": "8efc3969e41335927c241fa74d57d8b851140d9f99a69db353575dc2db01c02a",
+    "wall_clock_s": 458.52
+  }
+}
