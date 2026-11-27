@@ -124,8 +124,8 @@
       "PROWORK_GDPVAL_GE_1846"
     ],
     "expected_obligation_discharge_lcb": "0",
-    "expected_obligation_unlock_lcb": "0",
-    "interpretation": "Measures the distance to three open obligations and claims none of them: the sitting establishes that no instrument for a board episode exists in this tree, which is itself the blocker to name next.",
+    "expected_obligation_unlock_lcb": "1/38",
+    "interpretation": "Zero discharge is claimed. The unlock is one atomic prerequisite out of the 38 atomic predicates in the active zero-reality cut: this sitting establishes by measurement that no external-board instrument exists in the tree and that the goal binder is fail-open, which are the two facts the next action on CODING_TB4_GE_66_4 and OSWORLD_2_1_PARTIAL_GE_81_8 depends on. It is a prerequisite step, not a fraction of either obligation.",
     "scope_complete_discharge": false,
     "success_probability_lcb": "0.9",
     "wall_clock_cost_ub": 1
