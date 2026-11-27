@@ -989,9 +989,15 @@ def sense_local_frontier(
     test_files: list[str] = []
     js_files: list[str] = []
     js_test_files: list[str] = []
+    go_files: list[str] = []
+    go_test_files: list[str] = []
     c_files: list[str] = []
     c_test_files: list[str] = []
     containers: list[dict[str, str]] = []
+
+    has_go_mod = (ws / "go.mod").is_file()
+    has_py_manifest = any((ws / mf).is_file() for mf in ("pyproject.toml", "setup.py", "setup.cfg", "pytest.ini", "tox.ini", "requirements.txt"))
+    has_js_manifest = any((ws / mf).is_file() for mf in ("package.json", "tsconfig.json", "yarn.lock", "pnpm-lock.yaml"))
 
     scanned_files: list[dict[str, Any]] = list(env.get("files", []))
     seen_rels: set[str] = {str(f.get("rel") or "") for f in scanned_files}
@@ -1002,12 +1008,42 @@ def sense_local_frontier(
             if child.is_file() and child.name not in seen_rels:
                 seen_rels.add(child.name)
                 scanned_files.append({"rel": child.name, "bytes": child.stat().st_size})
-        for m_ref in re.finditer(r"([A-Za-z0-9_.\-/]+\.(?:py|js|mjs|cjs|ts|c|cc|cpp|cxx|h|hh|hpp|sh))\b", instruction or ""):
+        for m_ref in re.finditer(r"([A-Za-z0-9_.\-/]+\.(?:py|js|jsx|mjs|cjs|ts|tsx|go|c|cc|cpp|cxx|h|hh|hpp|sh))\b", instruction or ""):
             ref_rel = m_ref.group(1).lstrip("./")
             ref_p = ws / ref_rel
             if ref_p.is_file() and ref_rel not in seen_rels:
                 seen_rels.add(ref_rel)
                 scanned_files.append({"rel": ref_rel, "bytes": ref_p.stat().st_size})
+
+    def _classify_rel(rel: str) -> None:
+        if rel.endswith(".py"):
+            if rel not in py_files:
+                py_files.append(rel)
+            bn = pathlib.Path(rel).name
+            if (bn.startswith("test_") or bn.endswith("_test.py") or "/tests/" in f"/{rel}" or "/test/" in f"/{rel}") and rel not in test_files:
+                test_files.append(rel)
+        elif rel.endswith((".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx")) and not rel.endswith(".d.ts"):
+            if not ML_SWE_ENGINE._is_non_prod_skip(rel):
+                if rel not in js_files:
+                    js_files.append(rel)
+                if ML_SWE_ENGINE._is_test_path(rel) and rel not in js_test_files:
+                    js_test_files.append(rel)
+        elif rel.endswith(".go"):
+            if not any(part in (".git", "vendor", "node_modules", "testdata") for part in pathlib.PurePosixPath(rel).parts):
+                if rel not in go_files:
+                    go_files.append(rel)
+                if rel.endswith("_test.go") and rel not in go_test_files:
+                    go_test_files.append(rel)
+        elif rel.endswith((".c", ".cc", ".cpp", ".cxx")):
+            if not ML_SWE_ENGINE._is_c_skip_path(rel):
+                if ML_SWE_ENGINE._is_c_test_path(rel):
+                    if rel not in c_test_files:
+                        c_test_files.append(rel)
+                elif rel not in c_files:
+                    c_files.append(rel)
+        elif rel.endswith((".h", ".hpp", ".hh")) and not ML_SWE_ENGINE._is_c_skip_path(rel) and not ML_SWE_ENGINE._is_c_test_path(rel):
+            if rel not in c_files:
+                c_files.append(rel)
 
     for f in scanned_files:
         rel = str(f.get("rel") or "")
@@ -1016,31 +1052,40 @@ def sense_local_frontier(
             continue
         mtype = MORPH_ENGINE.infer_file_media_type(p)
         typed_files.append({"rel": rel, "media_type": mtype, "bytes": int(f.get("bytes", 0))})
-        if rel.endswith(".py"):
-            py_files.append(rel)
-            bn = pathlib.Path(rel).name
-            if bn.startswith("test_") or bn.endswith("_test.py") or "/tests/" in f"/{rel}":
-                test_files.append(rel)
-        elif rel.endswith((".js", ".mjs", ".cjs", ".ts")) and not rel.endswith(".d.ts"):
-            if not ML_SWE_ENGINE._is_non_prod_skip(rel):
-                js_files.append(rel)
-                if ML_SWE_ENGINE._is_test_path(rel):
-                    js_test_files.append(rel)
-        elif rel.endswith((".c", ".cc", ".cpp", ".cxx")):
-            if not ML_SWE_ENGINE._is_c_skip_path(rel):
-                if ML_SWE_ENGINE._is_c_test_path(rel):
-                    c_test_files.append(rel)
-                else:
-                    c_files.append(rel)
-        elif rel.endswith((".h", ".hpp", ".hh")) and not ML_SWE_ENGINE._is_c_skip_path(rel) and not ML_SWE_ENGINE._is_c_test_path(rel):
-            c_files.append(rel)
+        _classify_rel(rel)
         if mtype in MORPH_ENGINE._CONTAINER_TYPES:
             containers.append({"rel": rel, "media_type": mtype})
+
+    # Bounded manifest-guided probe: in large real repos (ansible, qutebrowser, protonmail,
+    # NodeBB, flipt, teleport, navidrome, vuls, tutanota), alphabetical 200-file truncation
+    # stops inside docs/assets before reaching src/pkg/tests. Probe source/test roots fast!
+    if ws.is_dir() and (
+        (has_go_mod and (not go_files or not go_test_files))
+        or (has_py_manifest and (not py_files or not test_files))
+        or (has_js_manifest and (not js_files or not js_test_files))
+    ):
+        _skip_walk = {".git", "node_modules", "vendor", ".venv", "venv", "dist", "build", "__pycache__", "docs", "doc", ".github", "assets", "media", "static", "locales", "po"}
+        _walked = 0
+        for _dp, _dns, _fns in os.walk(ws):
+            _dns[:] = [d for d in sorted(_dns) if d not in _skip_walk and not d.startswith(".")][:24]
+            _rel_dir = pathlib.Path(_dp).relative_to(ws).as_posix()
+            for _fn in _fns[:64]:
+                _rel = _fn if _rel_dir == "." else f"{_rel_dir}/{_fn}"
+                _classify_rel(_rel)
+                _walked += 1
+                if _walked >= 800:
+                    break
+            if _walked >= 800 or (
+                (not has_go_mod or (go_files and go_test_files))
+                and (not has_py_manifest or (py_files and test_files))
+                and (not has_js_manifest or (js_files and js_test_files))
+            ):
+                break
 
     swe_intent = any(
         w in low for w in (
             "pytest", "failing test", "fix test", "fix the test", "fix the failing",
-            "fix bug", "repair bug", "repair code", "unittest", "traceback",
+            "fix bug", "repair bug", "repair code", "unittest", "traceback", "go test",
             "attributeerror", "typeerror", "importerror", "nameerror", "assertionerror",
             "mocha", "vitest", "jest", "npm test", "node --test", "tap test",
             "segfault", "null pointer", "use-after-free", "buffer overflow", "buffer overrun",
@@ -1049,10 +1094,11 @@ def sense_local_frontier(
     )
 
     explicit_c_ref = bool(re.search(r"\b[A-Za-z0-9_.\-/]+\.(?:c|cc|cpp|cxx|h|hpp|hh|sh)\b", low))
-    explicit_js_ref = bool(re.search(r"\b[A-Za-z0-9_.\-/]+\.(?:js|mjs|cjs|ts)\b", low))
+    explicit_go_ref = bool(re.search(r"\b[A-Za-z0-9_.\-/]+\.go\b", low))
+    explicit_js_ref = bool(re.search(r"\b[A-Za-z0-9_.\-/]+\.(?:js|jsx|mjs|cjs|ts|tsx)\b", low))
     explicit_py_ref = bool(re.search(r"\b[A-Za-z0-9_.\-/]+\.py\b", low))
     has_swe_signal = swe_intent or ("fix" in low) or ("repair" in low)
-    if has_swe_signal and (not c_files or not c_test_files) and not test_files and not js_test_files:
+    if has_swe_signal and (not c_files or not c_test_files) and not test_files and not js_test_files and not go_files:
         _dc_src, _dc_tst, _ = ML_SWE_ENGINE._discover_c_files(ws)
         if _dc_src and not c_files:
             c_files.extend(_dc_src[:32])
@@ -1061,33 +1107,41 @@ def sense_local_frontier(
 
     if dom_nodes is not None:
         modality = "browser_dom"
-    elif swe_intent and containers and not test_files and not js_test_files and not c_test_files:
+    elif swe_intent and containers and not test_files and not js_test_files and not c_test_files and not go_files:
         modality = "cross_modal_bundle_swe"
+    elif has_swe_signal and explicit_go_ref and (go_files or has_go_mod):
+        modality = "swe_go_codebase"
     elif has_swe_signal and explicit_c_ref and c_files and (c_test_files or (ws / "tests" / "unittest.sh").is_file()):
         modality = "swe_c_codebase"
-    elif has_swe_signal and explicit_js_ref and (js_test_files or (swe_intent and js_files)):
+    elif has_swe_signal and explicit_js_ref and (js_test_files or (swe_intent and js_files) or has_js_manifest):
         modality = "swe_js_codebase"
-    elif has_swe_signal and explicit_py_ref and (test_files or (swe_intent and py_files)):
+    elif has_swe_signal and explicit_py_ref and (test_files or (swe_intent and py_files) or has_py_manifest):
         modality = "swe_codebase"
+    elif has_go_mod and go_files and not (explicit_py_ref and py_files) and not (explicit_js_ref and js_files):
+        modality = "swe_go_codebase"
     elif has_swe_signal and test_files:
         modality = "swe_codebase"
     elif has_swe_signal and js_test_files:
         modality = "swe_js_codebase"
+    elif has_swe_signal and go_test_files:
+        modality = "swe_go_codebase"
     elif has_swe_signal and c_files and (c_test_files or (ws / "tests" / "unittest.sh").is_file()):
         modality = "swe_c_codebase"
     elif swe_intent and py_files:
         modality = "swe_codebase"
-    elif swe_intent and (js_files or (ws / "package.json").is_file()):
+    elif swe_intent and (js_files or has_js_manifest):
         modality = "swe_js_codebase"
-    elif (test_files and py_files) or (js_test_files and js_files) or (c_test_files and c_files):
-        # General workspace-shape law: a tree that ships an executable test harness
-        # IS a codebase task, whatever the instruction says. Real issue text (e.g.
-        # SWE-bench Pro) describes desired behaviour and rarely contains words like
-        # "fix", so modality must not hinge on intent keywords.
-        if test_files and py_files:
+    elif (test_files and py_files) or (js_test_files and js_files) or (go_test_files and go_files) or (c_test_files and c_files) or has_go_mod or (has_py_manifest and py_files) or (has_js_manifest and js_files):
+        # General workspace-shape law: a tree that ships an executable test harness or
+        # language manifest IS a codebase task, whatever the instruction says.
+        if has_go_mod and go_files:
+            modality = "swe_go_codebase"
+        elif (test_files and py_files) or (has_py_manifest and py_files and not (has_js_manifest and js_test_files)):
             modality = "swe_codebase"
-        elif js_test_files and js_files:
+        elif (js_test_files and js_files) or (has_js_manifest and js_files):
             modality = "swe_js_codebase"
+        elif go_test_files and go_files:
+            modality = "swe_go_codebase"
         else:
             modality = "swe_c_codebase"
     else:
@@ -1101,6 +1155,8 @@ def sense_local_frontier(
         "test_files": test_files,
         "js_files": js_files,
         "js_test_files": js_test_files,
+        "go_files": go_files,
+        "go_test_files": go_test_files,
         "c_files": c_files,
         "c_test_files": c_test_files,
         "containers": containers,
@@ -5246,11 +5302,21 @@ def solve_arbitrary_environment(
         )
 
     # 0. Live Interactive HTTP/HTML Web UI Environment (zero-LLM, stdlib htmlform_read_v1 + compose_v1)
+    # Guard: NEVER hijack a software repository (go.mod / pyproject.toml / setup.py / package.json / .git)
+    # or make outbound external HTTP calls when `allow_web=False` just because issue prose mentions a URL!
+    _ws_probe = pathlib.Path(workspace).resolve()
+    _ws_is_code_repo = _ws_probe.is_dir() and any(
+        (_ws_probe / _mf).exists()
+        for _mf in ("go.mod", "pyproject.toml", "setup.py", "setup.cfg", "pytest.ini", "package.json", "tsconfig.json", "Cargo.toml", ".git")
+    )
     detected_url = web_url
-    if not detected_url:
+    if not detected_url and not _ws_is_code_repo:
         m_u = _URL_RE.search(instruction or "")
         if m_u:
-            detected_url = m_u.group(0).rstrip(".,;)")
+            _cand_url = m_u.group(0).rstrip(".,;)")
+            _is_local_url = bool(re.match(r"^https?://(?:127\.0\.0\.1|localhost|\[::1\])(?::\d+)?(?:/|$)", _cand_url, re.I))
+            if allow_web or _is_local_url:
+                detected_url = _cand_url
     # 0a. Cross-Modal Multi-Step Pipeline (`CLI <-> Authenticated HTTP API <-> CLI`)
     # When the instruction chains multiple steps combining a live URL AND workspace file/CLI clauses,
     # execute the full cross-modal pipeline via the zero-LLM Doc-Compiler BEFORE single-shot Web UI!
@@ -5514,6 +5580,13 @@ def solve_arbitrary_environment(
                     "regression_tests": blind_py.get("regression_tests"),
                     "gaps_queried": [],
                 }
+            else:
+                swe_res["blind_reproducer_diag"] = {
+                    "status": blind_py.get("status"),
+                    "candidates_compiled": blind_py.get("candidates_compiled"),
+                    "solver_status": blind_py.get("solver_status"),
+                    "rejected_count": len(blind_py.get("rejected_reproducers") or []),
+                }
         if swe_res.get("mode") == "ALREADY_PASSING":
             # Fail closed on a claim we cannot support: the visible harness showed no
             # defect and the blind reproducer qualified no patch, so NOTHING in the
@@ -5615,11 +5688,7 @@ def solve_arbitrary_environment(
         )
         # Blind SWE-bench Pro JS fallback: when existing tests already pass on c_old,
         # synthesize & qualify a reproducer from the issue description and verify pass2pass.
-        if (
-            js_res.get("status") != "VERIFIED"
-            and instruction
-            and ("(" in instruction or "```" in instruction)
-        ):
+        if js_res.get("status") != "VERIFIED" and instruction and len(instruction.strip()) >= 8:
             from canonical.runtime import epistemic_issue_reproducer_v1 as ISSUE_REPRO
 
             blind_js = ISSUE_REPRO.solve_issue_from_description(
@@ -5644,6 +5713,24 @@ def solve_arbitrary_environment(
                     "regression_tests": blind_js.get("regression_tests"),
                     "mode": "BLIND_ISSUE_REPRODUCER_JS_SWE",
                 }
+            else:
+                # Secondary prose-only JS/TS structural solver (handles pure-prose bugs with 0 parentheses)
+                from canonical.swe_kernel import go_and_jsts_causal_swe_engine_v1 as GO_JS_SWE
+
+                prose_js = GO_JS_SWE.solve_js_ts_from_prose(ws, instruction)
+                if prose_js.get("status") == "SOLVED" and prose_js.get("file"):
+                    _pfile = str(prose_js["file"])
+                    js_res = {
+                        "status": "VERIFIED",
+                        "verified": True,
+                        "winner": {
+                            "file": _pfile,
+                            "patched_source": (ws / _pfile).read_text(encoding="utf-8", errors="replace"),
+                            "repair": prose_js.get("repair"),
+                        },
+                        "reproducer": prose_js.get("reproducer"),
+                        "mode": "PROSE_CAUSAL_JS_TS_SWE",
+                    }
         ok_post = True
         winner = js_res.get("winner") if isinstance(js_res, Mapping) else None
         if js_res.get("status") == "VERIFIED" and isinstance(winner, Mapping) and winner.get("file"):
@@ -5732,6 +5819,33 @@ def solve_arbitrary_environment(
             "frontier_sense_ms": frontier["sense_ms"],
             "epistemic_diff": epistemic_diff,
             "swe_result": c_res,
+            "gaps_queried": [],
+            "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
+            "model_calls": 0,
+            "parameters_stored": 0,
+        }
+
+    # 3d. Multi-Language Go SWE Environment (flipt / navidrome / vuls / teleport / any go.mod repo)
+    if modality == "swe_go_codebase":
+        from canonical.swe_kernel import go_and_jsts_causal_swe_engine_v1 as GO_JS_SWE
+
+        go_res = GO_JS_SWE.solve_go_repository(
+            ws,
+            instruction or "",
+            timeout_s=max(float(timeout_s), 30.0),
+        )
+        ok_post = True
+        if go_res.get("status") == "SOLVED" and postcondition_fn is not None:
+            ok_post, _ = postcondition_fn(ws)
+        return {
+            "schema": SCHEMA,
+            "authority": AUTHORITY,
+            "modality": modality,
+            "status": "VERIFIED" if (go_res.get("status") == "SOLVED" and ok_post) else "FAILED",
+            "mode": "CAUSAL_GO_SWE" if go_res.get("status") == "SOLVED" else str(go_res.get("status") or "GO_NO_DEFECT_EVIDENCE"),
+            "frontier_sense_ms": frontier["sense_ms"],
+            "epistemic_diff": epistemic_diff,
+            "swe_result": go_res,
             "gaps_queried": [],
             "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
             "model_calls": 0,

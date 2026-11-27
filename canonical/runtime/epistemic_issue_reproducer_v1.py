@@ -1804,6 +1804,47 @@ def _run_reproducer_once(
 
     Returns `(is_qualified_behavioral_failure, returncode, combined_output)`.
     """
+    from canonical.swe_kernel import container_exec_bridge_v1 as _ce_bridge
+    import shlex as _shlex
+
+    bridge = _ce_bridge.get_active_bridge()
+    if bridge is not None:
+        if spec.language == "python" and bridge.toolchain.python_exe:
+            rel_test = (
+                f"{spec.test_subdir}/_epistemic_repro_probe_test.py"
+                if spec.test_subdir
+                else "_epistemic_repro_probe_test.py"
+            )
+            ov = bridge.collect_modified_overlays(repo_root, extra={rel_test: spec.test_source})
+            py_c = bridge.toolchain.python_exe
+            pp_expr = f"{bridge.workdir}/{repo_index.python_src_root}:{bridge.workdir}" if repo_index.python_src_root else bridge.workdir
+            if bridge.toolchain.has_pytest:
+                c_cmd = f"PYTHONPATH={_shlex.quote(pp_expr)}:${{PYTHONPATH:-}} PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 {_shlex.quote(py_c)} -m pytest -q --tb=short {_shlex.quote(rel_test)}"
+            else:
+                c_cmd = f"PYTHONPATH={_shlex.quote(pp_expr)}:${{PYTHONPATH:-}} {_shlex.quote(py_c)} -c {_shlex.quote(_STDLIB_TEST_RUNNER_SNIPPET)} {_shlex.quote(rel_test)}"
+            rc, out, err = bridge.run_cmd(c_cmd, overlays=ov, timeout_s=timeout_s)
+            combined = (out or "") + "\n" + (err or "")
+            if rc == 0:
+                return False, 0, combined
+            if any(h in combined for h in _PY_HARNESS_ERRORS):
+                return False, rc, combined
+            return True, rc, combined
+        if spec.language != "python" and (bridge.toolchain.vitest_bin or bridge.toolchain.node_exe):
+            if repo_index.is_typescript_vitest and bridge.toolchain.vitest_bin:
+                rel_test = "_epistemic_repro_probe.spec.ts"
+                c_cmd = f"{_shlex.quote(bridge.toolchain.vitest_bin)} run --no-file-parallelism {_shlex.quote(rel_test)}"
+            else:
+                rel_test = "_epistemic_repro_probe.test.js"
+                c_cmd = f"{_shlex.quote(bridge.toolchain.node_exe or 'node')} --test {_shlex.quote(rel_test)}"
+            ov = bridge.collect_modified_overlays(repo_root, extra={rel_test: spec.test_source})
+            rc, out, err = bridge.run_cmd(c_cmd, overlays=ov, timeout_s=timeout_s)
+            combined = (out or "") + "\n" + (err or "")
+            if rc == 0:
+                return False, 0, combined
+            if any(h in combined for h in _JS_HARNESS_ERRORS):
+                return False, rc, combined
+            return True, rc, combined
+
     py = python_exe or sys.executable
     if spec.language == "python":
         base_dir = (repo_root / spec.test_subdir) if spec.test_subdir else repo_root
@@ -1972,6 +2013,51 @@ def _run_regression_suite(
     """Run existing `pass2pass` tests in `ws` to prevent single-test overfitting."""
     if not test_files:
         return True, []
+    from canonical.swe_kernel import container_exec_bridge_v1 as _ce_bridge
+    import shlex as _shlex
+
+    bridge = _ce_bridge.get_active_bridge()
+    if bridge is not None:
+        ov = bridge.collect_modified_overlays(ws)
+        results_c: list[dict[str, Any]] = []
+        if repo_index.language == "python" and bridge.toolchain.python_exe:
+            py_c = bridge.toolchain.python_exe
+            pp_expr = f"{bridge.workdir}/{repo_index.python_src_root}:{bridge.workdir}" if repo_index.python_src_root else bridge.workdir
+            tf_args = " ".join(_shlex.quote(tf) for tf in test_files)
+            if bridge.toolchain.has_pytest:
+                c_cmd = f"PYTHONPATH={_shlex.quote(pp_expr)}:${{PYTHONPATH:-}} PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 {_shlex.quote(py_c)} -m pytest -q --tb=no {tf_args}"
+            else:
+                c_cmd = f"PYTHONPATH={_shlex.quote(pp_expr)}:${{PYTHONPATH:-}} {_shlex.quote(py_c)} -c {_shlex.quote(_STDLIB_TEST_RUNNER_SNIPPET)} {tf_args}"
+            rc, out, _ = bridge.run_cmd(c_cmd, overlays=ov, timeout_s=timeout_s)
+            results_c.append({
+                "files": list(test_files),
+                "rc": rc,
+                "summary": (out or "").strip().splitlines()[-1] if (out or "").strip() else "",
+                "via_container_bridge": True,
+            })
+            return rc == 0, results_c
+        if repo_index.language != "python" and (bridge.toolchain.vitest_bin or bridge.toolchain.node_exe):
+            all_ok_c = True
+            for tf in test_files:
+                tf_text = (ws / tf).read_text(encoding="utf-8", errors="replace")
+                if repo_index.is_typescript_vitest and bridge.toolchain.vitest_bin:
+                    if not re.search(r"\b(?:describe|it|test)\s*\(", tf_text):
+                        continue
+                    c_cmd = f"{_shlex.quote(bridge.toolchain.vitest_bin)} run --no-file-parallelism {_shlex.quote(tf)}"
+                else:
+                    nd = bridge.toolchain.node_exe or "node"
+                    c_cmd = f"{_shlex.quote(nd)} --test {_shlex.quote(tf)}" if "node:test" in tf_text else f"{_shlex.quote(nd)} {_shlex.quote(tf)}"
+                rc, out, _ = bridge.run_cmd(c_cmd, overlays=ov, timeout_s=timeout_s)
+                if rc != 0:
+                    all_ok_c = False
+                results_c.append({
+                    "file": tf,
+                    "rc": rc,
+                    "summary": (out or "").strip().splitlines()[-1] if (out or "").strip() else "",
+                    "via_container_bridge": True,
+                })
+            return all_ok_c, results_c
+
     results: list[dict[str, Any]] = []
     all_ok = True
     py = python_exe or sys.executable

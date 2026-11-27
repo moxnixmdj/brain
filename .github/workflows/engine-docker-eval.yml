@@ -267,8 +267,8 @@ jobs:
         run: |
           set -euo pipefail
           python -m pip install --upgrade pip
-          pip install "harbor==${HARBOR_VERSION}" pyyaml
-          python -c "import importlib.metadata as m; print('harbor', m.version('harbor'), 'ok')"
+          pip install "harbor==${HARBOR_VERSION}" pyyaml pytest
+          python -c "import importlib.metadata as m; print('harbor', m.version('harbor'), 'pytest', m.version('pytest'), 'ok')"
 
       - name: Reclaim runner disk before image pulls
         run: |

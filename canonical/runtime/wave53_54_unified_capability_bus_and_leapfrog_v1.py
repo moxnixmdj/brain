@@ -4456,6 +4456,87 @@ def audit_governance_consistency(benchmark_deltas: Sequence[float] | None = None
 class Wave53To54UnifiedCapabilityBusMixin(Wave51To52UnifiedModelMixin):
     """Chained mixin exposing all 6 Wave 53–54 leapfrog engines directly on `UnifiedModel`."""
 
+    def smart_invoke(
+        self,
+        method_or_goal: str,
+        payload: Mapping[str, Any] | None = None,
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Ergonomic unified front-door adapter for all 229+ UnifiedModel methods (fail-closed, 0 LLM calls)."""
+        import inspect as _inspect
+
+        merged: dict[str, Any] = dict(payload or {})
+        merged.update(kwargs)
+        fn = getattr(self, method_or_goal, None) if isinstance(method_or_goal, str) and not method_or_goal.startswith("_") else None
+        if not callable(fn):
+            # Treat as a natural-language goal and route cleanly through solve()/route()
+            if hasattr(self, "solve"):
+                return {
+                    "ok": True,
+                    "dispatched_to": "solve",
+                    "result": self.solve(str(method_or_goal), inputs=merged),
+                    "k3_model_calls": 0,
+                }
+            return {"ok": False, "error": f"UNKNOWN_TARGET:{method_or_goal}", "k3_model_calls": 0}
+
+        sig = _inspect.signature(fn)
+        params = list(sig.parameters.values())
+        accepts_var_kw = any(p.kind == _inspect.Parameter.VAR_KEYWORD for p in params)
+        synonyms: dict[str, tuple[str, ...]] = {
+            "goal": ("instruction", "query", "text", "prompt", "task"),
+            "instruction": ("goal", "query", "text", "prompt", "task"),
+            "query": ("goal", "instruction", "text", "prompt", "query_or_key"),
+            "workspace": ("work_dir", "workspace_dir", "workspace_root", "repo_root", "path"),
+            "workspace_root": ("workspace", "work_dir", "workspace_dir", "repo_root", "path"),
+            "work_dir": ("workspace", "workspace_root", "workspace_dir", "repo_root", "path"),
+            "payload": ("inputs", "request", "spec", "data"),
+            "inputs": ("payload", "request", "spec", "data"),
+            "source": ("source_code", "code", "before_source", "parent_source"),
+            "source_code": ("source", "code", "before_source", "parent_source"),
+        }
+        bound_kw: dict[str, Any] = {}
+        missing: list[str] = []
+        for p in params:
+            if p.kind in (_inspect.Parameter.VAR_POSITIONAL, _inspect.Parameter.VAR_KEYWORD):
+                continue
+            if p.name in merged:
+                bound_kw[p.name] = merged[p.name]
+            elif p.name in ("payload", "inputs") and merged:
+                bound_kw[p.name] = dict(merged)
+            else:
+                found = False
+                for alt in synonyms.get(p.name, ()):
+                    if alt in merged:
+                        bound_kw[p.name] = merged[alt]
+                        found = True
+                        break
+                if not found and p.default is _inspect._empty:
+                    missing.append(p.name)
+        if accepts_var_kw:
+            for k, v in merged.items():
+                if k not in bound_kw:
+                    bound_kw[k] = v
+        if missing:
+            return {
+                "ok": False,
+                "status": "MISSING_REQUIRED_INPUTS",
+                "dispatched_to": method_or_goal,
+                "missing": missing,
+                "signature": str(sig),
+                "k3_model_calls": 0,
+            }
+        try:
+            res = fn(**bound_kw)
+            return {"ok": True, "dispatched_to": method_or_goal, "result": res, "k3_model_calls": 0}
+        except Exception as exc:
+            return {
+                "ok": False,
+                "status": "INVOCATION_ERROR",
+                "dispatched_to": method_or_goal,
+                "error": f"{type(exc).__name__}: {exc}"[:240],
+                "k3_model_calls": 0,
+            }
+
     def unified_capability_bus_op(self, operation: str = "audit", **kwargs: Any) -> dict[str, Any]:
         if operation == "audit":
             return UnifiedCapabilityBusEngine.audit_bus()

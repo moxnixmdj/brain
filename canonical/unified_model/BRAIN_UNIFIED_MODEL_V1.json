@@ -33051,12 +33051,12 @@
   "routing_tokens": 4116,
   "skills": 18,
   "source_index_entry_points": 575,
-  "source_index_modules": 2321
+  "source_index_modules": 2324
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0ca9918715706d3abbd2ae13edd9dba2aeb5bfc62670ecef162fc435e6de695f"
+  "value": "77401e7d444cc77cb18e49bf24701c0e3b6d4fad7eb335b5aaebfa26b4656465"
  },
  "engines": [
   {
@@ -39333,7 +39333,7 @@
     "carrier_sha256": "426d6f925c303696e7bab9cc2f6c876e52f6c6186e8c9e632244a82d6720c220",
     "entrypoint": "SafeTransferEStitchStrataEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "745985be0f58cb24345b39b299a288d7f46521de52f62872beaa7265bc3f8f59"
+    "source_sha256": "8635c3538441fadde11b2e20984f5bd62bde6a8d269aae589d25a42136a03c7a"
    },
    "summary": "Wave 53 6-stage safe transfer engine unifying MIT E-Stitch e-class canonicalization, structured morphism abstraction, oracle-free alpha-safe templates, STRATA contrast-edge negative-transfer defense (0% blind corruption), hard invalidation, and Ville e-process credit gating.",
    "triggers": [
@@ -39368,7 +39368,7 @@
     "carrier_sha256": "426d6f925c303696e7bab9cc2f6c876e52f6c6186e8c9e632244a82d6720c220",
     "entrypoint": "UnifiedCapabilityBusEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "745985be0f58cb24345b39b299a288d7f46521de52f62872beaa7265bc3f8f59"
+    "source_sha256": "8635c3538441fadde11b2e20984f5bd62bde6a8d269aae589d25a42136a03c7a"
    },
    "summary": "Wave 53 zero-LOC-growth unified capability bus awakening 36 zero-overlap hidden organs (192 -> 228 cumulative DARK modules) and structural front-door intent router raising real SWE issue acceptance from 35.0% to 96.2% while refusing 100% of content-free inputs.",
    "triggers": [
@@ -39403,7 +39403,7 @@
     "carrier_sha256": "426d6f925c303696e7bab9cc2f6c876e52f6c6186e8c9e632244a82d6720c220",
     "entrypoint": "DbspHindsightStrataMemoryEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "745985be0f58cb24345b39b299a288d7f46521de52f62872beaa7265bc3f8f59"
+    "source_sha256": "8635c3538441fadde11b2e20984f5bd62bde6a8d269aae589d25a42136a03c7a"
    },
    "summary": "Wave 54 control-plane memory unifying DBSP Z-set cascade & formal Absence witnesses, Hindsight 4 epistemic networks, P-Mem explicit rollback edges, ForgetEval-Adv 6 primitives (including purge-by-query & shared-attribute release), and STRATA contrast conflict warnings.",
    "triggers": [
@@ -39438,7 +39438,7 @@
     "carrier_sha256": "426d6f925c303696e7bab9cc2f6c876e52f6c6186e8c9e632244a82d6720c220",
     "entrypoint": "DockerlessVerifierAndSelfPlayCurriculumEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "745985be0f58cb24345b39b299a288d7f46521de52f62872beaa7265bc3f8f59"
+    "source_sha256": "8635c3538441fadde11b2e20984f5bd62bde6a8d269aae589d25a42136a03c7a"
    },
    "summary": "Wave 54 7-probe deterministic zero-Docker patch verifier (Dockerless-inspired) and ignorance-ledger-driven self-play bug-injection & blind repair curriculum proving Round-2 skill transfer at K3=0.",
    "triggers": [
@@ -39473,7 +39473,7 @@
     "carrier_sha256": "426d6f925c303696e7bab9cc2f6c876e52f6c6186e8c9e632244a82d6720c220",
     "entrypoint": "FullMetamorphicLawAndPrecisionSlicerEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "745985be0f58cb24345b39b299a288d7f46521de52f62872beaa7265bc3f8f59"
+    "source_sha256": "8635c3538441fadde11b2e20984f5bd62bde6a8d269aae589d25a42136a03c7a"
    },
    "summary": "Wave 54 complete 9/9 metamorphic law repair synthesizer, test-isolation inherited-debt filter, free AST def-use neighbor-regression precision pre-filter, and multi-file top-K call-graph localizer with atomic CoW rollback.",
    "triggers": [
@@ -39508,7 +39508,7 @@
     "carrier_sha256": "426d6f925c303696e7bab9cc2f6c876e52f6c6186e8c9e632244a82d6720c220",
     "entrypoint": "UnifiedMultiRungJitRLAndWebMcpGrounderEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "745985be0f58cb24345b39b299a288d7f46521de52f62872beaa7265bc3f8f59"
+    "source_sha256": "8635c3538441fadde11b2e20984f5bd62bde6a8d269aae589d25a42136a03c7a"
    },
    "summary": "Wave 54 inverted multi-rung JitRL closed-form KL advantage executive loop + task-agnostic JSON-schema multi-step WebMCP & OSWorld 2.1 grounder with WebXSkill step contracts raising WebMCP grounding from 26.9% to 100.0%.",
    "triggers": [
@@ -93592,7 +93592,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/eval/harbor/swe_pro_v2_ci.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "4f5150e9946b09d6fae3b9b83657e9dba68dfc8b1ec13bc4ea515ee72d2ca977",
+   "sha256": "34c513319868fcf76905d0ac25e998e590124a4bd858afd0bb0cf60df00719f1",
    "summary": "CI driver for the official SWE-bench Pro V2 (Harbor) eval.",
    "triggers": [
     "swe",
@@ -96223,7 +96223,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/universal_epistemic_kernel_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "e771a2ff84ba5e6f9996ea2e19cc39aaae6041e3f7b65a2af0e791bf09154eec",
+   "sha256": "88e4d77cb18e50c7b92e19a275f34ef63c34c77cfccb113e055144f6170479e3",
    "summary": "Universal Epistemic Kernel v1 — ONE minimal, zero-LLM, zero-weight algorithm",
    "triggers": [
     "universal",
@@ -96403,7 +96403,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "745985be0f58cb24345b39b299a288d7f46521de52f62872beaa7265bc3f8f59",
+   "sha256": "8635c3538441fadde11b2e20984f5bd62bde6a8d269aae589d25a42136a03c7a",
    "summary": "Wave 53 & Wave 54: Unified Capability Bus, Safe-Transfer E-Stitch + STRATA,",
    "triggers": [
     "wave53",
@@ -170886,7 +170886,7 @@
   "included_source_count": 2563,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "195592c0432726687fcc509d118f8984bb1b7d9b517c48581a012a08d13e8463"
+  "source_tree_digest": "c6557519c8c9813a91d8163312bc9a15dc1900440a8fd701204cf9586cd6217a"
  },
  "research_index": [
   {
@@ -374988,7 +374988,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/epistemic_issue_reproducer_v1.py",
-   "sha256": "c685c7ec75cf9004c103dadb32dffe97b80bfc8cef2f668fcd50c1f4758b9c11",
+   "sha256": "78c7ffc9f9e90053b3cf832b9156e0f9228d2e40c9c4fa927587f031a619be1f",
    "summary": "Zero-LLM, Zero-Weight Polyglot Epistemic Issue-to-Reproducer & Blind SWE Resolver (v1).",
    "symbol_count": 30,
    "symbols": [
@@ -427571,7 +427571,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/universal_epistemic_kernel_v1.py",
-   "sha256": "e771a2ff84ba5e6f9996ea2e19cc39aaae6041e3f7b65a2af0e791bf09154eec",
+   "sha256": "88e4d77cb18e50c7b92e19a275f34ef63c34c77cfccb113e055144f6170479e3",
    "summary": "Universal Epistemic Kernel v1 — ONE minimal, zero-LLM, zero-weight algorithm",
    "symbol_count": 63,
    "symbols": [
@@ -431474,7 +431474,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-   "sha256": "745985be0f58cb24345b39b299a288d7f46521de52f62872beaa7265bc3f8f59",
+   "sha256": "8635c3538441fadde11b2e20984f5bd62bde6a8d269aae589d25a42136a03c7a",
    "summary": "Wave 53 & Wave 54: Unified Capability Bus, Safe-Transfer E-Stitch + STRATA,",
    "symbol_count": 43,
    "symbols": [
@@ -434471,6 +434471,44 @@
    "capability": false,
    "classification": "ORPHAN",
    "executable_entry_point": false,
+   "id": "source:canonical/swe_kernel/container_exec_bridge_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/swe_kernel/container_exec_bridge_v1.py",
+   "sha256": "68a3678e99092268ae43e71f547e2cb24dc5248af1181c6e254904416f197b2b",
+   "summary": "Thread-local container-execution bridge for zero-LLM SWE verification inside Harbor containers.",
+   "symbol_count": 5,
+   "symbols": [
+    "ContainerExecBridge",
+    "ContainerToolchain",
+    "activate_bridge",
+    "get_active_bridge",
+    "probe_container_toolchain"
+   ],
+   "terms": {
+    "activate_bridge": 1,
+    "bridge": 2,
+    "container": 1,
+    "container-execution": 1,
+    "containerexecbridge": 1,
+    "containers": 1,
+    "containertoolchain": 1,
+    "exec": 1,
+    "get_active_bridge": 1,
+    "harbor": 1,
+    "inside": 1,
+    "probe_container_toolchain": 1,
+    "swe": 1,
+    "thread-local": 1,
+    "v1": 1,
+    "verification": 1,
+    "zero-llm": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
    "id": "source:canonical/swe_kernel/contract_grounded_repair_v1.py",
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
@@ -436165,6 +436203,71 @@
    "capability": false,
    "classification": "ORPHAN",
    "executable_entry_point": false,
+   "id": "source:canonical/swe_kernel/go_and_jsts_causal_swe_engine_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/swe_kernel/go_and_jsts_causal_swe_engine_v1.py",
+   "sha256": "841ffb0e194babb5924d7e60ee810b1d8ae719c4cba001044e087d6bcdd18a05",
+   "summary": "Production Go + JavaScript/TypeScript Causal SWE Engine & Prose Reproducer (K3=0, $0.00).",
+   "symbol_count": 18,
+   "symbols": [
+    "GoFunctionInfo",
+    "ProseBugCues",
+    "_build_js_probes",
+    "_ensure_go_import",
+    "_go_zero_value_return",
+    "_is_js_test_file",
+    "_js_repair_candidates",
+    "_parse_go_first_param",
+    "discover_js_ts_files",
+    "infer_js_arg_type",
+    "parse_go_test_failure",
+    "parse_prose_cues",
+    "scan_go_repo",
+    "scan_js_ts_symbols",
+    "solve_go_repository",
+    "solve_js_ts_from_prose",
+    "synthesize_go_candidates",
+    "synthesize_go_reproducer_test"
+   ],
+   "terms": {
+    "0.00": 1,
+    "build_js_probes": 1,
+    "causal": 2,
+    "discover_js_ts_files": 1,
+    "engine": 2,
+    "ensure_go_import": 1,
+    "go": 2,
+    "go_zero_value_return": 1,
+    "gofunctioninfo": 1,
+    "infer_js_arg_type": 1,
+    "is_js_test_file": 1,
+    "javascript": 1,
+    "js_repair_candidates": 1,
+    "jsts": 1,
+    "k3": 1,
+    "parse_go_first_param": 1,
+    "parse_go_test_failure": 1,
+    "parse_prose_cues": 1,
+    "production": 1,
+    "prose": 1,
+    "prosebugcues": 1,
+    "reproducer": 1,
+    "scan_go_repo": 1,
+    "scan_js_ts_symbols": 1,
+    "solve_go_repository": 1,
+    "solve_js_ts_from_prose": 1,
+    "swe": 2,
+    "synthesize_go_candidates": 1,
+    "synthesize_go_reproducer_test": 1,
+    "typescript": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
    "id": "source:canonical/swe_kernel/goal_dag_executor_v1.py",
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
@@ -437791,6 +437894,51 @@
     "v1": 1,
     "witness_environments": 1,
     "written": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/swe_kernel/minimal_subtree_transfer_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/swe_kernel/minimal_subtree_transfer_v1.py",
+   "sha256": "a246df4e35d8753082c53598ca90034572d404d59a6502e9b44661a332fada0f",
+   "summary": "Full-Function AST-Diff & Minimal Subtree Delta Cross-Repo Transfer Engine (K3=0, $0.00).",
+   "symbol_count": 9,
+   "symbols": [
+    "MinimalSubtreeRule",
+    "MinimalSubtreeTransferStore",
+    "_alpha_sig_and_template",
+    "_collect_functions",
+    "_instantiate_template",
+    "_match_template",
+    "collect_function_scope",
+    "extract_function_ast_deltas",
+    "minimal_changed_subtrees"
+   ],
+   "terms": {
+    "0.00": 1,
+    "alpha_sig_and_template": 1,
+    "ast-diff": 1,
+    "collect_function_scope": 1,
+    "collect_functions": 1,
+    "cross-repo": 1,
+    "delta": 1,
+    "engine": 1,
+    "extract_function_ast_deltas": 1,
+    "full-function": 1,
+    "instantiate_template": 1,
+    "k3": 1,
+    "match_template": 1,
+    "minimal": 2,
+    "minimal_changed_subtrees": 1,
+    "minimalsubtreerule": 1,
+    "minimalsubtreetransferstore": 1,
+    "subtree": 2,
+    "transfer": 2,
+    "v1": 1
    }
   },
   {

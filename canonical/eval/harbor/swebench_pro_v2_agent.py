@@ -618,14 +618,57 @@ class CausalEngineAgent(_BaseAgent):  # type: ignore[misc,valid-type]
                 report["status"] = "TREE_TOO_BIG"
                 return report
 
-            rep = run_engine_on_tree(
-                tree,
-                instruction,
-                store_path=self.store_path,
-                memory_path=self.memory_path,
-                ablate_store=self.ablate_store,
-                timeout_s=self.agent_timeout_s,
+            import asyncio
+            from canonical.swe_kernel import container_exec_bridge_v1 as _ce_bridge
+
+            loop = asyncio.get_running_loop()
+
+            def _exec_sync(cmd_shell: str, timeout_sec: float = 30.0) -> tuple[int, str, str]:
+                try:
+                    fut = asyncio.run_coroutine_threadsafe(
+                        environment.exec(cmd_shell, timeout_sec=max(5, int(timeout_sec))),
+                        loop,
+                    )
+                    res = fut.result(timeout=max(10.0, float(timeout_sec) + 15.0))
+                    return (
+                        int(getattr(res, "return_code", 1) or 0),
+                        str(getattr(res, "stdout", "") or ""),
+                        str(getattr(res, "stderr", "") or ""),
+                    )
+                except Exception as exc:
+                    return 125, "", f"BRIDGE_EXEC_ERROR:{type(exc).__name__}:{exc}"
+
+            toolchain = await asyncio.to_thread(
+                _ce_bridge.probe_container_toolchain, workdir, _exec_sync
             )
+            report["container_toolchain"] = {
+                "python_exe": toolchain.python_exe,
+                "has_pytest": toolchain.has_pytest,
+                "go_exe": toolchain.go_exe,
+                "node_exe": toolchain.node_exe,
+                "vitest_bin": toolchain.vitest_bin,
+                "jest_bin": toolchain.jest_bin,
+            }
+            bridge = _ce_bridge.ContainerExecBridge(
+                workdir=workdir,
+                host_root=tree,
+                exec_fn=_exec_sync,
+                toolchain=toolchain,
+            )
+
+            def _run_with_bridge() -> dict[str, Any]:
+                with _ce_bridge.activate_bridge(bridge):
+                    return run_engine_on_tree(
+                        tree,
+                        instruction,
+                        store_path=self.store_path,
+                        memory_path=self.memory_path,
+                        ablate_store=self.ablate_store,
+                        timeout_s=self.agent_timeout_s,
+                    )
+
+            rep = await asyncio.to_thread(_run_with_bridge)
+            report["container_exec_calls"] = bridge.calls
             report.update({k: v for k, v in rep.items() if k != "changed"})
             changed = rep["changed"]
             report["changed"] = changed

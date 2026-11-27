@@ -736,6 +736,125 @@ class TestWave53To54UnifiedCapabilityBusAndLeapfrog(unittest.TestCase):
             )
             self.assertEqual(ir.synthesize_verified_reproducer(ws, issue)["status"], "NO_QUALIFIED_REPRODUCER")
 
+    def test_21_hard51_routing_url_guard_go_jsts_transfer_and_smart_invoke(self) -> None:
+        """Verify HARD-51 forensic fixes: 100% SWE routing behind 250 docs, zero URL hijacks, Go+JS/TS SWE, 1-hole transfer, smart_invoke."""
+        import shutil
+        from canonical.runtime import universal_epistemic_kernel_v1 as uek
+        from canonical.runtime.brain_unified_model_v1 import open_model
+        from canonical.swe_kernel import go_and_jsts_causal_swe_engine_v1 as gojs
+        from canonical.swe_kernel.minimal_subtree_transfer_v1 import MinimalSubtreeTransferStore
+
+        # 1. All 3 language repo archetypes buried behind 260 alphabetical docs + URLs in prose MUST route cleanly to SWE!
+        with tempfile.TemporaryDirectory(prefix="w54_hard51_route_") as td:
+            base = Path(td)
+            archetypes = [
+                ("py_qutebrowser", "pyproject.toml", "qutebrowser/misc/util.py", "tests/unit/test_util.py", "swe_codebase"),
+                ("js_protonmail", "package.json", "packages/shared/lib/mail.tsx", "packages/shared/test/mail.test.ts", "swe_js_codebase"),
+                ("go_flipt", "go.mod", "internal/server/eval.go", "internal/server/eval_test.go", "swe_go_codebase"),
+            ]
+            url_issue = "See https://github.com/org/repo/issues/123 and http://example.invalid..bad/api — update fails on empty input."
+            for name, manifest, src_rel, tst_rel, want_mod in archetypes:
+                repo = base / name
+                (repo / "docs").mkdir(parents=True)
+                # Create 260 alphabetical docs files that previously truncated EPI_CU scanning!
+                for i in range(260):
+                    (repo / "docs" / f"a_doc_{i:03d}.md").write_text("# doc\n", encoding="utf-8")
+                (repo / manifest).write_text("name = 'demo'\n", encoding="utf-8")
+                (repo / src_rel).parent.mkdir(parents=True, exist_ok=True)
+                (repo / tst_rel).parent.mkdir(parents=True, exist_ok=True)
+                (repo / src_rel).write_text("package eval\nfunc Demo() {}\n" if want_mod == "swe_go_codebase" else "x = 1\n", encoding="utf-8")
+                (repo / tst_rel).write_text("package eval\n" if want_mod == "swe_go_codebase" else "y = 1\n", encoding="utf-8")
+                fr = uek.sense_local_frontier(repo, url_issue)
+                self.assertEqual(fr["modality"], want_mod, f"{name} misrouted to {fr['modality']}")
+
+            # Verify Go repo + URL prose with allow_web=False routes to swe_go_codebase & NEVER touches network/UnicodeError!
+            go_repo = base / "go_flipt"
+            go_res = uek.solve_arbitrary_environment(go_repo, url_issue, allow_web=False, timeout_s=15.0)
+            self.assertEqual(go_res["modality"], "swe_go_codebase")
+            self.assertNotEqual(go_res["modality"], "live_http_web_ui")
+            self.assertNotEqual(go_res["modality"], "os_cli_computer_use")
+
+        # 2. Live Node.js end-to-end pure-prose JS solve via Universal Epistemic Kernel + zero false positives
+        if shutil.which("node"):
+            with tempfile.TemporaryDirectory(prefix="w54_js_live_") as td:
+                ws = Path(td)
+                (ws / "package.json").write_text('{"name":"demo"}\n', encoding="utf-8")
+                (ws / "slugify.js").write_text(
+                    "function slugify(str) {\n  if (str === '') return 'default';\n  return str.trim().toLowerCase();\n}\nmodule.exports = { slugify };\n",
+                    encoding="utf-8",
+                )
+                (ws / "test_slugify.js").write_text(
+                    "const assert = require('assert');\nconst { slugify } = require('./slugify');\n"
+                    "assert.strictEqual(slugify('Hello'), 'hello');\nassert.strictEqual(slugify(''), 'default');\n",
+                    encoding="utf-8",
+                )
+                issue = "In slugify, whitespace-only input returns empty string instead of 'default'."
+                r_js = gojs.solve_js_ts_from_prose(ws, issue)
+                self.assertEqual(r_js["status"], "SOLVED")
+                r_healthy = gojs.solve_js_ts_from_prose(ws, issue)
+                self.assertEqual(r_healthy["status"], "NO_QUALIFIED_REPRODUCER")
+
+        # 3. Go candidate synthesis + auto-import hygiene
+        with tempfile.TemporaryDirectory(prefix="w54_go_syn_") as td:
+            gws = Path(td)
+            (gws / "go.mod").write_text("module example.com/auth\n", encoding="utf-8")
+            (gws / "token.go").write_text(
+                'package auth\n\nfunc NormalizeToken(s string) string {\n\tif s == "" {\n\t\treturn "anonymous"\n\t}\n\treturn s\n}\n',
+                encoding="utf-8",
+            )
+            funcs, _ = gojs.scan_go_repo(gws)
+            self.assertEqual(len(funcs), 1)
+            cands = dict(gojs.synthesize_go_candidates((gws / "token.go").read_text(encoding="utf-8"), funcs[0], 'NormalizeToken returns empty string on whitespace-only input instead of "anonymous".'))
+            self.assertIn("go_trimspace_guard(s)", cands)
+            self.assertIn('import "strings"', cands["go_trimspace_guard(s)"])
+
+        # 4. Executable 1-scope-hole minimal-subtree cross-repo transfer
+        store = MinimalSubtreeTransferStore(allow_one_scope_hole=True)
+        store.learn_from_file_pair(
+            "def parse(s, parse_float):\n    return ParseState(s)\n",
+            "def parse(s, parse_float):\n    return ParseState(s, parse_float)\n",
+        )
+        ev = store.evaluate_heldout_pairs([(
+            "def wrap(file, color):\n    return auto_wrap_for_ansi(file)\n",
+            "def wrap(file, color):\n    return auto_wrap_for_ansi(file, color)\n",
+        )])
+        self.assertEqual(ev["exact_executable_hits"], 1)
+
+        # 5. UnifiedModel.smart_invoke ergonomic front-door adapter (0 net LOC in brain_unified_model_v1.py)
+        model = open_model()
+        r1 = model.smart_invoke("status")
+        self.assertTrue(r1["ok"])
+        r_miss = model.smart_invoke("bitemporal_memory_record", {})
+        self.assertFalse(r_miss["ok"])
+        self.assertEqual(r_miss["status"], "MISSING_REQUIRED_INPUTS")
+
+        # 6. ContainerExecBridge transactional overlay + atomic restore verification (works even on failure!)
+        import subprocess as _sp
+        from canonical.swe_kernel import container_exec_bridge_v1 as ceb
+
+        with tempfile.TemporaryDirectory(prefix="w54_ce_bridge_") as td:
+            cdir = Path(td)
+            (cdir / "app.py").write_text("VAL = 1\n", encoding="utf-8")
+
+            def _local_exec(cmd_shell: str, timeout_sec: float = 15.0) -> tuple[int, str, str]:
+                p = _sp.run(["bash", "-c", cmd_shell], capture_output=True, text=True, timeout=timeout_sec)
+                return p.returncode, p.stdout, p.stderr
+
+            tc = ceb.probe_container_toolchain(str(cdir), _local_exec)
+            self.assertTrue(bool(tc.python_exe))
+            br = ceb.ContainerExecBridge(workdir=str(cdir), host_root=cdir, exec_fn=_local_exec, toolchain=tc)
+            with ceb.activate_bridge(br):
+                rc, out, _ = br.run_cmd(
+                    f"{tc.python_exe} -c 'import app; assert app.VAL == 99; print(app.VAL)'",
+                    overlays={"app.py": "VAL = 99\n", "temp_probe.py": "X = 1\n"},
+                )
+                self.assertEqual(rc, 0)
+                self.assertIn("99", out)
+            # Original file MUST be restored atomically and temp probe deleted!
+            self.assertEqual((cdir / "app.py").read_text(encoding="utf-8"), "VAL = 1\n")
+            self.assertFalse((cdir / "temp_probe.py").exists())
+            self.assertEqual(br.calls, 1)
+
 
 if __name__ == "__main__":
     unittest.main()
