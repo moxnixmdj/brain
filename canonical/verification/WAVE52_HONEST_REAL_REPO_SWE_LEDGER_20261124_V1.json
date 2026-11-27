@@ -1,0 +1,154 @@
+{
+  "awakened_dark_modules": {
+    "cumulative_w40_w52": 192,
+    "wave51_52_added": 32,
+    "zero_overlap": true
+  },
+  "date_utc": "2026-11-24",
+  "per_task": [
+    {
+      "candidates_tried": 1,
+      "category": "WELL_POSED_EXISTING_MODULE",
+      "commit": "959bb79c",
+      "elapsed_ms": 2514.45,
+      "repaired": true,
+      "repo": "pypa/packaging",
+      "test_file": "tests/test_dependency_groups.py",
+      "well_posed_existing_module": true,
+      "winning_family": "S11_RECURSIVE_COLLECTOR_AND_VISITED_MEMO"
+    },
+    {
+      "candidates_tried": 2,
+      "category": "WELL_POSED_EXISTING_MODULE",
+      "commit": "d2fa9238",
+      "elapsed_ms": 2088.85,
+      "repaired": true,
+      "repo": "pypa/packaging",
+      "test_file": "tests/test_ranges.py",
+      "well_posed_existing_module": true,
+      "winning_family": "S10_SHORT_CIRCUIT_POLICY_GUARD"
+    },
+    {
+      "category": "ILL_POSED_FIXTURE",
+      "commit": "9f5249fb",
+      "repaired": false,
+      "repo": "pypa/packaging",
+      "test_file": "tests/test_metadata.py"
+    },
+    {
+      "candidates_tried": 1,
+      "category": "WELL_POSED_EXISTING_MODULE",
+      "commit": "668da866",
+      "elapsed_ms": 1894.56,
+      "repaired": true,
+      "repo": "pypa/packaging",
+      "test_file": "tests/test_markers.py",
+      "well_posed_existing_module": true,
+      "winning_family": "S8_IMPORT_SYMBOL_ALIAS"
+    },
+    {
+      "candidates_tried": 0,
+      "category": "GREENFIELD_ABSENT_MODULE",
+      "commit": "a3b6a1f6",
+      "elapsed_ms": 102.03,
+      "repaired": false,
+      "repo": "pypa/packaging",
+      "test_file": "tests/test_dependency_groups.py",
+      "well_posed_existing_module": false,
+      "winning_family": null
+    },
+    {
+      "candidates_tried": 1,
+      "category": "WELL_POSED_EXISTING_MODULE",
+      "commit": "f8f16338",
+      "elapsed_ms": 382.93,
+      "repaired": true,
+      "repo": "pypa/packaging",
+      "test_file": "tests/test_structures.py",
+      "well_posed_existing_module": true,
+      "winning_family": "S2_DUNDER_REFLEXIVE_ISINSTANCE_GUARD"
+    },
+    {
+      "category": "ILL_POSED_FIXTURE",
+      "commit": "e83801f4",
+      "repaired": false,
+      "repo": "pypa/packaging",
+      "test_file": "tests/test_metadata.py"
+    },
+    {
+      "candidates_tried": 1,
+      "category": "WELL_POSED_EXISTING_MODULE",
+      "commit": "96dfe2ce",
+      "elapsed_ms": 293.84,
+      "repaired": true,
+      "repo": "hukkin/tomli",
+      "test_file": "tests/test_error.py",
+      "well_posed_existing_module": true,
+      "winning_family": "S3_PUBLIC_REEXPORT_MODULE_NORMALIZATION"
+    },
+    {
+      "candidates_tried": 1,
+      "category": "WELL_POSED_EXISTING_MODULE",
+      "commit": "31c85a18",
+      "elapsed_ms": 3188.83,
+      "repaired": true,
+      "repo": "hukkin/tomli",
+      "test_file": "tests/test_error.py",
+      "well_posed_existing_module": true,
+      "winning_family": "S4_FSTRING_STRIP_REDUNDANT_REPR_QUOTES"
+    },
+    {
+      "candidates_tried": 0,
+      "category": "NON_PYTHON_CONFIG_MIGRATION",
+      "commit": "9af551b5",
+      "elapsed_ms": 18.26,
+      "repaired": false,
+      "repo": "hukkin/tomli",
+      "test_file": "tests/test_misc.py",
+      "well_posed_existing_module": false,
+      "winning_family": null
+    },
+    {
+      "candidates_tried": 2,
+      "category": "WELL_POSED_EXISTING_MODULE",
+      "commit": "67ec7d10",
+      "elapsed_ms": 541.59,
+      "repaired": true,
+      "repo": "hukkin/tomli",
+      "test_file": "tests/test_error.py",
+      "well_posed_existing_module": true,
+      "winning_family": "S9_PARSER_POSITION_ERROR_DIAGNOSTIC+R2_LITERAL_ALIGN"
+    },
+    {
+      "candidates_tried": 1,
+      "category": "WELL_POSED_EXISTING_MODULE",
+      "commit": "5ab9ec92",
+      "elapsed_ms": 368.52,
+      "repaired": true,
+      "repo": "hukkin/tomli",
+      "test_file": "tests/test_misc.py",
+      "well_posed_existing_module": true,
+      "winning_family": "S1_KWARG_CONTEXT_OBJECT_THREAD"
+    }
+  ],
+  "rules": {
+    "full_test_file_pass_required": true,
+    "k3_model_calls": 0,
+    "pure_stdlib_synthesizer": true,
+    "spend_usd": 0.0,
+    "zero_gold_diffs": true
+  },
+  "schema": "BRAIN_WAVE52_HONEST_REAL_REPO_SWE_LEDGER_V1",
+  "totals": {
+    "corpus_fail_tasks_total": 12,
+    "delta_vs_wave49_50_baseline": "4/10 (40.0%) -> 8/10 (80.0%)",
+    "greenfield_absent_module_commits": 1,
+    "ill_posed_missing_fixture_tasks": 2,
+    "non_fixture_corpus_tasks": 10,
+    "non_python_config_migration_commits": 1,
+    "pass_rate_over_10_corpus_tasks": 0.8,
+    "pass_rate_over_8_well_posed_existing_module_bugs": 1.0,
+    "repaired_count": 8,
+    "well_posed_existing_module_python_bugs": 8
+  }
+}

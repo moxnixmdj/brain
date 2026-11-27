@@ -3420,3 +3420,17 @@ def repair_repo_from_issue_zero_leakage(
     res["model_calls"] = 0
     return res
 
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for angelic_cegis_repair_v1."""
+    checks: dict[str, bool] = {}
+    checks["identifies_test_file"] = _is_test_or_oracle_file("tests/test_alpha.py") is True
+    checks["identifies_prod_file"] = _is_test_or_oracle_file("src/pkg/core.py") is False
+    checks["pytest_real_pass_positive"] = _pytest_passed_real_tests("3 passed in 0.05s\n", "") is True
+    checks["pytest_zero_collected_rejected"] = _pytest_passed_real_tests("no tests ran in 0.01s\n", "") is False
+    _src = "def f(x):\n    return x + 1\n"
+    _tree = ast.parse(_src)
+    _ret_val = _tree.body[0].body[0].value
+    _spliced = splice_ast_node(_src, _ret_val, "x + 2")
+    checks["splice_ast_node_works"] = isinstance(_spliced, str) and "return x + 2" in _spliced
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}

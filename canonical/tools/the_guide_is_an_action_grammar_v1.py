@@ -2516,5 +2516,19 @@ def main(argv: Sequence[str] | None = None) -> int:
     return 0
 
 
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for the_guide_is_an_action_grammar_v1."""
+    checks: dict[str, bool] = {}
+    _syn = parse_synopsis("Usage: tool [OPTIONS] INPUT OUTPUT\n")
+    checks["parse_synopsis_dict"] = isinstance(_syn, dict)
+    _opts = parse_declared_options("  -o, --output FILE   Write output to FILE\n  -v, --verbose       Verbose logs\n")
+    checks["parse_declared_options_finds_flags"] = isinstance(_opts, dict) and ("-o" in _opts or "--output" in _opts)
+    _b = Budget(runs=2)
+    checks["budget_take_1"] = _b.take() is True
+    checks["budget_take_2"] = _b.take() is True
+    checks["budget_exhausted_negative"] = _b.take() is False
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
+
 if __name__ == "__main__":
     raise SystemExit(main())

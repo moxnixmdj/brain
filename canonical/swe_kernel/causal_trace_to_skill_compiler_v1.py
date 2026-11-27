@@ -2577,3 +2577,23 @@ def prune_non_causal_steps_counterfactually(
         "k3_external_llm_calls": 0,
     }
 
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for causal_trace_to_skill_compiler_v1."""
+    checks: dict[str, bool] = {}
+    _trace = [
+        {"op": "noop_1", "essential": False},
+        {"op": "write_target", "essential": True},
+        {"op": "noop_2", "essential": False},
+    ]
+    _res = prune_non_causal_steps_counterfactually(
+        _trace,
+        lambda steps: any(s.get("op") == "write_target" for s in steps),
+    )
+    _kept = _res.get("minimal_trace") or _res.get("pruned_trace") or _res.get("steps") or []
+    checks["prunes_non_causal_steps"] = len(_kept) == 1 and _kept[0].get("op") == "write_target"
+    _res_fail = prune_non_causal_steps_counterfactually(_trace, lambda _steps: False)
+    checks["handles_failing_oracle"] = isinstance(_res_fail, dict)
+    _ok_pre, _ = check_step_preconditions([])
+    checks["empty_preconditions_ok"] = _ok_pre is True
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}

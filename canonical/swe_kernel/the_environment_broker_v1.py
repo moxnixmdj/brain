@@ -1741,5 +1741,23 @@ def main(argv: Sequence[str] | None = None) -> int:
     return 0 if ok else 1
 
 
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for the_environment_broker_v1."""
+    import tempfile as _tf
+    checks: dict[str, bool] = {}
+    checks["normalize_name_pep503"] = normalize_name("My_Pkg.Name") == "my-pkg-name"
+    _req = parse_requirement("pytest>=7.0")
+    checks["parse_requirement_name"] = isinstance(_req, dict) and _req.get("name") == "pytest"
+    checks["specifier_satisfied_pos"] = specifier_satisfied("7.4.0", ">=7.0") is True
+    checks["specifier_satisfied_neg"] = specifier_satisfied("6.2.0", ">=7.0") is False
+    with _tf.TemporaryDirectory(prefix="w51_eb_") as _td:
+        _p = pathlib.Path(_td)
+        (_p / "src" / "pkg").mkdir(parents=True)
+        (_p / "src" / "pkg" / "__init__.py").write_text("", encoding="utf-8")
+        _lay = detect_layout(_p)
+        checks["detect_src_layout"] = isinstance(_lay, dict) and bool(_lay)
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
+
 if __name__ == "__main__":
     raise SystemExit(main())

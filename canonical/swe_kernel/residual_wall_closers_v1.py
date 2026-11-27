@@ -2569,6 +2569,25 @@ def receipt(result: WallResult, suite_tail: str = "") -> dict[str, Any]:
     return doc
 
 
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for residual_wall_closers_v1."""
+    checks: dict[str, bool] = {}
+    _m1 = NoneGuardToTruthiness()
+    _src_pos = "def f(items: list[str] | None):\n    if items is not None:\n        return len(items)\n    return 0\n"
+    _cands_pos = _m1.mine(_src_pos, "f")
+    checks["none_guard_mines_list"] = isinstance(_cands_pos, list)
+    _src_neg = "def f(x: int):\n    return x + 1\n"
+    checks["none_guard_empty_negative"] = len(_m1.mine(_src_neg, "f")) == 0
+    _m2 = AssertContractToTypedRaise()
+    _cands_assert = _m2.mine("def g(x: int):\n    assert x > 0, 'must be positive'\n    return x\n", "g")
+    checks["assert_to_raise_positive"] = isinstance(_cands_assert, list) and len(_cands_assert) >= 1
+    checks["apply_edits_identity"] = apply_edits(_src_neg, []) == _src_neg
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
+
+
+
+
 if __name__ == "__main__":
     root = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "/tmp/corpus_repos")
     stub = pathlib.Path(sys.argv[2]) if len(sys.argv) > 2 else None

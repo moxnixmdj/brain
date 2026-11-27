@@ -2143,3 +2143,27 @@ def emit_expr(expr: IRExpr, lang: str) -> str:
     if op in bin_sym and len(expr.args) == 2:
         return f"({emit_expr(expr.args[0], lang)} {bin_sym[op]} {emit_expr(expr.args[1], lang)})"
     return expr.pretty()
+
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for semantic_ir_v1."""
+    checks: dict[str, bool] = {}
+    checks["detect_lang_python"] = detect_language("foo/bar.py") == "python"
+    checks["detect_lang_rust"] = detect_language("src/lib.rs") == "rust"
+    _i1 = Interval(1.0, 5.0)
+    _i2 = Interval(3.0, 8.0)
+    _m = _i1.meet(_i2)
+    _j = _i1.join(_i2)
+    checks["interval_meet"] = _m.lo == 3.0 and _m.hi == 5.0
+    checks["interval_join"] = _j.lo == 1.0 and _j.hi == 8.0
+    _disj = Interval(1.0, 2.0).meet(Interval(5.0, 6.0))
+    checks["interval_disjoint_bottom"] = bool(_disj.is_bottom() if callable(_disj.is_bottom) else _disj.is_bottom)
+    _eg = SemanticEGraph()
+    _a = _eg.add_expr(IRExpr("VAR", (), "x"))
+    _b = _eg.add_expr(IRExpr("VAR", (), "y"))
+    checks["egraph_distinct_initially"] = _eg.find(_a) != _eg.find(_b)
+    _eg.union(_a, _b)
+    checks["egraph_unified_after_union"] = _eg.find(_a) == _eg.find(_b)
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
+
+

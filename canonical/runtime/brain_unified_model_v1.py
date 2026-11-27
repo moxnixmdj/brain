@@ -575,18 +575,18 @@ def _extract_secondary_indexes(full: Mapping[str, Any], raw_sha: str) -> dict[st
 # --------------------------------------------------------------------------- model
 
 
-# The full installation includes Waves 40-50; blind worker mounts deliberately omit them.
+# The full installation includes Waves 40-52; blind worker mounts deliberately omit them.
 try:
-    from canonical.runtime.wave49_50_structural_ast_repair_and_titan_adjudication_v1 import (
-        Wave49To50UnifiedModelMixin as _Wave49To50UnifiedModelMixin,
+    from canonical.runtime.wave51_52_sliced_structural_swe_and_stranded_treasury_v1 import (
+        Wave51To52UnifiedModelMixin as _Wave51To52UnifiedModelMixin,
     )
-    _Wave40To42UnifiedModelMixin = _Wave49To50UnifiedModelMixin
+    _Wave49To50UnifiedModelMixin = _Wave40To42UnifiedModelMixin = _Wave51To52UnifiedModelMixin
 except ModuleNotFoundError as exc:
-    if not str(exc.name or "").startswith("canonical.runtime.wave4"):
+    if not str(exc.name or "").startswith(("canonical.runtime.wave4", "canonical.runtime.wave5")):
         raise
-    _Wave49To50UnifiedModelMixin = _Wave40To42UnifiedModelMixin = object
+    _Wave51To52UnifiedModelMixin = _Wave49To50UnifiedModelMixin = _Wave40To42UnifiedModelMixin = object
 
-class UnifiedModel(_Wave49To50UnifiedModelMixin):
+class UnifiedModel(_Wave51To52UnifiedModelMixin):
     """A loaded, digest-verified unified model."""
 
     def __init__(

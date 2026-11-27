@@ -2768,3 +2768,17 @@ def write_pr_description_and_verify(target: Path, goal: str) -> dict[str, Any]:
         "target_file": str(desc_path),
         "target_sha256": _sha256_bytes(desc_path.read_bytes()),
     }
+
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for polyglot_build_ci_engine_v1."""
+    checks: dict[str, bool] = {}
+    checks["balanced_positive"] = _balanced_delimiters("fn f(x: i32) -> i32 { return (x + 1); }") is True
+    checks["balanced_negative"] = _balanced_delimiters("fn f(x: i32) { return (x + 1; }") is False
+    _expr = _infer_arith_expr("add_two", ["a", "b"])
+    checks["infer_arith_add"] = isinstance(_expr, str) and "+" in _expr
+    _fn = _extract_requested_fn_name("implement function compute_total in module", default="fallback")
+    checks["extract_fn_name"] = _fn == "compute_total"
+    _stripped = _strip_ts_types_for_node_check("function add(a: number, b: number): number { return a + b; }")
+    checks["strip_ts_types"] = "return a + b" in _stripped and ": number" not in _stripped
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}

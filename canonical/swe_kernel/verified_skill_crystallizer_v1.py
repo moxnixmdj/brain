@@ -2691,3 +2691,36 @@ class VerifiedSkillStore:
             error_class=bug_class,
         )
         return res if res.get("crystallized") else None
+
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for verified_skill_crystallizer_v1."""
+    import tempfile as _tf
+    checks: dict[str, bool] = {}
+    with _tf.TemporaryDirectory(prefix="w51_vsc_") as _td:
+        _store = VerifiedSkillStore(pathlib.Path(_td) / "skills.json", seed=False)
+        _rule = _store.crystallize_code_fix(
+            before_snippet="def f(x):\n    return x == None\n",
+            after_snippet="def f(x):\n    return x is None\n",
+            language="python",
+            error_class="COMPARISON",
+            twin_oracle=lambda code: "is None" in code,
+        )
+        checks["crystallize_creates_rule"] = isinstance(_rule, dict) and _rule.get("crystallized") is True
+        _recalled = _store.recall_and_apply_verified(
+            source_text="def g(y):\n    return y == None\n",
+            language="python",
+            verifier=lambda code: "is None" in code,
+            error_class="COMPARISON",
+        )
+        checks["recall_apply_positive"] = isinstance(_recalled, dict) and "is None" in str(_recalled.get("patched_source") or _recalled.get("source") or "")
+        _miss = _store.recall_and_apply_verified(
+            source_text="def h(z):\n    return z + 1\n",
+            language="python",
+            verifier=lambda code: "is None" in code,
+            error_class="COMPARISON",
+        )
+        checks["recall_apply_negative_no_match"] = _miss is None
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
+
+

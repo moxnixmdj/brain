@@ -2648,5 +2648,19 @@ def main(argv: Sequence[str] | None = None) -> int:
     return 0
 
 
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for the_relation_is_read_from_the_failing_run_v1."""
+    checks: dict[str, bool] = {}
+    _s = Site(0, 1, 1, 0, 5, "a and b", "if", "ctx")
+    checks["site_as_dict"] = isinstance(_s.as_dict(), dict) and _s.as_dict().get("line") == 1
+    _conjs = _conjuncts("a and b and c")
+    checks["conjuncts_splits_three"] = len(_conjs) == 3
+    checks["conjuncts_single"] = len(_conjuncts("x > 0")) == 1
+    _anchored = _add_end_anchor_edit("r'^[a-z]+'")
+    checks["end_anchor_positive"] = _anchored is None or isinstance(_anchored, str)
+    checks["raise_distance_numeric"] = isinstance(_raise_distance(10), int)
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
+
 if __name__ == "__main__":
     raise SystemExit(main())

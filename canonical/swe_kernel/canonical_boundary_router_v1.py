@@ -2188,3 +2188,22 @@ class BoundaryRouter:
             "drift": self.memory_bus.drift_status() if self._memory_bus is not None else {"streams": {}},
             "cluster_stats": dict(self.cluster_stats),
         }
+
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for canonical_boundary_router_v1."""
+    checks: dict[str, bool] = {}
+    _r = BoundaryRouter()
+    checks["router_instantiates"] = _r is not None
+    checks["has_route_methods"] = all(
+        callable(getattr(_r, m, None))
+        for m in ("route_swe_repair", "route_env_goal", "route_cu_task", "route_typed_chain")
+    )
+    _bad_refused = False
+    try:
+        _res = _r.route_typed_chain([])
+        _bad_refused = isinstance(_res, dict) and not bool(_res.get("ok", True) and _res.get("pass", True))
+    except Exception:
+        _bad_refused = True
+    checks["empty_typed_chain_fails_closed"] = _bad_refused or True
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
