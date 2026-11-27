@@ -1,0 +1,35 @@
+name: Verify GenOffice DOCX mechanical candidate
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/verify-genoffice-docx-candidate.yml
+      - canonical/reasoning/2026-10-02_GENOFFICE_DOCX_CANDIDATE_SCREEN_V1.json
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: genspark-ai/genoffice
+          ref: db347087628281d49e53d009183d2fb506c3a444
+          path: external/genoffice
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.12.0'
+          cache: npm
+          cache-dependency-path: external/genoffice/package-lock.json
+      - name: Install pinned GenOffice dependencies without lifecycle scripts
+        working-directory: external/genoffice
+        run: npm ci --ignore-scripts
+      - name: Verify bounded DOCX parse patch and round-trip mechanics
+        working-directory: external/genoffice
+        run: npm run test -w @genoffice/docx-engine -- tests/hostile-input.test.ts tests/text-patch.test.ts tests/roundtrip.test.ts
