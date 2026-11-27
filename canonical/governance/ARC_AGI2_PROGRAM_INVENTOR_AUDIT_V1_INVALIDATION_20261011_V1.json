@@ -1,0 +1,20 @@
+{
+  "schema": "PROJECT_BRAIN_ARC_AGI2_PROGRAM_INVENTOR_AUDIT_V1_INVALIDATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INVALIDATED_BEFORE_RESULT_ACCEPTANCE__SCORER_SEMANTICS_TOO_STRICT__ZERO_CREDIT",
+  "invalidated_preexposure": "canonical/governance/ARC_AGI2_PUBLIC_EVAL_PROGRAM_INVENTOR_PREEXPOSURE_20261011_V1.json",
+  "reason": "V1 exact-task scoring required one candidate program to solve every test input. ARC two-attempt semantics permit two candidate outputs independently for each test input.",
+  "discovery_timing": "DISCOVERED_WHILE_EXECUTION_WAS_RUNNING_AND_BEFORE_ANY_AGGREGATE_RESULT_FILE_EXISTED_OR_WAS_READ",
+  "task_level_information_observed": false,
+  "aggregate_result_observed": false,
+  "execution_terminated": true,
+  "credit_delta": 0,
+  "repair": "CORRECT_SCORE_REDUCTION_ONLY__NO_SOLVER_OR_PRIMITIVE_CHANGE",
+  "hard_nonclaims": [
+    "NO_V1_SCORE",
+    "NO_V1_GENERALIZATION_CREDIT",
+    "NO_TASK_LEVEL_FAILURE_INFORMATION_USED"
+  ],
+  "promotion_authority": false,
+  "terminal_credit_delta": 0
+}

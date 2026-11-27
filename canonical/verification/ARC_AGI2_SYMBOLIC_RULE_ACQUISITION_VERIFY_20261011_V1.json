@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_ARC_AGI2_SYMBOLIC_RULE_ACQUISITION_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ACQUISITION_COMPLETE__PARTIAL_GENERALIZATION__OVERFIT_GAP_LOCALIZED__ZERO_PROMOTION_CREDIT",
+  "split_governance": "canonical/governance/ARC_AGI2_TRAINING_ACQUISITION_SPLIT_PREEXPOSURE_20261011_V1.json",
+  "resource_bound_repair": "canonical/governance/ARC_AGI2_SYMBOLIC_RULE_ACQUISITION_V1_RESOURCE_BOUND_REPAIR_20261011_V1.json",
+  "dataset": {
+    "repository": "arcprize/ARC-AGI-2",
+    "commit": "f3283f727488ad98fe575ea6a5ac981e4a188e49",
+    "partition": "ACQUISITION_FIRST_800_BY_FROZEN_FILENAME_HASH_ORDER",
+    "partition_corpus_sha256": "5e9c5b3c6115736ecd7081789170e33c2ce06ee9d6c37312a9e13bd9d418c1ca"
+  },
+  "subject": {
+    "runtime_path": "canonical/runtime/visual_symbolic_rule_inducer_v1.py",
+    "runtime_blob_sha": "b3bcc1cdd3fe246ca734b664c6020d2c47282bbc",
+    "test_blob_sha": "a7eaf0387c54159ea8bfb885b979f87674baa1a9"
+  },
+  "result": {
+    "task_count": 800,
+    "exact_tasks_solved": 45,
+    "exact_task_solve_rate": 0.05625,
+    "tasks_with_exact_training_rule": 278,
+    "exact_training_rule_rate": 0.3475,
+    "induction_status_counts": {
+      "EXACT_RULES_FOUND": 278,
+      "OUT_OF_SCOPE": 250,
+      "REPRESENTATION_INSUFFICIENT": 192,
+      "SEARCH_BOUND_REACHED__NO_EXACT_RULE": 80
+    },
+    "status_counts": {
+      "SOLVED_CANDIDATES": 75,
+      "NO_TEST_PREDICTION": 203,
+      "OUT_OF_SCOPE": 250,
+      "REPRESENTATION_INSUFFICIENT": 192,
+      "SEARCH_BOUND_REACHED__NO_EXACT_RULE": 80
+    },
+    "best_rule_depth_counts": {
+      "0": 4,
+      "1": 26,
+      "2": 34,
+      "3": 45,
+      "4": 169
+    },
+    "aggregate_generated_split_nodes": 2877494,
+    "wall_clock_seconds": 48.17429830999936,
+    "workers": 8,
+    "result_sha256": "bd24c08d736e8d177c1ca09e1e9cb5d8efbf43b158e647e0b7c49d40a0a7582a"
+  },
+  "causal_interpretation": {
+    "positive": "SYMBOLIC_RELATIONAL_FEATURES_PLUS_LEARNED_DECISION_RULES_CAN_SOLVE_NONTRIVIAL_ARC_AGI2_ACQUISITION_TASKS_WITH_ZERO_EXTERNAL_MODEL_CALLS",
+    "primary_observed_gap": "203_TASKS_WITH_EXACT_TRAINING_RULE_PRODUCED_NO_TEST_PREDICTION__MULTIWAY_CATEGORICAL_SPLITS_FAIL_ON_UNSEEN_FEATURE_VALUES",
+    "secondary_gaps": [
+      "250_SHAPE_CHANGE_TASKS_OUT_OF_SCOPE",
+      "192_SAME_SHAPE_TASKS_NOT_REPRESENTABLE_IN_CURRENT_FEATURE_ACTION_LANGUAGE",
+      "80_TASKS_HIT_SEARCH_BOUND"
+    ],
+    "next_action": "REPLACE_OBSERVED_VALUE_LOOKUP_SPLITS_WITH_GENERALIZING_BINARY_PREDICATES_AND_DEFAULT_ELSE_ROUTING__THEN_REMEASURE_ACQUISITION_BEFORE_TOUCHING_DEVELOPMENT_HOLDOUT"
+  },
+  "development_holdout_observed": false,
+  "qualification_holdout_observed": false,
+  "external_learned_capability_calls": 0,
+  "donor_runtime_required": false,
+  "incremental_spend_usd": 0,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0
+}

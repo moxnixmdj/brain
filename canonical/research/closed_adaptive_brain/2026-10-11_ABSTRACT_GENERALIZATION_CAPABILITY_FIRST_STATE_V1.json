@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_ABSTRACT_GENERALIZATION_CAPABILITY_FIRST_STATE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE_CAPABILITY_FIRST_REPAIR__ARC1_HILL_CLIMB_FROZEN__REPRESENTATION_INDUCTION_CRITICAL_PATH",
+  "mission": "BUILD_GENERAL_BRAIN_OWNED_ABSTRACT_VISUAL_GENERALIZATION_CAPABILITY__BENCHMARKS_ARE_FALSIFICATION_AND_AUDIT_INSTRUMENTS",
+  "frozen_baselines": {
+    "arc_agi1_v16": {
+      "governance": "canonical/governance/ARC_AGI1_V16_REGRESSION_BASELINE_FREEZE_20261011_V1.json",
+      "public_training_score": "83/400",
+      "role": "REGRESSION_ACQUISITION_EFFICIENCY_AND_CAUSAL_FAILURE_INSTRUMENT_ONLY",
+      "unseen_generalization_credit": false
+    }
+  },
+  "untouched_falsification": {
+    "arc_agi2_public_eval_program_inventor": {
+      "verification": "canonical/verification/ARC_AGI2_PROGRAM_INVENTOR_PUBLIC_EVAL_VERIFY_20261011_V1.json",
+      "score": "0/120",
+      "meaning": "DEPTH3_COMPOSITION_OF_FROZEN_V16_PARAMETER_FREE_PRIMITIVES_IS_INSUFFICIENT"
+    },
+    "arc_agi2_public_eval_combined": {
+      "verification": "canonical/verification/ARC_AGI2_COMBINED_SOLVER_PUBLIC_EVAL_VERIFY_20261011_V1.json",
+      "score": "0/120",
+      "meaning": "ARC1_V16_DIRECT_RULE_STACK_AND_ITS_FIXED_PRIMITIVE_COMPOSITIONS_HAVE_NO_MEASURED_TRANSFER_TO_THIS_UNTOUCHED_ARC2_SCOPE"
+    }
+  },
+  "current_causal_root": {
+    "id": "OPEN_ENDED_VISUAL_REPRESENTATION_AND_RULE_INDUCTION",
+    "reason": "FIXED_GRAMMAR_SEARCH_EXHAUSTED_WITH_ZERO_TRANSFER__NEW_LATENT_FEATURE_PREDICATE_ACTION_OR_RELATIONAL_REPRESENTATIONS_MUST_BE_INDUCED_FROM_ACQUISITION_DATA",
+    "not_current_roots": [
+      "DEEPER_SEARCH_OVER_SAME_FIXED_PRIMITIVES",
+      "ARC_AGI1_FAILURE_BY_FAILURE_OPERATOR_PATCHING",
+      "HYPOTHESIS_RANKING"
+    ]
+  },
+  "new_brain_owned_runtime": {
+    "finite_program_inventor": "canonical/runtime/finite_visual_program_inventor_v1.py",
+    "visual_symbolic_rule_inducer": "canonical/runtime/visual_symbolic_rule_inducer_v1.py",
+    "arc_program_adapter": "canonical/runtime/arc_visual_program_invention_adapter_v1.py",
+    "conservative_combined_solver": "canonical/runtime/arc_conservative_combined_solver_v1.py"
+  },
+  "development_data_policy": {
+    "split_governance": "canonical/governance/ARC_AGI2_TRAINING_ACQUISITION_SPLIT_PREEXPOSURE_20261011_V1.json",
+    "acquisition": 800,
+    "development_holdout": 100,
+    "qualification_holdout": 100,
+    "qualification_status": "SEALED_UNTOUCHED",
+    "arc_agi2_public_eval_status": "BURNED_AGGREGATE_FALSIFICATION_ONLY__NO_TASK_LEVEL_TUNING"
+  },
+  "promotion_law": [
+    "ACQUISITION_SUCCESS_ALONE_IS_NOT_GENERALIZATION_CREDIT",
+    "REPAIR_MUST_SURVIVE_PREDECLARED_UNTOUCHED_DEVELOPMENT_HOLDOUT",
+    "FINAL_CAPABILITY_PROMOTION_REQUIRES_SEPARATE_FROZEN_QUALIFICATION_AUTHORITY",
+    "CAUSAL_ABLATION_AND_REGRESSION_NONLOSS_REQUIRED_FOR_REUSABLE_PROMOTION"
+  ],
+  "execution_state": {
+    "active_branch": "successor/general-visual-program-inventor-v1-20261011",
+    "current_experiment": "ARC_AGI2_PUBLIC_TRAINING_ACQUISITION_800__VISUAL_SYMBOLIC_RULE_INDUCER_V1",
+    "result_observed": false
+  },
+  "external_learned_capability_calls": 0,
+  "donor_runtime_required": false,
+  "incremental_spend_usd": 0,
+  "arc_parity_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "promotion_authority": false
+}
