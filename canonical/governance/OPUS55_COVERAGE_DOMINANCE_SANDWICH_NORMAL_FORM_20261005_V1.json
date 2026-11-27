@@ -1,0 +1,150 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_COVERAGE_DOMINANCE_SANDWICH_NORMAL_FORM_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__ZERO_REALITY_BEHAVIORAL_PARITY_CERTIFICATION_NORMAL_FORM__WOLFRAM_VERIFIED_LOGIC__CURRENT_TARGET_COVERAGE_AND_DOMINANCE_REMAIN_FAIL_CLOSED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Replace open-ended exhaustive behavior enumeration with a monotone two-sided certificate: sound target supersets shrink from above, scope-complete Brain-dominance domains grow from below, and behavioral parity is certified when the former is contained in the latter. Preserve ownership/permanence as separate terminal gates.",
+  "exact_current_authorities": {
+    "conditional_family_quantifier_theorem": {
+      "path": "canonical/governance/OPUS55_LITERAL_PARITY_QUANTIFIER_MIGRATION_THEOREM_20261005_V1.json",
+      "git_blob_sha": "3d118e2b611445734d3b618a541a817ec9a78c0a"
+    },
+    "conditional_family_quantifier_verification": {
+      "path": "canonical/verification/OPUS55_LITERAL_PARITY_QUANTIFIER_MIGRATION_WOLFRAM_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "7f2c3dde44729f82b3744813c056483d99d122e6"
+    },
+    "w4_scope_truth_repair": {
+      "path": "canonical/governance/W4_TARGET_DISCOVERY_ACTIVATION_SCOPE_TRUTH_REPAIR_20261005_V1.json",
+      "git_blob_sha": "ec4233578ec45efbc4f9e1c0eb5b9019369aead4",
+      "current_rule": "W4_VALID_FOR_TOP_LEVEL_PRIMITIVE_FAMILY_DISCOVERY_AND_SEARCH_COMPRESSION__NOT_A_PROOF_THAT_ALL_TARGET_SPECIFIC_BEHAVIOR_CELLS_ARE_DISCOVERED_OR_DOMINATED"
+    },
+    "w4_scope_truth_repair_verification": {
+      "path": "canonical/verification/W4_TARGET_DISCOVERY_SCOPE_TRUTH_REPAIR_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "1974f8742afe3120e44d7bd97257b135cc8c2c7c"
+    },
+    "fixed_interface_coverage_candidate": {
+      "path": "canonical/governance/OPUS55_FIXED_INTERFACE_TRANSDUCER_TARGET_DISCOVERY_CERTIFICATE_20261005_V2.json",
+      "git_blob_sha": "cbeb240dd269f305268d98904d27dae5b20d70b1",
+      "role": "COVERAGE_CANDIDATE_ONLY__NO_DOMINANCE"
+    },
+    "intrinsic_target_semantics_input": {
+      "path": "canonical/governance/OPUS55_INTRINSIC_CAPABILITY_VS_DEPLOYMENT_PROFILE_BOUNDARY_20261005_V2.json",
+      "git_blob_sha": "9bac958e4db829f94d756cd94709d0c885d43e25",
+      "role": "ZERO_AUTHORITY_TARGET_SEMANTICS_INPUT_ONLY"
+    }
+  },
+  "definitions": {
+    "omega": "THE_FROZEN_UNIVERSE_OF_LOAD_BEARING_INTRINSIC_OPUS55_BEHAVIORAL_CAPABILITY_CELLS_UNDER_THE_TERMINAL_TARGET_SEMANTICS__EXCLUDING_SEPARATE_OWNERSHIP_AND_PERMANENCE_GATES",
+    "U": "THE_EXACT_SET_OF_ALL_ACTUAL_USEFUL_OPUS55_BEHAVIORAL_CAPABILITY_CELLS_SELECTED_BY_THE_FROZEN_TARGET__U_NEED_NOT_BE_EXTENSIONALLY_ENUMERATED",
+    "Q": "THE_SET_OF_BEHAVIORAL_CELLS_ON_WHICH_AN_OWNED_BRAIN_CONFIGURATION_IS_SCOPE_COMPLETE_EQUAL_OR_BETTER_THAN_THE_BOUND_OPUS55_TARGET_UNDER_APPLICABLE_ACCEPTANCE_SEMANTICS",
+    "coverage_certificate_Cj": "A_CONTENT_ADDRESSED_INDEPENDENTLY_VERIFIED_PROOF_OF_U_SUBSET_OR_EQUAL_Cj",
+    "dominance_certificate_Bk": "A_CONTENT_ADDRESSED_INDEPENDENTLY_VERIFIED_SCOPE_COMPLETE_PROOF_OF_Bk_SUBSET_OR_EQUAL_Q",
+    "C_star": "INTERSECTION_OF_ALL_CURRENTLY_ADMITTED_COVERAGE_CERTIFICATE_DOMAINS_Cj",
+    "B_star": "UNION_OF_ALL_CURRENTLY_ADMITTED_DOMINANCE_CERTIFICATE_DOMAINS_Bk",
+    "R": "C_star_SET_MINUS_B_star__THE_CURRENT_SANDWICH_CERTIFICATION_RESIDUAL"
+  },
+  "theorem": {
+    "name": "COVERAGE_DOMINANCE_SANDWICH",
+    "premises": [
+      "FOR_EVERY_ADMITTED_COVERAGE_CERTIFICATE_j__U_SUBSET_OR_EQUAL_Cj",
+      "FOR_EVERY_ADMITTED_DOMINANCE_CERTIFICATE_k__Bk_SUBSET_OR_EQUAL_Q",
+      "C_star_EQUALS_INTERSECTION_j_Cj",
+      "B_star_EQUALS_UNION_k_Bk",
+      "C_star_SUBSET_OR_EQUAL_B_star"
+    ],
+    "derived": [
+      "U_SUBSET_OR_EQUAL_C_star",
+      "B_star_SUBSET_OR_EQUAL_Q",
+      "U_SUBSET_OR_EQUAL_Q"
+    ],
+    "proof": [
+      "BECAUSE_U_IS_A_SUBSET_OF_EVERY_ADMITTED_Cj__U_IS_A_SUBSET_OF_THEIR_INTERSECTION_C_star",
+      "BECAUSE_EVERY_ADMITTED_Bk_IS_A_SUBSET_OF_Q__THEIR_UNION_B_star_IS_A_SUBSET_OF_Q",
+      "WITH_C_star_SUBSET_OR_EQUAL_B_star__TRANSITIVITY_GIVES_U_SUBSET_OR_EQUAL_C_star_SUBSET_OR_EQUAL_B_star_SUBSET_OR_EQUAL_Q"
+    ],
+    "certificate_closure_condition": "R_IS_EMPTY_EQUIVALENT_TO_C_star_SUBSET_OR_EQUAL_B_star__THIS_IS_SUFFICIENT_FOR_BEHAVIORAL_PARITY_CERTIFICATION_WITHIN_THIS_PROOF_SYSTEM",
+    "not_claimed": "R_NONEMPTY_DOES_NOT_PROVE_ACTUAL_TARGET_PARITY_FALSE__IT_PROVES_ONLY_THAT_THIS_CURRENT_CERTIFICATE_SANDWICH_HAS_NOT_CLOSED"
+  },
+  "monotonicity": {
+    "add_sound_coverage_certificate": "C_star_CAN_ONLY_SHRINK_OR_STAY_EQUAL__U_SUBSET_OR_EQUAL_C_star_IS_PRESERVED",
+    "add_sound_dominance_certificate": "B_star_CAN_ONLY_GROW_OR_STAY_EQUAL__B_star_SUBSET_OR_EQUAL_Q_IS_PRESERVED",
+    "consequence": "EVERY_VALID_ZERO_REALITY_DISCOVERY_OR_PROOF_ACTION_CAN_BE_CLASSIFIED_BY_WHETHER_IT_STRICTLY_SHRINKS_C_star_OR_STRICTLY_GROWS_B_star__ACTIONS_THAT_DO_NEITHER_CANNOT_CLOSE_THIS_BEHAVIORAL_PARITY_CERTIFICATE"
+  },
+  "current_truth_repair": {
+    "conditional_quantifier_migration_logic_valid": true,
+    "current_w4_top_level_family_discovery_is_behavior_cell_coverage_certificate": false,
+    "reason": "CURRENT_W4_TRUTH_REPAIR_EXPLICITLY_FORBIDS_TREATING_TOP_LEVEL_PRIMITIVE_FAMILY_CLASSIFIABILITY_AS_TARGET_SPECIFIC_BEHAVIOR_COMPLETENESS_OR_DOMINANCE",
+    "fixed_interface_superdomain_if_independently_verified_may_contribute_to_C_star": true,
+    "fixed_interface_superdomain_by_itself_contributes_to_B_star": false,
+    "full_family_domain_can_contribute_to_B_star_only_after_scope_complete_universal_equal_or_better_proof": true,
+    "family_union_can_contribute_as_a_coverage_domain_only_after_a_SEPARATE_PROOF_OF_U_SUBSET_OR_EQUAL_UNION_Fi": true
+  },
+  "countermodels": {
+    "missing_bridge": {
+      "pointwise_assignment": "u=true,c1=true,c2=true,b1=false,b2=false,q=false",
+      "satisfies": [
+        "u_IMPLIES_c1",
+        "u_IMPLIES_c2",
+        "b1_IMPLIES_q",
+        "b2_IMPLIES_q"
+      ],
+      "violates": "q_FOR_TARGET_MEMBER",
+      "consequence": "SOUND_COVERAGE_SUPERSETS_PLUS_SOUND_DOMINANCE_DOMAINS_DO_NOT_IMPLY_TARGET_PARITY_UNLESS_THE_ACTIVE_COVERAGE_INTERSECTION_IS_PROVED_INSIDE_THE_DOMINANCE_UNION"
+    },
+    "family_parity_without_target_to_family_coverage": {
+      "pointwise_assignment": "u=true,f=false,q=false",
+      "satisfies": "f_IMPLIES_q",
+      "violates": "u_IMPLIES_q",
+      "consequence": "UNIVERSAL_PARITY_ON_A_FAMILY_DOMAIN_IS_NOT_TARGET_PARITY_UNLESS_TARGET_MEMBERSHIP_IS_PROVED_TO_LAND_IN_THE_COVERED_FAMILY_UNION"
+    }
+  },
+  "scheduler_reduction": {
+    "terminal_behavioral_parity_lane": {
+      "objective": "CLOSE_R_EQUALS_C_star_MINUS_B_star_TO_EMPTY",
+      "coverage_side_actions": [
+        "ADMIT_ONLY_CONTENT_ADDRESSED_INDEPENDENTLY_VERIFIED_U_SUBSET_C_CERTIFICATES",
+        "INTERSECT_COMPATIBLE_TARGET_CONSTRAINTS_TO_SHRINK_C_star",
+        "PREFER_TARGET_INDEPENDENT_OR_FIRST_PARTY_CAUSAL_INTERFACE_CONSTRAINTS_OVER_FINITE_BEHAVIOR_ENUMERATION_WHEN_THEY_PRODUCE_A_STRICTLY_TIGHTER_SOUND_SUPERSET"
+      ],
+      "dominance_side_actions": [
+        "REUSE_EXISTING_SCOPE_COMPLETE_OBJECTIVE_CEILING_OR_UNIVERSAL_PROOFS_INTO_B_star",
+        "GROW_B_star_ONLY_WITH_FULL_DOMAIN_OR_STRONGER_EQUAL_OR_BETTER_CERTIFICATES",
+        "DO_NOT_PROMOTE_FINITE_SAMPLE_PARITY_TO_FULL_DOMAIN_DOMINANCE"
+      ],
+      "delete": [
+        "GENERIC_EXHAUSTIVE_BEHAVIOR_ENUMERATION_THAT_DOES_NOT_TIGHTEN_A_PROVED_COVERAGE_DOMAIN",
+        "TREAT_W4_TOP_LEVEL_ROLE_OR_FAMILY_CLASSIFIABILITY_AS_U_SUBSET_UNION_Fi",
+        "TREAT_FIXED_INTERFACE_U_SUBSET_D_AS_IF_IT_ALSO_PROVED_BRAIN_DOMINANCE_OVER_D",
+        "TREAT_CONDITIONAL_QUANTIFIER_MIGRATION_AS_AN_ACTIVE_FINALITY_WITNESS_WITHOUT_ITS_COVERAGE_PREMISE"
+      ]
+    },
+    "next_highest_leverage_proof_obligation": "COMPILE_THE_TIGHTEST_CURRENT_SOUND_C_star_FROM_ALL_VALID_TARGET_CONSTRAINTS_AND_THE_LARGEST_CURRENT_SCOPE_COMPLETE_B_star_FROM_EXISTING_PROOFS__THEN_EXPOSE_R_EXACTLY_AND_WORK_ONLY_ON_LOAD_BEARING_R_COMPONENTS"
+  },
+  "ownership_boundary": {
+    "behavioral_parity_certificate_is_not_ownership": true,
+    "behavioral_parity_certificate_is_not_permanence": true,
+    "ownership_and_cleanroom_permanence_gates_remain_separate": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_C_star_IS_ALREADY_SUBSET_OF_B_star",
+    "NO_CLAIM_LITERAL_TERMINAL_GOAL_IS_ACHIEVED",
+    "NO_CLAIM_CURRENT_19_FAMILIES_ARE_BEHAVIOR_CELL_EXHAUSTIVE",
+    "NO_CLAIM_FIXED_INTERFACE_SUPERDOMAIN_IS_INDEPENDENTLY_ADMITTED_BY_THIS_DOCUMENT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
