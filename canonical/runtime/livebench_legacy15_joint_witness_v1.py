@@ -50,15 +50,36 @@ def _safe_token(forbidden: list[str], seed: str = "zxqv") -> str:
     raise JointWitnessError("NO_SAFE_FILLER")
 
 def _required_fragments(required: list[str], forbidden: list[str]) -> list[str]:
+    """Construct existence carriers that are safe against every forbidden word.
+
+    Historical generated keywords are alphabetic literals. Existence uses
+    re.search(keyword, value), while forbidden words use whole-word matching.
+    Appending a nonempty alphabetic suffix therefore preserves the required
+    substring while making an identical forbidden token non-whole-word.
+
+    Search six suffix lengths. Historical forbidden sets contain five distinct
+    words, so at most five of these six distinct carriers can themselves equal
+    a forbidden word. This is a bounded constructive pigeonhole proof, not a
+    corpus-frequency assumption.
+    """
     out: list[str] = []
     for kw in required:
-        # Existence is substring/regex search while forbidden is whole-word search.
-        # If an identical generated word appears in both sets, append a letter:
-        # the required regex still matches but the forbidden whole-word checker does not.
-        if any(kw.lower() == w.lower() for w in forbidden):
-            out.append(kw + "x")
-        else:
-            out.append(kw)
+        if not re.fullmatch(r"[A-Za-z]+", kw):
+            raise JointWitnessError("NON_HISTORICAL_REQUIRED_KEYWORD")
+        chosen = None
+        for n in range(1, 7):
+            candidate = kw + ("x" * n)
+            if re.search(kw, candidate, flags=re.IGNORECASE) is None:
+                continue
+            if all(
+                re.search(r"\b" + re.escape(w) + r"\b", candidate, re.I) is None
+                for w in forbidden
+            ):
+                chosen = candidate
+                break
+        if chosen is None:
+            raise JointWitnessError("NO_SAFE_REQUIRED_CARRIER")
+        out.append(chosen)
     return out
 
 def _get_one(constraints: list[dict[str, Any]], iid: str) -> dict[str, Any] | None:
@@ -73,7 +94,8 @@ def _special_json(constraints: list[dict[str, Any]]) -> str:
     required = _required_fragments(_required(constraints), forbidden)
     filler = _safe_token(forbidden)
     payload = " ".join([filler, *required]).strip()
-    response = json.dumps({"response": payload}, ensure_ascii=False)
+    # Numeric key cannot collide with historical alphabetic forbidden words.
+    response = json.dumps({"0": payload}, ensure_ascii=False)
     for w in forbidden:
         if re.search(r"\b" + re.escape(w) + r"\b", response, re.I):
             raise JointWitnessError("JSON_FORBIDDEN_COLLISION")
@@ -102,8 +124,10 @@ def _special_two(constraints: list[dict[str, Any]]) -> str:
     filler = _safe_token(forbidden)
     title = "<<x>> " if _get_one(constraints, "detectable_format:title") else ""
     common = (title + " ".join([filler, *required])).strip()
-    a = common + " alpha"
-    b = common + " beta"
+    # Distinguish the two responses with digit-only suffixes. Historical
+    # forbidden keywords are alphabetic, so these suffixes are collision-free.
+    a = (common + " 0").strip()
+    b = (common + " 1").strip()
     response = a + "******" + b
     for w in forbidden:
         if re.search(r"\b" + re.escape(w) + r"\b", response, re.I):
@@ -156,8 +180,17 @@ def _build_general(constraints: list[dict[str, Any]]) -> str:
         elif relation == "less than":
             if n <= 0:
                 raise JointWitnessError("STRICT_LESS_THAN_ZERO_SENTENCES")
-            # Keep our own additions punctuation-free. Other visible constraints
-            # can still introduce punctuation; exact predecessor replay decides.
+            if n == 1:
+                # Punkt counts ordinary nonempty text as a sentence. Some exotic
+                # punctuation-only compositions may admit a zero-sentence witness,
+                # but V2 does not claim them until independently proved.
+                raise JointWitnessError("LESS_THAN_ONE_SENTENCE_NOT_PROVED")
+            if n == 2 and post is not None and end is not None:
+                # P.S./P.P.S plus an exact terminal question is a tokenizer
+                # interaction. Preserve soundness until exact-source closure.
+                raise JointWitnessError("LESS_THAN_TWO_SENTENCE_POSTSCRIPT_END_NOT_PROVED")
+            # One punctuation-free body sentence is sufficient for every
+            # historical threshold n>=2 absent the gated interaction above.
             body_parts.append(filler)
         else:
             raise JointWitnessError("UNKNOWN_SENTENCE_RELATION")
