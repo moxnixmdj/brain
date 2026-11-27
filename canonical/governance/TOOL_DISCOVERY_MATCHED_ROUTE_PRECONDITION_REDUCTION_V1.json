@@ -1,0 +1,116 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_MATCHED_ROUTE_PRECONDITION_REDUCTION_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__ZERO_REALITY_PRECONDITION_REDUCTION__ZERO_ACCEPTANCE_CREDIT",
+  "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "candidate_target": "Toolathlon-Verified",
+  "source_freeze": {
+    "path": "canonical/governance/TOOLATHLON_VERIFIED_TOOL_DISCOVERY_ROUTE_FREEZE_V1.json",
+    "git_blob_sha": "f55ae78014e1dc6f92f2696d33b7249251047f1c"
+  },
+  "source_internal_proof": {
+    "path": "canonical/verification/TOOL_DISCOVERY_INFORMATION_SAFE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "git_blob_sha": "d4ce5641e564f330bff32f6ffb7f184e87d8495d"
+  },
+  "source_protocol": {
+    "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+  },
+  "reductions": [
+    {
+      "prior_open_precondition": "FREEZE_CHECKER_AND_TASK_POPULATION_IDENTITY_WITHOUT_POST_FREEZE_TUNING",
+      "verdict": "SATISFIED_BY_EXISTING_CONTENT_ADDRESSED_FREEZE",
+      "basis": [
+        "BRAIN_CANDIDATE_FROZEN_BEFORE_ANY_TOOLATHLON_TASK_PROMPT_OR_GROUND_TRUTH_CONTENT_IS_READ",
+        "BENCHMARK_HEAD_COMMIT_FROZEN",
+        "FINALPOOL_TREE_SHA_FROZEN",
+        "FINALPOOL_TASK_DIRECTORY_COUNT_108",
+        "DOCS_TASK_EVALUATION_MAIN_AND_TASK_CONFIG_PRESENCE_108_OF_108",
+        "TASK_PROMPT_AND_GROUND_TRUTH_CONTENT_NOT_READ_BEFORE_BRAIN_PACKAGE_FREEZE"
+      ],
+      "reason": "A Git tree object content-addresses the complete descendant path/blob structure. Binding the fixed repository commit plus finalpool tree SHA therefore freezes the represented task population and its per-task evaluator files more strongly than a mutable filename list."
+    },
+    {
+      "prior_open_precondition": "DEFINE_HOW_INTERNAL_TRANSFER_VERSIONING_LEAST_COST_AND_ESCALATION_PROOFS_COMPOSE_WITH_TOOLATHLON_FIXED_BAR",
+      "verdict": "SATISFIED_BY_EXPLICIT_ROLE_SEPARATION",
+      "external_bar_role": [
+        "REAL_WORLD_LONG_HORIZON_END_STATE_TERMINAL_SUCCESS_ON_THE_FROZEN_108_TASK_TARGET",
+        "REAL_TOOL_SURFACE_EXPOSURE_FROM_THE_FROZEN_BENCHMARK"
+      ],
+      "independent_internal_proof_role": [
+        "TRUE_TOOL_CAPABILITIES_HIDDEN_FROM_CANDIDATE",
+        "SAFE_PROBES_RESTRICTED_TO_CURRENT_REQUIRED_CAPABILITIES",
+        "LEAST_COST_EVIDENCE_SUPPORTED_SUFFICIENT_ROUTE_SELECTED",
+        "VALID_PRIOR_CAPABILITY_EVIDENCE_REUSED_ON_LATER_TASK",
+        "TARGETED_VERSION_CHANGE_INVALIDATES_STALE_EVIDENCE",
+        "UNAVAILABLE_CHEAPER_ROUTE_EXCLUDED",
+        "UNAUTHORIZED_CHEAPER_ROUTE_EXCLUDED",
+        "NO_SUFFICIENT_ROUTE_ESCALATES_ONLY_AFTER_RELEVANT_NEGATIVE_EVIDENCE",
+        "PREMATURE_ESCALATION_REJECTED"
+      ],
+      "hard_boundary": "THIS_COMPOSITION_DEFINITION_DOES_NOT_PROVE_THAT_TOOLATHLON_REPRESENTS_THE_FULL_FROZEN_TOOL_DISCOVERY_SCOPE_OR_UNKNOWN_IDENTITY_DISCOVERY. THAT_SCOPE_RELATION_REMAINS_SEPARATELY_OPEN."
+    },
+    {
+      "prior_open_precondition": "FREEZE_TERMINAL_ACCEPTANCE_ACCOUNTING_AND_SELECTOR",
+      "verdict": "SATISFIED_BY_FIXED_FULL_POPULATION_SELECTOR_AND_ACCOUNTING",
+      "selector": {
+        "task_population": "ALL_108_FROZEN_TOOLATHLON_VERIFIED_TASK_DIRECTORIES",
+        "adaptive_task_selection": false,
+        "task_replacement": false,
+        "post_result_tuning": false,
+        "pass_at_1_attempts_per_task": 1,
+        "denominator": 108
+      },
+      "accounting": {
+        "reported_opus55_pass_at_1_percent_from_existing_freeze": 77.8,
+        "statistical_protocol": "canonical/governance/OPEN_ENDED_MATCHED_STATISTICAL_PROOF_PROTOCOL_V1.json",
+        "statistical_runtime": "canonical/runtime/matched_statistical_acceptance.py",
+        "proof_mode": "PREDECLARED_MATCHED_STATISTICAL_COMPARISON_WITH_BRAIN_LOWER_BOUND_AT_OR_ABOVE_OPUS_5_5_ACCEPTANCE_BOUND",
+        "alpha": 0.05,
+        "bound": "HOEFFDING_ONE_SIDED_LOWER_CONFIDENCE_BOUND_FOR_X_IN_0_1",
+        "formula": "max(0, mean - sqrt(log(1/alpha)/(2*n)))",
+        "minimum_integer_brain_passes_for_bound_at_or_above_77_8_percent": 97,
+        "brain_raw_pass_rate_at_97_of_108_percent": 89.81481481481481,
+        "brain_one_sided_lower_bound_at_97_of_108_percent": 0.7803808738480129,
+        "terminal_result_credit_rule": "NO_RESULT_CREDIT_UNTIL_THE_FROZEN_TARGET_RUN_IS_INDEPENDENTLY_EXECUTED_AND_BOUND",
+        "valid_route_metric_rule": "TOOLATHLON_PASS_AT_1_BINDS_TERMINAL_SUCCESS_ONLY__IT_MUST_NOT_BE_RELABELED_AS_VALID_ROUTE_TOP1",
+        "valid_route_and_transfer_rule": "END_STATE_PASS_RATE_ALONE_IS_NOT_WHOLE_FAMILY_ACCEPTANCE; THE FROZEN PROTOCOLS VALID_ROUTE, ROUTE-SAFETY, TRANSFER, AND PROMOTION OBLIGATIONS REMAIN LOAD_BEARING."
+      }
+    }
+  ],
+  "remaining_route_preconditions_after_this_candidate_if_independently_verified": [
+    "MAP_TOOLATHLON_REPRESENTED_DIMENSIONS_TO_FROZEN_TOOL_DISCOVERY_CONTRACT_WITHOUT_SCOPE_WEAKENING",
+    "PROVE_EXACT_ZERO_INCREMENTAL_SPEND_EXECUTION_CARRIER_OR_FAIL_CLOSED",
+    "BIND_OPUS_5_5_77_8_PASS_AT_1_SOURCE_DURABLY_AND_INDEPENDENTLY"
+  ],
+  "hard_nonclaims": [
+    "NO_TOOLATHLON_SCOPE_EQUIVALENCE_CLAIM",
+    "NO_ZERO_COST_CARRIER_CLAIM",
+    "NO_NEW_OPUS_REFERENCE_SOURCE_BINDING",
+    "NO_BRAIN_TOOLATHLON_RESULT",
+    "NO_TOOL_DISCOVERY_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_OR_FAMILY_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "metric_semantic_boundary": {
+    "toolathlon_public_opus_metric": "PASS_AT_1_END_STATE_SUCCESS",
+    "toolathlon_opus55_pass_at_1_percent": 77.8,
+    "frozen_protocol_metrics": [
+      "terminal_success",
+      "valid_route_top1",
+      "failed_probe_count",
+      "unnecessary_probe_count",
+      "transfer_reuse_rate"
+    ],
+    "hard_rule": "DO_NOT_SUBSTITUTE_TOOLATHLON_PASS_AT_1_FOR_VALID_ROUTE_TOP1_OR_ANY_OTHER_DISTINCT_PROTOCOL_METRIC",
+    "valid_route_top1_disposition": "MUST_BE_COMPOSED_FROM_A_SEPARATE_SCOPE_COMPLETE_ROUTE_OR_A_MATCHED_COMPARATOR_THAT_ACTUALLY_MEASURES_VALID_ROUTE",
+    "scope_mapping_disposition": "REMAINS_OPEN"
+  }
+}
