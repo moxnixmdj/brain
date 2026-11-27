@@ -13,6 +13,7 @@ class P1TerminalExecutionScopeAuditTests(unittest.TestCase):
             out["executed_route"]["candidate_output_keys_scored"],
             ["cause_step", "evidence_steps", "repair_id"],
         )
+        self.assertEqual(len(out["frozen_required_checks_not_evaluated_by_executed_scorer"]), 4)
         self.assertIn(
             "FAILURE_MECHANISM_CLASSIFICATION_SUPPORTED_BY_VISIBLE_RECEIPTS",
             out["frozen_required_checks_not_evaluated_by_executed_scorer"],
@@ -20,6 +21,10 @@ class P1TerminalExecutionScopeAuditTests(unittest.TestCase):
         self.assertIn(
             "NONIDENTIFIABLE_OR_CAUSALLY_EQUIVALENT_CASE_DOES_NOT_FORCE_UNIQUE_CAUSE",
             out["frozen_required_checks_not_evaluated_by_executed_scorer"],
+        )
+        self.assertIn(
+            "P1_TO_RECOVERY_ACCEPTANCE_SEMANTIC_TRANSPORT",
+            out["quarantined"],
         )
         self.assertFalse(out["promotion_authority"])
 
