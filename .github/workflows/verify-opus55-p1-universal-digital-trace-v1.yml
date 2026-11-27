@@ -1,0 +1,27 @@
+name: Verify Opus55 P1 universal digital trace V1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/governance/OPUS55_P1_UNIVERSAL_DIGITAL_TRACE_REPRESENTATION_20261005_V1.json"
+      - "canonical/runtime/verify_opus55_p1_universal_digital_trace_representation_v1.py"
+      - "canonical/tests/test_opus55_p1_universal_digital_trace_representation_v1.py"
+      - ".github/workflows/verify-opus55-p1-universal-digital-trace-v1.yml"
+  push:
+    branches: ["breakthrough/p1-universal-digital-trace-20261005-sol"]
+    paths:
+      - "canonical/governance/OPUS55_P1_UNIVERSAL_DIGITAL_TRACE_REPRESENTATION_20261005_V1.json"
+      - "canonical/runtime/verify_opus55_p1_universal_digital_trace_representation_v1.py"
+      - "canonical/tests/test_opus55_p1_universal_digital_trace_representation_v1.py"
+      - ".github/workflows/verify-opus55-p1-universal-digital-trace-v1.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python -m pytest -q canonical/tests/test_opus55_p1_universal_digital_trace_representation_v1.py
+      - run: python canonical/runtime/verify_opus55_p1_universal_digital_trace_representation_v1.py
