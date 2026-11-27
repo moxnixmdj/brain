@@ -1,0 +1,32 @@
+{
+  "schema":"PROJECT_BRAIN_OPUS55_DOMAIN_BEHAVIOR_UNIVERSE_ANCHOR_V2",
+  "date":"2026-10-05",
+  "status":"CANDIDATE__ALL_FIVE_DOMAINS_EXTERNALLY_SOURCE_ANCHORED__EXHAUSTIVE_DECOMPOSITION_OPEN__ZERO_CREDIT",
+  "supersedes":{"path":"canonical/governance/OPUS55_DOMAIN_BEHAVIOR_UNIVERSE_ANCHOR_20261005_V1.json","git_blob_sha":"b6c09cd59491903c9c1aa358035e861b2c08bb0f"},
+  "model":"Claude Opus 5.5",
+  "sources":[
+    {"id":"ANTHROPIC_OPUS55_LAUNCH","url":"https://www.anthropic.com/claude-opus-5-5","authority":"PRIMARY_PROVIDER","observed_scope":["CYBERSECURITY_SAFEGUARDS","BIOLOGY_SAFEGUARDS"]},
+    {"id":"ANTHROPIC_TRANSPARENCY_OPUS55","url":"https://www.anthropic.com/transparency","authority":"PRIMARY_PROVIDER","observed_scope":["AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT","CHEMICAL_AND_BIOLOGICAL_RISK"]},
+    {"id":"ANTHROPIC_OPUS55_SYSTEM_CARD_HEALTHCARE","url":"https://www.anthropic.com/claude-opus-5-5-system-card","authority":"PRIMARY_PROVIDER","observed_scope":["HEALTHBENCH_PROFESSIONAL","HEALTHBENCH_PROFESSIONAL_LENGTH_ADJUSTED_65_6_MAX"]},
+    {"id":"ANTHROPIC_SONNET55_SYSTEM_CARD_PHYSICIANBENCH_OPUS55","url":"https://www.anthropic.com/claude-sonnet-5-5-system-card","authority":"PRIMARY_PROVIDER","observed_scope":["PHYSICIANBENCH","PHYSICIANBENCH_OPUS55_MAX_PASS_AT_1_68_4"]},
+    {"id":"MATHARENA_ARXIVMATH_2026_06_OPUS55","url":"https://matharena.ai/competition_tables/arxiv--june","authority":"PRIMARY_BENCHMARK_OWNER","observed_scope":["ARXIVMATH_2026_06","ARXIVMATH_2026_06_OPUS55_HIGH_DEFAULT_FALLBACK_83_3"]},
+    {"id":"MATHARENA_ARXIVMATH_OPUS55_RELEASE_NOTICE","url":"https://matharena.ai/","authority":"PRIMARY_BENCHMARK_OWNER","observed_scope":["ARXIVMATH_OPUS55_PUBLIC_RESULTS_RELEASED_2026_09_24"]}
+  ],
+  "domains":{
+    "CYBERSECURITY":{"state":"OPEN_EXHAUSTIVE_DECOMPOSITION_REQUIRED","observed_surfaces":["CYBERSECURITY_SAFEGUARDS"],"exhaustive_behavior_universe":false,"lossless_transform_mapping":false},
+    "BIOLOGY_RESEARCH_AND_DEVELOPMENT":{"state":"OPEN_EXHAUSTIVE_DECOMPOSITION_REQUIRED","observed_surfaces":["BIOLOGY_SAFEGUARDS","CHEMICAL_AND_BIOLOGICAL_RISK"],"exhaustive_behavior_universe":false,"lossless_transform_mapping":false},
+    "AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT":{"state":"OPEN_EXHAUSTIVE_DECOMPOSITION_REQUIRED","observed_surfaces":["AUTOMATED_AI_RESEARCH_AND_DEVELOPMENT"],"exhaustive_behavior_universe":false,"lossless_transform_mapping":false},
+    "HEALTHCARE":{"state":"OPEN_EXHAUSTIVE_DECOMPOSITION_REQUIRED","observed_surfaces":["HEALTHBENCH_PROFESSIONAL","PHYSICIANBENCH"],"exhaustive_behavior_universe":false,"lossless_transform_mapping":false},
+    "MATHEMATICAL_REASONING_ARXIVMATH":{"state":"OPEN_EXHAUSTIVE_DECOMPOSITION_REQUIRED","observed_surfaces":["ARXIVMATH_2026_06","ARXIVMATH_OPUS55_PUBLIC_RESULTS_RELEASED_2026_09_24"],"exhaustive_behavior_universe":false,"lossless_transform_mapping":false}
+  },
+  "deduction":{
+    "proved":["ALL_FIVE_META_DOMAINS_NOW_HAVE_AT_LEAST_ONE_EXTERNAL_TARGET_SURFACE_ANCHOR","HEALTHCARE_SOURCE_INCOMPLETE_FLAG_REMOVED","MATHEMATICAL_REASONING_ARXIVMATH_SOURCE_INCOMPLETE_FLAG_REMOVED"],
+    "not_proved":["ANY_DOMAIN_BEHAVIOR_UNIVERSE_EXHAUSTIVE","ANY_DOMAIN_LOSSLESS_TRANSFORM_MAPPING_COMPLETE","ANY_META_OBLIGATION_CLOSED","ANY_ATOMIC_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"]
+  },
+  "closure_rule":"SOURCE_ANCHOR_IS_NECESSARY_NOT_SUFFICIENT__CLOSE_ONLY_WITH_EXHAUSTIVE_BEHAVIOR_UNIVERSE_AND_LOSSLESS_OWNED_TRANSFORM_MAPPING",
+  "next_required":"FOR_EACH_DOMAIN_BUILD_CONTENT_ADDRESSED_EXHAUSTIVE_BEHAVIOR_UNIVERSE_THEN_RUN_SHARED_LOSSLESS_TRANSFORM_MAPPING_COMPILER",
+  "execution_authority":false,
+  "promotion_authority":false,
+  "fresh_reality_authority":false,
+  "accounting":{"incremental_spend_usd":0,"new_reality_units_consumed":0,"terminal_cases_consumed":0,"acceptance_credit_delta":0,"family_credit_delta":0,"capability_credit_delta":0,"ownership_credit_delta":0}
+}
