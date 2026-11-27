@@ -5,6 +5,14 @@ from typing import Any, Mapping
 ACTIVE_POINTER_PATH = "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json"
 MODES = {"ACTIVE_INTERFACE", "DORMANT_WAKE", "CONTROL_PLANE_PREREQUISITE"}
 GOVERNANCE_ACTIONS = {"GOVERNANCE_GUARD", "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION"}
+WORK_CLASSES = {"PROGRESS_CANDIDATE", "FALSIFICATION_PROBE", "TRUTH_REPAIR", "CONTROL_PLANE"}
+PROGRESS_EFFECT_KINDS = {
+    "TRUTH_CLOSURE",
+    "INTERFACE_CONTRACTION",
+    "DEPTH_CONTRACTION",
+    "PREREQUISITE_CONTRACTION",
+    "PROOF_NODE_CONTRACTION",
+}
 
 CURRENTNESS_FIELDS = (
     "accepted_families",
@@ -71,6 +79,37 @@ def admission_errors(
         errors.append("V22_FRESH_REALITY_AUTHORITY_NOT_FALSE")
     if admission.get("terminal_credit_delta") != 0:
         errors.append("V22_TERMINAL_CREDIT_NONZERO")
+    work_class=str(admission.get("work_class") or "")
+    if work_class not in WORK_CLASSES:
+        errors.append("V22_WORK_CLASS_INVALID")
+    if admission.get("claimed_progress_credit") not in (None, 0):
+        errors.append("V22_PREWRITE_PROGRESS_CREDIT_NONZERO")
+    if mode=="CONTROL_PLANE_PREREQUISITE":
+        if work_class!="CONTROL_PLANE":
+            errors.append("V22_CONTROL_PLANE_WORK_CLASS_REQUIRED")
+    elif work_class=="CONTROL_PLANE":
+        errors.append("V22_CONTROL_PLANE_WORK_CLASS_OUTSIDE_CONTROL_PLANE_MODE")
+    if work_class=="PROGRESS_CANDIDATE":
+        expected=admission.get("expected_progress")
+        if not isinstance(expected,Mapping):
+            errors.append("V22_EXPECTED_PROGRESS_MISSING")
+        else:
+            if expected.get("effect_kind") not in PROGRESS_EFFECT_KINDS:
+                errors.append("V22_EXPECTED_PROGRESS_EFFECT_INVALID")
+            expected_targets=expected.get("target_truth_obligations")
+            actual_targets=admission.get("target_truth_obligations")
+            if not isinstance(expected_targets,list) or set(expected_targets)!=set(actual_targets or []):
+                errors.append("V22_EXPECTED_PROGRESS_TARGET_MISMATCH")
+            if not _nonempty(expected.get("success_condition")):
+                errors.append("V22_EXPECTED_PROGRESS_SUCCESS_CONDITION_MISSING")
+        if admission.get("postchange_evidence_required") is not True:
+            errors.append("V22_PROGRESS_POSTCHANGE_EVIDENCE_NOT_REQUIRED")
+    elif work_class=="TRUTH_REPAIR":
+        if admission.get("postchange_evidence_required") is not True:
+            errors.append("V22_TRUTH_REPAIR_POSTCHANGE_EVIDENCE_NOT_REQUIRED")
+    elif work_class=="FALSIFICATION_PROBE":
+        if admission.get("claimed_progress_credit") not in (None,0):
+            errors.append("V22_FALSIFICATION_PROBE_CANNOT_CLAIM_PROGRESS")
     if mode == "ACTIVE_INTERFACE":
         if str(admission.get("interface") or "") not in active_set:
             errors.append("V22_INTERFACE_NOT_CURRENTLY_ACTIVE")
@@ -108,6 +147,8 @@ def admission_errors(
         elif not receipts and not _nonempty(tournament.get("no_known_counterexample_reason")):
             errors.append("V22_COUNTEREXAMPLE_EVIDENCE_OR_REASON_REQUIRED")
         else:
+            if work_class=="TRUTH_REPAIR" and not receipts:
+                errors.append("V22_TRUTH_REPAIR_COUNTERMODEL_RECEIPT_REQUIRED")
             for i, row in enumerate(receipts):
                 if not isinstance(row, Mapping):
                     errors.append(f"V22_COUNTEREXAMPLE_RECEIPT_INVALID:{i}")
