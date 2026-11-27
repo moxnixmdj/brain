@@ -33056,7 +33056,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f61ff1c2ce610d189311c90b17399bd618bddaf51cc6698cf23f1edef2daa7c9"
+  "value": "374480f3177b3dfc92e993437f51a10c25945333b6a644e5e2ce5eb9996a501c"
  },
  "engines": [
   {
@@ -342272,7 +342272,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_RULE_MUST_SURVIVE_ITS_OWN_WITNESS_20261124_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "ae2635a8de710ae63ef8156026ce83c0ce7ff1cd3ed53eb08f5070a509400c36",
+   "sha256": "1c6b968c5088aee9a4000c8e49be607c5232de64a2b5c18acbe0b6630371fafe",
    "status": "SHIPPED",
    "terms": {
     "20261124": 1,
