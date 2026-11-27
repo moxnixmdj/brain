@@ -2251,3 +2251,24 @@ def render(result: dict) -> str:
     else:
         text = str(value)
     return f"{text}   [built: {node.label}]"
+
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for value_algebra_v1."""
+    checks: dict[str, bool] = {}
+    _lex = Lexicon(["alpha", "beta", "gamma"])
+    _picked = _lex.pick({"k1": {"alpha"}, "k2": {"delta"}})
+    checks["lexicon_pick_returns_list"] = isinstance(_picked, list)
+    _rem = _lex.without(frozenset({"alpha"}))
+    checks["lexicon_without_excludes"] = "alpha" not in _rem and "beta" in _rem
+    checks["law_non_negative_pos"] = _law_non_negative([1.0, 2.0], 3.0) is True
+    checks["law_non_negative_neg"] = _law_non_negative([1.0, 2.0], -1.0) is False
+    _bad_err = False
+    try:
+        evaluate(Node("__nonexistent_op_w51__", (), "number", frozenset(), "bad"))
+    except (EvalError, KeyError, ValueError):
+        _bad_err = True
+    checks["evaluate_rejects_unknown_op"] = _bad_err
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
+
+

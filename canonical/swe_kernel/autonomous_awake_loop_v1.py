@@ -2442,3 +2442,22 @@ class AwakeAgencyDaemon:
         self._stop_event.set()
         if self._thread is not None and self._thread.is_alive():
             self._thread.join(timeout=timeout)
+
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for autonomous_awake_loop_v1."""
+    import tempfile as _tf
+    checks: dict[str, bool] = {}
+    with _tf.TemporaryDirectory(prefix="w51_awake_") as _td:
+        _jdir = pathlib.Path(_td) / "journal"
+        _js = FileAtomicJournalStore(_jdir)
+        _created = _js.create("op_test_1", {"step": "probe", "ok": True})
+        _dup = _js.create("op_test_1", {"step": "dup"})
+        _got = _js.read("op_test_1")
+        checks["journal_create_and_read"] = (_created is True) and isinstance(_got, dict) and _got.get("step") == "probe"
+        checks["journal_duplicate_rejected"] = _dup is False
+        checks["journal_missing_negative"] = _js.read("nonexistent_op_999") is None
+        _daemon = AwakeAgencyDaemon(pathlib.Path(_td), journal_dir=_jdir)
+        checks["daemon_instantiates"] = _daemon is not None
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
+

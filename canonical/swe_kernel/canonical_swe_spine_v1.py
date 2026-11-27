@@ -4424,3 +4424,30 @@ __all__ = [
     "synthesize_counterfactual_and_angelic_repair",
     "trace_expression_and_literal_repair",
 ]
+
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for canonical_swe_spine_v1."""
+    import tempfile as _tf
+    checks: dict[str, bool] = {}
+    with _tf.TemporaryDirectory(prefix="w51_spine_") as _td:
+        _p = pathlib.Path(_td)
+        (_p / "app.py").write_text("def f(x):\n    return x + 1\n", encoding="utf-8")
+        checks["detect_python_repo"] = detect_repository_language(_p) == "python"
+        checks["detect_js_test_file"] = detect_repository_language(_p, test_file="spec.js") == "javascript"
+        checks["detect_c_sources"] = detect_repository_language(_p, c_sources=["main.c"]) == "c"
+        _store = CanonicalLawStore(_p / "laws.json")
+        checks["empty_store_zero"] = _store.count() == 0
+        _law = _store.add_verified_diff(
+            language="python",
+            failure_output="AssertionError: assert 1 == 2",
+            orig_source="def f(x):\n    return x\n",
+            patched_source="def f(x):\n    return x + 1\n",
+        )
+        checks["store_admits_diff"] = _law is not None and _store.count() >= 1
+        _contract = compile_plain_goal_contract("fix failing unit test in app.py")
+        checks["goal_contract_dict"] = isinstance(_contract, dict) and bool(_contract)
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
+
+
+

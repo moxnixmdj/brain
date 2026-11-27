@@ -4219,3 +4219,23 @@ def unified_diff_for_patches(worktree: pathlib.Path, file_patches: Mapping[str, 
             )
         )
     return "".join(chunks)
+
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for first_principles_mental_cegis_v1."""
+    import tempfile as _tf
+    checks: dict[str, bool] = {}
+    _x = IRNode("VAR", ("x",))
+    _nn = IRNode("NOT", (IRNode("NOT", (_x,)),))
+    checks["egraph_double_neg_canonical"] = egraph_canonicalize(_nn).canonical_sexpr() == egraph_canonicalize(_x).canonical_sexpr()
+    _y = IRNode("VAR", ("y",))
+    checks["egraph_distinguishes_distinct"] = egraph_canonicalize(_y).digest() != egraph_canonicalize(_x).digest()
+    _lifted = SemanticMeaningIR.lift_expr(ast.parse("x + 1", mode="eval").body)
+    checks["mir_lift_and_lower"] = isinstance(_lifted, IRNode) and isinstance(SemanticMeaningIR.lower_to_python(_lifted), str)
+    with _tf.TemporaryDirectory(prefix="w51_cegis_") as _td:
+        _g = CausalDataFlowGraph(pathlib.Path(_td))
+        checks["causal_graph_empty_ranks"] = isinstance(_g.rank_files(1), list) and len(_g.rank_files(1)) == 0
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
+
+
+

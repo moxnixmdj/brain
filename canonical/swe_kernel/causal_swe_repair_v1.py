@@ -2517,3 +2517,25 @@ def repair_worktree(
         "model_calls": 0,
         "parameters_stored": 0,
     }
+
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for causal_swe_repair_v1."""
+    import tempfile as _tf
+    checks: dict[str, bool] = {}
+    with _tf.TemporaryDirectory(prefix="w51_csr_") as _td:
+        _p = pathlib.Path(_td) / "mem.json"
+        _mem = SWERepairMemory(_p)
+        _s0 = _mem.priority_score("fam_a")
+        _mem.record_outcome("fam_a", verified=True, caused_regression=False, elapsed_s=0.1, abstract_shape="s1")
+        _s_win = _mem.priority_score("fam_a")
+        _mem.record_outcome("fam_b", verified=False, caused_regression=True, elapsed_s=0.5, abstract_shape="s2")
+        _s_loss = _mem.priority_score("fam_b")
+        checks["win_beats_loss_priority"] = _s_win > _s_loss
+        checks["initial_score_numeric"] = isinstance(_s0, (int, float))
+        _mem.save(_p)
+        _mem2 = SWERepairMemory(_p)
+        checks["roundtrip_persistence"] = abs(_mem2.priority_score("fam_a") - _s_win) < 1e-9
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
+
+

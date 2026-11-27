@@ -2449,3 +2449,25 @@ def asymmetric_leapfrog_dispatch(
         ],
         "model_calls": 0,
     }
+
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for asymmetric_frontier_leapfrog_v1."""
+    checks: dict[str, bool] = {}
+    _g0 = ((1, 0, 2),)
+    _g1 = ((0, 1, 2),)
+    _g2 = ((0, 0, 1),)
+    _twin = EpistemicObjectDigitalTwin(actions=("RIGHT", "LEFT"))
+    _twin.observe_transition(_g0, "RIGHT", _g1, False)
+    _twin.observe_transition(_g1, "RIGHT", _g2, True)
+    _plan = _twin.plan_bfs(_g0, 0)
+    checks["twin_bfs_positive"] = _plan == ["RIGHT", "RIGHT"]
+    _twin_empty = EpistemicObjectDigitalTwin(actions=("RIGHT",))
+    checks["twin_bfs_unknown_negative"] = _twin_empty.plan_bfs(_g0, 0) is None
+    _egg = EggMindProofSaturator()
+    _eq = _egg.prove_egraph_equality("(add x 0)", "x", [("add_zero", "(add ?a 0)", "?a")])
+    checks["eggmind_identity_proof"] = isinstance(_eq, dict) and bool(_eq.get("proved") or _eq.get("equal") or _eq.get("pass"))
+    _neq = _egg.prove_egraph_equality("(add x 1)", "x", [("add_zero", "(add ?a 0)", "?a")])
+    checks["eggmind_rejects_false_eq"] = isinstance(_neq, dict) and not bool(_neq.get("proved") or _neq.get("equal"))
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
+

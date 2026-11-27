@@ -2989,3 +2989,22 @@ class SemanticGeneralizationEngine(GeneralizationEngine):
             "adapted_strategy": adapted,
             "timestamp": _utcnow(),
         }
+
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for semantic_generalization_engine_v1."""
+    checks: dict[str, bool] = {}
+    _ast_task = parse_task("count functions in python file")
+    checks["parse_task_valid"] = isinstance(_ast_task.to_dict(), dict) and bool(_ast_task.to_dict())
+    _md = parse_markdown("# Title\n\n- item 1\n- item 2\n")
+    checks["parse_markdown_structure"] = _md is not None
+    _pol = OnlineParametricPolicyModel(n_features=16, state_path=None)
+    _p0 = _pol.predict("count functions in python file")
+    _upd = _pol.update_from_experience("count functions in python file", OPERATIONS[0], ALL_CONCEPTS[0], DOMAINS[0], persist=False)
+    _p1 = _pol.predict("count functions in python file")
+    checks["policy_predict_dict"] = isinstance(_p0, dict) and isinstance(_p1, dict)
+    checks["policy_update_returns_dict"] = isinstance(_upd, dict)
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
+
+
+

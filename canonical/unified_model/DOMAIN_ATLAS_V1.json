@@ -314,6 +314,7 @@
     "wave45_46_anytime_valid_quotient_metamorphic_hcu_v1",
     "wave47_48_futamura_tomography_egraph_crystallizer_v1",
     "wave49_50_structural_ast_repair_and_titan_adjudication_v1",
+    "wave51_52_sliced_structural_swe_and_stranded_treasury_v1",
     "what_a_real_fix_needs_from_the_site_v1",
     "what_an_experience_can_own_v1",
     "what_is_knowable_here_v1",
@@ -322,14 +323,14 @@
     "witness_inversion_v1",
     "zygote_worker_pool_v1"
    ],
-   "candidates": 318,
+   "candidates": 319,
    "frontier_function": "resolve a repository issue from a text description",
    "harvested_all": 112,
    "harvested_executable_top": 6,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 25,
-   "indexed_all": 298,
+   "indexed_all": 299,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -369,7 +370,7 @@
      ],
      "path": "canonical/swe_kernel/causal_nexus_v1.py",
      "score": 36.0,
-     "sha256": "3fe354afac608848",
+     "sha256": "4fe4a45a233803a6",
      "source_index": true,
      "summary": "Causal Nexus: expected-value abduction, single-site counterfactual blame, lens synthesis,"
     },
@@ -389,7 +390,7 @@
      ],
      "path": "canonical/swe_kernel/angelic_cegis_repair_v1.py",
      "score": 35.75,
-     "sha256": "1be7109dca145cad",
+     "sha256": "66e744b267f29b80",
      "source_index": true,
      "summary": "True Angelic Execution + Live Differential Spectrum + Object-Aware CEGIS Repair (v1)."
     },
@@ -409,7 +410,7 @@
      ],
      "path": "canonical/swe_kernel/canonical_swe_spine_v1.py",
      "score": 35.25,
-     "sha256": "435c77752cc3239a",
+     "sha256": "fef38eb22c43125e",
      "source_index": true,
      "summary": "Canonical Unified Polyglot SWE Spine (`canonical_swe_spine_v1`)."
     },
@@ -429,7 +430,7 @@
      ],
      "path": "canonical/swe_kernel/cow_angelic_zygote_v1.py",
      "score": 35.25,
-     "sha256": "7bf2c97306270047",
+     "sha256": "307946e6ab0321d3",
      "source_index": true,
      "summary": "Copy-on-Write Prewarmed Pytest Zygote Server, Angelic Branch Inversion,"
     },
@@ -489,7 +490,7 @@
      ],
      "path": "canonical/swe_kernel/multistep_repo_closed_loop_solver_v1.py",
      "score": 34.0,
-     "sha256": "4c523ce34e0d042e",
+     "sha256": "576b092106a95a80",
      "source_index": true,
      "summary": "Multi-Step Closed-Loop Repository Solver, Differential Trace Localizer & Race Prober."
     },
@@ -589,7 +590,7 @@
      ],
      "path": "canonical/swe_kernel/causal_swe_repair_v1.py",
      "score": 33.5,
-     "sha256": "309aea6d845f5028",
+     "sha256": "fa4b695cb117395e",
      "source_index": true,
      "summary": "Zero-Leakage Causal SWE Repair Engine."
     },
@@ -734,6 +735,26 @@
      "summary": "Causal Whole-File Lesson Localization, Execution-Locus Filtering & Held-Out Admission."
     },
     {
+     "adapter_module_match": true,
+     "anchored": 14.25,
+     "harvested": false,
+     "matched": [
+      "ast@doc",
+      "repair@doc",
+      "patch@symbol",
+      "repair@symbol",
+      "swe@symbol",
+      "ast@symbol",
+      "dataflow@symbol",
+      "oracle@symbol"
+     ],
+     "path": "canonical/runtime/wave51_52_sliced_structural_swe_and_stranded_treasury_v1.py",
+     "score": 25.75,
+     "sha256": "1bb533cb396b97c6",
+     "source_index": true,
+     "summary": "Wave 51-52 Frontier Leapfrog: ARISE Statement-Level Def-Use Slicer, S8-S11 General Structural"
+    },
+    {
      "adapter_module_match": false,
      "anchored": 4.5,
      "harvested": true,
@@ -809,29 +830,9 @@
      ],
      "path": "canonical/swe_kernel/residual_wall_closers_v1.py",
      "score": 24.75,
-     "sha256": "bcdcf8536c558b50",
+     "sha256": "2bf5145e459dea7b",
      "source_index": true,
      "summary": "Residual-wall closers: the thirteen laws a trace-literal engine cannot reach."
-    },
-    {
-     "adapter_module_match": true,
-     "anchored": 10.5,
-     "harvested": false,
-     "matched": [
-      "swe@doc",
-      "ast@doc",
-      "repair@symbol",
-      "swe@symbol",
-      "synthes@doc",
-      "ast@symbol",
-      "bug@symbol",
-      "diff@symbol"
-     ],
-     "path": "canonical/runtime/wave40_dark_matter_frontier_kernel_v1.py",
-     "score": 24.5,
-     "sha256": "4bd50f721dfd5452",
-     "source_index": true,
-     "summary": "Wave 40 Dark-Matter Frontier Kernel (K3=0, $0 spend)."
     }
    ],
    "vendored_donors_excluded": 2
@@ -1358,7 +1359,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 15.0,
-     "sha256": "008271f7c63331ff",
+     "sha256": "c2fd2fed658c2259",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -1653,7 +1654,7 @@
      ],
      "path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
      "score": 9.0,
-     "sha256": "822b5a9c9960dfd7",
+     "sha256": "6985aa189eb04320",
      "source_index": true,
      "summary": "Frontier Seven-Move Unified Runtime Substrate (`K3 = 0`, `$0` spend, Elon-Law Minimalism)."
     },
@@ -1720,7 +1721,7 @@
      ],
      "path": "canonical/swe_kernel/sentient_cognitive_core_v1.py",
      "score": 7.75,
-     "sha256": "d32a7badda8dc0bf",
+     "sha256": "aeaf0191019f9e0e",
      "source_index": true,
      "summary": "Sentient Cognitive Core V1 (`sentient_cognitive_core_v1`, `K3 = 0`)."
     },
@@ -1737,7 +1738,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 7.5,
-     "sha256": "008271f7c63331ff",
+     "sha256": "c2fd2fed658c2259",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -1921,7 +1922,7 @@
      ],
      "path": "canonical/swe_kernel/canonical_boundary_router_v1.py",
      "score": 4.5,
-     "sha256": "7b032e420a1323fd",
+     "sha256": "a6f7e26103ace2d9",
      "source_index": true,
      "summary": "Canonical BoundaryRouter & Compounding Closed-Loop Orchestrator (`0I`)."
     },
@@ -2244,7 +2245,7 @@
      ],
      "path": "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
      "score": 27.25,
-     "sha256": "365a2822b898e2b9",
+     "sha256": "cc78a5f1dc9519e2",
      "source_index": true,
      "summary": "Causal Demonstration-to-Program Compiler \u2014 Watch/Explore Once -> <5ms Permanent Skill."
     },
@@ -2304,7 +2305,7 @@
      ],
      "path": "canonical/swe_kernel/causal_nexus_v1.py",
      "score": 25.75,
-     "sha256": "3fe354afac608848",
+     "sha256": "4fe4a45a233803a6",
      "source_index": true,
      "summary": "Causal Nexus: expected-value abduction, single-site counterfactual blame, lens synthesis,"
     },
@@ -2344,7 +2345,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 24.5,
-     "sha256": "008271f7c63331ff",
+     "sha256": "c2fd2fed658c2259",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -2424,7 +2425,7 @@
      ],
      "path": "canonical/swe_kernel/semantic_generalization_engine_v1.py",
      "score": 21.0,
-     "sha256": "459d877ed10644de",
+     "sha256": "5406fdae2b065d09",
      "source_index": true,
      "summary": "Neuro-symbolic compositional & causal generalization engine (Problem 2)."
     },
@@ -2873,6 +2874,7 @@
     "wave45_46_anytime_valid_quotient_metamorphic_hcu_v1",
     "wave47_48_futamura_tomography_egraph_crystallizer_v1",
     "wave49_50_structural_ast_repair_and_titan_adjudication_v1",
+    "wave51_52_sliced_structural_swe_and_stranded_treasury_v1",
     "weight_space_fuel_v1",
     "weights_from_scratch_v1",
     "what_an_experience_can_own_v1",
@@ -2880,14 +2882,14 @@
     "whitebox_introspector_and_trace_synthesizer_v1",
     "workflow_goal_generalization_v1"
    ],
-   "candidates": 208,
+   "candidates": 209,
    "frontier_function": "context that stays correct as it fills",
    "harvested_all": 55,
    "harvested_executable_top": 9,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 25,
-   "indexed_all": 201,
+   "indexed_all": 202,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -2967,7 +2969,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 17.75,
-     "sha256": "008271f7c63331ff",
+     "sha256": "c2fd2fed658c2259",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -3025,7 +3027,7 @@
      ],
      "path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
      "score": 16.25,
-     "sha256": "822b5a9c9960dfd7",
+     "sha256": "6985aa189eb04320",
      "source_index": true,
      "summary": "Frontier Seven-Move Unified Runtime Substrate (`K3 = 0`, `$0` spend, Elon-Law Minimalism)."
     },
@@ -3163,7 +3165,7 @@
      ],
      "path": "canonical/runtime/asymmetric_frontier_leapfrog_v1.py",
      "score": 14.75,
-     "sha256": "f939aa2107e2304a",
+     "sha256": "9117f2cf5815c569",
      "source_index": true,
      "summary": "Asymmetric Frontier-Leapfrog Unification Spine \u2014 v1."
     },
@@ -3241,7 +3243,7 @@
      ],
      "path": "canonical/swe_kernel/autonomous_awake_loop_v1.py",
      "score": 13.0,
-     "sha256": "5a580f290e473d5c",
+     "sha256": "cc738d10f3f21aad",
      "source_index": true,
      "summary": "Continuous Zero-LLM Awake Agency Loop (`autonomous_awake_loop_v1`)."
     },
@@ -3728,18 +3730,19 @@
     "wave45_46_anytime_valid_quotient_metamorphic_hcu_v1",
     "wave47_48_futamura_tomography_egraph_crystallizer_v1",
     "wave49_50_structural_ast_repair_and_titan_adjudication_v1",
+    "wave51_52_sliced_structural_swe_and_stranded_treasury_v1",
     "weights_from_scratch_v1",
     "work_unit_validity_guard_v2",
     "worker_syscall_allowlist_v1"
    ],
-   "candidates": 347,
+   "candidates": 348,
    "frontier_function": "know when you do not know, and prove what you did",
    "harvested_all": 64,
    "harvested_executable_top": 4,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 24,
-   "indexed_all": 311,
+   "indexed_all": 312,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -3859,7 +3862,7 @@
      ],
      "path": "canonical/runtime/asymmetric_frontier_leapfrog_v1.py",
      "score": 22.5,
-     "sha256": "f939aa2107e2304a",
+     "sha256": "9117f2cf5815c569",
      "source_index": true,
      "summary": "Asymmetric Frontier-Leapfrog Unification Spine \u2014 v1."
     },
@@ -3899,7 +3902,7 @@
      ],
      "path": "canonical/swe_kernel/causal_nexus_v1.py",
      "score": 19.25,
-     "sha256": "3fe354afac608848",
+     "sha256": "4fe4a45a233803a6",
      "source_index": true,
      "summary": "Causal Nexus: expected-value abduction, single-site counterfactual blame, lens synthesis,"
     },
@@ -3919,7 +3922,7 @@
      ],
      "path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
      "score": 18.5,
-     "sha256": "2ea067a8cc0f65af",
+     "sha256": "213b4b3865dbdce3",
      "source_index": true,
      "summary": "Unified Unfamiliar-Name Frontier Leapfrog Engine (`K3 = 0`, `$0` spend, Elon's First Law)."
     },
@@ -4386,17 +4389,18 @@
     "wave43_44_dark_matter_meme_webmcp_leapfrog_v1",
     "wave47_48_futamura_tomography_egraph_crystallizer_v1",
     "wave49_50_structural_ast_repair_and_titan_adjudication_v1",
+    "wave51_52_sliced_structural_swe_and_stranded_treasury_v1",
     "what_the_vocabulary_cannot_say_v1",
     "what_transfers_to_a_second_host_v1"
    ],
-   "candidates": 145,
+   "candidates": 146,
    "frontier_function": "predict what an action does before doing it",
    "harvested_all": 44,
    "harvested_executable_top": 8,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 24,
-   "indexed_all": 141,
+   "indexed_all": 142,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -4416,7 +4420,7 @@
      ],
      "path": "canonical/swe_kernel/first_principles_mental_cegis_v1.py",
      "score": 29.25,
-     "sha256": "8013e57d228a3318",
+     "sha256": "fc412f6d52fc1913",
      "source_index": true,
      "summary": "First-Principles Program & Environment Understanding Engine (V1)."
     },
@@ -4455,7 +4459,7 @@
      ],
      "path": "canonical/swe_kernel/sentient_cognitive_core_v1.py",
      "score": 20.75,
-     "sha256": "d32a7badda8dc0bf",
+     "sha256": "aeaf0191019f9e0e",
      "source_index": true,
      "summary": "Sentient Cognitive Core V1 (`sentient_cognitive_core_v1`, `K3 = 0`)."
     },
@@ -4774,7 +4778,7 @@
      ],
      "path": "canonical/swe_kernel/semantic_generalization_engine_v1.py",
      "score": 13.5,
-     "sha256": "459d877ed10644de",
+     "sha256": "5406fdae2b065d09",
      "source_index": true,
      "summary": "Neuro-symbolic compositional & causal generalization engine (Problem 2)."
     },
@@ -4794,7 +4798,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 13.25,
-     "sha256": "008271f7c63331ff",
+     "sha256": "c2fd2fed658c2259",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -4898,13 +4902,13 @@
  "method": "weighted lexical evidence over module stem, docstring and symbol names; frontier vocabulary and this repository's own vocabulary in one table",
  "min_score": 3.0,
  "model_calls": 0,
- "modules_scanned": 3379,
+ "modules_scanned": 3382,
  "network_calls": 0,
  "per_domain": 25,
  "reachability": {
   "coding_agents": {
-   "chance_route_recall": 0.2264,
-   "chance_source_recall": 0.1389,
+   "chance_route_recall": 0.2328,
+   "chance_source_recall": 0.1392,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -5051,8 +5055,8 @@
    ]
   },
   "computer_use": {
-   "chance_route_recall": 0.0778,
-   "chance_source_recall": 0.0688,
+   "chance_route_recall": 0.0771,
+   "chance_source_recall": 0.0687,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -5197,7 +5201,7 @@
    ]
   },
   "continual_learning": {
-   "chance_route_recall": 0.0639,
+   "chance_route_recall": 0.0634,
    "chance_source_recall": 0.018,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.333,
@@ -5344,8 +5348,8 @@
    ]
   },
   "instant_learning": {
-   "chance_route_recall": 0.1986,
-   "chance_source_recall": 0.0859,
+   "chance_route_recall": 0.197,
+   "chance_source_recall": 0.0858,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -5492,8 +5496,8 @@
    ]
   },
   "memory": {
-   "chance_route_recall": 0.1653,
-   "chance_source_recall": 0.0903,
+   "chance_route_recall": 0.1722,
+   "chance_source_recall": 0.0906,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 1.0,
@@ -5640,8 +5644,8 @@
    ]
   },
   "verification_abstention": {
-   "chance_route_recall": 0.2278,
-   "chance_source_recall": 0.1521,
+   "chance_route_recall": 0.2342,
+   "chance_source_recall": 0.1524,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 1.0,
@@ -5678,7 +5682,7 @@
      "routed_hit": [
       "engine:WAKE_SLEEP_CONSOLIDATION",
       "engine:LEAPFROG_W47_MEANING_EGRAPH_VERICODING_PROOF_CUT",
-      "engine:COUNTERFACTUAL_DISCR_TREE_SKILL_ROUTER"
+      "engine:LEAPFROG_W51_STRANDED_TREASURY_CONFINEMENT_ORACLE"
      ],
      "routed_top": [
       "engine:WAKE_SLEEP_CONSOLIDATION",
@@ -5786,8 +5790,8 @@
    ]
   },
   "world_model": {
-   "chance_route_recall": 0.1361,
-   "chance_source_recall": 0.0631,
+   "chance_route_recall": 0.1433,
+   "chance_source_recall": 0.0635,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -5890,7 +5894,9 @@
      "query": "rank residual causes for an observed effect",
      "route_hit": true,
      "routed_hit": [
-      "engine:ANGELIC_LENS_COW_REPAIR"
+      "engine:ANGELIC_LENS_COW_REPAIR",
+      "engine:LEAPFROG_W39_MOORE_ONTOLOGY_WITNESS_LEARNER",
+      "engine:LEAPFROG_W44_MEME_DBSP_CASCADE_ABSENCE_MEMORY"
      ],
      "routed_top": [
       "source.objective_relevance.rank.bm25",
