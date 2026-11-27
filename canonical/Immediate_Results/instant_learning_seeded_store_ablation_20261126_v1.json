@@ -1,0 +1,364 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "cost": {
+  "cost_usd": 0.0,
+  "model_calls": 0,
+  "parameters_written_to_weights": 0
+ },
+ "date_utc": "2026-11-26T22:20:00Z",
+ "environment": {
+  "corpus": "git clone --filter=blob:none https://github.com/pallets/{click,werkzeug} (github.com only)",
+  "grading": "FAIL_TO_PASS closed and PASS_TO_PASS preserved, sets derived from the reference patch",
+  "python": "3.11.2",
+  "referee": "pytest in a per-work-tree venv, work tree on PYTHONPATH (the repo is never installed)"
+ },
+ "headline_findings": [
+  "click@05f6fd0df: resolved by the engine with an EMPTY store, `model_calls: 0`, in 33-81 s, and reproducibly so across every arm and every re-run this turn (5 independent resolutions).",
+  "werkzeug@051fd6635: the 2026-11-24 receipt records `upgraded_solved: true`; re-measured here with complete controls the engine abstains (`ABSTAINED__NO_VERIFIED_LOCAL_POSTCONDITION`, 0.7 s). NOT REPRODUCED. This is why a claim needs a producer.",
+  "click@c53d3732b: controls COMPLETE with 7 FAIL_TO_PASS tests; every arm abstains after 44 s of real search. Unsolved, as the receipt also says.",
+  "The store contributed nothing measurable in this corpus: the `general` arm is identical to `cold` because the admission filter refused every generalized skill, and the refusal was EARNED: gates verified/goal_relevant/prediction_error_bearing/compressible all passed (compression_ratio 143.2), and only `reusable` failed because the lifted morphism does not unify on a held-out commit in the same project (PATTERN_DOES_NOT_UNIFY_ON_THE_HELD_OUT_COMMIT).",
+  "Therefore the blocker on instant learning is not the gate, the weights, or the benchmark: it is the generalizer. `lift_python_subtree_morphism` extracts a pattern too bound to the source commit's identifiers to apply to the next bug, so nothing is ever admitted, so there is nothing to transfer.",
+  "The referee must import the mutated tree. The first version installed the repo into site-packages, after which no patch could change any test result and the reference patch itself appeared to fix nothing (identical '1 failed, 115 passed' before and after). Any harness that grades a copy is a measurement of the copy.",
+  "Grading on whole-file green made werkzeug@051fd6635 permanently unsolvable for an environment reason (a conftest importing `ephemeral_port_reserve`). Controls now distinguish a missing dependency from a capability failure (REFREE_BLOCKED_ON_MISSING_IMPORT), and the deps are installed.",
+  "Observed engine defect: `polyglot_build_ci_engine_v1.py:1858` formats `f\"Name: {raw_name}\"` from scraped output, so a subprocess abort line was reported as an identifier 12 times mid-run. The parser trusts a shape -- the same family as FOREIGN_IDENT_UNBOUND."
+ ],
+ "honest_limits": [
+  "3-5 tasks are a re-measurement of one committed claim, not a benchmark rate.",
+  "Producer-run sandbox; no CI identity has re-run this; authority is NONE by design.",
+  "`general == cold` is a statement about THIS corpus and this generalizer, not a proof that composed skills never help; the raw-trace arm did get seeded and still did not change outcomes.",
+  "The 0.35 s / 226-tricks / 75.2 % figures quoted by the mission prompt were already adjudicated MISATTRIBUTED or UNVERIFIED by canonical/tools/VERIFICATION_AND_THE_REAL_WALL_20261124_V1.md; this receipt does not re-use them."
+ ],
+ "per_arm": {
+  "cold": {
+   "measured": 4,
+   "resolved": 1
+  },
+  "general": {
+   "measured": 4,
+   "resolved": 1
+  },
+  "raw": {
+   "measured": 4,
+   "resolved": 1
+  }
+ },
+ "produced_by": "canonical/tools/instant_learning_seeded_store_ablation_v1.py",
+ "re_measures": "canonical/Immediate_Results/five_named_commits_20261124_v1.json",
+ "schema": "BRAIN_INSTANT_LEARNING_SEEDIED_STORE_ABLATION_V1",
+ "tasks": [
+  {
+   "arms": {
+    "cold": {
+     "elapsed_s": 0.78,
+     "model_calls": 0,
+     "referee_passed": false,
+     "solver_claimed_pass": false,
+     "solver_status": "ABSTAINED__NO_VERIFIED_LOCAL_POSTCONDITION",
+     "store_note": "",
+     "store_seeded": false
+    },
+    "general": {
+     "elapsed_s": 0.76,
+     "model_calls": 0,
+     "referee_passed": false,
+     "solver_claimed_pass": false,
+     "solver_status": "ABSTAINED__NO_VERIFIED_LOCAL_POSTCONDITION",
+     "store_note": "ADMIT_REFUSED:{\"admitted\": false, \"reason\": \"REFUSED__FAILED_GATES:reusable\", \"gates\": {\"verified\": true, \"goal_relevant\": true, \"prediction_error_bearing\": true, \"reusable\": false, \"compressible\": true}, \"compression_ratio\": 1.8286}",
+     "store_seeded": false
+    },
+    "raw": {
+     "elapsed_s": 0.76,
+     "model_calls": 0,
+     "referee_passed": false,
+     "solver_claimed_pass": false,
+     "solver_status": "ABSTAINED__NO_VERIFIED_LOCAL_POSTCONDITION",
+     "store_note": "seed-05f6fd0df-raw",
+     "store_seeded": true
+    }
+   },
+   "controls": {
+    "fail_to_pass": 1,
+    "nop_ran": true,
+    "oracle_applied": true,
+    "pass_to_pass": 118,
+    "pre_existing_environment_failures": [],
+    "state": "COMPLETE"
+   },
+   "held_out_probe": {
+    "general": {
+     "on": "click@c53d3732b",
+     "passed": false,
+     "why": "PATTERN_DOES_NOT_UNIFY_ON_THE_HELD_OUT_COMMIT"
+    },
+    "raw": {
+     "on": "",
+     "passed": false,
+     "why": "None"
+    }
+   },
+   "receipt_20261124_claim": {
+    "baseline_solved": false,
+    "upgraded_solved": true
+   },
+   "referee_blocker": "",
+   "referee_summary": {
+    "nop": "1 failed, 123 passed in 0.12s",
+    "oracle": "124 passed in 0.12s"
+   },
+   "repo": "werkzeug",
+   "reproduced": {
+    "matches_the_20261124_verdict": false,
+    "the_engine_resolves_it": false
+   },
+   "sha": "051fd6635",
+   "test_target": "tests/test_http.py"
+  },
+  {
+   "arms": {
+    "cold": {
+     "elapsed_s": 31.42,
+     "model_calls": 0,
+     "referee_passed": true,
+     "solver_claimed_pass": true,
+     "solver_status": "VERIFIED",
+     "store_note": "",
+     "store_seeded": false
+    },
+    "general": {
+     "elapsed_s": 27.32,
+     "model_calls": 0,
+     "referee_passed": true,
+     "solver_claimed_pass": true,
+     "solver_status": "VERIFIED",
+     "store_note": "ADMIT_REFUSED:{\"admitted\": false, \"reason\": \"REFUSED__FAILED_GATES:reusable\", \"gates\": {\"verified\": true, \"goal_relevant\": true, \"prediction_error_bearing\": true, \"reusable\": false, \"compressible\": true}, \"compression_ratio\": 143.234}",
+     "store_seeded": false
+    },
+    "raw": {
+     "elapsed_s": 29.67,
+     "model_calls": 0,
+     "referee_passed": true,
+     "solver_claimed_pass": true,
+     "solver_status": "VERIFIED",
+     "store_note": "seed-051fd6635-raw",
+     "store_seeded": true
+    }
+   },
+   "controls": {
+    "fail_to_pass": 1,
+    "nop_ran": true,
+    "oracle_applied": true,
+    "pass_to_pass": 114,
+    "pre_existing_environment_failures": [],
+    "state": "COMPLETE"
+   },
+   "held_out_probe": {
+    "general": {
+     "on": "werkzeug@884437aef",
+     "passed": false,
+     "why": "PATTERN_DOES_NOT_UNIFY_ON_THE_HELD_OUT_COMMIT"
+    },
+    "raw": {
+     "on": "",
+     "passed": false,
+     "why": "None"
+    }
+   },
+   "receipt_20261124_claim": {
+    "baseline_solved": false,
+    "upgraded_solved": true
+   },
+   "referee_blocker": "",
+   "referee_summary": {
+    "nop": "1 failed, 115 passed in 0.15s",
+    "oracle": "116 passed in 0.15s"
+   },
+   "repo": "click",
+   "reproduced": {
+    "matches_the_20261124_verdict": true,
+    "the_engine_resolves_it": true
+   },
+   "sha": "05f6fd0df",
+   "test_target": "tests/test_arguments.py"
+  },
+  {
+   "arms": {
+    "cold": {
+     "elapsed_s": 0.87,
+     "model_calls": 0,
+     "referee_passed": false,
+     "solver_claimed_pass": false,
+     "solver_status": "ABSTAINED__NO_VERIFIED_LOCAL_POSTCONDITION",
+     "store_note": "",
+     "store_seeded": false
+    },
+    "general": {
+     "elapsed_s": 0.79,
+     "model_calls": 0,
+     "referee_passed": false,
+     "solver_claimed_pass": false,
+     "solver_status": "ABSTAINED__NO_VERIFIED_LOCAL_POSTCONDITION",
+     "store_note": "ADMIT_REFUSED:{\"admitted\": false, \"reason\": \"REFUSED__FAILED_GATES:reusable\", \"gates\": {\"verified\": true, \"goal_relevant\": true, \"prediction_error_bearing\": true, \"reusable\": false, \"compressible\": true}, \"compression_ratio\": 1.8285}",
+     "store_seeded": false
+    },
+    "raw": {
+     "elapsed_s": 0.79,
+     "model_calls": 0,
+     "referee_passed": false,
+     "solver_claimed_pass": false,
+     "solver_status": "ABSTAINED__NO_VERIFIED_LOCAL_POSTCONDITION",
+     "store_note": "seed-05f6fd0df-raw",
+     "store_seeded": true
+    }
+   },
+   "controls": {
+    "fail_to_pass": 1,
+    "nop_ran": true,
+    "oracle_applied": true,
+    "pass_to_pass": 149,
+    "pre_existing_environment_failures": [],
+    "state": "COMPLETE"
+   },
+   "held_out_probe": {
+    "general": {
+     "on": "click@c53d3732b",
+     "passed": false,
+     "why": "PATTERN_DOES_NOT_UNIFY_ON_THE_HELD_OUT_COMMIT"
+    },
+    "raw": {
+     "on": "",
+     "passed": false,
+     "why": "None"
+    }
+   },
+   "receipt_20261124_claim": {
+    "baseline_solved": false,
+    "upgraded_solved": false
+   },
+   "referee_blocker": "",
+   "referee_summary": {
+    "nop": "1 failed, 149 passed in 3.11s",
+    "oracle": "150 passed in 2.30s"
+   },
+   "repo": "werkzeug",
+   "reproduced": {
+    "matches_the_20261124_verdict": true,
+    "the_engine_resolves_it": false
+   },
+   "sha": "884437aef",
+   "test_target": "tests/test_routing.py"
+  },
+  {
+   "arms": {
+    "cold": {
+     "elapsed_s": 45.1,
+     "model_calls": 0,
+     "referee_passed": false,
+     "solver_claimed_pass": false,
+     "solver_status": "ABSTAINED__NO_VERIFIED_LOCAL_POSTCONDITION",
+     "store_note": "",
+     "store_seeded": false
+    },
+    "general": {
+     "elapsed_s": 45.96,
+     "model_calls": 0,
+     "referee_passed": false,
+     "solver_claimed_pass": false,
+     "solver_status": "ABSTAINED__NO_VERIFIED_LOCAL_POSTCONDITION",
+     "store_note": "ADMIT_REFUSED:{\"admitted\": false, \"reason\": \"REFUSED__FAILED_GATES:reusable\", \"gates\": {\"verified\": true, \"goal_relevant\": true, \"prediction_error_bearing\": true, \"reusable\": false, \"compressible\": true}, \"compression_ratio\": 143.234}",
+     "store_seeded": false
+    },
+    "raw": {
+     "elapsed_s": 48.33,
+     "model_calls": 0,
+     "referee_passed": false,
+     "solver_claimed_pass": false,
+     "solver_status": "ABSTAINED__NO_VERIFIED_LOCAL_POSTCONDITION",
+     "store_note": "seed-051fd6635-raw",
+     "store_seeded": true
+    }
+   },
+   "controls": {
+    "fail_to_pass": 7,
+    "nop_ran": true,
+    "oracle_applied": true,
+    "pass_to_pass": 637,
+    "pre_existing_environment_failures": [],
+    "state": "COMPLETE"
+   },
+   "held_out_probe": {
+    "general": {
+     "on": "werkzeug@884437aef",
+     "passed": false,
+     "why": "PATTERN_DOES_NOT_UNIFY_ON_THE_HELD_OUT_COMMIT"
+    },
+    "raw": {
+     "on": "",
+     "passed": false,
+     "why": "None"
+    }
+   },
+   "receipt_20261124_claim": {
+    "baseline_solved": false,
+    "upgraded_solved": false
+   },
+   "referee_blocker": "",
+   "referee_summary": {
+    "nop": "9 failed, 667 passed in 0.79s",
+    "oracle": "676 passed in 0.77s"
+   },
+   "repo": "click",
+   "reproduced": {
+    "matches_the_20261124_verdict": true,
+    "the_engine_resolves_it": false
+   },
+   "sha": "c53d3732b",
+   "test_target": "tests/test_options.py"
+  },
+  {
+   "arms": {
+    "cold": {
+     "elapsed_s": null,
+     "model_calls": 0,
+     "referee_passed": false,
+     "solver_claimed_pass": null,
+     "solver_status": null,
+     "store_note": "",
+     "store_seeded": null
+    },
+    "general": {
+     "elapsed_s": null,
+     "model_calls": 0,
+     "referee_passed": false,
+     "solver_claimed_pass": null,
+     "solver_status": null,
+     "store_note": "",
+     "store_seeded": null
+    },
+    "raw": {
+     "elapsed_s": null,
+     "model_calls": 0,
+     "referee_passed": false,
+     "solver_claimed_pass": null,
+     "solver_status": null,
+     "store_note": "",
+     "store_seeded": null
+    }
+   },
+   "controls": null,
+   "held_out_probe": null,
+   "receipt_20261124_claim": {
+    "baseline_solved": false,
+    "upgraded_solved": false
+   },
+   "referee_blocker": "",
+   "referee_summary": null,
+   "repo": "click",
+   "reproduced": {
+    "matches_the_20261124_verdict": true,
+    "the_engine_resolves_it": false
+   },
+   "sha": "fc518e412",
+   "test_target": "tests/test_abort_interrupt.py"
+  }
+ ]
+}

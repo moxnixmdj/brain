@@ -1,0 +1,150 @@
+{
+  "capability_id": "truecap.docx_text_edit_transaction",
+  "contract": {
+    "declared_expectation": {
+      "field": "status",
+      "type": "field_nonempty"
+    },
+    "generator": {
+      "entry": "generate_transaction",
+      "module": "canonical/capabilities/true/generators/docx_span_edit_gen_v1.py"
+    },
+    "kernel": {
+      "entry": "solve_transaction",
+      "module": "canonical/runtime/docx_true_capability_adapters_v1.py"
+    },
+    "oracle_verdicts": {
+      "ATOMICITY_AND_INVERSE": {
+        "class": "METAMORPHIC",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      },
+      "EXPECTED_OUTCOME": {
+        "class": "ANALYTIC_CLOSED_FORM",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      },
+      "PACKAGE_INTEGRITY": {
+        "class": "PROPERTY",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      }
+    },
+    "solver_git_blob_sha": "0008bed08fa3e17587a4af04e5bce04ff81fc8d2",
+    "spec": "canonical/capabilities/true/specs/DOCX_TEXT_EDIT_TRANSACTION_V1.json"
+  },
+  "effect": "truecap.docx_text_edit_transaction.outcome.changed_members",
+  "goal": "Promote the measured true capability DOCX_TEXT_EDIT_TRANSACTION_V1 into the bound-capability lane: re-execute the adapter on the committed instance in a fresh process and issue the receipt the registry admission requires.",
+  "origin_mission_path": "canonical/capabilities/true/TRUE_CAPABILITY_LEDGER_V1.json",
+  "registry_entry": {
+    "action_template": {
+      "args": {
+        "capability_id": "truecap.docx_text_edit_transaction",
+        "instance_path": "canonical/capabilities/true/instances/docx_text_edit_transaction.json"
+      },
+      "expect": {
+        "field": "status",
+        "type": "field_nonempty"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "truecap_docx_text_edit_transaction",
+    "ambient_preconditions": [
+      "a committed instance fixture at canonical/capabilities/true/instances/docx_text_edit_transaction.json, digest-pinned by the queue entry; if it is regenerated the edge must be re-measured, not re-labelled"
+    ],
+    "cost": 1,
+    "entrypoint": "run",
+    "fixture": "canonical/capabilities/true/instances/docx_text_edit_transaction.json",
+    "fixture_error": null,
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "docx",
+      "measured",
+      "true-capability"
+    ],
+    "limitations": [
+      "NO more than 64 edits per call",
+      "NO targets spanning two paragraphs",
+      "NO headers/footers/footnotes",
+      "NO visual-layout, tracked-changes, fields or numbering guarantees",
+      "`result_fields` is the union of keys observed across the measured outcomes and `result_fields_guaranteed` the intersection; a consumer that needs a field to exist must read the guaranteed set.",
+      "The receipt lane re-runs the committed instance (index #0) and cannot vary it: fresh-instance breadth is the certification's own measurement, recorded in canonical/capabilities/COMPOSITION_EDGES_V1.json and the ledger receipt."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "provides": [
+      "truecap.docx_text_edit_transaction.outcome.changed_members",
+      "truecap.docx_text_edit_transaction.outcome.edit_count",
+      "truecap.docx_text_edit_transaction.outcome.edit_index",
+      "truecap.docx_text_edit_transaction.outcome.edited_paragraph_count",
+      "truecap.docx_text_edit_transaction.outcome.match_count",
+      "truecap.docx_text_edit_transaction.outcome.output_docx_b64",
+      "truecap.docx_text_edit_transaction.outcome.output_file_left_behind_on_failure",
+      "truecap.docx_text_edit_transaction.outcome.preserved_member_count",
+      "truecap.docx_text_edit_transaction.outcome.reason",
+      "truecap.docx_text_edit_transaction.outcome.scope",
+      "truecap.docx_text_edit_transaction.outcome.semantic_authority",
+      "truecap.docx_text_edit_transaction.outcome.status",
+      "truecap.docx_text_edit_transaction.outcome.terminal_authority",
+      "truecap.docx_text_edit_transaction.outcome.visual_layout_authority"
+    ],
+    "requires": [],
+    "result_fields": [
+      "adapter",
+      "capability_id",
+      "certification",
+      "changed_members",
+      "edit_count",
+      "edit_index",
+      "edited_paragraph_count",
+      "match_count",
+      "output_docx_b64",
+      "output_file_left_behind_on_failure",
+      "preserved_member_count",
+      "reason",
+      "scope",
+      "semantic_authority",
+      "status",
+      "terminal_authority",
+      "visual_layout_authority"
+    ],
+    "result_fields_guaranteed": [
+      "adapter",
+      "capability_id",
+      "certification",
+      "output_docx_b64",
+      "output_file_left_behind_on_failure",
+      "status"
+    ],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/truecap_docx_text_edit_transaction.py",
+      "certification_law": "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "enrolled_by": "canonical/tools/capability_enroll_certified_v1.py",
+      "measured_fresh_pass_rate": 1.0,
+      "measured_instances": 2000,
+      "measured_utc": "2026-10-14T19:13:46Z",
+      "path": "canonical/runtime/bound_capabilities/truecap_docx_text_edit_transaction.py",
+      "receipt": "canonical/capabilities/true/receipts/DOCX_TEXT_EDIT_TRANSACTION_V1__9e73768fd0f238e0.json",
+      "solver_git_blob_sha": "0008bed08fa3e17587a4af04e5bce04ff81fc8d2",
+      "spec": "canonical/capabilities/true/specs/DOCX_TEXT_EDIT_TRANSACTION_V1.json",
+      "type": "repository_python_source"
+    },
+    "status": "BOUND_PENDING_INDEPENDENT_VERIFICATION"
+  },
+  "schema": "PROJECT_BRAIN_PENDING_TRUE_CAPABILITY_BINDING_V1",
+  "status": "PENDING_INDEPENDENT_VERIFICATION",
+  "verification_fixture": "canonical/capabilities/true/instances/docx_text_edit_transaction.json",
+  "verification_fixture_sha256": "552441a83932305562daf2dbe5ee5f5882c4e6d88440258813b95c17efd853e1",
+  "verification_mission_id": "TRUECAP-ENROLL-DOCX-TEXT-EDIT-TRANSACTION__1DEC99DEEA61",
+  "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-DOCX-TEXT-EDIT-TRANSACTION__1dec99deea61__VERIFY.json"
+}

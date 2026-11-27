@@ -1,0 +1,228 @@
+{
+  "arms": {
+    "causal": {
+      "arm": "causal",
+      "cost_usd_total": 0.0,
+      "missing_trials": [
+        "instance_qutebrowser__qutebrowser-3e21c8214a998cb1058defd15aabb24617a76402-v5fc38aaf22415ab0b70567368332beee7955b367",
+        "instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171",
+        "instance_qutebrowser__qutebrowser-deeb15d6f009b3ca0c3bd503a7cef07462bd16b4-v363c8a7e5ccdf6968fc7ab84a2053ac78036691d"
+      ],
+      "model_calls_total": 0,
+      "n_expected": 3,
+      "n_missing_trial": 3,
+      "n_reported": 3,
+      "n_shard_reports": 1,
+      "resolve_rate_pct": 0.0,
+      "resolved": 0,
+      "tasks": {
+        "instance_qutebrowser__qutebrowser-3e21c8214a998cb1058defd15aabb24617a76402-v5fc38aaf22415ab0b70567368332beee7955b367": {
+          "agent_status": "NOT_RUN",
+          "n_files_changed": 0,
+          "resolved": false,
+          "reward": null
+        },
+        "instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171": {
+          "agent_status": "NOT_RUN",
+          "n_files_changed": 0,
+          "resolved": false,
+          "reward": null
+        },
+        "instance_qutebrowser__qutebrowser-deeb15d6f009b3ca0c3bd503a7cef07462bd16b4-v363c8a7e5ccdf6968fc7ab84a2053ac78036691d": {
+          "agent_status": "NOT_RUN",
+          "n_files_changed": 0,
+          "resolved": false,
+          "reward": null
+        }
+      },
+      "wall_seconds_mean": null,
+      "wall_seconds_total": null
+    },
+    "nop": {
+      "arm": "nop",
+      "cost_usd_total": 0.0,
+      "missing_trials": [
+        "instance_qutebrowser__qutebrowser-3e21c8214a998cb1058defd15aabb24617a76402-v5fc38aaf22415ab0b70567368332beee7955b367",
+        "instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171",
+        "instance_qutebrowser__qutebrowser-deeb15d6f009b3ca0c3bd503a7cef07462bd16b4-v363c8a7e5ccdf6968fc7ab84a2053ac78036691d"
+      ],
+      "model_calls_total": 0,
+      "n_expected": 3,
+      "n_missing_trial": 3,
+      "n_reported": 3,
+      "n_shard_reports": 1,
+      "resolve_rate_pct": 0.0,
+      "resolved": 0,
+      "tasks": {
+        "instance_qutebrowser__qutebrowser-3e21c8214a998cb1058defd15aabb24617a76402-v5fc38aaf22415ab0b70567368332beee7955b367": {
+          "agent_status": "NOT_RUN",
+          "n_files_changed": 0,
+          "resolved": false,
+          "reward": null
+        },
+        "instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171": {
+          "agent_status": "NOT_RUN",
+          "n_files_changed": 0,
+          "resolved": false,
+          "reward": null
+        },
+        "instance_qutebrowser__qutebrowser-deeb15d6f009b3ca0c3bd503a7cef07462bd16b4-v363c8a7e5ccdf6968fc7ab84a2053ac78036691d": {
+          "agent_status": "NOT_RUN",
+          "n_files_changed": 0,
+          "resolved": false,
+          "reward": null
+        }
+      },
+      "wall_seconds_mean": null,
+      "wall_seconds_total": null
+    },
+    "oracle": {
+      "arm": "oracle",
+      "cost_usd_total": 0.0,
+      "missing_trials": [
+        "instance_qutebrowser__qutebrowser-3e21c8214a998cb1058defd15aabb24617a76402-v5fc38aaf22415ab0b70567368332beee7955b367",
+        "instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171",
+        "instance_qutebrowser__qutebrowser-deeb15d6f009b3ca0c3bd503a7cef07462bd16b4-v363c8a7e5ccdf6968fc7ab84a2053ac78036691d"
+      ],
+      "model_calls_total": 0,
+      "n_expected": 3,
+      "n_missing_trial": 3,
+      "n_reported": 3,
+      "n_shard_reports": 1,
+      "resolve_rate_pct": 0.0,
+      "resolved": 0,
+      "tasks": {
+        "instance_qutebrowser__qutebrowser-3e21c8214a998cb1058defd15aabb24617a76402-v5fc38aaf22415ab0b70567368332beee7955b367": {
+          "agent_status": "NOT_RUN",
+          "n_files_changed": 0,
+          "resolved": false,
+          "reward": null
+        },
+        "instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171": {
+          "agent_status": "NOT_RUN",
+          "n_files_changed": 0,
+          "resolved": false,
+          "reward": null
+        },
+        "instance_qutebrowser__qutebrowser-deeb15d6f009b3ca0c3bd503a7cef07462bd16b4-v363c8a7e5ccdf6968fc7ab84a2053ac78036691d": {
+          "agent_status": "NOT_RUN",
+          "n_files_changed": 0,
+          "resolved": false,
+          "reward": null
+        }
+      },
+      "wall_seconds_mean": null,
+      "wall_seconds_total": null
+    }
+  },
+  "n_reports_read": 3,
+  "note": "Resolve decisions come from each task's own verifier inside the official container image. Merged across shards by task union.",
+  "run_produced_number": true,
+  "schema": "brain.bench_eval_report.v1",
+  "shard_diagnostics": [
+    {
+      "harbor_exit_code": "0",
+      "harbor_log_last_lines": [
+        "Tip: There are many benchmarks available in Harbor's registry.",
+        "Run `harbor datasets list` to see all available datasets.",
+        "",
+        "  3/3 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:02:34 0:00:00",
+        "",
+        "adhoc \u2022 causal_engine",
+        "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
+        "\u2503 Trials \u2503 Exceptions \u2503  Mean \u2503",
+        "\u2521\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2547\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2547\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2529",
+        "\u2502      3 \u2502          0 \u2502 0.000 \u2502",
+        "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+        "",
+        "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
+        "\u2503 Reward \u2503 Count \u2503",
+        "\u2521\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2547\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2529",
+        "\u2502 0.0    \u2502     3 \u2502",
+        "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+        "",
+        "Job Info",
+        "Total runtime: 2m 34s",
+        "Results written to ",
+        "/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/result.jso",
+        "n",
+        "Inspect results by running `harbor view ",
+        "/home/runner/work/brain/brain/work-causal-0/jobs`",
+        "Share results by running `harbor upload ",
+        "/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0`",
+        ""
+      ],
+      "harbor_log_line_count": 28,
+      "source": "causal-s0.meta.json"
+    },
+    {
+      "harbor_exit_code": "0",
+      "harbor_log_last_lines": [
+        "Tip: There are many benchmarks available in Harbor's registry.",
+        "Run `harbor datasets list` to see all available datasets.",
+        "",
+        "  3/3 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:02:07 0:00:00",
+        "",
+        "adhoc \u2022 nop",
+        "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
+        "\u2503 Trials \u2503 Exceptions \u2503  Mean \u2503",
+        "\u2521\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2547\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2547\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2529",
+        "\u2502      3 \u2502          0 \u2502 0.000 \u2502",
+        "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+        "",
+        "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
+        "\u2503 Reward \u2503 Count \u2503",
+        "\u2521\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2547\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2529",
+        "\u2502 0.0    \u2502     3 \u2502",
+        "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+        "",
+        "Job Info",
+        "Total runtime: 2m 7s",
+        "Results written to ",
+        "/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/result.json",
+        "Inspect results by running `harbor view ",
+        "/home/runner/work/brain/brain/work-nop-0/jobs`",
+        "Share results by running `harbor upload ",
+        "/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0`",
+        ""
+      ],
+      "harbor_log_line_count": 27,
+      "source": "nop-s0.meta.json"
+    },
+    {
+      "harbor_exit_code": "0",
+      "harbor_log_last_lines": [
+        "Tip: There are many benchmarks available in Harbor's registry.",
+        "Run `harbor datasets list` to see all available datasets.",
+        "",
+        "  3/3 Mean: 1.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 0:02:29 0:00:00",
+        "",
+        "adhoc \u2022 oracle",
+        "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
+        "\u2503 Trials \u2503 Exceptions \u2503  Mean \u2503",
+        "\u2521\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2547\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2547\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2529",
+        "\u2502      3 \u2502          0 \u2502 1.000 \u2502",
+        "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+        "",
+        "\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513",
+        "\u2503 Reward \u2503 Count \u2503",
+        "\u2521\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2547\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2529",
+        "\u2502 1.0    \u2502     3 \u2502",
+        "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+        "",
+        "Job Info",
+        "Total runtime: 2m 29s",
+        "Results written to ",
+        "/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/result.jso",
+        "n",
+        "Inspect results by running `harbor view ",
+        "/home/runner/work/brain/brain/work-oracle-0/jobs`",
+        "Share results by running `harbor upload ",
+        "/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0`",
+        ""
+      ],
+      "harbor_log_line_count": 28,
+      "source": "oracle-s0.meta.json"
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "capability_id": "truecap.docx_story_part_replace",
+  "contract": {
+    "declared_expectation": {
+      "field": "status",
+      "type": "field_equals",
+      "value": "PASS"
+    },
+    "generator": {
+      "entry": "generate_story",
+      "module": "canonical/capabilities/true/generators/docx_span_edit_gen_v1.py"
+    },
+    "kernel": {
+      "entry": "solve_story",
+      "module": "canonical/runtime/docx_true_capability_adapters_v1.py"
+    },
+    "oracle_verdicts": {
+      "EXPECTED_OUTCOME": {
+        "class": "ANALYTIC_CLOSED_FORM",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      },
+      "INVERSE_EDIT_RESTORES": {
+        "class": "METAMORPHIC",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      },
+      "PACKAGE_INTEGRITY": {
+        "class": "PROPERTY",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      }
+    },
+    "solver_git_blob_sha": "0008bed08fa3e17587a4af04e5bce04ff81fc8d2",
+    "spec": "canonical/capabilities/true/specs/DOCX_STORY_PART_REPLACE_V1.json"
+  },
+  "effect": "truecap.docx_story_part_replace.outcome.changed_members",
+  "goal": "Promote the measured true capability DOCX_STORY_PART_REPLACE_V1 into the bound-capability lane: re-execute the adapter on the committed instance in a fresh process and issue the receipt the registry admission requires.",
+  "origin_mission_path": "canonical/capabilities/true/TRUE_CAPABILITY_LEDGER_V1.json",
+  "registry_entry": {
+    "action_template": {
+      "args": {
+        "capability_id": "truecap.docx_story_part_replace",
+        "instance_path": "canonical/capabilities/true/instances/docx_story_part_replace.json"
+      },
+      "expect": {
+        "field": "status",
+        "type": "field_equals",
+        "value": "PASS"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "truecap_docx_story_part_replace",
+    "ambient_preconditions": [
+      "a committed instance fixture at canonical/capabilities/true/instances/docx_story_part_replace.json, digest-pinned by the queue entry; if it is regenerated the edge must be re-measured, not re-labelled"
+    ],
+    "cost": 1,
+    "entrypoint": "run",
+    "fixture": "canonical/capabilities/true/instances/docx_story_part_replace.json",
+    "fixture_error": null,
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "docx",
+      "measured",
+      "true-capability"
+    ],
+    "limitations": [
+      "NO body edits through this entry",
+      "NO targets spanning two paragraphs",
+      "NO creation of missing parts",
+      "NO visual-layout, tracked-changes, fields or numbering guarantees",
+      "`result_fields` is the union of keys observed across the measured outcomes and `result_fields_guaranteed` the intersection; a consumer that needs a field to exist must read the guaranteed set.",
+      "The receipt lane re-runs the committed instance (index #0) and cannot vary it: fresh-instance breadth is the certification's own measurement, recorded in canonical/capabilities/COMPOSITION_EDGES_V1.json and the ledger receipt."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "provides": [
+      "truecap.docx_story_part_replace.outcome.changed_members",
+      "truecap.docx_story_part_replace.outcome.output_docx_b64",
+      "truecap.docx_story_part_replace.outcome.output_file_left_behind_on_failure",
+      "truecap.docx_story_part_replace.outcome.paragraph_index",
+      "truecap.docx_story_part_replace.outcome.part_name",
+      "truecap.docx_story_part_replace.outcome.preserved_member_count",
+      "truecap.docx_story_part_replace.outcome.scope",
+      "truecap.docx_story_part_replace.outcome.semantic_authority",
+      "truecap.docx_story_part_replace.outcome.spanned_text_node_count",
+      "truecap.docx_story_part_replace.outcome.status",
+      "truecap.docx_story_part_replace.outcome.terminal_authority",
+      "truecap.docx_story_part_replace.outcome.visual_layout_authority"
+    ],
+    "requires": [],
+    "result_fields": [
+      "adapter",
+      "capability_id",
+      "certification",
+      "changed_members",
+      "output_docx_b64",
+      "output_file_left_behind_on_failure",
+      "paragraph_index",
+      "part_name",
+      "preserved_member_count",
+      "scope",
+      "semantic_authority",
+      "spanned_text_node_count",
+      "status",
+      "terminal_authority",
+      "visual_layout_authority"
+    ],
+    "result_fields_guaranteed": [
+      "adapter",
+      "capability_id",
+      "certification",
+      "changed_members",
+      "output_docx_b64",
+      "output_file_left_behind_on_failure",
+      "paragraph_index",
+      "part_name",
+      "preserved_member_count",
+      "scope",
+      "semantic_authority",
+      "spanned_text_node_count",
+      "status",
+      "terminal_authority",
+      "visual_layout_authority"
+    ],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/truecap_docx_story_part_replace.py",
+      "certification_law": "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "enrolled_by": "canonical/tools/capability_enroll_certified_v1.py",
+      "measured_fresh_pass_rate": 1.0,
+      "measured_instances": 2000,
+      "measured_utc": "2026-10-14T19:13:54Z",
+      "path": "canonical/runtime/bound_capabilities/truecap_docx_story_part_replace.py",
+      "receipt": "canonical/capabilities/true/receipts/DOCX_STORY_PART_REPLACE_V1__e098d8db05ee5d56.json",
+      "solver_git_blob_sha": "0008bed08fa3e17587a4af04e5bce04ff81fc8d2",
+      "spec": "canonical/capabilities/true/specs/DOCX_STORY_PART_REPLACE_V1.json",
+      "type": "repository_python_source"
+    },
+    "status": "BOUND_PENDING_INDEPENDENT_VERIFICATION"
+  },
+  "schema": "PROJECT_BRAIN_PENDING_TRUE_CAPABILITY_BINDING_V1",
+  "status": "PENDING_INDEPENDENT_VERIFICATION",
+  "verification_fixture": "canonical/capabilities/true/instances/docx_story_part_replace.json",
+  "verification_fixture_sha256": "500cfe1a1c7b7152fc6d7e71896dc62d3871b99e2722332935857d32b3bd949d",
+  "verification_mission_id": "TRUECAP-ENROLL-DOCX-STORY-PART-REPLACE__45F2A15DAB41",
+  "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-DOCX-STORY-PART-REPLACE__45f2a15dab41__VERIFY.json"
+}
