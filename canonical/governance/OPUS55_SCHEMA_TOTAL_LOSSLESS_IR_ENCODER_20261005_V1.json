@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_SCHEMA_TOTAL_LOSSLESS_IR_ENCODER_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__P2_REPRESENTATION_TOTALITY_REDUCED_TO_LOSSLESS_TAGGED_EMBEDDING__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Discharge the representation half of P2_TOTAL_ENCODER in the schema-closed compositional trace-refinement route without pretending to solve local behavioral noninferiority: inject every frozen typed interaction member and exact JSON payload into a Brain-owned tagged IR losslessly, with explicit actor labeling and fail-closed unknown-member behavior.",
+  "authorities": {
+    "schema_snapshot": {
+      "path": "canonical/governance/OPUS55_FROZEN_INTERACTION_SCHEMA_SNAPSHOT_20261005_V1.json",
+      "git_blob_sha": "747f535e158d249a6ac358b28266dc0348254dc7"
+    },
+    "theorem": {
+      "path": "canonical/governance/OPUS55_SCHEMA_CLOSED_COMPOSITIONAL_TRACE_REFINEMENT_THEOREM_20261005_V1.json",
+      "premise": "P2_TOTAL_ENCODER"
+    },
+    "runtime": {
+      "path": "canonical/runtime/opus55_schema_lossless_ir_encoder_v1.py"
+    },
+    "tests": {
+      "path": "canonical/tests/test_opus55_schema_lossless_ir_encoder_v1.py"
+    }
+  },
+  "theorem": {
+    "id": "LOSSLESS_TAGGED_EMBEDDING_IS_TOTAL_SEMANTICS_INFORMATION_PRESERVING_REPRESENTATION",
+    "domain": "THE_FINITE_DISCRIMINANT_AND_CONTROL_MEMBER_SETS_BOUND_BY_THE_FROZEN_SCHEMA_SNAPSHOT_WITH_ARBITRARY_VALID_JSON_PAYLOADS",
+    "encoder": "E(channel,type,payload,actor)=(fixed_IR_schema,channel,type,actor,canonical_JSON(payload))",
+    "decoder": "D(E(...))=canonical_JSON(payload)",
+    "proof": [
+      "EVERY_FROZEN_SCHEMA_MEMBER_APPEARS_IN_EXACTLY_ONE_OR_MORE_EXPLICIT_CHANNEL_MEMBER_SETS_AND_THE_RUNTIME_ACCEPTS_EVERY_MEMBER_IN_THOSE_SETS.",
+      "THE_PAYLOAD_IS_SERIALIZED_WITH_LOSSLESS_JSON VALUE SEMANTICS AND STORED WITHOUT FEATURE_EXTRACTION_SUMMARIZATION_OR_SEMANTIC_COLLAPSE.",
+      "CHANNEL TYPE AND ACTOR LABELS ARE RETAINED AS SEPARATE_TAGS SO IDENTICAL_PAYLOADS_FROM_DISTINCT_PROTOCOL_MEMBERS_DO_NOT_COLLAPSE.",
+      "THE_DECODER_RETURNS_THE_PRESERVED_JSON_VALUE_AND FAILS_CLOSED_IF_CHANNEL MEMBER ACTOR OR IR_SCHEMA_IDENTITY_IS_INVALID.",
+      "THEREFORE_THE_ENCODING_IS_TOTAL_OVER_THE_PINNED_JSON_PROTOCOL_MEMBER_DOMAIN_AND_INJECTIVE_UP_TO_JSON_OBJECT_KEY_ORDER_WHICH_IS_SEMANTICALLY_IRRELEVANT_FOR_THE_BOUND_API_VALUES."
+    ],
+    "consequence_if_schema_snapshot_and_runtime_are_independently_verified": "P2_NO_LONGER_REQUIRES_MEMBER_BY_MEMBER_SEMANTIC_REPRESENTATION_DESIGN__REPRESENTATION_TOTALITY_IS_CLOSED_BY_LOSSLESS_EMBEDDING;ANY_TASK_SEMANTICS_NEEDED_FOR_NONINFERIORITY_REMAINS_IN_P4_LOCAL_REFINEMENT_AND_P7_ACCEPTANCE_ORDER.",
+    "actor_boundary": "THE_ENCODER_DOES_NOT_INFER_ACTOR_IDENTITY;IT_PRESERVES_AN_EXPLICIT_ACTOR_LABEL. TOTAL_ACTOR_ATTRIBUTION_FOR_TARGET_PROJECTION_REMAINS_A_SEPARATE_PREMISE.",
+    "hidden_state_boundary": "OPAQUE_THINKING_REDACTED_THINKING_COMPACTION_OR_OTHER_STATE_CARRIERS_CAN_BE_REPRESENTED_WITHOUT_DECRYPTING_OR_REPRODUCING_PRIVATE_INTERNAL_REASONING."
+  },
+  "regression_population": {
+    "frozen_schema_members": 178,
+    "channels": 10,
+    "includes": [
+      "STABLE_AND_BETA_REQUEST_CONTENT",
+      "STABLE_AND_BETA_RESPONSE_CONTENT",
+      "STABLE_AND_BETA_TOOL_DEFINITIONS",
+      "STABLE_AND_BETA_STOP_REASONS",
+      "STABLE_AND_BETA_TOP_LEVEL_REQUEST_CONTROL_FIELDS"
+    ],
+    "fail_closed": [
+      "UNKNOWN_CHANNEL",
+      "UNKNOWN_SCHEMA_MEMBER",
+      "UNKNOWN_ACTOR",
+      "NON_JSON_PAYLOAD",
+      "TAMPERED_IR_MEMBER",
+      "SCHEMA_SNAPSHOT_DRIFT"
+    ]
+  },
+  "critical_path_effect_if_verified": [
+    "REMOVE_MANUAL_PER_BLOCK_ENCODER_DESIGN_FROM_P2",
+    "REDUCE_P2_TO_SCHEMA_SNAPSHOT_CURRENTNESS_PLUS_LOSSLESS_ENCODER_RUNTIME_VERIFICATION_PLUS_SEPARATE_ACTOR_ATTRIBUTION",
+    "MOVE_SEMANTIC_PERFORMANCE_BURDEN_TO_P4_LOCAL_REFINEMENT_WHERE_IT_BELONGS",
+    "KEEP_P5_CONSTRUCTOR_PRESERVATION_AND_P7_ACCEPTANCE_MONOTONICITY_OPEN"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_BRAIN_UNDERSTANDS_OR_DOMINATES_EVERY_ENCODED_PAYLOAD",
+    "NO_CLAIM_ACTOR_ATTRIBUTION_TOTALITY",
+    "NO_CLAIM_P4_LOCAL_REFINEMENT",
+    "NO_CLAIM_P5_CONSTRUCTOR_PRESERVATION",
+    "NO_CLAIM_TARGET_DISCOVERY_COMPLETE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
