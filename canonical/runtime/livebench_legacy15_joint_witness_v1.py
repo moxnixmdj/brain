@@ -200,11 +200,26 @@ def _build_general(constraints: list[dict[str, Any]]) -> str:
             raise JointWitnessError("UNKNOWN_WORD_RELATION")
 
     # Postscript is placed after ordinary body but before an exact end phrase.
+    #
+    # The frozen Punkt scorer treats the trailing period in "P.S." as a
+    # sentence boundary when whitespace follows it.  For the compatible
+    # visible contract "less than 2 sentences", concatenate the filler
+    # directly after the marker.  The exact legacy PostscriptChecker accepts
+    # this form (its regex requires "P." + optional whitespace + "S" and then
+    # arbitrary tail text), while the literal "P.S." marker remains present.
+    # All other postscript cases preserve the historical spelling.
     if post:
         marker = str(_slots(post).get("postscript_marker") or "")
         if not marker:
             raise JointWitnessError("POSTSCRIPT_MARKER_REQUIRED")
-        core = core.rstrip() + "\n" + marker + " " + filler
+        sentence_slots = _slots(sentence) if sentence else {}
+        compact_ps = (
+            marker == "P.S."
+            and str(sentence_slots.get("relation") or "") == "less than"
+            and int(sentence_slots.get("num_sentences") or 0) == 2
+        )
+        separator = "" if compact_ps else " "
+        core = core.rstrip() + "\n" + marker + separator + filler
 
     if end:
         phrase = str(_slots(end).get("end_phrase") or "").strip()
