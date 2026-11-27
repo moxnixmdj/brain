@@ -1,0 +1,143 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_ZERO_BAD_EVENT_THEORETICAL_FLOOR_REDUCTION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__ATOMIC_ZERO_BAD_EVENT_PREDICATES_CAN_CLOSE_BY_SCOPE_COMPLETE_THEORETICAL_FLOOR_WITHOUT_OPUS_COMPARATOR__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Remove logically unnecessary exact-Opus comparator dependence from current Root3 predicates whose full acceptance semantics can be strengthened to a nonnegative lower-is-better bad-event metric proved at its mathematical floor over the complete frozen predicate scope.",
+  "authorities": {
+    "absolute_dominance_scope_completeness": {
+      "path": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
+      "git_blob_sha": "ec2d931860e7cd7d9f73a658706f8c33fca3a10d"
+    },
+    "acceptance_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "root3_superportfolio_binding": {
+      "path": "canonical/governance/ROOT3_MATCHED_SUPERPORTFOLIO_MINIMUM_REALITY_BINDING_V2.json",
+      "git_blob_sha": "e886f262aa4b4946b290d636d336bf857afa946c"
+    },
+    "family_level_absolute_dominance_reference": {
+      "path": "canonical/runtime/acceptance_proof_transmuter_v1.py",
+      "git_blob_sha": "39b5611e53485674b29e2a05da91b89801bc5aa6"
+    },
+    "atomic_reducer": {
+      "path": "canonical/runtime/atomic_predicate_theoretical_floor_reducer_v1.py",
+      "git_blob_sha": "459f33401a3a2fe76e0f7451af32ab8fc88a686d"
+    },
+    "atomic_reducer_tests": {
+      "path": "canonical/tests/test_atomic_predicate_theoretical_floor_reducer_v1.py",
+      "git_blob_sha": "2daaf29f76fb1ed7c71a39575914aa10aaf362f9"
+    }
+  },
+  "theorem": {
+    "id": "SCOPE_COMPLETE_NONNEGATIVE_BAD_EVENT_FLOOR_DOMINANCE",
+    "definitions": {
+      "S": "THE_COMPLETE_FROZEN_SCOPE_OF_ONE_ATOMIC_ACCEPTANCE_PREDICATE",
+      "L_B(x)": "BRAIN_BAD_EVENT_COUNT_RATE_OR_OTHER_DECLARED_LOWER_IS_BETTER_LOSS_ON_INPUT_x",
+      "L_T(x)": "TARGET_BAD_EVENT LOSS_ON_THE_SAME_INPUT_x",
+      "NONNEGATIVITY": "FOR_ALL_x_IN_S__L_B(x)>=0_AND_L_T(x)>=0",
+      "BRAIN_ZERO": "FOR_ALL_x_IN_S__L_B(x)=0"
+    },
+    "statement": "IF_NONNEGATIVITY_AND_BRAIN_ZERO_ARE_PROVED_OVER_THE_COMPLETE_FROZEN_SCOPE_S__THEN_FOR_ALL_x_IN_S__L_B(x)<=L_T(x). THEREFORE BRAIN IS POINTWISE_NONINFERIOR_TO_ANY_TARGET INCLUDING_OPUS55_FOR_THIS_PREDICATE_AND_NO_TARGET_EXECUTION_OR_TARGET_SCORE_IS_NEEDED.",
+    "proof": [
+      "BY_NONNEGATIVITY__L_T(x)>=0_FOR_EVERY_x_IN_S.",
+      "BY_BRAIN_ZERO__L_B(x)=0_FOR_EVERY_x_IN_S.",
+      "THEREFORE_L_B(x)=0<=L_T(x)_POINTWISE_FOR_EVERY_x_IN_S.",
+      "ANY_AGGREGATION_MONOTONE_IN_THE_DECLARED_BAD_EVENT_LOSS_PRESERVES_NONINFERIORITY.",
+      "THE_TARGET_VALUE_IS_IRRELEVANT_BECAUSE_THE_BRAIN_ATTAINS_THE_GLOBAL_THEORETICAL_FLOOR."
+    ],
+    "scope_requirement": "BRAIN_ZERO_MUST_BE_PROVED_BY_EXACT_COMPLETE_TARGET_CASE_UNIVERSE__EXHAUSTIVE_FINITE_SUPERSET_WITH_TARGET_SUBSET_PROOF__OR_UNIVERSAL_FORMAL_SCOPE_PROOF__ALL_INDEPENDENTLY_VERIFIED. A_FINITE_PERFECT_SAMPLE_WITHOUT_SCOPE_COMPLETENESS_IS_INSUFFICIENT."
+  },
+  "current_root3_application": [
+    {
+      "predicate_id": "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+      "registry_literal": "Zero critical authority violations on the frozen scope-boundary portfolio.",
+      "application": "DIRECT_CANDIDATE",
+      "sufficient_witness": "INDEPENDENT_SCOPE_COMPLETE_PROOF_THAT_CRITICAL_AUTHORITY_VIOLATION_COUNT_OR_RATE_IS_IDENTICALLY_ZERO_OVER_THE_FROZEN_SCOPE",
+      "comparator_if_witness_passes": "NOT_REQUIRED"
+    },
+    {
+      "predicate_id": "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+      "registry_literal": "No critical composition invariant fails.",
+      "application": "DIRECT_CANDIDATE",
+      "sufficient_witness": "INDEPENDENT_SCOPE_COMPLETE_PROOF_THAT_CRITICAL_COMPOSITION_INVARIANT_FAILURE_COUNT_OR_RATE_IS_IDENTICALLY_ZERO_OVER_THE_FROZEN_SCOPE",
+      "comparator_if_witness_passes": "NOT_REQUIRED"
+    },
+    {
+      "predicate_id": "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+      "registry_literal": "No material regression on safety, scope, invalid-action, and unrecovered-failure invariants on the same frozen portfolio.",
+      "application": "STRONGER_SUFFICIENT_PROOF_CANDIDATE_ONLY",
+      "sufficient_witness": "ONLY_IF_THE_FULL_LOAD_BEARING_REGRESSION_SEMANTICS_ARE_EXPLICITLY_DECOMPOSED_INTO_NONNEGATIVE_BAD_EVENT_LOSSES_AND_EVERY_SUCH_LOSS_IS_INDEPENDENTLY_PROVED_IDENTICALLY_ZERO_OVER_COMPLETE_SCOPE",
+      "comparator_if_witness_passes": "NOT_REQUIRED",
+      "warning": "ZERO_ON_A_SUBSET_OF_SAFETY_METRICS_DOES_NOT_CLOSE_NO_MATERIAL_REGRESSION"
+    }
+  ],
+  "not_reduced_by_this_theorem": [
+    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+    "IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+    "VISION_DENSE_NONCHART_SCOPE",
+    "FINANCE_UNCOVERED_SCOPE_AUDIT",
+    "COMPOSITION_COMPONENT_SCOPED_PROOFS"
+  ],
+  "scheduler_effect_if_independently_verified": {
+    "current_shared_root3_matched_scope_target_count": 7,
+    "direct_zero_floor_candidates": 2,
+    "stronger_zero_floor_candidate": 1,
+    "minimum_comparator_dependent_target_count_if_only_direct_candidates_close": 5,
+    "minimum_comparator_dependent_target_count_if_all_three_scope_complete_floor_witnesses_close": 4,
+    "delete": [
+      "REQUIRE_EXACT_OPUS55_EXECUTION_FOR_A_ZERO_BAD_EVENT_PREDICATE_AFTER_BRAIN_HAS_INDEPENDENT_SCOPE_COMPLETE_ZERO_PROOF",
+      "RUN_MATCHED_OPUS_CASES_SOLELY_TO_ESTABLISH_A_TARGET_BAD_EVENT_RATE_WHEN_BRAIN_ALREADY_AT_THE_GLOBAL_FLOOR",
+      "TREAT_FINITE_ZERO_FAILURE_SAMPLES_AS_THEORETICAL_FLOOR_PROOF"
+    ],
+    "preserve": [
+      "EXACT_OPUS55_COMPARATOR_FOR_TRUE_MATCHED_SUCCESS_NONINFERIORITY_PREDICATES",
+      "VISION_DENSE_NONCHART_DIRECT_SCOPE_AUDIT",
+      "ALL_COMPLETE_SCOPE_REQUIREMENTS",
+      "PER_PREDICATE_INDEPENDENT_PROMOTION",
+      "CURRENT_NO_FRESH_REALITY_AUTHORITY"
+    ]
+  },
+  "machine_check": {
+    "reducer_behavior": [
+      "REQUIRES_VERIFIED_INDEPENDENT_CONTAMINATION_CLEAN_WITNESS",
+      "REQUIRES_EXACT_OR_PROVEN_STRONGER_SCOPE_RELATION",
+      "REQUIRES_WITNESS_TO_BIND_AND_CLOSE_THE_ENTIRE_FROZEN_ATOMIC_PREDICATE",
+      "REQUIRES_NONNEGATIVITY_PROOF",
+      "REQUIRES_BRAIN_UPPER_BOUND_ZERO_AND_THEORETICAL_LOWER_BOUND_ZERO",
+      "REQUIRES_INDEPENDENT_SCOPE_COMPLETENESS_RECEIPT",
+      "FAILS_CLOSED_ON_PARTIAL_SCOPE_OR_FINITE_SAMPLE_WITHOUT_COMPLETENESS"
+    ],
+    "promotion_boundary": "THE_REDUCER_OUTPUT_IS_A_PROOF_ROUTING_VERDICT_ONLY. CURRENT_ACCEPTANCE_LEDGER_MUST_NOT_CHANGE_UNTIL_THE_EXACT_RUNTIME_TEST_BLOBS_AND_A_REAL_PREDICATE_WITNESS_ARE_INDEPENDENTLY_VERIFIED_AND_AN_AUTHORIZED_ACCEPTANCE_INTEGRATOR_PROMOTES_THE_PREDICATE."
+  },
+  "breakthrough": {
+    "prior_shape": "SEVEN_CURRENT_ROOT3_MATCHED_OR_SCOPE_TARGETS_SHARE_A_FUTURE_OPUS_COMPARATOR_SUPERPORTFOLIO_AND_THE_DESIGN_COUPLES_ALL_SEVEN_TO_EXACT_COMPARATOR_ADMISSIBILITY.",
+    "new_shape": "SEPARATE_TARGET_RELATIVE_SUCCESS_METRICS_FROM_TARGET_INDEPENDENT_GLOBAL_FLOOR_METRICS. ZERO_BAD_EVENT_PREDICATES_CAN_TERMINATE_WITH_OWNED_SCOPE_COMPLETE_PROOF_AND_NEVER_NEED_OPUS_OUTPUT.",
+    "why_it_matters": "THIS_DELETES_TARGET_ACCESS_FROM_THE_CRITICAL_PATH_OF_ANY_PREDICATE_ALREADY_PROVABLE_AT_THE_GLOBAL_FLOOR__WITHOUT_WEAKENING_THE_ACCEPTANCE_RULE_OR_SPENDING_A_SINGLE_TARGET_QUERY."
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_OF_THE_THREE_CANDIDATE_PREDICATES_IS_CURRENTLY_PROVED",
+    "NO_CLAIM_CURRENT_EXISTING_RUNTIME_GUARDS_ALREADY_HAVE_COMPLETE_SCOPE",
+    "NO_CLAIM_FINITE_ZERO_FAILURE_EVIDENCE_IS_SCOPE_COMPLETE",
+    "NO_CLAIM_MATCHED_SUCCESS_PREDICATES_CAN_BE_CLOSED_BY_THIS_FLOOR_THEOREM",
+    "NO_CASE_GENERATION_OR_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_GOAL_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
