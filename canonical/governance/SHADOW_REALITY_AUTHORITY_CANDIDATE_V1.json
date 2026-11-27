@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_SHADOW_REALITY_AUTHORITY_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__NOT_ACTIVE__INDEPENDENT_VERIFICATION_AND_EXACT_ROOT_PROJECTION_REQUIRED__ZERO_CREDIT",
+  "policy_path": "canonical/governance/PROOF_CARRYING_SHADOW_REALITY_POLICY_V2.json",
+  "objective": "CREATE_A_NARROW_AUTHORITY_CLASS_FOR_PRE_FIXED_POINT_ZERO_CREDIT_ESCROWED_COLLECTION_ONLY__WITHOUT_GRANTING_RESULT_RELEASE_PROMOTION_OR_ACCEPTANCE",
+  "proposed_authority_semantics": {
+    "shadow_collection_authority": "PER_ROUTE_ONLY_IF_RUNTIME_LEASE_GATE_PASSES_AND_CONTENT_ADDRESSED_INDEPENDENT_AUTHORITY_RECEIPT_IS_BOUND",
+    "result_release_authority": false,
+    "acceptance_credit_authority": false,
+    "promotion_authority": false,
+    "terminal_execution_authority": false,
+    "global_fresh_reality_promotion_authority": false
+  },
+  "activation_preconditions": [
+    "POLICY_AND_RUNTIME_INDEPENDENT_PUBLIC_RUNNER_PASS",
+    "CURRENT_MAIN_ROOT_PROJECTION_EXACT_PASS",
+    "GENERIC_PRECOMMIT_ISOLATION_THEOREM_STILL_ACTIVE",
+    "BENCHMARK_SPECIFIC_THIN_ADAPTER_PASS_PER_ROUTE",
+    "ONE_USE_ESCROW_LEASE_PASS_PER_ROUTE",
+    "ZERO_INCREMENTAL_SPEND_GUARD_PASS_PER_ROUTE",
+    "NO_SCORE_VISIBILITY_TO_CANDIDATE_OPTIMIZER_OR_MUTATORS_BEFORE_RELEASE"
+  ],
+  "revocation": [
+    "ANY_HASH_DRIFT",
+    "ANY_FEEDBACK_PATH_TO_CANDIDATE_OR_POLICY",
+    "ANY_RESULT_VISIBILITY_BEFORE_RELEASE",
+    "ANY_NONZERO_INCREMENTAL_SPEND",
+    "ANY_LEASE_REPLAY",
+    "ANY_BENCHMARK_ADAPTER_FAILURE",
+    "ANY_ROOT_PROJECTION_MISMATCH"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "active": false
+}
