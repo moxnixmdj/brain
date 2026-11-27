@@ -1,0 +1,133 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ROOT1_THREE_TRANSFORM_MINIMUM_REPAIR_CUT_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PUBLIC_GEOMETRY_ARITHMETIC_REDUCTION__ZERO_TERMINAL_EXPOSURE__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Minimize the real semantic capability repair required to discharge the current LiveBench Root1 predicate without weakening the terminal capability objective.",
+  "bound_inputs": {
+    "target_geometry": {
+      "path": "canonical/governance/LIVEBENCH_2026_06_25_OPUS55_IF_TARGET_GEOMETRY_V1.json",
+      "git_blob_sha": "0214ddfa1082b3fafd652bab23a1ed9e130ee94f",
+      "task_counts": {
+        "paraphrase": 50,
+        "simplify": 50,
+        "story_generation": 50,
+        "summarize": 50
+      },
+      "total_questions": 200,
+      "displayed_target_percent": 65.7,
+      "exact_comparator_mean_percent": 65.73775
+    },
+    "score_mass_cut": {
+      "path": "canonical/governance/LIVEBENCH_IF_SCORE_MASS_MINIMUM_CUT_V1.json",
+      "git_blob_sha": "ad60e8dce539f9f2b1d631ae2c6ced9efb6b1aeb",
+      "role": "PUBLIC_SCORER_ARITHMETIC_ONLY"
+    },
+    "prior_semantic_frontier": {
+      "path": "canonical/governance/LIVEBENCH_ROOT1_SEMANTIC_SEED_REPAIR_FRONTIER_V1.json",
+      "git_blob_sha": "844eb26e1ddefb49240c1ad61d7e5466b58e45c2",
+      "prior_minimum_claim": "FOUR_SEMANTIC_EFFECT_CLASSES_LISTED_AS_REQUIRED"
+    }
+  },
+  "theorem": {
+    "equal_task_weighting": true,
+    "task_weight_each": 0.25,
+    "quarantine_story_generation_for_root1_repair": {
+      "assumed_story_generation_task_score_percent": 0,
+      "remaining_named_tasks": [
+        "paraphrase",
+        "simplify",
+        "summarize"
+      ],
+      "remaining_question_count": 150
+    },
+    "displayed_threshold": {
+      "required_sum_of_three_task_scores_percent": 262.8,
+      "required_mean_of_three_task_scores_percent": 87.6,
+      "proof": "(paraphrase + simplify + summarize + 0) / 4 >= 65.7 iff paraphrase + simplify + summarize >= 262.8 iff their mean >= 87.6"
+    },
+    "stricter_raw_comparator_mean": {
+      "required_sum_of_three_task_scores_percent": 262.951,
+      "required_mean_of_three_task_scores_percent": 87.65033333333334,
+      "proof": "(paraphrase + simplify + summarize + 0) / 4 >= 65.73775 iff the three-score sum >= 262.951"
+    },
+    "constructive_sufficient_points": [
+      {
+        "paraphrase": 100,
+        "simplify": 100,
+        "summarize": 100,
+        "story_generation": 0,
+        "aggregate_percent": 75,
+        "clears_displayed_65_7": true,
+        "clears_exact_65_73775": true
+      },
+      {
+        "paraphrase": 100,
+        "simplify": 100,
+        "summarize": 62.8,
+        "story_generation": 0,
+        "aggregate_percent": 65.7,
+        "clears_displayed_65_7": true,
+        "clears_exact_65_73775": false
+      },
+      {
+        "paraphrase": 100,
+        "simplify": 100,
+        "summarize": 62.951,
+        "story_generation": 0,
+        "aggregate_percent": 65.73775,
+        "clears_displayed_65_7": true,
+        "clears_exact_65_73775": true
+      }
+    ]
+  },
+  "breakthrough": {
+    "deleted_overconstraint": "ROOT1_REPAIR_REQUIRES_ALL_FOUR_SEMANTIC_TASK_CLASSES_BEFORE_THE_FIXED_BAR_CAN_BE_CLOSED",
+    "replacement": "STORY_GENERATION_MAY_SCORE_ZERO_FOR_ROOT1_REPAIR_IF_THE_THREE_NON_STORY_TASKS_SUPPLY_SUFFICIENT_SCORE_MASS",
+    "immediate_scheduler_consequence": [
+      "REMOVE_STORY_GENERATION_FROM_THE_MINIMUM_LIVEBENCH_ROOT1_REPAIR_CRITICAL_PATH",
+      "FOCUS_ZERO_COST_WHITE_BOX_SEARCH_AND_CONSTRUCTION_ON_PARAPHRASE_SIMPLIFY_AND_SUMMARIZE_FIRST",
+      "PREFER_TWO_NEAR_FULL_TRANSFORM_TASKS_PLUS_ONLY_THE_MINIMUM_REQUIRED_THIRD_TASK_SCORE_OVER_A_GENERAL_FOUR_TASK_SEMANTIC_CORE",
+      "DO_NOT_OPEN_A_LEARNED_STORY_GENERATION_LANE_MERELY_TO_CLOSE_LIVEBENCH_IF_GE_65_7"
+    ],
+    "leverage": "A_DIFFICULT_OPEN_ENDED_GENERATION_CLASS_CAN_BE_DEFERRED_FROM_THIS_ROOT1_PREDICATE_WITHOUT_CHANGING_THE_TERMINAL_OBJECTIVE"
+  },
+  "semantic_truth_firewall": {
+    "rule": "ROOT1_FIXED_BAR_CLOSURE_AND_TERMINAL_CAPABILITY_OWNERSHIP_ARE_DIFFERENT_PROPOSITIONS",
+    "required_for_any_credited_non_story_case": [
+      "THE_RESPONSE_MUST_BE_SEMANTICALLY_VALID_FOR_THE_UNDERLYING_PARAPHRASE_SIMPLIFY_OR_SUMMARIZE_REQUEST",
+      "FORMAT_OR_CHECKER_CONSTRAINTS_MUST_BE_APPLIED_WITHOUT_DESTROYING_THE_REQUIRED_SEMANTIC_CONTENT",
+      "SCORE_ONLY_WITNESSES_REMAIN_QUARANTINED_FROM_CAPABILITY_CREDIT"
+    ],
+    "story_generation_terminal_obligation": "DEFERRED_FROM_THIS_ROOT1_MINIMUM_CUT_ONLY__NOT_DELETED_FROM_THE_TERMINAL_ALL_USEFUL_CAPABILITIES_OBJECTIVE"
+  },
+  "next_minimum_action": {
+    "action": "FALSIFY_OR_BIND_ZERO_COST_WHITE_BOX_PRODUCERS_FOR_PARAPHRASE_SIMPLIFY_AND_SUMMARIZE; MEASURE_THEIR_PUBLIC_NONTERMINAL_SEMANTIC_VALIDITY_AND LEGACY_IFEVAL_CONSTRAINT_COMPATIBILITY; ONLY_OPEN_A_LEARNED_SEMANTIC_LANE_FOR_RESIDUAL_SCORE_MASS_OR_TERMINAL_CAPABILITY_COVERAGE.",
+    "terminal_cases_required": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_THREE_TRANSFORM_TASKS_ARE_CURRENTLY_SOLVED",
+    "NO_CLAIM_ANY_WHITE_BOX_PRODUCER_ALREADY_MEETS_87_6_PERCENT",
+    "NO_CLAIM_STORY_GENERATION_IS_NOT_A_USEFUL_TERMINAL_CAPABILITY",
+    "NO_BENCHMARK_PASS_OR_ACCEPTANCE_PROMOTION",
+    "NO_NEW_TERMINAL_PROMPT_RESPONSE_OR_KWARGS_EXPOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
