@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY25_WITNESS_COMPILER_INDEPENDENT_LOCAL_STRESS_V1",
+  "date": "2026-10-04",
+  "status": "PASS__174_OF_174_SYNTHETIC_PUBLIC_GRAMMAR_CASES__SEPARATE_CHECKER_IMPLEMENTATION__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "candidate": {
+    "compiler": "canonical/runtime/livebench_legacy25_witness_compiler_v1.py",
+    "adapter": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v5.py"
+  },
+  "verification": {
+    "total_cases": 174,
+    "passed": 174,
+    "failed": 0,
+    "parameter_sweeps": [
+      "keyword_frequency",
+      "letter_frequency",
+      "number_sentences",
+      "number_paragraphs",
+      "number_words",
+      "nth_paragraph_first_word",
+      "number_placeholders",
+      "number_bullet_lists",
+      "number_highlighted_sections",
+      "multiple_sections",
+      "capital_word_frequency"
+    ],
+    "fixed_family_cases": [
+      "keyword_existence",
+      "forbidden_words",
+      "postscript",
+      "constrained_response",
+      "json_format",
+      "title",
+      "two_responses",
+      "end_checker",
+      "no_comma",
+      "quotation"
+    ],
+    "pairwise_composition_cases": 28,
+    "checker_independence": "SEPARATE_TEST_HARNESS_REIMPLEMENTED_PINNED_PUBLIC_CHECKER_SEMANTICS_INDEPENDENTLY_OF_COMPILER_INTERNAL_VALIDATOR",
+    "tokenization_note": "LOCAL_ENVIRONMENT_LACKED_PINNED_NLTK_PUNKT_DATA_AND_LANGDETECT; CONTROLLED_SYNTHETIC_SENTENCE_AND_CAPITAL_TOKEN_CASES_USED_SEPARATE_NLTK_TOKENIZER_IMPLEMENTATIONS_WHERE_AVAILABLE",
+    "langdetect_families": "EXCLUDED_FROM_CONSTRUCTIVE_PASS_AND_ASSERTED_FAIL_CLOSED_BY_COMPILER_TESTS"
+  },
+  "hard_nonclaims": [
+    "NOT_EXACT_EXECUTION_OF_THE_PINNED_LIVEBENCH_PYTHON_MODULE",
+    "NOT_A_LIVEBENCH_SCORE",
+    "NOT_TERMINAL_POPULATION_EVIDENCE",
+    "NO_CASE_73_OR_LATER_READ_OR_EXPOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_PROMOTION_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
