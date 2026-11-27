@@ -1,0 +1,42 @@
+{
+  "schema":"PROJECT_BRAIN_COMPOSITION_CURRENT_OWNED_FAMILY_BRIDGES_V2",
+  "date":"2026-10-03",
+  "status":"CANDIDATE__MEMORY_PLUS_CURRENT_DELEGATION_BRIDGES__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective":"Derive exactly two current composition component receipt candidates: memory from the already-owned canonical LONG_HORIZON_MEMORY_AND_CONTINUITY scope, and delegation by restoring the historically verified component mapping only after current universal-scope whole-family closure.",
+  "canonical_base_commit":"0fa257b9a4940edc01d3503902a06d6a0027e2d1",
+  "runtime":"canonical/runtime/composition_current_owned_family_bridges_v2.py",
+  "tests":"canonical/tests/test_composition_current_owned_family_bridges_v2.py",
+  "source_authorities":{
+    "target_envelope":{"path":"canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json","git_blob_sha":"661a57f839101fbf54c7e4edc76166c65ce9327d"},
+    "current_protocols":{"path":"canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json","git_blob_sha":"62394e5b7d221ec9f69c3458f669e40e253a9d09"},
+    "frozen_manifest":{"path":"canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json","git_blob_sha":"9efbf3e81e67fbd15e34be2fcd86fbfc626b246d"},
+    "zero_receipt_baseline":{"path":"canonical/governance/COMPOSITION_COMPONENT_PROOF_SLICE_INPUT_V1.json","git_blob_sha":"adc7db65b20361be54fa26935e36aa88babf373d"},
+    "owned_memory_package":{"path":"canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json","git_blob_sha":"2d912cf8df64bd806fffb6a1070d95644d005470"},
+    "current_predicate_bindings":{"path":"canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json","git_blob_sha":"7885a827b1483bfb38315c1f492848f7e4680285"},
+    "historical_component_mapping_verification":{"path":"canonical/verification/COMPOSITION_BEHAVIORAL_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json","git_blob_sha":"bb9ecf9b34e3a41d8cd9a387fe70d9376accbccc"},
+    "delegation_acceptance_verification":{"path":"canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json","git_blob_sha":"d04f2a8c5594d261158835db1cae3822411b6b23"},
+    "delegation_scope_verification":{"path":"canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json","git_blob_sha":"955ac8f4bd0db2527bfbb465fc8252df6d916156"}
+  },
+  "expected_after_independent_verification":{
+    "current_scoped_proved_components":["delegation","memory"],
+    "current_scoped_proved_interface_count":2,
+    "current_open_interface_count":10,
+    "parent_composition_predicate_closed":false
+  },
+  "hard_rules":[
+    "CANDIDATE_RECEIPTS_MUST_REMAIN_UNVERIFIED_UNTIL_INDEPENDENT_RUNNER_RECONSTRUCTS_THE_BINDINGS",
+    "MEMORY_SCOPE_MAY_NOT_EXPAND_BEYOND_THE_VERIFIED_OWNED_PACKAGE_AND_MUST_PRESERVE_ALL_EXCLUSIONS",
+    "DELEGATION_COMPONENT_MAPPING_MAY_BE_REUSED_ONLY_BECAUSE_ITS_MAPPING_WAS_INDEPENDENTLY_VERIFIED_AND_ITS_SOURCE_FAMILY_IS_NOW_UNIVERSALLY_SCOPE_COMPLETE",
+    "TOOL_DISCOVERY_HISTORICAL_RECEIPT_REMAINS_QUARANTINED",
+    "NO_PARENT_COMPOSITION_ACCEPTANCE_FROM_TWO_OF_TWELVE_COMPONENTS",
+    "NO_FRESH_REALITY",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "new_reality_units_consumed":0,
+  "incremental_spend_usd":0,
+  "capability_credit_delta":0,
+  "family_credit_delta":0,
+  "execution_authority":false,
+  "promotion_authority":false,
+  "next":"INDEPENDENTLY_VERIFY_EXACT_CURRENT_SOURCES_AND_DERIVATION__THEN_BUILD_CURRENT_TWO_RECEIPT_SLICE_INPUT_AND_RUN_VERIFIED_SLICER__EXPECT_2_OF_12_CURRENT_SCOPED_PROVED_AND_10_OPEN"
+}
