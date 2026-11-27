@@ -1,0 +1,137 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_OPAQUE_STATE_OBSERVATIONAL_QUOTIENT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__OPAQUE_VENDOR_STATE_ALPHA_QUOTIENT__INDEPENDENT_SEMANTIC_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Compress the repaired Opus 5.5 interface-completeness and dominance problem by proving that vendor-specific opaque state-carrier bytes are not distinct capability values when all load-bearing acceptance and future behavior are invariant under alpha-renaming that preserves carrier kind actor identity order emit/echo linkage and state-transition effects.",
+  "authorities": {
+    "profile_aware_interface_v2": {
+      "path": "canonical/governance/OPUS55_PROFILE_AWARE_FIXED_INTERFACE_TRACE_SUPERSET_COVERAGE_20261005_V2.json",
+      "git_blob_sha": "4976e7cd238f3b2061ac44f01fb7792449bea9bb"
+    },
+    "first_party_sdk_typed_schema_verification": {
+      "path": "canonical/verification/OPUS55_FIRST_PARTY_SDK_TYPED_SCHEMA_CONNECTOR_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "0724d19852ec43cba132113d9599649b59f62992",
+      "source_repository": "anthropics/anthropic-sdk-python",
+      "source_ref": "v1.11.0",
+      "role": "EXACT_TYPED_CARRIER_INVENTORY__DOES_NOT_BY_ITSELF_PROVE_PROFILE_COMPLETENESS_OR_SEMANTIC_OPACITY"
+    },
+    "target_factorization": {
+      "path": "canonical/governance/OPUS55_TARGET_COVERAGE_DOMAIN_FACTORIZATION_20261005_V1.json",
+      "git_blob_sha": "6eea5d77e85cf84d5694e4ac7bcef7970064a231"
+    },
+    "thinking_counterexample": {
+      "path": "canonical/governance/OPUS55_FIXED_INTERFACE_THINKING_CHANNEL_COUNTEREXAMPLE_20261005_V1.json",
+      "git_blob_sha": "b843e047c04b51c63f67e93386b42d8b3ff80b85"
+    }
+  },
+  "first_party_evidence": [
+    {
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/migration-guide",
+      "observed_2026_10_05": [
+        "THINKING_BLOCKS_MUST_BE_RETURNED_COMPLETE_AND_UNMODIFIED_IN_TOOL_USE_LOOPS",
+        "THINKING_TEXT_IS_OMITTED_BY_DEFAULT_WHILE_SIGNATURE_REMAINS",
+        "TEXT_BETWEEN_TOOL_CALLS_CAN_BE_CARRIED_BY_THINKING_BLOCKS"
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+      "observed_2026_10_05": [
+        "THINKING_IS_ALWAYS_ON",
+        "THINKING_BLOCKS_ARE_TIED_TO_MODEL_AND_CONVERSATION"
+      ]
+    }
+  ],
+  "definitions": {
+    "RAW_TRACE": "A finite actor-attributed Opus55 interaction trace including semantic events and opaque state-carrier values.",
+    "OPAQUE_CARRIER": "A documented carrier whose raw bytes or identifier are not themselves assigned task utility but whose identity ordering and round-trip linkage can influence later transitions.",
+    "ALPHA_RENAMING": "Any bijection over opaque carrier values within each actor and carrier kind that preserves equality inequality emission order echo links while leaving every semantic payload unchanged.",
+    "Q_TRACE": "The equivalence class of a raw trace under all admissible alpha-renamings of opaque carriers.",
+    "CAPABILITY_ACCEPTANCE": "Any terminal capability scorer or proof predicate whose value is invariant under admissible opaque-carrier alpha-renaming.",
+    "BRAIN_SUBSTITUTE_STATE": "A Brain-owned state representation that need not reproduce Opus vendor bytes but must preserve the quotient trace and every load-bearing future transition used by the claimed capability."
+  },
+  "theorem": {
+    "id": "OPAQUE_STATE_ALPHA_QUOTIENT_PRESERVES_CAPABILITY_DOMINANCE",
+    "premises": [
+      "THE_CARRIER_CLASSIFICATION_IS_SOUND__NO_USER_OR_TASK_UTILITY_DEPENDS_ON_THE_RAW_OPAQUE_BYTES_OR_VENDOR_IDENTIFIER",
+      "EVERY_LOAD_BEARING_CAUSAL_DEPENDENCY_OF_THE_CARRIER_IS_PRESERVED_BY_KIND_IDENTITY_ORDER_LINKAGE_AND_RESULTING_STATE_TRANSITIONS",
+      "CAPABILITY_ACCEPTANCE_IS_INVARIANT_UNDER_ADMISSIBLE_ALPHA_RENAMING",
+      "BRAIN_PROVES_EQUAL_OR_BETTER_CAPABILITY_ACCEPTANCE_OVER_THE_QUOTIENT_TRACE_DOMAIN_USING_BRAIN_OWNED_STATE"
+    ],
+    "statement": "FOR_CAPABILITY_OBSOLESCENCE__EXACT_OPUS_VENDOR_CARRIER_BYTES_OR_IDENTIFIERS_NEED_NOT_BE_REPRODUCED__DOMINANCE_OVER_THE_QUOTIENT_DOMAIN_IS_SUFFICIENT_FOR_ALL_ACCEPTANCE_FUNCTIONS_SATISFYING_THE_INVARIANCE_PREMISE.",
+    "proof": [
+      "PARTITION_RAW_TRACES_INTO_EQUIVALENCE_CLASSES_UNDER_ADMISSIBLE_ALPHA_RENAMING.",
+      "BY_ACCEPTANCE_INVARIANCE_EVERY_RAW_TRACE_IN_ONE_CLASS_HAS_THE_SAME_CAPABILITY_RELEVANT_VALUE.",
+      "PRESERVING_KIND_IDENTITY_ORDER_LINKAGE_AND_FUTURE_TRANSITION_BEHAVIOR_PRESERVES_ALL_DECLARED_LOAD_BEARING_CAUSAL_USE_OF_THE_CARRIER.",
+      "THEREFORE_COMPARING_BRAIN_AND_TARGET_ON_ONE QUOTIENT REPRESENTATIVE OR DIRECTLY ON_THE_QUOTIENT_CLASS_LOSES_NO_CAPABILITY_RELEVANT_INFORMATION.",
+      "EXACT_VENDOR_BYTES_ARE_IMPLEMENTATION_STATE_NOT_AN_ADDITIONAL_CAPABILITY_OBLIGATION_UNLESS_A_FALSIFIER_SHOWS_RAW_BYTE_DEPENDENCE."
+    ]
+  },
+  "schema_binding": {
+    "rule": "APPLY_THE_QUOTIENT_ONLY_AFTER_THE_RAW_EVENT_HAS_BEEN_CLASSIFIED_AGAINST_THE_CONTENT_ADDRESSED_FIRST_PARTY_TYPED_SCHEMA_AND_ACTOR_ATTRIBUTION.",
+    "default": "SCHEMA_FIELDS_AND_CONTENT_BLOCKS_REMAIN_SEMANTIC_OR_CONTROL_STATE_UNLESS_THE_OPAQUE_CARRIER_PREMISES_ARE_SEPARATELY_PROVED.",
+    "effect": "THE_SDK_SCHEMA_CLOSES_TYPE_ENUMERATION_WORK__THIS_QUOTIENT_ONLY_COMPRESSES_VALUE_SPACES_INSIDE_PROVED_OPAQUE_CARRIER_FIELDS."
+  },
+  "opus55_thinking_application": {
+    "signed_thinking_signature": "CANDIDATE_OPAQUE_STATE_CARRIER__PRESERVE_BLOCK_KIND_ORDER_IDENTITY_ROUNDTRIP_AND_BEHAVIORAL_EFFECT__DO_NOT_REQUIRE_VENDOR_SIGNATURE_BYTE_REPRODUCTION",
+    "redacted_thinking_data": "CANDIDATE_OPAQUE_STATE_CARRIER_ONLY_WHERE_THE_DATA_IS_NOT_EXPOSED_AS_SEMANTIC_TASK_OUTPUT__PRESERVE_CAUSAL_STATE_EFFECT",
+    "visible_or_summarized_thinking_text": "SEMANTIC_IF_LOAD_BEARING_OR_USER_VISIBLE__MUST_NOT_BE_QUOTIENTED_AWAY",
+    "tool_call_ids": "MAY_BE_ALPHA_QUOTIENTED_ONLY_IF_ACCEPTANCE_AND_EXTERNAL_ENVIRONMENT_USE_IDENTITY_LINKAGE_NOT_LITERAL_ID_BYTES",
+    "stop_reason_or_refusal_category": "SEMANTIC_CONTROL_STATE__NOT_OPAQUE_BY_DEFAULT"
+  },
+  "critical_path_effect_if_independently_verified": {
+    "delete": [
+      "REQUIRE_EXACT_OPUS_THINKING_SIGNATURE_BYTES_AS_A_BRAIN_CAPABILITY_OUTPUT",
+      "ENUMERATE_THE_VALUE_SPACE_OF_OPAQUE_VENDOR_STATE_TOKENS_FOR_INTERFACE_COMPLETENESS",
+      "CREATE_A_NEW_CAPABILITY_FAMILY_MERELY_FOR_VENDOR_STATE_CARRIER_BYTES"
+    ],
+    "replace_with": [
+      "FINITE_CARRIER_KIND_ENUMERATION",
+      "ALPHA_EQUIVALENCE_LINKAGE_VERIFICATION",
+      "STATE_TRANSITION_BEHAVIOR_EQUIVALENCE_OR_DOMINANCE",
+      "FAIL_CLOSED_TEST_FOR_ANY_ACCEPTANCE_DEPENDENCE_ON_RAW_CARRIER_BYTES"
+    ],
+    "preserve": [
+      "THINKING_AND_REDACTED_THINKING_AS_DOCUMENTED_CHANNEL_OR_STATE_TYPES",
+      "VISIBLE_THINKING_TEXT_WHEN_LOAD_BEARING",
+      "ACTOR_ATTRIBUTION",
+      "PROFILE_AWARE_INTERFACE_TOTALITY",
+      "B0_B9_EXTENSIONAL_ROLE_TOTALITY",
+      "ALL_PERFORMANCE_AND_SCOPE_PROOF_OBLIGATIONS"
+    ]
+  },
+  "implementation": {
+    "runtime": "canonical/runtime/opus55_opaque_state_observational_quotient_v1.py",
+    "tests": "canonical/tests/test_opus55_opaque_state_observational_quotient_v1.py",
+    "runtime_scope": "STRUCTURAL_ALPHA_EQUIVALENCE_ONLY__DOES_NOT_SELF_CERTIFY_SEMANTIC_OPACITY_OR_BRAIN_STATE_TRANSITION_DOMINANCE"
+  },
+  "falsifiers": [
+    "A_TERMINAL_SCORER_OR_USEFUL_USER_TASK_DIRECTLY_VALUES_OR_INSPECTS_THE_RAW_SIGNATURE_OR_OPAQUE_BYTES",
+    "TWO_ALPHA_RENAMED_CARRIERS_WITH_IDENTICAL_EMIT_ECHO_LINKAGE_CAN_CAUSE_DIFFERENT_LOAD_BEARING_BEHAVIOR_FOR_REASONS_NOT_REPRESENTED_IN_THE_ABSTRACT_STATE_TRANSITION",
+    "THE_APPLICATION_REQUIRES_VENDOR_CRYPTOGRAPHIC_VALIDITY_AS_THE_CAPABILITY_OUTPUT_RATHER_THAN_AS_AN_OPUS_DEPLOYMENT_WRAPPER",
+    "VISIBLE_THINKING_OR_OTHER_SEMANTIC_CONTENT_IS_MISCLASSIFIED_AS_OPAQUE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_INTERFACE_TOTALITY_IS_NOW_PROVED",
+    "NO_CLAIM_THINKING_STATE_CAN_BE_DELETED_FROM_THE_TRACE_MODEL",
+    "NO_CLAIM_RAW_VENDOR_BYTES_ARE_ALWAYS_IRRELEVANT",
+    "NO_CLAIM_BRAIN_ALREADY_HAS_A_SCOPE_COMPLETE_STATE_TRANSITION_DOMINANCE_RECEIPT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_LITERAL_TERMINAL_COMPLETION",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
