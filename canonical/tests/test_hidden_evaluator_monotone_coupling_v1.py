@@ -25,9 +25,19 @@ class MonotoneCouplingTests(unittest.TestCase):
 
     def test_inferior_mass_fails_closed(self):
         out = solve({
-            "target_distribution": [{"id": "high", "probability": "1"}],
-            "brain_distribution": [{"id": "low", "probability": "1"}],
-            "dominance_edges": [{"target": "low", "brain": "low"}],
+            "target_distribution": [
+                {"id": "low", "probability": "0"},
+                {"id": "high", "probability": "1"},
+            ],
+            "brain_distribution": [
+                {"id": "low", "probability": "1"},
+                {"id": "high", "probability": "0"},
+            ],
+            "dominance_edges": [
+                {"target": "low", "brain": "low"},
+                {"target": "low", "brain": "high"},
+                {"target": "high", "brain": "high"},
+            ],
             "material_order_certificate": "TEST_ORDER_V1",
         })
         self.assertEqual(out["status"], "FAIL_CLOSED", out)
