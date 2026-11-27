@@ -1,0 +1,108 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY_SEMANTIC_SEED_COMPOSITION_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__SEMANTIC_SEED_TO_LEGACY_IFEVAL_COMPOSITION_BRIDGE__17_OF_25_FAMILIES_ADMITTED__INDEPENDENT_EXECUTION_PENDING__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "causal_gap_closed": "THE_BRAIN_HAD_A_PUBLIC_OPEN_WEIGHT_SEMANTIC_CORE_CANDIDATE_AND_A_PROMPT_ONLY_LEGACY_IFEVAL_INVERTER_BUT_NO_FAIL_CLOSED_RUNTIME_BRIDGE_THAT_COULD_ADD_SUPPORTED_LEGACY_CONSTRAINT_STRUCTURE_WHILE_MECHANICALLY_RETAINING_THE_REAL_SEMANTIC_ANSWER",
+  "candidate": {
+    "runtime_path": "canonical/runtime/livebench_legacy_seed_composer_v1.py",
+    "runtime_git_blob_sha": "f8c7622e42f98edb153c99ecb09a3a66c89fc096",
+    "legacy_inverter_path": "canonical/runtime/livebench_legacy_ifeval_prompt_inverter_v1.py",
+    "legacy_inverter_git_blob_sha": "74904d2a00ed3f0bb2e8ab7787c59c0a8f828f7a",
+    "test_path": "canonical/tests/test_livebench_legacy_seed_composer_v1.py",
+    "test_git_blob_sha": "b2469e55a377971c4f74a2f425391a08033d7fab",
+    "source_livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "source_legacy_instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2"
+  },
+  "mechanical_invariant": "EVERY_PASS_RESPONSE_CONTAINS_THE_ORIGINAL_SEMANTIC_SEED_VERBATIM_AS_ONE_CONTIGUOUS_SUBSTRING",
+  "admitted_legacy_checker_families": [
+    "keywords:existence",
+    "keywords:frequency",
+    "keywords:forbidden_words",
+    "keywords:letter_frequency",
+    "length_constraints:number_words",
+    "detectable_content:number_placeholders",
+    "detectable_content:postscript",
+    "detectable_format:number_bullet_lists",
+    "detectable_format:constrained_response",
+    "detectable_format:number_highlighted_sections",
+    "detectable_format:multiple_sections",
+    "detectable_format:title",
+    "combination:two_responses",
+    "combination:repeat_prompt",
+    "startend:end_checker",
+    "punctuation:no_comma",
+    "startend:quotation"
+  ],
+  "admitted_family_count": 17,
+  "legacy_registry_family_count": 25,
+  "family_surface_fraction": 0.68,
+  "explicitly_unadmitted_families": [
+    "language:response_language",
+    "length_constraints:number_sentences",
+    "length_constraints:number_paragraphs",
+    "length_constraints:nth_paragraph_first_word",
+    "detectable_format:json_format",
+    "change_case:capital_word_frequency",
+    "change_case:english_capital",
+    "change_case:english_lowercase"
+  ],
+  "fail_closed_properties": [
+    "EMPTY_SEED_REJECTED",
+    "ZERO_RECOGNIZED_CONSTRAINT_REJECTED",
+    "ANY_RECOGNIZED_UNADMITTED_FAMILY_REJECTED",
+    "LOSSY_CASE_REWRITE_NOT_PERFORMED",
+    "LESS_THAN_VIOLATION_NOT_REPAIRED_BY_DELETING_SEED_BYTES",
+    "CONTRADICTORY_REQUIRED_AND_FORBIDDEN_KEYWORDS_REJECTED_BY_FINAL_POSTVALIDATION",
+    "EVERY_RECOGNIZED_ADMITTED_CHECKER_IS_POSTVALIDATED_AFTER_COMPOSITION"
+  ],
+  "composition_order_breakthroughs": [
+    "HIGHLIGHT_MARKERS_ARE_APPENDED_INLINE_WITH_A_NON_BULLET_PREFIX_SO_THEY_DO_NOT_ALIAS_AS_BULLET_LIST_LINES",
+    "POSTSCRIPT_IS_APPLIED_AFTER_ORDINARY_STRUCTURAL_SUFFIXES",
+    "EXACT_END_PHRASE_IS_APPLIED_AFTER_POSTSCRIPT",
+    "OUTER_QUOTATION_IS_APPLIED_LAST_BECAUSE_THE_PINNED_END_CHECKER_STRIPS_SURROUNDING_DOUBLE_QUOTES"
+  ],
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1950,
+    "status": "PENDING_EXECUTION__WORKFLOW_NOT_SCHEDULED_BY_CURRENT_TOKEN_PATH",
+    "pinned_candidate_blobs": [
+      "74904d2a00ed3f0bb2e8ab7787c59c0a8f828f7a",
+      "f8c7622e42f98edb153c99ecb09a3a66c89fc096"
+    ],
+    "planned_scope": "17_SINGLE_FAMILY_EXACT_UPSTREAM_CHECKS_PLUS_MULTI_CONSTRAINT_INTERACTIONS_PLUS_FAIL_CLOSED_ADVERSARIAL_CASES",
+    "terminal_case_content_read": false,
+    "hidden_terminal_kwargs_read": false
+  },
+  "scheduler_effect": [
+    "IF_THE_FROZEN_ACTIVE_POPULATION_LEGACY_DISPATCH_COLLAPSE_IS_INDEPENDENTLY_VERIFIED__ROUTE_REAL_SEMANTIC_SEEDS_THROUGH_THIS_COMPOSER_BEFORE_SPENDING_WORK_ON_MODERN_IFBENCH_ONLY_CONSTRUCTORS",
+    "DO_NOT_TREAT_THE_17_OF_25_FAMILY_COUNT_AS_SCORE_MASS_OR_TERMINAL_COVERAGE",
+    "USE_THE_OPEN_WEIGHT_SEMANTIC_CORE_TO_GENERATE_THE_UNDERLYING_ANSWER_AND_THIS_MODULE_ONLY_AS_FAIL_CLOSED_CONSTRAINT_INTEGRATION_GLUE",
+    "KEEP_THE_EIGHT_UNADMITTED_FAMILIES_ON_THE_RESIDUAL_FRONTIER_UNTIL_EXACT_NONLOSSY_HANDLING_OR_MODEL_NATIVE_SATISFACTION_IS_VERIFIED"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_17_OF_25_FAMILIES_IMPLIES_68_PERCENT_TERMINAL_SCORE",
+    "NO_CLAIM_ADDED_INSTRUCTION_REQUIRED_MATERIAL_IS_SEMANTICALLY_NEUTRAL_IN_ALL_CONTEXTS",
+    "NO_CLAIM_THE_OPEN_WEIGHT_SEMANTIC_CORE_BYTES_ARE_ALREADY_INTERNALIZED",
+    "NO_CLAIM_INDEPENDENT_VERIFICATION_HAS_COMPLETED",
+    "NO_CLAIM_LIVEBENCH_ACCEPTANCE_OR_CAPABILITY_OWNERSHIP"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
