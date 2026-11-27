@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_P1_TERMINAL_ARCHIVE_SUFFICIENCY_AUDIT_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_CANDIDATE__INDEPENDENT_ARCHIVE_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Prove from the exact immutable Terminal V3 full-result artifact whether existing archived P1 evidence can discharge the two residual whole-scope obligations before any fresh observation is accepted.",
+  "artifact": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 36977803089,
+    "artifact_id": 11214610934,
+    "name": "terminal-v3-wave-receipts",
+    "digest": "sha256:e77e935b4612ecbe094e806f1f4da3dff0289552844b29e5a7a7bd99020503f2",
+    "full_result_sha256": "f4bec690aa0580cb532dbfd5985705bae8d153c9df31ffdf460b02f8b152e0f2"
+  },
+  "verifier": "canonical/runtime/p1_terminal_archive_sufficiency_audit_v1.py",
+  "tests": "canonical/tests/test_p1_terminal_archive_sufficiency_audit_v1.py",
+  "decision_rule": "FRESH_TWO_OBLIGATION_SUPPLEMENT_IS_ADMISSIBLE_ONLY_IF_EXACT_ARCHIVE_IS_AGGREGATE_ONLY_AND_CANNOT_DISCHARGE_EXPLICIT_SCOPE_CLASS_OR_HETEROGENEOUS_INTERVENTION_RESCUE",
+  "terminal_v3_replay_forbidden": true,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false
+}
