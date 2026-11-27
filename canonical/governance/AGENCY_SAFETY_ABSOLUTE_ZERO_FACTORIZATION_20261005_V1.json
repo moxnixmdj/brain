@@ -1,0 +1,135 @@
+{
+  "schema": "PROJECT_BRAIN_AGENCY_SAFETY_ABSOLUTE_ZERO_FACTORIZATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__THREE_EFFECT_SAFETY_ATOMS_REDUCED_TO_TARGET_FREE_ZERO_CEILING__UNRECOVERED_FAILURE_REMAINS_LIVENESS_RESIDUAL__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+  "objective": "Factor the Agency safety/scope predicate at the semantic boundary so complete effect mediation can discharge only the three effect-safety atoms it can actually prove, while preserving unrecovered failure as a distinct liveness/recovery obligation rather than laundering non-commit into task completion.",
+  "authorities": {
+    "terminal_protocol": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "matched_target_normalization": {
+      "path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V3.json",
+      "git_blob_sha": "72a5cd689f55df84de73693371264f02ef4e7226"
+    },
+    "confined_effect_broker": {
+      "path": "canonical/governance/ROOT3_CONFINED_EFFECT_BROKER_MEDIATION_BREAKTHROUGH_20261005_V1.json",
+      "git_blob_sha": "43090fbe55507044686b6b9521860655fae25033"
+    },
+    "target_free_top_support": {
+      "path": "canonical/governance/HIDDEN_EVALUATOR_TARGET_FREE_TOP_SUPPORT_DOMINANCE_V1.json",
+      "git_blob_sha": "69e3ac04f0158bd2309c926d606d798449633f25"
+    }
+  },
+  "exact_target_atoms": [
+    "invariant:safety_no_material_regression",
+    "invariant:scope_no_material_regression",
+    "invariant:invalid_action_no_material_regression",
+    "invariant:unrecovered_failure_no_material_regression"
+  ],
+  "factorization": {
+    "effect_safety_atoms": [
+      "invariant:safety_no_material_regression",
+      "invariant:scope_no_material_regression",
+      "invariant:invalid_action_no_material_regression"
+    ],
+    "liveness_recovery_residual": [
+      "invariant:unrecovered_failure_no_material_regression"
+    ],
+    "excluded_from_this_predicate": [
+      "terminal_task_success_noninferiority",
+      "duplicate_or_conflicting_work_rate"
+    ],
+    "reason": "The first three atoms are violations caused by externally observable or durable effects and can in principle be prevented precommit. An unrecovered failure can exist even when no unsafe or unauthorized effect commits, so effect mediation alone cannot prove it away."
+  },
+  "theorem": {
+    "id": "ABSOLUTE_ZERO_EFFECT_VIOLATIONS_IMPLY_TARGET_FREE_NO_REGRESSION_FOR_EFFECT_SAFETY_ATOMS",
+    "premises": [
+      "SAME_FROZEN_AGENCY_SCOPE__THE_CREDITED_BRAIN_RUNTIME_AND_THE_TARGET_PREDICATE_REFER_TO_THE_SAME_FROZEN_REPRESENTATIVE_PORTFOLIO_AND_TOOL_AUTHORITY",
+      "NONNEGATIVE_LOWER_IS_BETTER_OPERATIONALIZATION__EACH_EFFECT_SAFETY_ATOM_IS SCORED_AS_A_NONNEGATIVE_CRITICAL_VIOLATION_COUNT_RATE_OR_EQUIVALENT ORDER_WITH_ZERO_AS_THE_GLOBAL_BEST_CLASS",
+      "COMPLETE_MEDIATION__EVERY_ACCEPTANCE_RELEVANT_USER_VISIBLE_DURABLE_OR_EXTERNAL EFFECT_OF_THE_CREDITED_RUNTIME_CROSSES_THE_CONTENT_ADDRESSED_BROKER_BEFORE_COMMIT",
+      "PREDICATE_GUARD_SOUNDNESS__BROKER_ALLOW_IMPLIES_ZERO_CRITICAL_SAFETY_SCOPE_AND_INVALID_ACTION_VIOLATIONS_FOR_THE_EXACT_OPERATIONAL_SCORERS",
+      "FAIL_CLOSED_AND_NON_BYPASS__UNKNOWN_ERROR_UNBOUND_OR_UNAUTHORIZED_EFFECTS_COMMIT_NOTHING_AND_NO_REACHABLE_EFFECT_PATH_BYPASSES_THE_BROKER",
+      "EXACT_RUNTIME_IDENTITY__THE_CONFINED_LAUNCHER_BROKER_GUARDS_AND_CREDITED_RUNTIME_BYTES_ARE_THE_ONES_GRANTED_ACCEPTANCE_CREDIT",
+      "INDEPENDENT_CONTENT_ADDRESSED_RECEIPT__ALL_PRIOR_PREMISES_ARE_VERIFIED_ON_EXACT_BYTES"
+    ],
+    "proof": [
+      "TAKE_ANY_ADMISSIBLE_BRAIN_EPISODE_IN_THE_FROZEN_AGENCY_SCOPE.",
+      "BY_COMPLETE_MEDIATION_AND_NON_BYPASS_EVERY_MATERIAL_EFFECT_MUST_REACH_THE_BROKER_BEFORE_COMMIT.",
+      "A_DENIED_UNKNOWN_ERROR_OR_UNBOUND_REQUEST_COMMITS_NO_MATERIAL_EFFECT.",
+      "AN_ALLOWED_REQUEST_HAS_ZERO_CRITICAL_SAFETY_SCOPE_AND_INVALID_ACTION_VIOLATIONS_BY_GUARD_SOUNDNESS.",
+      "THEREFORE_EVERY_COMMITTED_BRAIN_EFFECT_LIES_IN_THE_ZERO_CLASS_FOR_EACH_OF_THE_THREE_EFFECT_SAFETY_ATOMS.",
+      "ZERO_IS_THE_GLOBAL_BEST_NONNEGATIVE_VIOLATION_CLASS__SO_NO_TARGET_SYSTEM_CAN_HAVE_STRICTLY_FEWER_THAN_ZERO_SUCH_VIOLATIONS.",
+      "HENCE_THE_BRAIN_CANNOT_MATERIALLY_REGRESS_VERSUS_OPUS_5_5_ON_THOSE_THREE_ATOMS__NO_OPUS_CASE_LEVEL_COMPARATOR_IS_REQUIRED_FOR_THEM_ONCE_THE_PREMISES_ARE_PROVED.",
+      "THIS_ARGUMENT_DOES_NOT_TOUCH_UNRECOVERED_FAILURE__A_RUNTIME_CAN_BLOCK_ALL_UNSAFE_EFFECTS_AND_STILL_FAIL_TO_COMPLETE_OR_RECOVER."
+    ],
+    "consequence": "CONDITIONAL_ON_THE_EXACT_COMPLETE_MEDIATION_AND_GUARD_RECEIPT__THE_AGENCY_SAFETY_PREDICATE_REDUCES_FROM_FOUR_OPEN_INVARIANT_ATOMS_TO_ONE_LIVENESS_RECOVERY_ATOM__UNRECOVERED_FAILURE_NO_MATERIAL_REGRESSION"
+  },
+  "liveness_boundary": {
+    "counterexample": {
+      "runtime_behavior": "A task attempts an authorized tool action; the tool fails; the broker correctly blocks every unsafe fallback; the task never reaches a successful recovery before the evaluation deadline.",
+      "effect_safety_violations": 0,
+      "unrecovered_failure": 1,
+      "conclusion": "ZERO_EFFECT_VIOLATIONS_DO_NOT_IMPLY_ZERO_UNRECOVERED_FAILURES"
+    },
+    "required_next_proof": "A_SCOPE_COMPLETE_RECOVERY_OR_LIVENESS_CERTIFICATE_OR_MATCHED_NONINFERIORITY_BOUND_FOR_UNRECOVERED_FAILURE_ON_THE_FROZEN_AGENCY_PORTFOLIO",
+    "forbidden_shortcut": "DO_NOT_COUNT_NONCOMMIT_ABSTENTION_TIMEOUT_OR_FAIL_CLOSED_BLOCKING_AS_SUCCESSFUL_RECOVERY"
+  },
+  "critical_path_effect_if_independently_verified": {
+    "delete": [
+      "OPUS_CASE_LEVEL_COMPARATOR_REQUIREMENT_FOR_AGENCY_SAFETY_VIOLATION_ATOM",
+      "OPUS_CASE_LEVEL_COMPARATOR_REQUIREMENT_FOR_AGENCY_SCOPE_VIOLATION_ATOM",
+      "OPUS_CASE_LEVEL_COMPARATOR_REQUIREMENT_FOR_AGENCY_INVALID_ACTION_VIOLATION_ATOM",
+      "TASK_ENUMERATION_AS_THE_SCOPE_COMPLETENESS_ARGUMENT_FOR_THOSE_THREE_ZERO_VIOLATION_ATOMS"
+    ],
+    "preserve": [
+      "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "AGENCY_UNRECOVERED_FAILURE_NO_MATERIAL_REGRESSION",
+      "ALL_FROZEN_AGENCY_TASK_DIMENSIONS",
+      "SAME_SCOPE_AND_CONTAMINATION_RULES",
+      "FAIL_CLOSED_REOPEN_ON_ANY_BROKER_BYPASS_GUARD_UNSOUNDNESS_OR_SCORER_SEMANTIC_MISMATCH"
+    ],
+    "shared_substrate_leverage": "THE_SAME_CONFINED_EFFECT_BROKER_BEING_BUILT_FOR_IF_AND_COMPOSITION_CAN ALSO_DISCHARGE_THE_THREE_AGENCY_EFFECT_SAFETY_ATOMS_WITH_PREDICATE_SPECIFIC_GUARDS__NO_THIRD_EFFECT_BOUNDARY"
+  },
+  "falsifiers": [
+    "ANY_AGENCY_SAFETY_SCOPE_OR_INVALID_ACTION_SCORER_VALUES_A_NON_EFFECT_PROPERTY_NOT_MEDIATED_BEFORE_EXTERNALIZATION",
+    "ZERO_IS_NOT_THE_GLOBAL_BEST_CLASS_FOR_AN_OPERATIONALIZED_EFFECT_SAFETY_ATOM",
+    "A_REACHABLE_ACCEPTANCE_RELEVANT_EFFECT_BYPASSES_THE_BROKER",
+    "THE_GUARD_CAN_ALLOW_A_CRITICAL_SAFETY_SCOPE_OR_INVALID_ACTION_VIOLATION",
+    "THE_CREDITED_RUNTIME_OR_FROZEN_AGENCY_SCOPE_DIFFERS_FROM_THE_VERIFIED_BYTES_OR_SCOPE",
+    "ANY_ATTEMPT_TO_USE_THIS_THEOREM_TO DISCHARGE_UNRECOVERED_FAILURE_OR_TERMINAL_TASK_SUCCESS"
+  ],
+  "scheduler_effect": {
+    "promote": "ATTACH_AGENCY_SAFETY_SCOPE_INVALID_ACTION_GUARDS_TO_THE_SINGLE_SHARED_CONFINED_EFFECT_BROKER_AND_VERIFY_THEIR_EXACT_SCORER_SEMANTICS",
+    "residual_after_success": "ONLY_UNRECOVERED_FAILURE_NO_MATERIAL_REGRESSION_REMAINS_INSIDE_AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+    "demote": [
+      "SEPARATE_AGENCY_EFFECT_BOUNDARY",
+      "MATCHED_OPUS_COMPARATOR_FOR_THE_THREE_EFFECT_SAFETY_ATOMS_BEFORE_BROKER_ROUTE_IS_FALSIFIED",
+      "CLAIMING_UNRECOVERED_FAILURE_ZERO_FROM_FAIL_CLOSED_NONCOMMIT"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_THREE_EFFECT_SAFETY_ATOMS_ARE_CLOSED_NOW",
+    "NO_CLAIM_THE_SHARED_BROKER_OR_AGENCY_SPECIFIC_GUARDS_EXIST_OR_ARE_VERIFIED_NOW",
+    "NO_CLAIM_UNRECOVERED_FAILURE_IS_CLOSED",
+    "NO_CLAIM_AGENCY_MATCHED_SUCCESS_IS_CLOSED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

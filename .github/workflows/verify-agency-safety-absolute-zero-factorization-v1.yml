@@ -1,0 +1,30 @@
+name: Verify Agency safety absolute-zero factorization
+
+on:
+  pull_request:
+    paths:
+      - "canonical/governance/AGENCY_SAFETY_ABSOLUTE_ZERO_FACTORIZATION_20261005_V1.json"
+      - "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json"
+      - "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V3.json"
+      - "canonical/governance/ROOT3_CONFINED_EFFECT_BROKER_MEDIATION_BREAKTHROUGH_20261005_V1.json"
+      - "canonical/governance/HIDDEN_EVALUATOR_TARGET_FREE_TOP_SUPPORT_DOMINANCE_V1.json"
+      - "canonical/tests/test_agency_safety_absolute_zero_factorization_v1.py"
+      - ".github/workflows/verify-agency-safety-absolute-zero-factorization-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Parse governance certificate
+        run: python -m json.tool canonical/governance/AGENCY_SAFETY_ABSOLUTE_ZERO_FACTORIZATION_20261005_V1.json > /dev/null
+      - name: Run factorization regression tests
+        run: python -m unittest canonical.tests.test_agency_safety_absolute_zero_factorization_v1 -v
