@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_R6_SOURCE_AUTHORITY_INFORMATION_BOUND_WOLFRAM_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_WOLFRAM_BOOLEAN_CORE_PASS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SYNTHESIS_R6_SOURCE_AUTHORITY_INFORMATION_BOUND_20261005_V1.json",
+    "git_blob_sha": "10b303b4ef6ac09b564c44cabd70e25384ac29a1"
+  },
+  "verified_claim": "IF_IDENTICAL_OBSERVABLE_INPUT_FORCES_ONE_DETERMINISTIC_BINARY_OUTPUT_WHILE_CORRECTNESS_REQUIRES_OPPOSITE_BINARY_POLARITIES_IN_TWO_WORLDS__NO_BINARY_COMMITMENT_CAN_BE_CORRECT_IN_BOTH",
+  "wolfram_language": "<|\"BinaryCommitCanSatisfyBothWorlds\" -> SatisfiableQ[p && Not[p], {p}], \"AllBinaryCommitments\" -> BooleanTable[{p, Not[p], p && Not[p]}, {p}], \"SafeAbstentionNeeded\" -> TautologyQ[(p || Not[p]) && Not[p && Not[p]], {p}]|>",
+  "result": {
+    "BinaryCommitCanSatisfyBothWorlds": false,
+    "AllBinaryCommitments": [
+      [true, false, false],
+      [false, true, false]
+    ],
+    "SafeAbstentionNeeded": true
+  },
+  "interpretation": [
+    "SUPPORTED_ONLY_COMMITS_FAIL_WORLD_B",
+    "UNSUPPORTED_ONLY_COMMITS_FAIL_WORLD_A",
+    "THE_BOOLEAN_CORE_REQUIRES_ADDITIONAL_INFORMATION_BEFORE_POLARITY_COMMITMENT",
+    "UNRESOLVED_IS_THE_FAIL_CLOSED_NONCOMMITTING_STATE_USED_BY_THE_IMPLEMENTED_GATE"
+  ],
+  "hard_nonclaims": [
+    "WOLFRAM_DID_NOT_VERIFY_WHICH_REAL_WORLD_SOURCES_ARE_AUTHORITATIVE",
+    "WOLFRAM_DID_NOT_VERIFY_THE_BEHAVIORAL_CONTRACT_OR_PROVENANCE_FACTS",
+    "WOLFRAM_DID_NOT_PROVE_WHOLE_R6_OR_SYNTHESIS_SCOPE_CLOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0
+  }
+}

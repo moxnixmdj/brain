@@ -1,0 +1,134 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_R6_SOURCE_AUTHORITY_INFORMATION_BOUND_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__R6_SOURCE_AUTHORITY_INFORMATION_LOWER_BOUND__FAIL_CLOSED_GATE_IMPLEMENTED__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Replace implicit source-authority guessing inside synthesis with the minimum information-safe rule: authority-sensitive support may commit only when an evidence-specific authority fact is explicitly verified and provenance-bound; otherwise the route returns unresolved.",
+  "action_intent": {
+    "path": "canonical/action_intents/2026-10-05_SYNTHESIS_R6_SOURCE_AUTHORITY_INFORMATION_BOUND_SOL_V1.json",
+    "git_blob_sha": "0611cde35c06a2e4761a3cb9b1acbe991804b777"
+  },
+  "authorities": {
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+    },
+    "countermodel_partition": {
+      "path": "canonical/governance/SYNTHESIS_P3_TYPED_INPUT_DOMAIN_COUNTERMODEL_PARTITION_20261005_V1.json",
+      "git_blob_sha": "4150a16f4c20bf0bfcaa23d31b0b03af69417b2b",
+      "residual": "SYNTHESIS_SCOPE_R6_PROVENANCE_AND_UNIT_SENSITIVE_SUPPORT"
+    },
+    "semantic_reduction": {
+      "path": "canonical/governance/SYNTHESIS_P3_CONTRACT_SEMANTIC_REDUCTION_20261005_V1.json",
+      "git_blob_sha": "f6b83872bf1288693e4e5250a561599f1cc6fa75"
+    },
+    "frozen_v3_candidate": {
+      "path": "canonical/runtime/p3_information_safe_candidate_v3.py",
+      "git_blob_sha": "54bfc7e5ee205aa328863a5ea1ca6f47f864d85a"
+    }
+  },
+  "indistinguishability_theorem": {
+    "shared_public_payload": {
+      "claim": {
+        "claim_id": "C",
+        "metric": "M",
+        "relation": "at_least",
+        "threshold": 50,
+        "unit": "index_point"
+      },
+      "evidence": [
+        {
+          "evidence_id": "E_HIGH",
+          "metric": "M",
+          "value": 60,
+          "unit": "index_point",
+          "provenance": [
+            "SRC_A"
+          ]
+        },
+        {
+          "evidence_id": "E_LOW",
+          "metric": "M",
+          "value": 40,
+          "unit": "index_point",
+          "provenance": [
+            "SRC_B"
+          ]
+        }
+      ]
+    },
+    "world_a_hidden_truth": "E_HIGH_IS_ADMISSIBLE_AND_E_LOW_IS_INADMISSIBLE",
+    "world_b_hidden_truth": "E_LOW_IS_ADMISSIBLE_AND_E_HIGH_IS_INADMISSIBLE",
+    "required_polarity_world_a": "SUPPORTED",
+    "required_polarity_world_b": "UNSUPPORTED",
+    "proof": [
+      "THE_PUBLIC_PAYLOAD_IS_BYTE_IDENTICAL_ACROSS_THE_TWO_WORLDS",
+      "ANY_DETERMINISTIC_RESOLVER_LIMITED_TO_THAT_PAYLOAD_MUST_RETURN_THE_SAME_POLARITY_IN_BOTH_WORLDS",
+      "THE_CORRECT_POLARITIES_ARE_OPPOSITE",
+      "THEREFORE_ANY_RESOLVER_THAT_COMMITS_SUPPORTED_OR_UNSUPPORTED_WITHOUT_ADDITIONAL_AUTHORITY_INFORMATION_IS_WRONG_IN_AT_LEAST_ONE_WORLD"
+    ],
+    "safe_third_output": "UNRESOLVED_SOURCE_AUTHORITY",
+    "knowledge_rule": "A_VERIFIED_AUTHORITY_RELATION_MAY_BE_ACQUIRED_JIT_AS_KNOWLEDGE;IT_MUST_BE_PROVENANCE_BOUND_BEFORE_USE"
+  },
+  "implemented_gate": {
+    "path": "canonical/runtime/synthesis_r6_source_authority_information_bound_v1.py",
+    "git_blob_sha": "35cc18e2d9bf0c88e2cd5bd8c3ccd58a4bd23407",
+    "contract": [
+      "AUTHORITY_FACT_BINDS_EXACT_EVIDENCE_ID",
+      "AUTHORITY_FACT_BINDS_EXACT_PROVENANCE_SEQUENCE",
+      "AUTHORITY_STATE_IS_ADMISSIBLE_OR_INADMISSIBLE",
+      "AUTHORITY_FACT_HAS_NONEMPTY_BASIS",
+      "MISSING_CONTRADICTORY_OR_MISBOUND_FACT_RETURNS_UNRESOLVED",
+      "RAW_PROVENANCE_LABEL_TEXT_NEVER_CONFERS_AUTHORITY",
+      "ORIGINAL_EVIDENCE_VALUE_UNIT_AND_PROVENANCE_ARE_PRESERVED"
+    ]
+  },
+  "scheduler_effect_if_independently_verified": {
+    "delete": [
+      "INFER_SOURCE_AUTHORITY_FROM_PROVENANCE_NAME_OR_IDENTIFIER",
+      "TREAT_SAME_METRIC_EVIDENCE_AS_INTERCHANGEABLE_BEFORE_AUTHORITY_BINDING",
+      "SEARCH_FOR_A_PURELY_DETERMINISTIC_AUTHORITY_POLARITY_RULE_OVER_RAW_PROVENANCE_LABELS"
+    ],
+    "replace_with": [
+      "USE_EXPLICIT_VERIFIED_AUTHORITY_FACT_WHEN_PRESENT",
+      "OTHERWISE_ACQUIRE_AUTHORITY_FACT_JIT_WITH_EVIDENCE",
+      "OTHERWISE_RETURN_UNRESOLVED_SOURCE_AUTHORITY"
+    ],
+    "remaining_r6": [
+      "GENERAL_SUPPORT_SEMANTICS_AFTER_AUTHORITY_FILTERING",
+      "INDEPENDENT_VERIFICATION_OF_THE_FAIL_CLOSED_GATE",
+      "COMPOSITION_WITH_THE_R5_UNIT_AND_REQUIRED_CLAIM_REPAIR_AFTER_THAT_CANDIDATE_IS_PROMOTED"
+    ]
+  },
+  "breakthrough": "R6_SOURCE_AUTHORITY_IS_AN_INFORMATION_ACQUISITION_PROBLEM_NOT_A_VOTING_HEURISTIC_PROBLEM",
+  "hard_nonclaims": [
+    "NO_WHOLE_R6_CLOSURE",
+    "NO_WHOLE_SYNTHESIS_TYPED_DOMAIN_CLOSURE",
+    "NO_GENERAL_SUPPORT_SEMANTICS_CLOSURE",
+    "NO_MATCHED_QUALITY_PASS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "verification_candidate": {
+    "tests_path": "canonical/tests/test_synthesis_r6_source_authority_information_bound_v1.py",
+    "tests_git_blob_sha": "ea53d85be30731ac96bcb3050ad9fe95b4574578",
+    "workflow_path": ".github/workflows/verify-synthesis-r6-source-authority-information-bound-v1.yml",
+    "workflow_git_blob_sha": "ee7145732bf237969b7de97fe25aaa7efc49701b",
+    "required_result": "ALL_TESTS_PASS_ON_INDEPENDENT_GITHUB_RUNNER"
+  }
+}
