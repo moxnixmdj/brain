@@ -398,3 +398,162 @@ reasoned from first.
 - It lands at the implicated return site only (two-site control).
 - The gate refuses test-satisfying constants, and that refusal now has a
   measured case inside this document rather than only in the gate's own header.
+
+---
+
+# Part 5: Why single-experience transfer fails — the store keeps the shape and drops the value
+
+## The ablation
+
+Held-out task the backward route cannot solve on its own: a binop defect
+(`merged(x,y) = x * y`) whose expectation is `a + b + 6` — computed from
+variables, input-dependent, so no constant duty exists and the dependency gate
+would refuse one.
+
+| arm | store | held-out result |
+|---|---|---|
+| 1 | empty, never trained | `FAIL_CLOSED__REPO_NATIVE_EXHAUSTED` · 47 ms |
+| 2 | seeded by training on a **different repo**, same defect family | `FAIL_CLOSED__REPO_NATIVE_EXHAUSTED` · 16 ms |
+
+No transfer. Clean, and identical in both arms.
+
+## Why — read off the store itself, not guessed
+
+The store contains eight morphisms. Filtering to the class this session added:
+
+```
+trm_205687a683a98686  hole_before {'?1':'__b0','?2':'__b0','?3':'None','?4':'__b0','?d0':'describe'}
+trm_ac42f329e7d29102  hole_before {'?1':'__b0','?2':'__b0','?3':'None','?4':'__b0','?d0':'get_name'}
+trm_b909346c91bfeb1c  hole_before {'?1':'__b0','?2':'__b0','?3':'None','?4':'__b0','?d0':'label'}
+trm_d067d4d1b1efdc64  hole_before {'?1':'__b0','?2':'__b0','?3':'None','?4':'__b0','?d0':'g'}
+```
+
+Four lessons learned, and **the only field that differs is `?d0`, the function
+name.** The duty that made each patch correct — `''`, `0`, `'<none>'` — is not
+present. `literal_witness: {}` on all four.
+
+So the abstraction is real and it is *too good*: anti-unification over the AST
+correctly collapsed four different guards into one shape, and in doing so threw
+away the one datum that differs between them. The shape says **where** to apply
+a repair. It cannot say **what** to apply, because what to apply is exactly
+what was abstracted away.
+
+That explains both results without appeal to anything else:
+
+- **Same shape, new duty** (`describe` with `'<none>'`): the shape matches, but
+  the stored entry carries no value, so it cannot be applied without re-reading
+  the new failure — which is the backward route again, not the store.
+- **Different shape, same defect family** (the binop ablation): no morphism of
+  the right shape exists at all, so both arms fail identically. The binop class
+  has its own route (`ANGELIC_OE_STRUCTURAL`) and its own morphisms; nothing
+  generalises across them.
+
+## What this means for §3
+
+The claim under test was "do a task once and learn it permanently." The
+mechanism is real but it stores **shape without value**, and a shape alone
+cannot perform a repair. Two distinct things are being conflated:
+
+1. **Reuse of placement** — "a partial duty belongs at a `None` guard's return."
+   This transfers, and is what the store correctly holds.
+2. **Reuse of content** — "the answer here is `'<none>'`." This does not
+   transfer and should not, because it is task-specific by construction.
+
+A store that recorded the value as a *witness* — `literal_witness: {'duty': "''"}` —
+would let a later task **propose** the old duty as a candidate and let the CoW
+oracle reject it when wrong. That is the minimal change that would make the
+store contribute a real prior instead of a placement hint, and it is the next
+bottleneck. It is not implemented here, and no transfer gain is claimed.
+
+## Corrections accumulated in this document
+
+Four of my own probes were invalid before any conclusion was drawn from them:
+`f(1) == len([1,2])` (genuinely green), `h(1) == len([1,2,3])` (duty readable,
+gate refusal correct), `merged(4,3) == 4+3+5` (genuinely green), and the
+`"".join(...)` case (collapses to a constant). The pattern is the same each
+time: I built a control from intuition about what it would exercise instead of
+executing it first. Every row above was verified red-before-use, and the two
+that were not are the two I withdrew.
+
+---
+
+# Part 6: Fixing the store's data loss did not create a transfer I can measure
+
+## What was actually broken, and is now fixed
+
+`TreeRewriteMorphism` anti-unifies before/after source into a shape with holes.
+The concrete value the repair substituted survived only in `literal_witness`,
+which is populated from `_string_literals` — and that helper filters
+`isinstance(a.value, str) and a.value`, i.e. by **truthiness**. So:
+
+| duty substituted | kept in `literal_witness`? |
+|---|---|
+| `''` | **no** — falsy |
+| `0` | **no** — falsy |
+| `None` | already skipped by design |
+| `'<none>'` | yes |
+
+Measured on the four morphisms this session learned, `hole_before` differed in
+exactly one field — `?d0`, the function name — and `literal_witness` was `{}` on
+all four. The store kept **where** a repair belongs and discarded **what** to
+put there. For the most common duty in this defect family (`''`, `0`) nothing
+was kept at all.
+
+Fixed: a new `duty_witness` field on the morphism records the substituted
+constant beside the abstraction. Verified round-trip:
+
+```
+learn(..., duty_witness="''")  -> morphism.duty_witness == "''"
+                             -> literal_witness == {}      (unchanged, by design)
+reload through from_dict()   -> duty_witness == "''"        (round-trip OK)
+```
+
+and the store on disk now carries `stored duties=["''"]` where it previously
+carried nothing.
+
+## The consumer, and the one rule it must override
+
+Stored duties are offered as candidates with the observed obligation first, and
+the tier distinguishes them (`STORED_DUTY_PROPOSAL` vs
+`ASSERTION_BACKWARD_OBLIGATION`) so a stored-duty win can never be miscounted as
+a fresh read.
+
+A stored constant fails the input-dependency gate by construction: substituting
+`''` for `return None` is a constant, and the gate exists to refuse exactly that
+shape unless the function still reads its inputs elsewhere. The override is
+deliberately the **narrowest** possible: it skips the dependency gate for a
+candidate whose value came from the store, and changes nothing else. The CoW
+oracle still decides, so a stale witness costs a verification and can never
+certify. The gate's purpose is to stop a *search* settling for a lookup; it
+must not stop the system attempting a value it learned elsewhere and verifying
+it, because that attempt is the only mechanism by which any stored value could
+ever be reused.
+
+## Can I show the store contributing? Not yet, and I will not claim it
+
+Four attempts at a held-out task whose duty is unreadable from its own failure,
+each verified red before use:
+
+| held-out construction | why it failed to discriminate |
+|---|---|
+| computed expectation `"".join(["a","b"])[:0]` | constant-folds; runner publishes `''` |
+| `wanted = "wan" + "ted"` | constant-folds; runner publishes `'wanted'` |
+| `wanted = [3, 4]`, function returns `1` | runner publishes `[3, 4]` as a list duty |
+| binop defect with `a + b + 6` | no morphism of that shape exists, so no proposal |
+
+The runner's assertion rewriting is *too good*: it publishes the operands
+whenever they are constants, so a constant duty is almost always readable from
+the failure itself. The narrow band where a constant duty is correct but not
+readable is small, and I did not construct a case inside it.
+
+**Therefore: the data-loss bug is fixed and verified; a transfer gain from the
+fix is NOT demonstrated.** The honest status is that the store now *can* carry a
+reusable value, and that no measurement in this session shows it earning a pass
+no other route would have found. Claiming otherwise would repeat the exact
+error Part 4 had to withdraw.
+
+## What this does not change
+
+The `None`-guard repair, its crystallisation, and the 12-test suite all stand.
+The non-literal ceiling from Part 4 stands. The official harnesses still cannot
+run (no docker), so no benchmark number exists, and §6 is not met.

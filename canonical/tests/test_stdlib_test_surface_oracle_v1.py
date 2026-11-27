@@ -323,3 +323,56 @@ class SpineVerifiesWhatItCanRepair(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class StoreKeepsTheValueItLearned(unittest.TestCase):
+    """A morphism must remember WHAT it substituted, not only where.
+
+    `literal_witness` is derived from truthiness (`isinstance(v, str) and v`), so it
+    silently drops every falsy duty -- `''` and `0` -- which are the commonest duties
+    in this defect family. Measured on four morphisms this session learned: only the
+    function name differed between them, and `literal_witness` was `{}` on all four.
+    `duty_witness` carries the value beside the abstraction instead.
+    """
+
+    def setUp(self) -> None:
+        self._td = tempfile.mkdtemp(prefix="duty_store_")
+        self.path = pathlib.Path(self._td) / "store.json"
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self._td, ignore_errors=True)
+
+    def test_falsy_duty_is_recorded_and_survives_a_reload(self) -> None:
+        from canonical.swe_kernel import causal_nexus_v1 as causal
+
+        store = causal.SkillStoreV2(self.path)
+        before = "def f(x):\n    if x is None:\n        return None\n    return x.upper()\n"
+        after = "def f(x):\n    if x is None:\n        return ''\n    return x.upper()\n"
+        morph = store.learn(before, after, origin="TEST", duty_witness="''")
+        self.assertIsNotNone(morph)
+        self.assertEqual(morph.duty_witness, "''")
+        self.assertEqual(morph.literal_witness, {},
+                         "literal_witness stays truthiness-filtered; duty_witness is the fix")
+
+        reloaded = causal.SkillStoreV2(self.path)
+        row = next(m for m in reloaded.morphisms.values() if m.morphism_id == morph.morphism_id)
+        self.assertEqual(row.duty_witness, "''")
+
+    def test_zero_duty_is_also_recorded(self) -> None:
+        from canonical.swe_kernel import causal_nexus_v1 as causal
+
+        store = causal.SkillStoreV2(self.path)
+        before = "def g(x):\n    if x is None:\n        return None\n    return x * 2\n"
+        after = "def g(x):\n    if x is None:\n        return 0\n    return x * 2\n"
+        morph = store.learn(before, after, origin="TEST", duty_witness="0")
+        self.assertEqual(morph.duty_witness, "0")
+
+    def test_morphism_without_a_duty_defaults_to_empty(self) -> None:
+        from canonical.swe_kernel import causal_nexus_v1 as causal
+
+        store = causal.SkillStoreV2(self.path)
+        before = "def h(x):\n    return x + 1\n"
+        after = "def h(x):\n    return x + 2\n"
+        morph = store.learn(before, after, origin="TEST")
+        if morph is not None:
+            self.assertEqual(morph.duty_witness, "")

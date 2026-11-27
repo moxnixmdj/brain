@@ -1,0 +1,466 @@
+{
+ "action_id": "THE_RULE_MUST_SURVIVE_ITS_OWN_WITNESS_20261124_V1",
+ "action_intent_id": "THE_RULE_MUST_SURVIVE_ITS_OWN_WITNESS_20261124_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "The blind catalogue measured the skill store as contributing nothing and recorded the reason in the same receipt: the learned pattern was one hole over the whole body, so it produced 0 proposals on its own witness, on a held-out same-family body and in file text. This wave replaces the operator rather than the index: anti-unification that parameterises identifiers, a right-hand side that projects the after side out of the bound before side, and three fail-closed gates (fidelity, transfer, non-degeneracy) so a rule that cannot fire on a renamed instance is never stored.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "(1) Tuning retrieval: the ablation was identical with and without the store, so recall was never the constraint. (2) Fixing the hole-witness bug alone: the receipt records the repair still at 0 on a held-out family body, because the pattern had no structure. (3) Re-running the same catalogue with more candidates: candidate count is not the variable, the rule's left side is.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only: self-check 8 of 8, 16 unit tests, one ledger. No independent identity has re-run any of it.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/structured_morphism_abstraction_v1.py",
+   "canonical/tests/test_structured_morphism_abstraction_v1.py",
+   "canonical/verification/STRUCTURED_MORPHISM_ABSTRACTION_20261124_V1.json"
+  ],
+  "route_class": "COMPOSE",
+  "route_id": null,
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "the census's own fleet measurement; no benchmark output is borrowed and no answer is leaked",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::the store's entries were degenerate two-sided patterns: a single hole over the whole body, so the learned object was the identity function on one string and could neither propose nor match anything else",
+ "canonical_base_commit": "cba2a0554eaf2b74374a9f67b4928564e02be3e1",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": {
+  "families_admitted": "3 of 3",
+  "families_refused": "4 of 4",
+  "median_hole_share": 0.3846,
+  "store_contribution": "unchanged (0)",
+  "unseen_third_surfaces_transferred": 3
+ },
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "the store's entries were degenerate two-sided patterns: a single hole over the whole body, so the learned object was the identity function on one string and could neither propose nor match anything else",
+ "date": "2026-11-24",
+ "expected_parent_change": "a repair observed once is stored as a rule whose left side parameterises identifiers and whose right side projects subterms of the match, so the same rule fires on a renamed, never-seen instance",
+ "expected_parent_frontier_change": "the frontier moves from 'the store exists' to 'the store may only keep rules that survive their own witness and a renamed variant under a fresh surface'",
+ "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
+ "falsification_condition": "if any stored rule failed to fire on its own witness, or fired on the witness but not on the renamed variant, the operator would be the old degenerate one under a new name; the gates are exactly that test",
+ "generic_repair_from_single_probe": true,
+ "governance_change": null,
+ "highest_leverage_now": true,
+ "honest_limits": [
+  "hand-written mechanism families, not blind tasks: 3 positive and 4 negative families, no repository was repaired",
+  "the store is not rebuilt on this operator yet, so store contribution stays measured at zero",
+  "the operator rewrites expressions and simple statements; inserting a guard or spanning statements is not covered",
+  "a pinned constant repairs its own witness and is refused transfer, which is correct but means some real repairs are not storable"
+ ],
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "live_challenger_frontier_discovery_required": true,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/81",
+  "interpretation": "OSWorld 2.0's authors diagnose frontier failure as weak recovery and maintenance of hidden state. A computer-use agent's action is only as good as the invocation it can compose from what the environment declares. Round 7 measured that the composition was wrong for reasons the environment had already published: the same 20 programs yield 33 doors when their declarations are misread and 57 when they are read, with no new knowledge acquired. No benchmark task was run; no discharge is claimed.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "0.5",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "3 of 3 positive families admitted and each transferred to a third, never-seen surface with different identifiers and containers; 4 of 4 negatives refused (pinned literal, unrelated pair, no-op, shape change); median hole share 0.385 against the degenerate 1.0; self-check 8 of 8; 16 tests; 0 model calls, 0 network, 0 parameters",
+ "next_step": "rebuild the blind catalogue's learned entries through admit(), then re-run the store-vs-empty ablation whose current answer is 'identical'",
+ "parent_capability": "verified_skill_crystallizer_ir_bridge_v1 + the recorded store-vs-empty ablation",
+ "probe_specific": false,
+ "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+ "progress_evidence_paths": [
+  "canonical/swe_kernel/structured_morphism_abstraction_v1.py",
+  "canonical/tests/test_structured_morphism_abstraction_v1.py",
+  "canonical/verification/STRUCTURED_MORPHISM_ABSTRACTION_20261124_V1.json"
+ ],
+ "real_outcome": "the eighth judge is a probe pair rather than a new validator, and the environment's own verdict is what admits it",
+ "rebased_onto": null,
+ "recursive_obs": {
+  "canonical_base_commit": "cba2a0554eaf2b74374a9f67b4928564e02be3e1",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "whole-body hole patterns",
+   "retrieval tuning over degenerate entries",
+   "adding candidates to the blind catalogue",
+   "treating a written entry as a learned rule"
+  ],
+  "expected_parent_frontier_change": "the frontier moves from 'the store exists' to 'the store may only keep rules that survive their own witness and a renamed variant under a fresh surface'",
+  "expected_parent_level_state_change": "the frontier moves from 'the store exists' to 'the store may only keep rules that survive their own witness and a renamed variant under a fresh surface'",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "(delete) drop the store and keep only the verifier -- truthful but forfeits the only compounding route left",
+    "(bypass) keep the store and never claim it contributes -- what the tree does today, and it costs 2,080 modules of upkeep",
+    "(substitute) store nothing but the verifier's refutation -- loses the repair, keeps the evidence"
+   ],
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_STORED_OBJECT_WAS_THE_IDENTITY_FUNCTION_ON_ONE_STRING",
+   "surviving_causal_blocker": "the store's entries were degenerate two-sided patterns: a single hole over the whole body, so the learned object was the identity function on one string and could neither propose nor match anything else"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "retrieval-index work (the ablation says the index is not the variable)",
+    "the hole-witness repair alone (the receipt records held-out transfer still at 0)",
+    "re-running the catalogue with more candidates per commit"
+   ],
+   "existing_inherited_routes_checked": [
+    "blind catalogue: 9 of 13 repaired, 0 regressions, 0 of 7 unseen-kind commits",
+    "store vs empty on two commits: identical (pluggy 25 candidates both arms, werkzeug 1 candidate both arms)",
+    "generalized vs raw traces: not measurable, because both artefacts were the same raw trace with a hole",
+    "the learned pattern's own two-sided constraint: 0 proposals on its own witness, 0 on a held-out family body, 0 on file text",
+    "dependency memory on the MEME protocol: 36 of 36 against a flat store's 12 of 36 (a different task, not repair)"
+   ],
+   "external_existing_routes_checked": [
+    "SWE-bench Pro V2 boards (5 Nov 2026): Opus 5 + Claude Code 99.4% [98.4, 99.8], HARD-51 98.0% -- frontier resolve, cited as a target, not compared against a mechanism test",
+    "MEME protocol (arXiv 2605.12477v2): best mean 0.32/0.59 for a memory-flat system, which is the same order as this tree's own 1.000 on 36 hand-built pairs and does not transfer to repair"
+   ],
+   "surviving_gap": "No artefact in this tree had ever been required to fire on anything other than the string it was learned from. That single missing gate explains the identical ablation, the 0 of 7 unseen kinds and the store's zero contribution."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "retrieval tuning: the store-vs-empty ablation was already identical, so recall was never the constraint",
+    "candidate count: the receipt records 0 proposals on the witness itself, which no candidate budget can fix",
+    "calling the store 'learned' on the strength of a write: a whole-body hole is a transcription, not a rule"
+   ],
+   "real_outcome": "A repair observed once is stored as a two-sided rule whose left side parameterises identifiers and whose right side projects subterms of the match, so the same rule fires on a renamed instance it has never seen.",
+   "surviving_necessity": "Without a transferable rule there is nothing for a store to keep, so every compounding claim in this tree rests on an object that cannot fire. The zoo of 2,080 import-and-stop modules is the same defect one level up: artefacts that were never asked to survive their own witness."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": [
+    "verified_skill_crystallizer_ir_bridge_v1 supplies the storage side, unchanged",
+    "typed_invention_v1 supplies the proposal side, unchanged",
+    "dark_matter_adjudicator_v1 supplies the fail-closed verdict shape reused here"
+   ],
+   "downstream_work_to_delete_or_supersede": [
+    "the whole-body-hole pattern that the V2 receipt recorded as unmeasurable and unproductive",
+    "retrieval tuning over degenerate entries",
+    "the assumption that a written entry is a learned rule"
+   ],
+   "fresh_reuse_plan": "The blind catalogue's learned entries are rebuilt through admit(); the ablation is re-run and the claim to beat is still 'identical'."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": [
+    "the three families and four negatives are constants in the module, so the measurement is one process",
+    "the ledger is generated from the same functions the tests import, so no number is copied by hand"
+   ],
+   "revalidated_layers": [
+    "obs_capability",
+    "obs_blocker",
+    "route_frontier"
+   ],
+   "search_stop_decision": "Search stopped once the frontier numbers were pinned to their boards and versions; nothing external was needed to decide the operator, because the receipt already named the cause."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_necessity_reason": "Three gates and one projection are the smallest object that can distinguish a rule from a transcription, and the ablation arm shows the parameterisation is load-bearing rather than decorative.",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Route 2 was already answered by measurement, not argument: with and without the store the catalogue repaired exactly the same commits. Route 3 is the hand-typed set the tree keeps proving does not generalise.",
+   "routes_ranked": [
+    "1. replace the operator: parameterised identifiers, projected after side, three refusal gates (selected)",
+    "2. tune retrieval over the existing degenerate entries (refused: the ablation was identical)",
+    "3. hand-write repair rules per bug class (refused: a rule per class is the hand-typed set that never converges)"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_detail": "The syntactic oracle is exact -- applying a rule and comparing ASTs admits no judgement -- and the receipt being answered is the one that measured the store at zero.",
+   "oracle_paths": [
+    "canonical/verification/STRUCTURED_MORPHISM_ABSTRACTION_20261124_V1.json",
+    "canonical/tests/test_structured_morphism_abstraction_v1.py",
+    "canonical/verification/AUTONOMOUS_CAUSAL_SWE_AND_COMPUTER_USE_RECEIPT_20261124_V2.json"
+   ],
+   "synthetic_verification_necessity": "The snippets are hand-written mechanism fixtures, not tasks. They are necessary because the blind catalogue's repair traces are not stored as before/after pairs, and they are labelled as fixtures everywhere they appear.",
+   "verification_considered_detail": "Every claim comes from executing the operator on snippets: 3 positive families admitted and fired on a third, never-seen surface; 4 negative families refused; self-check 8 of 8; 16 unit tests."
+  },
+  "real_outcome": "A repair observed once is stored as a two-sided rule whose left side parameterises identifiers and whose right side projects subterms of the match, so the same rule fires on a renamed instance it has never seen.",
+  "required_capability": "Admission rather than transcription: a learned rule must reproduce its own witness, transfer to a renamed variant, and carry structure outside its holes, or it is refused with the failing gate named.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "no retrieval scheme can make the identity function match a different string",
+      "CORRECTNESS": "a rule that cannot fire on its own witness is not a recall problem",
+      "INCREMENTAL_COST": "0",
+      "RELIABILITY": "the ablation is deterministic",
+      "VERIFIABILITY": "same receipt, two arms",
+      "WALL_CLOCK": "n/a"
+     },
+     "evidence": [
+      "store vs empty: identical on both commits; the entry produced 0 proposals on its own witness"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/AUTONOMOUS_CAUSAL_SWE_AND_COMPUTER_USE_RECEIPT_20261124_V2.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "TUNE_RETRIEVAL_OVER_THE_EXISTING_ENTRIES"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "does not scale past the classes I think of",
+      "CORRECTNESS": "a hand-written rule is exact on its class and absent on every other",
+      "INCREMENTAL_COST": "0",
+      "RELIABILITY": "high within the class",
+      "VERIFIABILITY": "easy, which is why it is tempting",
+      "WALL_CLOCK": "fast"
+     },
+     "evidence": [
+      "the tree's hand-typed sets have been the recurring ceiling for forty waves"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHERE_THE_SWE_BENCH_LOSS_IS_20261124_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "HAND_WRITE_ONE_RULE_PER_BUG_CLASS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "the first artefact in the tree required to fire on something it never saw",
+      "CORRECTNESS": "fidelity and transfer are checked syntactically, not judged",
+      "INCREMENTAL_COST": "0 model calls, 0 network calls, 0 parameters",
+      "RELIABILITY": "deterministic, and the refusal arms are pinned by tests",
+      "VERIFIABILITY": "16 tests, one per gate or refusal",
+      "WALL_CLOCK": "0.02 s for the whole measurement"
+     },
+     "evidence": [
+      "3 of 3 positive families admitted, each firing on a third unseen surface; 4 of 4 negatives refused; median hole share 0.385 against the degenerate 1.0; ablation: removing name parameterisation keeps witness fidelity and loses every unseen surface; self-check 8 of 8; 16 tests"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/STRUCTURED_MORPHISM_ABSTRACTION_20261124_V1.json",
+      "canonical/tests/test_structured_morphism_abstraction_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "REPLACE_THE_DEGENERATE_LEARNED_PATTERN_WITH_A_TRANSFERABLE_RULE"
+    }
+   ],
+   "checked_at_utc": "2026-11-26T23:54:31Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "store whole-body-hole patterns and describe the store as learned",
+   "max_age_hours": 24,
+   "negative_search_summary": "Searched for a published single-example repair operator with an admission test: the literature describes anti-unification and version-space learning, but no system reports refusing a learned rule because it could not fire on its own witness. That refusal is local and is the whole contribution.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "program repair from a single example anti-unification transferable rewrite rule 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "skill library memory for coding agents does the store contribute ablation"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "AST anti-unification holes projection subterm rewrite admission test"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "SWE-bench Pro V2 boards November 2026 resolve rate"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "REPLACE_THE_DEGENERATE_LEARNED_PATTERN_WITH_A_TRANSFERABLE_RULE",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-26T23:54:31Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3 runtime with unittest (pytest is absent)",
+      "evidence": [
+       "16 tests pass in 0.02 s; self-check 8 of 8"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "the repository tree and the V2 receipt, readable offline",
+      "evidence": [
+       "the ledger is regenerated from the same functions the tests import"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "model API or remote service at runtime",
+      "evidence": [
+       "0 model calls, 0 network calls, 0 parameters"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "MODEL_API",
+      "required": false,
+      "scope": "GLOBAL",
+      "status": "NOT_REQUIRED",
+      "volatility": "VOLATILE"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "REPLACE_THE_DEGENERATE_LEARNED_PATTERN_WITH_A_TRANSFERABLE_RULE",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/verification/AUTONOMOUS_CAUSAL_SWE_AND_COMPUTER_USE_RECEIPT_20261124_V2.json",
+     "canonical/verification/WHERE_THE_SWE_BENCH_LOSS_IS_20261124_V1.json",
+     "canonical/swe_kernel/verified_skill_crystallizer_ir_bridge_v1.py"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "Nov 2026 frontier boards quoted only with their date and version, as targets"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "Python standard library ast only; the tests use unittest, because pytest is absent here"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/abs/2610.24206",
+     "https://arxiv.org/abs/2605.12477"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "REPLACE_THE_DEGENERATE_LEARNED_PATTERN_WITH_A_TRANSFERABLE_RULE",
+   "TUNE_RETRIEVAL_OVER_THE_EXISTING_ENTRIES",
+   "HAND_WRITE_ONE_RULE_PER_BUG_CLASS",
+   "DROP_THE_STORE_AND_KEEP_THE_VERIFIER"
+  ],
+  "selected_route": "REPLACE_THE_DEGENERATE_LEARNED_PATTERN_WITH_A_TRANSFERABLE_RULE",
+  "selected_surviving_route": "REPLACE_THE_DEGENERATE_LEARNED_PATTERN_WITH_A_TRANSFERABLE_RULE",
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "stop_condition": "stop when every learned entry either passes fidelity, transfer and non-degeneracy or is refused with the failing gate named",
+  "why_selected_route_is_fastest_sufficient": "It is 0.02 s of local computation with no model and no network, it refuses four kinds of candidate rather than defending one, and it is the first artefact here required to fire on something unseen.",
+  "why_this_is_not_another_organ": "The operator is 380 lines of standard-library AST work; it reuses the crystallizer for storage and the adjudicator's fail-closed verdict shape, and adds no index and no runtime dependency."
+ },
+ "required_capability": "a learned rule that survives its own witness and a renamed variant under an unseen surface, so storage is admission rather than transcription",
+ "route_class": "COMPOSE",
+ "route_id": "SORT_DOUBT_INTO_EVIDENCE_BACKED_KINDS_AND_ASK_BY_INFORMATION_GAIN",
+ "route_order_walk": {
+  "ADAPT": "admission is by evidence, so a candidate that merely looks like a reader is refused.",
+  "BYPASS": "Not used. Widening the typed table by hand is the move that never ends.",
+  "COMPOSE": "SELECTED: joins the refusal reader (which names kinds), content judges, and round 10's scan; nothing new was invented except the admission test.",
+  "INVENT": "Not used. No second scan and no second memory were created."
+ },
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "REPLACE_THE_DEGENERATE_LEARNED_PATTERN_WITH_A_TRANSFERABLE_RULE",
+ "selected_surviving_route": "REPLACE_THE_DEGENERATE_LEARNED_PATTERN_WITH_A_TRANSFERABLE_RULE",
+ "selective_note": "the probe pair is written by the program that defines the kind; the candidate table grants no authority",
+ "selectivity_note": "the control that keeps this honest is the degenerate arm: the same repair abstracted without name parameterisation still reproduces its witness and loses every unseen surface, so the parameterisation is measured rather than asserted",
+ "status": "SHIPPED",
+ "stop_condition": "stop when every learned entry either passes fidelity, transfer and non-degeneracy or is refused with the failing gate named",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "what_is_not": "any benchmark score, any end-to-end repair, any store contribution, independent verification",
+  "what_is_real": "the degenerate operator is replaced and the refusal is measured 4 of 4"
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "No truth obligation is discharged by this round. The loop is a mechanism \u2014 scan, right question, plan, verify, generalize, admit, persist, replay \u2014 which is obligation-adjacent; the honest statement is that this changes the existence of an honest goal-directed loop, not any open obligation.",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "478f3cdef55518cfec98104ca6ce9c9e7e490b1d",
+     "path": "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_V1.json"
+    }
+   ],
+   "decisive_question": "Does the loop actually persist a generalization from fresh evidence \u2014 or does it claim to when it only shows one goal-reaching trace?",
+   "falsifier_id": "THE_LOOP_PERSISTED_A_RULE_FROM_ONE_EXPERIENCE",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "",
+   "proposal_id": "PERFECT_ALGORITHM_COMPOSED_LOOP_V1"
+  }
+ },
+ "verification": "16 tests: self-check 8 of 8, fidelity on three families, renamed-variant transfer, unseen third surface, pinned-literal refusal, unrelated-pair refusal, statement-count mismatch refusal, syntax-error fail-closed, no-op refusal, name-parameterisation ablation, degeneracy metric, ledger shape, no benchmark claim",
+ "weakens_existing_guard": false
+}
