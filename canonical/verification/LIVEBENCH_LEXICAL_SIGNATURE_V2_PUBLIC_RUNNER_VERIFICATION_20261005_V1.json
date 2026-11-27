@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEXICAL_SIGNATURE_V2_PUBLIC_RUNNER_VERIFICATION_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BLOB_AND_446_REACHABLE_SIGNATURES_VERIFIED__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "subject": {
+    "brain_pull_request": 1918,
+    "runtime_path": "canonical/runtime/livebench_legacy15_lexical_collision_signature_v2.py",
+    "runtime_git_blob_sha": "a87d53a8f21d1fa0b05b3e3500799f5153a649ad",
+    "governance_path": "canonical/governance/LIVEBENCH_LEXICAL_SLOT_QUOTIENT_BREAKTHROUGH_20261005_V2.json"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2099,
+    "workflow_run_id": 37241911872,
+    "workflow_job_id": 111552157442,
+    "conclusion": "success",
+    "verifier_head_commit": "dc8c5fe827d4128ca5b3bf9bb38a61ec12819bdb",
+    "verified_subject_git_blob_sha": "a87d53a8f21d1fa0b05b3e3500799f5153a649ad",
+    "result": {
+      "fixed_nth_signature_count": 320,
+      "generic_nth_signature_count": 126,
+      "exact_reachable_signature_count": 446,
+      "conservative_cartesian_bound": 768,
+      "prior_320_bound_valid_for_current_kernel": false,
+      "section_collision_explicit": true
+    }
+  },
+  "verified_claims": [
+    "THE_CURRENT_SECTION_AWARE_LEXICAL_UNSAT_STATE_CANNOT_BE_SOUNDLY_BOUNDED_BY_THE_PRIOR_320_SIGNATURE_QUOTIENT",
+    "THE_EXACT_REACHABLE_CURRENT_LEXICAL_COLLISION_SIGNATURE_COUNT_IS_446",
+    "THE_446_COUNT_FOLLOWS_FROM_320_FIXED_NTH_SIGNATURES_PLUS_126_GENERIC_NTH_SIGNATURES",
+    "NTH_FORBIDDEN_DEPENDENCE_FOR_FIXED_NTH_WORDS_IS_EXPLICITLY_ENFORCED",
+    "GENERIC_NTH_FORBIDDEN_REACHABILITY_RESPECTS_THE_EXACT_FIVE_SLOT_FORBIDDEN_SAMPLE_CAPACITY",
+    "SECTION_FORBIDDEN_END_PHRASE_FORBIDDEN_AND_NTH_FORBIDDEN_HARD_COLLISIONS_ARE_EXPLICIT_IN_THE_QUOTIENT",
+    "RAW_1525_WORD_COMBINATION_ENUMERATION_IS_NOT_REQUIRED_FOR_THIS_LEXICAL_LAYER"
+  ],
+  "consequence": {
+    "v1_320_bound": "REVOKED_FOR_CURRENT_SECTION_AWARE_KERNEL",
+    "v2_446_quotient": "INDEPENDENTLY_VERIFIED_FOR_SCHEDULING_AND_FURTHER_PROOF_COMPOSITION",
+    "next_proof_step": "CROSS_PRODUCT_446_LEXICAL_SIGNATURES_ONLY_WITH_CHECKER_RELEVANT_NUMERIC_AND_STRUCTURAL_EQUIVALENCE_CLASSES__POSTVALIDATE_EXACT_PINNED_CHECKERS__CERTIFY_UNSAT_RESIDUALS__FEED_POINTWISE_OPTIMALITY_KERNEL"
+  },
+  "hard_nonclaims": [
+    "NO_TERMINAL_ROW_CONTENT_READ",
+    "NO_TERMINAL_PROMPT_CONTENT_READ",
+    "NO_TERMINAL_SCORE_READ",
+    "NO_TERMINAL_CASE_FREQUENCY_INFERRED",
+    "NO_CLAIM_THE_LEXICAL_QUOTIENT_ALONE_CLOSES_LIVEBENCH",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
