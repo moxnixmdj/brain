@@ -1,0 +1,50 @@
+name: Verify delegation protocol scope completeness v1
+on:
+  pull_request:
+    paths:
+      - "canonical/governance/DELEGATION_SCOPE_EQUIVALENCE_RELATION_V2.json"
+      - "canonical/governance/DELEGATION_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE_V1.json"
+      - "canonical/runtime/delegation_protocol_scope_completeness_verifier_v1.py"
+      - "canonical/tests/test_delegation_protocol_scope_completeness_v1.py"
+      - "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json"
+      - "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json"
+      - "canonical/runtime/delegation_whole_scope_candidate_v2.py"
+      - "canonical/runtime/delegation_whole_scope_proof_v2.py"
+      - "canonical/runtime/delegation_structural_variety_proof_v3.py"
+      - "canonical/governance/TASK_TO_DELEGATION_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json"
+      - "canonical/runtime/scope_equivalent_proof_gate_v2.py"
+      - ".github/workflows/verify-delegation-protocol-scope-completeness-v1.yml"
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run delegation scope completeness adversarial tests
+        run: python -m unittest canonical.tests.test_delegation_protocol_scope_completeness_v1 -v
+      - name: Verify live current delegation scope cone
+        run: python -m canonical.runtime.delegation_protocol_scope_completeness_verifier_v1 > delegation-scope-verdict.json
+      - name: Assert zero-credit universal scope result
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("delegation-scope-verdict.json"))
+          assert d["status"].startswith("PASS"), d
+          assert d["scope_complete"] is True
+          assert d["basis"] == "UNIVERSAL_FORMAL_SCOPE_PROOF"
+          assert d["finite_sample_used_as_exhaustive_proof"] is False
+          assert d["capability_credit_delta"] == 0
+          assert d["family_credit_delta"] == 0
+          assert d["execution_authority"] is False
+          assert d["promotion_authority"] is False
+          print(json.dumps(d,indent=2,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: delegation-protocol-scope-completeness-v1
+          path: delegation-scope-verdict.json
