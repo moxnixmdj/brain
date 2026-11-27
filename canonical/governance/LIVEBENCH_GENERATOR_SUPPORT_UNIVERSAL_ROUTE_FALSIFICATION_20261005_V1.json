@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_GENERATOR_SUPPORT_UNIVERSAL_ROUTE_FALSIFICATION_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_FORMAL_FALSIFICATION__ACTIVE15_GENERATOR_SUPPORT_CONTAINS_BELOW_THRESHOLD_UNSATISFIABLE_CASE__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "purpose": "Falsify the scheduler branch that attempts to prove the LiveBench threshold solely by showing a threshold floor over every conflict-compatible active-15 generator-supported parameterization. Preserve stronger formal proofs about the actual frozen population and the separately authorized clean-equivalent route.",
+  "source_bindings": {
+    "livebench_repository": "LiveBench/LiveBench",
+    "frozen_checker_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "frozen_instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "frozen_registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "frozen_score_process_blob": "8ce01747887ec0792c8f024e1972e34ece781676",
+    "historical_generator_commit": "686be1e78a0ba8036d7e355bc406e1a265da5292",
+    "historical_generator_blob": "6ff390d6885cf90f88d9d36959735cb327613edc",
+    "active15_runtime_path": "canonical/runtime/livebench_frozen_active_legacy15_v1.py",
+    "active15_runtime_git_blob_sha": "34440ee69322e9d519cbe656cb03c55683a8b9c6",
+    "composition_archetypes_path": "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py",
+    "composition_archetypes_git_blob_sha": "0dbef76a6189a3cdc21ce3dae97ef6921e333b34"
+  },
+  "counterexample": {
+    "instruction_ids": [
+      "length_constraints:number_sentences",
+      "startend:end_checker"
+    ],
+    "conflict_compatible": true,
+    "generator_cardinality": 2,
+    "reachable_parameters": {
+      "length_constraints:number_sentences": {
+        "num_sentences": 1,
+        "relation": "less than"
+      },
+      "startend:end_checker": {
+        "end_phrase": "Any other questions?"
+      }
+    },
+    "checker_obligations": [
+      "NUMBER_OF_SENTENCES_REQUIRES_count_sentences(response)_LT_1__THEREFORE_ZERO_SENTENCES",
+      "END_CHECKER_REQUIRES_NONEMPTY_RESPONSE_ENDING_WITH_ANY_OTHER_QUESTIONS_QUESTION_MARK",
+      "STRICT_EVALUATOR_MARKS_EMPTY_RESPONSE_FALSE_BEFORE_CHECKER",
+      "ANY_NONEMPTY_RESPONSE_SATISFYING_THE_END_PHRASE_HAS_AT_LEAST_ONE_PUNKT_SENTENCE"
+    ],
+    "joint_satisfiability": false
+  },
+  "score_consequence": {
+    "frozen_rule": "(ALL_TRUE_BINARY + TRUE_FRACTION)/2",
+    "instruction_count": 2,
+    "maximum_simultaneously_true_instructions": 1,
+    "all_true_binary": 0,
+    "maximum_true_fraction": 0.5,
+    "maximum_case_score": 0.25,
+    "opus55_comparator_floor": 0.6573775,
+    "counterexample_below_comparator": true
+  },
+  "deduction": {
+    "proved_if_independently_verified": [
+      "THE_FULL_ACTIVE15_GENERATOR_SUPPORT_DOES_NOT_HAVE_A_PER_CASE_SCORE_FLOOR_AT_OR_ABOVE_THE_OPUS55_COMPARATOR",
+      "THEREFORE_EXHAUSTING_ALL_928_IDENTITY_SHAPES_AND_ALL_REACHABLE_PARAMETERS_CANNOT_BY_ITSELF_YIELD_A_UNIVERSAL_THRESHOLD_PROOF_FOR_ARBITRARY_GENERATOR_SUPPORTED_POPULATIONS",
+      "A_GENERATOR_SUPPORT_ONLY_WORST_CASE_PROOF_IS_NOT_THE_CORRECT NEXT LIVEBENCH RESCUE ROUTE"
+    ],
+    "not_proved": [
+      "THE_ACTUAL_FROZEN_200_ROW_POPULATION_CONTAINS_THIS_COUNTEREXAMPLE",
+      "THE_ACTUAL_FROZEN_POPULATION_SCORE_IS_BELOW_THRESHOLD",
+      "NO_CASE_INDEPENDENT_FORMAL_PROOF_ABOUT_THE_ACTUAL_FIXED_POPULATION_CAN_EXIST",
+      "A_CLEAN_UNEXPOSED_EQUIVALENT_POPULATION_WITH_VERIFIED_SCOPE_BRIDGE_IS IMPOSSIBLE"
+    ]
+  },
+  "scheduler_effect_if_verified": {
+    "remove_as_primary": "FULL_GENERATOR_SUPPORT_UNIVERSAL_THRESHOLD_PROOF",
+    "retain": [
+      "FORMAL_PROOF_SPECIFIC_TO_ACTUAL_FIXED_POPULATION_USING_NONCONTAMINATED_SCOPE FACTS",
+      "PRECOMMITTED_CLEAN_UNEXPOSED_EQUIVALENT_POPULATION_WITH_VERIFIED_SCOPE_BRIDGE",
+      "SEPARATELY_VERIFIED_STRONGER_PROOF_SATISFYING_CONTAMINATION_PARTITION"
+    ],
+    "next_minimum_cut": "BUILD_AND_VERIFY_THE_SCOPE_BRIDGE_FOR_A_POST_FREEZE_CLEAN_EQUIVALENT_POPULATION_BEFORE_GENERATING_OR_SCORING_THAT_POPULATION"
+  },
+  "contamination_firewall": [
+    "NO_ACTIVE_TERMINAL_ROW_CONTENT_READ",
+    "NO_ACTIVE_TERMINAL_ROW_ID_OR_KWARG_USED",
+    "PUBLIC_FROZEN_CHECKER_SOURCE_ONLY",
+    "PUBLIC_HISTORICAL_GENERATOR_SOURCE_ONLY",
+    "ZERO_ACCEPTANCE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
