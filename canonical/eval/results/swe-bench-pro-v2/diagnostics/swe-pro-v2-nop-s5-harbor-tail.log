@@ -1,23 +1,23 @@
 Tip: There are many benchmarks available in Harbor's registry.
 Run `harbor datasets list` to see all available datasets.
 
-  8/8 Mean: 0.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:15:23 0:00:00
+  3/3 Mean: 0.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:05:15 0:00:00
 
 adhoc • nop
 ┏━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
 ┃ Trials ┃ Exceptions ┃  Mean ┃
 ┡━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━┩
-│      8 │          0 │ 0.000 │
+│      3 │          0 │ 0.000 │
 └────────┴────────────┴───────┘
 
 ┏━━━━━━━━┳━━━━━━━┓
 ┃ Reward ┃ Count ┃
 ┡━━━━━━━━╇━━━━━━━┩
-│ 0.0    │     8 │
+│ 0.0    │     3 │
 └────────┴───────┘
 
 Job Info
-Total runtime: 15m 23s
+Total runtime: 5m 15s
 Results written to 
 /home/runner/work/brain/brain/work-nop-5/jobs/swe-pro-v2-nop-s5/result.json
 Inspect results by running `harbor view 

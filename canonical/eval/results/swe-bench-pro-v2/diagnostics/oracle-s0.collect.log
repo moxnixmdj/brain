@@ -1,1 +1,1 @@
-{"arm": "oracle", "resolved": 9, "n_expected": 51, "resolve_rate_pct": 17.65, "model_calls_total": 0, "cost_usd_total": 0.0}
+{"arm": "oracle", "resolved": 3, "n_expected": 51, "resolve_rate_pct": 5.88, "model_calls_total": 0, "cost_usd_total": 0.0}

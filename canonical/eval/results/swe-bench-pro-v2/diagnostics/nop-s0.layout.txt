@@ -1,118 +1,64 @@
 W=/home/runner/work/brain/brain/work-nop-0
 /home/runner/work/brain/brain/work-nop-0/jobs
 /home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__Rm4c4SF
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__Rm4c4SF/artifacts
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__Rm4c4SF/config.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__Rm4c4SF/agent
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__Rm4c4SF/verifier
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__Rm4c4SF/lock.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__Rm4c4SF/result.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__Rm4c4SF/trial.log
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_ansible__ansible-d72025__oSe4DYH
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_ansible__ansible-d72025__oSe4DYH/artifacts
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_ansible__ansible-d72025__oSe4DYH/config.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_ansible__ansible-d72025__oSe4DYH/agent
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_ansible__ansible-d72025__oSe4DYH/verifier
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_ansible__ansible-d72025__oSe4DYH/lock.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_ansible__ansible-d72025__oSe4DYH/result.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_ansible__ansible-d72025__oSe4DYH/trial.log
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_protonmail__webclients__ExADyUM
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_protonmail__webclients__ExADyUM/artifacts
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_protonmail__webclients__ExADyUM/config.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_protonmail__webclients__ExADyUM/agent
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_protonmail__webclients__ExADyUM/verifier
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_protonmail__webclients__ExADyUM/lock.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_protonmail__webclients__ExADyUM/result.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_protonmail__webclients__ExADyUM/trial.log
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_element-hq__element-web__pSjmdhQ
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_element-hq__element-web__pSjmdhQ/artifacts
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_element-hq__element-web__pSjmdhQ/config.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_element-hq__element-web__pSjmdhQ/agent
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_element-hq__element-web__pSjmdhQ/verifier
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_element-hq__element-web__pSjmdhQ/lock.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_element-hq__element-web__pSjmdhQ/result.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_element-hq__element-web__pSjmdhQ/trial.log
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__QRsTXCc
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__QRsTXCc/artifacts
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__QRsTXCc/config.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__QRsTXCc/agent
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__QRsTXCc/verifier
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__QRsTXCc/lock.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__QRsTXCc/result.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__QRsTXCc/trial.log
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__yj3HusJ
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__yj3HusJ/artifacts
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__yj3HusJ/config.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__yj3HusJ/agent
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__yj3HusJ/verifier
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__yj3HusJ/lock.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__yj3HusJ/result.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__yj3HusJ/trial.log
 /home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/job.log
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_flipt-io__flipt-cd18e54__rHPtrsq
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_flipt-io__flipt-cd18e54__rHPtrsq/artifacts
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_flipt-io__flipt-cd18e54__rHPtrsq/config.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_flipt-io__flipt-cd18e54__rHPtrsq/agent
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_flipt-io__flipt-cd18e54__rHPtrsq/verifier
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_flipt-io__flipt-cd18e54__rHPtrsq/lock.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_flipt-io__flipt-cd18e54__rHPtrsq/result.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_flipt-io__flipt-cd18e54__rHPtrsq/trial.log
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__5GgvAAd
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__5GgvAAd/artifacts
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__5GgvAAd/config.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__5GgvAAd/agent
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__5GgvAAd/verifier
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__5GgvAAd/lock.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__5GgvAAd/result.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__5GgvAAd/trial.log
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_flipt-io__flipt-cd18e54__3WdLssn
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_flipt-io__flipt-cd18e54__3WdLssn/artifacts
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_flipt-io__flipt-cd18e54__3WdLssn/config.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_flipt-io__flipt-cd18e54__3WdLssn/agent
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_flipt-io__flipt-cd18e54__3WdLssn/verifier
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_flipt-io__flipt-cd18e54__3WdLssn/lock.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_flipt-io__flipt-cd18e54__3WdLssn/result.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_flipt-io__flipt-cd18e54__3WdLssn/trial.log
 /home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/config.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_NodeBB__NodeBB-8168c6c4__WrzK67h
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_NodeBB__NodeBB-8168c6c4__WrzK67h/artifacts
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_NodeBB__NodeBB-8168c6c4__WrzK67h/config.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_NodeBB__NodeBB-8168c6c4__WrzK67h/agent
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_NodeBB__NodeBB-8168c6c4__WrzK67h/verifier
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_NodeBB__NodeBB-8168c6c4__WrzK67h/lock.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_NodeBB__NodeBB-8168c6c4__WrzK67h/result.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_NodeBB__NodeBB-8168c6c4__WrzK67h/trial.log
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_gravitational__teleport__hc3Se6G
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_gravitational__teleport__hc3Se6G/artifacts
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_gravitational__teleport__hc3Se6G/config.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_gravitational__teleport__hc3Se6G/agent
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_gravitational__teleport__hc3Se6G/verifier
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_gravitational__teleport__hc3Se6G/lock.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_gravitational__teleport__hc3Se6G/result.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_gravitational__teleport__hc3Se6G/trial.log
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_NodeBB__NodeBB-8168c6c4__VyGckSt
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_NodeBB__NodeBB-8168c6c4__VyGckSt/artifacts
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_NodeBB__NodeBB-8168c6c4__VyGckSt/config.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_NodeBB__NodeBB-8168c6c4__VyGckSt/agent
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_NodeBB__NodeBB-8168c6c4__VyGckSt/verifier
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_NodeBB__NodeBB-8168c6c4__VyGckSt/lock.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_NodeBB__NodeBB-8168c6c4__VyGckSt/result.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_NodeBB__NodeBB-8168c6c4__VyGckSt/trial.log
 /home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/lock.json
 /home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/result.json
 --- result.json files ---
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__Rm4c4SF/result.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_ansible__ansible-d72025__oSe4DYH/result.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_protonmail__webclients__ExADyUM/result.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_element-hq__element-web__pSjmdhQ/result.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__QRsTXCc/result.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_flipt-io__flipt-cd18e54__rHPtrsq/result.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__5GgvAAd/result.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_NodeBB__NodeBB-8168c6c4__WrzK67h/result.json
-/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_gravitational__teleport__hc3Se6G/result.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__yj3HusJ/result.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_flipt-io__flipt-cd18e54__3WdLssn/result.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_NodeBB__NodeBB-8168c6c4__VyGckSt/result.json
 /home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/result.json
 --- keys of the first result.json found ---
-## /home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__Rm4c4SF/result.json
+## /home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_internetarchive__openli__yj3HusJ/result.json
 ['agent_execution', 'agent_info', 'agent_result', 'agent_setup', 'config', 'environment_setup', 'exception_info', 'finished_at', 'id', 'source', 'started_at', 'step_results', 'task_checksum', 'task_id', 'task_name', 'trial_name', 'trial_uri', 'verifier', 'verifier_environment_mode', 'verifier_result']
-  task_name= 'swebench-pro/instance_internetarchive__openlibrary-0dc5b20fa186f9714f8a838178597e69f549d026-v2d9a6c849c60ed19fd0858ce9e40b7cc8e097e59'
-  trial_name= 'instance_internetarchive__openli__Rm4c4SF'
-  task_id= {'path': '/home/runner/work/brain/brain/work-nop-0/tasks/instance_internetarchive__openlibrary-0dc5b20fa186f9714f8a838178597e69f549d026-v2d9a6c849c60ed19fd0858ce9e40b7cc8e097e59'}
+  task_name= 'swebench-pro/instance_internetarchive__openlibrary-a48fd6ba9482c527602bc081491d9e8ae6e8226c-vfa6ff903cb27f336e17654595dd900fa943dcd91'
+  trial_name= 'instance_internetarchive__openli__yj3HusJ'
+  task_id= {'path': '/home/runner/work/brain/brain/work-nop-0/tasks/instance_internetarchive__openlibrary-a48fd6ba9482c527602bc081491d9e8ae6e8226c-vfa6ff903cb27f336e17654595dd900fa943dcd91'}
   verifier_result= {"rewards": {"reward": 0.0}}
-## /home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_ansible__ansible-d72025__oSe4DYH/result.json
+## /home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_flipt-io__flipt-cd18e54__3WdLssn/result.json
 ['agent_execution', 'agent_info', 'agent_result', 'agent_setup', 'config', 'environment_setup', 'exception_info', 'finished_at', 'id', 'source', 'started_at', 'step_results', 'task_checksum', 'task_id', 'task_name', 'trial_name', 'trial_uri', 'verifier', 'verifier_environment_mode', 'verifier_result']
-  task_name= 'swebench-pro/instance_ansible__ansible-d72025be751c894673ba85caa063d835a0ad3a8c-v390e508d27db7a51eece36bb6d9698b63a5b638a'
-  trial_name= 'instance_ansible__ansible-d72025__oSe4DYH'
-  task_id= {'path': '/home/runner/work/brain/brain/work-nop-0/tasks/instance_ansible__ansible-d72025be751c894673ba85caa063d835a0ad3a8c-v390e508d27db7a51eece36bb6d9698b63a5b638a'}
+  task_name= 'swebench-pro/instance_flipt-io__flipt-cd18e54a0371fa222304742c6312e9ac37ea86c1'
+  trial_name= 'instance_flipt-io__flipt-cd18e54__3WdLssn'
+  task_id= {'path': '/home/runner/work/brain/brain/work-nop-0/tasks/instance_flipt-io__flipt-cd18e54a0371fa222304742c6312e9ac37ea86c1'}
   verifier_result= {"rewards": {"reward": 0.0}}
-## /home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_protonmail__webclients__ExADyUM/result.json
+## /home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_NodeBB__NodeBB-8168c6c4__VyGckSt/result.json
 ['agent_execution', 'agent_info', 'agent_result', 'agent_setup', 'config', 'environment_setup', 'exception_info', 'finished_at', 'id', 'source', 'started_at', 'step_results', 'task_checksum', 'task_id', 'task_name', 'trial_name', 'trial_uri', 'verifier', 'verifier_environment_mode', 'verifier_result']
-  task_name= 'swebench-pro/instance_protonmail__webclients-5f0745dd6993bb1430a951c62a49807c6635cd77'
-  trial_name= 'instance_protonmail__webclients__ExADyUM'
-  task_id= {'path': '/home/runner/work/brain/brain/work-nop-0/tasks/instance_protonmail__webclients-5f0745dd6993bb1430a951c62a49807c6635cd77'}
+  task_name= 'swebench-pro/instance_NodeBB__NodeBB-8168c6c40707478f71b8af60300830fe554c778c-vf2cf3cbd463b7ad942381f1c6d077626485a1e9e'
+  trial_name= 'instance_NodeBB__NodeBB-8168c6c4__VyGckSt'
+  task_id= {'path': '/home/runner/work/brain/brain/work-nop-0/tasks/instance_NodeBB__NodeBB-8168c6c40707478f71b8af60300830fe554c778c-vf2cf3cbd463b7ad942381f1c6d077626485a1e9e'}
   verifier_result= {"rewards": {"reward": 0.0}}
-## /home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_element-hq__element-web__pSjmdhQ/result.json
-['agent_execution', 'agent_info', 'agent_result', 'agent_setup', 'config', 'environment_setup', 'exception_info', 'finished_at', 'id', 'source', 'started_at', 'step_results', 'task_checksum', 'task_id', 'task_name', 'trial_name', 'trial_uri', 'verifier', 'verifier_environment_mode', 'verifier_result']
-  task_name= 'swebench-pro/instance_element-hq__element-web-ecfd1736e5dd9808e87911fc264e6c816653e1a9-vnan'
-  trial_name= 'instance_element-hq__element-web__pSjmdhQ'
-  task_id= {'path': '/home/runner/work/brain/brain/work-nop-0/tasks/instance_element-hq__element-web-ecfd1736e5dd9808e87911fc264e6c816653e1a9-vnan'}
-  verifier_result= {"rewards": {"reward": 0.0}}
+## /home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/result.json
+['finished_at', 'id', 'n_total_trials', 'started_at', 'stats', 'updated_at']
+  task_name= None
+  trial_name= None
+  task_id= None
+  verifier_result= null
 --- manifest ids (first 3) ---
 Traceback (most recent call last):
   File "<string>", line 1, in <module>

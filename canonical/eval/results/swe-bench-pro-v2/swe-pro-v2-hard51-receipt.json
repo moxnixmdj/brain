@@ -3,113 +3,118 @@
   "causal": {
    "cost_usd_total": 0.0,
    "engine_statuses": {
-    "EDITS_UPLOADED": 3,
+    "EDITS_UPLOADED": 2,
     "HARNESS_ERROR": 1,
-    "NO_EDITS": 47
+    "NOT_RUN": 33,
+    "NO_AGENT_REPORT": 1,
+    "NO_EDITS": 14
    },
    "model_calls_total": 0,
    "n_expected": 51,
-   "n_missing_trial": 0,
-   "n_reported": 51,
+   "n_missing_trial": 33,
+   "n_reported": 18,
    "resolve_rate_pct": 0.0,
    "resolved": 0,
-   "wall_seconds_mean": 157.33,
-   "wall_seconds_total": 8023.61
+   "wall_seconds_mean": 235.63,
+   "wall_seconds_total": 4241.34
   },
   "nop": {
    "cost_usd_total": 0.0,
    "engine_statuses": {
-    "NO_AGENT_REPORT": 51
+    "NOT_RUN": 33,
+    "NO_AGENT_REPORT": 18
    },
    "model_calls_total": 0,
    "n_expected": 51,
-   "n_missing_trial": 0,
-   "n_reported": 51,
+   "n_missing_trial": 33,
+   "n_reported": 18,
    "resolve_rate_pct": 0.0,
    "resolved": 0,
-   "wall_seconds_mean": 136.62,
-   "wall_seconds_total": 6967.79
+   "wall_seconds_mean": 135.98,
+   "wall_seconds_total": 2447.72
   },
   "oracle": {
    "cost_usd_total": 0.0,
    "engine_statuses": {
-    "NO_AGENT_REPORT": 51
+    "NOT_RUN": 33,
+    "NO_AGENT_REPORT": 18
    },
    "model_calls_total": 0,
    "n_expected": 51,
-   "n_missing_trial": 0,
-   "n_reported": 51,
-   "resolve_rate_pct": 100.0,
-   "resolved": 51,
-   "wall_seconds_mean": 149.3,
-   "wall_seconds_total": 7614.16
+   "n_missing_trial": 33,
+   "n_reported": 18,
+   "resolve_rate_pct": 35.29,
+   "resolved": 18,
+   "wall_seconds_mean": 128.23,
+   "wall_seconds_total": 2308.05
   }
  },
  "attribution": {
   "causal": {
-   "engine_attributable": 50,
-   "harness_side": 1,
+   "engine_attributable": 16,
+   "harness_side": 2,
    "harness_side_statuses": [
-    "HARNESS_ERROR"
+    "HARNESS_ERROR",
+    "NO_AGENT_REPORT"
    ],
    "measured_resolve_rate_pct": 0.0,
    "n_expected": 51,
    "resolve_rate_pct_engine_attributable": 0.0,
    "resolved_engine_attributable": 0,
-   "rows_read": 51
+   "rows_read": 18
   },
   "nop": {
-   "engine_attributable": 51,
+   "engine_attributable": 18,
    "harness_side": 0,
    "harness_side_statuses": [],
    "measured_resolve_rate_pct": 0.0,
    "n_expected": 51,
    "resolve_rate_pct_engine_attributable": 0.0,
    "resolved_engine_attributable": 0,
-   "rows_read": 51
+   "rows_read": 18
   },
   "oracle": {
-   "engine_attributable": 51,
+   "engine_attributable": 18,
    "harness_side": 0,
    "harness_side_statuses": [],
-   "measured_resolve_rate_pct": 100.0,
+   "measured_resolve_rate_pct": 35.29,
    "n_expected": 51,
    "resolve_rate_pct_engine_attributable": 100.0,
-   "resolved_engine_attributable": 51,
-   "rows_read": 51
+   "resolved_engine_attributable": 18,
+   "rows_read": 18
   }
  },
- "authority": "OFFICIAL_TASK_VERDICTS__GATES_PASSED",
+ "authority": "OFFICIAL_TASK_VERDICTS__GATES_NOT_PASSED",
  "benchmark": "SWE-bench Pro V2 (HARD-51, 51 tasks)",
- "claimable_as_a_benchmark_number": true,
+ "claimable_as_a_benchmark_number": false,
  "control_rows": {
   "causal": {
    "resolved": 0,
    "rows_expected": 51,
-   "rows_read": 51
+   "rows_read": 18
   },
   "nop": {
    "resolved": 0,
    "rows_expected": 51,
-   "rows_read": 51
+   "rows_read": 18
   },
   "oracle": {
-   "resolved": 51,
+   "resolved": 18,
    "rows_expected": 51,
-   "rows_read": 51
+   "rows_read": 18
   }
  },
  "date": "2026-11-27",
- "eval_commit": "358cf8bfac2a2b92c53b425f4cbc1da06733f603",
+ "eval_commit": "e4cd1fbcc023b3ab2f129a482f4e58f751d80070",
  "gates_recomputed_here": {
-  "nop_data_complete": true,
-  "nop_gate_pass": true,
-  "oracle_data_complete": true,
-  "oracle_gate_pass": true
+  "nop_data_complete": false,
+  "nop_gate_pass": false,
+  "oracle_data_complete": false,
+  "oracle_gate_pass": false
  },
  "gates_reported_by_harness": {
-  "nop_gate_pass": true,
-  "oracle_gate_pass": true
+  "nop_gate_pass": false,
+  "oracle_gate_pass": false
  },
  "harness_side_statuses": [
   "EMPTY_TREE",
@@ -120,9 +125,9 @@
   "UPLOAD_BLOCKED"
  ],
  "n_real_trial_rows_per_arm": {
-  "causal": 51,
-  "nop": 51,
-  "oracle": 51
+  "causal": 18,
+  "nop": 18,
+  "oracle": 18
  },
  "n_shard_reports_read": 18,
  "note": "A resolve rate is quotable only when the oracle and nop controls pass in the same job configuration that produced it. This receipt is derived from the committed report by copying fields; it adds no measurement and rounds nothing.",
@@ -135,5 +140,8 @@
   "the engine ran with no network and no hosted model call",
   "the harness distinguishes a failed run from an unmeasured one, and says which it got"
  ],
- "why_not_claimable": []
+ "why_not_claimable": [
+  "ORACLE_GATE: only 18/51 trials of the oracle control were read, so the control is unproven and the causal number is not interpretable.",
+  "NOP_GATE: only 18/51 trials of the nop control were read, so the control is unproven and the causal number is not interpretable."
+ ]
 }
