@@ -22,6 +22,8 @@ MODEL = "brain-qwen3.5-9b"
 TOOL_NAME = "submit_science_proposal"
 MAX_RESPONSE_BYTES = 100_000
 MAX_TOOL_COMPLETION_TOKENS = 4096
+SERVER_CONTEXT_TOKENS = 16384
+MAX_ACTION_TIMEOUT_S = 3600
 MAX_CANDIDATES_PER_PROPOSAL = 4
 MIN_TIMEOUT_S = 300
 MAX_TIMEOUT_S = 900
@@ -103,7 +105,7 @@ TOOL = {
                                 "maxItems": MAX_CANDIDATES_PER_PROPOSAL,
                                 "items": {"type": "string", "minLength": 1, "maxLength": 64},
                             },
-                            "timeout_sec": {"type": "integer", "minimum": 1, "maximum": 7200},
+                            "timeout_sec": {"type": "integer", "minimum": 1, "maximum": MAX_ACTION_TIMEOUT_S},
                             "verify_timeout_sec": {"type": "integer", "minimum": 1, "maximum": 3600},
                             "command": {"type": "string"},
                             "verify_command": {"type": "string"},
@@ -276,6 +278,15 @@ def plan(prompt: str, *, timeout_s: int = 180) -> dict[str, Any]:
         raise SciencePlannerError("SCIENCE_PLANNER_PROMPT_REQUIRED")
     payload = _request_payload(prompt)
     input_tokens = count_input_tokens(payload)
+    if input_tokens + MAX_TOOL_COMPLETION_TOKENS > SERVER_CONTEXT_TOKENS:
+        raise SciencePlannerError(
+            "SCIENCE_PLANNER_CONTEXT_FIT_FAILED_PREINFERENCE:"
+            + str(input_tokens)
+            + "+"
+            + str(MAX_TOOL_COMPLETION_TOKENS)
+            + ">"
+            + str(SERVER_CONTEXT_TOKENS)
+        )
     timeout_s = effective_timeout_s(input_tokens, timeout_s)
 
     body = json.dumps(payload).encode("utf-8")
