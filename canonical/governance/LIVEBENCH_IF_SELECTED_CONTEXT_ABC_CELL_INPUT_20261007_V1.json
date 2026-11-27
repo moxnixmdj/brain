@@ -1,0 +1,142 @@
+{
+  "schema": "PROJECT_BRAIN_SELECTED_CONTEXT_ABC_CELL_INPUT_V1",
+  "cell_id": "LIVEBENCH_IF_ACTIVE15_FROZEN_200",
+  "authority": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V9.json",
+    "git_blob_sha": "1ec7f2c86534d046e51ddda00001ed287039fc0a"
+  },
+  "selected_route": {
+    "operative_files": [
+      {
+        "path": "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py",
+        "git_blob_sha": "0dbef76a6189a3cdc21ce3dae97ef6921e333b34"
+      },
+      {
+        "path": "canonical/runtime/livebench_legacy15_contract_composer_v2.py",
+        "git_blob_sha": "d73ec366b32252996258eae6d10d67d4d6a5e042"
+      },
+      {
+        "path": "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py",
+        "git_blob_sha": "71e637c70edf1c582e28ea38b3b798965c803a06"
+      },
+      {
+        "path": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
+        "git_blob_sha": "7477f5ea5bdeac3595ee2784a38d078fe2f385b0"
+      },
+      {
+        "path": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v1.py",
+        "git_blob_sha": "34f4df9f0bd265fc555686bd251a264e446d4c04"
+      },
+      {
+        "path": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v4.py",
+        "git_blob_sha": "721207ba39d502e3f610289578e9d5bab78b1fcc"
+      }
+    ]
+  },
+  "target_scope": {
+    "evidence": {
+      "path": "canonical/verification/LIVEBENCH_IF_V9_SELECTED_CONTEXT_ABC_SPRITE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "55871c15418ff173b6d5c8ac00150bab34f60595"
+    },
+    "checks": [
+      {
+        "pointer": [
+          "checks",
+          "exact_active15_scope"
+        ],
+        "equals": true
+      },
+      {
+        "pointer": [
+          "checks",
+          "scope_terminal_dataset_read_false"
+        ],
+        "equals": true
+      }
+    ]
+  },
+  "adequacy_or_dominance": {
+    "evidence": {
+      "path": "canonical/verification/LIVEBENCH_IF_V9_SELECTED_CONTEXT_ABC_SPRITE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "55871c15418ff173b6d5c8ac00150bab34f60595"
+    },
+    "checks": [
+      {
+        "pointer": [
+          "checks",
+          "pointwise_independent_public_runner_pass"
+        ],
+        "equals": true
+      },
+      {
+        "pointer": [
+          "checks",
+          "pointwise_12489_of_12489_exact_optimum"
+        ],
+        "equals": true
+      },
+      {
+        "pointer": [
+          "checks",
+          "current_predicate_binding_unique_proved_scope_complete"
+        ],
+        "equals": true
+      },
+      {
+        "pointer": [
+          "checks",
+          "proof_kind_clean_case_independent_formal_pointwise_dominance"
+        ],
+        "equals": true
+      }
+    ]
+  },
+  "local_c": {
+    "evidence": {
+      "path": "canonical/verification/LIVEBENCH_IF_V9_SELECTED_CONTEXT_ABC_SPRITE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "55871c15418ff173b6d5c8ac00150bab34f60595"
+    },
+    "checks": [
+      {
+        "pointer": [
+          "derived_candidate_binding",
+          "deterministic_whole_route_kernel"
+        ],
+        "equals": true
+      },
+      {
+        "pointer": [
+          "derived_candidate_binding",
+          "selected_discriminator_required"
+        ],
+        "equals": false
+      }
+    ]
+  },
+  "route_local_d": {
+    "evidence": {
+      "path": "canonical/verification/LIVEBENCH_IF_V9_SELECTED_CONTEXT_ABC_SPRITE_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "55871c15418ff173b6d5c8ac00150bab34f60595"
+    },
+    "checks": [
+      {
+        "pointer": [
+          "checks",
+          "material_effect_escape_hits_zero"
+        ],
+        "equals": true
+      },
+      {
+        "pointer": [
+          "derived_candidate_binding",
+          "route_local_material_effect_footprint_empty"
+        ],
+        "equals": true
+      }
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
