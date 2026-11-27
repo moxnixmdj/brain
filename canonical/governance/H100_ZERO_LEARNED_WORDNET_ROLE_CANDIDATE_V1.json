@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_WORDNET_ROLE_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PINNED_RAW_WORDNET_LEXICAL_ACQUISITION__ZERO_LEARNED__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "TEST_UNSEEN_ROLE_CUE_ACQUISITION_FROM_AN_INDEPENDENT_PRE_FROZEN_RAW_LEXICAL_SOURCE_WITH_ZERO_PERSISTENT_LEARNED_STATE",
+  "source_manifest": {
+    "path": "canonical/governance/H100_ZERO_LEARNED_LEXICAL_ACQUISITION_SOURCE_V1.json",
+    "git_blob_sha": "0894359a78657575d1c1506169954651634cb602"
+  },
+  "preexposure": {
+    "path": "canonical/governance/H100_ZERO_LEARNED_LEXICAL_ROLE_PREEXPOSURE_V1.json",
+    "git_blob_sha": "18fcb83edd277ec59c733c3445489481df0310ae"
+  },
+  "exact_bound_components": {
+    "canonical/runtime/h100_zero_learned_wordnet_role_v1.py": "f1d37d50da24346bf4d81156e0b4afdd3dfae418",
+    "canonical/tests/test_h100_zero_learned_wordnet_role_v1.py": "92c854aa836b789072fc50a1785d38ccd0a1addb",
+    "canonical/runtime/h100_zero_learned_wordnet_replay_v1.py": "f1c96f272d2d76081909e5d633a9b38b0e6e1cc4"
+  },
+  "source_boundary": {
+    "repository": "nltk/wordnet",
+    "commit": "ce91915ae38a341ae845be4d825ef6003cddf395",
+    "noun_index_blob": "1a458379f794704c0e283d5204413732f1dbe65d",
+    "noun_data_blob": "4575737e5b3b832f52c18842ff5e195d83deeb54",
+    "external_source_class": "RAW_KNOWLEDGE_NOT_CAPABILITY_PROVIDER"
+  },
+  "pass_condition": "ALL_FROZEN_LEXICAL_TASKS_MATCH_EXPECTED_ROLE_OR_ABSTENTION_USING_ONLY_PINNED_WORDNET_RAW_BYTES_AND_GENERIC_RUNTIME_EVIDENCE_RULES",
+  "accounting": {
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0,
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_SEMANTIC_UNDERSTANDING_CLAIM",
+    "NO_CLAIM_WORDNET_COVERS_ARBITRARY_DOMAIN_TERMINOLOGY",
+    "NO_UNKNOWN_DOMAIN_ACCEPTANCE_CREDIT",
+    "NO_H100_TERMINAL_CREDIT"
+  ],
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance": false,
+    "ownership": false
+  },
+  "independent_verification_required": true
+}

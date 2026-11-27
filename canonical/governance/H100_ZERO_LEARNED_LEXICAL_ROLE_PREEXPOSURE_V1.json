@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_LEXICAL_ROLE_PREEXPOSURE_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_BEFORE_LEXICAL_CLASSIFIER_OUTCOMES__PUBLIC_SYNTHETIC_NONTERMINAL__ZERO_CREDIT",
+  "source_manifest": "canonical/governance/H100_ZERO_LEARNED_LEXICAL_ACQUISITION_SOURCE_V1.json",
+  "objective": "TEST_WHETHER_UNSEEN_ROLE_CUES_CAN_BE_RESOLVED_FROM_THE_PRE_FROZEN_RAW_WORDNET_SOURCE_WITH_ZERO_PERSISTENT_LEARNED_STATE",
+  "tasks": [
+    {
+      "task_id": "DETERMINANTS_CONSEQUENCE",
+      "text": "Determinants: factor_a, factor_b; consequence: metric_c.",
+      "input_cue": "determinant",
+      "output_cue": "consequence",
+      "expected_inputs": [
+        "factor_a",
+        "factor_b"
+      ],
+      "expected_target": "metric_c",
+      "expected_status": "ROLES_IDENTIFIED"
+    },
+    {
+      "task_id": "ANTECEDENTS_RESULTANT",
+      "text": "Antecedents: alpha, beta; resultant: score.",
+      "input_cue": "antecedent",
+      "output_cue": "resultant",
+      "expected_inputs": [
+        "alpha",
+        "beta"
+      ],
+      "expected_target": "score",
+      "expected_status": "ROLES_IDENTIFIED"
+    },
+    {
+      "task_id": "PRECURSORS_PRODUCT",
+      "text": "Precursors: material_a, material_b; product: material_c.",
+      "input_cue": "precursor",
+      "output_cue": "product",
+      "expected_inputs": [
+        "material_a",
+        "material_b"
+      ],
+      "expected_target": "material_c",
+      "expected_status": "ROLES_IDENTIFIED"
+    },
+    {
+      "task_id": "CAUSES_EFFECT",
+      "text": "Causes: x, z; effect: y.",
+      "input_cue": "cause",
+      "output_cue": "effect",
+      "expected_inputs": [
+        "x",
+        "z"
+      ],
+      "expected_target": "y",
+      "expected_status": "ROLES_IDENTIFIED"
+    },
+    {
+      "task_id": "AMBIGUOUS_ENTITIES",
+      "text": "Entities: a, b; related entity: c.",
+      "input_cue": "entity",
+      "output_cue": "entity",
+      "expected_inputs": [],
+      "expected_target": null,
+      "expected_status": "ABSTAIN_DIRECTION_NOT_IDENTIFIED"
+    }
+  ],
+  "outcome_definition": {
+    "role_cue_semantics_must_come_from_pinned_wordnet_source": true,
+    "task_surface_parser_may_only_extract_named_fields": true,
+    "exact_role_identification_required_on_directional_tasks": true,
+    "exact_abstention_required_when_lexical_source_does_not_identify_direction": true,
+    "no_partial_credit": true
+  },
+  "hard_rules": [
+    "NO_TASK_SPECIFIC_LEXICON_ENTRIES_IN_RUNTIME",
+    "NO_LANGUAGE_MODEL_OR_EMBEDDING_PROVIDER",
+    "NO_POST_HOC_SOURCE_SUBSTITUTION",
+    "NO_CORRELATION_TO_CAUSATION_INFERENCE",
+    "FINITE_LEXICAL_PASS_IS_NOT_OPEN_WORLD_SEMANTICS"
+  ],
+  "accounting": {
+    "persistent_learned_bytes": 0,
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
