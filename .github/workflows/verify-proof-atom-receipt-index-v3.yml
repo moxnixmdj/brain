@@ -1,0 +1,92 @@
+name: Verify proof atom receipt index v3
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/proof_atom_receipt_index_v3.py"
+      - "canonical/tests/test_proof_atom_receipt_index_v3.py"
+      - "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V3.json"
+      - "canonical/runtime/canonical_proof_atom_basis_v2.py"
+      - "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json"
+      - ".github/workflows/verify-proof-atom-receipt-index-v3.yml"
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run V3 receipt index adversarial tests
+        id: tests
+        continue-on-error: true
+        run: |
+          set +e
+          python -m unittest canonical.tests.test_proof_atom_receipt_index_v3 -v > v3-tests.stdout 2> v3-tests.stderr
+          code=$?
+          echo "$code" > v3-tests.exitcode
+          exit 0
+      - name: Execute current corpus-bound 40-atom index
+        id: index
+        continue-on-error: true
+        run: |
+          set +e
+          python -m canonical.runtime.proof_atom_receipt_index_v3 > proof-atom-receipt-index-v3.json 2> v3-index.stderr
+          code=$?
+          echo "$code" > v3-index.exitcode
+          if [ "$code" -eq 0 ]; then
+            python - <<'PY' > v3-index-summary.json 2>> v3-index.stderr
+          import json
+          p=json.load(open("proof-atom-receipt-index-v3.json"))
+          print(json.dumps({
+            "status": p.get("status"),
+            "canonical_atom_count": p.get("canonical_atom_count"),
+            "scanned_file_count": p.get("scanned_file_count"),
+            "candidate_match_count": p.get("candidate_match_count"),
+            "atoms_with_candidate_matches": p.get("atoms_with_candidate_matches"),
+            "atoms_without_candidate_matches": p.get("atoms_without_candidate_matches"),
+            "review_queue_length": p.get("review_queue_length"),
+            "atoms_with_truncated_candidate_lists": p.get("atoms_with_truncated_candidate_lists"),
+            "basis_manifest_sha256": p.get("basis_manifest_sha256"),
+            "scanned_corpus_manifest_sha256": p.get("scanned_corpus_manifest_sha256"),
+            "scan_policy_sha256": p.get("scan_policy_sha256"),
+            "index_fingerprint_sha256": p.get("index_fingerprint_sha256")
+          }, indent=2, sort_keys=True))
+          PY
+          fi
+          exit 0
+      - name: Upload V3 diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proof-atom-receipt-index-v3-diagnostics
+          path: |
+            proof-atom-receipt-index-v3.json
+            v3-index-summary.json
+            v3-index.stderr
+            v3-index.exitcode
+            v3-tests.stdout
+            v3-tests.stderr
+            v3-tests.exitcode
+          if-no-files-found: warn
+      - name: Enforce pass
+        if: always()
+        run: |
+          test "$(cat v3-tests.exitcode)" = "0"
+          test "$(cat v3-index.exitcode)" = "0"
+          python - <<'PY'
+          import json
+          p=json.load(open("proof-atom-receipt-index-v3.json"))
+          assert p["status"].startswith("PASS")
+          assert p["canonical_atom_count"] == 40
+          assert len(p["basis_manifest_sha256"]) == 64
+          assert len(p["scanned_corpus_manifest_sha256"]) == 64
+          assert len(p["scan_policy_sha256"]) == 64
+          assert len(p["index_fingerprint_sha256"]) == 64
+          assert p["review_queue_length"] == p["atoms_with_candidate_matches"]
+          assert p["new_reality_units_consumed"] == 0
+          assert p["capability_credit_delta"] == 0
+          assert p["family_credit_delta"] == 0
+          PY
