@@ -57,6 +57,7 @@ on:
   push:
     branches:
       - arena/b81b2217-brain
+      - arena/a8db71d0-brain
     paths:
       - "canonical/eval/docker/Dockerfile"
       - ".github/workflows/engine-docker-eval.yml"
