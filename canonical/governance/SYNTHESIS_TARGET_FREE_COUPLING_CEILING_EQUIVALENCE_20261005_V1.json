@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_TARGET_FREE_COUPLING_CEILING_EQUIVALENCE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__TARGET_FREE_COUPLING_NO_FREE_LUNCH_BOUNDARY__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "parent_predicate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+  "objective": "Determine whether the newly active monotone-coupling route can remove all target-specific Opus outcome information for synthesis, or only remove exact hidden evaluator weights.",
+  "authority": {
+    "material_order_certificate": {
+      "path": "canonical/governance/SYNTHESIS_MATERIAL_OUTCOME_ORDER_MONOTONICITY_CERTIFICATE_20261005_V1.json",
+      "branch": "breakthrough/synthesis-material-order-monotonicity-sol-v1"
+    },
+    "coupling_theorem": {
+      "path": "canonical/governance/HIDDEN_EVALUATOR_MONOTONE_COUPLING_DOMINANCE_V1.json",
+      "git_blob_sha": "678f728089a8df815153af6dd58a88894dd0671f"
+    },
+    "matched_quality_metric": {
+      "path": "canonical/governance/SYNTHESIS_MATCHED_QUALITY_METRIC_CONTRACT_V1.json",
+      "git_blob_sha": "0886f7592875a5b750cdd401aa783351ab2f0854"
+    }
+  },
+  "theorem": {
+    "domain": "THE_COMPLETE_SYNTHESIS_MATERIAL_ORDER_HAS_COORDINATES_IN_[0,1]^6_WITH_COORDINATEWISE_HIGHER_IS_BETTER",
+    "greatest_element": "TOP = (1,1,1,1,1,1)",
+    "target_uncertainty_class": "ALL_TARGET_DISTRIBUTIONS_P_OVER_THE_MATERIAL_OUTCOME_DOMAIN__NO_TARGET_SPECIFIC_MASS_OR_BOUND_INFORMATION",
+    "statement": "A_FIXED_BRAIN_DISTRIBUTION_Q_ADMITS_A_DOMINANCE_PRESERVING_COUPLING_AGAINST_EVERY_P_IN_THE_TARGET_UNCERTAINTY_CLASS_IFF_Q_PLACES_PROBABILITY_1_ON_TOP_OR_ON_OUTCOMES_ORDER_EQUIVALENT_TO_TOP",
+    "proof": [
+      "NECESSITY: CHOOSE_THE_ADMISSIBLE_TARGET_DISTRIBUTION_P = DELTA_TOP.",
+      "ANY_VALID_COUPLING_MUST_PAIR_ITS_UNIT_TARGET_MASS_ONLY_WITH_BRAIN_OUTCOMES_b_SUCH_THAT_b_GE_TOP.",
+      "TOP_IS_THE_GREATEST_COORDINATEWISE_ELEMENT__SO_b_GE_TOP_IMPLIES_b=TOP_UP_TO_ORDER_EQUIVALENCE.",
+      "THEREFORE_Q_MUST_PLACE_ALL_MASS_ON_TOP_EQUIVALENTS.",
+      "SUFFICIENCY: IF_Q=DELTA_TOP__PAIR_EVERY_TARGET_OUTCOME_WITH_TOP; TOP_DOMINATES_EVERY_OUTCOME."
+    ],
+    "synthesis_consequence": "WITHOUT_TARGET_SPECIFIC_OUTCOME_INFORMATION__THE_MONOTONE_COUPLING_ROUTE_COLLAPSES_TO_A_BRAIN_CEILING_PROOF. COUPLING_REMOVES_HIDDEN_WEIGHT_DISCOVERY_BUT_NOT_THE_INFORMATION_THEORETIC_NEED_FOR_EITHER_TARGET_OUTCOME_BOUNDS_OR_BRAIN_PERFECTION."
+  },
+  "scheduler_effect": {
+    "delete": [
+      "RUN_COUPLING_WITH_AN_UNCONSTRAINED_UNKNOWN_TARGET_DISTRIBUTION",
+      "TREAT_MONOTONE_COUPLING_AS_TARGET_INFORMATION_FREE",
+      "REQUEST_EXACT_HIDDEN_AGGREGATOR_WEIGHTS_BEFORE_TARGET_OUTCOME_BOUNDS"
+    ],
+    "branch": [
+      {
+        "route": "BRAIN_CEILING_ROUTE",
+        "condition": "PROVE_BRAIN_OUTCOME_MASS_1_AT_THE_SIX_VECTOR_TOP_OVER_THE_FROZEN_TARGET_SCOPE",
+        "effect": "NO_TARGET_OUTCOME_QUERY_REQUIRED"
+      },
+      {
+        "route": "MINIMUM_TARGET_INFORMATION_ROUTE",
+        "condition": "BRAIN_CEILING_NOT_PROVED",
+        "effect": "ACQUIRE_OR_DERIVE_THE_SMALLEST_SOUND_TARGET_SPECIFIC_OUTCOME_MASS_OR_ORDER_BOUND_THAT_CAN_CHANGE_THE_COUPLING_FEASIBILITY_DECISION"
+      }
+    ],
+    "next": "FIRST_TEST_EXISTING_BRAIN_EVIDENCE_FOR_A_SOUND_TOP_MASS_CERTIFICATE__IF_IT_FAILS__COMPUTE_THE_MINIMUM_TARGET_OUTCOME_INFORMATION_CUT_BEFORE_ANY_COMPARATOR_EXECUTION"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_BRAIN_IS_AT_THE_SIX_VECTOR_TOP",
+    "NO_CLAIM_TARGET_MASS_IS_UNCONSTRAINED_IN_REALITY__ONLY_THAT_IT_IS_UNCONSTRAINED_IF_NO_TARGET_SPECIFIC_EVIDENCE_IS_BOUND",
+    "NO_CLAIM_A_TARGET_QUERY_IS_YET_AUTHORIZED",
+    "NO_SYNTHESIS_PREDICATE_CLOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
