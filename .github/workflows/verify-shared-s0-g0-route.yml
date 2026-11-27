@@ -1,0 +1,16 @@
+name: Verify shared S0 G0 frozen route
+on:
+  push:
+    branches: [obs-shared-route-freeze-20261002]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - run: PYTHONPATH=. python -m unittest -v canonical.tests.test_verify_shared_s0_g0_route
