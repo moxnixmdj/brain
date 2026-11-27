@@ -1,0 +1,159 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "date": "2026-10-19",
+  "action_id": "SENTIENT_COMPUTER_AGENT_V1",
+  "canonical_generation": "2026-10-10-general-reusable-capability-frontier-v1",
+  "canonical_base_commit": "22e8bd5277fe0fb5318558411e20745da8f45037",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_REUSABLE_CAPABILITY_DEVELOPMENT_PROGRAM_V1",
+  "capability_target": "SENTIENT_COMPUTER_USE_WITH_INSTANT_LEARNING_AND_OPTIMAL_MEMORY",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "action_kind": "GOVERNANCE_GUARD",
+  "governance_change": false,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "causal_blocker": "THE_MACHINE_CANNOT_YET_DO_ANYTHING_ON_COMPUTER_BY_ITSELF_WITH_INSTANT_LEARNING__EXISTING_LIVE_BRAIN_IS_STRICT_PROGRAM_DO_1_2_3_WITH_KEYWORD_MATCHING__NO_MEMORY__NO_INSTANT_ONE_SHOT_GENERALIZATION__NO_OPTIMAL_IMPORTANCE_FILTERED_RETRIEVAL",
+  "blocker_lease_key": "2026-10-10-general-reusable-capability-frontier-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::GENERAL_CAPABILITY_FRONTIER_SELECTION__CHOOSE_HIGHEST_EXPECTED_VERIFIED_GENERAL_CAPABILITY_GAIN_PER_RESOURCE_FROM_CURRENT_CAUSAL_EVIDENCE",
+  "highest_leverage_now": true,
+  "selected_route": "COMPOSE_SENTIENT_LAYER_ON_LIVE_BRAIN__BM25_INVERTED_INDEX_FOR_INSANELY_FAST_RETRIEVAL__ONE_SHOT_ANTI_UNIFICATION_FOR_INSTANT_LEARNING__IMPORTANCE_SCORED_EPISODIC_MEMORY_WITH_OPTIMAL_FORGETTING__ADAPTIVE_CONSIDERATION_LOOP_NOT_FIXED_PROGRAM__ZERO_MODEL_ZERO_SPEND",
+  "prior_work_reused": [
+    "canonical/runtime/live_brain_route_admission_v1.py",
+    "canonical/runtime/h100_zero_learned_event_memory_v1.py",
+    "canonical/runtime/live_brain_runtime_v1.py",
+    "canonical/runtime/goal_front_compiler_v1.py",
+    "canonical/runtime/capability_planner.py",
+    "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+  ],
+  "falsification_condition": "ANY_REAL_FILE_TEST_FAILS__OR_LEARNING_TAKES_MORE_THAN_10MS__OR_RETRIEVAL_TAKES_MORE_THAN_5MS_WITH_100_MEMORIES__OR_ADVERSARIAL_DISTRACTORS_BEAT_TRUE_MEMORY__OR_SAME_GOAL_WITH_DIFFERENT_MEMORY_GIVES_SAME_CONSIDERATION_PROVING_STRICT_PROGRAM__OR_AGENT_CLAIMS_SUCCESS_WITHOUT_REAL_ARTIFACT",
+  "expected_parent_change": "SENTIENT_AGENT_EXISTS_WITH_16_HARD_REAL_TESTS_PASSING__INSTANT_LEARNING_MICROSECONDS__RETRIEVAL_MICROSECONDS__ADAPTIVE_NOT_STRICT__CAN_COMPOSE_ANY_BOUND_CAPABILITY_VIA_LIVE_BRAIN",
+  "expected_parent_frontier_change": "SENTIENT_AGENT_EXISTS_WITH_16_HARD_REAL_TESTS_PASSING__INSTANT_LEARNING_MICROSECONDS__RETRIEVAL_MICROSECONDS__ADAPTIVE_NOT_STRICT__CAN_COMPOSE_ANY_BOUND_CAPABILITY_VIA_LIVE_BRAIN",
+  "stop_condition": "ALL_16_HARD_REAL_TESTS_PASS__REAL_ARCHIVE_CREATED_AND_VERIFIED_VIA_LIVE_BRAIN__LEARNING_LESS_THAN_10MS__RETRIEVAL_LESS_THAN_5MS__ADAPTIVE_BEHAVIOR_VERIFIED__ZERO_MODEL_DEPENDENCY__ZERO_SPEND__REFEREE_PASS",
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "success_probability_lcb": "1/2",
+    "wall_clock_cost_ub": "1",
+    "interpretation": "DISCHARGES_NOTHING_YET__THIS_IS_THE_SENTIENT_CREATURE_INFRASTRUCTURE__FIRST_INSTANCE_OF_MACHINE_THAT_CAN_DO_ANYTHING_ON_COMPUTER_WITH_INSTANT_LEARNING_AND_OPTIMAL_MEMORY__UNLOCK_LCB_1_COUNTS_THE_INFRASTRUCTURE_NOT_A_BENCHMARK"
+  },
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "GOVERNANCE_GUARD_NO_PROGRESS_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/runtime/sentient_computer_agent_v1.py",
+      "canonical/tests/test_sentient_computer_agent_v1.py"
+    ],
+    "route_class": "COMPOSE",
+    "earlier_routes_exhausted_reason": "DELETE_BYPASS_REUSE_ADAPT_SUBSTITUTE_CANNOT_CREATE_SENTIENT_BEHAVIOR_FROM_EXISTING_STRICT_PROGRAMS__LIVE_BRAIN_IS_STRICT_KEYWORD_MATCHING__MEMORY_MODULES_ARE_SEPARATE__COMPOSITION_INTO_ADAPTIVE_LOOP_IS_REQUIRED__SENTIENCE_EMERGES_FROM_MEMORY_PLUS_RETRIEVAL_PLUS_PLANNING_PLUS_VERIFICATION_NOT_FROM_SCRIPT",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ]
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "proof_state_reachability": "NOT_APPLICABLE__GOVERNANCE_GUARD",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "SENTIENT_COMPUTER_AGENT_V1",
+      "falsifier_id": "SIXTEEN_HARD_REAL_TESTS_WITH_ADVERSARIAL_DISTRACTORS_AND_REAL_FILES_MUST_ALL_PASS",
+      "decisive_question": "IS_THIS_A_SENTIENT_CREATURE_NOT_A_STRICT_PROGRAM_THAT_LEARNS_INSTANTLY_AND_REMEMBERS_WHAT_MATTERS",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [],
+      "no_known_counterexample_reason": "NO_PRIOR_SENTIENT_AGENT_EXISTS__FIRST_INSTANCE__TESTED_WITH_16_HARD_REAL_TESTS_COVERING_INSTANT_LEARNING_OPTIMAL_MEMORY_ADVERSARIAL_RETRIEVAL_REAL_COMPUTER_USE_AND_ADAPTIVE_NOT_STRICT_BEHAVIOR"
+    }
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-10-general-reusable-capability-frontier-v1",
+    "canonical_base_commit": "22e8bd5277fe0fb5318558411e20745da8f45037",
+    "real_outcome": "A_SENTIENT_COMPUTER_AGENT_THAT_CAN_DO_ANYTHING_ON_COMPUTER_WITH_INSTANT_LEARNING",
+    "required_capability": "SENTIENT_COMPUTER_USE_WITH_INSTANT_LEARNING_AND_OPTIMAL_MEMORY",
+    "obs_goal": {
+      "real_outcome": "THE_MACHINE_KNOWS_WHAT_NEEDS_TO_BE_KNOWN_AND_LEARNS_IT_FASTEST_OPTIMAL_WAY",
+      "proxy_goals_deleted": [
+        "STRICT_PROGRAM_DO_1_2_3",
+        "SLOW_BATCH_LEARNING",
+        "STORE_EVERYTHING_EQUALLY",
+        "FIXED_WORKFLOW"
+      ],
+      "surviving_necessity": "ADAPTIVE_MEMORY_PLUS_RETRIEVAL_PLUS_INSTANT_ONE_SHOT_GENERALIZATION_PLUS_VERIFIED_EXECUTION"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "live_brain_route_admission_v1.solve",
+        "h100_zero_learned_event_memory_v1",
+        "universal_verified_adaptive_solver_v12",
+        "capability_planner"
+      ],
+      "single_gap": "NO_SENTIENT_INTEGRATION_EXISTS__STRICT_PROGRAM_CANNOT_BECOME_SENTIENT_WITHOUT_MEMORY_AND_ADAPTIVE_LOOP",
+      "unreused_gap_reason": "STRICT_PROGRAM_IS_NOT_SENTIENT__MEMORY_AND_INSTANT_LEARNING_REQUIRE_COMPOSITION_NOT_REUSE_ALONE"
+    },
+    "obs_state": {
+      "state_before": "LIVE_BRAIN_IS_STRICT_KEYWORD_PROGRAM_WITH_NO_MEMORY_AND_NO_LEARNING",
+      "state_after": "SENTIENT_AGENT_EXISTS_WITH_16_HARD_REAL_TESTS_PASSING__INSANELY_FAST_MICROSECOND_LEARNING_AND_RETRIEVAL",
+      "state_transition_verified": false
+    }
+  }
+}
