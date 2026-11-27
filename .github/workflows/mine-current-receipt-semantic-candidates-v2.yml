@@ -1,0 +1,58 @@
+name: Mine current receipt semantic candidates V2
+
+on:
+  push:
+    branches: ["audit/current-receipt-saturation-connector-v2-20261003-sol"]
+    paths:
+      - "canonical/runtime/existing_receipt_semantic_candidate_miner_v2.py"
+      - ".github/workflows/mine-current-receipt-semantic-candidates-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  mine:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Bind exact current target and witness authorities
+        run: |
+          set -euo pipefail
+          test "$(git hash-object canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V3.json)" = "72a5cd689f55df84de73693371264f02ef4e7226"
+          test "$(git hash-object canonical/governance/OPUS55_BRAIN_WITNESS_NORMALIZATION_V2.json)" = "5526f2c23b6f1eba5362c028f1029a8f15f095e1"
+
+      - name: Mine current existing receipt semantic candidates
+        run: |
+          set -euo pipefail
+          python canonical/runtime/existing_receipt_semantic_candidate_miner_v2.py > /tmp/existing_receipt_semantic_candidate_mining_v2.json
+          python - <<'PY'
+          import json
+          p="/tmp/existing_receipt_semantic_candidate_mining_v2.json"
+          x=json.load(open(p))
+          assert x["schema"]=="PROJECT_BRAIN_EXISTING_RECEIPT_SEMANTIC_CANDIDATE_MINER_V2", x
+          assert x["status"]=="DISCOVERY_ONLY__ZERO_SEMANTIC_OR_ACCEPTANCE_CREDIT", x
+          assert x["target_count"]==8, x
+          assert x["witness_count"]==12, x
+          assert x["target_source"]=="canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V3.json", x
+          assert x["witness_source"]=="canonical/governance/OPUS55_BRAIN_WITNESS_NORMALIZATION_V2.json", x
+          assert x["incremental_spend_usd"]==0, x
+          assert x["capability_credit_delta"]==0, x
+          assert x["family_credit_delta"]==0, x
+          print(json.dumps({
+              "searchable_file_count":x["searchable_file_count"],
+              "exact_catalog_edge_candidate_count":x["exact_catalog_edge_candidate_count"],
+              "global_exact_reuse_candidate_count":x["global_exact_reuse_candidate_count"],
+              "targets_with_catalog_edge_candidates":x["targets_with_catalog_edge_candidates"],
+              "targets_with_global_exact_reuse_candidates":x["targets_with_global_exact_reuse_candidates"],
+          }, indent=2))
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: current-receipt-semantic-candidate-mining-v2
+          path: /tmp/existing_receipt_semantic_candidate_mining_v2.json
+          if-no-files-found: error
+          retention-days: 7
