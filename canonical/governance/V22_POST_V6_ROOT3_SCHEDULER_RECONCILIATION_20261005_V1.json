@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_V22_POST_V6_ROOT3_SCHEDULER_RECONCILIATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__SCHEDULER_TRUTH_REPAIR__PRESERVE_32_OPEN_UNTIL_RECOMPUTED__ZERO_CREDIT",
+  "base_main_commit": "230a59a60f16035aa0c631961514bb4a057f2f66",
+  "objective": "Prevent stale V22 scheduling metadata from controlling current work after later acceptance-basis and Root3 premise changes, without deleting or adding any terminal truth obligation absent a fresh authoritative recomputation.",
+  "bound_evidence": {
+    "active_v22_pointer": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+      "git_blob_sha": "e6e39bcbc7d7c3a1451f19b75b75fc77a46bc0f1"
+    },
+    "acceptance_v6_activation": {
+      "path": "canonical/governance/TERMINAL_ACCEPTANCE_BASIS_V6_ACTIVATION_20261005_V1.json",
+      "git_blob_sha": "c3e4533ae1a0672e626d06d50c8a040465ba930c",
+      "effect": "V5_REPLACED_AS_CURRENT_KNOWN_ACCEPTANCE_ACCOUNTING_BASIS__FIVE_DOMAIN_SURFACES__MULTILINGUAL__LONG_CONTEXT__ABSTRACT_GENERALIZATION__FOUR_INTRINSIC_SECURITY_DIMENSIONS_EXPLICIT"
+    },
+    "root3_c1_delta_v5": {
+      "path": "canonical/verification/ROOT3_EFFECT_CHANNEL_REGISTRY_C1_DELTA_VERIFICATION_20261005_V5.json",
+      "git_blob_sha": "519f02995f6ff7cb344cecab1d4a9a5615e6b36e",
+      "effect": "CURRENT_DIRECT_PROCESS_SITE_UNIVERSE_18__ONE_TEMPORARY_TRANSFORM_SITE_DELETED__C1_STILL_SCOPE_INCOMPLETE"
+    },
+    "strict_bootstrap_public_verification": {
+      "path": "canonical/verification/ROOT3_STRICT_CURRENT_BOOTSTRAP_PUBLIC_RUNNER_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "9c1c64ce0e4a8c76301f323854a28911417862bb",
+      "effect": "BOOTSTRAP_MECHANICS_PUBLIC_PASS__READ_ONLY_BOUND__OTHER_SIX_EFFECT_CLASSES_FAIL_CLOSED__ENTRYPOINT_INSTALLATION_NOT_PROVED"
+    }
+  },
+  "reconciliation": {
+    "preserve_without_recompute": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 24,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 32,
+      "terminal": false,
+      "root1_positive_gap_count": 0
+    },
+    "mark_stale_for_scheduling_detail": [
+      "V22_META_PROGRAM_DESCRIPTION_THAT_PREDATES_V6_ACCEPTANCE_REBIND",
+      "ROOT3_PROCESS_SITE_OR_CLASS_FRONTIER_METADATA_THAT_PREDATES_THE_18_SITE_V5_RECOMPUTATION",
+      "ANY_NEXT_ACTION_RANKING_ASSUMING_STRICT_ROOT3_BOOTSTRAP_IS_ALREADY_INSTALLED_AT_THE_CREDITED_ENTRYPOINT"
+    ],
+    "current_nonnegotiable_open_premises": [
+      "LITERAL_TARGET_DOMAIN_COMPLETENESS_OR_SOUND_TARGET_SUPERSET_COVERAGE",
+      "V6_CURRENT_KNOWN_ACCEPTANCE_BASIS_PERFORMANCE_AND_META_PARITY",
+      "ROOT3_NONREPO_NATIVE_CHILD_INTERNAL_AND_EXTERNAL_BRIDGE_EFFECT_TOTALITY",
+      "ROOT3_C2_C3_MEDIATOR_BINDING_AND_DOMINATOR_SOUNDNESS",
+      "OWNERSHIP_AND_FINAL_CONTENT_ADDRESSED_CLEANROOM_FINALITY"
+    ]
+  },
+  "required_recompute": {
+    "input_set": [
+      "V22_32_OPEN_TRUTH_SET",
+      "TERMINAL_ACCEPTANCE_BASIS_V6_ACTIVATION",
+      "ROOT3_C1_DELTA_V5",
+      "ROOT3_STRICT_CURRENT_BOOTSTRAP_PUBLIC_PASS",
+      "ALL_POST_V22_VERIFIED_DELTAS_THAT_TOUCH_ANY_OF_THE_32_OPEN_OBLIGATIONS"
+    ],
+    "output_requirements": [
+      "EXACT_OPEN_TRUTH_SET_UNCHANGED_OR_EXPLICITLY_JUSTIFIED_DELTA",
+      "CURRENT_ACTIVE_AND_DORMANT_PARTITION_TOTALITY",
+      "CURRENT_SHARED_CAUSAL_INTERFACES",
+      "CURRENT_MINIMUM_ACTION_FRONTIER",
+      "NO_DUPLICATE_OR_STALE_ACTIONS",
+      "CONTENT_ADDRESSED_SOURCE_BINDINGS",
+      "INDEPENDENT_VERIFICATION"
+    ],
+    "scheduler_rule_until_then": "USE_V22_ONLY_FOR_PRESERVED_GLOBAL_TRUTH_COUNTS_AND_HIGH_LEVEL_THREE_INTERFACE_FACTORING__USE_LATER_VERIFIED_ARTIFACTS_FOR_LOCAL_SUBFRONTIER_STATE__FAIL_CLOSED_ON_CONFLICT"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_OF_THE_32_OPEN_TRUTH_OBLIGATIONS_CLOSED",
+    "NO_CLAIM_V6_LITERAL_TARGET_COMPLETE",
+    "NO_CLAIM_ROOT3_C1_C2_C3_COMPLETE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
