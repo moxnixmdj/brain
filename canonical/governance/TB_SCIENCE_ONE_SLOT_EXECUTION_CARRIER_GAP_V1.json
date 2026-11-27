@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_ONE_SLOT_EXECUTION_CARRIER_GAP_V1",
+  "date": "2026-10-03",
+  "status": "ACTIVE_TRUTH_REPAIR__CURRENT_ONE_SLOT_AUTHORITY_VERIFIED__EXACT_EXECUTION_CARRIER_ABSENT__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+  "target_predicate": "TB_SCIENCE_GE_58_7",
+  "current_authority": {
+    "path": "canonical/governance/TB_SCIENCE_ONE_SLOT_CANARY_AUTHORITY_V2.json",
+    "git_blob_sha": "741d6ca0cc4880e6cd9c76e3046272b1feb756f1",
+    "verification_path": "canonical/verification/TB_SCIENCE_ONE_SLOT_CANARY_ACTIVE_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "verification_git_blob_sha": "64eb34a0df64d49f0b7d4f6c97c7f07f777799c8",
+    "verifier_pr": 1240,
+    "verifier_run_id": 37105048727,
+    "verifier_conclusion": "success",
+    "authorized_slot": "terminal-bench-science/baseline-free-localization::trial-0"
+  },
+  "carrier_audit": {
+    "brain_main_workflows_checked_at_commit": "6a9e18be244b8999b1676d16e3c285e122f25bbe",
+    "exact_current_one_slot_execution_workflow_found": false,
+    "activation_commit_workflow_runs": [
+      {
+        "run_id": 37105190104,
+        "name": "Verify terminal projection consistency",
+        "conclusion": "failure",
+        "runner_id": 0,
+        "steps": 0,
+        "interpretation": "CARRIER_FAILED_BEFORE_USER_CODE"
+      }
+    ],
+    "prior_execution_carrier": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "workflow_path": ".github/workflows/execute-tb-science-tranche1-v1.yml",
+      "workflow_git_blob_sha": "bf79ac405b0d88d6926383db2e67e513a95f77d3",
+      "status": "INADMISSIBLE_FOR_CURRENT_CANARY__PINNED_TO_THREE_PERMANENTLY_CONSUMED_SLOTS_AND_SUPERSEDED_PLANNER_CONTROLLER_BYTES",
+      "old_authorized_slots": [
+        "terminal-bench-science/genomic-model-ranking::trial-0",
+        "terminal-bench-science/mri-harmonization::trial-0",
+        "terminal-bench-science/navigation-sensor-calibration::trial-0"
+      ],
+      "old_planner_blob": "17472fd2b01b164fbb180aecfc04385b55b11499",
+      "current_planner_blob": "879887984e2ca8abacac486d687f519f5d0d78a5",
+      "old_controller_blob": "8ab8287fdb6a9b63b9fe2d2addde731486c89d1e",
+      "current_controller_blob": "5557efd21f1a433ad16766def3775a79c459784b"
+    }
+  },
+  "causal_blocker": "NO_CONTENT_ADDRESSED_EXECUTION_WORKFLOW_OR_EQUIVALENT_CALLABLE_CARRIER_BOUND_TO_EXACT_CURRENT_ONE_SLOT_AUTHORITY_AND_CURRENT_ROUTE_BYTES",
+  "minimum_safe_next": "BUILD_OR_RECOVER_EXACT_ONE_SLOT_EXECUTION_CARRIER__INDEPENDENTLY_HASH_BIND_AUTHORITY_WORKFLOW_AND_CURRENT_ROUTE__THEN_EXECUTE_ONLY_BASELINE_FREE_LOCALIZATION_TRIAL_0__AUTO_REVOKE",
+  "hard_rules": [
+    "DO_NOT_REPLAY_ANY_OF_THE_THREE_PERMANENTLY_CONSUMED_SLOTS",
+    "DO_NOT_REUSE_SUPERSEDED_TRANCHE1_PLANNER_OR_CONTROLLER_BYTES",
+    "DO_NOT_COUNT_AUTHORITY_AS_EXECUTION",
+    "DO_NOT_COUNT_RUNNER_ID_0_ZERO_STEP_FAILURE_AS_CAPABILITY_FAILURE",
+    "DO_NOT_EXECUTE_UNVERIFIED_CARRIER",
+    "NO_RETRY_NO_REPLACEMENT"
+  ],
+  "terminal_results_observed": 0,
+  "fresh_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
