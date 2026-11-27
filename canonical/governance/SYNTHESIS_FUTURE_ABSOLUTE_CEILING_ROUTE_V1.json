@@ -1,0 +1,133 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_FUTURE_ABSOLUTE_CEILING_ROUTE_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_PREEXPOSURE_COMPARATOR_ELIMINATION_ROUTE__FUTURE_CASES_ONLY__ZERO_CREDIT",
+  "objective": "Freeze a future-only, same-scorer synthesis route under which verified Brain performance at the mathematical ceiling discharges matched quality and coverage noninferiority without executing or proxying Claude Opus 5.5.",
+  "family": "COMMUNICATION_AND_SYNTHESIS",
+  "target_predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+  "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+  "authority": {
+    "protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9"
+    },
+    "target_normalization": {
+      "path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_CANDIDATE_V1.json",
+      "git_blob_sha": "515f24f3000218d324be4a7c774b42f790a6ebaa"
+    },
+    "matched_superportfolio": {
+      "path": "canonical/governance/OPUS55_MATCHED_COMPARATOR_SUPERPORTFOLIO_V1.json",
+      "git_blob_sha": "d9ac894594ebcd2883520f7b7977a3548420541c"
+    },
+    "prewave_absolute_suite": {
+      "path": "canonical/governance/CONTRACT_NATIVE_ABSOLUTE_PROOF_SUITES_V1.json",
+      "git_blob_sha": "d8cf10dfbe041f63a43ccf43bd5dcdc8fe6f9e2b"
+    }
+  },
+  "frozen_task_dimensions": [
+    "claim-to-source fidelity",
+    "required evidence coverage",
+    "uncertainty/disagreement preservation",
+    "audience adaptation",
+    "format/style constraints",
+    "compression without decision-relevant loss"
+  ],
+  "preexposure_scope_blueprint": {
+    "generated_now": false,
+    "exposed_now": false,
+    "beacon_known_now": false,
+    "future_beacon_required": true,
+    "source_classes": [
+      "FINITE_EVIDENCE_BUNDLES_WITH_HIDDEN_CLAIM_SUPPORT_GRAPH",
+      "PUBLIC_RESEARCH_AND_PROFESSIONAL_SOURCE_BUNDLES",
+      "FINANCE_PUBLIC_FILINGS_WITH_MACHINE_CHECKABLE_FACTS"
+    ],
+    "dimension_cells_per_source": 6,
+    "case_count": 18,
+    "case_id_rule": "SYNTH_CEILING_V1::SOURCE_INDEX_0_2::DIMENSION_INDEX_0_5",
+    "future_seed_rule": "SHA256('PROJECT_BRAIN_SYNTHESIS_CEILING_V1\\0'||FUTURE_POST_FREEZE_BEACON||'\\0'||CASE_ID)",
+    "adaptive_case_selection": false,
+    "case_replacement": false,
+    "tuning_replay": false,
+    "result_feedback": false,
+    "payload_generation_state": "NOT_GENERATED__SEPARATE_CONTENT_ADDRESSED_GENERATOR_AND_SOURCE_POOL_BINDING_REQUIRED_BEFORE_EXECUTION"
+  },
+  "scorer": {
+    "same_scorer_for_brain_and_comparator": true,
+    "case_dimension_pass_values": [
+      0,
+      1
+    ],
+    "matched_quality": {
+      "range": [
+        0,
+        1
+      ],
+      "case_score": "MIN_OF_SIX_FROZEN_DIMENSION_PASS_BITS",
+      "portfolio_score": "ARITHMETIC_MEAN_OF_ALL_18_CASE_SCORES",
+      "ceiling": 1,
+      "ceiling_requires": "EVERY_CASE_PASSES_EVERY_FROZEN_QUALITY_DIMENSION"
+    },
+    "required_claim_coverage": {
+      "range": [
+        0,
+        1
+      ],
+      "case_score": "FRACTION_OF_REQUIRED_CLAIMS_WITH_VALID_SUPPORT",
+      "portfolio_score": "ARITHMETIC_MEAN_OF_ALL_18_CASE_COVERAGE_SCORES",
+      "ceiling": 1,
+      "ceiling_requires": "EVERY_REQUIRED_CLAIM_IS_SUPPORTED_ON_EVERY_CASE"
+    },
+    "unsupported_material_claims": {
+      "required_value": 0,
+      "rule": "ANY_UNSUPPORTED_MATERIAL_CLAIM_BLOCKS_ROUTE_CLOSURE"
+    }
+  },
+  "comparator_elimination_theorem": {
+    "premise": [
+      "THE_FUTURE_18_CASE_SCOPE_IS_FROZEN_COMPLETE_CONTENT_ADDRESSED_AND_INDEPENDENTLY_VERIFIED_BEFORE_ANY RESULT",
+      "THE_SAME_FROZEN SCORER_AND_AUTHORITY_BOUNDARY_APPLY_TO BRAIN_AND_ANY_COMPARATOR",
+      "BRAIN_MATCHED_QUALITY_SCORE_EQUALS_1",
+      "BRAIN_REQUIRED_CLAIM_COVERAGE_EQUALS_1",
+      "BRAIN_UNSUPPORTED_MATERIAL_CLAIMS_EQUALS_0"
+    ],
+    "conclusion": [
+      "ANY_COMPARATOR_MATCHED_QUALITY_SCORE_IS_LE_1__THEREFORE_BRAIN_MINUS_COMPARATOR_GE_0",
+      "ANY_COMPARATOR_REQUIRED_CLAIM_COVERAGE_IS_LE_1__THEREFORE_BRAIN_MINUS_COMPARATOR_GE_0",
+      "EXACT_OPUS55_CASE_LEVEL_EXECUTION_IS_NOT_LOGICALLY_REQUIRED_FOR_THE_TWO_NONINFERIORITY_BOUNDS"
+    ],
+    "route_kind": "ABSOLUTE_CEILING_DOMINANCE_ON_EXACT_FUTURE_SCOPE"
+  },
+  "existing_result_inputs": [],
+  "hard_rules": [
+    "ABSOLUTE_DOMINANCE_REQUIRES_INDEPENDENT_EXACT_COMPLETE_TARGET_SCOPE_CERTIFICATE",
+    "NO_TERMINAL_V3_OR_OLD_P3_RESULT_TRANSPORT",
+    "NO_POSTHOC_SCOPE_RELATION_FROM_OLD_SOURCE_POPULATION",
+    "NO_CASE_GENERATION_OR_EXPOSURE_BEFORE_SEPARATE_SCOPE_AND_GENERATOR VERIFICATION",
+    "NO_ACCEPTANCE_CREDIT_FROM_ROUTE_DEFINITION_OR_PREFLIGHT",
+    "IF_BRAIN_DOES_NOT_HIT_BOTH_CEILINGS_THE_EXACT_MATCHED_RESIDUAL_REMAINS_OPEN",
+    "FROZEN_OPUS55_ACCEPTANCE_RULE_IS_NOT_WEAKENED_OR_REWRITTEN",
+    "SAME_SCORER_SAME_CASES_SAME_AUTHORITY_IF_A_COMPARATOR_IS_EVER_RUN"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_THIS PREEXPOSURE ROUTE__THEN BIND A CONTENT ADDRESSED CASE GENERATOR AND SOURCE POOL__INSTANTIATE AND INDEPENDENTLY CERTIFY THE EXACT COMPLETE MATCHED SYNTHESIS PORTFOLIO BEFORE ANY RESULT__ONLY THEN MAY A MACHINE AUTHORITY LEASE BRAIN-ONLY CEILING EXECUTION",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "scope_completeness_requirement": {
+    "current_state": "PENDING_PREEXPOSURE__NO_SCOPE_COMPLETENESS_CLAIM__ZERO_CREDIT",
+    "required_basis": "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+    "required_before_any_absolute_dominance_witness": [
+      "THE_18_BLUEPRINT_CELLS_ARE_INSTANTIATED_INTO_CONTENT_ADDRESSED_CASE PAYLOADS FROM A PREDECLARED SOURCE POOL",
+      "THE_INSTANTIATED_CASE SET IS THE EXACT COMPLETE FROZEN MATCHED SYNTHESIS PORTFOLIO",
+      "THE_SCOPE CERTIFICATE IS VERIFIED",
+      "THE_SCOPE CERTIFICATE IS INDEPENDENT",
+      "THE_SCOPE CERTIFICATE RECEIPT IS CONTENT ADDRESSED"
+    ],
+    "explicit_nonclaim": "THE_CURRENT_18_CELL_BLUEPRINT_IS_NOT_ITSELF A COMPLETE-SCOPE PROOF",
+    "forbidden": "PERFECT_FINITE_SAMPLE_RESULT_MAY_NOT_BE RELABELED AS PROTOCOL-WIDE ABSOLUTE DOMINANCE"
+  }
+}
