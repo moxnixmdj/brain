@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_ONE_USE_TRANSPORT_AND_RESULT_DURABILITY_HARDENING_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_TRUTH_CANDIDATE__PRECLAIM_TOCTOU_AND_POSTCLAIM_RESULT_DURABILITY_GAPS_SEPARATED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "observed_preclaim_failure": {
+    "workflow_run_id": 37240563767,
+    "workflow_job_id": 111548273333,
+    "failed_step": "Recheck exact frozen retry subject",
+    "production_step": "SKIPPED",
+    "checkout_observed_head": "2e80454bfd5f49efe00f3cb4233ca6c3a26648df",
+    "causal_defect": "A_QUEUED_WORKFLOW_CHECKED_OUT_MUTABLE_GITHUB_REF_INSTEAD_OF_THE_IMMUTABLE_TRIGGER_SHA",
+    "atomic_claim_created": false,
+    "production_cases_consumed": 0,
+    "classification": "TRANSPORT_LIVENESS_FAILURE__NOT_CAPABILITY_FAILURE__NOT_PRODUCTION_CONSUMPTION"
+  },
+  "independent_convergence": {
+    "separate_brain_worker_detected_same_defect": true,
+    "obsolete_9dd_claim_tombstone_path": "canonical/governance/UNKNOWN_DOMAIN_PREIMMUTABLE_CLAIM_TOMBSTONE_20261005_V1.json",
+    "initial_runner_repair_pr": 2068,
+    "clean_rebased_runner_repair_pr": 2075,
+    "required_property": "PRODUCTION_WORKTREE_CHECKOUT_IMMUTABLE_CREATE_EVENT_GITHUB_SHA"
+  },
+  "postclaim_result_durability_gap": {
+    "defect": "AFTER_ATOMIC_CLAIM_HTTP_201_AND_IRREVERSIBLE_CASE_EXECUTION__A_SINGLE_REMOTE_RESULT_CREATE_CAN_FAIL_OR_RETURN_AMBIGUOUS_TRANSPORT_STATUS",
+    "consequence": "WITH_REPLAY_FORBIDDEN__THE_ONLY_ADMISSIBLE_OUTCOME_CAN_BE_LOST_EVEN_THOUGH_THE_CAPABILITY_EXECUTION_ALREADY_OCCURRED",
+    "class": "ONE_USE_EVIDENCE_INTEGRITY_AND_DURABILITY_GAP",
+    "minimum_repair": [
+      "EMIT_SANITIZED_EXACT_RESULT_BYTES_TO_THE_JOB_LOG_BEFORE_REMOTE_RESULT_PERSISTENCE",
+      "RETRY_REMOTE_CREATE_WITHOUT_REEXECUTING_CASES",
+      "AFTER_AMBIGUOUS_OR_NON_201_WRITE__READ_THE_EXPECTED_RESULT_PATH_AND_ACCEPT_ONLY_EXACT_BYTE_EQUALITY",
+      "FAIL_CLOSED_IF_DURABILITY_CANNOT_BE_PROVED"
+    ]
+  },
+  "implementation_candidate": {
+    "runner_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2060,
+    "head_sha": "36f92997eb7e8650be8750beebeb61eca65bc14b",
+    "unique_contribution": "POSTCLAIM_RESULT_DURABILITY_REPAIR",
+    "overlaps_with_pr_2075_on_checkout_repair": true,
+    "current_authority": false,
+    "acceptance_credit": false,
+    "production_credit": false,
+    "required_before_use": "REBASE_UNIQUE_DURABILITY_DELTA_ONTO_THE_CANONICAL_IMMUTABLE_CHECKOUT_REPAIR__INDEPENDENTLY_VERIFY__THEN_EXPLICITLY_ACTIVATE"
+  },
+  "scheduling_law": [
+    "PRECLAIM_TRANSPORT_FAILURES_WITH_NO_ATOMIC_CLAIM_AND_ZERO_CASES_MUST_NOT_BE_CLASSIFIED_AS_CAPABILITY_FAILURES",
+    "ONE_USE_EXECUTION_TRANSPORT_MUST_PIN_IMMUTABLE_TRIGGER_BYTES_BEFORE_LINEARIZATION",
+    "ONE_USE_RESULT_DURABILITY_MUST_BE_ESTABLISHED_WITHOUT_REPLAYING_THE_CAPABILITY_EXECUTION",
+    "RESULT_PERSISTENCE_RETRY_IS_NOT_CASE_REPLAY_WHEN_IT_REUSES_THE_ALREADY_COMPUTED_SANITIZED_RESULT_BYTES_ONLY"
+  ],
+  "hard_nonclaims": [
+    "THIS_RECORD_DOES_NOT_PROVE_UNKNOWN_DOMAIN_ACCEPTANCE",
+    "PR_2060_HAS_ZERO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "NO_TERMINAL_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_RECORD"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
