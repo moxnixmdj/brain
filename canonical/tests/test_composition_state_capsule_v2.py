@@ -91,6 +91,27 @@ class Tests(unittest.TestCase):
         self.assertEqual(verdict["status"], "FAIL_CLOSED")
         self.assertIn("EVIDENCE_HASH_MISMATCH", verdict["reason"])
 
+    def test_nonfinite_evidence_fails_closed(self):
+        with self.assertRaises(CapsuleError):
+            append_macrostep(
+                empty_capsule(),
+                producer_ref="worker-a",
+                producer_descriptor=PRODUCER,
+                action_ref="tool:web:source-a",
+                action_descriptor=ACTION,
+                requires=[],
+                provides=["out"],
+                values={"out": 1},
+                evidence_values={"bad": {"score": float("nan")}},
+                lineage={
+                    "out": [
+                        "evidence:bad",
+                        "action:tool:web:source-a",
+                        "producer:worker-a",
+                    ]
+                },
+            )
+
     def test_action_descriptor_tamper_fails_closed(self):
         cap = seed()
         bad = copy.deepcopy(cap)

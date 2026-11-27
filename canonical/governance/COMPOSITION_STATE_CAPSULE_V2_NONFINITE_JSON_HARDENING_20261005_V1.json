@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_STATE_CAPSULE_V2_NONFINITE_JSON_HARDENING_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_TRUTH_REPAIR__NONFINITE_JSON_REJECTED_FAIL_CLOSED__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Harden the concurrently landed composition state capsule V2 without duplicating its stronger producer/action/evidence content-binding design. Reject NaN and Infinity at canonicalization so the hash domain is strict finite JSON rather than Python's non-standard JSON extensions.",
+  "subject": {
+    "runtime_path": "canonical/runtime/composition_state_capsule_v2.py",
+    "runtime_git_blob_sha": "b218d2bc70206a88a43e87471346d39fcedd6d3b",
+    "tests_path": "canonical/tests/test_composition_state_capsule_v2.py",
+    "tests_git_blob_sha": "309569be0841429ed190b3f98dbe35d2c946a180"
+  },
+  "falsification_of_predecessor": {
+    "predecessor_runtime_git_blob_sha": "cf72b9211872dfe1994248cc2395e031554507b4",
+    "fact": "PYTHON_JSON_DUMPS_DEFAULT_ALLOW_NAN_IS_TRUE",
+    "witness": "AN_EVIDENCE_PAYLOAD_CONTAINING_FLOAT_NAN_IS_SERIALIZED_AS_THE_NON_STANDARD_TOKEN_NaN_AND_CAN_ENTER_THE_HASH_DOMAIN",
+    "why_load_bearing": "THE_CAPSULE_CALLS_ITS_HASH_INPUT_CANONICAL_EVIDENCE. ACCEPTING_NONFINITE_NUMERIC_EXTENSIONS_MAKES_THE_DECLARED_CANONICAL_JSON_DOMAIN_BROADER_THAN_STRICT_JSON_AND_WEAKENS_CROSS_VERIFIER_REPRODUCIBILITY.",
+    "repair": "SET_ALLOW_NAN_FALSE_INSIDE_THE_SINGLE_CANONICALIZER__VALUEERROR_IS_ALREADY_CAUGHT_AND_CONVERTED_TO_CAPSULE_ERROR"
+  },
+  "preserved_stronger_v2_properties": [
+    "PRODUCER_DESCRIPTOR_CONTENT_BINDING",
+    "ACTION_DESCRIPTOR_CONTENT_BINDING",
+    "EVIDENCE_VALUE_CONTENT_BINDING",
+    "MANDATORY_PRODUCER_AND_ACTION_LINEAGE_FOR_EVERY_OUTPUT",
+    "APPEND_ONLY_STATE_VERSIONING",
+    "EXACT_PARENT_AND_INPUT_BINDINGS",
+    "EXACT_PREFIX_ROLLBACK"
+  ],
+  "new_regression": {
+    "id": "NONFINITE_EVIDENCE_FAILS_CLOSED",
+    "input": "evidence_values bad score equals float nan",
+    "required_result": "APPEND_MACROSTEP_RAISES_CAPSULE_ERROR_BEFORE_COMMIT"
+  },
+  "proof_boundary": {
+    "this_delta_can_establish_after_independent_verification": "STRICT_FINITE_JSON_CANONICALIZATION_FOR_CAPSULE_HASH_INPUTS",
+    "still_open": [
+      "NO_BYPASS_INTEGRATION",
+      "EVIDENCE_CHANNEL_TOTALITY",
+      "EXTERNAL_SOURCE_ADMISSION_AND_AUTHENTICITY",
+      "P1_P2_SYSTEM_LEVEL_CLOSURE",
+      "P3_CRITICAL_FAILURE_AGGREGATION",
+      "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES_ACCEPTANCE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_P1_P2_OR_P3_CLOSURE",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
