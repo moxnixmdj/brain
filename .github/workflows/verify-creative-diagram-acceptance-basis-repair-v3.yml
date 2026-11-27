@@ -1,0 +1,38 @@
+name: Verify creative diagram acceptance basis repair v3
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/governance/CREATIVE_DIAGRAM_ACCEPTANCE_BASIS_REPAIR_V3_20261005.json
+      - canonical/runtime/verify_creative_diagram_acceptance_basis_repair_v3.py
+      - canonical/tests/test_creative_diagram_acceptance_basis_repair_v3.py
+      - canonical/governance/CREATIVE_DIAGRAM_ACCEPTANCE_BASIS_REPAIR_V2_20261005.json
+      - canonical/governance/STATIC_SVG_DIAGRAM_MECHANICS_KERNEL_20261005_V1.json
+      - canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json
+      - canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_V1.json
+      - canonical/verification/CREATIVE_TEXT_METRIC_INDEPENDENCE_WOLFRAM_VERIFICATION_20261005_V1.json
+      - canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json
+      - canonical/governance/CREATIVE_DIAGRAM_TERMINAL_PROOF_BASIS_GAP_20261005_V1.json
+      - canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json
+      - canonical/runtime/html_svg_diagram_mechanics_v1.py
+      - canonical/runtime/svg_diagram_render_oracle_v1.py
+      - .github/workflows/verify-creative-diagram-acceptance-basis-repair-v3.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Verify repaired basis
+        run: python canonical/runtime/verify_creative_diagram_acceptance_basis_repair_v3.py
+      - name: Run fail-closed mutation tests
+        run: python -m unittest -v canonical.tests.test_creative_diagram_acceptance_basis_repair_v3
