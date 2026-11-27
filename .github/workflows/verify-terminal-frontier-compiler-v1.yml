@@ -6,6 +6,13 @@ on:
       - canonical/runtime/terminal_frontier_compiler_v1.py
       - canonical/tests/test_terminal_frontier_compiler_v1.py
       - canonical/governance/TERMINAL_FRONTIER_COMPILER_V1.json
+      - canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json
+      - canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json
+      - canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json
+      - canonical/governance/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V*.json
+      - canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V*.json
+      - canonical/verification/ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V*.json
+      - canonical/verification/CURRENT_ZERO_REALITY_MINIMUM_CUT_V*.json
       - .github/workflows/verify-terminal-frontier-compiler-v1.yml
   workflow_dispatch:
 permissions:
