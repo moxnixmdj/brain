@@ -1,0 +1,26 @@
+name: Verify finite-sample ceiling firewall
+
+on:
+  pull_request:
+    paths:
+      - canonical/runtime/finite_sample_ceiling_firewall_v1.py
+      - canonical/tests/test_finite_sample_ceiling_firewall_v1.py
+      - canonical/governance/RECOVERY_T0_T2_SAMPLE_CEILING_FALSIFICATION_V1.json
+      - canonical/governance/RECOVERY_T0_T2_ACCEPTANCE_SCOPE_RELATION_V1.json
+      - canonical/governance/OPUS55_MATCHED_COMPARATOR_SUPERPORTFOLIO_V1.json
+      - .github/workflows/verify-finite-sample-ceiling-firewall.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run firewall tests
+        run: python -m unittest -v canonical.tests.test_finite_sample_ceiling_firewall_v1
