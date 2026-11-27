@@ -561,6 +561,11 @@ def _self_check() -> Dict[str, Any]:
     }
 
 
+def self_check() -> Dict[str, Any]:
+    """Public proof hook: the capability bus will not dispatch anything that cannot run this."""
+    return _self_check()
+
+
 def main(argv: Optional[Sequence[str]] = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--self-check", action="store_true")

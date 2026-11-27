@@ -1,0 +1,409 @@
+{
+ "admitted": [
+  "structured_morphism_abstraction_v1",
+  "single_experience_transfer_v1",
+  "concept_library_v1"
+ ],
+ "declared": 28,
+ "failed": [],
+ "import_ms_total": 183.03,
+ "plugins": [
+  {
+   "detail": "self_check passed",
+   "entry": "admit",
+   "import_ms": 3.58,
+   "module": "canonical.swe_kernel.structured_morphism_abstraction_v1",
+   "plugin_id": "structured_morphism_abstraction_v1",
+   "rung": 1,
+   "self_check_ms": 3.0,
+   "state": "ADMITTED",
+   "triggers": [
+    "repair.abstract"
+   ]
+  },
+  {
+   "detail": "self_check passed",
+   "entry": "self_check",
+   "import_ms": 10.87,
+   "module": "canonical.swe_kernel.single_experience_transfer_v1",
+   "plugin_id": "single_experience_transfer_v1",
+   "rung": 1,
+   "self_check_ms": 1.33,
+   "state": "ADMITTED",
+   "triggers": [
+    "repair.transfer.measure"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "settle_taught_edit",
+   "import_ms": 4.43,
+   "module": "canonical.swe_kernel.taught_actions.settled_admission_v1",
+   "plugin_id": "settled_admission_v1",
+   "rung": 1,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "repair.admit.taught"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "learn_scope",
+   "import_ms": 1.75,
+   "module": "canonical.swe_kernel.rule_scope_learning_v1",
+   "plugin_id": "rule_scope_learning_v1",
+   "rung": 1,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "repair.scope"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "recheck",
+   "import_ms": 2.72,
+   "module": "canonical.swe_kernel.skill_recheck_v1",
+   "plugin_id": "skill_recheck_v1",
+   "rung": 1,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "store.recheck"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "rule_is_applicable",
+   "import_ms": 2.67,
+   "module": "canonical.tools.invalidation_enforcement_v1",
+   "plugin_id": "invalidation_enforcement_v1",
+   "rung": 1,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "store.invalidate"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "",
+   "import_ms": 0.24,
+   "module": "canonical.tools.what_the_operand_names_cost_v1",
+   "plugin_id": "what_the_operand_names_cost_v1",
+   "rung": 1,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "repair.alpha_safe"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "",
+   "import_ms": 3.99,
+   "module": "canonical.swe_kernel.retained_repair_session_v1",
+   "plugin_id": "retained_repair_session_v1",
+   "rung": 1,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "repair.session"
+   ]
+  },
+  {
+   "detail": "self_check passed",
+   "entry": "",
+   "import_ms": 5.8,
+   "module": "canonical.swe_kernel.concept_library_v1",
+   "plugin_id": "concept_library_v1",
+   "rung": 1,
+   "self_check_ms": 1.76,
+   "state": "ADMITTED",
+   "triggers": [
+    "library.egraph"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "derive_swap_family",
+   "import_ms": 0.21,
+   "module": "canonical.swe_kernel.operator_generalization_v1",
+   "plugin_id": "operator_generalization_v1",
+   "rung": 1,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "library.operator"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "",
+   "import_ms": 0.84,
+   "module": "canonical.swe_kernel.metamorphic_plugin_v1",
+   "plugin_id": "metamorphic_plugin_v1",
+   "rung": 1,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "test.metamorphic"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "rank_violations",
+   "import_ms": 0.7,
+   "module": "canonical.swe_kernel.violation_attribution_v1",
+   "plugin_id": "violation_attribution_v1",
+   "rung": 1,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "test.attribute"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "",
+   "import_ms": 62.31,
+   "module": "canonical.runtime.swe_typed_plan_v1",
+   "plugin_id": "swe_typed_plan_v1",
+   "rung": 1,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "plan.swe"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "",
+   "import_ms": 0.4,
+   "module": "canonical.runtime.grounded_action_v1",
+   "plugin_id": "grounded_action_v1",
+   "rung": 1,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "plan.grounded"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "",
+   "import_ms": 0.23,
+   "module": "canonical.runtime.solve_v1",
+   "plugin_id": "solve_v1",
+   "rung": 1,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "core.solve"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "",
+   "import_ms": 36.41,
+   "module": "canonical.swe_kernel.perfect_algorithm_unified_v8",
+   "plugin_id": "perfect_algorithm_unified_v8",
+   "rung": 1,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "core.loop"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "",
+   "import_ms": 4.66,
+   "module": "canonical.runtime.wave41_rung3_proposer_jitrl_continual_flywheel_v1",
+   "plugin_id": "wave41_rung3_proposer_jitrl_continual_flywheel_v1",
+   "rung": 2,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "propose.rung3"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "",
+   "import_ms": 0.24,
+   "module": "canonical.swe_kernel.experiential_strategy_extractor_v1",
+   "plugin_id": "experiential_strategy_extractor_v1",
+   "rung": 1,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "learn.strategy"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "",
+   "import_ms": 0.28,
+   "module": "canonical.runtime.ignorance_ledger_v1",
+   "plugin_id": "ignorance_ledger_v1",
+   "rung": 1,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "learn.curriculum"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "",
+   "import_ms": 0.27,
+   "module": "canonical.runtime.experience_v1",
+   "plugin_id": "experience_v1",
+   "rung": 1,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "learn.experience"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "",
+   "import_ms": 0.18,
+   "module": "canonical.runtime.credit_gates_v1",
+   "plugin_id": "credit_gates_v1",
+   "rung": 1,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "learn.credit"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "",
+   "import_ms": 2.56,
+   "module": "canonical.runtime.osworld_v21_brain_agent_adapter_v1",
+   "plugin_id": "osworld_v21_brain_agent_adapter_v1",
+   "rung": 1,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "cua.osworld21"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "",
+   "import_ms": 0.7,
+   "module": "canonical.runtime.osworld_v21_local_qwen_policy_v1",
+   "plugin_id": "osworld_v21_local_qwen_policy_v1",
+   "rung": 2,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "cua.policy.local"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "",
+   "import_ms": 23.72,
+   "module": "canonical.swe_kernel.epistemic_computer_agent_v1",
+   "plugin_id": "epistemic_computer_agent_v1",
+   "rung": 1,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "cua.epistemic"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "",
+   "import_ms": 0.77,
+   "module": "canonical.runtime.mysterymechanism_sparse_symbolic_adapter_v2",
+   "plugin_id": "mysterymechanism_sparse_symbolic_adapter_v2",
+   "rung": 1,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "discover.active"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "",
+   "import_ms": 11.63,
+   "module": "canonical.runtime.harbor_swe_zero_model_agent_v1",
+   "plugin_id": "harbor_swe_zero_model_agent_v1",
+   "rung": 1,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "swe.harbor"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "",
+   "import_ms": 0.51,
+   "module": "canonical.tools.weight_space_fuel_v1",
+   "plugin_id": "weight_space_fuel_v1",
+   "rung": 2,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "weights.readiness"
+   ]
+  },
+  {
+   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "entry": "",
+   "import_ms": 0.38,
+   "module": "canonical.tools.experience_corpus_training_readiness_v1",
+   "plugin_id": "experience_corpus_training_readiness_v1",
+   "rung": 2,
+   "self_check_ms": 0.0,
+   "state": "UNVERIFIED",
+   "triggers": [
+    "weights.corpus"
+   ]
+  }
+ ],
+ "schema": "BRAIN_CAPABILITY_BUS_V1_AUDIT",
+ "self_check_ms_total": 6.09,
+ "states": {
+  "ADMITTED": 3,
+  "UNVERIFIED": 25
+ },
+ "unverified": [
+  "settled_admission_v1",
+  "rule_scope_learning_v1",
+  "skill_recheck_v1",
+  "invalidation_enforcement_v1",
+  "what_the_operand_names_cost_v1",
+  "retained_repair_session_v1",
+  "operator_generalization_v1",
+  "metamorphic_plugin_v1",
+  "violation_attribution_v1",
+  "swe_typed_plan_v1",
+  "grounded_action_v1",
+  "solve_v1",
+  "perfect_algorithm_unified_v8",
+  "wave41_rung3_proposer_jitrl_continual_flywheel_v1",
+  "experiential_strategy_extractor_v1",
+  "ignorance_ledger_v1",
+  "experience_v1",
+  "credit_gates_v1",
+  "osworld_v21_brain_agent_adapter_v1",
+  "osworld_v21_local_qwen_policy_v1",
+  "epistemic_computer_agent_v1",
+  "mysterymechanism_sparse_symbolic_adapter_v2",
+  "harbor_swe_zero_model_agent_v1",
+  "weight_space_fuel_v1",
+  "experience_corpus_training_readiness_v1"
+ ]
+}

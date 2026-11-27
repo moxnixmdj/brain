@@ -33037,26 +33037,26 @@
   "bound_capabilities": 153,
   "capabilities": 462,
   "engines": 264,
-  "extended_source_index_modules": 706,
+  "extended_source_index_modules": 707,
   "federated_kernel_engines": 238,
   "harvested_admitted": 0,
-  "harvested_capabilities": 697,
+  "harvested_capabilities": 699,
   "harvested_contract_surfaces": 44,
-  "harvested_program_surfaces": 653,
+  "harvested_program_surfaces": 655,
   "knowledge_documents": 786,
   "promotion_callable": 31,
   "promotion_candidates": 849,
   "receipt_backed_capabilities": 309,
-  "research_index_records": 7466,
+  "research_index_records": 7469,
   "routing_tokens": 4070,
   "skills": 18,
-  "source_index_entry_points": 573,
-  "source_index_modules": 2319
+  "source_index_entry_points": 574,
+  "source_index_modules": 2320
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d211fd714410723b5dec62feb7c13bf38ddd12bb5b8510d7bfc0e471ac6d0a17"
+  "value": "b631223cbcb9b03df7c464dbf655881a915f5d7ec8204be05a7d32d928c65560"
  },
  "engines": [
   {
@@ -56120,6 +56120,45 @@
     "recursive": 1,
     "stamp": 2,
     "tools": 1
+   },
+   "tree": "canonical/tools"
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "ext_source:canonical/tools/stamp_capability_bus_intent_20261124.py",
+   "imported_by_count": 0,
+   "kind": "EXTENDED_SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/tools/stamp_capability_bus_intent_20261124.py",
+   "sha256": "7fa5f5ccbd1926a52c7026014c1ac6674da82f23d5c178acfa912e5e6e86e5a4",
+   "summary": "Stamp the recursive-OBS record and live route frontier for wave 47's capability bus.",
+   "symbol_count": 4,
+   "symbols": [
+    "challengers",
+    "frontier",
+    "layers",
+    "main"
+   ],
+   "terms": {
+    "20261124": 1,
+    "47": 1,
+    "bus": 2,
+    "canonical": 1,
+    "capability": 2,
+    "challengers": 1,
+    "frontier": 2,
+    "intent": 1,
+    "layers": 1,
+    "live": 1,
+    "main": 1,
+    "obs": 1,
+    "record": 1,
+    "recursive": 1,
+    "route": 1,
+    "stamp": 2,
+    "tools": 1,
+    "wave": 1
    },
    "tree": "canonical/tools"
   },
@@ -94254,6 +94293,27 @@
    "declared_inputs": [],
    "declared_result_fields": [],
    "entrypoint": "main",
+   "id": "canonical.runtime.capability_bus_v1.hidden.v1",
+   "invocation": "cli",
+   "kind": "HARVESTED_EXECUTABLE_SURFACE",
+   "path": "canonical/runtime/capability_bus_v1.py",
+   "route": "canonical/runtime/harvested_capability_runtime_v1.py",
+   "sha256": "bc7878218474d4f75e8ac795980e44414e3f6a5be91f5ee07bca022793d08bcd",
+   "summary": "A capability bus that admits a plugin only when the plugin can prove itself by running.",
+   "triggers": [
+    "capability",
+    "bus"
+   ]
+  },
+  {
+   "admission_state": "DISCOVERED_NOT_ADMITTED",
+   "admitted": false,
+   "also_in_source_index": true,
+   "capability": false,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "entrypoint": "main",
    "id": "canonical.runtime.capability_composer_v1.hidden.v1",
    "invocation": "cli",
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
@@ -97513,7 +97573,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/swe_kernel/structured_morphism_abstraction_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "e1652fe8894aae07cd82c969ba2b6d16e9f460c3d1f6bfe4c651e06f679f8a8a",
+   "sha256": "e6643df3f5a06ae41ef8480726be514ea66257c37103f3ceb1e0df5957c7e638",
    "summary": "Structured morphism abstraction: the smallest change that makes a learned repair transfer.",
    "triggers": [
     "structured",
@@ -104312,6 +104372,29 @@
     "stamp",
     "answer",
     "receipt",
+    "intent"
+   ]
+  },
+  {
+   "admission_state": "DISCOVERED_NOT_ADMITTED",
+   "admitted": false,
+   "also_in_source_index": false,
+   "capability": false,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "entrypoint": "main",
+   "id": "canonical.tools.stamp_capability_bus_intent_20261124.hidden.v1",
+   "invocation": "cli",
+   "kind": "HARVESTED_EXECUTABLE_SURFACE",
+   "path": "canonical/tools/stamp_capability_bus_intent_20261124.py",
+   "route": "canonical/runtime/harvested_capability_runtime_v1.py",
+   "sha256": "7fa5f5ccbd1926a52c7026014c1ac6674da82f23d5c178acfa912e5e6e86e5a4",
+   "summary": "Stamp the recursive-OBS record and live route frontier for wave 47's capability bus.",
+   "triggers": [
+    "stamp",
+    "capability",
+    "bus",
     "intent"
    ]
   },
@@ -170284,10 +170367,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 2554,
+  "included_source_count": 2556,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "a85b49faa6b3e94e2c20342b5ad41f873be62c6d32ed24ecbe76cc6d4033f201"
+  "source_tree_digest": "c09a59427d5dbdcb9e7505e5dde98257d30c34274b9593d1259b29299aad07d4"
  },
  "research_index": [
   {
@@ -243658,6 +243741,42 @@
     "audit": 1,
     "capability": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/CAPABILITY_BUS_AUDIT_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/CAPABILITY_BUS_AUDIT_20261124_V1.json",
+   "schema": "BRAIN_CAPABILITY_BUS_V1_AUDIT",
+   "sha256": "96192dca1d8e32c4040b7449d7a07549dbbac391dd967dbdb125b63d979b673e",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "audit": 1,
+    "bus": 1,
+    "capability": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/verification/CAPABILITY_BUS_WAVE47_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/CAPABILITY_BUS_WAVE47_20261124_V1.json",
+   "schema": "BRAIN_CAPABILITY_BUS_WAVE47_V1",
+   "sha256": "eef7d37e0d1a4bbb9d3c9a70382b3128589448b680d8d7b668b96c1956f15642",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "bus": 1,
+    "capability": 1,
+    "v1": 1,
+    "wave47": 1
    }
   },
   {
@@ -330991,6 +331110,51 @@
    }
   },
   {
+   "action_id": "DECLARATION_IS_NOT_ADMISSION_20261124_V1",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/action_intents/DECLARATION_IS_NOT_ADMISSION_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/DECLARATION_IS_NOT_ADMISSION_20261124_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "f1c5b0599f4811be2ec06811618895cab532c546412c6d703252aa46a043f0e9",
+   "status": "SHIPPED",
+   "terms": {
+    "20261124": 1,
+    "25": 1,
+    "28": 2,
+    "admission": 1,
+    "admit_by_execution_not_by_declaration": 1,
+    "broken": 1,
+    "cannot": 1,
+    "code": 1,
+    "declaration": 2,
+    "declaration_is_not_admission_20261124_v1": 1,
+    "dispatch": 1,
+    "executed": 1,
+    "exist": 1,
+    "frontier": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "indistinguishable": 1,
+    "itself": 1,
+    "many": 2,
+    "measured": 1,
+    "moves": 1,
+    "never": 1,
+    "not": 1,
+    "one": 1,
+    "organ": 1,
+    "organs": 3,
+    "proof": 1,
+    "prove": 1,
+    "run": 1,
+    "shipped": 1,
+    "so": 1,
+    "state": 1,
+    "themselves": 1
+   }
+  },
+  {
    "action_id": "DEFER_FORM_FOR_ZERO_CANDIDATE_EMISSION_20261124_V41",
    "capability": false,
    "date": "2026-11-24",
@@ -363037,6 +363201,47 @@
     "valid_sha": 1,
     "verify_independent_pair": 1,
     "verify_receipt": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/capability_bus_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/capability_bus_v1.py",
+   "sha256": "bc7878218474d4f75e8ac795980e44414e3f6a5be91f5ee07bca022793d08bcd",
+   "summary": "A capability bus that admits a plugin only when the plugin can prove itself by running.",
+   "symbol_count": 8,
+   "symbols": [
+    "CapabilityBus",
+    "Loaded",
+    "PluginSpec",
+    "_Timeout",
+    "_alarm",
+    "_passing",
+    "main",
+    "scan"
+   ],
+   "terms": {
+    "admits": 1,
+    "alarm": 1,
+    "bus": 2,
+    "capability": 2,
+    "capabilitybus": 1,
+    "itself": 1,
+    "loaded": 1,
+    "main": 1,
+    "only": 1,
+    "passing": 1,
+    "plugin": 2,
+    "pluginspec": 1,
+    "prove": 1,
+    "running": 1,
+    "scan": 1,
+    "timeout": 1,
+    "v1": 1
    }
   },
   {
@@ -395807,23 +396012,51 @@
   },
   {
    "capability": false,
-   "classification": "UNPARSEABLE",
+   "classification": "ORPHAN",
    "executable_entry_point": false,
    "id": "source:canonical/runtime/osworld_v21_app_policy_overlay_v1.py",
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/osworld_v21_app_policy_overlay_v1.py",
-   "sha256": "d790ee3ef3344437ec6397c415928bb423d9e74cb82f394a1c294a997f236fbb",
-   "summary": "",
-   "symbol_count": 0,
-   "symbols": [],
+   "sha256": "a8afaed95f23a24eba737cfe1e43db087a0a27e08b4d43773f15ac1dba255f21",
+   "summary": "Conservative task-agnostic app-operation overlay for OSWorld 2.1.",
+   "symbol_count": 12,
+   "symbols": [
+    "_active_app_name",
+    "_app",
+    "_app_op",
+    "_calc",
+    "_code",
+    "_first_path",
+    "_impress",
+    "_num_after",
+    "_quoted",
+    "_vlc",
+    "_writer",
+    "decide"
+   ],
    "terms": {
-    "app": 1,
-    "osworld": 1,
-    "overlay": 1,
+    "2.1": 1,
+    "active_app_name": 1,
+    "app": 2,
+    "app-operation": 1,
+    "app_op": 1,
+    "calc": 1,
+    "code": 1,
+    "conservative": 1,
+    "decide": 1,
+    "first_path": 1,
+    "impress": 1,
+    "num_after": 1,
+    "osworld": 2,
+    "overlay": 2,
     "policy": 1,
+    "quoted": 1,
+    "task-agnostic": 1,
     "v1": 1,
-    "v21": 1
+    "v21": 1,
+    "vlc": 1,
+    "writer": 1
    }
   },
   {
@@ -440879,9 +441112,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/structured_morphism_abstraction_v1.py",
-   "sha256": "e1652fe8894aae07cd82c969ba2b6d16e9f460c3d1f6bfe4c651e06f679f8a8a",
+   "sha256": "e6643df3f5a06ae41ef8480726be514ea66257c37103f3ceb1e0df5957c7e638",
    "summary": "Structured morphism abstraction: the smallest change that makes a learned repair transfer.",
-   "symbol_count": 29,
+   "symbol_count": 30,
    "symbols": [
     "PHole",
     "PLiteral",

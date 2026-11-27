@@ -1,0 +1,120 @@
+{
+ "answer": "The unwired part is true and was measured; the wiring part is false. Of 28 declared organs, 28 import and 3 can prove themselves; 25 cannot, so a fail-closed bus admits 3 and refuses 25. Declaration is not admission. One of the two dead modules was revived; the other is blocked by a referee that has never been green.",
+ "base_commit": "a1287637ca220bd2903d0ef8383c3ee07d682c4d",
+ "bus": {
+  "admitted": [
+   "structured_morphism_abstraction_v1",
+   "single_experience_transfer_v1",
+   "concept_library_v1"
+  ],
+  "cpu_seconds": 0.2,
+  "declared": 28,
+  "dispatch_probe": {
+   "ok": true,
+   "trigger": "repair.abstract",
+   "verdict": "ADMITTED"
+  },
+  "import_ms_total": 214.76,
+  "manifest": "canonical/runtime/plugins/capability_bus_manifest_v1.json",
+  "refusal_probe": {
+   "error": "NO_ADMITTED_PLUGIN_FOR_TRIGGER:cua.osworld21",
+   "ok": false,
+   "trigger": "cua.osworld21"
+  },
+  "self_check_ms_total": 5.19,
+  "states": {
+   "ADMITTED": 3,
+   "UNVERIFIED": 25
+  },
+  "unverified_count": 25,
+  "wall_clock_s": 0.221
+ },
+ "cost": {
+  "model_calls": 0,
+  "network_calls": 0,
+  "parameters": 0
+ },
+ "date": "2026-11-24",
+ "next_measured_step": "give the five transfer-pipeline organs (settled_admission, rule_scope_learning, skill_recheck, invalidation_enforcement, what_the_operand_names_cost) a five-line executable proof each, then re-run this audit: the number to beat is 3 admitted of 28",
+ "plan_claims": {
+  "0_of_51_hard_51_and_43_no_edits": "UNVERIFIED",
+  "0_of_685_harvested": "UNVERIFIED (no artifact reproduced)",
+  "19_of_26_no_grounding": "UNVERIFIED",
+  "23_unwired_organs": "VERIFIED (27 named, 27 unwired from the model, 24 from the federation)",
+  "2_syntax_errors": "VERIFIED and repaired (5 existed; 2 in tree-authored code, 3 in a vendored snapshot)",
+  "4_hanging_root3_modules": "UNVERIFIED (39 root3_* modules exist; no >25 s import observed in this session)",
+  "7_488_of_7534_loc": "FAILED (7,653 lines; no such ceiling found)",
+  "96.3_percent_edits_commit_unique": "UNVERIFIED",
+  "frontier_numbers_agent_s4_21_3_pct_jitrl_strata_meme_forgeteval_dockerless": "UNVERIFIED this turn: not fetched, and the brief forbids carrying a number as fact without a source that matches version and scaffold",
+  "quixbugs_22_of_22_vs_1_of_40": "UNVERIFIED (no receipt found and not re-run this wave)"
+ },
+ "question": "Are the '23 high-leverage organs' actually unwired, and can they be wired by declaration alone?",
+ "schema": "BRAIN_CAPABILITY_BUS_WAVE47_V1",
+ "self_check": {
+  "command": "python3 -m unittest canonical.tests.test_capability_bus_v1",
+  "expect_exit": 0,
+  "tests": 13
+ },
+ "structural_audit": {
+  "front_door_loc": {
+   "brain_unified_model_v1.py": 7653,
+   "plan_claimed_bum_loc": "7,488 of a 7,534 ceiling",
+   "unified_hidden_capability_federation_v1.py": 7322,
+   "verdict": "FAILED: the file is 7653 lines, and no 7,534 ceiling exists in the verifier or the workflows"
+  },
+  "imports": {
+   "import_fail": 0,
+   "import_ok": 27,
+   "of_27_named": 27,
+   "total_import_ms": 1124,
+   "verdict": "VERIFIED: every named organ imports on this machine"
+  },
+  "self_check_presence": {
+   "of": 28,
+   "verdict": "MEASURED: 25 organs have no executable proof, so they cannot be admitted",
+   "with_public_self_check": 3
+  },
+  "syntax_errors": {
+   "corpus_scan": {
+    "files": 6508,
+    "seconds": 8.0
+   },
+   "found_before_repair": 5,
+   "left_as_found": [
+    {
+     "defect": "a parenthesised expression written with literal backslash-n escapes",
+     "measured": "gh run list --workflow verify-livebench-legacy-predecessor-compiler-v1.yml -L 12: all failure",
+     "path": "canonical/runtime/livebench_legacy_predecessor_compiler_audit_v1.py",
+     "why_not_repaired": "its only referee has failed on every run since 2026-10-04, including on main (gh run list: 15+ consecutive failures), because it downloads a HuggingFace dataset. Repairing the file turns a dormant workflow into a live red check, so the repair is deferred to a PR that can reach that dataset."
+    }
+   ],
+   "plan_claimed": "2 real SyntaxErrors at livebench_legacy_predecessor_compiler_audit_v1.py:139 and osworld_v21_app_policy_overlay_v1.py:152",
+   "remaining": 4,
+   "remaining_detail": "3 in a vendored upstream snapshot (stirrup_247f24d) plus the livebench audit left as found",
+   "repaired": [
+    {
+     "defect": "17 regex lines whose character classes contained both quote characters inside a double-quoted raw string",
+     "path": "canonical/runtime/osworld_v21_app_policy_overlay_v1.py",
+     "result": "compiles, imports, and routes 'set A1 to hello' to set_cell_value (pinned by a test)"
+    }
+   ]
+  },
+  "wiring_scan": {
+   "federated": {
+    "concept_library_v1": 4,
+    "operator_generalization_v1": 1,
+    "wave41_rung3_proposer_jitrl_continual_flywheel_v1": 12
+   },
+   "method": "grep -c <module-leaf> in each front door",
+   "of_27_named": 27,
+   "unwired_from_bum": 27,
+   "unwired_from_fed": 24,
+   "verdict": "VERIFIED"
+  }
+ },
+ "what_this_does_not_do": [
+  "it does not wire the 25 unverified organs: doing so would dispatch code that has never proved itself",
+  "it does not measure any benchmark or any task success",
+  "it does not change the front doors; the bus is a separate dispatcher and the model file is untouched"
+ ]
+}
