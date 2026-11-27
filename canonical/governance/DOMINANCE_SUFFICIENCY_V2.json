@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_DOMINANCE_SUFFICIENCY_V2",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__EXACT_CLAIM_BOUND_ROBUST_NONINFERIORITY_CERTIFICATE__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "supersedes_on_branch": [
+    "canonical/runtime/dominance_sufficiency_v1.py",
+    "canonical/runtime/dominance_first_learning_router_v1.py"
+  ],
+  "reason_for_v2": "V1 did not mechanically bind every receipt to the exact hypothesis set, configuration, target contract, metric, and numeric bound values, and its wrapper conflated a noninferiority certificate with execution authorization.",
+  "theorem": "IF THE LIVE WORLD SET IS SCOPE COMPLETE, THE TARGET CONTRACT COVERS ALL LOAD-BEARING ACCEPTANCE DIMENSIONS, THE EVALUATOR RELATION IS PROVED, AND ONE DURABLY BRAIN-OWNED CONFIGURATION HAS A CONSERVATIVE LOWER BOUND NOT BELOW THE CONSERVATIVE COMPARATOR UPPER BOUND IN EVERY LIVE WORLD, THEN HYPOTHESIS DISAMBIGUATION IS NOT REQUIRED TO CERTIFY NONINFERIORITY FOR THAT EXACT TARGET CONTRACT AND METRIC.",
+  "exact_bindings_required": [
+    "TARGET_CONTRACT_SHA256_AND_METRIC_ID",
+    "CONTENT_ADDRESSED_TARGET_CONTRACT_RECEIPT_WITH_LOAD_BEARING_DIMENSION_COMPLETENESS",
+    "CONTENT_ADDRESSED_SCOPE_COMPLETE_LIVE_HYPOTHESIS_SET_RECEIPT_BOUND_TO_EXACT_LIVE_SET_DIGEST",
+    "CONTENT_ADDRESSED_DONOR_INDEPENDENT_OWNERSHIP_RECEIPT_BOUND_TO_EXACT_CONFIGURATION",
+    "CONTENT_ADDRESSED_BOUND_RECEIPT_PER_CONFIGURATION_AND_HYPOTHESIS",
+    "BOUND_RECEIPT_MUST_MATCH_EXACT_BRAIN_LOWER_COMPARATOR_UPPER_TARGET_CONTRACT_AND_METRIC",
+    "BOUND_RECEIPT_MUST_PROVE_EVALUATOR_RELATION_AND_SCOPE_COMPLETENESS"
+  ],
+  "controller_order_if_verified": [
+    "TRY_EXACTLY_BOUND_DOMINANCE_SUFFICIENCY",
+    "IF_PASS_STOP_INFORMATION_ACQUISITION_FOR_THIS_DECISION_BUT_KEEP_EXECUTION_AUTHORITY_SEPARATE",
+    "IF_OPEN_FALL_BACK_TO_EXISTING_V3_DECISION_SUFFICIENCY_AND_DISCRIMINATION",
+    "IF_INVALID_FAIL_CLOSED"
+  ],
+  "runtime": {
+    "binding": "canonical/runtime/dominance_binding_v2.py",
+    "verifier": "canonical/runtime/dominance_sufficiency_v2.py",
+    "router": "canonical/runtime/dominance_first_learning_router_v2.py"
+  },
+  "tests": [
+    "canonical/tests/test_dominance_sufficiency_v2.py",
+    "canonical/tests/test_dominance_first_learning_router_v2.py"
+  ],
+  "falsification_history": {
+    "v1_defect_record": "canonical/action_intents/2026-10-06_DOMINANCE_V1_REPAIR_REQUIRED.json",
+    "v1_credit": 0,
+    "v1_execution_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_CURRENT_TERMINAL_PREDICATE_IS_CLOSED_BY_THIS_CONTROLLER.",
+    "NO_EXECUTION_AUTHORITY_FROM_A_DOMINANCE_CERTIFICATE.",
+    "NO_PROMOTION_AUTHORITY.",
+    "NO_FRESH_REALITY_AUTHORITY.",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT.",
+    "NO_CLAIM_A_SCOPE_COMPLETE_LIVE_WORLD_SET_EXISTS_FOR_EVERY_TASK.",
+    "NO_CLAIM_AN_OBJECTIVE_CEILING_TRANSPORTS_TO_RELATIVE_ELO_WITHOUT_A_VERIFIED_RELATIVE_SCORE_BRIDGE."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}

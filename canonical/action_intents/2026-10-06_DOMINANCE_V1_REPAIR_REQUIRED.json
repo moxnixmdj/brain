@@ -1,0 +1,9 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "DOMINANCE-V1-REPAIR-REQUIRED-20261006",
+  "status": "ZERO_CREDIT_REPAIR_REQUIRED",
+  "branch": "feature/dominance-sufficiency-v1-20261006",
+  "reason": "V1 receipts are not mechanically bound to every load-bearing claim coordinate.",
+  "execution_authority": false,
+  "promotion_authority": false
+}
