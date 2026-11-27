@@ -33051,12 +33051,12 @@
   "routing_tokens": 4116,
   "skills": 18,
   "source_index_entry_points": 575,
-  "source_index_modules": 2324
+  "source_index_modules": 2325
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "77401e7d444cc77cb18e49bf24701c0e3b6d4fad7eb335b5aaebfa26b4656465"
+  "value": "d76916ad5285c0ac2c3a71b8222644df13478908487fe5d164c03c3f09cffda1"
  },
  "engines": [
   {
@@ -374988,7 +374988,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/epistemic_issue_reproducer_v1.py",
-   "sha256": "78c7ffc9f9e90053b3cf832b9156e0f9228d2e40c9c4fa927587f031a619be1f",
+   "sha256": "d9d38bad7ddd1cd1fe8b951afd6cbef84d945ec93a4b438e0aec0fa25b1cc5d5",
    "summary": "Zero-LLM, Zero-Weight Polyglot Epistemic Issue-to-Reproducer & Blind SWE Resolver (v1).",
    "symbol_count": 30,
    "symbols": [
@@ -434502,6 +434502,48 @@
     "thread-local": 1,
     "v1": 1,
     "verification": 1,
+    "zero-llm": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/swe_kernel/container_swe_patch_solver_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/swe_kernel/container_swe_patch_solver_v1.py",
+   "sha256": "9ca8367a39035dc1becdb056da8b549ba49617195aecae468c5ba49e20b7cfac",
+   "summary": "Container-native zero-LLM Python SWE patch solver backed by ContainerExecBridge.",
+   "symbol_count": 8,
+   "symbols": [
+    "_enclosing_function",
+    "_extract_test_imported_symbols",
+    "_find_symbol_sites",
+    "_generate_python_candidates_at_site",
+    "_get_transfer_store",
+    "_parse_traceback_sites",
+    "_transfer_candidates_at_line",
+    "solve_python_with_container_bridge"
+   ],
+   "terms": {
+    "backed": 1,
+    "container": 1,
+    "container-native": 1,
+    "containerexecbridge": 1,
+    "enclosing_function": 1,
+    "extract_test_imported_symbols": 1,
+    "find_symbol_sites": 1,
+    "generate_python_candidates_at_site": 1,
+    "get_transfer_store": 1,
+    "parse_traceback_sites": 1,
+    "patch": 2,
+    "python": 1,
+    "solve_python_with_container_bridge": 1,
+    "solver": 2,
+    "swe": 2,
+    "transfer_candidates_at_line": 1,
+    "v1": 1,
     "zero-llm": 1
    }
   },

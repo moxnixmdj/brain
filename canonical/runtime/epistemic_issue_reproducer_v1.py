@@ -2194,15 +2194,29 @@ def solve_issue_from_description(
         )
 
         if repro["language"] == "python":
-            from canonical.runtime import causal_angelic_swe_engine_v1 as PY_SWE
+            from canonical.swe_kernel import container_exec_bridge_v1 as _ce_bridge
 
             solve_targets = list(repro_rels) + [tf for tf in pre_reg_tests if tf not in repro_rels]
-            solve_res = PY_SWE.solve_repository(
-                ws,
-                solve_targets,
-                python_exe=py,
-                timeout_s=max(15.0, timeout_s - (time.monotonic() - t0)),
-            )
+            rem_s = max(15.0, timeout_s - (time.monotonic() - t0))
+            if _ce_bridge.get_active_bridge() is not None:
+                from canonical.swe_kernel import container_swe_patch_solver_v1 as _ce_py_solver
+
+                solve_res = _ce_py_solver.solve_python_with_container_bridge(
+                    ws,
+                    solve_targets,
+                    python_src_root=repo_index.python_src_root or "",
+                    referenced_symbols=all_ref_syms,
+                    timeout_s=rem_s,
+                )
+            else:
+                from canonical.runtime import causal_angelic_swe_engine_v1 as PY_SWE
+
+                solve_res = PY_SWE.solve_repository(
+                    ws,
+                    solve_targets,
+                    python_exe=py,
+                    timeout_s=rem_s,
+                )
         else:
             from canonical.runtime import multilang_causal_swe_engine_v1 as ML_SWE
 

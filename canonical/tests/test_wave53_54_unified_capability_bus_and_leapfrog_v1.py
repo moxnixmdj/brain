@@ -855,6 +855,29 @@ class TestWave53To54UnifiedCapabilityBusAndLeapfrog(unittest.TestCase):
             self.assertFalse((cdir / "temp_probe.py").exists())
             self.assertEqual(br.calls, 1)
 
+            # 7. End-to-end Stage-2 Python repair through ContainerExecBridge (off-by-one boundary fix!)
+            from canonical.swe_kernel import container_swe_patch_solver_v1 as csolver
+
+            (cdir / "limit.py").write_text(
+                "def within_cap(x, cap):\n    return x < cap\n",
+                encoding="utf-8",
+            )
+            (cdir / "test_limit_repro.py").write_text(
+                "from limit import within_cap\n\ndef test_cap_inclusive():\n    assert within_cap(5, 5) is True\n    assert within_cap(6, 5) is False\n",
+                encoding="utf-8",
+            )
+            with ceb.activate_bridge(br):
+                sres = csolver.solve_python_with_container_bridge(
+                    cdir,
+                    ["test_limit_repro.py"],
+                    timeout_s=20.0,
+                )
+            self.assertTrue(sres["verified"], f"Container bridge Python solver failed: {sres}")
+            self.assertEqual(sres["winner"]["file"], "limit.py")
+            self.assertIn("<=", sres["winner"]["patched_source"])
+            # Container repo must STILL be untouched until agent uploads final winner!
+            self.assertEqual((cdir / "limit.py").read_text(encoding="utf-8"), "def within_cap(x, cap):\n    return x < cap\n")
+
 
 if __name__ == "__main__":
     unittest.main()
