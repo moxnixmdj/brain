@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_DISTRIBUTIONAL_PREORDER_WOLFRAM_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_WOLFRAM_CORE_PROOF_PASS__FIRST_ORDERING_LEMMA_ONLY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/TERMINAL_DISTRIBUTIONAL_PREORDER_WELL_FORMED_20261006_V1.json",
+    "git_blob_sha": "20586d7b7c2933fb00052bcd51daec04325db770"
+  },
+  "independent_provider": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "checked_expressions": [
+      "FullSimplify[Implies[a >= b && b >= c, a >= c], Element[{a,b,c}, Reals]]",
+      "BooleanConvert[Implies[((! bb) || aa) && ((! cc) || bb), ((! cc) || aa)], DNF]",
+      "BooleanConvert[(! aa) || aa, DNF]"
+    ],
+    "result": [
+      true,
+      true,
+      true
+    ]
+  },
+  "verified_core": [
+    "REAL_VALUED_EVALUATOR_DOMINANCE_IS_TRANSITIVE_COORDINATEWISE",
+    "BOOLEAN_HARD_CONSTRAINT_PRESERVATION_IS_REFLEXIVE",
+    "BOOLEAN_HARD_CONSTRAINT_PRESERVATION_IS_TRANSITIVE",
+    "INTERSECTION_OF_THE_COORDINATE_RELATIONS_IS_A_PREORDER",
+    "MUTUAL_PREORDER_DOMINANCE_INDUCES_AN_EQUIVALENCE_RELATION",
+    "QUOTIENT_BY_MUTUAL_DOMINANCE_INDUCES_A_PARTIAL_ORDER",
+    "NO_GLOBAL_SCALAR_TRADEOFF_WEIGHT_IS_REQUIRED_FOR_WELL_FORMEDNESS"
+  ],
+  "deduction": "THE_FIRST_CANONICAL_SUCCESSOR_LEMMA_UTILITY_AND_EQUAL_OR_BETTER_ORDERING_WELL_FORMED_HAS_A_SOUND_GENERIC_MATHEMATICAL_CONSTRUCTION_ONCE_THE_CONTEXT_SPECIFIC_EVALUATOR_AND_HARD_CONSTRAINT_FAMILIES_ARE_GIVEN",
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_EVALUATOR_FAMILY_IS_COMPLETE",
+    "NO_CLAIM_THE_CONTEXT_DOMAIN_IS_COMPLETE",
+    "NO_CLAIM_TARGET_UTILITY_QUOTIENT_COMPLETENESS",
+    "NO_CLAIM_BRAIN_DOMINANCE",
+    "NO_OPEN32_DELETION",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "classification": "THEOREM_VERIFICATION",
+    "terminal_progress_credit": false,
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0
+  }
+}
