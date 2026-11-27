@@ -1,0 +1,165 @@
+{
+  "schema": "PROJECT_BRAIN_VISION_NONCHART_QWEN3VL4B_DIRECT_BENCHMARK_BINDING_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FOUR_OF_FOUR_NONCHART_LEAVES_HAVE_EXACT_4B_DIRECT_PUBLIC_BENCHMARK_WITNESSES__MATCHED_OPUS_COMPARATOR_AND_BRAIN_OWNERSHIP_STILL_OPEN__ZERO_CREDIT",
+  "objective": "Replace the live Vision Root3 four-leaf semantic-route search with exact public direct benchmark witnesses for the already-pinned Qwen3-VL-4B-Instruct acquisition subject, while preserving every acceptance, comparator, ownership, and fresh-reality gate.",
+  "target_predicate": "VISION_DENSE_NONCHART_SCOPE",
+  "authority": {
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "terminal_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+      "exact_acceptance_literal": "dense-document non-chart leaves require matched direct scope audit if not exercised by Chartography"
+    },
+    "four_leaf_partition": {
+      "path": "canonical/governance/VISION_NONCHART_FOUR_LEAF_PARTITION_20261005_V1.json",
+      "git_blob_sha": "a95f412b365c8927547477232e8516c81e16abaf",
+      "leaves": [
+        "dense documents",
+        "screenshots",
+        "diagrams",
+        "complex real-world imagery"
+      ]
+    },
+    "exact_subject_manifest": {
+      "path": "canonical/governance/CHARTOGRAPHY_QWEN3_VL4B_EXACT_ARTIFACT_MANIFEST_20261005_V1.json",
+      "git_blob_sha": "fc60bd458243e9ce721ca29fb986f067c0b70417",
+      "model": "Qwen/Qwen3-VL-4B-Instruct",
+      "revision": "ebb281ec70b05090aa6165b016eac8ec08e71b17",
+      "license": "apache-2.0"
+    },
+    "native_image_input_verification": {
+      "path": "canonical/verification/CHARTOGRAPHY_QWEN3_VL4B_PUBLIC_SOURCE_VERIFICATION_20261005_V1.json",
+      "git_blob_sha": "22dc5bddb1b5144c601d65431494c0eab556b874"
+    }
+  },
+  "primary_public_evidence": {
+    "qwen3_vl_technical_report": {
+      "title": "Qwen3-VL Technical Report",
+      "arxiv_id": "2511.21631",
+      "source_url": "https://arxiv.org/abs/2511.21631",
+      "table": "Table 4: Performance of small-sized Qwen3-VL models and GPT-5-nano on visual benchmarks",
+      "subject_column": "Qwen3-VL 4B / instruct",
+      "publication_date": "2025-11-26"
+    },
+    "ai2d_scope_definition": {
+      "source_url": "https://registry.opendata.aws/allenai-diagrams/",
+      "observed": "AI2D contains 4,817 illustrative diagrams for research on diagram understanding and associated question answering."
+    },
+    "realworldqa_scope_definition": {
+      "repository": "QwenLM/Qwen3-VL",
+      "path": "evaluation/RealWorldQA/README.md",
+      "git_blob_sha": "eb2c120721bde7a60f0ad78591231e4a806da13e",
+      "observed": "RealWorldQA is a real-world visual question answering benchmark with 700+ high-quality VQA samples covering various real-world scenarios."
+    }
+  },
+  "direct_leaf_witnesses": [
+    {
+      "leaf": "dense documents",
+      "benchmark_witnesses": [
+        {
+          "benchmark": "DocVQA_test",
+          "score": 95.3,
+          "metric": "reported Table 4 score",
+          "subject": "Qwen3-VL-4B-Instruct"
+        },
+        {
+          "benchmark": "MMLongBenchDoc",
+          "score": 43.5,
+          "metric": "reported Table 4 score",
+          "subject": "Qwen3-VL-4B-Instruct"
+        }
+      ],
+      "semantic_binding": "DIRECT_DOCUMENT_QUESTION_ANSWERING_PLUS_LONG_DOCUMENT_UNDERSTANDING"
+    },
+    {
+      "leaf": "screenshots",
+      "benchmark_witnesses": [
+        {
+          "benchmark": "ScreenSpot Pro",
+          "score": 59.5,
+          "metric": "reported Table 4 score",
+          "subject": "Qwen3-VL-4B-Instruct"
+        }
+      ],
+      "semantic_binding": "DIRECT_GUI_PERCEPTION_AND_GROUNDING_OVER_INTERFACE_IMAGES"
+    },
+    {
+      "leaf": "diagrams",
+      "benchmark_witnesses": [
+        {
+          "benchmark": "AI2D_w.M.",
+          "score": 84.1,
+          "metric": "reported Table 4 score",
+          "subject": "Qwen3-VL-4B-Instruct"
+        }
+      ],
+      "semantic_binding": "DIRECT_SCIENTIFIC_DIAGRAM_UNDERSTANDING_AND_QUESTION_ANSWERING"
+    },
+    {
+      "leaf": "complex real-world imagery",
+      "benchmark_witnesses": [
+        {
+          "benchmark": "RealWorldQA",
+          "score": 70.9,
+          "metric": "reported Table 4 score",
+          "subject": "Qwen3-VL-4B-Instruct"
+        }
+      ],
+      "semantic_binding": "DIRECT_REAL_WORLD_VISUAL_QUESTION_ANSWERING"
+    }
+  ],
+  "reduction": {
+    "before": {
+      "direct_leaf_benchmark_witness_count": 0,
+      "residual_leaf_count": 4,
+      "state": "GENERIC_EXISTING_RECEIPT_REUSE_FIXED_POINT"
+    },
+    "after": {
+      "exact_subject_direct_leaf_benchmark_witness_count": 4,
+      "semantically_unwitnessed_leaf_count": 0,
+      "matched_opus55_comparator_bound": false,
+      "brain_internalization_or_ownership_bound": false,
+      "acceptance_closed": false
+    },
+    "deleted_search_actions": [
+      "SEARCH_FOR_ANY_DIRECT_PUBLIC_QWEN3_VL4B_DENSE_DOCUMENT_WITNESS",
+      "SEARCH_FOR_ANY_DIRECT_PUBLIC_QWEN3_VL4B_SCREENSHOT_OR_GUI_WITNESS",
+      "SEARCH_FOR_ANY_DIRECT_PUBLIC_QWEN3_VL4B_DIAGRAM_WITNESS",
+      "SEARCH_FOR_ANY_DIRECT_PUBLIC_QWEN3_VL4B_COMPLEX_REAL_WORLD_IMAGE_WITNESS"
+    ],
+    "remaining_load_bearing_cut": [
+      "BIND_MATCHED_OPUS55_COMPARATOR_OR_STRONGER_SCOPE_COMPLETE_RELATION_FOR_THE_FOUR_LEAVES",
+      "BIND_BRAIN_INTERNALIZATION_OWNERSHIP_OR_AN_ADMISSIBLE_STRONGER_OWNED_SUBJECT",
+      "INDEPENDENTLY_VERIFY_PRIMARY_SOURCE_ROW_AND_COLUMN_BINDINGS",
+      "PROMOTE_ONLY_IF_THE_FROZEN_ACCEPTANCE_PROTOCOL_IS_SATISFIED"
+    ],
+    "root3_saturation_resume_condition_triggered": "NEW_VERIFIED_SEMANTIC_BINDING_CHANGES_A_LIVE_TARGET_RESIDUAL"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_QWEN3_VL4B_IS_NONINFERIOR_TO_OPUS55_ON_ANY_OF_THE_FOUR_LEAVES",
+    "NO_CLAIM_THE_PUBLIC_SCORES_ARE_MATCHED_OPUS55_COMPARATOR_SCORES",
+    "NO_CLAIM_MODEL_WEIGHTS_ARE_CURRENTLY_BRAIN_INTERNALIZED_OR_OWNED",
+    "NO_CLAIM_VISION_DENSE_NONCHART_SCOPE_IS_CLOSED",
+    "NO_ROOT1_RECLASSIFICATION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
