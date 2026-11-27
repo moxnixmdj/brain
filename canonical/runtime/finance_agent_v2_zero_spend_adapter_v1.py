@@ -115,7 +115,18 @@ class _GuardedRequestContext:
         except BaseException as exc:
             await self._state.observe(self._provider_id, self._call_id, None, exc)
             raise
-        await self._state.observe(self._provider_id, self._call_id, result, None)
+        try:
+            await self._state.observe(self._provider_id, self._call_id, result, None)
+        except BaseException:
+            # If the post-response observer fails closed (quota/payment/overage/cost
+            # signal, malformed evidence, etc.), exit the already-entered provider
+            # response context before propagating the guard failure. Otherwise the
+            # abort path can leak an open HTTP response/connection.
+            exc = __import__("sys").exc_info()
+            try:
+                await self._inner.__aexit__(*exc)
+            finally:
+                raise
         return result
 
     async def __aexit__(self, exc_type: Any, exc: BaseException | None, tb: Any) -> Any:

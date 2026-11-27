@@ -39,23 +39,30 @@ class FakeContext:
     def __init__(self, result=None, exc=None):
         self.result = result if result is not None else object()
         self.exc = exc
+        self.exit_calls = 0
     async def __aenter__(self):
         if self.exc:
             raise self.exc
         return self.result
     async def __aexit__(self, exc_type, exc, tb):
+        self.exit_calls += 1
         return False
 
 
 class FakeSession:
     get_calls = []
     post_calls = []
+    last_context = None
     def get(self, url, *args, **kwargs):
         self.__class__.get_calls.append(str(url))
-        return FakeContext(result={"url": str(url)})
+        ctx = FakeContext(result={"url": str(url)})
+        self.__class__.last_context = ctx
+        return ctx
     def post(self, url, *args, **kwargs):
         self.__class__.post_calls.append(str(url))
-        return FakeContext(result={"url": str(url)})
+        ctx = FakeContext(result={"url": str(url)})
+        self.__class__.last_context = ctx
+        return ctx
 
 
 class FakeTavilyClient:
@@ -84,10 +91,12 @@ class Tests(unittest.IsolatedAsyncioTestCase):
         FakeSession.post_calls = []
         self.mod = tools_module()
         self.web = FakeWebSearch()
+        self.snapshots = {p: snap(p) for p in ("tavily", "sec_api", "tiingo")}
+        FakeSession.last_context = None
         self.out = a.install_adapter(
             tools_module=self.mod,
             tool_instances=[self.web],
-            snapshots={p: snap(p) for p in ("tavily", "sec_api", "tiingo")},
+            snapshots=self.snapshots,
             outcome_observer=safe_outcome,
         )
         self.state = self.out["state"]
@@ -177,6 +186,42 @@ class Tests(unittest.IsolatedAsyncioTestCase):
         after_get = self.mod.aiohttp.ClientSession.get
         self.assertIsNot(before_get, after_get)
         self.out = {"restore": lambda: None}
+
+
+    async def test_invalidated_snapshot_blocks_before_tavily_provider_call(self):
+        self.snapshots["tavily"]["paid_fallback_enabled"] = True
+        with self.assertRaises(g.ZeroSpendBlocked):
+            await self.web.client.search(query="must-not-run")
+        self.assertEqual(self.web.client.calls, 0)
+        self.assertEqual(self.state.ledger("tavily").attempted_calls, 0)
+
+    async def test_http_context_is_closed_when_post_response_observer_fails_closed(self):
+        async def quota_trip(provider_id, call_id, result, exc):
+            out = dict(safe_outcome(provider_id, call_id, result, exc))
+            if provider_id == "sec_api":
+                out["quota_exhausted"] = True
+            return out
+        self.out["restore"]()
+        self.out = a.install_adapter(
+            tools_module=self.mod,
+            tool_instances=[self.web],
+            snapshots={p: snap(p) for p in ("tavily", "sec_api", "tiingo")},
+            outcome_observer=quota_trip,
+        )
+        self.state = self.out["state"]
+        session = self.mod.aiohttp.ClientSession()
+        with self.assertRaises(g.ZeroSpendBlocked):
+            async with session.post("https://api.sec-api.io/full-text-search") as _:
+                pass
+        self.assertIsNotNone(FakeSession.last_context)
+        self.assertEqual(FakeSession.last_context.exit_calls, 1)
+        self.assertEqual(self.state.ledger("sec_api").guard_trip_count, 1)
+
+    async def test_host_suffix_spoof_is_not_reclassified_as_provider_call(self):
+        session = self.mod.aiohttp.ClientSession()
+        async with session.post("https://api.sec-api.io.evil.example/full-text-search") as _:
+            pass
+        self.assertEqual(self.state.ledger("sec_api").attempted_calls, 0)
 
 
 class OriginalTavilyTool:
