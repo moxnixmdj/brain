@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_P1_V4_DIAGNOSIS_COUNTEREXAMPLE_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_14_BRAIN_BLOBS__V4_DROP_PROVENANCE_AND_UNFALSIFIABLE_DIAGNOSIS_COUNTEREXAMPLES_REPRODUCED__P1_QUARANTINE_MUST_REMAIN__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "brain_pull_request": 943,
+  "brain_branch": "p1-v4-unfalsifiable-diagnosis-counterexample-v1-20261002",
+  "exact_brain_blobs": {
+    "canonical/runtime/p1_composite_proof_role_verifier_v1.py": "8c19c94413ac4a4fbabaabc4253c2ff53275dd18",
+    "canonical/tests/test_p1_composite_proof_role_verifier_v1.py": "b7a03a08cbba9086ec3cf7ca2936680fe4bb1358",
+    "canonical/governance/P1_COMPOSITE_PROOF_ROLE_RECONCILIATION_V1.json": "1da223b8133e83d3ba1b238012593b39dcae91f9",
+    "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json": "8703c6aa08227467a619a7ae90d0d61f8e54da39",
+    "canonical/verification/TRAJECTORY_TYPED_IR_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "ee69a93c45a2b16676c49bfb0a01749a5c4ea1e2",
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v4.py": "0c386e6b78a8e97e9c1944e63600047bc4e2849b",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v4.py": "6e1dfaa6b63fc629d55d07b2361bf625f11a5ce3",
+    "canonical/tests/test_trajectory_failure_typed_ir_v4.py": "70a224fec7341775e46bb1bfb8bd2d33b3c355b3",
+    "canonical/runtime/p1_terminal_execution_scope_audit_v1.py": "6793cc98fa8ef767cb6ec8fdd33d8e7d50b2833d",
+    "canonical/governance/TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1.json": "a1630299d29ea9c07e55b4314c07ddb3228c3287",
+    "canonical/runtime/terminal_parent_portfolio_runner_v1.py": "431b62e503a6a179f19339ae5e0ab6948424a650",
+    "canonical/runtime/contract_native_proof_suites.py": "0210790c7dd705ef328e1b55d529a30c5c6c3337",
+    "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+    "canonical/governance/P1_TERMINAL_EXECUTION_SCOPE_MISMATCH_QUARANTINE_V1.json": "f4fe68c78ccdf5392b5e24519ae9a57e620221a7"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 960,
+    "pull_request_head": "c5a2fb2e945f63f01e514623d2ce6178ff865eb7",
+    "merge_commit": "413bc00518f91acc92aaaacd02aa11239d2c577c",
+    "workflow_name": "Verify P1 V4 diagnosis counterexample v1",
+    "workflow_run_id": 37017012869,
+    "workflow_job_id": 110870256599,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_14_BRAIN_SOURCE_BLOBS_MIRRORED",
+    "V4_DROP_PROVENANCE_MUTATION_SURVIVES_EXACT_FROZEN_V4_SCORER",
+    "V4_UNFALSIFIABLE_DIAGNOSIS_MUTATION_SURVIVES_EXACT_FROZEN_V4_SCORER_AFTER_ROLE_REASSIGNMENT",
+    "CORRECTED_ROLE_ASSIGNMENT_IS_NOT_EQUIVALENT_TO_MUTATION_KILL",
+    "P1_COMPOSITE_CANDIDATE_REMAINS_FAIL_CLOSED",
+    "P1_QUARANTINE_LIFT_INELIGIBLE",
+    "ZERO_TERMINAL_REPLAY",
+    "ZERO_NEW_ACCEPTANCE_CREDIT"
+  ],
+  "disposition": {
+    "p1_execution_scope_quarantine": "MUST_REMAIN",
+    "whole_p1_contract_restored": false,
+    "recovery_acceptance_transport": "FORBIDDEN",
+    "minimum_repair": [
+      "MAKE_SUPPORTING_RECEIPTS_LOAD_BEARING_UNDER_DROP_PROVENANCE_OR_BIND_AN_EXISTING_PREDECLARED_COMPONENT_THAT_ALREADY_DOES",
+      "MAKE_UNFALSIFIABLE_DIAGNOSIS_FAIL_CLOSED_IN_AN_EXACT_PREDECLARED_BOUND_COMPONENT__ROLE_REASSIGNMENT_ALONE_IS_INSUFFICIENT",
+      "REVERIFY_ALL_NINE_FROZEN_MUTATIONS_BY_EXECUTABLE_KILL_NOT_ROLE_MEMBERSHIP"
+    ]
+  },
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false
+}
