@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_P3_CEGAR_SELECTED_TRUTH_BRIDGE_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_8_OF_8__FULL_EXACT_GIT_BLOB_CHAIN_20_OF_20__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "branch": "research/p3-cegar-selected-truth-bridge-20261008-v1",
+    "new_files": {
+      "canonical/runtime/selected_semantic_predicate_identity_v1.py": "44998c7c8bf2896f0fa32ef040c999a5abab05f1",
+      "canonical/runtime/p3_cegar_selected_truth_bridge_v1.py": "23ffdb4b2f7afd1a5e349bb4b5af34367d8e57a3",
+      "canonical/tests/test_p3_cegar_selected_truth_bridge_v1.py": "37f3c052f9f95409fe73d72c5625df6743fe5c78"
+    },
+    "upstream_cegar": {
+      "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py": "c81746a4e9c9bc48a1aafe22cf854632f81698eb"
+    }
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "workspace": "/home/sprite/p3_cegar_truth_bridge_verify_v1"
+  },
+  "verification": {
+    "tests_run": 8,
+    "tests_passed": 8,
+    "failures": 0,
+    "errors": 0,
+    "full_exact_git_blob_chain_verified": 20,
+    "proved": [
+      "STABLE_PRECOMMITMENT_PREDICATE_IDENTITY_MATCHES_THE_CURRENT_TRUTH_CHECKER_ACROSS_DIFFERENT_CASE_VALUES",
+      "TRUE_SELECTED_PREDICATE_RECOMPILES_TO_THE_TRUE_BRANCH_POLICY",
+      "FALSE_SELECTED_PREDICATE_RECOMPILES_TO_THE_FALSE_BRANCH_POLICY",
+      "CALLER_ALIAS_OR_WRONG_SYMBOLIC_FORMULA_CANNOT_INHERIT_CHECKER_TRUTH",
+      "CHANGED_POLICY_SOURCE_INVALIDATES_THE_PRECOMMITTED_PREDICATE_IDENTITY",
+      "CALLER_SUPPLIED_TRUTH_IS_REJECTED",
+      "CALLER_SUPPLIED_SEMANTIC_REFINEMENTS_ARE_FORBIDDEN",
+      "COMMON_POLICY_STOPS_WITHOUT_CONSUMING_ANY_SEMANTIC_OBSERVATION"
+    ],
+    "falsification_history": {
+      "first_replay_passed": false,
+      "first_replay_failure": "STALE_SELECTED_SEMANTIC_TRUTH_CERTIFICATE_DEPENDENCY_IN_THE_EXISTING_REPLAY_WORKSPACE_CAUSED_PREDICATE_ID_MISMATCH",
+      "repair": "REFRESH_ENTIRE_SEMANTIC_PROOF_CHAIN_TO_EXACT_CURRENT_MAIN_BLOBS",
+      "post_refresh_result": "PASS_8_OF_8",
+      "interpretation": "DEPENDENCY_BYTES_ARE_LOAD_BEARING_AND_MUST_BE_CONTENT_BOUND"
+    }
+  },
+  "current_effect": {
+    "selected_discriminator_query_selection_mechanics": true,
+    "stable_precommitment_predicate_identity": true,
+    "selected_discriminator_truth_binding_for_checked_raw_defined_term_fragment": true,
+    "truth_bound_cegar_recompilation_to_authenticated_branch_policy": true,
+    "source_authorization_verified": false,
+    "global_policy_adequacy_cover_complete": false,
+    "u_empty": false,
+    "terminal": false
+  },
+  "next_residual": "AUTHORITATIVE_SOURCE_BINDING_FOR_THE_SELECTED_POLICY_CHANGING_FACT__PLUS_SCOPE_COMPLETE_AUTHENTICATED_POLICY_ADEQUACY_COVER_WHERE_NOT_ALREADY_PROVED",
+  "hard_nonclaims": [
+    "NO_CLAIM_ARBITRARY_SELECTED_DISCRIMINATORS_ARE_PROVABLE",
+    "NO_CLAIM_THE_POLICY_OR_FACT_SOURCE_BYTES_ARE_AUTHORIZED_FOR_THE_LIVE_TASK",
+    "NO_CLAIM_SCOPE_COMPLETE_POLICY_ADEQUACY_COVER_EXISTS_FOR_ALL_REMAINING_CONTEXTS",
+    "NO_U_EMPTY_DB_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}

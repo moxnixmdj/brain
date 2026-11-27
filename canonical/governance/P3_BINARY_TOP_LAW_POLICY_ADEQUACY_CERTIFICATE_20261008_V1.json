@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_POLICY_ADEQUACY_CERTIFICATE_V1",
+  "date": "2026-10-08",
+  "policy_id": "P3_BOUND_BINARY_GROUNDED_DECISION_TOP_LAW_POLICY_V1",
+  "policy_condition": {
+    "op": "ATOM",
+    "id": "P3_BOUND_BINARY_EXPLICIT_TOP_LAW_MEMBERSHIP_V1"
+  },
+  "policy_condition_sha256": "8ba783f39125a136ef15538fa2492489cfb048931e40f0d1aeebfc3c8470deef",
+  "adequacy_proved": true,
+  "brain_owned": true,
+  "load_bearing_constraints_preserved": true,
+  "exact_policy": {
+    "path": "canonical/runtime/p3_binary_decision_grounded_expression_v1.py",
+    "git_blob_sha": "590cdc4e7f5a513d0e40bb31afed20df61826bad"
+  },
+  "adequacy_region": {
+    "id": "P3_BOUND_BINARY_REAL_CONTEXT_GROUNDED_DECISION_TOP_LAW_V1",
+    "path": "canonical/governance/P3_BOUND_BINARY_REAL_CONTEXT_TOP_LAW_REGION_20261008_V1.json",
+    "git_blob_sha": "e367ff0a5734e2430b0b5476bf073b4688c410e1"
+  },
+  "region_verifier": {
+    "path": "canonical/runtime/p3_binary_explicit_top_law_region_verifier_v1.py",
+    "git_blob_sha": "da871727e5939b5c190e9c383d6c361642168b80"
+  },
+  "independent_region_verification": {
+    "path": "canonical/verification/P3_BINARY_EXPLICIT_TOP_LAW_REGION_TWO_SPRITE_VERIFICATION_20261008_V1.json",
+    "git_blob_sha": "05dd31a787eccec0311c8abd26f21c624d4deb66"
+  },
+  "membership_recognizer": {
+    "path": "canonical/runtime/p3_binary_explicit_contract_membership_v1.py",
+    "git_blob_sha": "ca24d891210fb6d885a959c26a9da3451a8b67c7"
+  },
+  "meaning": "WHEN_THE_UPSTREAM_ROOT_TASK_BYTES_ARE_RECOMPUTED_TO_PASS_P3_BINARY_EXPLICIT_CONTRACT_MEMBERSHIP_V1__THE_EXACT_BRAIN_OWNED_GROUNDED_BINARY_DECISION_POLICY_SATISFIES_THE_BOUND_EVIDENCE_TO_AUDIENCE_SYNTHESIS_CONTRACT_AND_DECLARED_BINARY_TOP_LAW_QUALITY_COORDINATES.",
+  "membership_self_certified": false,
+  "root_task_authority_self_proved": false,
+  "terminal_authority": false,
+  "hard_nonclaims": [
+    "NO_FREE_FORM_P3_SCOPE_CLOSURE",
+    "NO_CONTEXT_OUTSIDE_THE_STRICT_EXPLICIT_BINARY_SOURCE_CLASS",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
