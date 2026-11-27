@@ -24,6 +24,7 @@ from canonical.runtime import livebench_legacy15_composition_archetypes_v1 as ar
 from canonical.runtime import livebench_legacy15_joint_witness_v1 as witness
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY15_END2END_EXACT_SYNTHETIC_AUDIT_V2"
+AUDIT_REVISION = "V4_SCAFFOLD_COLLISION_CLOSURE_20261005"
 FROZEN_LIVEBENCH_COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
 FROZEN_REGISTRY_BLOB = "903ed738398648c7cfac61d5ffa478c22f1f0891"
 FROZEN_INSTRUCTIONS_BLOB = "4997bab885a676d92545fd91a9a20b48d234a2b2"
@@ -95,6 +96,19 @@ PROFILES = (
         "bullets": 1,
         "sections": ("SECTION", 1),
         "end": "Is there anything else I can help with?",
+    },
+    {
+        "name": "SCAFFOLD_COLLISION",
+        "existence": ["response", "alpha", "beta", "signal", "proof"],
+        "forbidden": ["response", "alpha", "beta", "zxqv", "answer"],
+        "paragraphs": 3,
+        "words": (180, "at least"),
+        "sentences": (6, "at least"),
+        "nth": (3, 2, "signal"),
+        "postscript": "P.S.",
+        "bullets": 3,
+        "sections": ("Section", 3),
+        "end": "Any other questions?",
     },
 )
 
@@ -278,6 +292,7 @@ def audit(livebench_root: Path, max_failures: int) -> dict[str, Any]:
     all_pass = exact_full_pass == total
     return {
         "schema": SCHEMA,
+        "audit_revision": AUDIT_REVISION,
         "status": (
             "PASS__ALL_SYNTHETIC_ACTIVE15_CASES_EXACT_FULL_SCORE"
             if all_pass
