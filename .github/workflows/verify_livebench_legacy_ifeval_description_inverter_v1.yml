@@ -1,0 +1,72 @@
+name: Verify legacy IFEval description inverter
+on:
+  push:
+    branches:
+      - breakthrough/livebench-legacy25-compiler-20261004
+  pull_request:
+    paths:
+      - canonical/runtime/livebench_legacy_ifeval_description_inverter_v1.py
+      - canonical/runtime/livebench_legacy_ifeval_single_checker_witness_v1.py
+      - canonical/tests/test_livebench_legacy_ifeval_description_inverter_v1.py
+      - canonical/tests/test_livebench_legacy_ifeval_single_checker_against_frozen_source.py
+      - .github/workflows/verify_livebench_legacy_ifeval_description_inverter_v1.yml
+
+jobs:
+  parser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m py_compile canonical/runtime/livebench_legacy_ifeval_description_inverter_v1.py canonical/runtime/livebench_legacy_ifeval_single_checker_witness_v1.py
+      - run: python -m unittest canonical.tests.test_livebench_legacy_ifeval_description_inverter_v1 -v
+
+  exact:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        instruction_id:
+          - "keywords:existence"
+          - "keywords:frequency"
+          - "keywords:forbidden_words"
+          - "keywords:letter_frequency"
+          - "language:response_language"
+          - "length_constraints:number_sentences"
+          - "length_constraints:number_paragraphs"
+          - "length_constraints:number_words"
+          - "length_constraints:nth_paragraph_first_word"
+          - "detectable_content:number_placeholders"
+          - "detectable_content:postscript"
+          - "detectable_format:number_bullet_lists"
+          - "detectable_format:constrained_response"
+          - "detectable_format:number_highlighted_sections"
+          - "detectable_format:multiple_sections"
+          - "detectable_format:json_format"
+          - "detectable_format:title"
+          - "combination:two_responses"
+          - "combination:repeat_prompt"
+          - "startend:end_checker"
+          - "change_case:capital_word_frequency"
+          - "change_case:english_capital"
+          - "change_case:english_lowercase"
+          - "punctuation:no_comma"
+          - "startend:quotation"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check nltk==3.9.2 langdetect==1.0.9 immutabledict==4.2.1
+      - run: |
+          git clone --filter=blob:none https://github.com/LiveBench/LiveBench.git /tmp/LiveBench
+          git -C /tmp/LiveBench checkout 8f8e5c381a16e3f24257776edd53471fe86f8091
+          test "$(git -C /tmp/LiveBench rev-parse HEAD)" = "8f8e5c381a16e3f24257776edd53471fe86f8091"
+      - run: python -c "import nltk; nltk.download('punkt', quiet=True); nltk.download('punkt_tab', quiet=True)"
+      - run: python -m unittest canonical.tests.test_livebench_legacy_ifeval_single_checker_against_frozen_source.FrozenLegacySingleCheckerWitnessVerification.test_each_source_rendered_description_inverts_and_witness_passes_exact_checker -v
+        env:
+          LIVEBENCH_SOURCE_ROOT: /tmp/LiveBench
+          ONLY_ID: ${{ matrix.instruction_id }}
