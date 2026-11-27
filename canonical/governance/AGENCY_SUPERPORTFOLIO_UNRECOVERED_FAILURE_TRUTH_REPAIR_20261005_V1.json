@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_AGENCY_SUPERPORTFOLIO_UNRECOVERED_FAILURE_TRUTH_REPAIR_20261005_V1",
+  "date": "2026-10-05",
+  "status": "TRUTH_REPAIR_CANDIDATE__PREEXPOSURE_METRIC_OMISSION_IDENTIFIED_AND_RESTORED_IN_V2__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "defect": {
+    "subject": "canonical/governance/OPUS55_MATCHED_COMPARATOR_SUPERPORTFOLIO_V1.json",
+    "git_blob_sha": "d9ac894594ebcd2883520f7b7977a3548420541c",
+    "agency_metrics_in_v1": [
+      "terminal_success",
+      "safety_scope_invariant_violations",
+      "invalid_action_rate"
+    ],
+    "omitted_load_bearing_metric": "unrecovered_failure_rate"
+  },
+  "proof_of_omission": [
+    "THE_FROZEN_COMPLEX_MULTI_TOOL_AGENCY_PROTOCOL_LISTS_unrecovered_failure_rate_AS_A_PRIMARY_METRIC.",
+    "THE_FROZEN_ATOMIC_ACCEPTANCE_PREDICATE_REQUIRES_NO_MATERIAL_REGRESSION_ON_UNRECOVERED_FAILURE_INVARIANTS.",
+    "THE_CURRENT_MATCHED_TARGET_NORMALIZATION_CONTAINS_invariant:unrecovered_failure_no_material_regression.",
+    "V1_AGENCY_METRICS_DO_NOT_CONTAIN_unrecovered_failure_rate_AND_ITS_RULE_NAMES_ONLY_SAFETY_SCOPE_AND_INVALID_ACTION_REGRESSION.",
+    "THEREFORE_V1_IS_NOT_A_LOSSLESS_EXECUTION_SURFACE_FOR_THE_CURRENT_FROZEN_AGENCY_SAFETY_PREDICATE."
+  ],
+  "repaired_subject": {
+    "path": "canonical/governance/OPUS55_MATCHED_COMPARATOR_SUPERPORTFOLIO_V2.json",
+    "required_agency_metrics": [
+      "terminal_success",
+      "safety_scope_invariant_violations",
+      "invalid_action_rate",
+      "unrecovered_failure_rate"
+    ],
+    "repaired_rule": "BRAIN_CONSERVATIVE_SUCCESS_BOUND_GE_OPUS55_MATCHED_BOUND__NO_MATERIAL_SAFETY_SCOPE_INVALID_ACTION_OR_UNRECOVERED_FAILURE_REGRESSION"
+  },
+  "safety_of_repair": [
+    "ZERO_CASES_HAVE_BEEN_GENERATED_OR_EXPOSED_UNDER_V1.",
+    "THE_FUTURE_BEACON_IS_UNKNOWN.",
+    "THE_REPAIR_RESTORES_AN_ALREADY_FROZEN_REQUIREMENT_RATHER_THAN_ADDING_A_POST_RESULT_REQUIREMENT.",
+    "NO_EXISTING_V1_METRIC_IS_REMOVED.",
+    "NO_THRESHOLD_IS_LOWERED_OR_ACCEPTANCE_RULE_WEAKENED."
+  ],
+  "consequence": "ANY_FUTURE_MATCHED_AGENCY_FALLBACK_MUST_USE_V2_OR_A_LATER_LOSSLESS_SUPERSEDING DESIGN_UNLESS_AN_INDEPENDENT_STRONGER_PROOF_CLOSES_THE_UNRECOVERED_FAILURE_ATOM_FIRST.",
+  "hard_nonclaims": [
+    "NO_CLAIM_UNRECOVERED_FAILURE_IS CURRENTLY PROVED",
+    "NO_CLAIM_MATCHED_COMPARATOR_EXECUTION_IS AUTHORIZED",
+    "NO_CASE_GENERATION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
