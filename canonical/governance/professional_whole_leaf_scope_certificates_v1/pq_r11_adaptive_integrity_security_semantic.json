@@ -1,0 +1,38 @@
+{
+  "acceptance_authority": false,
+  "claim_id": "601d5c30da84cc04f67f80eeb607447b7328174b52ae434e5cd5dbb9bf371a44",
+  "claim_scope_git_blob_sha": "e1d7b4d16bc1339b478bacd486fd379c995343b2",
+  "date": "2026-10-10",
+  "evidence_refs": [
+    {
+      "git_blob_sha": "59d7d31a7eb174de79cf2a4c8a4e9687de3e031c",
+      "path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r11_adaptive_integrity_security_semantic_verify.json"
+    }
+  ],
+  "execution_authority": false,
+  "hard_nonclaims": [
+    "NO_LEAF_PROPERTY_TRUTH",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "incremental_spend_usd": 0,
+  "leaf_id": "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::SEMANTIC",
+  "promotion_authority": false,
+  "quality_authority": false,
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_CERTIFICATE_V2",
+  "scope_certificate": {
+    "all_admissible_target_inputs_proved": true,
+    "basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "claim_id": "601d5c30da84cc04f67f80eeb607447b7328174b52ae434e5cd5dbb9bf371a44",
+    "formal_completeness": true,
+    "id": "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::SEMANTIC::WHOLE_LEAF_SCOPE_V1",
+    "independent": true,
+    "premise_set_id": "claim-verification:59d7d31a7eb174de79cf2a4c8a4e9687de3e031c",
+    "scope_relation": "EXACT",
+    "target_scope_id": "scope://professional-quality/whole-leaf/601d5c30da84cc04f67f80eeb607447b7328174b52ae434e5cd5dbb9bf371a44",
+    "verified": true
+  },
+  "semantic_truth_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
