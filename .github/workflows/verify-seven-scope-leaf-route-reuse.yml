@@ -1,0 +1,33 @@
+name: Verify seven scope leaf active route reuse
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/governance/SEVEN_SCOPE_LEAF_ACTIVE_ROUTE_REUSE_FIXED_POINT_V1.json
+      - canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V2.json
+      - canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json
+      - canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json
+      - canonical/runtime/verify_seven_scope_leaf_route_reuse_v1.py
+      - .github/workflows/verify-seven-scope-leaf-route-reuse.yml
+  pull_request:
+    paths:
+      - canonical/governance/SEVEN_SCOPE_LEAF_ACTIVE_ROUTE_REUSE_FIXED_POINT_V1.json
+      - canonical/governance/SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V2.json
+      - canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json
+      - canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json
+      - canonical/runtime/verify_seven_scope_leaf_route_reuse_v1.py
+      - .github/workflows/verify-seven-scope-leaf-route-reuse.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python canonical/runtime/verify_seven_scope_leaf_route_reuse_v1.py
