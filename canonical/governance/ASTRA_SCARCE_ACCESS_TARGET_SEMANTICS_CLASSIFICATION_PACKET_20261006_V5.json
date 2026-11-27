@@ -1,0 +1,133 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_SCARCE_ACCESS_TARGET_SEMANTICS_CLASSIFICATION_PACKET_V5",
+  "date": "2026-10-06",
+  "status": "READY_FOR_SINGLE_SCARCE_ASTRA_INTERACTION__BEHAVIOR_CONTEXT_UNIT_REDUCTION_APPLIED__ZERO_ASTRA_ACCESS_CONSUMED",
+  "supersedes": "canonical/governance/ASTRA_SCARCE_ACCESS_TARGET_SEMANTICS_CLASSIFICATION_PACKET_20261006_V4.json",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "bound_reductions": {
+    "atomic_family_prefilter": {
+      "path": "canonical/governance/PRE_ASTRA_ATOMIC_FAMILY_SEMANTIC_PREFILTER_20261006_V1.json",
+      "git_blob_sha": "f16536e2a7b89686457e004fa63d1ee723a6b42e"
+    },
+    "public_evaluator_compression": {
+      "path": "canonical/governance/PUBLIC_EVALUATOR_SEMANTICS_COMPRESSION_20261006_V1.json",
+      "git_blob_sha": "8228493403426407ad773bd1f51bb64552ddf5c1"
+    },
+    "pre_astra_information_mincut": {
+      "path": "canonical/governance/PRE_ASTRA_TARGET_INFORMATION_MINCUT_THEOREM_20261006_V1.json",
+      "git_blob_sha": "6622a34c2de805523ac2c87808c13fb6cba1f3fe"
+    },
+    "behavior_context_unit_reduction": {
+      "path": "canonical/governance/PRE_ASTRA_BEHAVIOR_CONTEXT_SEMANTIC_UNIT_REDUCTION_20261006_V1.json",
+      "git_blob_sha": "d914614f7997aa5d52d4cef76d31740d7ef4e043"
+    },
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "semantic_purge_law": {
+      "path": "canonical/laws/BEHAVIORAL_CONTRACT_AND_SEMANTIC_PURGE_LAW_V1.md",
+      "git_blob_sha": "5b70ed776f13194ea02d7df1d878a88386a48b61"
+    },
+    "atomic_causal_map": {
+      "path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
+      "git_blob_sha": "1f86f034a4f34478e3e2cfd82b5d1b0f8e11143d"
+    }
+  },
+  "known_information_removed_before_astra": {
+    "unresolved_atomic_acceptance_contracts_already_partitioned": 24,
+    "fixed_score_target_tuples_already_bound": 14,
+    "public_evaluator_families_already_researched": 10,
+    "current_open_family_labels_for_accounting_only": 14,
+    "current_active_contracted_residual_behaviors": 12,
+    "family_label_semantic_authority": false,
+    "astra_access_consumed": 0
+  },
+  "current_behavioral_basis": {
+    "completeness": "NOT_PROVED__MUST_BE_FALSIFIED_BY_ASTRA_AGAINST_PRIMARY_OPUS55_USEFUL_CAPABILITY_EVIDENCE",
+    "behavior_ids": [
+      "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+      "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+      "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "TASK_TO_DELEGATION_GRAPH_001",
+      "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+    ]
+  },
+  "semantic_unit": {
+    "unit": "BEHAVIORAL_CONTRACT_X_CONTEXT_EQUIVALENCE_CLASS",
+    "reason": "E_M_U_CERTIFICATION_DEPENDS_ON_THE_CONTEXT_TRAJECTORY_LAW_AND_UTILITY_OR_EVALUATOR_CLASS__WHILE_FAMILY_LABELS_ARE_CANONICAL_ACCOUNTING_SURFACES_ONLY.",
+    "counterexample_to_family_labeling": "A_SINGLE_FAMILY_CAN_CONTAIN_C1_WITH_COMPLETE_EXPLICIT_EVALUATOR_SEMANTICS_AND_C2_WITH_ARBITRARY_HIDDEN_MEASURE_SEPARATING_UTILITY__THEREFORE_C1_IS_E_AND_C2_IS_U.",
+    "family_role": "PROJECT_CERTIFIED_BEHAVIOR_CONTEXT_RESULTS_BACK_TO_FAMILY_ACCEPTANCE_SURFACES_ONLY_AFTER_SEMANTIC_CERTIFICATION."
+  },
+  "scarce_access_policy": {
+    "astra_interaction_budget": 1,
+    "no_followup_questions": true,
+    "objective": "MAXIMIZE_THE_MEASURE_OF_REAL_USEFUL_OPUS55_BEHAVIOR_CONTEXTS_COVERED_BY_SOUND_E_OR_M_OR_CONTEXT_GENERATOR_PROOFS__WHILE_FIRST_FALSIFYING_THE_COMPLETENESS_OF_THE_CURRENT_12_CONTRACT_BASIS.",
+    "postcondition": "ASTRA_OUTPUT_ZERO_CREDIT_UNTIL_INDEPENDENT_RECONSTRUCTION_SOURCE_BINDING_AND_CONTENT_ADDRESSING."
+  },
+  "astra_prompt": [
+    "This is one scarce interaction. Do not ask follow-up questions. Do not produce motivational prose, benchmark score restatement, generic model descriptions, or a family-by-family marketing summary.",
+    "The terminal goal is literal: Brain must permanently internalize, configure, verify, and own every useful Opus 5.5 capability at equal-or-better level. External knowledge may remain JIT; opaque external capability execution does not count as ownership.",
+    "Brain-side first principles already establish three L1 certification routes per context: E = complete explicit load-bearing evaluators and hard constraints; M = every admissible hidden L1 utility is proved monotone in a sound material outcome order plus dominance-preserving coupling; U = otherwise exact equality of full deployed Brain and target trajectory laws under the same context.",
+    "For arbitrary measure-separating hidden U, exact trajectory-law equality is information-theoretically necessary. Do not propose generic moments, means, finite summaries, or other non-measure-determining statistics as a universal shortcut.",
+    "Canonical Brain law says Opus capability-family rows are acceptance/evaluation accounting surfaces only and carry zero internal ontology authority. Therefore do NOT assign one E, M, or U label to an entire family unless you separately prove semantic uniformity across every load-bearing behavior and context in that family.",
+    "The semantic unit for this interaction is BEHAVIORAL CONTRACT x CONTEXT EQUIVALENCE CLASS. Family labels are used only after certification to account for which external evaluation surfaces are affected.",
+    "Brain currently has 12 active contracted residual behaviors. FIRST, adversarially falsify the completeness of this behavioral basis against primary-source Opus 5.5 useful capability descriptions and relevant task/evaluator semantics. Identify a missing contract only when it represents an observably distinct input-state-to-output/action behavior not already captured by a current contract or a sound composition of them.",
+    "Current behavior IDs: CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001; SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001; SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001; STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001; BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001; ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001; TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001; NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001; PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001; TASK_TO_DELEGATION_GRAPH_001; TOOL_ROUTE_DISCOVERY_AND_SELECTION_001; EVIDENCE_TO_AUDIENCE_SYNTHESIS_001.",
+    "SECOND, for each current or newly justified behavior contract, partition the broadest defensible context classes into E, M, and U/UNRESOLVED. Do not classify the behavior globally if different context subclasses have different evaluator or utility semantics.",
+    "For E context subclasses: provide the claimed COMPLETE load-bearing evaluator and hard-constraint basis, the reason completeness follows for exactly that context class, and the smallest omitted-dimension counterexample that would kill the classification.",
+    "For M context subclasses: define the exact material outcome partial order and admissible hidden utility class; prove why EVERY admissible utility is monotone; give the smallest preference-reversal, nonseparable-interaction, tail-risk, hard-constraint, or context-dependent utility counterexample that would kill M.",
+    "For U: state exactly why E, M, and transfer attempts fail and what full target-law information remains irreducible.",
+    "THIRD, search for cross-context or cross-behavior generators: exact task-contract refinement, symmetry, invariance, bisimulation, trace equivalence, evaluator equivalence, dominance-preserving abstraction, or another theorem that lets one proof cover many behavior-context cells. State every load-bearing premise and the smallest boundary counterexample.",
+    "Do not spend this interaction rediscovering the 24 current atomic acceptance contracts, 14 fixed score target tuples, or already-researched public benchmark methodology for Terminal-Bench, OSWorld 2.1, HLE, Finance Agent v2, AutomationBench, GDPval, AA-Briefcase, FrontierCode, MysteryMechanism, and Chartography unless a specific source premise is needed to falsify a broader behavior-context theorem.",
+    "Do not guess private benchmark results, reconstruct private test answers from public methodology, infer hidden human preference laws without data, or invent hidden Opus internals.",
+    "Use primary public sources for factual premises and map each source to the exact proposition it supports. Source citations do not prove theorem steps.",
+    "Rank results by target-law information eliminated across behavior-context cells. Shared behavior proofs that project to multiple family surfaces are higher leverage than family-specific restatements.",
+    "Return the minimum external-information cut after classification: STRUCTURAL_ONCE, PER_BEHAVIOR, PER_CONTEXT, EXACT_TARGET_LAW_IRREDUCIBLE.",
+    "Provide at least ten minimal counterexamples against your strongest basis-completeness, E, M, and transfer claims.",
+    "End with exactly one highest-leverage post-verification action chosen by expected terminal truth-obligation contraction per unit scarce evidence cost."
+  ],
+  "required_output": {
+    "behavior_basis_falsification": "Current 12-contract basis: COMPLETE | MISSING_CONTRACTS_FOUND | UNRESOLVED; list only observably distinct missing contracts with primary-source premise and non-duplication argument.",
+    "behavior_context_partition": "For each current/new behavior: context subclasses classified E | M | U_OR_UNRESOLVED, exact premises, breadth, and decisive falsifier.",
+    "E_completeness_basis": "Complete evaluator/hard-constraint basis and omitted-dimension falsifier per E cell.",
+    "M_monotonicity_basis": "Outcome order, admissible utility class, monotonicity premise, coupling consequence, and preference-reversal falsifier per M cell.",
+    "context_generators": "Cross-context/cross-behavior transfer theorems with exact invariance premises, breadth, and boundary counterexample.",
+    "family_projection": "Map certified behavior-context cells to the 14 current open family accounting surfaces without inferring new semantics from family names.",
+    "residual_U": "Exact irreducible cells and minimum target-law information still required.",
+    "information_cut": "STRUCTURAL_ONCE | PER_BEHAVIOR | PER_CONTEXT | EXACT_TARGET_LAW_IRREDUCIBLE.",
+    "top_counterexamples": "At least 10 minimal falsifiers.",
+    "sourced_evidence": "Primary-source claim-to-source mapping only.",
+    "next_single_action": "Exactly one action after independent verification."
+  },
+  "truth_boundary": [
+    "ASTRA_OUTPUT_ZERO_CREDIT_UNTIL_INDEPENDENT_VERIFICATION",
+    "CURRENT_12_BEHAVIOR_CONTRACTS_NOT_ASSUMED_COMPLETE",
+    "FAMILY_LABELS_ACCOUNTING_ONLY",
+    "NO_FAMILY_E_M_OR_U_WITHOUT_UNIFORMITY_THEOREM",
+    "NO_E_WITHOUT_COMPLETE_EXPLICIT_SEMANTICS",
+    "NO_M_WITHOUT_PROVED_ALL_UTILITY_MONOTONICITY",
+    "UNKNOWN_REMAINS_U_OR_UNRESOLVED",
+    "NO_PRIVATE_SCORE_INFERENCE",
+    "NO_WEAKENING_OF_TERMINAL_OBJECTIVE"
+  ],
+  "accounting": {
+    "astra_access_consumed_by_packet_creation": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
