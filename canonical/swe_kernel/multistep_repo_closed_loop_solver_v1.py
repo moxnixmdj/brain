@@ -2131,3 +2131,17 @@ def probe_concurrency_races_live(
         "execution_proved_count": len(witnesses),
         "witnesses": witnesses,
     }
+
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for multistep_repo_closed_loop_solver_v1."""
+    checks: dict[str, bool] = {}
+    checks["is_test_positive"] = _is_test_relpath("tests/test_core.py") is True
+    checks["is_test_negative"] = _is_test_relpath("src/core.py") is False
+    _src = "def alpha(x):\n    return x + 1\n\ndef beta(y):\n    return y * 2\n"
+    _fn = _extract_function_source(_src, "alpha")
+    checks["extract_fn_positive"] = isinstance(_fn, str) and "return x + 1" in _fn
+    checks["extract_fn_missing_negative"] = _extract_function_source(_src, "nonexistent") is None
+    checks["input_deps_preserved_pos"] = _input_dependencies_preserved("def f(x):\n    return x + 1\n", "def f(x):\n    return x + 2\n") is True
+    checks["input_deps_dropped_neg"] = _input_dependencies_preserved("def f(x):\n    return x + 1\n", "def f(x):\n    return 2\n") is False
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}

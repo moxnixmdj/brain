@@ -1,0 +1,28 @@
+Tip: There are many benchmarks available in Harbor's registry.
+Run `harbor datasets list` to see all available datasets.
+
+  8/8 Mean: 0.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:14:51 0:00:00
+
+adhoc • causal_engine
+┏━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
+┃ Trials ┃ Exceptions ┃  Mean ┃
+┡━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━┩
+│      8 │          0 │ 0.000 │
+└────────┴────────────┴───────┘
+
+┏━━━━━━━━┳━━━━━━━┓
+┃ Reward ┃ Count ┃
+┡━━━━━━━━╇━━━━━━━┩
+│ 0.0    │     8 │
+└────────┴───────┘
+
+Job Info
+Total runtime: 14m 51s
+Results written to 
+/home/runner/work/brain/brain/work-causal-4/jobs/swe-pro-v2-causal-s4/result.jso
+n
+Inspect results by running `harbor view 
+/home/runner/work/brain/brain/work-causal-4/jobs`
+Share results by running `harbor upload 
+/home/runner/work/brain/brain/work-causal-4/jobs/swe-pro-v2-causal-s4`
+

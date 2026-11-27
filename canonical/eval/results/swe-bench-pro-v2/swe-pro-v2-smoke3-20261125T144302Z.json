@@ -1,0 +1,121 @@
+{
+  "arms": {
+    "causal": {
+      "arm": "causal",
+      "cost_usd_total": 0.0,
+      "missing_trials": [
+        "instance_qutebrowser__qutebrowser-3e21c8214a998cb1058defd15aabb24617a76402-v5fc38aaf22415ab0b70567368332beee7955b367",
+        "instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171",
+        "instance_qutebrowser__qutebrowser-deeb15d6f009b3ca0c3bd503a7cef07462bd16b4-v363c8a7e5ccdf6968fc7ab84a2053ac78036691d"
+      ],
+      "model_calls_total": 0,
+      "n_expected": 3,
+      "n_missing_trial": 3,
+      "n_reported": 3,
+      "n_shard_reports": 3,
+      "resolve_rate_pct": 0.0,
+      "resolved": 0,
+      "tasks": {
+        "instance_qutebrowser__qutebrowser-3e21c8214a998cb1058defd15aabb24617a76402-v5fc38aaf22415ab0b70567368332beee7955b367": {
+          "agent_status": "NOT_RUN",
+          "n_files_changed": 0,
+          "resolved": false,
+          "reward": null
+        },
+        "instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171": {
+          "agent_status": "NOT_RUN",
+          "n_files_changed": 0,
+          "resolved": false,
+          "reward": null
+        },
+        "instance_qutebrowser__qutebrowser-deeb15d6f009b3ca0c3bd503a7cef07462bd16b4-v363c8a7e5ccdf6968fc7ab84a2053ac78036691d": {
+          "agent_status": "NOT_RUN",
+          "n_files_changed": 0,
+          "resolved": false,
+          "reward": null
+        }
+      },
+      "wall_seconds_mean": null,
+      "wall_seconds_total": null
+    },
+    "nop": {
+      "arm": "nop",
+      "cost_usd_total": 0.0,
+      "missing_trials": [
+        "instance_qutebrowser__qutebrowser-3e21c8214a998cb1058defd15aabb24617a76402-v5fc38aaf22415ab0b70567368332beee7955b367",
+        "instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171",
+        "instance_qutebrowser__qutebrowser-deeb15d6f009b3ca0c3bd503a7cef07462bd16b4-v363c8a7e5ccdf6968fc7ab84a2053ac78036691d"
+      ],
+      "model_calls_total": 0,
+      "n_expected": 3,
+      "n_missing_trial": 3,
+      "n_reported": 3,
+      "n_shard_reports": 3,
+      "resolve_rate_pct": 0.0,
+      "resolved": 0,
+      "tasks": {
+        "instance_qutebrowser__qutebrowser-3e21c8214a998cb1058defd15aabb24617a76402-v5fc38aaf22415ab0b70567368332beee7955b367": {
+          "agent_status": "NOT_RUN",
+          "n_files_changed": 0,
+          "resolved": false,
+          "reward": null
+        },
+        "instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171": {
+          "agent_status": "NOT_RUN",
+          "n_files_changed": 0,
+          "resolved": false,
+          "reward": null
+        },
+        "instance_qutebrowser__qutebrowser-deeb15d6f009b3ca0c3bd503a7cef07462bd16b4-v363c8a7e5ccdf6968fc7ab84a2053ac78036691d": {
+          "agent_status": "NOT_RUN",
+          "n_files_changed": 0,
+          "resolved": false,
+          "reward": null
+        }
+      },
+      "wall_seconds_mean": null,
+      "wall_seconds_total": null
+    },
+    "oracle": {
+      "arm": "oracle",
+      "cost_usd_total": 0.0,
+      "missing_trials": [
+        "instance_qutebrowser__qutebrowser-3e21c8214a998cb1058defd15aabb24617a76402-v5fc38aaf22415ab0b70567368332beee7955b367",
+        "instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171",
+        "instance_qutebrowser__qutebrowser-deeb15d6f009b3ca0c3bd503a7cef07462bd16b4-v363c8a7e5ccdf6968fc7ab84a2053ac78036691d"
+      ],
+      "model_calls_total": 0,
+      "n_expected": 3,
+      "n_missing_trial": 3,
+      "n_reported": 3,
+      "n_shard_reports": 3,
+      "resolve_rate_pct": 0.0,
+      "resolved": 0,
+      "tasks": {
+        "instance_qutebrowser__qutebrowser-3e21c8214a998cb1058defd15aabb24617a76402-v5fc38aaf22415ab0b70567368332beee7955b367": {
+          "agent_status": "NOT_RUN",
+          "n_files_changed": 0,
+          "resolved": false,
+          "reward": null
+        },
+        "instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171": {
+          "agent_status": "NOT_RUN",
+          "n_files_changed": 0,
+          "resolved": false,
+          "reward": null
+        },
+        "instance_qutebrowser__qutebrowser-deeb15d6f009b3ca0c3bd503a7cef07462bd16b4-v363c8a7e5ccdf6968fc7ab84a2053ac78036691d": {
+          "agent_status": "NOT_RUN",
+          "n_files_changed": 0,
+          "resolved": false,
+          "reward": null
+        }
+      },
+      "wall_seconds_mean": null,
+      "wall_seconds_total": null
+    }
+  },
+  "n_reports_read": 9,
+  "note": "Resolve decisions come from each task's own verifier inside the official container image. Merged across shards by task union.",
+  "schema": "brain.bench_eval_report.v1"
+}

@@ -575,18 +575,18 @@ def _extract_secondary_indexes(full: Mapping[str, Any], raw_sha: str) -> dict[st
 # --------------------------------------------------------------------------- model
 
 
-# The full installation includes Waves 40-50; blind worker mounts deliberately omit them.
+# The full installation includes Waves 40-52; blind worker mounts deliberately omit them.
 try:
-    from canonical.runtime.wave49_50_structural_ast_repair_and_titan_adjudication_v1 import (
-        Wave49To50UnifiedModelMixin as _Wave49To50UnifiedModelMixin,
+    from canonical.runtime.wave51_52_sliced_structural_swe_and_stranded_treasury_v1 import (
+        Wave51To52UnifiedModelMixin as _Wave51To52UnifiedModelMixin,
     )
-    _Wave40To42UnifiedModelMixin = _Wave49To50UnifiedModelMixin
+    _Wave49To50UnifiedModelMixin = _Wave40To42UnifiedModelMixin = _Wave51To52UnifiedModelMixin
 except ModuleNotFoundError as exc:
-    if not str(exc.name or "").startswith("canonical.runtime.wave4"):
+    if not str(exc.name or "").startswith(("canonical.runtime.wave4", "canonical.runtime.wave5")):
         raise
-    _Wave49To50UnifiedModelMixin = _Wave40To42UnifiedModelMixin = object
+    _Wave51To52UnifiedModelMixin = _Wave49To50UnifiedModelMixin = _Wave40To42UnifiedModelMixin = object
 
-class UnifiedModel(_Wave49To50UnifiedModelMixin):
+class UnifiedModel(_Wave51To52UnifiedModelMixin):
     """A loaded, digest-verified unified model."""
 
     def __init__(
@@ -2805,6 +2805,29 @@ class UnifiedModel(_Wave49To50UnifiedModelMixin):
             return self.solve_swe_repo_native(inputs.pop("repo_root", cwd), **inputs)
         if requested == "RECALL":
             return self.recall(goal)
+        if requested == "EPISTEMIC":
+            # Two kernels answer mode="EPISTEMIC": the Universal Epistemic Kernel this branch
+            # added, and the workspace-COW solver that main added in #7074.  Which one runs is
+            # decided by the call shape, not by a preference -- no shape is claimed by both, so
+            # neither side's contract is quietly overwritten:
+            #   * inputs naming a UEK channel (workspace, web/db/dom/gui/tomography/...) -> UEK,
+            #     even when cwd is also set, because explicit inputs outrank an ambient cwd;
+            #   * a bare cwd, or the COW keys (workspace_dir, repo_dir, store, pytest_targets,
+            #     suspect_files) -> the workspace-COW solver, which is what main's tests pin;
+            #   * neither -> UEK, which fails closed with EPISTEMIC_WORKSPACE_REQUIRED__FAIL_CLOSED.
+            _cow_keys = {"workspace_dir", "repo_dir", "store", "pytest_targets", "suspect_files"}
+            _uek_keys = {
+                "workspace", "memory", "memory_path", "governed_memory", "dom_nodes", "gui_env",
+                "web_url", "source_url", "target_url", "api_url", "graphql_url", "db_path",
+                "tomography_env", "self_play_tasks", "cow_speculative_actions", "cow_executor",
+                "cow_residual", "petri_net_spec", "skill_store", "goal_targets", "postcondition_fn",
+                "verifier", "field_values", "knowledge_source", "python_exe", "allow_web",
+            }
+            if not _uek_keys.intersection(inputs or {}):
+                if cwd is not None or _cow_keys.intersection(inputs or {}):
+                    return self._solve_via_epistemic_workspace_cow(goal, inputs=inputs, cwd=cwd)
+            return self._solve_via_universal_epistemic_kernel(goal, inputs=inputs, cwd=cwd)
+
         # Unified Hidden-Arsenal fast rungs (addressable via explicit mode or AUTO structured inputs)
         if requested == "CHECKABILITY" or (requested == "AUTO" and "checkability_workspace" in inputs):
             ws = inputs.pop("checkability_workspace", inputs.pop("workspace_root", cwd or ROOT))
@@ -3010,6 +3033,11 @@ class UnifiedModel(_Wave49To50UnifiedModelMixin):
 
             routing = self.route(goal)
             if not routing["confident"]:
+                if isinstance(inputs, Mapping) and ("workspace" in inputs or "dom_nodes" in inputs or "web_url" in inputs):
+                    return self._solve_via_universal_epistemic_kernel(
+                        goal, inputs=inputs, cwd=cwd, routing=routing
+                    )
+
                 # Unified fallback: no verified capability or engine claims
                 # this goal. Before failing closed, ask whether a discovered
                 # (harvested) surface does. Execution stays unadmitted and
@@ -3045,6 +3073,143 @@ class UnifiedModel(_Wave49To50UnifiedModelMixin):
             except Exception:
                 pass
         return out
+
+    def _solve_via_epistemic_workspace_cow(
+        self,
+        goal: str,
+        *,
+        inputs: Mapping[str, Any] | None = None,
+        cwd: str | Path | None = None,
+    ) -> dict[str, Any]:
+        """Trunk semantics for mode="EPISTEMIC": the zero-knowledge workspace COW solver.
+
+        Added by main in #7074 (``cross_modal_tomography_petri_v1.solve_epistemic_workspace_cow``
+        over an ``EpistemicStoreV1``).  Kept as its own method so the front door can dispatch to it
+        by call shape instead of choosing one kernel for every caller.
+        """
+        from canonical.swe_kernel import cross_modal_tomography_petri_v1 as _cmtp
+        from canonical.swe_kernel import epistemic_admission_and_self_play_v1 as _easp
+
+        inputs = dict(inputs or {})
+        ws_arg = cwd or inputs.get("workspace_dir") or inputs.get("repo_dir")
+        store_obj = inputs.get("store")
+        if isinstance(store_obj, (str, Path)):
+            store_obj = _easp.EpistemicStoreV1(Path(store_obj))
+        elif not isinstance(store_obj, _easp.EpistemicStoreV1):
+            store_obj = _easp.EpistemicStoreV1()
+        ep_res = _cmtp.solve_epistemic_workspace_cow(
+            workspace_dir=Path(ws_arg) if ws_arg is not None else Path.cwd(),
+            goal_text=str(goal or ""),
+            store=store_obj,
+            pytest_targets=inputs.get("pytest_targets"),
+            suspect_files=inputs.get("suspect_files"),
+            timeout_s=float(inputs.get("timeout_s", 35.0)),
+        )
+        return {
+            "schema": SOLUTION_SCHEMA,
+            "operation": "EPISTEMIC_WORKSPACE_COW_SOLVE",
+            "goal": goal,
+            "status": ep_res.get("status", "UNSOLVED"),
+            "pass": bool(ep_res.get("pass")),
+            "epistemic_result": ep_res,
+            "model_calls": 0,
+            "parameters_stored": 0,
+            "authority": "NONE",
+            "non_claims": list(NON_CLAIMS),
+        }
+
+    def _solve_via_universal_epistemic_kernel(
+        self,
+        goal: str,
+        *,
+        inputs: Mapping[str, Any] | None = None,
+        cwd: str | Path | None = None,
+        routing: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Front-door delegation to the zero-LLM, zero-weight Universal Epistemic Kernel.
+
+        Enters any arbitrary workspace/environment knowing nothing, senses the local
+        frontier, computes the exact Epistemic Diff against external inspectable memory,
+        acquires only missing gaps in parallel, verifies atomically in an isolated state
+        copy, and distills only generalized atomic knowledge (`parameters_stored == 0`).
+        """
+        from canonical.runtime import universal_epistemic_kernel_v1 as uek
+
+        inp = dict(inputs or {})
+        ws_raw = inp.get("workspace") or cwd
+        if (
+            ws_raw is None
+            and "dom_nodes" not in inp
+            and "web_url" not in inp
+            and "source_url" not in inp
+            and "target_url" not in inp
+            and "api_url" not in inp
+            and "graphql_url" not in inp
+            and "db_path" not in inp
+            and "gui_env" not in inp
+            and "tomography_env" not in inp
+            and "self_play_tasks" not in inp
+            and "cow_speculative_actions" not in inp
+            and "petri_net_spec" not in inp
+            and "http://" not in goal
+            and "https://" not in goal
+        ):
+            return self._failure(
+                goal,
+                "EPISTEMIC_WORKSPACE_REQUIRED__FAIL_CLOSED",
+                routing=routing,
+            )
+        ws_path = Path(ws_raw).resolve() if ws_raw is not None else Path.cwd()
+        mem = inp.get("memory")
+        mem_path = inp.get("memory_path")
+        if mem is None and mem_path:
+            mem = uek.load_universal_memory(mem_path)
+        res = uek.solve_arbitrary_environment(
+            ws_path,
+            goal,
+            memory=mem,
+            governed_memory=inp.get("governed_memory"),
+            base_url=inp.get("base_url"),
+            tomography_env=inp.get("tomography_env"),
+            goal_targets=inp.get("goal_targets"),
+            self_play_tasks=inp.get("self_play_tasks"),
+            skill_store=inp.get("skill_store"),
+            cow_speculative_actions=inp.get("cow_speculative_actions"),
+            cow_executor=inp.get("cow_executor"),
+            cow_residual=inp.get("cow_residual"),
+            petri_net_spec=inp.get("petri_net_spec"),
+            postcondition_fn=inp.get("postcondition_fn"),
+            dom_nodes=inp.get("dom_nodes"),
+            gui_env=inp.get("gui_env"),
+            web_url=inp.get("web_url") or inp.get("source_url"),
+            target_url=inp.get("target_url"),
+            api_url=inp.get("api_url"),
+            graphql_url=inp.get("graphql_url"),
+            db_path=inp.get("db_path"),
+            verifier=inp.get("verifier"),
+            field_values=inp.get("field_values"),
+            knowledge_source=inp.get("knowledge_source"),
+            python_exe=inp.get("python_exe"),
+            allow_web=bool(inp.get("allow_web", True)),
+            timeout_s=float(inp.get("timeout_s", 20.0)),
+        )
+        if mem is not None and mem_path:
+            uek.save_universal_memory(mem, mem_path)
+        ok = res.get("status") == "VERIFIED"
+        return {
+            "schema": SOLUTION_SCHEMA,
+            "operation": "EPISTEMIC_SOLVE",
+            "goal": goal,
+            "pass": ok,
+            "status": "PASS" if ok else "FAIL_CLOSED",
+            "model_digest": self.digest,
+            "model_calls": 0,
+            "parameters_stored": 0,
+            "external_model_dependency": False,
+            "authority": "NONE",
+            "routing": dict(routing) if isinstance(routing, Mapping) else None,
+            "epistemic_result": res,
+        }
 
     def act_or_learn(
         self,
@@ -7436,7 +7601,7 @@ def main(argv: list[str] | None = None) -> int:
     solve_p = sub.add_parser("solve", help="route and execute")
     solve_p.add_argument("goal")
     solve_p.add_argument("--inputs", default="{}", help="JSON object of inputs")
-    solve_p.add_argument("--mode", default="AUTO", choices=["AUTO", "RECALL", "SOLVE_OR_LEARN"])
+    solve_p.add_argument("--mode", default="AUTO", choices=["AUTO", "RECALL", "SOLVE_OR_LEARN", "EPISTEMIC"])
     solve_p.add_argument("--capability-id", default=None)
     solve_p.add_argument("--instance-id", default=None)
     ns = parser.parse_args(argv)

@@ -981,6 +981,15 @@ class TreeRewriteMorphism:
     # morphism learned on `read_name(record)` also fires on `read_nickname(rec)`. The concrete
     # value stays in `literal_witness` so the entry is still inspectable and refutable (§9.2).
     literal_witness: dict[str, Any] = field(default_factory=dict)
+    #: The concrete value this morphism was verified with, when the repair was a
+    #: substitution of a constant for a divergent return/branch. Anti-unification
+    #: deliberately abstracts concrete values away, which is what makes a morphism
+    #: portable -- and which is why a stored entry could previously say WHERE a
+    #: repair belongs but never WHAT to put there (`literal_witness` is empty for a
+    #: falsy duty such as `''` or `0`). Keeping the witness lets a later task
+    #: *propose* the old value as a candidate; the caller's oracle still has to
+    #: accept it, so a stale witness costs a verification and can never certify.
+    duty_witness: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         return dataclasses.asdict(self)
@@ -1003,6 +1012,7 @@ class TreeRewriteMorphism:
             name_restore=dict(d.get("name_restore") or {}),
             hole_before_dumps=dict(d.get("hole_before_dumps") or {}),
             literal_witness=dict(d.get("literal_witness") or {}),
+            duty_witness=str(d.get("duty_witness") or ""),
         )
 
 
@@ -1145,8 +1155,14 @@ class SkillStoreV2:
         origin: str,
         diagnostic_class: str = "general",
         language: str = "python",
+        duty_witness: str = "",
     ) -> TreeRewriteMorphism | None:
-        """Crystallize a verified before/after pair into a statement-level morphism."""
+        """Crystallize a verified before/after pair into a statement-level morphism.
+
+        ``duty_witness`` is the concrete constant this pair substituted, if any. It is
+        recorded beside the abstraction (not inside it) so a later task can propose the
+        value without the morphism losing portability.
+        """
         if language != "python":
             self.refusal_counts["NON_PYTHON_STATEMENT_LEVEL"] = self.refusal_counts.get("NON_PYTHON_STATEMENT_LEVEL", 0) + 1
             return None
@@ -1227,6 +1243,7 @@ class SkillStoreV2:
             name_restore=dict(created_after),
             hole_before_dumps=hole_before,
             literal_witness=dict(lit_slots),
+            duty_witness=str(duty_witness or ""),
         )
         self.morphisms[mid] = m
         self.save()

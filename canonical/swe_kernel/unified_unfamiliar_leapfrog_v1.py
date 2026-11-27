@@ -2227,3 +2227,23 @@ def run_unfamiliar_six_moves_suite() -> dict[str, Any]:
         "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
         "model_calls": 0,
     }
+
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for unified_unfamiliar_leapfrog_v1."""
+    checks: dict[str, bool] = {}
+    _jtms = SemiringProvenanceJTMSMemory()
+    _jtms.assert_premise("svc", "endpoint", "https://old.example", witness_sha="w51_sha_1")
+    _jtms.derive_fact(("svc", "active_url", "https://old.example"), body_triples=[("svc", "endpoint", "https://old.example")])
+    _q1 = _jtms.query("svc", "active_url")
+    checks["jtms_derives_fact"] = isinstance(_q1, dict) and bool(_q1.get("values") or _q1.get("facts") or _q1.get("active") or _q1.get("derived"))
+    _jtms.retract_premise("svc", "endpoint", "https://old.example")
+    _q2 = _jtms.query("svc", "active_url")
+    checks["jtms_retraction_kills_ghost_fact"] = isinstance(_q2, dict) and not bool(_q2.get("values") or _q2.get("facts") or _q2.get("active"))
+    _audit_ok = audit_test_run_truthfulness(returncode=0, stdout="4 passed in 0.1s", stderr="", tests_executed=4)
+    _audit_lie = audit_test_run_truthfulness(returncode=5, stdout="no tests ran", stderr="", tests_executed=0)
+    checks["audit_truthful_pass"] = _audit_ok.get("truthful_pass") is True
+    checks["audit_rejects_zero_collected"] = _audit_lie.get("truthful_pass") is False
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
+
+

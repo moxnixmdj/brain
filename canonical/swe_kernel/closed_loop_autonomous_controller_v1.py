@@ -2430,4 +2430,22 @@ def execute_and_elevate_confined_trajectory(
         "k3_external_llm_calls": 0,
     }
 
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for closed_loop_autonomous_controller_v1."""
+    checks: dict[str, bool] = {}
+    _tok = next(iter(_HONEST_REFUSAL_CLASSES))
+    checks["honest_refusal_detected"] = _is_honest_contract_refusal({"failure_class": _tok, "status": "REFUSED"}) is True
+    checks["success_not_refusal"] = _is_honest_contract_refusal({"status": "OK", "pass": True}) is False
+    _s1 = _program_signature({"steps": [{"op": "a"}, {"op": "b"}]})
+    _s2 = _program_signature({"steps": [{"op": "a"}, {"op": "c"}]})
+    checks["program_signature_distinguishes"] = isinstance(_s1, str) and _s1 != _s2
+    _rejected_unknown = False
+    try:
+        _deterministic_zero_llm_mcp_substrate("nonexistent_kind_w51", {})
+    except ValueError:
+        _rejected_unknown = True
+    checks["mcp_substrate_rejects_unknown_kind"] = _rejected_unknown
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
+
 

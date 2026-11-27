@@ -1,0 +1,24 @@
+{
+  "file_name": "qebac94.txt",
+  "file_text": "\nzeta job job\n",
+  "kind": "ask",
+  "question": {
+    "blank": false,
+    "containing": null,
+    "lengths": false,
+    "reduce": "count",
+    "rest": false,
+    "unique": false,
+    "unit": "lines"
+  },
+  "sentence": "how many rows are in {file}",
+  "world": {
+    "kind": "text",
+    "lines": [
+      "",
+      "zeta job job"
+    ],
+    "token": "WARN",
+    "trailing_newline": true
+  }
+}

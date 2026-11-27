@@ -395,6 +395,7 @@ def _crystallize_verified_repair(
     edits: Mapping[str, str],
     orig_sources: Mapping[str, str],
     provenance: str,
+    duty_witness: str = "",
 ) -> dict[str, Any]:
     """Write a verified repair into the external stores. Returns the ids earned.
 
@@ -412,6 +413,16 @@ def _crystallize_verified_repair(
     """
     learned: list[str] = []
     laws: list[str] = []
+    # The constant this repair substituted, if the route read one off the failure.
+    # Recorded beside the anti-unified shape so a later task can propose it; the
+    # store's own abstraction deliberately drops concrete values.
+    _duty = ""
+    if isinstance(duty_witness, str) and duty_witness:
+        try:
+            ast.literal_eval(duty_witness)
+            _duty = duty_witness
+        except (ValueError, SyntaxError, TypeError):
+            _duty = ""
     for rel, new_src in sorted(edits.items()):
         orig_src = orig_sources.get(rel)
         if orig_src is None or orig_src == new_src:
@@ -421,6 +432,7 @@ def _crystallize_verified_repair(
                 try:
                     morph = skill_store.learn(
                         orig_src, new_src, origin=provenance, diagnostic_class=provenance.split(":")[-1],
+                        duty_witness=_duty,
                     )
                     if morph is not None:
                         learned.append(morph.morphism_id)
@@ -3243,16 +3255,30 @@ def solve_swe_repo_native_multifile(
         baseline = oracle(copied)
         baseline['output'] = baseline['output'].replace(str(copied)+'/', '')
 
-    def _verify_in_isolated_cow(rel_edits: Mapping[str, str], *, single_test_src: str | None = None) -> tuple[bool, str, bool]:
-        """Screen self-contained assertions if possible; confirm on a fresh project copy."""
+    def _verify_in_isolated_cow(
+        rel_edits: Mapping[str, str],
+        *,
+        single_test_src: str | None = None,
+        stored_duty_proposal: bool = False,
+    ) -> tuple[bool, str, bool]:
+        """Screen self-contained assertions if possible; confirm on a fresh project copy.
+
+        `stored_duty_proposal` marks a candidate whose value came from the skill
+        store rather than from this failure. It relaxes exactly one rule -- the
+        input-dependency gate -- and nothing else. That gate exists to stop a
+        search from *settling* for a lookup; it must not stop the system from
+        trying a value it learned elsewhere and verifying it, which is the only
+        way a stored duty can ever be reused. The CoW oracle still decides.
+        """
         if time.monotonic() >= deadline:
             return False, "BUDGET_EXHAUSTED", False
         for rel, candidate in rel_edits.items():
             if rel not in py_source_rels:
                 return False, "NOT_PRODUCT_SOURCE", False
-            dep = dependencies.gate((root / rel).read_text(encoding="utf-8"), candidate)
-            if dep["status"] != dependencies.PASS:
-                return False, dep["reason"], False
+            if not stored_duty_proposal:
+                dep = dependencies.gate((root / rel).read_text(encoding="utf-8"), candidate)
+                if dep["status"] != dependencies.PASS:
+                    return False, dep["reason"], False
         zygote_used = False
         if len(rel_edits) == 1 and single_test_src:
             only_rel, new_src = next(iter(rel_edits.items()))
@@ -3329,6 +3355,7 @@ def solve_swe_repo_native_multifile(
             skill_store=_skill_store, law_store=_closure_law_store, language="python",
             failure_output=base_out, edits=edits, orig_sources=orig_sources,
             provenance="UNTRUSTED_PROPOSER_VERIFIED" if supplied else f"ZERO_MODEL_{tier}",
+            duty_witness=str((dict(extra) if extra else {}).get("backward_obligation_source") or ""),
         )
         if keep_patch_applied:
             for rel, new_src in sorted(edits.items()):
@@ -3609,9 +3636,23 @@ def solve_swe_repo_native_multifile(
         # forward search over a mutation grammar. Measured on the `None`-guard
         # probe, nothing filled `oe_synthesized_exprs` when there were no
         # witnesses, so the value the test named was never tried anywhere.
-        if baseline_obligation_sources:
+        # Stored duties are PROPOSALS, never decisions. A morphism learned on another
+        # repo records the constant it substituted (`duty_witness`); that constant is
+        # the only reusable part of a constant repair and anti-unification throws it
+        # away. Offered here, with the observed obligation first, and every candidate
+        # still goes through the same dependency gate and the same CoW oracle.
+        _duty_candidates: list[tuple[str, bool]] = [(x, False) for x in baseline_obligation_sources]
+        if _skill_store is not None:
+            try:
+                for _m in _skill_store.morphisms.values():
+                    _w = getattr(_m, "duty_witness", "")
+                    if _w and _w not in [c for c, _ in _duty_candidates]:
+                        _duty_candidates.append((_w, True))
+            except Exception:
+                pass
+        if _duty_candidates:
             _lines = orig_src.splitlines(keepends=True)
-            for _src in baseline_obligation_sources[:8]:
+            for _src, _from_store in _duty_candidates[:8]:
                 for _ln in (ranked_lines_by_file.get(rel) or []):
                     if not (1 <= _ln <= len(_lines)):
                         continue
@@ -3624,12 +3665,16 @@ def solve_swe_repo_native_multifile(
                     _cand_src = "".join(_cand)
                     if _cand_src == orig_src:
                         continue
-                    _ok, _out, _zused = _verify_in_isolated_cow({rel: _cand_src}, single_test_src=single_test_src)
+                    _ok, _out, _zused = _verify_in_isolated_cow(
+                        {rel: _cand_src},
+                        single_test_src=single_test_src,
+                        stored_duty_proposal=_from_store,
+                    )
                     zygote_screened += int(_zused)
                     if _ok:
                         return _crystallize_and_finish(
                             {rel: _cand_src},
-                            tier="ASSERTION_BACKWARD_OBLIGATION",
+                            tier="STORED_DUTY_PROPOSAL" if _from_store else "ASSERTION_BACKWARD_OBLIGATION",
                             localization=localization_report,
                             stages=stages_run,
                             zygote_screened=zygote_screened,
@@ -4379,3 +4424,30 @@ __all__ = [
     "synthesize_counterfactual_and_angelic_repair",
     "trace_expression_and_literal_repair",
 ]
+
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for canonical_swe_spine_v1."""
+    import tempfile as _tf
+    checks: dict[str, bool] = {}
+    with _tf.TemporaryDirectory(prefix="w51_spine_") as _td:
+        _p = pathlib.Path(_td)
+        (_p / "app.py").write_text("def f(x):\n    return x + 1\n", encoding="utf-8")
+        checks["detect_python_repo"] = detect_repository_language(_p) == "python"
+        checks["detect_js_test_file"] = detect_repository_language(_p, test_file="spec.js") == "javascript"
+        checks["detect_c_sources"] = detect_repository_language(_p, c_sources=["main.c"]) == "c"
+        _store = CanonicalLawStore(_p / "laws.json")
+        checks["empty_store_zero"] = _store.count() == 0
+        _law = _store.add_verified_diff(
+            language="python",
+            failure_output="AssertionError: assert 1 == 2",
+            orig_source="def f(x):\n    return x\n",
+            patched_source="def f(x):\n    return x + 1\n",
+        )
+        checks["store_admits_diff"] = _law is not None and _store.count() >= 1
+        _contract = compile_plain_goal_contract("fix failing unit test in app.py")
+        checks["goal_contract_dict"] = isinstance(_contract, dict) and bool(_contract)
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
+
+
+

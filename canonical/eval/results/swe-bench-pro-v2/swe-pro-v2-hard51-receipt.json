@@ -1,0 +1,139 @@
+{
+ "arms": {
+  "causal": {
+   "cost_usd_total": 0.0,
+   "engine_statuses": {
+    "EDITS_UPLOADED": 4,
+    "HARNESS_ERROR": 4,
+    "NO_EDITS": 43
+   },
+   "model_calls_total": 0,
+   "n_expected": 51,
+   "n_missing_trial": 0,
+   "n_reported": 51,
+   "resolve_rate_pct": 0.0,
+   "resolved": 0,
+   "wall_seconds_mean": 149.44,
+   "wall_seconds_total": 7621.2
+  },
+  "nop": {
+   "cost_usd_total": 0.0,
+   "engine_statuses": {
+    "NO_AGENT_REPORT": 51
+   },
+   "model_calls_total": 0,
+   "n_expected": 51,
+   "n_missing_trial": 0,
+   "n_reported": 51,
+   "resolve_rate_pct": 0.0,
+   "resolved": 0,
+   "wall_seconds_mean": 142.17,
+   "wall_seconds_total": 7250.73
+  },
+  "oracle": {
+   "cost_usd_total": 0.0,
+   "engine_statuses": {
+    "NO_AGENT_REPORT": 51
+   },
+   "model_calls_total": 0,
+   "n_expected": 51,
+   "n_missing_trial": 0,
+   "n_reported": 51,
+   "resolve_rate_pct": 100.0,
+   "resolved": 51,
+   "wall_seconds_mean": 157.72,
+   "wall_seconds_total": 8043.92
+  }
+ },
+ "attribution": {
+  "causal": {
+   "engine_attributable": 47,
+   "harness_side": 4,
+   "harness_side_statuses": [
+    "HARNESS_ERROR"
+   ],
+   "measured_resolve_rate_pct": 0.0,
+   "n_expected": 51,
+   "resolve_rate_pct_engine_attributable": 0.0,
+   "resolved_engine_attributable": 0,
+   "rows_read": 51
+  },
+  "nop": {
+   "engine_attributable": 51,
+   "harness_side": 0,
+   "harness_side_statuses": [],
+   "measured_resolve_rate_pct": 0.0,
+   "n_expected": 51,
+   "resolve_rate_pct_engine_attributable": 0.0,
+   "resolved_engine_attributable": 0,
+   "rows_read": 51
+  },
+  "oracle": {
+   "engine_attributable": 51,
+   "harness_side": 0,
+   "harness_side_statuses": [],
+   "measured_resolve_rate_pct": 100.0,
+   "n_expected": 51,
+   "resolve_rate_pct_engine_attributable": 100.0,
+   "resolved_engine_attributable": 51,
+   "rows_read": 51
+  }
+ },
+ "authority": "OFFICIAL_TASK_VERDICTS__GATES_PASSED",
+ "benchmark": "SWE-bench Pro V2 (HARD-51, 51 tasks)",
+ "claimable_as_a_benchmark_number": true,
+ "control_rows": {
+  "causal": {
+   "resolved": 0,
+   "rows_expected": 51,
+   "rows_read": 51
+  },
+  "nop": {
+   "resolved": 0,
+   "rows_expected": 51,
+   "rows_read": 51
+  },
+  "oracle": {
+   "resolved": 51,
+   "rows_expected": 51,
+   "rows_read": 51
+  }
+ },
+ "date": "2026-11-25",
+ "eval_commit": "ab47d3bdad35e7dbd492663393a320212a7d24a6",
+ "gates_recomputed_here": {
+  "nop_data_complete": true,
+  "nop_gate_pass": true,
+  "oracle_data_complete": true,
+  "oracle_gate_pass": true
+ },
+ "gates_reported_by_harness": {
+  "nop_gate_pass": true,
+  "oracle_gate_pass": true
+ },
+ "harness_side_statuses": [
+  "EMPTY_TREE",
+  "HARNESS_ERROR",
+  "NOT_RUN",
+  "NO_AGENT_REPORT",
+  "TREE_TOO_BIG",
+  "UPLOAD_BLOCKED"
+ ],
+ "n_real_trial_rows_per_arm": {
+  "causal": 51,
+  "nop": 51,
+  "oracle": 51
+ },
+ "n_shard_reports_read": 18,
+ "note": "A resolve rate is quotable only when the oracle and nop controls pass in the same job configuration that produced it. This receipt is derived from the committed report by copying fields; it adds no measurement and rounds nothing.",
+ "run_produced_number": true,
+ "run_produced_number_as_reported_by_harness": true,
+ "schema": "BRAIN_SWE_PRO_V2_RUN_RECEIPT_V1",
+ "task_set_label": null,
+ "what_this_run_did_prove": [
+  "each task's own verifier ran inside the pinned official container image, and its reward is the only source of the resolved flag",
+  "the engine ran with no network and no hosted model call",
+  "the harness distinguishes a failed run from an unmeasured one, and says which it got"
+ ],
+ "why_not_claimable": []
+}

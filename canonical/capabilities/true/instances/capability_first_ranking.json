@@ -1,0 +1,92 @@
+{
+  "checkpoint_open_obligation_count": 11,
+  "defect": "BAD_WORK_TYPE",
+  "schema": "CAPABILITY_FIRST_RANKING_INSTANCE_V1",
+  "work": [
+    {
+      "complexity_cost_ub": 1,
+      "compute_cost_ub": 0,
+      "expected_capability_gain_lcb": "0.2",
+      "expected_efficiency_gain_lcb": "0.2",
+      "expected_reliability_gain_lcb": 1,
+      "generalization_lcb": 1,
+      "memory_cost_ub": "0.25",
+      "reuse_breadth_lcb": "1.5",
+      "success_probability_lcb": "0.1",
+      "wall_clock_cost_ub": 1,
+      "work_id": "W-38a01",
+      "work_type": "EFFICIENCY_IMPROVEMENT"
+    },
+    {
+      "claims_new_primitive": true,
+      "complexity_cost_ub": 1,
+      "compute_cost_ub": 1,
+      "exact_unsatisfied_predicate": "P_c4ccf3",
+      "existing_mechanism_unsoundness_reasons": {
+        "MECH-2b7": "unsound because 6bd0"
+      },
+      "existing_mechanisms_searched": [
+        "MECH-2b7"
+      ],
+      "expected_capability_gain_lcb": 0,
+      "expected_efficiency_gain_lcb": 0,
+      "expected_reliability_gain_lcb": 0,
+      "falsifier_and_promotion_criteria": "falsifier cbb5",
+      "frontier_class": "OPEN_WORLD_EVIDENCE_FRONTIER",
+      "generalization_lcb": "0.5",
+      "independently_verified_missing_primitive_or_counterexample": "CX_da712a",
+      "memory_cost_ub": 0,
+      "minimum_new_primitive_scope": "scope 7273",
+      "reuse_breadth_lcb": 3,
+      "success_probability_lcb": "0.1",
+      "verified_capability_defect_ids": [
+        "CE-ce97"
+      ],
+      "wall_clock_cost_ub": 2,
+      "work_id": "W-237a6",
+      "work_type": "capability_build"
+    },
+    {
+      "complexity_cost_ub": 0,
+      "compute_cost_ub": 0,
+      "expected_capability_gain_lcb": 1,
+      "expected_efficiency_gain_lcb": "0.1",
+      "expected_obligation_discharge_lcb": 0,
+      "expected_obligation_unlock_lcb": 1,
+      "expected_reliability_gain_lcb": 0,
+      "generalization_lcb": "0.25",
+      "memory_cost_ub": 0,
+      "reuse_breadth_lcb": "0.5",
+      "scope_complete_discharge": true,
+      "success_probability_lcb": "0.8",
+      "wall_clock_cost_ub": 2,
+      "work_id": "W-246cf",
+      "work_type": "RELIABILITY_IMPROVEMENT"
+    },
+    {
+      "claims_new_primitive": true,
+      "complexity_cost_ub": 1,
+      "compute_cost_ub": "0.5",
+      "exact_unsatisfied_predicate": "P_9e7d97",
+      "existing_mechanism_unsoundness_reasons": {
+        "MECH-53e": "unsound because a353"
+      },
+      "existing_mechanisms_searched": [
+        "MECH-53e"
+      ],
+      "expected_capability_gain_lcb": 0,
+      "expected_efficiency_gain_lcb": 0,
+      "expected_reliability_gain_lcb": 0,
+      "falsifier_and_promotion_criteria": "falsifier 4cec",
+      "generalization_lcb": "0.75",
+      "independently_verified_missing_primitive_or_counterexample": "CX_729f32",
+      "memory_cost_ub": 0,
+      "minimum_new_primitive_scope": "scope a360",
+      "reuse_breadth_lcb": 3,
+      "success_probability_lcb": "0.1",
+      "wall_clock_cost_ub": 1,
+      "work_id": "W-3863c",
+      "work_type": "FALSIFICATION"
+    }
+  ]
+}

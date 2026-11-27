@@ -2367,3 +2367,27 @@ __all__ = [
     "build_graph", "function_term", "cross_language_equivalence", "summarize",
     "digest", "_freeze",
 ]
+
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for guarded_meaning_ir_v1."""
+    checks: dict[str, bool] = {}
+    _eg = SemiPersistentEGraph()
+    _i1 = _eg.add(Lit(1))
+    _i2 = _eg.add(Lit(2))
+    checks["egraph_distinct"] = not _eg.equal(_i1, _i2)
+    _d0 = _eg.depth
+    _eg.push()
+    _i3 = _eg.add(Lit(3))
+    checks["egraph_push_increases_depth"] = _eg.depth == _d0 + 1 and _eg.find(_i3) >= 0
+    _eg.pop()
+    checks["egraph_pop_restores_depth"] = _eg.depth == _d0
+    checks["eval_term_lit"] = eval_term(Lit(42)) == 42
+    _ds = DeltaSim({"x": 10})
+    _ds.push()
+    _ds.pop()
+    checks["deltasim_preserves_frame"] = _ds.get("x") == 10
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
+
+
+

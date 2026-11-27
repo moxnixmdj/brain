@@ -1,0 +1,16 @@
+{
+  "arms": {},
+  "mode_inputs": {
+    "agent_timeout_s": "600",
+    "arms": "all",
+    "benchmark": "swe-pro-v2-smoke3",
+    "commit_results": "true",
+    "n_shard_reports_found": 0,
+    "n_shards": "1",
+    "run_failed": ""
+  },
+  "note": "NO SHARD REPORTS: every shard failed before collect; this run produced no benchmark number",
+  "run_failed": true,
+  "run_produced_number": false,
+  "schema": "brain.bench_eval_report.v1"
+}

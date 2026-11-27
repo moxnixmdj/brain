@@ -3791,3 +3791,22 @@ def run(payload: Mapping[str, Any] | None = None, root: pathlib.Path = ROOT) -> 
         "trigram_build_ms": idx.build_ms,
         "model_dependency_count": 0,
     }
+
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for frontier_seven_moves_runtime_v1."""
+    checks: dict[str, bool] = {}
+    _ng = CDCLNogoodTable()
+    _key = CDCLNogoodTable.compute_emc_key("def f(x):\n    return x + 1\n", "f", [(1,), (2,)])
+    checks["cdcl_initial_miss"] = _ng.check("scope_a", _key) is None
+    _ng.learn_nogood("scope_a", _key, "conflict_witness")
+    checks["cdcl_learns_hit"] = _ng.check("scope_a", _key) == "conflict_witness"
+    _ng.invalidate_scope("scope_a")
+    checks["cdcl_invalidates_scope"] = _ng.check("scope_a", _key) is None
+    _mem = DBSPZSetMemory()
+    _mem.apply_delta([("fact:alpha", {"text": "alpha endpoint active"}, 1)])
+    checks["dbsp_query_positive"] = len(_mem.query("alpha endpoint")) >= 1
+    _mem.apply_delta([("fact:alpha", {"text": "alpha endpoint active"}, -1)])
+    checks["dbsp_retraction_zeroes"] = len(_mem.query("alpha endpoint")) == 0
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
+

@@ -2202,5 +2202,19 @@ def main(argv: Sequence[str] | None = None) -> int:
     return 0
 
 
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for the_assertion_is_the_demand_v1."""
+    checks: dict[str, bool] = {}
+    checks["literal_expression_int"] = literal_expression(42) == "42"
+    checks["literal_expression_str"] = literal_expression("hi") == "'hi'"
+    checks["safe_equal_positive"] = safe_equal([1, 2], [1, 2]) is True
+    checks["safe_equal_negative"] = safe_equal([1, 2], [1, 3]) is False
+    _eval = evaluate("x + 1", [{"x": 2}, {"x": 5}])
+    checks["evaluate_across_frames"] = _eval == [3, 6]
+    _lits = test_literals("def test_a():\n    assert f('hello') == 7\n", "test_a", cap=10)
+    checks["test_literals_extracts"] = "hello" in _lits and 7 in _lits
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
+
 if __name__ == "__main__":
     raise SystemExit(main())

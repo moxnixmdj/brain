@@ -2503,3 +2503,37 @@ def shared_cognitive_core(state_dir: pathlib.Path | str | None = None) -> Sentie
         _SHARED_CORES_BY_PATH[key] = core
     return core
 
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for sentient_cognitive_core_v1."""
+    import tempfile as _tf
+    checks: dict[str, bool] = {}
+    with _tf.TemporaryDirectory(prefix="w51_scc_") as _td:
+        _bel = EpistemicSelfBeliefEngine(pathlib.Path(_td) / "belief.json")
+        _tkt = _bel.predict_before_act("swe_task_1")
+        _surp = _bel.settle_and_compute_surprise(_tkt, outcome_pass=True, inspector="self_check")
+        checks["belief_predict_and_settle"] = isinstance(_surp, dict) and bool(_surp)
+        _gt_hi = GlobalVoIDominanceController.good_turing_unseen_mass(
+            [{"failure_signature": "e1"}],
+            probed_upstream_groups=["g1"],
+            unprobed_upstream_groups=["g2", "g3", "g4"],
+        )
+        _gt_lo = GlobalVoIDominanceController.good_turing_unseen_mass(
+            [{"failure_signature": "e1"}, {"failure_signature": "e1"}, {"failure_signature": "e1"}],
+            probed_upstream_groups=["g1", "g2", "g3", "g4"],
+            unprobed_upstream_groups=[],
+        )
+        checks["good_turing_monotone"] = 0.0 <= _gt_lo < _gt_hi <= 1.0
+        _pos = WakeSleepConsolidationEngine.verify_two_witness_nonconstant([
+            {"input": 1, "output": 2},
+            {"input": 2, "output": 4},
+        ])
+        _neg = WakeSleepConsolidationEngine.verify_two_witness_nonconstant([
+            {"input": 1, "output": 5},
+            {"input": 2, "output": 5},
+        ])
+        checks["two_witness_nonconstant_pos"] = isinstance(_pos, dict) and bool(_pos.get("pass", _pos.get("nonconstant", True)))
+        checks["two_witness_constant_neg"] = isinstance(_neg, dict) and not bool(_neg.get("pass", _neg.get("nonconstant", False)))
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
+
+

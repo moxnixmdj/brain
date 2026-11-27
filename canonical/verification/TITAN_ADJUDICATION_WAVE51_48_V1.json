@@ -1,0 +1,405 @@
+{
+  "broken_count": 0,
+  "candidates": 48,
+  "counts": {
+    "BROKEN": 0,
+    "IMPORTS_ONLY": 0,
+    "MISSING_SUBSTRATE": 0,
+    "PROVEN": 48
+  },
+  "engine_id": "LEAPFROG_W51_48_TITAN_BLOB_PINNED_ADJUDICATOR",
+  "k3_model_calls": 0,
+  "pass": true,
+  "pinned_verdicts": [
+    {
+      "blob_sha256": "9117f2cf5815c56933ec0ed6be6b2bd321932c31c62481d405424434719413ff",
+      "checks": 4,
+      "elapsed_ms": 180.89,
+      "loc": 2473,
+      "path": "canonical/runtime/asymmetric_frontier_leapfrog_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "f54b54cc639f5b2d77a6e2a0286db86fb69d025b9e457cf655934a6883d05986",
+      "checks": 6,
+      "elapsed_ms": 133.53,
+      "loc": 3078,
+      "path": "canonical/runtime/computer_env_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "6985aa189eb0432051f2697a2c30189913eb5c31d35eb0f1cf5f4604d7d436d3",
+      "checks": 5,
+      "elapsed_ms": 137.65,
+      "loc": 3812,
+      "path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "ce593e90204393a242b84c315cb35d5cdc3951fb929931ded683904af1f794d8",
+      "checks": 10,
+      "elapsed_ms": 328.7,
+      "loc": 3744,
+      "path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "9fc0907d8cd38270829362629e4ab2309066d81299526b17d91d216b923d0d89",
+      "checks": 3,
+      "elapsed_ms": 186.74,
+      "loc": 7322,
+      "path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "5c12f43d4d79e93bb8f7f466031c4e684da980d0ff94e1080d4a047ec7dc0fde",
+      "checks": 5,
+      "elapsed_ms": 84.51,
+      "loc": 2274,
+      "path": "canonical/runtime/value_algebra_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "359f45e06b7b2e186f268df8af32926426a221c57da820aac423b7713a0a19d0",
+      "checks": 5,
+      "elapsed_ms": 171.39,
+      "loc": 2055,
+      "path": "canonical/runtime/wave43_44_dark_matter_meme_webmcp_leapfrog_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "e89d9e8302ca1c5abf43f3d0dbbafa2bf6906cf052aea1399ff41e6a26e73c9d",
+      "checks": 5,
+      "elapsed_ms": 459.81,
+      "loc": 1635,
+      "path": "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "7f92d52c9efcdb608b403b46951b59b47407fab04d7df1771530af8a758df5de",
+      "checks": 7,
+      "elapsed_ms": 1035.52,
+      "loc": 1523,
+      "path": "canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "920594f8fbf14dde4a4ea44a93c8a6e0c06907518627bda40af0c7ceb0704442",
+      "checks": 10,
+      "elapsed_ms": 574.01,
+      "loc": 2392,
+      "path": "canonical/runtime/wave49_50_structural_ast_repair_and_titan_adjudication_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "1bb533cb396b97c6299dfd000d76495c3a8ec96679dd53840ccce310fab2cbb0",
+      "checks": 12,
+      "elapsed_ms": 200.57,
+      "loc": 2472,
+      "path": "canonical/runtime/wave51_52_sliced_structural_swe_and_stranded_treasury_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "66e744b267f29b805d67af8675fdb5c094b64e990a96ccfc831d6396740f66ed",
+      "checks": 5,
+      "elapsed_ms": 110.23,
+      "loc": 3436,
+      "path": "canonical/swe_kernel/angelic_cegis_repair_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "62f4babdbf45b92ac0f447916dfa781de8acab713ff695b8b0b07785d620b6d2",
+      "checks": 7,
+      "elapsed_ms": 155.01,
+      "loc": 4508,
+      "path": "canonical/swe_kernel/angelic_lens_cow_repair_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "cc738d10f3f21aad20f762d4fa8b4a5bc2b5928728ae2c15427ea50e6670c2c6",
+      "checks": 4,
+      "elapsed_ms": 257.46,
+      "loc": 2463,
+      "path": "canonical/swe_kernel/autonomous_awake_loop_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "a6f7e26103ace2d97c1eadd4bf4144d40854dccd95c38543ca69e1528ffbd18f",
+      "checks": 3,
+      "elapsed_ms": 106.36,
+      "loc": 2209,
+      "path": "canonical/swe_kernel/canonical_boundary_router_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "393154b3bf7e244ba4d51cb970441ee4594217cc841895db079adf39a424b4f8",
+      "checks": 6,
+      "elapsed_ms": 176.16,
+      "loc": 4449,
+      "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "fef38eb22c43125e487eb132d2d3a8465eeaa3639d50cf168df3fbb8bd6e6497",
+      "checks": 6,
+      "elapsed_ms": 243.39,
+      "loc": 4453,
+      "path": "canonical/swe_kernel/canonical_swe_spine_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "3583b533f8e8ab14a48f66d9f06d2d2d1c51748e40fa0bc5c892cb0bcd1cb066",
+      "checks": 5,
+      "elapsed_ms": 293.75,
+      "loc": 3367,
+      "path": "canonical/swe_kernel/causal_cegis_inventor_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "fa4b695cb117395e6147123804ab2e9595043ea074d4afbab0405b40caf4453e",
+      "checks": 3,
+      "elapsed_ms": 141.98,
+      "loc": 2541,
+      "path": "canonical/swe_kernel/causal_swe_repair_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "cc78a5f1dc9519e2f9385b11aa54008f29786ab74bb1ed6356d5f674191f98e8",
+      "checks": 3,
+      "elapsed_ms": 169.33,
+      "loc": 2599,
+      "path": "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "eb09de7bee87396370cc03649203df995d5dabd56ed1a6240ad53ded655c2b1f",
+      "checks": 4,
+      "elapsed_ms": 221.66,
+      "loc": 2451,
+      "path": "canonical/swe_kernel/closed_loop_autonomous_controller_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "6e3e1df7dc513ba4f3e45fd474bf75d396db14b8eff3da437a78fb0dc5f7bf65",
+      "checks": 3,
+      "elapsed_ms": 125.08,
+      "loc": 2720,
+      "path": "canonical/swe_kernel/concept_library_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "307946e6ab0321d3cfc327d4901c272b31cd7454f2e2b6c9415b4af5471b6bdb",
+      "checks": 6,
+      "elapsed_ms": 117.6,
+      "loc": 2326,
+      "path": "canonical/swe_kernel/cow_angelic_zygote_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "6834c024cf4a05ba6f62c1070fdecee48247808c5052a760c37c6cda45d36415",
+      "checks": 9,
+      "elapsed_ms": 115.39,
+      "loc": 3452,
+      "path": "canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "fc412f6d52fc191377a2ac7d58203948d51c8dbde1dc6e28783392ae470149ad",
+      "checks": 4,
+      "elapsed_ms": 137.57,
+      "loc": 4241,
+      "path": "canonical/swe_kernel/first_principles_mental_cegis_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "70eba69f4f574c64551f5b5e69a179d88de47b22d015045a7dd28dc42d3ee834",
+      "checks": 5,
+      "elapsed_ms": 120.11,
+      "loc": 2393,
+      "path": "canonical/swe_kernel/guarded_meaning_ir_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "06798ebc3687ee516a3504b4ad54f0a7bf8e4c51becc775a9051ed678244eee3",
+      "checks": 6,
+      "elapsed_ms": 107.15,
+      "loc": 5230,
+      "path": "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "de17d977021fc4f6a464ed0909a0efaa12d935251429b8b0c622d171b98d3584",
+      "checks": 6,
+      "elapsed_ms": 139.78,
+      "loc": 3846,
+      "path": "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "576b092106a95a8076d7d67c0eb905ad6e68e3e195756031e9af3030ea5df3be",
+      "checks": 6,
+      "elapsed_ms": 189.44,
+      "loc": 2147,
+      "path": "canonical/swe_kernel/multistep_repo_closed_loop_solver_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "441bb8c335e65e3ca33ea59ef45a8681311cb0b9552c53c2b6536fb47396e3b6",
+      "checks": 5,
+      "elapsed_ms": 156.44,
+      "loc": 3295,
+      "path": "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "001124c1e7a0abe205570a4b953beceb06ceb9f6a7ac97bd686434c0bc74f97d",
+      "checks": 5,
+      "elapsed_ms": 123.5,
+      "loc": 2784,
+      "path": "canonical/swe_kernel/polyglot_build_ci_engine_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "0f9fa4298191aa3388cbeefc25a8aa2dc1803e1b316bbd569db9a7ace9a6008c",
+      "checks": 6,
+      "elapsed_ms": 210.82,
+      "loc": 2870,
+      "path": "canonical/swe_kernel/recursive_self_architect_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "2bf5145e459dea7b4ac6104f64f3e6113ed6e13cef5d1a9733f95ba6718e5947",
+      "checks": 4,
+      "elapsed_ms": 109.87,
+      "loc": 2600,
+      "path": "canonical/swe_kernel/residual_wall_closers_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "157d04d99abc71ef0be57a51744e874faec7df0e2472f56b06dab6835af9ca64",
+      "checks": 7,
+      "elapsed_ms": 128.84,
+      "loc": 6762,
+      "path": "canonical/swe_kernel/reverse_tomography_algebra_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "ac2d36a67cf994896ad9872ae0a930d0f1dd1db2c6ef379a3172fa4d800bf5cf",
+      "checks": 6,
+      "elapsed_ms": 170.29,
+      "loc": 4717,
+      "path": "canonical/swe_kernel/semantic_causal_engine_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "5406fdae2b065d09d5df58d30c86b333686e215b3cfd49a4c60ff1ef09507958",
+      "checks": 4,
+      "elapsed_ms": 113.59,
+      "loc": 3010,
+      "path": "canonical/swe_kernel/semantic_generalization_engine_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "14a87530f0c400891d43878f544e8210cf2e3cfe0bdd031f11244604d1be7385",
+      "checks": 7,
+      "elapsed_ms": 97.73,
+      "loc": 2169,
+      "path": "canonical/swe_kernel/semantic_ir_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "aeaf0191019f9e0ea2a1b6bdf9f5d67a8b6166c3cc080aa23cc02afba972b1ae",
+      "checks": 4,
+      "elapsed_ms": 113.55,
+      "loc": 2539,
+      "path": "canonical/swe_kernel/sentient_cognitive_core_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "e81082a5360247dbfa540b0cf66c11b792f577863897058c966f97e61b446211",
+      "checks": 5,
+      "elapsed_ms": 112.92,
+      "loc": 1763,
+      "path": "canonical/swe_kernel/the_environment_broker_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "81bb83f933b8123d3bf0f5e435d811e0706875f9b28a84884c2783e6e45b93e2",
+      "checks": 6,
+      "elapsed_ms": 183.52,
+      "loc": 6784,
+      "path": "canonical/swe_kernel/unified_epistemic_portfolio_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "213b4b3865dbdce32a183dfc82d0a064e11c2e5e3c3d9e93b516ace17f174738",
+      "checks": 4,
+      "elapsed_ms": 157.13,
+      "loc": 2249,
+      "path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "6435ae5c3acbd2d2de51f975f9a3c793c6d08673780f0d28d047a12e0d51417c",
+      "checks": 6,
+      "elapsed_ms": 223.01,
+      "loc": 4465,
+      "path": "canonical/swe_kernel/universal_computer_agent_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "e5e6a04804ee631728f1205c762ed549147d2227564c29b716815fd0d5542b0d",
+      "checks": 3,
+      "elapsed_ms": 148.68,
+      "loc": 2269,
+      "path": "canonical/swe_kernel/universal_semantic_ir_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "57dbe996831ec24ccf0431cd99c18ad0204153eba54074748abaee3882f2429f",
+      "checks": 3,
+      "elapsed_ms": 201.46,
+      "loc": 2726,
+      "path": "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "8898314e5493ea6f1ee8671b17f5b8270deb01b1b47c1f881905d48f0ba0ee12",
+      "checks": 6,
+      "elapsed_ms": 127.98,
+      "loc": 2220,
+      "path": "canonical/tools/the_assertion_is_the_demand_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "dcd14d0e0bb8e1cbdad557cea7ecc18c911f5b14ee42589f101663430d4d1e16",
+      "checks": 5,
+      "elapsed_ms": 111.45,
+      "loc": 2534,
+      "path": "canonical/tools/the_guide_is_an_action_grammar_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "01f352910916ac31a0b1e4757cc6d5f6e1d4a07ec5dd9af75899302670a456a8",
+      "checks": 5,
+      "elapsed_ms": 115.94,
+      "loc": 2666,
+      "path": "canonical/tools/the_relation_is_read_from_the_failing_run_v1.py",
+      "verdict": "PROVEN"
+    },
+    {
+      "blob_sha256": "e3f3e320e18d90e691c9e296efd7959e3a55c16e8e6837254db3c5c15a21d125",
+      "checks": 5,
+      "elapsed_ms": 89.82,
+      "loc": 2887,
+      "path": "canonical/tools/the_right_question_is_an_experiment_v1.py",
+      "verdict": "PROVEN"
+    }
+  ],
+  "proven_count": 48,
+  "proven_loc": 152920,
+  "run_digest_sha256": "aae80dd5eaca49112e11d6c727775aa664c84af698e39ca39deef062ec30990d",
+  "schema": "BRAIN_WAVE51_52_SLICED_STRUCTURAL_SWE_AND_STRANDED_TREASURY_V1",
+  "spend_usd": 0.0,
+  "total_behavioral_checks": 259
+}

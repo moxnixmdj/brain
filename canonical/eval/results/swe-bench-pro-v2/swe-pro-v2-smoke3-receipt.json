@@ -1,0 +1,39 @@
+{
+ "arms": {},
+ "attribution": {},
+ "authority": "NO_MEASUREMENT__HARNESS_ONLY",
+ "benchmark": "SWE-bench Pro V2",
+ "claimable_as_a_benchmark_number": false,
+ "control_rows": {},
+ "date": "2026-11-25",
+ "eval_commit": "unknown",
+ "gates_recomputed_here": {
+  "nop_data_complete": false,
+  "nop_gate_pass": false,
+  "oracle_data_complete": false,
+  "oracle_gate_pass": false
+ },
+ "gates_reported_by_harness": {},
+ "harness_side_statuses": [
+  "EMPTY_TREE",
+  "HARNESS_ERROR",
+  "NOT_RUN",
+  "NO_AGENT_REPORT",
+  "TREE_TOO_BIG",
+  "UPLOAD_BLOCKED"
+ ],
+ "n_real_trial_rows_per_arm": {},
+ "n_shard_reports_read": null,
+ "note": "A resolve rate is quotable only when the oracle and nop controls pass in the same job configuration that produced it. This receipt is derived from the committed report by copying fields; it adds no measurement and rounds nothing.",
+ "run_produced_number": false,
+ "run_produced_number_as_reported_by_harness": false,
+ "schema": "BRAIN_SWE_PRO_V2_RUN_RECEIPT_V1",
+ "task_set_label": null,
+ "what_this_run_did_prove": [
+  "the harness distinguishes a failed run from an unmeasured one, and says which it got"
+ ],
+ "why_not_claimable": [
+  "NO_TRIAL_DATA: no trial row was read for any expected task, so this run produced no benchmark number. The 0 columns in the raw report are a harness failure, not a score, and the controls were never exercised.",
+  "RUN_FAILED: the eval job reported failure; no shard report was committed."
+ ]
+}
