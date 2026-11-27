@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V2_SEMANTIC_IDENTITY_QUARANTINE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_TRUTH__V2_SEMANTIC_PRODUCTION_IDENTITY_PERMANENTLY_QUARANTINED_BY_REACHABLE_COUNTEREXAMPLE__NO_LAUNCH_NO_CLAIM_NO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "quarantined_identity": {
+    "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_EXECUTION_IDENTITY_V2",
+    "sha256": "5dc0103691b2b3afa8bb8f95482389dcd796fb87346804066907ff146ecdbb1e",
+    "exact_candidate_commit_recorded_by_stale_frontier": "33c660f4a801b69f2a46d3bbc5dbfb74618e066a",
+    "stale_frontier_path": "canonical/governance/UNKNOWN_DOMAIN_ATOMIC_TRANSACTION_FRONTIER_V2.json",
+    "stale_frontier_merge_commit": "e11c4051f3bbf933f8f77bf6a60c528b0cfa63c7",
+    "launch_ref": "refs/heads/unknown-domain-direct-launch/5dc0103691b2b3afa8bb8f95482389dcd796fb87346804066907ff146ecdbb1e",
+    "claim_ref": "refs/heads/unknown-domain-direct-claims/5dc0103691b2b3afa8bb8f95482389dcd796fb87346804066907ff146ecdbb1e"
+  },
+  "falsification": {
+    "canonical_truth_repair_commit": "085e262b6c47b8f82dd4b3259fea25d6b2104b30",
+    "revoked_proof": "canonical/verification/UNKNOWN_DOMAIN_DIRECT_V2_UNIVERSAL_FORMAL_REDUCTION_20261005_V1.json",
+    "decisive_regression": "canonical/tests/test_unknown_domain_v2_universal_promotion_revocation_v1.py",
+    "defect_1": "REACHABLE_ADD2_EXACT_IEEE754_ROLE_ORDER_COUNTEREXAMPLE__V2_CAN_IDENTIFY_CORRECT_SUPPORT_YET_SWAP_R0_R1_AND_MISS_EXACT_GOLD_BY_ONE_ULP",
+    "defect_2": "TRUNCATED_HMAC_DERIVED_IDENTIFIERS_LACK_STRUCTURAL_INJECTIVITY_TOTALITY_PROOF",
+    "logical_consequence": "ONE_REACHABLE_COUNTEREXAMPLE_IS_SUFFICIENT_TO_INVALIDATE_THE_FOR_EVERY_POPULATION_V2_ACCEPTANCE_CLAIM"
+  },
+  "current_ref_observation_at_quarantine": {
+    "semantic_launch_ref_observed": false,
+    "semantic_claim_ref_observed": false,
+    "production_result_observed": false,
+    "production_cases_consumed_for_this_identity": 0
+  },
+  "hard_rules": [
+    "DO_NOT_CREATE_THE_5DC010_V2_LAUNCH_REF",
+    "DO_NOT_CREATE_OR_CREDIT_THE_5DC010_V2_CLAIM_REF",
+    "DO_NOT_USE_ANY_PASSING_CONTROL_PLANE_VERIFICATION_TO_RESURRECT_A_FALSIFIED_EXECUTION_SUBJECT",
+    "CONTROL_PLANE_HARDENING_CANNOT_REPAIR_A_CAPABILITY_COUNTEREXAMPLE",
+    "ONLY_A_NEW_EXECUTION_SUBJECT_THAT_CLOSES_BOTH_EXACT_FLOAT_AND_IDENTIFIER_TOTALITY_HOLES_MAY_REENTER_ROOT3_REDUCTION",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "successor_frontier": {
+    "required_subject": "CANDIDATE_V3_PLUS_GENERATOR_V3_TOTAL_EXACT_CONJUNCTION",
+    "independent_verifier_merge_commit": "a91cf68b5c8ada93e0ba10cfce0f5a5d7b2643e9",
+    "required_next_gate": "INDEPENDENT_CONTENT_BOUND_V4_RECEIPT_THEN_SEPARATE_FAIL_CLOSED_ROOT3_AND_ACCEPTANCE_REDUCTION",
+    "production_required_for_bound_universal_evaluator_claim": false
+  },
+  "authority": {
+    "execution": false,
+    "fresh_reality": false,
+    "acceptance_credit": false,
+    "family_credit": false,
+    "capability_credit": false,
+    "ownership_credit": false,
+    "promotion": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
