@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_LOSSLESS_TASK_INGRESS_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "REMOTE_ISOLATED_REPLAY_PASS__45_OF_45_FULL_AA_SUITE__ZERO_TERMINAL_CREDIT",
+  "executor": {
+    "kind": "SPRITE_REMOTE_ISOLATED_RUNTIME",
+    "sprite_name": "brain-frontiercode-route-refresh-verify-20261008-v1",
+    "sprite_id": "sprite-516155ae-ce43-4477-bba9-ea126ee41fa1",
+    "working_directory": "/tmp/aa_briefcase_verify_3133"
+  },
+  "ingress": {
+    "runtime": {
+      "path": "canonical/runtime/aa_briefcase_lossless_task_ingress_v1.py",
+      "git_blob_sha": "b3476d2db7105a51fc299dfb1e058db054e9250a"
+    },
+    "tests": {
+      "path": "canonical/tests/test_aa_briefcase_lossless_task_ingress_v1.py",
+      "git_blob_sha": "a3989d30dbbca760b9e3a0fc4a2c8108f27868b8"
+    },
+    "focused_tests_run": 7,
+    "focused_tests_passed": 7
+  },
+  "full_suite": {
+    "tests_run": 45,
+    "tests_passed": 45,
+    "failures": 0,
+    "errors": 0,
+    "command": "python3 -m unittest -v canonical.tests.test_aa_briefcase_lossless_task_ingress_v1 canonical.tests.test_aa_briefcase_owner_signature_verifier_v1 canonical.tests.test_aa_briefcase_minimal_owner_attestation_v1 canonical.tests.test_aa_briefcase_scope_complete_dominance_v1 canonical.tests.test_aa_briefcase_current_epoch_noninferiority_bridge_v3 canonical.tests.test_aa_briefcase_current_epoch_result_bridge_v2"
+  },
+  "proved": [
+    "EVERY NONEMPTY RAW TASK LINE IS PRESERVED VERBATIM WITH BYTE OFFSETS AND SHA256",
+    "DECLARED DELIVERABLE PATHS ARE PRESERVED EXACTLY AND MUST BE UNIQUE SAFE RELATIVE PATHS",
+    "EVERY DECLARED SOURCE FILE IS PRESERVED BY SAFE PATH SHA256 AND SIZE",
+    "DUPLICATE OR PATH-TRAVERSAL SOURCE/DESINATION ENTRIES FAIL CLOSED",
+    "INGRESS RECEIPT IS DETERMINISTIC",
+    "SEMANTIC COMPLETENESS IS NOT SELF-CERTIFIED",
+    "NO HIDDEN RUBRIC INFORMATION IS USED"
+  ],
+  "boundary": [
+    "DOES_NOT_PROVE_TASK_SEMANTICS_ARE_UNDERSTOOD",
+    "DOES_NOT_PROVE_SOURCE_CONTENT_WAS_PARSED",
+    "DOES_NOT_BUILD_ANY_DELIVERABLE",
+    "NO_OFFICIAL_AA_ACCEPTANCE_FAMILY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "new_sprite_created": false,
+    "incremental_spend_usd": null,
+    "spend_measurement_available": false,
+    "fresh_private_benchmark_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}

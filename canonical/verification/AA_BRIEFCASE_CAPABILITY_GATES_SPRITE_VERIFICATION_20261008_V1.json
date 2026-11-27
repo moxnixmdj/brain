@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_CAPABILITY_GATES_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "REMOTE_ISOLATED_REPLAY_PASS__112_OF_112__ZERO_TERMINAL_CREDIT",
+  "executor": {
+    "kind": "SPRITE_REMOTE_ISOLATED_RUNTIME",
+    "sprite_name": "brain-frontiercode-route-refresh-verify-20261008-v1",
+    "sprite_id": "sprite-516155ae-ce43-4477-bba9-ea126ee41fa1",
+    "working_directory": "/tmp/aa_briefcase_verify_3133"
+  },
+  "command": "python3 -m unittest discover -s canonical/tests -p test_aa_briefcase_*.py -v",
+  "result": {
+    "tests_run": 112,
+    "tests_passed": 112,
+    "failures": 0,
+    "errors": 0,
+    "status": "OK"
+  },
+  "capability_gate_blobs": {
+    "lossless_ingress_runtime": "ee4f11b4c9e2e0dff2e4422297505b3c5c4aae2b",
+    "lossless_ingress_tests": "739c8facc412b318aa0663808305121c0a7f421b",
+    "declared_source_parser_runtime": "47f9d8da1fdb7a377223cf41e9b27947246657cb",
+    "declared_source_parser_tests": "c94418ccb1da8bcb8960a497b152b9fb15db2b66",
+    "authority_convention_sweep_runtime": "a4a1541152b91a9a4d9548bf04c98ed1a8bfd53a",
+    "authority_convention_sweep_tests": "deb5f2ff9da1dcadd3273b25b2fa281e488d0253",
+    "pre_generation_contract_runtime": "3841d10ff953bc083181ec8b170c49f9c6ebd9df",
+    "pre_generation_contract_tests": "3e8f7b8f386c1639e11a2d932c15f7b81c68f02a",
+    "post_build_audit_runtime": "ca10ed89fb675241dd4932589621045ba6803bfc",
+    "post_build_audit_tests": "67e84afa98afe8c89c492bbe5363b54bd8af0546",
+    "official_github_publication_runtime": "46ee74356961dfc0e282da0b46e5b11e0d8090dd",
+    "official_github_publication_tests": "357d19c699c37333163e713fa43c41fb252433fe"
+  },
+  "proved": [
+    "LOSSLESS TASK SCENARIO WEEK CONTEXT AND DECLARED SOURCE INGESTION GATE PASSES ITS CURRENT TEST SURFACE",
+    "ALL DECLARED SUPPORTED SOURCE FORMATS MUST PARSE OR EXECUTION FAILS CLOSED",
+    "AUTHORITY STANDARD ASSUMPTION CONVENTION SCENARIO AND RECONCILIATION CANDIDATES ARE SWEPT FROM PARSED SOURCES AND ALL DISCOVERED CANDIDATES REQUIRE REVIEW",
+    "HIGH SIGNAL AUTHORITY OR STANDARD CANDIDATES CANNOT BE SILENTLY DISMISSED AS CONTEXT",
+    "PRE_GENERATION CONTRACT FAILS CLOSED ON OMITTED TASK OBLIGATIONS DIMENSIONS CONVENTIONS UNBOUND SOURCES AUTHORITY CONFLICTS DEGENERATE SCENARIOS DEGENERATE RECONCILIATIONS AND OUTPUT REACHABILITY MISMATCH",
+    "POST_BUILD AUDIT FAILS CLOSED ON OMITTED REQUIREMENTS DIMENSIONS CONVENTIONS SCENARIO STATES OR RATIONALES RECONCILIATIONS SOURCE TRACEABILITY MECHANICAL REOPEN OR FREEZE",
+    "ALL EXISTING AA EPOCH DEDUP DIRECT DOMINANCE OWNER ATTESTATION OFFICIAL GITHUB PUBLICATION AND ELO BRIDGES REMAIN GREEN"
+  ],
+  "not_proved": [
+    "OPEN WORLD SEMANTIC COMPLETENESS OF THE CONTRACT COMPILER",
+    "THAT THE CURRENT BRAIN CAN GENERATE A PROFESSIONAL DELIVERABLE SATISFYING A FRESH UNTOUCHED AA_BRIEFCASE_LITE TASK",
+    "PAIRWISE PROFESSIONAL QUALITY NONINFERIORITY TO OPUS55",
+    "OFFICIAL AA_BRIEFCASE ACCEPTANCE OR SCORE",
+    "FAMILY OR TERMINAL CLOSURE"
+  ],
+  "next_load_bearing_step": "PRECOMMIT AND EXECUTE A DIFFERENT UNTOUCHED PUBLIC AA_BRIEFCASE_LITE TASK WITHOUT OPENING ITS GRADING CHECKS OR REFERENCE SUBMISSIONS BEFORE OUTPUT FREEZE__USE THE NEW INGEST_PARSE_AUTHORITY_CONTRACT_GENERATION_POST_BUILD GATES__THEN DIAGNOSE ONLY AFTER FREEZE.",
+  "accounting": {
+    "new_sprite_created": false,
+    "incremental_spend_usd": null,
+    "spend_measurement_available": false,
+    "fresh_private_benchmark_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}

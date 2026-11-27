@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_LITE_W1_T3_FRESH_FALSIFICATION_PRECOMMIT_V1",
+  "date": "2026-10-08",
+  "status": "PRECOMMITTED_BEFORE_W1_T3_PROMPT_SOURCE_GRADING_OR_SUBMISSION_REVIEW__ZERO_TERMINAL_CREDIT",
+  "objective": "FALSIFY THE CURRENT AA_BRIEFCASE PROFESSIONAL DELIVERABLE ROUTE ON A DIFFERENT UNTOUCHED PUBLIC LITE TASK AFTER IMPLEMENTING LOSSLESS INGESTION SOURCE PARSING AUTHORITY/CONVENTION SWEEP PRE_GENERATION CONTRACT AND POST_BUILD AUDIT.",
+  "benchmark": {
+    "repository": "ArtificialAnalysis/AA-Briefcase-Lite",
+    "public_status": "PUBLIC_DEMONSTRATIVE_SCENARIO_ONLY__NOT_PART_OF_OFFICIAL_AA_BRIEFCASE_RESULTS",
+    "selected_task_id": "w1_t3",
+    "selected_task_name_from_public_inventory": "Target assessment, opportunities & risks",
+    "deliverable_filename_from_public_inventory": "target_assessment.pptx",
+    "deliverable_type": "PPTX"
+  },
+  "untouched_check": {
+    "repository_searches_performed": [
+      "w1_t3",
+      "W1-T3",
+      "target_assessment.pptx",
+      "Target Assessment"
+    ],
+    "prior_brain_matches_found": 0,
+    "prior_brain_task_specific_execution_found": false
+  },
+  "information_seen_before_precommit": [
+    "PUBLIC TASK INVENTORY IDENTIFIER w1_t3",
+    "PUBLIC INVENTORY LABEL Target assessment, opportunities & risks",
+    "PUBLIC INVENTORY DELIVERABLE target_assessment.pptx",
+    "GENERAL AA_BRIEFCASE_LITE SCENARIO IDENTITY AS DUE DILIGENCE"
+  ],
+  "forbidden_before_output_freeze": [
+    "tasks/w1_t3.md TASK BRIEF",
+    "w1_t3 GRADING CHECKS OR RUBRIC",
+    "w1_t3 TRACEABILITY/EVIDENCE CHAINS",
+    "w1_t3 MODEL OR REFERENCE SUBMISSIONS",
+    "w1_t3 JUDGE OUTPUTS"
+  ],
+  "allowed_after_this_precommit_before_freeze": [
+    "SCENARIO OVERVIEW",
+    "WEEK OVERVIEW",
+    "SELECTED W1_T3 TASK BRIEF",
+    "ONLY THE SOURCE FILES DECLARED FOR W1_T3",
+    "BRAIN OWNED PREEXISTING AND PRECOMMITTED CAPABILITY ROUTES"
+  ],
+  "route_order": [
+    "LOSSLESS HARNESS INGESTION",
+    "PARSE ALL DECLARED SOURCES OR BLOCK",
+    "AUTHORITY/CONVENTION SWEEP",
+    "COMPILE FAIL_CLOSED PRE_GENERATION PROFESSIONAL CONTRACT",
+    "GENERATE target_assessment.pptx",
+    "RUN POST_BUILD REQUIREMENT DIMENSION CONVENTION SCENARIO RECONCILIATION SOURCE TRACE AND MECHANICAL AUDIT",
+    "FREEZE OUTPUT DIGEST",
+    "ONLY THEN OPEN W1_T3 GRADING CHECKS AND REFERENCE SUBMISSIONS FOR DIAGNOSTIC FALSIFICATION"
+  ],
+  "pass_meaning": "CURRENT ROUTE SURVIVES ONE DIFFERENT UNTOUCHED PUBLIC LITE PROFESSIONAL PPTX TASK UNDER A PRECOMMITTED INFORMATION BOUNDARY__NOT OFFICIAL AA PARITY.",
+  "failure_meaning": "A NEW CAPABILITY ROUTE OR TOOLING DEFECT IS LOCALIZED WITHOUT CONSUMING PRIVATE AA EVIDENCE.",
+  "hard_nonclaims": [
+    "NO OFFICIAL AA_BRIEFCASE EVIDENCE",
+    "NO OPUS55 NONINFERIORITY INFERENCE FROM THIS PUBLIC TASK",
+    "NO FAMILY OR TERMINAL CREDIT",
+    "NO CLAIM THE TASK WILL PASS"
+  ],
+  "accounting": {
+    "fresh_private_benchmark_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}

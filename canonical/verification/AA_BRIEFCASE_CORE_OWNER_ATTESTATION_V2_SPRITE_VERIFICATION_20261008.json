@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_CORE_OWNER_ATTESTATION_V2_SPRITE_VERIFICATION",
+  "date": "2026-10-08",
+  "status": "REMOTE_ISOLATED_REPLAY_PASS__49_OF_49__ZERO_TERMINAL_CREDIT",
+  "executor": {
+    "kind": "SPRITE_REMOTE_ISOLATED_RUNTIME",
+    "sprite_name": "brain-frontiercode-route-refresh-verify-20261008-v1",
+    "sprite_id": "sprite-516155ae-ce43-4477-bba9-ea126ee41fa1",
+    "working_directory": "/tmp/aa_briefcase_verify_3133"
+  },
+  "command": "python3 -m unittest -v canonical.tests.test_aa_briefcase_owner_signature_verifier_v1 canonical.tests.test_aa_briefcase_core_owner_attestation_v2 canonical.tests.test_aa_briefcase_minimal_owner_attestation_v1 canonical.tests.test_aa_briefcase_scope_complete_dominance_v1 canonical.tests.test_aa_briefcase_current_epoch_noninferiority_bridge_v3 canonical.tests.test_aa_briefcase_current_epoch_result_bridge_v2",
+  "result": {
+    "tests_run": 49,
+    "tests_passed": 49,
+    "failures": 0,
+    "errors": 0,
+    "status": "OK"
+  },
+  "source_blobs": {
+    "owner_signature_runtime": "b9f04c53a23dc98a220a1f1d096b72da00d4f3c9",
+    "owner_signature_tests": "b8706a9a27b7e86fdb6b43874b5ff5d9031e9d47",
+    "core_owner_attestation_runtime": "93b5b2fa488f053a39ca0cd99b85678dda0b4990",
+    "core_owner_attestation_tests": "5e4ce7d01d2282bfb9fa0ce3921c395861c9d8c1",
+    "current_epoch_bridge_v3": "977465d4ef2e8f7b0c3323255507b1a16a316129",
+    "current_epoch_bridge_v3_tests": "5e31a8c37aaad6cd02f4f02b9eb29d749187b288",
+    "richer_owner_attestation_runtime": "85ae7f42d69d892a9d8c87d63ba14c56d669971d",
+    "richer_owner_attestation_tests": "c36a289c046f9e3df3251cc82f6bb884ea7f8aee",
+    "detailed_dominance_runtime": "fc62cc86598e304a5dafc8823b8ca43908bd1fc1",
+    "detailed_dominance_tests": "ded5b73404f0fbe6fd77606be2b226e7525152c2",
+    "scalar_bridge_v2": "50c85c96bc0a6a73354349f05421572274d21cf5",
+    "scalar_bridge_v2_tests": "2b0b3a55ec0218e18b33f71e956637da2e93c798"
+  },
+  "verified": [
+    "REAL ED25519 SIGNATURE VERIFICATION PASSES FOR UNMODIFIED CANONICAL STATEMENT",
+    "MODIFIED STATEMENT OR SIGNATURE BYTES FAIL CRYPTOGRAPHICALLY",
+    "OWNER PUBLIC KEY MUST MATCH A VERIFIED AA_BRIEFCASE OWNER KEY BINDING",
+    "CORE OWNER ATTESTATION DOES NOT REQUIRE PRIVATE TASK OR CHECK POPULATION HASHES FOR LOGICAL SUFFICIENCY",
+    "OPTIONAL PRIVATE POPULATION COMMITMENTS ARE ACCEPTED AS AUDIT STRENGTHENING",
+    "SIGNATURE IS VERIFIED BEFORE CORE PREDICATE SEMANTICS ARE TRUSTED",
+    "STALE EPOCH INCOMPLETE SCOPE INCOMPLETE GRADING RELATIONS AND NEGATIVE NONINFERIORITY FAIL CLOSED",
+    "CORE OWNER ATTESTATION MULTIPLEXES BOTH AA_BRIEFCASE PREDICATE ALIASES",
+    "RICHER OWNER ATTESTATION DETAILED E_M_U AND MATCHED ELO FALLBACKS REMAIN AVAILABLE"
+  ],
+  "minimum_external_bundle": {
+    "statement": "SIGNED CURRENT-EPOCH SCOPE-COMPLETE BRAIN_NONINFERIORITY CLAIM",
+    "signature": "VERIFIABLE OWNER OR AUTHORIZED-OPERATOR SIGNATURE",
+    "trust_anchor": "VERIFIED OWNER KEY OR EQUIVALENT AUTHENTICATED SIGNER BINDING"
+  },
+  "remaining_external_fact": "ONE REAL AUTHENTICATED OWNER-ATTESTATION BUNDLE FOR THE ACTUAL BRAIN SUBJECT__NO PRIVATE BENCHMARK CONTENT REQUIRED.",
+  "hard_nonclaims": [
+    "NO REAL ARTIFICIAL ANALYSIS OWNER KEY OR SIGNATURE IS PRESENT.",
+    "NO PRIVATE AA_BRIEFCASE CASES WERE CONSUMED.",
+    "NO AA_BRIEFCASE PREDICATE FAMILY OR TERMINAL CREDIT."
+  ],
+  "accounting": {
+    "new_sprite_created": false,
+    "incremental_spend_usd": null,
+    "spend_measurement_available": false,
+    "fresh_private_benchmark_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}

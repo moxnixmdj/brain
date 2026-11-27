@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_CURRENT_GRADING_PROTOCOL_PUBLIC_V1",
+  "date": "2026-10-08",
+  "status": "CURRENT_PUBLIC_OWNER_METHODOLOGY_SNAPSHOT__ZERO_BRAIN_CREDIT",
+  "benchmark": "AA-Briefcase v1.1",
+  "owner_sources": [
+    "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+    "https://artificialanalysis.ai/evaluations/aa-briefcase"
+  ],
+  "current_reference": {
+    "model": "Claude Opus 5.5 (Max, Default Fallback)",
+    "elo": 1807,
+    "confidence_interval_minus": 11,
+    "confidence_interval_plus": 12,
+    "observed_date": "2026-10-08"
+  },
+  "private_scope": {
+    "task_count": 91,
+    "scored_project_count": 4,
+    "tasks_private": true,
+    "private_task_instructions_inputs_and_grading_rubrics": true
+  },
+  "grading": {
+    "rubric": {
+      "kind": "BINARY_PASS_FAIL_PER_CHECK",
+      "judge_panel": [
+        "Claude Opus 4.8 (Max)",
+        "GPT-5.5 (High reasoning)",
+        "Gemini 3.1 Pro Preview (High reasoning)"
+      ],
+      "one_judge_sampled_per_verdict": true,
+      "sampling_balanced": true,
+      "same_rubric_check_uses_same_judge": true
+    },
+    "analytical_quality": {
+      "kind": "BLIND_PAIRWISE_PREFERENCE",
+      "judge_panel": [
+        "Claude Opus 5 (High effort)",
+        "GPT-5.6 Sol (Medium reasoning)",
+        "Gemini 3.8 Flash (High reasoning)"
+      ],
+      "one_judge_sampled_per_comparison": true,
+      "sampling_balanced": true
+    },
+    "presentation": {
+      "kind": "BLIND_PAIRWISE_PREFERENCE",
+      "judge_panel": [
+        "Claude Opus 5 (High effort)",
+        "GPT-5.6 Sol (Medium reasoning)",
+        "Gemini 3.8 Flash (High reasoning)"
+      ],
+      "one_judge_sampled_per_comparison": true,
+      "sampling_balanced": true
+    }
+  },
+  "rating": {
+    "per_scope_fit": "Crowd-BT maximum likelihood",
+    "rubric_to_elo": "synthetic head-to-head matches",
+    "overall_metric": "aggregates rubric pass rate, analytical quality Elo and presentation Elo",
+    "anchor": {
+      "model": "DeepSeek V4.1 Flash (Max)",
+      "elo": 1600
+    },
+    "confidence_interval": "sandwich estimator"
+  },
+  "proof_boundary": {
+    "publicly_established": [
+      "CURRENT PUBLIC GRADING PANEL IDENTITIES AND SAMPLING STRUCTURE",
+      "CURRENT PUBLIC AGGREGATION FAMILY",
+      "CURRENT OPUS55 MAX REFERENCE ELO"
+    ],
+    "not_publicly_established": [
+      "PRIVATE TASK POPULATION BYTES",
+      "PRIVATE GRADING RUBRIC BYTES",
+      "BRAIN PRIVATE AA_BRIEFCASE OUTCOMES",
+      "CURRENT OPUS55 PRIVATE SUBMISSION BYTES",
+      "OWNER-SIGNED SCOPE-COMPLETE DIRECT DOMINANCE RECEIPT"
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_model_queries": 0,
+    "terminal_credit_delta": 0
+  }
+}
