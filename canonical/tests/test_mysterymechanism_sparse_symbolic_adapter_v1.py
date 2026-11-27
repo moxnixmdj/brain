@@ -68,6 +68,36 @@ class MysteryMechanismSparseSymbolicAdapterTests(unittest.TestCase):
         self.assertFalse(out["private_score_claimed"])
         self.assertEqual(out["external_learned_capability_calls"], 0)
 
+    def test_integrated_solver_uses_separable_bilinear_route_when_it_is_strictly_better(self):
+        def law(x, z):
+            f = x / (1 - x) ** 2
+            g = 1 / (1 + math.sqrt(z))
+            return 1.2 + 2.5 * f + 1.7 * g + 3.1 * f * g
+
+        pts = [
+            (0.22,2.3),(0.63,0.4),(0.05,0.1),(0.8,0.1),
+            (0.05,20.0),(0.8,20.0),(0.425,math.sqrt(2.0)),
+            (0.31,5.0),(0.69,11.0),
+        ]
+        rows = [{"x":x,"z":z,"out":law(x,z)} for x,z in pts]
+        out = mm.solve(
+            rows,
+            bounds={"x":[0.05,0.8],"z":[0.1,20.0]},
+            target="out",
+            fit_threshold=1e-5,
+        )
+        self.assertEqual(
+            out["status"],
+            "CANDIDATE_READY__UNVERIFIED_ON_PRIVATE_STRUCTURAL_PROBES",
+            out,
+        )
+        self.assertEqual(out["route"], "SEPARABLE_BILINEAR_TRANSFORM_V2", out)
+        self.assertLess(out["conservative_nrmse"], 1e-5, out)
+        self.assertLess(out["candidate"]["delete_two_nrmse"], 1e-5, out)
+        self.assertFalse(out["private_score_claimed"])
+        self.assertEqual(out["acceptance_credit_delta"], 0)
+        self.assertEqual(out["family_credit_delta"], 0)
+
     def test_reserved_discriminator_never_leaves_declared_bounds(self):
         rows = [
             {"x":1.0,"out":1.0},
