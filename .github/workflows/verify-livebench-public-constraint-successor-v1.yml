@@ -1,0 +1,117 @@
+name: verify-livebench-public-constraint-successor-v1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/instruction_constraint_compiler_v2.py"
+      - "canonical/runtime/livebench_public_constraint_solver_v1.py"
+      - "canonical/runtime/root1_livebench_successor_adapter_v1.py"
+      - "canonical/tests/test_instruction_constraint_compiler_v2.py"
+      - "canonical/tests/test_livebench_public_constraint_solver_v1.py"
+      - "canonical/tests/test_livebench_public_upstream_checker_v1.py"
+      - ".github/workflows/verify-livebench-public-constraint-successor-v1.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install small frozen checker dependencies
+        run: |
+          set +e
+          {
+            python -m pip install --disable-pip-version-check \
+              nltk emoji "syllapy>=0.8.0"
+            python -m nltk.downloader -q punkt punkt_tab averaged_perceptron_tagger_eng
+          } > install.log 2>&1
+          echo "$?" > install.status
+          cat install.log
+          exit 0
+      - name: Fetch exact frozen public LiveBench scorer source
+        run: |
+          set +e
+          {
+            git clone -q https://github.com/LiveBench/LiveBench.git /tmp/LiveBench
+            git -C /tmp/LiveBench checkout -q 8f8e5c381a16e3f24257776edd53471fe86f8091
+            test "$(git -C /tmp/LiveBench rev-parse HEAD)" = "8f8e5c381a16e3f24257776edd53471fe86f8091"
+          } > livebench-fetch.log 2>&1
+          echo "$?" > livebench-fetch.status
+          cat livebench-fetch.log
+          exit 0
+      - name: Fetch pinned public IFBench population
+        run: |
+          set +e
+          {
+            git clone -q https://github.com/allenai/IFBench.git /tmp/IFBench
+            git -C /tmp/IFBench checkout -q 1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d
+            test "$(git -C /tmp/IFBench rev-parse HEAD)" = "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d"
+          } > ifbench-fetch.log 2>&1
+          echo "$?" > ifbench-fetch.status
+          cat ifbench-fetch.log
+          exit 0
+
+      - name: Audit all 300 public IFBench rows against exact frozen checkers
+        env:
+          PYTHONPATH: "/tmp/LiveBench:."
+        run: |
+          set +e
+          python canonical/runtime/livebench_public_population_audit_v1.py \
+            --data /tmp/IFBench/data/IFBench_test.jsonl \
+            --output public-coverage.json \
+            > public-coverage.log 2>&1
+          echo "$?" > public-coverage.status
+          cat public-coverage.log
+          exit 0
+
+      - name: Run local compiler and solver tests
+        run: |
+          set +e
+          python -m unittest -v \
+            canonical.tests.test_instruction_constraint_compiler_v2 \
+            canonical.tests.test_livebench_public_constraint_solver_v1 \
+            > local-tests.log 2>&1
+          echo "$?" > local-tests.status
+          cat local-tests.log
+          exit 0
+      - name: Validate witnesses against exact frozen upstream checkers
+        env:
+          PYTHONPATH: "/tmp/LiveBench:."
+        run: |
+          set +e
+          python -m unittest -v canonical.tests.test_livebench_public_upstream_checker_v1 \
+            > upstream-tests.log 2>&1
+          echo "$?" > upstream-tests.status
+          cat upstream-tests.log
+          exit 0
+      - name: Upload diagnostic logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: livebench-public-constraint-successor-v1-diagnostics
+          path: |
+            local-tests.log
+            local-tests.status
+            upstream-tests.log
+            upstream-tests.status
+            public-coverage.json
+            public-coverage.log
+            public-coverage.status
+            install.log
+            install.status
+            livebench-fetch.log
+            livebench-fetch.status
+            ifbench-fetch.log
+            ifbench-fetch.status
+      - name: Enforce test outcomes
+        run: |
+          test "$(cat install.status)" = "0"
+          test "$(cat livebench-fetch.status)" = "0"
+          test "$(cat ifbench-fetch.status)" = "0"
+          test "$(cat local-tests.status)" = "0"
+          test "$(cat upstream-tests.status)" = "0"
+          test "$(cat public-coverage.status)" = "0"
