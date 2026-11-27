@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_WHITEBOX_SEMANTIC_TEXT_CORE_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FOUR_BOUNDED_SEMANTIC_EFFECTS__ZERO_LEARNED_LOCAL__EXACT_BLOB_BOUND__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "parent_frontier": {
+    "path": "canonical/governance/LIVEBENCH_ROOT1_SEMANTIC_SEED_REPAIR_FRONTIER_V1.json",
+    "frontier_commit": "7892c5e1c365703155032469fedeb38e90e9e86a",
+    "target_layer": "GENERAL_SEMANTIC_SEED_PRODUCTION"
+  },
+  "preexposure_chronology": {
+    "preexposure_commit": "ee11da2a4ebccdf4c9ab76b8442308cbd264f0e4",
+    "implementation_commit": "d4ea2b6fa1f4284a4e2be1297bf519e58f33e6b6",
+    "tests_commit": "87d21fc40877221629db58df1b5e0c7a92bf3eb3",
+    "preexposure_before_implementation": true
+  },
+  "exact_bound_components": {
+    "canonical/governance/WHITEBOX_SEMANTIC_TEXT_CORE_PREEXPOSURE_V1.json": "1fe5d5691f8687b313d90d8e156f2d1d5bbd88e9",
+    "canonical/runtime/whitebox_semantic_text_core_v1.py": "09b1620bbad0dfdb1bc9236121a68af40bba75ad",
+    "canonical/tests/test_whitebox_semantic_text_core_v1.py": "afe9e53f90ef6868229d10d572b1be37f3ded078"
+  },
+  "candidate_effects": [
+    {
+      "effect": "text.paraphrase.semantic_preserving",
+      "scope": "BOUNDED_DECLARED_TRUTH_PRESERVING_REWRITES_ONLY",
+      "mechanical_guard": "ONLY_ALL_EVERY_IF_THEN_SIMPLE_NEGATIVE_CONTRACTION_AND_SYMMETRIC_COORDINATION_RULES__ELSE_ABSTAIN"
+    },
+    {
+      "effect": "text.simplify.semantic_preserving",
+      "scope": "BOUNDED_CONTRACTION_EXPANSION_AND_SEMICOLON_CLAUSE_SPLITTING",
+      "mechanical_guard": "NORMALIZED_CONTENT_TOKEN_SEQUENCE_IDENTICAL_AND_FROZEN_COMPLEXITY_STRICTLY_DECREASES"
+    },
+    {
+      "effect": "text.summarize.faithful",
+      "scope": "STRICT_EXTRACTIVE_MULTI_SENTENCE_SUMMARIZATION",
+      "mechanical_guard": "EVERY_SUMMARY_SENTENCE_IS_EXACT_SOURCE_SENTENCE_AND_OUTPUT_IS_STRICTLY_SHORTER"
+    },
+    {
+      "effect": "text.story.generate_instruction_grounded",
+      "scope": "STRUCTURED_CHARACTER_GOAL_OBSTACLE_SETTING_INPUT",
+      "mechanical_guard": "ALL_FOUR_EXPLICIT_FACT_SLOTS_APPEAR_VERBATIM_IN_FIXED_NARRATIVE_SCAFFOLD"
+    }
+  ],
+  "architecture": {
+    "one_shared_core": true,
+    "runtime_path": "canonical/runtime/whitebox_semantic_text_core_v1.py",
+    "stdlib_only": true,
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0,
+    "network_during_execution": false,
+    "random_search": false,
+    "dynamic_code_execution": false,
+    "incremental_spend_usd": 0
+  },
+  "breakthrough_if_verified": [
+    "THE_OPERATIVE_RESEARCH_FRONTIER_NO_LONGER_HAS_ZERO_CONSTRUCTIVE_LOCAL_SEMANTIC_TEXT_PRODUCER_CANDIDATES; ONE_SHARED_WHITE_BOX_CORE NOW IMPLEMENTS BOUNDED EFFECTS IN ALL_FOUR REQUIRED TASK FAMILIES.",
+    "FAITHFUL_SUMMARIZATION_AND_TOKEN_PRESERVING_SIMPLIFICATION OBTAIN SEMANTIC SAFETY FROM CONSTRUCTION RATHER THAN FROM A SECOND LEARNED JUDGE.",
+    "UNSUPPORTED OPEN_WORLD LANGUAGE IS EXPLICITLY ABSTAINED RATHER THAN HALLUCINATED AS SOLVED.",
+    "THE_NEXT_ROOT1 QUESTION BECOMES SCOPE EXPANSION AND LIVEBENCH-RELEVANT TASK-PROMPT ADAPTATION, NOT WHETHER ANY LOCAL SEMANTIC SEED MECHANISM EXISTS."
+  ],
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_GENERAL_TEXT_GENERATION",
+    "NO_GENERAL_PARAPHRASE_COVERAGE",
+    "NO_ABSTRACTIVE_SUMMARY_CLAIM",
+    "NO_UNSTRUCTURED_STORY_PROMPT_COVERAGE",
+    "NO_LIVEBENCH_CASE_SCORE_CLAIM",
+    "NO_LIVEBENCH_IF_THRESHOLD_CLOSURE",
+    "NO_OPUS_5_5_PARITY_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_REGISTRY_PROMOTION_BEFORE_INDEPENDENT_VERIFICATION"
+  ],
+  "next_minimum_cut_if_verified": [
+    "INDEPENDENTLY_VERIFY_EXACT_PREEXPOSURE_RUNTIME_AND_TEST BLOBS",
+    "CLASSIFY_PUBLIC_NONTERMINAL LIVEBENCH-LIKE BASE TASK PROMPT FORMS INTO THESE FOUR SEMANTIC EFFECTS WITHOUT TERMINAL CONTENT",
+    "MEASURE COVERAGE OF THE BOUNDED CORE ON A SEPARATELY FROZEN PUBLIC NONTERMINAL POPULATION",
+    "EXPAND ONLY THE HIGHEST-MASS SEMANTIC RESIDUAL; DO NOT JUMP TO A LOCAL LEARNED COMPONENT UNTIL WHITE_BOX COVERAGE IS CONSTRUCTIVELY INSUFFICIENT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance": false,
+    "ownership": false
+  }
+}
