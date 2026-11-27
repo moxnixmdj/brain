@@ -33051,12 +33051,12 @@
   "routing_tokens": 4116,
   "skills": 18,
   "source_index_entry_points": 575,
-  "source_index_modules": 2325
+  "source_index_modules": 2326
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d76916ad5285c0ac2c3a71b8222644df13478908487fe5d164c03c3f09cffda1"
+  "value": "0d31fd3427ddcc0adebf64fe9008825553199258f32913b175c7843619ffbeee"
  },
  "engines": [
   {
@@ -96223,7 +96223,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/universal_epistemic_kernel_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "88e4d77cb18e50c7b92e19a275f34ef63c34c77cfccb113e055144f6170479e3",
+   "sha256": "bb9378df60db9fc447c6561de57998330ab9fea374845d66d4c13ab6c609053f",
    "summary": "Universal Epistemic Kernel v1 — ONE minimal, zero-LLM, zero-weight algorithm",
    "triggers": [
     "universal",
@@ -97828,7 +97828,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/swe_kernel/single_experience_transfer_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "214174118b3c0493ab1d0d822c67700ce0e2c4b6ca850722690c9bd635565b6f",
+   "sha256": "ae355990b735863ace1d253780fc0343eb270e7d232ab1e0a597068723477ca9",
    "summary": "Does one experience help on the *next* repair? Measured on real commits, with an empty-store arm.",
    "triggers": [
     "single",
@@ -170886,7 +170886,7 @@
   "included_source_count": 2563,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "c6557519c8c9813a91d8163312bc9a15dc1900440a8fd701204cf9586cd6217a"
+  "source_tree_digest": "30e157408b4f87f54f45a3d724177569eef6b8f9010c1e31dde96d0be297addb"
  },
  "research_index": [
   {
@@ -374988,15 +374988,16 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/epistemic_issue_reproducer_v1.py",
-   "sha256": "d9d38bad7ddd1cd1fe8b951afd6cbef84d945ec93a4b438e0aec0fa25b1cc5d5",
+   "sha256": "034a8b7aebd97ab80f6e57e0094820477ca68abf0727b08e6cb29f39e6265985",
    "summary": "Zero-LLM, Zero-Weight Polyglot Epistemic Issue-to-Reproducer & Blind SWE Resolver (v1).",
-   "symbol_count": 30,
+   "symbol_count": 31,
    "symbols": [
     "CompiledReproSpec",
     "RepoSymbolIndex",
     "SymbolEntry",
     "_build_js_imports",
     "_build_python_imports",
+    "_compile_bm25_fixture_test_clones",
     "_compile_doctest_block",
     "_compile_existing_test_clones",
     "_compile_fenced_blocks",
@@ -375014,17 +375015,16 @@
     "_py_module_path",
     "_python_has_pytest",
     "_run_regression_suite",
-    "_run_reproducer_once",
-    "_select_regression_tests"
+    "_run_reproducer_once"
    ],
    "terms": {
     "blind": 1,
     "build_js_imports": 1,
     "build_python_imports": 1,
+    "compile_bm25_fixture_test_clones": 1,
     "compile_doctest_block": 1,
     "compile_existing_test_clones": 1,
     "compile_fenced_blocks": 1,
-    "compile_issue_specs": 1,
     "compile_metamorphic_witness_clones": 1,
     "compile_prose_clauses": 1,
     "compiledreprospec": 1,
@@ -427571,7 +427571,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/universal_epistemic_kernel_v1.py",
-   "sha256": "88e4d77cb18e50c7b92e19a275f34ef63c34c77cfccb113e055144f6170479e3",
+   "sha256": "bb9378df60db9fc447c6561de57998330ab9fea374845d66d4c13ab6c609053f",
    "summary": "Universal Epistemic Kernel v1 — ONE minimal, zero-LLM, zero-weight algorithm",
    "symbol_count": 63,
    "symbols": [
@@ -432775,6 +432775,54 @@
    "capability": false,
    "classification": "ORPHAN",
    "executable_entry_point": false,
+   "id": "source:canonical/swe_kernel/bm25_code_localizer_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/swe_kernel/bm25_code_localizer_v1.py",
+   "sha256": "63a8dfee47b0fab95a6c1b58c99046e988d7c6015f6723cfaad3f984fb389f4b",
+   "summary": "Two-stage pure-stdlib BM25 code & test localizer for Python, Go, and JS/TS repositories.",
+   "symbol_count": 10,
+   "symbols": [
+    "RankedFile",
+    "RankedFunction",
+    "_extract_functions_from_file",
+    "_is_test_file",
+    "_walk_repo_files",
+    "bm25_rank_documents",
+    "extract_query_weights",
+    "localize_files_bm25",
+    "localize_functions_bm25",
+    "tokenize_code"
+   ],
+   "terms": {
+    "bm25": 2,
+    "bm25_rank_documents": 1,
+    "code": 2,
+    "extract_functions_from_file": 1,
+    "extract_query_weights": 1,
+    "go": 1,
+    "is_test_file": 1,
+    "js": 1,
+    "localize_files_bm25": 1,
+    "localize_functions_bm25": 1,
+    "localizer": 2,
+    "pure-stdlib": 1,
+    "python": 1,
+    "rankedfile": 1,
+    "rankedfunction": 1,
+    "repositories": 1,
+    "test": 1,
+    "tokenize_code": 1,
+    "ts": 1,
+    "two-stage": 1,
+    "v1": 1,
+    "walk_repo_files": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
    "id": "source:canonical/swe_kernel/boundary_disjunction_normalization_v1.py",
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
@@ -434475,7 +434523,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/container_exec_bridge_v1.py",
-   "sha256": "68a3678e99092268ae43e71f547e2cb24dc5248af1181c6e254904416f197b2b",
+   "sha256": "fbc03b2974b4eee531babe18a6019654a95da3a357ddeb274a139c51bfb24814",
    "summary": "Thread-local container-execution bridge for zero-LLM SWE verification inside Harbor containers.",
    "symbol_count": 5,
    "symbols": [
@@ -434513,7 +434561,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/container_swe_patch_solver_v1.py",
-   "sha256": "9ca8367a39035dc1becdb056da8b549ba49617195aecae468c5ba49e20b7cfac",
+   "sha256": "24f2d883abca0729066299ef21429094aa7d8abec09c608e2b195ca71d2f56f9",
    "summary": "Container-native zero-LLM Python SWE patch solver backed by ContainerExecBridge.",
    "symbol_count": 8,
    "symbols": [
@@ -436249,7 +436297,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/go_and_jsts_causal_swe_engine_v1.py",
-   "sha256": "841ffb0e194babb5924d7e60ee810b1d8ae719c4cba001044e087d6bcdd18a05",
+   "sha256": "5791e9e692377b2f58794aff8e308341b0e514806dda3fa7f7b878f58f596501",
    "summary": "Production Go + JavaScript/TypeScript Causal SWE Engine & Prose Reproducer (K3=0, $0.00).",
    "symbol_count": 18,
    "symbols": [
@@ -441048,9 +441096,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/single_experience_transfer_v1.py",
-   "sha256": "214174118b3c0493ab1d0d822c67700ce0e2c4b6ca850722690c9bd635565b6f",
+   "sha256": "ae355990b735863ace1d253780fc0343eb270e7d232ab1e0a597068723477ca9",
    "summary": "Does one experience help on the *next* repair? Measured on real commits, with an empty-store arm.",
-   "symbol_count": 26,
+   "symbol_count": 27,
    "symbols": [
     "CompoundAttrRule",
     "Repair",
@@ -441072,10 +441120,10 @@
     "parse_patch",
     "score",
     "score_combined",
+    "score_minimal_subtree_scope_grounded",
     "score_raw_traces",
     "score_subexpr",
-    "self_check",
-    "shape_ceiling"
+    "self_check"
    ],
    "terms": {
     "apply_compound_attr_rule": 1,
@@ -441085,7 +441133,6 @@
     "commits": 1,
     "compoundattrrule": 1,
     "dump": 1,
-    "emit_digest": 1,
     "empty-store": 1,
     "evaluate": 1,
     "experience": 2,
@@ -441106,6 +441153,7 @@
     "rule_compound_kind": 1,
     "score": 1,
     "score_combined": 1,
+    "score_minimal_subtree_scope_grounded": 1,
     "score_raw_traces": 1,
     "score_subexpr": 1,
     "shape_ceiling": 1,

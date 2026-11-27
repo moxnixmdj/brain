@@ -361,6 +361,16 @@ def engine_diagnosis(result: Any, *, max_items: int = 8) -> dict[str, Any]:
             out[key] = v[:200]
         elif v is not None and not isinstance(v, (list, dict)):
             out[key] = v
+    swe_res = src.get("swe_result")
+    if isinstance(swe_res, dict):
+        sub: dict[str, Any] = {}
+        for sk in ("status", "mode", "symbol", "file", "repair", "build_failed", "candidates_tried", "via_container_bridge"):
+            if swe_res.get(sk) is not None:
+                sub[sk] = swe_res[sk]
+        if isinstance(swe_res.get("blind_reproducer_diag"), dict):
+            sub["blind_reproducer_diag"] = swe_res["blind_reproducer_diag"]
+        if sub:
+            out["swe_diag"] = sub
     for key in ("gaps_queried", "gaps", "unknowns"):
         v = src.get(key)
         if isinstance(v, (list, tuple, set, dict)):

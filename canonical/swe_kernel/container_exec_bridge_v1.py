@@ -60,22 +60,25 @@ class ContainerExecBridge:
         except OSError:
             cand_res, host_res = candidate_root, self.host_root
         if cand_res != host_res:
-            # Diff only small source files that exist in candidate_root vs host_root
-            for p in cand_res.rglob("*"):
-                if not p.is_file():
-                    continue
-                if any(part in (".git", "node_modules", "vendor", ".venv", "__pycache__") for part in p.parts):
-                    continue
-                if p.suffix.lower() not in (".py", ".go", ".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx", ".c", ".h", ".cpp"):
-                    continue
-                rel = p.relative_to(cand_res).as_posix()
-                hp = host_res / rel
-                try:
-                    c_bytes = p.read_bytes()
-                    if not hp.is_file() or hp.read_bytes() != c_bytes:
-                        overlays[rel] = c_bytes.decode("utf-8", errors="replace")
-                except OSError:
-                    continue
+            import os as _os
+
+            _skip = frozenset({".git", "node_modules", "vendor", ".venv", "venv", "__pycache__", "dist", "build", ".pytest_cache"})
+            _exts = (".py", ".go", ".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx", ".c", ".h", ".cpp")
+            for dp, dns, fns in _os.walk(cand_res):
+                dns[:] = [d for d in dns if d not in _skip]
+                rel_dir = pathlib.Path(dp).relative_to(cand_res).as_posix()
+                for fn in fns:
+                    if not fn.endswith(_exts):
+                        continue
+                    p = pathlib.Path(dp) / fn
+                    rel = fn if rel_dir == "." else f"{rel_dir}/{fn}"
+                    hp = host_res / rel
+                    try:
+                        c_bytes = p.read_bytes()
+                        if not hp.is_file() or hp.read_bytes() != c_bytes:
+                            overlays[rel] = c_bytes.decode("utf-8", errors="replace")
+                    except OSError:
+                        continue
         if extra:
             for k, v in extra.items():
                 overlays[self._safe_rel(k)] = v

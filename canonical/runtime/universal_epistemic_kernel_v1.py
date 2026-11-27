@@ -5684,7 +5684,7 @@ def solve_arbitrary_environment(
             ws,
             test_targets=explicit_js_tests or None,
             memory=memory,
-            timeout_s=max(float(timeout_s), 30.0),
+            timeout_s=min(max(float(timeout_s), 20.0), 45.0),
         )
         # Blind SWE-bench Pro JS fallback: when existing tests already pass on c_old,
         # synthesize & qualify a reproducer from the issue description and verify pass2pass.
@@ -5694,7 +5694,7 @@ def solve_arbitrary_environment(
             blind_js = ISSUE_REPRO.solve_issue_from_description(
                 ws,
                 instruction,
-                timeout_s=max(float(timeout_s), 30.0),
+                timeout_s=min(max(float(timeout_s), 30.0), 90.0),
                 memory=memory,
             )
             if blind_js.get("verified") and blind_js.get("patched_files"):
@@ -5714,6 +5714,12 @@ def solve_arbitrary_environment(
                     "mode": "BLIND_ISSUE_REPRODUCER_JS_SWE",
                 }
             else:
+                js_res["blind_reproducer_diag"] = {
+                    "status": blind_js.get("status"),
+                    "candidates_compiled": blind_js.get("candidates_compiled"),
+                    "solver_status": blind_js.get("solver_status"),
+                    "rejected_count": len(blind_js.get("rejected_reproducers") or []),
+                }
                 # Secondary prose-only JS/TS structural solver (handles pure-prose bugs with 0 parentheses)
                 from canonical.swe_kernel import go_and_jsts_causal_swe_engine_v1 as GO_JS_SWE
 
@@ -5731,6 +5737,8 @@ def solve_arbitrary_environment(
                         "reproducer": prose_js.get("reproducer"),
                         "mode": "PROSE_CAUSAL_JS_TS_SWE",
                     }
+                else:
+                    js_res["blind_reproducer_diag"]["prose_js_status"] = prose_js.get("status")
         ok_post = True
         winner = js_res.get("winner") if isinstance(js_res, Mapping) else None
         if js_res.get("status") == "VERIFIED" and isinstance(winner, Mapping) and winner.get("file"):

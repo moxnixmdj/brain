@@ -672,6 +672,57 @@ def score_combined(
             "rate": round(len(hits) / len(repairs), 4) if repairs else 0.0}
 
 
+def score_minimal_subtree_scope_grounded(
+    train: Sequence[Repair],
+    test: Sequence[Repair],
+) -> Dict[str, Any]:
+    """Scope-grounded 0-hole + 1-scope-hole minimal-subtree transfer arm (zero hallucinated symbols)."""
+    from canonical.swe_kernel import minimal_subtree_transfer_v1 as _mst
+
+    def _wrap_stmt(line: str, fn_name: str) -> str:
+        s = line.strip()
+        if s.endswith(":"):
+            return f"def {fn_name}():\n    {s}\n        pass\n"
+        return f"def {fn_name}():\n    {s}\n"
+
+    store = _mst.MinimalSubtreeTransferStore(allow_one_scope_hole=True)
+    for idx, r in enumerate(train):
+        store.learn_from_file_pair(_wrap_stmt(r.before, f"_f_{idx}"), _wrap_stmt(r.after, f"_f_{idx}"))
+
+    hits: List[Dict[str, Any]] = []
+    for idx, r in enumerate(test):
+        stmt_b = _as_statement(r.before)
+        stmt_a = _as_statement(r.after)
+        if stmt_b is None or stmt_a is None:
+            continue
+        scope_names = sorted({
+            n.id for n in ast.walk(stmt_b) if isinstance(n, ast.Name)
+        })
+        deltas = _mst.extract_function_ast_deltas(
+            _wrap_stmt(r.before, f"_t_{idx}"),
+            _wrap_stmt(r.after, f"_t_{idx}"),
+        )
+        if len(deltas) != 1:
+            continue
+        db, da = deltas[0]
+        want_sub = ast.unparse(da)
+        for rule, cand_expr in store.apply_to_expr(db, scope_names=scope_names):
+            if cand_expr == want_sub:
+                hits.append({
+                    "repair": r.key(),
+                    "source": "MINIMAL_SUBTREE_SCOPE_STORE",
+                    "rule_witness": rule.example,
+                })
+                break
+    return {
+        "tested": len(test),
+        "hits": len(hits),
+        "rules_learned": len(store.rules()),
+        "detail": hits[:40],
+        "rate": round(len(hits) / len(test), 4) if test else 0.0,
+    }
+
+
 def evaluate(train: Sequence[Repair], test: Sequence[Repair]) -> Dict[str, Any]:
     rules = learn(train)
     subexpr_rules = learn_subexpr(train)
@@ -679,6 +730,7 @@ def evaluate(train: Sequence[Repair], test: Sequence[Repair]) -> Dict[str, Any]:
     store = score(rules, test)
     subexpr_store = score_subexpr(subexpr_rules, test, compound_attr_rules=compound_attr_rules)
     combined_store = score_combined(rules, subexpr_rules, test, compound_attr_rules=compound_attr_rules)
+    minimal_subtree_store = score_minimal_subtree_scope_grounded(train, test)
     return {
         "train_repairs": len(train),
         "train_files": len({r.path for r in train}),
@@ -689,6 +741,7 @@ def evaluate(train: Sequence[Repair], test: Sequence[Repair]) -> Dict[str, Any]:
         "STORE": store,
         "SUBEXPR_STORE": subexpr_store,
         "COMBINED_STORE": combined_store,
+        "MINIMAL_SUBTREE_SCOPE_STORE": minimal_subtree_store,
         "EMPTY": {"tested": len(test), "hits": 0, "rate": 0.0},
         "RAW_TRACE": score_raw_traces(train, test),
         "SHAPE_CEILING": shape_ceiling(rules, test),

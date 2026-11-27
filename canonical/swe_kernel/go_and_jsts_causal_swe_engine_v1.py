@@ -102,20 +102,27 @@ def _is_js_test_file(p: pathlib.Path) -> bool:
     )
 
 
-def discover_js_ts_files(repo_root: pathlib.Path) -> tuple[list[pathlib.Path], list[pathlib.Path]]:
+def discover_js_ts_files(repo_root: pathlib.Path, *, max_files: int = 1500) -> tuple[list[pathlib.Path], list[pathlib.Path]]:
+    import os as _os
+
     srcs: list[pathlib.Path] = []
     tests: list[pathlib.Path] = []
-    for p in sorted(repo_root.rglob("*")):
-        if not p.is_file() or any(part in _JS_SKIP_DIRS for part in p.parts):
-            continue
-        if p.suffix not in (".js", ".mjs", ".cjs", ".ts", ".tsx"):
-            continue
-        if p.name.startswith("__repro_"):
-            continue
-        if _is_js_test_file(p):
-            tests.append(p)
-        else:
-            srcs.append(p)
+    seen = 0
+    for dp, dns, fns in _os.walk(repo_root):
+        dns[:] = [d for d in sorted(dns) if d not in _JS_SKIP_DIRS and not d.startswith(".")]
+        for fn in sorted(fns):
+            if fn.startswith("__repro_") or fn.endswith(".d.ts"):
+                continue
+            p = pathlib.Path(dp) / fn
+            if p.suffix not in (".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx"):
+                continue
+            if _is_js_test_file(p):
+                tests.append(p)
+            else:
+                srcs.append(p)
+            seen += 1
+            if seen >= max_files:
+                return srcs, tests
     return srcs, tests
 
 
@@ -240,6 +247,13 @@ def solve_js_ts_from_prose(repo_root: pathlib.Path, issue_text: str, *, node_bin
     repo_root = pathlib.Path(repo_root)
     srcs, test_files = discover_js_ts_files(repo_root)
     sym_map = scan_js_ts_symbols(repo_root, issue_text)
+    if not sym_map:
+        from canonical.swe_kernel import bm25_code_localizer_v1 as _bm25
+
+        for rf in _bm25.localize_functions_bm25(repo_root, issue_text, language="js", top_k=4):
+            sf = repo_root / rf.rel_path
+            if sf.is_file() and rf.name not in sym_map:
+                sym_map[rf.name] = sf
     if not sym_map:
         return {"status": "NO_SYMBOL_FOUND", "language": "javascript"}
 
@@ -396,38 +410,49 @@ def _parse_go_first_param(params_raw: str) -> tuple[str, str]:
     return parts[0] if parts else "", ""
 
 
-def scan_go_repo(repo_root: pathlib.Path) -> tuple[list[GoFunctionInfo], list[pathlib.Path]]:
-    """Index all non-test Go functions/methods and locate all *_test.go files."""
+def scan_go_repo(repo_root: pathlib.Path, *, max_files: int = 1500) -> tuple[list[GoFunctionInfo], list[pathlib.Path]]:
+    """Index all non-test Go functions/methods and locate all *_test.go files (pruned os.walk)."""
+    import os as _os
+
     repo_root = pathlib.Path(repo_root)
     funcs: list[GoFunctionInfo] = []
     tests: list[pathlib.Path] = []
-    for p in sorted(repo_root.rglob("*.go")):
-        if any(part in _GO_SKIP_DIRS for part in p.parts):
-            continue
-        if p.name.endswith("_test.go"):
-            tests.append(p)
-            continue
-        txt = p.read_text(encoding="utf-8", errors="replace")
-        pkg_m = re.search(r"(?m)^package\s+(\w+)", txt)
-        pkg = pkg_m.group(1) if pkg_m else "main"
-        rel = p.relative_to(repo_root).as_posix()
-        for m in _GO_FUNC_RE.finditer(txt):
-            p0_name, p0_type = _parse_go_first_param(m.group(4))
-            funcs.append(
-                GoFunctionInfo(
-                    rel_path=rel,
-                    package=pkg,
-                    name=m.group(3),
-                    receiver_var=m.group(1) or "",
-                    receiver_type=(m.group(2) or "").strip(),
-                    params_raw=m.group(4).strip(),
-                    first_param_name=p0_name,
-                    first_param_type=p0_type,
-                    return_type=m.group(5).strip(),
-                    header_start=m.start(),
-                    body_start=m.end(),
+    seen = 0
+    for dp, dns, fns in _os.walk(repo_root):
+        dns[:] = [d for d in sorted(dns) if d not in _GO_SKIP_DIRS and not d.startswith(".")]
+        for fn in sorted(fns):
+            if not fn.endswith(".go"):
+                continue
+            p = pathlib.Path(dp) / fn
+            seen += 1
+            if fn.endswith("_test.go"):
+                tests.append(p)
+                if seen >= max_files:
+                    return funcs, tests
+                continue
+            txt = p.read_text(encoding="utf-8", errors="replace")
+            pkg_m = re.search(r"(?m)^package\s+(\w+)", txt)
+            pkg = pkg_m.group(1) if pkg_m else "main"
+            rel = p.relative_to(repo_root).as_posix()
+            for m in _GO_FUNC_RE.finditer(txt):
+                p0_name, p0_type = _parse_go_first_param(m.group(4))
+                funcs.append(
+                    GoFunctionInfo(
+                        rel_path=rel,
+                        package=pkg,
+                        name=m.group(3),
+                        receiver_var=m.group(1) or "",
+                        receiver_type=(m.group(2) or "").strip(),
+                        params_raw=m.group(4).strip(),
+                        first_param_name=p0_name,
+                        first_param_type=p0_type,
+                        return_type=m.group(5).strip(),
+                        header_start=m.start(),
+                        body_start=m.end(),
+                    )
                 )
-            )
+            if seen >= max_files:
+                return funcs, tests
     return funcs, tests
 
 
@@ -609,6 +634,15 @@ def solve_go_repository(repo_root: pathlib.Path, issue_text: str, *, timeout_s: 
     funcs, _ = scan_go_repo(repo_root)
     matched = [f for f in funcs if re.search(rf"\b{re.escape(f.name)}\b", issue_text)]
     if not matched:
+        from canonical.swe_kernel import bm25_code_localizer_v1 as _bm25
+
+        by_key = {(f.rel_path, f.name): f for f in funcs}
+        by_name = {f.name: f for f in funcs}
+        for rf in _bm25.localize_functions_bm25(repo_root, issue_text, language="go", top_k=6):
+            hit = by_key.get((rf.rel_path, rf.name)) or by_name.get(rf.name)
+            if hit is not None and hit not in matched:
+                matched.append(hit)
+    if not matched:
         return {"status": "NO_SYMBOL_FOUND", "language": "go"}
 
     bridge = _ce_bridge.get_active_bridge()
@@ -638,16 +672,24 @@ def solve_go_repository(repo_root: pathlib.Path, issue_text: str, *, timeout_s: 
     )
 
     if use_bridge and bridge is not None:
-        if repro:
-            pre_cmd = f"{_shlex.quote(go_bin)} test -v -count=1 -run {_shlex.quote('^' + repro['test_name'] + '$')} {_shlex.quote(pkg_arg)}"
-            pre_rc, _, _ = bridge.run_cmd(pre_cmd, overlays={repro_rel: repro["test_source"]}, timeout_s=min(timeout_s, 45.0))
-            if pre_rc == 0:
-                return {"status": "NO_QUALIFIED_REPRODUCER", "language": "go", "symbol": target.name, "via_container_bridge": True}
+        if not repro:
+            return {"status": "NO_QUALIFIED_REPRODUCER", "language": "go", "symbol": target.name, "via_container_bridge": True}
+        pre_cmd = f"{_shlex.quote(go_bin)} test -v -count=1 -run {_shlex.quote('^' + repro['test_name'] + '$')} {_shlex.quote(pkg_arg)}"
+        pre_rc, pre_out, pre_err = bridge.run_cmd(pre_cmd, overlays={repro_rel: repro["test_source"]}, timeout_s=min(timeout_s, 45.0))
+        pre_comb = (pre_out or "") + "\n" + (pre_err or "")
+        # Fail closed if reproducer already passes OR failed only to compile (not a behavioral test failure!)
+        if pre_rc == 0 or "[build failed]" in pre_comb or "cannot find package" in pre_comb:
+            return {
+                "status": "NO_QUALIFIED_REPRODUCER",
+                "language": "go",
+                "symbol": target.name,
+                "pre_rc": pre_rc,
+                "build_failed": "[build failed]" in pre_comb,
+                "via_container_bridge": True,
+            }
 
         for desc, patched in candidates:
-            ov: dict[str, str] = {target.rel_path: patched}
-            if repro:
-                ov[repro_rel] = repro["test_source"]
+            ov: dict[str, str] = {target.rel_path: patched, repro_rel: repro["test_source"]}
             post_cmd = f"{_shlex.quote(go_bin)} test -count=1 {_shlex.quote(pkg_arg)}"
             post_rc, _, _ = bridge.run_cmd(post_cmd, overlays=ov, timeout_s=min(timeout_s, 45.0))
             if post_rc == 0:
@@ -662,19 +704,21 @@ def solve_go_repository(repo_root: pathlib.Path, issue_text: str, *, timeout_s: 
                 }
         return {"status": "UNSOLVED", "language": "go", "symbol": target.name, "candidates_tried": len(candidates), "via_container_bridge": True}
 
+    if not repro:
+        return {"status": "NO_QUALIFIED_REPRODUCER", "language": "go", "symbol": target.name}
+
     # Isolated CoW temp workspace so host repo is NEVER mutated unless verified green!
     with tempfile.TemporaryDirectory(prefix="go_swe_cow_") as td:
         ws = pathlib.Path(td) / "repo"
-        shutil.copytree(repo_root, ws, ignore=shutil.ignore_patterns(".git"))
+        shutil.copytree(repo_root, ws, ignore=shutil.ignore_patterns(".git"), symlinks=True, ignore_dangling_symlinks=True)
         pkg_dir = (ws / target.rel_path).parent
-        repro_path: pathlib.Path | None = None
-        if repro:
-            repro_path = pkg_dir / f"zz_epistemic_repro_{target.name.lower()}_test.go"
-            repro_path.write_text(repro["test_source"], encoding="utf-8")
-            pre = subprocess.run([go_bin, "test", "-v", "-run", repro["test_name"], "."], cwd=str(pkg_dir), capture_output=True, text=True, timeout=timeout_s)
-            if pre.returncode == 0:
-                repro_path.unlink(missing_ok=True)
-                return {"status": "NO_QUALIFIED_REPRODUCER", "language": "go", "symbol": target.name}
+        repro_path = pkg_dir / f"zz_epistemic_repro_{target.name.lower()}_test.go"
+        repro_path.write_text(repro["test_source"], encoding="utf-8")
+        pre = subprocess.run([go_bin, "test", "-v", "-run", repro["test_name"], "."], cwd=str(pkg_dir), capture_output=True, text=True, timeout=timeout_s)
+        pre_comb = (pre.stdout or "") + "\n" + (pre.stderr or "")
+        if pre.returncode == 0 or "[build failed]" in pre_comb:
+            repro_path.unlink(missing_ok=True)
+            return {"status": "NO_QUALIFIED_REPRODUCER", "language": "go", "symbol": target.name}
 
         for desc, patched in candidates:
             (ws / target.rel_path).write_text(patched, encoding="utf-8")

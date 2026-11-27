@@ -1759,6 +1759,125 @@ def _compile_metamorphic_witness_clones(
     return specs
 
 
+def _compile_bm25_fixture_test_clones(
+    repo_root: pathlib.Path,
+    issue_text: str,
+    repo_index: RepoSymbolIndex,
+) -> list[CompiledReproSpec]:
+    """BM25-guided fixture-preserving crash/edge-case test cloner for pure-prose issues.
+
+    Locates top-ranked existing tests via pure-stdlib BM25 (works even when the issue only
+    mentions kwargs/flags/attributes like `show_envvar`/`envvar` instead of top-level defs),
+    preserves pytest fixture parameters (e.g. `(runner)`), mutates only cue-justified input
+    literals, and uses a strict no-uncaught-crash oracle (0 false positives on healthy repos).
+    """
+    if repo_index.language != "python":
+        return []
+    cues = _extract_metamorphic_cues(issue_text, repo_index)
+    if not cues["any_active"] or cues["expected_exc"]:
+        return []
+
+    from canonical.swe_kernel import bm25_code_localizer_v1 as _bm25
+
+    ranked_tests = _bm25.localize_functions_bm25(
+        repo_root, issue_text, language="python", in_tests=True, top_k=4,
+    )
+    if not ranked_tests:
+        return []
+
+    # Build cue-justified literal replacements (string -> edge string, int -> 0/-1)
+    str_muts: list[tuple[str, str]] = []
+    if cues["empty"]:
+        str_muts.append(("empty_str", '""'))
+    if cues["whitespace_case"]:
+        str_muts.append(("ws_str", '"   "'))
+    if cues["want_unicode"]:
+        str_muts.append(("unicode_str", '"caf\\u00e9\\u2603"'))
+    int_muts: list[tuple[str, str]] = []
+    if cues["zero_neg"]:
+        int_muts.append(("zero", "0"))
+        if cues["want_negative"]:
+            int_muts.append(("neg", "-1"))
+    if not str_muts and not int_muts:
+        return []
+
+    specs: list[CompiledReproSpec] = []
+    seen: set[str] = set()
+    for rfn in ranked_tests[:3]:
+        p = repo_root / rfn.rel_path
+        try:
+            src = p.read_text(encoding="utf-8", errors="replace")
+            tree = ast.parse(src)
+        except (OSError, SyntaxError):
+            continue
+        lines = src.splitlines()
+        header = _extract_test_file_header(tree, lines)
+        test_subdir = pathlib.PurePosixPath(rfn.rel_path).parent.as_posix()
+        if test_subdir == ".":
+            test_subdir = ""
+        fn_node = next(
+            (n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == rfn.name),
+            None,
+        )
+        if fn_node is None or len(fn_node.body) > 25:
+            continue
+        # Strip parametrize decorators (cloned probe uses explicit mutated args)
+        if any("parametrize" in ast.unparse(d) for d in fn_node.decorator_list):
+            continue
+        # Keep non-assert setup/execution statements ONLY (strict crash-only oracle -> 0 FP!)
+        kept_stmts = [st for st in fn_node.body if not isinstance(st, ast.Assert)]
+        if not kept_stmts:
+            continue
+        arg_sig = ast.unparse(fn_node.args)
+        body_code = "\n".join("    " + ln for st in kept_stmts for ln in ast.unparse(st).splitlines())
+        if "runner.invoke(" in body_code and "result" in body_code:
+            body_code += "\n    assert getattr(result, 'exception', None) is None"
+
+        # Find string or int keyword/positional literals inside kept_stmts to perturb
+        mut_pairs: list[tuple[str, str, str]] = []
+        for st in kept_stmts:
+            for n in ast.walk(st):
+                if isinstance(n, ast.keyword) and isinstance(n.value, ast.Constant):
+                    if isinstance(n.value.value, str) and n.value.value and str_muts:
+                        old_kw = f"{n.arg}={repr(n.value.value)}"
+                        for lbl, rep_lit in str_muts[:2]:
+                            mut_pairs.append((f"{lbl}_{n.arg}", old_kw, f"{n.arg}={rep_lit}"))
+                    elif isinstance(n.value.value, int) and not isinstance(n.value.value, bool) and int_muts:
+                        old_kw = f"{n.arg}={repr(n.value.value)}"
+                        for lbl, rep_lit in int_muts[:1]:
+                            mut_pairs.append((f"{lbl}_{n.arg}", old_kw, f"{n.arg}={rep_lit}"))
+        for lbl, old_frag, new_frag in mut_pairs[:4]:
+            if old_frag not in body_code:
+                continue
+            mut_body = body_code.replace(old_frag, new_frag, 1)
+            fn_src = f"{header.rstrip()}\n\ndef test_epistemic_bm25_{lbl}_{len(specs)}({arg_sig}):\n{mut_body}\n"
+            if fn_src in seen:
+                continue
+            try:
+                ast.parse(fn_src)
+            except SyntaxError:
+                continue
+            seen.add(fn_src)
+            specs.append(
+                CompiledReproSpec(
+                    language="python",
+                    kind="bm25_fixture_clone",
+                    test_source=fn_src,
+                    referenced_symbols=[
+                        s for s in repo_index.symbols if re.search(rf"\b{re.escape(s)}\b", body_code)
+                    ][:6],
+                    assertion_count=1,
+                    has_contrastive=False,
+                    description=f"bm25_clone_{lbl}({rfn.rel_path}::{rfn.name})",
+                    test_subdir=test_subdir,
+                    source_test_file=rfn.rel_path,
+                )
+            )
+            if len(specs) >= 6:
+                return specs
+    return specs
+
+
 def compile_issue_specs(
     issue_text: str,
     repo_index: RepoSymbolIndex,
@@ -1772,6 +1891,8 @@ def compile_issue_specs(
     if repo_root is not None:
         specs.extend(_compile_existing_test_clones(repo_root, issue_text, repo_index))
         specs.extend(_compile_metamorphic_witness_clones(repo_root, issue_text, repo_index))
+        if len(specs) < 2:
+            specs.extend(_compile_bm25_fixture_test_clones(repo_root, issue_text, repo_index))
     # Deduplicate identical test sources while preserving order
     seen: set[str] = set()
     uniq: list[CompiledReproSpec] = []
@@ -1829,7 +1950,7 @@ def _run_reproducer_once(
             if any(h in combined for h in _PY_HARNESS_ERRORS):
                 return False, rc, combined
             return True, rc, combined
-        if spec.language != "python" and (bridge.toolchain.vitest_bin or bridge.toolchain.node_exe):
+        if spec.language != "python" and (bridge.toolchain.vitest_bin or bridge.toolchain.jest_bin or bridge.toolchain.node_exe):
             if repo_index.is_typescript_vitest and bridge.toolchain.vitest_bin:
                 rel_test = "_epistemic_repro_probe.spec.ts"
                 c_cmd = f"{_shlex.quote(bridge.toolchain.vitest_bin)} run --no-file-parallelism {_shlex.quote(rel_test)}"
@@ -1839,6 +1960,11 @@ def _run_reproducer_once(
             ov = bridge.collect_modified_overlays(repo_root, extra={rel_test: spec.test_source})
             rc, out, err = bridge.run_cmd(c_cmd, overlays=ov, timeout_s=timeout_s)
             combined = (out or "") + "\n" + (err or "")
+            if rc != 0 and bridge.toolchain.jest_bin and not repo_index.is_typescript_vitest:
+                if any(tok in combined for tok in ("Cannot use import statement", "Unexpected token", "ERR_UNKNOWN_FILE_EXTENSION")):
+                    j_cmd = f"{_shlex.quote(bridge.toolchain.jest_bin)} --runInBand --no-cache {_shlex.quote(rel_test)}"
+                    rc, out, err = bridge.run_cmd(j_cmd, overlays=ov, timeout_s=timeout_s)
+                    combined = (out or "") + "\n" + (err or "")
             if rc == 0:
                 return False, 0, combined
             if any(h in combined for h in _JS_HARNESS_ERRORS):
@@ -2117,11 +2243,11 @@ def _run_regression_suite(
 
 
 def _copy_workspace(src: pathlib.Path, dst: pathlib.Path) -> None:
-    """Create a fast isolated working copy (symlinking node_modules if present)."""
+    """Create a fast isolated working copy (preserving symlinks & ignoring dangling symlinks)."""
     def _ignore(dirpath: str, names: list[str]) -> set[str]:
         return {n for n in names if n in (".git", "__pycache__", ".pytest_cache", "node_modules")}
 
-    shutil.copytree(src, dst, ignore=_ignore)
+    shutil.copytree(src, dst, ignore=_ignore, symlinks=True, ignore_dangling_symlinks=True)
     nm = src / "node_modules"
     if nm.exists() and not (dst / "node_modules").exists():
         (dst / "node_modules").symlink_to(nm.resolve())
@@ -2206,6 +2332,7 @@ def solve_issue_from_description(
                     solve_targets,
                     python_src_root=repo_index.python_src_root or "",
                     referenced_symbols=all_ref_syms,
+                    issue_text=issue_text,
                     timeout_s=rem_s,
                 )
             else:

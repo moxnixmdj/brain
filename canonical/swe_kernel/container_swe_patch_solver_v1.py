@@ -39,22 +39,35 @@ _STDLIB_TEST_RUNNER = (
 
 
 def _get_transfer_store() -> _mst.MinimalSubtreeTransferStore:
-    """Lazily train a 1-scope-hole minimal-subtree transfer store from the repo's real-fix corpus."""
+    """Lazily train a 1-scope-hole minimal-subtree transfer store from the repo's real-fix corpora."""
     global _CACHED_TRANSFER_STORE
     if _CACHED_TRANSFER_STORE is not None:
         return _CACHED_TRANSFER_STORE
     store = _mst.MinimalSubtreeTransferStore(allow_one_scope_hole=True)
-    corpus_path = pathlib.Path(__file__).resolve().parents[1] / "corpus" / "real_fix_pairs_20261119_V1.json"
-    if corpus_path.is_file():
+    corpus_dir = pathlib.Path(__file__).resolve().parents[1] / "corpus"
+    sources_spec = (
+        ("real_fix_pairs_20261119_V1.json", ("tasks", "pairs"), ("before", "before_source", "buggy_source"), ("after", "after_source", "fixed_source")),
+        ("real_fix_commits_20261116_V1.json", ("grammar", "tasks"), ("defective", "before", "before_source"), ("repaired", "after", "after_source")),
+    )
+    for fname, list_keys, b_keys, a_keys in sources_spec:
+        cpath = corpus_dir / fname
+        if not cpath.is_file():
+            continue
         try:
-            data = json.loads(corpus_path.read_text(encoding="utf-8"))
-            pairs = data.get("pairs") if isinstance(data, dict) else (data if isinstance(data, list) else [])
-            for item in pairs or []:
+            data = json.loads(cpath.read_text(encoding="utf-8"))
+            items = []
+            if isinstance(data, dict):
+                for lk in list_keys:
+                    if isinstance(data.get(lk), list):
+                        items.extend(data[lk])
+            elif isinstance(data, list):
+                items = data
+            for item in items:
                 if not isinstance(item, dict):
                     continue
-                b_src = item.get("before_source") or item.get("buggy_source") or ""
-                a_src = item.get("after_source") or item.get("fixed_source") or ""
-                if isinstance(b_src, str) and isinstance(a_src, str) and b_src and a_src:
+                b_src = next((item[k] for k in b_keys if isinstance(item.get(k), str) and item[k]), "")
+                a_src = next((item[k] for k in a_keys if isinstance(item.get(k), str) and item[k]), "")
+                if b_src and a_src:
                     store.learn_from_file_pair(b_src, a_src)
         except Exception:
             pass
@@ -297,6 +310,7 @@ def solve_python_with_container_bridge(
     *,
     python_src_root: str = "",
     referenced_symbols: Sequence[str] = (),
+    issue_text: str = "",
     timeout_s: float = 45.0,
     max_candidates: int = 36,
 ) -> dict[str, Any]:
@@ -327,6 +341,16 @@ def solve_python_with_container_bridge(
     if not sites:
         sym_pool = list(referenced_symbols) + _extract_test_imported_symbols(ws, test_targets)
         sites = _find_symbol_sites(ws, sym_pool)
+    if issue_text and len(sites) < 3:
+        from canonical.swe_kernel import bm25_code_localizer_v1 as _bm25
+
+        for rf in _bm25.localize_functions_bm25(ws, issue_text, language="python", top_k=5):
+            # Include body lines of each BM25-localized function!
+            for extra_site in _find_symbol_sites(ws, [rf.name]):
+                if extra_site[0] == rf.rel_path and extra_site not in sites:
+                    sites.append(extra_site)
+            if (rf.rel_path, rf.lineno) not in sites:
+                sites.append((rf.rel_path, rf.lineno))
     if not sites:
         return {
             "status": "NO_LOCALIZED_SITES",

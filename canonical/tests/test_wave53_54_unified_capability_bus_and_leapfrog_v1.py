@@ -878,6 +878,84 @@ class TestWave53To54UnifiedCapabilityBusAndLeapfrog(unittest.TestCase):
             # Container repo must STILL be untouched until agent uploads final winner!
             self.assertEqual((cdir / "limit.py").read_text(encoding="utf-8"), "def within_cap(x, cap):\n    return x < cap\n")
 
+    def test_22_bm25_polyglot_localizer_and_corpus_transfer_store(self) -> None:
+        """Verify Two-Stage BM25 localization (Py/Go/JS), fixture-preserving cloner, and 79+ real corpus transfer rules."""
+        import shutil
+        from canonical.swe_kernel import bm25_code_localizer_v1 as bm25
+        from canonical.swe_kernel import container_swe_patch_solver_v1 as csolver
+        from canonical.swe_kernel import go_and_jsts_causal_swe_engine_v1 as gojs
+        from canonical.runtime import epistemic_issue_reproducer_v1 as ir
+
+        # 1. Production transfer store MUST load real executable rules from canonical/corpus (never silently 0!)
+        store = csolver._get_transfer_store()
+        self.assertGreaterEqual(len(store.rules()), 50)
+
+        with tempfile.TemporaryDirectory(prefix="w54_bm25_poly_") as td:
+            root = Path(td)
+
+            # 2. Pure-prose Go BM25 localization (issue NEVER names `CheckBurstLimit` verbatim!)
+            g = root / "go_repo"
+            (g / "pkg" / "ratelimit").mkdir(parents=True)
+            (g / "go.mod").write_text("module example.com/rl\n", encoding="utf-8")
+            (g / "pkg" / "ratelimit" / "bucket.go").write_text(
+                "package ratelimit\n\nfunc CheckBurstLimit(burst int) bool {\n\treturn burst > 0\n}\n",
+                encoding="utf-8",
+            )
+            (g / "pkg" / "ratelimit" / "header.go").write_text(
+                "package ratelimit\n\nfunc FormatHeader(name string) string {\n\treturn name\n}\n",
+                encoding="utf-8",
+            )
+            rf_go = bm25.localize_functions_bm25(g, "rate limit bucket check fails on zero burst", language="go", top_k=3)
+            self.assertTrue(rf_go and rf_go[0].name == "CheckBurstLimit")
+            go_res = gojs.solve_go_repository(g, "rate limit bucket check fails on zero burst")
+            self.assertEqual(go_res.get("symbol"), "CheckBurstLimit")
+
+            # 3. Pure-prose JS BM25 + live Node.js solve (issue NEVER names `makeSlug` verbatim!)
+            if shutil.which("node"):
+                j = root / "js_repo"
+                j.mkdir()
+                (j / "package.json").write_text('{"name":"demo"}\n', encoding="utf-8")
+                (j / "slug.js").write_text(
+                    "function makeSlug(text) {\n  if (text === '') return 'default';\n  return text.trim().toLowerCase();\n}\nmodule.exports = { makeSlug };\n",
+                    encoding="utf-8",
+                )
+                (j / "test_slug.js").write_text(
+                    "const assert = require('assert');\nconst { makeSlug } = require('./slug');\nassert.strictEqual(makeSlug('Hi'), 'hi');\n",
+                    encoding="utf-8",
+                )
+                j_res = gojs.solve_js_ts_from_prose(
+                    j, "slug normalization returns empty string on whitespace-only input instead of 'default'",
+                )
+                self.assertEqual(j_res["status"], "SOLVED")
+                self.assertEqual(j_res["symbol"], "makeSlug")
+
+            # 4. Python BM25 fixture-preserving test cloner (issue mentions only kwarg `envvar`, 0 def/class names!)
+            p = root / "py_repo"
+            (p / "pkg").mkdir(parents=True)
+            (p / "tests").mkdir(parents=True)
+            (p / "pyproject.toml").write_text('[project]\nname = "demo"\n', encoding="utf-8")
+            (p / "pkg" / "__init__.py").write_text("", encoding="utf-8")
+            (p / "pkg" / "opt.py").write_text(
+                "def format_opt(envvar='X', show_envvar=True):\n    return f'[env: {envvar}]' if show_envvar else ''\n",
+                encoding="utf-8",
+            )
+            (p / "tests" / "test_opt.py").write_text(
+                "from pkg.opt import format_opt\n\n"
+                "def test_show_envvar(tmp_path):\n"
+                "    out = format_opt(envvar='ARG1', show_envvar=True)\n"
+                "    assert 'ARG1' in out\n",
+                encoding="utf-8",
+            )
+            idx = ir.scan_repo_symbols(p)
+            specs = ir.compile_issue_specs("Fix `show_envvar` output for an empty `envvar`", idx, repo_root=p)
+            self.assertTrue(any(sp.kind == "bm25_fixture_clone" and "test_show_envvar" in sp.description for sp in specs))
+
+            # 5. Dangling symlink safety (openlibrary-b67138 regression guard: `_copy_workspace` MUST NOT crash!)
+            (p / "infogami").symlink_to("/nonexistent/dangling/target")
+            copied = root / "py_repo_copied"
+            ir._copy_workspace(p, copied)
+            self.assertTrue((copied / "pkg" / "opt.py").is_file())
+
 
 if __name__ == "__main__":
     unittest.main()
