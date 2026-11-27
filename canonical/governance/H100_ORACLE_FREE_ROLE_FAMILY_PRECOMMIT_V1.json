@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ORACLE_FREE_ROLE_FAMILY_PRECOMMIT_V1",
+  "date": "2026-10-06",
+  "status": "FROZEN_BEFORE_INDEPENDENT_RESULTS__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Test whether a bounded raw two-column numeric task can identify both directed input/target role orientation and one of the existing verified parametric families without receiving target-column, input-column, family, or ontology labels.",
+  "subject": {
+    "runtime": "canonical/runtime/h100_oracle_free_role_family_v1.py",
+    "tests": "canonical/tests/test_h100_oracle_free_role_family_v1.py",
+    "base_family_search": "canonical/runtime/h100_zero_learned_parametric_unary_v1.py"
+  },
+  "frozen_cases": [
+    "OPAQUE_EXP_ABS_UNIQUE_ORIENTATION",
+    "OPAQUE_THRESHOLD_STEP_UNIQUE_ORIENTATION",
+    "OPAQUE_LINEAR_TREND_SINUSOID_UNIQUE_ORIENTATION",
+    "BIDIRECTIONALLY_EXACT_LINEAR_NONIDENTIFIABILITY_CONTROL",
+    "COLUMN_RENAMING_INVARIANCE"
+  ],
+  "semantic_side_information_forbidden": [
+    "EXPECTED_FAMILY",
+    "TARGET_COLUMN_LABEL",
+    "INPUT_COLUMN_LABEL",
+    "ONTOLOGY_ROLE_LABEL",
+    "TASK_ID_TO_FAMILY_MAPPING"
+  ],
+  "pass_gate": [
+    "ALL_THREE_IDENTIFIABLE_FAMILIES_SELECT_THE_CORRECT_DIRECTED_ROLE_AND_FAMILY",
+    "THE_BIDIRECTIONALLY_EXACT_CONTROL_ABSTAINS_INSTEAD_OF_GUESSING",
+    "COLUMN_RENAMING_DOES_NOT_CHANGE_THE_DISCOVERED_ROLE_RELATION",
+    "PERSISTENT_LEARNED_BYTES_ZERO",
+    "EXTERNAL_LEARNED_CAPABILITY_CALLS_ZERO"
+  ],
+  "interpretation_if_pass": "A_NONTRIVIAL_SLICE_OF_REPRESENTATION_SELECTION_CAN_BE_IMPLEMENTED_AS_EXHAUSTIVE_HYPOTHESIS_ENUMERATION_PLUS_EXACT_VERIFICATION_WITHOUT_ROLE_OR_FAMILY_ORACLE_LABELS. THIS DOES_NOT ESTABLISH OPEN_WORLD_SEMANTIC_ATOM_DISCOVERY.",
+  "falsifiers": [
+    "A_UNIQUE_CASE_PRODUCES_MULTIPLE_EXACT_DIRECTED_HYPOTHESES",
+    "A_UNIQUE_CASE_SELECTS_THE_WRONG_DIRECTION_OR_FAMILY",
+    "THE_NONIDENTIFIABLE_CONTROL_FORCES_A_UNIQUE_ORIENTATION",
+    "COLUMN_RENAMING_CHANGES_THE_SELECTED_BEHAVIOR",
+    "ANY_FORBIDDEN_SEMANTIC_SIDE_INFORMATION_BECOMES_LOAD_BEARING"
+  ],
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_NATURAL_LANGUAGE_UNDERSTANDING",
+    "NO_ARBITRARY_REPRESENTATION_DISCOVERY",
+    "NO_CLAIM_THE_PREEXISTING_PARAMETRIC_FAMILY_VOCABULARY_IS FREE INFORMATION",
+    "NO_OPUS55_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
