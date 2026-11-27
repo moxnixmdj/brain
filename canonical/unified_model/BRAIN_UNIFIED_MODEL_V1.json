@@ -31005,9 +31005,9 @@
     "verified"
    ],
    "verification": {
-    "evidence_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_CLOSING_SUPERCOMPOSER_V1_V1.json",
+    "evidence_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_ULTIMATE_SUPERCOMPOSER_V1_V1.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "9954912e43c5bc12f38158f4eaa8c5e7444611409e62b8931ca28ce47cbda4a3",
+    "evidence_sha256": null,
     "independent_verification_evident": true,
     "mission_id": "HARDCORE-VERIFY-SOFTWARE-HARDCORE-ULTIMATE-SUPERCOMPOSER-V1",
     "module_sha256": null,
@@ -31446,9 +31446,9 @@
     "applied"
    ],
    "verification": {
-    "evidence_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REPAIR_CROSSFILE_CHOREOGRAPH_V1_V1.json",
+    "evidence_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REPAIR_CHOREOGRAPH_V1_V1.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "78e08d914e927a64576e1ca64aa91fa77e25a39a9e5293028b797081f1910704",
+    "evidence_sha256": null,
     "independent_verification_evident": true,
     "mission_id": "AUTO-VERIFY-SOFTWARE-REPAIR-CHOREOGRAPH-CROSSFILE-V1",
     "module_sha256": null,
@@ -31528,9 +31528,9 @@
     "proven"
    ],
    "verification": {
-    "evidence_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REPAIR_LOOP_CEGIS_HYPOTHESIS_V1_V1.json",
+    "evidence_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REPAIR_LOOP_CEGIS_HYPOTHESIS_V1.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "1285e5c612a0ac53e95b4fd6a6a4330aeccae4b30f866b1f7c84b9c67332e7ab",
+    "evidence_sha256": null,
     "independent_verification_evident": true,
     "mission_id": "AUTO-VERIFY-SOFTWARE-REPAIR-LOOP-CEGIS-HYPOTHESIS-V1",
     "module_sha256": null,
@@ -31613,9 +31613,9 @@
     "typed"
    ],
    "verification": {
-    "evidence_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REVIEW_GATE_COMPOSER_V1_V1.json",
+    "evidence_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REVIEW_GATE_COMPOSER_V1.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "4f7513df92d8835593f1247abdf4cbf28ab33b9c1f9cfa689bc13d04799392b5",
+    "evidence_sha256": null,
     "independent_verification_evident": true,
     "mission_id": "AUTO-VERIFY-SOFTWARE-REVIEW-GATE-COMPOSER-V1",
     "module_sha256": null,
@@ -32587,9 +32587,9 @@
     "selection"
    ],
    "verification": {
-    "evidence_path": "canonical/verification/HARDCORE_VERIFY_TEST_SLICE_NEVER_MISS_V1_V1.json",
+    "evidence_path": "canonical/verification/HARDCORE_VERIFY_TEST_SLICE_NEVER_MISS_V1.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "6428b746bfb864dfbf0c00ec78ab573eee6e6c41a79b9e714331424d4f59c0d4",
+    "evidence_sha256": null,
     "independent_verification_evident": true,
     "mission_id": "AUTO-VERIFY-TEST-SLICE-NEVER-MISS-V1",
     "module_sha256": null,
@@ -33056,7 +33056,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d5722a9e3dd552662efe89f7e7077316ed2d798b99dcb3668986b4f904d30f60"
+  "value": "0d080b2442b4fae52331f8f61dedae603bfb881f35a7abc4a59bfc4e065d1e4c"
  },
  "engines": [
   {
@@ -152663,27 +152663,26 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 2750,
+   "bytes": 3326,
    "headings": [
     "Enrollment gate: what the root can actually dispatch"
    ],
    "kind": "DOCUMENT",
    "path": "canonical/capabilities/ENROLLMENT_GATE_V1.md",
-   "sha256": "5428f1732ed47f62129782655841520bdbe8b3b4d3076b0af940b1700415bfaf",
-   "summary": "- registry rows: live 145, snapshot 146, extended 2321, projection 321, pending bindings 18 → merged 2490 | admitted by `load_verified_registry`: **462** - provides vocabulary 683, requires vocabulary 125 - rows dispatched as the declared native kind `runtime_native_action`: 2 (no adapter file expected; listed, not counted as a defect) - `OWNED_FAMILY_ROUTES` (fact): ownership-matrix route modules",
+   "sha256": "4df9488a85f8c0a5a91cf3c12d9a1b2ef0959d3159f29bcbda604e4b846639bf",
+   "summary": "- registry rows: live 145, snapshot 146, extended 2319, projection 305, pending bindings 16 → merged 2472 | admitted by `load_verified_registry`: **447** - provides vocabulary 658, requires vocabulary 125 - rows dispatched as the declared native kind `runtime_native_action`: 2 (no adapter file expected; listed, not counted as a defect) - ownership-matrix route modules: 4 named, INVENTORY_ONLY__NOT",
    "terms": {
-    "11": 2,
     "125": 1,
     "145": 1,
     "146": 1,
-    "18": 1,
-    "2321": 1,
-    "2490": 1,
+    "16": 1,
+    "2319": 1,
+    "2472": 1,
     "25": 1,
-    "321": 1,
+    "305": 1,
     "35": 1,
-    "462": 1,
-    "683": 1,
+    "447": 1,
+    "658": 1,
     "actually": 1,
     "adapter": 1,
     "admission": 1,
@@ -152696,15 +152695,16 @@
     "but": 1,
     "candidate.response_or_fields.available": 1,
     "cannot": 1,
-    "canonical": 3,
+    "canonical": 8,
     "capabilities": 1,
     "capability": 1,
     "chart.query.x_value.available": 1,
     "chart.query.y_value.available": 1,
+    "chart.question.binary_phase_solvus.available": 1,
+    "chart.question.legend_linear_intersection.available": 1,
     "defect": 4,
     "dispatch": 3,
     "enrollment": 2,
-    "fact": 2,
     "file": 2,
     "means": 2,
     "missing_verification_receipt": 2,
@@ -152718,7 +152718,7 @@
     "snapshot": 2,
     "tree": 2,
     "unsatisfiable_requires": 2,
-    "verification": 3,
+    "verification": 8,
     "vocabulary": 2
    },
    "title": "Enrollment gate: what the root can actually dispatch",
@@ -170883,10 +170883,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 2568,
+  "included_source_count": 2563,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "fc80fe6b67cdf253d0100425990a5460a04db4c51ab71b6de3885d31fa0fadb2"
+  "source_tree_digest": "09b16eb231070b3403a169fd0ed6dc684f02f96043ce7f659116579fa7c4298c"
  },
  "research_index": [
   {
@@ -307149,7 +307149,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/WAVE53_54_HONEST_BENCHMARK_RECEIPT_20261124_V1.json",
    "schema": "BRAIN_WAVE53_54_HONEST_BENCHMARK_RECEIPT_V1",
-   "sha256": "52cf5d26218c98002bcb5c8afeaf0579df18a2b5d93525c80a695e080391acbf",
+   "sha256": "923c3b4a7e7807d03664a5c67c1e41f980995fb4bac17ea3d9f18b9152da97d7",
    "status": "",
    "terms": {
     "20261124": 1,
@@ -348656,7 +348656,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/WAVE53_54_UNIFIED_CAPABILITY_BUS_AND_LEAPFROG_20261124_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "36380339c84acf6533f883a4ce99f2f5ac7bde8b6f8c93d7f97dca434a9a8a7e",
+   "sha256": "4fa15b210f0dc1130b51ba6035b2357931acf7164287b2fae8ff20e4b6aff658",
    "status": "SHIPPED",
    "terms": {
     "0.00": 1,

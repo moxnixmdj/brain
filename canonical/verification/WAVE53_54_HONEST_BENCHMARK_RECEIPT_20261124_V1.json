@@ -39,7 +39,7 @@
   "elapsed_s": 65.36,
   "frontier_walls_a_to_d": {
     "authority": "NONE__PRODUCER_RUN_SANDBOX",
-    "measured_at_utc": "2026-11-27T13:22:58Z",
+    "measured_at_utc": "2026-11-27T13:30:31Z",
     "model_calls": 0,
     "spend_usd": 0.0,
     "wall_a_5j_generalizer": {
@@ -107,16 +107,12 @@
       ],
       "removed_literal_paren_chokepoint": true
     },
-    "wall_d_enrollment_gate_receipt_path_repairs": {
+    "wall_d_enrollment_gate_receipt_path_diagnosis": {
+      "confirmed_filename_typos_with_matching_on_disk_capability_id": 5,
+      "current_missing_verification_receipt": 8,
       "dangling_adapter": 0,
-      "files_repaired": [
-        "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
-        "canonical/runtime/BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
-      ],
-      "honest_genuinely_missing_preserved": 3,
-      "missing_verification_receipt_after": 3,
-      "missing_verification_receipt_before": 8,
-      "repaired_typos_count": 5,
+      "genuinely_missing_receipts": 3,
+      "status": "DIAGNOSED_AND_SPLIT_FOR_FOLLOWUP_PR_PER_15_FILE_SCOPE_CAP",
       "unenrolled_certified_capability": 0
     }
   },

@@ -670,10 +670,27 @@ class TestWave53To54UnifiedCapabilityBusAndLeapfrog(unittest.TestCase):
             s_arity = ir.synthesize_verified_reproducer(arity_ws, "Arg get_help_record fails when items is empty.")
             self.assertEqual(s_arity["status"], "NO_QUALIFIED_REPRODUCER")
 
-    def test_19_frontier_wall_d_enrollment_gate_receipt_repairs(self) -> None:
-        """Wall D: 5 broken registry receipt_path typos repaired to real on-disk receipts; 3 genuine absences remain honest."""
+    def test_19_frontier_wall_b_compound_lhs_subexpr_and_wall_d_honest_gate(self) -> None:
+        """Wall B: compound-LHS sub-expression transfer + bare-Name guard; Wall D: honest enrollment gate census."""
+        from canonical.swe_kernel import single_experience_transfer_v1 as set1
         from canonical.tools import capability_enrollment_gate_v1 as gate
 
+        # Wall B: compound-LHS sub-expression transfers across statement wrappers while refusing bare Names
+        train = [
+            set1.Repair(slug="a/b", sha="1" * 40, path="p.py", index=0,
+                        before="if len(xs) < limit:\n    pass", after="if len(xs) <= limit:\n    pass"),
+        ]
+        held = [
+            set1.Repair(slug="c/d", sha="2" * 40, path="q.py", index=0,
+                        before="ok = len(items) < cap", after="ok = len(items) <= cap"),
+        ]
+        ev = set1.evaluate(train, held)
+        self.assertEqual(ev["STORE"]["hits"], 0)
+        self.assertEqual(ev["SUBEXPR_STORE"]["hits"], 1)
+        self.assertEqual(ev["COMBINED_STORE"]["hits"], 1)
+        self.assertIsNone(set1.extract_minimal_compound_subexpr_pair("x = te", "x = t"))
+
+        # Wall D: live enrollment gate reports 0 dangling adapters & 0 unenrolled certified capabilities
         root = Path(__file__).resolve().parents[2]
         r = gate.build(
             root,
@@ -684,7 +701,7 @@ class TestWave53To54UnifiedCapabilityBusAndLeapfrog(unittest.TestCase):
         )
         self.assertEqual(r["defect_counts"]["DANGLING_ADAPTER"], 0)
         self.assertEqual(r["defect_counts"]["UNENROLLED_CERTIFIED_CAPABILITY"], 0)
-        self.assertEqual(r["defect_counts"]["MISSING_VERIFICATION_RECEIPT"], 3)
+        self.assertEqual(r["defect_counts"]["MISSING_VERIFICATION_RECEIPT"], 8)
 
 
 if __name__ == "__main__":
