@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_MYSTERYMECHANISM_INTRINSIC_NONINFERIORITY_MINIMUM_CERTIFICATE_V1",
+  "date": "2026-10-11",
+  "status": "PROVED_MINIMUM_SUFFICIENT_CERTIFICATE_REDUCTION__ACCEPTANCE_STILL_OPEN_ON_EVIDENCE__ZERO_CREDIT",
+  "canonical_base_commit": "3ec2d6cac56c4c8f049940ffa592b56fa53baaec",
+  "objective": "Replace the overstrong need to infer the complete private Opus capability envelope with the minimum sound certificates needed for MysteryMechanism represented-scope intrinsic noninferiority.",
+  "scope": {
+    "benchmark": "Vals AI MysteryMechanism",
+    "private_task_count": 222,
+    "represented_scope_only": true,
+    "global_opus_capability_envelope_claimed": false
+  },
+  "actor_attribution": {
+    "deployed_opus55_percent": 49.55,
+    "deployed_success_count": 110,
+    "fallback_excluded_intrinsic_opus55_percent": 49.10,
+    "fallback_excluded_intrinsic_success_count": 109,
+    "rule": "Use 109 as the causally cleaner represented-scope intrinsic comparator. Do not promote 49.10 to a global intrinsic Opus 5.5 ceiling."
+  },
+  "theorem": {
+    "definitions": {
+      "M": "fixed private 222-task population",
+      "S_O": "fallback-excluded intrinsic Opus-success subset of M",
+      "S_B": "Brain-success subset of M under the same task contract and scorer"
+    },
+    "minimum_aggregate_noninferiority": "|S_B| >= 109",
+    "stronger_taskwise_noninferiority": "S_O subset_of S_B",
+    "admissible_routes": {
+      "MATCHED_COUNT": "Authentic independently verified Brain receipt on the same 222 private tasks, contract and scorer with at least 109 successes and no opaque target-capability provider.",
+      "THRESHOLD_MASS": "Scope-complete proof that at least 109 private tasks belong to a class on which Brain is guaranteed to receive binary credit under the same contract and scorer.",
+      "SUCCESS_SET_DOMINANCE": "Content-bound taskwise proof that S_O is a subset of S_B with |S_O|=109."
+    }
+  },
+  "information_lower_bound": {
+    "public_examples_alone_sufficient": false,
+    "reason": "Finite public transcripts without a sound private-mechanism-class restriction admit hidden worlds with identical public evidence and different private success mass.",
+    "required_new_information_if_no_matched_result": "A sound private-population mass relation or success-set relation."
+  },
+  "current_result": {
+    "proof_shape_blocker": "CLOSED",
+    "benchmark_acceptance_blocker": "OPEN",
+    "single_missing_information_atom": "ONE_OF__AUTHENTIC_MATCHED_BRAIN_SUCCESS_COUNT_GE_109__OR_SCOPE_COMPLETE_PRIVATE_SUCCESS_MASS_GE_109__OR_CONTENT_BOUND_SUCCESS_SET_DOMINANCE",
+    "same_public_example_search_authority": false,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "source_bindings": {
+    "actor_attributed_witness": ["canonical/governance/MYSTERYMECHANISM_REPRESENTED_SCOPE_ACTOR_ATTRIBUTED_WITNESS_20261007_V1.json", "40812f82ba6cdb82697c6acca395ddd51223b545"],
+    "identifiability_lower_bound": ["canonical/governance/MYSTERYMECHANISM_IDENTIFIABILITY_LOWER_BOUND_20261007_V1.json", "4ce626c784db25b1a89ce9277da3dbc50498a1cc"],
+    "public_scope_saturation": ["canonical/governance/MYSTERYMECHANISM_PUBLIC_SCOPE_SUPERSET_SEARCH_SATURATION_20261005_V1.json", "a8b142d5a38683018f0f86d748338b51c9054d02"],
+    "current_wake_gate": ["canonical/governance/CURRENT_O_TB4_MYSTERY_WAKE_GATE_RECONCILIATION_20261011_V1.json", "3c4f75a7d9208fa423e0282f6f0b0859ef7426c6"],
+    "current_terminal_authority": ["canonical/governance/CURRENT_TERMINAL_AUTHORITY.json", "ae28dee5dd638813f4c42aa6d7c46d4950f1c0f8"]
+  },
+  "verification_policy": {
+    "proof_only": true,
+    "new_live_runtime_primitive_added": false,
+    "independent_verification_required_before_activation": true,
+    "fail_closed_on_population_contract_scorer_receipt_or_scope_mismatch": true
+  },
+  "hard_nonclaims": [
+    "No claim Brain currently has 109 private successes.",
+    "No claim a current public symbolic grammar covers 109 private tasks.",
+    "No claim 49.10 is a global intrinsic Opus 5.5 ceiling.",
+    "No claim the global Opus unknown-mechanism capability envelope is identified.",
+    "No acceptance, family, capability, ownership or terminal credit."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_private_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
