@@ -1,15 +1,15 @@
 # SWE-bench Pro V2 (HARD-51, 51 tasks) — engine eval (measured run)
 
-- upstream/eval commit recorded by CI: `c2f0e3911e79b6a96490c2b66c93f329cc93abf1`
+- upstream/eval commit recorded by CI: `107e2e74eb7cfdce709db51b0edc4db390a6135b`
 - Resolve decisions come from each task's own verifier inside the official container image.
 - `nop` must resolve 0/N and `oracle` must resolve N/N or the causal number is not interpretable.
 
-- Measured under: `engine_timeout_s=900`, `eval_commit=c2f0e3911e79b6a96490c2b66c93f329cc93abf1`, `n_shards=6`
+- Measured under: `engine_timeout_s=900`, `eval_commit=107e2e74eb7cfdce709db51b0edc4db390a6135b`, `n_shards=6`
 | arm | resolved | tasks | resolve % | model calls | cost USD | trial wall s (total) | engine s (total) | missing trials |
 |---|---|---|---|---|---|---|---|---|
-| causal | 0 | 51 | 0.0 | 0 | 0.0 | 9291.38 | 1787.976 | 0 |
-| nop | 0 | 51 | 0.0 | 0 | 0.0 | 7132.52 | None | 0 |
-| oracle | 51 | 51 | 100.0 | 0 | 0.0 | 7742.4 | None | 0 |
+| causal | 0 | 51 | 0.0 | 0 | 0.0 | 7445.6 | 856.741 | 0 |
+| nop | 0 | 51 | 0.0 | 0 | 0.0 | 6943.1 | None | 0 |
+| oracle | 51 | 51 | 100.0 | 0 | 0.0 | 8292.97 | None | 0 |
 
 ## Harness gates
 
@@ -25,7 +25,7 @@
 | `causal-s2.meta.json` | 0 | 28 | `` |
 | `causal-s3.meta.json` | 0 | 28 | `` |
 | `causal-s4.meta.json` | 0 | 28 | `` |
-| `causal-s5.meta.json` | 0 | 120 | `` |
+| `causal-s5.meta.json` | 0 | 90 | `` |
 | `nop-s0.meta.json` | 0 | 27 | `` |
 | `nop-s1.meta.json` | 0 | 27 | `` |
 | `nop-s2.meta.json` | 0 | 27 | `` |
@@ -56,12 +56,12 @@
 | `instance_element-hq__element-web-66d0b318bc6fee0d17b54c1` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_element-hq__element-web-772df3021201d9c73835a62` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_element-hq__element-web-ecfd1736e5dd9808e87911f` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
-| `instance_flipt-io__flipt-2ca5dfb3513e4e786d2b037075617cc` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
+| `instance_flipt-io__flipt-2ca5dfb3513e4e786d2b037075617cc` | 0.0 | no | EDITS_UPLOADED | PASS | True | 1 |  |
 | `instance_flipt-io__flipt-3d5a345f94c2adc8a0eaa102c189c08` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_flipt-io__flipt-524f277313606f8cd29b299617d6565` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_flipt-io__flipt-c1728053367c753688f114ec26e703c` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_flipt-io__flipt-c188284ff0c094a4ee281afebebd849` | 0.0 | no | EDITS_UPLOADED | PASS | True | 1 |  |
-| `instance_flipt-io__flipt-cd18e54a0371fa222304742c6312e9a` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
+| `instance_flipt-io__flipt-cd18e54a0371fa222304742c6312e9a` | 0.0 | no | EDITS_UPLOADED | PASS | True | 1 |  |
 | `instance_flipt-io__flipt-e2bd19dafa7166c96b082fb2a59eb54` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_future-architect__vuls-5af1a227339e46c7abf3f281` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
 | `instance_future-architect__vuls-ca3f6b1dbf2cd24d1537bfda` | 0.0 | no | NO_EDITS | FAIL_CLOSED | False | 0 |  |
@@ -97,7 +97,7 @@
 
 ### Why the trials ended the way they did (engine's own account, not ours)
 
-`FAILED`×20, `NO_QUALIFIED_REPRODUCER`×17, `CAUSAL_ANGELIC_JS_SWE`×11, `UNSOLVED`×2, `CAUSAL_GO_SWE`×1.
+`FAILED`×20, `CAUSAL_ANGELIC_JS_SWE`×11, `NO_QUALIFIED_REPRODUCER`×10, `UNSOLVED`×7, `CAUSAL_GO_SWE`×3.
 
-What the engine did across the causal arm (behaviour, not a score): `EDITS_UPLOADED`×1, `NO_EDITS`×50. Resolve rate is decided only by each task's own verifier.
+What the engine did across the causal arm (behaviour, not a score): `EDITS_UPLOADED`×3, `NO_EDITS`×48. Resolve rate is decided only by each task's own verifier.
 

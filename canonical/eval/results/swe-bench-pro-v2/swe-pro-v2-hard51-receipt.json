@@ -3,8 +3,8 @@
   "causal": {
    "cost_usd_total": 0.0,
    "engine_statuses": {
-    "EDITS_UPLOADED": 1,
-    "NO_EDITS": 50
+    "EDITS_UPLOADED": 3,
+    "NO_EDITS": 48
    },
    "model_calls_total": 0,
    "n_expected": 51,
@@ -12,8 +12,8 @@
    "n_reported": 51,
    "resolve_rate_pct": 0.0,
    "resolved": 0,
-   "wall_seconds_mean": 182.18,
-   "wall_seconds_total": 9291.38
+   "wall_seconds_mean": 145.99,
+   "wall_seconds_total": 7445.6
   },
   "nop": {
    "cost_usd_total": 0.0,
@@ -26,8 +26,8 @@
    "n_reported": 51,
    "resolve_rate_pct": 0.0,
    "resolved": 0,
-   "wall_seconds_mean": 139.85,
-   "wall_seconds_total": 7132.52
+   "wall_seconds_mean": 136.14,
+   "wall_seconds_total": 6943.1
   },
   "oracle": {
    "cost_usd_total": 0.0,
@@ -40,8 +40,8 @@
    "n_reported": 51,
    "resolve_rate_pct": 100.0,
    "resolved": 51,
-   "wall_seconds_mean": 151.81,
-   "wall_seconds_total": 7742.4
+   "wall_seconds_mean": 162.61,
+   "wall_seconds_total": 8292.97
   }
  },
  "attribution": {
@@ -97,7 +97,7 @@
   }
  },
  "date": "2026-11-27",
- "eval_commit": "c2f0e3911e79b6a96490c2b66c93f329cc93abf1",
+ "eval_commit": "107e2e74eb7cfdce709db51b0edc4db390a6135b",
  "gates_recomputed_here": {
   "nop_data_complete": true,
   "nop_gate_pass": true,
