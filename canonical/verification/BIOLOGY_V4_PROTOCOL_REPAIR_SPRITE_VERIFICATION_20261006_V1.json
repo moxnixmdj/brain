@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_BIOLOGY_V4_PROTOCOL_REPAIR_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__MINIMAL_PROTOCOL_TRANSFORM_REPAIR__G_NOT_PROMOTED__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "branch": "biology-v3-protocol-troubleshooting-falsifier-20261006-v1",
+    "exact_blobs": {
+      "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V2.json": "ae250d5bc5da73b23600670be354ffba31e65e53",
+      "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V3.json": "2fc36d3e10eb6885bce579e8b2e3e1d616a01ff8",
+      "canonical/governance/OPUS55_DOMAIN_BEHAVIORAL_QUOTIENT_MAPPING_V3.json": "2c40a1e326e6f7162e362ae0ceba0026e2e92ba5",
+      "canonical/governance/OPUS55_DOMAIN_BEHAVIORAL_QUOTIENT_MAPPING_V4.json": "b1ffa38f7a28d163ea278c37118723f3d2d43643",
+      "canonical/verification/TERMINAL_FALSIFICATION_TOURNAMENT_UNMAPPED_TRANSFORM_SEARCH_20261006_V3.json": "f76c77dba1c853a42fc6f3fb670e978e35fa17c0",
+      "canonical/runtime/biology_v4_protocol_repair_verifier.py": "6f4f4810fcda314a9fe5809465ea4f8a037b81ad"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "working_directory": "/home/sprite/biologyv4protocol",
+    "execution": "EXACT_GITHUB_BLOB_MATERIALIZATION_THEN_REPLAY_WRAPPER_IMPORTING_COMMITTED_VERIFIER",
+    "result": "PASS_ZERO_EXIT"
+  },
+  "verified": [
+    "REGISTRY_V3_ADDS_EXACTLY_ONE_NEW_PROTOCOL_DIAGNOSIS_CONTRACT",
+    "ALL_PREEXISTING_BEHAVIORAL_CONTRACTS_REMAIN_UNCHANGED",
+    "ONLY_FOUR_EXISTING_FAMILY_ACCOUNTING_ROWS_GAIN_THE_NEW_CONTRACT",
+    "BIOLOGY_V4_ADDS_EXACTLY_ONE_PROTOCOL_DIAGNOSIS_TRANSFORM",
+    "BIOLOGY_V4_ADDS_EXACTLY_ONE_REQUIRED_BEHAVIORAL_CONTRACT",
+    "ALL_NONBIOLOGY_DOMAIN_ROWS_REMAIN_UNCHANGED",
+    "NO_NEW_PRIMITIVE_ACCOUNTING_FAMILY",
+    "BIOLOGY_G_ROUTE_NOT_PROMOTED",
+    "SEMANTIC_LOSSLESSNESS_REMAINS_UNPROVED_PENDING_FRESH_V4_SEARCH",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "source_binding": {
+    "repository": "malob/ai-system-cards",
+    "commit": "282a67c3c79617b23a1a23ed0869239b6e28d139",
+    "path": "cards/anthropic/claude-opus-5-5/sections/08b-capabilities-2.md",
+    "git_blob_sha": "de110235f19d017f7b9a7a76392a7cc4a7ddc854",
+    "primary_pdf_sha256": "7311c9c6bbb16d012f1c12c7418b05949fcf7ae3e30d2c40f22050074b2a7378",
+    "relevant_section": "8.17.8 Protocols"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "astra_access_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
