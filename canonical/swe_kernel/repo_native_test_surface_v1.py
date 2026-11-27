@@ -38,10 +38,80 @@ def restored_surface(baseline, candidate):
             and candidate['skipped']==baseline['skipped'])
 
 
+def _case_key(nodeid):
+    """Map a `path::name` nodeid to the same `(classname, name)` identity the pytest report yields."""
+    path, _, leaf = str(nodeid).partition('::')
+    parts = [p for p in path.replace('\\', '/').split('/') if p]
+    if parts[:1] == ['tests']:
+        parts = parts[1:]
+    if parts and parts[-1].endswith('.py'):
+        parts[-1] = parts[-1][:-3]
+    if parts[:1] == ['src']:
+        parts = parts[1:]
+    classname = '.'.join(parts)
+    return (classname, leaf)
+
+
+def _stdlib_surface(root, targets, *, timeout):
+    """Run the same surface with no pytest, via the `os.fork()` CoW stdlib runner.
+
+    `pytest` is not a dependency of this project, and the benchmark numbers must
+    come from an oracle that runs wherever the spine runs. The spine already
+    ships a runner that discovers plain `def test_*` functions, `Test*` classes
+    and `unittest.TestCase` subclasses -- and that fails closed on an empty run,
+    which is the exact lie this module was written to catch.
+
+    Nothing is relaxed relative to the pytest path: an empty run is NO_CASES, a
+    crashing or timing-out runner is RUNNER_ERROR, and only "all cases passed
+    and at least one ran" is GREEN. `error` cases are an errored case; they are
+    never silently dropped.
+    """
+    from canonical.swe_kernel import stdlib_cow_test_runner_v1 as cow_runner
+
+    payload = cow_runner.run_targets_cow_fork(
+        root, targets or ('.',), timeout_s=min(15.0, float(timeout)),
+    )
+    result = dict(
+        status='NO_CASES', passed=set(), failed=set(), skipped=set(),
+        output=str(payload.get('output') or ''),
+    )
+    if not payload.get('ok', True) and payload.get('timed_out'):
+        return {**result, 'status': 'TIMEOUT'}
+    errored = payload.get('errored_nodeids') or ()
+    failed = payload.get('failed_nodeids') or ()
+    # A payload carrying no counts at all means the child died before reporting.
+    if payload.get('passed') is None and not failed:
+        return {**result, 'status': 'RUNNER_ERROR'}
+    for nodeid in failed:
+        result['failed'].add(_case_key(nodeid))
+    for nodeid in errored:
+        result['failed'].add(_case_key(nodeid))
+    passed_nodeids = payload.get('passed_nodeids') or ()
+    if len(passed_nodeids) != int(payload.get('passed') or 0):
+        # Identity is part of this surface's contract: `restored_surface`
+        # compares the case sets, so a count without identities cannot be
+        # represented honestly. Refuse rather than invent keys.
+        return {**result, 'status': 'RUNNER_ERROR'}
+    for nodeid in passed_nodeids:
+        result['passed'].add(_case_key(nodeid))
+    if result['failed']:
+        return {**result, 'status': 'RED'}
+    if result['passed']:
+        return {**result, 'status': 'GREEN'}
+    return result
+
+
 def test_surface(root, targets, *, timeout):
     result = dict(status='NO_CASES', passed=set(), failed=set(), skipped=set(), output='')
     if timeout <= 0:
         return {**result, 'status':'TIMEOUT'}
+    try:
+        import pytest  # noqa: F401
+        has_pytest = True
+    except ImportError:
+        has_pytest = False
+    if not has_pytest:
+        return _stdlib_surface(root, targets, timeout=timeout)
     with tempfile.TemporaryDirectory(prefix='test_surface_') as td:
         xml = Path(td)/'report.xml'
         cmd = [sys.executable, '-m', 'pytest', '-q', '--tb=short', '-p', 'no:cacheprovider',

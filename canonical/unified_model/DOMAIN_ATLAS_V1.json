@@ -410,7 +410,7 @@
      ],
      "path": "canonical/swe_kernel/canonical_swe_spine_v1.py",
      "score": 35.25,
-     "sha256": "ad833c9343f92b5e",
+     "sha256": "12d4296d4822ae50",
      "source_index": true,
      "summary": "Canonical Unified Polyglot SWE Spine (`canonical_swe_spine_v1`)."
     },

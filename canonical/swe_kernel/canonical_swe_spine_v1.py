@@ -3563,6 +3563,22 @@ def solve_swe_repo_native_multifile(
     stages_run.append("STAGE_3_REPO_PETRI_AND_ANGELIC_OE")
     mined_components_total = 0
     oe_synthesized_exprs: list[str] = []
+
+    # The failing run states the goal. `extract_value_obligations` mines the
+    # `expected` side of a failed assertion; if it is a literal, the repair is to
+    # make a return site produce exactly that value. Only literals the test itself
+    # published are used -- nothing is invented, and the CoW oracle still decides.
+    baseline_obligation_sources: list[str] = []
+    try:
+        for _ob in causal_nexus_v1.extract_value_obligations(base_out or ""):
+            try:
+                _src = causal_nexus_v1.literal_source(_ob.expected_value)
+            except (ValueError, TypeError):
+                continue
+            if _src and _src not in baseline_obligation_sources:
+                baseline_obligation_sources.append(_src)
+    except Exception:
+        baseline_obligation_sources = []
     if witness_envs and witness_targets:
         try:
             oe_synthesized_exprs = angelic_oe.synthesize_oe_expression(
@@ -3588,6 +3604,41 @@ def solve_swe_repo_native_multifile(
             mined_components_total += len(comps)
         except Exception:
             pass
+        # Backward obligation: the failing assertion already states the expected
+        # value, so the repair is "make a return site produce that value", not a
+        # forward search over a mutation grammar. Measured on the `None`-guard
+        # probe, nothing filled `oe_synthesized_exprs` when there were no
+        # witnesses, so the value the test named was never tried anywhere.
+        if baseline_obligation_sources:
+            _lines = orig_src.splitlines(keepends=True)
+            for _src in baseline_obligation_sources[:8]:
+                for _ln in (ranked_lines_by_file.get(rel) or []):
+                    if not (1 <= _ln <= len(_lines)):
+                        continue
+                    _orig = _lines[_ln - 1]
+                    if not _orig.lstrip().startswith("return"):
+                        continue
+                    _indent = _orig[: len(_orig) - len(_orig.lstrip())]
+                    _cand = list(_lines)
+                    _cand[_ln - 1] = f"{_indent}return {_src}\n"
+                    _cand_src = "".join(_cand)
+                    if _cand_src == orig_src:
+                        continue
+                    _ok, _out, _zused = _verify_in_isolated_cow({rel: _cand_src}, single_test_src=single_test_src)
+                    zygote_screened += int(_zused)
+                    if _ok:
+                        return _crystallize_and_finish(
+                            {rel: _cand_src},
+                            tier="ASSERTION_BACKWARD_OBLIGATION",
+                            localization=localization_report,
+                            stages=stages_run,
+                            zygote_screened=zygote_screened,
+                            extra={
+                                "mined_repo_components": mined_components_total,
+                                "oe_synthesized_exprs": oe_synthesized_exprs[:5],
+                                "backward_obligation_source": _src,
+                            },
+                        )
         for patched, proof in return_paths(orig_src, ranked_lines_by_file[rel]):
             ok, _, screened = _verify_in_isolated_cow({rel: patched}, single_test_src=single_test_src)
             zygote_screened += int(screened)

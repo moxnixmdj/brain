@@ -45,7 +45,7 @@
   },
   "benchmark_or_family_rank_authority": "Producer sandbox measurements and repository verifier suites; zero external model calls and zero claims of terminal benchmark discharge.",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::28 flagship titans lacked executable behavioral self_check() receipts, Wave 50 structural SWE capped at 4/10 real-repo commits due to missing import-alias/parser-diagnostic/policy-guard/recursive-collector AST families, 4 high-value mechanisms remained stranded in unmerged PRs (#7071/#7049/#7019/#6857), and 32 additional DARK modules remained unwired from UnifiedModel.",
-  "canonical_base_commit": "77fc2b161102051ba1025859380804b738467361",
+  "canonical_base_commit": "cba2a0554eaf2b74374a9f67b4928564e02be3e1",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": {
     "w51_48_titan_blob_pinned_adjudicator": "Upgraded 28 additional flagship titans + wave51_52 to subprocess PROVEN (48/48 PROVEN, 148,232 PROVEN LOC, 261 behavioral checks, 0 BROKEN, SHA-256 blob-pinned in TITAN_ADJUDICATION_WAVE51_48_V1.json).",
@@ -101,7 +101,7 @@
   ],
   "real_outcome": "Wave 51 & Wave 52 Frontier Leapfrog: 48/48 subprocess-PROVEN flagship titans (148,232 LOC, 261 checks, 0 BROKEN), 8/10 corpus / 8/8 well-posed existing-module Python bugs repaired on real pypa/packaging + hukkin/tomli git checkouts with zero gold diffs at K3=0 ($0.00), 4 stranded PR confinement/oracle/guard mechanisms integrated, Zero-LLM FTS5+A-TMA memory with 0.00 ghost memory & calibrated ABSTAIN_EXPIRED, 192 cumulative awakened DARK modules, and 264 engines (238 federated) wired into UnifiedModel at 7,488 LOC with 38/38 verifier PASS.",
   "recursive_obs": {
-    "canonical_base_commit": "77fc2b161102051ba1025859380804b738467361",
+    "canonical_base_commit": "cba2a0554eaf2b74374a9f67b4928564e02be3e1",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "rewriting 28 existing titans from scratch (instrumented in place with pure-stdlib self_check() instead)",
@@ -218,7 +218,7 @@
           "route": "WAVE50_STATUS_QUO"
         }
       ],
-      "checked_at_utc": "2026-11-26T23:53:31Z",
+      "checked_at_utc": "2026-11-27T00:06:46Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -258,7 +258,7 @@
       "selected_route": "WAVE51_52_SLICED_STRUCTURAL_SWE_STRANDED_TREASURY_48_TITANS_K3_ZERO",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-26T23:53:31Z",
+        "checked_at_utc": "2026-11-27T00:06:46Z",
         "execution_dependencies": [
           {
             "dependency": "Python 3.11 stdlib (ast, sqlite3 FTS5, gzip, lzma, hashlib, subprocess) + 48 verified flagship titans + 192 DARK modules",
@@ -325,7 +325,7 @@
     "real_outcome": "Wave 51 & Wave 52 Frontier Leapfrog: 48/48 subprocess-PROVEN flagship titans (148,232 LOC, 261 checks, 0 BROKEN), 8/10 corpus / 8/8 well-posed existing-module Python bugs repaired on real pypa/packaging + hukkin/tomli git checkouts with zero gold diffs at K3=0 ($0.00), 4 stranded PR confinement/oracle/guard mechanisms integrated, Zero-LLM FTS5+A-TMA memory with 0.00 ghost memory & calibrated ABSTAIN_EXPIRED, 192 cumulative awakened DARK modules, and 264 engines (238 federated) wired into UnifiedModel at 7,488 LOC with 38/38 verifier PASS.",
     "required_capability": "Subprocess behavioral adjudication across 48 flagship titans, ARISE statement-level def-use slicing + general S8-S11 AST repair, stranded PR confinement/byte-effect/verifier-lie/contrastive/symbol-scope guards, Zero-LLM FTS5+A-TMA memory, and 192 awakened DARK modules inside UnifiedModel at K3=0.",
     "route_frontier": {
-      "canonical_base_commit": "77fc2b161102051ba1025859380804b738467361",
+      "canonical_base_commit": "cba2a0554eaf2b74374a9f67b4928564e02be3e1",
       "challenger_routes": [
         {
           "comparison": {
@@ -350,7 +350,7 @@
           "route": "WAVE50_STATUS_QUO"
         }
       ],
-      "checked_at_utc": "2026-11-26T23:53:31Z",
+      "checked_at_utc": "2026-11-27T00:06:46Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -390,7 +390,7 @@
       "selected_route": "WAVE51_52_SLICED_STRUCTURAL_SWE_STRANDED_TREASURY_48_TITANS_K3_ZERO",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-26T23:53:31Z",
+        "checked_at_utc": "2026-11-27T00:06:46Z",
         "execution_dependencies": [
           {
             "dependency": "Python 3.11 stdlib (ast, sqlite3 FTS5, gzip, lzma, hashlib, subprocess) + 48 verified flagship titans + 192 DARK modules",
