@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_SHARED_GAP_EXECUTABLE_AUDIT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__FRESH_ISOLATED_EXECUTABLE_AUDIT__5_OF_5__CURRENT_CC_R3_OPEN__ZERO_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "branch": "successor/escape-progress-shared-gap-executable-audit-20261010-v1",
+  "branch_head_sha": "6ab83c5e9417dcb6812f99fdbf110743c85045d9",
+  "exact_blobs": {
+    "runtime": {
+      "path": "canonical/runtime/escape_progress_shared_gap_audit_v1.py",
+      "git_blob_sha": "53fb708e755561696f57b39705b04cefcaa2233b"
+    },
+    "tests": {
+      "path": "canonical/tests/test_escape_progress_shared_gap_audit_v1.py",
+      "git_blob_sha": "505f4aeb686a17b73c6ab9b54aaf19bfe0d05dcd"
+    },
+    "manifest": {
+      "path": "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V1.json"
+    },
+    "binding": {
+      "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V1.json"
+    }
+  },
+  "isolated_carrier": {
+    "type": "SPRITE",
+    "name": "brain-escape-audit-verify-20261010-v1",
+    "id": "sprite-e24ab09a-a44f-45c6-816a-521154d8c1cc",
+    "environment_mutation": "NONE_REQUIRED",
+    "pytest_available": false,
+    "execution_mode": "DEPENDENCY_FREE_PYTHON_TEST_HARNESS"
+  },
+  "tests": {
+    "total": 5,
+    "passed": 5,
+    "failed": 0,
+    "cases": [
+      "CURRENT_REPOSITORY_TRUTH_STAYS_OPEN_WITHOUT_ROW_PROOFS",
+      "COMPLETE_CONTENT_ADDRESSED_13_ROW_PROOF_SET_CLOSES_CC_R3",
+      "GAP_A_WITHOUT_STRICT_SHRINK_REMAINS_OPEN",
+      "GAP_B_NONPROGRESS_OUTCOME_REMAINS_OPEN",
+      "MANIFEST_ROUTE_GROUP_DRIFT_FAILS_CLOSED"
+    ]
+  },
+  "verified_semantics": {
+    "current_manifest_row_count": 13,
+    "expected_gap_a_count": 9,
+    "expected_gap_b_count": 4,
+    "current_cc_r3_proved": false,
+    "current_open_row_count_without_row_proofs": 13,
+    "executable_proof_gate_now_available": true,
+    "gap_a_required_predicates": [
+      "CURRENT_ACQUIRABILITY",
+      "FINITE_COMPLETE_OUTCOME_SET",
+      "STRICT_DECISION_REGION_SHRINK",
+      "AUTHENTICATED_TRUTH_PRESERVATION",
+      "SAFETY",
+      "CONTENT_ADDRESS"
+    ],
+    "gap_b_required_predicates": [
+      "VERIFIED_EXECUTABLE_ACTION",
+      "CURRENT_EXECUTABILITY",
+      "FINITE_WELL_FOUNDED_PROGRESS_MEASURE",
+      "EVERY_ALLOWED_OUTCOME_TERMINAL_OR_STRICTLY_DECREASING",
+      "SAFETY",
+      "CONTENT_ADDRESS"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CC_R3_CERTIFICATE_YET",
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_CREDIT",
+    "NO_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
