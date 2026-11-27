@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_P1_EXECUTABLE_CAUSAL_CUTSET_V6",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__EXECUTABLE_CAUSAL_REPAIR_NOT_LABEL_MATCHING__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "objective": "Replace label-defined rescue with exact executable intervention semantics for normalized P1 trajectories whose dependency and repair semantics are explicit.",
+  "candidate": "canonical/runtime/p1_causal_cutset_v6.py",
+  "independent_reference": "canonical/runtime/p1_causal_cutset_v6_proof.py",
+  "tests": "canonical/tests/test_p1_causal_cutset_v6.py",
+  "breakthrough": {
+    "causal_criterion": "A repair set receives causal credit iff applying that set and recomputing the declared dependency graph changes every declared terminal failed resource from unavailable to available.",
+    "minimality": "Report inclusion-minimal rescuing repair sets; unique singleton is IDENTIFIED, unique multi-repair set is INTERACTION, multiple distinct minimal rescuers are AMBIGUOUS.",
+    "first_class_scope": true,
+    "label_only_rescue_forbidden": true,
+    "false_earliest_violation_counterexample": "An early SCOPE violation on one branch of an ALTERNATIVE dependency is noncausal when another healthy branch suffices and a later STATE_TRANSITION defect blocks terminal success. V5 selects the early ancestor; V6 selects the later executable cause."
+  },
+  "verified_locally_before_branch_write": {
+    "cross_product_cases": 192,
+    "false_earliest_alternative_cases": 6,
+    "total_reference_cases": 198,
+    "unittest_count": 7,
+    "result": "PASS"
+  },
+  "claim_boundary": [
+    "NORMALIZED_TOPOLOGICAL_TRAJECTORIES_WITH_EXPLICIT_DEPENDENCY_COMPOSITION",
+    "EXPLICIT_FAILED_CHECKS_WITH_NONEMPTY_VISIBLE_SUPPORTING_RECEIPTS",
+    "SEQUENTIAL_CONJUNCTIVE_AND_ALTERNATIVE_DEPENDENCY_SEMANTICS",
+    "AT_MOST_16_EXPLICIT_REPAIR_ATOMS_FOR_EXACT_SUBSET_ENUMERATION",
+    "DETERMINISTIC_DECLARED_REPAIR_EFFECT_IS_RESTORE_THE_FAILED_LOCAL_CHECK"
+  ],
+  "not_claimed": [
+    "NO_OPAQUE_OR_UNKNOWN_REPAIR_EFFECT_INFERENCE",
+    "NO_NONREPLAYABLE_HIDDEN_CAUSAL_EFFECT_CLAIM",
+    "NO_WHOLE_P1_SCOPE_EQUIVALENCE_CLAIM",
+    "NO_P1_QUARANTINE_CLEARANCE",
+    "NO_TERMINAL_REPLAY",
+    "NO_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "next": "INDEPENDENT_PUBLIC_EXACT_BLOB_VERIFICATION__THEN_COMPOSE_WITH_BRAIN_OWNED_AGENT_REPLAY_FOR_REPLAYABLE_OPAQUE_EFFECTS__THEN_PROVE_EXACT_OR_SUPERSET_SCOPE_RELATION_TO_THE_THREE_FROZEN_P1_DIRECT_SURFACES",
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
