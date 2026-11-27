@@ -1,19 +1,19 @@
-name: Verify synthesis bound claim guard
+name: Verify synthesis bound claim guard V2
 
 on:
   push:
     branches: [main]
     paths:
-      - "canonical/runtime/synthesis_bound_claim_guard_v1.py"
-      - "canonical/tests/test_synthesis_bound_claim_guard_v1.py"
-      - "canonical/governance/SYNTHESIS_ROOT3_RESIDUAL_REUSE_MINIMUM_CUT_20261005_V1.json"
+      - "canonical/runtime/synthesis_bound_claim_guard_v2.py"
+      - "canonical/tests/test_synthesis_bound_claim_guard_v2.py"
+      - "canonical/governance/SYNTHESIS_BOUND_CLAIM_GUARD_V2_REBIND_20261005_V1.json"
       - ".github/workflows/verify-synthesis-bound-claim-guard.yml"
   pull_request:
     branches: [main]
     paths:
-      - "canonical/runtime/synthesis_bound_claim_guard_v1.py"
-      - "canonical/tests/test_synthesis_bound_claim_guard_v1.py"
-      - "canonical/governance/SYNTHESIS_ROOT3_RESIDUAL_REUSE_MINIMUM_CUT_20261005_V1.json"
+      - "canonical/runtime/synthesis_bound_claim_guard_v2.py"
+      - "canonical/tests/test_synthesis_bound_claim_guard_v2.py"
+      - "canonical/governance/SYNTHESIS_BOUND_CLAIM_GUARD_V2_REBIND_20261005_V1.json"
       - ".github/workflows/verify-synthesis-bound-claim-guard.yml"
   workflow_dispatch:
 
@@ -22,12 +22,28 @@ permissions:
 
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
-      - name: Verify synthesis bound claim guard
-        run: PYTHONPATH=. python -m unittest -v canonical.tests.test_synthesis_bound_claim_guard_v1
+          python-version: "3.12"
+      - name: Verify exact V2 frozen blobs
+        shell: python
+        run: |
+          import hashlib
+          from pathlib import Path
+          expected = {
+              "canonical/runtime/synthesis_bound_claim_guard_v2.py": "6d342f37140c1790485366dada18e32d5f7aa8d0",
+              "canonical/tests/test_synthesis_bound_claim_guard_v2.py": "3e5c4ec8b391388a28554769ef38aa296471db0e",
+              "canonical/governance/SYNTHESIS_BOUND_CLAIM_GUARD_V2_REBIND_20261005_V1.json": "092432a592d4f466393630af641f41ec49f685ef",
+          }
+          for p, want in expected.items():
+              data = Path(p).read_bytes()
+              got = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
+              if got != want:
+                  raise SystemExit(f"BLOB_DRIFT {p} {got} != {want}")
+          print("EXACT_V2_BLOBS_PASS")
+      - name: Run synthesis bound claim guard V2 tests
+        run: PYTHONPATH=. python -m unittest -v canonical.tests.test_synthesis_bound_claim_guard_v2
