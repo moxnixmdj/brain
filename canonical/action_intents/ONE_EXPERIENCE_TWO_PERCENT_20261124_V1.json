@@ -1,7 +1,7 @@
 {
  "action_id": "ONE_EXPERIENCE_TWO_PERCENT_20261124_V1",
  "action_intent_id": "ONE_EXPERIENCE_TWO_PERCENT_20261124_V1",
- "action_kind": "MEASUREMENT_THAT_KILLS_A_MECHANISM",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
  "action_summary": "Wave 45 replaced a degenerate learned pattern with a transferable rule and claimed only that the rule fires on a renamed instance. This wave asks the question that claim makes askable, on real histories rather than fixtures: harvest 400 commits each from python-attrs/attrs and pallets/click into 1,600 single-statement repairs, learn rules from one side, and see whether any rule reproduces a repair it never saw. It does not: 4 of 163 within a project (2.45%) against 5 of 163 for verbatim traces (3.07%), and 0 of 1,350 across projects, although 76.4% of the held-out repairs share a root shape with some stored rule. The abstraction does not beat transcription, so retrieval on the shape of an edit is not the bottleneck -- the trigger is.",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
@@ -42,7 +42,7 @@
  },
  "benchmark_or_family_rank_authority": "the census's own fleet measurement; no benchmark output is borrowed and no answer is leaked",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::store entries are keyed on the shape of the edit, and an edit is surface-specific: 76.4% of held-out repairs share a root node with a stored rule and still none of them is reproduced across projects",
- "canonical_base_commit": "ebafef8c25974b52b3e0878f64b95285509724a3",
+ "canonical_base_commit": "99baa735f983f65293d341b847df0751e7873a66",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": {
   "cross_repository_pairs": 1350,
@@ -96,7 +96,7 @@
  "real_outcome": "the eighth judge is a probe pair rather than a new validator, and the environment's own verdict is what admits it",
  "rebased_onto": null,
  "recursive_obs": {
-  "canonical_base_commit": "ebafef8c25974b52b3e0878f64b95285509724a3",
+  "canonical_base_commit": "99baa735f983f65293d341b847df0751e7873a66",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "root-shape indexing",
@@ -265,7 +265,7 @@
      "route": "MEASURE_SINGLE_EXPERIENCE_TRANSFER_ON_REAL_COMMITS_BEFORE_BUILDING_ANY_MORE_STORE"
     }
    ],
-   "checked_at_utc": "2026-11-27T00:32:54Z",
+   "checked_at_utc": "2026-11-27T00:37:39Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -305,7 +305,7 @@
    "selected_route": "MEASURE_SINGLE_EXPERIENCE_TRANSFER_ON_REAL_COMMITS_BEFORE_BUILDING_ANY_MORE_STORE",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-27T00:32:54Z",
+    "checked_at_utc": "2026-11-27T00:37:39Z",
     "execution_dependencies": [
      {
       "dependency": "gh CLI authenticated against api.github.com",
@@ -316,7 +316,8 @@
        "DIRECT_PROBE"
       ],
       "evidence_scope": "GLOBAL",
-      "kind": "REMOTE_API",
+      "kind": "NETWORK_ENDPOINT",
+      "observed_at_utc": "2026-11-27T00:37:39Z",
       "required": true,
       "scope": "GLOBAL",
       "status": "READY",
@@ -347,6 +348,7 @@
       ],
       "evidence_scope": "GLOBAL",
       "kind": "MODEL_API",
+      "observed_at_utc": "2026-11-27T00:37:39Z",
       "required": false,
       "scope": "GLOBAL",
       "status": "NOT_REQUIRED",
