@@ -1,0 +1,129 @@
+{
+  "schema": "PROJECT_BRAIN_SUB100MB_DKL_DEPENDENCY_AUDIT_V1",
+  "date": "2026-10-04",
+  "status": "RESEARCH_CANDIDATE__ZERO_CREDIT__PROVISIONAL_CLASSIFICATION",
+  "objective": "MINIMIZE_THE_IRREDUCIBLE_LEARNED_STATE_BY_MOVING_EVERY_PROVABLY_MOVABLE_CAPABILITY_TRANSFORM_INTO_DETERMINISTIC_MACHINERY_OR_EXTERNAL_JIT_KNOWLEDGE",
+  "source_bindings": {
+    "learned_state_contract": {
+      "path": "canonical/governance/SUB100MB_LEARNED_STATE_CONTRACT_V1.json",
+      "git_blob_sha": "fc994d2cd4fb964a97df7706dd19d6519131cf72"
+    },
+    "ownership_matrix": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+      "git_blob_sha": "11498bd194c8018617767918edec020268239bc1"
+    },
+    "atomic_causal_map": {
+      "path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
+      "git_blob_sha": "1f86f034a4f34478e3e2cfd82b5d1b0f8e11143d"
+    }
+  },
+  "classes": {
+    "D": "DETERMINISTIC_OR_EXPLICITLY_PROGRAMMED_CAPABILITY_STATE",
+    "K": "EXTERNAL_JIT_KNOWLEDGE_OR_NONCAPABILITY_INFORMATION",
+    "L": "PERSISTENT_LEARNED_STATE_REQUIRED_UNTIL_CAUSALLY_SUBSTITUTED"
+  },
+  "mechanism_class_projection": [
+    {
+      "mechanism_class": "KNOWLEDGE",
+      "default_projection": "K",
+      "rule": "FACTS_AND_DOMAIN_CONTENT_MAY_BE_EXTERNAL_JIT_IF_THE_SOURCE_DOES_NOT_SUPPLY_THE_MISSING_REASONING_CAPABILITY"
+    },
+    {
+      "mechanism_class": "RETRIEVAL",
+      "default_projection": "D_PLUS_K",
+      "rule": "SEARCH_ROUTING_INDEX_TRAVERSAL_AND_DEDUPLICATION_ARE_D;_RETRIEVED_CONTENT_IS_K;ANY_LEARNED_RERANKER_IS_L_AND_BYTE_COUNTED"
+    },
+    {
+      "mechanism_class": "DETERMINISTIC_COMPUTATION",
+      "default_projection": "D",
+      "rule": "EXACT_ARITHMETIC_SYMBOLIC_EXECUTION_COMPILATION_AND_OTHER_PROVABLY_DETERMINISTIC_TRANSFORMS"
+    },
+    {
+      "mechanism_class": "PERSISTENT_STATE",
+      "default_projection": "D_OR_L",
+      "rule": "EXPLICIT_RECORDS_AND_PROGRAMS_ARE_D;ANY_VALUES_FIT_OR_OPTIMIZED_FROM_DATA_ARE_L"
+    },
+    {
+      "mechanism_class": "REPRESENTATION_FORMATION",
+      "default_projection": "L_CANDIDATE",
+      "rule": "REMAINS_L_UNLESS_A_DETERMINISTIC_OR_NONLEARNED_SUBSTITUTE_IS_CAUSALLY_SUFFICIENT"
+    },
+    {
+      "mechanism_class": "CANDIDATE_GENERATION",
+      "default_projection": "L_CANDIDATE",
+      "rule": "REMAINS_L_UNLESS_SEARCH_PROGRAM_SYNTHESIS_OR_OTHER_EXPLICIT_GENERATOR_MATCHES_THE_REQUIRED_GENERALIZATION"
+    },
+    {
+      "mechanism_class": "EVALUATION",
+      "default_projection": "D_OR_L",
+      "rule": "EXACT_ORACLE_AND_EXECUTABLE_TESTS_ARE_D;SEMANTIC_JUDGMENT_WITHOUT_AN_EXACT_ORACLE_REMAINS_L_CANDIDATE"
+    },
+    {
+      "mechanism_class": "STATE_UPDATE",
+      "default_projection": "D",
+      "rule": "EXPLICIT_STATE_TRANSITIONS_LEASES_CHECKPOINTS_AND_COMPILED_UPDATES_ARE_D_UNLESS_VALUES_ARE_LEARNED"
+    },
+    {
+      "mechanism_class": "ACTION",
+      "default_projection": "D",
+      "rule": "TOOL_PROTOCOL_AND_RUNTIME_MECHANICS_ARE_D;ACTION_SELECTION_MAY_STILL_DEPEND_ON_L"
+    },
+    {
+      "mechanism_class": "VERIFICATION",
+      "default_projection": "D_OR_L",
+      "rule": "FORMAL_EXECUTABLE_AND_CONTENT_ADDRESSED_VERIFIERS_ARE_D;OPEN_ENDED_SEMANTIC_VERIFICATION_REMAINS_L_CANDIDATE"
+    }
+  ],
+  "current_high_risk_learned_residuals": [
+    {
+      "rank": 1,
+      "id": "RAW_SOURCE_TO_SEMANTICALLY_CORRECT_NORMALIZED_REQUIREMENTS",
+      "reason": "SHARED_PRECURSOR_TO_INSTRUCTION_FOLLOWING_UNKNOWN_DOMAIN_ADAPTATION_PROFESSIONAL_WORK_AND_COMPOSITION"
+    },
+    {
+      "rank": 2,
+      "id": "AMBIGUOUS_SOURCE_TO_INDEPENDENT_ALTERNATIVE_INTERPRETATIONS_AND_COUNTEREXAMPLES",
+      "reason": "DIRECTLY_TESTS_NOVEL_SEMANTIC_GENERALIZATION_WITHOUT_AN_EXACT_LOCAL_ORACLE"
+    },
+    {
+      "rank": 3,
+      "id": "ENGINEERING_DRAWING_TO_CORRECT_STRUCTURED_PARTSPEC_AND_GLOBAL_SOLID_TOPOLOGY",
+      "reason": "SPENT_FAILURE_AVAILABLE_AND_PUBLIC_WHITE_BOX_DONORS_EXPOSE_A_NARROW_LEARNED_EXTRACTION_BOUNDARY"
+    },
+    {
+      "rank": 4,
+      "id": "GENERAL_NAMED_METHOD_STANDARD_TO_AUTHORITATIVE_APPLICABLE_RULE_SET",
+      "reason": "COMBINES_JIT_KNOWLEDGE_WITH_SCOPE_JUDGMENT_AND_RULE_APPLICATION"
+    },
+    {
+      "rank": 5,
+      "id": "NON_REPLAYABLE_TEXT_EVENT_CAUSE_CANDIDATE_GENERATION",
+      "reason": "CURRENT_CAUSAL_MAP_ALREADY_SOLVES_EXPLICIT_DAG_AND_REPLAYABLE_CASES_BUT_NOT_GENERAL_TEXT_EVENTS"
+    }
+  ],
+  "first_falsification_wedge": {
+    "id": "ENGINEERING_DRAWING_TO_CORRECT_STRUCTURED_PARTSPEC_AND_GLOBAL_SOLID_TOPOLOGY",
+    "selection_reason": "MAXIMIZES_INFORMATION_GAIN_PER_FRESH_REALITY_UNIT_BECAUSE_BRAIN_HAS_A_SPENT_FAILURE_AND_DONORS_SEPARATE_THE_LARGE_VISION_MODEL_FROM_TYPED_AND_DETERMINISTIC_CAD_MACHINERY",
+    "brain_spent_evidence": "canonical/capabilities/opus55/CAD_MODEL_TB4_SPENT_CAUSAL_DECOMPOSITION_20261001_V1.json",
+    "replay_allowed": false,
+    "builder_must_not_use_hidden_verifier_metrics": true,
+    "development_sources_may_use_public_DONOR_benchmarks": true
+  },
+  "hard_rules": [
+    "UNKNOWN_MECHANISM_DEFAULTS_TO_L_NOT_D",
+    "DATA_FIT_OR_OPTIMIZED_STATE_ALWAYS_COUNTS_AS_L",
+    "NO_EXTERNAL_GENERAL_REASONING_PROVIDER_DURING_SCORED_EXECUTION",
+    "SELF_CONSISTENCY_WITH_A_MODEL_EXTRACTED_SPEC_IS_NOT_SOURCE_LEVEL_CORRECTNESS",
+    "SUCCESSFUL_TRAJECTORIES_SHOULD_BE_COMPILED_TO_D_WHEN_CAUSALLY_SUFFICIENT",
+    "NO_FAMILY_OR_ACCEPTANCE_CREDIT_FROM_THIS_CLASSIFICATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
