@@ -35,6 +35,25 @@ class P1V4ScopeSafeResidualDischargeTests(unittest.TestCase):
         self.assertFalse(out["promotion_authority"])
         self.assertEqual(out["new_reality_units_consumed"], 0)
 
+    def test_even_complete_prewave_v4_cannot_clear_terminal_quarantine(self):
+        v = copy.deepcopy(compiler._load(compiler.V4_VERIFICATION))
+        future_kinds = set(compiler.candidate_v4.ALLOWED_KINDS) | {"SCOPE"}
+        v["verified"]["mechanism_classes"] = sorted(future_kinds)
+        v["verified"]["heterogeneous_post_intervention_terminal_rescue_verified"] = True
+
+        original = compiler.candidate_v4.ALLOWED_KINDS
+        compiler.candidate_v4.ALLOWED_KINDS = future_kinds
+        try:
+            out = compiler.evaluate(v4_verification=v)
+        finally:
+            compiler.candidate_v4.ALLOWED_KINDS = original
+
+        self.assertTrue(out["pass"], out)
+        self.assertFalse(
+            out["can_clear_p1_scope_quarantine"],
+            "prewave V4 evidence must never substitute for frozen T0/T2 terminal rescue evidence",
+        )
+
     def test_spoofed_scope_claim_without_live_candidate_support_fails_closed(self):
         v = copy.deepcopy(compiler._load(compiler.V4_VERIFICATION))
         v["verified"]["mechanism_classes"] = list(v["verified"]["mechanism_classes"]) + ["SCOPE"]

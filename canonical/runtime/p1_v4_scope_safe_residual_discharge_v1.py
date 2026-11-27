@@ -159,14 +159,22 @@ def evaluate(
         })
 
     unresolved_missing_semantics = sorted(MISSING_FROM_TERMINAL_SCORER - discharged)
-    can_clear = not residuals and not unresolved_missing_semantics
+    prewave_residuals_exhausted = not residuals and not unresolved_missing_semantics
+
+    # This compiler is deliberately prewave-only. The frozen P1 binding forbids
+    # standalone synthetic whole-domain terminal credit and requires direct P1
+    # intervention/rescue evidence inside the frozen T0/T2 observations.
+    # Therefore exhausting V4/prewave residual semantics can never, by itself,
+    # clear the terminal P1 scope quarantine. A separate terminal-evidence
+    # reconciler must prove that frozen requirement.
+    can_clear = False
 
     return {
         "schema": SCHEMA,
         "status": (
-            "PASS__V4_COMPRESSES_P1_SCOPE_QUARANTINE_TO_EXACT_RESIDUAL"
-            if not can_clear
-            else "PASS__P1_SCOPE_QUARANTINE_CLEARABLE_CANDIDATE"
+            "PASS__V4_PREFLIGHT_RESIDUAL_EXHAUSTED__TERMINAL_QUARANTINE_REMAINS"
+            if prewave_residuals_exhausted
+            else "PASS__V4_COMPRESSES_P1_SCOPE_QUARANTINE_TO_EXACT_RESIDUAL"
         ),
         "pass": True,
         "errors": [],
@@ -186,8 +194,16 @@ def evaluate(
         },
         "heterogeneous_post_intervention_terminal_rescue_verified": heterogeneous_rescue_verified,
         "residual_obligations": residuals,
+        "prewave_residuals_exhausted": prewave_residuals_exhausted,
         "can_clear_p1_scope_quarantine": can_clear,
+        "terminal_clearance_requires": (
+            "FROZEN_T0_T2_DIRECT_P1_INTERVENTION_RESCUE_EVIDENCE__"
+            "STANDALONE_SYNTHETIC_WHOLE_DOMAIN_SCORE_FORBIDDEN"
+        ),
         "next": (
+            "REQUIRE_FROZEN_T0_T2_DIRECT_P1_INTERVENTION_RESCUE_EVIDENCE_BEFORE_QUARANTINE_CLEARANCE"
+            if prewave_residuals_exhausted
+            else
             "SEARCH_EXISTING_P1_SCOPE_FAILURE_AND_HETEROGENEOUS_INTERVENTION_RESCUE_RECEIPTS__"
             "ONLY_IF_ABSENT_FREEZE_THE_MINIMUM_TWO_OBLIGATION_ROUTE_BEFORE_ANY_NEW_REALITY"
         ),
