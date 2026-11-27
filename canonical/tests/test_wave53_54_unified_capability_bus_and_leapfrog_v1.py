@@ -526,6 +526,166 @@ class TestWave53To54UnifiedCapabilityBusAndLeapfrog(unittest.TestCase):
         self.assertEqual(gov["capability_bus_failed"], 0)
         self.assertTrue(gov["credit_gate_e_process"]["statistically_supported"])
 
+    def test_17_frontier_wall_a_variable_arity_generalizer_and_subexpr_lifting(self) -> None:
+        """Wall A (§5j generalizer): recursive ClassDef/docstring descent, sub-expression lift, and variable-arity AU."""
+        from canonical.swe_kernel import epistemic_admission_and_self_play_v1 as ea
+
+        # 1. Multi-class + added docstring + null-coalesce refactor (click@05f6fd0df shape)
+        before_multi = (
+            "class Cmd:\n"
+            "    def format_args(self, ctx):\n"
+            "        return ctx\n\n"
+            "class Arg:\n"
+            "    def get_help_record(self, ctx):\n"
+            "        if self.help is None:\n"
+            "            return None\n"
+            "        return self.make_metavar(ctx), self.help\n"
+        )
+        after_multi = (
+            "class Cmd:\n"
+            "    def format_args(self, ctx):\n"
+            '        """Format args docstring."""\n'
+            "        return ctx\n\n"
+            "class Arg:\n"
+            "    def get_help_record(self, ctx):\n"
+            "        return self.make_metavar(ctx), self.help or ''\n"
+        )
+        m_multi = ea.lift_python_subtree_morphism(before_multi, after_multi)
+        self.assertIsNotNone(m_multi)
+        self.assertEqual(len(m_multi.before_stmts_pattern), 2)
+        self.assertEqual(len(m_multi.after_stmts_template), 1)
+        self.assertEqual(m_multi.unbound_holes(), set())
+
+        # 2. Sub-expression extraction from If-test (`envvar is not None` -> `envvar`)
+        m_sub = ea.lift_python_subtree_morphism(
+            "class Opt:\n    def hint(self, envvar):\n        if envvar is not None:\n            return envvar\n        return ''\n",
+            "class Opt:\n    def hint(self, envvar):\n        if envvar:\n            return envvar\n        return ''\n",
+        )
+        self.assertIsNotNone(m_sub)
+        self.assertEqual(m_sub.before_stmts_pattern, ("_H0_ is not None",))
+        self.assertEqual(m_sub.after_stmts_template, ("_H0_",))
+        applied_unseen = ea.apply_subtree_morphism_to_python(
+            m_sub, "def check(token):\n    if token is not None:\n        return token\n"
+        )
+        self.assertIsNotNone(applied_unseen)
+        self.assertIn("if token:", applied_unseen)
+
+        # 3. Variable-arity Semantic-IR anti-unification (arity 2 vs arity 1) + fail-closed negative
+        m_a = ea.TreeRewriteMorphism(
+            before_stmts_pattern=("_H0_ = _H1_ + 1", "if _H2_ is not None:\n    return _H2_"),
+            after_stmts_template=("_H0_ = _H1_ + 2", "if _H2_:\n    return _H2_"),
+            param_holes=(),
+            hole_types={"_H0_": "ident", "_H1_": "expr", "_H2_": "ident"},
+        )
+        m_b = ea.TreeRewriteMorphism(
+            before_stmts_pattern=("if _H0_ is not None:\n    return _H0_.upper()",),
+            after_stmts_template=("if _H0_:\n    return _H0_.upper()",),
+            param_holes=(),
+            hole_types={"_H0_": "ident"},
+        )
+        au = ea.anti_unify_subtree_morphisms(m_a, m_b)
+        self.assertIsNotNone(au)
+        self.assertEqual(au.unbound_holes(), set())
+        self.assertIn("is not None", au.before_stmts_pattern[0])
+
+        # Unrelated rules MUST fail closed (None)
+        m_u1 = ea.lift_python_subtree_morphism("def p(a):\n    return a + 1\n", "def p(a):\n    return a * 2\n")
+        m_u2 = ea.lift_python_subtree_morphism(
+            "def q(x):\n    if x is None:\n        return []\n    return list(x)\n",
+            "def q(x):\n    return list(x or [])\n",
+        )
+        self.assertIsNone(ea.anti_unify_subtree_morphisms(m_u1, m_u2))
+
+    def test_18_frontier_wall_c_metamorphic_witness_splitter_fail_closed(self) -> None:
+        """Wall C (SWE-bench Pro Wall 1): green-suite pure-prose metamorphic witness qualifies bugs & rejects healthy repos."""
+        from canonical.runtime import epistemic_issue_reproducer_v1 as ir
+
+        with tempfile.TemporaryDirectory(prefix="w54_meta_wallc_") as td:
+            # Buggy green-suite repo (no parentheses in prose issue, all existing tests green)
+            buggy = Path(td) / "buggy"
+            buggy.mkdir()
+            (buggy / "auth.py").write_text(
+                "class WWWAuthenticate:\n"
+                "    def __init__(self, auth_type, parameters=None):\n"
+                "        self.type = auth_type\n"
+                "        self.parameters = parameters if parameters is not None else {}\n"
+                "    def to_header(self):\n"
+                "        parts = [f'{k}={v}' for k, v in self.parameters.items()]\n"
+                "        return f\"{self.type.title()} {' '.join(parts)}\"\n",
+                encoding="utf-8",
+            )
+            (buggy / "test_auth.py").write_text(
+                "from auth import WWWAuthenticate\n\n"
+                "def test_basic_with_realm():\n"
+                "    a = WWWAuthenticate('basic', {'realm': 'api'})\n"
+                "    assert a.to_header() == 'Basic realm=api'\n",
+                encoding="utf-8",
+            )
+            issue = "WWWAuthenticate to_header produces a trailing space when parameters is empty."
+            s_buggy = ir.synthesize_verified_reproducer(buggy, issue)
+            self.assertEqual(s_buggy["status"], "QUALIFIED")
+            self.assertIn("to_header", s_buggy["reproducer"]["test_source"])
+
+            # Healthy fixed repo MUST fail closed (`NO_QUALIFIED_REPRODUCER`)
+            healthy = Path(td) / "healthy"
+            healthy.mkdir()
+            (healthy / "auth.py").write_text(
+                "class WWWAuthenticate:\n"
+                "    def __init__(self, auth_type, parameters=None):\n"
+                "        self.type = auth_type\n"
+                "        self.parameters = parameters if parameters is not None else {}\n"
+                "    def to_header(self):\n"
+                "        if not self.parameters:\n"
+                "            return self.type.title()\n"
+                "        parts = [f'{k}={v}' for k, v in self.parameters.items()]\n"
+                "        return f\"{self.type.title()} {' '.join(parts)}\"\n",
+                encoding="utf-8",
+            )
+            (healthy / "test_auth.py").write_text(
+                "from auth import WWWAuthenticate\n\n"
+                "def test_basic_with_realm():\n"
+                "    a = WWWAuthenticate('basic', {'realm': 'api'})\n"
+                "    assert a.to_header() == 'Basic realm=api'\n",
+                encoding="utf-8",
+            )
+            s_healthy = ir.synthesize_verified_reproducer(healthy, issue)
+            self.assertEqual(s_healthy["status"], "NO_QUALIFIED_REPRODUCER")
+            self.assertIsNone(s_healthy["reproducer"])
+
+            # Arity-safety check: method requiring `ctx` must NEVER false-trigger with 0 args
+            arity_ws = Path(td) / "arity_safe"
+            arity_ws.mkdir()
+            (arity_ws / "arg.py").write_text(
+                "class Arg:\n"
+                "    def __init__(self, items):\n"
+                "        self.items = items\n"
+                "    def get_help_record(self, ctx):\n"
+                "        return (ctx, '')\n",
+                encoding="utf-8",
+            )
+            (arity_ws / "test_arg.py").write_text(
+                "from arg import Arg\n\ndef test_arg():\n    a = Arg(['x'])\n    assert a.get_help_record('c') == ('c', '')\n",
+                encoding="utf-8",
+            )
+            s_arity = ir.synthesize_verified_reproducer(arity_ws, "Arg get_help_record fails when items is empty.")
+            self.assertEqual(s_arity["status"], "NO_QUALIFIED_REPRODUCER")
+
+    def test_19_frontier_wall_d_enrollment_gate_receipt_repairs(self) -> None:
+        """Wall D: 5 broken registry receipt_path typos repaired to real on-disk receipts; 3 genuine absences remain honest."""
+        from canonical.tools import capability_enrollment_gate_v1 as gate
+
+        root = Path(__file__).resolve().parents[2]
+        r = gate.build(
+            root,
+            root / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+            root / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json",
+            root / "canonical/capabilities/true/TRUE_CAPABILITY_LEDGER_V1.json",
+            root / "canonical/runtime/bound_capabilities",
+        )
+        self.assertEqual(r["defect_counts"]["DANGLING_ADAPTER"], 0)
+        self.assertEqual(r["defect_counts"]["UNENROLLED_CERTIFIED_CAPABILITY"], 0)
+        self.assertEqual(r["defect_counts"]["MISSING_VERIFICATION_RECEIPT"], 3)
+
 
 if __name__ == "__main__":
     unittest.main()

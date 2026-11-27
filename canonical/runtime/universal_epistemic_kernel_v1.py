@@ -5486,10 +5486,11 @@ def solve_arbitrary_environment(
         )
         # Blind SWE-bench / SWE-bench Pro issue-to-reproducer fallback: when all existing
         # repo tests already pass (no hidden failing test present), synthesize & qualify an
-        # executable reproducer directly from the issue description, solve, and verify pass2pass.
+        # executable reproducer (direct or Metamorphic Witness Splitter clone) from the issue
+        # description, solve, and verify pass2pass. Fails closed when no defect is evidenced.
         if (
             swe_res.get("mode") == "ALREADY_PASSING" or swe_res.get("status") != "VERIFIED"
-        ) and instruction and "(" in instruction:
+        ) and instruction and len(instruction.strip()) >= 8:
             from canonical.runtime import epistemic_issue_reproducer_v1 as ISSUE_REPRO
 
             blind_py = ISSUE_REPRO.solve_issue_from_description(

@@ -42,6 +42,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import copy
 import hashlib
 import json
 import pathlib
@@ -58,6 +59,17 @@ from canonical.swe_kernel.structured_morphism_abstraction_v1 import (
     abstract,
     admit,
     apply_rule,
+)
+
+COMPOUND_EXPR_NODES = (
+    ast.Attribute,
+    ast.Compare,
+    ast.Call,
+    ast.BinOp,
+    ast.BoolOp,
+    ast.Subscript,
+    ast.UnaryOp,
+    ast.IfExp,
 )
 
 SCHEMA = "BRAIN_SINGLE_EXPERIENCE_TRANSFER_V1"
@@ -302,15 +314,381 @@ def shape_ceiling(rules: Sequence[Rule], test: Sequence[Repair]) -> Dict[str, An
             "rate": round(reachable / len(test), 4) if test else 0.0}
 
 
+def _find_minimal_subexpr_diffs(
+    a: ast.AST,
+    b: ast.AST,
+    enclosing_pair: Optional[Tuple[ast.expr, ast.expr]] = None,
+) -> List[Tuple[ast.AST, ast.AST, Optional[Tuple[ast.expr, ast.expr]]]]:
+    """Find minimal differing sub-AST pairs while tracking the tightest enclosing compound expr."""
+    if _dump(a) == _dump(b):
+        return []
+    next_enclosing = enclosing_pair
+    if isinstance(a, COMPOUND_EXPR_NODES) and isinstance(b, COMPOUND_EXPR_NODES):
+        next_enclosing = (a, b)
+    if type(a) is not type(b):
+        return [(a, b, enclosing_pair)]
+    diffs: List[Tuple[ast.AST, ast.AST, Optional[Tuple[ast.expr, ast.expr]]]] = []
+    for fname, fa in ast.iter_fields(a):
+        if fname in ("ctx", "type_comment"):
+            continue
+        fb = getattr(b, fname, None)
+        if isinstance(fa, ast.AST) and isinstance(fb, ast.AST):
+            diffs.extend(_find_minimal_subexpr_diffs(fa, fb, next_enclosing))
+        elif isinstance(fa, list) and isinstance(fb, list):
+            if len(fa) != len(fb):
+                return [(a, b, enclosing_pair)]
+            for ia, ib in zip(fa, fb):
+                if isinstance(ia, ast.AST) and isinstance(ib, ast.AST):
+                    diffs.extend(_find_minimal_subexpr_diffs(ia, ib, next_enclosing))
+                elif ia != ib:
+                    return [(a, b, enclosing_pair)]
+        elif fa != fb:
+            return [(a, b, enclosing_pair)]
+    return diffs
+
+
+def extract_minimal_compound_subexpr_pair(before_src: str, after_src: str) -> Optional[Tuple[str, str]]:
+    """Extract a single minimal compound-LHS sub-expression rewrite from a repair hunk.
+
+    Safety guard: if the minimal diff is a bare `ast.Name` or `ast.Constant` (e.g. `te -> t`),
+    it MUST lift to its tightest enclosing compound expression (e.g. `te.Concatenate -> t.Concatenate`,
+    which abstracts to `te._H0_ -> t._H0_` or attribute/call/compare shape) — never emitting a
+    bare-identifier wildcard that collides with unrelated local variables.
+    """
+    nb = _as_statement(before_src)
+    na = _as_statement(after_src)
+    if nb is None or na is None:
+        return None
+    diffs = _find_minimal_subexpr_diffs(nb, na, None)
+    if len(diffs) != 1:
+        return None
+    db, da, enc = diffs[0]
+    if isinstance(db, COMPOUND_EXPR_NODES) and isinstance(da, ast.expr):
+        eb, ea = db, da
+    elif enc is not None and isinstance(enc[0], COMPOUND_EXPR_NODES) and isinstance(enc[1], ast.expr):
+        eb, ea = enc
+    else:
+        return None
+    if _dump(eb) == _dump(ea):
+        return None
+    try:
+        sb = ast.unparse(eb).strip()
+        sa = ast.unparse(ea).strip()
+    except Exception:
+        return None
+    if not sb or not sa or sb == sa:
+        return None
+    return sb, sa
+
+
+@dataclass(frozen=True)
+class CompoundAttrRule:
+    """Two-witness anti-unified compound attribute owner rewrite (`owner_before.<attr> -> owner_after.<attr>`).
+
+    Strict safety invariants:
+    - Matches ONLY `ast.Attribute(value=ast.Name(id=owner_before), attr=...)` — NEVER bare `ast.Name`!
+    - Requires >= 2 distinct attribute names witnessed in training (`len(witness_attrs) >= 2`),
+      eliminating one-off accidental identifier renames.
+    """
+
+    owner_before: str
+    owner_after: str
+    witness_attrs: Tuple[str, ...]
+
+    @property
+    def before(self) -> str:
+        return f"{self.owner_before}.<attr>"
+
+    @property
+    def after(self) -> str:
+        return f"{self.owner_after}.<attr>"
+
+
+def learn_compound_attr_rules(repairs: Sequence[Repair], *, min_witnesses: int = 2) -> List[CompoundAttrRule]:
+    """Anti-unify >= 2 distinct compound attribute owner rewrites (`A.x -> B.x` + `A.y -> B.y` => `A.<attr> -> B.<attr>`)."""
+    buckets: Dict[Tuple[str, str], set[str]] = {}
+    for repair in repairs:
+        nb = _as_statement(repair.before)
+        na = _as_statement(repair.after)
+        if nb is None or na is None:
+            continue
+        diffs = _find_minimal_subexpr_diffs(nb, na, None)
+        for db, da, enc in diffs:
+            pair = (db, da) if isinstance(db, ast.Attribute) and isinstance(da, ast.Attribute) else enc
+            if pair is None:
+                continue
+            eb, ea = pair
+            if (
+                isinstance(eb, ast.Attribute)
+                and isinstance(ea, ast.Attribute)
+                and eb.attr == ea.attr
+                and isinstance(eb.value, ast.Name)
+                and isinstance(ea.value, ast.Name)
+                and eb.value.id != ea.value.id
+            ):
+                buckets.setdefault((eb.value.id, ea.value.id), set()).add(eb.attr)
+    out: List[CompoundAttrRule] = []
+    for (ob, oa), attrs in sorted(buckets.items()):
+        if len(attrs) >= min_witnesses:
+            out.append(CompoundAttrRule(owner_before=ob, owner_after=oa, witness_attrs=tuple(sorted(attrs))))
+    return out
+
+
+def apply_compound_attr_rule(rule: CompoundAttrRule, before_src: str) -> List[str]:
+    """Apply a 2-witness compound attribute rule to `before_src` (all-matching + single-occurrence candidates)."""
+    stmt = _as_statement(before_src)
+    if stmt is None:
+        return []
+    hits = 0
+    for node in ast.walk(stmt):
+        if isinstance(node, ast.Attribute) and isinstance(node.value, ast.Name) and node.value.id == rule.owner_before:
+            hits += 1
+    if hits == 0:
+        return []
+
+    class _AllAttrReplacer(ast.NodeTransformer):
+        def visit_Attribute(self, node: ast.Attribute) -> ast.AST:
+            node = self.generic_visit(node)
+            if isinstance(node.value, ast.Name) and node.value.id == rule.owner_before:
+                return ast.Attribute(
+                    value=ast.Name(id=rule.owner_after, ctx=ast.Load()),
+                    attr=node.attr,
+                    ctx=node.ctx,
+                )
+            return node
+
+    out: List[str] = []
+    try:
+        all_tree = _AllAttrReplacer().visit(copy.deepcopy(stmt))
+        out.append(ast.unparse(ast.fix_missing_locations(all_tree)))
+    except Exception:
+        pass
+    return out
+
+
+def _rule_compound_kind(rule: Rule) -> Optional[str]:
+    """Return the compound AST expr kind of `rule.lhs` if it is a compound expression, else None."""
+    kind = getattr(rule.lhs, "kind", None)
+    if kind in {c.__name__ for c in COMPOUND_EXPR_NODES}:
+        return kind
+    return None
+
+
+def learn_subexpr(repairs: Sequence[Repair]) -> List[Rule]:
+    """Learn deduplicated compound-LHS sub-expression rewrite rules via Wave 45 `admit`/`abstract`."""
+    rules: List[Rule] = []
+    seen: set[Tuple[str, str]] = set()
+    for repair in repairs:
+        pair = extract_minimal_compound_subexpr_pair(repair.before, repair.after)
+        if pair is None:
+            continue
+        sb, sa = pair
+        verdict = admit(sb, sa)
+        if verdict["verdict"] != ADMITTED:
+            continue
+        try:
+            rule = abstract(sb, sa)
+        except (SyntaxError, TypeError, KeyError, ValueError):
+            continue
+        if _rule_compound_kind(rule) is None:
+            continue
+        sig = (repr(rule.lhs), repr(rule.rhs))
+        if sig in seen:
+            continue
+        seen.add(sig)
+        rules.append(rule)
+    return rules
+
+
+def apply_subexpr_rule(rule: Rule, before_src: str) -> List[str]:
+    """Apply a compound-LHS sub-expression rule to every matching sub-expression inside `before_src`."""
+    stmt = _as_statement(before_src)
+    if stmt is None:
+        return []
+    target_kind = _rule_compound_kind(rule)
+    if not target_kind:
+        return []
+
+    # Collect matching compound sub-expressions using deterministic pre-order AST traversal
+    matches: List[Tuple[int, str]] = []
+    counter = [0]
+
+    def _collect(node: ast.AST) -> None:
+        if isinstance(node, COMPOUND_EXPR_NODES) and type(node).__name__ == target_kind:
+            occ = counter[0]
+            counter[0] += 1
+            try:
+                sub_src = ast.unparse(node)
+                produced = apply_rule(rule, sub_src)
+            except Exception:
+                produced = None
+            if produced is not None and produced.strip() != sub_src.strip():
+                matches.append((occ, produced.strip()))
+        for child in ast.iter_child_nodes(node):
+            _collect(child)
+
+    _collect(stmt)
+    if not matches:
+        return []
+
+    out: List[str] = []
+    seen_out: set[str] = set()
+    for match_idx, repl_src in matches:
+        try:
+            repl_expr = ast.parse(repl_src, mode="eval").body
+        except SyntaxError:
+            continue
+        tree_copy = copy.deepcopy(stmt)
+        pos_box = [0]
+        replaced_box = [False]
+
+        class _SingleOccReplacer(ast.NodeTransformer):
+            def generic_visit(self, node: ast.AST) -> ast.AST:
+                if isinstance(node, COMPOUND_EXPR_NODES) and type(node).__name__ == target_kind:
+                    occ = pos_box[0]
+                    pos_box[0] += 1
+                    if occ == match_idx:
+                        replaced_box[0] = True
+                        return copy.deepcopy(repl_expr)
+                return super().generic_visit(node)
+
+        new_tree = _SingleOccReplacer().visit(tree_copy)
+        if replaced_box[0]:
+            try:
+                cand = ast.unparse(ast.fix_missing_locations(new_tree))
+            except Exception:
+                continue
+            if cand not in seen_out:
+                seen_out.add(cand)
+                out.append(cand)
+    return out
+
+
+def score_subexpr(
+    subexpr_rules: Sequence[Rule],
+    repairs: Sequence[Repair],
+    compound_attr_rules: Sequence[CompoundAttrRule] = (),
+) -> Dict[str, Any]:
+    """Score compound-LHS sub-expression rules (single-witness + 2-witness compound-attr) under exact whole-statement AST oracle."""
+    by_kind: Dict[str, List[Rule]] = {}
+    for rule in subexpr_rules:
+        kind = _rule_compound_kind(rule)
+        if kind:
+            by_kind.setdefault(kind, []).append(rule)
+
+    hits: List[Dict[str, Any]] = []
+    for repair in repairs:
+        stmt_before = _as_statement(repair.before)
+        stmt_after = _as_statement(repair.after)
+        if stmt_before is None or stmt_after is None:
+            continue
+        target_dump = _dump(stmt_after)
+        present_kinds = {type(n).__name__ for n in ast.walk(stmt_before) if isinstance(n, COMPOUND_EXPR_NODES)}
+        matched = False
+        for kind in present_kinds:
+            for rule in by_kind.get(kind, ()):
+                for cand in apply_subexpr_rule(rule, repair.before):
+                    cand_stmt = _as_statement(cand)
+                    if cand_stmt is not None and _dump(cand_stmt) == target_dump:
+                        hits.append({"repair": repair.key(), "rule_witness": rule.before, "rule_after": rule.after})
+                        matched = True
+                        break
+                if matched:
+                    break
+            if matched:
+                break
+        if not matched and "Attribute" in present_kinds:
+            for car in compound_attr_rules:
+                for cand in apply_compound_attr_rule(car, repair.before):
+                    cand_stmt = _as_statement(cand)
+                    if cand_stmt is not None and _dump(cand_stmt) == target_dump:
+                        hits.append({"repair": repair.key(), "rule_witness": car.before, "rule_after": car.after})
+                        matched = True
+                        break
+                if matched:
+                    break
+    return {"tested": len(repairs), "hits": len(hits), "detail": hits[:40],
+            "rate": round(len(hits) / len(repairs), 4) if repairs else 0.0}
+
+
+def score_combined(
+    whole_rules: Sequence[Rule],
+    subexpr_rules: Sequence[Rule],
+    repairs: Sequence[Repair],
+    compound_attr_rules: Sequence[CompoundAttrRule] = (),
+) -> Dict[str, Any]:
+    """Union of whole-statement `STORE` and compound-LHS `SUBEXPR_STORE` (exact whole-statement AST match)."""
+    by_kind: Dict[str, List[Rule]] = {}
+    for rule in subexpr_rules:
+        kind = _rule_compound_kind(rule)
+        if kind:
+            by_kind.setdefault(kind, []).append(rule)
+
+    hits: List[Dict[str, Any]] = []
+    for repair in repairs:
+        stmt_after = _as_statement(repair.after)
+        if stmt_after is None:
+            continue
+        target_dump = _dump(stmt_after)
+        matched = False
+        for rule in whole_rules:
+            produced = apply_rule(rule, repair.before)
+            if produced is None:
+                continue
+            cand_stmt = _as_statement(produced)
+            if cand_stmt is not None and _dump(cand_stmt) == target_dump:
+                hits.append({"repair": repair.key(), "source": "STORE", "rule_witness": rule.before})
+                matched = True
+                break
+        if matched:
+            continue
+        stmt_before = _as_statement(repair.before)
+        if stmt_before is None:
+            continue
+        present_kinds = {type(n).__name__ for n in ast.walk(stmt_before) if isinstance(n, COMPOUND_EXPR_NODES)}
+        for kind in present_kinds:
+            for rule in by_kind.get(kind, ()):
+                for cand in apply_subexpr_rule(rule, repair.before):
+                    cand_stmt = _as_statement(cand)
+                    if cand_stmt is not None and _dump(cand_stmt) == target_dump:
+                        hits.append({"repair": repair.key(), "source": "SUBEXPR_STORE", "rule_witness": rule.before})
+                        matched = True
+                        break
+                if matched:
+                    break
+            if matched:
+                break
+        if not matched and "Attribute" in present_kinds:
+            for car in compound_attr_rules:
+                for cand in apply_compound_attr_rule(car, repair.before):
+                    cand_stmt = _as_statement(cand)
+                    if cand_stmt is not None and _dump(cand_stmt) == target_dump:
+                        hits.append({"repair": repair.key(), "source": "COMPOUND_ATTR_STORE", "rule_witness": car.before})
+                        matched = True
+                        break
+                if matched:
+                    break
+    return {"tested": len(repairs), "hits": len(hits), "detail": hits[:40],
+            "rate": round(len(hits) / len(repairs), 4) if repairs else 0.0}
+
+
 def evaluate(train: Sequence[Repair], test: Sequence[Repair]) -> Dict[str, Any]:
     rules = learn(train)
+    subexpr_rules = learn_subexpr(train)
+    compound_attr_rules = learn_compound_attr_rules(train)
     store = score(rules, test)
+    subexpr_store = score_subexpr(subexpr_rules, test, compound_attr_rules=compound_attr_rules)
+    combined_store = score_combined(rules, subexpr_rules, test, compound_attr_rules=compound_attr_rules)
     return {
         "train_repairs": len(train),
         "train_files": len({r.path for r in train}),
         "rules_admitted": len(rules),
+        "subexpr_rules_admitted": len(subexpr_rules),
+        "compound_attr_rules_admitted": len(compound_attr_rules),
         "rules_per_repair": round(len(rules) / len(train), 4) if train else 0.0,
         "STORE": store,
+        "SUBEXPR_STORE": subexpr_store,
+        "COMBINED_STORE": combined_store,
         "EMPTY": {"tested": len(test), "hits": 0, "rate": 0.0},
         "RAW_TRACE": score_raw_traces(train, test),
         "SHAPE_CEILING": shape_ceiling(rules, test),

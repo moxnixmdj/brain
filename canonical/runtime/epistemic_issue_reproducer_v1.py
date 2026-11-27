@@ -60,10 +60,73 @@ _PY_HARNESS_ERRORS = (
     "TabError:",
     "ImportError:",
     "ModuleNotFoundError:",
+    "No module named ",
     "NameError:",
     "AttributeError: module ",
     "ERROR collecting ",
+    "required positional argument",
+    "positional argument but",
 )
+
+_PYTEST_AVAIL_CACHE: dict[str, bool] = {}
+
+
+def _python_has_pytest(python_exe: str) -> bool:
+    """Cached check whether `python_exe` has `pytest` importable."""
+    if python_exe not in _PYTEST_AVAIL_CACHE:
+        try:
+            proc = subprocess.run(
+                [python_exe, "-c", "import pytest"],
+                capture_output=True,
+                text=True,
+                timeout=10.0,
+            )
+            _PYTEST_AVAIL_CACHE[python_exe] = proc.returncode == 0
+        except Exception:
+            _PYTEST_AVAIL_CACHE[python_exe] = False
+    return _PYTEST_AVAIL_CACHE[python_exe]
+
+
+_STDLIB_TEST_RUNNER_SNIPPET = r"""
+import importlib.util, inspect, pathlib, sys, tempfile, traceback, unittest
+
+failed = 0
+ran = 0
+for rel in sys.argv[1:]:
+    p = pathlib.Path(rel).resolve()
+    spec = importlib.util.spec_from_file_location(p.stem, p)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    suite = unittest.defaultTestLoader.loadTestsFromModule(mod)
+    if suite.countTestCases() > 0:
+        res = unittest.TextTestRunner(verbosity=0).run(suite)
+        ran += res.testsRun
+        failed += len(res.failures) + len(res.errors)
+    for name, obj in inspect.getmembers(mod, inspect.isfunction):
+        if not name.startswith("test_") or obj.__module__ != mod.__name__:
+            continue
+        sig = inspect.signature(obj)
+        kwargs = {}
+        tmp_ctx = None
+        if "tmp_path" in sig.parameters:
+            tmp_ctx = tempfile.TemporaryDirectory()
+            kwargs["tmp_path"] = pathlib.Path(tmp_ctx.name)
+        elif any(p_.default is inspect.Parameter.empty for p_ in sig.parameters.values()):
+            continue
+        ran += 1
+        try:
+            obj(**kwargs)
+        except Exception:
+            failed += 1
+            traceback.print_exc()
+        finally:
+            if tmp_ctx is not None:
+                tmp_ctx.cleanup()
+if ran == 0:
+    print("ERROR collecting 0 runnable tests", file=sys.stderr)
+    sys.exit(2)
+sys.exit(1 if failed > 0 else 0)
+"""
 
 _JS_HARNESS_ERRORS = (
     "SyntaxError:",
@@ -1230,6 +1293,436 @@ def _compile_existing_test_clones(
     return specs
 
 
+def _extract_metamorphic_cues(issue_text: str, repo_index: RepoSymbolIndex) -> dict[str, Any]:
+    """Extract structured behavioral defect cues from prose issue text (fail-closed if none)."""
+    txt = issue_text or ""
+    low = txt.lower()
+    cues: dict[str, Any] = {
+        "empty": bool(
+            re.search(r"\b(empty|blank|none|null|missing|no\s+param\w*|without\s+\w+|zero[- ]length)\b", low)
+            or '""' in txt or "''" in txt or "[]" in txt or "{}" in txt
+        ),
+        "zero_neg": bool(
+            re.search(r"\b(zero|negative|division\s+by\s+zero|off[- ]by[- ]one|underflow|non[- ]positive)\b", low)
+            or re.search(r"(?<![.\w])(?:-1|0)(?![.\w])", txt)
+        ),
+        "whitespace_case": bool(
+            re.search(r"\b(whitespace|trailing\s+space|leading\s+space|strip|newline|case[- ]?sensitiv\w*|uppercase|lowercase|unicode|non[- ]ascii)\b", low)
+        ),
+        "duplicate_order": bool(
+            re.search(r"\b(duplicate\w*|dedup\w*|repeated|unsorted|reverse[d]?|order)\b", low)
+        ),
+        "roundtrip": bool(
+            re.search(r"\b(round[- ]?trip|idempotent|idempotence)\b", low)
+        ),
+        "forbid_trailing_space": ("trailing space" in low or "trailing whitespace" in low),
+        "forbid_leading_space": ("leading space" in low or "leading whitespace" in low),
+        "want_negative": ("negative" in low or "-1" in txt),
+        "want_unicode": ("unicode" in low or "non-ascii" in low or "utf-8" in low),
+        "want_case": bool(re.search(r"\b(case[- ]?sensitiv\w*|uppercase|lowercase)\b", low)),
+        "expected_lit": _extract_expected_literal_near(txt),
+        "expected_exc": _extract_expected_exception_near(txt, repo_index),
+    }
+    cues["any_active"] = any(
+        cues[k] for k in ("empty", "zero_neg", "whitespace_case", "duplicate_order", "roundtrip")
+    ) or bool(cues["expected_lit"] is not None or cues["expected_exc"])
+    return cues
+
+
+def _compile_metamorphic_witness_clones(
+    repo_root: pathlib.Path,
+    issue_text: str,
+    repo_index: RepoSymbolIndex,
+) -> list[CompiledReproSpec]:
+    """Metamorphic Witness Splitter (SWE-bench Pro Wall-1 breaker, strictly fail-closed).
+
+    When all existing repo tests pass (`NO_DEFECT_EVIDENCE` / green suite) and the issue prose
+    contains no executable snippet, harvest real calls/constructors from existing passing tests
+    that exercise symbols explicitly named in `issue_text`, and synthesize targeted counterfactual
+    metamorphic witness tests guided ONLY by explicit cues in `issue_text`.
+
+    Invariants:
+    - Never runs when no repo symbol is named in `issue_text` or no behavioral cue is present.
+    - Emits pure-stdlib Python `def test_epistemic_metamorphic_*()` probes (no `pytest` required).
+    - Every emitted probe still goes through `_run_reproducer_once`: if the unpatched repo passes
+      the probe, it is rejected (never hallucinating a bug on a healthy repo).
+    """
+    if repo_index.language != "python":
+        return []
+    cues = _extract_metamorphic_cues(issue_text, repo_index)
+    if not cues["any_active"]:
+        return []
+
+    # Resolve repo symbols explicitly mentioned in `issue_text` (functions, classes, and Class.method)
+    mentioned_syms: list[str] = []
+    mentioned_methods: set[str] = set()
+    for sym in sorted(repo_index.symbols.keys(), key=len, reverse=True):
+        if len(sym) < 3 or sym.startswith("_"):
+            continue
+        if "." in sym:
+            cls_nm, meth_nm = sym.split(".", 1)
+            if re.search(rf"\b{re.escape(sym)}\b", issue_text) or (
+                re.search(rf"\b{re.escape(cls_nm)}\b", issue_text)
+                and re.search(rf"\b{re.escape(meth_nm)}\b", issue_text)
+            ):
+                if cls_nm not in mentioned_syms:
+                    mentioned_syms.append(cls_nm)
+                mentioned_methods.add(meth_nm)
+        elif re.search(rf"\b{re.escape(sym)}\b", issue_text):
+            if sym not in mentioned_syms:
+                mentioned_syms.append(sym)
+    if not mentioned_syms:
+        return []
+
+    # Candidate existing test files mentioning these symbols
+    cand_test_files: list[str] = []
+    for sym in mentioned_syms:
+        for tf in repo_index.symbol_to_tests.get(sym, []):
+            if tf not in cand_test_files:
+                cand_test_files.append(tf)
+        for tf in repo_index.test_files:
+            if tf in cand_test_files:
+                continue
+            try:
+                txt_tf = (repo_root / tf).read_text(encoding="utf-8", errors="replace")
+            except OSError:
+                continue
+            if re.search(rf"\b{re.escape(sym)}\b", txt_tf):
+                cand_test_files.append(tf)
+
+    specs: list[CompiledReproSpec] = []
+    seen_src: set[str] = set()
+    exp_lit = cues["expected_lit"]
+    exp_exc = cues["expected_exc"]
+
+    minimal_header = "\n".join(_build_python_imports(mentioned_syms, repo_index))
+
+    def _clean_header(raw_header: str) -> str:
+        kept = []
+        for ln in raw_header.splitlines():
+            s = ln.strip()
+            if s.startswith("import pytest") or s.startswith("from pytest "):
+                continue
+            kept.append(ln)
+        return "\n".join(kept)
+
+    def _emit_spec(
+        header_txt: str,
+        fn_name: str,
+        body_lines: list[str],
+        desc: str,
+        tf_rel: str,
+        test_subdir: str,
+    ) -> None:
+        nonlocal specs
+        # Prefer minimal symbol-exact imports when the body doesn't need extra test-file helpers,
+        # avoiding unrelated test-only imports (`pytest`, third-party plugins) in bare containers.
+        headers_to_try = []
+        if minimal_header:
+            headers_to_try.append(minimal_header)
+        cleaned = _clean_header(header_txt)
+        if cleaned and cleaned != minimal_header:
+            headers_to_try.append(cleaned)
+        if not headers_to_try:
+            headers_to_try.append("")
+        for hdr in headers_to_try[:1]:
+            full_src = (hdr.rstrip() + "\n\n" if hdr.strip() else "") + f"def {fn_name}():\n" + "\n".join(body_lines) + "\n"
+            if full_src in seen_src:
+                return
+            try:
+                tree_chk = ast.parse(full_src)
+            except SyntaxError:
+                continue
+            # If minimal header leaves any Load name undefined (helper from test file), fall back to cleaned header
+            if hdr == minimal_header and cleaned and cleaned != minimal_header:
+                import builtins as _builtins
+                defined: set[str] = set(dir(_builtins))
+                for n_ in ast.walk(tree_chk):
+                    if isinstance(n_, ast.Import):
+                        defined.update(a.asname or a.name.split(".")[0] for a in n_.names)
+                    elif isinstance(n_, ast.ImportFrom):
+                        defined.update(a.asname or a.name for a in n_.names)
+                    elif isinstance(n_, ast.FunctionDef):
+                        defined.add(n_.name)
+                    elif isinstance(n_, ast.Name) and isinstance(n_.ctx, ast.Store):
+                        defined.add(n_.id)
+                used = {n_.id for n_ in ast.walk(tree_chk) if isinstance(n_, ast.Name) and isinstance(n_.ctx, ast.Load)}
+                if used - defined:
+                    full_src = cleaned.rstrip() + "\n\n" + f"def {fn_name}():\n" + "\n".join(body_lines) + "\n"
+                    if full_src in seen_src:
+                        return
+                    try:
+                        ast.parse(full_src)
+                    except SyntaxError:
+                        return
+            seen_src.add(full_src)
+            specs.append(CompiledReproSpec(
+                kind="existing_test_clone",
+                language="python",
+                test_source=full_src,
+                referenced_symbols=list(mentioned_syms),
+                expected_exception=exp_exc,
+                assertion_count=1,
+                has_contrastive=False,
+                description=desc,
+                test_subdir=test_subdir,
+                source_test_file=tf_rel,
+            ))
+
+    def _build_perturbed_call_variants(call_node: ast.Call) -> list[tuple[str, str]]:
+        """Generate cue-gated metamorphic perturbations of a concrete call AST."""
+        variants: list[tuple[str, str]] = []
+        orig_src = ast.unparse(call_node)
+
+        def _mutate_arg(idx: int, is_kw: bool, new_expr_src: str, label: str) -> None:
+            try:
+                new_val = ast.parse(new_expr_src, mode="eval").body
+            except SyntaxError:
+                return
+            import copy as _copy
+            cloned = _copy.deepcopy(call_node)
+            if is_kw:
+                cloned.keywords[idx].value = new_val
+            else:
+                cloned.args[idx] = new_val
+            mut_src = ast.unparse(cloned)
+            if mut_src != orig_src:
+                variants.append((label, mut_src))
+
+        # Positional & keyword arguments
+        arg_items: list[tuple[int, bool, ast.AST]] = [(i, False, a) for i, a in enumerate(call_node.args)]
+        arg_items.extend((i, True, kw.value) for i, kw in enumerate(call_node.keywords) if kw.arg)
+
+        for idx, is_kw, arg in arg_items:
+            if cues["empty"]:
+                if isinstance(arg, ast.Constant) and isinstance(arg.value, str) and arg.value != "":
+                    _mutate_arg(idx, is_kw, '""', "empty_str")
+                elif isinstance(arg, ast.List) and arg.elts:
+                    _mutate_arg(idx, is_kw, "[]", "empty_list")
+                elif isinstance(arg, ast.Tuple) and arg.elts:
+                    _mutate_arg(idx, is_kw, "()", "empty_tuple")
+                elif isinstance(arg, ast.Dict) and arg.keys:
+                    _mutate_arg(idx, is_kw, "{}", "empty_dict")
+                elif isinstance(arg, ast.Constant) and arg.value is not None and (is_kw or "none" in (issue_text or "").lower() or "null" in (issue_text or "").lower()):
+                    _mutate_arg(idx, is_kw, "None", "none_arg")
+            if cues["zero_neg"]:
+                if isinstance(arg, ast.Constant) and isinstance(arg.value, int) and not isinstance(arg.value, bool):
+                    if arg.value != 0:
+                        _mutate_arg(idx, is_kw, "0", "zero_int")
+                    if cues["want_negative"] and arg.value >= 0:
+                        _mutate_arg(idx, is_kw, "-1", "neg_int")
+                elif isinstance(arg, ast.List) and arg.elts and all(isinstance(e, ast.Constant) and isinstance(e.value, (int, float)) for e in arg.elts):
+                    _mutate_arg(idx, is_kw, "[0]", "zero_list")
+            if cues["whitespace_case"]:
+                if isinstance(arg, ast.Constant) and isinstance(arg.value, str) and arg.value:
+                    if not arg.value.startswith(" ") and not arg.value.endswith(" "):
+                        _mutate_arg(idx, is_kw, repr(f"  {arg.value}  "), "pad_whitespace")
+                    if cues["want_unicode"]:
+                        _mutate_arg(idx, is_kw, repr(arg.value + "\u00e9"), "unicode_str")
+                    if cues["want_case"] and arg.value.lower() == arg.value:
+                        _mutate_arg(idx, is_kw, repr(arg.value.upper()), "upper_case")
+            if cues["duplicate_order"]:
+                if isinstance(arg, ast.List) and len(arg.elts) >= 2:
+                    dup_src = "[" + ", ".join(ast.unparse(e) for e in list(arg.elts) + [arg.elts[0]]) + "]"
+                    _mutate_arg(idx, is_kw, dup_src, "dup_list")
+                    rev_src = "[" + ", ".join(ast.unparse(e) for e in reversed(arg.elts)) + "]"
+                    _mutate_arg(idx, is_kw, rev_src, "rev_list")
+        return variants[:6]
+
+    def _build_check_lines(call_expr: str) -> list[str]:
+        if exp_exc:
+            return [
+                "    _raised = False",
+                "    try:",
+                f"        {call_expr}",
+                f"    except {exp_exc}:",
+                "        _raised = True",
+                f"    assert _raised, 'Expected {exp_exc} to be raised'",
+            ]
+        lines = [f"    _res = {call_expr}"]
+        if exp_lit is not None:
+            lines.append(f"    assert _res == ({exp_lit}), f'Unexpected result: {{_res!r}}'")
+        if cues["forbid_trailing_space"]:
+            lines.append("    assert not (isinstance(_res, str) and _res.endswith(' ')), f'Trailing space in {_res!r}'")
+        if cues["forbid_leading_space"]:
+            lines.append("    assert not (isinstance(_res, str) and _res.startswith(' ')), f'Leading space in {_res!r}'")
+        return lines
+
+    _zero_arg_cache: dict[tuple[str, str], bool] = {}
+
+    def _method_accepts_zero_args(cls_nm: str, m_nm: str) -> bool:
+        key = (cls_nm, m_nm)
+        if key in _zero_arg_cache:
+            return _zero_arg_cache[key]
+        ok = False
+        for entry in repo_index.symbols.get(cls_nm) or ():
+            if entry.kind != "class":
+                continue
+            try:
+                t_mod = ast.parse((repo_root / entry.rel_path).read_text(encoding="utf-8", errors="replace"))
+            except (OSError, SyntaxError):
+                continue
+            for n_ in ast.walk(t_mod):
+                if isinstance(n_, ast.ClassDef) and n_.name == cls_nm:
+                    for item in n_.body:
+                        if isinstance(item, ast.FunctionDef) and item.name == m_nm:
+                            # Skip @property (not callable) and require 0 required non-self args
+                            is_prop = any(
+                                (isinstance(d, ast.Name) and d.id == "property")
+                                or (isinstance(d, ast.Attribute) and d.attr == "property")
+                                for d in item.decorator_list
+                            )
+                            if is_prop:
+                                continue
+                            pos_args = list(item.args.posonlyargs) + list(item.args.args)
+                            req_non_self = max(0, len(pos_args) - 1 - len(item.args.defaults))
+                            req_kwonly = sum(1 for d in item.args.kw_defaults if d is None)
+                            if req_non_self == 0 and req_kwonly == 0:
+                                ok = True
+                                break
+        _zero_arg_cache[key] = ok
+        return ok
+
+    # Harvest calls from existing passing test functions & unittest.TestCase methods
+    for tf_rel in cand_test_files[:6]:
+        if len(specs) >= 24:
+            break
+        tf_p = repo_root / tf_rel
+        if not tf_p.is_file():
+            continue
+        try:
+            src_tf = tf_p.read_text(encoding="utf-8", errors="replace")
+            tree_tf = ast.parse(src_tf)
+        except (OSError, SyntaxError):
+            continue
+        src_lines = src_tf.splitlines(keepends=True)
+        header_txt = _extract_test_file_header(tree_tf, src_lines)
+        test_subdir = pathlib.PurePosixPath(tf_rel).parent.as_posix()
+        if test_subdir == ".":
+            test_subdir = ""
+
+        # Collect both top-level `def test_*` and `unittest.TestCase` methods `def test_*(self)`
+        test_fns: list[ast.FunctionDef] = []
+        for node in tree_tf.body:
+            if isinstance(node, ast.FunctionDef) and node.name.startswith("test_"):
+                if not node.args.args:
+                    test_fns.append(node)
+            elif isinstance(node, ast.ClassDef):
+                for item in node.body:
+                    if isinstance(item, ast.FunctionDef) and item.name.startswith("test_") and len(item.args.args) == 1:
+                        test_fns.append(item)
+
+        for fn in test_fns:
+            if len(specs) >= 24:
+                break
+            # Find concrete calls to mentioned symbols inside `fn`
+            for st_idx, st in enumerate(fn.body):
+                for sub in ast.walk(st):
+                    if not isinstance(sub, ast.Call):
+                        continue
+                    call_nm = (
+                        sub.func.attr
+                        if isinstance(sub.func, ast.Attribute)
+                        else (sub.func.id if isinstance(sub.func, ast.Name) else "")
+                    )
+                    if call_nm not in mentioned_syms and call_nm not in mentioned_methods:
+                        continue
+                    # Preserve preceding pure setup assignments (skipping `self.` assertions)
+                    setup_lines: list[str] = []
+                    for prev in fn.body[:st_idx]:
+                        p_src = ast.unparse(prev)
+                        if "self." in p_src or p_src.startswith("assert "):
+                            continue
+                        if isinstance(prev, (ast.Assign, ast.AnnAssign)):
+                            setup_lines.append("    " + p_src)
+
+                    # Special case: method call on constructor with empty dict/list/str e.g. `WWWAuthenticate("basic", {}).to_header()`
+                    variants = _build_perturbed_call_variants(sub)
+                    if not variants and cues["roundtrip"] and isinstance(sub.func, ast.Name):
+                        orig_c = ast.unparse(sub)
+                        body_rt = setup_lines + [
+                            f"    _r1 = {orig_c}",
+                            f"    _r2 = {sub.func.id}(_r1)",
+                            "    assert _r2 == _r1, f'Not idempotent: {_r1!r} != {_r2!r}'",
+                        ]
+                        _emit_spec(
+                            header_txt,
+                            f"test_epistemic_metamorphic_rt_{fn.name}",
+                            body_rt,
+                            f"metamorphic_roundtrip({tf_rel}::{fn.name})",
+                            tf_rel,
+                            test_subdir,
+                        )
+                    for label, mut_call in variants:
+                        if len(specs) >= 24:
+                            break
+                        # If `sub` was receiver constructor (`WWWAuthenticate("basic", {})`) and methods were mentioned, test each mentioned method!
+                        if (
+                            call_nm in mentioned_syms
+                            and mentioned_methods
+                            and any(e.kind == "class" for e in (repo_index.symbols.get(call_nm) or ()))
+                        ):
+                            for m_nm in sorted(mentioned_methods):
+                                if len(specs) >= 24 or not _method_accepts_zero_args(call_nm, m_nm):
+                                    continue
+                                target_call = f"({mut_call}).{m_nm}()"
+                                body_lines = setup_lines + _build_check_lines(target_call)
+                                _emit_spec(
+                                    header_txt,
+                                    f"test_epistemic_metamorphic_{label}_{m_nm}_{fn.name}_{len(specs)}",
+                                    body_lines,
+                                    f"metamorphic_{label}.{m_nm}({tf_rel}::{fn.name})",
+                                    tf_rel,
+                                    test_subdir,
+                                )
+                        else:
+                            body_lines = setup_lines + _build_check_lines(mut_call)
+                            _emit_spec(
+                                header_txt,
+                                f"test_epistemic_metamorphic_{label}_{fn.name}_{len(specs)}",
+                                body_lines,
+                                f"metamorphic_{label}({tf_rel}::{fn.name})",
+                                tf_rel,
+                                test_subdir,
+                            )
+                    # Also handle direct class-receiver method calls where receiver was constructed in setup:
+                    # e.g., `auth = WWWAuthenticate("basic", {"realm": "x"}); auth.to_header()` -> perturb constructor in setup!
+                    if (
+                        isinstance(sub.func, ast.Attribute)
+                        and isinstance(sub.func.value, ast.Name)
+                        and sub.func.attr in mentioned_methods
+                    ):
+                        recv_var = sub.func.value.id
+                        for p_idx, prev in enumerate(fn.body[:st_idx]):
+                            if (
+                                isinstance(prev, ast.Assign)
+                                and len(prev.targets) == 1
+                                and isinstance(prev.targets[0], ast.Name)
+                                and prev.targets[0].id == recv_var
+                                and isinstance(prev.value, ast.Call)
+                            ):
+                                for label, mut_ctor in _build_perturbed_call_variants(prev.value):
+                                    if len(specs) >= 12:
+                                        break
+                                    pre_s = [
+                                        "    " + ast.unparse(fn.body[k])
+                                        for k in range(st_idx)
+                                        if k != p_idx and isinstance(fn.body[k], (ast.Assign, ast.AnnAssign)) and "self." not in ast.unparse(fn.body[k])
+                                    ]
+                                    pre_s.append(f"    {recv_var} = {mut_ctor}")
+                                    body_lines = pre_s + _build_check_lines(ast.unparse(sub))
+                                    _emit_spec(
+                                        header_txt,
+                                        f"test_epistemic_metamorphic_ctor_{label}_{fn.name}_{len(specs)}",
+                                        body_lines,
+                                        f"metamorphic_ctor_{label}({tf_rel}::{fn.name})",
+                                        tf_rel,
+                                        test_subdir,
+                                    )
+
+    return specs
+
+
 def compile_issue_specs(
     issue_text: str,
     repo_index: RepoSymbolIndex,
@@ -1242,6 +1735,7 @@ def compile_issue_specs(
     specs.extend(_compile_prose_clauses(issue_text, repo_index))
     if repo_root is not None:
         specs.extend(_compile_existing_test_clones(repo_root, issue_text, repo_index))
+        specs.extend(_compile_metamorphic_witness_clones(repo_root, issue_text, repo_index))
     # Deduplicate identical test sources while preserving order
     seen: set[str] = set()
     uniq: list[CompiledReproSpec] = []
@@ -1287,7 +1781,10 @@ def _run_reproducer_once(
             pp_parts.append(env["PYTHONPATH"])
         env["PYTHONPATH"] = os.pathsep.join(pp_parts)
         env["PYTEST_DISABLE_PLUGIN_AUTOLOAD"] = "1"
-        cmd = [py, "-m", "pytest", "-q", "--tb=short", rel_test]
+        if _python_has_pytest(py):
+            cmd = [py, "-m", "pytest", "-q", "--tb=short", rel_test]
+        else:
+            cmd = [py, "-c", _STDLIB_TEST_RUNNER_SNIPPET, rel_test]
         harness_errs = _PY_HARNESS_ERRORS
     elif repo_index.is_typescript_vitest:
         tmp_test = repo_root / "_epistemic_repro_probe.spec.ts"
@@ -1452,7 +1949,10 @@ def _run_regression_suite(
             pp_parts.append(env["PYTHONPATH"])
         env["PYTHONPATH"] = os.pathsep.join(pp_parts)
         env["PYTEST_DISABLE_PLUGIN_AUTOLOAD"] = "1"
-        cmd = [py, "-m", "pytest", "-q", "--tb=no", *list(test_files)]
+        if _python_has_pytest(py):
+            cmd = [py, "-m", "pytest", "-q", "--tb=no", *list(test_files)]
+        else:
+            cmd = [py, "-c", _STDLIB_TEST_RUNNER_SNIPPET, *list(test_files)]
         proc = subprocess.run(cmd, cwd=ws, env=env, capture_output=True, text=True, timeout=timeout_s)
         ok = proc.returncode == 0
         all_ok = ok

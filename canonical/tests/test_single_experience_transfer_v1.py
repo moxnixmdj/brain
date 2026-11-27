@@ -15,11 +15,18 @@ import unittest
 
 from canonical.swe_kernel.single_experience_transfer_v1 import (
     Repair,
+    apply_compound_attr_rule,
+    apply_subexpr_rule,
     evaluate,
+    extract_minimal_compound_subexpr_pair,
     learn,
+    learn_compound_attr_rules,
+    learn_subexpr,
     parse_patch,
     score,
+    score_combined,
     score_raw_traces,
+    score_subexpr,
     self_check,
     shape_ceiling,
     split_by_file,
@@ -136,8 +143,63 @@ class ScorerTest(unittest.TestCase):
     def test_evaluate_reports_all_four_arms(self) -> None:
         train, test = split_by_file(_repairs() + _repairs(path="n.py"))
         report = evaluate(train, test)
-        for arm in ("STORE", "EMPTY", "RAW_TRACE", "SHAPE_CEILING"):
+        for arm in ("STORE", "SUBEXPR_STORE", "COMBINED_STORE", "EMPTY", "RAW_TRACE", "SHAPE_CEILING"):
             self.assertIn(arm, report)
+
+    def test_subexpr_transfers_across_different_statement_wrappers(self) -> None:
+        """A rule learned inside an `if` header must transfer into an unseen `return` or `assign`."""
+        train = [
+            Repair(
+                slug="a/b", sha="1" * 40, path="p.py", index=0,
+                before="if len(xs) < limit:\n    pass",
+                after="if len(xs) <= limit:\n    pass",
+            ),
+        ]
+        held = [
+            Repair(
+                slug="c/d", sha="2" * 40, path="q.py", index=0,
+                before="ok = len(items) < cap",
+                after="ok = len(items) <= cap",
+            ),
+        ]
+        # Whole-statement store misses because root statement changed from If to Assign
+        self.assertEqual(score(learn(train), held)["hits"], 0)
+        # Compound-LHS sub-expression store reproduces the held-out after AST exactly
+        sub_rules = learn_subexpr(train)
+        self.assertEqual(score_subexpr(sub_rules, held)["hits"], 1)
+        self.assertEqual(score_combined(learn(train), sub_rules, held)["hits"], 1)
+
+    def test_bare_name_diff_is_never_admitted_as_subexpr_rule(self) -> None:
+        """Fail-closed safety guard: bare `Name -> Name` diffs must never become wildcard rewrites."""
+        train = [
+            Repair(slug="a/b", sha="3" * 40, path="p.py", index=0, before="x = te", after="x = t"),
+        ]
+        self.assertIsNone(extract_minimal_compound_subexpr_pair("x = te", "x = t"))
+        self.assertEqual(learn_subexpr(train), [])
+        self.assertEqual(learn_compound_attr_rules(train), [])
+
+    def test_compound_attr_rule_requires_two_witnesses_and_ignores_bare_names(self) -> None:
+        one_witness = [
+            Repair(slug="a/b", sha="4" * 40, path="p.py", index=0,
+                   before="x: te.Self = obj", after="x: t.Self = obj"),
+        ]
+        self.assertEqual(learn_compound_attr_rules(one_witness), [])
+        two_witnesses = one_witness + [
+            Repair(slug="a/b", sha="5" * 40, path="p2.py", index=0,
+                   before="y: te.ParamSpec = spec", after="y: t.ParamSpec = spec"),
+        ]
+        cars = learn_compound_attr_rules(two_witnesses)
+        self.assertEqual(len(cars), 1)
+        self.assertEqual(cars[0].owner_before, "te")
+        self.assertEqual(cars[0].owner_after, "t")
+        # Fires on unseen compound attribute `te.Concatenate` in another repo
+        held_attr = [
+            Repair(slug="c/d", sha="6" * 40, path="q.py", index=0,
+                   before="z: te.Concatenate = fn", after="z: t.Concatenate = fn"),
+        ]
+        self.assertEqual(score_subexpr([], held_attr, compound_attr_rules=cars)["hits"], 1)
+        # Never fires on bare local variable `te`
+        self.assertEqual(apply_compound_attr_rule(cars[0], "val = te + 1"), [])
 
 
 class ReceiptTest(unittest.TestCase):

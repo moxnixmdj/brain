@@ -1,182 +1,126 @@
 {
-  "schema": "BRAIN_WAVE53_54_HONEST_BENCHMARK_RECEIPT_V1",
-  "date": "2026-11-24",
   "authority": "NONE__PRODUCER_RUN_SANDBOX",
-  "producer_independent": false,
+  "axis_f_self_check": {
+    "checks": {
+      "agent_s4_lstar_evolution_and_guarded_webx_skill": true,
+      "all_9_metamorphic_law_generators_and_debt_isolation": true,
+      "alpha_safe_transfer_and_hard_invalidation": true,
+      "bus_36_zero_overlap_and_24_callable": true,
+      "dbsp_hindsight_strata_rollback_and_forgeteval_primitives": true,
+      "dockerless_verifier_and_selfplay_round2_transfer": true,
+      "estitch_equivalent_idioms_collapse_to_same_eclass": true,
+      "front_door_accepts_real_and_refuses_content_free": true,
+      "governance_consistency_audit_detects_drift_fail_closed": true,
+      "inverted_stack_rung2_compiles_to_rung0_zero_proposer": true,
+      "jitrl_overrides_bad_prior_and_webmcp_grounds_multi_step": true,
+      "memory_2026_gauntlet_meme_forgeteval_pmem_statebench_pass5": true,
+      "strata_contrast_edge_blocks_blind_negative_transfer": true,
+      "trigger_keyed_cross_repo_transfer_and_contrast_safety": true
+    },
+    "checks_passed": 14,
+    "checks_total": 14,
+    "k3_model_calls": 0,
+    "pass": true,
+    "schema": "BRAIN_WAVE53_54_UNIFIED_CAPABILITY_BUS_AND_LEAPFROG_V1",
+    "spend_usd": 0.0
+  },
   "base_commit": "7121e93c2a680eeebbbd2c8126338fbf4b919833",
-  "k3_model_calls": 0,
-  "incremental_spend_usd": 0.0,
-  "elapsed_s": 65.36,
-  "unified_model_invariants": {
-    "brain_unified_model_loc": 7653,
-    "elon_law_loc_cap": 7534,
-    "net_loc_delta": 0,
-    "engines_total": 270,
-    "federated_kernel_engines": 244,
-    "verify_brain_unified_model_pass": "38/38"
-  },
-  "unified_capability_bus": {
-    "wave53_54_awakened_dark_modules": 36,
-    "zero_overlap_with_w40_w52": true,
-    "cumulative_w40_w54_awakened_dark_modules": 228,
-    "bus_organs_callable": "24/24",
-    "osworld_overlay_syntax_error_repaired": true,
-    "osworld_v21_app_policy_overlay_decide_ok": "5/5"
-  },
-  "real_80_swe_verified_front_door": {
-    "corpus": "canonical/corpus/swe_verified_issue_text_20261124_V1.json",
-    "baseline_accepted": "28/80 (35.0%)",
-    "wave53_accepted": "77/80 (96.2%)",
-    "refused_ids": [
-      "pytest-dev__pytest-7432",
-      "pytest-dev__pytest-7521",
-      "pytest-dev__pytest-7982"
-    ],
-    "adversarial_content_free_refused": "20/20 (100.0%, 0 false accepts)"
-  },
-  "real_quixbugs_40_of_40_strict_leave_one_out_transfer": {
-    "source": "github.com/jkoppel/QuixBugs (uncontaminated shallow clone; ALL 40 Python programs including all 31 JSON + 9 graph/Node programs via upstream python_testcases/test_*.py with pytest.run_slow=False)",
-    "gold_correct_sanity_check": "39/40 pass within 0.9s cap (levenshtein slow recursive test exceeds 0.9s cap); 40/40 buggy programs fail",
-    "baseline_1fix_transfer": "1/40 (2.5%, widest 3/40 = 7.5%)",
-    "rules_admitted_from_40_pairs": "39/40",
-    "programs_evaluated": 40,
-    "wave53_54_strict_loo_solved": 13,
-    "wave53_54_strict_loo_rate_pct": 32.5,
-    "solved_transfers": [
-      {
-        "target": "find_first_in_sorted",
-        "donor": "knapsack",
-        "mode": "ORACLE_VERIFIED_L3_FAMILY:COMPARE_OP_FAMILY",
-        "candidates_tried": 8
-      },
-      {
-        "target": "find_in_sorted",
-        "donor": "next_palindrome",
-        "mode": "ORACLE_VERIFIED_L3_FAMILY:OFF_BY_ONE_DELTA",
-        "candidates_tried": 42
-      },
-      {
-        "target": "gcd",
-        "donor": "shortest_path_lengths",
-        "mode": "ORACLE_VERIFIED_L3_FAMILY:ARG_OR_OPERAND_SWAP",
-        "candidates_tried": 14
-      },
-      {
-        "target": "knapsack",
-        "donor": "mergesort",
-        "mode": "ORACLE_VERIFIED_L3_FAMILY:COMPARE_OP_FAMILY",
-        "candidates_tried": 58
-      },
-      {
-        "target": "lcs_length",
-        "donor": "next_palindrome",
-        "mode": "ORACLE_VERIFIED_L3_FAMILY:OFF_BY_ONE_DELTA",
-        "candidates_tried": 20
-      },
-      {
-        "target": "lis",
-        "donor": "max_sublist_sum",
-        "mode": "ORACLE_VERIFIED_L3_FAMILY:ACCUMULATOR_MAX_CLAMP",
-        "candidates_tried": 38
-      },
-      {
-        "target": "max_sublist_sum",
-        "donor": "lis",
-        "mode": "ORACLE_VERIFIED_L3_FAMILY:ACCUMULATOR_MAX_CLAMP",
-        "candidates_tried": 13
-      },
-      {
-        "target": "next_permutation",
-        "donor": "knapsack",
-        "mode": "ORACLE_VERIFIED_L3_FAMILY:COMPARE_OP_FAMILY",
-        "candidates_tried": 34
-      },
-      {
-        "target": "pascal",
-        "donor": "next_palindrome",
-        "mode": "ORACLE_VERIFIED_L3_FAMILY:OFF_BY_ONE_DELTA",
-        "candidates_tried": 16
-      },
-      {
-        "target": "quicksort",
-        "donor": "knapsack",
-        "mode": "ORACLE_VERIFIED_TRANSFER",
-        "candidates_tried": 1
-      },
-      {
-        "target": "rpn_eval",
-        "donor": "shortest_path_lengths",
-        "mode": "ORACLE_VERIFIED_L3_FAMILY:ARG_OR_OPERAND_SWAP",
-        "candidates_tried": 14
-      },
-      {
-        "target": "shortest_path_lengths",
-        "donor": "rpn_eval",
-        "mode": "ORACLE_VERIFIED_L3_FAMILY:ARG_OR_OPERAND_SWAP",
-        "candidates_tried": 35
-      },
-      {
-        "target": "to_base",
-        "donor": "shortest_path_lengths",
-        "mode": "ORACLE_VERIFIED_L3_FAMILY:ARG_OR_OPERAND_SWAP",
-        "candidates_tried": 12
-      }
-    ],
-    "oracle_free_negative_transfer_corruptions_on_40_clean_programs": 0,
-    "oracle_free_contrast_blocked": 40
-  },
   "blind_cross_repo_store_vs_empty_oss_ablation": {
-    "description": "4 donor fixes (__reversed__=None protocol trap, assert->TypeError, except ValueError broadening, <= -> < boundary) evaluated blind on 12 unseen renamed-identifier target functions + 12 clean control functions",
     "baseline_subtree_transfer_control_delta": 0,
+    "clean_control_corruptions": "0/12 (0.0%)",
+    "description": "4 donor fixes (__reversed__=None protocol trap, assert->TypeError, except ValueError broadening, <= -> < boundary) evaluated blind on 12 unseen renamed-identifier target functions + 12 clean control functions",
     "empty_store_oracle_free_solved": "0/12",
     "empty_store_oracle_gated_solved": "0/12",
     "populated_store_oracle_free_solved": "3/12 (+3 vs empty, 0/12 clean corruptions)",
-    "populated_store_oracle_gated_solved": "12/12 (+12 vs empty, 0/12 clean corruptions)",
-    "clean_control_corruptions": "0/12 (0.0%)"
+    "populated_store_oracle_gated_solved": "12/12 (+12 vs empty, 0/12 clean corruptions)"
   },
-  "real_webmcp_41_schema_grounder_and_state_machine": {
-    "receiver_baseline": "7/26 grounded (26.9%, 19/26 NO_GROUNDING)",
-    "receiver_wave54_grounded": "26/26 (100.0%)",
-    "receiver_wave54_step_count_ge_expected_required": "26/26 (100.0%)",
-    "receiver_wave54_state_machine_postcondition_verified": "26/26 (100.0%)",
-    "followup_wave54_grounded": "15/15 (100.0%)",
-    "followup_wave54_step_count_ge_expected_required": "15/15 (100.0%)",
-    "followup_wave54_state_machine_postcondition_verified": "15/15 (100.0%)",
-    "total_41_grounded_step_covered_and_state_verified": "41/41 (100.0%)",
-    "note": "Verified offline against declared app tool schemas, exact expected_required step counts from call_grades JSON, and deterministic WebMCP state-machine postcondition checks; live Playwright Chromium execution remains outside this sandbox."
-  },
-  "metamorphic_9_of_9_multifile_and_precision_prefilter": {
-    "laws_with_repair_generators": 9,
-    "baseline_laws_with_generators": 4,
-    "inherited_debt_isolation_verified": true,
-    "multifile_callgraph_localization_coupled": true,
-    "unittest_testcase_neighbor_regression_prefilter_rejected_target_passing_bad_patch": true,
-    "neighbor_regressions_caught": [
-      "tests/test_router.py::TestRouter::test_neighbor_plain_key",
-      "tests/test_router.py::TestRouter::test_neighbor_upper_trim"
-    ],
-    "single_file_failed_and_rolled_back": true,
-    "atomic_2file_cow_commit_passed_full_unittest_suite": true
-  },
-  "self_check": {
-    "schema": "BRAIN_WAVE53_54_UNIFIED_CAPABILITY_BUS_AND_LEAPFROG_V1",
-    "pass": true,
-    "checks_passed": 9,
-    "checks_total": 9,
-    "checks": {
-      "bus_36_zero_overlap_and_24_callable": true,
-      "front_door_accepts_real_and_refuses_content_free": true,
-      "estitch_equivalent_idioms_collapse_to_same_eclass": true,
-      "strata_contrast_edge_blocks_blind_negative_transfer": true,
-      "alpha_safe_transfer_and_hard_invalidation": true,
-      "all_9_metamorphic_law_generators_and_debt_isolation": true,
-      "dockerless_verifier_and_selfplay_round2_transfer": true,
-      "jitrl_overrides_bad_prior_and_webmcp_grounds_multi_step": true,
-      "dbsp_hindsight_strata_rollback_and_forgeteval_primitives": true
+  "brain_unified_model_loc": 7653,
+  "date": "2026-11-24",
+  "elapsed_s": 65.36,
+  "frontier_walls_a_to_d": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "measured_at_utc": "2026-11-27T13:22:58Z",
+    "model_calls": 0,
+    "spend_usd": 0.0,
+    "wall_a_5j_generalizer": {
+      "after_cross_commit_unifies": 3,
+      "after_lift_arities": [
+        2,
+        1,
+        3
+      ],
+      "before_cross_commit_unifies": 0,
+      "before_lift_arities": [
+        10,
+        1,
+        0
+      ],
+      "commits": [
+        "click@05f6fd0df",
+        "click@c53d3732b",
+        "werkzeug@051fd6635",
+        "werkzeug@884437aef",
+        "click@fc518e412"
+      ],
+      "cross_commit_total": 6,
+      "cross_repo_hit": "click@c53d3732b (_H0_ is not None -> _H0_) -> werkzeug@884437aef",
+      "module": "canonical/swe_kernel/epistemic_admission_and_self_play_v1.py",
+      "negative_unrelated_fail_closed": true,
+      "probe_script": "canonical/tools/one_or_two_witness_generalization_probe_v1.py (UNMODIFIED)",
+      "variable_arity_anti_unification_verified": true
     },
-    "k3_model_calls": 0,
-    "spend_usd": 0.0
+    "wall_b_single_experience_subexpr_transfer": {
+      "compound_lhs_safety_guard": true,
+      "module": "canonical/swe_kernel/single_experience_transfer_v1.py",
+      "real_upstream_80commits_per_repo": {
+        "cross_repo_click_to_werkzeug_n483": {
+          "combined_store": 3,
+          "raw_trace": 0,
+          "store": 3
+        },
+        "cross_repo_werkzeug_to_click_n216": {
+          "combined_store": 9,
+          "raw_trace": 0,
+          "store": 5
+        },
+        "within_click_disjoint_n118": {
+          "combined_store": 1,
+          "raw_trace": 1,
+          "store": 0
+        },
+        "within_werkzeug_disjoint_n276": {
+          "combined_store": 14,
+          "raw_trace": 12,
+          "store": 10
+        }
+      },
+      "unit_tests_passed": 22,
+      "unit_tests_total": 22
+    },
+    "wall_c_swebench_pro_wall1_metamorphic_witness_splitter": {
+      "arity_mismatch_harness_protection_verified": true,
+      "green_suite_pure_prose_buggy_qualified": true,
+      "healthy_fixed_repo_fail_closed_no_qualified_reproducer": true,
+      "modules": [
+        "canonical/runtime/epistemic_issue_reproducer_v1.py",
+        "canonical/runtime/universal_epistemic_kernel_v1.py"
+      ],
+      "removed_literal_paren_chokepoint": true
+    },
+    "wall_d_enrollment_gate_receipt_path_repairs": {
+      "dangling_adapter": 0,
+      "files_repaired": [
+        "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+        "canonical/runtime/BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
+      ],
+      "honest_genuinely_missing_preserved": 3,
+      "missing_verification_receipt_after": 3,
+      "missing_verification_receipt_before": 8,
+      "repaired_typos_count": 5,
+      "unenrolled_certified_capability": 0
+    }
   },
+  "generated_at_utc": "2026-11-27T12:25:09Z",
   "honest_limits": [
     "All measurements are producer-run sandbox measurements (authority: NONE__PRODUCER_RUN_SANDBOX), NOT independent third-party benchmark certifications.",
     "QuixBugs evaluation ran strict leave-one-out transfer on ALL 40/40 upstream Python programs (31 JSON + 9 graph/Node); upstream levenshtein gold solution exceeded the 0.9s per-candidate timeout cap on its slow recursive case.",
@@ -184,181 +128,320 @@
     "WebMCP 41/41 grounding, expected_required step coverage, and WebXSkill postcondition checks were verified against declared tool schemas and a deterministic state machine; live Chromium/Playwright execution requires browser runtime outside this sandbox.",
     "External Dockerized SWE-bench Pro / Terminal-Bench 4.0 / OSWorld 2.1 VM evaluations remain outside this local K3=0 sandbox."
   ],
-  "generated_at_utc": "2026-11-27T12:25:09Z",
-  "terminal_authority": false,
-  "brain_unified_model_loc": 7653,
+  "incremental_spend_usd": 0.0,
+  "k3_model_calls": 0,
+  "metamorphic_9_of_9_multifile_and_precision_prefilter": {
+    "atomic_2file_cow_commit_passed_full_unittest_suite": true,
+    "baseline_laws_with_generators": 4,
+    "inherited_debt_isolation_verified": true,
+    "laws_with_repair_generators": 9,
+    "multifile_callgraph_localization_coupled": true,
+    "neighbor_regressions_caught": [
+      "tests/test_router.py::TestRouter::test_neighbor_plain_key",
+      "tests/test_router.py::TestRouter::test_neighbor_upper_trim"
+    ],
+    "single_file_failed_and_rolled_back": true,
+    "unittest_testcase_neighbor_regression_prefilter_rejected_target_passing_bad_patch": true
+  },
   "net_loc_delta_over_main": 0,
-  "spend_usd": 0.0,
   "play0_capability_bus_live_audit": {
-    "declared": 29,
     "admitted": 26,
+    "declared": 29,
     "failed": 0,
+    "new_admitted": 26,
+    "prior_wave47_admitted": 3,
     "unverified": 3,
     "unverified_reason": {
-      "solve_v1": "SHA-pinned in 7 canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V22..V28.json files",
       "osworld_v21_brain_agent_adapter_v1": "Requires OSWorld VM absent in CI/sandbox; intentionally kept UNVERIFIED and fail-closed",
-      "osworld_v21_local_qwen_policy_v1": "Requires local Qwen GPU policy server absent in CI/sandbox; intentionally kept UNVERIFIED and fail-closed"
-    },
-    "prior_wave47_admitted": 3,
-    "new_admitted": 26
+      "osworld_v21_local_qwen_policy_v1": "Requires local Qwen GPU policy server absent in CI/sandbox; intentionally kept UNVERIFIED and fail-closed",
+      "solve_v1": "SHA-pinned in 7 canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V22..V28.json files"
+    }
   },
   "play1_play2_play4_real_uncontaminated_oss_4arm_ablation": {
-    "repos": [
-      {
-        "repo_id": "hukkin/tomli",
-        "target_rel": "src/tomli/_parser.py",
-        "confirmed_real_bugs": 4
-      },
-      {
-        "repo_id": "more-itertools/more-itertools",
-        "target_rel": "more_itertools/more.py",
-        "confirmed_real_bugs": 2
-      },
-      {
-        "repo_id": "bottlepy/bottle",
-        "target_rel": "bottle.py",
-        "confirmed_real_bugs": 4
-      }
-    ],
-    "contamination_check": "ZERO click, ZERO werkzeug; fresh depth-1 GitHub clones executed in isolated temp workspaces via LocalSubprocessHarborEnvironment against each repo's real unittest suite",
-    "protocol": "Strict cross-repo leave-one-repo-out (exclude_repo=repo_id) + 10 unmodified clean-code negative controls (verifier=None)",
     "arms": {
-      "EMPTY": {
+      "EDIT_KEYED": {
+        "rate": 0.0,
         "solved": 0,
-        "total": 10,
-        "rate": 0.0
+        "total": 10
+      },
+      "EMPTY": {
+        "rate": 0.0,
+        "solved": 0,
+        "total": 10
       },
       "RAW_TRACE_VERBATIM": {
+        "rate": 0.0,
         "solved": 0,
-        "total": 10,
-        "rate": 0.0
-      },
-      "EDIT_KEYED": {
-        "solved": 0,
-        "total": 10,
-        "rate": 0.0
+        "total": 10
       },
       "TRIGGER_KEYED_ESTITCH_STRATA": {
-        "solved": 10,
-        "total": 10,
+        "candidates_tried_each": 1,
         "rate": 1.0,
-        "candidates_tried_each": 1
+        "solved": 10,
+        "total": 10
       }
     },
     "clean_blind_corruptions": 0,
     "clean_controls_total": 10,
+    "contamination_check": "ZERO click, ZERO werkzeug; fresh depth-1 GitHub clones executed in isolated temp workspaces via LocalSubprocessHarborEnvironment against each repo's real unittest suite",
     "credit_gates_v1": {
-      "e_value": 107.2283,
       "activation_gate_pass": true,
+      "e_value": 107.2283,
       "net_lift_vs_edit_keyed": 10
     },
+    "harbor_runner_fix": "Fixed process-group cleanup (start_new_session=True + os.killpg SIGKILL) in LocalSubprocessHarborEnvironment.exec so timed-out mutated loops never hang",
     "ignorance_ledger_v1": {
-      "open_before": 4,
       "open_after": 2,
+      "open_before": 4,
       "resolved_families": [
         "arith_add_sub",
         "eq_neq"
       ]
     },
-    "harbor_runner_fix": "Fixed process-group cleanup (start_new_session=True + os.killpg SIGKILL) in LocalSubprocessHarborEnvironment.exec so timed-out mutated loops never hang"
+    "protocol": "Strict cross-repo leave-one-repo-out (exclude_repo=repo_id) + 10 unmodified clean-code negative controls (verifier=None)",
+    "repos": [
+      {
+        "confirmed_real_bugs": 4,
+        "repo_id": "hukkin/tomli",
+        "target_rel": "src/tomli/_parser.py"
+      },
+      {
+        "confirmed_real_bugs": 2,
+        "repo_id": "more-itertools/more-itertools",
+        "target_rel": "more_itertools/more.py"
+      },
+      {
+        "confirmed_real_bugs": 4,
+        "repo_id": "bottlepy/bottle",
+        "target_rel": "bottle.py"
+      }
+    ]
   },
   "play3_inverted_neurosymbolic_stack": {
-    "rung2_first_solved": true,
-    "rung2_rung_used": 2,
-    "rung2_compiled_to_rung0": true,
+    "k3_model_calls": 0,
     "rung0_homologous_solved": true,
-    "rung0_rung_used": 0,
     "rung0_proposer_calls": 0,
-    "k3_model_calls": 0
+    "rung0_rung_used": 0,
+    "rung2_compiled_to_rung0": true,
+    "rung2_first_solved": true,
+    "rung2_rung_used": 2
   },
   "play5_agent_s4_lstar_and_webx_skill": {
-    "webmcp_tasks_total": 41,
-    "webmcp_tasks_grounded": 41,
-    "webmcp_breakdown": "26/26 receiver + 15/15 followup (see real_webmcp_41_schema_grounder_and_state_machine)",
     "angluin_lstar_drift_recovery": true,
+    "webmcp_breakdown": "26/26 receiver + 15/15 followup (see real_webmcp_41_schema_grounder_and_state_machine)",
+    "webmcp_tasks_grounded": 41,
+    "webmcp_tasks_total": 41,
     "webx_skill_precondition_refusal_and_postcondition_rollback": true
   },
   "play6_2026_memory_gauntlet": {
-    "pass": true,
-    "meme": {
-      "pass": true,
-      "cascade": true,
-      "absence": true,
-      "deletion": true
-    },
     "forgeteval_adv": {
-      "pass": true,
-      "leaked_probes": 0,
       "forgetting_accuracy": 1.0,
+      "leaked_probes": 0,
+      "pass": true,
       "unrelated_retained": true
     },
-    "pmem_rollback_edges": {
-      "pass": true,
-      "unrelated_concurrent_preserved": true
+    "k3_model_calls": 0,
+    "meme": {
+      "absence": true,
+      "cascade": true,
+      "deletion": true,
+      "pass": true
     },
     "memory_arena_state_bench": {
       "pass_at_5": true,
       "seeds_passed": 5,
       "seeds_total": 5
     },
-    "k3_model_calls": 0,
+    "pass": true,
+    "pmem_rollback_edges": {
+      "pass": true,
+      "unrelated_concurrent_preserved": true
+    },
     "spend_usd": 0.0
   },
   "play7_governance_consistency_audit": {
-    "schema": "WAVE53_54_GOVERNANCE_CONSISTENCY_AUDIT_V1",
-    "pass": true,
-    "terminal_authority": false,
     "authority": "NONE__PRODUCER_RUN_SANDBOX",
-    "contradictions_detected": 3,
-    "contradictions": [
-      {
-        "kind": "CROSS_FILE_FAMILY_COUNT_DRIFT",
-        "ownership_file": "5_OF_19_ACCEPTED / 14_OF_19_OPEN",
-        "current_terminal_authority": "7_OF_19_ACCEPTANCE / 18_OF_38_ATOMIC_PROVED"
-      },
-      {
-        "kind": "INTRA_FILE_OWNERSHIP_DRIFT",
-        "status_field": "14_OF_19_OPEN",
-        "residual_gap_field": "12_OF_19_FAMILIES_OPEN"
-      },
-      {
-        "kind": "INTRA_FILE_CTA_DRIFT",
-        "status_field": "7_OF_19_ACCEPTANCE",
-        "rule_field": "CURRENT_ACCEPTANCE_IS_5_OF_19"
-      }
-    ],
     "capability_bus_admitted": 26,
     "capability_bus_declared": 29,
     "capability_bus_failed": 0,
+    "contradictions": [
+      {
+        "current_terminal_authority": "7_OF_19_ACCEPTANCE / 18_OF_38_ATOMIC_PROVED",
+        "kind": "CROSS_FILE_FAMILY_COUNT_DRIFT",
+        "ownership_file": "5_OF_19_ACCEPTED / 14_OF_19_OPEN"
+      },
+      {
+        "kind": "INTRA_FILE_OWNERSHIP_DRIFT",
+        "residual_gap_field": "12_OF_19_FAMILIES_OPEN",
+        "status_field": "14_OF_19_OPEN"
+      },
+      {
+        "kind": "INTRA_FILE_CTA_DRIFT",
+        "rule_field": "CURRENT_ACCEPTANCE_IS_5_OF_19",
+        "status_field": "7_OF_19_ACCEPTANCE"
+      }
+    ],
+    "contradictions_detected": 3,
     "credit_gate_e_process": {
-      "n": 10,
       "e_value": 107.2283,
+      "n": 10,
       "statistically_supported": true
     },
-    "reconciliation_policy": "DERIVE_FROM_SINGLE_RECEIPT_LEDGER__FAIL_CLOSED_ON_COUNT_MISMATCH__ZERO_FALSE_TERMINAL_PROMOTION"
-  },
-  "axis_f_self_check": {
-    "schema": "BRAIN_WAVE53_54_UNIFIED_CAPABILITY_BUS_AND_LEAPFROG_V1",
     "pass": true,
-    "checks_passed": 14,
-    "checks_total": 14,
+    "reconciliation_policy": "DERIVE_FROM_SINGLE_RECEIPT_LEDGER__FAIL_CLOSED_ON_COUNT_MISMATCH__ZERO_FALSE_TERMINAL_PROMOTION",
+    "schema": "WAVE53_54_GOVERNANCE_CONSISTENCY_AUDIT_V1",
+    "terminal_authority": false
+  },
+  "producer_independent": false,
+  "real_80_swe_verified_front_door": {
+    "adversarial_content_free_refused": "20/20 (100.0%, 0 false accepts)",
+    "baseline_accepted": "28/80 (35.0%)",
+    "corpus": "canonical/corpus/swe_verified_issue_text_20261124_V1.json",
+    "refused_ids": [
+      "pytest-dev__pytest-7432",
+      "pytest-dev__pytest-7521",
+      "pytest-dev__pytest-7982"
+    ],
+    "wave53_accepted": "77/80 (96.2%)"
+  },
+  "real_quixbugs_40_of_40_strict_leave_one_out_transfer": {
+    "baseline_1fix_transfer": "1/40 (2.5%, widest 3/40 = 7.5%)",
+    "gold_correct_sanity_check": "39/40 pass within 0.9s cap (levenshtein slow recursive test exceeds 0.9s cap); 40/40 buggy programs fail",
+    "oracle_free_contrast_blocked": 40,
+    "oracle_free_negative_transfer_corruptions_on_40_clean_programs": 0,
+    "programs_evaluated": 40,
+    "rules_admitted_from_40_pairs": "39/40",
+    "solved_transfers": [
+      {
+        "candidates_tried": 8,
+        "donor": "knapsack",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:COMPARE_OP_FAMILY",
+        "target": "find_first_in_sorted"
+      },
+      {
+        "candidates_tried": 42,
+        "donor": "next_palindrome",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:OFF_BY_ONE_DELTA",
+        "target": "find_in_sorted"
+      },
+      {
+        "candidates_tried": 14,
+        "donor": "shortest_path_lengths",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:ARG_OR_OPERAND_SWAP",
+        "target": "gcd"
+      },
+      {
+        "candidates_tried": 58,
+        "donor": "mergesort",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:COMPARE_OP_FAMILY",
+        "target": "knapsack"
+      },
+      {
+        "candidates_tried": 20,
+        "donor": "next_palindrome",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:OFF_BY_ONE_DELTA",
+        "target": "lcs_length"
+      },
+      {
+        "candidates_tried": 38,
+        "donor": "max_sublist_sum",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:ACCUMULATOR_MAX_CLAMP",
+        "target": "lis"
+      },
+      {
+        "candidates_tried": 13,
+        "donor": "lis",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:ACCUMULATOR_MAX_CLAMP",
+        "target": "max_sublist_sum"
+      },
+      {
+        "candidates_tried": 34,
+        "donor": "knapsack",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:COMPARE_OP_FAMILY",
+        "target": "next_permutation"
+      },
+      {
+        "candidates_tried": 16,
+        "donor": "next_palindrome",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:OFF_BY_ONE_DELTA",
+        "target": "pascal"
+      },
+      {
+        "candidates_tried": 1,
+        "donor": "knapsack",
+        "mode": "ORACLE_VERIFIED_TRANSFER",
+        "target": "quicksort"
+      },
+      {
+        "candidates_tried": 14,
+        "donor": "shortest_path_lengths",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:ARG_OR_OPERAND_SWAP",
+        "target": "rpn_eval"
+      },
+      {
+        "candidates_tried": 35,
+        "donor": "rpn_eval",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:ARG_OR_OPERAND_SWAP",
+        "target": "shortest_path_lengths"
+      },
+      {
+        "candidates_tried": 12,
+        "donor": "shortest_path_lengths",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:ARG_OR_OPERAND_SWAP",
+        "target": "to_base"
+      }
+    ],
+    "source": "github.com/jkoppel/QuixBugs (uncontaminated shallow clone; ALL 40 Python programs including all 31 JSON + 9 graph/Node programs via upstream python_testcases/test_*.py with pytest.run_slow=False)",
+    "wave53_54_strict_loo_rate_pct": 32.5,
+    "wave53_54_strict_loo_solved": 13
+  },
+  "real_webmcp_41_schema_grounder_and_state_machine": {
+    "followup_wave54_grounded": "15/15 (100.0%)",
+    "followup_wave54_state_machine_postcondition_verified": "15/15 (100.0%)",
+    "followup_wave54_step_count_ge_expected_required": "15/15 (100.0%)",
+    "note": "Verified offline against declared app tool schemas, exact expected_required step counts from call_grades JSON, and deterministic WebMCP state-machine postcondition checks; live Playwright Chromium execution remains outside this sandbox.",
+    "receiver_baseline": "7/26 grounded (26.9%, 19/26 NO_GROUNDING)",
+    "receiver_wave54_grounded": "26/26 (100.0%)",
+    "receiver_wave54_state_machine_postcondition_verified": "26/26 (100.0%)",
+    "receiver_wave54_step_count_ge_expected_required": "26/26 (100.0%)",
+    "total_41_grounded_step_covered_and_state_verified": "41/41 (100.0%)"
+  },
+  "schema": "BRAIN_WAVE53_54_HONEST_BENCHMARK_RECEIPT_V1",
+  "self_check": {
     "checks": {
-      "bus_36_zero_overlap_and_24_callable": true,
-      "front_door_accepts_real_and_refuses_content_free": true,
-      "estitch_equivalent_idioms_collapse_to_same_eclass": true,
-      "strata_contrast_edge_blocks_blind_negative_transfer": true,
-      "alpha_safe_transfer_and_hard_invalidation": true,
       "all_9_metamorphic_law_generators_and_debt_isolation": true,
-      "dockerless_verifier_and_selfplay_round2_transfer": true,
-      "jitrl_overrides_bad_prior_and_webmcp_grounds_multi_step": true,
+      "alpha_safe_transfer_and_hard_invalidation": true,
+      "bus_36_zero_overlap_and_24_callable": true,
       "dbsp_hindsight_strata_rollback_and_forgeteval_primitives": true,
-      "memory_2026_gauntlet_meme_forgeteval_pmem_statebench_pass5": true,
-      "trigger_keyed_cross_repo_transfer_and_contrast_safety": true,
-      "inverted_stack_rung2_compiles_to_rung0_zero_proposer": true,
-      "agent_s4_lstar_evolution_and_guarded_webx_skill": true,
-      "governance_consistency_audit_detects_drift_fail_closed": true
+      "dockerless_verifier_and_selfplay_round2_transfer": true,
+      "estitch_equivalent_idioms_collapse_to_same_eclass": true,
+      "front_door_accepts_real_and_refuses_content_free": true,
+      "jitrl_overrides_bad_prior_and_webmcp_grounds_multi_step": true,
+      "strata_contrast_edge_blocks_blind_negative_transfer": true
     },
+    "checks_passed": 9,
+    "checks_total": 9,
     "k3_model_calls": 0,
+    "pass": true,
+    "schema": "BRAIN_WAVE53_54_UNIFIED_CAPABILITY_BUS_AND_LEAPFROG_V1",
     "spend_usd": 0.0
+  },
+  "spend_usd": 0.0,
+  "terminal_authority": false,
+  "unified_capability_bus": {
+    "bus_organs_callable": "24/24",
+    "cumulative_w40_w54_awakened_dark_modules": 228,
+    "osworld_overlay_syntax_error_repaired": true,
+    "osworld_v21_app_policy_overlay_decide_ok": "5/5",
+    "wave53_54_awakened_dark_modules": 36,
+    "zero_overlap_with_w40_w52": true
+  },
+  "unified_model_invariants": {
+    "brain_unified_model_loc": 7653,
+    "elon_law_loc_cap": 7534,
+    "engines_total": 270,
+    "federated_kernel_engines": 244,
+    "net_loc_delta": 0,
+    "verify_brain_unified_model_pass": "38/38"
   }
 }

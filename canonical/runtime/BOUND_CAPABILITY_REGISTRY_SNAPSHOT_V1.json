@@ -9957,7 +9957,7 @@
         "observed_effect": {
           "output_verified": true
         },
-        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_ULTIMATE_SUPERCOMPOSER_V1_V1.json"
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_CLOSING_SUPERCOMPOSER_V1_V1.json"
       }
     },
     "software.hardcore.final.supercomposer.v1": {
@@ -10337,7 +10337,7 @@
           "choreography_verified": true,
           "verified": true
         },
-        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REPAIR_CHOREOGRAPH_V1_V1.json",
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REPAIR_CROSSFILE_CHOREOGRAPH_V1_V1.json",
         "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_REPAIR_CHOREOGRAPH_V1.json"
       }
     },
@@ -10409,7 +10409,7 @@
           "iterations": 1,
           "verified": true
         },
-        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REPAIR_LOOP_CEGIS_HYPOTHESIS_V1.json",
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REPAIR_LOOP_CEGIS_HYPOTHESIS_V1_V1.json",
         "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_REPAIR_LOOP_CEGIS_HYPOTHESIS_V1.json"
       }
     },
@@ -10484,7 +10484,7 @@
           "gates_verified": true,
           "verified": true
         },
-        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REVIEW_GATE_COMPOSER_V1.json",
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REVIEW_GATE_COMPOSER_V1_V1.json",
         "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_REVIEW_GATE_COMPOSER_V1.json"
       }
     },
@@ -11558,7 +11558,7 @@
           "never_miss": true,
           "verified": true
         },
-        "receipt_path": "canonical/verification/HARDCORE_VERIFY_TEST_SLICE_NEVER_MISS_V1.json",
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_TEST_SLICE_NEVER_MISS_V1_V1.json",
         "state_path": "canonical/astra_runtime/state/HARDCORE_TEST_SLICE_NEVER_MISS_V1.json"
       }
     },
