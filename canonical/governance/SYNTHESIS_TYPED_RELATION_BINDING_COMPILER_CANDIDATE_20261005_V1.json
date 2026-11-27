@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_TYPED_RELATION_BINDING_COMPILER_CANDIDATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__TYPED_SUPPORT_RELATIONS_COMPILED_INTO_CANONICAL_BOUND_CLAIM_GUARD_LANGUAGE__ZERO_SUPPORT_REQUIRED_CLAIM_BECOMES_EXPLICIT_INSUFFICIENT__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Close the deterministic seam between already-typed claim/evidence relations and the canonical synthesis bound-claim guard. Reuse the verified model-independent typed decision kernel for sufficiency/conflict policy rather than inventing a second support policy.",
+  "authorities": {
+    "compiler": {
+      "path": "canonical/runtime/synthesis_typed_relation_binding_compiler_v1.py",
+      "git_blob_sha": "a4cf39154f962a6ef05d9c49c2947013e3f0d9ce"
+    },
+    "tests": {
+      "path": "canonical/tests/test_synthesis_typed_relation_binding_compiler_v1.py",
+      "git_blob_sha": "5358654ac18a1bc31e6bf49e54a63804b1fd6e10"
+    },
+    "verified_typed_decision_kernel": {
+      "path": "canonical/runtime/bound_capabilities/evidence_decision_synthesis.py",
+      "git_blob_sha": "d7c73c24d2038c40bfb38ea6f10749a15a2d5415"
+    },
+    "canonical_bound_claim_guard": {
+      "path": "canonical/runtime/synthesis_bound_claim_guard_v1.py",
+      "git_blob_sha": "bd631efbfd76787e9dc1d4f9e276c195d1142790"
+    },
+    "current_root3_cut": {
+      "path": "canonical/governance/SYNTHESIS_ROOT3_RESIDUAL_REUSE_MINIMUM_CUT_20261005_V1.json",
+      "role": "R5 deterministic control slice expects externally supplied typed support bindings"
+    }
+  },
+  "admitted_boundary": {
+    "input": [
+      "EXPLICIT_CLAIM_IDS_WITH_REQUIRED_BOOLEAN",
+      "EXPLICIT_EVIDENCE_TO_CLAIM_ID_BINDING",
+      "UPSTREAM_TYPED_RELATION_IS_SUPPORTS_OR_CONTRADICTS",
+      "CONFIDENCE_AND_STRENGTH_ARE_FINITE_ZERO_TO_ONE",
+      "NONEMPTY_INDEPENDENCE_GROUP",
+      "NONEMPTY_SOURCE_AND_REFERENCE_PROVENANCE"
+    ],
+    "explicitly_not_inferred": [
+      "NATURAL_LANGUAGE_ENTAILMENT",
+      "FACTUAL_CORRECTNESS",
+      "SOURCE_QUALITY_OR_AUTHORITY",
+      "AUDIENCE_RELEVANCE",
+      "SEMANTIC_ROLE_OF_RAW_EVIDENCE"
+    ]
+  },
+  "composition": [
+    "PARTITION_TYPED_EVIDENCE_ROWS_BY_EXPLICIT_CLAIM_ID",
+    "MAP_EACH_CLAIM_TO_ONE_ALTERNATIVE_IN_VERIFIED_TYPED_DECISION_KERNEL",
+    "PRESERVE_RELATION_CONFIDENCE_STRENGTH_INDEPENDENCE_GROUP_AND_PROVENANCE",
+    "MAP_DECIDED_TO_SUPPORTED__CONFLICTED_TO_CONFLICTED__INSUFFICIENT_OR_NO_ADMISSIBLE_TO_INSUFFICIENT",
+    "CANONICALLY_SERIALIZE_SOURCE_REF_PROVENANCE_REVERSIBLY_FOR_BOUND_CLAIM_GUARD",
+    "FEED_ALL_COMPILED_BINDINGS_TO_SYNTHESIS_BOUND_CLAIM_GUARD_V1",
+    "RECONCILE_GUARD_INSUFFICIENT_REQUIRED_CLAIMS_AGAINST_COMPILED_BINDING_STATES"
+  ],
+  "deterministic_consequence": [
+    "REQUIRED_CLAIM_WITH_ZERO_TYPED_EVIDENCE_COMPILES_TO_INSUFFICIENT_AND_CAN_NO_LONGER_SILENTLY_DISAPPEAR",
+    "PURE_SUPPORT_CAN_COMPILE_TO_SUPPORTED_ONLY_THROUGH_THE_VERIFIED_DECISION_POLICY",
+    "EXCESS_CONFLICT_COMPILES_TO_CONFLICTED_OR_INSUFFICIENT_ACCORDING_TO_THE_VERIFIED_POLICY",
+    "OPTIONAL_INSUFFICIENT_CLAIMS_DO_NOT_BLOCK_REQUIRED_READY_CLAIMS",
+    "UNKNOWN_RELATIONS_REFERENCES_DUPLICATES_OR_UNDECLARED_SEMANTIC_FIELDS_FAIL_CLOSED"
+  ],
+  "scheduler_effect_if_independently_verified": {
+    "delete": [
+      "TREAT_TYPED_RELATION_TO_SUPPORT_BINDING_COMPILATION_AS_AN_OPEN_SYNTHESIS_SEMANTIC_MECHANISM",
+      "BUILD_A_SECOND_R5_SUFFICIENCY_POLICY_PARALLEL_TO_THE_VERIFIED_TYPED_DECISION_KERNEL"
+    ],
+    "preserve": [
+      "G1_GENERAL_SEMANTIC_SUPPORT_BINDING_BEFORE_TYPED_RELATIONS_EXIST",
+      "G2_GOAL_AUDIENCE_RELEVANCE_POLICY_UNDER_BUDGET",
+      "G3_REALIZED_GROUNDED_EXPRESSION_UNDER_GENERAL_CONSTRAINTS",
+      "SOURCE_QUALITY_AND_INDEPENDENCE_JUDGMENT",
+      "SYNTHESIS_ROOT3_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS_AS_OPEN"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_G1_GENERAL_SEMANTIC_SUPPORT_BINDING_CLOSURE",
+    "NO_GENERAL_EVIDENCE_SUFFICIENCY_CLAIM",
+    "NO_FACTUAL_CORRECTNESS_OR_SOURCE_AUTHORITY_CLAIM",
+    "NO_G2_OR_G3_CLOSURE",
+    "NO_SYNTHESIS_ROOT3_OR_ROOT2_PASS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "next": "INDEPENDENTLY_REPLAY_EXACT_COMPILER_TEST_KERNEL_AND_GUARD_BLOBS_WITH_HOSTILE_MUTATIONS__THEN_SUBTRACT_ONLY_THE_TYPED_RELATION_TO_SUPPORT_BINDING_SEAM"
+}
