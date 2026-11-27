@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_OWNER_SCORING_METADATA_BOUNDARY_EVIDENCE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "AUTHENTIC_OWNER_SUPPORT_REPLY__NON_SENSITIVE_SCORING_METADATA_WITHHELD__ZERO_CREDIT",
+  "target_predicate": "CODING_CURSORBENCH_GE_57_8",
+  "source": {
+    "provider": "GMAIL",
+    "thread_id": "1a103dde59e2a653",
+    "message_id": "1a12a45b94b67c2d",
+    "reply_to_sent_message_id": "1a12a4444d760f2e",
+    "support_ticket": "T-G59465",
+    "sender": "Sam from Cursor <hi@cursor.com>",
+    "timestamp": "2026-10-11T09:22:54Z",
+    "normalized_reply_body_sha256": "87e710f145e43307053a5b8746e2de688cd8e05c2523455e3046ee6b1239a3e3",
+    "normalized_reply_body_bytes": 854
+  },
+  "owner_statements": [
+    "PUBLIC_MATERIALS_DESCRIBE_CURSORBENCH_ACCURACY_AS_AGGREGATED_OVER_ALL_TASKS_ACROSS_MULTIPLE_PASSES_OF_THE_EVALUATION_SET_TO_REDUCE_VARIANCE",
+    "SUPPORT_CANNOT_SHARE_FURTHER_SCORING_DETAILS_BEYOND_PUBLIC_MATERIALS",
+    "PER_TASK_SCORE_TYPE_NOT_SHAREABLE_BY_SUPPORT",
+    "TASK_OR_PASS_WEIGHTING_NOT_SHAREABLE_BY_SUPPORT",
+    "SCORED_UNIT_COUNT_OR_DENOMINATOR_FOR_PUBLISHED_OPUS_5_5_MAX_RESULT_NOT_SHAREABLE_BY_SUPPORT",
+    "REDACTED_OR_SIGNED_AGGREGATE_RUN_SUMMARY_NOT_SHAREABLE_BY_SUPPORT",
+    "HELD_OUT_TASK_CONTENTS_REMAIN_PRIVATE",
+    "NO_EXTERNAL_EVALUATION_OR_SUBMISSION_PATH_ON_CURSORBENCH",
+    "OWNER_SUPPORT_STATES_THIS_CLOSES_THE_REMAINING_RESEARCH_ROUTE_ON_THEIR_SIDE"
+  ],
+  "proof_effect": {
+    "new_exact_scoring_formula": false,
+    "new_denominator": false,
+    "new_weighting_rule": false,
+    "new_per_task_score_domain": false,
+    "new_target_result_artifact": false,
+    "new_brain_score_lower_bound": false,
+    "owner_non_sensitive_scoring_metadata_route_open": false,
+    "owner_non_sensitive_scoring_metadata_route_state": "CLOSED_UNDER_CURRENT_SUPPORT_POLICY",
+    "high_level_multiple_pass_aggregation_fact_added": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_MULTIPLE_PASSES_ARE_EQUALLY_WEIGHTED",
+    "NO_CLAIM_TASKS_ARE_EQUALLY_WEIGHTED",
+    "NO_CLAIM_PER_TASK_SCORING_IS_BINARY",
+    "NO_CLAIM_DENOMINATOR_OR_TASK_COUNT_IS_KNOWN",
+    "NO_CLAIM_THE_SUPPORT_BOUNDARY_CAN_NEVER_CHANGE",
+    "NO_CLAIM_BRAIN_CURSORBENCH_SCORE_IS_GE_57_8",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}

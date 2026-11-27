@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_ANCHOR_TRANSFER_EXECUTABLE_GATE_LOCAL_VERIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "LOCAL_DETERMINISTIC_REPLAY_PASS__9_OF_9__NOT_INDEPENDENT__ZERO_CREDIT",
+  "target_predicate": "CODING_CURSORBENCH_GE_57_8",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/cursorbench_anchor_transfer_certificate_v1.py",
+      "git_blob_sha": "febe2b9746edf8b619b71a1fa7f96d1e5cf876f7"
+    },
+    "tests": {
+      "path": "canonical/tests/test_cursorbench_anchor_transfer_certificate_v1.py",
+      "git_blob_sha": "fef407699d79593983ab6f8d7e8bb092ae3e15a8"
+    },
+    "route_theorem": {
+      "path": "canonical/governance/CURSORBENCH_ANCHOR_TRANSFER_ROUTE_REDUCTION_20261011_V1.json",
+      "git_blob_sha": "6240360bbbd67b353820137bedf667008f7aa5cd"
+    }
+  },
+  "carrier": {
+    "provider": "CHATGPT_CONTAINER_LOCAL_REPLAY",
+    "python_version": "3.13.5",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "independent": false,
+    "incremental_spend_usd": 0
+  },
+  "result": {
+    "test_functions_run": 9,
+    "test_functions_passed": 9,
+    "test_functions_failed": 0,
+    "unittest_result": "OK"
+  },
+  "verified_fail_closed_cases": [
+    "DIRECT_0_578_LOWER_BOUND_ACCEPTED",
+    "DIRECT_0_577_LOWER_BOUND_REJECTED",
+    "NONINFERIORITY_WITHOUT_SAME_FROZEN_EVALUATOR_REJECTED",
+    "NONINFERIORITY_WITH_SAME_FROZEN_EVALUATOR_ACCEPTED",
+    "COMPLETE_SCORE_RELEVANT_INPUT_EQUIVALENCE_WITH_SAME_FUNCTIONAL_ACCEPTED",
+    "INPUT_DOMINANCE_WITHOUT_PROVED_MONOTONICITY_REJECTED",
+    "INPUT_DOMINANCE_WITH_PROVED_MONOTONICITY_ACCEPTED",
+    "MISSING_CONTENT_ADDRESSED_EVIDENCE_REJECTED",
+    "WRONG_ANCHOR_SCORE_REJECTED"
+  ],
+  "proof_effect": {
+    "anchor_transfer_logic_is_executable": true,
+    "empirical_target_relation_proved": false,
+    "brain_cursorbench_score_proved": false,
+    "acceptance_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_INDEPENDENT_VERIFICATION_CLAIM",
+    "NO_CURSORBENCH_TARGET_EXECUTION_OCCURRED",
+    "NO_BRAIN_GE_OPUS_TARGET_RELATION_WAS_INSTANTIATED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ]
+}

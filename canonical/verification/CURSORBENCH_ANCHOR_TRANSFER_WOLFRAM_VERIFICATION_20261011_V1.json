@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_ANCHOR_TRANSFER_WOLFRAM_VERIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_SYMBOLIC_STRUCTURAL_VERIFICATION_PASS__EMPIRICAL_TRANSFER_PREMISE_UNPROVED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CURSORBENCH_ANCHOR_TRANSFER_ROUTE_REDUCTION_20261011_V1.json",
+    "git_blob_sha": "6240360bbbd67b353820137bedf667008f7aa5cd"
+  },
+  "engine": "WOLFRAM_LANGUAGE_STATELESS_KERNEL",
+  "checks": [
+    {
+      "id": "ANCHOR_TRANSITIVITY",
+      "expression": "Reduce[so == 289/500 && sb >= so && sb < 289/500, {so,sb}, Reals]",
+      "result": "False",
+      "interpretation": "NO_REAL_COUNTERMODEL_EXISTS_WHERE_OPUS_SCORE_IS_0_578_BRAIN_SCORE_IS_AT_LEAST_OPUS_AND_BRAIN_IS_BELOW_0_578"
+    },
+    {
+      "id": "EQUAL_INPUT_EXTensional_SUBSTITUTION",
+      "expression": "Simplify[(f[x] == f[y]) /. y -> x]",
+      "result": "True",
+      "interpretation": "IDENTICAL_INPUT_TO_THE_SAME_FUNCTIONAL_CANNOT_PRODUCE_DIFFERENT_OUTPUTS"
+    },
+    {
+      "id": "DOMINANCE_WITHOUT_MONOTONICITY_COUNTEREXAMPLE",
+      "expression": "FindInstance[xb >= xo && -xb < -xo, {xb,xo}, Reals]",
+      "result": "{{xb -> 0, xo -> -1}}",
+      "interpretation": "INPUT_ORDER_ALONE_DOES_NOT_IMPLY_OUTPUT_ORDER_FOR_AN_ARBITRARY_SCORE_FUNCTIONAL"
+    },
+    {
+      "id": "MONOTONICITY_IMPLICATION_LOGIC",
+      "expression": "FullSimplify[Implies[d && Implies[d,s], s], Element[{d,s}, Booleans]]",
+      "result": "True",
+      "interpretation": "ONCE_THE_REQUIRED_MONOTONICITY_IMPLICATION_IS_SEPARATELY_PROVED_THE_OUTPUT_ORDER_FOLLOWS"
+    }
+  ],
+  "verified": [
+    "DIRECT_SCORE_NONINFERIORITY_TO_THE_AUTHENTIC_0_578_ANCHOR_IS_STRUCTURALLY_SUFFICIENT",
+    "COMPLETE_SCORE_INPUT_IDENTITY_UNDER_THE_SAME_SCORE_FUNCTIONAL_IS_FORMULA_FREE",
+    "GENERIC_SCORE_INPUT_DOMINANCE_MUST_FAIL_CLOSED_WITHOUT_MONOTONICITY"
+  ],
+  "not_verified": [
+    "BRAIN_CURSORBENCH_4_0_SCORE_NONINFERIORITY_TO_OPUS_5_5_MAX",
+    "COMPLETE_SCORE_RELEVANT_INPUT_IDENTITY",
+    "CURSORBENCH_4_0_SCORE_FUNCTIONAL_MONOTONICITY",
+    "ANY_BRAIN_CURSORBENCH_SCORE"
+  ],
+  "hard_nonclaims": [
+    "NO_EMPIRICAL_CURSORBENCH_TRANSFER_PREMISE_IS_CREATED_BY_SYMBOLIC_LOGIC.",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}

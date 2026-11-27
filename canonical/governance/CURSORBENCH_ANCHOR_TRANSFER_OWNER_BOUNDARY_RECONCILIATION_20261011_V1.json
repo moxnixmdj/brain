@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_ANCHOR_TRANSFER_OWNER_BOUNDARY_RECONCILIATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE_RECONCILIATION__OWNER_RUN_EXTERNAL_EVALUATION_ROUTE_CLOSED_UNDER_CURRENT_POLICY__ANCHOR_TRANSFER_REMAINS_OPEN_ON_ONE_TARGET_RELATION_CERTIFICATE__ZERO_CREDIT",
+  "target_predicate": "CODING_CURSORBENCH_GE_57_8",
+  "subjects": {
+    "anchor_transfer_candidate": {
+      "path": "canonical/governance/CURSORBENCH_ANCHOR_TRANSFER_ROUTE_REDUCTION_20261011_V1.json",
+      "git_blob_sha": "6240360bbbd67b353820137bedf667008f7aa5cd"
+    },
+    "owner_boundary_evidence": {
+      "path": "canonical/evidence/CURSORBENCH_OWNER_EXTERNAL_EVALUATION_BOUNDARY_EVIDENCE_20261011_V1.json",
+      "git_blob_sha": "5304524e0731fadb8c4f877f206d729980029f65"
+    },
+    "current_wait_state": {
+      "path": "canonical/governance/CURSORBENCH_CURRENT_INFORMATION_BOUNDARY_WAIT_STATE_RECONCILIATION_20261010_V1.json",
+      "git_blob_sha": "4f1df11b30d9b69090c31e234449975eb7cdfd89"
+    }
+  },
+  "closed_routes_under_current_information_and_owner_policy": [
+    "REPEAT_PUBLIC_SCORE_DECOMPOSITION_SEARCH_WITHOUT_SOURCE_DELTA",
+    "INFER_DENOMINATOR_FROM_ROUNDED_LEADERBOARD",
+    "OWNER_RUN_CURSORBENCH_4_0_EVALUATION_OF_BRAIN",
+    "PUBLIC_THIRD_PARTY_CURSORBENCH_4_0_SUBMISSION_INTERFACE",
+    "PRIVATE_HELD_OUT_TASK_DISCLOSURE",
+    "DERIVE_FORMAL_ALL_MEMBERS_ADEQUACY_FROM_CURRENT_SCOPE_AND_OWNER_INFORMATION_ALONE"
+  ],
+  "still_sound_closure_routes": [
+    {
+      "id": "ANCHOR_TRANSFER",
+      "minimum_new_fact": "CONTENT_ADDRESSED_TARGET_SCOPED_BRAIN_VS_OPUS_5_5_MAX_SCORE_NONINFERIORITY_OR_COMPLETE_SCORE_INPUT_EQUIVALENCE_UNDER_THE_SAME_FROZEN_CURSORBENCH_4_0_EVALUATOR_RELATION"
+    },
+    {
+      "id": "DIRECT_NEW_AUTHORITY",
+      "minimum_new_fact": "AUTHENTIC_CURSOR_RESULT_GRADER_OR_SCORING_ARTIFACT_SUFFICIENT_TO_DERIVE_A_BRAIN_SCORE_LOWER_BOUND_GE_0_578"
+    },
+    {
+      "id": "STRICTLY_STRONGER_CONSTRUCTIVE_PARENT",
+      "minimum_new_fact": "NEW_INDEPENDENTLY_VERIFIED_BRAIN_OWNED_CODING_POLICY_WITH_TARGET_RELEVANCE_AND_CONSTRUCTIVE_ADEQUACY_STRICTLY_EXPANDING_CURRENT_PROVED_COVER"
+    }
+  ],
+  "minimum_information_cut": {
+    "current_same_information_internal_solution_exists": false,
+    "exact_reason": "TWO_WORLDS_REMAIN_COMPATIBLE_WITH_ALL_CURRENT_BOUND_INFORMATION__ONE_WITH_BRAIN_SCORE_BELOW_0_578_AND_ONE_AT_OR_ABOVE_0_578__UNLESS_A_NEW_TARGET_RELATION_SCORE_AUTHORITY_OR_STRONGER_TARGET_RELEVANT_CONSTRUCTIVE PREMISE_IS_ADDED.",
+    "best_single_delta": "TARGET_SCOPED_BRAIN_VS_OPUS_5_5_MAX_SCORE_RELATION_CERTIFICATE"
+  },
+  "scheduler": {
+    "same_information_retry_authority": false,
+    "do_not_wait_for_owner_run_evaluation": true,
+    "wake_on": [
+      "MATERIAL_CURSOR_POLICY_OR_SUBMISSION_INTERFACE_CHANGE",
+      "NEW_CURSOR_OR_VENDOR_RESULT_GRADER_SCORING_ARTIFACT",
+      "CONTENT_ADDRESSED_TARGET_SCOPED_BRAIN_VS_OPUS_5_5_MAX_SCORE_RELATION_EVIDENCE",
+      "NEW_TARGET_RELEVANT_CONSTRUCTIVE_PARENT_WITH_INDEPENDENT_ADEQUACY_THEOREM"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CURSORBENCH_IS IMPOSSIBLE_TO_CLOSE.",
+    "NO_CLAIM_BRAIN_ACTUAL_SCORE_IS_BELOW_57_8.",
+    "NO_TARGET_RELATION_CERTIFICATE_IS_CURRENTLY_PROVED.",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false
+}

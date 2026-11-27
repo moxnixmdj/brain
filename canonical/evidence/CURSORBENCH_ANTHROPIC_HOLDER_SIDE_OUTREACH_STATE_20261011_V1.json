@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_ANTHROPIC_HOLDER_SIDE_OUTREACH_STATE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "TWO_OFFICIAL_ANTHROPIC_CONTACT_SURFACES_USED__EVALUATION_SPECIFIC_REPLY_PENDING__ZERO_CREDIT",
+  "target_predicate": "CODING_CURSORBENCH_GE_57_8",
+  "generic_feedback_route": {
+    "recipient": "feedback@anthropic.com",
+    "sent_message_id": "1a12a658d211cddf",
+    "sent_thread_id": "1a12a658d211cddf",
+    "sent_timestamp": "2026-10-11T09:57:40Z",
+    "sent_body_sha256": "cb97d45e115a99e60d46ed93d41f3e2ebb5d98ce657c0857dbcc3a4495df378f",
+    "sent_body_bytes": 1411,
+    "autoreply_message_id": "1a12a6595e9ebe32",
+    "autoreply_timestamp": "2026-10-11T09:57:42Z",
+    "autoreply_body_sha256": "ba255acf42ef3051662aa5011c9ed7b83fbb5e21e7db0f5793423189e0bccbf0",
+    "autoreply_body_bytes": 559,
+    "autoreply_effect": "MESSAGE_RECEIVED_AND_LOGGED__FURTHER_ASSISTANCE_REDIRECTED_TO_PRODUCT_SUPPORT_HELP_CENTER_MESSENGER",
+    "human_metadata_answer_received": false
+  },
+  "evaluation_specific_route": {
+    "recipient": "eval-initiative@anthropic.com",
+    "public_basis": "Anthropic third-party model evaluation initiative contact for evaluation questions.",
+    "sent_message_id": "1a12a666352aff16",
+    "sent_thread_id": "1a12a666352aff16",
+    "sent_timestamp": "2026-10-11T09:58:35Z",
+    "sent_body_sha256": "f13bcc11a99cc49311a6e5d955697d3e5fc4401011f9c4d185d2fe231c0fcafd",
+    "sent_body_bytes": 1204,
+    "reply_state": "NO_REPLY_OBSERVED_AT_BIND_TIME"
+  },
+  "support_messenger_boundary": {
+    "official_help_center_support_messenger_exists": true,
+    "official_help_center_states_support_messenger_does_not_consume_claude_usage_limits": true,
+    "current_available_browser_automation_is_separately_metered": true,
+    "used": false,
+    "reason_not_used": "HARD_ZERO_INCREMENTAL_SPEND"
+  },
+  "request_scope": [
+    "PER_TASK_SCORE_CONTRIBUTION_TYPE",
+    "TASK_OR_PASS_AGGREGATION_OR_WEIGHTING",
+    "SCORED_UNIT_COUNT_OR_DENOMINATOR_FOR_OPUS_5_5_CURSORBENCH_4_0_57_8",
+    "REDACTED_AGGREGATE_RESULT_RECORD_CHECKSUM_SIGNED_RECEIPT_OR_TABLE_ROW_WITHOUT_HIDDEN_TASK_CONTENTS",
+    "OR_PRECISE_CONFIRMATION_NONE_CAN_BE_SHARED"
+  ],
+  "scheduler": {
+    "same_information_repeat_email_authority": false,
+    "state": "PENDING_EVALUATION_SPECIFIC_ANTHROPIC_REPLY",
+    "wake_on": [
+      "ANTHROPIC_REPLY_WITH_NEW_SCORING_OR_RESULT_METADATA",
+      "ANTHROPIC_PRECISE_UNAVAILABLE_REPLY",
+      "MATERIAL_NEW_FREE_OFFICIAL_CONTACT_SURFACE",
+      "MATERIAL_CURSOR_OR_ANTHROPIC_PUBLIC_ARTIFACT_DELTA"
+    ],
+    "on_no_reply": "NO_PROOF_STATE_CHANGE"
+  },
+  "proof_effect": {
+    "new_exact_scoring_formula": false,
+    "new_target_result_artifact": false,
+    "new_brain_score_lower_bound": false,
+    "new_brain_ge_opus_relation": false,
+    "acceptance_state": "OPEN"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_HUMAN_ANTHROPIC_METADATA_REPLY_INFERRED",
+    "NO_CLAIM_ANTHROPIC_WILL_REPLY",
+    "NO_CLAIM_ANTHROPIC_POSSESSES_SHAREABLE_METADATA",
+    "NO_CLAIM_BRAIN_CURSORBENCH_SCORE_IS_GE_57_8",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false,
+  "terminal_authority": false
+}

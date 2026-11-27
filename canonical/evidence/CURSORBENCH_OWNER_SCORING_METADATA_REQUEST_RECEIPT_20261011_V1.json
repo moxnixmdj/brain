@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_OWNER_SCORING_METADATA_REQUEST_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "OWNER_SCORING_METADATA_REQUEST_SENT__PENDING_OWNER_REPLY__ZERO_CREDIT",
+  "target_predicate": "CODING_CURSORBENCH_GE_57_8",
+  "gmail": {
+    "thread_id": "1a103dde59e2a653",
+    "reply_to_message_id": "1a103e0ae4bd73ad",
+    "sent_message_id": "1a12a4444d760f2e",
+    "sent_timestamp": "2026-10-11T09:21:19Z",
+    "recipient": "hi@cursor.com",
+    "support_ticket": "T-G59465"
+  },
+  "requested_non_sensitive_authority": [
+    "PER_TASK_SCORE_CONTRIBUTION_DOMAIN__BINARY_BOUNDED_NUMERIC_OR_OTHER",
+    "AGGREGATION_FORM__UNWEIGHTED_MEAN_OR_WEIGHTED_TASK_PASS_FORM",
+    "TOTAL_SCORED_UNIT_DENOMINATOR_OR_TASK_PASS_COUNT_FOR_OPUS_5_5_MAX_57_8",
+    "REDACTED_OR_SIGNED_AGGREGATE_RESULT_SUMMARY_WITHOUT_TASK_CONTENT"
+  ],
+  "explicit_boundaries": [
+    "NO_PRIVATE_OR_HELD_OUT_TASK_DISCLOSURE_REQUESTED",
+    "NO_OWNER_RUN_EXTERNAL_EVALUATION_REQUESTED",
+    "NO_PAID_SERVICE_REQUESTED",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "scheduler_effect": {
+    "new_external_evidence_edge_exists": true,
+    "edge_state": "PENDING_OWNER_REPLY",
+    "same_information_internal_retry_authority": false,
+    "do_not_infer_reply": true,
+    "on_positive_reply": "RECOMPUTE_ROUTE_A_AND_ANCHOR_TRANSFER_IMMEDIATELY",
+    "on_precise_unavailable_reply": "CLOSE_NON_SENSITIVE_OWNER_SCORING_METADATA_ROUTE_UNDER_CURRENT_POLICY",
+    "on_no_reply": "NO_PROOF_STATE_CHANGE"
+  },
+  "hard_nonclaims": [
+    "NO_OWNER_REPLY_HAS_BEEN_RECEIVED_TO_THIS_REQUEST.",
+    "NO_SCORING_SEMANTICS_OR_DENOMINATOR_IS_INFERRED.",
+    "NO_BRAIN_CURSORBENCH_SCORE_OR_NONINFERIORITY_IS_PROVED.",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
