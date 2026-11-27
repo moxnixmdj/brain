@@ -425,7 +425,9 @@ def apply_rule(rule: Rule, source: str) -> Optional[str]:
         return None
     try:
         return ast.unparse(ast.fix_missing_locations(instantiate(rule.rhs, bindings)))
-    except KeyError:
+    except (KeyError, AttributeError, IndexError, TypeError):
+        # A projection is defined against the pattern's own bound subtree; a different match may
+        # bind a node that has no such field. That is a non-match, not an error.
         return None
 
 

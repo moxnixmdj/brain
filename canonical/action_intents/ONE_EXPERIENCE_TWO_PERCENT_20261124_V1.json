@@ -1,0 +1,460 @@
+{
+ "action_id": "ONE_EXPERIENCE_TWO_PERCENT_20261124_V1",
+ "action_intent_id": "ONE_EXPERIENCE_TWO_PERCENT_20261124_V1",
+ "action_kind": "MEASUREMENT_THAT_KILLS_A_MECHANISM",
+ "action_summary": "Wave 45 replaced a degenerate learned pattern with a transferable rule and claimed only that the rule fires on a renamed instance. This wave asks the question that claim makes askable, on real histories rather than fixtures: harvest 400 commits each from python-attrs/attrs and pallets/click into 1,600 single-statement repairs, learn rules from one side, and see whether any rule reproduces a repair it never saw. It does not: 4 of 163 within a project (2.45%) against 5 of 163 for verbatim traces (3.07%), and 0 of 1,350 across projects, although 76.4% of the held-out repairs share a root shape with some stored rule. The abstraction does not beat transcription, so retrieval on the shape of an edit is not the bottleneck -- the trigger is.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "(1) Tuning retrieval: the earlier ablation was identical with and without the store. (2) A better abstraction: measured here, 2.45% against 3.07% for verbatim traces, so the operator adds nothing on this corpus. (3) More candidates: the failure is on the held-out repair itself, not on a budget.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only: self-check 5/5, 19 tests, one receipt whose numbers are produced by the same functions the tests import. No independent identity has re-run any of it.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/single_experience_transfer_v1.py",
+   "canonical/tests/test_single_experience_transfer_v1.py",
+   "canonical/verification/SINGLE_EXPERIENCE_TRANSFER_20261124_V1.json"
+  ],
+  "route_class": "COMPOSE",
+  "route_id": null,
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "the census's own fleet measurement; no benchmark output is borrowed and no answer is leaked",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::store entries are keyed on the shape of the edit, and an edit is surface-specific: 76.4% of held-out repairs share a root node with a stored rule and still none of them is reproduced across projects",
+ "canonical_base_commit": "cba2a0554eaf2b74374a9f67b4928564e02be3e1",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": {
+  "cross_repository_pairs": 1350,
+  "cross_repository_store_rate": 0.0,
+  "mechanisms_killed": 1,
+  "shape_ceiling": 0.7644,
+  "within_repository_raw_trace_rate": 0.0307,
+  "within_repository_store_rate": 0.0245
+ },
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "store entries are keyed on the shape of the edit, and an edit is surface-specific: 76.4% of held-out repairs share a root node with a stored rule and still none of them is reproduced across projects",
+ "date": "2026-11-24",
+ "expected_parent_change": "the store's index moves from the shape of a change to the failing condition that forced it, because the shape of an edit has now been measured as the wrong key",
+ "expected_parent_frontier_change": "the frontier moves from 'can a rule transfer' to 'what must a rule be indexed by for it to transfer', with the transfer rate ceiling for shape-keyed retrieval measured at 0 of 1,350",
+ "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
+ "falsification_condition": "if the instrument could not register a hit it would report 0 whatever the corpus, so a built-in positive control must fire on an identical shape under new identifiers before any zero is believed; it fires, 1 of 1, and the empty and near-miss arms stay 0",
+ "generic_repair_from_single_probe": false,
+ "governance_change": null,
+ "highest_leverage_now": true,
+ "honest_limits": [
+  "two repositories, one language, 400 commits each: this is a real but narrow corpus",
+  "no test was run and no task was solved: the measurement is whether a stored rule reproduces another commit's edit",
+  "pallets/click is development data for this tree's catalogues and is marked CONTAMINATED_FOR_CATALOGUE",
+  "the 2.45% arm and the 3.07% arm are three repairs apart; the honest reading is 'no advantage', not 'slightly worse'"
+ ],
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "live_challenger_frontier_discovery_required": true,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/81",
+  "interpretation": "OSWorld 2.0's authors diagnose frontier failure as weak recovery and maintenance of hidden state. A computer-use agent's action is only as good as the invocation it can compose from what the environment declares. Round 7 measured that the composition was wrong for reasons the environment had already published: the same 20 programs yield 33 doors when their declarations are misread and 57 when they are read, with no new knowledge acquired. No benchmark task was run; no discharge is claimed.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "0.5",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "1,600 repairs harvested (250 attrs, 1,350 click) from 808 GitHub API calls with 0 model calls; within-project file-grouped split 4/163 store against 5/163 raw traces and 91/163 shape ceiling; cross-project 0/1,350 against a 76.4% shape ceiling; self-check 5/5; 19 tests; re-scoring from cache costs 3.0 s and no network",
+ "next_step": "build the trigger-keyed store: index by the failing assertion or violated invariant that forced the edit, and measure whether a repair learned from one failure is proposed for a different failure of the same kind",
+ "parent_capability": "structured_morphism_abstraction_v1 + the V2 store-vs-empty ablation",
+ "probe_specific": false,
+ "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+ "progress_evidence_paths": [
+  "canonical/swe_kernel/single_experience_transfer_v1.py",
+  "canonical/tests/test_single_experience_transfer_v1.py",
+  "canonical/verification/SINGLE_EXPERIENCE_TRANSFER_20261124_V1.json"
+ ],
+ "real_outcome": "the eighth judge is a probe pair rather than a new validator, and the environment's own verdict is what admits it",
+ "rebased_onto": null,
+ "recursive_obs": {
+  "canonical_base_commit": "2d928e014483efb7d497ccf136aaaa9582c492d7",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "root-shape indexing",
+   "the claim that abstraction alone transfers",
+   "recall of the training corpus as a success measure"
+  ],
+  "expected_parent_frontier_change": "the frontier moves from 'can a rule transfer' to 'what must a rule be indexed by for it to transfer', with the transfer rate ceiling for shape-keyed retrieval measured at 0 of 1,350",
+  "expected_parent_level_state_change": "the frontier moves from 'can a rule transfer' to 'what must a rule be indexed by for it to transfer', with the transfer rate ceiling for shape-keyed retrieval measured at 0 of 1,350",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "(delete) drop the store and keep only the verifier -- truthful, forfeits compounding",
+    "(bypass) keep shape-keyed entries and never claim they transfer -- what the measurement now forbids",
+    "(substitute) key entries on the failing assertion, which needs executable failures and is the next build"
+   ],
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_KEY_IS_THE_EDIT_NOT_THE_FAILURE",
+   "surviving_causal_blocker": "store entries are keyed on the shape of the edit, and an edit is surface-specific: 76.4% of held-out repairs share a root node with a stored rule and still none of them is reproduced across projects"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "the assumption that abstraction alone creates transfer (2.45% against 3.07% for raw traces)",
+    "root-shape indexing as the store's key (0 of 1,350 with a 76.4% ceiling)"
+   ],
+   "existing_inherited_routes_checked": [
+    "V2 ablation: store vs empty identical on both commits",
+    "Wave 45: 3 of 3 hand-written families transferred to a third unseen surface",
+    "NO_COMPOUNDING (8fe5f749): an unindexed library made later tasks slower",
+    "0 of 7 unseen-kind commits repaired in the blind catalogue"
+   ],
+   "external_existing_routes_checked": [
+    "SWE-bench Pro V2 boards (5 Nov 2026) quote resolve rates, not transfer rates, so they cannot answer this",
+    "the memory literature reports recall over sessions, which is a different quantity from reproducing a repair"
+   ],
+   "surviving_gap": "No store in this tree is keyed on the failure a repair answers. Shape-keyed retrieval is now measured at zero across projects, which is the first time the ceiling has been located rather than argued."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "calling a rule 'transferable' because it fired on a renamed fixture",
+    "measuring recall of the corpus instead of reproduction of held-out repairs",
+    "treating the absence of a store as the ceiling when the empty arm had never been printed"
+   ],
+   "real_outcome": "The store is measured against an empty store and against verbatim traces on real commit histories, so the question 'does one experience help on the next repair' has a number instead of an assumption.",
+   "surviving_necessity": "Every compounding claim in this tree reduces to this measurement, and until it existed the claim was unfalsifiable: store and no store had been reported identical without a held-out arm."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": [
+    "structured_morphism_abstraction_v1 supplies the rule learner unchanged",
+    "the V2 receipt supplies the question and the earlier zero"
+   ],
+   "downstream_work_to_delete_or_supersede": [
+    "root-shape indexing for store retrieval",
+    "the claim that the Wave 45 operator earns its place as a store mechanism"
+   ],
+   "fresh_reuse_plan": "The next store is keyed on the failing condition; the same scorer, splits and control arms are reused so the two keys are directly comparable."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": [
+    "the harvest is cached by digest, so re-scoring costs 3.0 s and no network",
+    "the receipt's verdict is computed from the arms rather than typed"
+   ],
+   "revalidated_layers": [
+    "obs_capability",
+    "obs_blocker",
+    "route_frontier"
+   ],
+   "search_stop_decision": "Search stopped when two repositories gave the same answer at two granularities; a third would not change the key."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_necessity_reason": "Without a positive control a zero is indistinguishable from a broken scorer; the control is what makes the deletion decision legitimate.",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Route 2 was answered by the waveform of this measurement: abstraction scored below verbatim traces. Route 3 fails on the denominator -- the rules were already plentiful and still never matched.",
+   "routes_ranked": [
+    "1. measure transfer on real commits with three arms and a positive control (selected)",
+    "2. build a richer abstraction first (refused: the abstraction is not what fails, the key is)",
+    "3. add more stored rules (refused: 163 rules fired on 0 of 1,350 held-out repairs)"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_detail": "A hit is an exact AST match; there is no fuzzy credit and no human judgement in the loop.",
+   "oracle_paths": [
+    "canonical/verification/SINGLE_EXPERIENCE_TRANSFER_20261124_V1.json",
+    "canonical/tests/test_single_experience_transfer_v1.py",
+    "canonical/verification/AUTONOMOUS_CAUSAL_SWE_AND_COMPUTER_USE_RECEIPT_20261124_V2.json"
+   ],
+   "synthetic_verification_necessity": "None of the corpus is synthetic: every pair is a real commit's before/after. The only synthetic material is the positive control, which exists to prove the scorer can fire.",
+   "verification_considered_detail": "Every number is produced by the same functions the tests import; the self-check fires a hit on an identical shape under new identifiers before any zero is reported."
+  },
+  "real_outcome": "The store is measured against an empty store and against verbatim traces on real commit histories, so the question 'does one experience help on the next repair' has a number instead of an assumption.",
+  "required_capability": "A transfer measurement with a positive control, a file-disjoint held-out split, and a cross-repository arm, so a zero can be believed and a mechanism can be deleted on evidence.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "no mechanism to strengthen a zero",
+      "CORRECTNESS": "the abstraction is not the failing part; verbatim traces do as well",
+      "INCREMENTAL_COST": "0",
+      "RELIABILITY": "deterministic",
+      "VERIFIABILITY": "same held-out pairs",
+      "WALL_CLOCK": "n/a"
+     },
+     "evidence": [
+      "store 4/163 against raw traces 5/163 on the same held-out repairs"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/SINGLE_EXPERIENCE_TRANSFER_20261124_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "BUILD_A_RICHER_ABSTRACTION_FIRST"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "none measured",
+      "CORRECTNESS": "supply is not the constraint",
+      "INCREMENTAL_COST": "0",
+      "RELIABILITY": "high",
+      "VERIFIABILITY": "easy",
+      "WALL_CLOCK": "seconds"
+     },
+     "evidence": [
+      "163 rules from 250 repairs fired on 0 of 1,350 held-out repairs"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/SINGLE_EXPERIENCE_TRANSFER_20261124_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "ADD_MORE_STORED_RULES"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "kills a mechanism and locates the ceiling of its key",
+      "CORRECTNESS": "exact AST matching, file-disjoint splits, three arms",
+      "INCREMENTAL_COST": "0 model calls, 0 parameters",
+      "RELIABILITY": "deterministic given the pinned digest",
+      "VERIFIABILITY": "19 tests, one per arm or refusal",
+      "WALL_CLOCK": "371 s harvest, 3.0 s to re-score"
+     },
+     "evidence": [
+      "1,600 repairs, 808 API calls, 0 model calls; store 2.45%, raw 3.07%, empty 0%, ceiling 55.8% within project; 0 of 1,350 across projects with a 76.4% ceiling; positive control fires"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/SINGLE_EXPERIENCE_TRANSFER_20261124_V1.json",
+      "canonical/tests/test_single_experience_transfer_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "MEASURE_SINGLE_EXPERIENCE_TRANSFER_ON_REAL_COMMITS_BEFORE_BUILDING_ANY_MORE_STORE"
+    }
+   ],
+   "checked_at_utc": "2026-11-27T00:32:54Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "store rules keyed on the shape of the edit and describe them as learned skills",
+   "max_age_hours": 24,
+   "negative_search_summary": "Searched for a published measurement of single-example repair transfer with an empty-store arm: the repair literature reports patch-generation rates on a benchmark, not whether a stored rule reproduces another project's commit. That gap is what this round fills.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "single example repair transfer held-out commits measured 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "fix pattern databases PAR templates retrieval index by failure not by patch shape"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "anti-unification versus verbatim trace storage ablation repair"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "automated program repair 2026 benchmark transfer across projects"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "MEASURE_SINGLE_EXPERIENCE_TRANSFER_ON_REAL_COMMITS_BEFORE_BUILDING_ANY_MORE_STORE",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-27T00:32:54Z",
+    "execution_dependencies": [
+     {
+      "dependency": "gh CLI authenticated against api.github.com",
+      "evidence": [
+       "808 calls, 1,600 repairs, 0 rate-limit failures"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "REMOTE_API",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "VOLATILE"
+     },
+     {
+      "dependency": "local Python 3 with unittest",
+      "evidence": [
+       "19 tests pass; self-check 5 of 5"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "model API at runtime",
+      "evidence": [
+       "0 model calls, 0 parameters"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "MODEL_API",
+      "required": false,
+      "scope": "GLOBAL",
+      "status": "NOT_REQUIRED",
+      "volatility": "VOLATILE"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "MEASURE_SINGLE_EXPERIENCE_TRANSFER_ON_REAL_COMMITS_BEFORE_BUILDING_ANY_MORE_STORE",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/verification/AUTONOMOUS_CAUSAL_SWE_AND_COMPUTER_USE_RECEIPT_20261124_V2.json",
+     "canonical/verification/STRUCTURED_MORPHISM_ABSTRACTION_20261124_V1.json"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "Nov 2026 SWE-bench Pro V2 boards, quoted as targets and never compared to this"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "python-attrs/attrs and pallets/click histories; Python standard library only"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://api.github.com (repository patches, read as data at build time)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "MEASURE_SINGLE_EXPERIENCE_TRANSFER_ON_REAL_COMMITS_BEFORE_BUILDING_ANY_MORE_STORE",
+   "BUILD_A_RICHER_ABSTRACTION_FIRST",
+   "ADD_MORE_STORED_RULES",
+   "DROP_THE_STORE_AND_KEEP_THE_VERIFIER"
+  ],
+  "selected_route": "MEASURE_SINGLE_EXPERIENCE_TRANSFER_ON_REAL_COMMITS_BEFORE_BUILDING_ANY_MORE_STORE",
+  "selected_surviving_route": "MEASURE_SINGLE_EXPERIENCE_TRANSFER_ON_REAL_COMMITS_BEFORE_BUILDING_ANY_MORE_STORE",
+  "selected_surviving_route_class": "MEASURE_AND_DELETE",
+  "stop_condition": "stop when a held-out repair is reproduced from a stored entry in a different repository, or when the key that would make that possible is identified and measured",
+  "why_selected_route_is_fastest_sufficient": "It is 371 s of harvesting and 3.0 s of scoring, needs no model and no task execution, and it deletes a mechanism instead of defending one.",
+  "why_this_is_not_another_organ": "It reuses the Wave 45 learner unchanged and adds no index, no store and no runtime dependency; the only new code parses diffs and counts hits."
+ },
+ "required_capability": "a store whose entries are retrieved by the failure they answer rather than by the shape of the edit, measured against the 0-of-1,350 ceiling that shape-keyed retrieval has now hit",
+ "route_class": "COMPOSE",
+ "route_id": "SORT_DOUBT_INTO_EVIDENCE_BACKED_KINDS_AND_ASK_BY_INFORMATION_GAIN",
+ "route_order_walk": {
+  "ADAPT": "admission is by evidence, so a candidate that merely looks like a reader is refused.",
+  "BYPASS": "Not used. Widening the typed table by hand is the move that never ends.",
+  "COMPOSE": "SELECTED: joins the refusal reader (which names kinds), content judges, and round 10's scan; nothing new was invented except the admission test.",
+  "INVENT": "Not used. No second scan and no second memory were created."
+ },
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "MEASURE_SINGLE_EXPERIENCE_TRANSFER_ON_REAL_COMMITS_BEFORE_BUILDING_ANY_MORE_STORE",
+ "selected_surviving_route": "MEASURE_SINGLE_EXPERIENCE_TRANSFER_ON_REAL_COMMITS_BEFORE_BUILDING_ANY_MORE_STORE",
+ "selective_note": "the probe pair is written by the program that defines the kind; the candidate table grants no authority",
+ "selectivity_note": "the control that keeps this honest is the positive arm: the same instrument registers a hit on an identical shape under new identifiers, so the zeros are measurements rather than a broken scorer",
+ "status": "SHIPPED",
+ "stop_condition": "stop when a held-out repair is reproduced from a stored entry in a different repository, or when the key that would make that possible is identified and measured",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "what_is_not": "any task repaired, any benchmark, any trigger-keyed store, independent verification",
+  "what_is_real": "the first store-vs-empty transfer measurement on real commits, with all three arms and a positive control, and it kills shape-keyed retrieval"
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "No truth obligation is discharged by this round. The loop is a mechanism \u2014 scan, right question, plan, verify, generalize, admit, persist, replay \u2014 which is obligation-adjacent; the honest statement is that this changes the existence of an honest goal-directed loop, not any open obligation.",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "478f3cdef55518cfec98104ca6ce9c9e7e490b1d",
+     "path": "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_V1.json"
+    }
+   ],
+   "decisive_question": "Does the loop actually persist a generalization from fresh evidence \u2014 or does it claim to when it only shows one goal-reaching trace?",
+   "falsifier_id": "THE_LOOP_PERSISTED_A_RULE_FROM_ONE_EXPERIENCE",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "",
+   "proposal_id": "PERFECT_ALGORITHM_COMPOSED_LOOP_V1"
+  }
+ },
+ "verification": "19 tests: positive control, compound-header elision, interleaved blocks as separate repairs, oversize and no-change refusal, file-disjoint splits, empty-store zero, near-miss refusal, raw-trace exactness, shape ceiling, receipt consistency, and a check that no benchmark result is claimed",
+ "weakens_existing_guard": false
+}
