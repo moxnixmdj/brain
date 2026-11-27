@@ -1,0 +1,35 @@
+{
+  "schema":"PROJECT_BRAIN_SEMANTIC_OBSERVATIONAL_EQUIVALENCE_WOLFRAM_VERIFICATION_V1",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_WOLFRAM_EXHAUSTIVE_SMALL_MODEL_PASS__ZERO_TERMINAL_CREDIT",
+  "subject":{
+    "governance":{"path":"canonical/governance/SEMANTIC_OBSERVATIONAL_EQUIVALENCE_INFORMATION_CUT_20261007_V1.json","git_blob_sha":"8a14917fa6e7b503a8a6d4004f5e41036967ec7b"},
+    "runtime":{"path":"canonical/runtime/semantic_observational_equivalence_cut_v1.py","git_blob_sha":"ce07c8306d25439b4d4e8a7e2c9725ebf0f4ea4a"},
+    "tests":{"path":"canonical/tests/test_semantic_observational_equivalence_cut_v1.py","git_blob_sha":"92e9d7d5de37d67cdd5de62c1c93008de8ea045b"}
+  },
+  "independent_provider":{
+    "provider":"WOLFRAM_LANGUAGE",
+    "exhaustive_grid":{
+      "world_count":3,
+      "policy_count":2,
+      "binary_query_count_per_model":2,
+      "query_set_count":28,
+      "adequacy_relation_count":27,
+      "total_models":756
+    },
+    "verified":{
+      "finite_budget_recurrence_equals_full_query_partition_at_budget_2_for_all_756_models":true,
+      "zero_residual_states_iff_every_full_query_equivalence_class_has_a_common_adequate_policy_for_all_756_models":true,
+      "unsplittable_two_world_disjoint_policy_example_residual_states":2,
+      "four_world_two_binary_query_example_budget_states":[4,2,1]
+    }
+  },
+  "conclusion":"IN_THE_BOUND_FINITE_DETERMINISTIC_QUERY MODEL, THE IRREDUCIBLE SEMANTIC INFORMATION AFTER ALL ADMISSIBLE QUERIES IS EXACTLY THE MAXIMUM MINIMUM ADEQUATE-POLICY COVER SIZE OVER FULL-QUERY OBSERVATIONAL-EQUIVALENCE CLASSES. THE FINITE-BUDGET RECURRENCE CORRECTLY COMPUTES THE OPTIMAL WORST-BRANCH RESIDUAL STATE COUNT ON THE EXHAUSTIVE SMALL-MODEL GRID.",
+  "hard_nonclaims":[
+    "NO OPEN-WORLD UNIVERSALITY CLAIM.",
+    "NO CLAIM CURRENT REAL OPUS55 QUERY UNIVERSE IS COMPLETE.",
+    "NO CLAIM REAL FIVE-ROLE SEMANTIC FRONTIER HAS ZERO RESIDUAL BITS.",
+    "NO TERMINAL ACCEPTANCE FAMILY CAPABILITY OR OWNERSHIP CREDIT."
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
