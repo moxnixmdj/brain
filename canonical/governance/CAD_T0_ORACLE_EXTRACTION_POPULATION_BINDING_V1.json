@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_CAD_T0_ORACLE_EXTRACTION_POPULATION_BINDING_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREWAVE_CASE_SOURCE_AND_ORACLE_EXTRACTION__INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+  "portfolio": "T0_CODING_SEMANTIC_GEOMETRY_PORTFOLIO",
+  "source_rule": {
+    "source": "THE_FROZEN_T0_CODING_SEMANTIC_GEOMETRY_PORTFOLIO",
+    "load_bearing_predicate": "M1_CAD_BEHAVIOR_DECLARED_LOAD_BEARING_BY_FROZEN_T0_EVALUATOR_ROUTE_METADATA_BEFORE_CANDIDATE_EXECUTION",
+    "selection": "GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2_POST_FREEZE_BEACON_RULE",
+    "pre_beacon_case_selection": false,
+    "adaptive_case_selection": false,
+    "case_replacement": false,
+    "tuning_replay": false
+  },
+  "oracle_extraction": {
+    "runtime": "canonical/runtime/cad_t0_oracle_extractor.py",
+    "scorer": "canonical/runtime/cad_t0_multiplex_scorer.py",
+    "observation_schema": "canonical/governance/CAD_T0_EVALUATOR_OBSERVATION_SCHEMA_V1.json",
+    "reference_truth_producer": "FROZEN_T0_HARNESS_REFERENCE_OR_BRAIN_OWNED_INDEPENDENT_GEOMETRY_ORACLE",
+    "candidate_output_measurement": "INDEPENDENT_GEOMETRY_KERNEL_OR_FROZEN_TERMINAL_HARNESS",
+    "candidate_self_report_as_oracle": false,
+    "immutable_candidate_output_digest_required": true,
+    "producer_id_and_version_or_blob_required": true
+  },
+  "hidden_reference_fields": [
+    "reference_constraint_graph",
+    "identifiable",
+    "reference_geometry_metrics",
+    "required_geometry_metrics",
+    "metric_tolerances",
+    "geometry_class_label",
+    "mutation_identity"
+  ],
+  "candidate_forbidden_fields": [
+    "reference_solid",
+    "reference_constraint_graph",
+    "reference_geometry_metrics",
+    "hidden_verifier",
+    "mutation_identity",
+    "candidate_geometry_metrics_as_oracle",
+    "geometry_class_covered_as_self_report"
+  ],
+  "failure_rules": [
+    "IDENTIFIABLE_UNSUPPORTED_GEOMETRY_CLASS_FAILS_TERMINAL_CASE",
+    "NONIDENTIFIABLE_CASE_REQUIRES_INDEPENDENT_AMBIGUITY_WITNESS",
+    "MISSING_OR_UNVERSIONED_MEASUREMENT_FAILS_CLOSED",
+    "CANDIDATE_OUTPUT_DIGEST_MISMATCH_FAILS_CLOSED",
+    "CANDIDATE_SELF_REPORTED_GEOMETRY_METRICS_HAVE_ZERO_ORACLE_AUTHORITY",
+    "NO_CASE_REPLACEMENT_AFTER_FAILURE"
+  ],
+  "dependencies": [
+    "canonical/runtime/cad_t0_oracle_extractor.py",
+    "canonical/runtime/cad_t0_multiplex_scorer.py",
+    "canonical/governance/CAD_T0_EVALUATOR_OBSERVATION_SCHEMA_V1.json",
+    "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
+    "canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json",
+    "canonical/verification/CAD_T0_MULTIPLEX_SCORER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  ],
+  "execution_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
