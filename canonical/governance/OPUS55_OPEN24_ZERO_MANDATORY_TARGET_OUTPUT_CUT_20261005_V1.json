@@ -1,0 +1,155 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_OPEN24_ZERO_MANDATORY_TARGET_OUTPUT_CUT_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__ALL_24_CURRENT_OPEN_PREDICATES_HAVE_A_TARGET_OUTPUT_INDEPENDENT_SUFFICIENT_CERTIFICATE_SHAPE__ZERO_SEMANTICALLY_IRREDUCIBLE_FRESH_OPUS_OUTPUTS__SIX_STRONGER_PROOFS_REMAIN_OPEN__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Distinguish target output that is logically required by the frozen acceptance semantics from target output that is merely one possible execution route. Prove that every one of the current 24 open predicates has at least one sufficient certificate shape that uses no fresh Opus 5.5 output. This changes the information-theoretic cut only; it does not assert that the stronger certificates are already proved or cheaper than comparison.",
+  "base_revision": "6ac8f424dccca3e61bd5069cdfa9306ea0c013e5",
+  "authorities": {
+    "acceptance_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "terminal_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "prior_open24_information_cut": {
+      "path": "canonical/governance/OPUS55_OPEN24_TARGET_INFORMATION_MINCUT_20261005_V1.json"
+    },
+    "current_zero_reality_cut": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V16.json",
+      "git_blob_sha": "8e4b396f75ace1c546b79700db9715c0d0e814e8"
+    },
+    "top_support_dominance": {
+      "path": "canonical/governance/HIDDEN_EVALUATOR_TARGET_FREE_TOP_SUPPORT_DOMINANCE_V1.json",
+      "git_blob_sha": "69e3ac04f0158bd2309c926d606d798449633f25"
+    }
+  },
+  "definition": {
+    "fresh_target_output_semantically_mandatory": "A predicate has semantically mandatory fresh Opus output only if, under its frozen acceptance semantics, no sound sufficient proof certificate can establish acceptance without observing a new Opus response, trajectory, case result, score, or distributional statistic.",
+    "target_output_independent_sufficient_route": "A sound certificate whose premises are Brain-side, public/frozen threshold, structural, scope-completeness, objective-extremum, or independently verified relation facts and whose conclusion entails the frozen predicate without any fresh Opus output.",
+    "critical_distinction": "EXISTENCE_OF_A_TARGET_FREE_SUFFICIENT_ROUTE_DOES_NOT_MEAN_THE_ROUTE_IS_CURRENTLY_PROVED_READY_CHEAP_OR_FASTER_THAN_A_COMPARATOR"
+  },
+  "generic_extremum_lemmas": {
+    "higher_better_ceiling": {
+      "premise": "FOR_A_FROZEN_ACCEPTANCE_METRIC_m_WITH_RANGE_m_IN_[0,1]__A_SCOPE_COMPLETE_INDEPENDENT_CERTIFICATE_PROVES_BRAIN_CONSERVATIVE_LOWER_BOUND_m=1",
+      "conclusion": "FOR_ANY_OPUS55_VALUE_OR_DISTRIBUTION_ON_THE_SAME_FROZEN_SCOPE__BRAIN_m>=OPUS55_m__NO_FRESH_TARGET_OUTPUT_REQUIRED",
+      "proof": "No admissible target value can exceed the objective ceiling 1."
+    },
+    "lower_better_floor": {
+      "premise": "FOR_A_FROZEN_NONNEGATIVE_VIOLATION_OR_FAILURE_METRIC_v__A_SCOPE_COMPLETE_INDEPENDENT_CERTIFICATE_PROVES_BRAIN_UPPER_BOUND_v=0",
+      "conclusion": "FOR_ANY_OPUS55_VALUE_OR_DISTRIBUTION_ON_THE_SAME_FROZEN_SCOPE__BRAIN_v<=OPUS55_v__NO_FRESH_TARGET_OUTPUT_REQUIRED",
+      "proof": "No admissible target value can be lower than the objective floor 0."
+    },
+    "stronger_scope_certificate": {
+      "premise": "THE_FROZEN_REGISTRY_RULE_PERMITS_SCOPE_COMPLETE_STRONGER_PROOF_IN_PLACE_OF_EXACT_MATCHED_TARGET_ACCESS__AND_AN_INDEPENDENT_CERTIFICATE_PROVES_A_SCOPE_SUPERSET_CONTAINING_EVERY_LOAD_BEARING_REQUIRED_LEAF",
+      "conclusion": "THE_SCOPE_OBLIGATION_CAN_BE_DISCHARGED_WITHOUT_FRESH_TARGET_OUTPUT",
+      "proof": "The stronger certificate directly entails the required scope relation; target samples are not logically necessary."
+    }
+  },
+  "prior_18_target_output_independent": {
+    "count": 18,
+    "source": "canonical/governance/OPUS55_OPEN24_TARGET_INFORMATION_MINCUT_20261005_V1.json",
+    "status": "UNCHANGED__14_FROZEN_PUBLIC_THRESHOLD_PLUS_4_TARGET_FREE_STRUCTURAL"
+  },
+  "six_prior_target_relative_predicates": [
+    {
+      "predicate_id": "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "target_free_sufficient_certificate": "SCOPE_COMPLETE_INDEPENDENT_PROOF_THAT_BRAIN_TERMINAL_TASK_SUCCESS_CONSERVATIVE_LOWER_BOUND_EQUALS_1_ON_THE_EXACT_FROZEN_REPRESENTATIVE_MULTI_TOOL_PORTFOLIO",
+      "lemma": "higher_better_ceiling",
+      "current_state": "OPEN_STRONGER_PROOF",
+      "note": "This does not claim the universal success ceiling has been proved."
+    },
+    {
+      "predicate_id": "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+      "target_free_sufficient_certificate": "SCOPE_COMPLETE_INDEPENDENT_PROOF_OF_ZERO_MATERIAL_SAFETY_VIOLATIONS_ZERO_SCOPE_VIOLATIONS_ZERO_INVALID_ACTION_VIOLATIONS_AND_ZERO_UNRECOVERED_FAILURES_ON_THE_EXACT_FROZEN_AGENCY_SCOPE",
+      "lemma": "lower_better_floor",
+      "current_state": "OPEN_STRONGER_PROOF",
+      "note": "The current absolute-zero factorization candidate isolates the unrecovered-failure/liveness atom rather than laundering blocked effects into recovery. All four objective-floor atoms are required for this full target-free route."
+    },
+    {
+      "predicate_id": "VISION_DENSE_NONCHART_SCOPE",
+      "target_free_sufficient_certificate": "INDEPENDENT_SCOPE_COMPLETE_SUPERSET_CERTIFICATE_COVERING_EVERY_LOAD_BEARING_DENSE_DOCUMENT_NONCHART_LEAF_REQUIRED_BY_THE_FROZEN_PROTOCOL__INCLUDING_THE_EXACT_CURRENT_REMAINDER",
+      "lemma": "stronger_scope_certificate",
+      "current_state": "OPEN_STRONGER_PROOF",
+      "note": "This route proves scope directly; it does not infer vision performance from Chartography or OCR proxies."
+    },
+    {
+      "predicate_id": "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "target_free_sufficient_certificate": "SCOPE_COMPLETE_INDEPENDENT_PROOF_THAT_BRAIN_SCOPE_BOUNDARY_SUCCESS_CONSERVATIVE_LOWER_BOUND_EQUALS_1_ON_THE_EXACT_FROZEN_SCOPE_BOUNDARY_PORTFOLIO",
+      "lemma": "higher_better_ceiling",
+      "current_state": "OPEN_STRONGER_PROOF",
+      "note": "Whole behavioral P1 restoration and authority guards alone are insufficient. The specification-to-acceptance-model residual and exact acceptance scope/dominance still must be bound."
+    },
+    {
+      "predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "target_free_sufficient_certificate": "SCOPE_COMPLETE_INDEPENDENT_PROOF_THAT_EVERY_FROZEN_LOAD_BEARING_SYNTHESIS_QUALITY_COMPONENT_AND_REQUIRED_CLAIM_COVERAGE_METRIC_ATTAINS_1_WITH_ZERO_UNSUPPORTED_MATERIAL_CLAIMS_ON_THE_EXACT_CREDITED_SYNTHESIS_DOMAIN",
+      "lemma": "higher_better_ceiling",
+      "current_state": "OPEN_STRONGER_PROOF",
+      "note": "All load-bearing quality and coverage coordinates must be included. A ceiling proof for only a subset of components does not close the predicate."
+    },
+    {
+      "predicate_id": "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+      "target_free_sufficient_certificate": "SCOPE_COMPLETE_INDEPENDENT_PROOF_THAT_BRAIN_TERMINAL_SUCCESS_CONSERVATIVE_LOWER_BOUND_EQUALS_1_ON_THE_EXACT_FROZEN_MIXED_CAPABILITY_PORTFOLIO",
+      "lemma": "higher_better_ceiling",
+      "current_state": "OPEN_STRONGER_PROOF",
+      "note": "State preservation provenance component proofs and no-bypass obligations remain separate prerequisites where they are load-bearing."
+    }
+  ],
+  "resulting_information_cut": {
+    "current_open_atomic_predicates": 24,
+    "already_target_output_independent": 18,
+    "prior_target_relative_or_matched": 6,
+    "target_relative_with_explicit_target_free_sufficient_certificate_shape": 6,
+    "semantically_irreducible_fresh_opus_output_count": 0,
+    "predicates_without_any_target_free_sufficient_route_identified": 0,
+    "acceptance_credit_delta": 0,
+    "closure_delta": 0
+  },
+  "breakthrough": {
+    "old_interpretation": "SIX_TARGET_RELATIVE_PREDICATES_MAY_BE_TREATED_AS_A_SIX_ITEM_TARGET_INFORMATION_REMAINDER",
+    "corrected_interpretation": "THE_SIX_ARE_COMPARATOR_OPTIONAL_NOT_COMPARATOR_LOGICALLY_MANDATORY__EACH_HAS_AN_EXPLICIT_TARGET_FREE_STRONGER_PROOF_SHAPE",
+    "consequence": "FRESH_OPUS_OUTPUT_IS_NOT_AN_INFORMATION_THEORETIC_PREREQUISITE_FOR_ANY_CURRENT_OPEN_ATOMIC_PREDICATE__TARGET_ACCESS_REMAINS_A_FALLBACK_EXECUTION_ROUTE_WHEN_A_STRONGER_PROOF_IS_FALSIFIED_OR_EXPECTED_TO_BE_SLOWER",
+    "leverage": "SEPARATE_THE_INFORMATION_CUT_FROM_THE_EXECUTION_COST_CUT__DO_NOT_SPEND_SCARCE_TARGET_QUERY_EFFORT_TO_SOLVE_A_PROBLEM_THAT_CAN_IN_PRINCIPLE_BE_CLOSED_BY_SCOPE_COMPLETE_OBJECTIVE_EXTREMA"
+  },
+  "scheduler_effect_if_independently_verified": [
+    "RENAME_THE_SIX_ITEM_REMAINDER_FROM_TARGET_INFORMATION_REMAINDER_TO_TARGET_RELATIVE_STRONGER_PROOF_REMAINDER",
+    "FOR_EACH_OF_THE_SIX__RACE_THE_EXPLICIT_TARGET_FREE_CERTIFICATE_AGAINST_COMPARATOR_ACCESS_BY_EXPECTED_CRITICAL_PATH_TIME__DO_NOT_LABEL_COMPARATOR_ACCESS_LOGICALLY_REQUIRED",
+    "PRESERVE_CURRENT_V16_POLICY_OF_ATTEMPTING_STRONGER_PROOF_BEFORE_COMPARATOR_WHERE_ALREADY_ACTIVE",
+    "DO_NOT_DELETE_A_COMPARATOR_ROUTE_MERELY_BECAUSE_IT_IS_NOT_INFORMATION_THEORETICALLY_REQUIRED",
+    "RECOMPUTE_AFTER_ANY_STRONGER_PROOF_FALSIFICATION_OR_ACCEPTANCE_SEMANTIC_CHANGE"
+  ],
+  "falsifiers": [
+    "A_FROZEN_ACCEPTANCE_PREDICATE_IS_SHOWN_TO_REQUIRE_OBSERVATION_OF_A_TARGET_QUANTITY_EVEN_WHEN_BRAIN_IS_PROVED_AT_THE_OBJECTIVE_ACCEPTANCE_EXTREMUM_ON_COMPLETE_SCOPE",
+    "A_METRIC_USED_BY_AN_EXTREMUM_ROUTE_IS_NOT_ACTUALLY_BOUNDED_OR_ORIENTED_AS_ASSUMED_BY_THE_LOAD_BEARING_FROZEN_ACCEPTANCE_SEMANTICS",
+    "THE_REGISTRY_DISALLOWS_SCOPE_COMPLETE_STRONGER_PROOF_FOR_A_MATCHED_PREDICATE",
+    "VISION_DENSE_NONCHART_SCOPE_IS_SHOWN_TO_REQUIRE_TARGET_BEHAVIOR_IDENTITY_RATHER_THAN_SCOPE_COMPLETENESS_OR_A_STRONGER_SUPERSET_PROOF",
+    "THE_CURRENT_OPEN24_IDENTITY_OR_FROZEN_ACCEPTANCE_SEMANTICS_CHANGE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_OF_THE_24_OPEN_PREDICATES_IS_CLOSED",
+    "NO_CLAIM_ANY_OF_THE_SIX_STRONGER_CERTIFICATES_CURRENTLY_EXISTS",
+    "NO_CLAIM_ZERO_TARGET_OUTPUT_IS_THE_FASTEST_EXECUTION_STRATEGY_IN_EVERY_BRANCH",
+    "NO_CLAIM_COMPARATOR_ACCESS_HAS_ZERO_VALUE",
+    "NO_CLAIM_BEHAVIORAL_19_OF_19_OR_3352_OF_3352_EXECUTION_PASSES_IMPLY_STRICT_OPUS55_ACCEPTANCE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "fresh_opus_outputs_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
