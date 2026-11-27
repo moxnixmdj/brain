@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_UNION25_LANGUAGE_DECORATOR_NEUTRALITY_GATE_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_OUTCOME_BLIND_CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "purpose": "Discharge the sole runtime-sensitive condition blocking the exact 156-to-41 union25 semantic-kernel reduction: punctuation-only placeholder/highlight decorators must preserve pinned language detection on every canonical language carrier.",
+  "subjects": {
+    "language_carrier_bank": {
+      "path": "canonical/runtime/livebench_legacy25_single_contract_witness_v1.py",
+      "git_blob_sha": "e927c05071bb4342b41fb9d5be07cc32ea82e820",
+      "expected_language_count": 30
+    },
+    "semantic_kernel_reduction": {
+      "path": "canonical/runtime/livebench_union25_semantic_kernel_reduction_v1.py",
+      "git_blob_sha": "c08812986e1224bcbb910dfff3bc112f57453996",
+      "expected_conditional_kernel_count": 41,
+      "expected_conditional_hard_kernel_count": 39
+    },
+    "union25_scope": {
+      "path": "canonical/runtime/livebench_union25_archetypes_v1.py",
+      "git_blob_sha": "8c68e63bbc1e1b843f076dbcd8c4bfae11d4cc2a",
+      "expected_public_family_count": 25
+    }
+  },
+  "pinned_runtime": {
+    "checker_repository": "LiveBench/LiveBench",
+    "checker_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_git_blob_sha": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "language_codes_source_git_blob_sha": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "language_detector": "langdetect==1.0.9"
+  },
+  "exhaustive_gate": {
+    "placeholder_carrier": "[]",
+    "highlight_carrier": "*-*",
+    "placeholder_counts": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "highlight_counts": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "insertion_modes": [
+      "prefix_boundary",
+      "interior_boundary",
+      "suffix_boundary"
+    ],
+    "expected_raw_cases": 2250,
+    "normalization": "decorators separated from language text by ASCII spaces; never inserted inside a lexical token",
+    "required_for_each_case": [
+      "BASE_CARRIER_DETECTS_AS_EXPECTED_LANGUAGE",
+      "DECORATED_CARRIER_DETECTS_AS_EXPECTED_LANGUAGE",
+      "DECORATED_DETECTION_EQUALS_BASE_DETECTION"
+    ]
+  },
+  "promotion_rule": "ONLY_AN_INDEPENDENT_CONTENT_BOUND_PASS_OVER_ALL_2250_CASES_MAY_SET_LANGUAGE_DECORATOR_NEUTRALITY_TRUE_AND_UNLOCK_THE_41_KERNEL_CONDITIONAL_REDUCTION__THIS_GATE_ALONE_GRANTS_NO_LIVEBENCH_ACCEPTANCE",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_rows_read": 0,
+    "hidden_terminal_kwargs_read": 0,
+    "hidden_terminal_instruction_ids_read": 0,
+    "target_scores_read": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
