@@ -1,0 +1,176 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_GENERAL_ANALYSIS_B2_MINIMUM_CUT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__GENERIC_B2_ANALYSIS_RESIDUAL_PARTITIONED_BY_ACCEPTANCE_TOPOLOGY__ONE_OPEN_QUALITY_ATOM_MAXIMUM_AFTER_CEILING_REUSE__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Reduce the independently identified B2 general non-specialized analysis semantic-totality gap to the smallest sound terminal obligation set, without inventing a new primitive merely because the existing family wording is too narrow.",
+  "bound_base_commit": "90f4bbd36eac9842241e5df47e2a43b29ba72d41",
+  "authorities": {
+    "target_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+      "material_fact": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING is currently frozen as difficult expert-level questions across domains with search/code/tools."
+    },
+    "functional_basis_candidate": {
+      "path": "canonical/governance/OPUS55_OBSERVABLE_BEHAVIOR_FUNCTIONAL_BASIS_CHARACTERIZATION_20261005_V1.json",
+      "git_blob_sha": "62c0e207ce935a02611700a69e0917f938792b11"
+    },
+    "independent_semantic_totality_falsification": {
+      "pull_request": 2118,
+      "finding": "B2_GENERAL_ANALYSIS_CREATIVE_NON_SPECIALIZED_REGION is not proved semantically contained by the frozen 19-family wording."
+    },
+    "creative_partition": {
+      "pull_request": 2219,
+      "finding": "Creative text already has a distinct one-atom candidate repair; this artifact does not duplicate or absorb it."
+    },
+    "target_free_dominance_characterization": {
+      "pull_request": 2188,
+      "theorem": "For a finite scope-complete material partial order and arbitrary bounded monotone hidden utility, target-free universal noninferiority against every target distribution holds iff Brain support is the unique greatest element."
+    },
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "first_party_target_surface": {
+      "url": "https://www.anthropic.com/transparency",
+      "observed_utc_date": "2026-10-05",
+      "observation": "Claude Opus 5.5 is explicitly described as engaging in analysis as a supported useful observable task surface."
+    }
+  },
+  "problem": {
+    "residual": "B2_GENERAL_ANALYSIS_NON_SPECIALIZED_REGION",
+    "example_scope": "Text-input analysis tasks that transform supplied or JIT evidence into conclusions, comparisons, explanations, tradeoffs, diagnoses, or recommendations without necessarily being coding, science, finance, professional-work, exact-symbolic, unknown-domain, or tool-heavy tasks.",
+    "why_not_closed_by_current_family_wording": [
+      "Difficult expert-level tool-augmented reasoning is not textually identical to all ordinary or non-specialized analysis.",
+      "Output synthesis can render an analysis but does not by itself prove the load-bearing information transformation that produced the analysis.",
+      "Specialized families cannot be used as catch-alls when their defining conditions are absent."
+    ]
+  },
+  "breakthrough_partition": {
+    "principle": "Partition the residual by the topology of its acceptance relation, not by topic labels.",
+    "cells": [
+      {
+        "id": "B2A_ABSOLUTE_CEILING_ANALYSIS",
+        "definition": "Analysis instances for which every load-bearing success condition can be represented by a scope-complete objective or independently verifiable acceptance certificate with a known global ceiling.",
+        "examples_of_admissible_certificate_shapes": [
+          "Finite exact requirement satisfaction.",
+          "Formal proof or theorem-checkable validity.",
+          "Exhaustive finite verification.",
+          "Deterministic calculation or transformation with independently checkable invariants.",
+          "Evidence-grounded claims with complete support, provenance, uncertainty, constraint, and required-unit coverage where those conditions are proved scope-complete for the task class."
+        ],
+        "terminal_rule": "If Brain owns a route whose scope-complete independent certificate proves the global acceptance ceiling for every admissible instance in this cell, then Opus comparator execution is unnecessary because no target output can exceed the ceiling under that frozen acceptance relation.",
+        "new_learned_primitive_required": false,
+        "new_target_comparator_required_if_ceiling_proved": false,
+        "credit_now": false
+      },
+      {
+        "id": "B2B_OPEN_QUALITY_ANALYSIS",
+        "definition": "Analysis instances with a load-bearing quality dimension for which objective constraints can all pass while materially different admissible outputs remain incomparable or differently ranked under relevance, insight, usefulness, judgment, prioritization, explanatory power, or other non-ceiling quality semantics.",
+        "terminal_rule": "Do not infer target-free noninferiority merely from constraint satisfaction. Close this cell only with a sound scope-complete greatest-outcome theorem plus universal Brain attainment, or a predeclared matched quality comparison/equivalent target-bound acceptance proof.",
+        "new_broad_primitive_required_by_this_partition": false,
+        "minimum_new_acceptance_obligation_if_no_stronger_proof_exists": "GENERAL_ANALYSIS_OPEN_QUALITY_NONINFERIOR",
+        "credit_now": false
+      }
+    ]
+  },
+  "proof": {
+    "separation": [
+      "Choose two analysis outputs that satisfy all frozen objective constraints but differ only on an unmeasured open quality dimension. Then objective-constraint equality does not determine the quality order, so B2B cannot be soundly collapsed into B2A.",
+      "Conversely, when a frozen acceptance relation has a proved global maximum M and Brain is proved to attain M on the complete admissible scope, every target score under the same relation is <= M. Comparator execution adds no information needed for noninferiority."
+    ],
+    "minimality": [
+      "A new broad learned family is not implied by this gap: both B2A and B2B perform the same B2 information-transformation causal role already represented in the functional basis.",
+      "The gap is instead a mismatch between the frozen family wording and the target surface plus a missing acceptance condition on the non-ceiling subspace.",
+      "Therefore the minimum target-accounting repair is a semantic widening or equivalent family-accounting correction for general analysis, plus at most one B2B open-quality acceptance atom after all ceiling-bearing subregions are discharged by reused proofs.",
+      "Creative text remains separately governed by the creative-quality atom because originality/creative effectiveness and analysis quality are not assumed identical."
+    ]
+  },
+  "candidate_target_envelope_repair": {
+    "preferred_no_new_family_route": {
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "successor_useful_behavior": "Analyze and solve questions or problems across domains, from ordinary non-specialized analysis through difficult expert-level work, optionally using search, code, or other tools when useful.",
+      "reason": "The causal transform is still B2 information transformation; tool use and difficulty are conditions, not distinct primitive roles.",
+      "requires_independent_review_before_canonical_mutation": true
+    },
+    "fallback": "If governance forbids semantic widening of a frozen target family, add an accounting family for general analysis without claiming a new underlying learned primitive. Either route must create the same acceptance obligations."
+  },
+  "acceptance_reduction": {
+    "reuse_first": [
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001 where specification-derived acceptance is load-bearing.",
+      "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001 where the analysis is a structured method.",
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001 only for its actual evidence-to-output scope, not as a substitute for B2 reasoning.",
+      "EXACT_SYMBOLIC_COMPUTATION only inside its frozen bounded exact operation classes.",
+      "Any independently verified C0/C1/C2 ceiling certificates whose declared scope semantically contains the analysis subregion being credited."
+    ],
+    "new_atom_candidate": {
+      "id": "GENERAL_ANALYSIS_OPEN_QUALITY_NONINFERIOR",
+      "activate_only_if": "After scope-complete partitioning, a nonempty B2B_OPEN_QUALITY_ANALYSIS region remains and no stronger ceiling or exact-equivalence proof closes it.",
+      "acceptance": "Brain-owned configured route must equal or exceed Opus 5.5 on a predeclared contamination-safe portfolio representing the remaining open-quality general-analysis region under a frozen evaluator protocol, or satisfy a sound stronger scope-complete proof.",
+      "minimum_quality_dimensions": [
+        "FACTUAL_AND_LOGICAL_SOUNDNESS",
+        "RELEVANCE_TO_THE_ACTUAL_QUESTION",
+        "DEPTH_AND_NONTRIVIAL_INSIGHT_WHERE_REQUIRED",
+        "TRADEOFF_AND_UNCERTAINTY_JUDGMENT",
+        "PRIORITIZATION_AND_DECISION_USEFULNESS",
+        "EXPLANATORY_COHERENCE"
+      ],
+      "fresh_reality_authority": false
+    }
+  },
+  "critical_path_delta": {
+    "delete": [
+      "SEARCH_FOR_A_NEW_GENERIC_ANALYSIS_PRIMITIVE_BEFORE_PARTITIONING_THE_ACCEPTANCE_RELATION",
+      "TREAT_EXISTING_SYNTHESIS_OUTPUT_QUALITY_AS_PROOF_OF_THE_MISSING_B2_TRANSFORMATION",
+      "RUN_OPUS_COMPARATORS_ON_CEILING_BEARING_ANALYSIS_SUBREGIONS",
+      "CLAIM_CURRENT_19_FAMILY_WORDING_IS_SEMANTICALLY_TOTAL_WITHOUT_REPAIR"
+    ],
+    "activate": [
+      "INDEPENDENTLY_VERIFY_THIS_B2A_B2B_PARTITION_AND_THE_NO_NEW_PRIMITIVE_CONCLUSION.",
+      "COMPILE_A_SCOPE_COMPLETE_PARTITION_CERTIFICATE FOR THE GENERAL_ANALYSIS RESIDUAL.",
+      "REUSE_EXISTING_ABSOLUTE_CEILING_PROOFS TO DELETE B2A CELLS.",
+      "ONLY_IF_B2B_REMAINS_NONEMPTY, ADD ONE GENERAL_ANALYSIS_OPEN_QUALITY_NONINFERIOR ATOM OR A STRONGER EQUIVALENT PROOF ROUTE.",
+      "RECOMPUTE_TARGET_FAMILY_SEMANTIC_TOTALITY AFTER THE TARGET-ENVELOPE WORDING IS TRUTH-REPAIRED."
+    ]
+  },
+  "falsifiers": [
+    "A constructive analysis task in the residual requires a load-bearing causal role outside B0-B9.",
+    "The proposed semantic widening causes one family to absorb a transform that is not B2 information transformation.",
+    "A claimed B2A cell contains two admissible outputs that both satisfy its objective certificate but differ on a load-bearing quality dimension not represented by that certificate.",
+    "A claimed scope-complete ceiling certificate omits an admissible target condition or depends on self-asserted independence.",
+    "Creative-text quality is silently counted as closed by the general-analysis atom or vice versa."
+  ],
+  "terminal_effect": {
+    "root1_positive_new_primitive_gap_delta": 0,
+    "family_count_delta_now": 0,
+    "acceptance_predicate_delta_now": 0,
+    "proved_atomic_delta_now": 0,
+    "ownership_delta_now": 0,
+    "literal_terminal": false,
+    "reason": "This is a structural reduction and target-accounting repair candidate, not proof that the remaining analysis quality or current acceptance/ownership predicates are closed."
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_ANALYSIS_PARITY_IS PROVED.",
+    "NO_CLAIM_B2B_IS NONEMPTY AFTER A FUTURE COMPLETE CEILING PARTITION.",
+    "NO_CLAIM_THE_CURRENT_19_FAMILY ENVELOPE IS ALREADY SEMANTICALLY TOTAL.",
+    "NO_CLAIM_A_20TH FAMILY IS REQUIRED.",
+    "NO_CLAIM_THE_CURRENT_MULTIDISCIPLINARY_REASONING BAR COVERS THE WIDENED SCOPE.",
+    "NO_CREATIVE_TEXT CREDIT.",
+    "NO_ACCEPTANCE FAMILY CAPABILITY OR OWNERSHIP CREDIT.",
+    "NO_FRESH_REALITY OR TARGET COMPARATOR AUTHORITY."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
