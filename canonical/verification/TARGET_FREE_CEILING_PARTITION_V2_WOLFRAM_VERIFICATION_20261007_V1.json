@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_TARGET_FREE_CEILING_PARTITION_V2_WOLFRAM_VERIFICATION",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_PROPOSITIONAL_LOGIC_PASS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/TARGET_FREE_CEILING_PARTITION_REDUCTION_20261007_V2.json",
+    "governance_commit_sha": "8e00016945a5fd31e5f6cde5be1c5ab06bf9df0b",
+    "branch": "obs/target-free-ceiling-partition-v2-20261007"
+  },
+  "formula": "(top => (A && B)) => ((target => (A && B)) <=> ((target && !top) => (A && B)))",
+  "wolfram_code": "FullSimplify[Implies[Implies[t,c&&d],Equivalent[Implies[u,c&&d],Implies[u&&!t,c&&d]]],Element[{t,u,c,d},Booleans]]",
+  "wolfram_result": true,
+  "interpretation": [
+    "GIVEN_VALID_TOP_IMPLIES_A_AND_B_FOR_A_CONTEXT__TARGET_SPECIFIC_A_AND_B_ARE_REDUNDANT_IN_THAT_CONTEXT",
+    "THE_POINTWISE_EQUIVALENCE_LIFTS_TO_THE_CONTEXT_UNIVERSE",
+    "THE_LOGIC_DOES_NOT_ESTABLISH_WHICH_REAL_CONTEXTS_HAVE_VALID_TOP_CERTIFICATES"
+  ],
+  "hard_nonclaims": [
+    "NO_EMPIRICAL_TOP_COVERAGE_VERIFIED",
+    "NO_RESIDUAL_TARGET_COMPLETENESS_VERIFIED",
+    "NO_TERMINAL_OR_CAPABILITY_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
