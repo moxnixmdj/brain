@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_KERNEL_EFFECT_INHERITED_FD_COUNTERMODEL_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_COUNTERMODEL_PASS__NAMESPACE_ONLY_THEOREM_FALSIFIED__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "path": "canonical/runtime/root3_kernel_effect_inherited_fd_countermodel_v1.py",
+    "git_blob_sha": "2a2d596f17bf07aeb2adc390d672db4405d8b925"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "execution": "EXACT_GITHUB_BLOB_MATERIALIZATION_THEN_PYTHON3"
+  },
+  "result": {
+    "countermodel": true,
+    "child_returncode": 0,
+    "received": "X"
+  },
+  "proved_falsification": "A_COMMUNICATION_FILE_DESCRIPTOR_OPENED_BEFORE_unshare_-Urn_CAN_REMAIN_USABLE_BY_THE_CHILD_AFTER_NAMESPACE_ENTRY__THEREFORE_NAMESPACE_CREATION_ALONE_IS_NOT_A_SCOPE_COMPLETE_HOST_EFFECT_BOUNDARY.",
+  "repair_requirement": "ESTABLISH_BOUNDARY_BEFORE_UNAPPROVED_CHANNEL_CREATION_AND_CLOSE_OR_EXPLICITLY_ALLOWLIST_INHERITED_FILE_DESCRIPTORS_BEFORE_CREDITED_RUNTIME_START.",
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_REPAIRED_FD_HYGIENE_ROUTE_IS_YET_PROVED_SCOPE_COMPLETE",
+    "NO_ROOT3_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}

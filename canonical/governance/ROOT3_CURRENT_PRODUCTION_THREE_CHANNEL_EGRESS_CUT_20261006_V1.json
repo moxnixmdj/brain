@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_CURRENT_PRODUCTION_THREE_CHANNEL_EGRESS_CUT_V1",
+  "date": "2026-10-06",
+  "status": "DONOR_TRUTH_REPAIR__CURRENT_MAIN_STATIC_EGRESS_COMPRESSION__ZERO_ROOT3_CREDIT__REBASE_REQUIRED",
+  "canonical_subject": {
+    "main_commit": "564498e096f71c5786e2c1345a2fa4f4356ed566",
+    "astra_runtime_path": "canonical/runtime/astra_runtime.py",
+    "astra_runtime_git_blob_sha": "3567cfd77eae06e2d384c5e0b18972b2d3a62c3b"
+  },
+  "verified_substrate": {
+    "parent_membrane": "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+    "parent_membrane_hostile_verification": "canonical/verification/ROOT3_PARENT_EFFECT_MEMBRANE_HOSTILE_SPRITE_VERIFICATION_20261006_V1.json",
+    "final_output_policy": "canonical/runtime/declared_artifact_semantic_policy_v1.py",
+    "admin_persistence_policy": "canonical/runtime/root3_typed_durable_admin_write_v1.py",
+    "final_authorizer": "canonical/runtime/effect_broker_final_authorizer_v1.py",
+    "carrier_guard": "canonical/runtime/effect_carrier_guard_v2.py"
+  },
+  "static_current_runtime_facts": {
+    "external_tool_bridge_call_kinds": [
+      "urlopen",
+      "http_get",
+      "planner",
+      "package_name_search",
+      "python_source_tree",
+      "pypi_wheel_closure"
+    ],
+    "external_tool_bridge_role": "INFORMATION_OR_PLANNING_INGRESS_ONLY__NO_CURRENT_EXTERNAL_MUTATION_CALL_KIND",
+    "reserved_admin_persistence": [
+      "ASTRA_STATE_JSON",
+      "ASTRA_EVIDENCE_JSON",
+      "ASTRA_EVIDENCE_JSONL"
+    ],
+    "declared_final_output_semantic_policy_present": true,
+    "process_classes": "ALL_CURRENT_PROCESS_OR_NATIVE_EFFECTS_BECOME_INTERNAL_TO_PARENT_MEMBRANE_IF_ENTRY_DOMINANCE_IS_PROVED__HOST_MATERIAL_EGRESS_REMAINS_DENIED_EXCEPT_DECLARED_CHANNELS"
+  },
+  "minimum_cross_boundary_classes": [
+    {
+      "id": "INFORMATION_INGRESS",
+      "includes": [
+        "HTTP_GET",
+        "URLOPEN",
+        "PLANNER",
+        "PACKAGE_DISCOVERY",
+        "SOURCE_TREE_DISCOVERY",
+        "WHEEL_CLOSURE_DISCOVERY"
+      ],
+      "required_parent_binding": "RECOMPUTE_OR_VERIFY_CONTINUOUS_OBS_INFORMATION_AUTHORITY_AND_RETURN_CONTENT_BOUND_RESULT"
+    },
+    {
+      "id": "ADMIN_PERSISTENCE_EGRESS",
+      "includes": [
+        "ASTRA_STATE_JSON",
+        "ASTRA_EVIDENCE_JSON",
+        "ASTRA_EVIDENCE_JSONL"
+      ],
+      "required_parent_binding": "EXECUTE_EXISTING_ROOT3_TYPED_DURABLE_ADMIN_WRITE_PLAN_IN_TRUSTED_PARENT_AND_RETURN_POSTSTATE_RECEIPT"
+    },
+    {
+      "id": "FINAL_OUTPUT_EGRESS",
+      "includes": [
+        "DECLARED_ARTIFACT_FINALIZATION"
+      ],
+      "required_parent_binding": "USE_EXISTING_DECLARED_ARTIFACT_SEMANTIC_POLICY_PLUS_FINAL_AUTHORIZER_AND_TYPED_PARENT_FINALIZER"
+    }
+  ],
+  "deleted_as_independent_host_egress_classes_if_parent_entry_dominance_holds": [
+    "PACKAGE_ENV_MUTATION",
+    "LOCAL_LOOPBACK_SERVICE",
+    "BOUND_CHILD_CODE_EXECUTION",
+    "ARBITRARY_COMMAND_EXECUTION",
+    "TEMPORARY_FILESYSTEM_TRANSFORM",
+    "READ_ONLY_DECLARED_QUERY"
+  ],
+  "reason": "THESE_EFFECTS_MAY_AFFECT_PRIVATE_RUNTIME_STATE_OR_FUNCTIONAL_SUCCESS_BUT_CANNOT_BECOME_HOST_MATERIAL_EFFECTS_WHEN_ALL_DESCENDANTS_INHERIT_THE_VERIFIED_PRIVATE_ROOT_NETWORK_PID_IPC_UTS_DESCRIPTOR_PRIVILEGE_AND_RESOURCE_BOUNDARY__FUNCTIONAL_AVAILABILITY_REMAINS_A_SEPARATE_CAPABILITY_OBLIGATION",
+  "current_root3_build_cut": [
+    "BIND_PRODUCTION_ASTRA_PARENT_ENTRY_TO_ZERO_AMBIENT_NAMESPACE_MEMBRANE",
+    "ADD_PARENT_ROUNDTRIP_FOR_INFORMATION_INGRESS_WITH_TRUSTED_AUTHORITY_RECOMPUTATION",
+    "MOVE_TYPED_ADMIN_COMMIT_EXECUTION_TO_TRUSTED_PARENT_PERSISTENCE_HANDLER",
+    "BIND_FINAL_OUTPUT_TO_EXISTING_TYPED_PARENT_FINALIZER",
+    "PROVE_THESE_THREE_CHANNELS_ARE_TOTAL_FOR_CURRENT_CREDITED_RUNTIME_AND_ANY_NEW_MATERIAL_CHANNEL_FAILS_CLOSED",
+    "REPLAY_WHOLE_PRODUCTION_RUNTIME_AND_MUTATION_FALSIFIERS_ON_INDEPENDENT_CARRIER"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_PRODUCTION_ENTRY_IS_CURRENTLY_MEMBRANE_BOUND",
+    "NO_CLAIM_THREE_CHANNEL_TRANSPORT_IS_CURRENTLY_IMPLEMENTED",
+    "NO_CLAIM_FUNCTIONAL_CAPABILITY_AVAILABILITY_INSIDE_MEMBRANE",
+    "NO_CLAIM_FUTURE_EXTERNAL_MUTATION_CAPABILITIES_ARE_COVERED",
+    "NO_ROOT3_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}

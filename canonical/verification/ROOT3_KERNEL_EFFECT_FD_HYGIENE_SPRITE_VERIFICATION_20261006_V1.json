@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_KERNEL_EFFECT_FD_HYGIENE_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__FD_COUNTERMODEL_REPAIRED_FOR_NO_BROKER_LAUNCH__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "path": "canonical/runtime/root3_kernel_effect_fd_hygiene_probe_v1.py",
+    "git_blob_sha": "7bd60d71b88941bf7a83cee43dbf0ab9b1ba7ab1"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "execution": "EXACT_GITHUB_BLOB_MATERIALIZATION_THEN_PYTHON3"
+  },
+  "result": {
+    "pass": true,
+    "observed_live_fds": [0,1,2],
+    "child_returncode": 0
+  },
+  "proved_scope": "WHEN_LAUNCHED_WITH_CLOSE_FDS_TRUE_AND_NO_EXPLICIT_BROKER_FDS__THE_OBSERVED_ISOLATED_CHILD_HAS_ONLY_DECLARED_STDIO_DESCRIPTORS_AMONG_0_THROUGH_63.",
+  "hard_nonclaims": [
+    "NO_CLAIM_BROKER_FD_ALLOWLIST_SOUNDNESS",
+    "NO_CLAIM_STDIO_CHANNELS_ARE_NONMATERIAL_FOR_EVERY_TERMINAL_PREDICATE",
+    "NO_CLAIM_LATE_CHANNEL_CREATION_IS_IMPOSSIBLE",
+    "NO_CLAIM_UNIX_SOCKET_DEVICE_IOCTL_PTRACE_PROC_SYS_SYSFS_OR_NAMESPACE_ESCAPE_CLOSURE",
+    "NO_E2_E3_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}

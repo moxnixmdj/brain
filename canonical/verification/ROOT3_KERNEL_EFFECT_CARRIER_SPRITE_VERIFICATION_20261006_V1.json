@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_KERNEL_EFFECT_CARRIER_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__7_OF_7__CARRIER_PRIMITIVES_ONLY__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/root3_kernel_effect_carrier_probe_v1.py",
+      "git_blob_sha": "29db7c724716b62b1497fb12b6dab32e84cefe6a"
+    },
+    "governance": {
+      "path": "canonical/governance/ROOT3_KERNEL_EFFECT_CARRIER_V1.json",
+      "git_blob_sha": "4f0403075b6b488a48b1fe52060ebdadeab65887"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "execution": "EXACT_GITHUB_BLOB_MATERIALIZATION_THEN_PYTHON3_PROBE"
+  },
+  "verified": [
+    "UNPRIVILEGED_USER_NAMESPACE_CREATION",
+    "UNPRIVILEGED_USER_PLUS_NETWORK_NAMESPACE_CREATION",
+    "UNPRIVILEGED_USER_PLUS_MOUNT_NAMESPACE_CREATION",
+    "UNPRIVILEGED_COMBINED_USER_NETWORK_MOUNT_NAMESPACE_CREATION",
+    "CONTROL_EXTERNAL_NETWORK_REACHABILITY_OUTSIDE_NAMESPACE",
+    "EXTERNAL_NETWORK_BLOCKED_INSIDE_NEW_NETWORK_NAMESPACE",
+    "READ_ONLY_BIND_MOUNT_BLOCKS_DESCENDANT_WRITE_INSIDE_NAMESPACE"
+  ],
+  "result": {
+    "checks_passed": 7,
+    "checks_total": 7,
+    "e2_closed": false,
+    "e3_closed": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_UNSHARE_ALONE_IS_A_COMPLETE_SANDBOX",
+    "NO_CLAIM_INHERITED_FILE_DESCRIPTORS_UNIX_SOCKETS_DEVICES_IOCTL_PTRACE_PROC_SYS_SYSFS_OR_NAMESPACE_ESCAPE_ARE_CLOSED",
+    "NO_CLAIM_BROKER_SOUNDNESS",
+    "NO_CLAIM_REQUIRED_BRAIN_CAPABILITIES_HAVE_BEEN_RUN_INSIDE_THE_BOUNDARY",
+    "NO_ROOT3_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
