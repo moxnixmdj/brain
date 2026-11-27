@@ -1,0 +1,143 @@
+{
+  "schema": "PROJECT_BRAIN_IF_P2_SOUNDNESS_MINIMUM_SEMANTIC_BRIDGE_CUT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__P2_REDUCED_TO_FAIL_CLOSED_TOTALITY_PLUS_ONE_WAY_SEMANTIC_CONTAINMENT_EDGE__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "parent_predicate": "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+  "parent_premise": "P2_MEMBRANE_SOUNDNESS_AND_FAIL_CLOSED_TOTALITY",
+  "objective": "Reduce P2 to the smallest load-bearing semantic object. A complete executable authority scorer is not required: mechanical fail-closed totality plus one independently verified one-way containment edge from membrane ALLOW to scorer-safe is sufficient.",
+  "exact_inputs": {
+    "parent_cut": {
+      "path": "canonical/governance/IF_ZERO_CRITICAL_AUTHORITY_TWO_PREMISE_CUT_20261005_V1.json",
+      "git_blob_sha": "4f6c5d9a674410305be8647601d45ef2cf908063"
+    },
+    "target_normalization": {
+      "path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V3.json",
+      "git_blob_sha": "72a5cd689f55df84de73693371264f02ef4e7226"
+    },
+    "frozen_protocol": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "implication_algebra": {
+      "path": "canonical/runtime/protocol_implication_scope_algebra_v2.py",
+      "git_blob_sha": "6aba64c26433b4a8646d5d96bb07e5ba5b46ca1b"
+    },
+    "implication_verification": {
+      "path": "canonical/verification/PROTOCOL_IMPLICATION_SCOPE_ALGEBRA_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "443bb49ffc192ac11e6d4552ab78dc9f47366685"
+    }
+  },
+  "verified_target_semantic_surface": {
+    "exact_atom": "invariant:zero_critical_authority_violations",
+    "exact_metric": "critical_authority_violations",
+    "direction": "lower",
+    "threshold": 0,
+    "protocol_dimensions": [
+      "multi-constraint instruction compliance",
+      "authorization/scope boundaries",
+      "routine ambiguity",
+      "requirement change",
+      "explicit abstention/fail-closed cases"
+    ],
+    "current_semantic_gap": "THE_FROZEN_ARTIFACTS_NAME_THE_METRIC_AND_DIMENSIONS_BUT_DO_NOT_CURRENTLY_BIND_A_MACHINE_CHECKABLE_EVENT_LEVEL_PREDICATE_DEFINING_WHEN_AN_EVENT_COUNTS_AS_A_CRITICAL_AUTHORITY_VIOLATION."
+  },
+  "minimum_unproved_premises": [
+    {
+      "id": "P2A_FAIL_CLOSED_DECISION_TOTALITY",
+      "statement": "FOR_EVERY_AUTHORITY_RELEVANT_EVENT_AND_BOUND_AUTHORITY_STATE__THE_MEMBRANE_RETURNS_EXACTLY_ALLOW_OR_BLOCK__AND_ANY_UNKNOWN_AMBIGUOUS_MISSING_UNBOUND_OR_UNPARSEABLE_AUTHORITY_STATE_RETURNS_BLOCK_BEFORE_THE_EVENT_CAN_BECOME_OBSERVABLE_OR_EFFECTIVE",
+      "class": "MECHANICAL_RUNTIME_PROPERTY"
+    },
+    {
+      "id": "P2B_ALLOW_TO_SCORER_SAFE_SEMANTIC_CONTAINMENT",
+      "statement": "ON_EXACT_OR_PROVEN_STRONGER_FROZEN_SCOPE__FOR_EVERY_AUTHORITY_RELEVANT_EVENT_e__MEMBRANE_ALLOW(e)_IMPLIES_NOT_CRITICAL_AUTHORITY_VIOLATION(e)_UNDER_THE_FROZEN_ACCEPTANCE_SEMANTICS",
+      "class": "ONE_WAY_SEMANTIC_IMPLICATION",
+      "required_edge": {
+        "source_atom": "membrane:allow_content_bound_authority_event",
+        "target_atom": "event:not_critical_authority_violation",
+        "relation": "IMPLIES",
+        "scope_relation": "EXACT_OR_PROVEN_SUPERSET"
+      }
+    }
+  ],
+  "theorem": {
+    "id": "FAIL_CLOSED_TOTALITY_PLUS_ALLOW_SAFE_CONTAINMENT_IMPLIES_P2",
+    "proof": [
+      "FIX_ANY_AUTHORITY_RELEVANT_EVENT_e_CONSIDERED_FOR_EMISSION.",
+      "BY_P2A__THE_DECISION_IS_ALLOW_OR_BLOCK_AND_UNKNOWN_OR_AMBIGUOUS_STATE_CANNOT_REDUCE_TO_ALLOW.",
+      "IF_BLOCK__e_IS_NOT_EMITTED_AND_CANNOT_CONTRIBUTE_A_CRITICAL_AUTHORITY_VIOLATION.",
+      "IF_ALLOW__BY_P2B__e_IS_NOT_A_CRITICAL_AUTHORITY_VIOLATION_UNDER_THE_FROZEN_ACCEPTANCE_SEMANTICS.",
+      "THEREFORE_NO_DECISION_BRANCH_CAN_EMIT_A_CRITICAL_AUTHORITY_VIOLATION__WHICH_IS_PARENT_P2."
+    ],
+    "conclusion": "P2A_AND_P2B=>P2_MEMBRANE_SOUNDNESS_AND_FAIL_CLOSED_TOTALITY"
+  },
+  "why_full_scorer_reconstruction_is_not_required": {
+    "observation": "THE_PARENT_PROOF_ONLY_USES_THE_PROPERTY_ALLOW_IMPLIES_SAFE__IT_NEVER_NEEDS_TO_SCORE_OR_CLASSIFY_BLOCKED_EVENTS_OR_PRODUCE_A_COMPLETE_METRIC_VALUE_FROM_ARBITRARY_TRACES.",
+    "consequence": "THE_MINIMUM_SEMANTIC_OBJECT_IS_A_ONE_WAY_CONTAINMENT_EDGE__NOT_A_TOTAL_SCORER_IMPLEMENTATION.",
+    "preserved_fail_closed_rule": "ABSENCE_OF_THIS_EDGE_IS_NOT_EVIDENCE_OF_SAFETY."
+  },
+  "current_truth": {
+    "P2A_proved": false,
+    "P2B_proved": false,
+    "parent_P2_proved": false,
+    "livebench_ifeval_not_sufficient": true,
+    "reason": "THE_INDEPENDENTLY_FROZEN_LIVEBENCH_IFEVAL_SCORER_PROVES_THE_SEPARATE_PUBLIC_BAR_SURFACE__IT_DOES_NOT_DEFINE_THE_MATCHED_SCOPE_AUDIT'S_CRITICAL_AUTHORITY_VIOLATION_EVENT_SEMANTICS. NO_VERIFIED_ALLOW_TO_SAFE_EDGE_WAS_FOUND_IN_CURRENT_CANONICAL_AUTHORITY_OR_MATCHED_TARGET_NORMALIZATION."
+  },
+  "admissible_P2B_routes": [
+    {
+      "id": "EXACT_SCORER_CONTAINMENT",
+      "action": "BIND_THE_EXACT_PREDECLARED_AUTHORITY_VIOLATION_EVENT_SEMANTICS_AND_MECHANICALLY_PROVE_MEMBRANE_ALLOW_IS_A_SUBSET_OF_SCORER_SAFE_EVENTS",
+      "requires_full_scorer_execution": false
+    },
+    {
+      "id": "STRONGER_UNIVERSAL_AUTHORITY_CERTIFICATE",
+      "action": "PROVE_EVERY_ALLOW_EVENT_CARRIES_A_CONTENT_BOUND_AUTHORITY_WITNESS_THAT_IS_INDEPENDENTLY_VERIFIED_TO_BE_STRONGER_THAN_THE_FROZEN_SAFE_EVENT_REQUIREMENT__THEN_BIND_ONLY_THE_RESULTING_IMPLICATION_EDGE",
+      "warning": "DO_NOT_INVENT_A_NARROWER_AUTHORITY_DEFINITION__THE_STRONGER_RELATION_MUST_BE_INDEPENDENTLY_VERIFIED."
+    }
+  ],
+  "scheduler_delta": {
+    "delete": [
+      "RECONSTRUCT_A_COMPLETE_AUTHORITY_SCORER_IF_ONLY_THE_ALLOW_TO_SAFE_EDGE_IS_NEEDED",
+      "TREAT_LIVEBENCH_IFEVAL_SCORER_SEMANTICS_AS_THE_SCOPE_BOUNDARY_AUTHORITY_SCORER",
+      "PROMOTE_NATURAL_LANGUAGE_SIMILARITY_BETWEEN_AUTHORIZATION_AND_SAFE_EVENT_AS_A_SEMANTIC_EDGE"
+    ],
+    "activate": [
+      "BUILD_OR_RECOVER_P2A_FAIL_CLOSED_TOTALITY_RECEIPT",
+      "SEARCH_FOR_OR_PRODUCE_EXACTLY_ONE_P2B_ALLOW_TO_SCORER_SAFE_CONTAINMENT_CERTIFICATE",
+      "FEED_P2B_THROUGH_THE_EXISTING_EXACT_OR_SUPERSET_SCOPE_IMPLICATION_FIREWALL",
+      "AFTER_P2A_P2B_AND_PARENT_P1_PASS__TRANSMUTE_THE_ZERO_FLOOR_PREDICATE"
+    ]
+  },
+  "falsifiers": [
+    "UNKNOWN_AMBIGUOUS_MISSING_OR_UNBOUND_AUTHORITY_STATE_CAN_YIELD_ALLOW",
+    "A_MEMBRANE_ALLOWED_EVENT_IS_A_CRITICAL_AUTHORITY_VIOLATION_UNDER_THE_FROZEN_ACCEPTANCE_SEMANTICS",
+    "THE_P2B_EDGE_IS_PROVED_ONLY_ON_PARTIAL_OR_DIFFERENT_SCOPE",
+    "THE_P2B_EDGE_IS_INFERRED_FROM_NAMES_OR_NATURAL_LANGUAGE_ANALOGY_WITHOUT_INDEPENDENT_SEMANTIC_BINDING",
+    "LIVEBENCH_IFEVAL_IS_SUBSTITUTED_FOR_THE_SEPARATE_SCOPE_BOUNDARY_AUTHORITY_SEMANTICS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_P2A_IS_PROVED.",
+    "NO_CLAIM_P2B_IS_PROVED.",
+    "NO_CLAIM_A_COMPLETE_AUTHORITY_SCORER_IS_CURRENTLY_BOUND.",
+    "NO_CLAIM_IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS_IS_CLOSED.",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT.",
+    "NO_FRESH_REALITY_AUTHORITY."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
