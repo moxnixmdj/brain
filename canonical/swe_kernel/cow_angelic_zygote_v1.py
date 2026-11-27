@@ -2301,3 +2301,26 @@ class NegativeSpaceGuard:
         if self.store_path is not None:
             self.store_path.parent.mkdir(parents=True, exist_ok=True)
             self.store_path.write_text(json.dumps(self._invariants, indent=2, sort_keys=True), encoding="utf-8")
+
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for cow_angelic_zygote_v1."""
+    import tempfile as _tf
+    checks: dict[str, bool] = {}
+    _vecs = build_64_boundary_vectors()
+    checks["boundary_vectors_nonempty"] = isinstance(_vecs, list) and len(_vecs) >= 16
+    _orig = "def f(x):\n    return x\n"
+    _p1 = "def f(x):\n    return x + 1\n"
+    _p2 = "def f(x):\n    return x * 2\n"
+    _fp1 = canonical_ast_delta_fingerprint(_orig, _p1)
+    _fp2 = canonical_ast_delta_fingerprint(_orig, _p2)
+    checks["delta_fp_nonempty"] = isinstance(_fp1, str) and bool(_fp1)
+    checks["delta_fp_distinguishes_ops"] = _fp1 != _fp2
+    with _tf.TemporaryDirectory(prefix="w51_zyg_") as _td:
+        _nsg = NegativeSpaceGuard(pathlib.Path(_td) / "nsg.json")
+        checks["nsg_initially_clean"] = not _nsg.is_refuted(_orig, _p1)
+        _nsg.record_refutation(_orig, _p1, "counterexample")
+        checks["nsg_blocks_refuted"] = _nsg.is_refuted(_orig, _p1)
+        checks["nsg_allows_unrelated"] = not _nsg.is_refuted(_orig, _p2)
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
+

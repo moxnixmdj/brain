@@ -2704,3 +2704,28 @@ def run_learning_episode(
         "fallback_used": selected is not None,
         "terminal_authority": False,
     }
+
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for autonomous_verified_self_improvement_v1."""
+    checks: dict[str, bool] = {}
+    _st = _empty_state()
+    checks["empty_state_dict"] = isinstance(_st, dict)
+    _diag = _diagnose_failure({"ok": False, "error": "timeout waiting for probe"})
+    checks["diagnose_failure_nonempty"] = isinstance(_diag, dict) and bool(_diag)
+    _wid1 = _enqueue_improvement(_st, kind="gap", priority=1, identity={"k": "v1"}, payload={"note": "x"})
+    _wid2 = _enqueue_improvement(_st, kind="gap", priority=1, identity={"k": "v1"}, payload={"note": "x"})
+    checks["enqueue_idempotent_id"] = isinstance(_wid1, str) and _wid1 == _wid2
+    _valid_ok = True
+    try:
+        _validate_retry_value({"a": 1, "b": [2, "ok"]})
+    except Exception:
+        _valid_ok = False
+    checks["validate_retry_positive"] = _valid_ok
+    _bad_rejected = False
+    try:
+        _validate_retry_value(object())
+    except Exception:
+        _bad_rejected = True
+    checks["validate_retry_negative_rejects_object"] = _bad_rejected
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}

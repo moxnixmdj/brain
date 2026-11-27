@@ -2700,3 +2700,21 @@ def build_programmatic_ast_catamorphism_stmts(
         ast.fix_missing_locations(st)
     return stmts
 
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for concept_library_v1."""
+    import tempfile as _tf
+    checks: dict[str, bool] = {}
+    _expr = ast.parse("x * 2 + y", mode="eval").body
+    checks["pure_eval_positive"] = eval_pure_ast_expr(_expr, {"x": 5, "y": 3}) == 13
+    _unsafe_rejected = False
+    try:
+        _bad = ast.parse("__import__('os').system('echo hi')", mode="eval").body
+        eval_pure_ast_expr(_bad, {})
+    except UnsafeOrUnsupportedAST:
+        _unsafe_rejected = True
+    checks["pure_eval_rejects_unsafe_import"] = _unsafe_rejected
+    with _tf.TemporaryDirectory(prefix="w51_clib_") as _td:
+        _lib = CompoundingConceptLibrary(pathlib.Path(_td) / "concepts.json")
+        checks["library_initializes"] = isinstance(_lib.concepts(), (list, dict))
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}

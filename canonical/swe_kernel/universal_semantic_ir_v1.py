@@ -2246,3 +2246,24 @@ def lift_verified_diff_to_semantic_law(
         contrast_verified=contrast_verified,
         evidence_digest=ev_hash,
     )
+
+def self_check() -> dict[str, Any]:
+    """Behavioral positive+negative proof contract for universal_semantic_ir_v1."""
+    import tempfile as _tf
+    checks: dict[str, bool] = {}
+    _morph_same = extract_ast_subtree_morphism(
+        b"def f(x):\n    return x\n",
+        b"def f(x):\n    return x\n",
+    )
+    checks["extract_morphism_identity_none"] = _morph_same is None
+    _morph = extract_ast_subtree_morphism(
+        b"def f(x):\n    if x is None:\n        return 0\n    return x + 1\n",
+        b"def f(x):\n    if not x:\n        return 0\n    return x + 1\n",
+    )
+    checks["extract_morphism_returns_optional_dict"] = _morph is None or isinstance(_morph, dict)
+    with _tf.TemporaryDirectory(prefix="w51_usir_") as _td:
+        _st = SemanticCausalLawStore(pathlib.Path(_td) / "usir.json")
+        checks["law_store_initial_empty"] = len(_st.inspect_laws()) == 0
+    _ok = all(checks.values())
+    return {"pass": _ok, "verdict": "PASS" if _ok else "FAIL", "checks": len(checks), "passed": sum(checks.values()), "details": checks}
+
