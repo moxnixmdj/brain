@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_CROWDBT_UNSEEN_ENTRANT_WOLFRAM_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_BRADLEY_TERRY_UNSEEN_PARAMETER_RANGE_PASS__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/gdpval_crowdbt_unseen_entrant_identifiability_v1.py",
+      "git_blob_sha": "0c481581c6eee925ca6205e574fd29c0c8a9fba4"
+    },
+    "tests": {
+      "path": "canonical/tests/test_gdpval_crowdbt_unseen_entrant_identifiability_v1.py",
+      "git_blob_sha": "a8d671c7de960923acc46aee116945dd0c010496"
+    }
+  },
+  "independent_computation": {
+    "engine": "Wolfram Language",
+    "parameterization": "x=Exp(beta_B-beta_O)>0__P(B>O)=x/(1+x)",
+    "results": {
+      "limit_x_to_infinity": 1,
+      "limit_x_to_zero_positive": 0,
+      "inverse_for_0_lt_p_lt_1": "x=p/(1-p)"
+    }
+  },
+  "verified": [
+    "WITH_OPUS_STRENGTH_FIXED_AND_BRAIN_STRENGTH_UNCONSTRAINED__BRADLEY_TERRY_BRAIN_VS_OPUS_WIN_PROBABILITY_SPANS_THE_OPEN_INTERVAL_(0,1)",
+    "ANY_DESIRED_INTERIOR_PAIRWISE_PROBABILITY_HAS_A_CORRESPONDING_BRAIN_MINUS_OPUS_STRENGTH",
+    "AN_INCUMBENT_ONLY LIKELIHOOD CONTAINING_NO_BRAIN_EDGE CANNOT_IDENTIFY_BRAIN_STRENGTH"
+  ],
+  "boundary": [
+    "THIS_IS_A_PROPERTY_OF_THE_BRADLEY_TERRY FAMILY AND AN UNSEEN ENTRANT__NOT A CLAIM ABOUT THE PRIVATE OWNER GRAPH",
+    "THE_CURRENT PUBLIC GDPVAL SURFACE DOES_NOT_BIND_BRAIN COMPARISONS",
+    "NO OWNER PREFERENCE OR GDPVAL ACCEPTANCE CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
