@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_CODING_V9_SEMANTIC_ACCEPTANCE_SALVAGE_CANDIDATE_20261012_V1",
+  "date": "2026-10-12",
+  "status": "CANDIDATE_FOUND_AND_LOCAL_TESTS_PASS__NOT_INTEGRATED__ZERO_CAPABILITY_CREDIT",
+  "mission": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "current_main_frontier": {
+    "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "git_blob_sha": "24c41a4899f161e741e89a4c159caf0800d9fd1b",
+    "next": "CODING_GENERAL_SOFTWARE_REPAIR_LOOP_V9__SOUND_RAW_SOFTWARE_REQUEST_SEMANTIC_ACCEPTANCE_CELL_EXPANSION_AND_GENERALIZATION"
+  },
+  "reused_candidate": {
+    "origin": "SPRITE brain-canonical-apply-slice-verify-20261011-v1 /home/sprite/coding_v6_replay",
+    "compiler": {
+      "filename": "software_request_acceptance_compile_v1.py",
+      "sha256": "07d9814ddf0b22f59252ea72ef8dcbe89786863054d12fcec3643fae3d5538ef"
+    },
+    "executor": {
+      "filename": "software_request_acceptance_execute_v1.py",
+      "sha256": "e705d41eb69acdd2dd77d687948e187031e0fe56ccc3c8a86f8cbf287c3ff18d"
+    },
+    "tests": {
+      "filename": "test_software_request_acceptance_v1.py",
+      "sha256": "9e5807de212b4b120f60a1fef6b7f65eec14e16d900558e81900fafa8f27702a"
+    },
+    "additional_falsification": {
+      "filename": "additional_verify.py",
+      "sha256": "211281ff32ddd8980a7b173c5100dd6ce4f2c2a06c514a806f902e838f3e6ae2"
+    }
+  },
+  "candidate_semantics": [
+    "explicit Python call return and exception predicates",
+    "explicit file existence and non-existence predicates",
+    "AST-based unique function binding and literal-only arguments",
+    "unbound or undersegmented normative clauses remain blocking holes",
+    "existing test success has no authority to fill semantic gaps",
+    "zero external model runtime cognition"
+  ],
+  "verification": {
+    "command": "python -m unittest -v test_software_request_acceptance_v1.py",
+    "result": "PASS",
+    "tests_passed": 12,
+    "tests_total": 12,
+    "additional_falsification_script_present": true,
+    "additional_falsification_script_executed_in_this_turn": false,
+    "full_repository_regression_executed": false,
+    "current_main_dependency_replay": false,
+    "independent_reviewer": false
+  },
+  "integration_gap": [
+    "candidate exists only in prior verification Sprite, not canonical main",
+    "must import the candidate into canonical runtime/tests and adapt it to current repository APIs",
+    "must run red-green tests for the integration boundary",
+    "must add adversarial cases for side effects, unsafe import execution, symlink/path races, mutable repository drift, and source-grounded acceptance completeness",
+    "must compose with V8 measured acceptance without treating source predicates or passing tests as general task completeness",
+    "must run current-main independent replay before any promotion"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_NATURAL_LANGUAGE_SEMANTIC_COMPLETENESS",
+    "NO_ARBITRARY_SOFTWARE_REQUEST_COVERAGE",
+    "NO_CROSS_LANGUAGE_GENERALIZATION",
+    "NO_FRONTIERCODE_SCORE_CREDIT",
+    "NO_BENCHMARK_SCORE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "next": "SALVAGE_AND_HARDEN_THIS_EXISTING_ACCEPTANCE_CELL_CANDIDATE_IN_CANONICAL_V9__DO_NOT_REIMPLEMENT_FROM_SCRATCH__DO_NOT_PROMOTE_BEFORE_CURRENT_MAIN_INTEGRATION_AND_INDEPENDENT_REPLAY"
+}
