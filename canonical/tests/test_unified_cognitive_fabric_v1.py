@@ -9,6 +9,8 @@ from pathlib import Path
 
 from canonical.runtime import autonomous_verified_self_improvement_v1 as r3
 from canonical.runtime import universal_verified_adaptive_solver_v12 as solver_v12
+from canonical.runtime import semantic_relation_authority_registry_v1 as relation_registry
+from canonical.runtime import semantic_relation_entailment_dag_v1 as relation_dag
 from canonical.runtime.unified_cognitive_fabric_v1 import catalog, run
 
 
@@ -281,6 +283,94 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
             "SEMANTIC_IDENTITY",
         )
         verifier.assert_called_once()
+
+    def test_registered_finance_identity_edge_auto_routes_through_live_semantic_relation(self):
+        scope = "finance:explicit-definitions:test"
+        left = "reserve buffer"
+        right = "liquidity cushion"
+        upstream = {
+            "pass": True,
+            "schema": "PROJECT_BRAIN_SHARED_CONCEPT_IDENTITY_AUTHORITY_RECEIPT_V1",
+            "scope_id": scope,
+            "left_id": left,
+            "right_id": right,
+            "shared_concept_id": "FINANCE_ROLE::FACT",
+            "left_binding_authenticated": True,
+            "right_binding_authenticated": True,
+            "concept_semantics_authenticated": True,
+            "left_binding_sha256": "1" * 64,
+            "right_binding_sha256": "2" * 64,
+            "registry_sha256": "3" * 64,
+            "verification_authority_mutated": False,
+            "bounded_registry_scope_complete": True,
+            "open_world_ontology_complete": False,
+            "source_text_sha256": "4" * 64,
+            "authority_git_blob_sha": "5" * 40,
+            "receipt_sha256": "6" * 64,
+        }
+        relation_request = {
+            "schema": relation_registry.REQUEST_SCHEMA,
+            "adapter_id": relation_registry.FINANCE_BOUNDED_CONCEPT_IDENTITY_V1,
+            "scope_id": scope,
+            "source_id": left,
+            "target_id": right,
+            "relation": "ENTAILS",
+            "evidence": {
+                "schema": "PROJECT_BRAIN_FINANCE_BOUNDED_CONCEPT_IDENTITY_CLAIM_V1"
+            },
+        }
+        evidence = {
+            "schema": relation_dag.EVIDENCE_SCHEMA,
+            "scope_id": scope,
+            "left_id": left,
+            "right_id": right,
+            "entailment_receipts": [relation_request],
+            "counterexample_receipts": [],
+        }
+        with patch.object(
+            relation_registry.finance_identity,
+            "verify_claim",
+            return_value=upstream,
+        ):
+            out = run({
+                "payload": {
+                    "left_id": left,
+                    "right_id": right,
+                    "left_surface": left,
+                    "right_surface": right,
+                    "scope_id": scope,
+                    "required_relation": "LEFT_ENTAILS_RIGHT",
+                    "entailment_dag_evidence": evidence,
+                    "expected_entailment_dag_sha256": relation_dag.evidence_sha256(evidence),
+                },
+            })
+        self.assertTrue(out["auto_routed"], out)
+        self.assertEqual(out["mode"], "SEMANTIC_RELATION")
+        self.assertTrue(out["inner_pass"], out)
+        self.assertEqual(
+            out["result"]["strongest_proved_relation"],
+            "LEFT_ENTAILS_RIGHT",
+        )
+        self.assertTrue(out["result"]["proved_facts"]["left_entails_right"])
+
+    def test_relation_registry_has_no_unknown_adapter_fallback(self):
+        out = relation_registry.verify_relation({
+            "schema": relation_registry.REQUEST_SCHEMA,
+            "adapter_id": "UNREGISTERED_SEMANTIC_GUESSER",
+            "scope_id": "finance:test",
+            "source_id": "a",
+            "target_id": "b",
+            "relation": "ENTAILS",
+            "evidence": {},
+        })
+        self.assertFalse(out["pass"], out)
+        self.assertEqual(
+            out["reason"],
+            "UNREGISTERED_RELATION_AUTHORITY_ADAPTER",
+        )
+        self.assertFalse(
+            relation_registry.registry_manifest()["fallback_semantic_inference_allowed"]
+        )
 
     @patch("canonical.runtime.unified_cognitive_fabric_v1.oewn_decision_sense.resolve")
     def test_auto_oewn_decision_sense_routes_through_authenticated_control(self, resolver):
