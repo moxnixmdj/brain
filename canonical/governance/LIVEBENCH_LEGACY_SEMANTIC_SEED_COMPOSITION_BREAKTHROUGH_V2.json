@@ -1,0 +1,121 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY_SEMANTIC_SEED_COMPOSITION_BREAKTHROUGH_V2",
+  "date": "2026-10-04",
+  "status": "CANDIDATE_V2__LINEAGE_BACKED_VISIBLE_COMPILER__20_OF_25_LEGACY_FAMILIES_ADMITTED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "breakthrough": [
+    "REBASE_SEMANTIC_SEED_COMPOSITION_ON_THE_RECOVERED_HISTORICAL_GENERATOR_LINEAGE_AND_VISIBLE_CONSTRAINT_COMPILER_V2",
+    "USE_VISIBLE_PROMPT_TEXT_ONLY_TO_RECOVER_ALL_SCORE_RELEVANT_PARAMETERS_UNDER_THE_GENERATOR_CONTRACT",
+    "MECHANICALLY_RETAIN_THE_ORIGINAL_SEMANTIC_SEED_VERBATIM_ON_EVERY_PASS",
+    "EXPAND_SAFE_ADMISSION_FROM_17_OF_25_TO_20_OF_25_LEGACY_FAMILIES_WITH_EXACT_VALIDATOR_ONLY_ROUTES_FOR_PARAGRAPH_COUNT_NTH_PARAGRAPH_FIRST_WORD_AND_JSON"
+  ],
+  "candidate": {
+    "runtime_path": "canonical/runtime/livebench_legacy_semantic_seed_composer_v2.py",
+    "runtime_git_blob_sha": "e5207007305c26e712d2608019988d409a63f2c9",
+    "test_path": "canonical/tests/test_livebench_legacy_semantic_seed_composer_v2.py",
+    "test_git_blob_sha": "d7775764fa2cc569b5483ef7442e31c2236db16b",
+    "visible_compiler_path": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v2.py",
+    "visible_compiler_git_blob_sha": "0e7519f4f2b7d40084effc83a5bef814ee7fd487",
+    "frozen_livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "historical_generator_commit": "686be1e78a0ba8036d7e355bc406e1a265da5292",
+    "historical_generator_blob": "6ff390d6885cf90f88d9d36959735cb327613edc"
+  },
+  "mechanical_invariant": "EVERY_PASS_RESPONSE_CONTAINS_THE_ORIGINAL_SEMANTIC_SEED_VERBATIM_AS_ONE_CONTIGUOUS_SUBSTRING",
+  "admitted_family_count": 20,
+  "registered_legacy_family_count": 25,
+  "family_surface_fraction": 0.8,
+  "admitted_families": [
+    "keywords:existence",
+    "keywords:frequency",
+    "keywords:forbidden_words",
+    "keywords:letter_frequency",
+    "length_constraints:number_paragraphs",
+    "length_constraints:number_words",
+    "length_constraints:nth_paragraph_first_word",
+    "detectable_content:number_placeholders",
+    "detectable_content:postscript",
+    "detectable_format:number_bullet_lists",
+    "detectable_format:constrained_response",
+    "detectable_format:number_highlighted_sections",
+    "detectable_format:multiple_sections",
+    "detectable_format:json_format",
+    "detectable_format:title",
+    "combination:two_responses",
+    "combination:repeat_prompt",
+    "startend:end_checker",
+    "punctuation:no_comma",
+    "startend:quotation"
+  ],
+  "explicitly_unadmitted_families": [
+    "language:response_language",
+    "length_constraints:number_sentences",
+    "change_case:capital_word_frequency",
+    "change_case:english_capital",
+    "change_case:english_lowercase"
+  ],
+  "why_the_five_remain_closed": [
+    "LANGUAGE_AND_ENGLISH_CASE_CHECKERS_DEPEND_ON_EXACT_LANGUAGE_DETECTION_BEHAVIOR_NOT_REIMPLEMENTED_APPROXIMATELY",
+    "NUMBER_SENTENCES_DEPENDS_ON_EXACT_PINNED_SENTENCE_TOKENIZER_BEHAVIOR",
+    "CAPITAL_WORD_FREQUENCY_DEPENDS_ON_EXACT_PINNED_WORD_TOKENIZATION",
+    "GLOBAL_CASE_CONVERSION_WOULD_REWRITE_SEMANTIC_SEED_BYTES_AND_IS_NOT_UNIVERSALLY_SEMANTICS_PRESERVING"
+  ],
+  "fail_closed_rules": [
+    "EMPTY_SEED_REJECTED",
+    "NO_RECOGNIZED_CONSTRAINT_REJECTED",
+    "VISIBLE_COMPILER_PARSE_OR_DUPLICATE_FAILURE_REJECTED",
+    "INCOMPLETE_PARAMETER_RECOVERY_REJECTED",
+    "ANY_RECOGNIZED_UNADMITTED_FAMILY_REJECTED",
+    "CONTRADICTORY_COMBINATIONS_REJECTED_BY_FINAL_POSTVALIDATION",
+    "LESS_THAN_VIOLATIONS_ARE_NOT_REPAIRED_BY_DELETING_SEED_BYTES",
+    "JSON_PARAGRAPH_AND_NTH_PARAGRAPH_FAMILIES_ARE_VALIDATOR_ONLY_AND_NEVER_FORCE_SEED_REWRITES"
+  ],
+  "composition_order": [
+    "VISIBLE_LINEAGE_COMPILATION",
+    "REPEAT_PREFIX",
+    "TITLE_PREFIX",
+    "REQUIRED_ADDITIVE_CONTENT",
+    "STRUCTURAL_ADDITIONS",
+    "VALIDATOR_ONLY_CONSTRAINTS",
+    "POSTSCRIPT",
+    "EXACT_END_PHRASE",
+    "OUTER_QUOTATION",
+    "FINAL_ALL_FAMILY_POSTVALIDATION",
+    "FINAL_VERBATIM_SEED_INVARIANT"
+  ],
+  "scheduler_effect": [
+    "USE_THIS_MODEL_AGNOSTIC_COMPOSITION_BRIDGE_WITH_THE_SMALLEST_SEMANTIC_SEED_CARRIER_THAT_PASSES_THE_PRECOMMITTED_MEANING_SENSITIVE_GATE",
+    "DO_NOT_BLOCK_ON_55_6_GB_SMAUG_WHILE_SMALLER_4B_OR_9B_SEMANTIC_SEED_ROUTES_REMAIN_UNFALSIFIED",
+    "DO_NOT_TREAT_20_OF_25_FAMILY_SURFACE_AS_80_PERCENT_TERMINAL_SCORE_MASS",
+    "KEEP_THE_FIVE_UNADMITTED_FAMILIES_AS_THE_EXPLICIT_COMPOSITION_RESIDUAL"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_20_OF_25_FAMILIES_IMPLIES_80_PERCENT_TERMINAL_SCORE",
+    "NO_CLAIM_ADDED_FORMATTING_MATERIAL_IS_SEMANTICALLY_NEUTRAL_IN_ALL_TASKS",
+    "NO_CLAIM_VISIBLE_COMPILER_V2_PREDECESSOR_REPLAY_HAS_COMPLETED",
+    "NO_CLAIM_QWEN3_8_4B_OR_QWEN3_5_4B_SEMANTIC_SEED_QUALIFICATION_HAS_PASSED",
+    "NO_LIVEBENCH_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "supersedes_candidate": {
+    "branch": "breakthrough/livebench-legacy-seed-composer-20261004-sol",
+    "pull_request": 1804,
+    "reason": "V1_USED_THE_OLDER_PROMPT_INVERTER_AND_ADMITTED_17_OF_25_FAMILIES__V2_IS_BASED_ON_CURRENT_MAIN_AND_THE_RECOVERED_GENERATOR_LINEAGE_COMPILER"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
