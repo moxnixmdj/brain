@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_CI_BASELINE_DIFFERENTIAL_ADMISSIBILITY_BREAKTHROUGH_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_EVIDENCE__ZERO_ACCEPTANCE_CREDIT__GITHUB_CORE_API_RATE_LIMIT_PREVENTS_CURRENT_LOG_FETCH",
+  "terminal_objective": "Eliminate false-negative control-plane blocking while preserving fail-closed truth.",
+  "discovery": {
+    "workflow": "Verify terminal projection consistency",
+    "observation_source": "GitHub Actions failure notifications independently delivered through connected mailbox",
+    "exact_main_failure_notification_count": 13,
+    "distinct_main_commit_count": 13,
+    "sampled_main_commits": [
+      "656fc62",
+      "be07ce1",
+      "439eaf3",
+      "bd8bf6e",
+      "9ee00e1",
+      "548061b",
+      "4162c98",
+      "9b88bab",
+      "3553e2d",
+      "e32175a",
+      "26b0437",
+      "54859fe",
+      "147a3f8"
+    ],
+    "contemporaneous_root2_repair_failures": [
+      "2234f31",
+      "6002f3e",
+      "871a357",
+      "c79ed8e",
+      "64f3b19",
+      "24e87ee",
+      "9a061a8"
+    ],
+    "conclusion": "A red terminal-projection result on a repair branch is not by itself admissible evidence that the repair introduced the failure, because the same workflow is independently observed failing on canonical main."
+  },
+  "theorem": {
+    "name": "BASELINE_DIFFERENTIAL_CI_ADMISSIBILITY",
+    "rule": "FOR_PATCH_REGRESSION_CREDIT__A_WORKFLOW_FAILURE_IS_LOAD_BEARING_ONLY_IF_THE_EXACT_BASELINE_PASSES_OR_A_BRANCH_SPECIFIC_NEW_FAILURE_FINGERPRINT_IS_PROVED_RELATIVE_TO_THE_EXACT_BASELINE",
+    "nonimplications": [
+      "BASELINE_FAILURE_DOES_NOT_PROVE_BRANCH_CORRECTNESS",
+      "BASELINE_FAILURE_DOES_NOT_AUTHORIZE_MERGE",
+      "BASELINE_FAILURE_DOES_NOT_GRANT_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT"
+    ],
+    "scheduler_effect": [
+      "STOP_TREATING_INHERITED_RED_BASELINE_AS_PATCH_CAUSALITY",
+      "RUN_OR_REUSE_EXACT_BASE_CONTROL_BEFORE_REPAIR_CHURN",
+      "COMPARE_FAILURE_FINGERPRINTS_WHEN_BOTH_BASE_AND_BRANCH_FAIL",
+      "REPAIR_VALIDATOR_IF_BASELINE_ITSELF_IS_RED"
+    ]
+  },
+  "current_constraints": {
+    "github_core_api_rate_limited": true,
+    "raw_action_logs_retrievable_now": false,
+    "authorized_desktop_device_online": false,
+    "fresh_reality_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_TERMINAL_GOAL_CLAIM",
+    "NO_ROOT2_PREDICATE_PROMOTION",
+    "NO_ASSERTION_THAT_ALL_CI_FAILURES_SHARE_ONE_CAUSE",
+    "NO_ASSERTION_THAT_ZERO_SUCCESS_NOTIFICATIONS_MEANS_ZERO_SUCCESSFUL_RUNS"
+  ]
+}

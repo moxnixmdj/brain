@@ -1,0 +1,42 @@
+name: Verify differential CI admissibility v1
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "canonical/runtime/differential_ci_admissibility_v1.py"
+      - "canonical/verification/CI_BASELINE_DIFFERENTIAL_ADMISSIBILITY_BREAKTHROUGH_20261005_V1.json"
+      - ".github/workflows/verify-differential-ci-admissibility-v1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  self-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Self-test differential classifier
+        run: python canonical/runtime/differential_ci_admissibility_v1.py --self-test
+      - name: Prove inherited baseline failure is non-regression but non-final
+        shell: bash
+        run: |
+          out="$(python canonical/runtime/differential_ci_admissibility_v1.py \
+            --base-exit 1 --branch-exit 1 \
+            --base-fingerprint inherited --branch-fingerprint inherited)"
+          python - "$out" <<'PY'
+          import json, sys
+          d = json.loads(sys.argv[1])
+          assert d["classification"] == "INHERITED_BASELINE_FAILURE"
+          assert d["differential_gate_pass"] is True
+          assert d["patch_regression_proved"] is False
+          assert d["branch_absolute_validator_pass"] is False
+          assert d["terminal_finality_authority"] is False
+          assert d["merge_authority"] is False
+          assert d["acceptance_credit_delta"] == 0
+          print("inherited-baseline semantics: PASS")
+          PY
