@@ -1,0 +1,116 @@
+{
+  "schema": "PROJECT_BRAIN_R3_SERA8B_Q4_PATCH_AUTHOR_QUALIFICATION_FAILURE_20261009_V1",
+  "date": "2026-10-09",
+  "status": "FAIL__TRANSFORMED_SERA8B_Q4_PATCH_AUTHOR_NOT_QUALIFIED__ZERO_CREDIT",
+  "target_primitive": "R3_SUCCESS_ADAPTER_PATCH_AUTHOR",
+  "subject": {
+    "kind": "TRANSFORMED_MODEL_SUBJECT",
+    "display_name": "SERA-8B.Q4_K_M.gguf",
+    "sha256": "2c5e737d3252afb25198a931c56759189357469e1d1392a6cc993876d8554755",
+    "relationship_to_public_full_weight_route": "NEW_UNQUALIFIED_TRANSFORMED_SUBJECT__NO_CAPABILITY_INHERITANCE",
+    "source_route_record": "canonical/governance/R3_SUCCESS_ADAPTER_PATCH_AUTHOR_SERA8B_ACQUISITION_ROUTE_20261008_V1.json"
+  },
+  "execution_carrier": {
+    "incremental_spend_usd": 0,
+    "llama_server_sha256": "bb8de197dc690bdcb2869891111a2337ee27dd8c0db68a8b42c7b2e9fa9f7888",
+    "llama_cpp_version": "0.6.0-dev",
+    "llama_cpp_commit": "71ad059",
+    "architecture": "Linux x86_64 CPU",
+    "qualification_server_flags": {
+      "ctx_size": 4096,
+      "parallel_slots": 1,
+      "reasoning": "off",
+      "bind": "127.0.0.1"
+    },
+    "prior_multislot_failure_classification": "INFRASTRUCTURE__SHARED_KV_CONTEXT_EXHAUSTION__NOT_MODEL_VERDICT"
+  },
+  "qualification_contract": {
+    "workspace": "sera_patch_qual_v2",
+    "candidate_file_only_mutable": "r3_success_adapter.py",
+    "public_test_sha256": "f79eafee9af54999d320f069068508f998180a0785161bf4d0622fe676011c38",
+    "hidden_test_sha256": "f1bcda00def4c17e69dcd60a248092a602f1bf5d04ff79a99142dc57d4c7373b",
+    "immutable_verifier_sha256": "c36956b69e36e579527eb82e6d0728e326c7950312b765698c93c46e8ec9a53c",
+    "test_count": 16,
+    "requirements": [
+      "COPY_DYNAMIC_TASK_STATUS_AND_SHA_VALUES",
+      "REJECT_INVALID_KIND_MODE_AUTHORITY_STATUS_SHA_AND_TASK",
+      "RETURN_NONE_FOR_MALFORMED_INPUTS_WITHOUT_RAISING",
+      "DO_NOT_MUTATE_INPUT",
+      "CANNOT_SMUGGLE_PROMOTION_OR_VERIFICATION_AUTHORITY",
+      "OUTPUT_MATCHES_IMMUTABLE_VERIFIER_EXACT_SCHEMA"
+    ]
+  },
+  "evidence": {
+    "simpler_v1_synthetic_visible_suite": {
+      "result": "PASS",
+      "tests": "6/6",
+      "meaning": "LOWER_BOUND_ONLY__INSUFFICIENT_FOR_ROUTE_QUALIFICATION"
+    },
+    "v2_initial_candidate": {
+      "result": "FAIL",
+      "tests_passed": 5,
+      "tests_total": 16,
+      "errors": 11,
+      "main_failures": [
+        "MISSING_RE_IMPORT",
+        "NON_MAPPING_OBSERVATION_RAISED_ATTRIBUTE_ERROR"
+      ]
+    },
+    "feedback_repair_round_1": {
+      "result": "FAIL",
+      "tests_passed": 14,
+      "tests_total": 16,
+      "candidate_sha256": "347d7a3edb035f98348b086cdd704743324b2c917b310b16e8c55c2677cc83b5",
+      "remaining": [
+        "EMPTY_TASK_ID_ACCEPTED",
+        "NON_MAPPING_OBSERVATION_RAISED_ATTRIBUTE_ERROR"
+      ],
+      "output_protocol_note": "MODEL_EMITTED_BEGIN_FILE_AND_VALID_SOURCE_BUT_OMITTED_END_FILE_BEFORE_REASONING_MARKERS__DETERMINISTIC_FIRST_FILE_EXTRACTION_USED_FOR_TEST_ONLY"
+    },
+    "feedback_repair_round_2": {
+      "result": "FAIL",
+      "tests_passed": 15,
+      "tests_total": 16,
+      "candidate_sha256": "d872c3f4f9a622bc887fe342010585e01a04115e5af1e04a017ea19fb55ddf0d",
+      "remaining": [
+        "NON_MAPPING_OBSERVATION_RAISED_ATTRIBUTE_ERROR"
+      ]
+    },
+    "feedback_repair_round_3": {
+      "result": "FAIL",
+      "tests_passed": 15,
+      "tests_total": 16,
+      "candidate_sha256": "d872c3f4f9a622bc887fe342010585e01a04115e5af1e04a017ea19fb55ddf0d",
+      "remaining": [
+        "NON_MAPPING_OBSERVATION_RAISED_ATTRIBUTE_ERROR"
+      ],
+      "observation": "MODEL_REPEATED_THE_SAME_CANDIDATE_DESPITE_EXPLICIT_REMAINING_FAILURE_FEEDBACK"
+    },
+    "immutability_after_final_round": {
+      "public_test_sha256_unchanged": true,
+      "hidden_test_sha256_unchanged": true,
+      "immutable_verifier_sha256_unchanged": true
+    }
+  },
+  "conclusion": {
+    "qualified_as_default_r3_patch_author": false,
+    "qualified_as_root1_acquisition_route": false,
+    "brain_owned_capability": false,
+    "exact_patch_author_contract_proved": false,
+    "zero_cost_execution_fit_observed": true,
+    "software_patch_generation_observed": true,
+    "feedback_driven_partial_repair_observed": true,
+    "robust_malformed_input_contract_proved": false,
+    "next_action": "DO_NOT_BIND_THIS_TRANSFORMED_SUBJECT_AS_DEFAULT_PROVIDER__RETAIN_PROVIDER_NEUTRAL_CANDIDATE_ONLY_WRAPPER_AND_SEARCH_OR_QUALIFY_A_STRONGER_AUTHOR_ROUTE"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_PUBLIC_FULL_WEIGHT_SERA8B_SUBJECT_FAILED_THIS_QUALIFICATION.",
+    "NO_CLAIM_THE_Q4_TRANSFORM_PRESERVES_OR_INVALIDATES_THE_PUBLISHED_SWE_BENCH_RESULT.",
+    "NO_CLAIM_PATCH_AUTHORSHIP_IS_OWNED.",
+    "NO_SOURCE_WRITE_VERIFICATION_PROMOTION_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
