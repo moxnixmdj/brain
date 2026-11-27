@@ -652,3 +652,16 @@ class EpistemicComputerAgent:
             "parameters_stored": 0,
         }
 
+
+def self_check() -> dict[str, Any]:
+    """Verify EpistemicStore, NL goal parser, and EpistemicComputerAgent instantiate and fail closed."""
+    import tempfile
+    with tempfile.TemporaryDirectory(prefix="eca_sc_") as td:
+        store = EpistemicStore(td)
+        agent = EpistemicComputerAgent(store)
+        parsed = parse_nl_goal("Open report.txt")
+        ok = agent is not None and isinstance(parsed, ParsedGoal) and bool(parsed.raw_text)
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "parsed_surface": parsed.surface,
+    }

@@ -496,5 +496,28 @@ def main(argv: list[str] | None = None) -> int:
                  or (report.get("self_witness_counts") or {}).get(FAIL)) else 0
 
 
+def self_check() -> dict[str, Any]:
+    """Verify recheck distinguishes ABSENT, PASS, and FAIL rules without false passes."""
+    r_absent = recheck({"rule_id": "sc_absent"})
+    r_pass = recheck(
+        {"rule_id": "sc_pass", "taught_sources": [{"before": "a <= b", "after": "a < b"}]},
+        apply=lambda src, _rule: src.replace("<=", "<"),
+    )
+    r_fail = recheck(
+        {"rule_id": "sc_fail", "taught_sources": [{"before": "a <= b", "after": "a < b"}]},
+        apply=lambda src, _rule: src,
+    )
+    ok = (
+        r_absent.get("verdict") == "ABSENT"
+        and r_pass.get("verdict") == "PASS"
+        and r_fail.get("verdict") == "FAIL"
+    )
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "absent": r_absent.get("verdict"),
+        "pass": r_pass.get("verdict"),
+        "fail": r_fail.get("verdict"),
+    }
+
 if __name__ == "__main__":
     raise SystemExit(main())

@@ -1114,3 +1114,14 @@ def split_compound_swe_goal(goal: str, root: Any) -> list[str] | None:
             return None
     return parts
 
+
+def self_check() -> dict[str, Any]:
+    """Verify SWE request classification accepts real bug reports and rejects non-SWE queries."""
+    pos = is_swe_request("Fix TypeError in QuerySet.filter when passed None")
+    neg = is_swe_request("What is the capital of France?")
+    ok = (pos is True) and (neg is False) and callable(split_compound_swe_goal) and callable(build_plan)
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "swe_accepted": pos,
+        "non_swe_rejected": neg is False,
+    }

@@ -976,3 +976,15 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
             out["procedure_learned"] = {"learned": False,
                                         "error": type(exc).__name__ + ":" + str(exc)}
     return out
+
+
+def self_check() -> dict[str, Any]:
+    """Verify grounded capability registry loads and ranks relevant candidates without an LLM."""
+    reg = load_registry()
+    cands = keyword_candidates("fix python ast syntax error", reg, k=5)
+    ok = isinstance(reg, dict) and len(reg) >= 50 and isinstance(cands, list) and len(cands) >= 1
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "registry_size": len(reg) if isinstance(reg, dict) else 0,
+        "candidates_returned": len(cands) if isinstance(cands, list) else 0,
+    }

@@ -348,3 +348,20 @@ def settle_taught_edit(
         settlement=_row(space, len(asked), information_bits, disagreement,
                         confidence, SETTLED, winner_key=APPLY_KEY),
     )
+
+
+def self_check() -> dict[str, Any]:
+    """Verify fail-closed refusal without oracle and settled admission with an agreeing oracle."""
+    before = "def f(a, b):\n    return a <= b\n"
+    after = "def f(a, b):\n    return a < b\n"
+    target = "def g(a, b):\n    return a <= b\n"
+    no_oracle = settle_taught_edit(target, before, after, oracle=None)
+    settled = settle_taught_edit(target, before, after, oracle=lambda a, b: a < b)
+    refused_ok = no_oracle.get("action") == REFUSE_NO_ORACLE_UNSETTLED and no_oracle.get("edited_text") is None
+    settled_ok = settled.get("action") == ADMIT_SETTLED and "a < b" in str(settled.get("edited_text") or "")
+    ok = refused_ok and settled_ok
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "refused_without_oracle": refused_ok,
+        "settled_with_oracle": settled_ok,
+    }

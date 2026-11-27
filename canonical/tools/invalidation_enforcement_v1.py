@@ -242,5 +242,19 @@ def main(argv: list[str] | None = None) -> int:
     return 1 if report["any_path_applies_refuted_rule"] else 0
 
 
+def self_check() -> dict[str, Any]:
+    """Verify active rules are applicable and invalidated/expired rules stay dead."""
+    active_ok = rule_is_applicable({"state": "ACTIVE"}) is True
+    none_state_ok = rule_is_applicable({}) is True
+    inv_blocked = rule_is_applicable({"state": "INVALIDATED"}) is False
+    exp_blocked = rule_is_applicable({"state": "EXPIRED"}) is False
+    ok = active_ok and none_state_ok and inv_blocked and exp_blocked
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "active_ok": active_ok,
+        "invalidated_blocked": inv_blocked,
+        "expired_blocked": exp_blocked,
+    }
+
 if __name__ == "__main__":
     raise SystemExit(main())

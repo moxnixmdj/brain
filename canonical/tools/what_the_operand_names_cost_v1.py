@@ -479,5 +479,28 @@ def main(argv: Sequence[str] | None = None) -> int:
     return 0
 
 
+def self_check() -> dict[str, Any]:
+    """Verify alpha-safe rewrite transfers across distinct variable names and refuses shape mismatch."""
+    rewritten = alpha_safe_rewrite(
+        "if a <= b:\n    return a\n",
+        "if a < b:\n    return a\n",
+        "if idx <= limit:\n    return idx\n",
+    )
+    refused = alpha_safe_rewrite(
+        "if a <= b:\n    return a\n",
+        "if a < b:\n    return a\n",
+        "return 42\n",
+    )
+    ok = (
+        isinstance(rewritten, str)
+        and "idx < limit" in rewritten
+        and refused is None
+    )
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "transferred": isinstance(rewritten, str) and "idx < limit" in rewritten,
+        "mismatch_refused": refused is None,
+    }
+
 if __name__ == "__main__":
     raise SystemExit(main())

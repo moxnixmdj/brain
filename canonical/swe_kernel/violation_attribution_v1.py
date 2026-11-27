@@ -149,3 +149,20 @@ def attributable(violations: Sequence[Mapping[str, Any]], issue_text: str) -> bo
 
 def summarise(ranked: Iterable[Mapping[str, Any]], top: int = 3) -> list[str]:
     return [f"{v.get('where')} :: {v.get('score')} :: {v.get('evidence')}" for v in list(ranked)[:top]]
+
+
+def self_check() -> dict[str, Any]:
+    """Verify violation attribution ranks matching issue symbols and abstains on unrelated text."""
+    violations = [
+        {"law": "remove_argument_vanishes", "cls": "Cache", "method": "remove_item", "target": "Cache.remove_item"},
+        {"law": "round_trip", "cls": "Codec", "method": "encode", "target": "Codec.encode"},
+    ]
+    ranked = rank_violations(violations, "Cache.remove_item leaves stale entries after remove_item() is called")
+    unrelated = attributable(violations, "What is the weather in Paris tomorrow?")
+    top_ok = bool(ranked) and "remove_item" in str(ranked[0]) and ranked[0].score > 0.0
+    ok = top_ok and (unrelated is False)
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "top_ranked_ok": top_ok,
+        "unrelated_abstained": unrelated is False,
+    }

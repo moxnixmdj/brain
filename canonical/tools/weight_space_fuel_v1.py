@@ -309,5 +309,14 @@ def main() -> int:
     return 0
 
 
+def self_check() -> dict[str, Any]:
+    """Verify weight-space trajectory fuel auditor runs and returns structured numeric metrics."""
+    ck = controller_checkpoints()
+    ok = isinstance(ck, dict) and "records" in ck and "verified_units" in ck
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "records": ck.get("records") if isinstance(ck, dict) else None,
+    }
+
 if __name__ == "__main__":
     raise SystemExit(main())

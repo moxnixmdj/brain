@@ -647,3 +647,17 @@ def choose_final_experiment(
         "candidate_count": len(candidates),
         "all_coordinates_within_declared_bounds": True,
     }
+
+
+def self_check() -> dict[str, Any]:
+    """Verify sparse experiment planning and exact linear law recovery with zero random search."""
+    plan = plan_experiments({"x": [0.0, 4.0], "y": [0.0, 4.0]})
+    rows = [{"x": float(x), "y": float(y), "z": 2.0 * x + 3.0 * y} for x, y in ((0, 0), (4, 0), (0, 4), (4, 4), (2, 2))]
+    disc = sparse_discover(rows, target="z", inputs=["x", "y"])
+    nrmse = float((disc.get("best_candidate") or {}).get("loo_nrmse", 1.0))
+    ok = disc.get("status") == "SPARSE_CANDIDATES_FOUND" and nrmse < 1e-6 and len(plan.get("initial_experiments", [])) == 4
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "loo_nrmse": nrmse,
+        "initial_experiments": len(plan.get("initial_experiments", [])),
+    }

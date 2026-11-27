@@ -33056,7 +33056,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d3a63f345d0a55fcef8c6900bb84fb66ea436d04ec9cfe5c196895071bd37c22"
+  "value": "fdeac5319d0ca797a118b4558613b1a413dc232702be070da9d1fcff0e7463b0"
  },
  "engines": [
   {
@@ -38042,7 +38042,7 @@
     "carrier_sha256": "0a84f93559b54ef8588792e69c81b6951e7e1b78983cce5015a8e7a35775a357",
     "entrypoint": "PluggableRung3ProposerJitRLKernel",
     "source_path": "canonical/runtime/wave41_rung3_proposer_jitrl_continual_flywheel_v1.py",
-    "source_sha256": "b22c755fe0ad8c0d85a31f3ed9c1430c049338c4b465bc8be4a709e99f05571c"
+    "source_sha256": "cb1a629e1b74e7acb6f46a3ecb057e2082477123c6a0df7b18630187427338a8"
    },
    "summary": "Strict 4-rung escalation (Rung 0 Futamura -> Rung 1 Grammar-Closed CEGIS -> Rung 2 Angelic OE -> Rung 3 Pluggable Open-Weight Local Proposer) with K3=0 default abstention, live closed-form JitRL logit shift, CMU Steer-Don't-Solve, and Wave 40 Staged Goal-Blind NFV + CHASE gating.",
    "triggers": [
@@ -38080,7 +38080,7 @@
     "carrier_sha256": "0a84f93559b54ef8588792e69c81b6951e7e1b78983cce5015a8e7a35775a357",
     "entrypoint": "TTPOOPSDConsensusDistiller",
     "source_path": "canonical/runtime/wave41_rung3_proposer_jitrl_continual_flywheel_v1.py",
-    "source_sha256": "b22c755fe0ad8c0d85a31f3ed9c1430c049338c4b465bc8be4a709e99f05571c"
+    "source_sha256": "cb1a629e1b74e7acb6f46a3ecb057e2082477123c6a0df7b18630187427338a8"
    },
    "summary": "TTPO (arXiv:2608.27448) + OPSD (arXiv:2608.31046) label-free test-time behavioral-equivalence consensus distillation inside POSIX CoW forks: distills agreeing rollouts into positive JitRL receipts and penalizes confident disagreeing errors.",
    "triggers": [
@@ -38115,7 +38115,7 @@
     "carrier_sha256": "0a84f93559b54ef8588792e69c81b6951e7e1b78983cce5015a8e7a35775a357",
     "entrypoint": "WhiteboxTraceAbductionOEKernel",
     "source_path": "canonical/runtime/wave41_rung3_proposer_jitrl_continual_flywheel_v1.py",
-    "source_sha256": "b22c755fe0ad8c0d85a31f3ed9c1430c049338c4b465bc8be4a709e99f05571c"
+    "source_sha256": "cb1a629e1b74e7acb6f46a3ecb057e2082477123c6a0df7b18630187427338a8"
    },
    "summary": "Live unifier for 8 awakened DARK whitebox SWE organs: closed_loop_trace_abduction_repair_v1 (Ochiai + loop-cycle detection), angelic_oe_synthesizer_v1, cegis_semantic_synthesizer_v1, whitebox_introspector_and_trace_synthesizer_v1, semantic_ir_v1, python_counterfactual_spec_repair_v1, causal_swe_repair_v1, and multistep_repo_closed_loop_solver_v1.",
    "triggers": [
@@ -38153,7 +38153,7 @@
     "carrier_sha256": "0a84f93559b54ef8588792e69c81b6951e7e1b78983cce5015a8e7a35775a357",
     "entrypoint": "FutamuraCompileAwayFlywheelKernel",
     "source_path": "canonical/runtime/wave41_rung3_proposer_jitrl_continual_flywheel_v1.py",
-    "source_sha256": "b22c755fe0ad8c0d85a31f3ed9c1430c049338c4b465bc8be4a709e99f05571c"
+    "source_sha256": "cb1a629e1b74e7acb6f46a3ecb057e2082477123c6a0df7b18630187427338a8"
    },
    "summary": "Wave 42 compounding continual-learning flywheel: Zero-Data Self-Play -> Rung-1/2/3 Solve -> Futamura Rung-0 O(1) Skill Compile-Away -> Zero-Anchor-Regression Gate -> 4-Network Git/Engram TMA-NM Sleep Consolidation.",
    "triggers": [
@@ -38224,7 +38224,7 @@
     "carrier_sha256": "0a84f93559b54ef8588792e69c81b6951e7e1b78983cce5015a8e7a35775a357",
     "entrypoint": "OneDemoTrustAndRungCalibratorKernel",
     "source_path": "canonical/runtime/wave41_rung3_proposer_jitrl_continual_flywheel_v1.py",
-    "source_sha256": "b22c755fe0ad8c0d85a31f3ed9c1430c049338c4b465bc8be4a709e99f05571c"
+    "source_sha256": "cb1a629e1b74e7acb6f46a3ecb057e2082477123c6a0df7b18630187427338a8"
    },
    "summary": "Live unifier for 8 awakened DARK continual-learning & koan modules: the_goal_is_a_quotient_of_the_trace_v1 (collision-free quotient gating), the_demand_is_learned_from_the_run_v1, an_actions_effect_is_a_provenance_map_v1, the_page_is_the_guide_v1, when_one_showing_should_be_trusted_20261112_v1, generalization_rung_gradient_v1, the_frame_crosses_the_machine_v1, semantic_generalization_engine_v1, and canonical_boundary_router_v1.",
    "triggers": [
@@ -39333,7 +39333,7 @@
     "carrier_sha256": "0a84f93559b54ef8588792e69c81b6951e7e1b78983cce5015a8e7a35775a357",
     "entrypoint": "SafeTransferEStitchStrataEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "6e14dd0c719d23798b8a3025583225d448edc14b69de98af5fd180d622b6507b"
+    "source_sha256": "745985be0f58cb24345b39b299a288d7f46521de52f62872beaa7265bc3f8f59"
    },
    "summary": "Wave 53 6-stage safe transfer engine unifying MIT E-Stitch e-class canonicalization, structured morphism abstraction, oracle-free alpha-safe templates, STRATA contrast-edge negative-transfer defense (0% blind corruption), hard invalidation, and Ville e-process credit gating.",
    "triggers": [
@@ -39368,7 +39368,7 @@
     "carrier_sha256": "0a84f93559b54ef8588792e69c81b6951e7e1b78983cce5015a8e7a35775a357",
     "entrypoint": "UnifiedCapabilityBusEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "6e14dd0c719d23798b8a3025583225d448edc14b69de98af5fd180d622b6507b"
+    "source_sha256": "745985be0f58cb24345b39b299a288d7f46521de52f62872beaa7265bc3f8f59"
    },
    "summary": "Wave 53 zero-LOC-growth unified capability bus awakening 36 zero-overlap hidden organs (192 -> 228 cumulative DARK modules) and structural front-door intent router raising real SWE issue acceptance from 35.0% to 96.2% while refusing 100% of content-free inputs.",
    "triggers": [
@@ -39403,7 +39403,7 @@
     "carrier_sha256": "0a84f93559b54ef8588792e69c81b6951e7e1b78983cce5015a8e7a35775a357",
     "entrypoint": "DbspHindsightStrataMemoryEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "6e14dd0c719d23798b8a3025583225d448edc14b69de98af5fd180d622b6507b"
+    "source_sha256": "745985be0f58cb24345b39b299a288d7f46521de52f62872beaa7265bc3f8f59"
    },
    "summary": "Wave 54 control-plane memory unifying DBSP Z-set cascade & formal Absence witnesses, Hindsight 4 epistemic networks, P-Mem explicit rollback edges, ForgetEval-Adv 6 primitives (including purge-by-query & shared-attribute release), and STRATA contrast conflict warnings.",
    "triggers": [
@@ -39438,7 +39438,7 @@
     "carrier_sha256": "0a84f93559b54ef8588792e69c81b6951e7e1b78983cce5015a8e7a35775a357",
     "entrypoint": "DockerlessVerifierAndSelfPlayCurriculumEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "6e14dd0c719d23798b8a3025583225d448edc14b69de98af5fd180d622b6507b"
+    "source_sha256": "745985be0f58cb24345b39b299a288d7f46521de52f62872beaa7265bc3f8f59"
    },
    "summary": "Wave 54 7-probe deterministic zero-Docker patch verifier (Dockerless-inspired) and ignorance-ledger-driven self-play bug-injection & blind repair curriculum proving Round-2 skill transfer at K3=0.",
    "triggers": [
@@ -39473,7 +39473,7 @@
     "carrier_sha256": "0a84f93559b54ef8588792e69c81b6951e7e1b78983cce5015a8e7a35775a357",
     "entrypoint": "FullMetamorphicLawAndPrecisionSlicerEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "6e14dd0c719d23798b8a3025583225d448edc14b69de98af5fd180d622b6507b"
+    "source_sha256": "745985be0f58cb24345b39b299a288d7f46521de52f62872beaa7265bc3f8f59"
    },
    "summary": "Wave 54 complete 9/9 metamorphic law repair synthesizer, test-isolation inherited-debt filter, free AST def-use neighbor-regression precision pre-filter, and multi-file top-K call-graph localizer with atomic CoW rollback.",
    "triggers": [
@@ -39508,7 +39508,7 @@
     "carrier_sha256": "0a84f93559b54ef8588792e69c81b6951e7e1b78983cce5015a8e7a35775a357",
     "entrypoint": "UnifiedMultiRungJitRLAndWebMcpGrounderEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "6e14dd0c719d23798b8a3025583225d448edc14b69de98af5fd180d622b6507b"
+    "source_sha256": "745985be0f58cb24345b39b299a288d7f46521de52f62872beaa7265bc3f8f59"
    },
    "summary": "Wave 54 inverted multi-rung JitRL closed-form KL advantage executive loop + task-agnostic JSON-schema multi-step WebMCP & OSWorld 2.1 grounder with WebXSkill step contracts raising WebMCP grounding from 26.9% to 100.0%.",
    "triggers": [
@@ -47475,9 +47475,9 @@
    "imported_by_count": 0,
    "kind": "EXTENDED_SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/tools/experience_corpus_training_readiness_v1.py",
-   "sha256": "f8b6e5a9a5f10ab8a4d32e8bf1fe1d6ef01c0377ce9f692759ca76d571151e64",
+   "sha256": "a64edbdb8b40ac6139ef2bd24e32a581f513bece58cbe3cae6d4e055598b494e",
    "summary": "Is the experience we have accumulated a legal training set for weight-space learning?",
-   "symbol_count": 12,
+   "symbol_count": 13,
    "symbols": [
     "_has_provenance",
     "_has_world_identity",
@@ -47490,7 +47490,8 @@
     "audit_rows",
     "control_report",
     "main",
-    "measure"
+    "measure",
+    "self_check"
    ],
    "terms": {
     "ablations": 1,
@@ -47499,6 +47500,7 @@
     "admissible": 1,
     "audit": 1,
     "canonical": 1,
+    "check": 1,
     "control": 1,
     "corpus": 1,
     "executable": 1,
@@ -47517,6 +47519,7 @@
     "report": 1,
     "row": 1,
     "rows": 2,
+    "self": 1,
     "set": 1,
     "space": 1,
     "tools": 1,
@@ -50453,18 +50456,20 @@
    "imported_by_count": 1,
    "kind": "EXTENDED_SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/tools/invalidation_enforcement_v1.py",
-   "sha256": "ee9c76ef4e7c22e6387879c50601759abee34c102158a817d6a07e986b3a37ba",
+   "sha256": "92d7a3f13dc82865d69dcf54e4555ac7dd0701d1d7a5b38831f7d4675ad7434c",
    "summary": "An INVALIDATED rule must not be applicable, and nothing may make it one again.",
-   "symbol_count": 3,
+   "symbol_count": 4,
    "symbols": [
     "main",
     "measure",
-    "rule_is_applicable"
+    "rule_is_applicable",
+    "self_check"
    ],
    "terms": {
     "again": 1,
     "applicable": 2,
     "canonical": 1,
+    "check": 1,
     "enforcement": 1,
     "invalidated": 1,
     "invalidation": 1,
@@ -50477,6 +50482,7 @@
     "nothing": 1,
     "one": 1,
     "rule": 2,
+    "self": 1,
     "tools": 1,
     "v1": 1
    },
@@ -60837,9 +60843,9 @@
    "imported_by_count": 0,
    "kind": "EXTENDED_SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/tools/weight_space_fuel_v1.py",
-   "sha256": "393f802075b2436352356e80605f5feb538c7171002e2b324b4b62b89a6e5aad",
+   "sha256": "14476aedcf47809406e0150640bf8ee71705a7fe6b590b0ed42ec22a463c0303",
    "summary": "Can this repo try weight-space learning? Count the fuel before spending a dollar on the engine.",
-   "symbol_count": 9,
+   "symbol_count": 10,
    "symbols": [
     "_json",
     "controller_checkpoints",
@@ -60848,6 +60854,7 @@
     "measure",
     "production_rate",
     "report",
+    "self_check",
     "taught_action_corpora",
     "trajectory_store"
    ],
@@ -60856,6 +60863,7 @@
     "before": 1,
     "can": 1,
     "canonical": 1,
+    "check": 1,
     "checkpoints": 1,
     "controller": 1,
     "corpora": 1,
@@ -60873,6 +60881,7 @@
     "receipts": 1,
     "repo": 1,
     "report": 1,
+    "self": 1,
     "space": 2,
     "spending": 1,
     "store": 1,
@@ -61454,9 +61463,9 @@
    "imported_by_count": 2,
    "kind": "EXTENDED_SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/tools/what_the_operand_names_cost_v1.py",
-   "sha256": "ff009d01f8e0c2eb6328eba16a1d31a59e4401d9b82730e2a2e6ed110a4521e6",
+   "sha256": "8e50e455865e0f5b161d2b96f96012e37f735aef3fda62ea6a78b2f71e51018a",
    "summary": "Is the one-example rule welded to the demonstrated OPERAND NAMES, and what would unwelding it buy?",
-   "symbol_count": 14,
+   "symbol_count": 15,
    "symbols": [
     "_holds_operator",
     "_install",
@@ -61471,7 +61480,8 @@
     "main",
     "measure",
     "same_shape",
-    "same_shape_but_for_the_operation"
+    "same_shape_but_for_the_operation",
+    "self_check"
    ],
    "terms": {
     "alpha": 1,
@@ -61479,6 +61489,7 @@
     "buy": 1,
     "canonical": 1,
     "change": 1,
+    "check": 1,
     "cost": 1,
     "demonstrated": 1,
     "example": 1,
@@ -61499,6 +61510,7 @@
     "rule": 1,
     "safe": 1,
     "same": 2,
+    "self": 1,
     "shape": 3,
     "statement": 1,
     "tools": 1,
@@ -95061,7 +95073,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/credit_gates_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "cccad2b39f877907c87bd26f5575104786d190f98ed0117eb0d58157690e576b",
+   "sha256": "1338b0e1b1c9c103eb33d62f0cb20fa09c94870380ea5a36cd3ecbf717bfeff4",
    "summary": "Did it actually improve? Decided by arithmetic, never by assertion.",
    "triggers": [
     "credit",
@@ -96391,7 +96403,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "6e14dd0c719d23798b8a3025583225d448edc14b69de98af5fd180d622b6507b",
+   "sha256": "745985be0f58cb24345b39b299a288d7f46521de52f62872beaa7265bc3f8f59",
    "summary": "Wave 53 & Wave 54: Unified Capability Bus, Safe-Transfer E-Stitch + STRATA,",
    "triggers": [
     "wave53",
@@ -97881,7 +97893,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/swe_kernel/skill_recheck_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "aa6540e2fa2c506a2a9cf14a3cd14ecb55efbcadeecbc3dd0bfb4ad6d69d23d7",
+   "sha256": "5ef1af35d42f8b24d6df2aa669416ce4cf8a4543d0422a810df95629284a46bb",
    "summary": "A rule that has been taught is not a rule that has been shown to hold.",
    "triggers": [
     "skill",
@@ -100968,7 +100980,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/tools/experience_corpus_training_readiness_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "f8b6e5a9a5f10ab8a4d32e8bf1fe1d6ef01c0377ce9f692759ca76d571151e64",
+   "sha256": "a64edbdb8b40ac6139ef2bd24e32a581f513bece58cbe3cae6d4e055598b494e",
    "summary": "Is the experience we have accumulated a legal training set for weight-space learning?",
    "triggers": [
     "experience",
@@ -102165,7 +102177,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/tools/invalidation_enforcement_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "ee9c76ef4e7c22e6387879c50601759abee34c102158a817d6a07e986b3a37ba",
+   "sha256": "92d7a3f13dc82865d69dcf54e4555ac7dd0701d1d7a5b38831f7d4675ad7434c",
    "summary": "An INVALIDATED rule must not be applicable, and nothing may make it one again.",
    "triggers": [
     "invalidation",
@@ -106626,7 +106638,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/tools/weight_space_fuel_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "393f802075b2436352356e80605f5feb538c7171002e2b324b4b62b89a6e5aad",
+   "sha256": "14476aedcf47809406e0150640bf8ee71705a7fe6b590b0ed42ec22a463c0303",
    "summary": "Can this repo try weight-space learning? Count the fuel before spending a dollar on the engine.",
    "triggers": [
     "weight",
@@ -106867,7 +106879,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/tools/what_the_operand_names_cost_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "ff009d01f8e0c2eb6328eba16a1d31a59e4401d9b82730e2a2e6ed110a4521e6",
+   "sha256": "8e50e455865e0f5b161d2b96f96012e37f735aef3fda62ea6a78b2f71e51018a",
    "summary": "Is the one-example rule welded to the demonstrated OPERAND NAMES, and what would unwelding it buy?",
    "triggers": [
     "operand",
@@ -170874,7 +170886,7 @@
   "included_source_count": 2563,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "cb93bd7661e363b5b6841c784a817d969566f46b0e584d8694eab4cde0bb6a36"
+  "source_tree_digest": "98b05969f9e5e77f83fe60f24b3151aa99fe901360511c312c3e1ce698d33d78"
  },
  "research_index": [
   {
@@ -244255,7 +244267,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAPABILITY_BUS_AUDIT_20261124_V1.json",
    "schema": "BRAIN_CAPABILITY_BUS_V1_AUDIT",
-   "sha256": "96192dca1d8e32c4040b7449d7a07549dbbac391dd967dbdb125b63d979b673e",
+   "sha256": "4310ed5b3402387421d7a7d3c99c900b2bf1cbbec89a9e1367df1138d2ee37cc",
    "status": "",
    "terms": {
     "20261124": 1,
@@ -307137,7 +307149,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/WAVE53_54_HONEST_BENCHMARK_RECEIPT_20261124_V1.json",
    "schema": "BRAIN_WAVE53_54_HONEST_BENCHMARK_RECEIPT_V1",
-   "sha256": "6fc4ce6bf494737953ab8cccfbee7eb5d8f0ebb64ca10b06e136c7c00fc5ddea",
+   "sha256": "e8da48b9f8d4af784a4dbd787b9403623c67ebbbf55575e1af8b12c3c5fd8fe8",
    "status": "",
    "terms": {
     "20261124": 1,
@@ -348644,7 +348656,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/WAVE53_54_UNIFIED_CAPABILITY_BUS_AND_LEAPFROG_20261124_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "595e1ec432f60ce336e4aea93d32542acdae42a95d4a7918fa5784b47a99df6f",
+   "sha256": "de91e113a168974a2e7bc983f8a02256957ba87cde1a492a01915bb29e63cb04",
    "status": "SHIPPED",
    "terms": {
     "0.00": 1,
@@ -369424,9 +369436,9 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/credit_gates_v1.py",
-   "sha256": "cccad2b39f877907c87bd26f5575104786d190f98ed0117eb0d58157690e576b",
+   "sha256": "1338b0e1b1c9c103eb33d62f0cb20fa09c94870380ea5a36cd3ecbf717bfeff4",
    "summary": "Did it actually improve? Decided by arithmetic, never by assertion.",
-   "symbol_count": 7,
+   "symbol_count": 8,
    "symbols": [
     "_is_failure",
     "activation_gate",
@@ -369434,6 +369446,7 @@
     "credit",
     "e_process",
     "paired_significance",
+    "self_check",
     "validity_gate"
    ],
    "terms": {
@@ -369451,6 +369464,7 @@
     "is_failure": 1,
     "never": 1,
     "paired_significance": 1,
+    "self_check": 1,
     "v1": 1,
     "validity_gate": 1
    }
@@ -376372,9 +376386,9 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/experience_v1.py",
-   "sha256": "862206b9f06de4f8ebc11bdbe507c278b1a1bee8f679f770ffff324c857eeeef",
+   "sha256": "a19b1fd141cb55d78e48128b424cca3325c78380bf7999c233d099cc58c09c8e",
    "summary": "The machine gets better for having worked.",
-   "symbol_count": 14,
+   "symbol_count": 15,
    "symbols": [
     "_e_value",
     "_load",
@@ -376386,6 +376400,7 @@
     "observe",
     "recall_resolution",
     "record",
+    "self_check",
     "signature_of",
     "status",
     "summary",
@@ -376407,6 +376422,7 @@
     "recall_resolution": 1,
     "record": 1,
     "save": 1,
+    "self_check": 1,
     "signature_of": 1,
     "status": 1,
     "summary": 1,
@@ -382292,9 +382308,9 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/grounded_action_v1.py",
-   "sha256": "70e5eef59c0533662c8fba62a072ab970f1602cd8e9458fca4e97a545e06c6bf",
+   "sha256": "d8a5449eabfa824126279daaf41d57d83dc976f22f2ec865cbe65d3e7b86dffe",
    "summary": "Plain goal in, verified work out -- over the whole registry, with no model.",
-   "symbol_count": 15,
+   "symbol_count": 16,
    "symbols": [
     "_bind_inventory_param",
     "_binder",
@@ -382310,7 +382326,8 @@
     "_word_tokens",
     "act",
     "keyword_candidates",
-    "load_registry"
+    "load_registry",
+    "self_check"
    ],
    "terms": {
     "act": 1,
@@ -382335,6 +382352,7 @@
     "plain": 1,
     "registry": 1,
     "rows_that_can_run_a_stated_command": 1,
+    "self_check": 1,
     "try_bridge": 1,
     "v1": 1,
     "verified": 1,
@@ -385946,9 +385964,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/harbor_swe_zero_model_agent_v1.py",
-   "sha256": "ef31853de0fe473c9357c26c38837a9d77d3cdd34cd6ab6397536fd695b56270",
+   "sha256": "0d47c47347f117945e0153e8d6234969099d7eec737e48b60ad8d25215040ed6",
    "summary": "Project Brain Zero-Model Harbor SWE Agent V1.",
-   "symbol_count": 12,
+   "symbol_count": 13,
    "symbols": [
     "HarborSweZeroModelAgent",
     "LocalSubprocessHarborEnvironment",
@@ -385961,7 +385979,8 @@
     "_extract_test_target_from_instruction",
     "_python_bin_for_env",
     "_transfer_verified_file",
-    "run_zero_model_swe_harbor_goal"
+    "run_zero_model_swe_harbor_goal",
+    "self_check"
    ],
    "terms": {
     "agent": 2,
@@ -385980,6 +385999,7 @@
     "project": 1,
     "python_bin_for_env": 1,
     "run_zero_model_swe_harbor_goal": 1,
+    "self_check": 1,
     "swe": 2,
     "transfer_verified_file": 1,
     "v1": 2,
@@ -388140,9 +388160,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/ignorance_ledger_v1.py",
-   "sha256": "ca858b56267eced4628824c01be26a14790b18252ca4434d7efaf621a9676cdd",
+   "sha256": "ce93729fc5c47ac9a1caf04c2183c05d49447f4fd22798a78be1ae5f6747b14c",
    "summary": "The machine's own model of what it does not know, ranked by what it is worth.",
-   "symbol_count": 11,
+   "symbol_count": 12,
    "symbols": [
     "_beta_mean",
     "_identity",
@@ -388153,6 +388173,7 @@
     "open_gaps",
     "rank",
     "resolve",
+    "self_check",
     "stats",
     "value"
    ],
@@ -388174,6 +388195,7 @@
     "ranked": 1,
     "resolve": 1,
     "save": 1,
+    "self_check": 1,
     "stats": 1,
     "v1": 1,
     "value": 1,
@@ -394448,9 +394470,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/mysterymechanism_sparse_symbolic_adapter_v2.py",
-   "sha256": "cb8f32a531251630a788368b40fbbf9555c9ebb69836eaec59e3e01f9d132b36",
+   "sha256": "c87509c397bc63e2a0c789ab6e2a5d7304b4f1e659e43dc3adf212a5848cbb6a",
    "summary": "Sparse, benchmark-shaped symbolic discovery adapter for MysteryMechanism V2.",
-   "symbol_count": 23,
+   "symbol_count": 24,
    "symbols": [
     "SparseSymbolicError",
     "_base_expr",
@@ -394473,6 +394495,7 @@
     "_unary",
     "choose_final_experiment",
     "plan_experiments",
+    "self_check",
     "solve",
     "sparse_discover"
    ],
@@ -394495,6 +394518,7 @@
     "normalize_rows": 1,
     "nrmse": 1,
     "plan_experiments": 1,
+    "self_check": 1,
     "sig": 1,
     "solve": 2,
     "sparse": 2,
@@ -421307,9 +421331,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/swe_typed_plan_v1.py",
-   "sha256": "e4ed1db84f306c7d4dbe8d2b8126418d4941d1ee05d7585cdfb54fd21de0e7bd",
+   "sha256": "df976ace95f33beb22ce1198934d2cadbebbcc8a8db4940c358f33443e89a6db",
    "summary": "Scoped typed-SWE execution plan for the live front door (hidden-tool wiring).",
-   "symbol_count": 19,
+   "symbol_count": 20,
    "symbols": [
     "_effect_consistent",
     "_execution_template",
@@ -421328,6 +421352,7 @@
     "implementation_effect_error",
     "is_swe_request",
     "plan_report",
+    "self_check",
     "split_compound_swe_goal",
     "stated_family_token"
    ],
@@ -421354,6 +421379,7 @@
     "resolve_family": 1,
     "row_surface": 1,
     "scoped": 1,
+    "self_check": 1,
     "split_compound_swe_goal": 1,
     "stated_family_token": 1,
     "states_a_repair": 1,
@@ -431105,9 +431131,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/wave41_rung3_proposer_jitrl_continual_flywheel_v1.py",
-   "sha256": "b22c755fe0ad8c0d85a31f3ed9c1430c049338c4b465bc8be4a709e99f05571c",
+   "sha256": "cb1a629e1b74e7acb6f46a3ecb057e2082477123c6a0df7b18630187427338a8",
    "summary": "Wave 41 & Wave 42: Pluggable Rung-3 Proposer + Live JitRL + TTPO/OPSD",
-   "symbol_count": 10,
+   "symbol_count": 11,
    "symbols": [
     "FutamuraCompileAwayFlywheelKernel",
     "OneDemoTrustAndRungCalibratorKernel",
@@ -431118,6 +431144,7 @@
     "_apply_operator_rule",
     "_ast_structural_skeleton",
     "_extract_operator_delta",
+    "self_check",
     "wave41_42_awakened_inventory"
    ],
    "terms": {
@@ -431138,6 +431165,7 @@
     "proposer": 2,
     "rung-3": 1,
     "rung3": 1,
+    "self_check": 1,
     "ttpo": 1,
     "ttpoopsdconsensusdistiller": 1,
     "v1": 1,
@@ -431446,15 +431474,17 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-   "sha256": "6e14dd0c719d23798b8a3025583225d448edc14b69de98af5fd180d622b6507b",
+   "sha256": "745985be0f58cb24345b39b299a288d7f46521de52f62872beaa7265bc3f8f59",
    "summary": "Wave 53 & Wave 54: Unified Capability Bus, Safe-Transfer E-Stitch + STRATA,",
-   "symbol_count": 36,
+   "symbol_count": 43,
    "symbols": [
     "DbspHindsightStrataMemoryEngine",
     "DockerlessVerifierAndSelfPlayCurriculumEngine",
+    "EvolvingWebMcpInterfaceRepository",
     "FullMetamorphicLawAndPrecisionSlicerEngine",
     "SafeTransferEStitchStrataEngine",
     "StrataSkillEntry",
+    "TriggerKeyedTransferIndex",
     "UnifiedCapabilityBusEngine",
     "UnifiedMultiRungJitRLAndWebMcpGrounderEngine",
     "Wave53To54UnifiedCapabilityBusMixin",
@@ -431471,9 +431501,7 @@
     "_find_func_by_name",
     "_find_potentially_undefined_names",
     "_first_func",
-    "_instantiate_alpha_node",
-    "_introduced_bare_pass_stub",
-    "_is_strictly_oracle_free_idiom"
+    "_instantiate_alpha_node"
    ],
    "terms": {
     "53": 1,
@@ -435640,15 +435668,16 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/epistemic_computer_agent_v1.py",
-   "sha256": "8026f3005dadedaee98a5a15ef56f95922026770aa4cb41ffa4b15716d108015",
+   "sha256": "fdb4cbfe6028db186a6b7a3f86807af4b98033e0e0d397b2fd5d0f03d5f2f017",
    "summary": "Zero-Model Epistemic Computer-Use & Software-Engineering Agent (V1).",
-   "symbol_count": 5,
+   "symbol_count": 6,
    "symbols": [
     "EpistemicComputerAgent",
     "EpistemicStore",
     "ParsedGoal",
     "hypothesize_candidate_kinds",
-    "parse_nl_goal"
+    "parse_nl_goal",
+    "self_check"
    ],
    "terms": {
     "agent": 2,
@@ -435660,6 +435689,7 @@
     "hypothesize_candidate_kinds": 1,
     "parse_nl_goal": 1,
     "parsedgoal": 1,
+    "self_check": 1,
     "software-engineering": 1,
     "v1": 2,
     "zero-model": 1
@@ -435877,11 +435907,12 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/experiential_strategy_extractor_v1.py",
-   "sha256": "a43a67e501935a1bba8b805ef36959cda491cb2c20fb3d5e73529c7ded9538eb",
+   "sha256": "4120b4d587e5f9cdb7184860893e7d19e02253d250640ad3623215fcf100d5be",
    "summary": "Experiential Strategy Extraction — converts trajectories into generalizable heuristics.",
-   "symbol_count": 1,
+   "symbol_count": 2,
    "symbols": [
-    "ExperientialStrategyExtractor"
+    "ExperientialStrategyExtractor",
+    "self_check"
    ],
    "terms": {
     "converts": 1,
@@ -435891,6 +435922,7 @@
     "extractor": 1,
     "generalizable": 1,
     "heuristics": 1,
+    "self_check": 1,
     "strategy": 2,
     "trajectories": 1,
     "v1": 1
@@ -437635,9 +437667,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/metamorphic_plugin_v1.py",
-   "sha256": "5d141723d6e880db70e3513185b1288c25b4cca1733379191e48f3e6124e8671",
+   "sha256": "bab95b7a7592548bcb4c07184cf0ee6e7b929e39efeec049d1faa927bf7bca7b",
    "summary": "Pytest plugin: run the law library around a repository's own green suite.",
-   "symbol_count": 28,
+   "symbol_count": 29,
    "symbols": [
     "_arg_sig",
     "_budget",
@@ -438162,9 +438194,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/operator_generalization_v1.py",
-   "sha256": "8bd09c9f5b342af3260fbd1a381ab8ac1fe78cc759e4b32c7a3e3b02ba728069",
+   "sha256": "d2b3a7f9cf9052707375315869ac7d60bd426a83196abe047405df60054c1930",
    "summary": "Generalize a repair from one statement shape to every occurrence of the same operator swap.",
-   "symbol_count": 10,
+   "symbol_count": 11,
    "symbols": [
     "GeneralizationRefusal",
     "_occurrences",
@@ -438175,7 +438207,8 @@
     "derive_operator_swap",
     "derive_swap_family",
     "explain_rule",
-    "propose_operator_swaps"
+    "propose_operator_swaps",
+    "self_check"
    ],
    "terms": {
     "cross_language_gate": 1,
@@ -438195,6 +438228,7 @@
     "quote_aware_mask": 1,
     "repair": 1,
     "same": 1,
+    "self_check": 1,
     "shape": 1,
     "statement": 1,
     "swap": 1,
@@ -438612,13 +438646,14 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/perfect_algorithm_unified_v8.py",
-   "sha256": "0ecf8cb05093e431464314e298dc270ba15b5b8e55009b2f115775b95d94d686",
+   "sha256": "6e36ceeb806421a80f4476239de0a89555c2c5e966591e95fe0c03209a12b46e",
    "summary": "Perfect Algorithm Unified V8 — scan→retrieve→fetch→plan→understand→invent→act→learn→admit→save, one loop any env.",
-   "symbol_count": 3,
+   "symbol_count": 4,
    "symbols": [
     "PerfectAlgorithmUnifiedV8",
     "UnifiedReportV8",
-    "demo_v8"
+    "demo_v8",
+    "self_check"
    ],
    "terms": {
     "act": 1,
@@ -438638,6 +438673,7 @@
     "retrieve": 1,
     "save": 1,
     "scan": 1,
+    "self_check": 1,
     "understand": 1,
     "unified": 2,
     "unifiedreportv8": 1,
@@ -440108,11 +440144,12 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/retained_repair_session_v1.py",
-   "sha256": "3f742745fb672cc137fdb8dc300668e96668542f21bdaf22cb1f1dc984fe085b",
+   "sha256": "b2a4bdc44e40fff95ca7941f8c87b9df8530c2ae40595a1539161c2a8b405242",
    "summary": "Compose scoped source hypotheses with the existing production repair path.",
-   "symbol_count": 1,
+   "symbol_count": 2,
    "symbols": [
-    "RetainedRepairSession"
+    "RetainedRepairSession",
+    "self_check"
    ],
    "terms": {
     "compose": 1,
@@ -440124,6 +440161,7 @@
     "retained": 1,
     "retainedrepairsession": 1,
     "scoped": 1,
+    "self_check": 1,
     "session": 1,
     "source": 1,
     "v1": 1
@@ -440295,9 +440333,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/rule_scope_learning_v1.py",
-   "sha256": "c3a728270ffde3c1b6b781b6e5c6fa1a4f7145e2077bbec80cb4edebb22576a0",
+   "sha256": "6a48152b71fefbf2cec9acdf6dde31837e52a33313041afc78be1cca7ee46199",
    "summary": "Let a rule discover how general it actually is, instead of being told.",
-   "symbol_count": 13,
+   "symbol_count": 14,
    "symbols": [
     "ScopeLearningError",
     "_first_verified",
@@ -440311,6 +440349,7 @@
     "observed_outcome",
     "predicted_outcome",
     "scope_is",
+    "self_check",
     "synthesize_diagnostic_probes"
    ],
    "terms": {
@@ -440334,6 +440373,7 @@
     "scope": 1,
     "scope_is": 1,
     "scopelearningerror": 1,
+    "self_check": 1,
     "synthesize_diagnostic_probes": 1,
     "told": 1,
     "v1": 1,
@@ -441015,9 +441055,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/skill_recheck_v1.py",
-   "sha256": "aa6540e2fa2c506a2a9cf14a3cd14ecb55efbcadeecbc3dd0bfb4ad6d69d23d7",
+   "sha256": "5ef1af35d42f8b24d6df2aa669416ce4cf8a4543d0422a810df95629284a46bb",
    "summary": "A rule that has been taught is not a rule that has been shown to hold.",
-   "symbol_count": 9,
+   "symbol_count": 10,
    "symbols": [
     "_render_tokens",
     "_rule_is_applicable",
@@ -441027,6 +441067,7 @@
     "recheck_bundle",
     "recheck_store",
     "render_witness",
+    "self_check",
     "self_witness"
    ],
    "terms": {
@@ -441042,6 +441083,7 @@
     "rule": 2,
     "rule_is_applicable": 1,
     "rule_sources": 1,
+    "self_check": 1,
     "self_witness": 1,
     "shown": 1,
     "skill": 1,
@@ -442340,9 +442382,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/taught_actions/settled_admission_v1.py",
-   "sha256": "d8c35761c4237115cce20ebf7273ce5f49c31d30b8756648aa1b2c8352f151b6",
+   "sha256": "2b6fc5b4862595989b644543e3528fb16625e973b9459fa52109b441fa5a0828",
    "summary": "A taught edit may not touch a new target until its one open question is settled.",
-   "symbol_count": 11,
+   "symbol_count": 12,
    "symbols": [
     "_candidate_outcome",
     "_first_function",
@@ -442354,6 +442396,7 @@
     "_raise_sentinel",
     "_result",
     "_row",
+    "self_check",
     "settle_taught_edit"
    ],
    "terms": {
@@ -442375,6 +442418,7 @@
     "raise_sentinel": 1,
     "result": 1,
     "row": 1,
+    "self_check": 1,
     "settle_taught_edit": 1,
     "settled": 2,
     "target": 1,
@@ -443792,9 +443836,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/violation_attribution_v1.py",
-   "sha256": "e72426d362051bc3da807bbf96f626781678dd8ba552e8757ade90afea6a2e95",
+   "sha256": "dedd3509c389da6d1efab163c50d1e7f7f29cdc54961d1e709913af4feed77c3",
    "summary": "Attribute a task to one of a repository's standing law violations.",
-   "symbol_count": 7,
+   "symbol_count": 8,
    "symbols": [
     "Attribution",
     "_names_of",
@@ -443802,6 +443846,7 @@
     "issue_signals",
     "rank_violations",
     "score_violation",
+    "self_check",
     "summarise"
    ],
    "terms": {
@@ -443815,6 +443860,7 @@
     "rank_violations": 1,
     "repository": 1,
     "score_violation": 1,
+    "self_check": 1,
     "standing": 1,
     "summarise": 1,
     "task": 1,

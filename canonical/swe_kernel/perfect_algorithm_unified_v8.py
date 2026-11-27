@@ -367,3 +367,16 @@ def demo_v8() -> dict[str, Any]:
     f=pa.fetch([], "goal fix handler in b.py to return 7 for y=3", allow_instant_knowledge=False)
     inv=pa.invent(spec={"examples": [(2,5),(3,7)], "oracle": lambda inp: inp*2+1 if isinstance(inp,int) else None, "grammar": ["x","0","1","2","+","-","*","//"]})
     return {"SCHEMA": SCHEMA, "MODEL_CALLS": 0, "scan": s["status"], "retrieve": r["status"], "fetch": f["status"], "invent": inv.get("status") or inv.get("program"), "cover": list(VERIFIED_OWNED_EQUIVALENT_COVER.keys()), "hard_rules": list(HARD_RULES)}
+
+
+def self_check() -> dict[str, Any]:
+    """Verify PerfectAlgorithmUnifiedV8 compiles NL goals in an isolated temp memory directory."""
+    import tempfile
+    with tempfile.TemporaryDirectory(prefix="pau8_sc_") as td:
+        eng = PerfectAlgorithmUnifiedV8(memory_path=pathlib.Path(td) / "mem.json")
+        compiled = eng.compile_nl_goal("Fix off-by-one comparison in binary search")
+        ok = isinstance(compiled, dict) and bool(compiled)
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "compiled_keys": sorted(compiled.keys())[:6] if isinstance(compiled, dict) else [],
+    }

@@ -260,3 +260,21 @@ class ExperientialStrategyExtractor:
             score *= 1.2
         
         return score
+
+
+def self_check() -> dict[str, Any]:
+    """Verify strategy extraction from solved/failed trajectories and retrieval in isolated temp storage."""
+    import tempfile
+    with tempfile.TemporaryDirectory(prefix="ese_sc_") as td:
+        ext = ExperientialStrategyExtractor(strategies_path=Path(td) / "strategies.json")
+        rec = ext.extract_from_trajectory(
+            "Fix off-by-one boundary error in slice parser",
+            [{"action": "edit_cmp", "before": "<=", "after": "<"}],
+            "success",
+        )
+        hits = ext.retrieve_similar_strategies("off-by-one boundary error in parser")
+        ok = isinstance(rec, dict) and isinstance(hits, list) and len(hits) >= 1
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "retrieved_count": len(hits) if isinstance(hits, list) else 0,
+    }

@@ -25,11 +25,17 @@ from canonical.runtime.wave53_54_unified_capability_bus_and_leapfrog_v1 import (
     WAVE53_54_AWAKENED_DARK_MODULES,
     DbspHindsightStrataMemoryEngine,
     DockerlessVerifierAndSelfPlayCurriculumEngine,
+    EvolvingWebMcpInterfaceRepository,
     FullMetamorphicLawAndPrecisionSlicerEngine,
     SafeTransferEStitchStrataEngine,
+    TriggerKeyedTransferIndex,
     UnifiedCapabilityBusEngine,
     UnifiedMultiRungJitRLAndWebMcpGrounderEngine,
+    audit_governance_consistency,
+    audit_manifest_capability_bus,
     canonicalize_eclass_source,
+    dispatch_manifest_trigger,
+    execute_inverted_neurosymbolic_stack,
     self_check,
 )
 
@@ -37,10 +43,11 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 
 
 class TestWave53To54UnifiedCapabilityBusAndLeapfrog(unittest.TestCase):
-    def test_01_self_check_passes_all_9_adversarial_checks(self) -> None:
+    def test_01_self_check_passes_all_14_adversarial_checks(self) -> None:
         res = self_check()
         self.assertTrue(res["pass"], f"self_check failed: {res}")
-        self.assertEqual(res["checks_passed"], 9)
+        self.assertEqual(res["checks_passed"], 14)
+        self.assertEqual(res["checks_total"], 14)
         self.assertEqual(res["k3_model_calls"], 0)
         self.assertEqual(res["spend_usd"], 0.0)
 
@@ -354,6 +361,170 @@ class TestWave53To54UnifiedCapabilityBusAndLeapfrog(unittest.TestCase):
         self.assertTrue(plan["grounded"])
         self.assertEqual(len(plan["plan"]), 4)
         self.assertEqual(plan["tool_sequence"], ["open_door", "talk_to_animal", "talk_to_animal", "return_to_hallway"])
+
+    def test_11_play0_manifest_capability_bus_26_of_29_admitted_and_fail_closed(self) -> None:
+        """Play 0: Manifest CapabilityBus admits 26/29 plugins (0 failed) and refuses unverified triggers."""
+        aud = audit_manifest_capability_bus()
+        self.assertTrue(aud["pass"])
+        self.assertEqual(aud["declared"], 29)
+        self.assertEqual(aud["admitted_count"], 26)
+        self.assertEqual(aud["failed_count"], 0)
+        self.assertIn("wave53_54_unified_capability_bus_and_leapfrog_v1", aud["admitted"])
+        # Negative control: unverified OSWorld trigger must fail closed
+        refused = dispatch_manifest_trigger("cua.osworld21", {})
+        self.assertFalse(refused.get("ok", True))
+        # UnifiedModel exposes manifest_audit directly with +0 LOC growth in brain_unified_model_v1.py
+        model = load_unified_model()
+        via_model = model.unified_capability_bus_op("manifest_audit")
+        self.assertEqual(via_model["admitted_count"], 26)
+
+    def test_12_play1_play2_trigger_keyed_4arm_ablation_beats_edit_keyed(self) -> None:
+        """Play 1-2: Failing-condition TriggerKeyedTransferIndex beats EMPTY/RAW/EDIT_KEYED with 0 clean corruptions."""
+        cases = [
+            {
+                "task_id": "repo_a_bound", "repo_id": "repo_a",
+                "before_source": "def f_a(n, cap):\n    return n <= cap\n",
+                "after_source": "def f_a(n, cap):\n    return n < cap\n",
+                "failure_signal": {"exception": "AssertionError", "symptom": "boundary_compare off-by-one"},
+                "verifier": lambda s: "n < cap" in s,
+            },
+            {
+                "task_id": "repo_b_bound", "repo_id": "repo_b",
+                "before_source": "def f_b(idx, lim):\n    return idx <= lim\n",
+                "after_source": "def f_b(idx, lim):\n    return idx < lim\n",
+                "failure_signal": {"exception": "AssertionError", "symptom": "boundary_compare off-by-one"},
+                "verifier": lambda s: "idx < lim" in s,
+            },
+            {
+                "task_id": "repo_c_arith", "repo_id": "repo_c",
+                "before_source": "def f_c(x, y):\n    return x - y\n",
+                "after_source": "def f_c(x, y):\n    return x + y\n",
+                "failure_signal": {"exception": "AssertionError", "symptom": "arithmetic_op sum mismatch"},
+                "verifier": lambda s: "x + y" in s,
+            },
+            {
+                "task_id": "repo_d_arith", "repo_id": "repo_d",
+                "before_source": "def f_d(p, q):\n    return p - q\n",
+                "after_source": "def f_d(p, q):\n    return p + q\n",
+                "failure_signal": {"exception": "AssertionError", "symptom": "arithmetic_op sum mismatch"},
+                "verifier": lambda s: "p + q" in s,
+            },
+        ]
+        clean = [{"repo_id": "repo_clean", "source": "def clean_fn(u, v):\n    return u <= v\n"}]
+        res = TriggerKeyedTransferIndex.run_4arm_transfer_ablation(cases, clean_controls=clean)
+        self.assertTrue(res["pass"])
+        self.assertEqual(res["arms"]["EMPTY"]["solved"], 0)
+        self.assertEqual(res["arms"]["RAW_TRACE_VERBATIM"]["solved"], 0)
+        self.assertEqual(res["arms"]["EDIT_KEYED"]["solved"], 0)
+        self.assertEqual(res["arms"]["TRIGGER_KEYED_ESTITCH_STRATA"]["solved"], 4)
+        self.assertEqual(res["clean_blind_corruptions"], 0)
+        self.assertTrue(res["credit_gate"]["activation_gate_pass"])
+        self.assertGreater(res["credit_gate"]["e_value"], 2.0)
+
+    def test_13_play3_inverted_neurosymbolic_stack_compiles_rung2_to_rung0(self) -> None:
+        """Play 3: Verified Rung-2 local proposer patch compiles down to Rung 0 (0 proposer calls on homologous task)."""
+        idx = TriggerKeyedTransferIndex()
+        r2 = execute_inverted_neurosymbolic_stack(
+            buggy_source="def clamp_a(k, hi):\n    return k <= hi\n",
+            fn_name="clamp_a",
+            failure_signal={"exception": "AssertionError", "symptom": "boundary_compare off-by-one"},
+            verifier=lambda s: "k < hi" in s,
+            trigger_index=idx,
+            local_proposer=lambda ctx: [ctx["buggy_source"].replace("<=", "<")],
+            repo_id="r1",
+            task_id="t1",
+        )
+        self.assertTrue(r2["solved"])
+        self.assertEqual(r2["rung_used"], 2)
+        self.assertTrue(r2["compiled_to_rung0"])
+        self.assertEqual(r2["k3_model_calls"], 0)
+
+        # Second unseen homologous function must execute purely at Rung 0 with ZERO proposer calls!
+        r0 = execute_inverted_neurosymbolic_stack(
+            buggy_source="def clamp_b(pos, end):\n    return pos <= end\n",
+            fn_name="clamp_b",
+            failure_signal={"exception": "AssertionError", "symptom": "boundary_compare off-by-one"},
+            verifier=lambda s: "pos < end" in s,
+            trigger_index=idx,
+            local_proposer=lambda ctx: [],
+            repo_id="r2",
+            task_id="t2",
+        )
+        self.assertTrue(r0["solved"])
+        self.assertEqual(r0["rung_used"], 0)
+        self.assertEqual(r0["proposer_calls"], 0)
+        self.assertEqual(r0["k3_model_calls"], 0)
+
+    def test_14_play4_harbor_subprocess_timeout_kills_process_group_cleanly(self) -> None:
+        """Play 4: LocalSubprocessHarborEnvironment kills timed-out child process groups without hanging."""
+        import asyncio
+        import time
+        from canonical.runtime.harbor_swe_zero_model_agent_v1 import LocalSubprocessHarborEnvironment
+        with tempfile.TemporaryDirectory(prefix="w54_harbor_pg_") as td:
+            env = LocalSubprocessHarborEnvironment(td)
+            t0 = time.perf_counter()
+            res = asyncio.run(env.exec("python3 -c 'import time; time.sleep(30)'", timeout_sec=1))
+            dt = time.perf_counter() - t0
+            self.assertEqual(res.return_code, 124)
+            self.assertLess(dt, 5.0)
+
+    def test_15_play5_agent_s4_lstar_interface_evolution_and_guarded_webx_skill(self) -> None:
+        """Play 5: Agent-S4 evolves drifted WebMCP schema via Angluin L* and enforces WebXSkill pre/postconditions."""
+        repo = EvolvingWebMcpInterfaceRepository([
+            {"name": "filterOrders", "description": "Filter orders", "inputSchema": {"type": "object", "properties": {"status": {"type": "string", "enum": ["new"]}}}},
+        ])
+
+        def _oracle(args: dict) -> dict:
+            if args.get("order_state") in ("pending", "shipped"):
+                return {"ok": True}
+            return {"ok": False, "rejected_param": "status", "expected_param": "order_state", "allowed_enum": ["pending", "shipped"]}
+
+        ev = repo.angluin_lstar_probe_interface("filterOrders", _oracle, [{"status": "new"}])
+        self.assertTrue(ev["converged"])
+        self.assertTrue(ev["evolved"])
+        self.assertIn("order_state", ev["evolved_properties"])
+        self.assertNotIn("status", ev["evolved_properties"])
+
+        repo.compile_webx_skill(
+            "ship_order",
+            steps=[{"set_key": "order_state", "set_val": "shipped"}],
+            preconditions=[("auth", True)],
+            postconditions=[("order_state", "shipped")],
+        )
+        s_bad_pre = {"auth": False, "order_state": "pending"}
+        ref = repo.execute_webx_skill_guarded("ship_order", s_bad_pre, lambda step, st: st.update({step["set_key"]: step["set_val"]}))
+        self.assertEqual(ref["verdict"], "REFUSED__PRECONDITION_VIOLATED")
+        self.assertEqual(s_bad_pre["order_state"], "pending")
+
+        s_bad_post = {"auth": True, "order_state": "pending"}
+        rb = repo.execute_webx_skill_guarded("ship_order", s_bad_post, lambda step, st: st.update({"order_state": "cancelled"}))
+        self.assertEqual(rb["verdict"], "ROLLED_BACK__POSTCONDITION_VIOLATED")
+        self.assertEqual(s_bad_post["order_state"], "pending")
+
+        s_ok = {"auth": True, "order_state": "pending"}
+        ok = repo.execute_webx_skill_guarded("ship_order", s_ok, lambda step, st: st.update({step["set_key"]: step["set_val"]}))
+        self.assertEqual(ok["verdict"], "WEBX_SKILL_PASS")
+        self.assertEqual(s_ok["order_state"], "shipped")
+
+    def test_16_play6_memory_2026_gauntlet_and_play7_governance_audit(self) -> None:
+        """Play 6 + Play 7: 2026 memory gauntlet (MEME/ForgetEval-Adv/P-Mem/STATE-Bench pass^5) & honest governance audit."""
+        g = DbspHindsightStrataMemoryEngine.run_2026_memory_gauntlet()
+        self.assertTrue(g["pass"])
+        self.assertTrue(g["meme"]["pass"])
+        self.assertEqual(g["forgeteval_adv"]["leaked_probes"], 0)
+        self.assertEqual(g["forgeteval_adv"]["forgetting_accuracy"], 1.0)
+        self.assertTrue(g["pmem_rollback_edges"]["pass"])
+        self.assertTrue(g["memory_arena_state_bench"]["pass_at_5"])
+        self.assertEqual(g["memory_arena_state_bench"]["seeds_passed"], 5)
+
+        gov = audit_governance_consistency([1.0, 1.0, 1.0, 1.0, 1.0])
+        self.assertTrue(gov["pass"])
+        self.assertFalse(gov["terminal_authority"])
+        self.assertEqual(gov["authority"], "NONE__PRODUCER_RUN_SANDBOX")
+        self.assertGreaterEqual(gov["contradictions_detected"], 1)
+        self.assertEqual(gov["capability_bus_admitted"], 26)
+        self.assertEqual(gov["capability_bus_failed"], 0)
+        self.assertTrue(gov["credit_gate_e_process"]["statistically_supported"])
 
 
 if __name__ == "__main__":

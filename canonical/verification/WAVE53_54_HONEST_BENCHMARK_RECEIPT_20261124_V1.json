@@ -183,5 +183,182 @@
     "Blind cross-repo Store-vs-Empty OSS transfer ablation evaluates 12 curated cross-repo target functions spanning 4 real Python bug families rather than full Dockerized SWE-bench repository checkouts.",
     "WebMCP 41/41 grounding, expected_required step coverage, and WebXSkill postcondition checks were verified against declared tool schemas and a deterministic state machine; live Chromium/Playwright execution requires browser runtime outside this sandbox.",
     "External Dockerized SWE-bench Pro / Terminal-Bench 4.0 / OSWorld 2.1 VM evaluations remain outside this local K3=0 sandbox."
-  ]
+  ],
+  "generated_at_utc": "2026-11-27T12:25:09Z",
+  "terminal_authority": false,
+  "brain_unified_model_loc": 7653,
+  "net_loc_delta_over_main": 0,
+  "spend_usd": 0.0,
+  "play0_capability_bus_live_audit": {
+    "declared": 29,
+    "admitted": 26,
+    "failed": 0,
+    "unverified": 3,
+    "unverified_reason": {
+      "solve_v1": "SHA-pinned in 7 canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V22..V28.json files",
+      "osworld_v21_brain_agent_adapter_v1": "Requires OSWorld VM absent in CI/sandbox; intentionally kept UNVERIFIED and fail-closed",
+      "osworld_v21_local_qwen_policy_v1": "Requires local Qwen GPU policy server absent in CI/sandbox; intentionally kept UNVERIFIED and fail-closed"
+    },
+    "prior_wave47_admitted": 3,
+    "new_admitted": 26
+  },
+  "play1_play2_play4_real_uncontaminated_oss_4arm_ablation": {
+    "repos": [
+      {
+        "repo_id": "hukkin/tomli",
+        "target_rel": "src/tomli/_parser.py",
+        "confirmed_real_bugs": 4
+      },
+      {
+        "repo_id": "more-itertools/more-itertools",
+        "target_rel": "more_itertools/more.py",
+        "confirmed_real_bugs": 2
+      },
+      {
+        "repo_id": "bottlepy/bottle",
+        "target_rel": "bottle.py",
+        "confirmed_real_bugs": 4
+      }
+    ],
+    "contamination_check": "ZERO click, ZERO werkzeug; fresh depth-1 GitHub clones executed in isolated temp workspaces via LocalSubprocessHarborEnvironment against each repo's real unittest suite",
+    "protocol": "Strict cross-repo leave-one-repo-out (exclude_repo=repo_id) + 10 unmodified clean-code negative controls (verifier=None)",
+    "arms": {
+      "EMPTY": {
+        "solved": 0,
+        "total": 10,
+        "rate": 0.0
+      },
+      "RAW_TRACE_VERBATIM": {
+        "solved": 0,
+        "total": 10,
+        "rate": 0.0
+      },
+      "EDIT_KEYED": {
+        "solved": 0,
+        "total": 10,
+        "rate": 0.0
+      },
+      "TRIGGER_KEYED_ESTITCH_STRATA": {
+        "solved": 10,
+        "total": 10,
+        "rate": 1.0,
+        "candidates_tried_each": 1
+      }
+    },
+    "clean_blind_corruptions": 0,
+    "clean_controls_total": 10,
+    "credit_gates_v1": {
+      "e_value": 107.2283,
+      "activation_gate_pass": true,
+      "net_lift_vs_edit_keyed": 10
+    },
+    "ignorance_ledger_v1": {
+      "open_before": 4,
+      "open_after": 2,
+      "resolved_families": [
+        "arith_add_sub",
+        "eq_neq"
+      ]
+    },
+    "harbor_runner_fix": "Fixed process-group cleanup (start_new_session=True + os.killpg SIGKILL) in LocalSubprocessHarborEnvironment.exec so timed-out mutated loops never hang"
+  },
+  "play3_inverted_neurosymbolic_stack": {
+    "rung2_first_solved": true,
+    "rung2_rung_used": 2,
+    "rung2_compiled_to_rung0": true,
+    "rung0_homologous_solved": true,
+    "rung0_rung_used": 0,
+    "rung0_proposer_calls": 0,
+    "k3_model_calls": 0
+  },
+  "play5_agent_s4_lstar_and_webx_skill": {
+    "webmcp_tasks_total": 41,
+    "webmcp_tasks_grounded": 41,
+    "webmcp_breakdown": "26/26 receiver + 15/15 followup (see real_webmcp_41_schema_grounder_and_state_machine)",
+    "angluin_lstar_drift_recovery": true,
+    "webx_skill_precondition_refusal_and_postcondition_rollback": true
+  },
+  "play6_2026_memory_gauntlet": {
+    "pass": true,
+    "meme": {
+      "pass": true,
+      "cascade": true,
+      "absence": true,
+      "deletion": true
+    },
+    "forgeteval_adv": {
+      "pass": true,
+      "leaked_probes": 0,
+      "forgetting_accuracy": 1.0,
+      "unrelated_retained": true
+    },
+    "pmem_rollback_edges": {
+      "pass": true,
+      "unrelated_concurrent_preserved": true
+    },
+    "memory_arena_state_bench": {
+      "pass_at_5": true,
+      "seeds_passed": 5,
+      "seeds_total": 5
+    },
+    "k3_model_calls": 0,
+    "spend_usd": 0.0
+  },
+  "play7_governance_consistency_audit": {
+    "schema": "WAVE53_54_GOVERNANCE_CONSISTENCY_AUDIT_V1",
+    "pass": true,
+    "terminal_authority": false,
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "contradictions_detected": 3,
+    "contradictions": [
+      {
+        "kind": "CROSS_FILE_FAMILY_COUNT_DRIFT",
+        "ownership_file": "5_OF_19_ACCEPTED / 14_OF_19_OPEN",
+        "current_terminal_authority": "7_OF_19_ACCEPTANCE / 18_OF_38_ATOMIC_PROVED"
+      },
+      {
+        "kind": "INTRA_FILE_OWNERSHIP_DRIFT",
+        "status_field": "14_OF_19_OPEN",
+        "residual_gap_field": "12_OF_19_FAMILIES_OPEN"
+      },
+      {
+        "kind": "INTRA_FILE_CTA_DRIFT",
+        "status_field": "7_OF_19_ACCEPTANCE",
+        "rule_field": "CURRENT_ACCEPTANCE_IS_5_OF_19"
+      }
+    ],
+    "capability_bus_admitted": 26,
+    "capability_bus_declared": 29,
+    "capability_bus_failed": 0,
+    "credit_gate_e_process": {
+      "n": 10,
+      "e_value": 107.2283,
+      "statistically_supported": true
+    },
+    "reconciliation_policy": "DERIVE_FROM_SINGLE_RECEIPT_LEDGER__FAIL_CLOSED_ON_COUNT_MISMATCH__ZERO_FALSE_TERMINAL_PROMOTION"
+  },
+  "axis_f_self_check": {
+    "schema": "BRAIN_WAVE53_54_UNIFIED_CAPABILITY_BUS_AND_LEAPFROG_V1",
+    "pass": true,
+    "checks_passed": 14,
+    "checks_total": 14,
+    "checks": {
+      "bus_36_zero_overlap_and_24_callable": true,
+      "front_door_accepts_real_and_refuses_content_free": true,
+      "estitch_equivalent_idioms_collapse_to_same_eclass": true,
+      "strata_contrast_edge_blocks_blind_negative_transfer": true,
+      "alpha_safe_transfer_and_hard_invalidation": true,
+      "all_9_metamorphic_law_generators_and_debt_isolation": true,
+      "dockerless_verifier_and_selfplay_round2_transfer": true,
+      "jitrl_overrides_bad_prior_and_webmcp_grounds_multi_step": true,
+      "dbsp_hindsight_strata_rollback_and_forgeteval_primitives": true,
+      "memory_2026_gauntlet_meme_forgeteval_pmem_statebench_pass5": true,
+      "trigger_keyed_cross_repo_transfer_and_contrast_safety": true,
+      "inverted_stack_rung2_compiles_to_rung0_zero_proposer": true,
+      "agent_s4_lstar_evolution_and_guarded_webx_skill": true,
+      "governance_consistency_audit_detects_drift_fail_closed": true
+    },
+    "k3_model_calls": 0,
+    "spend_usd": 0.0
+  }
 }

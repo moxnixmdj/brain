@@ -210,3 +210,21 @@ def stats(path: str | None = None) -> dict[str, Any]:
         "tried": len(tried),
         "ever_helped": sum(1 for g in tried if int(g.get("helped") or 0) > 0),
     }
+
+
+def self_check() -> dict[str, Any]:
+    """Verify ignorance ledger notes, ranks, and resolves gaps cleanly in isolated temp storage."""
+    import tempfile
+    with tempfile.TemporaryDirectory(prefix="ig_sc_") as td:
+        lp = Path(td) / "ignorance.json"
+        gid = note("untested_law_generator", why="self_check", cost=1.0, path=lp)
+        ranked = rank(limit=3, path=lp)
+        before_open = open_gaps(path=lp)
+        resolve(gid, helped=True, close=True, path=lp)
+        after_open = open_gaps(path=lp)
+        ok = bool(gid) and len(ranked) == 1 and before_open == 1 and after_open == 0
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "before_open": before_open,
+        "after_open": after_open,
+    }

@@ -118,6 +118,7 @@ class LocalSubprocessHarborEnvironment:
         self._extra_env = dict(extra_env or {})
 
     async def exec(self, command: str, *, timeout_sec: int | None = None) -> _ExecResult:
+        import signal
         env = dict(os.environ)
         env["PYTHONDONTWRITEBYTECODE"] = "1"
         env.update(self._extra_env)
@@ -129,11 +130,19 @@ class LocalSubprocessHarborEnvironment:
             env=env,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
+            start_new_session=True,
         )
         try:
             out_b, err_b = await asyncio.wait_for(proc.communicate(), timeout=timeout_sec or 120)
         except asyncio.TimeoutError:
-            proc.kill()
+            try:
+                os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+            try:
+                proc.kill()
+            except ProcessLookupError:
+                pass
             await proc.communicate()
             return _ExecResult(124, "", "LOCAL_SUBPROCESS_TIMEOUT")
         return _ExecResult(
@@ -874,3 +883,18 @@ class HarborSweZeroModelAgent(BaseAgent):
             except Exception:
                 pass
 
+
+def self_check() -> dict[str, Any]:
+    """Verify LocalSubprocessHarborEnvironment runs an isolated command and captures exact stdout."""
+    import asyncio, tempfile
+    with tempfile.TemporaryDirectory(prefix="harbor_sc_") as td:
+        env = LocalSubprocessHarborEnvironment(td)
+        res = asyncio.run(env.exec("python3 -c 'print(42)'"))
+        out = str(getattr(res, "stdout", "") or "").strip()
+        rc = int(getattr(res, "return_code", getattr(res, "returncode", -1)))
+        ok = (rc == 0) and (out == "42")
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "return_code": rc,
+        "stdout": out,
+    }
