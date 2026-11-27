@@ -1,0 +1,187 @@
+{
+  "schema": "BRAIN_WAVE53_54_HONEST_BENCHMARK_RECEIPT_V1",
+  "date": "2026-11-24",
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "producer_independent": false,
+  "base_commit": "ebafef8c25974b52b3e0878f64b95285509724a3",
+  "k3_model_calls": 0,
+  "incremental_spend_usd": 0.0,
+  "elapsed_s": 65.36,
+  "unified_model_invariants": {
+    "brain_unified_model_loc": 7488,
+    "elon_law_loc_cap": 7534,
+    "net_loc_delta": 0,
+    "engines_total": 270,
+    "federated_kernel_engines": 244,
+    "verify_brain_unified_model_pass": "38/38"
+  },
+  "unified_capability_bus": {
+    "wave53_54_awakened_dark_modules": 36,
+    "zero_overlap_with_w40_w52": true,
+    "cumulative_w40_w54_awakened_dark_modules": 228,
+    "bus_organs_callable": "24/24",
+    "osworld_overlay_syntax_error_repaired": true,
+    "osworld_v21_app_policy_overlay_decide_ok": "5/5"
+  },
+  "real_80_swe_verified_front_door": {
+    "corpus": "canonical/corpus/swe_verified_issue_text_20261124_V1.json",
+    "baseline_accepted": "28/80 (35.0%)",
+    "wave53_accepted": "77/80 (96.2%)",
+    "refused_ids": [
+      "pytest-dev__pytest-7432",
+      "pytest-dev__pytest-7521",
+      "pytest-dev__pytest-7982"
+    ],
+    "adversarial_content_free_refused": "20/20 (100.0%, 0 false accepts)"
+  },
+  "real_quixbugs_40_of_40_strict_leave_one_out_transfer": {
+    "source": "github.com/jkoppel/QuixBugs (uncontaminated shallow clone; ALL 40 Python programs including all 31 JSON + 9 graph/Node programs via upstream python_testcases/test_*.py with pytest.run_slow=False)",
+    "gold_correct_sanity_check": "39/40 pass within 0.9s cap (levenshtein slow recursive test exceeds 0.9s cap); 40/40 buggy programs fail",
+    "baseline_1fix_transfer": "1/40 (2.5%, widest 3/40 = 7.5%)",
+    "rules_admitted_from_40_pairs": "39/40",
+    "programs_evaluated": 40,
+    "wave53_54_strict_loo_solved": 13,
+    "wave53_54_strict_loo_rate_pct": 32.5,
+    "solved_transfers": [
+      {
+        "target": "find_first_in_sorted",
+        "donor": "knapsack",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:COMPARE_OP_FAMILY",
+        "candidates_tried": 8
+      },
+      {
+        "target": "find_in_sorted",
+        "donor": "next_palindrome",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:OFF_BY_ONE_DELTA",
+        "candidates_tried": 42
+      },
+      {
+        "target": "gcd",
+        "donor": "shortest_path_lengths",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:ARG_OR_OPERAND_SWAP",
+        "candidates_tried": 14
+      },
+      {
+        "target": "knapsack",
+        "donor": "mergesort",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:COMPARE_OP_FAMILY",
+        "candidates_tried": 58
+      },
+      {
+        "target": "lcs_length",
+        "donor": "next_palindrome",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:OFF_BY_ONE_DELTA",
+        "candidates_tried": 20
+      },
+      {
+        "target": "lis",
+        "donor": "max_sublist_sum",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:ACCUMULATOR_MAX_CLAMP",
+        "candidates_tried": 38
+      },
+      {
+        "target": "max_sublist_sum",
+        "donor": "lis",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:ACCUMULATOR_MAX_CLAMP",
+        "candidates_tried": 13
+      },
+      {
+        "target": "next_permutation",
+        "donor": "knapsack",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:COMPARE_OP_FAMILY",
+        "candidates_tried": 34
+      },
+      {
+        "target": "pascal",
+        "donor": "next_palindrome",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:OFF_BY_ONE_DELTA",
+        "candidates_tried": 16
+      },
+      {
+        "target": "quicksort",
+        "donor": "knapsack",
+        "mode": "ORACLE_VERIFIED_TRANSFER",
+        "candidates_tried": 1
+      },
+      {
+        "target": "rpn_eval",
+        "donor": "shortest_path_lengths",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:ARG_OR_OPERAND_SWAP",
+        "candidates_tried": 14
+      },
+      {
+        "target": "shortest_path_lengths",
+        "donor": "rpn_eval",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:ARG_OR_OPERAND_SWAP",
+        "candidates_tried": 35
+      },
+      {
+        "target": "to_base",
+        "donor": "shortest_path_lengths",
+        "mode": "ORACLE_VERIFIED_L3_FAMILY:ARG_OR_OPERAND_SWAP",
+        "candidates_tried": 12
+      }
+    ],
+    "oracle_free_negative_transfer_corruptions_on_40_clean_programs": 0,
+    "oracle_free_contrast_blocked": 40
+  },
+  "blind_cross_repo_store_vs_empty_oss_ablation": {
+    "description": "4 donor fixes (__reversed__=None protocol trap, assert->TypeError, except ValueError broadening, <= -> < boundary) evaluated blind on 12 unseen renamed-identifier target functions + 12 clean control functions",
+    "baseline_subtree_transfer_control_delta": 0,
+    "empty_store_oracle_free_solved": "0/12",
+    "empty_store_oracle_gated_solved": "0/12",
+    "populated_store_oracle_free_solved": "3/12 (+3 vs empty, 0/12 clean corruptions)",
+    "populated_store_oracle_gated_solved": "12/12 (+12 vs empty, 0/12 clean corruptions)",
+    "clean_control_corruptions": "0/12 (0.0%)"
+  },
+  "real_webmcp_41_schema_grounder_and_state_machine": {
+    "receiver_baseline": "7/26 grounded (26.9%, 19/26 NO_GROUNDING)",
+    "receiver_wave54_grounded": "26/26 (100.0%)",
+    "receiver_wave54_step_count_ge_expected_required": "26/26 (100.0%)",
+    "receiver_wave54_state_machine_postcondition_verified": "26/26 (100.0%)",
+    "followup_wave54_grounded": "15/15 (100.0%)",
+    "followup_wave54_step_count_ge_expected_required": "15/15 (100.0%)",
+    "followup_wave54_state_machine_postcondition_verified": "15/15 (100.0%)",
+    "total_41_grounded_step_covered_and_state_verified": "41/41 (100.0%)",
+    "note": "Verified offline against declared app tool schemas, exact expected_required step counts from call_grades JSON, and deterministic WebMCP state-machine postcondition checks; live Playwright Chromium execution remains outside this sandbox."
+  },
+  "metamorphic_9_of_9_multifile_and_precision_prefilter": {
+    "laws_with_repair_generators": 9,
+    "baseline_laws_with_generators": 4,
+    "inherited_debt_isolation_verified": true,
+    "multifile_callgraph_localization_coupled": true,
+    "unittest_testcase_neighbor_regression_prefilter_rejected_target_passing_bad_patch": true,
+    "neighbor_regressions_caught": [
+      "tests/test_router.py::TestRouter::test_neighbor_plain_key",
+      "tests/test_router.py::TestRouter::test_neighbor_upper_trim"
+    ],
+    "single_file_failed_and_rolled_back": true,
+    "atomic_2file_cow_commit_passed_full_unittest_suite": true
+  },
+  "self_check": {
+    "schema": "BRAIN_WAVE53_54_UNIFIED_CAPABILITY_BUS_AND_LEAPFROG_V1",
+    "pass": true,
+    "checks_passed": 9,
+    "checks_total": 9,
+    "checks": {
+      "bus_36_zero_overlap_and_24_callable": true,
+      "front_door_accepts_real_and_refuses_content_free": true,
+      "estitch_equivalent_idioms_collapse_to_same_eclass": true,
+      "strata_contrast_edge_blocks_blind_negative_transfer": true,
+      "alpha_safe_transfer_and_hard_invalidation": true,
+      "all_9_metamorphic_law_generators_and_debt_isolation": true,
+      "dockerless_verifier_and_selfplay_round2_transfer": true,
+      "jitrl_overrides_bad_prior_and_webmcp_grounds_multi_step": true,
+      "dbsp_hindsight_strata_rollback_and_forgeteval_primitives": true
+    },
+    "k3_model_calls": 0,
+    "spend_usd": 0.0
+  },
+  "honest_limits": [
+    "All measurements are producer-run sandbox measurements (authority: NONE__PRODUCER_RUN_SANDBOX), NOT independent third-party benchmark certifications.",
+    "QuixBugs evaluation ran strict leave-one-out transfer on ALL 40/40 upstream Python programs (31 JSON + 9 graph/Node); upstream levenshtein gold solution exceeded the 0.9s per-candidate timeout cap on its slow recursive case.",
+    "Blind cross-repo Store-vs-Empty OSS transfer ablation evaluates 12 curated cross-repo target functions spanning 4 real Python bug families rather than full Dockerized SWE-bench repository checkouts.",
+    "WebMCP 41/41 grounding, expected_required step coverage, and WebXSkill postcondition checks were verified against declared tool schemas and a deterministic state machine; live Chromium/Playwright execution requires browser runtime outside this sandbox.",
+    "External Dockerized SWE-bench Pro / Terminal-Bench 4.0 / OSWorld 2.1 VM evaluations remain outside this local K3=0 sandbox."
+  ]
+}

@@ -149,13 +149,13 @@ def _calc(instruction: str):
     m = re.search(r"merge\s+(?:cells?\s+)?([A-Z]+\d+:[A-Z]+\d+)", instruction, re.I)
     if m:
         return _app_op("libreoffice_calc", "merge_cells", {"range_str": m.group(1).upper()})
-    m = re.search(r"(?:set|put|write).*?\b([A-Z]+\d+)\b.*?(?:to|as|=)\s+["']?([^"';]+)", instruction, re.I)
+    m = re.search(r'''(?:set|put|write).*?\b([A-Z]+\d+)\b.*?(?:to|as|=)\s+["']?([^"';]+)''', instruction, re.I)
     if m:
         return _app_op("libreoffice_calc", "set_cell_value", {"cell": m.group(1).upper(), "value": m.group(2).strip()})
     m = re.search(r"sort.*?column\s+([A-Z]+).*?\b(ascending|descending)\b", instruction, re.I)
     if m:
         return _app_op("libreoffice_calc", "sort_column", {"column_name": m.group(1).upper(), "ascending": m.group(2).lower()=="ascending"})
-    m = re.search(r"rename\s+(?:the\s+)?sheet\s+["']?([^"']+?)["']?\s+to\s+["']?([^"']+?)["']?(?:[.;]|$)", instruction, re.I)
+    m = re.search(r'''rename\s+(?:the\s+)?sheet\s+["']?([^"']+?)["']?\s+to\s+["']?([^"']+?)["']?(?:[.;]|$)''', instruction, re.I)
     if m:
         return _app_op("libreoffice_calc", "rename_sheet", {"old_name": m.group(1).strip(), "new_name": m.group(2).strip()})
     m = re.search(r"zoom.*?(\d{2,3})\s*%?", instruction, re.I)
@@ -164,7 +164,7 @@ def _calc(instruction: str):
     m = re.search(r"transpose\s+([A-Z]+\d+:[A-Z]+\d+).*?(?:to|at)\s+([A-Z]+\d+)", instruction, re.I)
     if m:
         return _app_op("libreoffice_calc", "transpose_range", {"source_range": m.group(1).upper(), "target_cell": m.group(2).upper()})
-    m = re.search(r"(?:switch|go).*?sheet\s+["']?([^"'.;]+)", instruction, re.I)
+    m = re.search(r'''(?:switch|go).*?sheet\s+["']?([^"'.;]+)''', instruction, re.I)
     if m:
         return _app_op("libreoffice_calc", "switch_active_sheet", {"sheet_name": m.group(1).strip()})
     return None
@@ -205,7 +205,7 @@ def _code(instruction: str):
         return _app_op("code", "update_extensions")
     if ("list" in low or "show" in low) and "extension" in low:
         return _app_op("code", "list_extensions")
-    m = re.search(r"(install|uninstall|disable).*?extension\s+["']?([A-Za-z0-9_.-]+)", instruction, re.I)
+    m = re.search(r'''(install|uninstall|disable).*?extension\s+["']?([A-Za-z0-9_.-]+)''', instruction, re.I)
     if m:
         op = {"install":"install_extension","uninstall":"uninstall_extension","disable":"disable_extension"}[m.group(1).lower()]
         return _app_op("code", op, {"extension_id": m.group(2)})
