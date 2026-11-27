@@ -37,7 +37,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::no producer existed for the instant-learning receipts, so their numbers could not be re-run; and with a producer in place the measured ceiling is not the admission filter (verified, goal-relevant, prediction-error-bearing and MDL-compressible all pass at ratio 143.2) but lift_python_subtree_morphism, which emits statement-slice copies of one fix (held-out arities 10/1/0), fires on 0 of 6 cross-commit applications including same-project pairs, and cannot be composed because anti_unify_subtree_morphisms refuses on its own before_arity equality (0 of 3 witness pairs, ARITY_MISMATCH_BEFORE) -- so accumulating exposures cannot lift the ceiling, and a store that admits nothing cannot turn one experience into capability",
- "canonical_base_commit": "cba2a0554eaf2b74374a9f67b4928564e02be3e1",
+ "canonical_base_commit": "f0f5f217d79b0273a4eb2bbef2ade54d424203a1",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -99,7 +99,7 @@
  "parent_capability": "canonical/tools/instant_learning_seeded_store_ablation_v1.py + canonical/swe_kernel/epistemic_admission_and_self_play_v1.py",
  "prior_work_reused": "epistemic_admission_and_self_play_v1 (lift_python_subtree_morphism, anti_unify_subtree_morphisms, apply_subtree_morphism_to_python, EpistemicStoreV1 five-gate admission), cross_modal_tomography_petri_v1.solve_epistemic_workspace_cow, execution_guard/true_capability_harness_v1, VERIFICATION_AND_THE_REAL_WALL_20261124_V1 and PASTED_PLAN_VERIFICATION_20261124_V1 as prior audits that this branch extends rather than repeats",
  "recursive_obs": {
-  "canonical_base_commit": "cba2a0554eaf2b74374a9f67b4928564e02be3e1",
+  "canonical_base_commit": "f0f5f217d79b0273a4eb2bbef2ade54d424203a1",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "contract_authority": "READ_FROM_ORIGIN/main_AT_GENERATION_TIME__NOT_TRANSCRIBED",
   "deleted_or_bypassed_paths": [
@@ -221,7 +221,7 @@
  "v22_prewrite_admission": {
   "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-  "checked_at_utc": "2026-11-27T00:08:05Z",
+  "checked_at_utc": "2026-11-27T00:22:19Z",
   "currentness": {
    "accepted_families": 5,
    "meta_envelope_open_count": 8,
