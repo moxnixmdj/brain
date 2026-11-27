@@ -50,16 +50,11 @@ def _safe_token(forbidden: list[str], seed: str = "zxqv") -> str:
     raise JointWitnessError("NO_SAFE_FILLER")
 
 def _required_fragments(required: list[str], forbidden: list[str]) -> list[str]:
-    out: list[str] = []
-    for kw in required:
-        # Existence is substring/regex search while forbidden is whole-word search.
-        # If an identical generated word appears in both sets, append a letter:
-        # the required regex still matches but the forbidden whole-word checker does not.
-        if any(kw.lower() == w.lower() for w in forbidden):
-            out.append(kw + "x")
-        else:
-            out.append(kw)
-    return out
+    # Frozen KeywordChecker uses regex substring search while ForbiddenWords uses
+    # whole-word boundaries.  The public generator's keyword pool is alphabetic.
+    # A trailing digit therefore preserves every required match and destroys every
+    # whole-word forbidden collision, including required/forbidden overlap.
+    return [kw + "0" for kw in required]
 
 def _get_one(constraints: list[dict[str, Any]], iid: str) -> dict[str, Any] | None:
     xs = [c for c in constraints if c.get("instruction_id") == iid]
@@ -73,7 +68,9 @@ def _special_json(constraints: list[dict[str, Any]]) -> str:
     required = _required_fragments(_required(constraints), forbidden)
     filler = _safe_token(forbidden)
     payload = " ".join([filler, *required]).strip()
-    response = json.dumps({"response": payload}, ensure_ascii=False)
+    # A JSON string has no mandatory alphabetic object key.  This matters because
+    # "response" itself is in the frozen public WORD_LIST and may be forbidden.
+    response = json.dumps(payload, ensure_ascii=False)
     for w in forbidden:
         if re.search(r"\b" + re.escape(w) + r"\b", response, re.I):
             raise JointWitnessError("JSON_FORBIDDEN_COLLISION")
@@ -100,10 +97,12 @@ def _special_two(constraints: list[dict[str, Any]]) -> str:
     forbidden = _forbidden(constraints)
     required = _required_fragments(_required(constraints), forbidden)
     filler = _safe_token(forbidden)
-    title = "<<x>> " if _get_one(constraints, "detectable_format:title") else ""
+    title = "<<0>> " if _get_one(constraints, "detectable_format:title") else ""
     common = (title + " ".join([filler, *required])).strip()
-    a = common + " alpha"
-    b = common + " beta"
+    # Numeric differentiators cannot collide with the alphabetic frozen keyword
+    # pool, unlike the old fixed words "alpha"/"beta".
+    a = common + " 0"
+    b = common + " 1"
     response = a + "******" + b
     for w in forbidden:
         if re.search(r"\b" + re.escape(w) + r"\b", response, re.I):
@@ -131,7 +130,7 @@ def _build_general(constraints: list[dict[str, Any]]) -> str:
 
     body_parts: list[str] = []
     if title:
-        body_parts.append("<<x>>")
+        body_parts.append("<<0>>")
     body_parts.extend(required)
 
     if sections:
@@ -139,7 +138,10 @@ def _build_general(constraints: list[dict[str, Any]]) -> str:
         n = int(s["num_sections"])
         splitter = str(s["section_spliter"])
         for i in range(1, n + 1):
-            body_parts.append(f"{splitter} {i}\n{filler}{i}")
+            # SectionChecker permits zero whitespace before the index.  Gluing
+            # the digit removes the whole-word boundary after "Section", so even
+            # a forbidden keyword "section" cannot make this composition fail.
+            body_parts.append(f"{splitter}{i}\n{filler}{i}")
 
     if bullets:
         n = int(_slots(bullets)["num_bullets"])
@@ -156,8 +158,25 @@ def _build_general(constraints: list[dict[str, Any]]) -> str:
         elif relation == "less than":
             if n <= 0:
                 raise JointWitnessError("STRICT_LESS_THAN_ZERO_SENTENCES")
-            # Keep our own additions punctuation-free. Other visible constraints
-            # can still introduce punctuation; exact predecessor replay decides.
+            if n == 1:
+                # Punkt returns one sentence for every non-empty witness used by
+                # this active surface.  The only satisfiable <1 branch is empty,
+                # which can coexist only with negative forbidden-words and a
+                # less-than word bound.
+                positive = {
+                    str(c.get("instruction_id") or "")
+                    for c in constraints
+                    if str(c.get("instruction_id") or "") not in {
+                        "length_constraints:number_sentences",
+                        "keywords:forbidden_words",
+                        "length_constraints:number_words",
+                    }
+                }
+                wc = _get_one(constraints, "length_constraints:number_words")
+                if positive or (wc is not None and str(_slots(wc).get("relation")) != "less than"):
+                    raise JointWitnessError("HARD_UNSAT_SENTENCE_LT1_REQUIRES_NONEMPTY_OUTPUT")
+                return ""
+            # For thresholds >=2 construct one punctuation-controlled sentence.
             body_parts.append(filler)
         else:
             raise JointWitnessError("UNKNOWN_SENTENCE_RELATION")
@@ -202,9 +221,16 @@ def _build_general(constraints: list[dict[str, Any]]) -> str:
     # Postscript is placed after ordinary body but before an exact end phrase.
     if post:
         marker = str(_slots(post).get("postscript_marker") or "")
-        if not marker:
+        if marker == "P.S.":
+            neutral_post = filler + "p.s." + filler
+        elif marker == "P.P.S":
+            neutral_post = filler + "p.p.s" + filler
+        else:
             raise JointWitnessError("POSTSCRIPT_MARKER_REQUIRED")
-        core = core.rstrip() + "\n" + marker + " " + filler
+        # The exact PostscriptChecker scans for p.s./p.p.s with no word-boundary
+        # requirement.  Embedding the marker inside one token stream keeps it
+        # visible to that checker without creating an extra Punkt sentence.
+        core = core.rstrip() + " " + neutral_post
 
     if end:
         phrase = str(_slots(end).get("end_phrase") or "").strip()

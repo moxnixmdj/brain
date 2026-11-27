@@ -345,3 +345,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+# Current-main 2026-10-05 seven-archetype closure diagnostic trigger.
