@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_ROOT_IDENTITY_PRECEDENCE_TRUTH_REPAIR_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__UPSTREAM_POPULATION_IDENTITY_PRECEDES_DOWNSTREAM_EXACT_SCORE_ROOT_CLASSIFICATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "conflict": {
+    "currently_active_root_state": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "state": "ROOT1_ZERO__LIVEBENCH_ROOT2_ONLY_AFTER_FORCED_FAIL_REVOCATION"
+    },
+    "proxy_exact_score_repair_candidate": {
+      "brain_pr": 1808,
+      "path": "canonical/governance/LIVEBENCH_V6_EXACT_SCORE_PRECEDENCE_TRUTH_REPAIR_20261004_V1.json",
+      "git_blob_sha": "f2c6671b60462bec2de2b9574ab9e3f667ab3996",
+      "proved_local_fact": "THE_BOUND_V6_PROXY_EXECUTION_HAS_72_EXACT_SCORE_0_0_RECEIPTS_WITH_SCORING_ERROR_NULL__SO_THE_200_ROW_PROXY_CANDIDATE_HAS_A_64_PERCENT_CEILING"
+    },
+    "upstream_population_identity_repair_candidate": {
+      "brain_pr": 1781,
+      "path": "canonical/governance/LIVEBENCH_OFFICIAL_POPULATION_IDENTITY_TRUTH_REPAIR_V1.json",
+      "git_blob_sha": "786bfb0373743702394180ba3d7f325f468edc0b",
+      "runtime_git_blob_sha": "7b134265f7513292248a49edeb3313acab51c665",
+      "finding": "THE_HISTORICAL_PUBLIC_HF_PROXY_HAS_NOT_BEEN_JOINED_BY_QUESTION_ID_OR_EQUIVALENT_CONTENT_ADDRESS_TO_THE_OFFICIAL_2026_06_25_LEADERBOARD_SCORING_POPULATION"
+    }
+  },
+  "exact_v6_evidence": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "commit": "f3c439f329c7b481a8448a0619e7696111e05ecc",
+    "verification_script_blob": "bae0957c258d1211249bdc7be94244487d223cbc",
+    "reconciliation_blob": "b1e14f11d97673a499f2d9a5e2c708d9aba969fb",
+    "execution_log_blob": "6c9c89cd2f7e977405017cb5ddfa8033126f4bf2",
+    "exact_local_result": "72_OF_72_SCORE_0_0__128_REMAINING__PROXY_CEILING_64_0_PERCENT",
+    "preserved": true
+  },
+  "official_comparator_geometry": {
+    "path": "canonical/governance/LIVEBENCH_2026_06_25_OPUS55_IF_TARGET_GEOMETRY_V1.json",
+    "git_blob_sha": "0214ddfa1082b3fafd652bab23a1ed9e130ee94f",
+    "model": "claude-opus-5-5-max-effort",
+    "exact_mean_percent": 65.73775,
+    "tasks": [
+      "paraphrase",
+      "simplify",
+      "story_generation",
+      "summarize"
+    ],
+    "questions_per_task": 50,
+    "total_questions": 200
+  },
+  "historical_population_verification_audit": {
+    "verifier_pr": 1380,
+    "workflow_git_blob_sha": "043e9b8339fca0effc921cb1d721567e5e0d0358",
+    "what_it_checks": [
+      "LEADERBOARD_AGGREGATE_OPUS_TASK_SCORES",
+      "LEADERBOARD_50_PER_TASK_COUNTS",
+      "PUBLIC_HF_ACTIVE_50_PER_TASK_COUNTS",
+      "PUBLIC_HF_QUESTION_ID_UNIQUENESS"
+    ],
+    "missing_join": "NO_LEADERBOARD_SIDE_QUESTION_ID_SET_IS_OBTAINED_OR_COMPARED_TO_THE_PUBLIC_HF_ACTIVE_ID_SET",
+    "deduction": "EQUAL_CARDINALITY_AND_TASK_COUNTS_DO_NOT_PROVE_ROW_IDENTITY"
+  },
+  "precedence_theorem": {
+    "statement": "ROOT_CLASSIFICATION_FOR_THE_OFFICIAL_TERMINAL_PREDICATE_MUST_CONDITION_DOWNSTREAM_SCORE_EVIDENCE_ON_UPSTREAM_POPULATION_IDENTITY",
+    "cases": [
+      "OFFICIAL_EXACT_PASS=>CLOSED_PASS",
+      "OFFICIAL_EXACT_FAIL=>ROOT1_POSITIVE_GAP",
+      "PROXY_EXACT_FAIL_PLUS_PROVED_PROXY_EQUALS_OFFICIAL_POPULATION=>ROOT1_POSITIVE_GAP",
+      "PROXY_EXACT_FAIL_WITHOUT_PROVED_PROXY_EQUALS_OFFICIAL_POPULATION=>ROOT2_ONLY_FOR_TERMINAL_PREDICATE__PROXY_FAILURE_REMAINS_VALID_LOCALLY"
+    ],
+    "reason": "A_SCORE_IS_ONLY_A_MEASUREMENT_OF_THE_POPULATION_ON_WHICH_IT_WAS_OBSERVED; CONTENT_ADDRESSING_THE_SCORE_LOG_DOES_NOT_CONTENT_ADDRESS_AN_UNPROVED_POPULATION_SUBSTITUTION"
+  },
+  "implementation": {
+    "runtime": "canonical/runtime/livebench_root_identity_precedence_v1.py",
+    "tests": "canonical/tests/test_livebench_root_identity_precedence_v1.py"
+  },
+  "scheduler_effect_if_verified": [
+    "DO_NOT_ALLOW_PR_1808_OR_ANY_PROXY_LOCAL_EXACT_SCORE_RECEIPT_TO_RESTORE_LIVEBENCH_ROOT1_UNLESS_OFFICIAL_POPULATION_IDENTITY_IS_SEPARATELY_PROVED",
+    "PRESERVE_THE_V6_64_PERCENT_PROXY_FAILURE_AS_EXACT_LOCAL_EVIDENCE",
+    "KEEP_LIVEBENCH_TERMINAL_PREDICATE_ROOT2_ONLY_WHILE_OFFICIAL_POPULATION_IDENTITY_REMAINS_OPEN",
+    "PRIORITIZE_CONTENT_ADDRESSED_OFFICIAL_ROW_IDENTITY_OR_AN_IDENTITY_INDEPENDENT_DUAL_FAMILY_SUCCESSOR"
+  ],
+  "independent_verification": {
+    "population_identity_firewall_verifier_pr": 1982,
+    "status": "PENDING",
+    "required_additional_check": "BIND_EXACT_V6_SCORE_RECEIPTS_AND_VERIFY_PROXY_FAILURE_DOES_NOT_BYPASS_IDENTITY_GATE"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_V6_PROXY_FAILURE_IS_INVALID",
+    "NO_CLAIM_OFFICIAL_2026_ROWS_ARE_DIFFERENT",
+    "NO_CLAIM_OFFICIAL_2026_ROWS_ARE_THE_SAME",
+    "NO_LIVEBENCH_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_NEW_TERMINAL_CASE_CONTENT_READ",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "terminal_cases_executed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
