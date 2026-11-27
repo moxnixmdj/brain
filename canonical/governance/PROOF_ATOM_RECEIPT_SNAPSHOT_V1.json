@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_PROOF_ATOM_RECEIPT_SNAPSHOT_V1",
   "date": "2026-10-02",
-  "status": "CANDIDATE__SEALED_REPLAYABLE_V2_RECEIPT_SNAPSHOT__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
-  "objective": "Make both positive proof-atom candidate matches and negative literal-search claims independently replayable by binding the complete scanned file universe, exact repository commit/tree, search-root trees, proof inputs, and V2 index output.",
+  "status": "CANDIDATE__SEALED_REPLAYABLE_V2_RECEIPT_SNAPSHOT__EXACT_INDEX_TO_SEAL_CORPUS_DIGEST_EQUALITY_ENFORCED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Make positive proof-atom matches and negative literal-search claims independently replayable by binding the exact Git snapshot and complete candidate universe, and require the V2 index scanned-corpus digest to equal an independently reconstructed digest of that sealed universe.",
   "runtime": "canonical/runtime/proof_atom_receipt_snapshot_v1.py",
   "tests": "canonical/tests/test_proof_atom_receipt_snapshot_v1.py",
   "source_index": "canonical/runtime/proof_atom_receipt_index_v2.py",
@@ -14,13 +14,18 @@
     "SEARCH_ROOT_TREE_SHAS_AND_REPOSITORY_COMMIT_TREE_MUST_BE_BOUND",
     "EVERY_POSITIVE_MATCH_MUST_RESOLVE_INSIDE_THE_SEALED_MANIFEST_WITH_IDENTICAL_BLOB_SHA",
     "ZERO_MATCH_IS_ONLY_A_LITERAL_SEARCH_STATEMENT_WITHIN_THE_SEALED_CANDIDATE_UNIVERSE",
-    "NO_SEMANTIC_EQUIVALENCE_SCOPE_METRIC_ACCEPTANCE_CAPABILITY_OR_FAMILY_CREDIT"
+    "NO_SEMANTIC_EQUIVALENCE_SCOPE_METRIC_ACCEPTANCE_CAPABILITY_OR_FAMILY_CREDIT",
+    "INDEX_SCANNED_CORPUS_MANIFEST_SHA256_MUST_EQUAL_SEALED_UNIVERSE_INDEX_COMPATIBLE_DIGEST",
+    "SAME_SCANNED_FILE_COUNT_IS_NOT_SUFFICIENT_FOR_NEGATIVE_SEARCH_PROOF",
+    "FAIL_CLOSED_ON_INDEX_TO_SEAL_CORPUS_DIGEST_MISMATCH"
   ],
-  "next": "INDEPENDENTLY_VERIFY_EXACT_RUNNER_BYTES__RUN_ON_ONE_CLEAN_CURRENT_MAIN_SNAPSHOT__FREEZE_THE_RESULT__THEN_REVIEW_ONLY_CONTENT_ADDRESSED_CANDIDATES_FOR_THE_40_ACTIVE_ATOMS",
+  "next": "INDEPENDENTLY_VERIFY_EXACT_MANIFEST_BOUND_SNAPSHOT_RUNTIME_AND_TEST_BYTES__RUN_ONE_CLEAN_CURRENT_REPOSITORY_SNAPSHOT__FREEZE_RESULT__THEN_REVIEW_ONLY_CONTENT_ADDRESSED_CANDIDATES_FOR_THE_40_ACTIVE_ATOMS",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "runtime_git_blob_sha": "f3688da8240fb8acaabf6fd46ac345075a68fb12",
+  "tests_git_blob_sha": "b6154aeb3378cd6690f826288a366cb868c9057c"
 }

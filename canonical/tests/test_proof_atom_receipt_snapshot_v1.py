@@ -4,9 +4,10 @@ import subprocess
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from canonical.runtime.proof_atom_receipt_index_v2 import _candidate_files
-from canonical.runtime.proof_atom_receipt_snapshot_v1 import seal_candidate_universe
+from canonical.runtime.proof_atom_receipt_snapshot_v1 import build_snapshot, seal_candidate_universe
 
 
 def run(*args: str, cwd: Path) -> str:
@@ -58,6 +59,26 @@ class Tests(unittest.TestCase):
             p.write_text('{"claim":"changed"}\n', encoding="utf-8")
             with self.assertRaisesRegex(RuntimeError, "WORKTREE_OR_INDEX_DRIFT"):
                 seal_candidate_universe(root, _candidate_files(root))
+
+
+    def test_snapshot_fails_if_index_corpus_digest_differs_from_sealed_universe(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            init_repo(root)
+            fake_index = {
+                "status": "PASS__FAKE",
+                "scanned_file_count": 1,
+                "scanned_corpus_manifest_sha256": "0" * 64,
+                "atoms": [],
+            }
+            with patch(
+                "canonical.runtime.proof_atom_receipt_snapshot_v1.build_index",
+                return_value=fake_index,
+            ):
+                out = build_snapshot({}, {}, root=root)
+            self.assertEqual(out["status"], "FAIL_CLOSED")
+            self.assertIn("SCANNED_CORPUS_MANIFEST_MISMATCH", out["errors"])
+
 
     def test_untracked_candidate_fails_closed(self):
         with tempfile.TemporaryDirectory() as td:
