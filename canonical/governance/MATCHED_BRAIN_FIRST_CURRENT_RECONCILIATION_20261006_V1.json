@@ -1,0 +1,117 @@
+{
+  "schema": "PROJECT_BRAIN_MATCHED_BRAIN_FIRST_CURRENT_RECONCILIATION_V1",
+  "date": "2026-10-06",
+  "status": "ACTIVE_IF_EXACT_BOUND_BLOBS_VERIFY__BRAIN_FIRST_MATCHED_SCHEDULING__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "current_authority": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V3.json",
+    "git_blob_sha": "142cb46ac1bf0b5c570e6d2dc121dfca6f6e1544"
+  },
+  "applies_exactly_to": [
+    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+    "IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+  ],
+  "proved_conditional_chain": {
+    "brain_first_differential_theorem": {
+      "path": "canonical/governance/BRAIN_FIRST_DIFFERENTIAL_PREWAVE_V1.json",
+      "git_blob_sha": "43b5c74b5caf3b3065feaf98a87f798e7c14aead",
+      "independent_verification": {
+        "path": "canonical/verification/BRAIN_FIRST_DIFFERENTIAL_PREWAVE_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json",
+        "git_blob_sha": "9a9437a07f7dad464800a6eddb9776e63916317a"
+      }
+    },
+    "exact_monotone_reducer": {
+      "path": "canonical/governance/MATCHED_SUCCESS_FINITE_SCOPE_REDUCER_V1.json",
+      "git_blob_sha": "6b2696d70f9d4a9d9768dbd7bd097d62e7d4fd67",
+      "independent_verification": {
+        "path": "canonical/verification/MATCHED_SUCCESS_FINITE_SCOPE_REDUCER_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json",
+        "git_blob_sha": "d4937f70e21e49706324d46c292e131d9e96f4a0"
+      }
+    },
+    "finite_complete_scope_compiler": {
+      "path": "canonical/governance/MATCHED_SUCCESS_SCOPE_COMPILER_V1.json",
+      "git_blob_sha": "2e344ccaa611cda7764d4d70557f1e5bdec9cf3c",
+      "independent_verification": {
+        "path": "canonical/verification/MATCHED_SUCCESS_SCOPE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json",
+        "git_blob_sha": "ea289a46559a6cb4373e9b38f62e49abad399fbc"
+      }
+    },
+    "case_isolation_reset_compiler": {
+      "path": "canonical/governance/MATCHED_CASE_ISOLATION_RESET_CONTRACT_V1.json",
+      "git_blob_sha": "1ceef520c4022c6059abbb70923e8049801da192",
+      "independent_verification": {
+        "path": "canonical/verification/MATCHED_CASE_ISOLATION_RESET_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json",
+        "git_blob_sha": "f7b4dd5bfb1967e1090ec51b270f7dc0a7a459d7"
+      }
+    },
+    "component_bound_semantic_v4": {
+      "path": "canonical/governance/MATCHED_SUCCESS_COMPONENT_BOUND_SEMANTIC_V4.json",
+      "git_blob_sha": "d2f8f80666cc64aead91f9adee88a1eda0c17ced",
+      "independent_verification": {
+        "path": "canonical/verification/MATCHED_SUCCESS_COMPONENT_BOUND_V4_SPRITE_REPLAY_20261006_V1.json",
+        "git_blob_sha": "8e7bb1690bd06e91d64c218fe5776db28dce1aa3"
+      }
+    }
+  },
+  "deduction": {
+    "obsolete_ordering": "REQUIRE_EXECUTABLE_OPUS55_COMPARATOR_BEFORE_BRAIN_CASE_GENERATION_OR_BRAIN_EXECUTION",
+    "current_sound_ordering": [
+      "FREEZE_REAL_FINITE_COMPLETE_CONTENT_ADDRESSED_MATCHED_SCOPE_FOR_ALL_16_NORMALIZED_DIMENSIONS",
+      "BIND_REAL_CASE_ISOLATION_OR_RESET_EQUIVALENCE",
+      "BIND_V4_COMPONENT_AND_CAUSAL_SEMANTICS_FOR_THE_10_NONLEGACY_INTEGRATED_DIMENSIONS",
+      "ACTIVATE_PREDICATE_LOCAL_ONE_SHOT_FRESH_REALITY_FOR_THE_THREE_MATCHED_PREDICATES_ONLY",
+      "EXECUTE_BRAIN_ONCE_ON_EVERY_FROZEN_CASE_WITH_NO_RESULT_DEPENDENT_REPAIR_REPLAY_OR_SCOPE_EDIT",
+      "COMPILE_BRAIN_FAILURE_RESIDUAL",
+      "IF_BRAIN_FAILURE_RESIDUAL_IS_EMPTY__PROVE_SUCCESS_SET_OPUS_SUBSET_SUCCESS_SET_BRAIN_WITHOUT_ANY_OPUS_EXECUTION",
+      "IF_BRAIN_FAILURE_RESIDUAL_IS_NONEMPTY__REQUIRE_ADMISSIBLE_EXACT_OPUS55_EXECUTION_ONLY_ON_THOSE_FAILURE_CASES",
+      "TRANSPORT_SUCCESS_SET_INCLUSION_THROUGH_THE_EXACT_FINITE_SCOPE_MONOTONE_REDUCER",
+      "SEPARATELY_VERIFY_AND_PROMOTE_EACH_TARGET_PREDICATE"
+    ],
+    "best_case_comparator_information": "ZERO_OPUS55_CASE_OUTPUTS",
+    "worst_case_comparator_information": "ONLY_THE_BRAIN_FAILURE_RESIDUAL__NEVER_MORE_THAN_FULL_ORIGINAL_PORTFOLIO",
+    "proof": [
+      "THE_INDEPENDENTLY_VERIFIED BRAIN-FIRST THEOREM PROVES ONLY BRAIN-FAILURE CASES CAN CONTAIN THE FORBIDDEN PAIR OPUS_SUCCESS_AND_BRAIN_FAILURE.",
+      "THE LATER INDEPENDENTLY VERIFIED EXACT FINITE-SCOPE REDUCER PROVES SUCCESS-SET INCLUSION MONOTONICALLY IMPLIES NONINFERIOR SUCCESS FRACTION ON THE COMPLETE FROZEN CASE UNIVERSE.",
+      "THE LATER INDEPENDENTLY VERIFIED SCOPE AND ISOLATION COMPILERS CLOSE THE TWO PREVIOUSLY MISSING CONDITIONAL CONTRACT DEFINITIONS, WHILE REAL MANIFEST AND REAL HARNESS RECEIPTS REMAIN OPEN.",
+      "THE V4 COMPONENT-BOUND SEMANTIC CONTRACT PREVENTS STANDALONE COMPONENT PASSES OR RECEIPT ECHO FROM COUNTING AS THE TEN INTEGRATED MATCHED DIMENSIONS."
+    ]
+  },
+  "remaining_before_brain_execution": [
+    "REAL_FROZEN_MATCHED_CASE_MANIFEST_COVERING_ALL_16_NORMALIZED_DIMENSIONS",
+    "REAL_HARNESS_ISOLATION_OR_RESET_EQUIVALENCE_RECEIPTS_FOR_THAT_MANIFEST",
+    "REAL_V4_COMPONENT_AND_CAUSAL_BINDINGS_FOR_THE_10_NONLEGACY_INTEGRATED_DIMENSIONS",
+    "PREDICATE_LOCAL_ONE_SHOT_FRESH_REALITY_ACTIVATION_BOUND_TO_EXACT_FROZEN_BYTES"
+  ],
+  "deleted_as_current_prerequisite": [
+    "EXECUTABLE_OPUS55_ACCESS_BEFORE_BRAIN_FIRST_CASE_EXECUTION",
+    "FULL_PORTFOLIO_OPUS55_EXECUTION_BEFORE_KNOWING_THE_BRAIN_FAILURE_RESIDUAL"
+  ],
+  "hard_nonclaims": [
+    "NO_REAL_MATCHED_CASE_MANIFEST_EXISTS_YET",
+    "NO_REAL_MATCHED_CASE_ISOLATION_RECEIPTS_EXIST_YET",
+    "NO_REAL_V4_TERMINAL_CASE_RECEIPTS_EXIST_YET",
+    "NO_FRESH_REALITY_OR_EXECUTION_AUTHORITY_FROM_THIS RECONCILIATION",
+    "NO_CLAIM_THE_BRAIN_FAILURE_RESIDUAL_WILL_BE_EMPTY",
+    "NO_CLAIM_EXACT_OPUS55_RESIDUAL_ACCESS_CURRENTLY_EXISTS",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_verification_required": true
+}

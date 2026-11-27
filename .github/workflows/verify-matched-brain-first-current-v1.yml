@@ -1,0 +1,23 @@
+name: Verify current Brain-first matched reconciliation
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/governance/MATCHED_BRAIN_FIRST_CURRENT_RECONCILIATION_20261006_V1.json"
+      - "canonical/runtime/verify_matched_brain_first_current_reconciliation_v1.py"
+      - "canonical/tests/test_matched_brain_first_current_reconciliation_v1.py"
+      - ".github/workflows/verify-matched-brain-first-current-v1.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - run: python canonical/runtime/verify_matched_brain_first_current_reconciliation_v1.py
+      - run: python -m pytest -q canonical/tests/test_matched_brain_first_current_reconciliation_v1.py
