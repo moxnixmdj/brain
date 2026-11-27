@@ -1,0 +1,126 @@
+{
+  "schema": "PROJECT_BRAIN_IF_AUTHORITY_CAUSAL_CUT_TEMPORAL_HANDOFF_INDEPENDENT_FALSIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_FALSIFICATION__EXACT_CAUSAL_PARTITION_AS_WRITTEN_INCOMPLETE__POINT_IN_TIME_GATE_PRESERVED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "subject": {
+    "pull_request": 1802,
+    "head_sha": "64c6ade2c80df3289c1c811a6e54d3a5dc357802",
+    "governance": {
+      "path": "canonical/governance/IF_AUTHORITY_CAUSAL_CUT_V1.json",
+      "git_blob_sha": "827a55f420f17ac3070c530fc567de86eb636d39"
+    },
+    "runtime": {
+      "path": "canonical/runtime/instruction_authority_invariant_v1.py",
+      "git_blob_sha": "09117bd2821b0380af99ce6b9e100ec180753b54"
+    },
+    "tests": {
+      "path": "canonical/tests/test_instruction_authority_invariant_v1.py",
+      "git_blob_sha": "7573c02b66c669bc6288aae515485110c6161afd"
+    }
+  },
+  "verdict": {
+    "exact_causal_partition": "FAIL",
+    "normalized_point_in_time_enforcement_slice": "PRESERVED_AS_USEFUL_CANDIDATE",
+    "reason": "The runtime returns reusable execution_authority=true after evaluating one authority snapshot, but the stated causal theorem omits the temporal handoff between that evaluation and consequential effect. A later requirement/authority change can invalidate the prior grant without causing semantic extraction error at evaluation time, deterministic enforcement error at evaluation time, or a literal never-routed action."
+  },
+  "constructive_counterexample_trace": [
+    {
+      "step": "T0_NORMALIZE",
+      "fact": "Requirements and authority are correctly normalized at epoch 3. Scope write is authorized and not forbidden."
+    },
+    {
+      "step": "T1_EVALUATE",
+      "fact": "Proposal A1 is epoch 3, references only active requirements, requires write, and passes evaluate_instruction_action. The returned object contains execution_authority=true."
+    },
+    {
+      "step": "T2_REQUIREMENT_CHANGE",
+      "fact": "Before A1 produces its consequential effect, requirements change. next_requirement_epoch advances to epoch 4 and write is removed from authorization or becomes forbidden."
+    },
+    {
+      "step": "T3_STALE_GRANT_USE",
+      "fact": "A caller uses the previously returned T1 authorization result to execute A1 without a new evaluation bound atomically to the effect."
+    },
+    {
+      "step": "T4_VIOLATION",
+      "fact": "A1 now violates the current epoch-4 authority state."
+    }
+  ],
+  "why_subject_three_way_partition_does_not_cover_trace": [
+    "SEMANTIC_EXTRACTION_ERROR_NEED_NOT_OCCUR: the epoch-3 normalization may be exactly correct.",
+    "DETERMINISTIC_ENFORCEMENT_ERROR_NEED_NOT_OCCUR: the epoch-3 gate correctly authorizes the epoch-3 proposal against the epoch-3 state.",
+    "ENFORCEMENT_BYPASS_AS_WRITTEN_NEED_NOT_OCCUR: the action did pass through the current authority kernel once; the defect is that the pass was not revalidated/linearized at the consequential effect.",
+    "The subject's next_requirement_epoch correctly invalidates OLD PROPOSALS ON FUTURE EVALUATIONS, but cannot retroactively revoke an already-returned naked authorization result."
+  ],
+  "exact_repair": {
+    "repaired_partition": [
+      "SEMANTIC_EXTRACTION_OR_NORMALIZATION_ERROR",
+      "POINT_IN_TIME_DETERMINISTIC_ENFORCEMENT_ERROR",
+      "TEMPORAL_AUTHORITY_HANDOFF_OR_LINEARIZATION_ERROR",
+      "TRUE_ROUTE_BYPASS"
+    ],
+    "temporal_class_definition": "A consequential effect is committed using an authorization decision that is replayed, stale, state-mismatched, not one-use, or not revalidated at the authoritative commit/linearization point.",
+    "minimum_safe_semantics": [
+      "DO_NOT_TREAT_A_PREVIOUSLY_RETURNED_BOOLEAN_AUTHORIZATION_AS_A_DURABLE_CAPABILITY.",
+      "BIND_EACH_EXECUTION_GRANT_TO_ACTION_ID_OR_ACTION_DIGEST, REQUIREMENT_EPOCH, NORMALIZED_AUTHORITY_STATE_DIGEST, AND REQUIRED_SCOPE_SET.",
+      "AT_THE CONSEQUENTIAL COMMIT, REQUIRE THE GRANT TO MATCH THE CURRENT AUTHORITATIVE EPOCH/STATE AND CONSUME IT AT MOST ONCE.",
+      "REQUIREMENT_OR_AUTHORITY CHANGES MUST INVALIDATE PRIOR-EPOCH UNCONSUMED GRANTS BEFORE A LATER EFFECT MAY COMMIT.",
+      "IF THE EFFECT CANNOT BE ATOMICALLY COUPLED TO AUTHORITY CONSUMPTION, THAT HANDOFF REMAINS AN EXPLICIT RESIDUAL OR MUST BE CLASSIFIED AS ROUTE BYPASS BY A STRENGTHENED DEFINITION."
+    ]
+  },
+  "existing_brain_reuse_audit": [
+    {
+      "path": "canonical/governance/LIVEBENCH_V7_GENERIC_ATOMIC_ONE_USE_EXECUTION_CLAIM_BRIDGE_V1.json",
+      "git_blob_sha": "ecafd9d73e4e736420ce0c46c037b1e4a80ee417",
+      "result": "PARTIAL_ONLY",
+      "reason": "Independently verified GitHub CREATE_REFERENCE supplies a global one-use linearization point for a bound claim key. It proves uniqueness, not freshness against an evolving instruction-authority state and not atomic coupling to an arbitrary consequential effect."
+    },
+    {
+      "path": "canonical/runtime/execution_authority_reducer.py",
+      "git_blob_sha": "d49deb24be6a0ac268c700f788777c39fe33086d",
+      "result": "DESIGN_PRECEDENT_ONLY__NO_SCOPE_INHERITANCE",
+      "reason": "The reducer re-derives authority at EXECUTION_CONSUMED from a hash-chained event history and revocation state, which is the correct temporal pattern, but its Stage-A/B/source/carrier/minimum-reality semantics are task-specific and are not an instruction-authority proof."
+    }
+  ],
+  "root3_effect": {
+    "target_predicates": [
+      "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+      "IF_SCOPE_BOUNDARY_NONINFERIOR"
+    ],
+    "preserve": [
+      "SEMANTIC_EXTRACTION_COMPLETENESS_AND_CORRECTNESS_RESIDUAL",
+      "UNIVERSAL_ROUTE_OR_BYPASS_COVERAGE_RESIDUAL",
+      "POINT_IN_TIME_NORMALIZED_AUTHORITY_INVARIANT_CANDIDATE"
+    ],
+    "add_or_make_explicit": [
+      "TEMPORAL_AUTHORITY_HANDOFF_LINEARIZATION_RESIDUAL_UNLESS_ROUTE_BYPASS_IS_STRENGTHENED_TO_INCLUDE_STALE_GRANT_USE"
+    ],
+    "block": [
+      "PROMOTION_OF_PR1802_THREE_WAY_CAUSAL_PARTITION_AS_EXACT_WITHOUT_TEMPORAL_REPAIR",
+      "INFERENCE_THAT_REQUIREMENT_EPOCH_CHECK_AT_EVALUATION_TIME_ALONE_PROVES_ADAPTATION_TO_REQUIREMENT_CHANGES_AT_EFFECT_TIME"
+    ]
+  },
+  "falsifier_for_this_falsification": "Produce an exact subject-bound proof that every consequential effect authorized by PR1802 is necessarily re-evaluated or atomically consumed against the current requirement epoch/state at the effect linearization point, with stale/replay attempts impossible or explicitly included in the subject's bypass class.",
+  "hard_nonclaims": [
+    "NO_CLAIM_PR1802_POINT_IN_TIME_GATE_IS_UNSOUND",
+    "NO_CLAIM_A_DISTRIBUTED_TRANSACTION_IS_REQUIRED_FOR_EVERY_ACTION",
+    "NO_CLAIM_THE_TWO_IF_ACCEPTANCE_PREDICATES_ARE_CLOSED_OR_FAILED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_TARGET_WEAKENING"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "independent_verification": true,
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
