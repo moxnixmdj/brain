@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_ERROR_FIRST_KNAPSACK_IMPLEMENTATION_V1",
+  "date": "2026-10-05",
+  "status": "PRECOMPUTATION_CANDIDATE__SOURCE_ONLY__ACTIVATION_CONDITIONAL_ON_FROZEN_COARSE_GATE_FAILURE__ZERO_CREDIT",
+  "objective": "Implement the already-precommitted error-first precision allocation without using any ChartQA output, so wall-clock is recovered while the coarse 20-case preservation gate remains formally open.",
+  "precommit": "canonical/governance/H100_UNICHART_ERROR_FIRST_PRECISION_KNAPSACK_PRECOMMIT_V1.json",
+  "source": {
+    "model": "ahmed-masry/unichart-chartqa-960",
+    "revision": "e5eb1e52c1d775e0f3febaddc7fc3559e80cb989",
+    "sha256": "4407db60801a20bcf254946acfee6727491ef1739ad7b4d3abbf87b7c75e7229"
+  },
+  "policy": {
+    "base": "ALL_F32_GROUPS_W3_AFFINE_GROUP256__I64_LOSSLESS",
+    "candidate_bits": [
+      3,
+      4
+    ],
+    "benefit": "ACTUAL_RECONSTRUCTION_SSE_W3_MINUS_W4_USING_FP16_STORED_SCALE_AND_OFFSET",
+    "ordering": "DESC_BENEFIT_THEN_TENSOR_NAME_THEN_GROUP_INDEX",
+    "precision_map": "ONE_BIT_PER_F32_GROUP_COUNTED_INSIDE_MANIFEST",
+    "selection": "LONGEST_ORDERED_PREFIX_WHOSE_EXACT_COMPLETE_BUNDLE_IS_LE_100000000_BYTES",
+    "benchmark_outputs_used": false,
+    "task_labels_used": false
+  },
+  "runtime": "canonical/runtime/h100_unichart_error_first_knapsack_v1.py",
+  "tests": "canonical/tests/test_h100_unichart_error_first_knapsack_v1.py",
+  "hard_rules": [
+    "PRECOMPUTATION_MAY_RUN_BEFORE_COARSE_GATE_COMPLETES_BECAUSE_SELECTION_IS_SOURCE_ONLY",
+    "DO_NOT_ACTIVATE_OR_PROMOTE_UNLESS_FROZEN_COARSE_20_CASE_GATE_FORMALLY_FAILS",
+    "DO_NOT_CHANGE_FROZEN_CHARTQA_CASES_PROMPTS_IMAGES_SCORER_OR_THRESHOLDS",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_OWNERSHIP_AND_H100_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "h100_credit_delta": 0
+  }
+}\n

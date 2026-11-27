@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_CHARTQA_PRESERVATION_RUNNER_PRECOMMIT_V1",
+  "date": "2026-10-05",
+  "status": "PRECOMMITTED_BEFORE_ANY_PACKED_MODEL_ANSWER__ZERO_CREDIT",
+  "objective": "Freeze the exact FP32-vs-packed UniChart ChartQA preservation runner, execution environment, scoring semantics, and complete-bundle byte rule before observing any packed answer.",
+  "environment": {
+    "python": "3.11.16",
+    "torch": "2.0.1+cpu",
+    "transformers": "4.28.1",
+    "numpy": "1.26.4",
+    "sentencepiece": "0.2.2",
+    "pillow": "12.3.0"
+  },
+  "inputs": {
+    "case_preexposure": "canonical/governance/H100_UNICHART_CHARTQA_PRESERVATION_PREEXPOSURE_V1.json",
+    "image_preexposure": "canonical/governance/H100_UNICHART_CHARTQA_IMAGE_PREEXPOSURE_V1.json",
+    "runtime_assets": "canonical/governance/H100_UNICHART_CHARTQA_RUNTIME_ASSETS_V1.json",
+    "donor_packer": "canonical/runtime/h100_unichart_chartqa_bin_packer_v1.py"
+  },
+  "scorer": {
+    "text": "CASE_INSENSITIVE_STRIPPED_EXACT_MATCH",
+    "numeric": "STRIP_PERCENT_AND_COMMAS__FLOAT_PARSE__RELATIVE_ERROR_LE_0_05__ZERO_GOLD_EXACT_ZERO"
+  },
+  "agreement": "EXACT_POSTPROCESSED_ANSWER_STRING_EQUALITY",
+  "execution_order": "FP32_ALL_FROZEN_CASES_THEN_FRESH_MODEL_INSTANCE_PACKED_ALL_FROZEN_CASES",
+  "packed_loader": "STREAM_DEQUANTIZE_FROZEN_W4_W3_FORMAT_INTO_OFFICIAL_TRANSFORMERS_4_28_1_ARCHITECTURE",
+  "hard_rules": [
+    "NO_CASE_PROMPT_SCORER_THRESHOLD_OR_IMAGE_CHANGE_AFTER_PACKED_OUTPUTS",
+    "NO_TERMINAL_CHARTOGRAPHY_CASES",
+    "NO_H100_TERMINAL_CREDIT_FROM_THIS_PUBLIC_GATE"
+  ],
+  "runtime": "canonical/runtime/h100_unichart_chartqa_preservation_runner_v1.py",
+  "tests": "canonical/tests/test_h100_unichart_chartqa_preservation_runner_v1.py",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "h100_credit_delta": 0,
+    "acceptance_credit_delta": 0
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_ERROR_FIRST_KNAPSACK_PRECOMPUTATION_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PASS__TWO_CLEAN_IDENTICAL_SOURCE_ONLY_PACKS__ACTIVATION_CONDITIONAL__ZERO_CREDIT",
+  "subject": {
+    "donor": "ahmed-masry/unichart-chartqa-960@e5eb1e52c1d775e0f3febaddc7fc3559e80cb989",
+    "source_sha256": "4407db60801a20bcf254946acfee6727491ef1739ad7b4d3abbf87b7c75e7229",
+    "policy": "canonical/governance/H100_UNICHART_ERROR_FIRST_PRECISION_KNAPSACK_PRECOMMIT_V1.json",
+    "implementation": "canonical/runtime/h100_unichart_error_first_knapsack_v1.py"
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-heldout003-one-shot",
+    "sprite_id": "sprite-8d2b5b77-3bc8-42ca-a8ea-de4c1b0a2589",
+    "incremental_spend_usd": 0
+  },
+  "clean_runs": [
+    {
+      "output_bytes": 94686772,
+      "output_sha256": "bf6a70fd72c2edde52c9097c15203e1e433fac18f04699eafdfc30f3780a7770",
+      "result_sha256": "1cd4b7ab2551525b822620dcf5cc6a94c656de6f74839fd10c3d3b7747633a08"
+    },
+    {
+      "output_bytes": 94686772,
+      "output_sha256": "bf6a70fd72c2edde52c9097c15203e1e433fac18f04699eafdfc30f3780a7770",
+      "result_sha256": "1cd4b7ab2551525b822620dcf5cc6a94c656de6f74839fd10c3d3b7747633a08"
+    }
+  ],
+  "deterministic_identity": true,
+  "exact_result": {
+    "ancillary_bytes": 5313202,
+    "complete_bundle_bytes": 99999974,
+    "h100_budget_bytes": 100000000,
+    "margin_bytes": 26,
+    "total_f32_groups": 788529,
+    "selected_w4_groups": 435907,
+    "selected_w3_groups": 352622,
+    "precision_bitmap_sha256": "7826368ce15e401a61d48602dc6ac05df16bf12cea77f968ff4628b75bc26246",
+    "aggregate_source_sse_all_w3": 72717.37823367034,
+    "aggregate_source_sse_all_w4": 15768.660424256272,
+    "aggregate_selected_sse_reduction_vs_all_w3": 45861.52496013574,
+    "aggregate_source_sse_selected_layout": 26855.8532735346,
+    "encoder_groups": 289789,
+    "encoder_w4_groups": 192457,
+    "decoder_other_groups": 498740,
+    "decoder_other_w4_groups": 243450
+  },
+  "activation_boundary": "PRECOMPUTATION_ONLY__DO_NOT_ACTIVATE_FOR_CAPABILITY_TEST_UNTIL_THE_FROZEN_COARSE_GATE_IS_FORMALLY_FAILED_OR_SEPARATE_CANONICAL_ZERO_CREDIT_AUTHORITY_EXISTS",
+  "hard_nonclaims": [
+    "SOURCE_WEIGHT_RECONSTRUCTION_ERROR_REDUCTION_DOES_NOT_PROVE_TASK_CAPABILITY",
+    "NO_ERROR_FIRST_PACKED_MODEL_ANSWER_HAS_BEEN_USED_FOR_SELECTION",
+    "NO_CHARTOGRAPHY_THRESHOLD_CREDIT",
+    "NO_H100_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "terminal_cases_consumed": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "h100_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false
+}

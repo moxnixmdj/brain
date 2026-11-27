@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_COARSE_ONE_CASE_SMOKE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "OBSERVED__ONE_CASE_SMOKE_ONLY__NOT_FORMAL_20_CASE_GATE__ZERO_CREDIT",
+  "subject": {
+    "pr": 2310,
+    "branch": "research/h100-unichart-deterministic-packer-v1",
+    "donor": "ahmed-masry/unichart-chartqa-960@e5eb1e52c1d775e0f3febaddc7fc3559e80cb989",
+    "packed_checkpoint_sha256": "2c42f4d3d30e0a6cbcc8cd86da5705d3e53a87acb082b5d53899aee91c8313fa",
+    "packed_checkpoint_bytes": 89874047,
+    "complete_bundle_bytes": 95187249
+  },
+  "frozen_case": {
+    "id": "H00",
+    "imgname": "3887.png",
+    "gold": "Blue"
+  },
+  "fp32": {
+    "prediction": "Red",
+    "relaxed_correct": false
+  },
+  "packed": {
+    "prediction_class": "DEGENERATE_REPEATED_SUMMARIZE_CHART_TOKEN_SEQUENCE",
+    "relaxed_correct": false
+  },
+  "exact_answer_agreement": 0,
+  "raw_result_sha256": "3c9b4c8f4ff2ec290e558c1b35edcaa0a01d77b5bf7307d484ea1c04faaea00c",
+  "raw_result_location": "Sprite brain-heldout003-one-shot:/tmp/h100pack/chartqa_smoke1.json",
+  "environment": {
+    "python": "3.11.16",
+    "torch": "2.0.1+cpu",
+    "transformers": "4.28.1",
+    "numpy": "1.26.4"
+  },
+  "interpretation": [
+    "THIS_IS_STRONG_EVIDENCE_OF_COARSE_W4_ENCODER_W3_DECODER_CAPABILITY_DAMAGE_ON_H00",
+    "THIS_IS_NOT_THE_FROZEN_20_CASE_PRESERVATION_GATE",
+    "DO_NOT_MARK_COARSE_GATE_FAIL_OR_PASS_FROM_THIS_RECEIPT",
+    "SOURCE_ONLY_KNAPSACK_PRECOMPUTATION_MAY_CONTINUE_WITHOUT_USING_THIS_OUTPUT_FOR_SELECTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "h100_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false
+}

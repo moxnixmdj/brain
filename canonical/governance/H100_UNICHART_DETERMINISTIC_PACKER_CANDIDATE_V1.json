@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_DETERMINISTIC_PACKER_CANDIDATE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__SOURCE_ONLY_PACKER__BENCHMARK_BLIND__ZERO_CREDIT__REAL_WEIGHT_EXECUTION_PENDING",
+  "objective": "Freeze the exact deterministic transformation that will convert the preserved UniChart safetensors subject into a real sub-100MB H100 candidate before any low-bit capability outcome is observed.",
+  "authority_inputs": {
+    "exact_tensor_census": "canonical/verification/H100_UNICHART_EXACT_TENSOR_ENUMERATION_INDEPENDENT_VERIFICATION_20261005_V1.json",
+    "chartqa_preexposure": "canonical/governance/H100_UNICHART_CHARTQA_PRESERVATION_PREEXPOSURE_V1.json",
+    "error_first_fallback": "canonical/governance/H100_UNICHART_ERROR_FIRST_PRECISION_KNAPSACK_PRECOMMIT_V1.json"
+  },
+  "transformation": {
+    "source_checkpoint": "ahmed-masry/unichart-base-960@baa206a05372f8c49778313abb7091e1d0c8e474/model.safetensors",
+    "source_sha256": "2faf9ef1ac62a290ea58c80e9e2454db4e3613579e7cb6167cb934a03c09664e",
+    "group_size": 256,
+    "group_boundary": "RESET_PER_TENSOR",
+    "encoder_f32": "W4_AFFINE",
+    "decoder_and_other_f32": "W3_AFFINE",
+    "group_metadata": "FP16_SCALE_PLUS_FP16_OFFSET",
+    "code_bit_order": "LSB_FIRST",
+    "i64": "LOSSLESS_RAW_BYTES",
+    "benchmark_outputs_used_in_transform": false,
+    "task_labels_used_in_transform": false
+  },
+  "exact_preexecution_storage_reference": {
+    "f32_elements": 201858168,
+    "i64_elements": 200000,
+    "exact_census_mixed_complete_candidate_bytes": 95128044,
+    "h100_budget_bytes": 100000000,
+    "arithmetic_margin_bytes": 4871956
+  },
+  "runtime": "canonical/runtime/h100_unichart_lowbit_packer_v1.py",
+  "tests": "canonical/tests/test_h100_unichart_lowbit_packer_v1.py",
+  "required_next_actions": [
+    "RUN_SYNTHETIC_SOURCE_ONLY_TESTS_ON_A_ZERO_COST_EXECUTION_CARRIER",
+    "FETCH_EXACT_WEIGHT_PAYLOAD_ONLY_WHEN_ZERO_COST_CARRIER_IS_AVAILABLE",
+    "CREATE_REAL_PACKED_CHECKPOINT_WITH_THIS_FROZEN_TRANSFORM",
+    "AUDIT_COMPLETE_RUNTIME_BUNDLE_LE_100000000_BYTES",
+    "RUN_FROZEN_20_CASE_CHARTQA_PRESERVATION_GATE",
+    "IF_COARSE_TRANSFORM_FAILS_CAPABILITY_AND_STORAGE_PASSES__ACTIVATE_PRECOMMITTED_ERROR_FIRST_KNAPSACK_WITHOUT_CHANGING_CASES_OR_SCORER"
+  ],
+  "hard_nonclaims": [
+    "NO_REAL_UNICHART_WEIGHT_PAYLOAD_WAS_PACKED_BY_THIS_SOURCE_ONLY_COMMIT",
+    "NO_LOW_BIT_CAPABILITY_PRESERVATION_CLAIM",
+    "NO_CHARTOGRAPHY_GE_89_CLAIM",
+    "NO_H100_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "new_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "h100_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}\n
