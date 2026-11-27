@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "status": "PROPOSED__DRAFT_FOR_OPERATOR_REVIEW__NOT_COMMITTED__EXECUTES_NOTHING",
+  "draft_note": "This is a review draft. Per operator authorization ('draft the exact action intent for your review FIRST, then on your approval execute'), nothing here is committed to canonical/action_intents/ or executed until the operator approves. Live-canonical refresh against canonical/CANONICAL_POINTER.json falsified the promotion premise; this intent is the honest, gate-compliant result.",
+  "action_id": "RECORD-MODEL-INDEPENDENT-RESEARCH-EVIDENCE-NO-PROMOTION-20261001-V1",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "BIND_AT_EXECUTION_TO_LIVE_CANONICAL_MAIN__LOCAL_HEAD_1f65db6_IS_SQUASHED_AND_DIVERGES_FROM_COMPOSED_BASE_COMMITS__MUST_REFRESH_LIVE_REMOTE_BEFORE_CONSEQUENTIAL_ACTION",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_CAPABILITY_OWNERSHIP",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH__PLUS_OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
+  "action_kind": "NO_MUTATION_DIAGNOSTIC",
+  "expected_parent_frontier_change": "NONE. Record two real, independently-verified, model-dependent-count-zero research results as provenance evidence; record the live-canonical finding that a research-capability OWNERSHIP promotion is not gate-compliant; make no capability-target change, no ownership credit, no scoreboard change, no frontier mutation.",
+  "highest_leverage_now": false,
+  "prior_work_checked": [
+    "canonical/CANONICAL_POINTER.json (live canonical pointer, generation 2026-09-28-frontier-capability-obsolescence-v4)",
+    "active_capability_target = ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1 (research is NOT the active target)",
+    "critical_blocker = BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
+    "revoked_false_ownership_capabilities includes OPUS55_AGENTIC_SCIENTIFIC_RESEARCH_V1 (prior research-ownership claim revoked as false)",
+    "last_real_output_event (same capability id): next_causal_gap OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT, capability_credit_delta 0",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V6.md OWNED-credit conditions (durable package, no-rediscovery re-invocation, Brain-route tested >= Opus 5.5)",
+    "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V8.json and GOAL_HIERARCHY_ACTION_GATE_V7.json (fail-closed promotion checks)",
+    "boot_requirements: active_capability_target_change_requires_explicit_reconciliation, scoreboard_increase_requires_promotion_evidence, claim_scope_must_not_exceed_evidence_scope"
+  ],
+  "verified_evidence_recorded": [
+    {
+      "task_id": "PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003",
+      "decision": "YES: max permitted HTTP/2 initial stream flow-control window (2^31-1 = 2147483647) > default (2^16-1 = 65535)",
+      "grounding": "h2 4.4.1 acquired from sanctioned pypi.org, sha256 declared==observed",
+      "independent_verification": "recomputed from 31-bit field width; agrees",
+      "evidence_path": "canonical/astra_runtime/evidence/PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003__MODEL_INDEPENDENT_RESEARCH_RESULT.json"
+    },
+    {
+      "task_id": "PARENT_OPENENDED_FLOATING_POINT_SUMMATION_STABILITY_REAL_TASK_20260930_002",
+      "decision": "YES: sequential binary64 summation can be materially less accurate than stable summation under severe cancellation + large dynamic range (naive 0.0 vs exact 1000.0, relative error 1.0)",
+      "grounding": "IEEE 754 binary64 + CPython math.fsum (correctly-rounded)",
+      "independent_verification": "exact fractions.Fraction rational sum == fsum, != naive",
+      "evidence_path": "canonical/astra_runtime/evidence/PARENT_OPENENDED_FLOATING_POINT_SUMMATION_STABILITY_REAL_TASK_20260930_002__MODEL_INDEPENDENT_RESEARCH_RESULT.json"
+    }
+  ],
+  "finding__why_promotion_is_not_compliant": [
+    "Research is not the active capability target (active target is ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1); retargeting requires explicit reconciliation (boot_requirements.active_capability_target_change_requires_explicit_reconciliation).",
+    "OPUS55_AGENTIC_SCIENTIFIC_RESEARCH_V1 is in revoked_false_ownership_capabilities; a new research-ownership claim would repeat a revoked false-ownership pattern.",
+    "The research capability's open gap (OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT) is not addressed by the two executed questions.",
+    "OWNED credit requires a durable Brain capability package + no-rediscovery re-invocation + Brain-route tested >= Opus 5.5 + V6 ownership tests; the executed evidence establishes only that the reusable mechanism is realizable (law states 3->4), not an owned package (5->6).",
+    "claim_scope_must_not_exceed_evidence_scope: two verified ad-hoc research answers do not establish a >= Opus 5.5 bar for the whole research capability."
+  ],
+  "selected_surviving_route": "RECORD_EVIDENCE_AND_FINDING__NO_CAPABILITY_MUTATION",
+  "stop_condition": "No capability-target change, no ownership credit, no scoreboard increase, no frontier mutation, no PR, no merge. Stop after recording evidence + the no-promotion finding.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "evidence_path": "canonical/astra_runtime/evidence/PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003__MODEL_INDEPENDENT_RESEARCH_RESULT.json",
+  "next_action": "OPERATOR_DECISION_REQUIRED__EITHER_(A)_PURSUE_THE_ACTIVE_TARGET_ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1_VIA_ITS_OWN_GATED_ROUTE__OR_(B)_IF_RESEARCH_IS_TO_BE_ADVANCED__FIRST_AUTHORIZE_AN_EXPLICIT_ACTIVE_CAPABILITY_TARGET_RECONCILIATION__THEN_INTERNALIZE_THE_MODEL_INDEPENDENT_RESEARCH_ROUTE_AS_A_DURABLE_BRAIN_CAPABILITY_PACKAGE__THEN_V6_OWNERSHIP_TESTS__THEN_FRONTIER_RECONCILIATION__EACH_A_SEPARATE_GATED_STEP_REQUIRING_OPERATOR_APPROVAL",
+  "reasoning_decision_receipt_required_before_execution": true,
+  "live_canonical_refresh_required_before_execution": true
+}
