@@ -77,5 +77,142 @@
       "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
       "AGENTS.md"
     ]
+  },
+  "benchmark_or_family_rank_authority": "None. No benchmark rank, family rank or leaderboard position is claimed; the frontier numbers quoted in the comparison document are read from published boards with dates attached and none of them was run by us.",
+  "capability_credit_delta": {
+    "capability_credit_delta": 0,
+    "family_flips": 0,
+    "why_zero": "Measurement sitting: it re-runs existing instruments and adds oracles only where none existed. Zero model calls and $0.00 do not make a measurement into a capability gain.",
+    "measured_not_credited": {
+      "true_capability_specs": "11/11 PASS at 500 fresh instances each (5,500 instances, seed from OS entropy)",
+      "dependency_memory": "36/36 (1.000) vs flat control 12/36 (0.333); instrument discrimination 0.833",
+      "live_bound_invocations": "6/8 pass a separate oracle, 1 substrate forfeit, 1 instrument defect found",
+      "repair_fresh_bugs": "4/10 resolved on the visible suite; 4/10 pass held-out tests; 0 false repairs",
+      "goal_binding": "12/21 covered goals correct, 6 wrong, 3 refused; 1/3 uncovered goals correctly refused",
+      "instant_learning_loop": "1 of 6 declared claims hold (was 6/6 in the 2026-11-24 receipt)",
+      "unified_model_gates": "38/38 on the tree as found; 37/38 once one module is added",
+      "module_proven_census": "55 of 2,228 substantial modules can prove they execute (2.47%)"
+    }
+  },
+  "measured_effect": "One sitting, 458.5 s wall clock, 56 scored rows, 44 measured, 26 passing, 8 failing, 11 substrate or instrument forfeits, 5,500 fresh true-capability instances, 0 model calls, $0.00. The sitting reproduced eleven true-capability specs at 500/500, the MEME protocol bench at 36/36 with its control at 0.333, and the unified-model gate set at 38/38; it falsified the instant-learning closed loop (1/6 claims), the 462-entry registry count (145 today), and the stability of the compiled unified artifact under one added module (37/38).",
+  "real_outcome": "A single-runtime scorecard that executes every advanced capability family that can run on this machine and says, per axis, what the number is, who judged it, and what could not be measured. No capability or terminal credit is claimed.",
+  "falsification_condition": "Falsified if any probe imports or invokes an external model, if any credited row lacks an oracle, if a NO_SUBSTRATE or NO_INSTRUMENT row is presented as a pass, if the true-capability sweep passes with a fixed seed rather than OS entropy, or if the reported instant-learning / goal-binding / repair numbers cannot be reproduced by re-running the same command on a clean checkout.",
+  "next_step": "Fix the closed loop at the caller boundary (execute the returned document plan, observe the goal, admit, save, recall) and regenerate its receipt from the run that proves it; then make the goal binder refuse instead of binding on a shared generic verb, which is the fail-open front door this sitting measured at 6 wrong bindings out of 21.",
+  "honest_limits": [
+    "Producer-run sandbox measurement on one machine: no independent verifier has re-run it.",
+    "The goal labels and the held-out repair tests were written by the harness author, so those two rows are weaker evidence than the true-capability rows.",
+    "No external board episode was scored: TEN axes that decide whether a system can do computer work remain forfeits, not comparisons.",
+    "Nine advertised capabilities cannot run on this machine at all (PIL, sympy, yaml, tesseract, yq, pandoc, sqlite3 CLI, chromedriver, libreoffice, ffmpeg) and are recorded as substrate forfeits.",
+    "Sample sizes are small and the instances are ours: 36 memory instances, 10 repair bugs, 24 goals."
+  ],
+  "selectivity_note": "Reuses the tree's own instruments unchanged (true-capability harness, MEME bench, dark-matter adjudicator, unified-model verifier, orientation check, repair loop) and adds code only where no instrument existed. No protected path, no terminal truth, no tolerance, and no existing receipt was edited.",
+  "verification": "python3 -m unittest canonical.tests.test_advanced_capability_runtime_20261127_v1 (5 tests, PASS) + canonical/tools/advanced_capability_runtime_20261127_v1.py full run (56 rows, exit 0) + execution_guard/agent_orientation_check_v1.py verify (CONSISTENT). Producer-run only.",
+  "truth": {
+    "achieved": false,
+    "what_is_real": "A reproducible single-runtime measurement of every advanced capability family that can execute here, with per-row oracles, plus the falsification of three stale claims.",
+    "what_is_not": "Any frontier parity, any benchmark rank, any external-board episode, any capability or terminal credit, or independent verification."
+  },
+  "load_bearing_primary": {
+    "open_obligation_ids": [
+      "CODING_TB4_GE_66_4",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_GDPVAL_GE_1846"
+    ],
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_GDPVAL_GE_1846"
+    ],
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "0",
+    "interpretation": "Measures the distance to three open obligations and claims none of them: the sitting establishes that no instrument for a board episode exists in this tree, which is itself the blocker to name next.",
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "0.9",
+    "wall_clock_cost_ub": 1
+  },
+  "stop_condition": "Stop this PR once the scorecard re-runs end to end on a clean checkout, the contract test passes, repo_integrity_guard passes with zero violations, and the drift / load-bearing / orientation checks pass with the falsified stale claims recorded next to their fresh measurements.",
+  "recursive_obs": {
+    "canonical_base_commit": "7121e93c2a680eeebbbd2c8126338fbf4b919833",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "no deletion: the stale claims live in other branches' receipts and are quoted beside their fresh measurements rather than rewritten",
+      "bypassed nothing: every measurement is a re-run, not a re-read"
+    ],
+    "expected_parent_level_state_change": "NO_CAPABILITY_CREDIT__MEASUREMENT_ONLY__STALE_CLAIMS_FALSIFIED_AND_RECORDED__NO_FAMILY_FLIPPED",
+    "real_outcome": "A single-runtime scorecard that executes every advanced capability family that can run on this machine and says, per axis, what the number is, who judged it, and what could not be measured. No capability or terminal credit is claimed.",
+    "required_capability": "A single-runtime measurement harness that reuses every existing instrument, adds independent oracles only where none existed, and fails closed on anything it cannot measure.",
+    "selected_surviving_route": "REUSE_EXISTING_INSTRUMENTS_IN_ONE_RUNTIME_AND_ADD_ORACLES_ONLY_WHERE_NONE_EXISTED",
+    "stop_condition": "Stop this PR once the scorecard re-runs end to end on a clean checkout, the contract test passes, repo_integrity_guard passes with zero violations, and the drift / load-bearing / orientation checks pass with the falsified stale claims recorded next to their fresh measurements.",
+    "why_selected_route_is_fastest_sufficient": "Re-running the instruments that already exist costs one sitting (458.5 s) and zero dollars, whereas building new instruments would cost days and would still be judged by the same oracles.",
+    "obs_blocker": {
+      "blocker_is": "No single sitting had ever re-run the tree's instruments together, so three headline claims had gone stale unseen.",
+      "delete_bypass_substitute_options": [
+        "Reading the receipts and trusting them (rejected: that is exactly how the three claims went stale)",
+        "Building a new benchmark harness (rejected: duplicates existing instruments and adds no oracle)",
+        "Running an external board episode (not possible here: no image, grader or browser on this machine)"
+      ],
+      "evidence_the_blocker_is_real": [
+        "The instant-learning receipt claimed 6/6 claims on 2026-11-24 and holds 1/6 today",
+        "The comparison document dated 2026-11-26 cites 462 registry entries; the registry holds 145",
+        "The unified gate set is 38/38 on the tree as found and 37/38 after one module is added"
+      ]
+    },
+    "routes_considered": [
+      {
+        "route": "REUSE",
+        "verdict": "SELECTED",
+        "reason": "the instruments exist and are unchanged; one runtime makes them comparable"
+      },
+      {
+        "route": "ADAPT",
+        "verdict": "REJECTED",
+        "reason": "adapting an instrument while measuring with it would let the measurement move with the answer"
+      },
+      {
+        "route": "SYNTHESIZE_NEW_PRIMITIVE",
+        "verdict": "PARTIAL",
+        "reason": "only where no instrument existed: live adapter invocations, fresh-bug held-out oracle, goal labels, substrate census"
+      }
+    ],
+    "acceptance": "the scorecard is reproducible from one command, every row names its oracle, and no row is a pass without one"
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "CONTROL_PLANE_PREREQUISITE",
+    "proof_state_reachability": "No open truth obligation is claimed discharged by this PR. It measures the distance to three of them and names the absent instrument.",
+    "target_truth_obligations": [
+      "CODING_TB4_GE_66_4",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_GDPVAL_GE_1846"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "340ffad37195f8ba055e60361be90ee0527256bd",
+          "path": "canonical/verification/THE_GAP_CLOSES_THE_LOOP_20261124_V1.json"
+        }
+      ],
+      "decisive_question": "Do the tree's advanced capabilities, re-run together in one sitting, still hold the numbers their receipts claim?",
+      "falsifier_id": "SINGLE_RUNTIME_REMEASUREMENT_FALSIFIER",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "",
+      "proposal_id": "ADVANCED_CAPABILITY_RUNTIME_V1"
+    }
   }
 }
