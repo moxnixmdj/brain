@@ -1,0 +1,29 @@
+{
+  "schema":"PROJECT_BRAIN_SUB100MB_ARC_FRESH_HELDOUT_SLICE_V2",
+  "date":"2026-10-04",
+  "status":"FROZEN_BEFORE_TASK_CONTENT_EXPOSURE__V2_BYTES_BOUND",
+  "solver_freeze":{
+    "path":"canonical/governance/SUB100MB_ARC_ZERO_LEARNED_V2_FREEZE_V1.json",
+    "solver_path":"canonical/runtime/arc_zero_learned_solver_v2.py",
+    "solver_git_blob_sha":"23693697f2b503a3a30b4ddcaef179342fdda64c",
+    "persistent_learned_state_bytes":0
+  },
+  "source_subset":{
+    "repository":"iamvxrn/arc-agi-compressed",
+    "path":"subsets/arc1-evaluation-100.json",
+    "git_blob_sha":"13ae2c0107a0d49245f52d1cdf2096f533e24a86",
+    "seed":0
+  },
+  "selection_rule":"TAKE_THE_NEXT_10_IDS_IMMEDIATELY_AFTER_THE_SPENT_V1_BLOCK_ENDING_AT_2072aba6_IN_THE_PREEXISTING_FROZEN_SEED0_SUBSET",
+  "task_ids":["20818e16","22a4bbc2","2f0c5170","310f3251","319f2597","31adaf00","3391f8c0","33b52de3","3490cc26","34b99a2b"],
+  "task_count":10,
+  "information_policy":{
+    "none_of_these_task_contents_were_FETCHED_DURING_V2_DEVELOPMENT":true,
+    "solver_bytes_frozen_before_fetch":true,
+    "after_first_score_all_ten_become_spent":true,
+    "no_tuning_then_reclaiming_as_heldout":true
+  },
+  "metrics":["TRAINING_FIT_COUNT","EXACT_TEST_SUCCESS_COUNT","STRATEGY_SELECTED","PERSISTENT_LEARNED_STATE_BYTES"],
+  "hard_nonclaims":["DEVELOPMENT_SIGNAL_ONLY","NO_FULL_SET_REPRESENTATIVENESS","NO_OPUS_OR_UNKNOWN_DOMAIN_PARITY_CLAIM"],
+  "accounting":{"persistent_learned_state_bytes":0,"incremental_spend_usd":0,"acceptance_credit_delta":0,"family_credit_delta":0,"capability_credit_delta":0}
+}
