@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_OWNER_AUTHORITY_CI_RECONCILIATION_V1",
+  "date": "2026-10-09",
+  "status": "PR3836_ACTIONS_RUNS_EXISTED__NO_WORKFLOW_STEPS_OR_LOGS_EXPOSED__NO_CI_PASS__NO_EXECUTED_TEST_FAILURE_INFERRED__ZERO_CREDIT",
+  "subject": {
+    "pull_request": 3836,
+    "head_sha": "0e32262cbcbeb0a018633749396f0795a36436bd",
+    "merge_commit_sha": "4e977df8445aeeb2db0a9b69584d75e5e9d617f8",
+    "evidence_blob": "bbab86792bc0b46371a11571dd539aab4592cde6",
+    "reduction_blob": "09da1eec1f2108e4cb99cbc2f62270afc50efc58"
+  },
+  "runs": [
+    {
+      "run_id": 37965217337,
+      "workflow": "Load-bearing primary admission",
+      "conclusion": "failure",
+      "jobs": [
+        {"id":113937753514,"name":"verify","conclusion":"failure","steps":null,"logs_url":null}
+      ]
+    },
+    {
+      "run_id": 37965217424,
+      "workflow": "Drift Immunity Guard",
+      "conclusion": "failure",
+      "jobs": [
+        {"id":113937753346,"name":"guard","conclusion":"failure","steps":null,"logs_url":null},
+        {"id":113937753728,"name":"continuous-obs-runtime","conclusion":"failure","steps":null,"logs_url":null}
+      ]
+    },
+    {
+      "run_id": 37965214720,
+      "workflow": "verify-unified-live-brain-r1",
+      "conclusion": "failure",
+      "jobs_returned": 0
+    }
+  ],
+  "canonical_prestep_failure_context": {
+    "path": "canonical/governance/ACTIONS_PRESTEP_RUNNER_DISPATCH_FAILURE_20261007_V1.json",
+    "git_blob_sha": "b4e95e20f99c8d25fc3ea650e94bec3d18db16f9",
+    "current_runs_match_zero_exposed_step_signature": true,
+    "current_runner_id_exposed_by_connector": false
+  },
+  "truth": {
+    "actions_runs_existed": true,
+    "executed_ci_pass_proved": false,
+    "executed_repository_test_failure_proved": false,
+    "workflow_step_execution_observed": false,
+    "subject_reduction_invalidated_by_actions": false,
+    "subject_reduction_promoted_by_actions": false,
+    "exact_blob_invariant_replay_passed": "11_OF_11_STRUCTURAL_CHECKS"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_RUNNER_ID_VALUE",
+    "NO_CLAIM_INFRASTRUCTURE_ROOT_CAUSE",
+    "NO_CLAIM_PR3836_EXECUTED_CI_PASS",
+    "NO_BENCHMARK_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
