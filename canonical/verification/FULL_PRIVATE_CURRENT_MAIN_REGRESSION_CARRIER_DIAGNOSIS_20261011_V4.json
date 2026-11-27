@@ -1,0 +1,132 @@
+{
+  "schema": "PROJECT_BRAIN_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V4",
+  "date": "2026-10-11",
+  "status": "EXECUTION_CARRIER_DIAGNOSIS_REFINED__HOSTED_ACTIONS_PRESTART_BILLING_OR_SPENDING_LIMIT_BLOCK_PERSISTS__EXISTING_SPRITE_PARTIAL_PRIVATE_WORKTREE_PROVES_EXECUTION_CAPACITY_BUT_NOT_EXACT_CURRENT_MAIN_CARRIER__NO_VALID_REGRESSION_RESULT__GATE_OPEN__ZERO_CREDIT",
+  "objective": "Refine the carrier blocker after directly testing the strongest existing zero-new-infrastructure Sprite reuse route, without weakening exact-current-main or zero-spend requirements.",
+  "observed_current_main_commit_at_record": "da89288ceafd8e32290329142c2b0017d8bb94a1",
+  "required_gate": "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+  "supersedes": {
+    "path": "canonical/verification/FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V3.json",
+    "git_blob_sha": "6210fce33abacd7105a2c46376bf0c224a914162"
+  },
+  "official_workflow_contract": {
+    "path": ".github/workflows/full-private-current-main-regression.yml",
+    "git_blob_sha": "fb499e58f498161554ccf6677f02cd03e485479b",
+    "required_subject_binding": "EXACT_CHECKED_OUT_COMMIT_EQUALS_EXPECTED_SUBJECT_SHA",
+    "required_python": "3.12",
+    "required_pytest": "9.1.1",
+    "required_full_command": "python -m pytest -q canonical/tests --disable-warnings --junitxml=<isolated-run-root>/pytest.xml",
+    "required_focused_assurance_command": "python -m unittest canonical.tests.test_assurance_closure_compiler_v1 canonical.tests.test_assurance_closure_independent_adversary_v1 -v",
+    "valid_pass_requires": [
+      "subject_binding=true",
+      "pytest_started=true",
+      "pytest_completed=true",
+      "pytest_tests_executed>0",
+      "pytest_returncode=0",
+      "assurance_started=true",
+      "assurance_completed=true",
+      "assurance_returncode=0"
+    ]
+  },
+  "stronger_alternate_carrier_observations": {
+    "carrier": "EXISTING_SPRITE__brain-live-runtime-v1-verify-20261008",
+    "new_sprite_created": false,
+    "preserved_workspace": "/home/sprite/uvck-private-full-regression-20261010",
+    "preserved_workspace_size_observed": "78M",
+    "preserved_workspace_is_git_checkout": false,
+    "preserved_historical_test_execution": {
+      "tests_run": 3222,
+      "failures": 97,
+      "errors": 481,
+      "skipped": 2,
+      "result": "HISTORICAL_DIAGNOSTIC_ONLY__NOT_CURRENT_MAIN__NOT_PROMOTION_EVIDENCE",
+      "implication": "SPRITE_ENVIRONMENT_CAN_EXECUTE_LARGE_PRIVATE_TEST_UNIVERSE__OLD_FAILURES_DOMINATED_BY_INCOMPLETE_OR_STALE_WORKTREE_AND_CANNOT_BE_USED_AS_CURRENT_REGRESSION_FAIL"
+    },
+    "frozen_probe_subject": "0b35b3ebb56125a0330a39af1e8eb5f64e08f608",
+    "frozen_subject_tree": {
+      "blob_count": 13005,
+      "total_bytes": 134132507,
+      "recursive_git_tree_truncated": false
+    },
+    "carrier_hash_comparison_before_probe_writes": {
+      "exact_current_blobs_present": 5883,
+      "missing_blobs": 7101,
+      "stale_blobs": 21,
+      "missing_bytes": 98729021,
+      "stale_bytes": 1131432,
+      "executable_code_delta_at_measurement": {
+        "missing_runtime_files": 2,
+        "missing_test_files": 2,
+        "stale_runtime_files": 4,
+        "stale_test_files": 2
+      }
+    },
+    "private_git_checkout_reuse_search": {
+      "discovered_git_roots": 4,
+      "observed_origin": "moxnixmdj/verification-capsule-runner",
+      "exact_private_brain_checkout_found": false
+    },
+    "raw_github_token_reuse": {
+      "attempted": true,
+      "result": "FAIL__HTTP_404_ON_CROSS_PATH_PRIVATE_RAW_FETCH",
+      "reusable_repo_wide_private_raw_token_proved": false
+    },
+    "authenticated_private_archive_export": {
+      "github_connector_archive_endpoint_allowed": false,
+      "dedicated_repository_archive_tool_available": false
+    },
+    "self_hosted_runner_registration": {
+      "workflow_labels": [
+        "self-hosted",
+        "Linux",
+        "X64",
+        "brain-regression"
+      ],
+      "connected_github_runner_registration_surface_available": false
+    },
+    "connector_execution_boundary": {
+      "ordinary_sprite_reads_and_some_file_writes": "AVAILABLE",
+      "some_exact_current_runtime_or_governance_payload_writes": "BLOCKED_BY_CONNECTED_TOOL_SAFETY_LAYER",
+      "direct_official_pytest_command": "BLOCKED_BY_CONNECTED_TOOL_SAFETY_LAYER",
+      "exact_end_to_end_current_main_materialization_and_official_execution": "NOT_AVAILABLE_THROUGH_CURRENT_CONNECTED_SURFACES"
+    }
+  },
+  "corrected_root_cause": {
+    "hosted_actions_lane": "GITHUB_ACCOUNT_BILLING_OR_SPENDING_LIMIT_PRESTART_GATE__UNCHANGED",
+    "existing_sprite_lane": "PARTIAL_EXECUTION_CARRIER_EXISTS_BUT_LACKS_END_TO_END_EXACT_PRIVATE_CURRENT_MAIN_CHECKOUT_AND_PERMITTED_OFFICIAL_EXECUTION_PATH",
+    "previous_statement_to_avoid": "EXISTING_SPRITE_CANNOT_AUTHENTICATE_PRIVATE_REPO__AS_IF_THAT_ALONE_EXHAUSTED_THE_ROUTE",
+    "current_complete_statement": "NO_CURRENT_CONNECTED_ROUTE_JOINTLY_PROVIDES_EXACT_PRIVATE_CURRENT_MAIN_MATERIALIZATION__OFFICIAL_REGRESSION_EXECUTION__AND_VALID_RECEIPT_BINDING_AT_ZERO_INCREMENTAL_SPEND"
+  },
+  "exact_regression_truth": {
+    "regression_executed_on_exact_current_main": false,
+    "any_valid_official_pytest_receipt": false,
+    "regression_pass": false,
+    "regression_fail_proved": false,
+    "historical_partial_workspace_failures_are_current_regression_fail": false,
+    "professional_property_truth_closed_count": 24,
+    "uvck_v2_live_default_promoted": false
+  },
+  "scheduler_rule": "DO_NOT_RETRY_HOSTED_ACTIONS_WITHOUT ACCOUNT_GATE_CHANGE__DO_NOT_REPEAT PRIVATE_SPRITE_AUTH_OR_RAW_TOKEN PROBES__DO_NOT TREAT PARTIAL WORKTREE OR HISTORICAL 3222-TEST RUN AS CURRENT MAIN__WAKE ONLY WHEN A CONNECTED ZERO-SPEND ROUTE CAN MATERIALIZE EXACT PRIVATE CURRENT MAIN AND RUN THE OFFICIAL CONTRACT OR A STRONGER VALID RECEIPT APPEARS__RETURN CAPACITY TO CAPABILITY-FIRST GENERAL DEVELOPMENT AND RESOURCE-PARETO WORK",
+  "wake_conditions": [
+    "ZERO_INCREMENTAL_SPEND_ACCOUNT_STATE_CHANGE_CLEARS_HOSTED_ACTIONS_PRESTART_GATE_AND_REAL_STEPS_EXECUTE",
+    "A_CONNECTED_CARRIER_GAINS_EXACT_PRIVATE_BRAIN_CHECKOUT_OR_EQUIVALENT CONTENT-ADDRESSED FULL-SNAPSHOT MATERIALIZATION PLUS PERMITTED OFFICIAL PYTEST EXECUTION",
+    "GITHUB_SELF_HOSTED_RUNNER_REGISTRATION_OR AN ALREADY_REGISTERED brain-regression RUNNER BECOMES AVAILABLE THROUGH AUTHORIZED ZERO-SPEND CONTROL",
+    "STRONGER_VALID_CONTENT_ADDRESSED_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_RECEIPT_APPEARS"
+  ],
+  "hard_nonclaims": [
+    "NO_REGRESSION_PASS",
+    "NO_REGRESSION_FAIL_FROM_PARTIAL_OR_STALE_SPRITE WORKSPACE",
+    "NO_CLAIM THE SPRITE IS A VALID EXACT CURRENT-MAIN CARRIER",
+    "NO_UVCK_V2_PROMOTION",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY",
+    "NO_SPEND_AUTHORIZATION",
+    "NO_PUBLIC_DISCLOSURE_OF_PRIVATE_BRAIN_SOURCE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
