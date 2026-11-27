@@ -750,7 +750,7 @@
      ],
      "path": "canonical/runtime/wave51_52_sliced_structural_swe_and_stranded_treasury_v1.py",
      "score": 25.75,
-     "sha256": "85b5f345e24dd9b0",
+     "sha256": "1bb533cb396b97c6",
      "source_index": true,
      "summary": "Wave 51-52 Frontier Leapfrog: ARISE Statement-Level Def-Use Slicer, S8-S11 General Structural"
     },
@@ -3203,7 +3203,7 @@
      ],
      "path": "canonical/runtime/autonomous_verified_self_improvement_v1.py",
      "score": 13.0,
-     "sha256": "0dd519786a924153",
+     "sha256": "001a999323648f12",
      "source_index": true,
      "summary": "Autonomous verified self-improvement loop V1."
     },

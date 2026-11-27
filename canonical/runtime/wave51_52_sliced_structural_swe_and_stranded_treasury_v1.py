@@ -107,7 +107,7 @@ WAVE51_NEWLY_PROVEN_TITAN_MODULES: tuple[str, ...] = (
     "canonical/swe_kernel/angelic_cegis_repair_v1.py",
     "canonical/swe_kernel/semantic_generalization_engine_v1.py",
     "canonical/swe_kernel/polyglot_build_ci_engine_v1.py",
-    "canonical/runtime/autonomous_verified_self_improvement_v1.py",
+    "canonical/runtime/unified_hidden_capability_federation_v1.py",
     "canonical/swe_kernel/concept_library_v1.py",
     "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
     "canonical/tools/the_relation_is_read_from_the_failing_run_v1.py",
@@ -2189,7 +2189,8 @@ class Wave51FortyEightTitanAdjudicatorKernel:
             blob_sha = _sha256_bytes(fp.read_bytes()) if fp.is_file() else None
             if v["verdict"] == dma.PROVEN:
                 proven_loc += int(v.get("loc") or 0)
-            total_checks += int((v.get("evidence") or {}).get("checks") or 0)
+            raw_chk = (v.get("evidence") or {}).get("checks") or 0
+            total_checks += len(raw_chk) if isinstance(raw_chk, (dict, list, tuple)) else int(raw_chk)
             pinned.append(
                 {
                     "path": rel,

@@ -7293,3 +7293,30 @@ def compile_extended_source_index_rows(
                 }
             )
     return rows
+
+
+def self_check() -> dict[str, Any]:
+    """Behavioral positive & negative control check for the unified hidden-capability federation."""
+    cat = catalog_federated_engines()
+    count_ok = (
+        len(FEDERATED_KERNEL_DESCRIPTORS) >= 238
+        and isinstance(cat, dict)
+        and int(cat.get("count") or 0) == len(FEDERATED_KERNEL_DESCRIPTORS)
+        and int(cat.get("model_calls") or 0) == 0
+    )
+    pos = run_federated_engine("LEAPFROG_W52_ZERO_LLM_FTS_ATMA_HINDSIGHT_MEMORY", {"operation": "demo_cycle"})
+    pos_ok = bool(pos.get("pass")) and pos.get("k3_model_calls") == 0 and bool(pos.get("abstained_on_expired"))
+    neg = run_federated_engine("NONEXISTENT_ENGINE_MODE_NEG_CONTROL", {})
+    neg_ok = not bool(neg.get("pass"))
+    checks = {
+        "federated_catalog_complete": count_ok,
+        "positive_live_engine_dispatch_k3_zero": pos_ok,
+        "negative_unknown_engine_refused": neg_ok,
+    }
+    return {
+        "pass": all(checks.values()),
+        "checks": len(checks),
+        "details": checks,
+        "federated_engine_count": len(FEDERATED_KERNEL_DESCRIPTORS),
+    }
+
