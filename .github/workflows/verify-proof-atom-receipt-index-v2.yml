@@ -20,4 +20,67 @@ jobs:
         with:
           python-version: "3.12"
       - name: Run V2 receipt index tests
-        run: python -m unittest canonical.tests.test_proof_atom_receipt_index_v2 -v
+        run: |
+          set +e
+          python -m unittest canonical.tests.test_proof_atom_receipt_index_v2 -v > v2-tests.stdout 2> v2-tests.stderr
+          echo $? > v2-tests.exitcode
+          exit 0
+      - name: Execute live V2 receipt index
+        run: |
+          set +e
+          python -m canonical.runtime.proof_atom_receipt_index_v2 > proof-atom-receipt-index-v2.json 2> v2-index.stderr
+          code=$?
+          echo "$code" > v2-index.exitcode
+          if [ "$code" -eq 0 ]; then
+            python - <<'PY' > proof-atom-receipt-index-v2-summary.json 2>> v2-index.stderr
+          import hashlib, json
+          from pathlib import Path
+          p = json.loads(Path("proof-atom-receipt-index-v2.json").read_text())
+          data = Path("proof-atom-receipt-index-v2.json").read_bytes()
+          summary = {
+              "artifact_sha256": hashlib.sha256(data).hexdigest(),
+              "schema": p.get("schema"),
+              "status": p.get("status"),
+              "canonical_atom_count": p.get("canonical_atom_count"),
+              "scanned_file_count": p.get("scanned_file_count"),
+              "candidate_match_count": p.get("candidate_match_count"),
+              "atoms_with_candidate_matches": p.get("atoms_with_candidate_matches"),
+              "atoms_without_candidate_matches": p.get("atoms_without_candidate_matches"),
+              "candidate_matches_by_source_class": p.get("candidate_matches_by_source_class"),
+              "atom_ids_with_candidate_matches": p.get("atom_ids_with_candidate_matches"),
+              "atom_ids_without_candidate_matches": p.get("atom_ids_without_candidate_matches"),
+              "capability_credit_delta": p.get("capability_credit_delta"),
+              "family_credit_delta": p.get("family_credit_delta"),
+          }
+          print(json.dumps(summary, indent=2, sort_keys=True))
+          PY
+          fi
+          exit 0
+      - name: Upload exact live index and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proof-atom-receipt-index-v2-live
+          path: |
+            proof-atom-receipt-index-v2.json
+            proof-atom-receipt-index-v2-summary.json
+            v2-tests.stdout
+            v2-tests.stderr
+            v2-tests.exitcode
+            v2-index.stderr
+            v2-index.exitcode
+          if-no-files-found: warn
+      - name: Enforce pass
+        if: always()
+        run: |
+          test "$(cat v2-tests.exitcode)" = "0"
+          test "$(cat v2-index.exitcode)" = "0"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = json.loads(Path("proof-atom-receipt-index-v2.json").read_text())
+          assert p["status"].startswith("PASS"), p
+          assert p["canonical_atom_count"] == 40, p["canonical_atom_count"]
+          assert p["capability_credit_delta"] == 0
+          assert p["family_credit_delta"] == 0
+          PY
