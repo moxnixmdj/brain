@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "LIVEBENCH-PUNKT-CONTEXT-CLOSURE-20261005-V1",
+  "date": "2026-10-05",
+  "status": "PROPOSED__CRITICAL_PATH__ZERO_REALITY__ZERO_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "239bae9e904f43792d959c97694e798ba8c4952e",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "capability_target": "GENERAL_REASONING_AND_INSTRUCTION_FOLLOWING",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "action_kind": "EXHAUST_THE_LAST_ENVIRONMENT_SENSITIVE_POST_SACRIFICE_CONSTRUCTION_DIMENSION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::LIVEBENCH_IF_GE_65_7::PINNED_PUNKT_CONTEXT_CLOSURE",
+  "highest_leverage_now": true,
+  "current_truth": {
+    "proved_acceptance_predicates": 13,
+    "unresolved_acceptance_predicates": 25,
+    "post_sacrifice_parametric_reduction": "PASS__ONLY_PINNED_PUNKT_CONTEXT_REMAINS",
+    "structural_id_sets": 928,
+    "sentence_context_id_sets": 285,
+    "terminal_rows_read": 0,
+    "acceptance_credit": 0
+  },
+  "recursive_obs": {
+    "real_outcome": "Close universal LiveBench post-sacrifice construction without reading a terminal row.",
+    "obs_goal": {
+      "surviving_necessity": "EXACT_PINNED_PUNKT_NONINTERFERENCE_FOR_EVERY_SENTENCE_CHECKER_CONTEXT"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "post-sacrifice parametric reduction",
+        "numeric quotient",
+        "visible prompt compiler",
+        "pointwise minimum-cut theorem",
+        "exact 192-state lexical quotient"
+      ],
+      "surviving_gap": "INDEPENDENT_EXACT_RUNTIME_EXHAUSTION_OF_THE_FINITE_PUNKT_CONTEXT_BASIS"
+    },
+    "obs_blocker": {
+      "surviving_causal_blocker": "PUNKT_IS_THE_ONLY_REMAINING_ENVIRONMENT_SENSITIVE_CHECKER_BEHAVIOR_AFTER_PARAMETRIC_REDUCTION"
+    },
+    "obs_solution": {
+      "selected_surviving_route": "ENUMERATE_ALL_147924_REDUCED_PUNKT_CONTEXTS_AND_EXACTLY_POSTVALIDATE_WITH_PINNED_NLTK_AND_CHECKERS",
+      "deletion_first_order_applied": [
+        "DELETE_RAW_SLOT_CARTESIAN_PRODUCT",
+        "DELETE_LT1_FROM_CONSTRUCTION_AFTER_MANDATORY_SENTENCE_SACRIFICE",
+        "COLLAPSE_LT2_TO_20_TO_LT2_BOUNDARY",
+        "COLLAPSE_WORD_PADDING_TO_NO_PAD_VS_POSITIVE_PAD_CONTEXT",
+        "EXHAUST_ALL_REMAINING_FINITE_WRAPPER_AND_LOCATION_PARAMETERS"
+      ]
+    },
+    "obs_verification": {
+      "falsification_condition": "ANY_OF_147924_CONTEXTS_FAILS_COMPOSITION__ANY_SENTENCE_CHECKER_FAILS_EXACT_PINNED_POSTVALIDATION__ANY_NON_SENTENCE_CHECKER_REGRESSES__ANY_SOURCE_BLOB_OR_NLTK_BINDING_DRIFTS"
+    }
+  },
+  "terminal_proof_control": {
+    "proof_obligation": "Exact universal Punkt-context closure for all post-sacrifice generator-admitted active15 sentence contexts.",
+    "hole_type": "FINITE_ENVIRONMENT_SENSITIVE_RUNTIME_EXHAUSTION",
+    "expected_certificate_or_receipt": "Independent public-runner exact checker receipt bound to Brain subject blobs and NLTK 3.10.3.",
+    "maximum_cheap_test_cost": "147924_SYNTHETIC_PUBLIC_SOURCE_DERIVED_CASES__ZERO_TERMINAL_CASES__ZERO_INCREMENTAL_SPEND",
+    "contamination_risk": "NONE__NO_TERMINAL_ROWS_OR_HIDDEN_KWARGS",
+    "reversibility": "FULL",
+    "critical_path_relation": "Directly executes the sole remaining obligation named by livebench_post_sacrifice_parametric_reduction_v1."
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
