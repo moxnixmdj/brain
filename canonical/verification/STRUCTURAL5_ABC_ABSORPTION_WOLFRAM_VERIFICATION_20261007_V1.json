@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURAL5_ABC_ABSORPTION_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_LOGIC_PASS__SEMANTIC_MAPPING_REQUIRES_REVIEW__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/STRUCTURAL5_ABC_ABSORPTION_TRUTH_REPAIR_20261007_V1.json",
+    "governance_commit_sha": "91145e2e2db1687552a476208997d1496dc3d72d",
+    "branch": "obs/structural5-abc-absorption-20261007-v1"
+  },
+  "verification_provider": "WOLFRAM_LANGUAGE",
+  "formula": "((ABC=>S1)&...&(ABC=>S5)) => (ABC=>(S1&...&S5))",
+  "wolfram_result": true,
+  "verified": [
+    "POINTWISE_ABSORPTION_LOGIC_IS_VALID",
+    "IF_COMPLETE_ABC_SEMANTICALLY_ENTAILS_EACH_NAMED_STRUCTURAL_SLICE__THE_FIVE_EXTRA_TOP_LEVEL_CONJUNCTS_ARE_LOGICALLY_REDUNDANT"
+  ],
+  "not_verified": [
+    "SEMANTIC_SUBSUMPTION_OF_EACH_PREDICATE_INTO_CURRENT_ABC",
+    "CURRENT_ABC_CLOSURE",
+    "ANY_DIRECT15_RESULT",
+    "D_L2_CLOSURE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
