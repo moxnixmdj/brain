@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_GENERAL_COGNITION_SUBSTRATE_TRUSTED_GUARD_RECONCILIATION_20261007_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_TRUSTED_GUARD_TRUTH_REPAIR__SUPERSEDED_BLANKET_MODEL_REJECTION_REMOVED__FAIL_CLOSED_SUBSTRATE_OWNERSHIP_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "mission_lock_v6": {
+      "path": "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
+      "git_blob_sha": "1de77202bb8eec4a0c10cb92828cda8ff0c49e20"
+    },
+    "substrate_law_v3": {
+      "path": "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V3.md",
+      "git_blob_sha": "7532aa0a5700fc061c9cf6b003fa8a9fac27d3972"
+    },
+    "superseded_model_non_dependence_law": {
+      "path": "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md",
+      "git_blob_sha": "ed28d48cb5412520ef2968b06bf7f451a8da01d0"
+    },
+    "qwen35_durable_mirror_verification": {
+      "path": "canonical/verification/QWEN35_9B_M_DURABLE_MIRROR_VERIFICATION_20261006_V1.json",
+      "git_blob_sha": "c7c968e814569433ae066bc43b1ff6319a103cef"
+    },
+    "trusted_guard_before": {
+      "path": "canonical/runtime/enforce_goal_hierarchy.py",
+      "git_blob_sha": "10b53c1e38b41bc9f42919bd8a25651956bdc051"
+    },
+    "trusted_guard_candidate": {
+      "path": "canonical/runtime/enforce_goal_hierarchy.py",
+      "git_blob_sha": "bb452992c4243db2800d17d2c62e585ab32b427e"
+    },
+    "focused_tests": {
+      "path": "canonical/tests/test_general_cognition_substrate_guard_v1.py"
+    }
+  },
+  "contradiction_repaired": {
+    "current_law": "MODELS_MAY_EXECUTE_BRAIN_OWNED_CAPABILITY_CONFIGURATIONS_AS_GENERAL_COMPUTATION_OR_COGNITION_SUBSTRATE",
+    "stale_enforcement": "ANY_LOCAL_MODEL_MODEL_API_OR_MODEL_ARTIFACT_IN_A_COGNITIVE_EXECUTION_PATH_WAS_REJECTED_UNCONDITIONALLY_AND_COGNITIVE_PROMOTION_REQUIRED_MODEL_DEPENDENCY_COUNT_ZERO",
+    "effect": "THE_TRUSTED_GUARD_BLOCKED_A_ROUTE_CLASS_EXPLICITLY_ALLOWED_BY_CURRENT_CANONICAL_LAW",
+    "qwen_relevance": "THE_DURABLY_MIRRORED_QWEN3_5_9B_M_SUBSTRATE_COULD_NOT_BE LEGALLY EVALUATED AS A GENERAL COGNITION SUBSTRATE WHILE THE STALE BLANKET REJECTION REMAINED"
+  },
+  "repaired_predicate": {
+    "model_presence_alone_rejects": false,
+    "brain_owned_capability_configuration_required": true,
+    "configuration_materially_load_bearing_required": true,
+    "opaque_target_capability_provider_must_be_false": true,
+    "configured_system_evaluation_required": true,
+    "configuration_durability_required": true,
+    "each_model_dependency_must_be_declared_general_substrate": true,
+    "model_assisted_promotion_requires_explicit_substrate_ownership_evidence": true,
+    "provider_fallbacks_fail_closed_required_for_model_assisted_promotion": true
+  },
+  "falsification_canaries": [
+    "BARE_USE_MODEL_X_ROUTE_MUST_FAIL",
+    "OPAQUE_TARGET_CAPABILITY_PROVIDER_MUST_FAIL",
+    "MODEL_NOT_CLASSIFIED_AS_GENERAL_SUBSTRATE_MUST_FAIL",
+    "VALID_GENERAL_SUBSTRATE_UNDER_BRAIN_OWNED_MATERIALLY_LOAD_BEARING_CONFIGURATION_MAY_PASS_THIS_GUARD_ONLY"
+  ],
+  "independent_execution": {
+    "environment": "CHATGPT_ISOLATED_CONTAINER",
+    "focused_semantic_checks": 4,
+    "focused_semantic_checks_passed": 4,
+    "github_pr_workflow_observation": "VERIFY_V22_PREWRITE_ADMISSION_JOB_REPORTED_FAILURE_BUT_EXPOSED_ZERO_EXECUTED_STEPS_AND_NO_RETRIEVABLE_LOG_BLOB__NOT_TREATED_AS_CODE_PASS_OR_CODE_FALSIFICATION"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_QWEN3_5_9B_M_ITSELF_IS_AN_OWNED_CAPABILITY",
+    "NO_CLAIM_ANY_MODEL_ASSISTED_CAPABILITY_MEETS_THE_OPUS_5_5_BAR",
+    "NO_CLAIM_SHARED_SEMANTIC_TAIL_IS_CLOSED",
+    "NO_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
