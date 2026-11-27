@@ -1,0 +1,25 @@
+name: Verify Root3 information HTTP boundary V1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/astra_runtime.py
+      - canonical/tests/test_astra_external_information_http_boundary_v1.py
+      - canonical/governance/ROOT3_EXTERNAL_INFORMATION_HTTP_EFFECT_BOUNDARY_20261005_V1.json
+      - .github/workflows/verify-root3-information-http-boundary-v1.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Compile runtime
+        run: python -m py_compile canonical/runtime/astra_runtime.py
+      - name: Run fail-closed HTTP information-boundary tests
+        run: python -m pytest -q canonical/tests/test_astra_external_information_http_boundary_v1.py
