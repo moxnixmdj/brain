@@ -1,0 +1,74 @@
+{
+  "trades": [
+    {
+      "credit_rating": "SG",
+      "direction": -1,
+      "end": 10.794099,
+      "is_index": true,
+      "margined_mpor": 0.3323,
+      "notional": 377795305.0,
+      "reference": "ENT_1_806867",
+      "start": 0.9898
+    },
+    {
+      "credit_rating": "SG",
+      "direction": 1,
+      "end": 1.123122,
+      "is_index": true,
+      "margined_mpor": 0.1011,
+      "notional": 308796.55,
+      "reference": "ENT_1_806867",
+      "start": 1.0378
+    },
+    {
+      "credit_rating": "SG",
+      "direction": -1,
+      "end": 2.374068,
+      "is_index": true,
+      "margined_mpor": 0.3953,
+      "notional": 3998845265.23,
+      "reference": "ENT_0_695979",
+      "start": 1.6543
+    },
+    {
+      "credit_rating": "SG",
+      "direction": 1,
+      "end": 0.222462,
+      "is_index": true,
+      "margined_mpor": null,
+      "notional": 416727274.85,
+      "reference": "ENT_0_695979",
+      "start": 0.0
+    },
+    {
+      "credit_rating": "SG",
+      "direction": 1,
+      "end": 1.150418,
+      "is_index": true,
+      "margined_mpor": null,
+      "notional": 64607823.28,
+      "reference": "ENT_1_806867",
+      "start": 0.0
+    },
+    {
+      "credit_rating": "SG",
+      "direction": 1,
+      "end": 0.159732,
+      "is_index": true,
+      "margined_mpor": null,
+      "notional": 41687.2,
+      "reference": "ENT_0_695979",
+      "start": 0.0
+    },
+    {
+      "credit_rating": "SG",
+      "direction": -1,
+      "end": 0.871216,
+      "is_index": true,
+      "margined_mpor": null,
+      "notional": 902076436.82,
+      "reference": "ENT_1_806867",
+      "start": 0.7855
+    }
+  ]
+}

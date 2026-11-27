@@ -1,0 +1,645 @@
+{
+  "authority": "NONE__DERIVED_FROM_COMMITTED_RECEIPTS_AND_CI_REPORTS",
+  "benchmark_runs": {
+    "n_reports": 2,
+    "reports": {
+      "swe-pro-v2-hard51-latest.json": {
+        "arms": {
+          "causal": {
+            "agent_wall_seconds_total": 878.144,
+            "conditions": null,
+            "cost_usd": null,
+            "engine_statuses": {
+              "EDITS_UPLOADED": 3,
+              "HARNESS_ERROR": 4,
+              "NO_EDITS": 44
+            },
+            "model_calls": null,
+            "n_expected": 51,
+            "n_missing_trial": 0,
+            "resolved": 0
+          },
+          "nop": {
+            "agent_wall_seconds_total": null,
+            "conditions": null,
+            "cost_usd": null,
+            "engine_statuses": {
+              "NO_AGENT_REPORT": 51
+            },
+            "model_calls": null,
+            "n_expected": 51,
+            "n_missing_trial": 0,
+            "resolved": 0
+          },
+          "oracle": {
+            "agent_wall_seconds_total": null,
+            "conditions": null,
+            "cost_usd": null,
+            "engine_statuses": {
+              "NO_AGENT_REPORT": 51
+            },
+            "model_calls": null,
+            "n_expected": 51,
+            "n_missing_trial": 0,
+            "resolved": 50
+          }
+        },
+        "gates": {
+          "nop_gate_pass": true,
+          "oracle_gate_pass": false
+        },
+        "incomplete_shards": null,
+        "mode_inputs": null,
+        "n_arms": 3,
+        "receipt_authority": "OFFICIAL_TASK_VERDICTS__GATES_NOT_PASSED",
+        "receipt_claimable": false,
+        "receipt_file": "SWE_PRO_V2_HARD51_20261125_V1.json",
+        "receipt_why_not": [
+          "ORACLE_GATE: the reference patch resolved 50/51, not N/N, in this job configuration \u2014 a task's own test is then not the constraint it claims to be, and no causal resolve rate can be attributed to the engine."
+        ],
+        "run_failed": null,
+        "run_produced_number": true,
+        "schema": "brain.bench_eval_report.v1"
+      },
+      "swe-pro-v2-smoke3-latest.json": {
+        "arms": {},
+        "gates": null,
+        "incomplete_shards": null,
+        "mode_inputs": {
+          "agent_timeout_s": "600",
+          "arms": "all",
+          "benchmark": "swe-pro-v2-smoke3",
+          "commit_results": "true",
+          "n_shard_reports_found": 0,
+          "n_shards": "1",
+          "run_failed": ""
+        },
+        "n_arms": 0,
+        "receipt_authority": "NO_MEASUREMENT__HARNESS_ONLY",
+        "receipt_claimable": false,
+        "receipt_file": "swe-pro-v2-smoke3-receipt.json",
+        "receipt_why_not": [
+          "NO_TRIAL_DATA: no trial row was read for any expected task, so this run produced no benchmark number. The 0 columns in the raw report are a harness failure, not a score, and the controls were never exercised.",
+          "RUN_FAILED: the eval job reported failure; no shard report was committed."
+        ],
+        "run_failed": true,
+        "run_produced_number": false,
+        "schema": "brain.bench_eval_report.v1"
+      }
+    }
+  },
+  "capability_law": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX_COMPOSITION_OF_PUBLISHED_RECEIPTS",
+    "available": true,
+    "operating_point": {
+      "p_correct": 0.2978,
+      "p_correct_value_bearing": 0.1167
+    },
+    "report_keys": [
+      "authority",
+      "ceiling",
+      "computer_use",
+      "incremental_spend_usd",
+      "law",
+      "leverage",
+      "model_calls",
+      "network_calls",
+      "operating_point",
+      "receipts",
+      "scenarios",
+      "schema",
+      "terms",
+      "what_this_shows"
+    ],
+    "terms": {
+      "check_density": 0.6788,
+      "check_strength": 0.8021,
+      "determined": 0.5469,
+      "determined_value": 0.2143,
+      "memory_coverage": 0.1584,
+      "memory_exact": 0.0481,
+      "seen": 0.5445,
+      "silent_corruption": 0.3114
+    }
+  },
+  "claim_surface": {
+    "date_range": [
+      "20261015",
+      "20261201"
+    ],
+    "ledgers_dated_after_run_date": [
+      "BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.md",
+      "THE_GOAL_IS_NOT_IN_THE_ENVIRONMENT_20261130_V1.md",
+      "THE_REPERTOIRE_IS_A_QUERY_20261129_V1.md",
+      "THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.md",
+      "THE_GOAL_IS_A_QUOTIENT_OF_THE_TRACE_20261128_V1.md",
+      "THE_BRANCH_IS_THE_MODEL_20261128_V1.md",
+      "THE_PRICE_OF_A_CORRECT_DECISION_20261127_V1.md",
+      "THE_GOAL_IS_A_RELATION_OVER_THE_RUN_20261127_V1.md"
+    ],
+    "n_ledgers_dated_after_run_date": 10,
+    "n_root_ledgers": 368,
+    "newest_15": [
+      "BREADTH_BUYS_WHAT_REPETITION_CANNOT_20261201_V1.md",
+      "THE_GOAL_IS_NOT_IN_THE_ENVIRONMENT_20261130_V1.md",
+      "THE_REPERTOIRE_IS_A_QUERY_20261129_V1.md",
+      "THE_COUNTEREXAMPLE_IS_THE_NEXT_EXPERIMENT_20261129_V1.md",
+      "THE_GOAL_IS_A_QUOTIENT_OF_THE_TRACE_20261128_V1.md",
+      "THE_BRANCH_IS_THE_MODEL_20261128_V1.md",
+      "THE_PRICE_OF_A_CORRECT_DECISION_20261127_V1.md",
+      "THE_GOAL_IS_A_RELATION_OVER_THE_RUN_20261127_V1.md",
+      "THE_GOAL_IS_A_DISCRIMINATOR_20261126_V1.md",
+      "THE_DEMONSTRATION_CARRIES_THE_ACTION_20261126_V1.md",
+      "THE_VOCABULARY_IS_THE_ARTIFACT_20261125_V1.md",
+      "THE_DEMAND_IS_A_RELATION_20261125_V1.md",
+      "SWE_BENCH_PRO_V2_FIRST_MEASURED_RUN_20261125_V1.md",
+      "MOST_ADVANCED_CAPABILITIES_VS_FRONTIER_20261125_V1.md",
+      "A_SITE_IS_NOT_A_PRODUCTION_20261124_V1.md"
+    ],
+    "run_date": "20261125",
+    "verification_receipts": 2927
+  },
+  "cost_usd": 0.0,
+  "frontier_ownership_matrix": {
+    "broken_pointers": {},
+    "evaluated_utc": "2026-10-03",
+    "families": {
+      "ADVANCED_AGENTIC_CODING": {
+        "behavioral_status": "PASS",
+        "evidence_chars": 368,
+        "has_next_action": true,
+        "n_broken_pointers": 0,
+        "n_pointers": 5,
+        "ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+        "residual_chars": 243,
+        "scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
+        "status": "BRAIN_CONFIGURED_VERIFICATION_PENDING"
+      },
+      "AGENTIC_SCIENTIFIC_RESEARCH": {
+        "behavioral_status": "PASS",
+        "evidence_chars": 62,
+        "has_next_action": true,
+        "n_broken_pointers": 0,
+        "n_pointers": 2,
+        "ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+        "residual_chars": 0,
+        "scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
+        "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND"
+      },
+      "ARTIFACT_CREATION": {
+        "behavioral_status": "PASS",
+        "evidence_chars": 131,
+        "has_next_action": true,
+        "n_broken_pointers": 0,
+        "n_pointers": 4,
+        "ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+        "residual_chars": 0,
+        "scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE",
+        "status": "OWNED_COMPONENT_NOT_FULL_FAMILY"
+      },
+      "BUSINESS_WORKFLOW_AUTOMATION": {
+        "behavioral_status": "PASS",
+        "evidence_chars": 87,
+        "has_next_action": true,
+        "n_broken_pointers": 0,
+        "n_pointers": 2,
+        "ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+        "residual_chars": 0,
+        "scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
+        "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND"
+      },
+      "COMMUNICATION_AND_SYNTHESIS": {
+        "behavioral_status": "PASS",
+        "evidence_chars": 102,
+        "has_next_action": false,
+        "n_broken_pointers": 0,
+        "n_pointers": 1,
+        "ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+        "residual_chars": 0,
+        "scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE",
+        "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND"
+      },
+      "COMPLEX_MULTI_TOOL_AGENCY": {
+        "behavioral_status": "PASS",
+        "evidence_chars": 235,
+        "has_next_action": true,
+        "n_broken_pointers": 0,
+        "n_pointers": 4,
+        "ownership_credit": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+        "residual_chars": 0,
+        "scope_state": "P1_SCOPE_RESTORED__WHOLE_SCOPE_PASS",
+        "status": "VERIFIED_OWNED_EQUAL_OR_BETTER"
+      },
+      "COMPUTER_AND_BROWSER_USE": {
+        "behavioral_status": "PASS",
+        "evidence_chars": 180,
+        "has_next_action": true,
+        "n_broken_pointers": 0,
+        "n_pointers": 2,
+        "ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+        "residual_chars": 59,
+        "scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
+        "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND"
+      },
+      "EXACT_SYMBOLIC_COMPUTATION": {
+        "behavioral_status": "PASS",
+        "evidence_chars": 47,
+        "has_next_action": false,
+        "n_broken_pointers": 0,
+        "n_pointers": 1,
+        "ownership_credit": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+        "residual_chars": 0,
+        "scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE",
+        "status": "VERIFIED_OWNED_EQUAL_OR_BETTER"
+      },
+      "FINANCIAL_ANALYSIS": {
+        "behavioral_status": "PASS",
+        "evidence_chars": 156,
+        "has_next_action": false,
+        "n_broken_pointers": 0,
+        "n_pointers": 1,
+        "ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+        "residual_chars": 0,
+        "scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE",
+        "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND"
+      },
+      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT": {
+        "behavioral_status": "PASS",
+        "evidence_chars": 349,
+        "has_next_action": true,
+        "n_broken_pointers": 0,
+        "n_pointers": 3,
+        "ownership_credit": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+        "residual_chars": 0,
+        "scope_state": "P1_SCOPE_RESTORED__WHOLE_SCOPE_PASS",
+        "status": "VERIFIED_OWNED_EQUAL_OR_BETTER"
+      },
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY": {
+        "behavioral_status": "PASS",
+        "evidence_chars": 398,
+        "has_next_action": true,
+        "n_broken_pointers": 0,
+        "n_pointers": 4,
+        "ownership_credit": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+        "residual_chars": 0,
+        "scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE",
+        "status": "VERIFIED_OWNED_EQUAL_OR_BETTER"
+      },
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING": {
+        "behavioral_status": "PASS",
+        "evidence_chars": 135,
+        "has_next_action": true,
+        "n_broken_pointers": 0,
+        "n_pointers": 1,
+        "ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+        "residual_chars": 124,
+        "scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE",
+        "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND"
+      },
+      "MULTI_CAPABILITY_COMPOSITION": {
+        "behavioral_status": "PASS",
+        "evidence_chars": 144,
+        "has_next_action": true,
+        "n_broken_pointers": 0,
+        "n_pointers": 2,
+        "ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+        "residual_chars": 0,
+        "scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
+        "status": "OWNED_COMPONENT_NOT_FULL_FAMILY"
+      },
+      "PROFESSIONAL_KNOWLEDGE_WORK": {
+        "behavioral_status": "PASS",
+        "evidence_chars": 103,
+        "has_next_action": true,
+        "n_broken_pointers": 0,
+        "n_pointers": 6,
+        "ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+        "residual_chars": 88,
+        "scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE",
+        "status": "BRAIN_CONFIGURED_VERIFICATION_PENDING"
+      },
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY": {
+        "behavioral_status": "PASS",
+        "evidence_chars": 195,
+        "has_next_action": true,
+        "n_broken_pointers": 0,
+        "n_pointers": 6,
+        "ownership_credit": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+        "residual_chars": 0,
+        "scope_state": "P1_SCOPE_RESTORED__WHOLE_SCOPE_PASS",
+        "status": "VERIFIED_OWNED_EQUAL_OR_BETTER"
+      },
+      "SUBAGENT_DELEGATION_AND_COORDINATION": {
+        "behavioral_status": "PASS",
+        "evidence_chars": 219,
+        "has_next_action": true,
+        "n_broken_pointers": 0,
+        "n_pointers": 6,
+        "ownership_credit": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+        "residual_chars": 0,
+        "scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE",
+        "status": "VERIFIED_OWNED_EQUAL_OR_BETTER"
+      },
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING": {
+        "behavioral_status": "PASS",
+        "evidence_chars": 244,
+        "has_next_action": true,
+        "n_broken_pointers": 0,
+        "n_pointers": 4,
+        "ownership_credit": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+        "residual_chars": 0,
+        "scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE",
+        "status": "VERIFIED_OWNED_EQUAL_OR_BETTER"
+      },
+      "UNKNOWN_DOMAIN_ADAPTATION": {
+        "behavioral_status": "PASS",
+        "evidence_chars": 111,
+        "has_next_action": true,
+        "n_broken_pointers": 0,
+        "n_pointers": 1,
+        "ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+        "residual_chars": 0,
+        "scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE",
+        "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND"
+      },
+      "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING": {
+        "behavioral_status": "PASS",
+        "evidence_chars": 143,
+        "has_next_action": true,
+        "n_broken_pointers": 0,
+        "n_pointers": 1,
+        "ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+        "residual_chars": 0,
+        "scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE",
+        "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND"
+      }
+    },
+    "matrix_status": "CURRENT_RECONCILED__7_VERIFIED_OWNED__AGENCY_ACCEPTANCE_AND_OWNERSHIP_PROMOTED__REMAINING_FAMILIES_FAIL_CLOSED",
+    "n_behavioral_pass": 19,
+    "n_broken_pointers": 0,
+    "n_families": 19,
+    "n_quarantined_scope": 5,
+    "n_verified_owned": 7,
+    "summary_lists": {
+      "brain_configured_verification_pending": [
+        "ADVANCED_AGENTIC_CODING",
+        "PROFESSIONAL_KNOWLEDGE_WORK"
+      ],
+      "external_specimen_backed_families": [
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "COMPUTER_AND_BROWSER_USE",
+        "FINANCIAL_ANALYSIS",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "UNKNOWN_DOMAIN_ADAPTATION"
+      ],
+      "owned_components_not_full_family": [
+        "ARTIFACT_CREATION",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "primary_progress_metrics": [
+        "UNEXPLAINED_USEFUL_BEHAVIOR",
+        "DONOR_DEPENDENT_USEFUL_BEHAVIOR"
+      ],
+      "revoked_false_ownership_packages": [
+        "OPUS55_AGENTIC_SCIENTIFIC_RESEARCH_V1",
+        "OPUS55_BUSINESS_WORKFLOW_AUTOMATION_V1",
+        "OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1"
+      ],
+      "verified_owned_equal_or_better_capabilities": [
+        "EXACT_SYMBOLIC_COMPUTATION",
+        "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "SUBAGENT_DELEGATION_AND_COORDINATION",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "COMPLEX_MULTI_TOOL_AGENCY"
+      ]
+    }
+  },
+  "frontier_self_report_consistency": {
+    "agrees_with_fields": false,
+    "file": "canonical/capabilities/frontier/OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1.json",
+    "problems": [
+      "status says 5 of 19 accepted; acceptance_truth says 7 of 19",
+      "acceptance_truth.verified_owned_families=7 but ownership_truth.verified_owned_families=5"
+    ],
+    "status_string": "ACTIVE_FAIL_CLOSED__5_OF_19_ACCEPTED__5_OF_19_VERIFIED_OWNED__14_OF_19_OPEN__TERMINAL_FALSE"
+  },
+  "head": "5a626875",
+  "inventory_sha256_16": "330ac8dbc1c8ea1d",
+  "measured_capabilities": {
+    "law": "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+    "law_exists": true,
+    "ledger_authority": "NONE",
+    "n_capabilities": 9,
+    "n_pass": 9,
+    "n_stale": 0,
+    "rows": {
+      "AUTHENTICATED_PARETO_SCHEDULE_V1": {
+        "binding": "MEASURED_BYTES_STILL_IN_HEAD",
+        "canary_pass": "0/0",
+        "carrier": "SANDBOX",
+        "claim_chars": 730,
+        "fresh_pass_rate": 1.0,
+        "instances": 2000,
+        "kernels_pinned": "1/1",
+        "measured_utc": "2026-10-14T18:50:24Z",
+        "n_oracles": 4,
+        "oracle_classes": [
+          "ANALYTIC_CLOSED_FORM",
+          "METAMORPHIC",
+          "PROPERTY"
+        ],
+        "receipt": "canonical/capabilities/true/receipts/AUTHENTICATED_PARETO_SCHEDULE_V1__463480e1295d2068.json",
+        "receipt_sha256_16": "16c80f2b13ac8c73",
+        "scope_limits": 2,
+        "solver_blob_present_in_head": true,
+        "status": "MEASURED_SANDBOX",
+        "verdict": "PASS"
+      },
+      "CAPABILITY_FIRST_RANKING_V1": {
+        "binding": "MEASURED_BYTES_STILL_IN_HEAD",
+        "canary_pass": "0/0",
+        "carrier": "SANDBOX",
+        "claim_chars": 1184,
+        "fresh_pass_rate": 1.0,
+        "instances": 2000,
+        "kernels_pinned": "1/1",
+        "measured_utc": "2026-10-14T18:50:17Z",
+        "n_oracles": 5,
+        "oracle_classes": [
+          "ANALYTIC_CLOSED_FORM",
+          "METAMORPHIC",
+          "PROPERTY"
+        ],
+        "receipt": "canonical/capabilities/true/receipts/CAPABILITY_FIRST_RANKING_V1__b588e2cdf071cc62.json",
+        "receipt_sha256_16": "eb5e9931238258c3",
+        "scope_limits": 3,
+        "solver_blob_present_in_head": true,
+        "status": "MEASURED_SANDBOX",
+        "verdict": "PASS"
+      },
+      "DOCX_EXACT_TEXT_EDIT_V1": {
+        "binding": "MEASURED_BYTES_STILL_IN_HEAD",
+        "canary_pass": "0/0",
+        "carrier": "SANDBOX",
+        "claim_chars": 284,
+        "fresh_pass_rate": 1.0,
+        "instances": 3000,
+        "kernels_pinned": "0/0",
+        "measured_utc": "2026-10-14T17:55:14Z",
+        "n_oracles": 3,
+        "oracle_classes": [
+          "ANALYTIC_CLOSED_FORM",
+          "METAMORPHIC",
+          "PROPERTY"
+        ],
+        "receipt": "canonical/capabilities/true/receipts/DOCX_EXACT_TEXT_EDIT_V1__1ec1c01b914478ca.json",
+        "receipt_sha256_16": "98e410b103ff6d92",
+        "scope_limits": 4,
+        "solver_blob_present_in_head": true,
+        "status": "MEASURED_SANDBOX",
+        "verdict": "PASS"
+      },
+      "DOCX_RUN_SPAN_REPLACE_V1": {
+        "binding": "MEASURED_BYTES_STILL_IN_HEAD",
+        "canary_pass": "0/0",
+        "carrier": "SANDBOX",
+        "claim_chars": 468,
+        "fresh_pass_rate": 1.0,
+        "instances": 2000,
+        "kernels_pinned": "1/1",
+        "measured_utc": "2026-10-14T19:13:36Z",
+        "n_oracles": 3,
+        "oracle_classes": [
+          "ANALYTIC_CLOSED_FORM",
+          "METAMORPHIC",
+          "PROPERTY"
+        ],
+        "receipt": "canonical/capabilities/true/receipts/DOCX_RUN_SPAN_REPLACE_V1__2890e390b84f468d.json",
+        "receipt_sha256_16": "cc931e7a3ef99906",
+        "scope_limits": 4,
+        "solver_blob_present_in_head": true,
+        "status": "MEASURED_SANDBOX",
+        "verdict": "PASS"
+      },
+      "DOCX_STORY_PART_REPLACE_V1": {
+        "binding": "MEASURED_BYTES_STILL_IN_HEAD",
+        "canary_pass": "0/0",
+        "carrier": "SANDBOX",
+        "claim_chars": 612,
+        "fresh_pass_rate": 1.0,
+        "instances": 2000,
+        "kernels_pinned": "1/1",
+        "measured_utc": "2026-10-14T19:13:54Z",
+        "n_oracles": 3,
+        "oracle_classes": [
+          "ANALYTIC_CLOSED_FORM",
+          "METAMORPHIC",
+          "PROPERTY"
+        ],
+        "receipt": "canonical/capabilities/true/receipts/DOCX_STORY_PART_REPLACE_V1__e098d8db05ee5d56.json",
+        "receipt_sha256_16": "f5e0773e3aa7d95a",
+        "scope_limits": 4,
+        "solver_blob_present_in_head": true,
+        "status": "MEASURED_SANDBOX",
+        "verdict": "PASS"
+      },
+      "DOCX_TEXT_EDIT_TRANSACTION_V1": {
+        "binding": "MEASURED_BYTES_STILL_IN_HEAD",
+        "canary_pass": "0/0",
+        "carrier": "SANDBOX",
+        "claim_chars": 475,
+        "fresh_pass_rate": 1.0,
+        "instances": 2000,
+        "kernels_pinned": "1/1",
+        "measured_utc": "2026-10-14T19:13:46Z",
+        "n_oracles": 3,
+        "oracle_classes": [
+          "ANALYTIC_CLOSED_FORM",
+          "METAMORPHIC",
+          "PROPERTY"
+        ],
+        "receipt": "canonical/capabilities/true/receipts/DOCX_TEXT_EDIT_TRANSACTION_V1__9e73768fd0f238e0.json",
+        "receipt_sha256_16": "4dd620fbc5f19d7f",
+        "scope_limits": 4,
+        "solver_blob_present_in_head": true,
+        "status": "MEASURED_SANDBOX",
+        "verdict": "PASS"
+      },
+      "PARETO_FRONTIER_UPDATE_V1": {
+        "binding": "MEASURED_BYTES_STILL_IN_HEAD",
+        "canary_pass": "0/0",
+        "carrier": "SANDBOX",
+        "claim_chars": 792,
+        "fresh_pass_rate": 1.0,
+        "instances": 2000,
+        "kernels_pinned": "1/1",
+        "measured_utc": "2026-10-14T18:50:23Z",
+        "n_oracles": 3,
+        "oracle_classes": [
+          "ANALYTIC_CLOSED_FORM",
+          "METAMORPHIC",
+          "PROPERTY"
+        ],
+        "receipt": "canonical/capabilities/true/receipts/PARETO_FRONTIER_UPDATE_V1__ded725829226d120.json",
+        "receipt_sha256_16": "0b867e2f90f7f8bb",
+        "scope_limits": 2,
+        "solver_blob_present_in_head": true,
+        "status": "MEASURED_SANDBOX",
+        "verdict": "PASS"
+      },
+      "SACCR_CREDIT_ADDON_V1": {
+        "binding": "MEASURED_BYTES_STILL_IN_HEAD",
+        "canary_pass": "1/1",
+        "carrier": "SANDBOX",
+        "claim_chars": 205,
+        "fresh_pass_rate": 1.0,
+        "instances": 2000,
+        "kernels_pinned": "0/0",
+        "measured_utc": "2026-10-14T16:30:19Z",
+        "n_oracles": 3,
+        "oracle_classes": [
+          "ANALYTIC_CLOSED_FORM",
+          "DIFFERENTIAL_EXTERNAL",
+          "METAMORPHIC",
+          "PROPERTY"
+        ],
+        "receipt": "canonical/capabilities/true/receipts/SACCR_CREDIT_ADDON_V1__3e600b175e196a2e.json",
+        "receipt_sha256_16": "eb9b31bae70a8a93",
+        "scope_limits": 4,
+        "solver_blob_present_in_head": true,
+        "status": "MEASURED_SANDBOX",
+        "verdict": "PASS"
+      },
+      "SAME_IDENTITY_SUPERVISOR_V1": {
+        "binding": "MEASURED_BYTES_STILL_IN_HEAD",
+        "canary_pass": "0/0",
+        "carrier": "SANDBOX",
+        "claim_chars": 1205,
+        "fresh_pass_rate": 1.0,
+        "instances": 2000,
+        "kernels_pinned": "0/0",
+        "measured_utc": "2026-11-25T18:28:31Z",
+        "n_oracles": 5,
+        "oracle_classes": [
+          "ANALYTIC_CLOSED_FORM",
+          "METAMORPHIC",
+          "PROPERTY"
+        ],
+        "receipt": "canonical/capabilities/true/receipts/SAME_IDENTITY_SUPERVISOR_V1__3b246db7861650fb.json",
+        "receipt_sha256_16": "95d1918043f88e71",
+        "scope_limits": 5,
+        "solver_blob_present_in_head": true,
+        "status": "MEASURED_SANDBOX",
+        "verdict": "PASS"
+      }
+    }
+  },
+  "model_calls": 0,
+  "n_tracked_files": 18054,
+  "schema": "BRAIN_CAPABILITY_INVENTORY_V1"
+}

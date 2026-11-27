@@ -1,0 +1,157 @@
+{
+ "contamination": "NOT_USED_BY_TREE",
+ "cost": {
+  "cpu_seconds": 3.0,
+  "model_calls": 0,
+  "network_calls_this_run": 0,
+  "wall_clock_s": 3.0
+ },
+ "cross_repository": {
+  "EMPTY": {
+   "hits": 0,
+   "rate": 0.0,
+   "tested": 1350
+  },
+  "RAW_TRACE": {
+   "hits": 0,
+   "rate": 0.0,
+   "tested": 1350
+  },
+  "SHAPE_CEILING": {
+   "rate": 0.7644,
+   "same_root_as_some_rule": 1032,
+   "tested": 1350
+  },
+  "STORE": {
+   "detail": [],
+   "hits": 0,
+   "rate": 0.0,
+   "tested": 1350
+  },
+  "contamination": "CONTAMINATED_FOR_CATALOGUE",
+  "rules_admitted": 163,
+  "rules_per_repair": 0.652,
+  "test_repairs_seen": 1350,
+  "test_slug": "pallets/click",
+  "train_files": 36,
+  "train_repairs": 250
+ },
+ "harvest": {
+  "api_calls_original": 808,
+  "api_calls_this_run": 0,
+  "digest": "840083faaf25ca15",
+  "repairs": 250,
+  "reused_cache": true
+ },
+ "learn_slug": "python-attrs/attrs",
+ "not_claimed": [
+  "no task was repaired: this measures whether a stored rule can reproduce another commit's change",
+  "network was used at build time only, to read patches; nothing here runs at runtime",
+  "the repositories are ordinary open-source histories, not a benchmark, and no score is comparable to one"
+ ],
+ "schema": "BRAIN_SINGLE_EXPERIENCE_TRANSFER_V1",
+ "self_check": {
+  "checks": 5,
+  "command": "python3 -m canonical.swe_kernel.single_experience_transfer_v1 --self-check",
+  "detail": {
+   "empty_hits": 0,
+   "near_miss_hits": 0,
+   "positive_hits": 1,
+   "rules": 1,
+   "test": 1,
+   "train": 1
+  },
+  "expect_exit": 0,
+  "passed": 5,
+  "verdict": "SELF_CHECK_PASS"
+ },
+ "verdict": {
+  "abstraction_beats_verbatim": false,
+  "conclusion": "Retrieval on the shape of a change is not the bottleneck and the Wave 45 operator does not earn its place as a store mechanism on this corpus: inside one project 2.45% of held-out repairs are reproduced against 3.07% for verbatim traces, and across projects 0 of 1,350 despite 76.4% of held-out repairs sharing a root shape with some stored rule. What does not transfer is the trigger: these store entries are keyed on the edit, and an edit is surface-specific. The next mechanism must be keyed on the failing condition that made the edit necessary.",
+  "cross_repository": {
+   "raw_traces": 0.0,
+   "shape_ceiling": 0.7644,
+   "store": 0.0,
+   "tested": 1350
+  },
+  "deletion_condition": "structured_morphism_abstraction_v1 stays only while a trigger-keyed store uses it to express the repair itself; if the next wave's trigger-indexed store does not, the module is deleted under the no-part-without-measurement rule.",
+  "within_repository": {
+   "raw_traces": 0.0307,
+   "shape_ceiling": 0.5583,
+   "store": 0.0245,
+   "tested": 163
+  }
+ },
+ "within_changed_file_split": {
+  "EMPTY": {
+   "hits": 0,
+   "rate": 0.0,
+   "tested": 18
+  },
+  "RAW_TRACE": {
+   "hits": 0,
+   "rate": 0.0,
+   "tested": 18
+  },
+  "SHAPE_CEILING": {
+   "rate": 0.8889,
+   "same_root_as_some_rule": 16,
+   "tested": 18
+  },
+  "STORE": {
+   "detail": [],
+   "hits": 0,
+   "rate": 0.0,
+   "tested": 18
+  },
+  "rules_admitted": 104,
+  "rules_per_repair": 0.642,
+  "train_files": 24,
+  "train_repairs": 162
+ },
+ "within_repository": {
+  "EMPTY": {
+   "hits": 0,
+   "rate": 0.0,
+   "tested": 163
+  },
+  "RAW_TRACE": {
+   "hits": 5,
+   "rate": 0.0307,
+   "tested": 163
+  },
+  "SHAPE_CEILING": {
+   "rate": 0.5583,
+   "same_root_as_some_rule": 91,
+   "tested": 163
+  },
+  "STORE": {
+   "detail": [
+    {
+     "repair": "python-attrs/attrs@6e3786c5:src/attr/_make.py:0",
+     "rule_witness": "kw_only=False,"
+    },
+    {
+     "repair": "python-attrs/attrs@6e51cb7c:tests/test_dunders.py:3",
+     "rule_witness": "hash=True,"
+    },
+    {
+     "repair": "python-attrs/attrs@6e51cb7c:tests/test_dunders.py:4",
+     "rule_witness": "hash=True,"
+    },
+    {
+     "repair": "python-attrs/attrs@6e51cb7c:tests/test_dunders.py:5",
+     "rule_witness": "hash=True,"
+    }
+   ],
+   "hits": 4,
+   "rate": 0.0245,
+   "tested": 163
+  },
+  "rules_admitted": 64,
+  "rules_per_repair": 0.7356,
+  "split": "file-grouped, newest files held out",
+  "train_files": 24,
+  "train_repairs": 87
+ }
+}

@@ -1,0 +1,301 @@
+{
+  "admission_coverage_ratio": 0.005269,
+  "authority": "NONE__DERIVED_FROM_IMPORT_GRAPH_AND_COMMITTED_RECEIPTS",
+  "certified_capabilities": {
+    "AUTHENTICATED_PARETO_SCHEDULE_V1": {
+      "class": "TRUE_CAPABILITY",
+      "entry_function": "solve_schedule",
+      "entry_module": "canonical/runtime/scheduler_true_capability_adapters_v1.py",
+      "fresh_pass_rate": 1.0,
+      "instances": 2000,
+      "receipt": "canonical/capabilities/true/receipts/AUTHENTICATED_PARETO_SCHEDULE_V1__463480e1295d2068.json",
+      "receipt_present": true,
+      "solver_blob": "d7dbd9d320d27587d2dac228e16bc5b4eceba61a",
+      "spec": "canonical/capabilities/true/specs/AUTHENTICATED_PARETO_SCHEDULE_V1.json",
+      "verdict": "PASS"
+    },
+    "CAPABILITY_FIRST_RANKING_V1": {
+      "class": "TRUE_CAPABILITY",
+      "entry_function": "solve_ranking",
+      "entry_module": "canonical/runtime/scheduler_true_capability_adapters_v1.py",
+      "fresh_pass_rate": 1.0,
+      "instances": 2000,
+      "receipt": "canonical/capabilities/true/receipts/CAPABILITY_FIRST_RANKING_V1__b588e2cdf071cc62.json",
+      "receipt_present": true,
+      "solver_blob": "d7dbd9d320d27587d2dac228e16bc5b4eceba61a",
+      "spec": "canonical/capabilities/true/specs/CAPABILITY_FIRST_RANKING_V1.json",
+      "verdict": "PASS"
+    },
+    "DOCX_EXACT_TEXT_EDIT_V1": {
+      "class": "TRUE_CAPABILITY",
+      "entry_function": "solve_instance",
+      "entry_module": "canonical/runtime/docx_exact_text_edit.py",
+      "fresh_pass_rate": 1.0,
+      "instances": 3000,
+      "receipt": "canonical/capabilities/true/receipts/DOCX_EXACT_TEXT_EDIT_V1__1ec1c01b914478ca.json",
+      "receipt_present": true,
+      "solver_blob": "c137d9d05de3822a0bac6f2d52d1f4446f2682da",
+      "spec": "canonical/capabilities/true/specs/DOCX_EXACT_TEXT_EDIT_V1.json",
+      "verdict": "PASS"
+    },
+    "DOCX_RUN_SPAN_REPLACE_V1": {
+      "class": "TRUE_CAPABILITY",
+      "entry_function": "solve_span",
+      "entry_module": "canonical/runtime/docx_true_capability_adapters_v1.py",
+      "fresh_pass_rate": 1.0,
+      "instances": 2000,
+      "receipt": "canonical/capabilities/true/receipts/DOCX_RUN_SPAN_REPLACE_V1__2890e390b84f468d.json",
+      "receipt_present": true,
+      "solver_blob": "0008bed08fa3e17587a4af04e5bce04ff81fc8d2",
+      "spec": "canonical/capabilities/true/specs/DOCX_RUN_SPAN_REPLACE_V1.json",
+      "verdict": "PASS"
+    },
+    "DOCX_STORY_PART_REPLACE_V1": {
+      "class": "TRUE_CAPABILITY",
+      "entry_function": "solve_story",
+      "entry_module": "canonical/runtime/docx_true_capability_adapters_v1.py",
+      "fresh_pass_rate": 1.0,
+      "instances": 2000,
+      "receipt": "canonical/capabilities/true/receipts/DOCX_STORY_PART_REPLACE_V1__e098d8db05ee5d56.json",
+      "receipt_present": true,
+      "solver_blob": "0008bed08fa3e17587a4af04e5bce04ff81fc8d2",
+      "spec": "canonical/capabilities/true/specs/DOCX_STORY_PART_REPLACE_V1.json",
+      "verdict": "PASS"
+    },
+    "DOCX_TEXT_EDIT_TRANSACTION_V1": {
+      "class": "TRUE_CAPABILITY",
+      "entry_function": "solve_transaction",
+      "entry_module": "canonical/runtime/docx_true_capability_adapters_v1.py",
+      "fresh_pass_rate": 1.0,
+      "instances": 2000,
+      "receipt": "canonical/capabilities/true/receipts/DOCX_TEXT_EDIT_TRANSACTION_V1__9e73768fd0f238e0.json",
+      "receipt_present": true,
+      "solver_blob": "0008bed08fa3e17587a4af04e5bce04ff81fc8d2",
+      "spec": "canonical/capabilities/true/specs/DOCX_TEXT_EDIT_TRANSACTION_V1.json",
+      "verdict": "PASS"
+    },
+    "FAMILY:COMPLEX_MULTI_TOOL_AGENCY": {
+      "class": "FRONTIER_FAMILY",
+      "entry_blob": "eb0af8b01f25bcd38885fde71ebe1eccde793e85",
+      "entry_module": "canonical/runtime/matched_agency_stateful_case_v2.py",
+      "receipt": "canonical/verification/AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_WOLFRAM_VERIFICATION_20261007_V1.json",
+      "receipt_present": true,
+      "verdict": "VERIFIED_OWNED_EQUAL_OR_BETTER"
+    },
+    "FAMILY:EXACT_SYMBOLIC_COMPUTATION": {
+      "class": "FRONTIER_FAMILY",
+      "entry_blob": null,
+      "entry_module": null,
+      "receipt": null,
+      "receipt_present": false,
+      "verdict": "VERIFIED_OWNED_EQUAL_OR_BETTER"
+    },
+    "FAMILY:INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT": {
+      "class": "FRONTIER_FAMILY",
+      "entry_blob": null,
+      "entry_module": null,
+      "receipt": "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json",
+      "receipt_present": true,
+      "verdict": "VERIFIED_OWNED_EQUAL_OR_BETTER"
+    },
+    "FAMILY:LONG_HORIZON_MEMORY_AND_CONTINUITY": {
+      "class": "FRONTIER_FAMILY",
+      "entry_blob": null,
+      "entry_module": null,
+      "receipt": null,
+      "receipt_present": false,
+      "verdict": "VERIFIED_OWNED_EQUAL_OR_BETTER"
+    },
+    "FAMILY:SELF_VERIFICATION_DEBUGGING_AND_RECOVERY": {
+      "class": "FRONTIER_FAMILY",
+      "entry_blob": null,
+      "entry_module": null,
+      "receipt": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+      "receipt_present": true,
+      "verdict": "VERIFIED_OWNED_EQUAL_OR_BETTER"
+    },
+    "FAMILY:SUBAGENT_DELEGATION_AND_COORDINATION": {
+      "class": "FRONTIER_FAMILY",
+      "entry_blob": null,
+      "entry_module": null,
+      "receipt": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "receipt_present": true,
+      "verdict": "VERIFIED_OWNED_EQUAL_OR_BETTER"
+    },
+    "FAMILY:TOOL_DISCOVERY_SELECTION_AND_LEARNING": {
+      "class": "FRONTIER_FAMILY",
+      "entry_blob": null,
+      "entry_module": null,
+      "receipt": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "receipt_present": true,
+      "verdict": "VERIFIED_OWNED_EQUAL_OR_BETTER"
+    },
+    "FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1": {
+      "class": "TRUE_CAPABILITY",
+      "entry_function": "solve_through_the_front_door",
+      "entry_module": "canonical/runtime/file_change_true_capability_adapter_v1.py",
+      "fresh_pass_rate": 1.0,
+      "instances": 500,
+      "receipt": "canonical/capabilities/true/receipts/FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1__47bef8f1ea2618ef.json",
+      "receipt_present": true,
+      "solver_blob": "5e907c5001e3adf6180713a178ab3ae0184054fc",
+      "spec": "canonical/capabilities/true/specs/FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1.json",
+      "verdict": "PASS"
+    },
+    "FILE_QUESTION_TAUGHT_WORDS_V1": {
+      "class": "TRUE_CAPABILITY",
+      "entry_function": "solve_through_the_front_door",
+      "entry_module": "canonical/runtime/taught_words_true_capability_adapter_v1.py",
+      "fresh_pass_rate": 1.0,
+      "instances": 500,
+      "receipt": "canonical/capabilities/true/receipts/FILE_QUESTION_TAUGHT_WORDS_V1__21c33d583f3e2682.json",
+      "receipt_present": true,
+      "solver_blob": "b01876a44f4f6b6b19b8bf3970239eee8166a89a",
+      "spec": "canonical/capabilities/true/specs/FILE_QUESTION_TAUGHT_WORDS_V1.json",
+      "verdict": "PASS"
+    },
+    "PARETO_FRONTIER_UPDATE_V1": {
+      "class": "TRUE_CAPABILITY",
+      "entry_function": "solve_frontier",
+      "entry_module": "canonical/runtime/scheduler_true_capability_adapters_v1.py",
+      "fresh_pass_rate": 1.0,
+      "instances": 2000,
+      "receipt": "canonical/capabilities/true/receipts/PARETO_FRONTIER_UPDATE_V1__ded725829226d120.json",
+      "receipt_present": true,
+      "solver_blob": "d7dbd9d320d27587d2dac228e16bc5b4eceba61a",
+      "spec": "canonical/capabilities/true/specs/PARETO_FRONTIER_UPDATE_V1.json",
+      "verdict": "PASS"
+    },
+    "SACCR_CREDIT_ADDON_V1": {
+      "class": "TRUE_CAPABILITY",
+      "entry_function": "solve_instance",
+      "entry_module": "canonical/runtime/saccr_credit_kernel.py",
+      "fresh_pass_rate": 1.0,
+      "instances": 2000,
+      "receipt": "canonical/capabilities/true/receipts/SACCR_CREDIT_ADDON_V1__3e600b175e196a2e.json",
+      "receipt_present": true,
+      "solver_blob": "fb451d4a413ec537321920a5182e717f5079e512",
+      "spec": "canonical/capabilities/true/specs/SACCR_CREDIT_ADDON_V1.json",
+      "verdict": "PASS"
+    },
+    "SAME_IDENTITY_SUPERVISOR_V1": {
+      "class": "TRUE_CAPABILITY",
+      "entry_function": "solve_instance",
+      "entry_module": "canonical/runtime/same_identity_supervisor.py",
+      "fresh_pass_rate": 1.0,
+      "instances": 2000,
+      "receipt": "canonical/capabilities/true/receipts/SAME_IDENTITY_SUPERVISOR_V1__35251f4e055e0556.json",
+      "receipt_present": true,
+      "solver_blob": "ae66843e0d178801889a77e7700769a45a78b57e",
+      "spec": "canonical/capabilities/true/specs/SAME_IDENTITY_SUPERVISOR_V1.json",
+      "verdict": "PASS"
+    }
+  },
+  "certified_count": 18,
+  "cost_usd": 0.0,
+  "counts": {
+    "component_sizes_desc": [
+      "1572",
+      "37",
+      "33",
+      "32",
+      "25",
+      "19",
+      "18",
+      "15",
+      "14",
+      "13",
+      "11",
+      "11"
+    ],
+    "components": 3911,
+    "distinct_schema_constants": 2238,
+    "import_edges": 3806,
+    "max_fan_out": 19,
+    "modules": 6449,
+    "modules_declaring_authority": 238,
+    "modules_exposing_def_main": 764,
+    "modules_with_no_internal_importer": 5067,
+    "most_imported": [
+      [
+        "canonical.swe_kernel.verified_skill_crystallizer_v1",
+        72
+      ],
+      [
+        "canonical.runtime.lossless_raw_task_contract_v1",
+        65
+      ],
+      [
+        "canonical.runtime.effect_broker_receipt_resolver_v2",
+        63
+      ],
+      [
+        "canonical.runtime.brain_unified_model_v1",
+        45
+      ],
+      [
+        "canonical.runtime.live_integrated_brain_v1",
+        41
+      ],
+      [
+        "canonical.runtime.live_brain_route_admission_v1",
+        32
+      ],
+      [
+        "canonical.runtime.semantic_relation_entailment_dag_v1",
+        31
+      ],
+      [
+        "canonical.swe_kernel.concept_library_v1",
+        28
+      ]
+    ],
+    "runnable_entry_points": 2990,
+    "singletons": 3380,
+    "widest_importers": [
+      [
+        "canonical.swe_kernel.closed_loop_autonomous_controller_v1",
+        19
+      ],
+      [
+        "canonical.runtime.universal_verified_adaptive_solver_v1",
+        17
+      ],
+      [
+        "canonical.runtime.brain_unified_model_v1",
+        16
+      ],
+      [
+        "canonical.swe_kernel.perfect_algorithm_unified_v8",
+        16
+      ],
+      [
+        "canonical.runtime.live_brain_route_admission_v1",
+        15
+      ],
+      [
+        "canonical.swe_kernel.autonomous_awake_loop_v1",
+        14
+      ],
+      [
+        "canonical.tests.test_unified_awake_cognitive_fabric_v1",
+        13
+      ],
+      [
+        "canonical.tests.test_optimal_unified_creature_and_prc2_v1",
+        12
+      ]
+    ]
+  },
+  "fabric_sha256_16": "5318717a8b80a71d",
+  "head": "88b3e543",
+  "model_calls": 0,
+  "reachability": {
+    "ENTRY_POINT": 748,
+    "IN_USE": 605,
+    "ISLAND": 1512,
+    "TEST": 3033,
+    "TEST_ONLY": 551
+  },
+  "schema": "BRAIN_CAPABILITY_FABRIC_V1"
+}

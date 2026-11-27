@@ -1,0 +1,148 @@
+{
+  "capability_id": "truecap.same_identity_supervisor",
+  "contract": {
+    "declared_expectation": {
+      "field": "capability_id",
+      "type": "field_nonempty"
+    },
+    "generator": {
+      "entry": "generate",
+      "module": "canonical/capabilities/true/generators/same_identity_supervisor_gen_v1.py"
+    },
+    "kernel": {
+      "entry": "solve_instance",
+      "module": "canonical/runtime/same_identity_supervisor.py"
+    },
+    "oracle_verdicts": {
+      "EVENT_LOG_INTEGRITY": {
+        "class": "PROPERTY",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      },
+      "LEASE_EXCLUSIVITY": {
+        "class": "PROPERTY",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      },
+      "NO_TERMINAL_REEXECUTION": {
+        "class": "PROPERTY",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      },
+      "PRIORITY_SHIFT_INVARIANCE": {
+        "class": "METAMORPHIC",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      },
+      "REFERENCE_MODEL_TRACE": {
+        "class": "ANALYTIC_CLOSED_FORM",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      }
+    },
+    "solver_git_blob_sha": "ae66843e0d178801889a77e7700769a45a78b57e",
+    "spec": "canonical/capabilities/true/specs/SAME_IDENTITY_SUPERVISOR_V1.json"
+  },
+  "effect": "truecap.same_identity_supervisor.outcome.evidence_files",
+  "goal": "Promote the measured true capability SAME_IDENTITY_SUPERVISOR_V1 into the bound-capability lane: re-execute the adapter on the committed instance in a fresh process and issue the receipt the registry admission requires.",
+  "origin_mission_path": "canonical/capabilities/true/TRUE_CAPABILITY_LEDGER_V1.json",
+  "registry_entry": {
+    "action_template": {
+      "args": {
+        "capability_id": "truecap.same_identity_supervisor",
+        "instance_path": "canonical/capabilities/true/instances/same_identity_supervisor.json"
+      },
+      "expect": {
+        "field": "capability_id",
+        "type": "field_nonempty"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "truecap_same_identity_supervisor",
+    "ambient_preconditions": [
+      "a committed instance fixture at canonical/capabilities/true/instances/same_identity_supervisor.json, digest-pinned by the queue entry; if it is regenerated the edge must be re-measured, not re-labelled"
+    ],
+    "cost": 1,
+    "entrypoint": "run",
+    "fixture": "canonical/capabilities/true/instances/same_identity_supervisor.json",
+    "fixture_error": null,
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "measured",
+      "same",
+      "true-capability"
+    ],
+    "limitations": [
+      "NO continuous-OBS context validation: instance roots carry no canonical/CANONICAL_POINTER.json and missions carry no continuous_obs block, so continuous_obs_runtime.validate_context is never exercised (separately measurable)",
+      "NO real runtime process: the executor is injected and returns scripted exit codes; the default subprocess executor and the ASTRA launcher are out of scope",
+      "NO concurrent-process lock contention: operations are sequential in one process; the inter-process claim lock is not measured",
+      "NO lease-expiry semantics: lease_seconds is never exceeded inside an instance",
+      "NO guarantee about state files written by anything other than the supervisor itself",
+      "`result_fields` is the union of keys observed across the measured outcomes and `result_fields_guaranteed` the intersection; a consumer that needs a field to exist must read the guaranteed set.",
+      "The receipt lane re-runs the committed instance (index #0) and cannot vary it: fresh-instance breadth is the certification's own measurement, recorded in canonical/capabilities/COMPOSITION_EDGES_V1.json and the ledger receipt."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "provides": [
+      "truecap.same_identity_supervisor.outcome.evidence_files",
+      "truecap.same_identity_supervisor.outcome.executor_calls",
+      "truecap.same_identity_supervisor.outcome.final_states",
+      "truecap.same_identity_supervisor.outcome.ops"
+    ],
+    "requires": [],
+    "result_fields": [
+      "adapter",
+      "capability_id",
+      "certification",
+      "evidence_files",
+      "executor_calls",
+      "final_states",
+      "ops"
+    ],
+    "result_fields_guaranteed": [
+      "adapter",
+      "capability_id",
+      "certification",
+      "evidence_files",
+      "executor_calls",
+      "final_states",
+      "ops"
+    ],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/truecap_same_identity_supervisor.py",
+      "certification_law": "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "enrolled_by": "canonical/tools/capability_enroll_certified_v1.py",
+      "measured_fresh_pass_rate": 1.0,
+      "measured_instances": 2000,
+      "measured_utc": "2026-11-25T22:26:49Z",
+      "path": "canonical/runtime/bound_capabilities/truecap_same_identity_supervisor.py",
+      "receipt": "canonical/capabilities/true/receipts/SAME_IDENTITY_SUPERVISOR_V1__35251f4e055e0556.json",
+      "solver_git_blob_sha": "ae66843e0d178801889a77e7700769a45a78b57e",
+      "spec": "canonical/capabilities/true/specs/SAME_IDENTITY_SUPERVISOR_V1.json",
+      "type": "repository_python_source"
+    },
+    "status": "BOUND_PENDING_INDEPENDENT_VERIFICATION"
+  },
+  "schema": "PROJECT_BRAIN_PENDING_TRUE_CAPABILITY_BINDING_V1",
+  "status": "PENDING_INDEPENDENT_VERIFICATION",
+  "verification_fixture": "canonical/capabilities/true/instances/same_identity_supervisor.json",
+  "verification_fixture_sha256": "377330b010cf80c0a178d6c1dd0980e730d0c9cc924f3e5894b9fd445eaff479",
+  "verification_mission_id": "TRUECAP-ENROLL-SAME-IDENTITY-SUPERVISOR__AB0EA4C22E93",
+  "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-SAME-IDENTITY-SUPERVISOR__ab0ea4c22e93__VERIFY.json"
+}

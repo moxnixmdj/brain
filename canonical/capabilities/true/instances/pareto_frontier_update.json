@@ -1,0 +1,55 @@
+{
+  "candidates": [
+    {
+      "capability": "4.0",
+      "capability_id": "CAP-0-4d5d",
+      "compute": 0,
+      "generalization": "5.0",
+      "incremental_spend_usd": "3.0",
+      "independently_verified": true,
+      "latency": 0,
+      "memory": 1,
+      "reliability": 4,
+      "reusable_capability": true
+    },
+    {
+      "capability": "4.0",
+      "capability_id": "CAP-1-d0da",
+      "compute": 0,
+      "generalization": "5.0",
+      "incremental_spend_usd": "3.0",
+      "independently_verified": "true",
+      "latency": 0,
+      "memory": 1,
+      "reliability": 3,
+      "reusable_capability": true,
+      "semantic_contract_sha256": "3d69fdda5dd93b3a47d246cfd5590287c638a01237a634a383863ce0aece958a"
+    },
+    {
+      "capability": 3,
+      "capability_id": "CAP-2-124c",
+      "compute": 0,
+      "generalization": "5.0",
+      "incremental_spend_usd": 5,
+      "independently_verified": true,
+      "latency": 0,
+      "memory": 0,
+      "reliability": 3,
+      "reusable_capability": true
+    },
+    {
+      "capability": 3,
+      "capability_id": "CAP-3-9e7d",
+      "compute": 0,
+      "generalization": 4,
+      "incremental_spend_usd": "3.0",
+      "independently_verified": true,
+      "latency": 0,
+      "memory": 1,
+      "reliability": 4,
+      "reusable_capability": null,
+      "semantic_contract_sha256": "3d69fdda5dd93b3a47d246cfd5590287c638a01237a634a383863ce0aece958a"
+    }
+  ],
+  "schema": "PARETO_FRONTIER_UPDATE_INSTANCE_V1"
+}

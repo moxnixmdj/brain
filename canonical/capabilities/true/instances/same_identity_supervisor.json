@@ -1,0 +1,122 @@
+{
+  "agent_id": "AGENT-503D69FD",
+  "files": {
+    "deps/d0_a47d.txt": "dep 0 46cfd5590287\n",
+    "deps/d1_c638.txt": "dep 1 1237a634a383\n",
+    "missions/T0-63ce0a.json": "{\"mission_id\": \"T0-63ce0a\", \"payload\": \"ece958aff316dde3\", \"steps\": 6}\n",
+    "missions/T1-d5d17c.json": "{\"mission_id\": \"T1-d5d17c\", \"payload\": \"ce971372b7c4ccf3\", \"steps\": 4}\n",
+    "missions/T2-273cbb.json": "{\"mission_id\": \"T2-273cbb\", \"payload\": \"55fa703c4124c902\", \"steps\": 7}\n",
+    "missions/T3-5ac545.json": "{\"mission_id\": \"T3-5ac545\", \"payload\": \"3e9e7d97a353729f\", \"steps\": 2}\n"
+  },
+  "other_agent_id": "INTRUDER-DA5DD93B",
+  "schema": "SAME_IDENTITY_SUPERVISOR_INSTANCE_V1",
+  "script": [
+    {
+      "field": "agent_id",
+      "op": "edit_manifest",
+      "task": 3,
+      "value": "INTRUDER-DA5DD93B"
+    },
+    {
+      "op": "choose"
+    },
+    {
+      "op": "choose"
+    },
+    {
+      "agent": "self",
+      "op": "run",
+      "rc": 0,
+      "task": 3
+    },
+    {
+      "agent": "self",
+      "op": "run",
+      "rc": 4,
+      "task": 1
+    },
+    {
+      "field": "agent_id",
+      "op": "edit_manifest",
+      "task": 2,
+      "value": "INTRUDER-DA5DD93B"
+    },
+    {
+      "agent": "self",
+      "op": "run",
+      "rc": 137,
+      "task": 2
+    },
+    {
+      "agent": "other",
+      "op": "execute",
+      "rc": 0,
+      "task": 1
+    }
+  ],
+  "tasks": [
+    {
+      "manifest": {
+        "agent_id": "AGENT-503D69FD",
+        "checkpoint_before_runtime_once": true,
+        "incremental_spend_usd": 0,
+        "mission_path": "missions/T0-63ce0a.json",
+        "mission_sha256": "ffefc7fa982904b220f53282115441150e30addc4723ce7e07ddbcb410629687",
+        "prerequisites": [],
+        "priority": 575,
+        "schema": "PROJECT_BRAIN_SAME_IDENTITY_TASK_V1",
+        "task_id": "T0-63ce0a"
+      },
+      "manifest_path": "tasks/T0-63ce0a.json",
+      "task_id": "T0-63ce0a"
+    },
+    {
+      "manifest": {
+        "agent_id": "INTRUDER-DA5DD93B",
+        "checkpoint_before_runtime_once": false,
+        "incremental_spend_usd": 0,
+        "mission_path": "missions/T1-d5d17c.json",
+        "mission_sha256": "31c79d7aacedf4fbc853ac950abe06dd289dab1542c9777056277fb44898da55",
+        "prerequisites": [
+          "deps/d1_c638.txt",
+          "deps/d0_a47d.txt"
+        ],
+        "priority": 65,
+        "schema": "PROJECT_BRAIN_SAME_IDENTITY_TASK_V1",
+        "task_id": "T1-d5d17c"
+      },
+      "manifest_path": "tasks/T1-d5d17c.json",
+      "task_id": "T1-d5d17c"
+    },
+    {
+      "manifest": {
+        "agent_id": "AGENT-503D69FD",
+        "checkpoint_before_runtime_once": true,
+        "incremental_spend_usd": 0,
+        "mission_path": "missions/T2-273cbb.json",
+        "mission_sha256": "464b478dd843a3907875ec4280bff849e86984aa67ae531fec188b8f71f3a2a4",
+        "prerequisites": [],
+        "priority": 942,
+        "schema": "PROJECT_BRAIN_SAME_IDENTITY_TASK_V1",
+        "task_id": "T2-273cbb"
+      },
+      "manifest_path": "tasks/T2-273cbb.json",
+      "task_id": "T2-273cbb"
+    },
+    {
+      "manifest": {
+        "agent_id": "AGENT-503D69FD",
+        "checkpoint_before_runtime_once": false,
+        "incremental_spend_usd": 0,
+        "mission_path": "missions/T3-5ac545.json",
+        "mission_sha256": "6105fdfd93160eddedd545c67bc48bd9a5d245987cde5be54602a1df50f496c5",
+        "prerequisites": [],
+        "priority": 628,
+        "schema": "PROJECT_BRAIN_SAME_IDENTITY_TASK_V1",
+        "task_id": "T3-5ac545"
+      },
+      "manifest_path": "tasks/T3-5ac545.json",
+      "task_id": "T3-5ac545"
+    }
+  ]
+}

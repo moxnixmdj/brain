@@ -1,0 +1,145 @@
+{
+  "capability_id": "truecap.docx_exact_text_edit",
+  "contract": {
+    "declared_expectation": {
+      "field": "status",
+      "type": "field_equals",
+      "value": "PASS"
+    },
+    "generator": {
+      "entry": "generate",
+      "module": "canonical/capabilities/true/generators/docx_exact_text_edit_gen_v1.py"
+    },
+    "kernel": {
+      "entry": "solve_instance",
+      "module": "canonical/runtime/docx_exact_text_edit.py"
+    },
+    "oracle_verdicts": {
+      "EXPECTED_OUTCOME": {
+        "class": "ANALYTIC_CLOSED_FORM",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      },
+      "INVERSE_EDIT_RESTORES": {
+        "class": "METAMORPHIC",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      },
+      "PACKAGE_INTEGRITY": {
+        "class": "PROPERTY",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      }
+    },
+    "solver_git_blob_sha": "c137d9d05de3822a0bac6f2d52d1f4446f2682da",
+    "spec": "canonical/capabilities/true/specs/DOCX_EXACT_TEXT_EDIT_V1.json"
+  },
+  "effect": "truecap.docx_exact_text_edit.outcome.changed_members",
+  "goal": "Promote the measured true capability DOCX_EXACT_TEXT_EDIT_V1 into the bound-capability lane: re-execute the adapter on the committed instance in a fresh process and issue the receipt the registry admission requires.",
+  "origin_mission_path": "canonical/capabilities/true/TRUE_CAPABILITY_LEDGER_V1.json",
+  "registry_entry": {
+    "action_template": {
+      "args": {
+        "capability_id": "truecap.docx_exact_text_edit",
+        "instance_path": "canonical/capabilities/true/instances/docx_exact_text_edit.json"
+      },
+      "expect": {
+        "field": "status",
+        "type": "field_equals",
+        "value": "PASS"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "truecap_docx_exact_text_edit",
+    "ambient_preconditions": [
+      "a committed instance fixture at canonical/capabilities/true/instances/docx_exact_text_edit.json, digest-pinned by the queue entry; if it is regenerated the edge must be re-measured, not re-labelled"
+    ],
+    "cost": 1,
+    "entrypoint": "run",
+    "fixture": "canonical/capabilities/true/instances/docx_exact_text_edit.json",
+    "fixture_error": null,
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "docx",
+      "measured",
+      "true-capability"
+    ],
+    "limitations": [
+      "NO replacement of text spanning several runs or text nodes",
+      "NO visual-layout, tracked-changes, comments, headers/footers or numbering guarantees",
+      "NO general DOCX editing; one exact text node per call",
+      "NO no-op edits: new == old fails closed by design and is outside the input class",
+      "`result_fields` is the union of keys observed across the measured outcomes and `result_fields_guaranteed` the intersection; a consumer that needs a field to exist must read the guaranteed set.",
+      "The receipt lane re-runs the committed instance (index #0) and cannot vary it: fresh-instance breadth is the certification's own measurement, recorded in canonical/capabilities/COMPOSITION_EDGES_V1.json and the ledger receipt."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "provides": [
+      "truecap.docx_exact_text_edit.outcome.changed_members",
+      "truecap.docx_exact_text_edit.outcome.output_docx_b64",
+      "truecap.docx_exact_text_edit.outcome.output_file_left_behind_on_failure",
+      "truecap.docx_exact_text_edit.outcome.preserved_member_count",
+      "truecap.docx_exact_text_edit.outcome.scope",
+      "truecap.docx_exact_text_edit.outcome.status",
+      "truecap.docx_exact_text_edit.outcome.terminal_authority",
+      "truecap.docx_exact_text_edit.outcome.visual_layout_authority"
+    ],
+    "requires": [],
+    "result_fields": [
+      "adapter",
+      "capability_id",
+      "certification",
+      "changed_members",
+      "output_docx_b64",
+      "output_file_left_behind_on_failure",
+      "preserved_member_count",
+      "scope",
+      "status",
+      "terminal_authority",
+      "visual_layout_authority"
+    ],
+    "result_fields_guaranteed": [
+      "adapter",
+      "capability_id",
+      "certification",
+      "changed_members",
+      "output_docx_b64",
+      "output_file_left_behind_on_failure",
+      "preserved_member_count",
+      "scope",
+      "status",
+      "terminal_authority",
+      "visual_layout_authority"
+    ],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/truecap_docx_exact_text_edit.py",
+      "certification_law": "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "enrolled_by": "canonical/tools/capability_enroll_certified_v1.py",
+      "measured_fresh_pass_rate": 1.0,
+      "measured_instances": 3000,
+      "measured_utc": "2026-10-14T17:55:14Z",
+      "path": "canonical/runtime/bound_capabilities/truecap_docx_exact_text_edit.py",
+      "receipt": "canonical/capabilities/true/receipts/DOCX_EXACT_TEXT_EDIT_V1__1ec1c01b914478ca.json",
+      "solver_git_blob_sha": "c137d9d05de3822a0bac6f2d52d1f4446f2682da",
+      "spec": "canonical/capabilities/true/specs/DOCX_EXACT_TEXT_EDIT_V1.json",
+      "type": "repository_python_source"
+    },
+    "status": "BOUND_PENDING_INDEPENDENT_VERIFICATION"
+  },
+  "schema": "PROJECT_BRAIN_PENDING_TRUE_CAPABILITY_BINDING_V1",
+  "status": "PENDING_INDEPENDENT_VERIFICATION",
+  "verification_fixture": "canonical/capabilities/true/instances/docx_exact_text_edit.json",
+  "verification_fixture_sha256": "0387a8623bef7bb478a0c2238f3b6679bc32630861701813f6f6dcf0659ff0b8",
+  "verification_mission_id": "TRUECAP-ENROLL-DOCX-EXACT-TEXT-EDIT__85C322C2A8DC",
+  "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-DOCX-EXACT-TEXT-EDIT__85c322c2a8dc__VERIFY.json"
+}

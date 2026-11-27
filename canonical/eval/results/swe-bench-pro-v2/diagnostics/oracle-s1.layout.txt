@@ -1,0 +1,119 @@
+W=/home/runner/work/brain/brain/work-oracle-1
+/home/runner/work/brain/brain/work-oracle-1/jobs
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_internetarchive__openli__MXqRysm
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_internetarchive__openli__MXqRysm/artifacts
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_internetarchive__openli__MXqRysm/config.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_internetarchive__openli__MXqRysm/agent
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_internetarchive__openli__MXqRysm/verifier
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_internetarchive__openli__MXqRysm/lock.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_internetarchive__openli__MXqRysm/result.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_internetarchive__openli__MXqRysm/trial.log
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_ansible__ansible-de5858__KwnZXLp
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_ansible__ansible-de5858__KwnZXLp/artifacts
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_ansible__ansible-de5858__KwnZXLp/config.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_ansible__ansible-de5858__KwnZXLp/agent
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_ansible__ansible-de5858__KwnZXLp/verifier
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_ansible__ansible-de5858__KwnZXLp/lock.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_ansible__ansible-de5858__KwnZXLp/result.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_ansible__ansible-de5858__KwnZXLp/trial.log
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_protonmail__webclients__qtFocCr
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_protonmail__webclients__qtFocCr/artifacts
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_protonmail__webclients__qtFocCr/config.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_protonmail__webclients__qtFocCr/agent
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_protonmail__webclients__qtFocCr/verifier
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_protonmail__webclients__qtFocCr/lock.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_protonmail__webclients__qtFocCr/result.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_protonmail__webclients__qtFocCr/trial.log
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_flipt-io__flipt-e2bd19d__ZUPWeiz
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_flipt-io__flipt-e2bd19d__ZUPWeiz/artifacts
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_flipt-io__flipt-e2bd19d__ZUPWeiz/config.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_flipt-io__flipt-e2bd19d__ZUPWeiz/agent
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_flipt-io__flipt-e2bd19d__ZUPWeiz/verifier
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_flipt-io__flipt-e2bd19d__ZUPWeiz/lock.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_flipt-io__flipt-e2bd19d__ZUPWeiz/result.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_flipt-io__flipt-e2bd19d__ZUPWeiz/trial.log
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/job.log
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_flipt-io__flipt-2ca5dfb__k9btkmE
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_flipt-io__flipt-2ca5dfb__k9btkmE/artifacts
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_flipt-io__flipt-2ca5dfb__k9btkmE/config.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_flipt-io__flipt-2ca5dfb__k9btkmE/agent
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_flipt-io__flipt-2ca5dfb__k9btkmE/verifier
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_flipt-io__flipt-2ca5dfb__k9btkmE/lock.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_flipt-io__flipt-2ca5dfb__k9btkmE/result.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_flipt-io__flipt-2ca5dfb__k9btkmE/trial.log
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_ansible__ansible-40ade1__jT6AQLj
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_ansible__ansible-40ade1__jT6AQLj/artifacts
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_ansible__ansible-40ade1__jT6AQLj/config.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_ansible__ansible-40ade1__jT6AQLj/agent
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_ansible__ansible-40ade1__jT6AQLj/verifier
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_ansible__ansible-40ade1__jT6AQLj/lock.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_ansible__ansible-40ade1__jT6AQLj/result.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_ansible__ansible-40ade1__jT6AQLj/trial.log
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_gravitational__teleport__Wz4kjcm
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_gravitational__teleport__Wz4kjcm/artifacts
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_gravitational__teleport__Wz4kjcm/config.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_gravitational__teleport__Wz4kjcm/agent
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_gravitational__teleport__Wz4kjcm/verifier
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_gravitational__teleport__Wz4kjcm/lock.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_gravitational__teleport__Wz4kjcm/result.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_gravitational__teleport__Wz4kjcm/trial.log
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/config.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_internetarchive__openli__F2jQSCh
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_internetarchive__openli__F2jQSCh/artifacts
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_internetarchive__openli__F2jQSCh/config.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_internetarchive__openli__F2jQSCh/agent
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_internetarchive__openli__F2jQSCh/verifier
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_internetarchive__openli__F2jQSCh/lock.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_internetarchive__openli__F2jQSCh/result.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_internetarchive__openli__F2jQSCh/trial.log
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_qutebrowser__qutebrowse__H6tx3Zm
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_qutebrowser__qutebrowse__H6tx3Zm/artifacts
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_qutebrowser__qutebrowse__H6tx3Zm/config.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_qutebrowser__qutebrowse__H6tx3Zm/agent
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_qutebrowser__qutebrowse__H6tx3Zm/verifier
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_qutebrowser__qutebrowse__H6tx3Zm/lock.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_qutebrowser__qutebrowse__H6tx3Zm/result.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_qutebrowser__qutebrowse__H6tx3Zm/trial.log
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/lock.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/result.json
+--- result.json files ---
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_internetarchive__openli__MXqRysm/result.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_ansible__ansible-de5858__KwnZXLp/result.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_protonmail__webclients__qtFocCr/result.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_flipt-io__flipt-e2bd19d__ZUPWeiz/result.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_flipt-io__flipt-2ca5dfb__k9btkmE/result.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_ansible__ansible-40ade1__jT6AQLj/result.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_gravitational__teleport__Wz4kjcm/result.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_internetarchive__openli__F2jQSCh/result.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_qutebrowser__qutebrowse__H6tx3Zm/result.json
+/home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/result.json
+--- keys of the first result.json found ---
+## /home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_internetarchive__openli__MXqRysm/result.json
+['agent_execution', 'agent_info', 'agent_result', 'agent_setup', 'config', 'environment_setup', 'exception_info', 'finished_at', 'id', 'source', 'started_at', 'step_results', 'task_checksum', 'task_id', 'task_name', 'trial_name', 'trial_uri', 'verifier', 'verifier_environment_mode', 'verifier_result']
+  task_name= 'swebench-pro/instance_internetarchive__openlibrary-b67138b316b1e9c11df8a4a8391fe5cc8e75ff9f-ve8c8d62a2b60610a3c4631f5f23ed866bada9818'
+  trial_name= 'instance_internetarchive__openli__MXqRysm'
+  task_id= {'path': '/home/runner/work/brain/brain/work-oracle-1/tasks/instance_internetarchive__openlibrary-b67138b316b1e9c11df8a4a8391fe5cc8e75ff9f-ve8c8d62a2b60610a3c4631f5f23ed866bada9818'}
+  verifier_result= {"rewards": {"reward": 1.0}}
+## /home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_ansible__ansible-de5858__KwnZXLp/result.json
+['agent_execution', 'agent_info', 'agent_result', 'agent_setup', 'config', 'environment_setup', 'exception_info', 'finished_at', 'id', 'source', 'started_at', 'step_results', 'task_checksum', 'task_id', 'task_name', 'trial_name', 'trial_uri', 'verifier', 'verifier_environment_mode', 'verifier_result']
+  task_name= 'swebench-pro/instance_ansible__ansible-de5858f48dc9e1ce9117034e0d7e76806f420ca8-v1055803c3a812189a1133297f7f5468579283f86'
+  trial_name= 'instance_ansible__ansible-de5858__KwnZXLp'
+  task_id= {'path': '/home/runner/work/brain/brain/work-oracle-1/tasks/instance_ansible__ansible-de5858f48dc9e1ce9117034e0d7e76806f420ca8-v1055803c3a812189a1133297f7f5468579283f86'}
+  verifier_result= {"rewards": {"reward": 1.0}}
+## /home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_protonmail__webclients__qtFocCr/result.json
+['agent_execution', 'agent_info', 'agent_result', 'agent_setup', 'config', 'environment_setup', 'exception_info', 'finished_at', 'id', 'source', 'started_at', 'step_results', 'task_checksum', 'task_id', 'task_name', 'trial_name', 'trial_uri', 'verifier', 'verifier_environment_mode', 'verifier_result']
+  task_name= 'swebench-pro/instance_protonmail__webclients-715dbd4e6999499cd2a576a532d8214f75189116'
+  trial_name= 'instance_protonmail__webclients__qtFocCr'
+  task_id= {'path': '/home/runner/work/brain/brain/work-oracle-1/tasks/instance_protonmail__webclients-715dbd4e6999499cd2a576a532d8214f75189116'}
+  verifier_result= {"rewards": {"reward": 1.0}}
+## /home/runner/work/brain/brain/work-oracle-1/jobs/swe-pro-v2-oracle-s1/instance_flipt-io__flipt-e2bd19d__ZUPWeiz/result.json
+['agent_execution', 'agent_info', 'agent_result', 'agent_setup', 'config', 'environment_setup', 'exception_info', 'finished_at', 'id', 'source', 'started_at', 'step_results', 'task_checksum', 'task_id', 'task_name', 'trial_name', 'trial_uri', 'verifier', 'verifier_environment_mode', 'verifier_result']
+  task_name= 'swebench-pro/instance_flipt-io__flipt-e2bd19dafa7166c96b082fb2a59eb54b4be0d778'
+  trial_name= 'instance_flipt-io__flipt-e2bd19d__ZUPWeiz'
+  task_id= {'path': '/home/runner/work/brain/brain/work-oracle-1/tasks/instance_flipt-io__flipt-e2bd19dafa7166c96b082fb2a59eb54b4be0d778'}
+  verifier_result= {"rewards": {"reward": 1.0}}
+--- manifest ids (first 3) ---
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+TypeError: string indices must be integers, not 'str'

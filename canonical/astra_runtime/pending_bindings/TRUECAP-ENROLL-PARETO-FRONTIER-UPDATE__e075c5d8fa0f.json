@@ -1,0 +1,123 @@
+{
+  "capability_id": "truecap.pareto_frontier_update",
+  "contract": {
+    "declared_expectation": {
+      "field": "capability_id",
+      "type": "field_nonempty"
+    },
+    "generator": {
+      "entry": "generate_frontier",
+      "module": "canonical/capabilities/true/generators/scheduler_gen_v1.py"
+    },
+    "kernel": {
+      "entry": "solve_frontier",
+      "module": "canonical/runtime/scheduler_true_capability_adapters_v1.py"
+    },
+    "oracle_verdicts": {
+      "FRONTIER_INVARIANTS": {
+        "class": "PROPERTY",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      },
+      "REFERENCE_FOLD": {
+        "class": "ANALYTIC_CLOSED_FORM",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      },
+      "UNIFORM_SCALING_INVARIANCE": {
+        "class": "METAMORPHIC",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      }
+    },
+    "solver_git_blob_sha": "d7dbd9d320d27587d2dac228e16bc5b4eceba61a",
+    "spec": "canonical/capabilities/true/specs/PARETO_FRONTIER_UPDATE_V1.json"
+  },
+  "effect": "truecap.pareto_frontier_update.outcome.final_frontier_ids",
+  "goal": "Promote the measured true capability PARETO_FRONTIER_UPDATE_V1 into the bound-capability lane: re-execute the adapter on the committed instance in a fresh process and issue the receipt the registry admission requires.",
+  "origin_mission_path": "canonical/capabilities/true/TRUE_CAPABILITY_LEDGER_V1.json",
+  "registry_entry": {
+    "action_template": {
+      "args": {
+        "capability_id": "truecap.pareto_frontier_update",
+        "instance_path": "canonical/capabilities/true/instances/pareto_frontier_update.json"
+      },
+      "expect": {
+        "field": "capability_id",
+        "type": "field_nonempty"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "truecap_pareto_frontier_update",
+    "ambient_preconditions": [
+      "a committed instance fixture at canonical/capabilities/true/instances/pareto_frontier_update.json, digest-pinned by the queue entry; if it is regenerated the edge must be re-measured, not re-labelled"
+    ],
+    "cost": 1,
+    "entrypoint": "run",
+    "fixture": "canonical/capabilities/true/instances/pareto_frontier_update.json",
+    "fixture_error": null,
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "measured",
+      "pareto",
+      "true-capability"
+    ],
+    "limitations": [
+      "NO physical deletion semantics (option_preserving_capability_optimizer is a separate component)",
+      "NO claim about order-independence of the final frontier across differing semantic contracts",
+      "`result_fields` is the union of keys observed across the measured outcomes and `result_fields_guaranteed` the intersection; a consumer that needs a field to exist must read the guaranteed set.",
+      "The receipt lane re-runs the committed instance (index #0) and cannot vary it: fresh-instance breadth is the certification's own measurement, recorded in canonical/capabilities/COMPOSITION_EDGES_V1.json and the ledger receipt."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "provides": [
+      "truecap.pareto_frontier_update.outcome.final_frontier_ids",
+      "truecap.pareto_frontier_update.outcome.steps"
+    ],
+    "requires": [],
+    "result_fields": [
+      "adapter",
+      "capability_id",
+      "certification",
+      "final_frontier_ids",
+      "steps"
+    ],
+    "result_fields_guaranteed": [
+      "adapter",
+      "capability_id",
+      "certification",
+      "final_frontier_ids",
+      "steps"
+    ],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/truecap_pareto_frontier_update.py",
+      "certification_law": "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "enrolled_by": "canonical/tools/capability_enroll_certified_v1.py",
+      "measured_fresh_pass_rate": 1.0,
+      "measured_instances": 2000,
+      "measured_utc": "2026-10-14T18:50:23Z",
+      "path": "canonical/runtime/bound_capabilities/truecap_pareto_frontier_update.py",
+      "receipt": "canonical/capabilities/true/receipts/PARETO_FRONTIER_UPDATE_V1__ded725829226d120.json",
+      "solver_git_blob_sha": "d7dbd9d320d27587d2dac228e16bc5b4eceba61a",
+      "spec": "canonical/capabilities/true/specs/PARETO_FRONTIER_UPDATE_V1.json",
+      "type": "repository_python_source"
+    },
+    "status": "BOUND_PENDING_INDEPENDENT_VERIFICATION"
+  },
+  "schema": "PROJECT_BRAIN_PENDING_TRUE_CAPABILITY_BINDING_V1",
+  "status": "PENDING_INDEPENDENT_VERIFICATION",
+  "verification_fixture": "canonical/capabilities/true/instances/pareto_frontier_update.json",
+  "verification_fixture_sha256": "f904dea764e7d591f5d04a3f9514a671045f1de083f79361017d125fcb7c206a",
+  "verification_mission_id": "TRUECAP-ENROLL-PARETO-FRONTIER-UPDATE__E075C5D8FA0F",
+  "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-PARETO-FRONTIER-UPDATE__e075c5d8fa0f__VERIFY.json"
+}

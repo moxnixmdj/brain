@@ -425,7 +425,9 @@ def apply_rule(rule: Rule, source: str) -> Optional[str]:
         return None
     try:
         return ast.unparse(ast.fix_missing_locations(instantiate(rule.rhs, bindings)))
-    except KeyError:
+    except (KeyError, AttributeError, IndexError, TypeError):
+        # A projection is defined against the pattern's own bound subtree; a different match may
+        # bind a node that has no such field. That is a non-match, not an error.
         return None
 
 
@@ -557,6 +559,11 @@ def _self_check() -> Dict[str, Any]:
         "detail": detail,
         "verdict": "SELF_CHECK_PASS" if all(checks) else "SELF_CHECK_FAIL",
     }
+
+
+def self_check() -> Dict[str, Any]:
+    """Public proof hook: the capability bus will not dispatch anything that cannot run this."""
+    return _self_check()
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
