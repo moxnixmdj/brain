@@ -1,0 +1,28 @@
+name: Verify Opus55 family ownership promotion eligibility v1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/governance/OPUS55_FAMILY_OWNERSHIP_PROMOTION_ELIGIBILITY_V1.json'
+      - 'canonical/runtime/opus55_family_ownership_promotion_eligibility_v1.py'
+      - 'canonical/tests/test_opus55_family_ownership_promotion_eligibility_v1.py'
+      - '.github/workflows/verify-opus55-family-ownership-promotion-eligibility-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run fail-closed eligibility tests
+        run: python -m unittest -v canonical.tests.test_opus55_family_ownership_promotion_eligibility_v1
+      - name: Compile exact family-local promotion eligibility
+        run: python canonical/runtime/opus55_family_ownership_promotion_eligibility_v1.py
