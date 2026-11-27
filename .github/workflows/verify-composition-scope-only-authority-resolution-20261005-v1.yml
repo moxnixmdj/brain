@@ -1,0 +1,27 @@
+name: Verify Composition scope-only authority resolution V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/governance/COMPOSITION_SCOPE_ONLY_AUTHORITY_RESOLUTION_20261005_V1.json
+      - canonical/tests/test_composition_scope_only_authority_resolution_20261005_v1.py
+      - canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json
+      - canonical/governance/COMPOSITION_COMPONENT_PROOF_CURRENT_AUTHORITY_V6.json
+      - .github/workflows/verify-composition-scope-only-authority-resolution-20261005-v1.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Verify authority-relative theorem
+        run: python -m pytest -q canonical/tests/test_composition_scope_only_authority_resolution_20261005_v1.py
