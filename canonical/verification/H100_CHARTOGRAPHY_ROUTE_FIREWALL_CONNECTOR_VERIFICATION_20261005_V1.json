@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CHARTOGRAPHY_ROUTE_FIREWALL_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__QWEN4B_H100_INADMISSIBLE_AS_IS_OR_BY_QUANTIZATION_ALONE__ZERO_CREDIT",
+  "subject": {
+    "firewall_path": "canonical/governance/H100_CHARTOGRAPHY_ROUTE_FIREWALL_V1.json",
+    "firewall_git_blob_sha": "dcfc5efb0152b336a5165f84ec129a4ef8c56bcc",
+    "chartography_route_path": "canonical/governance/CHARTOGRAPHY_QWEN3_VL4B_VISION_ACQUISITION_ROUTE_V1.json",
+    "chartography_route_git_blob_sha": "2c682676f05ef6b7568a9bc79530be4d1b352aff"
+  },
+  "recomputed": {
+    "parameter_count": 4437815808,
+    "h100_budget_bytes": 100000000,
+    "exact_one_bit_bytes": 554726976,
+    "one_bit_over_budget": true,
+    "four_bit_bytes": 2218907904,
+    "max_one_bit_parameters_under_budget": 800000000
+  },
+  "checks": {
+    "route_parameter_count_matches": true,
+    "exact_one_bit_bytes_match": true,
+    "one_bit_already_exceeds_h100": true,
+    "h100_credit_zero": true,
+    "no_execution_authority": true,
+    "no_promotion_authority": true
+  },
+  "conclusion": "QWEN3_VL_4B_MAY_REMAIN_TERMINAL_CHARTOGRAPHY_FALLBACK_BUT_CANNOT_COUNT_AS_H100_PROGRESS_WITHOUT_A_SEPARATELY_VERIFIED_TRANSFORMED_SUBJECT_UNDER_100000000_TOTAL_PERSISTENT_LEARNED_BYTES",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "h100_credit_delta": 0
+  }
+}
