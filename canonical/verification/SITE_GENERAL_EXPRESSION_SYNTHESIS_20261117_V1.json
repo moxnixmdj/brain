@@ -1,0 +1,131 @@
+{
+  "schema": "BRAIN_SITE_GENERAL_EXPRESSION_SYNTHESIS_V1",
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "model_dependency_count": 0,
+  "network_calls_at_run_time": 0,
+  "tasks": 8,
+  "stages": {
+    "NO_EXAMPLES": 4,
+    "REPAIRED__CORPUS_TEST_PASSES": 4
+  },
+  "found_expression": 4,
+  "repaired_by_corpus_test": 4,
+  "rows": [
+    {
+      "task": "kheapsort",
+      "kind": "task",
+      "examples": 4,
+      "function": "kheapsort",
+      "baseline_examples_passed": 1,
+      "sites": 2,
+      "candidates": 40000,
+      "synthesis_status": "FOUND",
+      "chosen_site": "for_iter",
+      "chosen_expression": "arr[k:]",
+      "chosen_source_sha256": "31557b2f33af002ce76c00d1dbdbac19fc429e8b61d1c4d20061608e6cac6667",
+      "corpus_test_returncode": 0,
+      "corpus_test_tail": [
+        "....                                                                     [100%]",
+        "4 passed in 0.01s"
+      ],
+      "stage": "REPAIRED__CORPUS_TEST_PASSES",
+      "seconds": 21.7
+    },
+    {
+      "task": "possible_change",
+      "kind": "task",
+      "examples": 10,
+      "function": "possible_change",
+      "baseline_examples_passed": -1,
+      "sites": 5,
+      "candidates": 29042,
+      "synthesis_status": "FOUND",
+      "chosen_site": "if_test",
+      "chosen_expression": "((total < 0) or (not coins))",
+      "chosen_source_sha256": "04388a6f3d00724bd30acb73ddc1a7563d5ed923a123dea2242a63b7fa42d97b",
+      "corpus_test_returncode": 0,
+      "corpus_test_tail": [
+        "..........                                                               [100%]",
+        "10 passed in 0.08s"
+      ],
+      "stage": "REPAIRED__CORPUS_TEST_PASSES",
+      "seconds": 18.2
+    },
+    {
+      "task": "powerset",
+      "kind": "task",
+      "examples": 5,
+      "function": "powerset",
+      "baseline_examples_passed": 0,
+      "sites": 3,
+      "candidates": 60000,
+      "synthesis_status": "FOUND",
+      "chosen_site": "return",
+      "chosen_expression": "(rest_subsets + [([first] + _v) for _v in rest_subsets])",
+      "chosen_source_sha256": "31876760ad9e6aba060c886b1845ee42318cef70c8a2a50ae101b90cb7f0d978",
+      "corpus_test_returncode": 0,
+      "corpus_test_tail": [
+        ".....                                                                    [100%]",
+        "5 passed in 0.01s"
+      ],
+      "stage": "REPAIRED__CORPUS_TEST_PASSES",
+      "seconds": 29.3
+    },
+    {
+      "task": "subsequences",
+      "kind": "task",
+      "examples": 12,
+      "function": "subsequences",
+      "baseline_examples_passed": 0,
+      "sites": 4,
+      "candidates": 80000,
+      "synthesis_status": "FOUND",
+      "chosen_site": "return",
+      "chosen_expression": "[[]]",
+      "chosen_source_sha256": "26382e7ebc795e7425ecf1982f2473c7da95c1dc32768cf1b2bba615a49429d7",
+      "corpus_test_returncode": 0,
+      "corpus_test_tail": [
+        "............                                                             [100%]",
+        "12 passed in 0.01s"
+      ],
+      "stage": "REPAIRED__CORPUS_TEST_PASSES",
+      "seconds": 58.3
+    },
+    {
+      "task": "shortest_path_length",
+      "kind": "task",
+      "examples": 0,
+      "stage": "NO_EXAMPLES"
+    },
+    {
+      "task": "shortest_path_lengths",
+      "kind": "task",
+      "examples": 0,
+      "stage": "NO_EXAMPLES"
+    },
+    {
+      "task": "shortest_paths",
+      "kind": "task",
+      "examples": 0,
+      "stage": "NO_EXAMPLES"
+    },
+    {
+      "task": "topological_ordering",
+      "kind": "task",
+      "examples": 0,
+      "stage": "NO_EXAMPLES"
+    }
+  ],
+  "provenance": {
+    "measurement_date_utc": "2026-11-17",
+    "quixbugs_head": "4257f44b0ff1181dedaedee6a447e133219fcebf",
+    "python": "Python 3.11.2",
+    "pytest": "pytest 9.2.0",
+    "historical_run_command": "python canonical/tools/site_general_expression_synthesis_v1.py --quixbugs /tmp/quixbugs --tasks kheapsort possible_change powerset subsequences shortest_path_length shortest_path_lengths shortest_paths topological_ordering --out /tmp/sgs-hard-open-final.jsonl --receipt /tmp/sgs-hard-open-final.json",
+    "selection": "eight previously identified hard-open tasks only; known wins not re-evaluated",
+    "answer_key_disclosure": "The answer keys for the four example-searchable tasks were inspected while designing the grammar; no answer key was copied into the solver task directory. These are in-sample results.",
+    "verdict_limit": "For the four repaired tasks, the corpus tests use the same published examples used in synthesis; the tests do not constitute independent unseen-input validation.",
+    "source_version_note": "The measured process loaded the implementation after the ordering and timer changes, before subsequent documentation edits and a positive max_texts validation check. The latter does not affect the default 20000 used in this run; an exact measured source hash was not captured.",
+    "measurement_is_independent": false
+  }
+}
