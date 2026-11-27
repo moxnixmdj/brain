@@ -1,0 +1,285 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_FAMILY_INTERFACE_COMPLETENESS_CHARACTERIZATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FAMILY_CLASSIFICATION_COMPLETENESS_THEOREM__OPEN_WORLD_CONDITION_DISCOVERY_REMAINS__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Separate primitive-family ontology completeness from open-world target-condition discovery. Prove a falsifiable normal form under which unseen Opus 5.5 skills may add condition-specific acceptance obligations without creating a new capability family unless they exhibit a genuinely untypable input, action, state, output, or semantic transform.",
+  "authorities": {
+    "target_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "first_party_surface_mapping": {
+      "path": "canonical/governance/OPUS55_FIRST_PARTY_SURFACE_TO_FAMILY_UNION_MAPPING_V2.json",
+      "git_blob_sha": "58b7a3a25d4f19eb34182f1dfbd36634f1c75142"
+    },
+    "public_source_universe": {
+      "path": "canonical/governance/OPUS55_PUBLIC_CAPABILITY_SOURCE_UNIVERSE_V1.json",
+      "git_blob_sha": "26814f5bad298e1d73b257f5289051744ca381f3"
+    },
+    "open_world_boundary": {
+      "path": "canonical/governance/OPUS55_OPEN_WORLD_TARGET_CERTIFICATION_BOUNDARY_20261005_V1.json",
+      "git_blob_sha": "2476ab2d8220994d7858c80409b563e1582c88e6"
+    },
+    "domain_erasure_mapping": {
+      "path": "canonical/governance/OPUS55_THREE_DOMAIN_INSTANCE_EXISTING_FAMILY_MAPPING_20261005_V1.json"
+    }
+  },
+  "definitions": {
+    "family_classification_complete": "EVERY_ADMISSIBLE_USEFUL_TARGET_BEHAVIOR_CAN_BE_LOSSLESSLY_TYPED_AS_ONE_EXISTING_NONCOMPOSITION_FAMILY_OR_A_FINITE_COMPOSITION_OF_EXISTING_TYPED_FAMILIES_WITHOUT_ERASING_A_LOAD_BEARING_OBSERVABLE_TRANSFORM.",
+    "condition": "A DOMAIN_LANGUAGE_CONTEXT_HORIZON_DIFFICULTY_DATA_DISTRIBUTION_OR_TOOL_ENVIRONMENT_RESTRICTION_APPLIED_TO_AN_ALREADY_TYPED_TRANSFORM.",
+    "new_family_counterexample": "A USEFUL_TARGET_BEHAVIOR_CONTAINING_AT_LEAST_ONE_LOAD_BEARING_OBSERVABLE_TRANSFORM_OR_INTERFACE_CLASS_THAT CANNOT BE TYPED BY ANY EXISTING NONCOMPOSITION FAMILY AND CANNOT BE REDUCED TO JIT_KNOWLEDGE_PLUS_EXISTING_TYPED_TRANSFORMS.",
+    "composition_non_vacuity_rule": "MULTI_CAPABILITY_COMPOSITION_MAY COMPOSE ONLY ALREADY_TYPED_CHILD_TRANSFORMS. IT MAY NOT ABSORB AN UNTYPED TRANSFORM BY LABELING IT COMPOSITION."
+  },
+  "observable_behavior_normal_form": {
+    "input_state": [
+      "TEXT_OR_STRUCTURED_TEXT_INPUT",
+      "IMAGE_OR_VISUAL_INPUT",
+      "TASK_GOAL_SPECIFICATION_AND_AUTHORIZATION",
+      "CONVERSATION_OR_PROJECT_HISTORY",
+      "JIT_EXTERNAL_KNOWLEDGE_AND_EVIDENCE",
+      "AVAILABLE_TOOL_ACTION_SCHEMAS_AND_CURRENT_ENVIRONMENT_STATE"
+    ],
+    "typed_transform_classes": [
+      {
+        "class": "INTERPRET_SCOPE_AND_VISUAL_STATE",
+        "families": [
+          "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+          "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+        ]
+      },
+      {
+        "class": "REASON_ADAPT_AND_COMPUTE",
+        "families": [
+          "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+          "UNKNOWN_DOMAIN_ADAPTATION",
+          "EXACT_SYMBOLIC_COMPUTATION"
+        ]
+      },
+      {
+        "class": "DISCOVER_RESEARCH_AND_SELECT_TOOLS",
+        "families": [
+          "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+          "AGENTIC_SCIENTIFIC_RESEARCH"
+        ]
+      },
+      {
+        "class": "EXECUTE_CODE_TOOLS_BROWSER_AND_WORKFLOWS",
+        "families": [
+          "ADVANCED_AGENTIC_CODING",
+          "COMPLEX_MULTI_TOOL_AGENCY",
+          "BUSINESS_WORKFLOW_AUTOMATION",
+          "COMPUTER_AND_BROWSER_USE"
+        ]
+      },
+      {
+        "class": "MAINTAIN_STATE_AND_COORDINATE",
+        "families": [
+          "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+          "SUBAGENT_DELEGATION_AND_COORDINATION"
+        ]
+      },
+      {
+        "class": "VERIFY_DEBUG_AND_RECOVER",
+        "families": [
+          "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
+        ]
+      },
+      {
+        "class": "SYNTHESIZE_AND_DELIVER",
+        "families": [
+          "COMMUNICATION_AND_SYNTHESIS",
+          "ARTIFACT_CREATION",
+          "PROFESSIONAL_KNOWLEDGE_WORK",
+          "FINANCIAL_ANALYSIS"
+        ]
+      },
+      {
+        "class": "COMPOSE_TYPED_CHILDREN",
+        "families": [
+          "MULTI_CAPABILITY_COMPOSITION"
+        ],
+        "restriction": "NO_UNTYPED_CHILD_ABSORPTION"
+      }
+    ],
+    "output_state": [
+      "TEXT_RESPONSE_OR_STRUCTURED_TEXT",
+      "TEXT_BASED_ARTIFACT_OR_DIAGRAM",
+      "CODE_OR_FILE_MUTATION",
+      "TOOL_API_BROWSER_OR_COMPUTER_ACTION_RESULT",
+      "UPDATED_PROJECT_OR_CONVERSATION_STATE"
+    ]
+  },
+  "knowledge_capability_separation": {
+    "rule": "DOMAIN_FACTS_ONTOLOGIES_CURRENT_LITERATURE_AND_ENTITY_SPECIFIC_CONTENT_ARE_EXTERNAL_JIT_KNOWLEDGE_BY_TERMINAL_OBJECTIVE. CHANGING ONLY THIS PAYLOAD CANNOT CREATE A NEW INTERNALIZED CAPABILITY FAMILY.",
+    "new_family_requires": "A NEW_LOAD_BEARING_TRANSFORM_CONTROL_POLICY_INTERFACE_OR_STATE_SEMANTIC_AFTER_DOMAIN_KNOWLEDGE_IS REPLACED WITH TYPED_JIT_INPUTS."
+  },
+  "current_public_taxonomy_typing": [
+    {
+      "surface": "8.2 SWE-bench Pro, Multilingual, and Multimodal",
+      "families": ["ADVANCED_AGENTIC_CODING", "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING", "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"],
+      "conditions": ["MULTILINGUAL", "MULTIMODAL"],
+      "new_family_required": false
+    },
+    {
+      "surface": "8.3 DeepSWE v1.1",
+      "families": ["ADVANCED_AGENTIC_CODING", "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"],
+      "new_family_required": false
+    },
+    {
+      "surface": "8.4 FrontierCode",
+      "families": ["ADVANCED_AGENTIC_CODING"],
+      "new_family_required": false
+    },
+    {
+      "surface": "8.5 Terminal-Bench 4.0",
+      "families": ["ADVANCED_AGENTIC_CODING", "COMPLEX_MULTI_TOOL_AGENCY", "TOOL_DISCOVERY_SELECTION_AND_LEARNING"],
+      "new_family_required": false
+    },
+    {
+      "surface": "8.6 Terminal-Bench-Science 0.1",
+      "families": ["AGENTIC_SCIENTIFIC_RESEARCH", "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING", "TOOL_DISCOVERY_SELECTION_AND_LEARNING"],
+      "new_family_required": false
+    },
+    {
+      "surface": "8.7 FrontierSWE v2",
+      "families": ["ADVANCED_AGENTIC_CODING"],
+      "new_family_required": false
+    },
+    {
+      "surface": "8.8 CursorBench 4.0",
+      "families": ["ADVANCED_AGENTIC_CODING", "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"],
+      "new_family_required": false
+    },
+    {
+      "surface": "8.9 ArXivMath",
+      "families": ["MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING", "EXACT_SYMBOLIC_COMPUTATION", "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"],
+      "condition": "RESEARCH_LEVEL_NON_SYMBOLIC_MATHEMATICAL_REASONING",
+      "new_family_required": false
+    },
+    {
+      "surface": "8.10 Long context",
+      "families": ["LONG_HORIZON_MEMORY_AND_CONTINUITY", "COMMUNICATION_AND_SYNTHESIS", "PROFESSIONAL_KNOWLEDGE_WORK", "ADVANCED_AGENTIC_CODING", "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"],
+      "condition": "LONG_CONTEXT",
+      "new_family_required": false
+    },
+    {
+      "surface": "8.11 Agentic search",
+      "families": ["TOOL_DISCOVERY_SELECTION_AND_LEARNING", "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING", "UNKNOWN_DOMAIN_ADAPTATION", "AGENTIC_SCIENTIFIC_RESEARCH"],
+      "new_family_required": false
+    },
+    {
+      "surface": "8.12 Multi-agent",
+      "families": ["SUBAGENT_DELEGATION_AND_COORDINATION", "COMPLEX_MULTI_TOOL_AGENCY", "MULTI_CAPABILITY_COMPOSITION"],
+      "new_family_required": false
+    },
+    {
+      "surface": "8.13 Multimodal",
+      "families": ["VISION_AND_DENSE_DOCUMENT_UNDERSTANDING", "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING", "COMPUTER_AND_BROWSER_USE"],
+      "condition": "IMAGE_OR_VISUAL_INPUT",
+      "new_family_required": false
+    },
+    {
+      "surface": "8.14 Real-world professional tasks",
+      "families": ["PROFESSIONAL_KNOWLEDGE_WORK", "ARTIFACT_CREATION", "COMMUNICATION_AND_SYNTHESIS", "COMPLEX_MULTI_TOOL_AGENCY"],
+      "new_family_required": false
+    },
+    {
+      "surface": "8.15 Healthcare",
+      "families": ["PROFESSIONAL_KNOWLEDGE_WORK", "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING", "COMMUNICATION_AND_SYNTHESIS", "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING", "AGENTIC_SCIENTIFIC_RESEARCH"],
+      "condition": "HEALTHCARE_DOMAIN",
+      "new_family_required": false
+    },
+    {
+      "surface": "8.16 Multilingual performance",
+      "families": ["COMMUNICATION_AND_SYNTHESIS", "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT", "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING", "PROFESSIONAL_KNOWLEDGE_WORK", "ADVANCED_AGENTIC_CODING"],
+      "condition": "MULTILINGUAL",
+      "new_family_required": false
+    },
+    {
+      "surface": "8.17 Life sciences capabilities",
+      "families": ["AGENTIC_SCIENTIFIC_RESEARCH", "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING", "UNKNOWN_DOMAIN_ADAPTATION", "TOOL_DISCOVERY_SELECTION_AND_LEARNING", "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING", "COMMUNICATION_AND_SYNTHESIS"],
+      "condition": "LIFE_SCIENCES_DOMAIN",
+      "new_family_required": false
+    },
+    {
+      "surface": "2.2 CB evaluations",
+      "families": ["AGENTIC_SCIENTIFIC_RESEARCH", "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING", "UNKNOWN_DOMAIN_ADAPTATION", "TOOL_DISCOVERY_SELECTION_AND_LEARNING"],
+      "condition": "CHEMICAL_BIOLOGICAL_DOMAIN",
+      "new_family_required": false
+    },
+    {
+      "surface": "2.3 AI R&D",
+      "families": ["ADVANCED_AGENTIC_CODING", "AGENTIC_SCIENTIFIC_RESEARCH", "COMPLEX_MULTI_TOOL_AGENCY", "TOOL_DISCOVERY_SELECTION_AND_LEARNING", "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY", "MULTI_CAPABILITY_COMPOSITION"],
+      "condition": "AI_R_AND_D_DOMAIN",
+      "new_family_required": false
+    },
+    {
+      "surface": "3.3 Cyber capability evaluations",
+      "families": ["ADVANCED_AGENTIC_CODING", "COMPUTER_AND_BROWSER_USE", "COMPLEX_MULTI_TOOL_AGENCY", "TOOL_DISCOVERY_SELECTION_AND_LEARNING", "UNKNOWN_DOMAIN_ADAPTATION", "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING"],
+      "condition": "CYBERSECURITY_DOMAIN",
+      "new_family_required": false
+    }
+  ],
+  "characterization_theorem": {
+    "statement": "FOR FAMILY CLASSIFICATION ONLY: IF A USEFUL OPUS55 BEHAVIOR'S INPUTS_OUTPUTS_ACTION_CHANNELS_AND_LOAD_BEARING INTERMEDIATE TRANSFORMS ALL TYPE INTO THE OBSERVABLE_BEHAVIOR_NORMAL_FORM, THEN THE BEHAVIOR REQUIRES NO NEW CAPABILITY FAMILY. ANY NEW DOMAIN_LANGUAGE_CONTEXT_HORIZON_DIFFICULTY_OR_DATA_DISTRIBUTION MAY STILL CREATE A NEW CONDITION_SPECIFIC ACCEPTANCE OBLIGATION. LITERAL TERMINAL PARITY IS NOT IMPLIED.",
+    "current_public_source_universe_result": "ALL_ENUMERATED_CAPABILITY_BEARING_TOP_LEVEL_SYSTEM_CARD_SECTIONS_TYPE INTO_EXISTING_FAMILIES_WITHOUT_USING_MULTI_CAPABILITY_COMPOSITION_TO_HIDE AN UNTYPED CHILD.",
+    "family_count_effect_if_verified": "CURRENT_19_FAMILY_ONTOLOGY_CLOSED_FOR_THE_CURRENT_OPUS55_INTERFACE_GRAMMAR",
+    "open_world_effect_if_verified": "UNOBSERVED USEFUL BEHAVIOR MAY REOPEN CONDITION_OR_ACCEPTANCE COVERAGE. IT REOPENS FAMILY COUNT ONLY BY CONSTRUCTIVE UNTYPABLE COUNTEREXAMPLE."
+  },
+  "falsifiers": [
+    "NEW_NATIVE_INPUT_MODALITY_WITH_LOAD_BEARING_MODEL_PROCESSING_NOT REDUCIBLE TO TEXT_IMAGE_OR_TYPED_TOOL_INPUT.",
+    "NEW_NATIVE_OUTPUT_OR_ACTUATION_CLASS_NOT REPRESENTABLE AS TEXT_ARTIFACT_CODE_FILE_TOOL_API_BROWSER_OR_COMPUTER_ACTION.",
+    "NEW_STATE_MEMORY_COORDINATION_SEMANTIC_NOT REPRESENTABLE BY EXISTING STATE_AND_COORDINATION FAMILIES.",
+    "NEW_LOAD_BEARING_INTERMEDIATE TRANSFORM NOT TYPABLE BY ANY NONCOMPOSITION FAMILY AFTER DOMAIN KNOWLEDGE IS REPLACED BY TYPED_JIT_INPUT.",
+    "ANY_CURRENT_SYSTEM_CARD_CAPABILITY_BEARING TOP_LEVEL SECTION CONTAINS A MATERIAL USEFUL OPERATION OMITTED BY THE DECLARED MAPPING.",
+    "INDEPENDENT_REVIEW FINDS THAT A MAPPING USES MULTI_CAPABILITY_COMPOSITION TO MASK AN UNTYPED CHILD TRANSFORM."
+  ],
+  "scheduler_delta_if_verified": {
+    "delete": [
+      "DEFAULT_REOPEN_PRIMITIVE_FAMILY_COUNT_ON_NEW_BENCHMARK_NAME",
+      "DEFAULT_REOPEN_PRIMITIVE_FAMILY_COUNT_ON_NEW_DOMAIN_LANGUAGE_OR_CONTEXT_LABEL",
+      "REPEAT_DOMAIN_BY_DOMAIN_NEW_FAMILY_SEARCH_WITHOUT_A_CONSTRUCTIVE UNTYPABLE_BEHAVIOR COUNTEREXAMPLE"
+    ],
+    "activate": [
+      "TYPE_NEW_TARGET_EVIDENCE_THROUGH_THE_NORMAL_FORM",
+      "ADD_ONLY_NEW_CONDITION_SPECIFIC_ACCEPTANCE_OBLIGATIONS_WHEN_TRANSFORM_ALREADY_TYPES",
+      "REOPEN_FAMILY_ONTOLOGY_ONLY_ON_A_FALSIFIER_OR_CONSTRUCTIVE_UNTYPABLE_COUNTEREXAMPLE",
+      "PRESERVE_OPEN_WORLD_TARGET_DISCOVERY_FOR_LITERAL_ALL_USEFUL_FINALITY"
+    ]
+  },
+  "terminal_effect": {
+    "root1_positive_gap_delta": 0,
+    "family_acceptance_credit_delta": 0,
+    "atomic_acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "literal_terminal": false,
+    "reason": "THIS CHARACTERIZES FAMILY ONTOLOGY ONLY. PERFORMANCE PARITY, CONDITION COVERAGE, OWNERSHIP AND THE OPEN_WORLD DISCOVERY COMPLETENESS PREMISE REMAIN SEPARATE."
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_ACTUAL_PRIVATE_OR_UNOBSERVED_OPUS55 USEFUL_BEHAVIORS HAVE BEEN DISCOVERED.",
+    "NO_CLAIM_ALL_NEW_CONDITIONS ARE ALREADY ACCEPTED.",
+    "NO_CLAIM_EXISTING_19_FAMILIES ARE ALL EQUAL_OR_BETTER OR OWNED.",
+    "NO_CLAIM_MULTI_CAPABILITY_COMPOSITION_IS A UNIVERSAL CATCH_ALL FOR UNTYPED TRANSFORMS.",
+    "NO_LITERAL_TERMINAL_SEAL.",
+    "NO_FRESH_REALITY_AUTHORITY."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
