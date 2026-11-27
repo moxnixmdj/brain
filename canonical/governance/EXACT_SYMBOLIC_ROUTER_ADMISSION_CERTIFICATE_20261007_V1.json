@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_EXACT_SYMBOLIC_ROUTER_ADMISSION_CERTIFICATE_V1",
+  "date": "2026-10-07",
+  "status": "POSITIVE_ADMISSION_CERTIFICATE__EXACT_FROZEN_SUITE_ONLY__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "cell_id": "OBS-EXACT-SYMBOLIC-001",
+  "family": "EXACT_SYMBOLIC_COMPUTATION",
+  "context_digest": "sha256:38460d8e0a4886575743a50829e19b8aee02911962b3b668f38867883338e76f",
+  "admission_predicate": {
+    "suite_path": "canonical/obsolescence/suites/EXACT_SYMBOLIC_COMPUTATION_SUITE_V1.json",
+    "suite_git_blob_sha": "1a0154d44963ce08ed78920978fb64ba054334cb",
+    "suite_sha256": "38460d8e0a4886575743a50829e19b8aee02911962b3b668f38867883338e76f",
+    "capability_id": "EXACT_SYMBOLIC_COMPUTATION_V1",
+    "suite_id": "OBS-EXACT-SYMBOLIC-001",
+    "rule": "ADMIT_IFF_THE_FIXED_CANONICAL_SUITE_BYTES_MATCH_BOTH_THE_BOUND_GIT_BLOB_AND_SHA256_AND_THE_DECLARED_SUITE_AND_CAPABILITY_IDENTITIES_MATCH"
+  },
+  "selected_route": {
+    "route_id": "accepted.exact_symbolic",
+    "runner_path": "canonical/obsolescence/run_exact_symbolic_v1.py",
+    "runner_git_blob_sha": "8f6f04fee00664b26ddf1a45a65698399c7ca6c3",
+    "selected_entry": "run_task",
+    "route_governance_path": "canonical/governance/EXACT_SYMBOLIC_SELECTED_LEAF_ROUTE_20261007_V1.json",
+    "route_governance_git_blob_sha": "ba48f9024787e25308f9ad1dd74a83064f467865"
+  },
+  "adequacy_certificate": {
+    "path": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+    "git_blob_sha": "a691d49ef377fa216bbbeff70183112d65445463",
+    "result": "100_PERCENT_EXACT_CORRECTNESS_ON_FROZEN_12_TASK_CLASS__THEORETICAL_CEILING"
+  },
+  "soundness": {
+    "positive_only": true,
+    "outside_exact_bound_context": "FAIL_CLOSED",
+    "target_information_consumed": 0,
+    "incremental_spend_usd": 0
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_MATHEMATICAL_REASONING_CLAIM",
+    "NO_ADMISSION_OUTSIDE_THE_EXACT_FROZEN_SUITE",
+    "NO_SELECTED_COVER_COMPLETENESS_CLAIM",
+    "NO_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
