@@ -344,3 +344,24 @@ def explain_rule(rule: Mapping[str, Any], *, proposed_in: str | None = None) -> 
             "bases": sorted({v["basis"] for v in gate["verdicts"]}),
         }
     return out
+
+
+def self_check() -> dict[str, Any]:
+    """Verify single-operator swap derivation, swap family expansion, and non-operator refusal."""
+    rule = {
+        "pattern_tokens": [["id", "a"], ["op", "<="], ["id", "b"]],
+        "replacement_tokens": [["id", "a"], ["op", "<"], ["id", "b"]],
+    }
+    swap = derive_operator_swap(rule)
+    fam = derive_swap_family(rule)
+    non_op = derive_operator_swap({
+        "pattern_tokens": [["id", "a"], ["op", "<="], ["id", "b"]],
+        "replacement_tokens": [["id", "c"], ["op", "<"], ["id", "b"]],
+    })
+    ok = swap == {"from": "<=", "to": "<"} and len(fam) >= 2 and non_op is None
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "swap": swap,
+        "family_size": len(fam),
+        "multi_diff_refused": non_op is None,
+    }

@@ -346,5 +346,17 @@ def main(argv: Iterable[str] | None = None) -> int:
     return 0 if report["census_valid"] else 1
 
 
+def self_check() -> dict[str, Any]:
+    """Verify training-readiness auditor accepts an admissible reference row and rejects an empty row."""
+    ref = admissible_reference_row()
+    good = audit_rows("self_check_pos", [ref])
+    bad = audit_rows("self_check_neg", [{"id": "incomplete"}])
+    ok = int(good.get("fully_ready_rows", 0)) == 1 and int(bad.get("fully_ready_rows", 1)) == 0
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "pos_ready": good.get("fully_ready_rows"),
+        "neg_ready": bad.get("fully_ready_rows"),
+    }
+
 if __name__ == "__main__":
     raise SystemExit(main())

@@ -732,3 +732,23 @@ def pytest_sessionfinish(session, exitstatus) -> None:
 def pytest_exception_interact(node, call, report) -> None:  # pragma: no cover - diagnostics only
     if os.environ.get("META_TRACE"):
         sys.stderr.write("".join(traceback.format_exception(call.excinfo.type, call.excinfo.value, call.excinfo.tb))[:2000])
+
+
+def self_check() -> dict[str, Any]:
+    """Verify metamorphic pytest plugin hooks and law registry are live and callable."""
+    required_hooks = (
+        pytest_configure,
+        pytest_collection_finish,
+        pytest_runtest_teardown,
+        pytest_sessionfinish,
+        pytest_exception_interact,
+    )
+    hooks_ok = all(callable(h) for h in required_hooks)
+    laws_mod = _laws() if callable(_laws) else None
+    law_checks = [k for k in dir(laws_mod) if k.startswith("check_") and callable(getattr(laws_mod, k, None))] if laws_mod is not None else []
+    ok = hooks_ok and len(law_checks) >= 4
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "hooks_callable": hooks_ok,
+        "law_checks_count": len(law_checks),
+    }

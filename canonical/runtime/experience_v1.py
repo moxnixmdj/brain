@@ -358,3 +358,19 @@ def summary(path=None) -> dict:
         "resolution_count": len(state.get("resolutions") or {}),
         "cells": cells,
     }
+
+
+def self_check() -> dict[str, Any]:
+    """Verify structural failure suppression works and does not suppress unseen capabilities."""
+    import tempfile
+    with tempfile.TemporaryDirectory(prefix="exp_sc_") as td:
+        ep = Path(td) / "experience.json"
+        record("cap.alpha", "missing_dep", succeeded=False, structural=True, path=ep)
+        sup_hit = is_suppressed("cap.alpha", "missing_dep", path=ep)
+        sup_miss = is_suppressed("cap.unseen", "missing_dep", path=ep)
+        ok = (sup_hit is True) and (sup_miss is False)
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "structural_suppressed": sup_hit,
+        "unseen_not_suppressed": sup_miss is False,
+    }

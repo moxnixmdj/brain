@@ -1259,3 +1259,22 @@ class Wave40To42UnifiedModelMixin:
 
     def wave41_42_awakened_inventory(self) -> dict[str, Any]:
         return wave41_42_awakened_inventory()
+
+
+def self_check() -> dict[str, Any]:
+    """Verify Wave 41 Rung-3 JitRL + Futamura Compile-Away flywheel kernels instantiate and report inventory."""
+    import tempfile
+    inv = wave41_42_awakened_inventory()
+    jit = PluggableRung3ProposerJitRLKernel()
+    with tempfile.TemporaryDirectory(prefix="w41_sc_") as td:
+        fly = FutamuraCompileAwayFlywheelKernel(memory_root=td)
+        ok = (
+            isinstance(inv, dict)
+            and int(inv.get("wave41_42_awakened_dark_modules_count", 0)) >= 10
+            and jit is not None
+            and fly is not None
+        )
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "awakened_count": int(inv.get("wave41_42_awakened_dark_modules_count", 0)) if isinstance(inv, dict) else 0,
+    }

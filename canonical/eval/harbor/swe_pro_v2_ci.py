@@ -331,6 +331,8 @@ def collect(
                 "store_saved": rep.get("store_saved"),
                 "engine_notes": rep.get("notes") or [],
                 "diagnosis": rep.get("engine_diagnosis") or {},
+                "container_toolchain": rep.get("container_toolchain"),
+                "container_exec_calls": rep.get("container_exec_calls", 0),
                 "error": rep.get("error"),
                 "network_attempts": rep.get("network_attempts"),
                 "network_guard": rep.get("network_guard"),

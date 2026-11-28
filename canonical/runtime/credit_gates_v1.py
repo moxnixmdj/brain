@@ -254,6 +254,19 @@ def credit(before: dict, after: dict, sigma: float = 2.0,
     }
 
 
+def self_check() -> dict[str, Any]:
+    """Verify anytime-valid e-process grows on positive evidence and activation gate rejects regressions."""
+    ep = e_process([1.0, 1.0, 1.0, 1.0])
+    act_pos = activation_gate({"a": 0.0, "b": 0.0}, {"a": 1.0, "b": 1.0}, ["a", "b"])
+    act_flat = activation_gate({"a": 1.0, "b": 1.0}, {"a": 1.0, "b": 1.0}, ["a", "b"])
+    ok = float(ep.get("e_value", 0.0)) > 1.0 and (act_pos is True) and (act_flat is False)
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "e_value": ep.get("e_value"),
+        "activation_pos": act_pos,
+        "activation_flat_rejected": act_flat is False,
+    }
+
 if __name__ == "__main__":
     # Same infra failure both runs: excluded, and correctly not counted.
     before = {"a": 0, "b": 1, "c": 0, "d": 1, "e": 0, "f": 1, "g": 0, "h": 1}

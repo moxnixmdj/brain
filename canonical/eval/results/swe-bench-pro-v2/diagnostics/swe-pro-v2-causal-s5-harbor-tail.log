@@ -63,7 +63,7 @@ Run `harbor datasets list` to see all available datasets.
 <unknown>:60: SyntaxWarning: invalid escape sequence '\d'
 <unknown>:46: SyntaxWarning: invalid escape sequence '\.'
 <unknown>:85: SyntaxWarning: invalid escape sequence '\d'
-  8/8 Mean: 0.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:18:52 0:00:00
+  8/8 Mean: 0.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:20:47 0:00:00
 
 adhoc • causal_engine
 ┏━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
@@ -79,7 +79,7 @@ adhoc • causal_engine
 └────────┴───────┘
 
 Job Info
-Total runtime: 18m 52s
+Total runtime: 20m 47s
 Results written to 
 /home/runner/work/brain/brain/work-causal-5/jobs/swe-pro-v2-causal-s5/result.jso
 n

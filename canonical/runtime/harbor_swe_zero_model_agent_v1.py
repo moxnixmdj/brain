@@ -58,8 +58,12 @@ MAX_OUTPUT_CHARS = 16000
 
 _REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
 _KERNEL_FILES = (
+    "canonical/runtime/deterministic_decision_primitives.py",
+    "canonical/runtime/settlement_v1.py",
     "canonical/swe_kernel/angelic_cegis_repair_v1.py",
     "canonical/swe_kernel/cow_angelic_zygote_v1.py",
+    "canonical/swe_kernel/differential_witness_inversion_v1.py",
+    "canonical/swe_kernel/executable_simulator_mental_model_v1.py",
     "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
     "canonical/swe_kernel/c_asan_cegis_repair_v1.py",
     "canonical/swe_kernel/js_causal_cegis_repair_v1.py",
@@ -68,6 +72,14 @@ _KERNEL_FILES = (
     "canonical/swe_kernel/universal_computer_agent_v1.py",
     "canonical/swe_kernel/executable_mental_model_v1.py",
     "canonical/swe_kernel/semantic_ir_v1.py",
+    "canonical/swe_kernel/minimal_epistemic_core_v1.py",
+    "canonical/swe_kernel/bm25_code_localizer_v1.py",
+    "canonical/swe_kernel/guarded_meaning_ir_v1.py",
+    "canonical/swe_kernel/producer_lineage_graph_v1.py",
+    "canonical/swe_kernel/induced_edit_basis_v1.py",
+    "canonical/swe_kernel/minimal_subtree_transfer_v1.py",
+    "canonical/swe_kernel/hdc_semantic_engine_v1.py",
+    "canonical/swe_kernel/unified_fast_spine_v1.py",
 )
 
 
@@ -83,6 +95,7 @@ def _build_kernel_tar_gz() -> bytes:
             tf.addfile(ti, io.BytesIO(payload))
 
         _add_bytes("canonical/__init__.py", b"")
+        _add_bytes("canonical/runtime/__init__.py", b"")
         _add_bytes("canonical/swe_kernel/__init__.py", b"")
         for rel_mod in _KERNEL_FILES:
             _add_bytes(rel_mod, (_REPO_ROOT / rel_mod).read_bytes())
@@ -118,6 +131,7 @@ class LocalSubprocessHarborEnvironment:
         self._extra_env = dict(extra_env or {})
 
     async def exec(self, command: str, *, timeout_sec: int | None = None) -> _ExecResult:
+        import signal
         env = dict(os.environ)
         env["PYTHONDONTWRITEBYTECODE"] = "1"
         env.update(self._extra_env)
@@ -129,11 +143,19 @@ class LocalSubprocessHarborEnvironment:
             env=env,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
+            start_new_session=True,
         )
         try:
             out_b, err_b = await asyncio.wait_for(proc.communicate(), timeout=timeout_sec or 120)
         except asyncio.TimeoutError:
-            proc.kill()
+            try:
+                os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+            try:
+                proc.kill()
+            except ProcessLookupError:
+                pass
             await proc.communicate()
             return _ExecResult(124, "", "LOCAL_SUBPROCESS_TIMEOUT")
         return _ExecResult(
@@ -340,6 +362,34 @@ elif test_target == "__TERMINAL_GOAL__":
             m1_res = acr.repair_repo_from_issue_zero_leakage(
                 repo_root, goal_text, timeout_s=timeout_s, skill_store=store
             )
+        if not m1_res.get("repaired") and vis_tests:
+            try:
+                from canonical.swe_kernel.unified_fast_spine_v1 import UnifiedFastSpine
+
+                r_spine = UnifiedFastSpine().repair_repo_fast(
+                    repo_p,
+                    goal_text,
+                    test_target=ranked_vis[0] if vis_tests else None,
+                    max_files=3,
+                    max_candidates=120,
+                    timeout_s=0.12,
+                    apply_patch=False,
+                )
+                if r_spine.get("repaired") and r_spine.get("patched_files"):
+                    m1_res = {
+                        "repaired": True,
+                        "method": str(r_spine.get("method") or "UNIFIED_FAST_SPINE_COW_V1"),
+                        "rule": str(r_spine.get("rule") or "unified_fast_spine"),
+                        "patched_file": str(r_spine.get("patched_file") or ""),
+                        "patched_files": dict(r_spine.get("patched_files") or {}),
+                        "patched_line": 0,
+                        "failing_nodeid": str(r_spine.get("failing_nodeid") or vis_tests[0]),
+                        "reason": None,
+                        "elapsed_ms": int(round(float(r_spine.get("elapsed_ms", 0.0)))),
+                        "stats": dict(r_spine.get("stats") or {}),
+                    }
+            except Exception:
+                pass
     elif is_c_repo and not has_terminal_artifact:
         m1_res = casan.repair_c_repo_from_issue_zero_leakage(
             repo_root, goal_text, timeout_s=timeout_s, skill_store=store
@@ -350,6 +400,36 @@ elif test_target == "__TERMINAL_GOAL__":
             repo_root, goal_text, timeout_s=timeout_s, skill_store=store
         )
         issue_mode_tag = "ISSUE_ONLY_JS_SWE"
+    if not m1_res.get("repaired") and not has_terminal_artifact:
+        try:
+            from canonical.swe_kernel.unified_fast_spine_v1 import UnifiedFastSpine
+
+            poly_res = UnifiedFastSpine().solve_swe_polyglot(
+                repo_p,
+                goal_text,
+                apply_patch=False,
+            )
+            if poly_res.get("solved"):
+                inner = poly_res.get("result") if isinstance(poly_res.get("result"), dict) else {}
+                pf = dict(inner.get("patched_files") or {})
+                winner = inner.get("winner") if isinstance(inner.get("winner"), dict) else {}
+                if not pf and winner.get("file") and winner.get("patched_source"):
+                    pf[str(winner["file"])] = str(winner["patched_source"])
+                if pf:
+                    m1_res = {
+                        "repaired": True,
+                        "method": f"UNIFIED_FAST_SPINE_POLYGLOT__{poly_res.get('engine', 'POLY')}",
+                        "rule": str(inner.get("rule") or winner.get("description") or "polyglot_swe"),
+                        "patched_file": str(inner.get("patched_file") or winner.get("file") or next(iter(pf))),
+                        "patched_files": pf,
+                        "patched_line": int(winner.get("lineno") or 0),
+                        "failing_nodeid": str(inner.get("failing_nodeid") or ""),
+                        "reason": None,
+                        "elapsed_ms": int(round(float(poly_res.get("elapsed_ms", 0.0)))),
+                        "stats": dict(inner.get("stats") or {}),
+                    }
+        except Exception:
+            pass
     if m1_res.get("repaired"):
         written = []
         pf_map = dict(m1_res.get("patched_files") or {})
@@ -874,3 +954,18 @@ class HarborSweZeroModelAgent(BaseAgent):
             except Exception:
                 pass
 
+
+def self_check() -> dict[str, Any]:
+    """Verify LocalSubprocessHarborEnvironment runs an isolated command and captures exact stdout."""
+    import asyncio, tempfile
+    with tempfile.TemporaryDirectory(prefix="harbor_sc_") as td:
+        env = LocalSubprocessHarborEnvironment(td)
+        res = asyncio.run(env.exec("python3 -c 'print(42)'"))
+        out = str(getattr(res, "stdout", "") or "").strip()
+        rc = int(getattr(res, "return_code", getattr(res, "returncode", -1)))
+        ok = (rc == 0) and (out == "42")
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "return_code": rc,
+        "stdout": out,
+    }

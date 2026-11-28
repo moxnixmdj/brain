@@ -2,20 +2,43 @@
  "admitted": [
   "structured_morphism_abstraction_v1",
   "single_experience_transfer_v1",
-  "concept_library_v1"
+  "settled_admission_v1",
+  "rule_scope_learning_v1",
+  "skill_recheck_v1",
+  "invalidation_enforcement_v1",
+  "what_the_operand_names_cost_v1",
+  "retained_repair_session_v1",
+  "concept_library_v1",
+  "operator_generalization_v1",
+  "metamorphic_plugin_v1",
+  "violation_attribution_v1",
+  "swe_typed_plan_v1",
+  "grounded_action_v1",
+  "perfect_algorithm_unified_v8",
+  "wave41_rung3_proposer_jitrl_continual_flywheel_v1",
+  "experiential_strategy_extractor_v1",
+  "ignorance_ledger_v1",
+  "experience_v1",
+  "credit_gates_v1",
+  "epistemic_computer_agent_v1",
+  "mysterymechanism_sparse_symbolic_adapter_v2",
+  "harbor_swe_zero_model_agent_v1",
+  "weight_space_fuel_v1",
+  "experience_corpus_training_readiness_v1",
+  "wave53_54_unified_capability_bus_and_leapfrog_v1"
  ],
- "declared": 28,
+ "declared": 29,
  "failed": [],
- "import_ms_total": 183.03,
+ "import_ms_total": 210.86,
  "plugins": [
   {
    "detail": "self_check passed",
    "entry": "admit",
-   "import_ms": 3.58,
+   "import_ms": 11.12,
    "module": "canonical.swe_kernel.structured_morphism_abstraction_v1",
    "plugin_id": "structured_morphism_abstraction_v1",
    "rung": 1,
-   "self_check_ms": 3.0,
+   "self_check_ms": 2.56,
    "state": "ADMITTED",
    "triggers": [
     "repair.abstract"
@@ -24,90 +47,90 @@
   {
    "detail": "self_check passed",
    "entry": "self_check",
-   "import_ms": 10.87,
+   "import_ms": 14.11,
    "module": "canonical.swe_kernel.single_experience_transfer_v1",
    "plugin_id": "single_experience_transfer_v1",
    "rung": 1,
-   "self_check_ms": 1.33,
+   "self_check_ms": 1.83,
    "state": "ADMITTED",
    "triggers": [
     "repair.transfer.measure"
    ]
   },
   {
-   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "detail": "self_check passed",
    "entry": "settle_taught_edit",
-   "import_ms": 4.43,
+   "import_ms": 4.33,
    "module": "canonical.swe_kernel.taught_actions.settled_admission_v1",
    "plugin_id": "settled_admission_v1",
    "rung": 1,
-   "self_check_ms": 0.0,
-   "state": "UNVERIFIED",
+   "self_check_ms": 13.73,
+   "state": "ADMITTED",
    "triggers": [
     "repair.admit.taught"
    ]
   },
   {
-   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "detail": "self_check passed",
    "entry": "learn_scope",
-   "import_ms": 1.75,
+   "import_ms": 1.52,
    "module": "canonical.swe_kernel.rule_scope_learning_v1",
    "plugin_id": "rule_scope_learning_v1",
    "rung": 1,
-   "self_check_ms": 0.0,
-   "state": "UNVERIFIED",
+   "self_check_ms": 8.16,
+   "state": "ADMITTED",
    "triggers": [
     "repair.scope"
    ]
   },
   {
-   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "detail": "self_check passed",
    "entry": "recheck",
-   "import_ms": 2.72,
+   "import_ms": 0.2,
    "module": "canonical.swe_kernel.skill_recheck_v1",
    "plugin_id": "skill_recheck_v1",
    "rung": 1,
-   "self_check_ms": 0.0,
-   "state": "UNVERIFIED",
+   "self_check_ms": 0.03,
+   "state": "ADMITTED",
    "triggers": [
     "store.recheck"
    ]
   },
   {
-   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "detail": "self_check passed",
    "entry": "rule_is_applicable",
-   "import_ms": 2.67,
+   "import_ms": 0.44,
    "module": "canonical.tools.invalidation_enforcement_v1",
    "plugin_id": "invalidation_enforcement_v1",
    "rung": 1,
-   "self_check_ms": 0.0,
-   "state": "UNVERIFIED",
+   "self_check_ms": 0.02,
+   "state": "ADMITTED",
    "triggers": [
     "store.invalidate"
    ]
   },
   {
-   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "detail": "self_check passed",
    "entry": "",
-   "import_ms": 0.24,
+   "import_ms": 0.42,
    "module": "canonical.tools.what_the_operand_names_cost_v1",
    "plugin_id": "what_the_operand_names_cost_v1",
    "rung": 1,
-   "self_check_ms": 0.0,
-   "state": "UNVERIFIED",
+   "self_check_ms": 1.35,
+   "state": "ADMITTED",
    "triggers": [
     "repair.alpha_safe"
    ]
   },
   {
-   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "detail": "self_check passed",
    "entry": "",
-   "import_ms": 3.99,
+   "import_ms": 0.17,
    "module": "canonical.swe_kernel.retained_repair_session_v1",
    "plugin_id": "retained_repair_session_v1",
    "rung": 1,
-   "self_check_ms": 0.0,
-   "state": "UNVERIFIED",
+   "self_check_ms": 2.25,
+   "state": "ADMITTED",
    "triggers": [
     "repair.session"
    ]
@@ -115,77 +138,77 @@
   {
    "detail": "self_check passed",
    "entry": "",
-   "import_ms": 5.8,
+   "import_ms": 4.23,
    "module": "canonical.swe_kernel.concept_library_v1",
    "plugin_id": "concept_library_v1",
    "rung": 1,
-   "self_check_ms": 1.76,
+   "self_check_ms": 0.73,
    "state": "ADMITTED",
    "triggers": [
     "library.egraph"
    ]
   },
   {
-   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "detail": "self_check passed",
    "entry": "derive_swap_family",
-   "import_ms": 0.21,
+   "import_ms": 0.0,
    "module": "canonical.swe_kernel.operator_generalization_v1",
    "plugin_id": "operator_generalization_v1",
    "rung": 1,
-   "self_check_ms": 0.0,
-   "state": "UNVERIFIED",
+   "self_check_ms": 0.04,
+   "state": "ADMITTED",
    "triggers": [
     "library.operator"
    ]
   },
   {
-   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "detail": "self_check passed",
    "entry": "",
-   "import_ms": 0.84,
+   "import_ms": 0.69,
    "module": "canonical.swe_kernel.metamorphic_plugin_v1",
    "plugin_id": "metamorphic_plugin_v1",
    "rung": 1,
-   "self_check_ms": 0.0,
-   "state": "UNVERIFIED",
+   "self_check_ms": 0.55,
+   "state": "ADMITTED",
    "triggers": [
     "test.metamorphic"
    ]
   },
   {
-   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "detail": "self_check passed",
    "entry": "rank_violations",
-   "import_ms": 0.7,
+   "import_ms": 0.51,
    "module": "canonical.swe_kernel.violation_attribution_v1",
    "plugin_id": "violation_attribution_v1",
    "rung": 1,
-   "self_check_ms": 0.0,
-   "state": "UNVERIFIED",
+   "self_check_ms": 0.23,
+   "state": "ADMITTED",
    "triggers": [
     "test.attribute"
    ]
   },
   {
-   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "detail": "self_check passed",
    "entry": "",
-   "import_ms": 62.31,
+   "import_ms": 51.11,
    "module": "canonical.runtime.swe_typed_plan_v1",
    "plugin_id": "swe_typed_plan_v1",
    "rung": 1,
-   "self_check_ms": 0.0,
-   "state": "UNVERIFIED",
+   "self_check_ms": 3.65,
+   "state": "ADMITTED",
    "triggers": [
     "plan.swe"
    ]
   },
   {
-   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "detail": "self_check passed",
    "entry": "",
-   "import_ms": 0.4,
+   "import_ms": 0.38,
    "module": "canonical.runtime.grounded_action_v1",
    "plugin_id": "grounded_action_v1",
    "rung": 1,
-   "self_check_ms": 0.0,
-   "state": "UNVERIFIED",
+   "self_check_ms": 21.87,
+   "state": "ADMITTED",
    "triggers": [
     "plan.grounded"
    ]
@@ -204,79 +227,79 @@
    ]
   },
   {
-   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "detail": "self_check passed",
    "entry": "",
-   "import_ms": 36.41,
+   "import_ms": 34.69,
    "module": "canonical.swe_kernel.perfect_algorithm_unified_v8",
    "plugin_id": "perfect_algorithm_unified_v8",
    "rung": 1,
-   "self_check_ms": 0.0,
-   "state": "UNVERIFIED",
+   "self_check_ms": 2.24,
+   "state": "ADMITTED",
    "triggers": [
     "core.loop"
    ]
   },
   {
-   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "detail": "self_check passed",
    "entry": "",
-   "import_ms": 4.66,
+   "import_ms": 3.64,
    "module": "canonical.runtime.wave41_rung3_proposer_jitrl_continual_flywheel_v1",
    "plugin_id": "wave41_rung3_proposer_jitrl_continual_flywheel_v1",
    "rung": 2,
-   "self_check_ms": 0.0,
-   "state": "UNVERIFIED",
+   "self_check_ms": 0.36,
+   "state": "ADMITTED",
    "triggers": [
     "propose.rung3"
    ]
   },
   {
-   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "detail": "self_check passed",
    "entry": "",
-   "import_ms": 0.24,
+   "import_ms": 0.19,
    "module": "canonical.swe_kernel.experiential_strategy_extractor_v1",
    "plugin_id": "experiential_strategy_extractor_v1",
    "rung": 1,
-   "self_check_ms": 0.0,
-   "state": "UNVERIFIED",
+   "self_check_ms": 0.4,
+   "state": "ADMITTED",
    "triggers": [
     "learn.strategy"
    ]
   },
   {
-   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "detail": "self_check passed",
    "entry": "",
-   "import_ms": 0.28,
+   "import_ms": 0.31,
    "module": "canonical.runtime.ignorance_ledger_v1",
    "plugin_id": "ignorance_ledger_v1",
    "rung": 1,
-   "self_check_ms": 0.0,
-   "state": "UNVERIFIED",
+   "self_check_ms": 1.12,
+   "state": "ADMITTED",
    "triggers": [
     "learn.curriculum"
    ]
   },
   {
-   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "detail": "self_check passed",
    "entry": "",
-   "import_ms": 0.27,
+   "import_ms": 0.22,
    "module": "canonical.runtime.experience_v1",
    "plugin_id": "experience_v1",
    "rung": 1,
-   "self_check_ms": 0.0,
-   "state": "UNVERIFIED",
+   "self_check_ms": 0.5,
+   "state": "ADMITTED",
    "triggers": [
     "learn.experience"
    ]
   },
   {
-   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "detail": "self_check passed",
    "entry": "",
-   "import_ms": 0.18,
+   "import_ms": 0.0,
    "module": "canonical.runtime.credit_gates_v1",
    "plugin_id": "credit_gates_v1",
    "rung": 1,
-   "self_check_ms": 0.0,
-   "state": "UNVERIFIED",
+   "self_check_ms": 0.03,
+   "state": "ADMITTED",
    "triggers": [
     "learn.credit"
    ]
@@ -284,7 +307,7 @@
   {
    "detail": "no self_check(): cannot prove itself, never dispatched",
    "entry": "",
-   "import_ms": 2.56,
+   "import_ms": 2.65,
    "module": "canonical.runtime.osworld_v21_brain_agent_adapter_v1",
    "plugin_id": "osworld_v21_brain_agent_adapter_v1",
    "rung": 1,
@@ -297,7 +320,7 @@
   {
    "detail": "no self_check(): cannot prove itself, never dispatched",
    "entry": "",
-   "import_ms": 0.7,
+   "import_ms": 0.48,
    "module": "canonical.runtime.osworld_v21_local_qwen_policy_v1",
    "plugin_id": "osworld_v21_local_qwen_policy_v1",
    "rung": 2,
@@ -308,102 +331,97 @@
    ]
   },
   {
-   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "detail": "self_check passed",
    "entry": "",
-   "import_ms": 23.72,
+   "import_ms": 46.92,
    "module": "canonical.swe_kernel.epistemic_computer_agent_v1",
    "plugin_id": "epistemic_computer_agent_v1",
    "rung": 1,
-   "self_check_ms": 0.0,
-   "state": "UNVERIFIED",
+   "self_check_ms": 0.44,
+   "state": "ADMITTED",
    "triggers": [
     "cua.epistemic"
    ]
   },
   {
-   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "detail": "self_check passed",
    "entry": "",
-   "import_ms": 0.77,
+   "import_ms": 0.84,
    "module": "canonical.runtime.mysterymechanism_sparse_symbolic_adapter_v2",
    "plugin_id": "mysterymechanism_sparse_symbolic_adapter_v2",
    "rung": 1,
-   "self_check_ms": 0.0,
-   "state": "UNVERIFIED",
+   "self_check_ms": 192.98,
+   "state": "ADMITTED",
    "triggers": [
     "discover.active"
    ]
   },
   {
-   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "detail": "self_check passed",
    "entry": "",
-   "import_ms": 11.63,
+   "import_ms": 18.89,
    "module": "canonical.runtime.harbor_swe_zero_model_agent_v1",
    "plugin_id": "harbor_swe_zero_model_agent_v1",
    "rung": 1,
-   "self_check_ms": 0.0,
-   "state": "UNVERIFIED",
+   "self_check_ms": 36.74,
+   "state": "ADMITTED",
    "triggers": [
     "swe.harbor"
    ]
   },
   {
-   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "detail": "self_check passed",
    "entry": "",
-   "import_ms": 0.51,
+   "import_ms": 0.83,
    "module": "canonical.tools.weight_space_fuel_v1",
    "plugin_id": "weight_space_fuel_v1",
    "rung": 2,
-   "self_check_ms": 0.0,
-   "state": "UNVERIFIED",
+   "self_check_ms": 188.37,
+   "state": "ADMITTED",
    "triggers": [
     "weights.readiness"
    ]
   },
   {
-   "detail": "no self_check(): cannot prove itself, never dispatched",
+   "detail": "self_check passed",
    "entry": "",
-   "import_ms": 0.38,
+   "import_ms": 0.37,
    "module": "canonical.tools.experience_corpus_training_readiness_v1",
    "plugin_id": "experience_corpus_training_readiness_v1",
    "rung": 2,
-   "self_check_ms": 0.0,
-   "state": "UNVERIFIED",
+   "self_check_ms": 0.14,
+   "state": "ADMITTED",
    "triggers": [
     "weights.corpus"
+   ]
+  },
+  {
+   "detail": "self_check passed",
+   "entry": "self_check",
+   "import_ms": 11.4,
+   "module": "canonical.runtime.wave53_54_unified_capability_bus_and_leapfrog_v1",
+   "plugin_id": "wave53_54_unified_capability_bus_and_leapfrog_v1",
+   "rung": 1,
+   "self_check_ms": 76.06,
+   "state": "ADMITTED",
+   "triggers": [
+    "bus.unified_leapfrog",
+    "transfer.trigger_keyed_estitch_strata",
+    "swe.multifile_cow_repair",
+    "memory.dbsp_hindsight_strata",
+    "cua.webmcp_agent_s4"
    ]
   }
  ],
  "schema": "BRAIN_CAPABILITY_BUS_V1_AUDIT",
- "self_check_ms_total": 6.09,
+ "self_check_ms_total": 556.36,
  "states": {
-  "ADMITTED": 3,
-  "UNVERIFIED": 25
+  "ADMITTED": 26,
+  "UNVERIFIED": 3
  },
  "unverified": [
-  "settled_admission_v1",
-  "rule_scope_learning_v1",
-  "skill_recheck_v1",
-  "invalidation_enforcement_v1",
-  "what_the_operand_names_cost_v1",
-  "retained_repair_session_v1",
-  "operator_generalization_v1",
-  "metamorphic_plugin_v1",
-  "violation_attribution_v1",
-  "swe_typed_plan_v1",
-  "grounded_action_v1",
   "solve_v1",
-  "perfect_algorithm_unified_v8",
-  "wave41_rung3_proposer_jitrl_continual_flywheel_v1",
-  "experiential_strategy_extractor_v1",
-  "ignorance_ledger_v1",
-  "experience_v1",
-  "credit_gates_v1",
   "osworld_v21_brain_agent_adapter_v1",
-  "osworld_v21_local_qwen_policy_v1",
-  "epistemic_computer_agent_v1",
-  "mysterymechanism_sparse_symbolic_adapter_v2",
-  "harbor_swe_zero_model_agent_v1",
-  "weight_space_fuel_v1",
-  "experience_corpus_training_readiness_v1"
+  "osworld_v21_local_qwen_policy_v1"
  ]
 }

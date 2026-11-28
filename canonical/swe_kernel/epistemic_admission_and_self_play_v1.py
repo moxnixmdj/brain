@@ -1154,8 +1154,88 @@ def _collect_maximal_shared_exprs(before_stmts: Sequence[ast.stmt], after_stmts:
     return maximal
 
 
+def _strip_docstring_stmts(stmts: Sequence[ast.stmt]) -> list[ast.stmt]:
+    """Drop leading module/class/function docstring Expr(Constant(str)) nodes."""
+    out = list(stmts)
+    if (
+        out
+        and isinstance(out[0], ast.Expr)
+        and isinstance(out[0].value, ast.Constant)
+        and isinstance(out[0].value.value, str)
+    ):
+        return out[1:]
+    return out
+
+
+def _ast_dump_clean(node: ast.AST) -> str:
+    return ast.dump(node, annotate_fields=True, include_attributes=False)
+
+
+def _find_minimal_subexpr_diff(n1: ast.AST, n2: ast.AST) -> list[tuple[ast.AST, ast.AST]]:
+    """Return minimal differing (before_sub, after_sub) AST sub-node pairs."""
+    if _ast_dump_clean(n1) == _ast_dump_clean(n2):
+        return []
+    if type(n1) is not type(n2):
+        return [(n1, n2)]
+    diffs: list[tuple[ast.AST, ast.AST]] = []
+    for fname, v1 in ast.iter_fields(n1):
+        if fname in ("ctx", "type_comment"):
+            continue
+        v2 = getattr(n2, fname, None)
+        if isinstance(v1, ast.AST) and isinstance(v2, ast.AST):
+            diffs.extend(_find_minimal_subexpr_diff(v1, v2))
+        elif isinstance(v1, list) and isinstance(v2, list):
+            if len(v1) != len(v2):
+                return [(n1, n2)]
+            for x1, x2 in zip(v1, v2):
+                if isinstance(x1, ast.AST) and isinstance(x2, ast.AST):
+                    diffs.extend(_find_minimal_subexpr_diff(x1, x2))
+                elif x1 != x2:
+                    return [(n1, n2)]
+        elif v1 != v2:
+            return [(n1, n2)]
+    return diffs if diffs else [(n1, n2)]
+
+
+def _collect_changed_function_pairs(
+    b_stmts: Sequence[ast.stmt],
+    a_stmts: Sequence[ast.stmt],
+) -> list[tuple[ast.FunctionDef | ast.AsyncFunctionDef, ast.FunctionDef | ast.AsyncFunctionDef]]:
+    """Align changed functions & class methods by `(type, name)` recursively across a module."""
+    out: list[tuple[ast.FunctionDef | ast.AsyncFunctionDef, ast.FunctionDef | ast.AsyncFunctionDef]] = []
+    a_by_key: dict[tuple[type, str], ast.stmt] = {}
+    for st in a_stmts:
+        if isinstance(st, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            a_by_key[(type(st), st.name)] = st
+
+    for st_b in b_stmts:
+        if not isinstance(st_b, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            continue
+        st_a = a_by_key.get((type(st_b), st_b.name))
+        if st_a is None:
+            continue
+        if isinstance(st_b, ast.ClassDef) and isinstance(st_a, ast.ClassDef):
+            if ast.unparse(st_b) != ast.unparse(st_a):
+                out.extend(_collect_changed_function_pairs(st_b.body, st_a.body))
+        elif isinstance(st_b, (ast.FunctionDef, ast.AsyncFunctionDef)) and isinstance(
+            st_a, (ast.FunctionDef, ast.AsyncFunctionDef)
+        ):
+            b_clean = _strip_docstring_stmts(st_b.body)
+            a_clean = _strip_docstring_stmts(st_a.body)
+            if [ast.unparse(s) for s in b_clean] != [ast.unparse(s) for s in a_clean]:
+                out.append((st_b, st_a))
+    return out
+
+
+def _morphism_compactness_key(m: TreeRewriteMorphism) -> tuple[int, int, int]:
+    """Rank compact, non-empty, closed rules ahead of large multi-class slices."""
+    zero_penalty = 1 if len(m.before_stmts_pattern) == 0 else 0
+    total_chars = sum(len(s) for s in m.before_stmts_pattern) + sum(len(s) for s in m.after_stmts_template)
+    return (zero_penalty, len(m.before_stmts_pattern) + len(m.after_stmts_template), total_chars)
+
+
 def lift_python_subtree_morphism(before_code: str, after_code: str) -> TreeRewriteMorphism | None:
-    """Compute the minimal changed AST statement slice between `before_code` and `after_code`
+    """Compute the minimal changed AST statement/sub-expression slice between `before_code` and `after_code`
     and generalize shared expressions & identifiers into closed holes `_H0_`, `_P0_`.
     """
     try:
@@ -1177,52 +1257,34 @@ def lift_python_subtree_morphism(before_code: str, after_code: str) -> TreeRewri
     ):
         if isinstance(b_body[0], (ast.FunctionDef, ast.AsyncFunctionDef)):
             param_names = [arg.arg for arg in b_body[0].args.args if arg.arg != "self"]
-        b_body = list(b_body[0].body)
-        a_body = list(a_body[0].body)
+        b_body = _strip_docstring_stmts(b_body[0].body)
+        a_body = _strip_docstring_stmts(a_body[0].body)
 
-    # Also locate changed FunctionDef inside a multi-def module/class
-    if len(b_body) == len(a_body) and len(b_body) > 1:
-        diffs = [
-            i for i in range(len(b_body))
-            if ast.unparse(b_body[i]) != ast.unparse(a_body[i])
-        ]
-        if len(diffs) == 1:
-            di = diffs[0]
-            if isinstance(b_body[di], (ast.FunctionDef, ast.AsyncFunctionDef)) and isinstance(a_body[di], (ast.FunctionDef, ast.AsyncFunctionDef)):
-                param_names = [arg.arg for arg in b_body[di].args.args if arg.arg != "self"]
-                b_body = list(b_body[di].body)
-                a_body = list(a_body[di].body)
-            elif isinstance(b_body[di], ast.ClassDef) and isinstance(a_body[di], ast.ClassDef):
-                b_cls, a_cls = b_body[di].body, a_body[di].body
-                cdiffs = [j for j in range(min(len(b_cls), len(a_cls))) if ast.unparse(b_cls[j]) != ast.unparse(a_cls[j])]
-                if len(cdiffs) == 1 and isinstance(b_cls[cdiffs[0]], ast.FunctionDef) and isinstance(a_cls[cdiffs[0]], ast.FunctionDef):
-                    fn_b, fn_a = b_cls[cdiffs[0]], a_cls[cdiffs[0]]
-                    assert isinstance(fn_b, ast.FunctionDef) and isinstance(fn_a, ast.FunctionDef)
-                    param_names = [arg.arg for arg in fn_b.args.args if arg.arg != "self"]
-                    b_body = list(fn_b.body)
-                    a_body = list(fn_a.body)
-                elif 2 <= len(cdiffs) <= 8 and all(isinstance(b_cls[j], ast.FunctionDef) and isinstance(a_cls[j], ast.FunctionDef) for j in cdiffs):
-                    sub_morphs = [lift_python_subtree_morphism(ast.unparse(b_cls[j]), ast.unparse(a_cls[j])) for j in cdiffs]
-                    if all(sm is not None for sm in sub_morphs):
-                        acc_m = sub_morphs[0]
-                        for sm_next in sub_morphs[1:]:
-                            assert acc_m is not None and sm_next is not None
-                            acc_m = anti_unify_subtree_morphisms(acc_m, sm_next)
-                            if acc_m is None:
-                                break
-                        if acc_m is not None:
-                            return acc_m
-        elif 2 <= len(diffs) <= 8 and all(isinstance(b_body[j], ast.FunctionDef) and isinstance(a_body[j], ast.FunctionDef) for j in diffs):
-            sub_morphs = [lift_python_subtree_morphism(ast.unparse(b_body[j]), ast.unparse(a_body[j])) for j in diffs]
-            if all(sm is not None for sm in sub_morphs):
-                acc_m = sub_morphs[0]
+    # Locate changed FunctionDef(s) / ClassDef methods by name across multi-def modules/classes!
+    if len(b_body) > 1 or len(a_body) > 1:
+        fn_pairs = _collect_changed_function_pairs(b_body, a_body)
+        if len(fn_pairs) == 1:
+            fn_b, fn_a = fn_pairs[0]
+            param_names = [arg.arg for arg in fn_b.args.args if arg.arg != "self"]
+            b_body = _strip_docstring_stmts(fn_b.body)
+            a_body = _strip_docstring_stmts(fn_a.body)
+        elif 2 <= len(fn_pairs) <= 12:
+            sub_morphs = [
+                m for fn_b, fn_a in fn_pairs
+                if (m := lift_python_subtree_morphism(ast.unparse(fn_b), ast.unparse(fn_a))) is not None
+            ]
+            if sub_morphs:
+                # First try anti-unifying pairs across changed methods in the same commit
+                acc_m: TreeRewriteMorphism | None = sub_morphs[0]
                 for sm_next in sub_morphs[1:]:
-                    assert acc_m is not None and sm_next is not None
-                    acc_m = anti_unify_subtree_morphisms(acc_m, sm_next)
                     if acc_m is None:
                         break
+                    acc_m = anti_unify_subtree_morphisms(acc_m, sm_next)
                 if acc_m is not None:
                     return acc_m
+                # Otherwise return the most compact closed method-level rule (never 10 whole classes!)
+                sub_morphs.sort(key=_morphism_compactness_key)
+                return sub_morphs[0]
 
     # Strip unchanged prefix & suffix statements to isolate the minimal connected AST block edit!
     b_strs = [ast.unparse(s) for s in b_body]
@@ -1242,6 +1304,76 @@ def lift_python_subtree_morphism(before_code: str, after_code: str) -> TreeRewri
     a_slice = a_body[pref : len(a_body) - suff if suff else len(a_body)]
     if not b_slice and not a_slice:
         return None
+
+    # Recursively descend inside a single matching compound statement when its header is identical!
+    while (
+        len(b_slice) == 1
+        and len(a_slice) == 1
+        and type(b_slice[0]) is type(a_slice[0])
+        and isinstance(b_slice[0], (ast.If, ast.For, ast.AsyncFor, ast.While, ast.With))
+    ):
+        sb, sa = b_slice[0], a_slice[0]
+        same_header = False
+        if isinstance(sb, (ast.If, ast.While)) and isinstance(sa, (ast.If, ast.While)):
+            same_header = ast.unparse(sb.test) == ast.unparse(sa.test) and [ast.unparse(x) for x in sb.orelse] == [ast.unparse(x) for x in sa.orelse]
+        elif isinstance(sb, (ast.For, ast.AsyncFor)) and isinstance(sa, (ast.For, ast.AsyncFor)):
+            same_header = ast.unparse(sb.target) == ast.unparse(sa.target) and ast.unparse(sb.iter) == ast.unparse(sa.iter)
+        elif isinstance(sb, ast.With) and isinstance(sa, ast.With):
+            same_header = [ast.unparse(x) for x in sb.items] == [ast.unparse(x) for x in sa.items]
+        if not same_header:
+            break
+        b_body, a_body = list(sb.body), list(sa.body)
+        b_strs = [ast.unparse(s) for s in b_body]
+        a_strs = [ast.unparse(s) for s in a_body]
+        pref = 0
+        while pref < len(b_strs) and pref < len(a_strs) and b_strs[pref] == a_strs[pref]:
+            pref += 1
+        suff = 0
+        while (
+            suff < (len(b_strs) - pref)
+            and suff < (len(a_strs) - pref)
+            and b_strs[len(b_strs) - 1 - suff] == a_strs[len(a_strs) - 1 - suff]
+        ):
+            suff += 1
+        b_slice = b_body[pref : len(b_body) - suff if suff else len(b_body)]
+        a_slice = a_body[pref : len(a_body) - suff if suff else len(a_body)]
+        if not b_slice and not a_slice:
+            return None
+
+    # Sub-expression extraction: if a changed `If` statement (either the sole slice statement OR
+    # a 1-to-1 aligned `If` pair inside a multi-statement slice whose body/orelse are identical)
+    # changed ONLY in its test expression by a clean minimal compound sub-expression
+    # (e.g., `click@c53d3732b`: `envvar is not None` -> `envvar`), lift that sub-expression rule!
+    if len(b_slice) == len(a_slice):
+        for sb_i, sa_i in zip(b_slice, a_slice):
+            if (
+                isinstance(sb_i, ast.If)
+                and isinstance(sa_i, ast.If)
+                and ast.unparse(sb_i.test) != ast.unparse(sa_i.test)
+                and [ast.unparse(x) for x in sb_i.body] == [ast.unparse(x) for x in sa_i.body]
+                and [ast.unparse(x) for x in sb_i.orelse] == [ast.unparse(x) for x in sa_i.orelse]
+            ):
+                expr_diffs = _find_minimal_subexpr_diff(sb_i.test, sa_i.test)
+                if len(expr_diffs) == 1:
+                    eb, ea = expr_diffs[0]
+                    if (
+                        isinstance(eb, ast.expr)
+                        and isinstance(ea, ast.expr)
+                        and not isinstance(eb, (ast.Name, ast.Constant))
+                    ):
+                        b_slice = [ast.Expr(value=copy.deepcopy(eb))]
+                        a_slice = [ast.Expr(value=copy.deepcopy(ea))]
+                        break
+
+    # Anchored guard insertion: if `b_slice` is empty and there are no method params (e.g., `def to_header(self)`),
+    # include 1 neighboring anchor statement so the rule has arity >= 1 and can actually match/anti-unify!
+    if not b_slice and a_slice and not param_names:
+        if pref > 0:
+            b_slice = [b_body[pref - 1]]
+            a_slice = [a_body[pref - 1], *a_slice]
+        elif suff > 0:
+            b_slice = [b_body[len(b_body) - suff]]
+            a_slice = [*a_slice, a_body[len(a_body) - suff]]
 
     # Dataflow Slice Closure: if `a_slice` grafts an AST expression from an unchanged sibling
     # statement in the same function (e.g., `click@05f6fd0df4` grafting `self.make_metavar(ctx)`
@@ -1374,6 +1506,35 @@ def apply_subtree_morphism_to_python(
     pat_stmts = [ast.parse(p).body[0] for p in morphism.before_stmts_pattern]
     changed = False
 
+    # Case 0: Sub-expression rewrite rule (`len(pat_stmts) == 1`, compound `ast.Expr` -> `ast.Expr`)
+    if (
+        len(pat_stmts) == 1
+        and isinstance(pat_stmts[0], ast.Expr)
+        and not isinstance(pat_stmts[0].value, (ast.Name, ast.Constant))
+        and len(morphism.after_stmts_template) == 1
+    ):
+        a_parsed = ast.parse(morphism.after_stmts_template[0]).body
+        if len(a_parsed) == 1 and isinstance(a_parsed[0], ast.Expr):
+            pat_expr = pat_stmts[0].value
+            tmpl_expr_src = ast.unparse(a_parsed[0].value)
+
+            class _SubExprApplier(ast.NodeTransformer):
+                def visit(self, node: ast.AST) -> Any:
+                    nonlocal changed
+                    if isinstance(node, ast.expr) and (not changed or apply_all):
+                        bindings: dict[str, ast.AST] = {}
+                        if _match_ast_node(pat_expr, node, bindings):
+                            rep_stmts = _instantiate_ast_stmt(tmpl_expr_src, bindings)
+                            if rep_stmts and isinstance(rep_stmts[0], ast.Expr):
+                                changed = True
+                                return rep_stmts[0].value
+                    return super().visit(node)
+
+            out_tree = _SubExprApplier().visit(tree)
+            if changed:
+                return ast.unparse(ast.fix_missing_locations(out_tree)) + "\n"
+            return None
+
     def _transform_stmt_list(stmts: list[ast.stmt], fn_params: Sequence[str] = ()) -> list[ast.stmt]:
         nonlocal changed
         # Case 1: Pure function-entry guard insertion (`before_stmts_pattern == ()`, `param_holes != ()`)
@@ -1432,101 +1593,184 @@ def apply_subtree_morphism_to_python(
     return ast.unparse(ast.fix_missing_locations(tree)) + "\n"
 
 
+def _is_nontrivial_closed_morphism(m: TreeRewriteMorphism) -> bool:
+    """Reject degenerate wildcards (`_H0_ -> _H1_`), identity rules (`before == after`), or unbound holes."""
+    if not m.before_stmts_pattern or not m.after_stmts_template:
+        return False
+    if m.before_stmts_pattern == m.after_stmts_template:
+        return False
+    if m.unbound_holes():
+        return False
+    # Reject bare-hole single-statement patterns that match every expression/statement blindly
+    if len(m.before_stmts_pattern) == 1:
+        try:
+            st = ast.parse(m.before_stmts_pattern[0]).body[0]
+            if isinstance(st, ast.Expr) and isinstance(st.value, ast.Name) and re.fullmatch(r"_(?:H|P)\d+_", st.value.id):
+                return False
+        except SyntaxError:
+            return False
+    return True
+
+
+def _extract_core_stmt_candidates(m: TreeRewriteMorphism) -> list[tuple[tuple[str, ...], tuple[str, ...]]]:
+    """Project a variable-arity morphism onto its core Semantic-IR statement & condition slices."""
+    out: list[tuple[tuple[str, ...], tuple[str, ...]]] = []
+    b_stmts = list(m.before_stmts_pattern)
+    a_stmts = list(m.after_stmts_template)
+    # 1. Exact full slice
+    if b_stmts and a_stmts:
+        out.append((tuple(b_stmts), tuple(a_stmts)))
+    # 2. Single core statements (e.g., `If` guard or `Return` transform) paired with after core
+    for sb in b_stmts:
+        for sa in a_stmts:
+            if sb != sa:
+                out.append(((sb,), (sa,)))
+    # 3. Extract inner test expressions from `If` statements as expression-level Semantic-IR cores
+    b_tests: list[str] = []
+    for sb in b_stmts:
+        try:
+            n = ast.parse(sb).body[0]
+            if isinstance(n, ast.If):
+                b_tests.append(ast.unparse(n.test))
+            elif isinstance(n, ast.Expr):
+                b_tests.append(ast.unparse(n.value))
+        except SyntaxError:
+            pass
+    a_tests: list[str] = []
+    for sa in a_stmts:
+        try:
+            n = ast.parse(sa).body[0]
+            if isinstance(n, ast.If):
+                a_tests.append(ast.unparse(n.test))
+            elif isinstance(n, ast.Expr):
+                a_tests.append(ast.unparse(n.value))
+        except SyntaxError:
+            pass
+    for tb in b_tests:
+        for ta in a_tests:
+            if tb != ta:
+                out.append(((tb,), (ta,)))
+    return out
+
+
 def anti_unify_subtree_morphisms(
     m1: TreeRewriteMorphism,
     m2: TreeRewriteMorphism,
 ) -> TreeRewriteMorphism | None:
-    """Plotkin anti-unification over two `TreeRewriteMorphism` rules: verifies identical
-    statement-slice arity and lifts any differing constant/identifier positions into fresh
-    bound holes when bound in `before_stmts_pattern`.
+    """Plotkin anti-unification over two `TreeRewriteMorphism` rules with Semantic-IR
+    variable-arity core alignment (removes the rigid `ARITY_MISMATCH_BEFORE` wall while
+    preserving strict closedness & non-degeneracy).
     """
-    if len(m1.before_stmts_pattern) != len(m2.before_stmts_pattern) or len(m1.after_stmts_template) != len(m2.after_stmts_template):
-        return None
     if m1.before_stmts_pattern == m2.before_stmts_pattern and m1.after_stmts_template == m2.after_stmts_template:
         return m1
 
-    pair_map: dict[tuple[str, str], str] = {}
-    fresh_idx = max(len(m1.hole_types), len(m2.hole_types)) + 4
-
-    def _au_ast(n1: ast.AST, n2: ast.AST) -> ast.AST | None:
-        nonlocal fresh_idx
-        u1, u2 = ast.unparse(n1).strip(), ast.unparse(n2).strip()
-        if u1 == u2:
-            return copy.deepcopy(n1)
-        is_h1 = isinstance(n1, ast.Name) and bool(re.fullmatch(r"_(?:H|P)\d+_", n1.id))
-        is_h2 = isinstance(n2, ast.Name) and bool(re.fullmatch(r"_(?:H|P)\d+_", n2.id))
-        if (is_h1 or is_h2 or (isinstance(n1, ast.expr) and isinstance(n2, ast.expr) and type(n1) is not type(n2))):
-            key = (u1, u2)
-            if key not in pair_map:
-                pair_map[key] = f"_H{fresh_idx}_"
-                fresh_idx += 1
-            return ast.Name(id=pair_map[key], ctx=ast.Load())
-        if type(n1) is not type(n2):
+    def _au_same_arity(
+        b1: Sequence[str], a1: Sequence[str], b2: Sequence[str], a2: Sequence[str],
+    ) -> TreeRewriteMorphism | None:
+        if len(b1) != len(b2) or len(a1) != len(a2) or not b1 or not a1:
             return None
-        out = copy.copy(n1)
-        for fname, v1 in ast.iter_fields(n1):
-            if fname in ("ctx", "type_comment"):
-                continue
-            v2 = getattr(n2, fname, None)
-            if isinstance(v1, list):
-                if not isinstance(v2, list) or len(v1) != len(v2):
-                    return None
-                new_list = []
-                for x1, x2 in zip(v1, v2):
-                    if isinstance(x1, ast.AST):
-                        sub = _au_ast(x1, x2)
-                        if sub is None:
-                            return None
-                        new_list.append(sub)
-                    elif x1 == x2:
-                        new_list.append(x1)
-                    else:
-                        if isinstance(n1, ast.Constant):
-                            key = (u1, u2)
-                            if key not in pair_map:
-                                pair_map[key] = f"_H{fresh_idx}_"
-                                fresh_idx += 1
-                            return ast.Name(id=pair_map[key], ctx=ast.Load())
-                        return None
-                setattr(out, fname, new_list)
-            elif isinstance(v1, ast.AST):
-                sub = _au_ast(v1, v2)
-                if sub is None:
-                    return None
-                setattr(out, fname, sub)
-            elif v1 != v2:
-                if isinstance(n1, (ast.Name, ast.Constant)):
-                    key = (u1, u2)
-                    if key not in pair_map:
-                        pair_map[key] = f"_H{fresh_idx}_"
-                        fresh_idx += 1
-                    return ast.Name(id=pair_map[key], ctx=ast.Load())
+        pair_map: dict[tuple[str, str], str] = {}
+        fresh_idx = max(len(m1.hole_types), len(m2.hole_types)) + 4
+
+        def _au_ast(n1: ast.AST, n2: ast.AST) -> ast.AST | None:
+            nonlocal fresh_idx
+            u1, u2 = ast.unparse(n1).strip(), ast.unparse(n2).strip()
+            if u1 == u2:
+                return copy.deepcopy(n1)
+            is_h1 = isinstance(n1, ast.Name) and bool(re.fullmatch(r"_(?:H|P)\d+_", n1.id))
+            is_h2 = isinstance(n2, ast.Name) and bool(re.fullmatch(r"_(?:H|P)\d+_", n2.id))
+            if (is_h1 or is_h2 or (isinstance(n1, ast.expr) and isinstance(n2, ast.expr) and type(n1) is not type(n2))):
+                key = (u1, u2)
+                if key not in pair_map:
+                    pair_map[key] = f"_H{fresh_idx}_"
+                    fresh_idx += 1
+                return ast.Name(id=pair_map[key], ctx=ast.Load())
+            if type(n1) is not type(n2):
                 return None
-        return out
+            out = copy.copy(n1)
+            for fname, v1 in ast.iter_fields(n1):
+                if fname in ("ctx", "type_comment"):
+                    continue
+                v2 = getattr(n2, fname, None)
+                if isinstance(v1, list):
+                    if not isinstance(v2, list) or len(v1) != len(v2):
+                        return None
+                    new_list = []
+                    for x1, x2 in zip(v1, v2):
+                        if isinstance(x1, ast.AST):
+                            sub = _au_ast(x1, x2)
+                            if sub is None:
+                                return None
+                            new_list.append(sub)
+                        elif x1 == x2:
+                            new_list.append(x1)
+                        else:
+                            if isinstance(n1, ast.Constant):
+                                key = (u1, u2)
+                                if key not in pair_map:
+                                    pair_map[key] = f"_H{fresh_idx}_"
+                                    fresh_idx += 1
+                                return ast.Name(id=pair_map[key], ctx=ast.Load())
+                            return None
+                    setattr(out, fname, new_list)
+                elif isinstance(v1, ast.AST):
+                    sub = _au_ast(v1, v2)
+                    if sub is None:
+                        return None
+                    setattr(out, fname, sub)
+                elif v1 != v2:
+                    if isinstance(n1, (ast.Name, ast.Constant)):
+                        key = (u1, u2)
+                        if key not in pair_map:
+                            pair_map[key] = f"_H{fresh_idx}_"
+                            fresh_idx += 1
+                        return ast.Name(id=pair_map[key], ctx=ast.Load())
+                    return None
+            return out
 
-    b_au: list[str] = []
-    for s1, s2 in zip(m1.before_stmts_pattern, m2.before_stmts_pattern):
-        r = _au_ast(ast.parse(s1).body[0], ast.parse(s2).body[0])
-        if r is None:
+        b_au: list[str] = []
+        for s1, s2 in zip(b1, b2):
+            r = _au_ast(ast.parse(s1).body[0], ast.parse(s2).body[0])
+            if r is None:
+                return None
+            b_au.append(ast.unparse(ast.fix_missing_locations(r)))
+
+        a_au: list[str] = []
+        for s1, s2 in zip(a1, a2):
+            r = _au_ast(ast.parse(s1).body[0], ast.parse(s2).body[0])
+            if r is None:
+                return None
+            a_au.append(ast.unparse(ast.fix_missing_locations(r)))
+
+        merged = TreeRewriteMorphism(
+            before_stmts_pattern=tuple(b_au),
+            after_stmts_template=tuple(a_au),
+            param_holes=m1.param_holes if len(m1.param_holes) == len(m2.param_holes) else (),
+            hole_types={v: "anti_unified" for v in pair_map.values()},
+        )
+        if not _is_nontrivial_closed_morphism(merged):
             return None
-        b_au.append(ast.unparse(ast.fix_missing_locations(r)))
+        return merged
 
-    a_au: list[str] = []
-    for s1, s2 in zip(m1.after_stmts_template, m2.after_stmts_template):
-        r = _au_ast(ast.parse(s1).body[0], ast.parse(s2).body[0])
-        if r is None:
-            return None
-        a_au.append(ast.unparse(ast.fix_missing_locations(r)))
-
-    merged = TreeRewriteMorphism(
-        before_stmts_pattern=tuple(b_au),
-        after_stmts_template=tuple(a_au),
-        param_holes=m1.param_holes if len(m1.param_holes) == len(m2.param_holes) else (),
-        hole_types={v: "anti_unified" for v in pair_map.values()},
+    # Fast path: identical statement-slice arity
+    exact = _au_same_arity(
+        m1.before_stmts_pattern, m1.after_stmts_template,
+        m2.before_stmts_pattern, m2.after_stmts_template,
     )
-    if merged.unbound_holes():
-        return None
-    return merged
+    if exact is not None:
+        return exact
+
+    # Variable-arity Semantic-IR core alignment: align shared statement/condition cores across mismatched arities!
+    c1s = _extract_core_stmt_candidates(m1)
+    c2s = _extract_core_stmt_candidates(m2)
+    best: TreeRewriteMorphism | None = None
+    for b1, a1 in c1s:
+        for b2, a2 in c2s:
+            cand = _au_same_arity(b1, a1, b2, a2)
+            if cand is not None:
+                if best is None or _morphism_compactness_key(cand) < _morphism_compactness_key(best):
+                    best = cand
+    return best
 
 
 # ---------------------------------------------------------------------------

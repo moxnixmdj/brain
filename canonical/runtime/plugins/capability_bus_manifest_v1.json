@@ -1,259 +1,272 @@
 {
- "schema": "BRAIN_CAPABILITY_BUS_MANIFEST_V1",
- "note": "Every module here was named as a high-leverage organ missing from both front doors. Declaration is not admission: the bus admits only modules whose self_check() passes.",
- "generated_by": "canonical/runtime/capability_bus_v1.py --manifest <this file>",
- "plugins": [
-  {
-   "plugin_id": "structured_morphism_abstraction_v1",
-   "module": "canonical.swe_kernel.structured_morphism_abstraction_v1",
-   "entry": "admit",
-   "triggers": [
-    "repair.abstract"
-   ],
-   "rung": 0
-  },
-  {
-   "plugin_id": "single_experience_transfer_v1",
-   "module": "canonical.swe_kernel.single_experience_transfer_v1",
-   "entry": "self_check",
-   "triggers": [
-    "repair.transfer.measure"
-   ],
-   "rung": 0
-  },
-  {
-   "plugin_id": "settled_admission_v1",
-   "module": "canonical.swe_kernel.taught_actions.settled_admission_v1",
-   "entry": "settle_taught_edit",
-   "triggers": [
-    "repair.admit.taught"
-   ],
-   "rung": 1
-  },
-  {
-   "plugin_id": "rule_scope_learning_v1",
-   "module": "canonical.swe_kernel.rule_scope_learning_v1",
-   "entry": "learn_scope",
-   "triggers": [
-    "repair.scope"
-   ],
-   "rung": 1
-  },
-  {
-   "plugin_id": "skill_recheck_v1",
-   "module": "canonical.swe_kernel.skill_recheck_v1",
-   "entry": "recheck",
-   "triggers": [
-    "store.recheck"
-   ],
-   "rung": 1
-  },
-  {
-   "plugin_id": "invalidation_enforcement_v1",
-   "module": "canonical.tools.invalidation_enforcement_v1",
-   "entry": "rule_is_applicable",
-   "triggers": [
-    "store.invalidate"
-   ],
-   "rung": 1
-  },
-  {
-   "plugin_id": "what_the_operand_names_cost_v1",
-   "module": "canonical.tools.what_the_operand_names_cost_v1",
-   "entry": "",
-   "triggers": [
-    "repair.alpha_safe"
-   ],
-   "rung": 0
-  },
-  {
-   "plugin_id": "retained_repair_session_v1",
-   "module": "canonical.swe_kernel.retained_repair_session_v1",
-   "entry": "",
-   "triggers": [
-    "repair.session"
-   ],
-   "rung": 1
-  },
-  {
-   "plugin_id": "concept_library_v1",
-   "module": "canonical.swe_kernel.concept_library_v1",
-   "entry": "",
-   "triggers": [
-    "library.egraph"
-   ],
-   "rung": 1
-  },
-  {
-   "plugin_id": "operator_generalization_v1",
-   "module": "canonical.swe_kernel.operator_generalization_v1",
-   "entry": "derive_swap_family",
-   "triggers": [
-    "library.operator"
-   ],
-   "rung": 1
-  },
-  {
-   "plugin_id": "metamorphic_plugin_v1",
-   "module": "canonical.swe_kernel.metamorphic_plugin_v1",
-   "entry": "",
-   "triggers": [
-    "test.metamorphic"
-   ],
-   "rung": 1
-  },
-  {
-   "plugin_id": "violation_attribution_v1",
-   "module": "canonical.swe_kernel.violation_attribution_v1",
-   "entry": "rank_violations",
-   "triggers": [
-    "test.attribute"
-   ],
-   "rung": 1
-  },
-  {
-   "plugin_id": "swe_typed_plan_v1",
-   "module": "canonical.runtime.swe_typed_plan_v1",
-   "entry": "",
-   "triggers": [
-    "plan.swe"
-   ],
-   "rung": 1
-  },
-  {
-   "plugin_id": "grounded_action_v1",
-   "module": "canonical.runtime.grounded_action_v1",
-   "entry": "",
-   "triggers": [
-    "plan.grounded"
-   ],
-   "rung": 1
-  },
-  {
-   "plugin_id": "solve_v1",
-   "module": "canonical.runtime.solve_v1",
-   "entry": "",
-   "triggers": [
-    "core.solve"
-   ],
-   "rung": 1
-  },
-  {
-   "plugin_id": "perfect_algorithm_unified_v8",
-   "module": "canonical.swe_kernel.perfect_algorithm_unified_v8",
-   "entry": "",
-   "triggers": [
-    "core.loop"
-   ],
-   "rung": 1
-  },
-  {
-   "plugin_id": "wave41_rung3_proposer_jitrl_continual_flywheel_v1",
-   "module": "canonical.runtime.wave41_rung3_proposer_jitrl_continual_flywheel_v1",
-   "entry": "",
-   "triggers": [
-    "propose.rung3"
-   ],
-   "rung": 2
-  },
-  {
-   "plugin_id": "experiential_strategy_extractor_v1",
-   "module": "canonical.swe_kernel.experiential_strategy_extractor_v1",
-   "entry": "",
-   "triggers": [
-    "learn.strategy"
-   ],
-   "rung": 1
-  },
-  {
-   "plugin_id": "ignorance_ledger_v1",
-   "module": "canonical.runtime.ignorance_ledger_v1",
-   "entry": "",
-   "triggers": [
-    "learn.curriculum"
-   ],
-   "rung": 1
-  },
-  {
-   "plugin_id": "experience_v1",
-   "module": "canonical.runtime.experience_v1",
-   "entry": "",
-   "triggers": [
-    "learn.experience"
-   ],
-   "rung": 1
-  },
-  {
-   "plugin_id": "credit_gates_v1",
-   "module": "canonical.runtime.credit_gates_v1",
-   "entry": "",
-   "triggers": [
-    "learn.credit"
-   ],
-   "rung": 1
-  },
-  {
-   "plugin_id": "osworld_v21_brain_agent_adapter_v1",
-   "module": "canonical.runtime.osworld_v21_brain_agent_adapter_v1",
-   "entry": "",
-   "triggers": [
-    "cua.osworld21"
-   ],
-   "rung": 1
-  },
-  {
-   "plugin_id": "osworld_v21_local_qwen_policy_v1",
-   "module": "canonical.runtime.osworld_v21_local_qwen_policy_v1",
-   "entry": "",
-   "triggers": [
-    "cua.policy.local"
-   ],
-   "rung": 2
-  },
-  {
-   "plugin_id": "epistemic_computer_agent_v1",
-   "module": "canonical.swe_kernel.epistemic_computer_agent_v1",
-   "entry": "",
-   "triggers": [
-    "cua.epistemic"
-   ],
-   "rung": 1
-  },
-  {
-   "plugin_id": "mysterymechanism_sparse_symbolic_adapter_v2",
-   "module": "canonical.runtime.mysterymechanism_sparse_symbolic_adapter_v2",
-   "entry": "",
-   "triggers": [
-    "discover.active"
-   ],
-   "rung": 1
-  },
-  {
-   "plugin_id": "harbor_swe_zero_model_agent_v1",
-   "module": "canonical.runtime.harbor_swe_zero_model_agent_v1",
-   "entry": "",
-   "triggers": [
-    "swe.harbor"
-   ],
-   "rung": 1
-  },
-  {
-   "plugin_id": "weight_space_fuel_v1",
-   "module": "canonical.tools.weight_space_fuel_v1",
-   "entry": "",
-   "triggers": [
-    "weights.readiness"
-   ],
-   "rung": 2
-  },
-  {
-   "plugin_id": "experience_corpus_training_readiness_v1",
-   "module": "canonical.tools.experience_corpus_training_readiness_v1",
-   "entry": "",
-   "triggers": [
-    "weights.corpus"
-   ],
-   "rung": 2
-  }
- ]
+  "schema": "BRAIN_CAPABILITY_BUS_MANIFEST_V1",
+  "note": "Every module here was named as a high-leverage organ missing from both front doors. Declaration is not admission: the bus admits only modules whose self_check() passes.",
+  "generated_by": "canonical/runtime/capability_bus_v1.py --manifest <this file>",
+  "plugins": [
+    {
+      "plugin_id": "structured_morphism_abstraction_v1",
+      "module": "canonical.swe_kernel.structured_morphism_abstraction_v1",
+      "entry": "admit",
+      "triggers": [
+        "repair.abstract"
+      ],
+      "rung": 0
+    },
+    {
+      "plugin_id": "single_experience_transfer_v1",
+      "module": "canonical.swe_kernel.single_experience_transfer_v1",
+      "entry": "self_check",
+      "triggers": [
+        "repair.transfer.measure"
+      ],
+      "rung": 0
+    },
+    {
+      "plugin_id": "settled_admission_v1",
+      "module": "canonical.swe_kernel.taught_actions.settled_admission_v1",
+      "entry": "settle_taught_edit",
+      "triggers": [
+        "repair.admit.taught"
+      ],
+      "rung": 1
+    },
+    {
+      "plugin_id": "rule_scope_learning_v1",
+      "module": "canonical.swe_kernel.rule_scope_learning_v1",
+      "entry": "learn_scope",
+      "triggers": [
+        "repair.scope"
+      ],
+      "rung": 1
+    },
+    {
+      "plugin_id": "skill_recheck_v1",
+      "module": "canonical.swe_kernel.skill_recheck_v1",
+      "entry": "recheck",
+      "triggers": [
+        "store.recheck"
+      ],
+      "rung": 1
+    },
+    {
+      "plugin_id": "invalidation_enforcement_v1",
+      "module": "canonical.tools.invalidation_enforcement_v1",
+      "entry": "rule_is_applicable",
+      "triggers": [
+        "store.invalidate"
+      ],
+      "rung": 1
+    },
+    {
+      "plugin_id": "what_the_operand_names_cost_v1",
+      "module": "canonical.tools.what_the_operand_names_cost_v1",
+      "entry": "",
+      "triggers": [
+        "repair.alpha_safe"
+      ],
+      "rung": 0
+    },
+    {
+      "plugin_id": "retained_repair_session_v1",
+      "module": "canonical.swe_kernel.retained_repair_session_v1",
+      "entry": "",
+      "triggers": [
+        "repair.session"
+      ],
+      "rung": 1
+    },
+    {
+      "plugin_id": "concept_library_v1",
+      "module": "canonical.swe_kernel.concept_library_v1",
+      "entry": "",
+      "triggers": [
+        "library.egraph"
+      ],
+      "rung": 1
+    },
+    {
+      "plugin_id": "operator_generalization_v1",
+      "module": "canonical.swe_kernel.operator_generalization_v1",
+      "entry": "derive_swap_family",
+      "triggers": [
+        "library.operator"
+      ],
+      "rung": 1
+    },
+    {
+      "plugin_id": "metamorphic_plugin_v1",
+      "module": "canonical.swe_kernel.metamorphic_plugin_v1",
+      "entry": "",
+      "triggers": [
+        "test.metamorphic"
+      ],
+      "rung": 1
+    },
+    {
+      "plugin_id": "violation_attribution_v1",
+      "module": "canonical.swe_kernel.violation_attribution_v1",
+      "entry": "rank_violations",
+      "triggers": [
+        "test.attribute"
+      ],
+      "rung": 1
+    },
+    {
+      "plugin_id": "swe_typed_plan_v1",
+      "module": "canonical.runtime.swe_typed_plan_v1",
+      "entry": "",
+      "triggers": [
+        "plan.swe"
+      ],
+      "rung": 1
+    },
+    {
+      "plugin_id": "grounded_action_v1",
+      "module": "canonical.runtime.grounded_action_v1",
+      "entry": "",
+      "triggers": [
+        "plan.grounded"
+      ],
+      "rung": 1
+    },
+    {
+      "plugin_id": "solve_v1",
+      "module": "canonical.runtime.solve_v1",
+      "entry": "",
+      "triggers": [
+        "core.solve"
+      ],
+      "rung": 1
+    },
+    {
+      "plugin_id": "perfect_algorithm_unified_v8",
+      "module": "canonical.swe_kernel.perfect_algorithm_unified_v8",
+      "entry": "",
+      "triggers": [
+        "core.loop"
+      ],
+      "rung": 1
+    },
+    {
+      "plugin_id": "wave41_rung3_proposer_jitrl_continual_flywheel_v1",
+      "module": "canonical.runtime.wave41_rung3_proposer_jitrl_continual_flywheel_v1",
+      "entry": "",
+      "triggers": [
+        "propose.rung3"
+      ],
+      "rung": 2
+    },
+    {
+      "plugin_id": "experiential_strategy_extractor_v1",
+      "module": "canonical.swe_kernel.experiential_strategy_extractor_v1",
+      "entry": "",
+      "triggers": [
+        "learn.strategy"
+      ],
+      "rung": 1
+    },
+    {
+      "plugin_id": "ignorance_ledger_v1",
+      "module": "canonical.runtime.ignorance_ledger_v1",
+      "entry": "",
+      "triggers": [
+        "learn.curriculum"
+      ],
+      "rung": 1
+    },
+    {
+      "plugin_id": "experience_v1",
+      "module": "canonical.runtime.experience_v1",
+      "entry": "",
+      "triggers": [
+        "learn.experience"
+      ],
+      "rung": 1
+    },
+    {
+      "plugin_id": "credit_gates_v1",
+      "module": "canonical.runtime.credit_gates_v1",
+      "entry": "",
+      "triggers": [
+        "learn.credit"
+      ],
+      "rung": 1
+    },
+    {
+      "plugin_id": "osworld_v21_brain_agent_adapter_v1",
+      "module": "canonical.runtime.osworld_v21_brain_agent_adapter_v1",
+      "entry": "",
+      "triggers": [
+        "cua.osworld21"
+      ],
+      "rung": 1
+    },
+    {
+      "plugin_id": "osworld_v21_local_qwen_policy_v1",
+      "module": "canonical.runtime.osworld_v21_local_qwen_policy_v1",
+      "entry": "",
+      "triggers": [
+        "cua.policy.local"
+      ],
+      "rung": 2
+    },
+    {
+      "plugin_id": "epistemic_computer_agent_v1",
+      "module": "canonical.swe_kernel.epistemic_computer_agent_v1",
+      "entry": "",
+      "triggers": [
+        "cua.epistemic"
+      ],
+      "rung": 1
+    },
+    {
+      "plugin_id": "mysterymechanism_sparse_symbolic_adapter_v2",
+      "module": "canonical.runtime.mysterymechanism_sparse_symbolic_adapter_v2",
+      "entry": "",
+      "triggers": [
+        "discover.active"
+      ],
+      "rung": 1
+    },
+    {
+      "plugin_id": "harbor_swe_zero_model_agent_v1",
+      "module": "canonical.runtime.harbor_swe_zero_model_agent_v1",
+      "entry": "",
+      "triggers": [
+        "swe.harbor"
+      ],
+      "rung": 1
+    },
+    {
+      "plugin_id": "weight_space_fuel_v1",
+      "module": "canonical.tools.weight_space_fuel_v1",
+      "entry": "",
+      "triggers": [
+        "weights.readiness"
+      ],
+      "rung": 2
+    },
+    {
+      "plugin_id": "experience_corpus_training_readiness_v1",
+      "module": "canonical.tools.experience_corpus_training_readiness_v1",
+      "entry": "",
+      "triggers": [
+        "weights.corpus"
+      ],
+      "rung": 2
+    },
+    {
+      "plugin_id": "wave53_54_unified_capability_bus_and_leapfrog_v1",
+      "module": "canonical.runtime.wave53_54_unified_capability_bus_and_leapfrog_v1",
+      "entry": "self_check",
+      "triggers": [
+        "bus.unified_leapfrog",
+        "transfer.trigger_keyed_estitch_strata",
+        "swe.multifile_cow_repair",
+        "memory.dbsp_hindsight_strata",
+        "cua.webmcp_agent_s4"
+      ],
+      "rung": 0
+    }
+  ]
 }

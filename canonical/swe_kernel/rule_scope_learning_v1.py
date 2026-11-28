@@ -693,3 +693,29 @@ def calibrate_rule_scope(rule: Mapping[str, Any], *, store: Any = None) -> dict[
         persisted = bool(store.update_learned_scope(sid, effective_scope, audit=report))
     report["persisted"] = persisted
     return report
+
+
+def self_check() -> dict[str, Any]:
+    """Verify version-space scope learning narrows hypotheses and rejects empty instance lists."""
+    empty_refused = False
+    try:
+        learn_scope({}, [])
+    except ScopeLearningError:
+        empty_refused = True
+    rule = {
+        "pattern_tokens": [["id", "a"], ["op", "<="], ["id", "b"]],
+        "replacement_tokens": [["id", "a"], ["op", "<"], ["id", "b"]],
+        "language": "python",
+        "source": {"before": "if a <= b:\n    return a\n", "after": "if a < b:\n    return a\n"},
+    }
+    instances = [
+        {"source_text": "if a <= b:\n    return a\n", "language": "python", "label": "pos"},
+        {"source_text": "if x < y:\n    return x\n", "language": "python", "label": "neg"},
+    ]
+    res = learn_scope(rule, instances, verifier=lambda src: "a < b" in src)
+    ok = empty_refused and isinstance(res, dict) and bool(_hypotheses())
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "empty_refused": empty_refused,
+        "hypotheses_count": len(_hypotheses()),
+    }

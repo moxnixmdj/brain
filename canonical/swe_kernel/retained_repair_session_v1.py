@@ -124,3 +124,34 @@ class RetainedRepairSession:
             # A completed source repair is not undone because retention failed.
             self.metadata['teaching'] = {'crystallized': False, 'reason': type(exc).__name__}
         self.metadata['oracle_calls'] = self.oracle.calls
+
+
+def self_check() -> dict[str, Any]:
+    """Verify RetainedRepairSession rejects unknown settings and instantiates cleanly on a temp repo."""
+    import tempfile
+    unknown_rejected = False
+    with tempfile.TemporaryDirectory(prefix="retained_sc_") as td:
+        root = Path(td)
+        try:
+            RetainedRepairSession({"bogus_flag": True}, root, root, root, [], 5)
+        except ValueError:
+            unknown_rejected = True
+        target_file = root / "target.py"
+        target_file.write_text("def f(a, b):\n    return a <= b\n", encoding="utf-8")
+        test_file = root / "test_target.py"
+        test_file.write_text("import unittest\nfrom target import f\n\nclass T(unittest.TestCase):\n    def test_f(self):\n        self.assertFalse(f(2, 2))\n", encoding="utf-8")
+        sess = RetainedRepairSession(
+            {
+                "enabled": True,
+                "target_path": "target.py",
+                "contract": {"schema_version": 1, "scope_id": "self_check", "verification_kind": "TEST_SUITE"},
+                "db_path": "rules.sqlite",
+                "allow_operator_generalization": True,
+            },
+            root, root, root, [test_file], 5,
+        )
+        ok = unknown_rejected and callable(getattr(sess, "learn", None)) and callable(getattr(sess, "propose", None))
+    return {
+        "verdict": "SELF_CHECK_PASS" if ok else "SELF_CHECK_FAIL",
+        "unknown_setting_rejected": unknown_rejected,
+    }
