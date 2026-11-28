@@ -58,8 +58,12 @@ MAX_OUTPUT_CHARS = 16000
 
 _REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
 _KERNEL_FILES = (
+    "canonical/runtime/deterministic_decision_primitives.py",
+    "canonical/runtime/settlement_v1.py",
     "canonical/swe_kernel/angelic_cegis_repair_v1.py",
     "canonical/swe_kernel/cow_angelic_zygote_v1.py",
+    "canonical/swe_kernel/differential_witness_inversion_v1.py",
+    "canonical/swe_kernel/executable_simulator_mental_model_v1.py",
     "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
     "canonical/swe_kernel/c_asan_cegis_repair_v1.py",
     "canonical/swe_kernel/js_causal_cegis_repair_v1.py",
@@ -68,6 +72,7 @@ _KERNEL_FILES = (
     "canonical/swe_kernel/universal_computer_agent_v1.py",
     "canonical/swe_kernel/executable_mental_model_v1.py",
     "canonical/swe_kernel/semantic_ir_v1.py",
+    "canonical/swe_kernel/minimal_epistemic_core_v1.py",
 )
 
 
@@ -83,6 +88,7 @@ def _build_kernel_tar_gz() -> bytes:
             tf.addfile(ti, io.BytesIO(payload))
 
         _add_bytes("canonical/__init__.py", b"")
+        _add_bytes("canonical/runtime/__init__.py", b"")
         _add_bytes("canonical/swe_kernel/__init__.py", b"")
         for rel_mod in _KERNEL_FILES:
             _add_bytes(rel_mod, (_REPO_ROOT / rel_mod).read_bytes())
@@ -349,6 +355,40 @@ elif test_target == "__TERMINAL_GOAL__":
             m1_res = acr.repair_repo_from_issue_zero_leakage(
                 repo_root, goal_text, timeout_s=timeout_s, skill_store=store
             )
+        if not m1_res.get("repaired") and vis_tests:
+            try:
+                from canonical.swe_kernel import minimal_epistemic_core_v1 as mec
+                # Fast CoW PriorRepairEngine fallback for single-file self-contained Python modules
+                py_srcs = [
+                    p for p in sorted(repo_p.rglob("*.py"))
+                    if ".git" not in p.parts and not p.name.startswith("test_")
+                ]
+                if len(py_srcs) <= 3 and len(vis_tests) >= 1:
+                    test_src = (repo_p / vis_tests[0]).read_text(encoding="utf-8", errors="replace")
+                    engine = mec.PriorRepairEngine()
+                    for sp in py_srcs[:2]:
+                        raw_src = sp.read_text(encoding="utf-8", errors="replace")
+                        strength = mec.FastCoWVerifier.check_test_strength(raw_src, test_src, max_mutants=5)
+                        if strength.get("is_lie"):
+                            continue
+                        r_mec = engine.repair(raw_src, test_src, max_candidates=120, timeout_s=0.10)
+                        if r_mec.get("fixed") and r_mec.get("source"):
+                            rel_sp = sp.relative_to(repo_p).as_posix()
+                            m1_res = {
+                                "repaired": True,
+                                "method": "MINIMAL_EPISTEMIC_CORE_PRIOR_REPAIR_V1",
+                                "rule": str(r_mec.get("op_kind") or "prior_repair"),
+                                "patched_file": rel_sp,
+                                "patched_files": {rel_sp: str(r_mec["source"])},
+                                "patched_line": 0,
+                                "failing_nodeid": vis_tests[0],
+                                "reason": None,
+                                "elapsed_ms": int(round(float(r_mec.get("elapsed_ms", 0.0)))),
+                                "stats": {"candidates_tested": int(r_mec.get("candidates_tested", 0))},
+                            }
+                            break
+            except Exception:
+                pass
     elif is_c_repo and not has_terminal_artifact:
         m1_res = casan.repair_c_repo_from_issue_zero_leakage(
             repo_root, goal_text, timeout_s=timeout_s, skill_store=store

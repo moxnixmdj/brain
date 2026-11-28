@@ -33051,12 +33051,12 @@
   "routing_tokens": 4116,
   "skills": 18,
   "source_index_entry_points": 575,
-  "source_index_modules": 2326
+  "source_index_modules": 2329
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f36fac1079ed8eeef890880f10dc6644a1612c68004a3ee7f6762539318b33dc"
+  "value": "b5cf182b2afe2937d4e3dcc13179aaa35732b52a6f137346d62100fd5cc8b1a2"
  },
  "engines": [
   {
@@ -39333,7 +39333,7 @@
     "carrier_sha256": "426d6f925c303696e7bab9cc2f6c876e52f6c6186e8c9e632244a82d6720c220",
     "entrypoint": "SafeTransferEStitchStrataEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "8635c3538441fadde11b2e20984f5bd62bde6a8d269aae589d25a42136a03c7a"
+    "source_sha256": "d7eb42c3a9131deb29eeee2f63231640941ab036545373e17695bc382167dcd3"
    },
    "summary": "Wave 53 6-stage safe transfer engine unifying MIT E-Stitch e-class canonicalization, structured morphism abstraction, oracle-free alpha-safe templates, STRATA contrast-edge negative-transfer defense (0% blind corruption), hard invalidation, and Ville e-process credit gating.",
    "triggers": [
@@ -39368,7 +39368,7 @@
     "carrier_sha256": "426d6f925c303696e7bab9cc2f6c876e52f6c6186e8c9e632244a82d6720c220",
     "entrypoint": "UnifiedCapabilityBusEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "8635c3538441fadde11b2e20984f5bd62bde6a8d269aae589d25a42136a03c7a"
+    "source_sha256": "d7eb42c3a9131deb29eeee2f63231640941ab036545373e17695bc382167dcd3"
    },
    "summary": "Wave 53 zero-LOC-growth unified capability bus awakening 36 zero-overlap hidden organs (192 -> 228 cumulative DARK modules) and structural front-door intent router raising real SWE issue acceptance from 35.0% to 96.2% while refusing 100% of content-free inputs.",
    "triggers": [
@@ -39403,7 +39403,7 @@
     "carrier_sha256": "426d6f925c303696e7bab9cc2f6c876e52f6c6186e8c9e632244a82d6720c220",
     "entrypoint": "DbspHindsightStrataMemoryEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "8635c3538441fadde11b2e20984f5bd62bde6a8d269aae589d25a42136a03c7a"
+    "source_sha256": "d7eb42c3a9131deb29eeee2f63231640941ab036545373e17695bc382167dcd3"
    },
    "summary": "Wave 54 control-plane memory unifying DBSP Z-set cascade & formal Absence witnesses, Hindsight 4 epistemic networks, P-Mem explicit rollback edges, ForgetEval-Adv 6 primitives (including purge-by-query & shared-attribute release), and STRATA contrast conflict warnings.",
    "triggers": [
@@ -39438,7 +39438,7 @@
     "carrier_sha256": "426d6f925c303696e7bab9cc2f6c876e52f6c6186e8c9e632244a82d6720c220",
     "entrypoint": "DockerlessVerifierAndSelfPlayCurriculumEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "8635c3538441fadde11b2e20984f5bd62bde6a8d269aae589d25a42136a03c7a"
+    "source_sha256": "d7eb42c3a9131deb29eeee2f63231640941ab036545373e17695bc382167dcd3"
    },
    "summary": "Wave 54 7-probe deterministic zero-Docker patch verifier (Dockerless-inspired) and ignorance-ledger-driven self-play bug-injection & blind repair curriculum proving Round-2 skill transfer at K3=0.",
    "triggers": [
@@ -39473,7 +39473,7 @@
     "carrier_sha256": "426d6f925c303696e7bab9cc2f6c876e52f6c6186e8c9e632244a82d6720c220",
     "entrypoint": "FullMetamorphicLawAndPrecisionSlicerEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "8635c3538441fadde11b2e20984f5bd62bde6a8d269aae589d25a42136a03c7a"
+    "source_sha256": "d7eb42c3a9131deb29eeee2f63231640941ab036545373e17695bc382167dcd3"
    },
    "summary": "Wave 54 complete 9/9 metamorphic law repair synthesizer, test-isolation inherited-debt filter, free AST def-use neighbor-regression precision pre-filter, and multi-file top-K call-graph localizer with atomic CoW rollback.",
    "triggers": [
@@ -39508,7 +39508,7 @@
     "carrier_sha256": "426d6f925c303696e7bab9cc2f6c876e52f6c6186e8c9e632244a82d6720c220",
     "entrypoint": "UnifiedMultiRungJitRLAndWebMcpGrounderEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "8635c3538441fadde11b2e20984f5bd62bde6a8d269aae589d25a42136a03c7a"
+    "source_sha256": "d7eb42c3a9131deb29eeee2f63231640941ab036545373e17695bc382167dcd3"
    },
    "summary": "Wave 54 inverted multi-rung JitRL closed-form KL advantage executive loop + task-agnostic JSON-schema multi-step WebMCP & OSWorld 2.1 grounder with WebXSkill step contracts raising WebMCP grounding from 26.9% to 100.0%.",
    "triggers": [
@@ -96403,7 +96403,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "8635c3538441fadde11b2e20984f5bd62bde6a8d269aae589d25a42136a03c7a",
+   "sha256": "d7eb42c3a9131deb29eeee2f63231640941ab036545373e17695bc382167dcd3",
    "summary": "Wave 53 & Wave 54: Unified Capability Bus, Safe-Transfer E-Stitch + STRATA,",
    "triggers": [
     "wave53",
@@ -170886,7 +170886,7 @@
   "included_source_count": 2563,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "7a1fc2a190800926cdccc62b1e40181e29cceef317a9acd3d9cfff177edf513e"
+  "source_tree_digest": "143a4599667860c8ba00e3493ff85fd707a3b1f1a133e752b26ce302518eabc2"
  },
  "research_index": [
   {
@@ -385964,7 +385964,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/harbor_swe_zero_model_agent_v1.py",
-   "sha256": "0d47c47347f117945e0153e8d6234969099d7eec737e48b60ad8d25215040ed6",
+   "sha256": "82a8f1a4fed34fe1164209761a4a6571c883d61faf8250198cc7c876e3464385",
    "summary": "Project Brain Zero-Model Harbor SWE Agent V1.",
    "symbol_count": 13,
    "symbols": [
@@ -431474,7 +431474,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-   "sha256": "8635c3538441fadde11b2e20984f5bd62bde6a8d269aae589d25a42136a03c7a",
+   "sha256": "d7eb42c3a9131deb29eeee2f63231640941ab036545373e17695bc382167dcd3",
    "summary": "Wave 53 & Wave 54: Unified Capability Bus, Safe-Transfer E-Stitch + STRATA,",
    "symbol_count": 43,
    "symbols": [
@@ -437996,6 +437996,128 @@
     "v1": 1,
     "witness_environments": 1,
     "written": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/swe_kernel/minimal_arc3_agent_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/swe_kernel/minimal_arc3_agent_v1.py",
+   "sha256": "4069aba61dbb1172f4cdd72c84358e353a91ca464b629b6c149bf362cf061a3a",
+   "summary": "Minimal Epistemic Core ARC-AGI-3 Agent v1 (Zero-Neural Jobs 1 + 2 + 3 + 5a).",
+   "symbol_count": 3,
+   "symbols": [
+    "GamePrior",
+    "MinimalArc3Agent",
+    "extract_regions"
+   ],
+   "terms": {
+    "5a": 1,
+    "agent": 2,
+    "arc-agi-3": 1,
+    "arc3": 1,
+    "core": 1,
+    "epistemic": 1,
+    "extract_regions": 1,
+    "gameprior": 1,
+    "jobs": 1,
+    "minimal": 2,
+    "minimalarc3agent": 1,
+    "v1": 2,
+    "zero-neural": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/swe_kernel/minimal_epistemic_core_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/swe_kernel/minimal_epistemic_core_v1.py",
+   "sha256": "733ff117e2dc8484b64cf07d159f8ac8fb13418cbe5691257a55de4c300c7ec8",
+   "summary": "Minimal Epistemic Core v1 — Zero-Neural Jobs 1 + 2 + 3 + 4a + 5a in one lean engine.",
+   "symbol_count": 12,
+   "symbols": [
+    "DominoMemory",
+    "FastCoWVerifier",
+    "GitASTPrior",
+    "LiveIntrospector",
+    "LocalMicroModelBackend",
+    "PriorRepairEngine",
+    "RunOutcome",
+    "SpecExtractor",
+    "_ast_fingerprint",
+    "_is_clean_python",
+    "_stem",
+    "_tokenize_stemmed"
+   ],
+   "terms": {
+    "4a": 1,
+    "5a": 1,
+    "ast_fingerprint": 1,
+    "core": 2,
+    "dominomemory": 1,
+    "engine": 1,
+    "epistemic": 2,
+    "fastcowverifier": 1,
+    "gitastprior": 1,
+    "is_clean_python": 1,
+    "jobs": 1,
+    "lean": 1,
+    "liveintrospector": 1,
+    "localmicromodelbackend": 1,
+    "minimal": 2,
+    "one": 1,
+    "priorrepairengine": 1,
+    "runoutcome": 1,
+    "specextractor": 1,
+    "stem": 1,
+    "tokenize_stemmed": 1,
+    "v1": 2,
+    "zero-neural": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/swe_kernel/minimal_micro_models_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/swe_kernel/minimal_micro_models_v1.py",
+   "sha256": "aaffe9f317718c360bcbb33919286ad4b2138a8d594d50cd2129c792c86889f0",
+   "summary": "Minimal Specialized Micro-Models v1 — Step 4 Pareto Frontier over Proven Job 4b / 5b Residuals.",
+   "symbol_count": 4,
+   "symbols": [
+    "AstOpcodeMicroLM",
+    "OverfitRerankerMicroModel",
+    "SubspaceMemoryEncoder",
+    "extract_rerank_features"
+   ],
+   "terms": {
+    "4b": 1,
+    "5b": 1,
+    "astopcodemicrolm": 1,
+    "extract_rerank_features": 1,
+    "frontier": 1,
+    "job": 1,
+    "micro": 1,
+    "micro-models": 1,
+    "minimal": 2,
+    "models": 1,
+    "over": 1,
+    "overfitrerankermicromodel": 1,
+    "pareto": 1,
+    "proven": 1,
+    "residuals": 1,
+    "specialized": 1,
+    "step": 1,
+    "subspacememoryencoder": 1,
+    "v1": 2
    }
   },
   {

@@ -4712,6 +4712,134 @@ class Wave53To54UnifiedCapabilityBusMixin(Wave51To52UnifiedModelMixin):
             "k3_model_calls": 0,
         }
 
+    # --- Minimal Epistemic Core (Jobs 1-5a + ARC-AGI-3 + Specialized Micro-Models, lazy-loaded) ---
+
+    def minimal_core_repair(
+        self,
+        source: str,
+        test_code: str,
+        *,
+        entry_point: str = "",
+        docstring: str | None = None,
+        use_doctests: bool = False,
+        max_candidates: int = 120,
+        timeout_s: float = 0.05,
+        use_local_micro_llm: bool = False,
+    ) -> dict[str, Any]:
+        """Run the zero-dependency PriorRepairEngine (Jobs 3 + 4a + 5a) with optional local loopback hook."""
+        from canonical.swe_kernel.minimal_epistemic_core_v1 import (
+            FastCoWVerifier,
+            LocalMicroModelBackend,
+            PriorRepairEngine,
+        )
+
+        engine = PriorRepairEngine()
+        res = engine.repair(
+            source,
+            test_code,
+            entry_point=entry_point,
+            docstring=docstring,
+            use_doctests=use_doctests,
+            max_candidates=max_candidates,
+            timeout_s=timeout_s,
+        )
+        local_calls = 0
+        if not res.get("fixed") and use_local_micro_llm:
+            backend = LocalMicroModelBackend()
+            if backend.enabled:
+                for cand in backend.propose_python_patches(source, docstring or str(res.get("exc_type") or "")):
+                    ver = FastCoWVerifier.run_isolated(cand, test_code, timeout_s=max(0.2, timeout_s))
+                    if ver.passed:
+                        res = dict(res)
+                        res.update({"fixed": True, "source": cand, "op_kind": "local_micro_llm_verified"})
+                        break
+                local_calls = backend.calls
+        res["k3_model_calls"] = local_calls
+        return res
+
+    def minimal_core_check_test_strength(
+        self,
+        source: str,
+        test_code: str,
+        *,
+        max_mutants: int = 5,
+    ) -> dict[str, Any]:
+        """Run Job 3's 5-mutant lie detector (`FastCoWVerifier.check_test_strength`) on a test oracle."""
+        from canonical.swe_kernel.minimal_epistemic_core_v1 import FastCoWVerifier
+
+        out = FastCoWVerifier.check_test_strength(source, test_code, max_mutants=max_mutants)
+        out["k3_model_calls"] = 0
+        return out
+
+    def minimal_domino_memory(
+        self,
+        operation: str = "retrieve",
+        *,
+        conversation: Mapping[str, Any] | None = None,
+        query: str = "",
+        top_k: int = 10,
+        subspace_fusion: bool = False,
+    ) -> dict[str, Any]:
+        """Run Job 2 (`DominoMemory`) with optional Step 4B `SubspaceMemoryEncoder` RRF fusion."""
+        from canonical.swe_kernel.minimal_epistemic_core_v1 import DominoMemory
+
+        if operation == "retrieve" and conversation:
+            idx = DominoMemory.index_conversation(dict(conversation))
+            ret = DominoMemory.retrieve_turns(idx, query, top_k=top_k)
+            dom_ids = list(ret.get("dia_ids") or [])
+            extra = {
+                "speaker_conflict": bool(ret.get("speaker_conflict", False)),
+                "conflict_score": float(ret.get("conflict_score", 0.0)),
+            }
+            if subspace_fusion and idx.get("turns"):
+                from canonical.swe_kernel.minimal_micro_models_v1 import SubspaceMemoryEncoder
+
+                turns_list = idx["turns"]
+                texts = [f"{t.get('speaker', '')}: {t.get('text', '')}" for t in turns_list]
+                sess_ids = [int(t.get("session", 0)) for t in turns_list]
+                enc = SubspaceMemoryEncoder(n_components=min(64, max(1, len(texts) - 1)))
+                enc.fit_conversation(texts, sess_ids)
+                sub_scores = enc.query_scores(query)
+                sub_rank = sorted(range(len(turns_list)), key=lambda i: float(sub_scores[i]), reverse=True)
+                rrf: dict[str, float] = {}
+                for rank_i, tid in enumerate(dom_ids):
+                    rrf[tid] = rrf.get(tid, 0.0) + 1.0 / (25.0 + rank_i + 1.0)
+                for rank_i, ti in enumerate(sub_rank[: max(top_k * 2, 20)]):
+                    tid = str(turns_list[ti]["dia_id"])
+                    rrf[tid] = rrf.get(tid, 0.0) + 0.6 / (25.0 + rank_i + 1.0)
+                dom_ids = [k for k, _ in sorted(rrf.items(), key=lambda kv: kv[1], reverse=True)[:top_k]]
+            return {
+                "ok": True,
+                "turn_ids": dom_ids,
+                "meta": extra,
+                "subspace_fusion": bool(subspace_fusion),
+                "k3_model_calls": 0,
+            }
+        dm = DominoMemory()
+        return {"ok": True, "fact_count": len(dm._facts), "k3_model_calls": 0}
+
+    def minimal_arc3_create_agent(self) -> Any:
+        """Instantiate the zero-neural `MinimalArc3Agent` for interactive ARC-AGI-3 grid games."""
+        from canonical.swe_kernel.minimal_arc3_agent_v1 import MinimalArc3Agent
+
+        return MinimalArc3Agent()
+
+    def minimal_core_status(self) -> dict[str, Any]:
+        """Report availability of the lazy-wired Minimal Epistemic Core modules (0 LLM calls)."""
+        from canonical.swe_kernel.minimal_epistemic_core_v1 import LocalMicroModelBackend
+
+        backend = LocalMicroModelBackend()
+        return {
+            "ok": True,
+            "modules": [
+                "canonical.swe_kernel.minimal_epistemic_core_v1",
+                "canonical.swe_kernel.minimal_arc3_agent_v1",
+                "canonical.swe_kernel.minimal_micro_models_v1",
+            ],
+            "local_micro_llm_enabled": backend.enabled,
+            "k3_model_calls": 0,
+        }
+
 
 # =============================================================================
 # ADVERSARIAL SELF-CHECK (Positive + Negative Controls, K3 = 0, $0.00)
