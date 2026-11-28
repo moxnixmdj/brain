@@ -250,11 +250,195 @@ class GamePrior:
                     self.known_step_limit = int(min(recent))
 
 
+def _extract_diff_components(
+    frame: np.ndarray,
+    diff_mask: np.ndarray,
+    y0: int,
+    y1: int,
+    x0: int,
+    x1: int,
+) -> list[dict[str, Any]]:
+    """Fast 4-connected components seeded strictly inside the padded pixel-diff bounding box."""
+    h, w = frame.shape
+    py0, py1 = max(0, y0 - 8), min(h - 1, y1 + 8)
+    px0, px1 = max(0, x0 - 8), min(w - 1, x1 + 8)
+    crop = frame[py0:py1 + 1, px0:px1 + 1]
+    ch, cw = crop.shape
+    visited = np.zeros((ch, cw), dtype=bool)
+    out: list[dict[str, Any]] = []
+    dys, dxs = np.nonzero(diff_mask[py0:py1 + 1, px0:px1 + 1])
+    for sy, sx in zip(dys.tolist(), dxs.tolist()):
+        if visited[sy, sx]:
+            continue
+        col = int(crop[sy, sx])
+        q = deque([(sy, sx)])
+        visited[sy, sx] = True
+        min_x = max_x = sx
+        min_y = max_y = sy
+        sum_x = sum_y = area = 0
+        while q:
+            cy, cx = q.popleft()
+            area += 1
+            sum_x += cx
+            sum_y += cy
+            if cx < min_x:
+                min_x = cx
+            if cx > max_x:
+                max_x = cx
+            if cy < min_y:
+                min_y = cy
+            if cy > max_y:
+                max_y = cy
+            if area > 180:
+                break
+            for ny, nx in ((cy - 1, cx), (cy + 1, cx), (cy, cx - 1), (cy, cx + 1)):
+                if 0 <= ny < ch and 0 <= nx < cw and not visited[ny, nx] and int(crop[ny, nx]) == col:
+                    visited[ny, nx] = True
+                    q.append((ny, nx))
+        if area <= 160:
+            gx0, gy0, gx1, gy1 = px0 + min_x, py0 + min_y, px0 + max_x, py0 + max_y
+            if (gy0 <= 2 and gy1 <= 3) or (gy0 >= h - 4) or (gx0 <= 2 and gx1 <= 3) or (gx0 >= w - 4):
+                continue
+            out.append({
+                "color": col,
+                "area": area,
+                "cx": px0 + sum_x / area,
+                "cy": py0 + sum_y / area,
+                "bbox": (gx0, gy0, gx1, gy1),
+            })
+    return out
+
+
+class ObjectWorldModel:
+    """Strictly black-box Code-as-Model kinematic object-physics compiler (V5).
+
+    Learns avatar bbox, exact integer move vectors (dx, dy), and 1-counterexample
+    solid-wall vs passable color rules directly from raw pixel diffs (<0.15ms/step),
+    persisting verified physics across levels of the same game.
+    """
+
+    def __init__(self) -> None:
+        self.avatar_bbox: tuple[int, int, int, int] | None = None
+        self.avatar_color: int | None = None
+        self.avatar_area: int = 0
+        self.move_step: dict[str, tuple[int, int]] = {}
+        self.passable_colors: set[int] = set()
+        self.wall_votes: Counter[int] = Counter()
+        self.bg_color: int | None = None
+        self.state_bbox: dict[str, tuple[int, int, int, int]] = {}
+
+    def new_level(self) -> None:
+        self.avatar_bbox = None
+        self.bg_color = None
+        self.state_bbox.clear()
+
+    def on_reset(self) -> None:
+        self.avatar_bbox = None
+
+    def wall_colors(self, thresh: int = 2) -> set[int]:
+        return {c for c, v in self.wall_votes.items() if v >= thresh and c not in self.passable_colors}
+
+    def is_predicted_wall_at(
+        self,
+        act: str,
+        frame: np.ndarray,
+        bbox: tuple[int, int, int, int] | None,
+        thresh: int = 2,
+    ) -> bool:
+        if bbox is None or act not in self.move_step:
+            return False
+        walls = self.wall_colors(thresh=thresh)
+        if not walls:
+            return False
+        h, w = frame.shape
+        x0, y0, x1, y1 = bbox
+        dx, dy = self.move_step[act]
+        nx0, ny0, nx1, ny1 = x0 + dx, y0 + dy, x1 + dx, y1 + dy
+        if nx0 < 0 or ny0 < 0 or nx1 >= w or ny1 >= h:
+            return True
+        patch = frame[ny0:ny1 + 1, nx0:nx1 + 1]
+        for wc in walls:
+            if np.any(patch == wc):
+                return True
+        return False
+
+    def is_predicted_wall(self, act: str, frame: np.ndarray, thresh: int = 2) -> bool:
+        return self.is_predicted_wall_at(act, frame, self.avatar_bbox, thresh=thresh)
+
+    def observe_move(
+        self,
+        act: str,
+        prev_key: str,
+        next_key: str,
+        prev_frame: np.ndarray,
+        next_frame: np.ndarray,
+        hud_mask: np.ndarray,
+        moved: bool,
+    ) -> None:
+        h, w = prev_frame.shape
+        if self.bg_color is None:
+            vals, cnts = np.unique(prev_frame[~hud_mask] if np.any(hud_mask) else prev_frame, return_counts=True)
+            self.bg_color = int(vals[np.argmax(cnts)])
+        if not moved:
+            if self.avatar_bbox is not None and act in self.move_step:
+                x0, y0, x1, y1 = self.avatar_bbox
+                dx, dy = self.move_step[act]
+                nx0, ny0, nx1, ny1 = x0 + dx, y0 + dy, x1 + dx, y1 + dy
+                if 0 <= nx0 and nx1 < w and 0 <= ny0 and ny1 < h:
+                    patch = prev_frame[ny0:ny1 + 1, nx0:nx1 + 1]
+                    for c in np.unique(patch):
+                        ci = int(c)
+                        if ci != self.avatar_color and ci != self.bg_color and ci not in self.passable_colors:
+                            self.wall_votes[ci] += 1
+            return
+
+        diff = (prev_frame != next_frame) & ~hud_mask
+        ys, xs = np.nonzero(diff)
+        wpx = len(ys)
+        if wpx < 2 or wpx > 260:
+            return
+        y0, y1, x0, x1 = int(ys.min()), int(ys.max()), int(xs.min()), int(xs.max())
+        van = _extract_diff_components(prev_frame, diff, y0, y1, x0, x1)
+        app = _extract_diff_components(next_frame, diff, y0, y1, x0, x1)
+        best = None
+        for rv in van:
+            for ra in app:
+                if rv["color"] != ra["color"]:
+                    continue
+                if abs(rv["area"] - ra["area"]) > max(2, int(rv["area"] * 0.25)):
+                    continue
+                dx = int(round(ra["cx"] - rv["cx"]))
+                dy = int(round(ra["cy"] - rv["cy"]))
+                dist2 = dx * dx + dy * dy
+                if 1 <= dist2 <= 400 and (dx == 0 or dy == 0):
+                    bonus = (20 if self.avatar_color == rv["color"] else 0) + (50 if self.avatar_bbox == rv["bbox"] else 0)
+                    cand = (bonus, -abs(rv["area"] - ra["area"]), rv, ra, dx, dy)
+                    if best is None or cand[:2] > best[:2]:
+                        best = cand
+        if best is None:
+            return
+        _, _, rv, ra, dx, dy = best
+        old_bb, new_bb = rv["bbox"], ra["bbox"]
+        self.avatar_color = rv["color"]
+        self.avatar_area = rv["area"]
+        self.avatar_bbox = new_bb
+        self.move_step[act] = (dx, dy)
+        self.state_bbox[prev_key] = old_bb
+        self.state_bbox[next_key] = new_bb
+        nx0, ny0, nx1, ny1 = new_bb
+        dest_patch = prev_frame[ny0:ny1 + 1, nx0:nx1 + 1]
+        for c in np.unique(dest_patch):
+            ci = int(c)
+            if ci != self.avatar_color:
+                self.passable_colors.add(ci)
+
+
 class MinimalArc3Agent:
     """Zero-neural object-centric epistemic explorer & planner for one ARC-AGI-3 game across levels."""
 
     def __init__(self) -> None:
         self.prior = GamePrior()
+        self.world_model = ObjectWorldModel()
 
     def _offered_actions(
         self,
@@ -406,6 +590,8 @@ class MinimalArc3Agent:
                         sc = 1.3 * p.eff_rate(cls) + (0.35 if p.win_cls_hits.get(cls, 0) > 0 else 0.0)
                 else:
                     sc = 2.8 if t == 0 else (1.5 * p.eff_rate(cls) + 0.3)
+                    if frame is not None and self.world_model.is_predicted_wall(act, frame):
+                        sc -= 2.5
                 if act == inv_last:
                     sc -= 0.75
                 elif act == last_action and p.eff_rate(cls) > 0.3:
@@ -435,6 +621,7 @@ class MinimalArc3Agent:
         frame, avail, st_name, lvl = get_obs()
         if frame.shape != self.prior.hud_mask.shape:
             self.prior = GamePrior(frame.shape)
+        self.world_model.new_level()
         cur_key = self.prior.world_key(frame)
         cur_hist = self.prior.color_histogram(frame)
 
@@ -492,6 +679,8 @@ class MinimalArc3Agent:
                 tried.setdefault(key, set())
                 state_frames[key] = fr.copy()
                 state_mech_score.setdefault(key, 0.0)
+            if key == cur_key and key in self.world_model.state_bbox:
+                self.world_model.avatar_bbox = self.world_model.state_bbox[key]
 
         def rehash_graph_after_hud_growth() -> None:
             nonlocal transitions, action_specs, tried, state_frames, visit_count, state_mech_score
@@ -502,10 +691,13 @@ class MinimalArc3Agent:
             new_frames: dict[str, np.ndarray] = {}
             new_visits: Counter[str] = Counter()
             new_mech: dict[str, float] = {}
+            new_sbb: dict[str, tuple[int, int, int, int]] = {}
             for old_k, nk in key_map.items():
                 if nk not in new_specs:
                     new_specs[nk] = action_specs[old_k]
                     new_frames[nk] = state_frames[old_k]
+                if old_k in self.world_model.state_bbox:
+                    new_sbb[nk] = self.world_model.state_bbox[old_k]
                 new_tried.setdefault(nk, set()).update(tried.get(old_k, set()))
                 new_visits[nk] += visit_count.get(old_k, 0)
                 new_mech[nk] = max(new_mech.get(nk, 0.0), state_mech_score.get(old_k, 0.0))
@@ -515,6 +707,7 @@ class MinimalArc3Agent:
                         new_trans.setdefault(nk, {})[act] = ndst
                     else:
                         dead_edges.add((nk, act))
+            self.world_model.state_bbox = new_sbb
             transitions, action_specs, tried, state_frames, visit_count, state_mech_score = (
                 new_trans, new_specs, new_tried, new_frames, new_visits, new_mech,
             )
@@ -533,7 +726,27 @@ class MinimalArc3Agent:
                 and not (s["is_click"] and not s.get("has_move") and (s["x"], s["y"], int(s["color_cls"].split(":")[1])) in dead_click_coords)
             ]
 
-        def bfs_to_frontier(start_k: str, max_depth: int = 16) -> list[dict[str, Any]]:
+        def _has_non_wall_untried(key: str) -> bool:
+            u = untried_for(key)
+            if not u:
+                return False
+            fr_k = state_frames.get(key)
+            bb_k = self.world_model.state_bbox.get(key)
+            if fr_k is None or bb_k is None:
+                return True
+            for s in u:
+                if s["is_click"] or s["action"] not in ("A1", "A2", "A3", "A4"):
+                    return True
+                if not self.world_model.is_predicted_wall_at(s["action"], fr_k, bb_k):
+                    return True
+            return False
+
+        def bfs_to_frontier(
+            start_k: str,
+            max_depth: int = 16,
+            *,
+            require_non_wall: bool = False,
+        ) -> list[dict[str, Any]]:
             """Shortest path in G to a state with untried actions, tie-breaking toward rare-mechanic keystones."""
             q: deque[tuple[str, list[dict[str, Any]]]] = deque([(start_k, [])])
             seen_k = {start_k}
@@ -554,7 +767,7 @@ class MinimalArc3Agent:
                     if spec is None:
                         continue
                     npath = path + [spec]
-                    if untried_for(nxt):
+                    if untried_for(nxt) and (not require_non_wall or _has_non_wall_untried(nxt)):
                         if not has_any_keystone:
                             return npath
                         val = state_mech_score.get(nxt, 0.0) * 1.5 - len(npath) * 0.65
@@ -589,6 +802,7 @@ class MinimalArc3Agent:
                 state_stack = [cur_key]
                 recent_trace.clear()
                 planned_path.clear()
+                self.world_model.on_reset()
                 continue
 
             chosen: dict[str, Any] | None = None
@@ -636,7 +850,10 @@ class MinimalArc3Agent:
                     chosen = ranked[0]
                     consecutive_empty_resets = 0
                 else:
-                    path = bfs_to_frontier(cur_key, max_depth=max(8, min(36, budget - actions_used - 1)))
+                    md_bfs = max(8, min(36, budget - actions_used - 1))
+                    path = bfs_to_frontier(cur_key, max_depth=md_bfs, require_non_wall=True)
+                    if not path:
+                        path = bfs_to_frontier(cur_key, max_depth=md_bfs, require_non_wall=False)
                     if path:
                         planned_path.extend(path[1:])
                         chosen = path[0]
@@ -679,6 +896,7 @@ class MinimalArc3Agent:
                                 state_stack = [cur_key]
                                 recent_trace.clear()
                                 planned_path.clear()
+                                self.world_model.on_reset()
                                 continue
                             elif fallbacks:
                                 fallbacks.sort(key=lambda s: visit_count.get(transitions.get(cur_key, {}).get(s["action"], ""), 0))
@@ -752,6 +970,10 @@ class MinimalArc3Agent:
                     dead_click_coord_misses[ckey] += 1
                     if dead_click_coord_misses[ckey] >= 2:
                         dead_click_coords.add(ckey)
+                if not chosen["is_click"] and act_name in ("A1", "A2", "A3", "A4"):
+                    self.world_model.observe_move(
+                        act_name, prev_key, prev_key, prev_frame, frame, self.prior.hud_mask, False
+                    )
                 no_ops += 1
                 dead_edges.add((prev_key, act_name))
                 planned_path.clear()
@@ -778,6 +1000,10 @@ class MinimalArc3Agent:
                         self.prior.undo_actions.add(act_name)
 
             self.prior.record_affordance(act_name, chosen["cls"], chosen["color_cls"], world_px)
+            if not chosen["is_click"] and act_name in ("A1", "A2", "A3", "A4"):
+                self.world_model.observe_move(
+                    act_name, prev_key, next_key, prev_frame, frame, self.prior.hud_mask, True
+                )
             world_changes += 1
             recent_trace.append(chosen)
 

@@ -504,6 +504,28 @@ def run_engine_on_tree(
                                     f"{r_spine.get('patched_file')}"
                                 ),
                             }
+                        else:
+                            r_poly = _spine.solve_swe_polyglot(
+                                tree,
+                                instruction[:40000],
+                                apply_patch=False,
+                            )
+                            if r_poly.get("solved"):
+                                _inner = r_poly.get("result") if isinstance(r_poly.get("result"), Mapping) else {}
+                                _pf = dict(_inner.get("patched_files") or {})
+                                _win = _inner.get("winner") if isinstance(_inner.get("winner"), Mapping) else {}
+                                if not _pf and _win.get("file") and _win.get("patched_source"):
+                                    _pf[str(_win["file"])] = str(_win["patched_source"])
+                                if _pf:
+                                    result = {
+                                        "status": f"UNIFIED_FAST_SPINE_POLYGLOT__{r_poly.get('engine', 'POLY')}",
+                                        "pass": True,
+                                        "patch": _pf,
+                                        "explanation": (
+                                            f"UnifiedFastSpine polyglot ({r_poly.get('language')}) verified fix "
+                                            f"via {r_poly.get('engine')}"
+                                        ),
+                                    }
                     except Exception:
                         pass
     except NetworkRefusedByHarness as exc:

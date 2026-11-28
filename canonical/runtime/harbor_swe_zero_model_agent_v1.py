@@ -78,6 +78,7 @@ _KERNEL_FILES = (
     "canonical/swe_kernel/producer_lineage_graph_v1.py",
     "canonical/swe_kernel/induced_edit_basis_v1.py",
     "canonical/swe_kernel/minimal_subtree_transfer_v1.py",
+    "canonical/swe_kernel/hdc_semantic_engine_v1.py",
     "canonical/swe_kernel/unified_fast_spine_v1.py",
 )
 
@@ -399,6 +400,36 @@ elif test_target == "__TERMINAL_GOAL__":
             repo_root, goal_text, timeout_s=timeout_s, skill_store=store
         )
         issue_mode_tag = "ISSUE_ONLY_JS_SWE"
+    if not m1_res.get("repaired") and not has_terminal_artifact:
+        try:
+            from canonical.swe_kernel.unified_fast_spine_v1 import UnifiedFastSpine
+
+            poly_res = UnifiedFastSpine().solve_swe_polyglot(
+                repo_p,
+                goal_text,
+                apply_patch=False,
+            )
+            if poly_res.get("solved"):
+                inner = poly_res.get("result") if isinstance(poly_res.get("result"), dict) else {}
+                pf = dict(inner.get("patched_files") or {})
+                winner = inner.get("winner") if isinstance(inner.get("winner"), dict) else {}
+                if not pf and winner.get("file") and winner.get("patched_source"):
+                    pf[str(winner["file"])] = str(winner["patched_source"])
+                if pf:
+                    m1_res = {
+                        "repaired": True,
+                        "method": f"UNIFIED_FAST_SPINE_POLYGLOT__{poly_res.get('engine', 'POLY')}",
+                        "rule": str(inner.get("rule") or winner.get("description") or "polyglot_swe"),
+                        "patched_file": str(inner.get("patched_file") or winner.get("file") or next(iter(pf))),
+                        "patched_files": pf,
+                        "patched_line": int(winner.get("lineno") or 0),
+                        "failing_nodeid": str(inner.get("failing_nodeid") or ""),
+                        "reason": None,
+                        "elapsed_ms": int(round(float(poly_res.get("elapsed_ms", 0.0)))),
+                        "stats": dict(inner.get("stats") or {}),
+                    }
+        except Exception:
+            pass
     if m1_res.get("repaired"):
         written = []
         pf_map = dict(m1_res.get("patched_files") or {})

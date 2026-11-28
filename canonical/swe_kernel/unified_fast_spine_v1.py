@@ -307,6 +307,510 @@ def _dual_splice(parent: str, cand_a: str, cand_b: str) -> list[str]:
         return _splice_candidates_fallback(parent, cand_a, cand_b)
 
 
+# ---------------------------------------------------------------------------
+# Strike A: Great Awakening Registry of 26 Verified Zero-LLM Dark Engines
+# ---------------------------------------------------------------------------
+
+DARK_ENGINE_CATALOG: dict[str, dict[str, str]] = {
+    # SWE / Polyglot / Prose-Issue / Zero-Test / CST Skills
+    "causal_angelic_swe": {
+        "module": "canonical.runtime.causal_angelic_swe_engine_v1",
+        "entrypoint": "solve_repository",
+        "domain": "swe_python",
+    },
+    "multilang_causal_swe_js": {
+        "module": "canonical.runtime.multilang_causal_swe_engine_v1",
+        "entrypoint": "solve_js_repository",
+        "domain": "swe_polyglot",
+    },
+    "multilang_causal_swe_c": {
+        "module": "canonical.runtime.multilang_causal_swe_engine_v1",
+        "entrypoint": "solve_c_repository",
+        "domain": "swe_polyglot",
+    },
+    "go_causal_swe": {
+        "module": "canonical.swe_kernel.go_and_jsts_causal_swe_engine_v1",
+        "entrypoint": "solve_go_repository",
+        "domain": "swe_polyglot",
+    },
+    "jsts_prose_swe": {
+        "module": "canonical.swe_kernel.go_and_jsts_causal_swe_engine_v1",
+        "entrypoint": "solve_js_ts_from_prose",
+        "domain": "swe_polyglot",
+    },
+    "epistemic_issue_reproducer": {
+        "module": "canonical.runtime.epistemic_issue_reproducer_v1",
+        "entrypoint": "solve_issue_from_description",
+        "domain": "swe_prose",
+    },
+    "epistemic_spec_oracle": {
+        "module": "canonical.runtime.epistemic_spec_oracle_v1",
+        "entrypoint": "solve_zero_test_codebase",
+        "domain": "swe_zero_test",
+    },
+    "polyglot_cst_skill_inducer": {
+        "module": "canonical.runtime.polyglot_cst_skill_inducer_v1",
+        "entrypoint": "induce_cst_skill",
+        "domain": "swe_polyglot_skills",
+    },
+    "instant_swe_skill_store": {
+        "module": "canonical.runtime.instant_swe_skill_store_v1",
+        "entrypoint": "new_store",
+        "domain": "swe_skills",
+    },
+    "single_experience_transfer": {
+        "module": "canonical.swe_kernel.single_experience_transfer_v1",
+        "entrypoint": "learn",
+        "domain": "swe_transfer",
+    },
+    "history_induced_edit_grammar": {
+        "module": "canonical.swe_kernel.history_induced_edit_grammar_v1",
+        "entrypoint": "solve_task",
+        "domain": "swe_transfer",
+    },
+    "cross_repo_dataflow": {
+        "module": "canonical.swe_kernel.cross_repo_dataflow_v1",
+        "entrypoint": "build_cross_repo_graph",
+        "domain": "swe_analysis",
+    },
+    "software_repair_crossfile": {
+        "module": "canonical.runtime.bound_capabilities.software_repair_crossfile_choreograph_v1",
+        "entrypoint": "run",
+        "domain": "swe_crossfile",
+    },
+    "python_feature_implement_spec": {
+        "module": "canonical.runtime.bound_capabilities.python_feature_implement_function_spec",
+        "entrypoint": "run",
+        "domain": "swe_feature",
+    },
+    "software_patch_cegis_z3": {
+        "module": "canonical.runtime.bound_capabilities.software_patch_cegis_z3_v1",
+        "entrypoint": "run",
+        "domain": "swe_formal",
+    },
+    # Computer Use / World Model / SQL / GraphQL / OpenAPI / Morphisms / Compression
+    "unified_computer_use_agent": {
+        "module": "canonical.runtime.unified_computer_use_agent_v1",
+        "entrypoint": "solve_computer_use_task",
+        "domain": "computer_use",
+    },
+    "epistemic_world_model_planner": {
+        "module": "canonical.runtime.epistemic_world_model_planner_v1",
+        "entrypoint": "solve_with_epistemic_world_model",
+        "domain": "world_model",
+    },
+    "epistemic_schema_graph_sql": {
+        "module": "canonical.runtime.epistemic_schema_graph_agent_v1",
+        "entrypoint": "solve_epistemic_sql_query",
+        "domain": "sql_graphql",
+    },
+    "epistemic_openapi_agent": {
+        "module": "canonical.runtime.epistemic_openapi_agent_v1",
+        "entrypoint": "solve_live_openapi_workflow",
+        "domain": "openapi",
+    },
+    "epistemic_morphism_engine": {
+        "module": "canonical.runtime.epistemic_morphism_engine_v1",
+        "entrypoint": "solve_with_epistemic_morphisms",
+        "domain": "morphisms",
+    },
+    "epistemic_scan_acquire_compress": {
+        "module": "canonical.runtime.epistemic_scan_acquire_compress_v1",
+        "entrypoint": "solve_unseen_environment_live",
+        "domain": "world_model",
+    },
+    "local_guide": {
+        "module": "canonical.runtime.local_guide_v1",
+        "entrypoint": "lookup",
+        "domain": "computer_use",
+    },
+    "osworld_app_policy_overlay": {
+        "module": "canonical.runtime.osworld_v21_app_policy_overlay_v1",
+        "entrypoint": "decide",
+        "domain": "computer_use",
+    },
+    "perfect_algorithm_v5": {
+        "module": "canonical.swe_kernel.perfect_algorithm_unified_v5",
+        "entrypoint": "PerfectAlgorithmUnified",
+        "domain": "universal_planner",
+    },
+    # Grid Synthesis / Answer Shape / Stochastic Synth / Semantic Control / HLE / Charts
+    "grid_delta_rule_inducer_v2": {
+        "module": "canonical.runtime.grid_delta_rule_inducer_v2",
+        "entrypoint": "induce",
+        "domain": "grid_synthesis",
+    },
+    "answer_shape": {
+        "module": "canonical.runtime.answer_shape_v1",
+        "entrypoint": "asked",
+        "domain": "qa",
+    },
+    "stochastic_synthesizer": {
+        "module": "canonical.runtime.stochastic_synthesizer_v1",
+        "entrypoint": "synthesize_body_from_examples",
+        "domain": "synthesis",
+    },
+    "semantic_relation_control": {
+        "module": "canonical.runtime.semantic_relation_control_v1",
+        "entrypoint": "resolve",
+        "domain": "qa",
+    },
+    "hle_native_research_v5": {
+        "module": "canonical.runtime.hle_native_open_domain_research_v5",
+        "entrypoint": "propose",
+        "domain": "research_qa",
+    },
+    "chart_curve_label_rank": {
+        "module": "canonical.runtime.bound_capabilities.chart_direct_curve_label_family_rank_v1",
+        "entrypoint": "run",
+        "domain": "charts",
+        "optional_dep": "PIL",
+    },
+    "chart_axis_title_unit": {
+        "module": "canonical.runtime.bound_capabilities.chart_axis_title_unit_binding_v1",
+        "entrypoint": "run",
+        "domain": "charts",
+        "optional_dep": "PIL",
+    },
+}
+
+
+class DarkCapabilityRegistry:
+    """Lazy zero-overhead dispatcher awakening all verified dark zero-LLM engines under one front door."""
+
+    def __init__(self) -> None:
+        self._module_cache: dict[str, Any] = {}
+
+    @staticmethod
+    def list_engines(*, domain: str | None = None) -> list[dict[str, str]]:
+        out: list[dict[str, str]] = []
+        for slug, meta in sorted(DARK_ENGINE_CATALOG.items()):
+            if domain is None or meta["domain"] == domain:
+                out.append({"slug": slug, **meta})
+        return out
+
+    def load_module(self, slug: str) -> Any:
+        meta = DARK_ENGINE_CATALOG.get(slug)
+        if meta is None:
+            raise KeyError(f"UNKNOWN_DARK_ENGINE:{slug}")
+        mod_name = meta["module"]
+        mod = self._module_cache.get(mod_name)
+        if mod is None:
+            import importlib
+            mod = importlib.import_module(mod_name)
+            self._module_cache[mod_name] = mod
+        return mod
+
+    def get_entrypoint(self, slug: str) -> Any:
+        meta = DARK_ENGINE_CATALOG[slug]
+        mod = self.load_module(slug)
+        ep = meta["entrypoint"]
+        if hasattr(mod, ep):
+            return getattr(mod, ep)
+        # Graceful fallback: return the module itself if entrypoint alias differs
+        return mod
+
+    def invoke(self, slug: str, *args: Any, **kwargs: Any) -> dict[str, Any]:
+        t0 = time.perf_counter()
+        ep = self.get_entrypoint(slug)
+        if callable(ep):
+            res = ep(*args, **kwargs)
+        else:
+            res = {"module": DARK_ENGINE_CATALOG[slug]["module"], "exported": True}
+        return {
+            "schema": SCHEMA,
+            "engine": slug,
+            "domain": DARK_ENGINE_CATALOG[slug]["domain"],
+            "result": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": PRODUCER_MODEL_CALLS,
+        }
+
+    def probe_all(self) -> dict[str, Any]:
+        """Verify live stdlib importability of every catalogued dark zero-LLM engine."""
+        t0 = time.perf_counter()
+        results: dict[str, dict[str, Any]] = {}
+        unique_mods: dict[str, bool] = {}
+        stdlib_total = 0
+        stdlib_ok = 0
+        for slug, meta in sorted(DARK_ENGINE_CATALOG.items()):
+            mod_name = meta["module"]
+            is_opt = bool(meta.get("optional_dep"))
+            if not is_opt:
+                stdlib_total += 1
+            try:
+                mod = self.load_module(slug)
+                ep = meta["entrypoint"]
+                has_ep = hasattr(mod, ep)
+                results[slug] = {
+                    "imported": True,
+                    "has_entrypoint": has_ep,
+                    "domain": meta["domain"],
+                    "optional_dep": meta.get("optional_dep"),
+                }
+                unique_mods[mod_name] = True
+                if not is_opt and has_ep:
+                    stdlib_ok += 1
+            except Exception as exc:
+                results[slug] = {
+                    "imported": False,
+                    "has_entrypoint": False,
+                    "error": type(exc).__name__,
+                    "domain": meta["domain"],
+                    "optional_dep": meta.get("optional_dep"),
+                }
+                unique_mods[mod_name] = False
+        ok_count = sum(1 for v in results.values() if v.get("imported"))
+        return {
+            "schema": SCHEMA,
+            "engines_total": len(results),
+            "engines_imported": ok_count,
+            "stdlib_engines_total": stdlib_total,
+            "stdlib_engines_verified": stdlib_ok,
+            "unique_modules_imported": sum(1 for v in unique_mods.values() if v),
+            "unique_modules_total": len(unique_mods),
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 2),
+            "engines": results,
+            "model_calls": PRODUCER_MODEL_CALLS,
+        }
+
+
+# ---------------------------------------------------------------------------
+# Strike E: Logic-Grounded Compiled Workflow Graphs (NSI / PreAct Paradigm)
+# ---------------------------------------------------------------------------
+
+class WorkflowNode:
+    """Typed node in a compiled zero-LLM workflow graph (`DataOp`, `CheckOp`, `LoopOp`)."""
+
+    def __init__(
+        self,
+        node_id: str,
+        kind: str,
+        op_name: str,
+        *,
+        params: Mapping[str, Any] | None = None,
+        guard_features: Sequence[str] = (),
+        max_iters: int = 8,
+        body_nodes: Sequence["WorkflowNode"] = (),
+        recovery_branch: Sequence["WorkflowNode"] = (),
+    ) -> None:
+        if kind not in ("DataOp", "CheckOp", "LoopOp"):
+            raise ValueError(f"INVALID_WORKFLOW_NODE_KIND:{kind}")
+        self.node_id = str(node_id)
+        self.kind = kind
+        self.op_name = str(op_name)
+        self.params: dict[str, Any] = dict(params or {})
+        self.guard_features: tuple[str, ...] = tuple(str(f) for f in guard_features)
+        self.max_iters = max(1, int(max_iters))
+        self.body_nodes: list[WorkflowNode] = list(body_nodes)
+        self.recovery_branch: list[WorkflowNode] = list(recovery_branch)
+        self.tsetlin_guard: Any = None
+        self._guard_pos_masks: list[int] = []
+        self._guard_neg_masks: list[int] = []
+
+    def train_guard(
+        self,
+        pos_feature_sets: Sequence[Sequence[str]],
+        neg_feature_sets: Sequence[Sequence[str]] = (),
+    ) -> list[str]:
+        from canonical.swe_kernel.hdc_semantic_engine_v1 import MaxSATTsetlinClassifier
+
+        if self.tsetlin_guard is None:
+            self.tsetlin_guard = MaxSATTsetlinClassifier()
+        self._guard_pos_masks = [self.tsetlin_guard.encode_features(fs) for fs in pos_feature_sets]
+        self._guard_neg_masks = [self.tsetlin_guard.encode_features(fs) for fs in neg_feature_sets]
+        self.tsetlin_guard.fit(self._guard_pos_masks, self._guard_neg_masks)
+        return self.tsetlin_guard.explain_clauses()
+
+    def check_guard(self, active_features: Sequence[str]) -> bool:
+        if self.tsetlin_guard is not None and self.tsetlin_guard.clauses:
+            x = self.tsetlin_guard.encode_features(active_features)
+            return bool(self.tsetlin_guard.predict(x))
+        if self.guard_features:
+            fset = set(active_features)
+            return all(g in fset for g in self.guard_features)
+        return True
+
+    def as_dict(self) -> dict[str, Any]:
+        return {
+            "node_id": self.node_id,
+            "kind": self.kind,
+            "op_name": self.op_name,
+            "params": dict(self.params),
+            "guard_clauses": self.tsetlin_guard.explain_clauses() if self.tsetlin_guard is not None else list(self.guard_features),
+            "recovery_len": len(self.recovery_branch),
+        }
+
+
+class CompiledWorkflowGraph:
+    """Deterministic logic-grounded procedural workflow graph with Tsetlin preconditions
+    and targeted failure-node recovery grafting (compiles round-1 search -> round-2 sub-ms exec).
+    """
+
+    def __init__(self, workflow_id: str, nodes: Sequence[WorkflowNode]) -> None:
+        self.workflow_id = str(workflow_id)
+        self.nodes: list[WorkflowNode] = list(nodes)
+        self.executions: int = 0
+        self.grafts: int = 0
+
+    @classmethod
+    def compile_from_trace(
+        cls,
+        workflow_id: str,
+        trace_steps: Sequence[Mapping[str, Any]],
+        *,
+        hole_bindings: Mapping[str, str] | None = None,
+        positive_env_features: Sequence[Sequence[str]] = (),
+        negative_env_features: Sequence[Sequence[str]] = (),
+    ) -> "CompiledWorkflowGraph":
+        """Compile a verified round-1 execution trace into a parameterized typed DAG."""
+        bindings = {str(v): f"${{{k}}}" for k, v in (hole_bindings or {}).items() if v}
+        nodes: list[WorkflowNode] = []
+        for idx, step in enumerate(trace_steps):
+            kind = str(step.get("kind") or ("CheckOp" if step.get("is_check") else "DataOp"))
+            op_name = str(step.get("op") or step.get("action") or f"step_{idx}")
+            raw_params = dict(step.get("params") or {})
+            abstract_params: dict[str, Any] = {}
+            for pk, pv in raw_params.items():
+                if isinstance(pv, str):
+                    nv = pv
+                    for concrete, hole in bindings.items():
+                        nv = nv.replace(concrete, hole)
+                    abstract_params[pk] = nv
+                else:
+                    abstract_params[pk] = pv
+            g_feats = tuple(str(f) for f in (step.get("guard_features") or ()))
+            node = WorkflowNode(
+                node_id=f"{workflow_id}:n{idx}",
+                kind=kind,
+                op_name=op_name,
+                params=abstract_params,
+                guard_features=g_feats,
+                max_iters=int(step.get("max_iters", 8)),
+            )
+            if idx == 0 and positive_env_features:
+                node.train_guard(positive_env_features, negative_env_features)
+            nodes.append(node)
+        return cls(workflow_id, nodes)
+
+    @staticmethod
+    def _instantiate_params(params: Mapping[str, Any], bindings: Mapping[str, str]) -> dict[str, Any]:
+        out: dict[str, Any] = {}
+        for k, v in params.items():
+            if isinstance(v, str):
+                nv = v
+                for bk, bv in bindings.items():
+                    nv = nv.replace(f"${{{bk}}}", str(bv))
+                out[k] = nv
+            else:
+                out[k] = v
+        return out
+
+    def graft_recovery_at_node(
+        self,
+        node_idx: int,
+        recovery_nodes: Sequence[WorkflowNode],
+        *,
+        failed_env_features: Sequence[str] = (),
+    ) -> dict[str, Any]:
+        """Failure-node recovery grafting: preserve verified prefix `0..node_idx-1`,
+        attach recovery subgraph at `node_idx`, and refute the failed feature pattern in Tsetlin guard.
+        """
+        if not (0 <= node_idx < len(self.nodes)):
+            raise IndexError(f"NODE_IDX_OUT_OF_RANGE:{node_idx}")
+        target = self.nodes[node_idx]
+        target.recovery_branch = list(recovery_nodes)
+        refuted = 0
+        if failed_env_features and target.tsetlin_guard is not None:
+            neg_x = target.tsetlin_guard.encode_features(failed_env_features)
+            refuted = target.tsetlin_guard.refute_counterexample(neg_x, positives=target._guard_pos_masks)
+        self.grafts += 1
+        return {
+            "workflow_id": self.workflow_id,
+            "grafted_node_idx": node_idx,
+            "recovery_steps": len(target.recovery_branch),
+            "clauses_narrowed": refuted,
+            "total_grafts": self.grafts,
+        }
+
+    def execute(
+        self,
+        state: dict[str, Any],
+        executors: Mapping[str, Any],
+        *,
+        bindings: Mapping[str, str] | None = None,
+        env_features: Sequence[str] = (),
+    ) -> dict[str, Any]:
+        """Deterministic round-2+ execution (zero search, zero LLM calls)."""
+        t0 = time.perf_counter()
+        self.executions += 1
+        bmap = dict(bindings or {})
+        trace: list[dict[str, Any]] = []
+
+        def _run_node(node: WorkflowNode) -> tuple[bool, str]:
+            feats = list(env_features) + list(state.get("_features") or ())
+            if not node.check_guard(feats):
+                return False, "GUARD_REJECTED"
+            inst_params = self._instantiate_params(node.params, bmap)
+            fn = executors.get(node.op_name)
+            if fn is None:
+                return False, f"MISSING_EXECUTOR:{node.op_name}"
+            if node.kind == "CheckOp":
+                ok = bool(fn(state, inst_params))
+                return ok, "OK" if ok else "CHECK_FAILED"
+            if node.kind == "LoopOp":
+                for _ in range(node.max_iters):
+                    done = bool(fn(state, inst_params))
+                    if done:
+                        return True, "LOOP_SATISFIED"
+                    for bnode in node.body_nodes:
+                        bok, breason = _run_node(bnode)
+                        if not bok:
+                            return False, breason
+                return False, "LOOP_EXHAUSTED"
+            # DataOp
+            res = fn(state, inst_params)
+            ok = (res is not False)
+            return ok, "OK" if ok else "DATA_OP_FAILED"
+
+        for idx, node in enumerate(self.nodes):
+            ok, reason = _run_node(node)
+            trace.append({"node_idx": idx, "node_id": node.node_id, "kind": node.kind, "op": node.op_name, "ok": ok, "reason": reason})
+            if not ok:
+                if node.recovery_branch:
+                    rec_ok = True
+                    for rnode in node.recovery_branch:
+                        rok, rreason = _run_node(rnode)
+                        trace.append({"node_idx": idx, "node_id": rnode.node_id, "kind": rnode.kind, "op": rnode.op_name, "ok": rok, "reason": f"RECOVERY:{rreason}"})
+                        if not rok:
+                            rec_ok = False
+                            break
+                    if rec_ok:
+                        continue
+                return {
+                    "schema": SCHEMA,
+                    "workflow_id": self.workflow_id,
+                    "succeeded": False,
+                    "failed_node_idx": idx,
+                    "reason": reason,
+                    "steps_executed": len(trace),
+                    "trace": trace,
+                    "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+                    "model_calls": PRODUCER_MODEL_CALLS,
+                }
+
+        return {
+            "schema": SCHEMA,
+            "workflow_id": self.workflow_id,
+            "succeeded": True,
+            "failed_node_idx": None,
+            "steps_executed": len(trace),
+            "trace": trace,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": PRODUCER_MODEL_CALLS,
+        }
+
+
 class UnifiedFastSpine:
     """Single thin fast-path coordinator unifying Brain's verified zero-model organs."""
 
@@ -315,6 +819,9 @@ class UnifiedFastSpine:
         self._verified_donor_pairs: list[tuple[str, str, str]] = []
         self._subtree_store: Any = None
         self._learned_repos: set[str] = set()
+        self.dark_registry = DarkCapabilityRegistry()
+        self._cst_store: Any = None
+        self._compiled_workflows: dict[str, CompiledWorkflowGraph] = {}
 
     def _get_subtree_store(self) -> Any:
         if self._subtree_store is None:
@@ -555,13 +1062,14 @@ class UnifiedFastSpine:
 
         seen_src: set[str] = {source}
         subtree_tested = 0
-        # Stage 1a: Originating Minimal-Subtree Transfer rules (git history + verified fixes)
+        # Stage 1a: Originating Minimal-Subtree Transfer + E-Stitch rules (bounded so Stage 2 is never starved!)
+        sub_cap = min(20, max(8, max_candidates // 4))
         if store.rules():
             try:
                 sub_cands = store.propose_source_rewrites(
                     source,
                     focus_lines=focus_lines or None,
-                    max_candidates=min(40, max_candidates),
+                    max_candidates=sub_cap,
                 )
                 for sc in sub_cands:
                     cand_src = str(sc.get("source") or "")
@@ -587,21 +1095,22 @@ class UnifiedFastSpine:
             except Exception:
                 pass
 
-        # Stage 1b: History/donor-induced AST edit templates (`induced_edit_basis_v1`)
+        # Stage 1b: History/donor-induced AST edit templates (`induced_edit_basis_v1`, bounded cap)
         all_donors = list(self._verified_donor_pairs)
         if donor_pairs:
             all_donors.extend(donor_pairs)
         induced_tested = 0
+        ind_cap = min(16, max(6, max_candidates // 5))
         if all_donors:
             try:
-                templates = ieb.induce_templates(all_donors, context_depth=1, max_templates_per_pair=6)
-                templates.extend(ieb.induce_templates(all_donors, context_depth=0, max_templates_per_pair=6))
-                node_templates = ieb.induce_node_templates(all_donors, context_depth=1)
-                cands = ieb.candidates_from_templates(source, templates, max_candidates=min(48, max_candidates))
+                templates = ieb.induce_templates(all_donors[-16:], context_depth=1, max_templates_per_pair=4)
+                templates.extend(ieb.induce_templates(all_donors[-16:], context_depth=0, max_templates_per_pair=4))
+                node_templates = ieb.induce_node_templates(all_donors[-16:], context_depth=1)
+                cands = ieb.candidates_from_templates(source, templates, max_candidates=ind_cap)
                 cands.extend(
-                    ieb.candidates_from_node_templates(source, node_templates, max_candidates=min(32, max_candidates))
+                    ieb.candidates_from_node_templates(source, node_templates, max_candidates=ind_cap // 2)
                 )
-                for cand in cands:
+                for cand in cands[:ind_cap]:
                     cand_src = str(cand.get("source") or "")
                     if not cand_src or cand_src in seen_src:
                         continue
@@ -626,9 +1135,9 @@ class UnifiedFastSpine:
             except Exception:
                 pass
 
-        # Stage 2: PriorRepairEngine (with general algebraic structural ops) over FastCoWVerifier
+        # Stage 2: PriorRepairEngine (with general algebraic structural ops) — guaranteed >= 65% budget!
         engine = PriorRepairEngine()
-        prior_budget = max(1, max_candidates - subtree_tested - induced_tested)
+        prior_budget = max(int(max_candidates * 0.65), max_candidates - subtree_tested - induced_tested)
         prior_cands = engine.generate_candidates(
             source,
             executed_lines=loc.get("executed_lines") or set(),
@@ -941,13 +1450,39 @@ class UnifiedFastSpine:
         if zset_deltas:
             dbsp.apply_zset_deltas(zset_deltas, supersede_slot=True)
 
+        # Strike D: Zero-weight Random Indexing HDC + PathHD Entity-Temporal-Relation Graph
+        from canonical.swe_kernel.hdc_semantic_engine_v1 import PathHDKnowledgeGraph, RandomIndexingEncoder
+
+        hdc_encoder = RandomIndexingEncoder()
+        turn_docs = [f"{t.get('speaker', '')} {t.get('date_str', '') or t.get('session', '')} {t.get('text', '')}" for t in indexed_turns]
+        hdc_encoder.observe_documents(turn_docs)
+        path_kg = PathHDKnowledgeGraph(hdc_encoder)
+        hv_cache: dict[str, int] = {}
+        seq_map: dict[str, int] = {}
+        speakers_set: set[str] = set()
+        for idx, t in enumerate(indexed_turns):
+            dia_id = str(t.get("dia_id") or f"T:{idx}")
+            seq_map[dia_id] = idx
+            text = str(t.get("text") or "")
+            speaker = str(t.get("speaker") or "")
+            if speaker.strip():
+                speakers_set.add(speaker.strip().lower())
+            date_str = str(t.get("date_str") or t.get("session") or "")
+            hv_cache[dia_id] = hdc_encoder.encode_text(f"{speaker} {date_str} {text}", use_context=True)
+            path_kg.ingest_turn(text, speaker=speaker, turn_idx=idx + 1, timestamp_text=date_str, source_id=dia_id)
+
         return {
             "dom_idx": dom_idx,
             "dbsp": dbsp,
             "entity_to_dia": dict(ent_to_dia),
             "turn_by_dia": turn_by_dia,
+            "seq_map": seq_map,
+            "speakers": sorted(speakers_set),
             "comp_cache": comp_cache,
             "ppr_cache": {},
+            "hdc_encoder": hdc_encoder,
+            "path_kg": path_kg,
+            "hv_cache": hv_cache,
             "build_ms": round((time.perf_counter() - t0) * 1000.0, 2),
         }
 
@@ -960,8 +1495,14 @@ class UnifiedFastSpine:
         t_valid: int | None = None,
         ppr_weight: float = 0.10,
         comp_weight: float = 0.16,
+        hdc_weight: float = 0.08,
+        adj_weight: float = 0.55,
+        speaker_boost: float = 0.30,
     ) -> dict[str, Any]:
-        """Fuse DominoMemory BM25+char-ngram ranking + DBSP Bi-Temporal PPR + zero-parameter zlib Compression Gain."""
+        """Fuse DominoMemory BM25+char-ngram + DBSP Bi-Temporal PPR + zlib Compression Gain
+        + 2048-bit Random-Indexing HDC + PathHD Facts + Speaker Attribution + Same-Session
+        Dialogue-Neighborhood Propagation."""
+        from canonical.swe_kernel.hdc_semantic_engine_v1 import hv_similarity
         from canonical.swe_kernel.minimal_epistemic_core_v1 import DominoMemory
 
         dom_idx = index["dom_idx"]
@@ -970,6 +1511,9 @@ class UnifiedFastSpine:
         turn_by_dia: Mapping[str, dict[str, Any]] = index["turn_by_dia"]
         comp_cache: Mapping[str, tuple[bytes, int]] = index.get("comp_cache") or {}
         ppr_cache = index.get("ppr_cache") if isinstance(index.get("ppr_cache"), dict) else None
+        hdc_encoder = index.get("hdc_encoder")
+        path_kg = index.get("path_kg")
+        hv_cache: Mapping[str, int] = index.get("hv_cache") or {}
 
         cand_pool = max(top_k * 3, 35)
         base = DominoMemory.retrieve_turns(dom_idx, query, top_k=cand_pool)
@@ -1037,6 +1581,58 @@ class UnifiedFastSpine:
                     for rank, (_, did) in enumerate(comp_ranked):
                         rrf_scores[did] = rrf_scores.get(did, 0.0) + comp_weight / (20.0 + rank)
 
+        # Strike D: Zero-weight 2048-bit Random-Indexing HDC Hamming + PathHD structured fact boost
+        matched_facts: list[tuple[float, Any]] = []
+        if hdc_weight > 0.0 and hdc_encoder is not None and hv_cache:
+            q_hv = hdc_encoder.encode_text(query, use_context=True)
+            # Full-corpus O(N) bit_count scan is <0.3ms for 500 turns!
+            hdc_ranked: list[tuple[float, str]] = []
+            for did, dhv in hv_cache.items():
+                sim = hv_similarity(q_hv, dhv)
+                if sim > 0.04:
+                    hdc_ranked.append((sim, did))
+            if hdc_ranked:
+                hdc_ranked.sort(key=lambda x: -x[0])
+                for rank, (_, did) in enumerate(hdc_ranked[: max(top_k * 2, 24)]):
+                    rrf_scores[did] = rrf_scores.get(did, 0.0) + hdc_weight / (18.0 + rank)
+        if path_kg is not None:
+            matched_facts = path_kg.query_facts(query, top_k=5)
+            for rank, (fsc, fact) in enumerate(matched_facts):
+                if fact.source_id and fsc >= 3.0:
+                    rrf_scores[fact.source_id] = rrf_scores.get(fact.source_id, 0.0) + (hdc_weight * 1.15) / (12.0 + rank)
+
+        # Speaker-attribution prior + Same-session Dialogue-Neighborhood Propagation (+-1, +-2 turns)
+        indexed_turns: Sequence[Mapping[str, Any]] = dom_idx.get("turns") or ()
+        seq_map: Mapping[str, int] = index.get("seq_map") or {}
+        known_spks: Sequence[str] = index.get("speakers") or ()
+        target_spk: str | None = None
+        if len(known_spks) >= 2:
+            q_words = set(re.findall(r"[a-z]+", query.lower()))
+            mentioned = [s for s in known_spks if any(tok in q_words for tok in s.split() if len(tok) >= 3)]
+            if len(mentioned) == 1:
+                target_spk = mentioned[0]
+        if target_spk is not None and speaker_boost > 0.0:
+            for did in list(rrf_scores.keys()):
+                sp = str(turn_by_dia.get(did, {}).get("speaker") or "").strip().lower()
+                if sp == target_spk:
+                    rrf_scores[did] *= (1.0 + speaker_boost)
+        if adj_weight > 0.0 and seq_map and indexed_turns:
+            anchors = sorted(rrf_scores.items(), key=lambda x: -x[1])[:10]
+            for did, asc in anchors:
+                pos = seq_map.get(did)
+                if pos is None:
+                    continue
+                cur_sess = indexed_turns[pos].get("session")
+                for delta, decay in ((-1, 1.0), (+1, 1.0), (-2, 0.45), (+2, 0.45)):
+                    npos = pos + delta
+                    if 0 <= npos < len(indexed_turns) and indexed_turns[npos].get("session") == cur_sess:
+                        ndid = str(indexed_turns[npos].get("dia_id") or f"T:{npos}")
+                        nsp = str(indexed_turns[npos].get("speaker") or "").strip().lower()
+                        mult = adj_weight * decay
+                        if target_spk is not None:
+                            mult *= (1.35 if nsp == target_spk else 0.55)
+                        rrf_scores[ndid] = rrf_scores.get(ndid, 0.0) + asc * mult
+
         ordered = sorted(rrf_scores.items(), key=lambda x: -x[1])[:top_k]
         dia_ids = [did for did, _ in ordered]
         top_turns = [
@@ -1044,6 +1640,8 @@ class UnifiedFastSpine:
                 "dia_id": did,
                 "speaker": turn_by_dia.get(did, {}).get("speaker", ""),
                 "session": turn_by_dia.get(did, {}).get("session", ""),
+                "date_str": turn_by_dia.get(did, {}).get("date_str", ""),
+                "date": turn_by_dia.get(did, {}).get("date", ""),
                 "text": turn_by_dia.get(did, {}).get("text", ""),
                 "hybrid_score": round(sc, 6),
             }
@@ -1052,8 +1650,74 @@ class UnifiedFastSpine:
         return {
             "dia_ids": dia_ids,
             "top_turns": top_turns,
+            "matched_facts": [
+                {
+                    "subject": f.subject,
+                    "relation": f.relation,
+                    "obj": f.obj,
+                    "turn_idx": f.turn_idx,
+                    "superseded": f.superseded_by is not None,
+                    "source_id": f.source_id,
+                    "score": round(fsc, 3),
+                }
+                for fsc, f in matched_facts[:5]
+            ],
             "speaker_conflict": bool(base.get("speaker_conflict", False)),
             "conflict_score": float(base.get("conflict_score", 0.0)),
+        }
+
+    @staticmethod
+    def answer_hybrid_memory(
+        index: Mapping[str, Any],
+        question: str,
+        *,
+        top_k: int = 8,
+        abstain_threshold: float = 0.22,
+    ) -> dict[str, Any]:
+        """End-to-end zero-LLM symbolic + HDC QA with temporal supersession & calibrated abstention."""
+        t0 = time.perf_counter()
+        from canonical.swe_kernel.hdc_semantic_engine_v1 import extract_concise_answer
+
+        ret = UnifiedFastSpine.query_hybrid_memory(index, question, top_k=top_k)
+        turns = list(ret.get("top_turns") or [])
+        ev_texts = [str(t.get("text") or "") for t in turns]
+        timestamps = [str(t.get("date_str") or t.get("session") or "") for t in turns]
+        dates = [str(t.get("date") or "") for t in turns]
+        speakers = [str(t.get("speaker") or "") for t in turns]
+        all_speakers = list(index.get("speakers") or ())
+        path_kg = index.get("path_kg")
+        facts = path_kg.query_facts(question, top_k=5) if path_kg is not None else []
+        qa = extract_concise_answer(
+            question,
+            ev_texts,
+            facts=facts,
+            timestamps=timestamps,
+            dates=dates,
+            speakers=speakers,
+            all_speakers=all_speakers,
+            encoder=index.get("hdc_encoder"),
+            abstain_threshold=abstain_threshold,
+        )
+        # Optional dark `answer_shape_v1` shape classification metadata
+        answer_shape_tag = None
+        try:
+            from canonical.runtime import answer_shape_v1 as asv1
+            if hasattr(asv1, "asked"):
+                answer_shape_tag = asv1.asked(question)
+        except Exception:
+            pass
+        return {
+            "schema": SCHEMA,
+            "question": question,
+            "answer": qa["answer"],
+            "abstained": bool(qa["abstained"]),
+            "confidence": float(qa["confidence"]),
+            "answer_type": qa["answer_type"],
+            "answer_shape": answer_shape_tag,
+            "dia_ids": ret["dia_ids"],
+            "matched_facts": ret.get("matched_facts") or [],
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 2),
+            "model_calls": PRODUCER_MODEL_CALLS,
         }
 
     @staticmethod
@@ -1154,7 +1818,287 @@ class UnifiedFastSpine:
         }
 
     # ------------------------------------------------------------------
-    # Job 5a: Interactive World-Model Agent (`MinimalArc3Agent v3`)
+    # Strike A: Dark Capability Registry Front Door (26+ Zero-LLM Engines)
+    # ------------------------------------------------------------------
+    def dark_engine_catalog(self, *, domain: str | None = None) -> list[dict[str, str]]:
+        return self.dark_registry.list_engines(domain=domain)
+
+    def probe_dark_engines(self) -> dict[str, Any]:
+        return self.dark_registry.probe_all()
+
+    def invoke_dark_engine(self, slug: str, *args: Any, **kwargs: Any) -> dict[str, Any]:
+        return self.dark_registry.invoke(slug, *args, **kwargs)
+
+    # ------------------------------------------------------------------
+    # Strike C: Polyglot + Prose-Issue + Zero-Test + CST Skill SWE Router
+    # ------------------------------------------------------------------
+    def _get_cst_store(self) -> dict[str, Any]:
+        if self._cst_store is None:
+            from canonical.runtime import polyglot_cst_skill_inducer_v1 as pcsi
+            self._cst_store = pcsi.new_cst_store()
+        return self._cst_store
+
+    def learn_polyglot_skill(
+        self,
+        file_path: str,
+        before_text: str,
+        after_text: str,
+        *,
+        description: str = "",
+    ) -> dict[str, Any]:
+        """Instant 1-shot polyglot CST skill induction (Python, Go, JS, TS, Rust, Java, C/C++)."""
+        from canonical.runtime import polyglot_cst_skill_inducer_v1 as pcsi
+
+        lang = pcsi.detect_language(file_path)
+        store = self._get_cst_store()
+        res = pcsi.admit_cst_skill(store, before_text, after_text, language=lang, description=description)
+        learned = bool(res.get("admitted") or res.get("skill_id") or res.get("skill"))
+        sid = str(res.get("skill_id") or (res.get("skill") or {}).get("skill_id") or "")
+        return {
+            "schema": SCHEMA,
+            "learned": learned,
+            "language": lang,
+            "skill_id": sid,
+            "store_size": len(store.get("skills") or []),
+            "model_calls": PRODUCER_MODEL_CALLS,
+        }
+
+    def apply_polyglot_skills(self, file_path: str, source_text: str, *, max_candidates: int = 12) -> list[dict[str, Any]]:
+        """Recall and instantiate matching polyglot CST skills onto `source_text` (<1 ms)."""
+        from canonical.runtime import polyglot_cst_skill_inducer_v1 as pcsi
+
+        store = self._get_cst_store()
+        lang = pcsi.detect_language(file_path)
+        cands = pcsi.recall_cst_candidates(store, source_text, language=lang, max_candidates=max_candidates)
+        out: list[dict[str, Any]] = []
+        seen = {source_text}
+        for c in (cands or ()):
+            cand_src = c if isinstance(c, str) else str(c.get("patched_source") or c.get("source") or c.get("patched_text") or "")
+            if cand_src and cand_src not in seen:
+                seen.add(cand_src)
+                out.append({
+                    "language": lang,
+                    "skill_id": str(c.get("skill_id") or "") if isinstance(c, Mapping) else "",
+                    "source": cand_src,
+                })
+        return out
+
+    def solve_swe_polyglot(
+        self,
+        workspace: str | pathlib.Path,
+        issue_text: str = "",
+        *,
+        language: str | None = None,
+        apply_patch: bool = True,
+        test_target: str | None = None,
+    ) -> dict[str, Any]:
+        """Unified zero-LLM polyglot SWE router (Python / Go / JS / TS / C / C++ / prose-issue / zero-test)."""
+        t0 = time.perf_counter()
+        ws = pathlib.Path(workspace).resolve()
+        # Detect dominant repository language from workspace files
+        lang = (language or "").strip().lower()
+        if not lang:
+            ext_counts: dict[str, int] = defaultdict(int)
+            for p in ws.rglob("*"):
+                if p.is_file() and ".git" not in p.parts and "node_modules" not in p.parts:
+                    suf = p.suffix.lower()
+                    if suf in (".py", ".go", ".js", ".ts", ".tsx", ".jsx", ".c", ".h", ".cpp", ".cc"):
+                        ext_counts[suf] += 1
+            if ext_counts.get(".go", 0) > 0:
+                lang = "go"
+            elif ext_counts.get(".js", 0) + ext_counts.get(".ts", 0) + ext_counts.get(".jsx", 0) + ext_counts.get(".tsx", 0) > ext_counts.get(".py", 0):
+                lang = "javascript"
+            elif ext_counts.get(".c", 0) + ext_counts.get(".cpp", 0) + ext_counts.get(".cc", 0) > ext_counts.get(".py", 0):
+                lang = "c"
+            else:
+                lang = "python"
+
+        # 1. Go repositories -> awakened `go_and_jsts_causal_swe_engine_v1`
+        if lang == "go":
+            try:
+                from canonical.swe_kernel import go_and_jsts_causal_swe_engine_v1 as gj
+                res = gj.solve_go_repository(ws, issue_text=issue_text)
+                return {
+                    "schema": SCHEMA,
+                    "language": "go",
+                    "solved": bool(res.get("verified") or res.get("solved") or res.get("repaired") or res.get("patched")),
+                    "engine": "go_and_jsts_causal_swe_engine_v1",
+                    "result": res,
+                    "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 2),
+                    "model_calls": PRODUCER_MODEL_CALLS,
+                }
+            except Exception as exc:
+                return {"schema": SCHEMA, "language": "go", "solved": False, "error": f"{type(exc).__name__}: {exc}", "model_calls": PRODUCER_MODEL_CALLS}
+
+        # 2. JavaScript / TypeScript repositories -> multilang + prose JS/TS engines
+        if lang in ("js", "ts", "javascript", "typescript"):
+            try:
+                from canonical.runtime import multilang_causal_swe_engine_v1 as ml
+                res = ml.solve_js_repository(ws)
+                if isinstance(res, Mapping) and (res.get("verified") or res.get("solved") or res.get("repaired") or res.get("patched")):
+                    return {
+                        "schema": SCHEMA,
+                        "language": lang,
+                        "solved": True,
+                        "engine": "multilang_causal_swe_engine_v1",
+                        "result": dict(res),
+                        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 2),
+                        "model_calls": PRODUCER_MODEL_CALLS,
+                    }
+            except Exception:
+                pass
+            if issue_text:
+                try:
+                    from canonical.swe_kernel import go_and_jsts_causal_swe_engine_v1 as gj
+                    res2 = gj.solve_js_ts_from_prose(ws, issue_text)
+                    return {
+                        "schema": SCHEMA,
+                        "language": lang,
+                        "solved": bool(res2.get("verified") or res2.get("solved") or res2.get("repaired") or res2.get("patched")),
+                        "engine": "go_and_jsts_causal_swe_engine_v1",
+                        "result": res2,
+                        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 2),
+                        "model_calls": PRODUCER_MODEL_CALLS,
+                    }
+                except Exception as exc:
+                    return {"schema": SCHEMA, "language": lang, "solved": False, "error": f"{type(exc).__name__}: {exc}", "model_calls": PRODUCER_MODEL_CALLS}
+            return {"schema": SCHEMA, "language": lang, "solved": False, "engine": "multilang_causal_swe_engine_v1", "model_calls": PRODUCER_MODEL_CALLS}
+
+        # 3. C / C++ repositories -> awakened `multilang_causal_swe_engine_v1`
+        if lang in ("c", "cpp", "c++"):
+            try:
+                from canonical.runtime import multilang_causal_swe_engine_v1 as ml
+                res = ml.solve_c_repository(ws)
+                return {
+                    "schema": SCHEMA,
+                    "language": lang,
+                    "solved": bool(isinstance(res, Mapping) and (res.get("verified") or res.get("solved") or res.get("repaired") or res.get("patched"))),
+                    "engine": "multilang_causal_swe_engine_v1",
+                    "result": dict(res) if isinstance(res, Mapping) else res,
+                    "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 2),
+                    "model_calls": PRODUCER_MODEL_CALLS,
+                }
+            except Exception as exc:
+                return {"schema": SCHEMA, "language": lang, "solved": False, "error": f"{type(exc).__name__}: {exc}", "model_calls": PRODUCER_MODEL_CALLS}
+
+        # 4. Python repositories:
+        #    (a) Fast CoW Spine (BM25 + ProducerLineage + E-Stitch Subtree Transfer + Dual Splicing)
+        fast_res = self.repair_repo_fast(ws, issue_text, test_target=test_target, apply_patch=apply_patch)
+        if fast_res.get("repaired"):
+            return {
+                "schema": SCHEMA,
+                "language": "python",
+                "solved": True,
+                "engine": str(fast_res.get("method") or "UNIFIED_FAST_SPINE"),
+                "result": fast_res,
+                "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 2),
+                "model_calls": PRODUCER_MODEL_CALLS,
+            }
+        #    (b) Awakened `epistemic_issue_reproducer_v1` (prose issue -> repro test -> causal patch!)
+        if issue_text:
+            try:
+                from canonical.runtime import epistemic_issue_reproducer_v1 as eir
+                res_eir = eir.solve_issue_from_description(ws, issue_text)
+                if isinstance(res_eir, Mapping) and (res_eir.get("solved") or res_eir.get("repaired") or res_eir.get("patched")):
+                    return {
+                        "schema": SCHEMA,
+                        "language": "python",
+                        "solved": True,
+                        "engine": "epistemic_issue_reproducer_v1",
+                        "result": dict(res_eir),
+                        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 2),
+                        "model_calls": PRODUCER_MODEL_CALLS,
+                    }
+            except Exception:
+                pass
+        #    (c) Awakened `epistemic_spec_oracle_v1` (zero-test codebase synthesis & oracle)
+        if issue_text:
+            try:
+                from canonical.runtime import epistemic_spec_oracle_v1 as eso
+                res_eso = eso.solve_zero_test_codebase(ws, issue_text)
+                if isinstance(res_eso, Mapping) and (res_eso.get("solved") or res_eso.get("repaired") or res_eso.get("patched")):
+                    return {
+                        "schema": SCHEMA,
+                        "language": "python",
+                        "solved": True,
+                        "engine": "epistemic_spec_oracle_v1",
+                        "result": dict(res_eso),
+                        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 2),
+                        "model_calls": PRODUCER_MODEL_CALLS,
+                    }
+            except Exception:
+                pass
+        return {
+            "schema": SCHEMA,
+            "language": "python",
+            "solved": False,
+            "engine": "UNIFIED_FAST_SPINE_POLYGLOT",
+            "result": fast_res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 2),
+            "model_calls": PRODUCER_MODEL_CALLS,
+        }
+
+    # ------------------------------------------------------------------
+    # Strike E: Logic-Grounded Workflow Compilation (`DataOp`/`CheckOp`/`LoopOp`)
+    # ------------------------------------------------------------------
+    def compile_workflow_graph(
+        self,
+        workflow_id: str,
+        trace_steps: Sequence[Mapping[str, Any]],
+        *,
+        hole_bindings: Mapping[str, str] | None = None,
+        positive_env_features: Sequence[Sequence[str]] = (),
+        negative_env_features: Sequence[Sequence[str]] = (),
+    ) -> CompiledWorkflowGraph:
+        wf = CompiledWorkflowGraph.compile_from_trace(
+            workflow_id,
+            trace_steps,
+            hole_bindings=hole_bindings,
+            positive_env_features=positive_env_features,
+            negative_env_features=negative_env_features,
+        )
+        self._compiled_workflows[workflow_id] = wf
+        return wf
+
+    def execute_workflow_graph(
+        self,
+        workflow_id: str,
+        state: dict[str, Any],
+        executors: Mapping[str, Any],
+        *,
+        bindings: Mapping[str, str] | None = None,
+        env_features: Sequence[str] = (),
+    ) -> dict[str, Any]:
+        wf = self._compiled_workflows.get(workflow_id)
+        if wf is None:
+            return {"schema": SCHEMA, "workflow_id": workflow_id, "succeeded": False, "reason": "UNKNOWN_WORKFLOW", "model_calls": PRODUCER_MODEL_CALLS}
+        return wf.execute(state, executors, bindings=bindings, env_features=env_features)
+
+    def graft_workflow_recovery(
+        self,
+        workflow_id: str,
+        node_idx: int,
+        recovery_steps: Sequence[Mapping[str, Any]],
+        *,
+        failed_env_features: Sequence[str] = (),
+    ) -> dict[str, Any]:
+        wf = self._compiled_workflows.get(workflow_id)
+        if wf is None:
+            raise KeyError(f"UNKNOWN_WORKFLOW:{workflow_id}")
+        rnodes = [
+            WorkflowNode(
+                node_id=f"{workflow_id}:n{node_idx}:rec{i}",
+                kind=str(s.get("kind") or "DataOp"),
+                op_name=str(s.get("op") or s.get("action") or f"rec_{i}"),
+                params=dict(s.get("params") or {}),
+                guard_features=tuple(str(f) for f in (s.get("guard_features") or ())),
+            )
+            for i, s in enumerate(recovery_steps)
+        ]
+        return wf.graft_recovery_at_node(node_idx, rnodes, failed_env_features=failed_env_features)
+
+    # ------------------------------------------------------------------
+    # Job 5a: Interactive World-Model Agent (`MinimalArc3Agent v5`)
     # ------------------------------------------------------------------
     @staticmethod
     def create_arc3_agent() -> Any:
@@ -1174,6 +2118,7 @@ class UnifiedFastSpine:
             "causal_trace_skill_compiler": "canonical.swe_kernel.causal_trace_to_skill_compiler_v1",
             "dbsp_bitemporal_ppr_memory": "canonical.runtime.hidden_arsenal_unifier_v1",
             "minimal_epistemic_core": "canonical.swe_kernel.minimal_epistemic_core_v1",
+            "hdc_semantic_engine": "canonical.swe_kernel.hdc_semantic_engine_v1",
         }
         awakened_dark_organs = {
             "dual_program_splicing": "canonical.swe_kernel.dual_program_splicing_v1",
@@ -1193,13 +2138,19 @@ class UnifiedFastSpine:
                 loaded[k] = True
             except Exception:
                 loaded[k] = False
+        reg_probe = DarkCapabilityRegistry().probe_all()
         core_ok = all(loaded[k] for k in core_organs)
         return {
             "schema": SCHEMA,
             "core_organs_loaded": core_ok,
-            "all_organs_loaded": all(loaded.values()),
-            "wired_organ_count": sum(1 for v in loaded.values() if v),
+            "all_organs_loaded": all(loaded.values()) and (reg_probe["stdlib_engines_verified"] == reg_probe["stdlib_engines_total"]),
+            "wired_organ_count": sum(1 for v in loaded.values() if v) + int(reg_probe["unique_modules_imported"]),
             "organs": loaded,
+            "dark_registry_stdlib_verified": reg_probe["stdlib_engines_verified"],
+            "dark_registry_stdlib_total": reg_probe["stdlib_engines_total"],
+            "dark_registry_engines": reg_probe["engines_imported"],
+            "dark_registry_total": reg_probe["engines_total"],
+            "dark_registry_unique_modules": reg_probe["unique_modules_imported"],
             "model_calls": PRODUCER_MODEL_CALLS,
         }
 

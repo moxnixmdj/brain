@@ -484,7 +484,141 @@ def test_strike3_and_4_continual_memory_drift_retraction_and_unified_model_wirin
     fl = um.unified_fast_four_levers(64, sym_group_size=4, demo_bits=2.0)
     assert fl["quotient_prior_bits"] == 4.0 and fl["remaining_bits"] == 2.0 and fl["k3_model_calls"] == 0
     st = um.minimal_core_status()
-    assert st["ok"] is True and st["unified_fast_spine"]["wired_organ_count"] >= 15
+    assert st["ok"] is True and st["unified_fast_spine"]["wired_organ_count"] >= 40
+
+
+def test_master_plan_strikes_a_through_e_end_to_end():
+    """Verify Strikes A (Dark Registry), B (ARC-3 V5 ObjectWorldModel), C (E-Stitch + Polyglot CST),
+    D (2048-bit HDC + PathHD KG + Temporal Resolution + Speaker-Swap Abstention), and
+    E (CompiledWorkflowGraph + Tsetlin Guards + Failure-Node Recovery Grafting)."""
+    import numpy as np
+    from canonical.runtime.brain_unified_model_v1 import UnifiedModel, load_model
+    from canonical.swe_kernel.hdc_semantic_engine_v1 import (
+        MaxSATTsetlinClassifier,
+        PathHDKnowledgeGraph,
+        RandomIndexingEncoder,
+    )
+    from canonical.swe_kernel.minimal_arc3_agent_v1 import ObjectWorldModel, _extract_diff_components
+    from canonical.swe_kernel.minimal_subtree_transfer_v1 import MinimalSubtreeTransferStore
+
+    um = UnifiedModel(load_model())
+
+    # --- Strike A: DarkCapabilityRegistry (29/29 stdlib dark engines verified + live invoke) ---
+    probe = um.unified_fast_probe_dark_engines()
+    assert probe["stdlib_engines_verified"] == probe["stdlib_engines_total"] == 29
+    assert probe["k3_model_calls"] == 0
+    ans_shape = um.unified_fast_invoke_dark_engine("answer_shape", "When did Alice move to Austin?")
+    assert ans_shape["engine"] == "answer_shape" and ans_shape["model_calls"] == 0
+
+    # --- Strike B: ARC-AGI-3 V5 ObjectWorldModel (connected-component diff + avatar/wall learning) ---
+    f0 = np.zeros((20, 20), dtype=np.int32)
+    f0[8:10, 6:8] = 3      # avatar color 3
+    f0[8:10, 10:12] = 9    # wall color 9 two pixels right of f1
+    f1 = np.zeros((20, 20), dtype=np.int32)
+    f1[8:10, 8:10] = 3     # avatar stepped +2 right
+    f1[8:10, 10:12] = 9
+    hud = np.zeros((20, 20), dtype=bool)
+    diff = f0 != f1
+    comps = _extract_diff_components(f0, diff, 8, 9, 6, 9)
+    assert len(comps) >= 1 and any(c["color"] == 3 for c in comps)
+    owm = ObjectWorldModel()
+    owm.observe_move("ACTION4", "s0", "s1", f0, f1, hud, moved=True)
+    assert owm.avatar_color == 3 and owm.move_step.get("ACTION4") == (2, 0)
+    # Two bumps into color-9 barrier teach solid-wall physics -> predicts blocked on ACTION4!
+    owm.observe_move("ACTION4", "s1", "s1", f1, f1, hud, moved=False)
+    owm.observe_move("ACTION4", "s1", "s1", f1, f1, hud, moved=False)
+    assert 9 in owm.wall_colors(thresh=2)
+    assert owm.is_predicted_wall("ACTION4", f1, thresh=2) is True
+
+    # --- Strike C: E-Stitch Algebraic Equivalence Transfer + Polyglot CST 1-Shot Transfer ---
+    store = MinimalSubtreeTransferStore(allow_one_scope_hole=True)
+    assert store.learn_from_file_pair("def f(a, b):\n    return a < b\n", "def f(a, b):\n    return a <= b\n") >= 1
+    store.compress_library_estitch()
+    # Cross-syntax De Morgan transfer: `not (x >= y)` is algebraically equivalent to `x < y` -> rewrites to `x <= y`!
+    e_props = store.propose_source_rewrites("def g(x, y):\n    return not (x >= y)\n", max_candidates=12)
+    assert any("x <= y" in p["source"] for p in e_props)
+
+    sk_js = um.unified_fast_learn_polyglot_skill(
+        "m.js",
+        "function maxVal(a, b) { if (a < b) { return a; } return b; }",
+        "function maxVal(a, b) { if (a > b) { return a; } return b; }",
+    )
+    assert sk_js["learned"] is True and sk_js["language"] == "js"
+    js_cands = um.unified_fast_spine().apply_polyglot_skills(
+        "pick.js", "function pick(x, y) { if (x < y) { return x; } return y; }"
+    )
+    assert any("x > y" in c["source"] for c in js_cands)
+
+    # --- Strike D: Zero-weight 2048-bit HDC + PathHD KG + Temporal Resolution + Adversarial Abstention ---
+    enc = RandomIndexingEncoder()
+    enc.observe_documents([
+        "database timeout error occurred in postgres connection pool",
+        "postgres connection pool hit database timeout limit",
+    ])
+    assert enc.similarity("parse_url_query", "parsing_urls_queries") > 0.30
+    assert enc.similarity("database timeout error", "postgres connection pool") > enc.similarity(
+        "database timeout error", "orchard apple harvest basket"
+    ) + 0.08
+
+    kg = PathHDKnowledgeGraph(enc)
+    kg.ingest_turn("I live in Seattle.", speaker="Alice", turn_idx=1, source_id="D1:1")
+    kg.ingest_turn("I moved to Austin last month.", speaker="Alice", turn_idx=2, source_id="D1:2")
+    now_hits = kg.query_facts("Where does Alice currently live?", top_k=3)
+    assert now_hits and "austin" in now_hits[0][1].obj.lower()
+
+    conv = {
+        "session_1_date_time": "1:56 pm on 8 May, 2023",
+        "session_1": [
+            {"dia_id": "D1:1", "speaker": "Caroline", "text": "I went to the LGBTQ support group yesterday!"},
+            {"dia_id": "D1:2", "speaker": "Melanie", "text": "Awesome! I ran a charity marathon and realized self-care is vital."},
+        ],
+    }
+    qa_time = um.unified_fast_answer_hybrid_memory(conv, "When did Caroline go to the LGBTQ support group?")
+    assert qa_time["abstained"] is False and "7 May 2023" in qa_time["answer"]
+    # Adversarial speaker-swap question MUST abstain cleanly!
+    qa_adv = um.unified_fast_answer_hybrid_memory(conv, "What did Caroline realize after her charity marathon?")
+    assert qa_adv["abstained"] is True
+
+    # MaxSAT Tsetlin Classifier: learn + 1-counterexample refutation
+    tc = MaxSATTsetlinClassifier(["has_tb", "is_go", "writable"])
+    tc.fit([tc.encode_features(["has_tb", "writable"])], [tc.encode_features(["is_go"])])
+    assert tc.predict(tc.encode_features(["has_tb", "writable"])) is True
+    assert tc.predict(tc.encode_features(["is_go"])) is False
+
+    # --- Strike E: CompiledWorkflowGraph (hole abstraction + Tsetlin guard + recovery grafting) ---
+    execs = {
+        "load": lambda st, p: st.update({"vals": list(st["db"][p["tbl"]])}) or True,
+        "clean": lambda st, p: (
+            False if (st.get("fault") and not st.get("fixed"))
+            else (st.update({"vals": [v for v in st["vals"] if v > 0]}) or True)
+        ),
+        "heal": lambda st, p: st.update({"vals": [abs(v) for v in st["vals"] if v != 0], "fixed": True}) or True,
+        "verify": lambda st, p: (len(st["vals"]) > 0 and (st.update({"sum": sum(st["vals"])}) or True)),
+    }
+    um.unified_fast_compile_workflow_graph(
+        "wf_test_v1",
+        [
+            {"kind": "DataOp", "op": "load", "params": {"tbl": "jan"}},
+            {"kind": "DataOp", "op": "clean", "params": {}},
+            {"kind": "CheckOp", "op": "verify", "params": {}},
+        ],
+        hole_bindings={"tbl": "jan"},
+        positive_env_features=[["rw_mode"]],
+        negative_env_features=[["ro_mode"]],
+    )
+    st_ok = {"db": {"dec": [3, -1, 7]}}
+    r_ok = um.unified_fast_execute_workflow_graph("wf_test_v1", st_ok, execs, bindings={"tbl": "dec"}, env_features=["rw_mode"])
+    assert r_ok["succeeded"] is True and st_ok["sum"] == 10
+    r_blk = um.unified_fast_execute_workflow_graph("wf_test_v1", {"db": {"dec": [1]}}, execs, bindings={"tbl": "dec"}, env_features=["ro_mode"])
+    assert r_blk["succeeded"] is False and r_blk["reason"] == "GUARD_REJECTED"
+    st_f = {"db": {"dec": [3, -2, 5]}, "fault": True}
+    r_f = um.unified_fast_execute_workflow_graph("wf_test_v1", st_f, execs, bindings={"tbl": "dec"}, env_features=["rw_mode"])
+    assert r_f["succeeded"] is False and r_f["failed_node_idx"] == 1
+    um.unified_fast_graft_workflow_recovery("wf_test_v1", 1, [{"kind": "DataOp", "op": "heal", "params": {}}])
+    st_h = {"db": {"dec": [3, -2, 5]}, "fault": True}
+    r_h = um.unified_fast_execute_workflow_graph("wf_test_v1", st_h, execs, bindings={"tbl": "dec"}, env_features=["rw_mode"])
+    assert r_h["succeeded"] is True and st_h["sum"] == 10
+
 
 
 

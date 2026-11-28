@@ -411,6 +411,92 @@ def collect_class_attrs(tree: ast.AST, fn_qualname: str) -> list[str]:
     return [a for a, _ in counts.most_common(40)]
 
 
+def _canonical_eclass_variants(expr: ast.expr, *, max_variants: int = 4) -> list[ast.expr]:
+    """E-Stitch algebraic equivalence-class variants for Python expressions (PLDI 2026 paradigm).
+
+    Returns `[expr]` plus provably equivalent algebraic rewrites (commutative comparisons,
+    De Morgan / negated comparisons, commutative binary/boolean ops) so learned AST rules
+    match modulo syntactic ordering without changing semantics.
+    """
+    variants: list[ast.expr] = [expr]
+    seen_dumps = {ast.dump(expr)}
+
+    def _add(cand: ast.expr) -> None:
+        if len(variants) >= max_variants:
+            return
+        d = ast.dump(cand)
+        if d not in seen_dumps:
+            seen_dumps.add(d)
+            variants.append(cand)
+
+    # 1. Single-comparison commutative flips: a < b <-> b > a, a == b <-> b == a, etc.
+    if isinstance(expr, ast.Compare) and len(expr.ops) == 1 and len(expr.comparators) == 1:
+        op = expr.ops[0]
+        flip_map: dict[type[ast.cmpop], ast.cmpop] = {
+            ast.Eq: ast.Eq(),
+            ast.NotEq: ast.NotEq(),
+            ast.Lt: ast.Gt(),
+            ast.Gt: ast.Lt(),
+            ast.LtE: ast.GtE(),
+            ast.GtE: ast.LtE(),
+            ast.Is: ast.Is(),
+            ast.IsNot: ast.IsNot(),
+        }
+        flipped = flip_map.get(type(op))
+        if flipped is not None:
+            _add(ast.Compare(left=copy.deepcopy(expr.comparators[0]), ops=[flipped], comparators=[copy.deepcopy(expr.left)]))
+        # len(x) == 0 <-> not x
+        if (
+            isinstance(op, ast.Eq)
+            and isinstance(expr.left, ast.Call)
+            and isinstance(expr.left.func, ast.Name)
+            and expr.left.func.id == "len"
+            and len(expr.left.args) == 1
+            and isinstance(expr.comparators[0], ast.Constant)
+            and expr.comparators[0].value == 0
+        ):
+            _add(ast.UnaryOp(op=ast.Not(), operand=copy.deepcopy(expr.left.args[0])))
+
+    # 2. Negated comparison De Morgan normalization: not (a == b) <-> a != b, etc.
+    elif isinstance(expr, ast.UnaryOp) and isinstance(expr.op, ast.Not):
+        inner = expr.operand
+        if isinstance(inner, ast.Compare) and len(inner.ops) == 1 and len(inner.comparators) == 1:
+            neg_map: dict[type[ast.cmpop], ast.cmpop] = {
+                ast.Eq: ast.NotEq(),
+                ast.NotEq: ast.Eq(),
+                ast.Lt: ast.GtE(),
+                ast.GtE: ast.Lt(),
+                ast.LtE: ast.Gt(),
+                ast.Gt: ast.LtE(),
+                ast.In: ast.NotIn(),
+                ast.NotIn: ast.In(),
+                ast.Is: ast.IsNot(),
+                ast.IsNot: ast.Is(),
+            }
+            neg_op = neg_map.get(type(inner.ops[0]))
+            if neg_op is not None:
+                _add(ast.Compare(left=copy.deepcopy(inner.left), ops=[neg_op], comparators=[copy.deepcopy(inner.comparators[0])]))
+
+    # 3. Commutative BinOp flips: a + b <-> b + a, a * b <-> b * a, a | b <-> b | a, a & b <-> b & a
+    elif isinstance(expr, ast.BinOp) and isinstance(expr.op, (ast.Add, ast.Mult, ast.BitOr, ast.BitAnd, ast.BitXor)):
+        _add(ast.BinOp(left=copy.deepcopy(expr.right), op=copy.deepcopy(expr.op), right=copy.deepcopy(expr.left)))
+
+    # 4. Commutative 2-operand BoolOp flips: a and b <-> b and a, a or b <-> b or a
+    elif isinstance(expr, ast.BoolOp) and len(expr.values) == 2:
+        _add(ast.BoolOp(op=copy.deepcopy(expr.op), values=[copy.deepcopy(expr.values[1]), copy.deepcopy(expr.values[0])]))
+
+    return variants
+
+
+def _canonical_eclass_key(expr: ast.expr) -> str:
+    """Smallest alpha-renamed signature across an expression's algebraic e-class."""
+    sigs: list[str] = []
+    for var in _canonical_eclass_variants(expr, max_variants=4):
+        s, _ = _alpha_sig_and_template(var, {})
+        sigs.append(s)
+    return min(sigs) if sigs else ""
+
+
 class MinimalSubtreeTransferStore:
     """Learn executable 0-hole & 1-scope-hole minimal-subtree rewrite rules from full-function fixes."""
 
@@ -598,25 +684,76 @@ class MinimalSubtreeTransferStore:
             for r in self._rules.values()
         ]
 
+    def compress_library_estitch(self) -> dict[str, Any]:
+        """E-Stitch algebraic library compression: merge rules equivalent modulo e-class normal forms."""
+        before_n = len(self._rules)
+        if before_n <= 1:
+            return {"rules_before": before_n, "rules_after": before_n, "merged": 0, "compression_ratio": 1.0}
+        by_ec: dict[tuple[str, str, int, int], tuple[str, str]] = {}
+        new_rules: dict[tuple[str, str], MinimalSubtreeRule] = {}
+        new_counts: Counter[tuple[str, str]] = Counter()
+        new_fv: dict[tuple[str, str], tuple[str, ...]] = {}
+        new_fa: dict[tuple[str, str], tuple[str, ...]] = {}
+        merged = 0
+        for key, rule in sorted(self._rules.items(), key=lambda kv: -self._counts[kv[0]]):
+            fv = self._free_vars.get(key, ())
+            fa = self._free_attrs.get(key, ())
+            if isinstance(rule.lhs_template, ast.expr) and isinstance(rule.rhs_template, ast.expr):
+                ec_key = (_canonical_eclass_key(rule.lhs_template), _canonical_eclass_key(rule.rhs_template), len(fv), len(fa))
+            else:
+                ec_key = (rule.lhs_sig, rule.rhs_sig, len(fv), len(fa))
+            canon = by_ec.get(ec_key)
+            if canon is None:
+                by_ec[ec_key] = key
+                new_rules[key] = rule
+                new_counts[key] = self._counts[key]
+                new_fv[key] = fv
+                new_fa[key] = fa
+            else:
+                new_counts[canon] += self._counts[key]
+                merged += 1
+        self._rules = new_rules
+        self._counts = new_counts
+        self._free_vars = new_fv
+        self._free_attrs = new_fa
+        after_n = len(self._rules)
+        return {
+            "rules_before": before_n,
+            "rules_after": after_n,
+            "merged": merged,
+            "compression_ratio": round(before_n / max(1, after_n), 4),
+        }
+
     def apply_to_expr(
         self,
         expr_node: ast.expr,
         *,
         scope_names: Sequence[str] = (),
         attr_names: Sequence[str] = (),
+        use_egraph: bool = True,
     ) -> list[tuple[MinimalSubtreeRule, str]]:
-        """Return executable rewritten expressions using only matched bindings + target function's own scope."""
+        """Return executable rewritten expressions using matched bindings (modulo E-Stitch e-class) + target scope."""
         out: list[tuple[MinimalSubtreeRule, str]] = []
         seen: set[str] = set()
         orig_src = ast.unparse(expr_node)
         seen.add(orig_src)
         pool = list(scope_names) + list(_SAFE_SCOPE_BUILTINS)
         attr_pool = list(attr_names)
+        target_variants = _canonical_eclass_variants(expr_node, max_variants=3) if use_egraph else [expr_node]
         for rule in sorted(self.rules(), key=lambda r: -r.support_count):
-            bindings: dict[str, ast.AST] = {}
-            attr_bindings: dict[str, str] = {}
-            if not _match_template(rule.lhs_template, expr_node, bindings, attr_bindings):
+            matched_bindings: dict[str, ast.AST] | None = None
+            matched_attrs: dict[str, str] = {}
+            for cand_expr in target_variants:
+                bindings: dict[str, ast.AST] = {}
+                attr_bindings: dict[str, str] = {}
+                if _match_template(rule.lhs_template, cand_expr, bindings, attr_bindings):
+                    matched_bindings = bindings
+                    matched_attrs = attr_bindings
+                    break
+            if matched_bindings is None:
                 continue
+            bindings = matched_bindings
+            attr_bindings = matched_attrs
             key = (rule.lhs_sig, rule.rhs_sig)
             free_v = self._free_vars.get(key, ())
             free_a = self._free_attrs.get(key, ())

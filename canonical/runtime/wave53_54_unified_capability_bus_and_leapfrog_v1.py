@@ -4960,6 +4960,121 @@ class Wave53To54UnifiedCapabilityBusMixin(Wave51To52UnifiedModelMixin):
         out["k3_model_calls"] = 0
         return out
 
+    def unified_fast_probe_dark_engines(self) -> dict[str, Any]:
+        """Verify live importability & entrypoints of all 29 stdlib + 2 optional dark zero-LLM engines."""
+        out = self.unified_fast_spine().probe_dark_engines()
+        out["k3_model_calls"] = 0
+        return out
+
+    def unified_fast_invoke_dark_engine(self, slug: str, *args: Any, **kwargs: Any) -> dict[str, Any]:
+        """Invoke any catalogued dark zero-LLM engine by slug through `DarkCapabilityRegistry`."""
+        out = self.unified_fast_spine().invoke_dark_engine(slug, *args, **kwargs)
+        out["k3_model_calls"] = 0
+        return out
+
+    def unified_fast_answer_hybrid_memory(
+        self,
+        conversation_or_turns: Any,
+        question: str,
+        *,
+        top_k: int = 8,
+        abstain_threshold: float = 0.22,
+        zset_deltas: Sequence[tuple[str, str, str, int, int | None, int]] | None = None,
+    ) -> dict[str, Any]:
+        """End-to-end zero-LLM HDC + PathHD + DBSP hybrid memory QA with temporal resolution & abstention."""
+        from canonical.swe_kernel.unified_fast_spine_v1 import UnifiedFastSpine
+
+        idx = UnifiedFastSpine.build_hybrid_memory(conversation_or_turns, zset_deltas=zset_deltas)
+        out = UnifiedFastSpine.answer_hybrid_memory(
+            idx, question, top_k=top_k, abstain_threshold=abstain_threshold
+        )
+        out["k3_model_calls"] = 0
+        return out
+
+    def unified_fast_solve_swe_polyglot(
+        self,
+        workspace: str | pathlib.Path,
+        issue_text: str = "",
+        *,
+        language: str | None = None,
+        apply_patch: bool = True,
+        test_target: str | None = None,
+    ) -> dict[str, Any]:
+        """Unified zero-LLM polyglot SWE router (Python / Go / JS / TS / C / prose-issue / zero-test)."""
+        out = self.unified_fast_spine().solve_swe_polyglot(
+            workspace,
+            issue_text,
+            language=language,
+            apply_patch=apply_patch,
+            test_target=test_target,
+        )
+        out["k3_model_calls"] = 0
+        return out
+
+    def unified_fast_learn_polyglot_skill(
+        self,
+        file_path: str,
+        before_text: str,
+        after_text: str,
+        *,
+        description: str = "",
+    ) -> dict[str, Any]:
+        """1-shot polyglot CST skill induction into persistent `UnifiedFastSpine` skill store."""
+        out = self.unified_fast_spine().learn_polyglot_skill(
+            file_path, before_text, after_text, description=description
+        )
+        out["k3_model_calls"] = 0
+        return out
+
+    def unified_fast_compile_workflow_graph(
+        self,
+        workflow_id: str,
+        trace_steps: Sequence[Mapping[str, Any]],
+        *,
+        hole_bindings: Mapping[str, str] | None = None,
+        positive_env_features: Sequence[Sequence[str]] = (),
+        negative_env_features: Sequence[Sequence[str]] = (),
+    ) -> Any:
+        """Compile a verified round-1 trace into a parameterized `CompiledWorkflowGraph` (DataOp/CheckOp/LoopOp)."""
+        return self.unified_fast_spine().compile_workflow_graph(
+            workflow_id,
+            trace_steps,
+            hole_bindings=hole_bindings,
+            positive_env_features=positive_env_features,
+            negative_env_features=negative_env_features,
+        )
+
+    def unified_fast_execute_workflow_graph(
+        self,
+        workflow_id: str,
+        state: dict[str, Any],
+        executors: Mapping[str, Any],
+        *,
+        bindings: Mapping[str, str] | None = None,
+        env_features: Sequence[str] = (),
+    ) -> dict[str, Any]:
+        """Execute a compiled procedural workflow graph directly (sub-ms, 0 LLM calls)."""
+        out = self.unified_fast_spine().execute_workflow_graph(
+            workflow_id, state, executors, bindings=bindings, env_features=env_features
+        )
+        out["k3_model_calls"] = 0
+        return out
+
+    def unified_fast_graft_workflow_recovery(
+        self,
+        workflow_id: str,
+        node_idx: int,
+        recovery_steps: Sequence[Mapping[str, Any]],
+        *,
+        failed_env_features: Sequence[str] = (),
+    ) -> dict[str, Any]:
+        """Graft a targeted recovery branch at an exact failure node without re-planning the graph."""
+        out = self.unified_fast_spine().graft_workflow_recovery(
+            workflow_id, node_idx, recovery_steps, failed_env_features=failed_env_features
+        )
+        out["k3_model_calls"] = 0
+        return out
+
     def minimal_core_status(self) -> dict[str, Any]:
         """Report availability of the lazy-wired Minimal Epistemic Core + UnifiedFastSpine modules (0 LLM calls)."""
         from canonical.swe_kernel.minimal_epistemic_core_v1 import LocalMicroModelBackend
@@ -4973,6 +5088,8 @@ class Wave53To54UnifiedCapabilityBusMixin(Wave51To52UnifiedModelMixin):
                 "canonical.swe_kernel.minimal_epistemic_core_v1",
                 "canonical.swe_kernel.minimal_arc3_agent_v1",
                 "canonical.swe_kernel.minimal_micro_models_v1",
+                "canonical.swe_kernel.hdc_semantic_engine_v1",
+                "canonical.swe_kernel.minimal_subtree_transfer_v1",
                 "canonical.swe_kernel.unified_fast_spine_v1",
             ],
             "unified_fast_spine": spine_st,
