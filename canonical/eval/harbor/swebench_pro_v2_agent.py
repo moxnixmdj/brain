@@ -470,21 +470,27 @@ def run_engine_on_tree(
             else:
                 from canonical.runtime.brain_unified_model_v1 import open_model
 
-                result = open_model().solve(instruction[:40000], inputs=inputs, mode="EPISTEMIC")
+                _model = open_model()
+                result = _model.solve(instruction[:40000], inputs=inputs, mode="EPISTEMIC")
                 # If the primary solver produced no edits on disk or in payload, run the zero-model
-                # UnifiedFastSpine (BM25 + ProducerLineage + InducedEditBasis + FastCoWVerifier).
+                # UnifiedFastSpine (git-history MinimalSubtreeTransferStore + BM25 + ProducerLineage
+                # + InducedEditBasis + DualProgramSplicing + FastCoWVerifier).
                 _probe_edits = extract_engine_edits(result if isinstance(result, Mapping) else {})
                 _probe_diff = diff_trees(before, snapshot_tree(tree))
                 if not _probe_edits and _probe_diff == {"modified": [], "added": [], "removed": []}:
                     try:
-                        from canonical.swe_kernel.unified_fast_spine_v1 import UnifiedFastSpine
+                        if hasattr(_model, "unified_fast_spine"):
+                            _spine = _model.unified_fast_spine()
+                        else:
+                            from canonical.swe_kernel.unified_fast_spine_v1 import UnifiedFastSpine
 
+                            _spine = UnifiedFastSpine()
                         fast_spine_fallback_used = True
-                        r_spine = UnifiedFastSpine().repair_repo_fast(
+                        r_spine = _spine.repair_repo_fast(
                             tree,
                             instruction[:40000],
                             max_files=3,
-                            max_candidates=120,
+                            max_candidates=160,
                             timeout_s=0.12,
                             apply_patch=False,
                         )

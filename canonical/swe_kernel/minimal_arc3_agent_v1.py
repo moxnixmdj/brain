@@ -106,7 +106,12 @@ def _detect_grid_stride(frame: np.ndarray) -> int:
 
 
 class GamePrior:
-    """Cross-level epistemic physics memory persisted across levels 1..N of ONE game."""
+    """Cross-level epistemic physics memory persisted across levels 1..N of ONE game.
+
+    Uses `instant_condition_store_v1` single-counterexample invalidation semantics:
+    any learned negative constraint (dead click class, blocking wall color) is revoked
+    immediately on a single contradicting observation on a later level.
+    """
 
     def __init__(self, shape: tuple[int, int] = (64, 64)) -> None:
         self.hud_mask = np.zeros(shape, dtype=bool)
@@ -125,20 +130,39 @@ class GamePrior:
         self.action_vec: dict[str, tuple[float, float]] = {}
         self.undo_actions: set[str] = set()
         self.undo_votes: Counter[str] = Counter()
+        # Kinematic obstacle-color model (color -> [blocked_hits, pass_hits]) with 1-counterexample revocation
+        self.color_blocked_hits: Counter[int] = Counter()
+        self.color_pass_hits: Counter[int] = Counter()
+        # Energy / step-limit horizon tracker (distinguishes timeout GAME_OVER from fatal hazards!)
+        self.timeout_step_counts: list[int] = []
+        self.known_step_limit: int | None = None
 
     def observe_diff(self, prev_frame: np.ndarray, next_frame: np.ndarray) -> tuple[int, int, bool]:
-        """Update online HUD mask and return (raw_px, world_px, mask_grew)."""
+        """Update online border-only HUD mask and return (raw_px, world_px, mask_grew).
+
+        Restricts automatic step-counter HUD masking strictly to outer border strips
+        so small interior game objects (switches, keys, projectiles) are NEVER masked out.
+        """
         diff = prev_frame != next_frame
         raw_px = int(np.count_nonzero(diff))
         self.total_steps += 1
         grew = False
         h, w = self.hud_mask.shape
 
+        border_zone = np.zeros((h, w), dtype=bool)
+        border_zone[:4, :] = True
+        border_zone[max(0, h - 4):, :] = True
+        border_zone[:, :3] = True
+        border_zone[:, max(0, w - 3):] = True
+
         def _mark_hud(mask_slice: np.ndarray) -> None:
             nonlocal grew
+            masked_slice = mask_slice & border_zone
+            if not np.any(masked_slice):
+                return
             before = int(np.count_nonzero(self.hud_mask))
-            self.hud_mask |= mask_slice
-            self.tiny_change_hits[mask_slice] += 1
+            self.hud_mask |= masked_slice
+            self.tiny_change_hits[masked_slice] += 1
             for r in (0, 1, 2, h - 3, h - 2, h - 1):
                 if 0 <= r < h and int(np.count_nonzero(self.tiny_change_hits[r, :] > 0)) >= 3:
                     self.hud_mask[r, :] = True
@@ -152,8 +176,7 @@ class GamePrior:
             _mark_hud(diff)
         elif raw_px > 0:
             self.step_change_hits[diff] += 1
-            border_diff = diff.copy()
-            border_diff[1:h - 3, 1:w - 1] = False
+            border_diff = diff & border_zone
             b_px = int(np.count_nonzero(border_diff))
             if 1 <= b_px <= 2 and raw_px >= 12:
                 _mark_hud(border_diff)
@@ -202,6 +225,29 @@ class GamePrior:
 
     def is_dead_click_color(self, color_cls: str) -> bool:
         return self.color_tries.get(color_cls, 0) >= 2 and self.color_world_hits.get(color_cls, 0) == 0
+
+    def is_dead_click_cls(self, cls: str, color_cls: str | None) -> bool:
+        if color_cls and self.is_dead_click_color(color_cls):
+            return True
+        return self.cls_tries.get(cls, 0) >= 3 and self.cls_world_hits.get(cls, 0) == 0
+
+    def record_move_target_color(self, color: int, moved: bool) -> None:
+        if moved:
+            self.color_pass_hits[color] += 1
+        else:
+            self.color_blocked_hits[color] += 1
+
+    def is_predicted_wall_color(self, color: int) -> bool:
+        # Single-counterexample revocation: if we EVER moved onto `color`, it's not a pure wall
+        return self.color_blocked_hits.get(color, 0) >= 3 and self.color_pass_hits.get(color, 0) == 0
+
+    def record_timeout_candidate(self, steps_since_reset: int) -> None:
+        if steps_since_reset >= 8:
+            self.timeout_step_counts.append(steps_since_reset)
+            if len(self.timeout_step_counts) >= 2:
+                recent = self.timeout_step_counts[-4:]
+                if max(recent) - min(recent) <= 4:
+                    self.known_step_limit = int(min(recent))
 
 
 class MinimalArc3Agent:
@@ -284,8 +330,10 @@ class MinimalArc3Agent:
         target_vec: tuple[float, float] | None = None,
         *,
         just_fired_mechanic: bool = False,
+        frame: np.ndarray | None = None,
+        player_pos: tuple[float, float] | None = None,
     ) -> list[dict[str, Any]]:
-        """Rank untried actions by color-stratified discovery, winning-class transfer & spatial guidance."""
+        """Rank untried actions by color-stratified discovery, winning-class transfer, wall prediction & spatial guidance."""
         p = self.prior
         untested_colors_seen: set[str] = set()
         scored: list[tuple[float, dict[str, Any]]] = []
@@ -298,6 +346,7 @@ class MinimalArc3Agent:
             ),
         )
         inv_last = p.inv_action.get(last_action or "")
+
         for a in ordered:
             act = a["action"]
             cls = a["cls"]
@@ -307,8 +356,12 @@ class MinimalArc3Agent:
             if a["is_click"]:
                 if a.get("is_bg") and p.color_tries.get(ccls, 0) >= 1 and p.color_world_hits.get(ccls, 0) == 0:
                     continue
-                if p.is_dead_click_color(ccls):
-                    continue
+                if a.get("has_move"):
+                    if p.is_dead_click_color(ccls):
+                        continue
+                else:
+                    if p.is_dead_click_cls(cls, ccls):
+                        continue
                 ct = p.color_tries.get(ccls, 0)
                 if ct == 0:
                     if ccls not in untested_colors_seen:
@@ -329,6 +382,9 @@ class MinimalArc3Agent:
                         sc -= 1.0
                 vc = visited_click_coords.get((a["x"], a["y"]), 0)
                 sc += 0.4 / (1.0 + vc)
+                # Penalize immediately re-clicking a proven self-inverse toggle control on consecutive steps
+                if act == last_action and p.inv_action.get(act) == act:
+                    sc -= 0.85
                 if last_diff_center is not None and vc == 0:
                     d2 = (a["cx"] - last_diff_center[0]) ** 2 + (a["cy"] - last_diff_center[1]) ** 2
                     if 4.0 <= d2 <= 400.0:
@@ -387,6 +443,9 @@ class MinimalArc3Agent:
         tried: dict[str, set[str]] = {}
         dead_edges: set[tuple[str, str]] = set()
         death_edges: set[tuple[str, str]] = set()
+        edge_death_count: Counter[tuple[str, str]] = Counter()
+        dead_click_coord_misses: Counter[tuple[int, int, int]] = Counter()
+        dead_click_coords: set[tuple[int, int, int]] = set()
         state_frames: dict[str, np.ndarray] = {}
         visit_count: Counter[str] = Counter({cur_key: 1})
 
@@ -397,6 +456,8 @@ class MinimalArc3Agent:
         lattice_enabled = False
 
         actions_used = 0
+        steps_since_reset = 0
+        consecutive_empty_resets = 0
         resets_used = 0
         deaths = 0
         world_changes = 0
@@ -468,7 +529,8 @@ class MinimalArc3Agent:
                 and (key, act) not in death_edges
                 and act not in self.prior.undo_actions
                 and not (s["aid"] == 7 and self.prior.cls_tries.get(act, 0) >= 1)
-                and not (s["is_click"] and self.prior.is_dead_click_color(s["color_cls"]))
+                and not (s["is_click"] and (self.prior.is_dead_click_color(s["color_cls"]) if s.get("has_move") else self.prior.is_dead_click_cls(s["cls"], s["color_cls"])))
+                and not (s["is_click"] and not s.get("has_move") and (s["x"], s["y"], int(s["color_cls"].split(":")[1])) in dead_click_coords)
             ]
 
         def bfs_to_frontier(start_k: str, max_depth: int = 16) -> list[dict[str, Any]]:
@@ -518,6 +580,7 @@ class MinimalArc3Agent:
                 frame, avail, st_name, lvl = reset_fn()
                 actions_used += 1
                 resets_used += 1
+                steps_since_reset = 0
                 cur_key = self.prior.world_key(frame)
                 cur_hist = self.prior.color_histogram(frame)
                 ensure_state(cur_key, frame, avail)
@@ -566,14 +629,18 @@ class MinimalArc3Agent:
                     visited_click_coords,
                     target_vec=tvec,
                     just_fired_mechanic=just_fired_mechanic,
+                    frame=frame,
+                    player_pos=player_pos,
                 )
                 if ranked:
                     chosen = ranked[0]
+                    consecutive_empty_resets = 0
                 else:
                     path = bfs_to_frontier(cur_key, max_depth=max(8, min(36, budget - actions_used - 1)))
                     if path:
                         planned_path.extend(path[1:])
                         chosen = path[0]
+                        consecutive_empty_resets = 0
                     else:
                         undo_spec = None
                         for u_act in self.prior.undo_actions:
@@ -587,15 +654,23 @@ class MinimalArc3Agent:
                                 s for act, s in action_specs.get(cur_key, {}).items()
                                 if (cur_key, act) not in dead_edges and (cur_key, act) not in death_edges
                                 and act not in self.prior.undo_actions
-                                and not (s["is_click"] and self.prior.is_dead_click_color(s["color_cls"]))
+                                and not (s["is_click"] and (self.prior.is_dead_click_color(s["color_cls"]) if s.get("has_move") else self.prior.is_dead_click_cls(s["cls"], s["color_cls"])))
                             ]
-                            if fallbacks and resets_used >= 2:
+                            if fallbacks and (resets_used >= 2 or consecutive_empty_resets >= 2):
                                 fallbacks.sort(key=lambda s: visit_count.get(transitions.get(cur_key, {}).get(s["action"], ""), 0))
                                 chosen = fallbacks[0]
-                            elif actions_used < budget - 1 and visit_count[cur_key] >= 1 and cur_key != next(iter(action_specs)):
+                                consecutive_empty_resets = 0
+                            elif (
+                                actions_used < budget - 1
+                                and consecutive_empty_resets < 3
+                                and visit_count[cur_key] >= 1
+                                and cur_key != next(iter(action_specs))
+                            ):
                                 frame, avail, st_name, lvl = reset_fn()
                                 actions_used += 1
                                 resets_used += 1
+                                steps_since_reset = 0
+                                consecutive_empty_resets += 1
                                 cur_key = self.prior.world_key(frame)
                                 cur_hist = self.prior.color_histogram(frame)
                                 ensure_state(cur_key, frame, avail)
@@ -609,6 +684,8 @@ class MinimalArc3Agent:
                                 fallbacks.sort(key=lambda s: visit_count.get(transitions.get(cur_key, {}).get(s["action"], ""), 0))
                                 chosen = fallbacks[0]
                             else:
+                                # Re-open tried edges if graph exhausted on latent/timed puzzle instead of looping resets
+                                dead_edges.clear()
                                 all_acts = list(action_specs.get(cur_key, {}).values())
                                 if not all_acts:
                                     break
@@ -618,8 +695,18 @@ class MinimalArc3Agent:
             prev_key = cur_key
             prev_hist = cur_hist
             act_name = chosen["action"]
+            # Sample predicted destination pixel color for kinematic wall learning before stepping
+            pred_tgt_color: int | None = None
+            if not chosen["is_click"] and chosen["aid"] in (1, 2, 3, 4) and player_pos is not None and act_name in self.prior.action_vec:
+                vx, vy = self.prior.action_vec[act_name]
+                tx_i = int(round(player_pos[0] + vx))
+                ty_i = int(round(player_pos[1] + vy))
+                if 0 <= tx_i < prev_frame.shape[1] and 0 <= ty_i < prev_frame.shape[0]:
+                    pred_tgt_color = int(prev_frame[ty_i, tx_i])
+
             frame, avail, st_name, lvl = step_fn(chosen)
             actions_used += 1
+            steps_since_reset += 1
             if chosen["is_click"]:
                 visited_click_coords[(chosen["x"], chosen["y"])] += 1
 
@@ -642,7 +729,14 @@ class MinimalArc3Agent:
 
             if st_name == "GAME_OVER":
                 self.prior.record_affordance(act_name, chosen["cls"], chosen["color_cls"], 0)
-                death_edges.add((prev_key, act_name))
+                edge_death_count[(prev_key, act_name)] += 1
+                self.prior.record_timeout_candidate(steps_since_reset)
+                # Proven non-hazard timeout: ONLY unban if this EXACT edge succeeded before AND occurred late (energy timeout)
+                already_safe = (act_name in transitions.get(prev_key, {})) and (steps_since_reset >= 18)
+                if not already_safe:
+                    death_edges.add((prev_key, act_name))
+                else:
+                    tried.setdefault(prev_key, set()).discard(act_name)
                 planned_path.clear()
                 cur_key = next_key
                 cur_hist = next_hist
@@ -651,6 +745,13 @@ class MinimalArc3Agent:
 
             if world_px == 0 or next_key == prev_key:
                 self.prior.record_affordance(act_name, chosen["cls"], chosen["color_cls"], 0)
+                if pred_tgt_color is not None:
+                    self.prior.record_move_target_color(pred_tgt_color, moved=False)
+                if chosen["is_click"]:
+                    ckey = (chosen["x"], chosen["y"], int(chosen["color_cls"].split(":")[1]))
+                    dead_click_coord_misses[ckey] += 1
+                    if dead_click_coord_misses[ckey] >= 2:
+                        dead_click_coords.add(ckey)
                 no_ops += 1
                 dead_edges.add((prev_key, act_name))
                 planned_path.clear()
@@ -659,6 +760,13 @@ class MinimalArc3Agent:
                 just_fired_mechanic = False
                 ensure_state(cur_key, frame, avail)
                 continue
+
+            if pred_tgt_color is not None:
+                self.prior.record_move_target_color(pred_tgt_color, moved=True)
+            if chosen["is_click"]:
+                # Single-counterexample revocation: if clicking this coord EVER worked, unban it!
+                ckey = (chosen["x"], chosen["y"], int(chosen["color_cls"].split(":")[1]))
+                dead_click_coords.discard(ckey)
 
             # Detect UNDO action online
             if len(state_stack) >= 2 and next_key == state_stack[-2]:
@@ -720,9 +828,13 @@ class MinimalArc3Agent:
 
             transitions.setdefault(prev_key, {})[act_name] = next_key
             if last_action is not None and transitions.get(next_key, {}).get(last_action) == prev_key:
-                if act_name != last_action and act_name not in self.prior.undo_actions:
-                    self.prior.inv_action[last_action] = act_name
-                    self.prior.inv_action[act_name] = last_action
+                if act_name not in self.prior.undo_actions:
+                    if act_name != last_action:
+                        self.prior.inv_action[last_action] = act_name
+                        self.prior.inv_action[act_name] = last_action
+                    elif chosen["is_click"]:
+                        # Self-inverse toggle control: clicking the same control twice restores prior state!
+                        self.prior.inv_action[act_name] = act_name
 
             if len(state_stack) >= 2 and next_key == state_stack[-2]:
                 state_stack.pop()

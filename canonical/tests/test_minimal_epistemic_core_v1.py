@@ -310,7 +310,8 @@ def test_unified_fast_spine_dark_organs_and_multifile_repo_repair(tmp_path):
     sc = spine_self_check()
     assert sc["pass"] is True
     assert sc["core_organs_loaded"] is True
-    assert sc["repair_method"] == "INDUCED_EDIT_BASIS_COW_V1"
+    assert sc["repair_method"] in ("MINIMAL_SUBTREE_TRANSFER_COW_V1", "INDUCED_EDIT_BASIS_COW_V1")
+    assert sc["splice_method"] == "DUAL_PROGRAM_SPLICING_COW_V1"
 
     # Multi-file repo (>5 files, proving the old <=3-file ceiling is lifted!)
     for i in range(6):
@@ -366,7 +367,124 @@ def test_unified_fast_spine_dark_organs_and_multifile_repo_repair(tmp_path):
         "canonical/swe_kernel/producer_lineage_graph_v1.py",
         "canonical/swe_kernel/guarded_meaning_ir_v1.py",
         "canonical/swe_kernel/induced_edit_basis_v1.py",
+        "canonical/swe_kernel/minimal_subtree_transfer_v1.py",
     ):
         assert req in names
+
+
+def test_strike1_plotkin_lgg_subtree_transfer_self_play_and_dual_splicing():
+    """Verify Plotkin LGG minimal-subtree origination, zero-LLM self-play, and multi-bug dual splicing."""
+    from canonical.swe_kernel.minimal_subtree_transfer_v1 import MinimalSubtreeTransferStore
+    from canonical.swe_kernel.unified_fast_spine_v1 import UnifiedFastSpine
+
+    # 1. Plotkin LGG shared-subexpr lifting transfers `t.cast(T, expr) -> expr` across completely unseen names!
+    store = MinimalSubtreeTransferStore(allow_one_scope_hole=True)
+    donor_b = "def wrap(env):\n    return t.cast('WSGIResponse', self.get_response(env))\n"
+    donor_a = "def wrap(env):\n    return self.get_response(env)\n"
+    assert store.learn_from_file_pair(donor_b, donor_a) >= 1
+
+    unseen_src = "def make_fn(f):\n    return t.cast(F, new_func)\n"
+    proposals = store.propose_source_rewrites(unseen_src, max_candidates=20)
+    assert any("return new_func" in p["source"] for p in proposals)
+
+    # 2. Zero-LLM self-play warm start learns inverse rules directly from green code
+    spine = UnifiedFastSpine()
+    green = "def clip_hi(x, hi):\n    return x < hi\n"
+    green_test = "assert clip_hi(1, 2) is True\nassert clip_hi(2, 2) is False\n"
+    sp = spine.self_play_warm_start(green, green_test, max_mutants=4)
+    assert sp["mutants_learned"] >= 1 and sp["model_calls"] == 0
+
+    # 3. Assertion-Granular Dual-Program Splicing solves a 2-bug function no single edit passes!
+    two_bug = (
+        "def shift_pair(x, y):\n"
+        "    a = x - 1\n"
+        "    b = y - 1\n"
+        "    return (a, b)\n"
+    )
+    two_test = (
+        "assert shift_pair(5, 10)[0] == 6\n"
+        "assert shift_pair(5, 10)[1] == 11\n"
+        "assert shift_pair(0, 0) == (1, 1)\n"
+    )
+    res = spine.repair_function_fast(two_bug, two_test, max_candidates=60)
+    assert res["fixed"] is True
+    assert res["method"] == "DUAL_PROGRAM_SPLICING_COW_V1"
+
+
+def test_strike2_arc3_v4_border_only_hud_never_masks_interior_objects():
+    """Verify ARC-AGI-3 V4 restricts step-counter HUD masking strictly to outer border strips."""
+    import numpy as np
+    from canonical.swe_kernel.minimal_arc3_agent_v1 import GamePrior
+
+    gp = GamePrior((16, 16))
+    f0 = np.zeros((16, 16), dtype=np.int32)
+    f1 = f0.copy()
+    f1[8, 8] = 5  # 1-pixel interior switch toggle — MUST NOT be masked as HUD!
+    f1[8, 9] = 5
+    raw_px, world_px, grew = gp.observe_diff(f0, f1)
+    assert raw_px == 2 and world_px == 2 and grew is False
+    assert bool(gp.hud_mask[8, 8]) is False
+
+    # Outer border 1-px step-counter tick SHOULD be detected as HUD!
+    f2 = f0.copy()
+    f2[0, 5] = 7
+    raw_px2, world_px2, grew2 = gp.observe_diff(f0, f2)
+    assert raw_px2 == 1 and world_px2 == 0 and grew2 is True
+    assert bool(gp.hud_mask[0, 5]) is True
+
+
+def test_strike3_and_4_continual_memory_drift_retraction_and_unified_model_wiring():
+    """Verify InstantContinualMemory (0% stale leakage, 1-counterexample narrowing, CU transfer) on UnifiedModel."""
+    from canonical.runtime.brain_unified_model_v1 import UnifiedModel, load_model
+
+    um = UnifiedModel(load_model())
+    cm = um.unified_fast_continual_memory()
+
+    # 1. Bi-temporal schema migration: 0% stale leakage on current, 100% exact t=1 time-travel
+    cm.assert_fact("auth_svc", "port", "8080", t_valid=1, supersede=True)
+    cm.assert_fact("auth_svc", "port", "9090", t_valid=2, supersede=True)
+    assert cm.current_slot_values("auth_svc", "port") == ["9090"]
+    assert cm.current_slot_values("auth_svc", "port", t_valid=1) == ["8080"]
+
+    # 2. Single-counterexample condition narrowing + clean deletion
+    cmd = ["vacuum_tool", "db.sqlite"]
+    r_pos = cm.observe_action_outcome(cmd, ["has_tool", "db_present", "writable"], succeeded=True)
+    assert r_pos["condition_status"] == "OPEN__ONE_SUCCESS_BUYS_NO_CONDITION"
+    cm.observe_action_outcome(cmd, ["has_tool", "db_present"], succeeded=False)
+    assert cm.check_action_condition(cmd, ["has_tool", "db_present", "writable"])["applies"] is True
+    assert cm.check_action_condition(cmd, ["has_tool", "db_present"])["applies"] is False
+    assert cm.delete_action_condition(cmd) is True
+    assert cm.check_action_condition(cmd, ["has_tool", "db_present", "writable"])["applies"] is False
+
+    # 3. Cross-environment hole-abstracted CU procedure transfer + single-counterexample refutation
+    proc = cm.induce_cu_procedure(
+        domain="cli",
+        goal_kind="diff_export",
+        concrete_steps=[{"cmd": ["git", "-C", "/tmp/ws1/repo", "diff"], "out": "/tmp/ws1/p.diff"}],
+        hole_bindings={"__REPO_DIR__": "/tmp/ws1/repo", "__OUTPUT_PATH__": "/tmp/ws1/p.diff"},
+        env_observables=["domain:cli", "has_git", "clean_tree"],
+    )
+    assert proc is not None
+    recalled = cm.recall_cu_procedures(
+        domain="cli",
+        goal_kind="diff_export",
+        env_observables=["domain:cli", "has_git", "clean_tree"],
+        hole_bindings={"__REPO_DIR__": "/opt/unseen/repo", "__OUTPUT_PATH__": "/opt/unseen/p.diff"},
+    )
+    assert len(recalled) == 1 and recalled[0]["steps"][0]["cmd"][2] == "/opt/unseen/repo"
+    cm.refute_cu_procedure(proc["procedure_id"], failed_env_observables=["domain:cli", "has_git"])
+    assert cm.recall_cu_procedures(
+        domain="cli",
+        goal_kind="diff_export",
+        env_observables=["domain:cli", "has_git"],
+        hole_bindings={"__REPO_DIR__": "/opt/unseen/repo", "__OUTPUT_PATH__": "/opt/unseen/p.diff"},
+    ) == []
+
+    # 4. Awakened DARK organs directly reachable from UnifiedModel front door (0 LLM calls)
+    fl = um.unified_fast_four_levers(64, sym_group_size=4, demo_bits=2.0)
+    assert fl["quotient_prior_bits"] == 4.0 and fl["remaining_bits"] == 2.0 and fl["k3_model_calls"] == 0
+    st = um.minimal_core_status()
+    assert st["ok"] is True and st["unified_fast_spine"]["wired_organ_count"] >= 15
+
 
 

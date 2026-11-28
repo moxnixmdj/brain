@@ -77,6 +77,7 @@ _KERNEL_FILES = (
     "canonical/swe_kernel/guarded_meaning_ir_v1.py",
     "canonical/swe_kernel/producer_lineage_graph_v1.py",
     "canonical/swe_kernel/induced_edit_basis_v1.py",
+    "canonical/swe_kernel/minimal_subtree_transfer_v1.py",
     "canonical/swe_kernel/unified_fast_spine_v1.py",
 )
 

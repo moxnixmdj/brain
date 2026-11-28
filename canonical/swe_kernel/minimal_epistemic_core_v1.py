@@ -667,6 +667,126 @@ class FastCoWVerifier:
         rate = killed / len(mutants)
         return {"mutants": len(mutants), "killed": killed, "kill_rate": round(rate, 4), "is_lie": killed == 0}
 
+    @staticmethod
+    def extract_check_snippets(test_code: str) -> tuple[str, list[str]]:
+        """Split a Python test script into `(setup_code, [check_snippet_0, ...])` for per-assertion bitmasks.
+
+        Supports both top-level `assert ...` sequences and `def check(candidate):` / `def test_*():` wrappers.
+        """
+        try:
+            tree = ast.parse(test_code)
+        except SyntaxError:
+            return "", []
+        setup_stmts: list[ast.stmt] = []
+        checks: list[str] = []
+        # Case A: top-level `assert` statements
+        top_asserts = [s for s in tree.body if isinstance(s, ast.Assert)]
+        if len(top_asserts) >= 2:
+            for s in tree.body:
+                if isinstance(s, ast.Assert):
+                    checks.append(ast.unparse(s))
+                else:
+                    setup_stmts.append(s)
+            return "\n".join(ast.unparse(s) for s in setup_stmts), checks[:32]
+        # Case B: multiple `def test_*():` functions
+        test_fns = [s for s in tree.body if isinstance(s, ast.FunctionDef) and s.name.startswith("test_")]
+        if len(test_fns) >= 2:
+            for s in tree.body:
+                setup_stmts.append(s)
+            for fn in test_fns[:32]:
+                checks.append(f"{fn.name}()")
+            return "\n".join(ast.unparse(s) for s in setup_stmts), checks
+        # Case C: HumanEval-style `def check(candidate): assert ...` + `check(fn)`
+        for s in tree.body:
+            if isinstance(s, ast.FunctionDef) and s.name == "check":
+                fn_asserts = [b for b in s.body if isinstance(b, ast.Assert)]
+                if len(fn_asserts) >= 2:
+                    # Find what `check(...)` is called with
+                    cand_expr = None
+                    for tail in tree.body:
+                        if isinstance(tail, ast.Expr) and isinstance(tail.value, ast.Call):
+                            if isinstance(tail.value.func, ast.Name) and tail.value.func.id == "check" and tail.value.args:
+                                cand_expr = ast.unparse(tail.value.args[0])
+                                break
+                    if cand_expr:
+                        pre = [ast.unparse(b) for b in tree.body if b is not s and not (isinstance(b, ast.Expr) and isinstance(b.value, ast.Call) and isinstance(b.value.func, ast.Name) and b.value.func.id == "check")]
+                        pre.append(f"candidate = {cand_expr}")
+                        for b in s.body:
+                            if isinstance(b, ast.Assert):
+                                checks.append(ast.unparse(b))
+                            else:
+                                pre.append(ast.unparse(b))
+                        return "\n".join(pre), checks[:32]
+        return "", []
+
+    @staticmethod
+    def run_check_bitmask(
+        source: str,
+        setup_code: str,
+        check_snippets: Sequence[str],
+        timeout_s: float = 0.15,
+    ) -> tuple[int, int]:
+        """Evaluate every check independently inside ONE `os.fork()` CoW call (~1.2 ms total).
+
+        Returns `(passed_bitmask, total_checks)` so Dual-Program Splicing can discover
+        complementary partial repairs covering disjoint failing assertions!
+        """
+        n_checks = min(len(check_snippets), 32)
+        if n_checks == 0:
+            return 0, 0
+        lines = [source, setup_code, "__mask__ = 0"]
+        for i, snip in enumerate(check_snippets[:n_checks]):
+            lines.append("try:")
+            for sub_ln in snip.splitlines():
+                lines.append("    " + sub_ln)
+            lines.append(f"    __mask__ |= {1 << i}")
+            lines.append("except BaseException:")
+            lines.append("    pass")
+        full = "\n".join(lines) + "\n"
+        try:
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                compiled = compile(full, "<mask>", "exec")
+        except BaseException:
+            return 0, n_checks
+
+        r_fd, w_fd = os.pipe()
+        pid = os.fork()
+        if pid == 0:
+            os.close(r_fd)
+            try:
+                devnull = os.open(os.devnull, os.O_WRONLY)
+                os.dup2(devnull, 1)
+                os.dup2(devnull, 2)
+                os.close(devnull)
+                warnings.simplefilter("ignore")
+                signal.setitimer(signal.ITIMER_REAL, timeout_s)
+                ns: dict[str, Any] = {}
+                exec(compiled, ns, ns)
+                os.write(w_fd, str(int(ns.get("__mask__", 0))).encode("ascii"))
+            except BaseException:
+                try:
+                    os.write(w_fd, b"0")
+                except OSError:
+                    pass
+            finally:
+                try:
+                    os.close(w_fd)
+                except OSError:
+                    pass
+                os._exit(0)
+        os.close(w_fd)
+        buf = bytearray()
+        while True:
+            chunk = os.read(r_fd, 64)
+            if not chunk:
+                break
+            buf.extend(chunk)
+        os.close(r_fd)
+        os.waitpid(pid, 0)
+        s = buf.decode("ascii", errors="ignore").strip()
+        return (int(s) if s.isdigit() else 0), n_checks
+
 
 # =========================================================================== #
 # JOB 5a: Git-Trained Statistical AST Prior (<1 MB) + PriorRepairEngine
@@ -682,6 +802,11 @@ class GitASTPrior:
         "const_flip": 2.7,
         "method_sibling": 3.0,
         "func_sibling": 2.9,
+        "arg_perm": 2.7,
+        "null_guard": 2.6,
+        "truth_lift": 2.5,
+        "expr_off_by_one": 2.4,
+        "var_binop_slice": 2.1,
         "var_swap": 2.4,
         "operand_swap": 2.6,
         "range_bound": 2.7,
@@ -971,13 +1096,59 @@ class PriorRepairEngine:
                 if isinstance(node.op, (ast.Not, ast.USub, ast.UAdd)):
                     try_replace(parent, fname, idx, node.operand, "unary_toggle", ln, delta=1)
 
-            # 6. If / While condition negation (`not cond`)
+            # 6. If / While condition negation (`not cond`) + null-deref guard lift + `while True:` lift
             elif isinstance(node, (ast.If, ast.While)):
-                if not isinstance(node.test, ast.UnaryOp) or not isinstance(node.test.op, ast.Not):
-                    old_t = node.test
+                old_t = node.test
+                if not isinstance(old_t, ast.UnaryOp) or not isinstance(old_t.op, ast.Not):
                     node.test = ast.UnaryOp(op=ast.Not(), operand=old_t)
                     emit(work, "unary_toggle", ln, delta=1)
                     node.test = old_t
+                # General null-dereference guard lift: `x.attr ...` -> `x is None or ...` / `x is not None and ...`
+                deref_roots: list[ast.expr] = []
+                for sub in ast.walk(old_t):
+                    if isinstance(sub, ast.Attribute) and isinstance(sub.value, ast.Name):
+                        if all(ast.dump(sub.value) != ast.dump(prev) for prev in deref_roots):
+                            deref_roots.append(sub.value)
+                for root_v in deref_roots[:2]:
+                    node.test = ast.BoolOp(
+                        op=ast.Or(),
+                        values=[
+                            ast.Compare(left=copy.deepcopy(root_v), ops=[ast.Is()], comparators=[ast.Constant(None)]),
+                            old_t,
+                        ],
+                    )
+                    emit(work, "null_guard", ln, delta=2)
+                    node.test = ast.BoolOp(
+                        op=ast.And(),
+                        values=[
+                            ast.Compare(left=copy.deepcopy(root_v), ops=[ast.IsNot()], comparators=[ast.Constant(None)]),
+                            old_t,
+                        ],
+                    )
+                    emit(work, "null_guard", ln, delta=2)
+                    node.test = old_t
+                # `while True:` -> `while <in-scope var>:`
+                if isinstance(node, ast.While) and isinstance(old_t, ast.Constant) and old_t.value is True:
+                    for v in in_scope_vars[:6]:
+                        node.test = ast.Name(id=v, ctx=ast.Load())
+                        emit(work, "truth_lift", ln, delta=1)
+                    node.test = old_t
+
+            # 6b. Return constant lifting (`return True/False` -> `return v == 0` / `not v`; `return []` -> `return [v]`)
+            elif isinstance(node, ast.Return) and node.value is not None:
+                old_r = node.value
+                if isinstance(old_r, ast.Constant) and isinstance(old_r.value, bool):
+                    for v in in_scope_vars[:5]:
+                        node.value = ast.Compare(left=ast.Name(id=v, ctx=ast.Load()), ops=[ast.Eq()], comparators=[ast.Constant(0)])
+                        emit(work, "truth_lift", ln, delta=2)
+                        node.value = ast.UnaryOp(op=ast.Not(), operand=ast.Name(id=v, ctx=ast.Load()))
+                        emit(work, "truth_lift", ln, delta=2)
+                    node.value = old_r
+                elif isinstance(old_r, ast.List) and len(old_r.elts) == 0:
+                    for v in in_scope_vars[:4]:
+                        node.value = ast.List(elts=[ast.Name(id=v, ctx=ast.Load())], ctx=ast.Load())
+                        emit(work, "truth_lift", ln, delta=1)
+                    node.value = old_r
 
             # 7. Constants (int ±1, 0<->1, -1; bool flip; '' <-> ' ')
             elif isinstance(node, ast.Constant):
@@ -1048,6 +1219,14 @@ class PriorRepairEngine:
                     # Unwrap single-arg call (`abs(x)` -> `x`, `int(x)` -> `x`)
                     if len(node.args) == 1 and not node.keywords:
                         try_replace(parent, fname, idx, node.args[0], "unwrap_expr", ln, delta=2)
+                # General call argument permutation (`f(a, b)` -> `f(b, a)` for 2-3 positional args)
+                if 2 <= len(node.args) <= 3 and not node.keywords:
+                    orig_args = list(node.args)
+                    for i_a in range(len(orig_args)):
+                        for j_a in range(i_a + 1, len(orig_args)):
+                            node.args[i_a], node.args[j_a] = orig_args[j_a], orig_args[i_a]
+                            emit(work, "arg_perm", ln, delta=1)
+                            node.args[i_a], node.args[j_a] = orig_args[i_a], orig_args[j_a]
 
             # 9. Subscript / Slice off-by-one + reverse slice
             elif isinstance(node, ast.Subscript) and isinstance(node.ctx, ast.Load):
@@ -1087,6 +1266,21 @@ class PriorRepairEngine:
                         try_replace(parent, fname, idx, ast.Call(func=ast.Name(id=wfn, ctx=ast.Load()), args=[node], keywords=[]), "wrap_expr", ln, delta=2)
                     for wm in _WRAP_METHODS:
                         try_replace(parent, fname, idx, ast.Call(func=ast.Attribute(value=node, attr=wm, ctx=ast.Load()), args=[], keywords=[]), "wrap_expr", ln, delta=2)
+                    # Trace-localized off-by-one (`v + 1`, `v - 1`) & in-scope binary/slice completion
+                    if not executed_lines or ln in executed_lines:
+                        if not isinstance(parent, ast.Subscript) or fname != "slice":
+                            for d_op in (ast.Add, ast.Sub):
+                                try_replace(parent, fname, idx, ast.BinOp(left=node, op=d_op(), right=ast.Constant(1)), "expr_off_by_one", ln, delta=2)
+                        if len(in_scope_vars) <= 8:
+                            for other in in_scope_vars:
+                                if other == old_id:
+                                    continue
+                                oth_n = ast.Name(id=other, ctx=ast.Load())
+                                try_replace(parent, fname, idx, ast.BinOp(left=node, op=ast.Sub(), right=oth_n), "var_binop_slice", ln, delta=2)
+                                try_replace(parent, fname, idx, ast.BinOp(left=node, op=ast.Add(), right=oth_n), "var_binop_slice", ln, delta=2)
+                                if isinstance(parent, (ast.For, ast.Call, ast.Return, ast.Assign)):
+                                    try_replace(parent, fname, idx, ast.Subscript(value=node, slice=ast.Slice(lower=oth_n, upper=None, step=None), ctx=ast.Load()), "var_binop_slice", ln, delta=2)
+                                    try_replace(parent, fname, idx, ast.Subscript(value=node, slice=ast.Slice(lower=None, upper=oth_n, step=None), ctx=ast.Load()), "var_binop_slice", ln, delta=2)
                 elif isinstance(node.ctx, ast.Store) and isinstance(parent, (ast.AugAssign, ast.Assign)):
                     for other in in_scope_vars:
                         if other != old_id:

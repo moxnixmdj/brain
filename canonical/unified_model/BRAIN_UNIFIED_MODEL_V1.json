@@ -33056,7 +33056,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "5b92a07b45d208e86d9e8ef6e67d27644c55e59793e3c8eb8ecdea9b6610af68"
+  "value": "a775a5575d27236c12bb32f6bbcbe15e845866b6dd6b900ae085d4d97c2a752a"
  },
  "engines": [
   {
@@ -39333,7 +39333,7 @@
     "carrier_sha256": "426d6f925c303696e7bab9cc2f6c876e52f6c6186e8c9e632244a82d6720c220",
     "entrypoint": "SafeTransferEStitchStrataEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "f288efffee08b88dba3a48c9fda6fea1daa043451d348673d29f15b97e3270a3"
+    "source_sha256": "0f05d358c4f8d5f8a385ad9d4b0bdf5fad33298a412710fe91fd9f38da5a18b9"
    },
    "summary": "Wave 53 6-stage safe transfer engine unifying MIT E-Stitch e-class canonicalization, structured morphism abstraction, oracle-free alpha-safe templates, STRATA contrast-edge negative-transfer defense (0% blind corruption), hard invalidation, and Ville e-process credit gating.",
    "triggers": [
@@ -39368,7 +39368,7 @@
     "carrier_sha256": "426d6f925c303696e7bab9cc2f6c876e52f6c6186e8c9e632244a82d6720c220",
     "entrypoint": "UnifiedCapabilityBusEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "f288efffee08b88dba3a48c9fda6fea1daa043451d348673d29f15b97e3270a3"
+    "source_sha256": "0f05d358c4f8d5f8a385ad9d4b0bdf5fad33298a412710fe91fd9f38da5a18b9"
    },
    "summary": "Wave 53 zero-LOC-growth unified capability bus awakening 36 zero-overlap hidden organs (192 -> 228 cumulative DARK modules) and structural front-door intent router raising real SWE issue acceptance from 35.0% to 96.2% while refusing 100% of content-free inputs.",
    "triggers": [
@@ -39403,7 +39403,7 @@
     "carrier_sha256": "426d6f925c303696e7bab9cc2f6c876e52f6c6186e8c9e632244a82d6720c220",
     "entrypoint": "DbspHindsightStrataMemoryEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "f288efffee08b88dba3a48c9fda6fea1daa043451d348673d29f15b97e3270a3"
+    "source_sha256": "0f05d358c4f8d5f8a385ad9d4b0bdf5fad33298a412710fe91fd9f38da5a18b9"
    },
    "summary": "Wave 54 control-plane memory unifying DBSP Z-set cascade & formal Absence witnesses, Hindsight 4 epistemic networks, P-Mem explicit rollback edges, ForgetEval-Adv 6 primitives (including purge-by-query & shared-attribute release), and STRATA contrast conflict warnings.",
    "triggers": [
@@ -39438,7 +39438,7 @@
     "carrier_sha256": "426d6f925c303696e7bab9cc2f6c876e52f6c6186e8c9e632244a82d6720c220",
     "entrypoint": "DockerlessVerifierAndSelfPlayCurriculumEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "f288efffee08b88dba3a48c9fda6fea1daa043451d348673d29f15b97e3270a3"
+    "source_sha256": "0f05d358c4f8d5f8a385ad9d4b0bdf5fad33298a412710fe91fd9f38da5a18b9"
    },
    "summary": "Wave 54 7-probe deterministic zero-Docker patch verifier (Dockerless-inspired) and ignorance-ledger-driven self-play bug-injection & blind repair curriculum proving Round-2 skill transfer at K3=0.",
    "triggers": [
@@ -39473,7 +39473,7 @@
     "carrier_sha256": "426d6f925c303696e7bab9cc2f6c876e52f6c6186e8c9e632244a82d6720c220",
     "entrypoint": "FullMetamorphicLawAndPrecisionSlicerEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "f288efffee08b88dba3a48c9fda6fea1daa043451d348673d29f15b97e3270a3"
+    "source_sha256": "0f05d358c4f8d5f8a385ad9d4b0bdf5fad33298a412710fe91fd9f38da5a18b9"
    },
    "summary": "Wave 54 complete 9/9 metamorphic law repair synthesizer, test-isolation inherited-debt filter, free AST def-use neighbor-regression precision pre-filter, and multi-file top-K call-graph localizer with atomic CoW rollback.",
    "triggers": [
@@ -39508,7 +39508,7 @@
     "carrier_sha256": "426d6f925c303696e7bab9cc2f6c876e52f6c6186e8c9e632244a82d6720c220",
     "entrypoint": "UnifiedMultiRungJitRLAndWebMcpGrounderEngine",
     "source_path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-    "source_sha256": "f288efffee08b88dba3a48c9fda6fea1daa043451d348673d29f15b97e3270a3"
+    "source_sha256": "0f05d358c4f8d5f8a385ad9d4b0bdf5fad33298a412710fe91fd9f38da5a18b9"
    },
    "summary": "Wave 54 inverted multi-rung JitRL closed-form KL advantage executive loop + task-agnostic JSON-schema multi-step WebMCP & OSWorld 2.1 grounder with WebXSkill step contracts raising WebMCP grounding from 26.9% to 100.0%.",
    "triggers": [
@@ -96403,7 +96403,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "f288efffee08b88dba3a48c9fda6fea1daa043451d348673d29f15b97e3270a3",
+   "sha256": "0f05d358c4f8d5f8a385ad9d4b0bdf5fad33298a412710fe91fd9f38da5a18b9",
    "summary": "Wave 53 & Wave 54: Unified Capability Bus, Safe-Transfer E-Stitch + STRATA,",
    "triggers": [
     "wave53",
@@ -98460,7 +98460,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/swe_kernel/unified_fast_spine_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "b43a2ed4c40cc7ab4eb3846f569f1f06365c6fb2603c67938932137230446576",
+   "sha256": "7b0edb7a34aed47a3551af767952a9bdedbd4cdb668788a3f28865bfaff079bf",
    "summary": "Unified Fast Spine v1 — Elon's Law Unification of Brain's Verified Zero-Model Fast Organs.",
    "triggers": [
     "unified",
@@ -170908,7 +170908,7 @@
   "included_source_count": 2564,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "aa94d4065fb1d068c07c2967657aa078bcd6578f3e83a91a486d1acac552919f"
+  "source_tree_digest": "9e10ff032055e89aace22cffd934dc0219d17914a4491dfc63b3b3e0fc9763e0"
  },
  "research_index": [
   {
@@ -348678,7 +348678,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/WAVE53_54_UNIFIED_CAPABILITY_BUS_AND_LEAPFROG_20261124_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "0bea8cb8a24faf38ed65a5bc9e33989248a8f30eb2336b2bca53a306cbd45472",
+   "sha256": "1c31e9a88a4a1217902c45c1d44bf5a5781abbe9abb79b5181b08bb5bf7d2e23",
    "status": "SHIPPED",
    "terms": {
     "0.00": 1,
@@ -385986,7 +385986,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/harbor_swe_zero_model_agent_v1.py",
-   "sha256": "820b2b3b3cbdac498d596946ba71fe878d437452309a65fc72dfe569687a3d9f",
+   "sha256": "1ffcd86ad72824817381df43fdc966e0578a72b9c56ce842c108223181f8e781",
    "summary": "Project Brain Zero-Model Harbor SWE Agent V1.",
    "symbol_count": 13,
    "symbols": [
@@ -431496,7 +431496,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/wave53_54_unified_capability_bus_and_leapfrog_v1.py",
-   "sha256": "f288efffee08b88dba3a48c9fda6fea1daa043451d348673d29f15b97e3270a3",
+   "sha256": "0f05d358c4f8d5f8a385ad9d4b0bdf5fad33298a412710fe91fd9f38da5a18b9",
    "summary": "Wave 53 & Wave 54: Unified Capability Bus, Safe-Transfer E-Stitch + STRATA,",
    "symbol_count": 43,
    "symbols": [
@@ -438028,7 +438028,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/minimal_arc3_agent_v1.py",
-   "sha256": "35b7aa7b620ca2cc5ed8ad4a5013d35d7ff864401f0fe02cbac42f9c780d076e",
+   "sha256": "2fdb66ed5af6de933155869d426924fda520ab925b2921ea06565080b7b4bcde",
    "summary": "Minimal Epistemic Core ARC-AGI-3 Agent v3 — Object-Centric Active Moore-Machine World Model.",
    "symbol_count": 4,
    "symbols": [
@@ -438065,7 +438065,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/minimal_epistemic_core_v1.py",
-   "sha256": "733ff117e2dc8484b64cf07d159f8ac8fb13418cbe5691257a55de4c300c7ec8",
+   "sha256": "4a24fe7b3779da4032637e9207073410b3a2a3c1913bcdbdbe865ac35d18ddad",
    "summary": "Minimal Epistemic Core v1 — Zero-Neural Jobs 1 + 2 + 3 + 4a + 5a in one lean engine.",
    "symbol_count": 12,
    "symbols": [
@@ -438155,16 +438155,19 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/minimal_subtree_transfer_v1.py",
-   "sha256": "a246df4e35d8753082c53598ca90034572d404d59a6502e9b44661a332fada0f",
+   "sha256": "595be60e80a040f6ad3996783da9234cbf720ceece163beb13854f63b9f8a2ff",
    "summary": "Full-Function AST-Diff & Minimal Subtree Delta Cross-Repo Transfer Engine (K3=0, $0.00).",
-   "symbol_count": 9,
+   "symbol_count": 12,
    "symbols": [
     "MinimalSubtreeRule",
     "MinimalSubtreeTransferStore",
     "_alpha_sig_and_template",
     "_collect_functions",
     "_instantiate_template",
+    "_lift_shared_compound_subexprs",
     "_match_template",
+    "collect_class_attrs",
+    "collect_file_attrs",
     "collect_function_scope",
     "extract_function_ast_deltas",
     "minimal_changed_subtrees"
@@ -438173,6 +438176,8 @@
     "0.00": 1,
     "alpha_sig_and_template": 1,
     "ast-diff": 1,
+    "collect_class_attrs": 1,
+    "collect_file_attrs": 1,
     "collect_function_scope": 1,
     "collect_functions": 1,
     "cross-repo": 1,
@@ -438182,6 +438187,7 @@
     "full-function": 1,
     "instantiate_template": 1,
     "k3": 1,
+    "lift_shared_compound_subexprs": 1,
     "match_template": 1,
     "minimal": 2,
     "minimal_changed_subtrees": 1,
@@ -443663,21 +443669,29 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/unified_fast_spine_v1.py",
-   "sha256": "b43a2ed4c40cc7ab4eb3846f569f1f06365c6fb2603c67938932137230446576",
+   "sha256": "7b0edb7a34aed47a3551af767952a9bdedbd4cdb668788a3f28865bfaff079bf",
    "summary": "Unified Fast Spine v1 — Elon's Law Unification of Brain's Verified Zero-Model Fast Organs.",
-   "symbol_count": 2,
+   "symbol_count": 6,
    "symbols": [
+    "InstantContinualMemory",
     "UnifiedFastSpine",
+    "_content_bytes_for_comp",
+    "_dual_splice",
+    "_splice_candidates_fallback",
     "self_check"
    ],
    "terms": {
     "brain": 1,
+    "content_bytes_for_comp": 1,
+    "dual_splice": 1,
     "elon": 1,
     "fast": 3,
+    "instantcontinualmemory": 1,
     "law": 1,
     "organs": 1,
     "self_check": 1,
     "spine": 2,
+    "splice_candidates_fallback": 1,
     "unification": 1,
     "unified": 2,
     "unifiedfastspine": 1,

@@ -4848,6 +4848,30 @@ class Wave53To54UnifiedCapabilityBusMixin(Wave51To52UnifiedModelMixin):
         out["k3_model_calls"] = 0
         return out
 
+    def unified_fast_spine(self) -> Any:
+        """Return a persistent per-`UnifiedModel` `UnifiedFastSpine` (continual instant learning across calls)."""
+        spine = getattr(self, "_unified_fast_spine_instance", None)
+        if spine is None:
+            from canonical.swe_kernel.unified_fast_spine_v1 import UnifiedFastSpine
+
+            spine = UnifiedFastSpine()
+            self._unified_fast_spine_instance = spine
+        return spine
+
+    def unified_fast_learn_repo_history(
+        self,
+        repo_root: str | pathlib.Path,
+        *,
+        max_commits: int = 80,
+        before_commit: str | None = None,
+    ) -> dict[str, Any]:
+        """Pre-task active instant learning: mine `.git` commits into originating AST subtree rules."""
+        out = self.unified_fast_spine().learn_from_repo_history(
+            repo_root, max_commits=max_commits, before_commit=before_commit,
+        )
+        out["k3_model_calls"] = 0
+        return out
+
     def unified_fast_repair_repo(
         self,
         repo_root: str | pathlib.Path,
@@ -4860,10 +4884,8 @@ class Wave53To54UnifiedCapabilityBusMixin(Wave51To52UnifiedModelMixin):
         donor_pairs: Sequence[tuple[str, str, str]] | None = None,
         apply_patch: bool = False,
     ) -> dict[str, Any]:
-        """Run end-to-end fast-path (`BM25` + `ProducerLineage` + `InducedEditBasis` + `FastCoWVerifier`)."""
-        from canonical.swe_kernel.unified_fast_spine_v1 import UnifiedFastSpine
-
-        out = UnifiedFastSpine().repair_repo_fast(
+        """Run end-to-end active instant-learning SWE fast-path (BM25 + ProducerLineage + SubtreeTransfer + CoW + DualSplicing)."""
+        out = self.unified_fast_spine().repair_repo_fast(
             repo_root,
             issue_text,
             test_target=test_target,
@@ -4884,16 +4906,59 @@ class Wave53To54UnifiedCapabilityBusMixin(Wave51To52UnifiedModelMixin):
         top_k: int = 10,
         t_valid: int | None = None,
         ppr_weight: float = 0.10,
+        comp_weight: float = 0.16,
         zset_deltas: Sequence[tuple[str, str, str, int, int | None, int]] | None = None,
     ) -> dict[str, Any]:
-        """Run Job 2 + 4b (`DominoMemory` + `DBSPBiTemporalPPRMemory`) via `UnifiedFastSpine`."""
+        """Run Job 2 + 4b (`DominoMemory` + `DBSPBiTemporalPPRMemory` + zero-param `zlib` Compression Gain)."""
         from canonical.swe_kernel.unified_fast_spine_v1 import UnifiedFastSpine
 
         idx = UnifiedFastSpine.build_hybrid_memory(conversation_or_turns, zset_deltas=zset_deltas)
-        res = UnifiedFastSpine.query_hybrid_memory(idx, query, top_k=top_k, t_valid=t_valid, ppr_weight=ppr_weight)
+        res = UnifiedFastSpine.query_hybrid_memory(
+            idx, query, top_k=top_k, t_valid=t_valid, ppr_weight=ppr_weight, comp_weight=comp_weight,
+        )
         res["build_ms"] = idx.get("build_ms", 0.0)
         res["k3_model_calls"] = 0
         return res
+
+    def unified_fast_continual_memory(self) -> Any:
+        """Return a persistent `InstantContinualMemory` (DBSP Z-set retraction + ConditionStore + CUStore + DualDrift)."""
+        cm = getattr(self, "_unified_continual_memory_instance", None)
+        if cm is None:
+            cm = self.unified_fast_spine().create_continual_memory()
+            self._unified_continual_memory_instance = cm
+        return cm
+
+    def unified_fast_parse_refusal(self, refusal_text: str) -> dict[str, Any]:
+        """Awakened `a_refusal_is_a_specification_v1`: compile error/CLI refusals into executable clauses."""
+        out = self.unified_fast_spine().parse_refusal_to_clause(refusal_text)
+        out["k3_model_calls"] = 0
+        return out
+
+    def unified_fast_synthesize_spec(self, workspace: str | pathlib.Path, instruction: str) -> dict[str, Any]:
+        """Awakened 8,624L DARK `epistemic_spec_synthesizer_v1`: zero-LLM deductive greenfield spec synthesis."""
+        out = self.unified_fast_spine().synthesize_greenfield_spec(workspace, instruction)
+        out["k3_model_calls"] = 0
+        return out
+
+    def unified_fast_four_levers(
+        self,
+        hypothesis_count: int,
+        *,
+        sym_group_size: int = 1,
+        demo_bits: float = 0.0,
+        query_bits: float = 0.0,
+        refusal_bits: float = 0.0,
+    ) -> dict[str, Any]:
+        """Awakened DARK `the_four_levers_of_learning_from_experience_v1`: exact information-descent budget."""
+        out = self.unified_fast_spine().four_levers_budget(
+            hypothesis_count,
+            sym_group_size=sym_group_size,
+            demo_bits=demo_bits,
+            query_bits=query_bits,
+            refusal_bits=refusal_bits,
+        )
+        out["k3_model_calls"] = 0
+        return out
 
     def minimal_core_status(self) -> dict[str, Any]:
         """Report availability of the lazy-wired Minimal Epistemic Core + UnifiedFastSpine modules (0 LLM calls)."""
