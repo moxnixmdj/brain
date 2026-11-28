@@ -248,3 +248,125 @@ def test_step4_micro_models_reranker_subspace_and_ast_lm():
     e3 = lm3.eval_cross_entropy(srcs)
     assert e3["bits_per_node"] < e1["bits_per_node"]
 
+
+def test_arc3_v3_undo_detection_and_cross_level_win_transfer():
+    """Verify MinimalArc3Agent v3 detects A7 undo, prioritizes post-mechanic keystones, and transfers winning classes."""
+    import numpy as np
+    from canonical.swe_kernel.minimal_arc3_agent_v1 import MinimalArc3Agent
+
+    # Toy 16x16 grid: A4 moves player right; hitting switch at x=4 fires mechanic (+6px color change),
+    # then A5 submits & wins; A7 undoes the last move!
+    hist: list[tuple[int, bool]] = [(2, False)]
+
+    def make_frame():
+        x, sw = hist[-1]
+        fr = np.zeros((16, 16), dtype=np.int16)
+        fr[7:9, x:x + 2] = 3  # 2x2 avatar
+        if not sw:
+            fr[7:9, 5:7] = 8  # switch ahead
+        else:
+            fr[2:5, 2:5] = 11  # 9-pixel distant door opened (mechanic fired!)
+        return fr
+
+    def get_obs():
+        x, sw = hist[-1]
+        win = (x == -1)
+        return make_frame(), [1, 2, 3, 4, 5, 7], ("WIN" if win else "NOT_FINISHED"), (1 if win else 0)
+
+    def step_fn(spec):
+        aid = int(spec["aid"])
+        x, sw = hist[-1]
+        if aid == 7:
+            if len(hist) > 1:
+                hist.pop()
+        elif aid == 4 and x < 10:
+            nx = x + 1
+            nsw = sw or (nx >= 4)
+            hist.append((nx, nsw))
+        elif aid == 3 and x > 1:
+            hist.append((x - 1, sw))
+        elif aid == 5 and sw:
+            hist.append((-1, True))
+        return get_obs()
+
+    def reset_fn():
+        hist[:] = [(2, False)]
+        return get_obs()
+
+    agent = MinimalArc3Agent()
+    res = agent.play_level(get_obs, step_fn, reset_fn, budget=30, start_level=0)
+    assert res["solved"] is True
+    assert res["novel_mechanics_seen"] >= 1
+    assert agent.prior.win_cls_hits.get("A5", 0) >= 1
+
+
+def test_unified_fast_spine_dark_organs_and_multifile_repo_repair(tmp_path):
+    """Verify UnifiedFastSpine wires BM25, ProducerLineage, InducedEditBasis, DBSP-PPR, and Harbor bundle."""
+    import tarfile, io
+    from canonical.swe_kernel.unified_fast_spine_v1 import UnifiedFastSpine, self_check as spine_self_check
+    from canonical.runtime.wave53_54_unified_capability_bus_and_leapfrog_v1 import Wave53To54UnifiedCapabilityBusMixin
+    from canonical.runtime.harbor_swe_zero_model_agent_v1 import _build_kernel_tar_gz
+
+    sc = spine_self_check()
+    assert sc["pass"] is True
+    assert sc["core_organs_loaded"] is True
+    assert sc["repair_method"] == "INDUCED_EDIT_BASIS_COW_V1"
+
+    # Multi-file repo (>5 files, proving the old <=3-file ceiling is lifted!)
+    for i in range(6):
+        (tmp_path / f"helper_{i}.py").write_text(f"def helper_{i}(x):\n    return x + {i}\n", encoding="utf-8")
+    (tmp_path / "quota_guard.py").write_text(
+        "def allows_quota(used, limit):\n    return used <= limit\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "test_quota_guard.py").write_text(
+        "from quota_guard import allows_quota\n"
+        "assert allows_quota(1, 5) is True\n"
+        "assert allows_quota(5, 5) is False\n"
+        "assert allows_quota(6, 5) is False\n",
+        encoding="utf-8",
+    )
+
+    bus = Wave53To54UnifiedCapabilityBusMixin()
+    loc = bus.unified_fast_localize_repo(tmp_path, "allows_quota off-by-one when used equals limit")
+    assert loc["source_files"][0]["path"] == "quota_guard.py"
+
+    rep = bus.unified_fast_repair_repo(tmp_path, "allows_quota off-by-one when used equals limit")
+    assert rep["repaired"] is True
+    assert rep["patched_file"] == "quota_guard.py"
+    assert "used < limit" in rep["patched_files"]["quota_guard.py"]
+
+    # Negative control: weak test must be refused by FastCoWVerifier lie detector
+    bad_dir = tmp_path / "weak_repo"
+    bad_dir.mkdir()
+    (bad_dir / "mod.py").write_text("def add(a, b):\n    return a - b\n", encoding="utf-8")
+    (bad_dir / "test_mod.py").write_text("from mod import add\nassert True\n", encoding="utf-8")
+    weak_rep = UnifiedFastSpine().repair_repo_fast(bad_dir, "add returns wrong sum")
+    assert weak_rep["repaired"] is False
+
+    # Hybrid DominoMemory + DBSPBiTemporalPPRMemory via bus
+    hyb = bus.unified_fast_hybrid_memory(
+        [
+            {"dia_id": "D1:1", "speaker": "Maya", "text": "Maya visited Cobalt Harbor yesterday."},
+            {"dia_id": "D1:2", "speaker": "Liam", "text": "Cobalt Harbor hosts the Silver Beacon."},
+            {"dia_id": "D1:3", "speaker": "Maya", "text": "Rainy afternoon tea."},
+        ],
+        "Which beacon is linked to Maya?",
+        top_k=3,
+    )
+    assert "D1:2" in hyb["dia_ids"]
+
+    # Harbor container tarball must bundle UnifiedFastSpine + its pure-stdlib dark jewels
+    tar_bytes = _build_kernel_tar_gz()
+    with tarfile.open(fileobj=io.BytesIO(tar_bytes), mode="r:gz") as tf:
+        names = set(tf.getnames())
+    for req in (
+        "canonical/swe_kernel/unified_fast_spine_v1.py",
+        "canonical/swe_kernel/bm25_code_localizer_v1.py",
+        "canonical/swe_kernel/producer_lineage_graph_v1.py",
+        "canonical/swe_kernel/guarded_meaning_ir_v1.py",
+        "canonical/swe_kernel/induced_edit_basis_v1.py",
+    ):
+        assert req in names
+
+

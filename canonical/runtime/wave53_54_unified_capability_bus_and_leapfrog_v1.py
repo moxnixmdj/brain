@@ -4824,18 +4824,93 @@ class Wave53To54UnifiedCapabilityBusMixin(Wave51To52UnifiedModelMixin):
 
         return MinimalArc3Agent()
 
+    def unified_fast_localize_repo(
+        self,
+        repo_root: str | pathlib.Path,
+        issue_text: str,
+        *,
+        failing_source: str | None = None,
+        language: str = "python",
+        top_files: int = 8,
+        top_functions: int = 8,
+    ) -> dict[str, Any]:
+        """Run Job 1 (`BM25CodeLocalizer` + `ProducerLineageGraph`) via `UnifiedFastSpine` (0 model calls)."""
+        from canonical.swe_kernel.unified_fast_spine_v1 import UnifiedFastSpine
+
+        out = UnifiedFastSpine.localize_repo_bug(
+            repo_root,
+            issue_text,
+            failing_source=failing_source,
+            language=language,
+            top_files=top_files,
+            top_functions=top_functions,
+        )
+        out["k3_model_calls"] = 0
+        return out
+
+    def unified_fast_repair_repo(
+        self,
+        repo_root: str | pathlib.Path,
+        issue_text: str,
+        *,
+        test_target: str | None = None,
+        max_files: int = 3,
+        max_candidates: int = 120,
+        timeout_s: float = 0.12,
+        donor_pairs: Sequence[tuple[str, str, str]] | None = None,
+        apply_patch: bool = False,
+    ) -> dict[str, Any]:
+        """Run end-to-end fast-path (`BM25` + `ProducerLineage` + `InducedEditBasis` + `FastCoWVerifier`)."""
+        from canonical.swe_kernel.unified_fast_spine_v1 import UnifiedFastSpine
+
+        out = UnifiedFastSpine().repair_repo_fast(
+            repo_root,
+            issue_text,
+            test_target=test_target,
+            max_files=max_files,
+            max_candidates=max_candidates,
+            timeout_s=timeout_s,
+            donor_pairs=donor_pairs,
+            apply_patch=apply_patch,
+        )
+        out["k3_model_calls"] = 0
+        return out
+
+    def unified_fast_hybrid_memory(
+        self,
+        conversation_or_turns: Mapping[str, Any] | Sequence[Mapping[str, Any]],
+        query: str,
+        *,
+        top_k: int = 10,
+        t_valid: int | None = None,
+        ppr_weight: float = 0.10,
+        zset_deltas: Sequence[tuple[str, str, str, int, int | None, int]] | None = None,
+    ) -> dict[str, Any]:
+        """Run Job 2 + 4b (`DominoMemory` + `DBSPBiTemporalPPRMemory`) via `UnifiedFastSpine`."""
+        from canonical.swe_kernel.unified_fast_spine_v1 import UnifiedFastSpine
+
+        idx = UnifiedFastSpine.build_hybrid_memory(conversation_or_turns, zset_deltas=zset_deltas)
+        res = UnifiedFastSpine.query_hybrid_memory(idx, query, top_k=top_k, t_valid=t_valid, ppr_weight=ppr_weight)
+        res["build_ms"] = idx.get("build_ms", 0.0)
+        res["k3_model_calls"] = 0
+        return res
+
     def minimal_core_status(self) -> dict[str, Any]:
-        """Report availability of the lazy-wired Minimal Epistemic Core modules (0 LLM calls)."""
+        """Report availability of the lazy-wired Minimal Epistemic Core + UnifiedFastSpine modules (0 LLM calls)."""
         from canonical.swe_kernel.minimal_epistemic_core_v1 import LocalMicroModelBackend
+        from canonical.swe_kernel.unified_fast_spine_v1 import UnifiedFastSpine
 
         backend = LocalMicroModelBackend()
+        spine_st = UnifiedFastSpine.status()
         return {
-            "ok": True,
+            "ok": bool(spine_st.get("core_organs_loaded")),
             "modules": [
                 "canonical.swe_kernel.minimal_epistemic_core_v1",
                 "canonical.swe_kernel.minimal_arc3_agent_v1",
                 "canonical.swe_kernel.minimal_micro_models_v1",
+                "canonical.swe_kernel.unified_fast_spine_v1",
             ],
+            "unified_fast_spine": spine_st,
             "local_micro_llm_enabled": backend.enabled,
             "k3_model_calls": 0,
         }

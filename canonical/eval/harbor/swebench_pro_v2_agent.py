@@ -460,6 +460,7 @@ def run_engine_on_tree(
     if store is not None:
         inputs["skill_store"] = store
 
+    fast_spine_fallback_used = False
     # the catch sits outside the guard on purpose: the guard converts at its own __exit__, so a
     # try *inside* it would never see the converted refusal -- the nesting is the whole contract
     try:
@@ -470,6 +471,35 @@ def run_engine_on_tree(
                 from canonical.runtime.brain_unified_model_v1 import open_model
 
                 result = open_model().solve(instruction[:40000], inputs=inputs, mode="EPISTEMIC")
+                # If the primary solver produced no edits on disk or in payload, run the zero-model
+                # UnifiedFastSpine (BM25 + ProducerLineage + InducedEditBasis + FastCoWVerifier).
+                _probe_edits = extract_engine_edits(result if isinstance(result, Mapping) else {})
+                _probe_diff = diff_trees(before, snapshot_tree(tree))
+                if not _probe_edits and _probe_diff == {"modified": [], "added": [], "removed": []}:
+                    try:
+                        from canonical.swe_kernel.unified_fast_spine_v1 import UnifiedFastSpine
+
+                        fast_spine_fallback_used = True
+                        r_spine = UnifiedFastSpine().repair_repo_fast(
+                            tree,
+                            instruction[:40000],
+                            max_files=3,
+                            max_candidates=120,
+                            timeout_s=0.12,
+                            apply_patch=False,
+                        )
+                        if r_spine.get("repaired") and r_spine.get("patched_files"):
+                            result = {
+                                "status": str(r_spine.get("method") or "UNIFIED_FAST_SPINE_REPAIRED"),
+                                "pass": True,
+                                "patch": dict(r_spine.get("patched_files") or {}),
+                                "explanation": (
+                                    f"UnifiedFastSpine verified fix ({r_spine.get('rule')}) on "
+                                    f"{r_spine.get('patched_file')}"
+                                ),
+                            }
+                    except Exception:
+                        pass
     except NetworkRefusedByHarness as exc:
         # A trial that died on the network still has to arrive as a complete row, carrying the
         # reason. Letting the exception escape would land it in the shard collector as a bare
@@ -501,6 +531,7 @@ def run_engine_on_tree(
         "engine_result_status": str((result or {}).get("status") or "UNKNOWN"),
         "engine_diagnosis": engine_diagnosis(result if isinstance(result, Mapping) else {}),
         "engine_pass": bool((result or {}).get("pass")),
+        "fast_spine_fallback_used": bool(fast_spine_fallback_used),
         "changed": diff,
         "edits_applied_by": applied_by,
         "tree_bytes_before": sum(v[0] for v in before.values()),

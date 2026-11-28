@@ -73,6 +73,11 @@ _KERNEL_FILES = (
     "canonical/swe_kernel/executable_mental_model_v1.py",
     "canonical/swe_kernel/semantic_ir_v1.py",
     "canonical/swe_kernel/minimal_epistemic_core_v1.py",
+    "canonical/swe_kernel/bm25_code_localizer_v1.py",
+    "canonical/swe_kernel/guarded_meaning_ir_v1.py",
+    "canonical/swe_kernel/producer_lineage_graph_v1.py",
+    "canonical/swe_kernel/induced_edit_basis_v1.py",
+    "canonical/swe_kernel/unified_fast_spine_v1.py",
 )
 
 
@@ -357,36 +362,30 @@ elif test_target == "__TERMINAL_GOAL__":
             )
         if not m1_res.get("repaired") and vis_tests:
             try:
-                from canonical.swe_kernel import minimal_epistemic_core_v1 as mec
-                # Fast CoW PriorRepairEngine fallback for single-file self-contained Python modules
-                py_srcs = [
-                    p for p in sorted(repo_p.rglob("*.py"))
-                    if ".git" not in p.parts and not p.name.startswith("test_")
-                ]
-                if len(py_srcs) <= 3 and len(vis_tests) >= 1:
-                    test_src = (repo_p / vis_tests[0]).read_text(encoding="utf-8", errors="replace")
-                    engine = mec.PriorRepairEngine()
-                    for sp in py_srcs[:2]:
-                        raw_src = sp.read_text(encoding="utf-8", errors="replace")
-                        strength = mec.FastCoWVerifier.check_test_strength(raw_src, test_src, max_mutants=5)
-                        if strength.get("is_lie"):
-                            continue
-                        r_mec = engine.repair(raw_src, test_src, max_candidates=120, timeout_s=0.10)
-                        if r_mec.get("fixed") and r_mec.get("source"):
-                            rel_sp = sp.relative_to(repo_p).as_posix()
-                            m1_res = {
-                                "repaired": True,
-                                "method": "MINIMAL_EPISTEMIC_CORE_PRIOR_REPAIR_V1",
-                                "rule": str(r_mec.get("op_kind") or "prior_repair"),
-                                "patched_file": rel_sp,
-                                "patched_files": {rel_sp: str(r_mec["source"])},
-                                "patched_line": 0,
-                                "failing_nodeid": vis_tests[0],
-                                "reason": None,
-                                "elapsed_ms": int(round(float(r_mec.get("elapsed_ms", 0.0)))),
-                                "stats": {"candidates_tested": int(r_mec.get("candidates_tested", 0))},
-                            }
-                            break
+                from canonical.swe_kernel.unified_fast_spine_v1 import UnifiedFastSpine
+
+                r_spine = UnifiedFastSpine().repair_repo_fast(
+                    repo_p,
+                    goal_text,
+                    test_target=ranked_vis[0] if vis_tests else None,
+                    max_files=3,
+                    max_candidates=120,
+                    timeout_s=0.12,
+                    apply_patch=False,
+                )
+                if r_spine.get("repaired") and r_spine.get("patched_files"):
+                    m1_res = {
+                        "repaired": True,
+                        "method": str(r_spine.get("method") or "UNIFIED_FAST_SPINE_COW_V1"),
+                        "rule": str(r_spine.get("rule") or "unified_fast_spine"),
+                        "patched_file": str(r_spine.get("patched_file") or ""),
+                        "patched_files": dict(r_spine.get("patched_files") or {}),
+                        "patched_line": 0,
+                        "failing_nodeid": str(r_spine.get("failing_nodeid") or vis_tests[0]),
+                        "reason": None,
+                        "elapsed_ms": int(round(float(r_spine.get("elapsed_ms", 0.0)))),
+                        "stats": dict(r_spine.get("stats") or {}),
+                    }
             except Exception:
                 pass
     elif is_c_repo and not has_terminal_artifact:
